@@ -1,10 +1,11 @@
 #!/usr/bin/env zx
-import 'zx/globals';
 
 /**
  * Usage: zx rm-source-maps.mjs [path/to/dir]
  * Example: zx rm-source-maps.mjs build/client
  */
+
+// import "zx/globals";
 
 const dir = argv._[0];
 const force = argv.force;
