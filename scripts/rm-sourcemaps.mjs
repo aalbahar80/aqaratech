@@ -50,6 +50,5 @@ sourcemaps.forEach(async (sourceMap) => {
 let jsFiles = await glob(`${dir}/**/*.js`);
 jsFiles.forEach(async (jsFile) => {
 	await $`sed -i '/sourceMappingURL/d' ${jsFile}`;
-	// await $`sed -i '' -e '//# sourceMappingURL.*/d' ${jsFile}`;
 	console.log(`Removed sourceMappingURL from ${jsFile}`);
 });
