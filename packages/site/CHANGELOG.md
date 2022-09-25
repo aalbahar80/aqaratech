@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.6.1
+
+### Patch Changes
+
+- 2314f5b2: rm sourcemap urls
+
 ## 0.6.0
 
 ### Minor Changes
