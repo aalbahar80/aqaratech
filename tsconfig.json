@@ -7,5 +7,10 @@
 		"resolveJsonModule": true,
 		"types": ["zx", "node"],
 		"module": "ESNext"
-	}
+	},
+	"include": [
+		// use pnpm tsc --showConfig to diagnose
+		"scripts/**/*.*",
+		"ambient.d.ts"
+	]
 }
