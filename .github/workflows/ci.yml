@@ -103,7 +103,7 @@ jobs:
         shell: bash
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
 
-      - run: pnpm -F @self/backend run sentry:release --version ${{ inputs.backendTag }}  --environment ${{ inputs.environment }} ${{ inputs.environment != 'prod' && '--sourcemaps-only' || '' }}
+      - run: pnpm -F @self/backend run sentry:release --version ${{ inputs.backendTag }}  --environment ${{ inputs.environment }}
 
       - run: pnpm --filter @self/backend --prod deploy pruned
 

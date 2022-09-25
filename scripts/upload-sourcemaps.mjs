@@ -2,8 +2,6 @@
 
 console.log({ argv });
 
-const releaseOnly = argv['release-only'];
-const sourcemapsOnly = argv['sourcemaps-only'];
 const environment = argv['environment'];
 
 const manualVersion = argv.version;
@@ -42,19 +40,13 @@ if (cwd.endsWith('site')) {
 	await $`exit 1`;
 }
 
-if (releaseOnly) {
-	await $`sentry-cli releases new ${prefixedVersion} ${org} ${project} --finalize`;
-} else if (sourcemapsOnly) {
-	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${prefixedVersion}`;
-} else {
-	await $`sentry-cli releases new ${prefixedVersion} ${org} ${project} --finalize`;
-	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${prefixedVersion}`;
-}
+await $`sentry-cli releases new ${prefixedVersion} ${org} ${project} --finalize`;
+await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${prefixedVersion}`;
 
-// Always use sentry commit tracking. This will automatically associate commits with releases. AKA `suspect commits`.
+// Use sentry commit tracking. This will automatically associate commits with releases. AKA `suspect commits`.
 await $`sentry-cli releases set-commits --auto ${prefixedVersion} ${org} ${project}`;
 
-// Always create a new release deployment.
+// Create a new release deployment. This tells Sentry that a new release is being deployed to an environment. We can also add a URL herer.
 const envName = {
 	dev: 'staging',
 	prod: 'production',
