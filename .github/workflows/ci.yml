@@ -55,7 +55,7 @@ jobs:
         shell: bash
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
 
-      - run: pnpm -F @self/site run sentry:release --version ${{ inputs.siteTag }}
+      - run: pnpm -F @self/site run sentry:release --version ${{ inputs.siteTag }} --environment ${{ inputs.environment }}
 
       - if: ${{ inputs.environment == 'prod' }}
         name: Delete client sourcemaps

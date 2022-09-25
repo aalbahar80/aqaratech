@@ -4,6 +4,7 @@ console.log({ argv });
 
 const releaseOnly = argv['release-only'];
 const sourcemapsOnly = argv['sourcemaps-only'];
+const environment = argv['environment'];
 
 const manualVersion = argv.version;
 const fallbackVersion = await $`jq -r .version package.json`;
@@ -50,5 +51,13 @@ if (releaseOnly) {
 	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${prefixedVersion}`;
 }
 
-// Always use sentry commit tracking
+// Always use sentry commit tracking. This will automatically associate commits with releases. AKA `suspect commits`.
 await $`sentry-cli releases set-commits --auto ${prefixedVersion} ${org} ${project}`;
+
+// Always create a new release deployment.
+const envName = {
+	dev: 'staging',
+	prod: 'production',
+};
+
+await $`sentry-cli releases deploys ${prefixedVersion} new -e ${envName[environment]} ${org} ${project}`;
