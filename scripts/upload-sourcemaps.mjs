@@ -49,3 +49,6 @@ if (releaseOnly) {
 	await $`sentry-cli releases new ${prefixedVersion} ${org} ${project} --finalize`;
 	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${prefixedVersion}`;
 }
+
+// Always use sentry commit tracking
+await $`sentry-cli releases set-commits --auto ${prefixedVersion} ${org} ${project}`;
