@@ -18,13 +18,23 @@ let dir;
 
 const cwd = process.cwd();
 console.log({ cwd });
+
+/**
+ * Since Sentry releases are global per organization, we add a prefix to the release name.
+ * https://docs.sentry.io/product/cli/releases/
+ */
+let prefixedVersion = '';
+
 if (cwd.endsWith('site')) {
 	console.log(chalk.blue('In site directory'));
 	project = ['--project', 'site-client', '--project', 'site-server'];
+	prefixedVersion = `site-${version}`;
+
 	dir = 'build';
 } else if (process.cwd().endsWith('backend')) {
 	console.log(chalk.blue('In backend directory'));
 	project = ['--project', 'backend'];
+	prefixedVersion = `backend-${version}`;
 	dir = 'dist';
 } else {
 	console.log(chalk.red('Not in site or backend directory.'));
@@ -32,10 +42,10 @@ if (cwd.endsWith('site')) {
 }
 
 if (releaseOnly) {
-	await $`sentry-cli releases new ${version} ${org} ${project} --finalize`;
+	await $`sentry-cli releases new ${prefixedVersion} ${org} ${project} --finalize`;
 } else if (sourcemapsOnly) {
-	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${version}`;
+	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${prefixedVersion}`;
 } else {
-	await $`sentry-cli releases new ${version} ${org} ${project} --finalize`;
-	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${version}`;
+	await $`sentry-cli releases new ${prefixedVersion} ${org} ${project} --finalize`;
+	await $`sentry-cli sourcemaps upload ./build/ ${org} ${project} --release ${prefixedVersion}`;
 }
