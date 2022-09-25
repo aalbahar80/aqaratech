@@ -45,11 +45,3 @@ sourcemaps.forEach(async (sourceMap) => {
 	await $`rm ${sourceMap}`;
 	console.log(`${sourceMap} removed`);
 });
-
-// Delete sourcmap url comments from js files
-// TODO find a way to still make Sentry aware of the sourcemaps. Use URL instead of file path?
-let jsFiles = await glob(`${dir}/**/*.js`);
-jsFiles.forEach(async (jsFile) => {
-	await $`sed -i '/sourceMappingURL/d' ${jsFile}`;
-	console.log(`Removed sourceMappingURL from ${jsFile}`);
-});

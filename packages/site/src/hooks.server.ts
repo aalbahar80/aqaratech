@@ -211,6 +211,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 
 export const handleError: HandleServerError = ({ error, event }) => {
+	// discard map file errors
+	if (event.url.pathname.endsWith('js.map')) {
+		return;
+	}
+
 	console.error(error);
 
 	const info = extractRequestInfo(event);
@@ -224,7 +229,7 @@ export const handleError: HandleServerError = ({ error, event }) => {
 		// Alternate solution: https://github.com/sveltejs/kit/issues/6774#issuecomment-1246090470
 		Sentry.captureEvent({
 			level: 'info',
-			message: 'Redirect (404) - HandleServerError',
+			message: 'NotFoundError (404) - HandleServerError',
 			tags: {
 				status: error.status,
 				location: error.location,
