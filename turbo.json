@@ -13,9 +13,6 @@
 			"cache": false,
 			"dependsOn": ["build"]
 		},
-		"format": {
-			"outputs": []
-		},
 		"//#format": {
 			"outputs": []
 		},
