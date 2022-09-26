@@ -10,7 +10,7 @@
 		"test": "turbo run test:e2e",
 		"dev": "turbo run dev",
 		"sentry:release": "turbo run sentry:release",
-		"format": "prettier --check --ignore-path <(cat .gitignore .prettierignore) .",
+		"format": "prettier --check --ignore-path .gitignore . '!pnpm-lock.yaml'",
 		"format:fix": "prettier --write --ignore-path <(cat .gitignore .prettierignore) .",
 		"lint": "TIMING=1 turbo run lint --continue",
 		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
