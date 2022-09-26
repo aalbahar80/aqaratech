@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Property, Role } from '@prisma/client';
+import type { Property, Role } from '@prisma/client';
 import { randomUUID } from 'crypto';
 import { addDays, addMinutes, addMonths, subDays } from 'date-fns';
 import {
@@ -76,7 +76,7 @@ export const fakeRole = ({
 });
 
 export const fakeOrganization = () => {
-	const { fullName, label } = fakePerson();
+	// const { fullName, label } = fakePerson();
 	return {
 		id: generateId(),
 		createdAt: createdAt(),

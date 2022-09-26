@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Payout } from '@prisma/client';
+import type { Payout } from '@prisma/client';
 import { addDays } from 'date-fns';
 import { config } from 'dotenv';
 import { inspect } from 'util';
@@ -24,13 +24,13 @@ config({
 	path: '../backend/prisma/.env',
 });
 
-const randId = <T extends { id: string }>(entities: T[]): string => {
-	const entity = entities[Math.floor(Math.random() * entities.length)];
-	if (!entity) {
-		throw new Error(`No entity found. List is empty.`);
-	}
-	return entity.id;
-};
+// const randId = <T extends { id: string }>(entities: T[]): string => {
+// 	const entity = entities[Math.floor(Math.random() * entities.length)];
+// 	if (!entity) {
+// 		throw new Error(`No entity found. List is empty.`);
+// 	}
+// 	return entity.id;
+// };
 
 export async function seed({
 	printOnly = false,
