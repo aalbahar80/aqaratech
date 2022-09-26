@@ -1,23 +1,10 @@
 {
-	"extends": "@tsconfig/esm/tsconfig.json",
+	"extends": "@tsconfig/node18-strictest/tsconfig.json",
 	"compilerOptions": {
-		"module": "ESNext",
-		"target": "ESNext",
-		"noEmit": true,
-		"lib": ["esnext", "dom"],
-		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true,
-		"esModuleInterop": true,
+		"types": ["node"],
+		"resolveJsonModule": true,
 		"moduleResolution": "Node",
-		"strict": true,
-		"allowUnreachableCode": false,
-		"noImplicitAny": true,
-		"noImplicitOverride": true,
-		"noImplicitThis": true,
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitReturns": true,
-		"noUncheckedIndexedAccess": true,
-		"exactOptionalPropertyTypes": true
-	},
-	"include": ["src/**/*"]
+		"module": "ESNext",
+		"target": "ESNext"
+	}
 }

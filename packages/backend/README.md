@@ -22,3 +22,8 @@ Some models have a `label` field (on the DB-schema level) to grant users the abi
 Example: Portfolio model has a `fullName` field as well as `label` field.
 
 For convenience, those same models also expose a `title` field on the API level. The `title` field always equals the `label`, unless it is undefined, in which case it will revert to another existing field. (`fullName` for Portfolio, derived `address` for Property, etc)
+
+RM from db
+role.permissions
+lat/long
+planid
