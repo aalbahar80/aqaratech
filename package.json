@@ -11,7 +11,7 @@
 		"dev": "turbo run dev",
 		"sentry:release": "turbo run sentry:release",
 		"format": "prettier --check --ignore-path .gitignore . '!pnpm-lock.yaml'",
-		"format:fix": "prettier --write --ignore-path <(cat .gitignore .prettierignore) .",
+		"format:fix": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml",
 		"lint": "TIMING=1 turbo run lint --continue",
 		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
 		"check": "turbo run check --continue",
