@@ -16,7 +16,13 @@
 		"format": {
 			"outputs": []
 		},
+		"//#format": {
+			"outputs": []
+		},
 		"lint": {
+			"outputs": []
+		},
+		"//#lint": {
 			"outputs": []
 		},
 		"check": {
@@ -36,9 +42,6 @@
 		"@self/site#preview": {
 			"cache": false,
 			"dependsOn": ["@self/backend#health-check"]
-		},
-		"//#format": {
-			"outputs": []
 		}
 	}
 }
