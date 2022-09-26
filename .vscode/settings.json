@@ -7,10 +7,5 @@
 		],
 		"https://json.schemastore.org/github-workflow.json": "file:///home/hydra/projects/aqtech/.github/workflows/release.yml",
 		"https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json": "file:///home/hydra/projects/aqtech/packages/backend/openapi.yaml"
-	},
-	"eslint.workingDirectories": [
-		// "packages/test",
-		"packages/test",
-		"packages/seed"
-	]
+	}
 }
