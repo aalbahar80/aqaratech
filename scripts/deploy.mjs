@@ -54,7 +54,6 @@ if (!app) {
 		await $`exit 1`;
 	}
 
-	// await $`zx .do/deploy-new.mjs --app-name ${appName} --site-version ${siteVersion} --backend-version ${backendVersion}`;
 	// If app does not yet exist, use the spec.yml file as a base.
 	latestSpec = YAML.parse(await fs.readFile('.do/spec.yml', 'utf8'));
 	latestSpec.name = appName;

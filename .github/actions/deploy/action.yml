@@ -32,7 +32,7 @@ runs:
     - name: Create deployment on DigitalOcean
       shell: bash
       run: |
-        npx zx ./.do/deploy.mjs \
+        npx zx ./scripts/deploy.mjs \
         --app-name ${{ inputs.appName }} \
         --site-version ${{ inputs.siteTag }} \
         --backend-version ${{ inputs.backendTag }}
