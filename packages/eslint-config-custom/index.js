@@ -15,11 +15,13 @@ module.exports = {
 	],
 	plugins: ['@typescript-eslint'],
 	parserOptions: {
-		sourceType: 'module',
-		ecmaVersion: 2020,
-		// tsconfigRootDir: __dirname,
-		tsconfigRootDir: '.',
-		project: ['./tsconfig.json'],
+		tsconfigRootDir: __dirname,
+		project: [
+			// path.resolve(__dirname, 'core/server/**')
+			// '../*/tsconfig.json',
+			'../seed/tsconfig.json',
+			'../test/tsconfig.json',
+		],
 	},
 	root: true,
 	rules: {
