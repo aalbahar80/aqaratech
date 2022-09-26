@@ -10,6 +10,7 @@
 	import type { TenantDto } from '$api/openapi';
 
 	type TTenantDto = $$Generic<
+		// eslint-disable-next-line no-undef
 		TPortfolios extends undefined ? TenantDto : undefined
 	>;
 

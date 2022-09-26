@@ -10,7 +10,7 @@ import { version } from './package.json';
 
 // TODO don't generate sourcemaps if PUBLIC_AQARATECH_ENV is production
 
-export default defineConfig(({ command, mode, ssrBuild }) => {
+export default defineConfig(() => {
 	/** @type {import('vite').UserConfig} */
 	const common = {
 		plugins: [

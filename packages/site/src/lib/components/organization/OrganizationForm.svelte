@@ -10,6 +10,7 @@
 	import type { OrganizationDto } from '$api/openapi';
 
 	type TOrganizationDto = $$Generic<
+		// eslint-disable-next-line no-undef
 		TOrganizations extends undefined ? OrganizationDto : undefined
 	>;
 

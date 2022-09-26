@@ -33,6 +33,7 @@ declare module 'chart.js/dist/chart.esm' {
 // Update here: https://github.com/isaacHagoel/svelte-dnd-action/pull/401
 declare type DndEvent = import('svelte-dnd-action').DndEvent;
 declare namespace svelte.JSX {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	interface HTMLAttributes<T> {
 		onconsider?: (
 			event: CustomEvent<DndEvent> & { target: EventTarget & T },
@@ -44,6 +45,7 @@ declare namespace svelte.JSX {
 }
 
 declare namespace svelte.JSX {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	interface DOMAttributes<T> {
 		/**
 		 * Custom event I created to use along with `use:clickOutside` to detect when the user clicks outside of a component.

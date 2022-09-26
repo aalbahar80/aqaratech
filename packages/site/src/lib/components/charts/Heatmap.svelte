@@ -5,7 +5,7 @@
 	const colors = ['#ebedf0', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e'];
 	const date1 = new Date().getTime() / 1000;
 	console.log({ date1 }, 'Heatmap.svelte ~ 15');
-	let data = {
+	const data = {
 		dataPoints: {
 			1661065253.095: 20,
 			'1463673055': 113,

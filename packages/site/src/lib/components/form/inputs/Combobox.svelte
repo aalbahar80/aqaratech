@@ -100,7 +100,7 @@
 	 * Helper to make combobox accessible.
 	 */
 	let activeOption: Option | undefined;
-	let autoScroll = true;
+	const autoScroll = true;
 
 	$: {
 		if (!forceOpen) {
@@ -248,7 +248,7 @@
 			{#each filtered.slice(0, 100) as item (item.value)}
 				{@const selected = selection?.value === item.value}
 				<Hoverable let:hovering>
-					<!-- TODO classes can be simplified. It'd be preferrable to not use BOTH `classes()` utility AND `<style>` tag -->
+					<!-- TODO classes can be simplified. It'd be preferrable to not use BOTH `classes()` utility AND `style` tag -->
 					<!-- Don't confuse `disabled` (entire component) with `item.disabled` (single option) -->
 					<li
 						data-testid={item.value}

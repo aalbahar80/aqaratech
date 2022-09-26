@@ -10,10 +10,16 @@ module.exports = {
 		'prettier',
 	],
 	plugins: ['svelte3', '@typescript-eslint'],
-	ignorePatterns: ['*.cjs'],
+	ignorePatterns: [
+		'*.cjs',
+		'currency.ts',
+		'FrappeChart.svelte',
+		'jspdf-invoice-template.js',
+	],
 	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
 	settings: {
 		'svelte3/typescript': () => require('typescript'),
+		'svelte3/ignore-styles': () => true,
 	},
 	parserOptions: {
 		sourceType: 'module',
@@ -28,5 +34,19 @@ module.exports = {
 		'@typescript-eslint/no-non-null-assertion': 'off',
 		'@typescript-eslint/ban-ts-comment': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/no-unused-vars': [
+			'error',
+			{ destructuredArrayIgnorePattern: '^_' },
+		],
+		'prefer-const': [
+			'error',
+			{
+				destructuring: 'all',
+			},
+		],
+	},
+	globals: {
+		svelte: 'readonly',
+		__AQARATECH_APP_VERSION__: 'readonly',
 	},
 };

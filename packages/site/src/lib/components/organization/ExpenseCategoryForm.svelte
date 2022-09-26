@@ -13,6 +13,7 @@
 	import type { ExpenseCategoryDto } from '$api/openapi';
 
 	type TExpenseCategoryDto = $$Generic<
+		// eslint-disable-next-line no-undef
 		TExpenseCategorys extends undefined ? ExpenseCategoryDto : undefined
 	>;
 
