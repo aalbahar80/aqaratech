@@ -1,3 +1,4 @@
+export * from './factory';
 export {
 	fakeEmail,
 	fakeExpense,
@@ -21,5 +22,6 @@ export {
 	testTenantRoleId,
 	timespan,
 } from './generators.js';
-export { seed } from './seed.js';
 export { sample } from './sample-data';
+export { seed } from './seed.js';
+export * from './utils';
