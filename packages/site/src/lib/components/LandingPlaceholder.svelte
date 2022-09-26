@@ -554,8 +554,7 @@
 							{#each footerNavigation.social as item (item.name)}
 								<a href={item.href} class="text-gray-400 hover:text-gray-500">
 									<span class="sr-only">{item.name}</span>
-									<item.icon class="h-6 w-6" aria-hidden="true" />
-
+									<!-- <item.icon class="h-6 w-6" aria-hidden="true" /> -->
 									<!-- <Fa icon={item.icon} class="h-6 w-6" /> -->
 									<!-- <Icon src={item.icon} class="h-6 w-6" aria-hidden="true" /> -->
 								</a>

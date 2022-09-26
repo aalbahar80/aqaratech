@@ -8,7 +8,7 @@
 		"dev": "vite dev --port 3000",
 		"build": "rm -rf ./{.svelte-kit,build} && vite build && ./alter-problematic-chunk.sh",
 		"preview": ". ../../scripts/export-env.sh ../../.env && PORT=3000 ORIGIN=$PUBLIC_SITE_URL node build/index.js",
-		"check": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests --threshold warning",
+		"check": "svelte-check --tsconfig ./tsconfig.json --ignore tests --threshold warning",
 		"check:all": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests",
 		"check:watch": "svelte-check --use-new-transformation --ignore tests --watch",
 		"custom-lint": "eslint . --ext .ts,.svelte",
