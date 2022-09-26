@@ -17,7 +17,7 @@
 		"@self/seed": "workspace:0.5.0",
 		"@tsconfig/node18": "1.0.1",
 		"@tsconfig/node18-strictest": "1.0.0",
-		"@types/node": "18.7.20",
+		"@types/node": "18.7.23",
 		"dotenv": "16.0.2",
 		"eslint": "8.24.0",
 		"jose": "4.9.3",
