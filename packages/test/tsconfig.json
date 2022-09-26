@@ -3,9 +3,7 @@
 	"compilerOptions": {
 		"types": ["node"],
 		"resolveJsonModule": true,
-		"moduleResolution": "Node",
-		"module": "ESNext",
-		"target": "ESNext"
+		"module": "NodeNext"
 	},
 	"include": ["./**/*.*"],
 	"exclude": ["playwright-report", ".eslintrc.js"]
