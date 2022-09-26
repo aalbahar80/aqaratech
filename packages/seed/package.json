@@ -8,7 +8,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "tsc --project tsconfig.build.json",
+		"build": "tsc",
 		"test:e2e:prepare": "./create-test-db.sh",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",

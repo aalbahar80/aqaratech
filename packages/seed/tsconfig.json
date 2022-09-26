@@ -1,11 +1,14 @@
 {
+	"$schema": "http://json.schemastore.org/tsconfig",
 	"extends": "@tsconfig/node18-strictest/tsconfig.json",
 	"exclude": ["dist"],
 	"compilerOptions": {
 		"types": ["node"],
-		"resolveJsonModule": true,
-		"moduleResolution": "Node",
-		"module": "ESNext",
-		"target": "ESNext"
+		"outDir": "./dist",
+		"declaration": true,
+		"declarationDir": "./dist",
+		"sourceMap": true,
+		"resolveJsonModule": true
+		// "rootDirs": ["src"]
 	}
 }
