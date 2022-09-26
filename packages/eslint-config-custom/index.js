@@ -41,6 +41,7 @@ module.exports = {
 					'PUBLIC_AQ_DEBUG_SENTRY',
 					'PUBLIC_TRACE_RATE',
 					'MEILISEARCH_HOST',
+					'CI',
 				],
 			},
 		],
