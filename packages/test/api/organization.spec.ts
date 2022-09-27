@@ -1,33 +1,26 @@
-import { organizationFactory, testOrgRoleId } from '@self/seed';
+import { expect } from '@playwright/test';
+import { organizationFactory } from '@self/seed';
 import * as R from 'remeda';
-import { expect, test } from '../token';
 import type { OrganizationCreatedDto } from '../types/api';
+import { test } from './api-config';
 
-test.use({
-	extraHTTPHeaders: {
-		'x-role-id': testOrgRoleId,
-	},
-});
-
-test(`can create organization`, async ({ request, token }) => {
+test(`can create organization`, async ({ request }) => {
 	const org = organizationFactory.build();
 	const picked = R.pick(org, ['fullName', 'label']);
 
 	const res = await request.post(`/organizations`, {
-		headers: { Authorization: `Bearer ${token}` },
 		data: picked,
 	});
 
 	expect.soft(res.status()).toBe(201);
 });
 
-test(`can get organization`, async ({ request, token }) => {
+test(`can get organization`, async ({ request }) => {
 	// use get request to get the organization
 	const org = organizationFactory.build();
 	const picked = R.pick(org, ['fullName', 'label']);
 
 	const res = await request.post(`/organizations`, {
-		headers: { Authorization: `Bearer ${token}` },
 		data: picked,
 	});
 
@@ -37,7 +30,6 @@ test(`can get organization`, async ({ request, token }) => {
 
 	const res2 = await request.get(`/organizations/${created.organization.id}`, {
 		headers: {
-			Authorization: `Bearer ${token}`,
 			'x-role-id': created.roleId,
 		},
 	});

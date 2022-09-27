@@ -5,6 +5,8 @@ dotenv({
 	path: '../../.env',
 });
 
+const API_FILES = '**/api/**/*.spec.ts';
+
 const config: PlaywrightTestConfig = {
 	globalSetup: require.resolve('./global-setup'),
 	reporter: [
@@ -51,11 +53,19 @@ const config: PlaywrightTestConfig = {
 	projects: [
 		{
 			name: 'chromium',
+			testIgnore: [API_FILES],
 			use: {
 				...devices['Desktop Chrome'],
 				launchOptions: {
 					args: ['--window-position=0,0'],
 				},
+			},
+		},
+		{
+			name: 'api',
+			testMatch: [API_FILES],
+			use: {
+				baseURL: process.env.PUBLIC_API_URL,
 			},
 		},
 		// {
