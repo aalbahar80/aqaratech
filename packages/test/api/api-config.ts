@@ -1,18 +1,14 @@
 import { test } from '@playwright/test';
 import { testOrgRoleId } from '@self/seed';
+import { getToken } from '../utils/get-token';
 
 test.use({
-	extraHTTPHeaders: async ({}, use) => {
-		// Get token
-		const cookies = (await import('../storageState.json')).cookies;
-		const accessToken = cookies.find((c) => c.name === 'accessToken')?.value;
-		if (!accessToken) {
-			throw new Error('No access token found');
-		}
-
-		// Use token
+	extraHTTPHeaders: async ({ baseURL }, use) => {
 		const extraHTTPHeaders = {
-			Authorization: `Bearer ${accessToken}`,
+			Authorization: `Bearer ${await getToken({
+				name: 'accessToken',
+				domain: baseURL,
+			})}`,
 			'x-role-id': testOrgRoleId,
 		};
 		await use(extraHTTPHeaders);
