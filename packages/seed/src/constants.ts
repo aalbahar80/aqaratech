@@ -1,4 +1,6 @@
-import { generateId } from './generators';
+import { randomUUID } from 'node:crypto';
+
+const generateId = (): string => randomUUID();
 
 export const areas: [string, string][] = [
 	['Umm Al-Maradim Island', 'جزيرة أم المرادم'],
