@@ -1,12 +1,7 @@
 {
 	"name": "@self/seed",
 	"version": "0.5.0",
-	"source": "src/index.ts",
-	"main": "./dist/index.js",
-	"types": "dist/index.d.ts",
-	"files": [
-		"dist"
-	],
+	"main": "dist/self-seed.cjs.js",
 	"scripts": {
 		"build": "rm -rf dist && tsc",
 		"test:e2e:prepare": "./create-test-db.sh",
@@ -18,7 +13,9 @@
 		"eslint-config-custom": "workspace:*"
 	},
 	"devDependencies": {
+		"@babel/preset-typescript": "7.18.6",
 		"@faker-js/faker": "7.5.0",
+		"@preconstruct/cli": "2.2.1",
 		"@prisma/client": "4.3.1",
 		"@tsconfig/esm": "1.0.2",
 		"@types/node": "18.7.23",
