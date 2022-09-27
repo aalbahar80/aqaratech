@@ -64,7 +64,7 @@ jobs:
       - run: pnpm run lint:all
         continue-on-error: true
 
-      - run: pnpm run check
+      - run: pnpm run check:all
         continue-on-error: true
 
       - run: pnpm test

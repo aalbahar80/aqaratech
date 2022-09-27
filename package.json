@@ -16,7 +16,8 @@
 		"lint": "eslint --ignore-path .gitignore ./scripts/*",
 		"lint:all": "TIMING=1 turbo run lint --continue",
 		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
-		"check": "turbo run check --continue",
+		"check": "madge --circular --extensions ts --exclude .svelte-kit --no-spinner .",
+		"check:all": "turbo run check --continue",
 		"e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
 		"ci:publish": "changeset tag"
@@ -28,6 +29,7 @@
 		"@types/node": "18.7.23",
 		"eslint": "8.24.0",
 		"eslint-config-custom": "workspace:*",
+		"madge": "5.0.1",
 		"prettier": "2.7.1",
 		"prettier-plugin-tailwindcss": "0.1.13",
 		"turbo": "1.4.6",
