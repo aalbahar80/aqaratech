@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test:e2e": "DEBUG=pw:webserver pnpm run -F @self/seed test:e2e:prepare && playwright test",
+		"api:generate": "tsc --project tsconfig.api.json",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit"
@@ -21,6 +22,7 @@
 		"dotenv": "16.0.2",
 		"eslint": "8.24.0",
 		"jose": "4.9.3",
+		"remeda": "1.1.0",
 		"typescript": "4.8.3"
 	},
 	"dependencies": {

@@ -358,6 +358,7 @@ importers:
       eslint: 8.24.0
       eslint-config-custom: workspace:*
       jose: 4.9.3
+      remeda: 1.1.0
       typescript: 4.8.3
     dependencies:
       '@self/utils': link:../utils
@@ -371,6 +372,7 @@ importers:
       dotenv: 16.0.2
       eslint: 8.24.0
       jose: 4.9.3
+      remeda: 1.1.0
       typescript: 4.8.3
 
   packages/utils:
