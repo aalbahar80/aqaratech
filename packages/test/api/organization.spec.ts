@@ -1,7 +1,7 @@
 import { organizationFactory, testOrgRoleId } from '@self/seed';
 import * as R from 'remeda';
 import { expect, test } from '../token';
-import type { OrganizationCreatedDto } from '../types';
+import type { OrganizationCreatedDto } from '../types/api';
 
 test.use({
 	extraHTTPHeaders: {
@@ -33,7 +33,6 @@ test(`can get organization`, async ({ request, token }) => {
 
 	expect.soft(res.status()).toBe(201);
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const created = (await res.json()) as OrganizationCreatedDto;
 
 	const res2 = await request.get(`/organizations/${created.organization.id}`, {

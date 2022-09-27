@@ -43,6 +43,13 @@
 		"@self/site#preview": {
 			"cache": false,
 			"dependsOn": ["@self/backend#health-check"]
+		},
+		"//#api:generate": {
+			"outputs": [
+				"packages/site/src/api/openapi/**",
+				"packages/test/types/api/**"
+			],
+			"inputs": ["packages/backend/openapi.yaml"]
 		}
 	}
 }

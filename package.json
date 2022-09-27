@@ -20,7 +20,9 @@
 		"check:all": "turbo run check --continue",
 		"e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
-		"ci:publish": "changeset tag"
+		"ci:publish": "changeset tag",
+		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate",
+		"api:generate:all": "turbo run api:generate"
 	},
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.12",
