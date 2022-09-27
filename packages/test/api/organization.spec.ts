@@ -16,7 +16,6 @@ test(`can create organization`, async ({ request }) => {
 });
 
 test(`can get organization`, async ({ request }) => {
-	// use get request to get the organization
 	const org = organizationFactory.build();
 	const picked = R.pick(org, ['fullName', 'label']);
 

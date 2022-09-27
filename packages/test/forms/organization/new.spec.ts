@@ -1,4 +1,4 @@
-import { expect, Locator } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { test } from '../../config';
 
 test('existing user can create new org', async ({ page, isMobile }) => {

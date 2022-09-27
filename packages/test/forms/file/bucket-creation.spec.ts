@@ -1,3 +1,4 @@
 import { test } from '@playwright/test';
 
-test.skip('buckets are created if missing', async ({ request }) => {});
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+test.skip('buckets are created if missing', async () => {});
