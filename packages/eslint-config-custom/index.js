@@ -12,6 +12,11 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended-requiring-type-checking',
 		'turbo',
 		'prettier',
+
+		// eslint-config-prettier helps with detecting circular dependencies
+		// https://github.com/import-js/eslint-plugin-import/blob/main/config/recommended.js
+		'plugin:import/recommended',
+		'plugin:import/typescript',
 	],
 	plugins: ['@typescript-eslint'],
 	parserOptions: {
@@ -24,6 +29,25 @@ module.exports = {
 		],
 	},
 	root: true,
+	settings: {
+		// https://github.com/import-js/eslint-plugin-import#typescript
+		'import/resolver': {
+			node: true,
+			typescript: true,
+			// typescript: {
+			// 	alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+			// 	project: [
+			// 		// For sibling packages: Helps each .eslintrc.js file find its own tsconfig.json file
+			// 		'../*/tsconfig.json',
+			// 		// For root: Helps root .eslintrc.js file find its own tsconfig.json file
+			// 		'../../tsconfig.json',
+			// 	],
+			// },
+		},
+		'import/parsers': {
+			'@typescript-eslint/parser': ['.ts', '.tsx'],
+		},
+	},
 	rules: {
 		// https://github.com/vercel/turborepo/blob/main/packages/eslint-plugin-turbo/docs/rules/no-undeclared-env-vars.md
 		'turbo/no-undeclared-env-vars': [
@@ -47,6 +71,13 @@ module.exports = {
 				],
 			},
 		],
+		// 'import/no-cycle': 'error',
+		// 'import/no-cycle': [2, { maxDepth: 3 }],
+
+		// Detect circular dependencies.
+		// Be conservative with maxDepth, as it can be expensive.
+		'import/no-cycle': ['error', { maxDepth: 2 }],
+		'import/no-self-import': 'error',
 	},
 	ignorePatterns: ['.eslintrc.js', 'env.d.ts'],
 };
