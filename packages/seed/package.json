@@ -2,26 +2,27 @@
 	"name": "@self/seed",
 	"version": "0.5.0",
 	"main": "dist/self-seed.cjs.js",
+	"module": "dist/self-seed.esm.js",
 	"scripts": {
-		"build": "rm -rf dist && tsc",
+		"build": "rm -rf dist && preconstruct build",
 		"test:e2e:prepare": "./create-test-db.sh",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"eslint-config-custom": "workspace:*"
+		"@faker-js/faker": "7.5.0",
+		"@prisma/client": "4.3.1",
+		"date-fns": "2.29.3",
+		"dotenv": "16.0.2",
+		"eslint-config-custom": "workspace:*",
+		"factory.ts": "1.2.0"
 	},
 	"devDependencies": {
 		"@babel/preset-typescript": "7.18.6",
-		"@faker-js/faker": "7.5.0",
 		"@preconstruct/cli": "2.2.1",
-		"@prisma/client": "4.3.1",
 		"@tsconfig/esm": "1.0.2",
 		"@types/node": "18.7.23",
-		"date-fns": "2.29.3",
-		"dotenv": "16.0.2",
-		"factory.ts": "1.2.0",
 		"prisma": "4.3.1",
 		"tsx": "3.9.0",
 		"typescript": "4.8.3"
