@@ -3,8 +3,18 @@ import { testOrgEmail, testPassword } from '@self/seed';
 import { getToken } from './utils/get-token';
 
 async function globalSetup(config: FullConfig) {
-	const { baseURL, storageState, ignoreHTTPSErrors } = config.projects[0].use;
-	// avoid logging in again if cookies have not expired
+	const project = config.projects[0];
+
+	if (!project) {
+		throw new Error('No project found');
+	}
+	const { baseURL, storageState, ignoreHTTPSErrors } = project.use;
+
+	if (!baseURL || !storageState || !ignoreHTTPSErrors) {
+		throw new Error('Missing config'); // overkill?
+	}
+
+	// Avoid logging in again if cookies have not expired
 	try {
 		const idToken = await getToken({ name: 'idToken', domain: baseURL });
 		const accessToken = await getToken({
