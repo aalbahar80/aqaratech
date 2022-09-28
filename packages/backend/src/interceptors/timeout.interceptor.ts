@@ -15,7 +15,7 @@ export class TimeoutInterceptor implements NestInterceptor {
 
 	intercept(_context: ExecutionContext, next: CallHandler): Observable<any> {
 		return next.handle().pipe(
-			timeout(5000),
+			timeout(15000),
 			catchError((err) => {
 				if (err instanceof TimeoutError) {
 					this.logger.warn('Request timed out');

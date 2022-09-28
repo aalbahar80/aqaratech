@@ -8,7 +8,8 @@ import { test } from '../api-config';
 test.describe('one', () => {
 	let portfolioId: string;
 	let newRoleId: string;
-	test.beforeEach(async ({ request, extraHTTPHeaders }) => {
+	let orgId: string;
+	test.beforeEach(async ({ request }) => {
 		// create fresh org
 		const org = organizationFactory.build();
 
@@ -40,8 +41,9 @@ test.describe('one', () => {
 
 		expect(res.status()).toBe(201);
 
-		portfolioId = created.id;
+		orgId = orgCreated.organization.id;
 		newRoleId = orgCreated.roleId;
+		portfolioId = created.id;
 	});
 
 	test('handle noSuchBucket gracefully', async ({ request }) => {
@@ -62,6 +64,35 @@ test.describe('one', () => {
 			results: [],
 		});
 	});
-});
 
-test.skip('buckets are created if missing', async () => {});
+	test('buckets are automatically created', async ({ request }) => {
+		const url = withQuery('/files', {
+			relationKey: 'portfolio',
+			relationValue: portfolioId,
+		});
+
+		const fileName = 'test.txt';
+
+		const res = await request.post(url, {
+			headers: {
+				'x-role-id': newRoleId,
+			},
+			multipart: {
+				fileName: fileName,
+				relationKey: 'portfolio',
+				relationValue: portfolioId,
+				organizationId: orgId,
+				file: {
+					name: fileName,
+					mimeType: 'text/plain',
+					buffer: Buffer.from('hello world'),
+				},
+			},
+		});
+
+		expect(res.status()).toBe(201);
+
+		const data = await res.text();
+		expect(data).toBe('test.txt');
+	});
+});
