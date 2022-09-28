@@ -23,7 +23,7 @@ export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 		faker.name.lastName(),
 		faker.datatype.number({ min: 1, max: 500 }).toString(),
 	])}`,
-	avenue: faker.address.streetName(),
+	avenue: faker.datatype.number({ min: 1, max: 100 }).toString(),
 	number: faker.datatype.number({ min: 1, max: 100 }).toString(),
 	lat: +faker.address.latitude(),
 	long: +faker.address.longitude(),
