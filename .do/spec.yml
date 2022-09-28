@@ -81,13 +81,13 @@ services:
         scope: RUN_AND_BUILD_TIME
         type: SECRET
         value: 2493bd85d0e72adb6979a06c6385468653693f99dc8b108a655de336e3a04bb1
-      # - key: MEILISEARCH_HOST
-      #   scope: RUN_AND_BUILD_TIME
-      #   value: REPLACE_MEILISEARCH_HOST
-      # - key: MEILISEARCH_API_KEY
-      #   scope: RUN_AND_BUILD_TIME
-      #   type: SECRET
-      #   value: REPLACE_MEILISEARCH_API_KEY
+      - key: MEILISEARCH_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: http://localhost:7700
+      - key: MEILISEARCH_API_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: MASTER_KEY
       - key: PUBLIC_ROUTE_PATH
         scope: RUN_AND_BUILD_TIME
         value: ${_self.PUBLIC_ROUTE_PATH}
