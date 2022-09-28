@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 0.2.1
+
+### Patch Changes
+
+- c2a205f1: fix clientError on role switch
+
 ## 0.2.0
 
 ### Minor Changes

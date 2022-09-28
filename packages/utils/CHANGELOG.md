@@ -1,5 +1,13 @@
 # @self/utils
 
+## 1.5.1
+
+### Patch Changes
+
+- c2a205f1: fix clientError on role switch
+- Updated dependencies [c2a205f1]
+  - eslint-config-custom@0.2.1
+
 ## 1.5.0
 
 ### Minor Changes

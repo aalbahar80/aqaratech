@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.6.3
+
+### Patch Changes
+
+- c2a205f1: fix clientError on role switch
+
 ## 0.6.2
 
 ### Patch Changes
