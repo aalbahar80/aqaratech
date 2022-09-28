@@ -1,5 +1,5 @@
 import { getToken } from '../utils/get-token';
-import { test } from './new-org';
+import { test } from './api-fixtures';
 
 // Every test gets a fresh organization/role
 test.use({
