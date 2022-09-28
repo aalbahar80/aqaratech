@@ -10,11 +10,15 @@ export const test = base.extend<{
 	org: OrganizationCreatedDto;
 	portfolio: PortfolioDto;
 }>({
+	// A fixture that returns a fresh organization.
 	org: async ({ baseURL, browser }, use) => {
-		// create a new context.
-		// It's not inheriting contextOptions, because contextOptions is empty. Why is it empty?
-		// contextOptions might be empty because this is executed before test.use is called?
 		if (!baseURL) throw new Error('baseURL is not set');
+
+		// baseURL is populated because it is set very early in playwright.config.ts
+		// For some reason though, contextOptions.baseURL is not set.
+		// P.S. We can't use extraHTTPHeaders here, because it'll cause a circular dependency.
+		// contextOptions might be empty because this is executed before test.use is called?
+		// For this reason, we create a new context here.
 
 		const context = await browser.newContext({
 			baseURL,
@@ -47,6 +51,8 @@ export const test = base.extend<{
 		await use(created);
 		await context.close();
 	},
+	// A fixture that returns a fresh portfolio in a fresh organization.
+	// TODO: what happens if a test uses both org and portfolio fixtures? Will it create two organizations?
 	portfolio: async ({ org, request }, use) => {
 		// create fresh portfolio
 		const portfolio = portfolioFactory.build({
