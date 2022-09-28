@@ -12,7 +12,7 @@
 	},
 	"dependencies": {
 		"@faker-js/faker": "7.5.0",
-		"@prisma/client": "4.3.1",
+		"@prisma/client": "4.4.0",
 		"date-fns": "2.29.3",
 		"dotenv": "16.0.2",
 		"eslint-config-custom": "workspace:*",
@@ -23,8 +23,8 @@
 		"@preconstruct/cli": "2.2.1",
 		"@tsconfig/esm": "1.0.2",
 		"@types/node": "18.7.23",
-		"prisma": "4.3.1",
+		"prisma": "4.4.0",
 		"tsx": "3.9.0",
-		"typescript": "4.8.3"
+		"typescript": "4.8.4"
 	}
 }
