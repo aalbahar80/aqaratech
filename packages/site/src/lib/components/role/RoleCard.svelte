@@ -12,7 +12,11 @@
 	const meta = getRoleMeta(role);
 </script>
 
-<a href={`/auth/roles/${role.id}`} class="block hover:bg-gray-50">
+<a
+	href={`/auth/roles/${role.id}`}
+	data-sveltekit-reload
+	class="block hover:bg-gray-50"
+>
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex h-12 items-center justify-between">
 			<p class="select-all truncate text-sm font-medium text-indigo-600">
