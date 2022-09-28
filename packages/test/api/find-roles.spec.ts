@@ -1,20 +1,13 @@
-import { sample, testOrgRoleId } from '@self/seed';
-import { expect, test } from '../token';
-
-test.use({
-	extraHTTPHeaders: {
-		'x-role-id': testOrgRoleId,
-	},
-});
+import { expect } from '@playwright/test';
+import { sample } from '@self/seed';
+import { test } from './api-config';
 
 const org = sample.organizations[0];
 const portfolio = sample.portfolios[0];
 const tenant = sample.tenants[0];
 
-test('org members', async ({ request, token }) => {
-	const res = await request.get(`/organizations/${org.id}/roles`, {
-		headers: { authorization: `Bearer ${token}` },
-	});
+test('org members', async ({ request }) => {
+	const res = await request.get(`/organizations/${org.id}/roles`);
 
 	expect(res.status()).toBe(200);
 	const body = await res.json();
@@ -29,10 +22,8 @@ test('org members', async ({ request, token }) => {
 	});
 });
 
-test('portfolio members', async ({ request, token }) => {
-	const res = await request.get(`/portfolios/${portfolio.id}/roles`, {
-		headers: { authorization: `Bearer ${token}` },
-	});
+test('portfolio members', async ({ request }) => {
+	const res = await request.get(`/portfolios/${portfolio.id}/roles`);
 
 	expect(res.status()).toBe(200);
 	const body = await res.json();
@@ -47,10 +38,8 @@ test('portfolio members', async ({ request, token }) => {
 	});
 });
 
-test('tenant members', async ({ request, token }) => {
-	const res = await request.get(`/tenants/${tenant.id}/roles`, {
-		headers: { authorization: `Bearer ${token}` },
-	});
+test('tenant members', async ({ request }) => {
+	const res = await request.get(`/tenants/${tenant.id}/roles`);
 
 	expect(res.status()).toBe(200);
 	const body = await res.json();

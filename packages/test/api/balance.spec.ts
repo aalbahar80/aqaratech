@@ -1,22 +1,15 @@
-import { sample, testOrgRoleId } from '@self/seed';
-import { expect, test } from '../token';
+import { expect } from '@playwright/test';
+import { sample } from '@self/seed';
+import { test } from './api-config';
 
 const portfolio = sample.portfolios[0];
 const leaseInvoices = sample.leaseInvoices;
 const expenses = sample.expenses;
 const payouts = sample.payouts;
 
-test.use({
-	extraHTTPHeaders: {
-		'x-role-id': testOrgRoleId,
-	},
-});
-
 // TODO: other tests that add data will cause this test to fail
-test(`balance`, async ({ request, token }) => {
-	const res = await request.get(`/portfolios/${portfolio.id}/balance`, {
-		headers: { Authorization: `Bearer ${token}` },
-	});
+test(`balance`, async ({ request }) => {
+	const res = await request.get(`/portfolios/${portfolio.id}/balance`);
 
 	await expect(res).toBeOK();
 	const sums = {
