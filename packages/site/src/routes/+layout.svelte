@@ -6,6 +6,7 @@
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { environment } from '$lib/environment';
 	import { getSentryUser } from '$lib/utils/sentry/common';
+	import { shouldEnableSentry } from '@self/utils';
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
 	import { onMount } from 'svelte';
@@ -30,6 +31,10 @@
 				environment: environment.PUBLIC_AQARATECH_ENV,
 				release: __AQARATECH_APP_VERSION__,
 				debug: environment.PUBLIC_AQ_DEBUG_SENTRY === '1',
+				enabled: shouldEnableSentry({
+					env: environment.PUBLIC_AQARATECH_ENV,
+					debugEnv: environment.PUBLIC_AQ_DEBUG_SENTRY,
+				}),
 			});
 
 			Sentry.configureScope((scope) => {

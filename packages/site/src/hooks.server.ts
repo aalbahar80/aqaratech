@@ -11,7 +11,7 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
-import { envCheck } from '@self/utils';
+import { envCheck, shouldEnableSentry } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -44,6 +44,10 @@ Sentry.init({
 		}
 		return sampleRate;
 	},
+	enabled: shouldEnableSentry({
+		env: environment.PUBLIC_AQARATECH_ENV,
+		debugEnv: environment.PUBLIC_AQ_DEBUG_SENTRY,
+	}),
 });
 
 export const handle: Handle = async ({ event, resolve }) => {

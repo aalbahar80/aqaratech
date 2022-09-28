@@ -11,3 +11,4 @@ export { envCheck } from './env-check';
 export { fromUrl } from './from-url';
 export { isEntity, isEntityUrlName } from './is-entity';
 export { satisfies } from './satisfies';
+export { shouldEnableSentry } from './should-enable-sentry';

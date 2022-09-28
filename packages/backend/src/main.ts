@@ -1,6 +1,6 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { envCheck } from '@self/utils';
+import { envCheck, shouldEnableSentry } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
@@ -27,6 +27,10 @@ Sentry.init({
 		}
 		return sampleRate;
 	},
+	enabled: shouldEnableSentry({
+		env: process.env.PUBLIC_AQARATECH_ENV,
+		debugEnv: process.env.PUBLIC_AQ_DEBUG_SENTRY,
+	}),
 });
 
 async function bootstrap() {
