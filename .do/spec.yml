@@ -83,11 +83,11 @@ services:
         value: 2493bd85d0e72adb6979a06c6385468653693f99dc8b108a655de336e3a04bb1
       # - key: MEILISEARCH_HOST
       #   scope: RUN_AND_BUILD_TIME
-      #   value: http://104.248.29.78
+      #   value: REPLACE_MEILISEARCH_HOST
       # - key: MEILISEARCH_API_KEY
       #   scope: RUN_AND_BUILD_TIME
       #   type: SECRET
-      # value: EV[1:XYkVoJdTHL2e79KZKyxJY9nLdh+wXlOG:lGG1FPHc12i5h+tmrFos07c7+I2kZ2mIin++VyzFNNBPn58F+G+hpX3LiYqrf+4Z]
+      #   value: REPLACE_MEILISEARCH_API_KEY
       - key: PUBLIC_ROUTE_PATH
         scope: RUN_AND_BUILD_TIME
         value: ${_self.PUBLIC_ROUTE_PATH}
