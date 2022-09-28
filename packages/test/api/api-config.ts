@@ -1,15 +1,15 @@
-import { test } from '@playwright/test';
-import { testOrgRoleId } from '@self/seed';
 import { getToken } from '../utils/get-token';
+import { test } from './new-org';
 
+// Every test gets a fresh organization/role
 test.use({
-	extraHTTPHeaders: async ({ baseURL }, use) => {
+	extraHTTPHeaders: async ({ baseURL, org }, use) => {
 		const extraHTTPHeaders = {
 			Authorization: `Bearer ${await getToken({
 				name: 'accessToken',
 				domain: baseURL,
 			})}`,
-			'x-role-id': testOrgRoleId,
+			'x-role-id': org.roleId,
 		};
 		await use(extraHTTPHeaders);
 	},
