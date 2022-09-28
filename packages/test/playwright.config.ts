@@ -16,7 +16,7 @@ const config: PlaywrightTestConfig = {
 	retries: 2,
 	timeout: process.env.CI ? 30 * 1000 : 5 * 1000,
 	maxFailures: 20,
-	grepInvert: [/smoke/, /file/],
+	grepInvert: [/smoke/],
 	use: {
 		storageState: 'storageState.json',
 		headless: true,
