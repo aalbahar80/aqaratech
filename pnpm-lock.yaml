@@ -360,6 +360,7 @@ importers:
       jose: 4.10.0
       remeda: 1.1.0
       typescript: 4.8.4
+      ufo: 0.8.5
     dependencies:
       '@self/utils': link:../utils
       eslint-config-custom: link:../eslint-config-custom
@@ -374,6 +375,7 @@ importers:
       jose: 4.10.0
       remeda: 1.1.0
       typescript: 4.8.4
+      ufo: 0.8.5
 
   packages/utils:
     specifiers:
@@ -11048,6 +11050,10 @@ packages:
     resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
+
+  /ufo/0.8.5:
+    resolution: {integrity: sha512-e4+UtA5IRO+ha6hYklwj6r7BjiGMxS0O+UaSg9HbaTefg4kMkzj4tXzEBajRR+wkxf+golgAWKzLbytCUDMJAA==}
     dev: true
 
   /unbox-primitive/1.0.2:
