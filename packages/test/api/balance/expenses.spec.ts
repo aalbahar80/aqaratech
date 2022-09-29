@@ -11,27 +11,23 @@ test(`expense amount`, async ({ request, portfolio, expenseCategory }) => {
 		categoryId: expenseCategory.id,
 	});
 
-	// only submit necessary fields
-	const toCreate: CreateExpenseDto[] = expenses.map((e) => {
-		const expense = {
-			...R.pick(e, [
+	const sum = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+
+	// send post request for each expense
+	await Promise.all(
+		expenses.map((e) => {
+			// only submit necessary fields
+			const expense: CreateExpenseDto = R.pick(e, [
 				'amount',
 				'categoryId',
 				'portfolioId',
 				'organizationId',
 				'categoryId',
-			]),
-			postAt: e.postAt.toISOString(),
-		};
+				'postAt',
+			]);
 
-		return expense;
-	});
-
-	const sum = toCreate.reduce((acc, expense) => acc + expense.amount, 0);
-
-	// send post request for each expense
-	await Promise.all(
-		toCreate.map((expense) => request.post('/expenses', { data: expense })),
+			return request.post('/expenses', { data: expense });
+		}),
 	);
 
 	const res = await request.get(`/portfolios/${portfolio.id}/balance`);
