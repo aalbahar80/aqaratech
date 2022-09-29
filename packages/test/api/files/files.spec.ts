@@ -63,11 +63,12 @@ test('files can be downloaded', async ({ request, file }) => {
 		key: file,
 	});
 
-	const res = await request.get(url);
+	// const res = await request.get(url); // this fails, use fetch instead
+	const res = await fetch(url);
 
-	expect.soft(res.status()).toBe(200);
+	expect.soft(res.status).toBe(200);
 
-	const downloaded = await res.body();
+	const downloaded = await res.text();
 
-	expect(downloaded.toString('utf-8')).toBe('hello world');
+	expect(downloaded.toString()).toBe('hello world');
 });
