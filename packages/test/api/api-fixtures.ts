@@ -1,7 +1,11 @@
 import { test as base } from '@playwright/test';
 import { organizationFactory, portfolioFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { OrganizationCreatedDto, PortfolioDto } from '../types/api';
+import type {
+	ExpenseCategoryDto,
+	OrganizationCreatedDto,
+	PortfolioDto,
+} from '../types/api';
 import { getToken } from '../utils/get-token';
 
 // Extend basic test by providing an "org" fixture.
@@ -10,6 +14,7 @@ export const test = base.extend<{
 	org: OrganizationCreatedDto;
 	portfolio: PortfolioDto;
 	file: string;
+	expenseCategory: ExpenseCategoryDto;
 }>({
 	// A fixture that returns a fresh organization.
 	org: async ({ baseURL, browser }, use) => {
@@ -52,8 +57,9 @@ export const test = base.extend<{
 		await use(created);
 		await context.close();
 	},
+
 	// A fixture that returns a fresh portfolio in a fresh organization.
-	// TODO: what happens if a test uses both org and portfolio fixtures? Will it create two organizations?
+	// Fixtures are "composable", i.e when a test uses both org and portfolio fixtures, the same organization is used.
 	portfolio: async ({ org, request }, use) => {
 		// create fresh portfolio
 		const portfolio = portfolioFactory.build({
@@ -68,6 +74,7 @@ export const test = base.extend<{
 
 		await use(created);
 	},
+
 	// A fixture that returns a fresh file in a fresh portfolio.
 	file: async ({ portfolio, request }, use) => {
 		const fileName = 'test.txt';
@@ -90,5 +97,17 @@ export const test = base.extend<{
 		const key = `portfolio/${portfolio.id}/${name}`;
 
 		await use(key);
+	},
+
+	expenseCategory: async ({ request, org }, use) => {
+		const res = await request.get(`/expense-categories`);
+
+		const categories = (await res.json()) as ExpenseCategoryDto[];
+
+		const category = categories.find((c) => !c.isGroup);
+
+		if (!category) throw new Error('No expense category found');
+
+		await use(category);
 	},
 });

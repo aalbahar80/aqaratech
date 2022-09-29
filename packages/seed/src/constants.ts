@@ -1,5 +1,8 @@
 import { randomUUID } from 'node:crypto';
 
+// TODO: use this in all factories
+export const TIMESPAN = 2;
+
 const generateId = (): string => randomUUID();
 
 export const areas: [string, string][] = [

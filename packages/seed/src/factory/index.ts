@@ -1,3 +1,4 @@
+export * from './expense';
 export * from './organization';
 export * from './portfolio';
 export * from './property';
