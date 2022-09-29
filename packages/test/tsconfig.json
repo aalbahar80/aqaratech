@@ -1,8 +1,9 @@
 {
 	"extends": "@tsconfig/node18-strictest/tsconfig.json",
 	"compilerOptions": {
-		"types": ["node"],
-		"lib": ["ES2022", "DOM"],
+		// type hack to make the global `fetch` typed
+		// https://github.com/DefinitelyTyped/DefinitelyTyped/issues/60924#issuecomment-1250766494
+		"lib": ["DOM"],
 		"resolveJsonModule": true,
 		"module": "NodeNext"
 	},
