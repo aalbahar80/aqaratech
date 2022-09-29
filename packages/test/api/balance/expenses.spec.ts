@@ -5,12 +5,13 @@ import type { BalanceDto, CreateExpenseDto } from '../../types/api';
 import { test } from '../api-config';
 
 test(`expense amount`, async ({ request, portfolio, expenseCategory }) => {
-	const expenses = expenseFactory.buildList(5, {
+	const expenses = expenseFactory.buildList(2, {
 		portfolioId: portfolio.id,
 		organizationId: portfolio.organizationId,
 		categoryId: expenseCategory.id,
 	});
 
+	// only submit necessary fields
 	const toCreate: CreateExpenseDto[] = expenses.map((e) => {
 		const expense = {
 			...R.pick(e, [
@@ -30,7 +31,7 @@ test(`expense amount`, async ({ request, portfolio, expenseCategory }) => {
 
 	// send post request for each expense
 	await Promise.all(
-		expenses.map((expense) => request.post('/expenses', { data: expense })),
+		toCreate.map((expense) => request.post('/expenses', { data: expense })),
 	);
 
 	const res = await request.get(`/portfolios/${portfolio.id}/balance`);
