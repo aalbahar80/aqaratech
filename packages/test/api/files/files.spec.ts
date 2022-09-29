@@ -51,7 +51,7 @@ test('files can be deleted', async ({ request, file }) => {
 		key: file,
 	});
 
-	console.log({ url }, 'files.spec.ts ~ 53');
+	console.log({ url });
 	const res = await request.delete(url);
 
 	expect(res.status()).toBe(200);
@@ -63,6 +63,7 @@ test('files can be downloaded', async ({ request, file }) => {
 		key: file,
 	});
 
+	console.log({ url });
 	// const res = await request.get(url); // this fails, use fetch instead
 	const res = await fetch(url);
 
