@@ -9,6 +9,7 @@ import { getToken } from '../utils/get-token';
 export const test = base.extend<{
 	org: OrganizationCreatedDto;
 	portfolio: PortfolioDto;
+	file: string;
 }>({
 	// A fixture that returns a fresh organization.
 	org: async ({ baseURL, browser }, use) => {
@@ -66,5 +67,28 @@ export const test = base.extend<{
 		const created = (await res.json()) as PortfolioDto;
 
 		await use(created);
+	},
+	// A fixture that returns a fresh file in a fresh portfolio.
+	file: async ({ portfolio, request }, use) => {
+		const fileName = 'test.txt';
+
+		const res = await request.post(`/files`, {
+			multipart: {
+				fileName: fileName,
+				relationKey: 'portfolio',
+				relationValue: portfolio.id,
+				organizationId: portfolio.organizationId,
+				file: {
+					name: fileName,
+					mimeType: 'text/plain',
+					buffer: Buffer.from('hello world'),
+				},
+			},
+		});
+
+		const name = await res.text();
+		const key = `portfolio/${portfolio.id}/${name}`;
+
+		await use(key);
 	},
 });

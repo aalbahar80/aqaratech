@@ -44,3 +44,14 @@ test('buckets are automatically created', async ({ request, portfolio }) => {
 	const data = await res.text();
 	expect(data).toBe('test.txt');
 });
+
+test('files can be deleted', async ({ request, file }) => {
+	const url = withQuery('/files', {
+		key: file,
+	});
+
+	console.log({ url }, 'files.spec.ts ~ 53');
+	const res = await request.delete(url);
+
+	expect(res.status()).toBe(200);
+});
