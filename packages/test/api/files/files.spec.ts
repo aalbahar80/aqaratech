@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { withQuery } from 'ufo';
+import { getPresignedUrl } from '../../utils/get-presigned-url';
 import { test } from '../api-config';
 
 test('handle noSuchBucket gracefully', async ({ request, portfolio }) => {
@@ -54,4 +55,19 @@ test('files can be deleted', async ({ request, file }) => {
 	const res = await request.delete(url);
 
 	expect(res.status()).toBe(200);
+});
+
+test('files can be downloaded', async ({ request, file }) => {
+	const url = await getPresignedUrl({
+		request,
+		key: file,
+	});
+
+	const res = await request.get(url);
+
+	expect.soft(res.status()).toBe(200);
+
+	const downloaded = await res.body();
+
+	expect(downloaded.toString('utf-8')).toBe('hello world');
 });
