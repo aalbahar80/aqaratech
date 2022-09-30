@@ -1,10 +1,15 @@
 import { test as base } from '@playwright/test';
-import { organizationFactory, portfolioFactory } from '@self/seed';
+import {
+	organizationFactory,
+	portfolioFactory,
+	propertyFactory,
+} from '@self/seed';
 import * as R from 'remeda';
 import type {
 	ExpenseCategoryDto,
 	OrganizationCreatedDto,
 	PortfolioDto,
+	PropertyDto,
 } from '../types/api';
 import { getToken } from '../utils/get-token';
 
@@ -13,6 +18,7 @@ import { getToken } from '../utils/get-token';
 export const test = base.extend<{
 	org: OrganizationCreatedDto;
 	portfolio: PortfolioDto;
+	property: PropertyDto;
 	file: string;
 	expenseCategory: ExpenseCategoryDto;
 }>({
@@ -75,6 +81,22 @@ export const test = base.extend<{
 		await use(created);
 	},
 
+	// A fixture that returns a fresh property in a fresh organization.
+	property: async ({ portfolio, request }, use) => {
+		// create fresh property
+		const property = propertyFactory.build({
+			organizationId: portfolio.organizationId,
+			portfolioId: portfolio.id,
+		});
+
+		const picked = R.pick(property, ['area', 'number']);
+
+		const res = await request.post(`/properties`, { data: picked });
+
+		const created = (await res.json()) as PropertyDto;
+
+		await use(created);
+	},
 	// A fixture that returns a fresh file in a fresh portfolio.
 	file: async ({ portfolio, request }, use) => {
 		const fileName = 'test.txt';
