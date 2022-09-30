@@ -1,0 +1,7 @@
+{
+  debug
+}
+
+https://178.128.196.132 172.25.0.3
+
+reverse_proxy meilisearch:7700

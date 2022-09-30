@@ -1,0 +1,35 @@
+services:
+  caddy:
+    image: caddy/caddy:2.6.0-alpine
+    container_name: caddy-service
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - aq-network
+
+  meilisearch:
+    image: getmeili/meilisearch:v0.28.1
+    container_name: meilisearch
+    volumes:
+      - meili_data:/meili_data
+    environment:
+      - MEILI_HTTP_ADDR=meilisearch:7700
+    networks:
+      - aq-network
+
+volumes:
+  caddy_data:
+  caddy_config:
+  meili_data:
+
+
+networks:
+  aq-network:
+    driver: bridge
+    name: aq-network
