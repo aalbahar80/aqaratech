@@ -18,8 +18,6 @@ services:
     container_name: meilisearch
     volumes:
       - meili_data:/meili_data
-    environment:
-      - MEILI_HTTP_ADDR=meilisearch:7700
     networks:
       - aq-network
 
