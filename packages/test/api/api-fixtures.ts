@@ -3,6 +3,7 @@ import {
 	organizationFactory,
 	portfolioFactory,
 	propertyFactory,
+	unitFactory,
 } from '@self/seed';
 import * as R from 'remeda';
 import type {
@@ -10,6 +11,7 @@ import type {
 	OrganizationCreatedDto,
 	PortfolioDto,
 	PropertyDto,
+	UnitDto,
 } from '../types/api';
 import { getToken } from '../utils/get-token';
 
@@ -19,6 +21,7 @@ export const test = base.extend<{
 	org: OrganizationCreatedDto;
 	portfolio: PortfolioDto;
 	property: PropertyDto;
+	unit: UnitDto;
 	file: string;
 	expenseCategory: ExpenseCategoryDto;
 }>({
@@ -94,6 +97,23 @@ export const test = base.extend<{
 		const res = await request.post(`/properties`, { data: picked });
 
 		const created = (await res.json()) as PropertyDto;
+
+		await use(created);
+	},
+
+	unit: async ({ org, property, request }, use) => {
+		// create fresh unit
+		const unit = unitFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: property.portfolioId,
+			propertyId: property.id,
+		});
+
+		const picked = R.pick(unit, ['type', 'unitNumber']);
+
+		const res = await request.post(`/units`, { data: picked });
+
+		const created = (await res.json()) as UnitDto;
 
 		await use(created);
 	},
