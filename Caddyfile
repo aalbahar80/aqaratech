@@ -1,7 +1,9 @@
 {
   debug
+  # https://caddy.community/t/reverse-proxy-without-domain-name/7951/24
+  default_sni 178.128.196.132
 }
 
-https://178.128.196.132 172.25.0.3
+https://178.128.196.132
 
 reverse_proxy meilisearch:7700
