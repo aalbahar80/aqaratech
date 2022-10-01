@@ -1,13 +1,11 @@
 import { faker } from '@faker-js/faker';
 import type { User } from '@prisma/client';
 import * as Factory from 'factory.ts';
-import { createdAt, updatedAt } from '../utils/dates';
-import { ID } from '../utils/uuid';
+import { abstractFactory } from './abstract';
 
-export const userFactory = Factory.Sync.makeFactory<User>({
-	id: ID(),
-	createdAt: createdAt(),
-	updatedAt: updatedAt(),
-	fullName: faker.name.fullName(),
-	email: faker.internet.email(),
-});
+export const userFactory: Factory.Sync.Factory<User> = Factory.Sync.makeFactory(
+	{
+		fullName: Factory.Sync.each(() => faker.name.fullName()),
+		email: Factory.Sync.each(() => faker.internet.email()),
+	},
+).combine(abstractFactory);

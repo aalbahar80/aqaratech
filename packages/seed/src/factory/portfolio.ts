@@ -1,16 +1,12 @@
 import { faker } from '@faker-js/faker';
 import type { Portfolio } from '@prisma/client';
 import * as Factory from 'factory.ts';
-import { createdAt, updatedAt } from '../utils/dates';
-import { ID } from '../utils/uuid';
+import { abstractFactory } from './abstract';
 
 export const portfolioFactory = Factory.Sync.makeFactoryWithRequired<
 	Portfolio,
 	'organizationId'
 >({
-	id: ID(),
-	createdAt: createdAt(),
-	updatedAt: updatedAt(),
 	fullName: faker.name.fullName(),
 	label: null,
 	civilid: faker.datatype
@@ -18,4 +14,4 @@ export const portfolioFactory = Factory.Sync.makeFactoryWithRequired<
 		.toString(),
 	dob: faker.date.past(),
 	phone: faker.phone.number('9#######'),
-});
+}).combine(abstractFactory);
