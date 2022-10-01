@@ -1,9 +1,9 @@
 {
   debug
   # https://caddy.community/t/reverse-proxy-without-domain-name/7951/24
-  default_sni 178.128.196.132
+  default_sni workhorse-charlie.armadillo-cloud.ts.net
 }
 
-https://178.128.196.132
+workhorse-charlie.armadillo-cloud.ts.net
 
 reverse_proxy meilisearch:7700
