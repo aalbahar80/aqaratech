@@ -18,6 +18,8 @@ services:
     container_name: meilisearch
     volumes:
       - meili_data:/meili_data
+    environment:
+      - MEILI_MASTER_KEY=MASTER_KEY
     networks:
       - aq-network
 
