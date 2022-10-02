@@ -2,14 +2,7 @@ import type { Options } from '@sentry/types';
 import type { AqaratechEnv } from '../../../../types/environment';
 import { shouldEnableSentry } from './should-enable-sentry';
 
-type AqaratechConfig = Pick<
-	AqaratechEnv,
-	'PUBLIC_AQARATECH_ENV' | 'PUBLIC_AQ_DEBUG_SENTRY' | 'PUBLIC_TRACE_RATE'
->;
-
-export const getSentryConfig = (
-	config: AqaratechConfig,
-): AqaratechSentryConfig => {
+export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 	const { PUBLIC_AQARATECH_ENV, PUBLIC_TRACE_RATE, PUBLIC_AQ_DEBUG_SENTRY } =
 		config;
 
@@ -31,6 +24,11 @@ export const getSentryConfig = (
 		},
 	};
 };
+
+type Config = Pick<
+	AqaratechEnv,
+	'PUBLIC_AQARATECH_ENV' | 'PUBLIC_AQ_DEBUG_SENTRY' | 'PUBLIC_TRACE_RATE'
+>;
 
 type AqaratechSentryConfig = Pick<
 	Options,
