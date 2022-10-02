@@ -379,6 +379,7 @@ importers:
 
   packages/utils:
     specifiers:
+      '@sentry/types': 7.14.0
       '@tsconfig/esm': 1.0.2
       '@types/node': 18.7.23
       eslint-config-custom: workspace:*
@@ -388,6 +389,7 @@ importers:
       eslint-config-custom: link:../eslint-config-custom
       ts-toolbelt: 9.6.0
     devDependencies:
+      '@sentry/types': 7.14.0
       '@tsconfig/esm': 1.0.2
       '@types/node': 18.7.23
       typescript: 4.8.4
