@@ -1,10 +1,16 @@
 /**
  * Only run Sentry in production/staging, or when debugging it.
  */
-export const shouldEnableSentry = ({ env, debugEnv }: SentryOptions) => {
-	if (debugEnv == '1') {
+export const shouldEnableSentry = ({
+	PUBLIC_AQARATECH_ENV,
+	PUBLIC_AQ_DEBUG_SENTRY,
+}: SentryOptions) => {
+	if (PUBLIC_AQ_DEBUG_SENTRY == '1') {
 		return true;
-	} else if (env === 'production' || env === 'staging') {
+	} else if (
+		PUBLIC_AQARATECH_ENV === 'production' ||
+		PUBLIC_AQARATECH_ENV === 'staging'
+	) {
 		return true;
 	} else {
 		return false;
@@ -12,6 +18,6 @@ export const shouldEnableSentry = ({ env, debugEnv }: SentryOptions) => {
 };
 
 interface SentryOptions {
-	env?: string | undefined;
-	debugEnv?: string | undefined;
+	PUBLIC_AQARATECH_ENV: string | undefined;
+	PUBLIC_AQ_DEBUG_SENTRY: string | undefined;
 }

@@ -1,6 +1,5 @@
 export { envCheck } from './config/env-check';
 export { getSentryConfig } from './config/get-sentry-config';
-export { shouldEnableSentry } from './config/should-enable-sentry';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
 export {
 	DBEntity,

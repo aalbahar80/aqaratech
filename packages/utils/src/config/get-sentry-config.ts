@@ -11,8 +11,8 @@ export const getSentryConfig = (
 
 	return {
 		enabled: shouldEnableSentry({
-			env: PUBLIC_AQARATECH_ENV,
-			debugEnv: PUBLIC_AQ_DEBUG_SENTRY,
+			PUBLIC_AQARATECH_ENV,
+			PUBLIC_AQ_DEBUG_SENTRY,
 		}),
 		environment: PUBLIC_AQARATECH_ENV,
 		debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
