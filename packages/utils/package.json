@@ -1,28 +1,19 @@
 {
 	"name": "@self/utils",
 	"version": "1.5.1",
-	"description": "",
-	"main": "dist/cjs/index.js",
-	"module": "dist/mjs/index.js",
-	"types": "dist/mjs/index.d.ts",
-	"exports": {
-		"import": "./dist/mjs/index.js",
-		"require": "./dist/cjs/index.js"
-	},
 	"scripts": {
-		"build": "rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup",
-		"check": "tsc --noEmit",
+		"build": "rm -rf dist && preconstruct build",
 		"lint": "eslint --ignore-path ../../.gitignore .",
-		"lint:fix": "pnpm run lint --fix"
+		"lint:fix": "pnpm run lint --fix",
+		"check": "tsc --noEmit"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
 	"dependencies": {
 		"eslint-config-custom": "workspace:*",
 		"ts-toolbelt": "9.6.0"
 	},
 	"devDependencies": {
+		"@babel/preset-typescript": "7.18.6",
+		"@preconstruct/cli": "2.2.1",
 		"@sentry/types": "7.14.0",
 		"@tsconfig/esm": "1.0.2",
 		"@types/node": "18.7.23",
