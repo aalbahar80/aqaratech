@@ -1,5 +1,5 @@
+import { satisfies } from '../satisfies';
 import { DBEntity, Entity, NonDBEntity } from './entity';
-import { satisfies } from './satisfies';
 
 export interface EntityNames {
 	title: Entity;
