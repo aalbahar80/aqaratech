@@ -1,6 +1,8 @@
 {
 	"name": "@self/utils",
 	"version": "1.5.1",
+	"main": "dist/self-utils.cjs.js",
+	"module": "dist/self-utils.esm.js",
 	"scripts": {
 		"build": "rm -rf dist && preconstruct build",
 		"lint": "eslint --ignore-path ../../.gitignore .",

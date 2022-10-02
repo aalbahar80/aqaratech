@@ -1,16 +1,11 @@
 export { envCheck } from './config/env-check';
 export { getSentryConfig } from './config/get-sentry-config';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
-export {
-	DBEntity,
-	dbEntity,
-	Entity,
-	NonDBEntity,
-	nonDbEntity,
-} from './entity/entity-definition';
-export {
+export { dbEntity, nonDbEntity } from './entity/entity-definition';
+export type { DBEntity, Entity, NonDBEntity } from './entity/entity-definition';
+export { entitiesMap } from './entity/entity-map';
+export type {
 	DBEntitiesMap,
-	entitiesMap,
 	EntitiesMap,
 	EntityNames,
 	NonDBEntitiesMap,
