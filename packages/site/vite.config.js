@@ -19,9 +19,6 @@ export default defineConfig(() => {
 			isoImport(),
 			// basicSsl(),
 		],
-		ssr: {
-			noExternal: ['chart.js'],
-		},
 		build: {
 			// Generate sourcemaps for all builds. In production, remove them before building Docker image.
 			// This is to match the random chunk names with their original sourcemaps.
