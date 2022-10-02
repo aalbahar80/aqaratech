@@ -1,5 +1,5 @@
-import { Options } from '@sentry/types';
-import { AqaratechConfig } from './aqaratech-config';
+import type { Options } from '@sentry/types';
+import type { AqaratechConfig } from './aqaratech-config';
 import { shouldEnableSentry } from './should-enable-sentry';
 
 export const getSentryConfig = (

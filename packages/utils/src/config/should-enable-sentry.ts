@@ -1,4 +1,4 @@
-import { AqaratechConfig } from './aqaratech-config';
+import type { AqaratechConfig } from './aqaratech-config';
 
 /**
  * Only run Sentry in production/staging, or when debugging it.
