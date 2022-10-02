@@ -1,4 +1,5 @@
 import { Options } from '@sentry/types';
+import { AqaratechConfig } from './aqaratech-config';
 import { shouldEnableSentry } from './should-enable-sentry';
 
 export const getSentryConfig = (
@@ -24,12 +25,6 @@ export const getSentryConfig = (
 		},
 	};
 };
-
-interface AqaratechConfig {
-	PUBLIC_AQARATECH_ENV: string | undefined;
-	PUBLIC_TRACE_RATE: string;
-	PUBLIC_AQ_DEBUG_SENTRY: string;
-}
 
 type AqaratechSentryConfig = Pick<
 	Options,
