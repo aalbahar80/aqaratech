@@ -17,7 +17,7 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 		debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
 		tracesSampleRate: sampleRate,
 		tracesSampler(samplingContext) {
-			if (samplingContext.transactionContext?.name?.startsWith('/health')) {
+			if (samplingContext.transactionContext?.name?.endsWith('/health')) {
 				return 0;
 			}
 			return sampleRate;
