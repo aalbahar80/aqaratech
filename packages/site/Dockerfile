@@ -6,13 +6,20 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
+COPY  ./packages/site/package.json ./package.json
+
+# In package.json, remove any line that contains "workspace:"
+# This is a workaround to avoid having to install pnpm.
+# Note: Check that we don't actually need any of the workspace packages in production.
+RUN  sed -i '/workspace:/d' package.json
+RUN npm install --omit=dev
+
 # Don't run production as root
 RUN addgroup --system --gid 1001 sveltejs
 RUN adduser --system --uid 1001 sveltejs
 USER sveltejs
 
 COPY  ./packages/site/build ./build
-COPY  ./packages/site/package.json ./package.json
 
 EXPOSE 3000
 
