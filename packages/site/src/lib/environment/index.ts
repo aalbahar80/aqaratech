@@ -1,8 +1,20 @@
 import { env } from '$env/dynamic/public';
-import type { EnvironmentConfig } from '$models/interfaces/environment.interface';
+import type { AqaratechEnv } from '../../../../../types/environment';
 
-export const environment: EnvironmentConfig = {
-	PUBLIC_AQARATECH_ENV: env.PUBLIC_AQARATECH_ENV,
+type SiteEnvironment = Pick<
+	AqaratechEnv,
+	| 'PUBLIC_AQARATECH_ENV'
+	| 'PUBLIC_SITE_URL'
+	| 'PUBLIC_API_URL'
+	| 'PUBLIC_API_URL_LOCAL'
+	| 'PUBLIC_AQ_DEBUG_SENTRY'
+	| 'PUBLIC_TRACE_RATE'
+	| 'PUBLIC_AQ_DEBUG_SITE'
+>;
+
+export const environment: SiteEnvironment = {
+	PUBLIC_AQARATECH_ENV:
+		env.PUBLIC_AQARATECH_ENV as SiteEnvironment['PUBLIC_AQARATECH_ENV'],
 	PUBLIC_SITE_URL: env.PUBLIC_SITE_URL,
 	PUBLIC_API_URL: env.PUBLIC_API_URL,
 	PUBLIC_API_URL_LOCAL: env.PUBLIC_API_URL_LOCAL,
