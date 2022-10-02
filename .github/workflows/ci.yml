@@ -63,7 +63,7 @@ jobs:
         run: pnpm zx ./scripts/rm-sourcemaps.mjs ./packages/site/build/client --force
 
       # - run: docker build -f ./packages/site/Dockerfile .
-      - uses: ./.github/actions/build
+      - uses: ./.github/actions/build-image
         with:
           package: site
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
@@ -107,7 +107,7 @@ jobs:
 
       - run: pnpm --filter @self/backend --prod deploy pruned
 
-      - uses: ./.github/actions/build
+      - uses: ./.github/actions/build-image
         with:
           package: backend
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
