@@ -11,7 +11,7 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
-import { envCheck, shouldEnableSentry } from '@self/utils';
+import { envCheck, getSentryConfig } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -25,29 +25,24 @@ console.log({
 	envCheck: envCheck(),
 });
 
+const sentryConfig = getSentryConfig({
+	PUBLIC_AQ_DEBUG_SENTRY: environment.PUBLIC_AQ_DEBUG_SENTRY,
+	PUBLIC_AQARATECH_ENV: environment.PUBLIC_AQARATECH_ENV,
+	PUBLIC_TRACE_RATE: environment.PUBLIC_TRACE_RATE,
+});
+
+console.log('AqaratechConfig', sentryConfig);
+
 Sentry.init({
+	...sentryConfig,
 	// TODO use environment variable to set the DSN
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
-	tracesSampleRate: +(environment.PUBLIC_TRACE_RATE ?? 0),
-	environment: environment.PUBLIC_AQARATECH_ENV,
-	debug: environment.PUBLIC_AQ_DEBUG_SENTRY === '1',
+	release: __AQARATECH_APP_VERSION__,
 	integrations: [
-		// 	// enable HTTP calls tracing
+		// enable HTTP calls tracing
 		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),
 		new Sentry.Integrations.Console(),
 	],
-	release: __AQARATECH_APP_VERSION__,
-	tracesSampler(samplingContext) {
-		const sampleRate = +(process.env.PUBLIC_TRACE_RATE ?? 0);
-		if (samplingContext.transactionContext?.name?.startsWith('/health')) {
-			return 0;
-		}
-		return sampleRate;
-	},
-	enabled: shouldEnableSentry({
-		env: environment.PUBLIC_AQARATECH_ENV,
-		debugEnv: environment.PUBLIC_AQ_DEBUG_SENTRY,
-	}),
 });
 
 export const handle: Handle = async ({ event, resolve }) => {

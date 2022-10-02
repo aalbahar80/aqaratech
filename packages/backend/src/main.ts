@@ -1,6 +1,6 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { envCheck, shouldEnableSentry } from '@self/utils';
+import { envCheck, getSentryConfig } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
@@ -14,23 +14,19 @@ import { setupSwagger } from 'src/swagger';
 import { version } from '../package.json';
 import { AppModule } from './app.module';
 
+const sentryConfig = getSentryConfig({
+	PUBLIC_AQ_DEBUG_SENTRY: process.env.PUBLIC_AQ_DEBUG_SENTRY,
+	PUBLIC_AQARATECH_ENV: process.env.PUBLIC_AQARATECH_ENV,
+	PUBLIC_TRACE_RATE: process.env.PUBLIC_TRACE_RATE,
+});
+
+Logger.log(sentryConfig, 'AqaratechConfig');
+
 Sentry.init({
+	...sentryConfig,
 	// TODO use environment variable to set the DSN
 	dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
-	environment: process.env.PUBLIC_AQARATECH_ENV,
-	debug: process.env.PUBLIC_AQ_DEBUG_SENTRY === '1',
 	release: version,
-	tracesSampler(samplingContext) {
-		const sampleRate = +(process.env.PUBLIC_TRACE_RATE ?? 0);
-		if (samplingContext.transactionContext?.name?.startsWith('/health')) {
-			return 0;
-		}
-		return sampleRate;
-	},
-	enabled: shouldEnableSentry({
-		env: process.env.PUBLIC_AQARATECH_ENV,
-		debugEnv: process.env.PUBLIC_AQ_DEBUG_SENTRY,
-	}),
 });
 
 async function bootstrap() {
