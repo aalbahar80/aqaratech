@@ -15,6 +15,12 @@ on:
       backendTag:
         required: false
         type: string
+      siteSentryRelease:
+        required: false
+        type: string
+      backendSentryRelease:
+        required: false
+        type: string
 
 env:
   # Reusable workflows do not inherit secrets from the calling workflow, because the calling workflow does not have an "environment" input.
@@ -55,7 +61,7 @@ jobs:
         shell: bash
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
 
-      - run: pnpm -F @self/site run sentry:release --version ${{ inputs.siteTag }} --environment ${{ inputs.environment }}
+      - run: pnpm -F @self/site run sentry:release --version ${{ inputs.siteSentryRelease || inputs.siteTag }} --environment ${{ inputs.environment }}
 
       - if: ${{ inputs.environment == 'prod' }}
         name: Delete client sourcemaps
@@ -103,7 +109,7 @@ jobs:
         shell: bash
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
 
-      - run: pnpm -F @self/backend run sentry:release --version ${{ inputs.backendTag }}  --environment ${{ inputs.environment }}
+      - run: pnpm -F @self/backend run sentry:release --version ${{ inputs.backendSentryRelease || inputs.backendTag }}  --environment ${{ inputs.environment }}
 
       - run: pnpm --filter @self/backend --prod deploy pruned
 
