@@ -3,12 +3,14 @@ import { organizationFactory } from '@self/seed';
 import * as R from 'remeda';
 import { test } from './api-config';
 
-test(`can create organization`, async ({ request }) => {
-	const org = organizationFactory.build();
-	const picked = R.pick(org, ['fullName', 'label']);
+test(`can create organization`, async ({ request, org }) => {
+	const organization = R.pick(organizationFactory.build(), [
+		'fullName',
+		'label',
+	]);
 
 	const res = await request.post(`/organizations`, {
-		data: picked,
+		data: organization,
 	});
 
 	expect.soft(res.status()).toBe(201);
