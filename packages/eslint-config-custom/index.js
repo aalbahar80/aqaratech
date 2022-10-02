@@ -45,7 +45,7 @@ module.exports = {
 			// },
 		},
 		'import/parsers': {
-			'@typescript-eslint/parser': ['.ts', '.tsx'],
+			'@typescript-eslint/parser': ['.ts'],
 		},
 	},
 	rules: {
@@ -79,5 +79,5 @@ module.exports = {
 		'import/no-cycle': ['error', { maxDepth: 2 }],
 		'import/no-self-import': 'error',
 	},
-	ignorePatterns: ['.eslintrc.js', 'env.d.ts'],
+	ignorePatterns: ['.eslintrc.js'],
 };
