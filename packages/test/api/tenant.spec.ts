@@ -4,11 +4,16 @@ import * as R from 'remeda';
 import type { TenantDto } from '../types/api';
 import { test } from './api-config';
 
-test(`can't be created without orgId`, async ({ request }) => {
+test(`can't be created without orgId`, async ({ request, org }) => {
+	const tenant = R.pick(
+		tenantFactory.build({
+			organizationId: org.organization.id,
+		}),
+		['fullName'],
+	);
+
 	const res = await request.post(`/tenants`, {
-		data: {
-			fullName: 'Test Tenant',
-		},
+		data: tenant,
 	});
 
 	await expect(res).not.toBeOK();
@@ -16,14 +21,15 @@ test(`can't be created without orgId`, async ({ request }) => {
 });
 
 test(`can't be created without fullName`, async ({ request, org }) => {
-	const tenant = tenantFactory.build({
-		organizationId: org.organization.id,
-	});
+	const tenant = R.pick(
+		tenantFactory.build({
+			organizationId: org.organization.id,
+		}),
+		['organizationId'],
+	);
 
 	const res = await request.post(`/tenants`, {
-		data: {
-			organizationId: tenant.organizationId,
-		},
+		data: tenant,
 	});
 
 	await expect(res).not.toBeOK();
