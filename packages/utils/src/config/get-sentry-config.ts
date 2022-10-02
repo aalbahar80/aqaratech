@@ -20,7 +20,7 @@ export const getSentryConfig = (
 			PUBLIC_AQARATECH_ENV,
 			PUBLIC_AQ_DEBUG_SENTRY,
 		}),
-		environment: PUBLIC_AQARATECH_ENV,
+		environment: PUBLIC_AQARATECH_ENV || 'unknown',
 		debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
 		tracesSampleRate: sampleRate,
 		tracesSampler(samplingContext) {
