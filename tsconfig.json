@@ -5,7 +5,7 @@
 		"checkJs": true,
 		"noEmit": true,
 		"resolveJsonModule": true,
-		"types": ["zx", "node"],
+		"types": ["zx/globals"],
 		"module": "ESNext"
 	},
 	"include": [
