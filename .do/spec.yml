@@ -22,10 +22,10 @@ envs:
   - key: PUBLIC_API_URL_LOCAL
     scope: RUN_AND_BUILD_TIME
     value: ${backend.PRIVATE_URL}
-  - key: AQ_DEBUG_NEST
+  - key: PUBLIC_AQ_DEBUG_NEST
     scope: RUN_AND_BUILD_TIME
     value: '1'
-  - key: AQ_DEBUG_PRISMA
+  - key: PUBLIC_AQ_DEBUG_PRISMA
     scope: RUN_AND_BUILD_TIME
     value: '1'
   - key: PUBLIC_AQARATECH_ENV
