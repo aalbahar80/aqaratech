@@ -7,6 +7,8 @@ export interface AqaratechEnv {
 
 	// URL's
 
+	readonly ORIGIN: string;
+
 	/**
 	 * The current url origin where the site is hosted.
 	 * In development, this could be `http://localhost:3000`.
