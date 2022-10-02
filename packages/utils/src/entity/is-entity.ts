@@ -1,4 +1,4 @@
-import { dbEntity, Entity, nonDbEntity } from './entity';
+import { dbEntity, Entity, nonDbEntity } from './entity-definition';
 import { entitiesMap, URLName } from './entity-map';
 
 export function isEntity(str: string): str is Entity {

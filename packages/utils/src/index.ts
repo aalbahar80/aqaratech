@@ -7,7 +7,7 @@ export {
 	Entity,
 	NonDBEntity,
 	nonDbEntity,
-} from './entity/entity';
+} from './entity/entity-definition';
 export {
 	DBEntitiesMap,
 	entitiesMap,
