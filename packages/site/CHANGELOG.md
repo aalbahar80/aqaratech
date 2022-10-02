@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.7.0
+
+### Minor Changes
+
+- 83188149: unify sentry config logic
+
 ## 0.6.3
 
 ### Patch Changes

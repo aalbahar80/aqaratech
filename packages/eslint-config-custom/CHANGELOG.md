@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 0.3.0
+
+### Minor Changes
+
+- 83188149: unify sentry config logic
+
 ## 0.2.1
 
 ### Patch Changes

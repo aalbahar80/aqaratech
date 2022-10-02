@@ -1,5 +1,16 @@
 # @self/backend
 
+## 0.6.0
+
+### Minor Changes
+
+- 83188149: unify sentry config logic
+
+### Patch Changes
+
+- Updated dependencies [83188149]
+  - @self/utils@1.6.0
+
 ## 0.5.1
 
 ### Patch Changes

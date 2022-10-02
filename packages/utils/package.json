@@ -1,6 +1,6 @@
 {
 	"name": "@self/utils",
-	"version": "1.5.1",
+	"version": "1.6.0",
 	"main": "dist/self-utils.cjs.js",
 	"module": "dist/self-utils.esm.js",
 	"scripts": {

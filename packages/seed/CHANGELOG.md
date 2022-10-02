@@ -1,5 +1,16 @@
 # @self/seed
 
+## 0.6.0
+
+### Minor Changes
+
+- 83188149: unify sentry config logic
+
+### Patch Changes
+
+- Updated dependencies [83188149]
+  - eslint-config-custom@0.3.0
+
 ## 0.5.1
 
 ### Patch Changes

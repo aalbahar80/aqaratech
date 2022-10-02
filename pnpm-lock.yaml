@@ -51,7 +51,7 @@ importers:
       '@nestjs/testing': 9.1.2
       '@openapitools/openapi-generator-cli': 2.5.2
       '@prisma/client': 4.4.0
-      '@self/utils': workspace:1.5.1
+      '@self/utils': workspace:1.6.0
       '@sentry/node': 7.14.0
       '@sentry/tracing': 7.14.0
       '@types/cache-manager': 4.0.2
@@ -216,7 +216,7 @@ importers:
       '@felte/validator-zod': 1.0.12
       '@iconify/json': 2.1.114
       '@rgossiaux/svelte-headlessui': 1.0.2
-      '@self/utils': workspace:1.5.1
+      '@self/utils': workspace:1.6.0
       '@sentry/node': 7.14.0
       '@sentry/svelte': 7.14.0
       '@sentry/tracing': 7.14.0
@@ -349,8 +349,8 @@ importers:
   packages/test:
     specifiers:
       '@playwright/test': 1.26.1
-      '@self/seed': workspace:0.5.1
-      '@self/utils': workspace:1.5.1
+      '@self/seed': workspace:0.6.0
+      '@self/utils': workspace:1.6.0
       '@tsconfig/node18': 1.0.1
       '@tsconfig/node18-strictest': 1.0.0
       '@types/node': 18.7.23
