@@ -1,5 +1,5 @@
 import { SamplingContext } from '@sentry/types';
-import { shouldEnableSentry } from '../should-enable-sentry';
+import { shouldEnableSentry } from './should-enable-sentry';
 
 export const getSentryConfig = (
 	config: AqaratechConfig,
