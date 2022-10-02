@@ -1,3 +1,5 @@
+export { envCheck } from './config/env-check';
+export { shouldEnableSentry } from './config/should-enable-sentry';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
 export { DBEntity, dbEntity, Entity, NonDBEntity, nonDbEntity } from './entity';
 export {
@@ -7,8 +9,6 @@ export {
 	EntityNames,
 	NonDBEntitiesMap,
 } from './entity-map';
-export { envCheck } from './env-check';
 export { fromUrl } from './from-url';
 export { isEntity, isEntityUrlName } from './is-entity';
 export { satisfies } from './satisfies';
-export { shouldEnableSentry } from './should-enable-sentry';
