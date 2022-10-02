@@ -37,7 +37,7 @@ Sentry.init({
 	...sentryConfig,
 	// TODO use environment variable to set the DSN
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
-	release: __AQARATECH_APP_VERSION__,
+	release: `site-${__AQARATECH_APP_VERSION__}`,
 	integrations: [
 		// enable HTTP calls tracing
 		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),

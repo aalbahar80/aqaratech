@@ -34,7 +34,7 @@
 				// TODO: use environment variable to set the DSN
 				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 				integrations: [new BrowserTracing()],
-				release: __AQARATECH_APP_VERSION__,
+				release: `site-${__AQARATECH_APP_VERSION__}`,
 			});
 
 			Sentry.configureScope((scope) => {

@@ -27,7 +27,7 @@ Sentry.init({
 	...sentryConfig,
 	// TODO use environment variable to set the DSN
 	dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
-	release: version,
+	release: `backend-${version}`,
 });
 
 async function bootstrap() {
