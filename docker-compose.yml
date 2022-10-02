@@ -4,8 +4,8 @@ services:
     container_name: caddy-service
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
@@ -28,7 +28,6 @@ volumes:
   caddy_data:
   caddy_config:
   meili_data:
-
 
 networks:
   aq-network:
