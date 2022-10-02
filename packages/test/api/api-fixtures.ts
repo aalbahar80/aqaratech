@@ -3,6 +3,7 @@ import {
 	organizationFactory,
 	portfolioFactory,
 	propertyFactory,
+	tenantFactory,
 	unitFactory,
 } from '@self/seed';
 import * as R from 'remeda';
@@ -11,6 +12,7 @@ import type {
 	OrganizationCreatedDto,
 	PortfolioDto,
 	PropertyDto,
+	TenantDto,
 	UnitDto,
 } from '../types/api';
 import { getToken } from '../utils/get-token';
@@ -19,6 +21,7 @@ import { getToken } from '../utils/get-token';
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
 export const test = base.extend<{
 	org: OrganizationCreatedDto;
+	tenant: TenantDto;
 	portfolio: PortfolioDto;
 	property: PropertyDto;
 	unit: UnitDto;
@@ -65,6 +68,21 @@ export const test = base.extend<{
 
 		await use(created);
 		await context.close();
+	},
+
+	tenant: async ({ org, request }, use) => {
+		// create fresh tenant
+		const tenant = tenantFactory.build({
+			organizationId: org.organization.id,
+		});
+
+		const picked = R.pick(tenant, ['fullName', 'organizationId']);
+
+		const res = await request.post(`/tenants`, { data: picked });
+
+		const created = (await res.json()) as TenantDto;
+
+		await use(created);
 	},
 
 	// A fixture that returns a fresh portfolio in a fresh organization.
