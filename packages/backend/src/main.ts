@@ -20,6 +20,7 @@ const sentryConfig = getSentryConfig({
 	PUBLIC_TRACE_RATE: process.env.PUBLIC_TRACE_RATE,
 });
 
+Logger.log(version, 'AqaratechConfig');
 Logger.log(sentryConfig, 'AqaratechConfig');
 
 Sentry.init({
