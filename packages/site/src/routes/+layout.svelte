@@ -6,7 +6,7 @@
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { environment } from '$lib/environment';
 	import { getSentryUser } from '$lib/utils/sentry/common';
-	import { shouldEnableSentry } from '@self/utils';
+	import { getSentryConfig } from '@self/utils';
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
 	import { onMount } from 'svelte';
@@ -23,18 +23,18 @@
 
 		// https://github.com/bluwy/vite-plugin-iso-import#what-happens-if-i-use-an-import-value-that-has-been-stripped-off
 		if (!import.meta.env.SSR) {
+			const sentryConfig = getSentryConfig({
+				PUBLIC_AQ_DEBUG_SENTRY: environment.PUBLIC_AQ_DEBUG_SENTRY,
+				PUBLIC_AQARATECH_ENV: environment.PUBLIC_AQARATECH_ENV,
+				PUBLIC_TRACE_RATE: environment.PUBLIC_TRACE_RATE,
+			});
+
 			Sentry.init({
+				...sentryConfig,
 				// TODO: use environment variable to set the DSN
 				dsn: 'https://9b3cb0c95789401ea34643252fed4173@o1210217.ingest.sentry.io/6345874',
 				integrations: [new BrowserTracing()],
-				tracesSampleRate: +(environment.PUBLIC_TRACE_RATE ?? 0),
-				environment: environment.PUBLIC_AQARATECH_ENV,
 				release: __AQARATECH_APP_VERSION__,
-				debug: environment.PUBLIC_AQ_DEBUG_SENTRY === '1',
-				enabled: shouldEnableSentry({
-					env: environment.PUBLIC_AQARATECH_ENV,
-					debugEnv: environment.PUBLIC_AQ_DEBUG_SENTRY,
-				}),
 			});
 
 			Sentry.configureScope((scope) => {

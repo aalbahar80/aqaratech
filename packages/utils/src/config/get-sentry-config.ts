@@ -17,6 +17,7 @@ export const getSentryConfig = (
 		}),
 		environment: PUBLIC_AQARATECH_ENV,
 		debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
+		tracesSampleRate: sampleRate,
 		tracesSampler(samplingContext) {
 			if (samplingContext.transactionContext?.name?.startsWith('/health')) {
 				return 0;
@@ -28,5 +29,5 @@ export const getSentryConfig = (
 
 type AqaratechSentryConfig = Pick<
 	Options,
-	'enabled' | 'environment' | 'debug' | 'tracesSampler'
+	'enabled' | 'environment' | 'debug' | 'tracesSampler' | 'tracesSampleRate'
 >;
