@@ -1,13 +1,15 @@
 import { faker } from '@faker-js/faker';
 import type { Tenant } from '@prisma/client';
 import * as Factory from 'factory.ts';
+import type { Strict } from '../utils/strict';
 import { abstractFactory } from './abstract';
 
 export const tenantFactory = Factory.Sync.makeFactoryWithRequired<
-	Tenant,
+	Strict<Tenant>,
 	'organizationId'
 >({
 	fullName: faker.name.fullName(),
+	// @ts-expect-error factory.ts does not support optional/nullable properties
 	label: null,
 	civilid: faker.datatype
 		.number({ min: 200000000000, max: 399999999999 })
