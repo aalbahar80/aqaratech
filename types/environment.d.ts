@@ -65,4 +65,7 @@ export interface AqaratechEnv {
 	readonly PUBLIC_AQ_DEBUG_SITE: string;
 	readonly PUBLIC_AQ_DEBUG_PRISMA: string;
 	readonly PUBLIC_AQ_DEBUG_SENTRY: string;
+
+	// External
+	readonly CI: string | undefined;
 }

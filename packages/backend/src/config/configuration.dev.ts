@@ -16,8 +16,8 @@ export const developmentEnvironment = (): EnvironmentConfig => ({
 		POSTMARK_TOKEN: process.env.POSTMARK_TOKEN,
 	},
 	debug: {
-		DEBUG_NEST: process.env.AQ_DEBUG_NEST == '1',
-		DEBUG_PRISMA: process.env.AQ_DEBUG_PRISMA == '1',
+		DEBUG_NEST: process.env.PUBLIC_AQ_DEBUG_NEST == '1',
+		DEBUG_PRISMA: process.env.PUBLIC_AQ_DEBUG_PRISMA == '1',
 	},
 	meiliSearchConfig: {
 		HOST: process.env.MEILISEARCH_HOST,

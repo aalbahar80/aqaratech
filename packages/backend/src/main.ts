@@ -35,7 +35,7 @@ async function bootstrap() {
 
 	const app = await NestFactory.create(AppModule, {
 		logger: [
-			...(process.env?.AQ_DEBUG_NEST == '1' ? ['debug'] : ([] as any[])),
+			...(process.env?.PUBLIC_AQ_DEBUG_NEST == '1' ? ['debug'] : ([] as any[])),
 			'log',
 			'warn',
 			'error',
@@ -64,7 +64,7 @@ async function bootstrap() {
 			forbidNonWhitelisted: true,
 			whitelist: true,
 			// validateCustomDecorators: true, // fails eveything?
-			enableDebugMessages: process.env.AQ_DEBUG_NEST == '1',
+			enableDebugMessages: process.env.PUBLIC_AQ_DEBUG_NEST == '1',
 			disableErrorMessages: false,
 		}),
 	);
