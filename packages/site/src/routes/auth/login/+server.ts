@@ -10,9 +10,11 @@ export const GET: RequestHandler = () => {
 		state: crypto.randomUUID(),
 		audience: authConfig.AUTH0_API_AUDIENCE,
 	});
+
 	const url = `${authConfig.AUTH0_DOMAIN}/authorize?${decodeURIComponent(
 		query.toString(),
 	)}`;
+
 	return new Response(undefined, {
 		status: 302,
 		headers: {
