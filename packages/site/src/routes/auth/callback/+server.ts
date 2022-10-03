@@ -1,5 +1,5 @@
 import { authConfig } from '$lib/environment/auth';
-import { getUser } from '$lib/server/utils/get-user';
+import { validateToken } from '$lib/server/utils/validate';
 import type { RequestHandler } from '@sveltejs/kit';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
@@ -38,27 +38,42 @@ async function getTokens(code: string) {
 	}
 }
 
-export const GET: RequestHandler = async ({ locals, url }) => {
+export const GET: RequestHandler = async ({ url, cookies }) => {
 	const code = url.searchParams.get('code');
 
 	if (!code) throw new Error('Unable to get code from URL');
 
 	const tokens = await getTokens(code);
 
-	locals.accessToken = tokens.access_token;
+	if (!tokens.id_token || !tokens.access_token) {
+		throw new Error('Unable to get tokens from Auth0');
+	}
 
-	// TODO shouldn't add idToken to locals, instead extract user then discard it
-	locals.idToken = tokens.id_token;
+	// validate idToken only. Access token is validated by backend.
+	// TODO: validate both?
+	await validateToken(tokens.id_token);
 
-	// If user exists in db, we can use his accesstoken to get his profile
-	const user = await getUser({ token: locals.accessToken });
+	// set cookies
+	const maxAge = 60 * 60 * 24 * 7;
 
-	// TODO: differentiate between
-	// 1. user doesn't exist in db
-	// 2. backend not available
+	cookies.set('idToken', tokens.id_token, {
+		path: '/',
+		maxAge,
+		httpOnly: true,
+		secure: true,
+		sameSite: 'none', // TODO: research
+	});
 
-	// If user does not exist in db, redirect to welcome page
-	const location = user?.role?.meta.home || '/welcome';
+	cookies.set('accessToken', tokens.access_token, {
+		path: '/',
+		maxAge,
+		httpOnly: true,
+		secure: true,
+		sameSite: 'none', // TODO: research
+	});
+
+	// Redirect to `/concierge`.
+	const location = '/concierge';
 
 	return new Response(undefined, {
 		status: 302,
