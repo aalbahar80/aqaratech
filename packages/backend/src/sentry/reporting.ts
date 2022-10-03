@@ -1,6 +1,7 @@
 import { ExecutionContext } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
 import { Request } from 'express';
+import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 
 export interface ExtraContext {
 	name: string;
@@ -21,7 +22,31 @@ export function reportRequestException(
 	if (exception.reported) {
 		return;
 	}
+
 	Sentry.withScope((scope: Sentry.Scope) => {
+		const common = {
+			ip_address: request?.ip,
+		};
+
+		const user = request?.user as IUser | AuthenticatedUser | undefined;
+
+		if (user && 'id' in user) {
+			scope.setUser({
+				...common,
+				id: user.id,
+				email: user.email,
+				roleId: user.xRoleId,
+				username: user.fullName || undefined,
+				isAqaratechStaff: user.isAqaratechStaff,
+			});
+		} else if (user) {
+			scope.setUser({
+				...common,
+				email: user.email,
+				isAqaratechStaff: user.isAqaratechStaff,
+			});
+		}
+
 		scope.addEventProcessor((event: Sentry.Event) => {
 			if (request) {
 				const sentryEvent = Sentry.addRequestDataToEvent(event, request);
@@ -30,7 +55,9 @@ export function reportRequestException(
 			}
 			return null;
 		});
+
 		Sentry.captureException(exception);
+
 		exception.reported = true;
 	});
 }
