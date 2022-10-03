@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.7.1
+
+### Patch Changes
+
+- 74f75a51: add prefix to sentry config
+
 ## 0.7.0
 
 ### Minor Changes

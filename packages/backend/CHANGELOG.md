@@ -1,5 +1,11 @@
 # @self/backend
 
+## 0.6.1
+
+### Patch Changes
+
+- 74f75a51: add prefix to sentry config
+
 ## 0.6.0
 
 ### Minor Changes
