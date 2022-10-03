@@ -1,7 +1,7 @@
 import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { env } from '$env/dynamic/public';
-import { getUserByEmail } from '$lib/server/utils/get-user-by-email';
+import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
 import {
 	addTraceToHead,
@@ -78,10 +78,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 		await validateToken(idToken);
 
 		// get the user
-		const user = await getUserByEmail(accessToken);
+		const user = await getUser({
+			token: accessToken,
+		});
 
 		// set user in locals
-		event.locals.basicUser = user;
+		event.locals.user = user;
 	}
 
 	spanCookies.finish();

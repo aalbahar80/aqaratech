@@ -10,10 +10,11 @@ declare namespace App {
 		accessToken: string | undefined;
 		idToken: string | undefined;
 		xRoleId: string | undefined;
-		isAuthenticated: boolean;
 		isAqaratechStaff: boolean;
-		// TODO: remove everything above this line
-		basicUser: import('$api/openapi').ValidatedUserDto;
+	}
+
+	interface PageData {
+		user: import('$models/types/auth.type').User | undefined;
 	}
 
 	interface Error {

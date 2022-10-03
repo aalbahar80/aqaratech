@@ -84,7 +84,7 @@
 						{/each}
 					</div>
 
-					{#if !$page.data.isAuthenticated}
+					{#if !$page.data.user}
 						<div class="mt-6 px-5">
 							<a
 								href={LOGIN}

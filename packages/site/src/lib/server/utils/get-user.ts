@@ -1,14 +1,15 @@
-import { environment } from '$aqenvironment';
-import type { RoleSK, User } from '$lib/models/types/auth.type';
-import { getRoleMeta } from '$lib/utils/get-role-meta';
 import {
-	Configuration,
-	UsersApi,
+	FetchError,
+	ResponseError,
 	type ValidatedRoleDto,
 	type ValidatedUserDto,
 } from '$api/openapi';
+import { environment } from '$aqenvironment';
+import type { RoleSK, User } from '$lib/models/types/auth.type';
+import { getRoleMeta } from '$lib/utils/get-role-meta';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing'; // TODO: remove?
+import { error } from '@sveltejs/kit';
 
 const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
 	const defaultRole = roles.find((role) => role.isDefault) || roles[0];
@@ -76,20 +77,19 @@ export const getUser = async ({
 };
 
 const getProfile = async (
-	token: string,
+	accessToken: string,
 ): Promise<ValidatedUserDto | undefined> => {
-	// TODO find way to avoid making this call every time. (secure-cookie/cache).
-	// If session.user isn't used for sensitive data, we can just use the same strategy we use for persisting the x-role-id header/cookie.
-	const now = Date.now();
-
-	// users/me doesn't require the x-role-id header, but it does require the accessToken.
-	const headers: Record<string, string> = { Authorization: `Bearer ${token}` };
-
 	// Sentry
 	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();
 	const span = transaction?.startChild({
 		op: 'getProfile',
 	});
+
+	const headers: Record<string, string> = {
+		'Content-Type': 'application/json',
+		// users/me endpoint only requires accessToken, not x-role-id header.
+		Authorization: `Bearer ${accessToken}`,
+	};
 
 	if (span) {
 		headers['sentry-trace'] = `${span.toTraceparent()}`;
@@ -97,21 +97,29 @@ const getProfile = async (
 		console.warn('[getProfile] Could not get span/tranaction');
 	}
 
-	const config = new Configuration({
-		headers,
-		basePath: environment.PUBLIC_API_URL_LOCAL || environment.PUBLIC_API_URL,
-	});
-
 	// Either get the user or return undefined.
 	try {
-		const user = await new UsersApi(config).findProfile();
+		// construct url
+		const url = new URL(`${environment.PUBLIC_API_URL_LOCAL}/users/me`);
 
-		console.debug(
-			`Fetched user info for ${user.email} in ${Date.now() - now}ms`,
-		);
+		// fetch user
+		const res = await fetch(url.toString(), {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				// users/me doesn't require the x-role-id header, but it does require the accessToken.
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
 
-		return user;
+		const data = (await res.json()) as ValidatedUserDto;
+
+		return data;
 	} catch (e) {
+		// TODO: differentiate between errors caused by:
+		// 1. user doesn't exist in db
+		// 2. backend not available
+
 		console.error(e);
 		return undefined;
 	} finally {

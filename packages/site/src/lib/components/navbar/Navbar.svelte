@@ -38,7 +38,7 @@
 			<SearchButton />
 		{/if}
 
-		{#if $page.data.isAuthenticated}
+		{#if $page.data.user}
 			<div class="hidden lg:flex lg:items-center lg:space-x-6">
 				<NavbarDropdown />
 			</div>
@@ -48,7 +48,7 @@
 
 		<div
 			class="-mr-2 flex items-center gap-6 lg:hidden"
-			class:hidden={!$page.data.isAuthenticated}
+			class:hidden={!$page.data.user}
 		>
 			<NavPopover {navigation} />
 		</div>
