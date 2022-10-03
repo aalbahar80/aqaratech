@@ -38,19 +38,20 @@ async function getTokens(code: string) {
 	}
 }
 
-export const GET: RequestHandler = async (req) => {
-	const code = req.url.searchParams.get('code');
+export const GET: RequestHandler = async ({ locals, url }) => {
+	const code = url.searchParams.get('code');
+
 	if (!code) throw new Error('Unable to get code from URL');
 
 	const tokens = await getTokens(code);
 
-	req.locals.accessToken = tokens.access_token;
+	locals.accessToken = tokens.access_token;
 
 	// TODO shouldn't add idToken to locals, instead extract user then discard it
-	req.locals.idToken = tokens.id_token;
+	locals.idToken = tokens.id_token;
 
 	// If user exists in db, we can use his accesstoken to get his profile
-	const user = await getUser({ token: req.locals.accessToken });
+	const user = await getUser({ token: locals.accessToken });
 
 	// If user does not exist in db, redirect to welcome page
 	const location = user?.role?.meta.home || '/welcome';
