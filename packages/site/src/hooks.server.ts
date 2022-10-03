@@ -1,10 +1,8 @@
 import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { env } from '$env/dynamic/public';
-import { LOGIN, LOGOUT } from '$lib/constants/routes';
-import { getUser } from '$lib/server/utils/get-user';
+import { getUserByEmail } from '$lib/server/utils/get-user-by-email';
 import { validateToken } from '$lib/server/utils/validate';
-import { isAuthRoute } from '$lib/utils/is-public-route';
 import {
 	addTraceToHead,
 	extractRequestInfo,
@@ -15,8 +13,6 @@ import { envCheck, getSentryConfig } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
-import { parse, serialize } from 'cookie';
-import { errors } from 'jose';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
 console.log('Version: ', __AQARATECH_APP_VERSION__);
@@ -46,6 +42,7 @@ Sentry.init({
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
+	debugger;
 	// if (event.url.pathname.startsWith('/api/')) {
 	// 	return fetch(event.request);
 	// }
@@ -72,62 +69,19 @@ export const handle: Handle = async ({ event, resolve }) => {
 		description: 'parse cookies',
 	});
 
-	const cookies = parse(event.request.headers.get('cookie') || '');
+	const idToken = event.cookies.get('idToken');
+	const accessToken = event.cookies.get('accessToken');
 
-	// A user with an expired token needs a way to re-authenticate,
-	// so we don't want to validate the token if the user is trying to log in.
-	// If we do want to validate it either way, we need to make sure to not place
-	// the user in a redirect loop:
-	// idToken expired => redirect to login => idToken expired => redirect to login => ...
-	if (cookies.idToken && !isAuthRoute(event.url.pathname)) {
-		try {
-			console.log('validating idToken');
-			await validateToken(cookies.idToken);
-			event.locals.isAuthenticated = true;
-			// only set idToken in locals if it is valid
-			event.locals.idToken = cookies.idToken;
-		} catch (e) {
-			console.error(e);
-			if (e instanceof errors.JWTExpired) {
-				return new Response('Session expired', {
-					status: 302,
-					headers: {
-						Location: LOGIN,
-					},
-				});
-			} else {
-				console.warn(
-					`Invalid idToken: ${cookies.idToken}. Redirecting to ${LOGOUT} .`,
-				);
-				return new Response('', {
-					status: 302,
-					headers: {
-						Location: LOGOUT,
-					},
-				});
-				// Sentry.captureException(e);
-			}
-		}
+	// consume idToken and set user. Any redirects should be handled by layout/page load functions.
+	if (idToken && accessToken) {
+		// validate the idToken
+		await validateToken(idToken);
 
-		// attempt to get user from backend, set in locals.user
-		// We don't validate accessToken in the frontend. We only pass it along to the server.
-		// This will only run if the idToken is valid && the route is not public.
-		if (cookies.accessToken) {
-			// Don't try to get user if we don't have an accessToken
-			// TODO what about public pages? what about public pages when a user is signed in?
-			const user = await getUser({
-				token: cookies.accessToken,
-				selectedRoleId: cookies.xRoleId,
-			});
-			event.locals.user = user;
-			event.locals.accessToken = cookies.accessToken;
+		// get the user
+		const user = await getUserByEmail(accessToken);
 
-			// Place `xRoleId` in locals for it be picked up after `resolve` has been called.
-			// After `resolve` is called, xRoleId is serialized into a cookie to persist the role change.
-			// Additionally, if the user never changes roles,
-			// this will take care of setting & persisting the default role.
-			event.locals.xRoleId = user?.role?.id;
-		}
+		// set user in locals
+		event.locals.basicUser = user;
 	}
 
 	spanCookies.finish();
@@ -151,45 +105,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	spanResolve.finish();
 
-	const maxAge = 60 * 60 * 24 * 7;
-
-	// create new headers object to avoid mutating the original
-	const headers = new Headers(response.headers);
-
-	// https://medium.com/swlh/7-keys-to-the-mystery-of-a-missing-cookie-fdf22b012f09
-	headers.append(
-		'Set-Cookie',
-		serialize('idToken', event.locals.idToken || '', {
-			httpOnly: true,
-			path: '/',
-			maxAge: event.locals.idToken ? maxAge : 0,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
-
-	headers.append(
-		'Set-Cookie',
-		serialize('accessToken', event.locals.accessToken || '', {
-			httpOnly: true,
-			path: '/',
-			maxAge: event.locals.accessToken ? maxAge : 0,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
-
-	headers.append(
-		'Set-Cookie',
-		serialize('xRoleId', event.locals.xRoleId || '', {
-			httpOnly: true,
-			path: '/',
-			maxAge: event.locals.xRoleId ? maxAge : 0,
-			sameSite: 'none', // TODO research
-			secure: true,
-		}),
-	);
-
 	console.log(
 		`${new Date().toISOString()} Response: ${Date.now() - now}ms - ${method} ${
 			event.url.pathname
@@ -200,13 +115,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	transaction.finish();
 
-	// create new response object to avoid mutating the original
-	return new Response(response.body, {
-		...response,
-		status: response.status,
-		statusText: response.statusText,
-		headers,
-	});
+	return response;
 };
 
 export const handleError: HandleServerError = ({ error, event }) => {

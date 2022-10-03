@@ -12,6 +12,8 @@ declare namespace App {
 		xRoleId: string | undefined;
 		isAuthenticated: boolean;
 		isAqaratechStaff: boolean;
+		// TODO: remove everything above this line
+		basicUser: import('$api/openapi').ValidatedUserDto;
 	}
 
 	interface Error {

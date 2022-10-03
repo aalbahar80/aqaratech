@@ -51,6 +51,7 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 
 	// validate idToken only. Access token is validated by backend.
 	// TODO: validate both?
+	// TODO: consider leaving token validation to hooks.handle instead?
 	await validateToken(tokens.id_token);
 
 	// set cookies
