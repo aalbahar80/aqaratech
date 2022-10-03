@@ -53,6 +53,10 @@ export const GET: RequestHandler = async ({ locals, url }) => {
 	// If user exists in db, we can use his accesstoken to get his profile
 	const user = await getUser({ token: locals.accessToken });
 
+	// TODO: differentiate between
+	// 1. user doesn't exist in db
+	// 2. backend not available
+
 	// If user does not exist in db, redirect to welcome page
 	const location = user?.role?.meta.home || '/welcome';
 
