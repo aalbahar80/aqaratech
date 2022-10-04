@@ -163,15 +163,15 @@ export const handleError: HandleServerError = ({ error, event }) => {
 	return;
 };
 
-export const handleFetch: HandleFetch = async ({ request, fetch }) => {
+export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 	// Runs when a load uses `fetch()` on the server
-	const basePath = environment.PUBLIC_API_URL;
-	const newPath = environment.PUBLIC_API_URL_LOCAL;
+	const publicUrl = environment.PUBLIC_API_URL;
+	const localUrl = environment.PUBLIC_API_URL_LOCAL;
 
 	// request.headers.set('origin', PUBLIC_SITE_URL);
 
-	if (basePath && newPath && request.url.startsWith(basePath)) {
-		request = new Request(request.url.replace(basePath, newPath), request);
+	if (publicUrl && localUrl && request.url.startsWith(publicUrl)) {
+		request = new Request(request.url.replace(publicUrl, localUrl), request);
 	}
 
 	return fetch(request);
