@@ -60,12 +60,6 @@ export interface AggregateApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [start]
-	 * @param {string} [end]
-	 * @param {string} [portfolioId]
-	 * @param {string} [propertyId]
-	 * @param {string} [unitId]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof AggregateApiInterface
 	 */
@@ -86,18 +80,6 @@ export interface AggregateApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [start]
-	 * @param {string} [end]
-	 * @param {PaidStatusEnum} [paidStatus]
-	 * @param {string} [orderBy]
-	 * @param {string} [portfolioId]
-	 * @param {string} [propertyId]
-	 * @param {string} [unitId]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof AggregateApiInterface
 	 */
@@ -118,12 +100,6 @@ export interface AggregateApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [start]
-	 * @param {string} [end]
-	 * @param {string} [portfolioId]
-	 * @param {string} [propertyId]
-	 * @param {string} [unitId]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof AggregateApiInterface
 	 */

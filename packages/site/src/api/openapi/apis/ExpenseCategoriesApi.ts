@@ -43,8 +43,6 @@ export interface ExpenseCategoriesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {CreateExpenseCategoryDto} createExpenseCategoryDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpenseCategoriesApiInterface
 	 */
@@ -65,7 +63,6 @@ export interface ExpenseCategoriesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpenseCategoriesApiInterface
 	 */
@@ -84,9 +81,6 @@ export interface ExpenseCategoriesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {UpdateExpenseCategoryDto} updateExpenseCategoryDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpenseCategoriesApiInterface
 	 */
@@ -107,8 +101,6 @@ export interface ExpenseCategoriesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {UpdateAllExpenseCategoriesDto} updateAllExpenseCategoriesDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpenseCategoriesApiInterface
 	 */

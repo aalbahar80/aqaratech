@@ -37,8 +37,6 @@ export interface RolesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {CreateRoleDto} createRoleDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof RolesApiInterface
 	 */
@@ -59,8 +57,6 @@ export interface RolesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof RolesApiInterface
 	 */
@@ -81,8 +77,6 @@ export interface RolesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof RolesApiInterface
 	 */

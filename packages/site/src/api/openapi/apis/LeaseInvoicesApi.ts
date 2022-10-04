@@ -68,8 +68,6 @@ export interface LeaseInvoicesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {CreateLeaseInvoiceDto} createLeaseInvoiceDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
 	 */
@@ -90,18 +88,6 @@ export interface LeaseInvoicesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [start]
-	 * @param {string} [end]
-	 * @param {PaidStatusEnum} [paidStatus]
-	 * @param {string} [orderBy]
-	 * @param {string} [portfolioId]
-	 * @param {string} [propertyId]
-	 * @param {string} [unitId]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
 	 */
@@ -122,8 +108,6 @@ export interface LeaseInvoicesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
 	 */
@@ -144,8 +128,6 @@ export interface LeaseInvoicesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
 	 */
@@ -166,8 +148,6 @@ export interface LeaseInvoicesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
 	 */
@@ -188,9 +168,6 @@ export interface LeaseInvoicesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {UpdateLeaseInvoiceDto} updateLeaseInvoiceDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
 	 */

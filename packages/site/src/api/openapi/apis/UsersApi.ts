@@ -25,7 +25,6 @@ export interface UsersApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UsersApiInterface
 	 */

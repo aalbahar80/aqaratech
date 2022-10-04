@@ -66,8 +66,6 @@ export interface PropertiesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {CreatePropertyDto} createPropertyDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
 	 */
@@ -88,12 +86,6 @@ export interface PropertiesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
 	 */
@@ -114,8 +106,6 @@ export interface PropertiesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
 	 */
@@ -136,13 +126,6 @@ export interface PropertiesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
 	 */
@@ -163,8 +146,6 @@ export interface PropertiesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
 	 */
@@ -185,9 +166,6 @@ export interface PropertiesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {UpdatePropertyDto} updatePropertyDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
 	 */

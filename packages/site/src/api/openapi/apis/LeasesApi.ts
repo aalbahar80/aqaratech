@@ -80,8 +80,6 @@ export interface LeasesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {CreateLeaseDto} createLeaseDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
 	 */
@@ -102,9 +100,6 @@ export interface LeasesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {Array<CreateManyLeaseInvoicesDto>} createManyLeaseInvoicesDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
 	 */
@@ -125,12 +120,6 @@ export interface LeasesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {'id' | 'tenantId' | 'unitId' | 'createdAt' | 'updatedAt' | 'start' | 'end' | 'monthlyRent' | 'deposit' | 'canPay' | 'notify' | 'license' | 'organizationId' | 'portfolioId'} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
 	 */
@@ -151,19 +140,6 @@ export interface LeasesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [start]
-	 * @param {string} [end]
-	 * @param {PaidStatusEnum} [paidStatus]
-	 * @param {string} [orderBy]
-	 * @param {string} [portfolioId]
-	 * @param {string} [propertyId]
-	 * @param {string} [unitId]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
 	 */
@@ -184,8 +160,6 @@ export interface LeasesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
 	 */
@@ -206,8 +180,6 @@ export interface LeasesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
 	 */
@@ -228,9 +200,6 @@ export interface LeasesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {UpdateLeaseDto} updateLeaseDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
 	 */

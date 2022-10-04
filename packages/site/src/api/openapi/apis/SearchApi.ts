@@ -24,7 +24,6 @@ export interface SearchApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof SearchApiInterface
 	 */
@@ -43,7 +42,6 @@ export interface SearchApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof SearchApiInterface
 	 */

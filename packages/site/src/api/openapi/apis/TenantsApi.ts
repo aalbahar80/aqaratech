@@ -93,8 +93,6 @@ export interface TenantsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {CreateTenantDto} createTenantDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
 	 */
@@ -115,12 +113,6 @@ export interface TenantsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
 	 */
@@ -141,19 +133,6 @@ export interface TenantsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [start]
-	 * @param {string} [end]
-	 * @param {PaidStatusEnum} [paidStatus]
-	 * @param {string} [orderBy]
-	 * @param {string} [portfolioId]
-	 * @param {string} [propertyId]
-	 * @param {string} [unitId]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
 	 */
@@ -174,13 +153,6 @@ export interface TenantsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
 	 */
@@ -201,8 +173,6 @@ export interface TenantsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
 	 */
@@ -223,13 +193,6 @@ export interface TenantsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
 	 */
@@ -250,8 +213,6 @@ export interface TenantsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
 	 */
@@ -272,9 +233,6 @@ export interface TenantsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {UpdateTenantDto} updateTenantDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
 	 */

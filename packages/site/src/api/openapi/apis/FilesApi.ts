@@ -47,13 +47,6 @@ export interface FilesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} relationKey
-	 * @param {Blob} file
-	 * @param {string} organizationId
-	 * @param {string} relationValue
-	 * @param {string} fileName
-	 * @param {string} [label]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof FilesApiInterface
 	 */
@@ -74,9 +67,6 @@ export interface FilesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {'tenant' | 'portfolio' | 'property' | 'unit' | 'expense' | 'lease' | 'leaseInvoice' | 'maintenanceOrder'} relationKey
-	 * @param {string} relationValue
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof FilesApiInterface
 	 */
@@ -97,8 +87,6 @@ export interface FilesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} key
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof FilesApiInterface
 	 */
@@ -119,8 +107,6 @@ export interface FilesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} key
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof FilesApiInterface
 	 */

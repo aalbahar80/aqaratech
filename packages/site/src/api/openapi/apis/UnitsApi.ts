@@ -67,8 +67,6 @@ export interface UnitsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {CreateUnitDto} createUnitDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
 	 */
@@ -89,12 +87,6 @@ export interface UnitsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
 	 */
@@ -115,13 +107,6 @@ export interface UnitsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
 	 */
@@ -142,8 +127,6 @@ export interface UnitsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
 	 */
@@ -164,8 +147,6 @@ export interface UnitsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
 	 */
@@ -186,9 +167,6 @@ export interface UnitsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {UpdateUnitDto} updateUnitDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
 	 */

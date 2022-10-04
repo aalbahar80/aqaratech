@@ -65,8 +65,6 @@ export interface OrganizationsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {CreateOrganizationDto} createOrganizationDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
 	 */
@@ -87,7 +85,6 @@ export interface OrganizationsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
 	 */
@@ -106,8 +103,6 @@ export interface OrganizationsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
 	 */
@@ -128,13 +123,6 @@ export interface OrganizationsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
 	 */
@@ -155,8 +143,6 @@ export interface OrganizationsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
 	 */
@@ -177,9 +163,6 @@ export interface OrganizationsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {string} query
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
 	 */
@@ -200,9 +183,6 @@ export interface OrganizationsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {UpdateOrganizationDto} updateOrganizationDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
 	 */

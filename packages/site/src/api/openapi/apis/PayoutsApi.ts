@@ -56,8 +56,6 @@ export interface PayoutsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {CreatePayoutDto} createPayoutDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
 	 */
@@ -78,12 +76,6 @@ export interface PayoutsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {number} [page]
-	 * @param {number} [take]
-	 * @param {SortOrderEnum} [sortOrder]
-	 * @param {object} [filter]
-	 * @param {string} [orderBy]
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
 	 */
@@ -104,8 +96,6 @@ export interface PayoutsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
 	 */
@@ -126,8 +116,6 @@ export interface PayoutsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
 	 */
@@ -148,9 +136,6 @@ export interface PayoutsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} id
-	 * @param {UpdatePayoutDto} updatePayoutDto
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
 	 */

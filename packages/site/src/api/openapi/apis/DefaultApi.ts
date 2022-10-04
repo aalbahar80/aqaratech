@@ -24,7 +24,6 @@ export interface DefaultApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof DefaultApiInterface
 	 */
