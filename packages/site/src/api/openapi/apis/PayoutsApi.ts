@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CombinedEnum,
 	CreatePayoutDto,
 	PaginatedPayoutDto,
 	PayoutDto,
@@ -29,9 +28,9 @@ export interface PayoutsApiCreateRequest {
 export interface PayoutsApiFindAllRequest {
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface PayoutsApiFindOneRequest {
@@ -81,9 +80,9 @@ export interface PayoutsApiInterface {
 	 * @summary
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
@@ -250,16 +249,16 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

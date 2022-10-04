@@ -15,7 +15,6 @@
 import * as runtime from '../runtime';
 import type {
 	ByMonthDto,
-	CombinedEnum,
 	Occupancy,
 	PaidStatusEnum,
 	SortOrderEnum,
@@ -32,12 +31,12 @@ export interface AggregateApiGetExpensesByMonthRequest {
 export interface AggregateApiGetIncomeByMonthRequest {
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
 	start?: string;
 	end?: string;
 	paidStatus?: PaidStatusEnum;
+	orderBy?: string;
 	portfolioId?: string;
 	propertyId?: string;
 	unitId?: string;
@@ -89,12 +88,12 @@ export interface AggregateApiInterface {
 	 * @summary
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
 	 * @param {string} [start]
 	 * @param {string} [end]
 	 * @param {PaidStatusEnum} [paidStatus]
+	 * @param {string} [orderBy]
 	 * @param {string} [portfolioId]
 	 * @param {string} [propertyId]
 	 * @param {string} [unitId]
@@ -228,10 +227,6 @@ export class AggregateApi
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
@@ -250,6 +245,10 @@ export class AggregateApi
 
 		if (requestParameters.paidStatus !== undefined) {
 			queryParameters['paidStatus'] = requestParameters.paidStatus;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		if (requestParameters.portfolioId !== undefined) {

@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CombinedEnum,
 	CreateExpenseDto,
 	ExpenseDto,
 	PaginatedExpenseDto,
@@ -30,11 +29,11 @@ export interface ExpensesApiCreateRequest {
 export interface ExpensesApiFindAllRequest {
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
 	start?: string;
 	end?: string;
+	orderBy?: string;
 	portfolioId?: string;
 	propertyId?: string;
 	unitId?: string;
@@ -87,11 +86,11 @@ export interface ExpensesApiInterface {
 	 * @summary
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
 	 * @param {string} [start]
 	 * @param {string} [end]
+	 * @param {string} [orderBy]
 	 * @param {string} [portfolioId]
 	 * @param {string} [propertyId]
 	 * @param {string} [unitId]
@@ -264,10 +263,6 @@ export class ExpensesApi
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
@@ -282,6 +277,10 @@ export class ExpensesApi
 
 		if (requestParameters.end !== undefined) {
 			queryParameters['end'] = requestParameters.end;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		if (requestParameters.portfolioId !== undefined) {

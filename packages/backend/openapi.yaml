@@ -57,11 +57,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -72,6 +67,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -175,11 +175,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -190,6 +185,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -234,11 +234,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -264,6 +259,11 @@ paths:
           in: query
           schema:
             $ref: '#/components/schemas/PaidStatusEnum'
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: portfolioId
           required: false
           in: query
@@ -323,11 +323,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -338,6 +333,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -459,11 +459,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -489,6 +484,11 @@ paths:
           in: query
           schema:
             $ref: '#/components/schemas/PaidStatusEnum'
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: portfolioId
           required: false
           in: query
@@ -649,11 +649,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -664,6 +659,26 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            enum:
+              - id
+              - tenantId
+              - unitId
+              - createdAt
+              - updatedAt
+              - start
+              - end
+              - monthlyRent
+              - deposit
+              - canPay
+              - notify
+              - license
+              - organizationId
+              - portfolioId
+            type: string
       responses:
         '200':
           description: ''
@@ -772,11 +787,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -802,6 +812,11 @@ paths:
           in: query
           schema:
             $ref: '#/components/schemas/PaidStatusEnum'
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: portfolioId
           required: false
           in: query
@@ -905,11 +920,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -920,6 +930,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -1023,11 +1038,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1038,6 +1048,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -1082,11 +1097,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1097,6 +1107,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -1141,11 +1156,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1156,6 +1166,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -1200,11 +1215,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1215,6 +1225,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -1301,11 +1316,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1316,6 +1326,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -1419,11 +1434,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1434,6 +1444,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -1500,11 +1515,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1515,6 +1525,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -1618,11 +1633,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1633,6 +1643,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -1699,11 +1714,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1714,6 +1724,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -1817,11 +1832,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -1847,6 +1857,11 @@ paths:
           in: query
           schema:
             $ref: '#/components/schemas/PaidStatusEnum'
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: portfolioId
           required: false
           in: query
@@ -2016,11 +2031,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -2037,6 +2047,11 @@ paths:
           schema:
             type: string
         - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orderBy
           required: false
           in: query
           schema:
@@ -2296,11 +2311,6 @@ paths:
             minimum: 1
             default: 20
             type: number
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/CombinedEnum'
         - name: sortOrder
           required: false
           in: query
@@ -2311,6 +2321,11 @@ paths:
           in: query
           schema:
             type: object
+        - name: orderBy
+          required: false
+          in: query
+          schema:
+            type: string
         - name: id
           required: true
           in: path
@@ -2672,65 +2687,6 @@ components:
         - passportNum
         - nationality
         - residencyNum
-    CombinedEnum:
-      type: string
-      enum:
-        - id
-        - createdAt
-        - updatedAt
-        - fullName
-        - label
-        - civilid
-        - dob
-        - phone
-        - passportNum
-        - nationality
-        - residencyNum
-        - residencyEnd
-        - organizationId
-        - portfolioId
-        - area
-        - block
-        - avenue
-        - street
-        - number
-        - parcel
-        - paci
-        - cost
-        - long
-        - lat
-        - propertyId
-        - unitNumber
-        - floor
-        - size
-        - bed
-        - bath
-        - marketRent
-        - type
-        - usage
-        - tenantId
-        - unitId
-        - start
-        - end
-        - monthlyRent
-        - deposit
-        - canPay
-        - notify
-        - license
-        - dueAt
-        - postAt
-        - paidAt
-        - isPaid
-        - amount
-        - memo
-        - mfPaymentId
-        - leaseId
-        - maintenanceOrderId
-        - categoryId
-        - completedAt
-        - title
-        - description
-        - status
     SortOrderEnum:
       type: string
       enum:

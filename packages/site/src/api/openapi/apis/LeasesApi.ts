@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CombinedEnum,
 	CreateLeaseDto,
 	CreateManyLeaseInvoicesDto,
 	LeaseDto,
@@ -38,21 +37,21 @@ export interface LeasesApiCreateInvoicesRequest {
 export interface LeasesApiFindAllRequest {
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: FindAllOrderByEnum;
 }
 
 export interface LeasesApiFindInvoicesRequest {
 	id: string;
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
 	start?: string;
 	end?: string;
 	paidStatus?: PaidStatusEnum;
+	orderBy?: string;
 	portfolioId?: string;
 	propertyId?: string;
 	unitId?: string;
@@ -128,9 +127,9 @@ export interface LeasesApiInterface {
 	 * @summary
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {'id' | 'tenantId' | 'unitId' | 'createdAt' | 'updatedAt' | 'start' | 'end' | 'monthlyRent' | 'deposit' | 'canPay' | 'notify' | 'license' | 'organizationId' | 'portfolioId'} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
@@ -155,12 +154,12 @@ export interface LeasesApiInterface {
 	 * @param {string} id
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
 	 * @param {string} [start]
 	 * @param {string} [end]
 	 * @param {PaidStatusEnum} [paidStatus]
+	 * @param {string} [orderBy]
 	 * @param {string} [portfolioId]
 	 * @param {string} [propertyId]
 	 * @param {string} [unitId]
@@ -401,16 +400,16 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -473,10 +472,6 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
@@ -495,6 +490,10 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 
 		if (requestParameters.paidStatus !== undefined) {
 			queryParameters['paidStatus'] = requestParameters.paidStatus;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		if (requestParameters.portfolioId !== undefined) {
@@ -728,3 +727,25 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		return await response.value();
 	}
 }
+
+/**
+ * @export
+ */
+export const FindAllOrderByEnum = {
+	Id: 'id',
+	TenantId: 'tenantId',
+	UnitId: 'unitId',
+	CreatedAt: 'createdAt',
+	UpdatedAt: 'updatedAt',
+	Start: 'start',
+	End: 'end',
+	MonthlyRent: 'monthlyRent',
+	Deposit: 'deposit',
+	CanPay: 'canPay',
+	Notify: 'notify',
+	License: 'license',
+	OrganizationId: 'organizationId',
+	PortfolioId: 'portfolioId',
+} as const;
+export type FindAllOrderByEnum =
+	typeof FindAllOrderByEnum[keyof typeof FindAllOrderByEnum];

@@ -15,7 +15,6 @@
 import * as runtime from '../runtime';
 import type {
 	BalanceDto,
-	CombinedEnum,
 	CreatePortfolioDto,
 	PaginatedPayoutDto,
 	PaginatedPortfolioDto,
@@ -34,9 +33,9 @@ export interface PortfoliosApiCreateRequest {
 export interface PortfoliosApiFindAllRequest {
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface PortfoliosApiFindOneRequest {
@@ -47,36 +46,36 @@ export interface PortfoliosApiFindPayoutsRequest {
 	id: string;
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface PortfoliosApiFindPropertiesRequest {
 	id: string;
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface PortfoliosApiFindRolesRequest {
 	id: string;
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface PortfoliosApiFindUnitsRequest {
 	id: string;
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface PortfoliosApiGetBalanceRequest {
@@ -126,9 +125,9 @@ export interface PortfoliosApiInterface {
 	 * @summary
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -175,9 +174,9 @@ export interface PortfoliosApiInterface {
 	 * @param {string} id
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -202,9 +201,9 @@ export interface PortfoliosApiInterface {
 	 * @param {string} id
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -229,9 +228,9 @@ export interface PortfoliosApiInterface {
 	 * @param {string} id
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -256,9 +255,9 @@ export interface PortfoliosApiInterface {
 	 * @param {string} id
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -428,16 +427,16 @@ export class PortfoliosApi
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -555,16 +554,16 @@ export class PortfoliosApi
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -633,16 +632,16 @@ export class PortfoliosApi
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -711,16 +710,16 @@ export class PortfoliosApi
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -786,16 +785,16 @@ export class PortfoliosApi
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

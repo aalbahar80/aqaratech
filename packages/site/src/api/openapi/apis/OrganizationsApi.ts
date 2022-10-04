@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CombinedEnum,
 	CreateOrganizationDto,
 	OrganizationCreatedDto,
 	OrganizationDto,
@@ -37,9 +36,9 @@ export interface OrganizationsApiFindRolesRequest {
 	id: string;
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface OrganizationsApiRemoveRequest {
@@ -132,9 +131,9 @@ export interface OrganizationsApiInterface {
 	 * @param {string} id
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
@@ -410,16 +409,16 @@ export class OrganizationsApi
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

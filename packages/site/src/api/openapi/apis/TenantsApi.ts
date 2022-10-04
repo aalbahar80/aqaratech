@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CombinedEnum,
 	CreateTenantDto,
 	PaginatedLeaseDto,
 	PaginatedLeaseInvoiceDto,
@@ -33,21 +32,21 @@ export interface TenantsApiCreateRequest {
 export interface TenantsApiFindAllRequest {
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface TenantsApiFindInvoicesRequest {
 	id: string;
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
 	start?: string;
 	end?: string;
 	paidStatus?: PaidStatusEnum;
+	orderBy?: string;
 	portfolioId?: string;
 	propertyId?: string;
 	unitId?: string;
@@ -57,9 +56,9 @@ export interface TenantsApiFindLeasesRequest {
 	id: string;
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface TenantsApiFindOneRequest {
@@ -70,9 +69,9 @@ export interface TenantsApiFindRolesRequest {
 	id: string;
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
+	orderBy?: string;
 }
 
 export interface TenantsApiRemoveRequest {
@@ -118,9 +117,9 @@ export interface TenantsApiInterface {
 	 * @summary
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
@@ -145,12 +144,12 @@ export interface TenantsApiInterface {
 	 * @param {string} id
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
 	 * @param {string} [start]
 	 * @param {string} [end]
 	 * @param {PaidStatusEnum} [paidStatus]
+	 * @param {string} [orderBy]
 	 * @param {string} [portfolioId]
 	 * @param {string} [propertyId]
 	 * @param {string} [unitId]
@@ -178,9 +177,9 @@ export interface TenantsApiInterface {
 	 * @param {string} id
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
@@ -227,9 +226,9 @@ export interface TenantsApiInterface {
 	 * @param {string} id
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
+	 * @param {string} [orderBy]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
@@ -374,16 +373,16 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -446,10 +445,6 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
@@ -468,6 +463,10 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 
 		if (requestParameters.paidStatus !== undefined) {
 			queryParameters['paidStatus'] = requestParameters.paidStatus;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		if (requestParameters.portfolioId !== undefined) {
@@ -548,16 +547,16 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -678,16 +677,16 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

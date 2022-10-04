@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CombinedEnum,
 	CreateLeaseInvoiceDto,
 	LeaseInvoiceDto,
 	PaginatedLeaseInvoiceDto,
@@ -31,12 +30,12 @@ export interface LeaseInvoicesApiCreateRequest {
 export interface LeaseInvoicesApiFindAllRequest {
 	page?: number;
 	take?: number;
-	orderBy?: CombinedEnum;
 	sortOrder?: SortOrderEnum;
 	filter?: object;
 	start?: string;
 	end?: string;
 	paidStatus?: PaidStatusEnum;
+	orderBy?: string;
 	portfolioId?: string;
 	propertyId?: string;
 	unitId?: string;
@@ -93,12 +92,12 @@ export interface LeaseInvoicesApiInterface {
 	 * @summary
 	 * @param {number} [page]
 	 * @param {number} [take]
-	 * @param {CombinedEnum} [orderBy]
 	 * @param {SortOrderEnum} [sortOrder]
 	 * @param {object} [filter]
 	 * @param {string} [start]
 	 * @param {string} [end]
 	 * @param {PaidStatusEnum} [paidStatus]
+	 * @param {string} [orderBy]
 	 * @param {string} [portfolioId]
 	 * @param {string} [propertyId]
 	 * @param {string} [unitId]
@@ -293,10 +292,6 @@ export class LeaseInvoicesApi
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
 		if (requestParameters.sortOrder !== undefined) {
 			queryParameters['sortOrder'] = requestParameters.sortOrder;
 		}
@@ -315,6 +310,10 @@ export class LeaseInvoicesApi
 
 		if (requestParameters.paidStatus !== undefined) {
 			queryParameters['paidStatus'] = requestParameters.paidStatus;
+		}
+
+		if (requestParameters.orderBy !== undefined) {
+			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		if (requestParameters.portfolioId !== undefined) {
