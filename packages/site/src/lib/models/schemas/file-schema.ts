@@ -6,10 +6,13 @@ import { z } from 'zod';
 export const schema = z.object({
 	organizationId: isID,
 	fileName: z.string().min(1, { message: 'Required' }).transform(trim),
-	file: z.instanceof(File),
 
-	// Do not change. Specifically, this is sent using the multipart/form-data content type,
-	// Which causes the api sdk to change null to "null". Therefore, falsey values should NOT be sent.
+	// only check if file is truthy, server will check if file is valid
+	file: z
+		.any()
+		.refine((value) => !!value, { message: 'Required' })
+		.transform((value) => value as File),
+
 	relationKey: z.nativeEnum(CreateRelationKeyEnum),
 	relationValue: isID,
 });
