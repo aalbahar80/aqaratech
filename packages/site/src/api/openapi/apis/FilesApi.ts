@@ -16,9 +16,9 @@ import * as runtime from '../runtime';
 import type { PaginatedFileDto } from '../models';
 
 export interface FilesApiCreateRequest {
+	relationKey: CreateRelationKeyEnum;
 	file: Blob;
 	organizationId: string;
-	relationKey: CreateRelationKeyEnum;
 	relationValue: string;
 	fileName: string;
 	label?: string | null;
@@ -47,9 +47,9 @@ export interface FilesApiInterface {
 	/**
 	 *
 	 * @summary
+	 * @param {string} relationKey
 	 * @param {Blob} file
 	 * @param {string} organizationId
-	 * @param {string} relationKey
 	 * @param {string} relationValue
 	 * @param {string} fileName
 	 * @param {string} [label]
@@ -152,6 +152,16 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<string>> {
 		if (
+			requestParameters.relationKey === null ||
+			requestParameters.relationKey === undefined
+		) {
+			throw new runtime.RequiredError(
+				'relationKey',
+				'Required parameter requestParameters.relationKey was null or undefined when calling create.',
+			);
+		}
+
+		if (
 			requestParameters.file === null ||
 			requestParameters.file === undefined
 		) {
@@ -168,16 +178,6 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 			throw new runtime.RequiredError(
 				'organizationId',
 				'Required parameter requestParameters.organizationId was null or undefined when calling create.',
-			);
-		}
-
-		if (
-			requestParameters.relationKey === null ||
-			requestParameters.relationKey === undefined
-		) {
-			throw new runtime.RequiredError(
-				'relationKey',
-				'Required parameter requestParameters.relationKey was null or undefined when calling create.',
 			);
 		}
 
@@ -229,6 +229,10 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 			formParams = new URLSearchParams();
 		}
 
+		if (requestParameters.relationKey !== undefined) {
+			formParams.append('relationKey', requestParameters.relationKey as any);
+		}
+
 		if (requestParameters.file !== undefined) {
 			formParams.append('file', requestParameters.file as any);
 		}
@@ -238,10 +242,6 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 				'organizationId',
 				requestParameters.organizationId as any,
 			);
-		}
-
-		if (requestParameters.relationKey !== undefined) {
-			formParams.append('relationKey', requestParameters.relationKey as any);
 		}
 
 		if (requestParameters.relationValue !== undefined) {

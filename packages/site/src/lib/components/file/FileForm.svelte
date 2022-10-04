@@ -1,11 +1,11 @@
 <script lang="ts">
+	import { api } from '$api';
+	import type { CreateRelationKeyEnum } from '$api/openapi';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { api } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { schema } from '$lib/models/schemas/file-schema';
-	import type { CreateRelationKeyEnum } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 
 	export let relationKey: CreateRelationKeyEnum;

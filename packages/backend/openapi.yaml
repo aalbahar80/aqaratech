@@ -2496,7 +2496,7 @@ paths:
           required: true
           in: query
           schema:
-            enum:
+            enum: &ref_25
               - tenant
               - portfolio
               - property
@@ -4252,22 +4252,14 @@ components:
     CreateFileDto:
       type: object
       properties:
+        relationKey:
+          enum: *ref_25
+          type: string
         file:
           type: string
           format: binary
         organizationId:
           type: string
-        relationKey:
-          type: string
-          enum:
-            - tenant
-            - portfolio
-            - property
-            - unit
-            - expense
-            - lease
-            - leaseInvoice
-            - maintenanceOrder
         relationValue:
           type: string
         fileName:
@@ -4276,9 +4268,9 @@ components:
           type: string
           nullable: true
       required:
+        - relationKey
         - file
         - organizationId
-        - relationKey
         - relationValue
         - fileName
     FileDto:

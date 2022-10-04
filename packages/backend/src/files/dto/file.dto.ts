@@ -63,15 +63,17 @@ export class FileRequestDto extends DirectoryRequestDto {
 }
 
 export class CreateFileDto {
-	// This breaks file uploads. See sdk/dist/fileApi.js
-	// @ApiProperty({
-	//   enum: FileForeignKeys,
-	//   enumName: 'FileForeignKeys',
-	// })
-
 	@IsID()
 	organizationId: string;
 
+	@ApiProperty({
+		type: 'string',
+		enum: FileForeignKeys,
+		// Setting an enum name will cause these issues:
+		// https://github.com/OpenAPITools/openapi-generator/issues/11613
+		// https://github.com/OpenAPITools/openapi-generator/issues/9897
+		// enumName: 'FileForeignKeys',
+	})
 	@IsEnum(FileForeignKeys)
 	relationKey: FileForeignKeys;
 
