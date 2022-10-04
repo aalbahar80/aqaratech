@@ -21,8 +21,7 @@ import {
 	UsersApi,
 } from './openapi';
 
-export const api = ({ loadFetch }: { loadFetch?: LoadEvent['fetch'] }) => {
-	// export const api = (loadFetch?: LoadEvent['fetch']) => {
+export const api = (loadFetch?: LoadEvent['fetch']) => {
 	const headers: Record<string, string> = {
 		// origin: PUBLIC_SITE_URL,
 	};
