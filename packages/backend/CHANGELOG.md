@@ -1,5 +1,11 @@
 # @self/backend
 
+## 0.7.0
+
+### Minor Changes
+
+- 2b5958a5: handle role in cookies
+
 ## 0.6.1
 
 ### Patch Changes

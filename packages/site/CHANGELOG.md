@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.8.0
+
+### Minor Changes
+
+- 2b5958a5: handle role in cookies
+
 ## 0.7.1
 
 ### Patch Changes
