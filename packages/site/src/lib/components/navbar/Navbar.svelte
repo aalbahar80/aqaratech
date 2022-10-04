@@ -40,7 +40,7 @@
 
 		{#if $page.data.user}
 			<div class="hidden lg:flex lg:items-center lg:space-x-6">
-				<NavbarDropdown />
+				<NavbarDropdown user={$page.data.user} />
 			</div>
 		{:else}
 			<LoginButton />

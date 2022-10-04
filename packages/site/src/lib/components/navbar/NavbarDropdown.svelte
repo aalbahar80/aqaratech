@@ -5,9 +5,12 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { getNavOptions } from '$lib/components/navbar/nav-links';
+	import type { User } from '$lib/models/types/auth.type';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+
+	export let user: User;
 </script>
 
 <Dropdown>
@@ -34,7 +37,7 @@
 	</div>
 	<div slot="menu">
 		<DropdownMenu>
-			{#each getNavOptions($page.data.user) as option}
+			{#each getNavOptions(user) as option}
 				<MenuItem as="div" let:active>
 					<a href={option.href} data-sveltekit-reload>
 						<MenuItemChild {active}>
