@@ -62,8 +62,7 @@ test('login', async ({ page, baseURL }) => {
 
 	await expect.soft(page).toHaveURL(user.destination);
 
-	expect.soft(accessToken).toMatchObject({
-		name: 'accessToken',
+	const token = {
 		value: expect.stringMatching(
 			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/,
 		),
@@ -71,20 +70,19 @@ test('login', async ({ page, baseURL }) => {
 		path: '/',
 		expires: expect.any(Number),
 		httpOnly: true,
-		secure: true,
+		// sveltekit sets secure to true only in production
+		// secure: true,
+	};
+
+	expect.soft(accessToken).toMatchObject({
+		name: 'accessToken',
+		...token,
 	});
 
 	const idToken = cookies.find((c) => c.name === 'idToken');
 
 	expect.soft(idToken).toMatchObject({
 		name: 'idToken',
-		value: expect.stringMatching(
-			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/,
-		),
-		domain,
-		path: '/',
-		expires: expect.any(Number),
-		httpOnly: true,
-		secure: true,
+		...token,
 	});
 });
