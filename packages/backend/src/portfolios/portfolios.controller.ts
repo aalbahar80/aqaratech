@@ -8,12 +8,7 @@ import {
 	Post,
 	Query,
 } from '@nestjs/common';
-import {
-	ApiCreatedResponse,
-	ApiHeader,
-	ApiOkResponse,
-	ApiTags,
-} from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { AggregateService } from 'src/aggregate/aggregate.service';
 import { BalanceDto } from 'src/aggregate/dto/balance.dto';
@@ -21,7 +16,6 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -43,7 +37,6 @@ import { PortfoliosService } from './portfolios.service';
 
 const SubjectType = 'Portfolio';
 
-@ApiHeader({ name: ROLE_HEADER })
 @Controller('portfolios')
 @ApiTags('portfolios')
 @SwaggerAuth()

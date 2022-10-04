@@ -17,7 +17,6 @@ import {
 } from 'src/auth/public.decorator';
 import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
 
@@ -78,7 +77,7 @@ export class AbilitiesGuard implements CanActivate {
 			[];
 
 		const request = context.switchToHttp().getRequest<IRequest>();
-		const xRoleId = request.headers[ROLE_HEADER] as string | undefined;
+		const xRoleId = request.cookies['role'] as string | undefined;
 		const authenticatedUser = request.user; // safe to use email because it is set by jwt.strategy from accessToken
 
 		if (!xRoleId) {

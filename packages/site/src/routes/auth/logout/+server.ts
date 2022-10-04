@@ -20,6 +20,11 @@ export const GET: RequestHandler = ({ cookies }) => {
 		path: '/',
 	});
 
+	cookies.set('role', '', {
+		maxAge: 0,
+		path: '/',
+	});
+
 	// redirect to auth0 logout (global signout)
 	const BASE_URL = `${authConfig.AUTH0_DOMAIN}/v2/logout`;
 	const clientId = authConfig.AUTH0_CLIENT_ID;

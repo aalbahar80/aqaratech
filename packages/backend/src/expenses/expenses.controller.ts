@@ -8,16 +8,10 @@ import {
 	Post,
 	Query,
 } from '@nestjs/common';
-import {
-	ApiCreatedResponse,
-	ApiHeader,
-	ApiOkResponse,
-	ApiTags,
-} from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -34,7 +28,6 @@ import { ExpensesService } from './expenses.service';
 
 const SubjectType = 'Expense';
 
-@ApiHeader({ name: ROLE_HEADER })
 @Controller('expenses')
 @ApiTags('expenses')
 @SwaggerAuth()

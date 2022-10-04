@@ -1,11 +1,9 @@
 import { Controller, Delete, Post, UseGuards } from '@nestjs/common';
-import { ApiHeader, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { SearchService } from 'src/search/search.service';
 
-@ApiHeader({ name: ROLE_HEADER })
 @Controller('search')
 @ApiTags('search')
 export class SearchController {

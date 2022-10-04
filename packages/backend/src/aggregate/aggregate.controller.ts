@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { ApiHeader, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import {
 	ByMonthDto,
 	DashboardFilterDto,
@@ -7,13 +7,11 @@ import {
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import { AggregateService } from './aggregate.service';
 
-@ApiHeader({ name: ROLE_HEADER })
 @ApiTags('aggregate')
 @Controller('aggregate')
 export class AggregateController {

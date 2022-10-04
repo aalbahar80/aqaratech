@@ -16,13 +16,11 @@ import {
 	ApiConsumes,
 	ApiCreatedResponse,
 	ApiExtraModels,
-	ApiHeader,
 	ApiOkResponse,
 	ApiTags,
 	getSchemaPath,
 } from '@nestjs/swagger';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -39,7 +37,6 @@ import {
 import { IUser } from 'src/interfaces/user.interface';
 import { FilesService } from './files.service';
 
-@ApiHeader({ name: ROLE_HEADER })
 @Controller('files')
 @ApiTags('files')
 @SwaggerAuth()

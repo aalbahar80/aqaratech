@@ -1,33 +1,16 @@
-import { getUser } from '$lib/server/utils/get-user';
-import { json } from '@sveltejs/kit';
+import { MAX_AGE } from '$lib/constants/misc';
 import type { RequestHandler } from './$types';
 
-export const GET: RequestHandler = async ({ locals, params }) => {
-	if (!locals.accessToken) {
-		// TODO monitor if this happens
-		return json(
-			{
-				error: 'Unauthorized',
-			},
-			{
-				status: 401,
-			},
-		);
-	}
-
-	const user = await getUser({
-		token: locals.accessToken,
-		selectedRoleId: params.id,
+export const GET: RequestHandler = async ({ cookies, params }) => {
+	cookies.set('role', params.id, {
+		path: '/',
+		maxAge: MAX_AGE,
 	});
-
-	locals.xRoleId = user?.role?.id || '';
-
-	const location = user?.role?.meta.home || '/';
 
 	return new Response(undefined, {
 		status: 302,
 		headers: {
-			location,
+			location: '/concierge',
 		},
 	});
 };

@@ -1,13 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
-import {
-	ApiCreatedResponse,
-	ApiHeader,
-	ApiOkResponse,
-	ApiTags,
-} from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import {
@@ -19,7 +13,6 @@ import {
 import { IUser } from 'src/interfaces/user.interface';
 import { ExpenseCategoriesService } from './expense-categories.service';
 
-@ApiHeader({ name: ROLE_HEADER })
 @Controller('expense-categories')
 @ApiTags('expense-categories')
 @SwaggerAuth()

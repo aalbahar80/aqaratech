@@ -8,18 +8,12 @@ import {
 	Post,
 	Query,
 } from '@nestjs/common';
-import {
-	ApiCreatedResponse,
-	ApiHeader,
-	ApiOkResponse,
-	ApiTags,
-} from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -36,7 +30,6 @@ import { PropertiesService } from './properties.service';
 
 const SubjectType = 'Property';
 
-@ApiHeader({ name: ROLE_HEADER })
 @Controller('properties')
 @ApiTags('properties')
 @SwaggerAuth()

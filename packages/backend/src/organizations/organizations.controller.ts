@@ -9,12 +9,7 @@ import {
 	Query,
 	UseGuards,
 } from '@nestjs/common';
-import {
-	ApiCreatedResponse,
-	ApiHeader,
-	ApiOkResponse,
-	ApiTags,
-} from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
@@ -22,7 +17,6 @@ import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
 import { Action } from 'src/casl/casl-ability.factory';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
@@ -42,7 +36,6 @@ import { OrganizationsService } from './organizations.service';
 
 const SubjectType = 'Organization';
 
-@ApiHeader({ name: ROLE_HEADER })
 @Controller('organizations')
 @ApiTags('organizations')
 @SwaggerAuth()

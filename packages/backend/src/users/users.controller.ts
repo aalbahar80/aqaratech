@@ -1,19 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
-import {
-	ApiHeader,
-	ApiNotFoundResponse,
-	ApiOkResponse,
-	ApiTags,
-} from '@nestjs/swagger';
+import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { ValidatedUserDto } from 'src/users/dto/user.dto';
 import { UsersService } from './users.service';
 
-@ApiHeader({ name: ROLE_HEADER })
 @Controller('users')
 @ApiTags('users')
 @SwaggerAuth()

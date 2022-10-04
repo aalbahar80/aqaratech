@@ -6,7 +6,6 @@ import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SentryInterceptor } from 'src/sentry/sentry.interceptor';
@@ -47,7 +46,6 @@ async function bootstrap() {
 			allowedHeaders: [
 				'Authorization',
 				'Cookie',
-				ROLE_HEADER,
 				'Content-Type',
 				'x-sws-authenticated',
 				'baggage', // sentry

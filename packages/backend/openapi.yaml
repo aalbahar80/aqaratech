@@ -20,12 +20,7 @@ paths:
       operationId: TenantsController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_0
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -39,16 +34,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: &ref_1
+      tags: &ref_0
         - tenants
-      security: &ref_2
+      security: &ref_1
         - bearer: []
     get:
       operationId: TenantsController_findAll
       summary: ''
       description: ''
       parameters:
-        - *ref_0
         - name: page
           required: false
           in: query
@@ -95,15 +89,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/TenantDto'
-      tags: *ref_1
-      security: *ref_2
+      tags: *ref_0
+      security: *ref_1
   /tenants/{id}:
     get:
       operationId: TenantsController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_0
         - name: id
           required: true
           in: path
@@ -116,14 +109,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: *ref_1
-      security: *ref_2
+      tags: *ref_0
+      security: *ref_1
     patch:
       operationId: TenantsController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_0
         - name: id
           required: true
           in: path
@@ -142,14 +134,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: *ref_1
-      security: *ref_2
+      tags: *ref_0
+      security: *ref_1
     delete:
       operationId: TenantsController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_0
         - name: id
           required: true
           in: path
@@ -162,15 +153,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_1
-      security: *ref_2
+      tags: *ref_0
+      security: *ref_1
   /tenants/{id}/leases:
     get:
       operationId: TenantsController_findLeases
       summary: ''
       description: ''
       parameters:
-        - *ref_0
         - name: page
           required: false
           in: query
@@ -222,15 +212,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_1
-      security: *ref_2
+      tags: *ref_0
+      security: *ref_1
   /tenants/{id}/invoices:
     get:
       operationId: TenantsController_findInvoices
       summary: ''
       description: ''
       parameters:
-        - *ref_0
         - name: page
           required: false
           in: query
@@ -312,15 +301,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_1
-      security: *ref_2
+      tags: *ref_0
+      security: *ref_1
   /tenants/{id}/roles:
     get:
       operationId: TenantsController_findRoles
       summary: ''
       description: ''
       parameters:
-        - *ref_0
         - name: page
           required: false
           in: query
@@ -372,19 +360,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_1
-      security: *ref_2
+      tags: *ref_0
+      security: *ref_1
   /roles:
     post:
       operationId: RolesController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_3
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -398,7 +381,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDto'
-      tags: &ref_4
+      tags: &ref_2
         - roles
   /roles/{id}:
     delete:
@@ -406,7 +389,6 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - *ref_3
         - name: id
           required: true
           in: path
@@ -419,14 +401,13 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_4
+      tags: *ref_2
   /roles/{id}/send-invite:
     post:
       operationId: RolesController_sendInvite
       summary: ''
       description: ''
       parameters:
-        - *ref_3
         - name: id
           required: true
           in: path
@@ -435,18 +416,13 @@ paths:
       responses:
         '201':
           description: ''
-      tags: *ref_4
+      tags: *ref_2
   /leaseInvoices:
     post:
       operationId: LeaseInvoicesController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_5
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -460,16 +436,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialLeaseInvoiceDto'
-      tags: &ref_6
+      tags: &ref_3
         - leaseInvoices
-      security: &ref_7
+      security: &ref_4
         - bearer: []
     get:
       operationId: LeaseInvoicesController_findAll
       summary: ''
       description: ''
       parameters:
-        - *ref_5
         - name: page
           required: false
           in: query
@@ -546,15 +521,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_6
-      security: *ref_7
+      tags: *ref_3
+      security: *ref_4
   /leaseInvoices/{id}:
     get:
       operationId: LeaseInvoicesController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_5
         - name: id
           required: true
           in: path
@@ -567,14 +541,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_6
-      security: *ref_7
+      tags: *ref_3
+      security: *ref_4
     patch:
       operationId: LeaseInvoicesController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_5
         - name: id
           required: true
           in: path
@@ -593,14 +566,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialLeaseInvoiceDto'
-      tags: *ref_6
-      security: *ref_7
+      tags: *ref_3
+      security: *ref_4
     delete:
       operationId: LeaseInvoicesController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_5
         - name: id
           required: true
           in: path
@@ -613,15 +585,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_6
-      security: *ref_7
+      tags: *ref_3
+      security: *ref_4
   /leaseInvoices/{id}/send-email:
     post:
       operationId: LeaseInvoicesController_sendEmail
       summary: ''
       description: ''
       parameters:
-        - *ref_5
         - name: id
           required: true
           in: path
@@ -634,19 +605,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_6
-      security: *ref_7
+      tags: *ref_3
+      security: *ref_4
   /leases:
     post:
       operationId: LeasesController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_8
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -660,16 +626,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialLeaseDto'
-      tags: &ref_9
+      tags: &ref_5
         - leases
-      security: &ref_10
+      security: &ref_6
         - bearer: []
     get:
       operationId: LeasesController_findAll
       summary: ''
       description: ''
       parameters:
-        - *ref_8
         - name: page
           required: false
           in: query
@@ -716,15 +681,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_5
+      security: *ref_6
   /leases/{id}:
     get:
       operationId: LeasesController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_8
         - name: id
           required: true
           in: path
@@ -737,14 +701,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_5
+      security: *ref_6
     patch:
       operationId: LeasesController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_8
         - name: id
           required: true
           in: path
@@ -763,14 +726,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialLeaseDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_5
+      security: *ref_6
     delete:
       operationId: LeasesController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_8
         - name: id
           required: true
           in: path
@@ -783,15 +745,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_5
+      security: *ref_6
   /leases/{id}/invoices:
     get:
       operationId: LeasesController_findInvoices
       summary: ''
       description: ''
       parameters:
-        - *ref_8
         - name: id
           required: true
           in: path
@@ -873,14 +834,13 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_5
+      security: *ref_6
     post:
       operationId: LeasesController_createInvoices
       summary: ''
       description: ''
       parameters:
-        - *ref_8
         - name: id
           required: true
           in: path
@@ -901,19 +861,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_5
+      security: *ref_6
   /portfolios:
     post:
       operationId: PortfoliosController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_11
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -927,16 +882,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: &ref_12
+      tags: &ref_7
         - portfolios
-      security: &ref_13
+      security: &ref_8
         - bearer: []
     get:
       operationId: PortfoliosController_findAll
       summary: ''
       description: ''
       parameters:
-        - *ref_11
         - name: page
           required: false
           in: query
@@ -983,15 +937,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_12
-      security: *ref_13
+      tags: *ref_7
+      security: *ref_8
   /portfolios/{id}:
     get:
       operationId: PortfoliosController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_11
         - name: id
           required: true
           in: path
@@ -1004,14 +957,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_12
-      security: *ref_13
+      tags: *ref_7
+      security: *ref_8
     patch:
       operationId: PortfoliosController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_11
         - name: id
           required: true
           in: path
@@ -1030,14 +982,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_12
-      security: *ref_13
+      tags: *ref_7
+      security: *ref_8
     delete:
       operationId: PortfoliosController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_11
         - name: id
           required: true
           in: path
@@ -1050,15 +1001,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_12
-      security: *ref_13
+      tags: *ref_7
+      security: *ref_8
   /portfolios/{id}/roles:
     get:
       operationId: PortfoliosController_findRoles
       summary: ''
       description: ''
       parameters:
-        - *ref_11
         - name: page
           required: false
           in: query
@@ -1110,15 +1060,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_12
-      security: *ref_13
+      tags: *ref_7
+      security: *ref_8
   /portfolios/{id}/properties:
     get:
       operationId: PortfoliosController_findProperties
       summary: ''
       description: ''
       parameters:
-        - *ref_11
         - name: page
           required: false
           in: query
@@ -1170,15 +1119,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_12
-      security: *ref_13
+      tags: *ref_7
+      security: *ref_8
   /portfolios/{id}/units:
     get:
       operationId: PortfoliosController_findUnits
       summary: ''
       description: ''
       parameters:
-        - *ref_11
         - name: page
           required: false
           in: query
@@ -1230,15 +1178,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_12
-      security: *ref_13
+      tags: *ref_7
+      security: *ref_8
   /portfolios/{id}/payouts:
     get:
       operationId: PortfoliosController_findPayouts
       summary: ''
       description: ''
       parameters:
-        - *ref_11
         - name: page
           required: false
           in: query
@@ -1290,15 +1237,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_12
-      security: *ref_13
+      tags: *ref_7
+      security: *ref_8
   /portfolios/{id}/balance:
     get:
       operationId: PortfoliosController_getBalance
       summary: ''
       description: ''
       parameters:
-        - *ref_11
         - name: id
           required: true
           in: path
@@ -1311,19 +1257,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BalanceDto'
-      tags: *ref_12
-      security: *ref_13
+      tags: *ref_7
+      security: *ref_8
   /properties:
     post:
       operationId: PropertiesController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_14
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -1337,16 +1278,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: &ref_15
+      tags: &ref_9
         - properties
-      security: &ref_16
+      security: &ref_10
         - bearer: []
     get:
       operationId: PropertiesController_findAll
       summary: ''
       description: ''
       parameters:
-        - *ref_14
         - name: page
           required: false
           in: query
@@ -1393,15 +1333,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_15
-      security: *ref_16
+      tags: *ref_9
+      security: *ref_10
   /properties/{id}:
     get:
       operationId: PropertiesController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_14
         - name: id
           required: true
           in: path
@@ -1414,14 +1353,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_15
-      security: *ref_16
+      tags: *ref_9
+      security: *ref_10
     patch:
       operationId: PropertiesController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_14
         - name: id
           required: true
           in: path
@@ -1440,14 +1378,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_15
-      security: *ref_16
+      tags: *ref_9
+      security: *ref_10
     delete:
       operationId: PropertiesController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_14
         - name: id
           required: true
           in: path
@@ -1460,15 +1397,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_15
-      security: *ref_16
+      tags: *ref_9
+      security: *ref_10
   /properties/{id}/units:
     get:
       operationId: PropertiesController_findUnits
       summary: ''
       description: ''
       parameters:
-        - *ref_14
         - name: page
           required: false
           in: query
@@ -1520,19 +1456,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_15
-      security: *ref_16
+      tags: *ref_9
+      security: *ref_10
   /units:
     post:
       operationId: UnitsController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_17
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -1546,16 +1477,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialUnitDto'
-      tags: &ref_18
+      tags: &ref_11
         - units
-      security: &ref_19
+      security: &ref_12
         - bearer: []
     get:
       operationId: UnitsController_findAll
       summary: ''
       description: ''
       parameters:
-        - *ref_17
         - name: page
           required: false
           in: query
@@ -1602,15 +1532,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_18
-      security: *ref_19
+      tags: *ref_11
+      security: *ref_12
   /units/{id}:
     get:
       operationId: UnitsController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_17
         - name: id
           required: true
           in: path
@@ -1623,14 +1552,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_18
-      security: *ref_19
+      tags: *ref_11
+      security: *ref_12
     patch:
       operationId: UnitsController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_17
         - name: id
           required: true
           in: path
@@ -1649,14 +1577,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialUnitDto'
-      tags: *ref_18
-      security: *ref_19
+      tags: *ref_11
+      security: *ref_12
     delete:
       operationId: UnitsController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_17
         - name: id
           required: true
           in: path
@@ -1669,15 +1596,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_18
-      security: *ref_19
+      tags: *ref_11
+      security: *ref_12
   /units/{id}/leases:
     get:
       operationId: UnitsController_findLeases
       summary: ''
       description: ''
       parameters:
-        - *ref_17
         - name: page
           required: false
           in: query
@@ -1729,19 +1655,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_18
-      security: *ref_19
+      tags: *ref_11
+      security: *ref_12
   /payouts:
     post:
       operationId: PayoutsController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_20
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -1755,16 +1676,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayoutDto'
-      tags: &ref_21
+      tags: &ref_13
         - payouts
-      security: &ref_22
+      security: &ref_14
         - bearer: []
     get:
       operationId: PayoutsController_findAll
       summary: ''
       description: ''
       parameters:
-        - *ref_20
         - name: page
           required: false
           in: query
@@ -1811,15 +1731,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_13
+      security: *ref_14
   /payouts/{id}:
     get:
       operationId: PayoutsController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_20
         - name: id
           required: true
           in: path
@@ -1832,14 +1751,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_13
+      security: *ref_14
     patch:
       operationId: PayoutsController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_20
         - name: id
           required: true
           in: path
@@ -1858,14 +1776,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_13
+      security: *ref_14
     delete:
       operationId: PayoutsController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_20
         - name: id
           required: true
           in: path
@@ -1878,19 +1795,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_13
+      security: *ref_14
   /aggregate/incomeByMonth:
     get:
       operationId: AggregateController_getIncomeByMonth
       summary: ''
       description: ''
       parameters:
-        - &ref_23
-          name: x-role-id
-          in: header
-          schema:
-            type: string
         - name: page
           required: false
           in: query
@@ -1959,7 +1871,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: &ref_24
+      tags: &ref_15
         - aggregate
   /aggregate/expensesByMonth:
     get:
@@ -1967,7 +1879,6 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - *ref_23
         - name: start
           required: false
           in: query
@@ -2002,14 +1913,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: *ref_24
+      tags: *ref_15
   /aggregate/occupancy:
     get:
       operationId: AggregateController_getOccupancy
       summary: ''
       description: ''
       parameters:
-        - *ref_23
         - name: start
           required: false
           in: query
@@ -2044,17 +1954,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Occupancy'
-      tags: *ref_24
+      tags: *ref_15
   /users/me:
     get:
       operationId: UsersController_findProfile
       summary: ''
       description: ''
-      parameters:
-        - name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       responses:
         '200':
           description: ''
@@ -2073,12 +1979,7 @@ paths:
       operationId: ExpensesController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_25
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -2092,16 +1993,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialExpenseDto'
-      tags: &ref_26
+      tags: &ref_16
         - expenses
-      security: &ref_27
+      security: &ref_17
         - bearer: []
     get:
       operationId: ExpensesController_findAll
       summary: ''
       description: ''
       parameters:
-        - *ref_25
         - name: page
           required: false
           in: query
@@ -2173,15 +2073,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_26
-      security: *ref_27
+      tags: *ref_16
+      security: *ref_17
   /expenses/{id}:
     get:
       operationId: ExpensesController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_25
         - name: id
           required: true
           in: path
@@ -2194,14 +2093,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_26
-      security: *ref_27
+      tags: *ref_16
+      security: *ref_17
     patch:
       operationId: ExpensesController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_25
         - name: id
           required: true
           in: path
@@ -2220,14 +2118,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialExpenseDto'
-      tags: *ref_26
-      security: *ref_27
+      tags: *ref_16
+      security: *ref_17
     delete:
       operationId: ExpensesController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_25
         - name: id
           required: true
           in: path
@@ -2240,30 +2137,24 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_26
-      security: *ref_27
+      tags: *ref_16
+      security: *ref_17
   /search:
     post:
       operationId: SearchController_reindexAll
       summary: ''
       description: ''
-      parameters:
-        - &ref_28
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       responses:
         '201':
           description: ''
-      tags: &ref_29
+      tags: &ref_18
         - search
     delete:
       operationId: SearchController_remove
       summary: ''
       description: ''
-      parameters:
-        - *ref_28
+      parameters: []
       responses:
         '200':
           description: ''
@@ -2273,18 +2164,13 @@ paths:
                 type: array
                 items:
                   type: object
-      tags: *ref_29
+      tags: *ref_18
   /organizations:
     post:
       operationId: OrganizationsController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_30
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -2298,16 +2184,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationCreatedDto'
-      tags: &ref_31
+      tags: &ref_19
         - organizations
-      security: &ref_32
+      security: &ref_20
         - bearer: []
     get:
       operationId: OrganizationsController_findAll
       summary: ''
       description: ''
-      parameters:
-        - *ref_30
+      parameters: []
       responses:
         '200':
           description: ''
@@ -2325,15 +2210,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_31
-      security: *ref_32
+      tags: *ref_19
+      security: *ref_20
   /organizations/{id}:
     get:
       operationId: OrganizationsController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_30
         - name: id
           required: true
           in: path
@@ -2346,14 +2230,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_31
-      security: *ref_32
+      tags: *ref_19
+      security: *ref_20
     patch:
       operationId: OrganizationsController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_30
         - name: id
           required: true
           in: path
@@ -2372,14 +2255,13 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_31
-      security: *ref_32
+      tags: *ref_19
+      security: *ref_20
     delete:
       operationId: OrganizationsController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_30
         - name: id
           required: true
           in: path
@@ -2392,15 +2274,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_31
-      security: *ref_32
+      tags: *ref_19
+      security: *ref_20
   /organizations/{id}/roles:
     get:
       operationId: OrganizationsController_findRoles
       summary: ''
       description: ''
       parameters:
-        - *ref_30
         - name: page
           required: false
           in: query
@@ -2452,15 +2333,14 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_31
-      security: *ref_32
+      tags: *ref_19
+      security: *ref_20
   /organizations/{id}/search:
     get:
       operationId: OrganizationsController_search
       summary: ''
       description: ''
       parameters:
-        - *ref_30
         - name: id
           required: true
           in: path
@@ -2480,19 +2360,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/SearchDto'
-      tags: *ref_31
-      security: *ref_32
+      tags: *ref_19
+      security: *ref_20
   /expense-categories:
     post:
       operationId: ExpenseCategoriesController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_33
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -2506,16 +2381,15 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: &ref_34
+      tags: &ref_21
         - expense-categories
-      security: &ref_35
+      security: &ref_22
         - bearer: []
     get:
       operationId: ExpenseCategoriesController_findAll
       summary: ''
       description: ''
-      parameters:
-        - *ref_33
+      parameters: []
       responses:
         '200':
           description: ''
@@ -2525,14 +2399,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_34
-      security: *ref_35
+      tags: *ref_21
+      security: *ref_22
     patch:
       operationId: ExpenseCategoriesController_updateAll
       summary: ''
       description: ''
-      parameters:
-        - *ref_33
+      parameters: []
       requestBody:
         required: true
         content:
@@ -2548,15 +2421,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_34
-      security: *ref_35
+      tags: *ref_21
+      security: *ref_22
   /expense-categories/{id}:
     patch:
       operationId: ExpenseCategoriesController_update
       summary: ''
       description: ''
       parameters:
-        - *ref_33
         - name: id
           required: true
           in: path
@@ -2575,19 +2447,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_34
-      security: *ref_35
+      tags: *ref_21
+      security: *ref_22
   /files:
     post:
       operationId: FilesController_create
       summary: ''
       description: ''
-      parameters:
-        - &ref_36
-          name: x-role-id
-          in: header
-          schema:
-            type: string
+      parameters: []
       requestBody:
         required: true
         content:
@@ -2607,16 +2474,15 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: &ref_37
+      tags: &ref_23
         - files
-      security: &ref_38
+      security: &ref_24
         - bearer: []
     get:
       operationId: FilesController_findAll
       summary: ''
       description: ''
       parameters:
-        - *ref_36
         - name: relationKey
           required: true
           in: query
@@ -2653,14 +2519,13 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/FileDto'
-      tags: *ref_37
-      security: *ref_38
+      tags: *ref_23
+      security: *ref_24
     delete:
       operationId: FilesController_remove
       summary: ''
       description: ''
       parameters:
-        - *ref_36
         - name: key
           required: true
           in: query
@@ -2673,15 +2538,14 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_37
-      security: *ref_38
+      tags: *ref_23
+      security: *ref_24
   /files/find-one:
     get:
       operationId: FilesController_findOne
       summary: ''
       description: ''
       parameters:
-        - *ref_36
         - name: key
           required: true
           in: query
@@ -2694,8 +2558,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_37
-      security: *ref_38
+      tags: *ref_23
+      security: *ref_24
 info:
   title: Aqaratech
   description: Aqaratech API

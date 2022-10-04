@@ -11,7 +11,6 @@ import {
 import {
 	ApiBody,
 	ApiCreatedResponse,
-	ApiHeader,
 	ApiOkResponse,
 	ApiQuery,
 	ApiTags,
@@ -20,7 +19,6 @@ import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { ROLE_HEADER } from 'src/constants/header-role';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -43,7 +41,6 @@ import { LeasesService } from './leases.service';
 
 const SubjectType = 'Lease';
 
-@ApiHeader({ name: ROLE_HEADER })
 @Controller('leases')
 @ApiTags('leases')
 @SwaggerAuth()
