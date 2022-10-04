@@ -17,7 +17,7 @@ interface NavOption {
 
 // TODO can user be undefined?
 export const getNavOptions = (user: User | undefined): NavOption[] => [
-	...(user
+	...(user?.roles.length
 		? [
 				{
 					label: 'Switch Role',
@@ -25,7 +25,8 @@ export const getNavOptions = (user: User | undefined): NavOption[] => [
 					icon: HeroiconsSolidSwitchHorizontal,
 				},
 		  ]
-		: [
+		: // show the get started button if the user has no roles
+		  [
 				{
 					label: 'Get started',
 					href: `/welcome`,

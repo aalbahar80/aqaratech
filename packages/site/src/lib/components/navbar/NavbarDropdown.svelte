@@ -24,7 +24,7 @@
 					{user.role?.meta.roleLabel}
 				</span>
 			{:else}
-				<p>Welcome to Aqaratech</p>
+				<p>Menu</p>
 			{/if}
 		</div>
 		<Icon
