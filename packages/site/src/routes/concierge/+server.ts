@@ -1,4 +1,3 @@
-import { authConfig } from '$lib/environment/auth';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = () => {
@@ -9,7 +8,6 @@ export const GET: RequestHandler = () => {
 	// It should redirect the user to the correct page based on their role.
 	//
 	console.log('TODO: implement /concierge redirect');
-	debugger;
 
 	return new Response(undefined, {
 		status: 302,

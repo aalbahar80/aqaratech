@@ -42,7 +42,6 @@ Sentry.init({
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
-	debugger;
 	// if (event.url.pathname.startsWith('/api/')) {
 	// 	return fetch(event.request);
 	// }
