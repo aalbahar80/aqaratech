@@ -61,7 +61,8 @@ export const api = (loadFetch?: LoadEvent['fetch']) => {
 				name: 'api()',
 			});
 
-			traceValue = transaction.toTraceparent();
+			// TODO why is transaction possibly undefined?
+			traceValue = transaction?.toTraceparent();
 		}
 	}
 
