@@ -2475,12 +2475,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              allOf:
-                - $ref: '#/components/schemas/CreateFileDto'
-                - properties:
-                    file:
-                      type: string
-                      format: binary
               $ref: '#/components/schemas/CreateFileDto'
       responses:
         '201':
@@ -4258,9 +4252,13 @@ components:
     CreateFileDto:
       type: object
       properties:
+        file:
+          type: string
+          format: binary
         organizationId:
           type: string
         relationKey:
+          type: string
           enum:
             - tenant
             - portfolio
@@ -4270,7 +4268,6 @@ components:
             - lease
             - leaseInvoice
             - maintenanceOrder
-          type: string
         relationValue:
           type: string
         fileName:
@@ -4279,6 +4276,7 @@ components:
           type: string
           nullable: true
       required:
+        - file
         - organizationId
         - relationKey
         - relationValue

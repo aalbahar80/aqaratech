@@ -12,13 +12,10 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
-	ApiBody,
 	ApiConsumes,
 	ApiCreatedResponse,
-	ApiExtraModels,
 	ApiOkResponse,
 	ApiTags,
-	getSchemaPath,
 } from '@nestjs/swagger';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -45,23 +42,6 @@ export class FilesController {
 
 	@Post()
 	@ApiConsumes('multipart/form-data')
-	@ApiExtraModels(CreateFileDto)
-	@ApiBody({
-		type: CreateFileDto,
-		schema: {
-			allOf: [
-				{ $ref: getSchemaPath(CreateFileDto) },
-				{
-					properties: {
-						file: {
-							type: 'string',
-							format: 'binary',
-						},
-					},
-				},
-			],
-		},
-	})
 	@ApiCreatedResponse({ type: String })
 	@UseInterceptors(FileInterceptor('file'))
 	create(

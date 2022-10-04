@@ -1,8 +1,9 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { InternalServerErrorException } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 import { DBEntitiesMap, entitiesMap } from '@self/utils';
 import { Expose } from 'class-transformer';
-import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import { Allow, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 import { IsID } from 'src/decorators/field.decorators';
 import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 import { IUser } from 'src/interfaces/user.interface';
@@ -93,4 +94,8 @@ export class CreateFileDto {
 			user: { role: { organizationId: this.organizationId } } as IUser, // TODO just pass string
 		});
 	}
+
+	@Allow()
+	@ApiProperty({ type: 'string', format: 'binary' })
+	file: Express.Multer.File;
 }

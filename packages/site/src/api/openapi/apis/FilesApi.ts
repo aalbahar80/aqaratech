@@ -16,12 +16,12 @@ import * as runtime from '../runtime';
 import type { PaginatedFileDto } from '../models';
 
 export interface FilesApiCreateRequest {
-	organizationId?: string;
-	relationKey?: CreateRelationKeyEnum;
-	relationValue?: string;
-	fileName?: string;
+	file: Blob;
+	organizationId: string;
+	relationKey: CreateRelationKeyEnum;
+	relationValue: string;
+	fileName: string;
 	label?: string | null;
-	file?: Blob;
 }
 
 export interface FilesApiFindAllRequest {
@@ -47,12 +47,12 @@ export interface FilesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [organizationId]
-	 * @param {string} [relationKey]
-	 * @param {string} [relationValue]
-	 * @param {string} [fileName]
+	 * @param {Blob} file
+	 * @param {string} organizationId
+	 * @param {string} relationKey
+	 * @param {string} relationValue
+	 * @param {string} fileName
 	 * @param {string} [label]
-	 * @param {Blob} [file]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof FilesApiInterface
@@ -151,6 +151,56 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		requestParameters: FilesApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<string>> {
+		if (
+			requestParameters.file === null ||
+			requestParameters.file === undefined
+		) {
+			throw new runtime.RequiredError(
+				'file',
+				'Required parameter requestParameters.file was null or undefined when calling create.',
+			);
+		}
+
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling create.',
+			);
+		}
+
+		if (
+			requestParameters.relationKey === null ||
+			requestParameters.relationKey === undefined
+		) {
+			throw new runtime.RequiredError(
+				'relationKey',
+				'Required parameter requestParameters.relationKey was null or undefined when calling create.',
+			);
+		}
+
+		if (
+			requestParameters.relationValue === null ||
+			requestParameters.relationValue === undefined
+		) {
+			throw new runtime.RequiredError(
+				'relationValue',
+				'Required parameter requestParameters.relationValue was null or undefined when calling create.',
+			);
+		}
+
+		if (
+			requestParameters.fileName === null ||
+			requestParameters.fileName === undefined
+		) {
+			throw new runtime.RequiredError(
+				'fileName',
+				'Required parameter requestParameters.fileName was null or undefined when calling create.',
+			);
+		}
+
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -179,6 +229,10 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 			formParams = new URLSearchParams();
 		}
 
+		if (requestParameters.file !== undefined) {
+			formParams.append('file', requestParameters.file as any);
+		}
+
 		if (requestParameters.organizationId !== undefined) {
 			formParams.append(
 				'organizationId',
@@ -205,10 +259,6 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 			formParams.append('label', requestParameters.label as any);
 		}
 
-		if (requestParameters.file !== undefined) {
-			formParams.append('file', requestParameters.file as any);
-		}
-
 		const response = await this.request(
 			{
 				path: `/files`,
@@ -228,7 +278,7 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 	 *
 	 */
 	async create(
-		requestParameters: FilesApiCreateRequest = {},
+		requestParameters: FilesApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<string> {
 		const response = await this.createRaw(requestParameters, initOverrides);
