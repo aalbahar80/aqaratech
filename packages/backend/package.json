@@ -28,7 +28,7 @@
 		"postinstall": "prisma generate",
 		"health-check": "../../scripts/health-probe.sh $(awk '/^PUBLIC_API_URL_LOCAL/' ../../.env | awk -F '=' '{print $2}')/health 30",
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
-		"api:generate": "./get-openapi.sh && rm -rf ../site/src/api/openapi && TS_POST_PROCESS_FILE=\"./node_modules/.bin/prettier --write\" openapi-generator-cli generate"
+		"api:generate": "./get-openapi.sh && rm -rf ../site/src/api/openapi && openapi-generator-cli generate"
 	},
 	"prisma": {
 		"seed": "tsx ../seed/src/go-seed.ts"
