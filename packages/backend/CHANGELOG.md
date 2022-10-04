@@ -1,5 +1,13 @@
 # @self/backend
 
+## 0.7.1
+
+### Patch Changes
+
+- 5ed63358: create new user on /me first visit
+- Updated dependencies [5ed63358]
+  - @self/utils@1.6.1
+
 ## 0.7.0
 
 ### Minor Changes

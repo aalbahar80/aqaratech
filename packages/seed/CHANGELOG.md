@@ -1,5 +1,13 @@
 # @self/seed
 
+## 0.6.1
+
+### Patch Changes
+
+- 5ed63358: create new user on /me first visit
+- Updated dependencies [5ed63358]
+  - eslint-config-custom@0.3.1
+
 ## 0.6.0
 
 ### Minor Changes

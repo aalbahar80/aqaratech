@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 0.3.1
+
+### Patch Changes
+
+- 5ed63358: create new user on /me first visit
+
 ## 0.3.0
 
 ### Minor Changes

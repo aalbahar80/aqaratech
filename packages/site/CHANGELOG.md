@@ -1,5 +1,11 @@
 # @self/site
 
+## 0.8.1
+
+### Patch Changes
+
+- 5ed63358: create new user on /me first visit
+
 ## 0.8.0
 
 ### Minor Changes
