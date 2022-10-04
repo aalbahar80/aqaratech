@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { sample } from '@self/seed';
-import { test } from './api-config';
+import { test } from './api-fixtures';
 
 const org = sample.organizations[0];
 const portfolio = sample.portfolios[0];

@@ -1,7 +1,7 @@
 /* eslint-disable */
 // @ts-nocheck
 import { testOrgRoleId } from '@self/seed';
-import { test } from './api-config';
+import { test } from './api-fixtures';
 
 test.use({
 	extraHTTPHeaders: {

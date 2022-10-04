@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { tenantFactory } from '@self/seed';
 import * as R from 'remeda';
 import type { TenantDto } from '../types/api';
-import { test } from './api-config';
+import { test } from './api-fixtures';
 
 test(`can't be created without orgId`, async ({ request, org }) => {
 	const tenant = R.pick(

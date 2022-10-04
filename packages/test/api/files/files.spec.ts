@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { withQuery } from 'ufo';
 import { getPresignedUrl } from '../../utils/get-presigned-url';
-import { test } from '../api-config';
+import { test } from '../api-fixtures';
 
 test('handle noSuchBucket gracefully', async ({ request, portfolio }) => {
 	const url = withQuery('/files', {

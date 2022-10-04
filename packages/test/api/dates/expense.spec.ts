@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
 import type { ExpenseDto } from '../../types/api';
-import { test } from '../api-config';
+import { test } from '../api-fixtures';
 
 test('postAt defaults to midnight UTC', async ({ request, portfolio }) => {
 	const expense = expenseFactory.build({

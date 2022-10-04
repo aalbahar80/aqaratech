@@ -15,7 +15,6 @@ import type {
 	TenantDto,
 	UnitDto,
 } from '../types/api';
-import { getToken } from '../utils/get-token';
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
@@ -28,8 +27,14 @@ export const test = base.extend<{
 	file: string;
 	expenseCategory: ExpenseCategoryDto;
 }>({
+	// Dependency map: org -> page -> request
+	// 1. A new org is created
+	// 2. A new page is created with the role cookie set to the new org's role ID
+	// 3. The `request` fixture is overriden with the new page.request, which has the new role cookie set
+	// 4. Any test that imports from this file will have access to the new org, page, and request
+
 	// A fixture that returns a fresh organization.
-	org: async ({ baseURL, browser }, use) => {
+	org: async ({ baseURL, context }, use) => {
 		if (!baseURL) throw new Error('baseURL is not set');
 
 		// baseURL is populated because it is set very early in playwright.config.ts
@@ -38,36 +43,37 @@ export const test = base.extend<{
 		// contextOptions might be empty because this is executed before test.use is called?
 		// For this reason, we create a new context here.
 
-		const context = await browser.newContext({
-			baseURL,
-			extraHTTPHeaders: {
-				Authorization: `Bearer ${await getToken({
-					name: 'accessToken',
-					domain: baseURL,
-				})}`,
-			},
-		});
-
-		const organization = organizationFactory.build();
-
-		const orgPicked = R.pick(organization, ['fullName']);
-
-		const headers = {
-			Authorization: `Bearer ${await getToken({
-				name: 'accessToken',
-				domain: baseURL,
-			})}`,
-		};
+		const organization = R.pick(organizationFactory.build(), ['fullName']);
 
 		const res = await context.request.post(`/organizations`, {
-			headers,
-			data: orgPicked,
+			data: organization,
 		});
 
 		const created = (await res.json()) as OrganizationCreatedDto;
 
 		await use(created);
-		await context.close();
+	},
+
+	page: async ({ org, page }, use) => {
+		const roleCookie = (await page.context().cookies()).find(
+			(cookie) => cookie.name === 'role',
+		);
+
+		if (!roleCookie) throw new Error('role cookie is not set');
+
+		const newRoleCookie = {
+			...roleCookie,
+			value: org.roleId,
+		};
+
+		// await context.addCookies([newRoleCookie]);
+		await page.context().addCookies([newRoleCookie]);
+
+		await use(page);
+	},
+
+	request: async ({ page }, use) => {
+		await use(page.request);
 	},
 
 	tenant: async ({ org, request }, use) => {

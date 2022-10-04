@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { organizationFactory } from '@self/seed';
 import * as R from 'remeda';
-import { test } from './api-config';
+import { test } from './api-fixtures';
 
 test(`can create organization`, async ({ request, org }) => {
 	const organization = R.pick(organizationFactory.build(), [
