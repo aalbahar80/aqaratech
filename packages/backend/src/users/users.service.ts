@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { OrganizationDto } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
@@ -6,6 +6,8 @@ import { CreateUserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
 @Injectable()
 export class UsersService {
 	constructor(private readonly prisma: PrismaService) {}
+
+	private readonly logger = new Logger(UsersService.name);
 
 	async create({ createUserDto }: { createUserDto: CreateUserDto }) {
 		return this.prisma.user.create({ data: createUserDto });
@@ -31,7 +33,7 @@ export class UsersService {
 	// }
 
 	async findOneByEmail(email: string): Promise<ValidatedUserDto> {
-		const user = await this.prisma.user.findUniqueOrThrow({
+		let user = await this.prisma.user.findUnique({
 			where: { email },
 			include: {
 				roles: {
@@ -41,6 +43,29 @@ export class UsersService {
 				},
 			},
 		});
+
+		if (!user) {
+			// If user does not exist, create it. New users who have just signed up
+			// will only in exist in Auth0, not in our database.
+			this.logger.log(
+				`User with email: ${email} does not yet exist in our db. Creating...`,
+			);
+
+			user = await this.prisma.user.create({
+				data: {
+					email,
+				},
+				include: {
+					roles: {
+						include: {
+							organization: {
+								select: { id: true, fullName: true, label: true },
+							},
+						},
+					},
+				},
+			});
+		}
 
 		return {
 			...user,

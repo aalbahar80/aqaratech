@@ -41,9 +41,8 @@ export class OrganizationsService {
 							roleType: 'ORGADMIN',
 							isAccepted: true,
 							user: {
-								connectOrCreate: {
-									where: { email: user.email },
-									create: { email: user.email },
+								connect: {
+									email: user.email,
 								},
 							},
 						},

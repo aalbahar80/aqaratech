@@ -36,6 +36,7 @@ export const getUser = async ({
 
 	// User not in our db, nothing more to do.
 	if (!profile) {
+		// TODO: use zod to validate profile, roles at lease. This should never happen.
 		return undefined;
 	}
 
