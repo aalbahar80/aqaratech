@@ -18,6 +18,7 @@ import {
 import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/casl-ability.factory';
+import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
@@ -30,7 +31,6 @@ import {
 	LeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
-import { LeasePageOptionsDto } from 'src/leases/dto/lease-page-options.dto';
 import {
 	CreateLeaseDto,
 	LeaseDto,
@@ -70,7 +70,7 @@ export class LeasesController {
 	})
 	findAll(
 		@User() user: IUser,
-		@Query() pageOptionsDto: LeasePageOptionsDto,
+		@Query() pageOptionsDto: PageOptionsDto,
 	): Promise<WithCount<LeaseDto>> {
 		return this.leasesService.findAll({ pageOptionsDto, user });
 	}
