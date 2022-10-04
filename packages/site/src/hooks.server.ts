@@ -1,6 +1,7 @@
 import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { env } from '$env/dynamic/public';
+import { MAX_AGE } from '$lib/constants/misc';
 import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
 import {
@@ -82,6 +83,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 			token: accessToken,
 			selectedRoleId: currentRole,
 		});
+
+		// set the role cookie if it's not yet set
+		if (!currentRole && user?.role) {
+			event.cookies.set('role', user.role.id, {
+				path: '/',
+				maxAge: MAX_AGE,
+			});
+		}
 
 		// set user in locals
 		event.locals.user = user;
