@@ -6,12 +6,13 @@ import { createdAt, updatedAt } from '../utils/dates';
 
 export const roleFactory = Factory.Sync.makeFactoryWithRequired<
 	Role & { email: string },
-	'userId' | 'organizationId'
+	'organizationId'
 >({
 	id: Factory.each(() => randomUUID()),
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
+	userId: Factory.each(() => randomUUID()), // Should always be passed in?
 	roleType: Factory.each(() => 'ORGADMIN'),
 	portfolioId: Factory.each(() => null),
 	tenantId: Factory.each(() => null),
