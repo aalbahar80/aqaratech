@@ -16,7 +16,7 @@ interface NavOption {
 }
 
 // TODO can user be undefined?
-export const getNavOptions = (user: User): NavOption[] => [
+export const getNavOptions = (user: User | undefined): NavOption[] => [
 	...(user
 		? [
 				{
