@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Action } from 'src/casl/casl-ability.factory';
 import { frisk } from 'src/casl/frisk';
+import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import {
 	RemoveDocumentsEvent,
@@ -11,7 +12,6 @@ import {
 } from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 import {
 	CreateTenantDto,
@@ -52,13 +52,13 @@ export class TenantsService {
 	}
 
 	async findAll({
-		tenantPageOptionsDto,
+		pageOptionsDto,
 		user,
 	}: {
-		tenantPageOptionsDto: TenantPageOptionsDto;
+		pageOptionsDto: PageOptionsDto;
 		user: IUser;
 	}): Promise<WithCount<TenantDto>> {
-		const { page, take } = tenantPageOptionsDto;
+		const { page, take } = pageOptionsDto;
 
 		const [results, total] = await Promise.all([
 			this.prisma.tenant.findMany({

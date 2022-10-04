@@ -26,7 +26,6 @@ import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
-import { TenantPageOptionsDto } from 'src/tenants/dto/tenant-page-options.dto';
 import {
 	CreateTenantDto,
 	TenantDto,
@@ -62,9 +61,9 @@ export class TenantsController {
 	@ApiPaginatedResponse(TenantDto)
 	findAll(
 		@User() user: IUser,
-		@Query() tenantPageOptionsDto: TenantPageOptionsDto,
+		@Query() pageOptionsDto: PageOptionsDto,
 	): Promise<WithCount<TenantDto>> {
-		return this.tenantsService.findAll({ tenantPageOptionsDto, user });
+		return this.tenantsService.findAll({ pageOptionsDto, user });
 	}
 
 	@Get(':id')
