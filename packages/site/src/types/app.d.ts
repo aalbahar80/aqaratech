@@ -7,9 +7,6 @@ declare const __AQARATECH_APP_VERSION__: string;
 declare namespace App {
 	interface Locals {
 		user: import('$models/types/auth.type').User | undefined;
-		accessToken: string | undefined;
-		idToken: string | undefined;
-		xRoleId: string | undefined;
 		isAqaratechStaff: boolean;
 	}
 

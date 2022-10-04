@@ -70,6 +70,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const idToken = event.cookies.get('idToken');
 	const accessToken = event.cookies.get('accessToken');
+	const currentRole = event.cookies.get('role');
 
 	// consume idToken and set user. Any redirects should be handled by layout/page load functions.
 	if (idToken && accessToken) {
@@ -79,6 +80,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		// get the user
 		const user = await getUser({
 			token: accessToken,
+			selectedRoleId: currentRole,
 		});
 
 		// set user in locals

@@ -11,14 +11,10 @@ export const load: LayoutLoad = async ({ fetch, data, url: { pathname } }) => {
 
 	const apiClient = api({
 		loadFetch: fetch,
-		roleId: data.user?.role?.id,
 	});
 
 	return {
 		api: apiClient,
 		...data,
-		apiConfig: {
-			roleId: data.user?.role?.id,
-		},
 	};
 };

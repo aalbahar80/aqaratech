@@ -21,15 +21,9 @@ import {
 	UsersApi,
 } from './openapi';
 
-export const api = ({
-	loadFetch,
-	roleId,
-}: {
-	loadFetch?: LoadEvent['fetch'];
-	roleId?: string | undefined;
-}) => {
+export const api = ({ loadFetch }: { loadFetch?: LoadEvent['fetch'] }) => {
+	// export const api = (loadFetch?: LoadEvent['fetch']) => {
 	const headers: Record<string, string> = {
-		...(roleId ? { 'x-role-id': roleId } : {}),
 		// origin: PUBLIC_SITE_URL,
 	};
 
