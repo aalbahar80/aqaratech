@@ -60,17 +60,11 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 	cookies.set('idToken', tokens.id_token, {
 		path: '/',
 		maxAge,
-		httpOnly: true,
-		secure: true,
-		sameSite: 'none', // TODO: research
 	});
 
 	cookies.set('accessToken', tokens.access_token, {
 		path: '/',
 		maxAge,
-		httpOnly: true,
-		secure: true,
-		sameSite: 'none', // TODO: research
 	});
 
 	// Redirect to `/concierge`.
