@@ -43,8 +43,10 @@ async function bootstrap() {
 		],
 		cors: {
 			origin: process.env.PUBLIC_SITE_URL,
+			credentials: true,
 			allowedHeaders: [
 				'Authorization',
+				'Cookie',
 				ROLE_HEADER,
 				'Content-Type',
 				'x-sws-authenticated',

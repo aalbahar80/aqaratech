@@ -1,4 +1,7 @@
 import { environment } from '$aqenvironment';
+import * as SentryNode from '@sentry/node?server';
+import * as SentrySvelte from '@sentry/svelte?client';
+import type { LoadEvent } from '@sveltejs/kit';
 import {
 	AggregateApi,
 	Configuration,
@@ -17,21 +20,15 @@ import {
 	UnitsApi,
 	UsersApi,
 } from './openapi';
-import * as SentryNode from '@sentry/node?server';
-import * as SentrySvelte from '@sentry/svelte?client';
-import type { LoadEvent } from '@sveltejs/kit';
 
 export const api = ({
 	loadFetch,
-	token,
 	roleId,
 }: {
 	loadFetch?: LoadEvent['fetch'];
-	token: string;
 	roleId?: string | undefined;
 }) => {
 	const headers: Record<string, string> = {
-		Authorization: `Bearer ${token}`,
 		...(roleId ? { 'x-role-id': roleId } : {}),
 		// origin: PUBLIC_SITE_URL,
 	};
@@ -86,6 +83,7 @@ export const api = ({
 		...(loadFetch ? { fetchApi: loadFetch } : {}),
 		headers,
 		basePath,
+		credentials: 'include',
 	});
 
 	return {

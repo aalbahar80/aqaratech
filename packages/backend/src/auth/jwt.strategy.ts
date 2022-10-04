@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { AQARATECH_STAFF_ROLE } from '@self/utils';
+import type { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
@@ -28,24 +29,41 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
 		const jwksUri = `${domain}/.well-known/jwks.json`;
 
-		// const cookieExtractor = function (req: Request) {
-		//   let token = null;
-		//   if (req && req.headers.cookie) {
-		//     token = req.cookies['accessToken'];
-		//   }
-		//   return token;
-		// };
+		const cookieExtractor = function (req: Request) {
+			let token: string | null | undefined = undefined;
+
+			const cookies = req.cookies;
+			if (req && cookies) {
+				token = cookies['accessToken'];
+			}
+
+			if (token) {
+				console.log('Got jwt from cookie');
+				return token;
+			}
+
+			// Fallback to getting jwt from Authorization header
+			// TODO: remove if sveltekit can set cookies server-side in `getProfile`
+			token = ExtractJwt.fromAuthHeaderAsBearerToken()(req);
+
+			if (token) {
+				console.log('Got jwt from header');
+				return token;
+			}
+
+			console.log('No jwt found');
+			return null;
+		};
 
 		super({
+			// https://github.com/mikenicholson/passport-jwt#configure-strategy
 			secretOrKeyProvider: passportJwtSecret({
 				cache: true,
 				cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
 				rateLimit: true,
 				jwksUri,
 			}),
-			// jwtFromRequest: cookieExtractor,
-			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-			// https://github.com/mikenicholson/passport-jwt#configure-strategy
+			jwtFromRequest: cookieExtractor,
 			audience,
 			domain,
 			algorithms: ['RS256'],
