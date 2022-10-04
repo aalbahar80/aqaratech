@@ -168,10 +168,15 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 	const publicUrl = environment.PUBLIC_API_URL;
 	const localUrl = environment.PUBLIC_API_URL_LOCAL;
 
-	// request.headers.set('origin', PUBLIC_SITE_URL);
-
 	if (publicUrl && localUrl && request.url.startsWith(publicUrl)) {
 		request = new Request(request.url.replace(publicUrl, localUrl), request);
+
+		// Include cookies on server-side fetch requests in load functions
+		// https://kit.svelte.dev/docs/hooks#server-hooks-handlefetch
+		const cookie = event.request.headers.get('cookie');
+		if (cookie) {
+			request.headers.set('cookie', cookie);
+		}
 	}
 
 	return fetch(request);
