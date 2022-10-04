@@ -18,16 +18,7 @@ import type {
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
-export const test = base.extend<{
-	org: OrganizationCreatedDto;
-	tenant: TenantDto;
-	portfolio: PortfolioDto;
-	property: PropertyDto;
-	unit: UnitDto;
-	file: string;
-	expenseCategory: ExpenseCategoryDto;
-	withRoleId: string | undefined;
-}>({
+export const test = base.extend<TestFixtures & TestOptions>({
 	// Dependency map: org -> request
 	// 1. A new org is created
 	// 3. The `request` fixture is overriden with the new page.request, which has the new role cookie set
@@ -184,3 +175,17 @@ export const test = base.extend<{
 		await use(category);
 	},
 });
+
+interface TestFixtures {
+	org: OrganizationCreatedDto;
+	tenant: TenantDto;
+	portfolio: PortfolioDto;
+	property: PropertyDto;
+	unit: UnitDto;
+	file: string;
+	expenseCategory: ExpenseCategoryDto;
+}
+
+interface TestOptions {
+	withRoleId: string | undefined;
+}
