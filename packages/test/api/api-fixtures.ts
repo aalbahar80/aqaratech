@@ -27,11 +27,10 @@ export const test = base.extend<{
 	file: string;
 	expenseCategory: ExpenseCategoryDto;
 }>({
-	// Dependency map: org -> page -> request
+	// Dependency map: org -> request
 	// 1. A new org is created
-	// 2. A new page is created with the role cookie set to the new org's role ID
 	// 3. The `request` fixture is overriden with the new page.request, which has the new role cookie set
-	// 4. Any test that imports from this file will have access to the new org, page, and request
+	// 4. Any test that imports from this file will have access to the new org, and request
 
 	// A fixture that returns a fresh organization.
 	org: async ({ baseURL, context }, use) => {
@@ -54,8 +53,8 @@ export const test = base.extend<{
 		await use(created);
 	},
 
-	page: async ({ org, page }, use) => {
-		const roleCookie = (await page.context().cookies()).find(
+	request: async ({ org, context }, use) => {
+		const roleCookie = (await context.cookies()).find(
 			(cookie) => cookie.name === 'role',
 		);
 
@@ -66,14 +65,9 @@ export const test = base.extend<{
 			value: org.roleId,
 		};
 
-		// await context.addCookies([newRoleCookie]);
-		await page.context().addCookies([newRoleCookie]);
+		await context.addCookies([newRoleCookie]);
 
-		await use(page);
-	},
-
-	request: async ({ page }, use) => {
-		await use(page.request);
+		await use(context.request);
 	},
 
 	tenant: async ({ org, request }, use) => {
