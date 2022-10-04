@@ -1,3 +1,4 @@
+import { MAX_AGE } from '$lib/constants/misc';
 import { authConfig } from '$lib/environment/auth';
 import { validateToken } from '$lib/server/utils/validate';
 import type { RequestHandler } from '@sveltejs/kit';
@@ -55,16 +56,15 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 	await validateToken(tokens.id_token);
 
 	// set cookies
-	const maxAge = 60 * 60 * 24 * 7;
 
 	cookies.set('idToken', tokens.id_token, {
 		path: '/',
-		maxAge,
+		maxAge: MAX_AGE,
 	});
 
 	cookies.set('accessToken', tokens.access_token, {
 		path: '/',
-		maxAge,
+		maxAge: MAX_AGE,
 	});
 
 	// Redirect to `/concierge`.
