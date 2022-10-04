@@ -25,11 +25,9 @@ import type {
 
 export interface PropertiesApiCreateRequest {
 	createPropertyDto: CreatePropertyDto;
-	xRoleId?: string;
 }
 
 export interface PropertiesApiFindAllRequest {
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -39,12 +37,10 @@ export interface PropertiesApiFindAllRequest {
 
 export interface PropertiesApiFindOneRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface PropertiesApiFindUnitsRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -54,13 +50,11 @@ export interface PropertiesApiFindUnitsRequest {
 
 export interface PropertiesApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface PropertiesApiUpdateRequest {
 	id: string;
 	updatePropertyDto: UpdatePropertyDto;
-	xRoleId?: string;
 }
 
 /**
@@ -74,7 +68,6 @@ export interface PropertiesApiInterface {
 	 *
 	 * @summary
 	 * @param {CreatePropertyDto} createPropertyDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
@@ -96,7 +89,6 @@ export interface PropertiesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -124,7 +116,6 @@ export interface PropertiesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
@@ -147,7 +138,6 @@ export interface PropertiesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -175,7 +165,6 @@ export interface PropertiesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
@@ -199,7 +188,6 @@ export interface PropertiesApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdatePropertyDto} updatePropertyDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PropertiesApiInterface
@@ -249,13 +237,6 @@ export class PropertiesApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -323,13 +304,6 @@ export class PropertiesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -381,13 +355,6 @@ export class PropertiesApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -464,13 +431,6 @@ export class PropertiesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -525,13 +485,6 @@ export class PropertiesApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -599,13 +552,6 @@ export class PropertiesApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

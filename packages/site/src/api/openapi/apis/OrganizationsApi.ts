@@ -27,21 +27,14 @@ import type {
 
 export interface OrganizationsApiCreateRequest {
 	createOrganizationDto: CreateOrganizationDto;
-	xRoleId?: string;
-}
-
-export interface OrganizationsApiFindAllRequest {
-	xRoleId?: string;
 }
 
 export interface OrganizationsApiFindOneRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface OrganizationsApiFindRolesRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -51,19 +44,16 @@ export interface OrganizationsApiFindRolesRequest {
 
 export interface OrganizationsApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface OrganizationsApiSearchRequest {
 	id: string;
 	query: string;
-	xRoleId?: string;
 }
 
 export interface OrganizationsApiUpdateRequest {
 	id: string;
 	updateOrganizationDto: UpdateOrganizationDto;
-	xRoleId?: string;
 }
 
 /**
@@ -77,7 +67,6 @@ export interface OrganizationsApiInterface {
 	 *
 	 * @summary
 	 * @param {CreateOrganizationDto} createOrganizationDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
@@ -99,13 +88,11 @@ export interface OrganizationsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
 	 */
 	findAllRaw(
-		requestParameters: OrganizationsApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<PaginatedOrganizationDto>>;
 
@@ -114,7 +101,6 @@ export interface OrganizationsApiInterface {
 	 *
 	 */
 	findAll(
-		requestParameters: OrganizationsApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PaginatedOrganizationDto>;
 
@@ -122,7 +108,6 @@ export interface OrganizationsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
@@ -145,7 +130,6 @@ export interface OrganizationsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -173,7 +157,6 @@ export interface OrganizationsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
@@ -197,7 +180,6 @@ export interface OrganizationsApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {string} query
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
@@ -221,7 +203,6 @@ export interface OrganizationsApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdateOrganizationDto} updateOrganizationDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof OrganizationsApiInterface
@@ -272,13 +253,6 @@ export class OrganizationsApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -318,19 +292,11 @@ export class OrganizationsApi
 	 *
 	 */
 	async findAllRaw(
-		requestParameters: OrganizationsApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<PaginatedOrganizationDto>> {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -358,10 +324,9 @@ export class OrganizationsApi
 	 *
 	 */
 	async findAll(
-		requestParameters: OrganizationsApiFindAllRequest = {},
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PaginatedOrganizationDto> {
-		const response = await this.findAllRaw(requestParameters, initOverrides);
+		const response = await this.findAllRaw(initOverrides);
 		return await response.value();
 	}
 
@@ -383,13 +348,6 @@ export class OrganizationsApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -466,13 +424,6 @@ export class OrganizationsApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -527,13 +478,6 @@ export class OrganizationsApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -604,13 +548,6 @@ export class OrganizationsApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -677,13 +614,6 @@ export class OrganizationsApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

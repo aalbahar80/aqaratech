@@ -14,14 +14,6 @@
 
 import * as runtime from '../runtime';
 
-export interface SearchApiReindexAllRequest {
-	xRoleId?: string;
-}
-
-export interface SearchApiRemoveRequest {
-	xRoleId?: string;
-}
-
 /**
  * SearchApi - interface
  *
@@ -32,13 +24,11 @@ export interface SearchApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof SearchApiInterface
 	 */
 	reindexAllRaw(
-		requestParameters: SearchApiReindexAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<void>>;
 
@@ -47,20 +37,17 @@ export interface SearchApiInterface {
 	 *
 	 */
 	reindexAll(
-		requestParameters: SearchApiReindexAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<void>;
 
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof SearchApiInterface
 	 */
 	removeRaw(
-		requestParameters: SearchApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<object>>>;
 
@@ -69,7 +56,6 @@ export interface SearchApiInterface {
 	 *
 	 */
 	remove(
-		requestParameters: SearchApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<object>>;
 }
@@ -83,19 +69,11 @@ export class SearchApi extends runtime.BaseAPI implements SearchApiInterface {
 	 *
 	 */
 	async reindexAllRaw(
-		requestParameters: SearchApiReindexAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<void>> {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		const response = await this.request(
 			{
@@ -115,10 +93,9 @@ export class SearchApi extends runtime.BaseAPI implements SearchApiInterface {
 	 *
 	 */
 	async reindexAll(
-		requestParameters: SearchApiReindexAllRequest = {},
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<void> {
-		await this.reindexAllRaw(requestParameters, initOverrides);
+		await this.reindexAllRaw(initOverrides);
 	}
 
 	/**
@@ -126,19 +103,11 @@ export class SearchApi extends runtime.BaseAPI implements SearchApiInterface {
 	 *
 	 */
 	async removeRaw(
-		requestParameters: SearchApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<object>>> {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		const response = await this.request(
 			{
@@ -158,10 +127,9 @@ export class SearchApi extends runtime.BaseAPI implements SearchApiInterface {
 	 *
 	 */
 	async remove(
-		requestParameters: SearchApiRemoveRequest = {},
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<object>> {
-		const response = await this.removeRaw(requestParameters, initOverrides);
+		const response = await this.removeRaw(initOverrides);
 		return await response.value();
 	}
 }

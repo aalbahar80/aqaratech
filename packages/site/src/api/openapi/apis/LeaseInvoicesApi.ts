@@ -26,11 +26,9 @@ import type {
 
 export interface LeaseInvoicesApiCreateRequest {
 	createLeaseInvoiceDto: CreateLeaseInvoiceDto;
-	xRoleId?: string;
 }
 
 export interface LeaseInvoicesApiFindAllRequest {
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -46,23 +44,19 @@ export interface LeaseInvoicesApiFindAllRequest {
 
 export interface LeaseInvoicesApiFindOneRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface LeaseInvoicesApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface LeaseInvoicesApiSendEmailRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface LeaseInvoicesApiUpdateRequest {
 	id: string;
 	updateLeaseInvoiceDto: UpdateLeaseInvoiceDto;
-	xRoleId?: string;
 }
 
 /**
@@ -76,7 +70,6 @@ export interface LeaseInvoicesApiInterface {
 	 *
 	 * @summary
 	 * @param {CreateLeaseInvoiceDto} createLeaseInvoiceDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
@@ -98,7 +91,6 @@ export interface LeaseInvoicesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -132,7 +124,6 @@ export interface LeaseInvoicesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
@@ -155,7 +146,6 @@ export interface LeaseInvoicesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
@@ -178,7 +168,6 @@ export interface LeaseInvoicesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
@@ -202,7 +191,6 @@ export interface LeaseInvoicesApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdateLeaseInvoiceDto} updateLeaseInvoiceDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeaseInvoicesApiInterface
@@ -252,13 +240,6 @@ export class LeaseInvoicesApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -350,13 +331,6 @@ export class LeaseInvoicesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -408,13 +382,6 @@ export class LeaseInvoicesApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -471,13 +438,6 @@ export class LeaseInvoicesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -532,13 +492,6 @@ export class LeaseInvoicesApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -606,13 +559,6 @@ export class LeaseInvoicesApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

@@ -28,17 +28,14 @@ import type {
 
 export interface LeasesApiCreateRequest {
 	createLeaseDto: CreateLeaseDto;
-	xRoleId?: string;
 }
 
 export interface LeasesApiCreateInvoicesRequest {
 	id: string;
 	createManyLeaseInvoicesDto: Array<CreateManyLeaseInvoicesDto>;
-	xRoleId?: string;
 }
 
 export interface LeasesApiFindAllRequest {
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -48,7 +45,6 @@ export interface LeasesApiFindAllRequest {
 
 export interface LeasesApiFindInvoicesRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -64,18 +60,15 @@ export interface LeasesApiFindInvoicesRequest {
 
 export interface LeasesApiFindOneRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface LeasesApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface LeasesApiUpdateRequest {
 	id: string;
 	updateLeaseDto: UpdateLeaseDto;
-	xRoleId?: string;
 }
 
 /**
@@ -89,7 +82,6 @@ export interface LeasesApiInterface {
 	 *
 	 * @summary
 	 * @param {CreateLeaseDto} createLeaseDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
@@ -113,7 +105,6 @@ export interface LeasesApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {Array<CreateManyLeaseInvoicesDto>} createManyLeaseInvoicesDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
@@ -135,7 +126,6 @@ export interface LeasesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -163,7 +153,6 @@ export interface LeasesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -197,7 +186,6 @@ export interface LeasesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
@@ -220,7 +208,6 @@ export interface LeasesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
@@ -244,7 +231,6 @@ export interface LeasesApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdateLeaseDto} updateLeaseDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof LeasesApiInterface
@@ -291,13 +277,6 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -363,13 +342,6 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -442,13 +414,6 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -546,13 +511,6 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -611,13 +569,6 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -672,13 +623,6 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -746,13 +690,6 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

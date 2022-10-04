@@ -22,7 +22,6 @@ import type {
 } from '../models';
 
 export interface AggregateApiGetExpensesByMonthRequest {
-	xRoleId?: string;
 	start?: string;
 	end?: string;
 	portfolioId?: string;
@@ -31,7 +30,6 @@ export interface AggregateApiGetExpensesByMonthRequest {
 }
 
 export interface AggregateApiGetIncomeByMonthRequest {
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -46,7 +44,6 @@ export interface AggregateApiGetIncomeByMonthRequest {
 }
 
 export interface AggregateApiGetOccupancyRequest {
-	xRoleId?: string;
 	start?: string;
 	end?: string;
 	portfolioId?: string;
@@ -64,7 +61,6 @@ export interface AggregateApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {string} [start]
 	 * @param {string} [end]
 	 * @param {string} [portfolioId]
@@ -91,7 +87,6 @@ export interface AggregateApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -124,7 +119,6 @@ export interface AggregateApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {string} [start]
 	 * @param {string} [end]
 	 * @param {string} [portfolioId]
@@ -187,13 +181,6 @@ export class AggregateApi
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		const response = await this.request(
 			{
@@ -279,13 +266,6 @@ export class AggregateApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		const response = await this.request(
 			{
 				path: `/aggregate/incomeByMonth`,
@@ -345,13 +325,6 @@ export class AggregateApi
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		const response = await this.request(
 			{

@@ -15,10 +15,6 @@
 import * as runtime from '../runtime';
 import type { ValidatedUserDto } from '../models';
 
-export interface UsersApiFindProfileRequest {
-	xRoleId?: string;
-}
-
 /**
  * UsersApi - interface
  *
@@ -29,13 +25,11 @@ export interface UsersApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UsersApiInterface
 	 */
 	findProfileRaw(
-		requestParameters: UsersApiFindProfileRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<ValidatedUserDto>>;
 
@@ -44,7 +38,6 @@ export interface UsersApiInterface {
 	 *
 	 */
 	findProfile(
-		requestParameters: UsersApiFindProfileRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<ValidatedUserDto>;
 }
@@ -58,19 +51,11 @@ export class UsersApi extends runtime.BaseAPI implements UsersApiInterface {
 	 *
 	 */
 	async findProfileRaw(
-		requestParameters: UsersApiFindProfileRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<ValidatedUserDto>> {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -98,13 +83,9 @@ export class UsersApi extends runtime.BaseAPI implements UsersApiInterface {
 	 *
 	 */
 	async findProfile(
-		requestParameters: UsersApiFindProfileRequest = {},
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<ValidatedUserDto> {
-		const response = await this.findProfileRaw(
-			requestParameters,
-			initOverrides,
-		);
+		const response = await this.findProfileRaw(initOverrides);
 		return await response.value();
 	}
 }

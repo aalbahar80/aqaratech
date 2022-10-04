@@ -29,11 +29,9 @@ import type {
 
 export interface PortfoliosApiCreateRequest {
 	createPortfolioDto: CreatePortfolioDto;
-	xRoleId?: string;
 }
 
 export interface PortfoliosApiFindAllRequest {
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -43,12 +41,10 @@ export interface PortfoliosApiFindAllRequest {
 
 export interface PortfoliosApiFindOneRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface PortfoliosApiFindPayoutsRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -58,7 +54,6 @@ export interface PortfoliosApiFindPayoutsRequest {
 
 export interface PortfoliosApiFindPropertiesRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -68,7 +63,6 @@ export interface PortfoliosApiFindPropertiesRequest {
 
 export interface PortfoliosApiFindRolesRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -78,7 +72,6 @@ export interface PortfoliosApiFindRolesRequest {
 
 export interface PortfoliosApiFindUnitsRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -88,18 +81,15 @@ export interface PortfoliosApiFindUnitsRequest {
 
 export interface PortfoliosApiGetBalanceRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface PortfoliosApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface PortfoliosApiUpdateRequest {
 	id: string;
 	updatePortfolioDto: UpdatePortfolioDto;
-	xRoleId?: string;
 }
 
 /**
@@ -113,7 +103,6 @@ export interface PortfoliosApiInterface {
 	 *
 	 * @summary
 	 * @param {CreatePortfolioDto} createPortfolioDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -135,7 +124,6 @@ export interface PortfoliosApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -163,7 +151,6 @@ export interface PortfoliosApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -186,7 +173,6 @@ export interface PortfoliosApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -214,7 +200,6 @@ export interface PortfoliosApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -242,7 +227,6 @@ export interface PortfoliosApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -270,7 +254,6 @@ export interface PortfoliosApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -298,7 +281,6 @@ export interface PortfoliosApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -321,7 +303,6 @@ export interface PortfoliosApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -345,7 +326,6 @@ export interface PortfoliosApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdatePortfolioDto} updatePortfolioDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PortfoliosApiInterface
@@ -395,13 +375,6 @@ export class PortfoliosApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -469,13 +442,6 @@ export class PortfoliosApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -527,13 +493,6 @@ export class PortfoliosApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -609,13 +568,6 @@ export class PortfoliosApi
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -695,13 +647,6 @@ export class PortfoliosApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -780,13 +725,6 @@ export class PortfoliosApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -862,13 +800,6 @@ export class PortfoliosApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -924,13 +855,6 @@ export class PortfoliosApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -985,13 +909,6 @@ export class PortfoliosApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -1059,13 +976,6 @@ export class PortfoliosApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

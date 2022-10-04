@@ -25,11 +25,9 @@ import type {
 
 export interface ExpensesApiCreateRequest {
 	createExpenseDto: CreateExpenseDto;
-	xRoleId?: string;
 }
 
 export interface ExpensesApiFindAllRequest {
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -44,18 +42,15 @@ export interface ExpensesApiFindAllRequest {
 
 export interface ExpensesApiFindOneRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface ExpensesApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface ExpensesApiUpdateRequest {
 	id: string;
 	updateExpenseDto: UpdateExpenseDto;
-	xRoleId?: string;
 }
 
 /**
@@ -69,7 +64,6 @@ export interface ExpensesApiInterface {
 	 *
 	 * @summary
 	 * @param {CreateExpenseDto} createExpenseDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpensesApiInterface
@@ -91,7 +85,6 @@ export interface ExpensesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -124,7 +117,6 @@ export interface ExpensesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpensesApiInterface
@@ -147,7 +139,6 @@ export interface ExpensesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpensesApiInterface
@@ -171,7 +162,6 @@ export interface ExpensesApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdateExpenseDto} updateExpenseDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpensesApiInterface
@@ -221,13 +211,6 @@ export class ExpensesApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -315,13 +298,6 @@ export class ExpensesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -373,13 +349,6 @@ export class ExpensesApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -435,13 +404,6 @@ export class ExpensesApi
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -509,13 +471,6 @@ export class ExpensesApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

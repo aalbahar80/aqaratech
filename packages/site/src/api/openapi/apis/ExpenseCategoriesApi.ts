@@ -22,22 +22,15 @@ import type {
 
 export interface ExpenseCategoriesApiCreateRequest {
 	createExpenseCategoryDto: CreateExpenseCategoryDto;
-	xRoleId?: string;
-}
-
-export interface ExpenseCategoriesApiFindAllRequest {
-	xRoleId?: string;
 }
 
 export interface ExpenseCategoriesApiUpdateRequest {
 	id: string;
 	updateExpenseCategoryDto: UpdateExpenseCategoryDto;
-	xRoleId?: string;
 }
 
 export interface ExpenseCategoriesApiUpdateAllRequest {
 	updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto;
-	xRoleId?: string;
 }
 
 /**
@@ -51,7 +44,6 @@ export interface ExpenseCategoriesApiInterface {
 	 *
 	 * @summary
 	 * @param {CreateExpenseCategoryDto} createExpenseCategoryDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpenseCategoriesApiInterface
@@ -73,13 +65,11 @@ export interface ExpenseCategoriesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpenseCategoriesApiInterface
 	 */
 	findAllRaw(
-		requestParameters: ExpenseCategoriesApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ExpenseCategoryDto>>>;
 
@@ -88,7 +78,6 @@ export interface ExpenseCategoriesApiInterface {
 	 *
 	 */
 	findAll(
-		requestParameters: ExpenseCategoriesApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<ExpenseCategoryDto>>;
 
@@ -97,7 +86,6 @@ export interface ExpenseCategoriesApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdateExpenseCategoryDto} updateExpenseCategoryDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpenseCategoriesApiInterface
@@ -120,7 +108,6 @@ export interface ExpenseCategoriesApiInterface {
 	 *
 	 * @summary
 	 * @param {UpdateAllExpenseCategoriesDto} updateAllExpenseCategoriesDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof ExpenseCategoriesApiInterface
@@ -171,13 +158,6 @@ export class ExpenseCategoriesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -217,19 +197,11 @@ export class ExpenseCategoriesApi
 	 *
 	 */
 	async findAllRaw(
-		requestParameters: ExpenseCategoriesApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ExpenseCategoryDto>>> {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -257,10 +229,9 @@ export class ExpenseCategoriesApi
 	 *
 	 */
 	async findAll(
-		requestParameters: ExpenseCategoriesApiFindAllRequest = {},
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<ExpenseCategoryDto>> {
-		const response = await this.findAllRaw(requestParameters, initOverrides);
+		const response = await this.findAllRaw(initOverrides);
 		return await response.value();
 	}
 
@@ -294,13 +265,6 @@ export class ExpenseCategoriesApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -362,13 +326,6 @@ export class ExpenseCategoriesApi
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

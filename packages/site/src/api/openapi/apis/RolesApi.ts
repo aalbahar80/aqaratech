@@ -17,17 +17,14 @@ import type { CreateRoleDto, UserDto } from '../models';
 
 export interface RolesApiCreateRequest {
 	createRoleDto: CreateRoleDto;
-	xRoleId?: string;
 }
 
 export interface RolesApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface RolesApiSendInviteRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 /**
@@ -41,7 +38,6 @@ export interface RolesApiInterface {
 	 *
 	 * @summary
 	 * @param {CreateRoleDto} createRoleDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof RolesApiInterface
@@ -64,7 +60,6 @@ export interface RolesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof RolesApiInterface
@@ -87,7 +82,6 @@ export interface RolesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof RolesApiInterface
@@ -135,13 +129,6 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		const response = await this.request(
 			{
 				path: `/roles`,
@@ -186,13 +173,6 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		const response = await this.request(
 			{
@@ -240,13 +220,6 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		const response = await this.request(
 			{

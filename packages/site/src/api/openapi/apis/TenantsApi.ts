@@ -28,11 +28,9 @@ import type {
 
 export interface TenantsApiCreateRequest {
 	createTenantDto: CreateTenantDto;
-	xRoleId?: string;
 }
 
 export interface TenantsApiFindAllRequest {
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -42,7 +40,6 @@ export interface TenantsApiFindAllRequest {
 
 export interface TenantsApiFindInvoicesRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -58,7 +55,6 @@ export interface TenantsApiFindInvoicesRequest {
 
 export interface TenantsApiFindLeasesRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -68,12 +64,10 @@ export interface TenantsApiFindLeasesRequest {
 
 export interface TenantsApiFindOneRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface TenantsApiFindRolesRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -83,13 +77,11 @@ export interface TenantsApiFindRolesRequest {
 
 export interface TenantsApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface TenantsApiUpdateRequest {
 	id: string;
 	updateTenantDto: UpdateTenantDto;
-	xRoleId?: string;
 }
 
 /**
@@ -103,7 +95,6 @@ export interface TenantsApiInterface {
 	 *
 	 * @summary
 	 * @param {CreateTenantDto} createTenantDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
@@ -125,7 +116,6 @@ export interface TenantsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -153,7 +143,6 @@ export interface TenantsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -187,7 +176,6 @@ export interface TenantsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -215,7 +203,6 @@ export interface TenantsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
@@ -238,7 +225,6 @@ export interface TenantsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -266,7 +252,6 @@ export interface TenantsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
@@ -290,7 +275,6 @@ export interface TenantsApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdateTenantDto} updateTenantDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof TenantsApiInterface
@@ -337,13 +321,6 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -410,13 +387,6 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -514,13 +484,6 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -599,13 +562,6 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -660,13 +616,6 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -743,13 +692,6 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -804,13 +746,6 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -878,13 +813,6 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

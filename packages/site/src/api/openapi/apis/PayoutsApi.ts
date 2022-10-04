@@ -24,11 +24,9 @@ import type {
 
 export interface PayoutsApiCreateRequest {
 	createPayoutDto: CreatePayoutDto;
-	xRoleId?: string;
 }
 
 export interface PayoutsApiFindAllRequest {
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -38,18 +36,15 @@ export interface PayoutsApiFindAllRequest {
 
 export interface PayoutsApiFindOneRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface PayoutsApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface PayoutsApiUpdateRequest {
 	id: string;
 	updatePayoutDto: UpdatePayoutDto;
-	xRoleId?: string;
 }
 
 /**
@@ -63,7 +58,6 @@ export interface PayoutsApiInterface {
 	 *
 	 * @summary
 	 * @param {CreatePayoutDto} createPayoutDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
@@ -85,7 +79,6 @@ export interface PayoutsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -113,7 +106,6 @@ export interface PayoutsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
@@ -136,7 +128,6 @@ export interface PayoutsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
@@ -160,7 +151,6 @@ export interface PayoutsApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdatePayoutDto} updatePayoutDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof PayoutsApiInterface
@@ -207,13 +197,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -281,13 +264,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -339,13 +315,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -401,13 +370,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -475,13 +437,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

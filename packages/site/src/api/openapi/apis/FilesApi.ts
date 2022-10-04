@@ -16,7 +16,6 @@ import * as runtime from '../runtime';
 import type { PaginatedFileDto } from '../models';
 
 export interface FilesApiCreateRequest {
-	xRoleId?: string;
 	organizationId?: string;
 	relationKey?: CreateRelationKeyEnum;
 	relationValue?: string;
@@ -28,17 +27,14 @@ export interface FilesApiCreateRequest {
 export interface FilesApiFindAllRequest {
 	relationKey: FindAllRelationKeyEnum;
 	relationValue: string;
-	xRoleId?: string;
 }
 
 export interface FilesApiFindOneRequest {
 	key: string;
-	xRoleId?: string;
 }
 
 export interface FilesApiRemoveRequest {
 	key: string;
-	xRoleId?: string;
 }
 
 /**
@@ -51,7 +47,6 @@ export interface FilesApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {string} [organizationId]
 	 * @param {string} [relationKey]
 	 * @param {string} [relationValue]
@@ -81,7 +76,6 @@ export interface FilesApiInterface {
 	 * @summary
 	 * @param {'tenant' | 'portfolio' | 'property' | 'unit' | 'expense' | 'lease' | 'leaseInvoice' | 'maintenanceOrder'} relationKey
 	 * @param {string} relationValue
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof FilesApiInterface
@@ -104,7 +98,6 @@ export interface FilesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} key
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof FilesApiInterface
@@ -127,7 +120,6 @@ export interface FilesApiInterface {
 	 *
 	 * @summary
 	 * @param {string} key
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof FilesApiInterface
@@ -162,13 +154,6 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -290,13 +275,6 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -353,13 +331,6 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -415,13 +386,6 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;

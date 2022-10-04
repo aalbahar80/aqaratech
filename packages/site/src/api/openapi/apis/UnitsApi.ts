@@ -26,11 +26,9 @@ import type {
 
 export interface UnitsApiCreateRequest {
 	createUnitDto: CreateUnitDto;
-	xRoleId?: string;
 }
 
 export interface UnitsApiFindAllRequest {
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -40,7 +38,6 @@ export interface UnitsApiFindAllRequest {
 
 export interface UnitsApiFindLeasesRequest {
 	id: string;
-	xRoleId?: string;
 	page?: number;
 	take?: number;
 	orderBy?: CombinedEnum;
@@ -50,18 +47,15 @@ export interface UnitsApiFindLeasesRequest {
 
 export interface UnitsApiFindOneRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface UnitsApiRemoveRequest {
 	id: string;
-	xRoleId?: string;
 }
 
 export interface UnitsApiUpdateRequest {
 	id: string;
 	updateUnitDto: UpdateUnitDto;
-	xRoleId?: string;
 }
 
 /**
@@ -75,7 +69,6 @@ export interface UnitsApiInterface {
 	 *
 	 * @summary
 	 * @param {CreateUnitDto} createUnitDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
@@ -97,7 +90,6 @@ export interface UnitsApiInterface {
 	/**
 	 *
 	 * @summary
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -125,7 +117,6 @@ export interface UnitsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {number} [page]
 	 * @param {number} [take]
 	 * @param {CombinedEnum} [orderBy]
@@ -153,7 +144,6 @@ export interface UnitsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
@@ -176,7 +166,6 @@ export interface UnitsApiInterface {
 	 *
 	 * @summary
 	 * @param {string} id
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
@@ -200,7 +189,6 @@ export interface UnitsApiInterface {
 	 * @summary
 	 * @param {string} id
 	 * @param {UpdateUnitDto} updateUnitDto
-	 * @param {string} [xRoleId]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UnitsApiInterface
@@ -247,13 +235,6 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -320,13 +301,6 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -400,13 +374,6 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -462,13 +429,6 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
-
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
 			const tokenString = await token('bearer', []);
@@ -523,13 +483,6 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
@@ -597,13 +550,6 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		headerParameters['Content-Type'] = 'application/json';
-
-		if (
-			requestParameters.xRoleId !== undefined &&
-			requestParameters.xRoleId !== null
-		) {
-			headerParameters['x-role-id'] = String(requestParameters.xRoleId);
-		}
 
 		if (this.configuration && this.configuration.accessToken) {
 			const token = this.configuration.accessToken;
