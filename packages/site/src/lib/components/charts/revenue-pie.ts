@@ -1,4 +1,4 @@
-import { Chart } from 'chart.js/dist/chart.esm';
+import { Chart } from 'chart.js';
 
 type DataSets = Chart<'pie', number[]>['data']['datasets'];
 

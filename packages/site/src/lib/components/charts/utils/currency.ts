@@ -1,4 +1,4 @@
-import type { TooltipItem, ChartType } from 'chart.js/dist/chart.esm';
+import type { TooltipItem, ChartType } from 'chart.js';
 
 export const currencyTooltip = (context: TooltipItem<ChartType>) => {
 	let label = context.dataset.label || '';

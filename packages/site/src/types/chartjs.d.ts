@@ -1,6 +1,6 @@
-import type { ChartType } from 'chart.js/types/index.esm';
+import 'chart.js';
 
-declare module 'chart.js/dist/chart.esm' {
+declare module 'chart.js' {
 	interface TooltipPositionerMap {
 		top: TooltipPositionerFunction<ChartType>;
 	}

@@ -1,24 +1,24 @@
 <script lang="ts" context="module">
-	import 'chartjs-adapter-date-fns';
 	import {
-		Chart,
-		Legend,
-		Tooltip,
-		Filler,
-		LinearScale,
-		CategoryScale,
-		TimeScale,
-		PointElement,
-		BarElement,
-		BarController,
-		LineElement,
-		LineController,
-		PieController,
 		ArcElement,
+		BarController,
+		BarElement,
+		CategoryScale,
+		Chart,
+		Filler,
+		Legend,
+		LinearScale,
+		LineController,
+		LineElement,
+		PieController,
+		PointElement,
 		PolarAreaController,
 		RadialLinearScale,
+		TimeScale,
+		Tooltip,
 		type ActiveElement,
-	} from 'chart.js/dist/chart.esm';
+	} from 'chart.js';
+	import 'chartjs-adapter-date-fns';
 
 	// Adds padding to legend
 	const legendMargin = {

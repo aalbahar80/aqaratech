@@ -1,5 +1,5 @@
 import type { ExpenseDto } from '$api/openapi';
-import { Chart } from 'chart.js/dist/chart.esm';
+import { Chart } from 'chart.js';
 import { currencyTooltip } from './utils/currency';
 
 type DataSets = Chart<'bar', ExpenseDto[]>['data']['datasets'];

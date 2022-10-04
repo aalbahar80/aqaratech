@@ -23,13 +23,6 @@ declare namespace App {
 	// interface Platform {}
 }
 
-declare module 'chart.js/dist/chart.esm' {
-	// https://github.com/ivanhofer/sveltekit-typescript-showcase#2-extend-existing-type-definitions
-	import type { Chart } from 'chart.js/types/index.esm';
-	export * from 'chart.js/types/index.esm';
-	export default Chart;
-}
-
 // Update here: https://github.com/isaacHagoel/svelte-dnd-action/pull/401
 declare type DndEvent = import('svelte-dnd-action').DndEvent;
 declare namespace svelte.JSX {
