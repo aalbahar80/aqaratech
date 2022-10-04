@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 1.0.0
+
+### Major Changes
+
+- 4cd46cc5: bump major version
+
 ## 0.3.1
 
 ### Patch Changes

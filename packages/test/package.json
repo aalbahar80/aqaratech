@@ -1,6 +1,6 @@
 {
 	"name": "@self/test",
-	"version": "1.6.1",
+	"version": "2.0.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -15,7 +15,7 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@playwright/test": "1.26.1",
-		"@self/seed": "workspace:0.6.1",
+		"@self/seed": "workspace:1.0.0",
 		"@tsconfig/node18": "1.0.1",
 		"@tsconfig/node18-strictest": "1.0.0",
 		"@types/node": "18.8.0",
@@ -27,7 +27,7 @@
 		"ufo": "0.8.5"
 	},
 	"dependencies": {
-		"@self/utils": "workspace:1.6.1",
+		"@self/utils": "workspace:2.0.0",
 		"eslint-config-custom": "workspace:*"
 	}
 }

@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.0.0
+
+### Major Changes
+
+- 4cd46cc5: bump major version
+
 ## 0.8.1
 
 ### Patch Changes

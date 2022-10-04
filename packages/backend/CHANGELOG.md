@@ -1,5 +1,16 @@
 # @self/backend
 
+## 1.0.0
+
+### Major Changes
+
+- 4cd46cc5: bump major version
+
+### Patch Changes
+
+- Updated dependencies [4cd46cc5]
+  - @self/utils@2.0.0
+
 ## 0.7.1
 
 ### Patch Changes
