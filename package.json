@@ -22,7 +22,7 @@
 		"e2e:prepare": "./packages/seed/create-test-db.sh && pnpm run -F @self/backend seed",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
 		"ci:publish": "changeset tag",
-		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate && pnpm prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'",
+		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate && tsx ./scripts/rm-unused-jsdoc.ts && pnpm prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'",
 		"api:generate:all": "turbo run api:generate"
 	},
 	"devDependencies": {
@@ -35,6 +35,8 @@
 		"madge": "5.0.1",
 		"prettier": "2.7.1",
 		"prettier-plugin-tailwindcss": "0.1.13",
+		"ts-morph": "16.0.0",
+		"tsx": "3.9.0",
 		"turbo": "1.5.5",
 		"typescript": "4.8.4",
 		"zx": "7.0.8"
