@@ -67,38 +67,23 @@ if (!app) {
 	latestSpec = YAML.parse(await fs.readFile(SPEC, 'utf8'));
 }
 
-// check if siteVersion or backendVersion are different from the latest spec
-const siteVersionChanged =
-	siteVersion && siteVersion !== latestSpec.siteVersion;
-const backendVersionChanged =
-	backendVersion && backendVersion !== latestSpec.backendVersion;
-
-// if docker container tag hasn't changed, force a rebuild and exit
-if (!siteVersionChanged && !backendVersionChanged) {
-	console.log(
-		chalk.blue(
-			`No version changes detected. Forcing rebuild without updating spec...`,
-		),
-	);
-
-	// Create a new deployment with the `--force-rebuild` flag to ensure latest version of the container is pulled.
-	await $`doctl apps create-deployment ${appId} --force-rebuild`;
-
-	process.exit(0);
-}
-
 // bump versions in spec
 console.log(chalk.blue(`Bumping versions...`));
+
+let siteUnchanged = false;
+let backendUnchanged = false;
 
 latestSpec.services.forEach(
 	(/** @type {{ name: string; image: { tag: string; }; }} */ service) => {
 		// Only bump versions when a version is specified.
 		if (siteVersion && service.name === 'site') {
+			siteUnchanged = siteVersion !== service.image.tag;
 			console.log(
 				chalk.green(`Bumping site from ${service.image.tag} to ${siteVersion}`),
 			);
 			service.image.tag = siteVersion;
 		} else if (backendVersion && service.name === 'backend') {
+			backendUnchanged = backendVersion !== service.image.tag;
 			console.log(
 				chalk.green(
 					`Bumping backend from ${service.image.tag} to ${backendVersion}`,
@@ -108,6 +93,20 @@ latestSpec.services.forEach(
 		}
 	},
 );
+
+// if docker container tag hasn't changed, force a rebuild and exit
+if (siteUnchanged && backendUnchanged) {
+	console.log(
+		chalk.yellow(
+			`No version changes detected. Forcing rebuild without updating spec...`,
+		),
+	);
+
+	// Create a new deployment with the `--force-rebuild` flag to ensure latest version of the container is pulled.
+	await $`doctl apps create-deployment ${appId} --force-rebuild`;
+
+	process.exit(0);
+}
 
 // save spec
 console.log(chalk.blue(`Saving spec...`));
