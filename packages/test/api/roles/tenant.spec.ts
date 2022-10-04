@@ -4,7 +4,7 @@ import * as R from 'remeda';
 import type { PaginatedRoleDto } from '../../types/api';
 import { test } from '../api-fixtures';
 
-test('porfolio role', async ({ request, org, tenant }) => {
+test('tenant role', async ({ request, org, tenant }) => {
 	const role = R.pick(
 		roleFactory.build({
 			organizationId: org.organization.id,
