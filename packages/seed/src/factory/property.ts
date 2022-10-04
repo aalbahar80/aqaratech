@@ -1,18 +1,20 @@
 import { faker } from '@faker-js/faker';
 import type { Property } from '@prisma/client';
 import * as Factory from 'factory.ts';
+import { randomUUID } from 'node:crypto';
 import { areas } from '../constants';
-import type { Strict } from '../utils/strict';
-import { abstractFactory } from './abstract';
+import { createdAt, updatedAt } from '../utils/dates';
 
 export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
-	Strict<Property>,
+	Property,
 	'organizationId' | 'portfolioId'
 >({
+	id: Factory.each(() => randomUUID()),
+	createdAt: Factory.each(() => createdAt()),
+	updatedAt: Factory.each(() => updatedAt()),
+
 	area: areas[Math.floor(Math.random() * areas.length)]![1],
-	// @ts-expect-error factory.ts does not support optional/nullable properties
 	label: null,
-	// @ts-expect-error factory.ts does not support optional/nullable properties
 	cost: null, // rm?
 
 	// address
@@ -27,4 +29,4 @@ export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 	long: +faker.address.longitude(),
 	paci: faker.datatype.number({ min: 10000000, max: 19999999 }).toString(),
 	parcel: faker.datatype.number({ min: 100, max: 999999 }).toString(),
-}).combine(abstractFactory);
+});

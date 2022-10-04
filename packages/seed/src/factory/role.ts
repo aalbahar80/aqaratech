@@ -1,12 +1,17 @@
 import { faker } from '@faker-js/faker';
 import type { Role } from '@prisma/client';
 import * as Factory from 'factory.ts';
-import { abstractFactory } from './abstract';
+import { randomUUID } from 'node:crypto';
+import { createdAt, updatedAt } from '../utils/dates';
 
 export const roleFactory = Factory.Sync.makeFactoryWithRequired<
 	Role & { email: string },
 	'userId' | 'organizationId'
 >({
+	id: Factory.each(() => randomUUID()),
+	createdAt: Factory.each(() => createdAt()),
+	updatedAt: Factory.each(() => updatedAt()),
+
 	roleType: Factory.each(() => 'ORGADMIN'),
 	portfolioId: Factory.each(() => null),
 	tenantId: Factory.each(() => null),
@@ -14,4 +19,4 @@ export const roleFactory = Factory.Sync.makeFactoryWithRequired<
 	isDefault: Factory.each(() => faker.datatype.boolean()),
 	permissions: Factory.each(() => null),
 	email: Factory.each(() => faker.internet.email()),
-}).combine(abstractFactory);
+});
