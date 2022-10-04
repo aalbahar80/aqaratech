@@ -7,7 +7,6 @@
 	import NavbarIcon from '$lib/components/navbar/NavbarIcon.svelte';
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
 
-	// Needs to be reactive?
 	$: navigation = $page.data.user?.role?.meta.navLinks || [];
 </script>
 
