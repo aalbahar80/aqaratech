@@ -34,7 +34,7 @@
 			// type hack
 			throw new Error('No organizationId found in session');
 		}
-		return api($page.data.apiConfig).roles.create({
+		return api().roles.create({
 			createRoleDto: {
 				roleType: predefined.roleType,
 				organizationId,

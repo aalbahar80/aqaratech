@@ -104,7 +104,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			api($page.data.apiConfig).units.update({
+			api().units.update({
 				id: data.id,
 				updateUnitDto: values,
 			})}
@@ -116,7 +116,6 @@
 		{formType}
 		{basicFields}
 		{relationalFields}
-		onSubmit={(values) =>
-			api($page.data.apiConfig).units.create({ createUnitDto: values })}
+		onSubmit={(values) => api().units.create({ createUnitDto: values })}
 	/>
 {/if}

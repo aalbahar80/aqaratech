@@ -70,7 +70,7 @@
 			if (!expenseCategoryId) {
 				throw new Error('expenseCategoryId not found');
 			}
-			return api($page.data.apiConfig).expenseCategories.update({
+			return api().expenseCategories.update({
 				id: expenseCategoryId,
 				updateExpenseCategoryDto: { ...values, id: expenseCategoryId },
 			});
@@ -91,7 +91,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			api($page.data.apiConfig).expenseCategories.create({
+			api().expenseCategories.create({
 				createExpenseCategoryDto: { ...values, parentId: null },
 			})}
 		onSuccess={(value) => {

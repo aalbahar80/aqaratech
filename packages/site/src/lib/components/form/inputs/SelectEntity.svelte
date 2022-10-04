@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { api } from '$api';
 	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
 	import InputWrapper from '$lib/components/form/inputs/InputWrapper.svelte';
@@ -78,9 +77,7 @@
 				propertySelector?.clear();
 				const newSelection = e.detail.value;
 				if (typeof newSelection === 'string' && fields[1]) {
-					const children = await api(
-						$page.data.apiConfig,
-					).portfolios.findProperties({
+					const children = await api().portfolios.findProperties({
 						id: newSelection,
 						take: 1000,
 					});
@@ -107,12 +104,10 @@
 				unitSelector?.clear();
 				const newSelection = e.detail.value;
 				if (typeof newSelection === 'string' && fields[2]) {
-					const children = await api($page.data.apiConfig).properties.findUnits(
-						{
-							id: newSelection,
-							take: 1000,
-						},
-					);
+					const children = await api().properties.findUnits({
+						id: newSelection,
+						take: 1000,
+					});
 					fields[2].options = unitsToOptions(children);
 				}
 				propertyId = newSelection;

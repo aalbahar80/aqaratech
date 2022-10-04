@@ -125,7 +125,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			api($page.data.apiConfig).expenses.update({
+			api().expenses.update({
 				id: data.id,
 				updateExpenseDto: values,
 			})}
@@ -137,7 +137,6 @@
 		{formType}
 		{basicFields}
 		{relationalFields}
-		onSubmit={(values) =>
-			api($page.data.apiConfig).expenses.create({ createExpenseDto: values })}
+		onSubmit={(values) => api().expenses.create({ createExpenseDto: values })}
 	/>
 {/if}

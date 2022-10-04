@@ -65,7 +65,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data && // type hack
-			api($page.data.apiConfig).portfolios.update({
+			api().portfolios.update({
 				id: data.id,
 				updatePortfolioDto: values,
 			})}
@@ -77,7 +77,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			return api($page.data.apiConfig).portfolios.create({
+			return api().portfolios.create({
 				createPortfolioDto: values,
 			});
 		}}

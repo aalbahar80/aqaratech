@@ -9,9 +9,7 @@ export const load: LayoutLoad = async ({ fetch, data, url: { pathname } }) => {
 		throw redirect(302, LOGIN);
 	}
 
-	const apiClient = api({
-		loadFetch: fetch,
-	});
+	const apiClient = api(fetch);
 
 	return {
 		api: apiClient,

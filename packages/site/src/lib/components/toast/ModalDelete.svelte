@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { api } from '$api';
+	import { goto } from '$app/navigation';
 	import { addToast } from '$lib/stores/toast';
 	import { entitiesMap, type Entity } from '@self/utils';
 	import Modal from './Modal.svelte';
@@ -18,7 +17,7 @@
 		isLoading = true;
 		try {
 			const plural = entitiesMap[entity].plural;
-			await api($page.data.apiConfig)[plural].remove({ id });
+			await api()[plural].remove({ id });
 			isLoading = false;
 			isOpen = false;
 			if (onDelete) {

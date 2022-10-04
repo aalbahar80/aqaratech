@@ -52,7 +52,7 @@
 			on:click={() => {
 				console.debug(difference);
 				console.debug(newList);
-				api($page.data.apiConfig)
+				api()
 					.expenseCategories.updateAll({
 						updateAllExpenseCategoriesDto: { items: newList },
 					})

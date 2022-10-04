@@ -99,7 +99,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			api($page.data.apiConfig).leaseInvoices.update({
+			api().leaseInvoices.update({
 				id: data.id,
 				updateLeaseInvoiceDto: values,
 			})}
@@ -112,7 +112,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			api($page.data.apiConfig).leaseInvoices.create({
+			api().leaseInvoices.create({
 				createLeaseInvoiceDto: values,
 			})}
 	/>

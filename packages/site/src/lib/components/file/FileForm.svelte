@@ -49,7 +49,7 @@
 	formType="create"
 	{basicFields}
 	onSubmit={(values) => {
-		return api($page.data.apiConfig).files.create(values);
+		return api().files.create(values);
 	}}
 	onSuccess={() =>
 		goto(`/${entitiesMap[relationKey].urlName}/${relationValue}`)}

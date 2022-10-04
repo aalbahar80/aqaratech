@@ -54,7 +54,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			api($page.data.apiConfig).organizations.update({
+			api().organizations.update({
 				id: data.id,
 				updateOrganizationDto: values,
 			})}
@@ -70,7 +70,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			api($page.data.apiConfig).organizations.create({
+			api().organizations.create({
 				createOrganizationDto: values,
 			})}
 		onSuccess={() => {

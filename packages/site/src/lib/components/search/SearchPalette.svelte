@@ -30,7 +30,7 @@
 	const search = debounce(async (q: string) => {
 		if (!q || !$page.data.user?.role?.organizationId) return;
 		try {
-			groups = await api($page.data.apiConfig).organizations.search({
+			groups = await api().organizations.search({
 				id: $page.data.user?.role?.organizationId,
 				query: q,
 			});

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import { api } from '$api';
+	import type { LeaseInvoiceDto } from '$api/openapi';
+	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
@@ -10,7 +10,6 @@
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { DocumentText, Mail } from '@steeze-ui/heroicons';
 
 	type Transaction = LeaseInvoiceDto;
@@ -58,7 +57,7 @@
 			solid
 			disabled={!sendEnabled}
 			on:click={() => {
-				api($page.data.apiConfig)
+				api()
 					.leaseInvoices.sendEmail({ id: trx.id })
 					.then((res) => {
 						addSuccessToast(res);

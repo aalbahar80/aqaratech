@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { api } from '$api';
+	import type { RoleDto } from '$api/openapi';
 	import Badge from '$lib/components/Badge.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
@@ -8,7 +8,6 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { RoleDto } from '$api/openapi';
 	import { createEventDispatcher } from 'svelte';
 	import Fa6SolidEnvelope from '~icons/fa6-solid/envelope';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
@@ -38,7 +37,7 @@
 							<button
 								class="w-full"
 								on:click={() => {
-									api($page.data.apiConfig)
+									api()
 										.roles.sendInvite({ id: role.id })
 										.then(() => {
 											addSuccessToast(
@@ -58,7 +57,7 @@
 							<button
 								class="w-full"
 								on:click={() => {
-									api($page.data.apiConfig)
+									api()
 										.roles.remove({ id: role.id })
 										.then((id) => {
 											dispatch('delete', { id });

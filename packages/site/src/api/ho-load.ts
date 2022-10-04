@@ -15,11 +15,7 @@ export const fancy = <ThisLoad extends Load, Output>(
 	fn: Callback<ThisLoad, Output, true>,
 ): Callback<ThisLoad, Output> => {
 	return async (args) => {
-		const parentData = await args.parent();
-		const apiClient = api({
-			loadFetch: args.fetch,
-			...parentData.apiConfig,
-		});
+		const apiClient = api(args.fetch);
 		return fn.call(null, { ...args, api: apiClient });
 	};
 };

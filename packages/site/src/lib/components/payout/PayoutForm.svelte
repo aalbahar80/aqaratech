@@ -36,6 +36,5 @@
 	entity="payout"
 	formType="create"
 	{basicFields}
-	onSubmit={(values) =>
-		api($page.data.apiConfig).payouts.create({ createPayoutDto: values })}
+	onSubmit={(values) => api().payouts.create({ createPayoutDto: values })}
 />

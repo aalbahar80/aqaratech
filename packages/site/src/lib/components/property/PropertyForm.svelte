@@ -107,7 +107,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			api($page.data.apiConfig).properties.update({
+			api().properties.update({
 				id: data.id,
 				updatePropertyDto: values,
 			})}
@@ -120,7 +120,7 @@
 		{basicFields}
 		{relationalFields}
 		onSubmit={(values) =>
-			api($page.data.apiConfig).properties.create({
+			api().properties.create({
 				createPropertyDto: values,
 			})}
 	/>

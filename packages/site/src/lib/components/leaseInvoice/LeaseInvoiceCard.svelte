@@ -74,7 +74,7 @@
 									class="w-full"
 									on:click={async () => {
 										try {
-											await api($page.data.apiConfig).leaseInvoices.update({
+											await api().leaseInvoices.update({
 												id: invoice.id,
 												updateLeaseInvoiceDto: {
 													organizationId: invoice.organizationId,
@@ -86,9 +86,7 @@
 											});
 
 											addSuccessToast('Invoice updated');
-											invoice = await api(
-												$page.data.apiConfig,
-											).leaseInvoices.findOne({
+											invoice = await api().leaseInvoices.findOne({
 												id: invoice.id,
 											});
 										} catch (e) {

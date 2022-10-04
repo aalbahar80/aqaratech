@@ -90,7 +90,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data && // type hack
-			api($page.data.apiConfig).tenants.update({
+			api().tenants.update({
 				id: data.id,
 				updateTenantDto: values,
 			})}
@@ -102,7 +102,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			return api($page.data.apiConfig).tenants.create({
+			return api().tenants.create({
 				createTenantDto: values,
 			});
 		}}

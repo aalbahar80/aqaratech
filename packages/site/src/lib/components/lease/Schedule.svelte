@@ -1,11 +1,10 @@
 <script lang="ts">
+	import { api } from '$api';
+	import type { LeaseDto } from '$api/openapi';
 	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { api } from '$api';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
-	import type { LeaseDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { Trash } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -30,7 +29,7 @@
 	);
 
 	const onSubmit = async () => {
-		const created = await api($page.data.apiConfig).leases.createInvoices({
+		const created = await api().leases.createInvoices({
 			id: lease.id,
 			createManyLeaseInvoicesDto: schedule.map((invoice) => ({
 				...invoice,

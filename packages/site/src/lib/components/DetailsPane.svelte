@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { api } from '$api';
+	import type { PaginatedFileDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
@@ -10,7 +11,6 @@
 	import { hasFileSupport } from '$lib/utils/file';
 	import { inferRoute } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { PaginatedFileDto } from '$api/openapi';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { onMount } from 'svelte';
@@ -24,7 +24,7 @@
 		const route = inferRoute($page.url.pathname);
 		try {
 			if (hasFileSupport(route.entity.title))
-				files = await api($page.data.apiConfig).files.findAll({
+				files = await api().files.findAll({
 					relationKey: route.entity.title,
 					relationValue: route.id,
 				});
@@ -70,9 +70,7 @@
 										<button
 											on:click={async () => {
 												// encode file name to avoid special characters
-												const url = await api(
-													$page.data.apiConfig,
-												).files.findOne({
+												const url = await api().files.findOne({
 													key: file.key,
 												});
 												// opens in new tab because of content-disposition header
@@ -99,7 +97,7 @@
 																return;
 															}
 															// encode file name to avoid special characters
-															await api($page.data.apiConfig).files.remove({
+															await api().files.remove({
 																key: file.key,
 															});
 															files.results = [...files.results].filter(
