@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { testPortfolioId, testTenantRoleId } from '@self/seed';
+import type { PaginatedTenantDto } from '../../types/api';
 import { test } from '../api-fixtures';
 
 test.use({
@@ -35,7 +36,9 @@ for (const route of notAccessible) {
 
 test('can only get self from /tenants', async ({ request }) => {
 	const res = await request.get('/tenants');
-	const body = await res.json();
+
+	const body = (await res.json()) as PaginatedTenantDto;
+
 	expect(body.results.length).toBe(1);
 });
 
