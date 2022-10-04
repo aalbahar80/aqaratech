@@ -64,10 +64,9 @@ test('files can be downloaded', async ({ request, file }) => {
 	});
 
 	console.log({ url });
-	// const res = await request.get(url); // this fails, use fetch instead
-	const res = await fetch(url);
+	const res = await request.fetch(url); // request.get fails here
 
-	expect.soft(res.status).toBe(200);
+	expect.soft(res.status()).toBe(200);
 
 	const downloaded = await res.text();
 
