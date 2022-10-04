@@ -1,17 +1,19 @@
-import { testPortfolioId, testTenantRoleId } from '@self/seed';
-import { expect, test } from '../../token';
+import { expect } from '@playwright/test';
+import { testPortfolioId, testPortfolioRoleId } from '@self/seed';
+import { test } from '../api-fixtures';
 
 test.use({
-	extraHTTPHeaders: {
-		'x-role-id': testTenantRoleId,
-	},
+	withRole: testPortfolioRoleId,
 });
 
-const accessible = ['/leases', '/leaseInvoices'];
-const notAccessible = [
+const notAccessible = [];
+const accessible = [
+	'/tenants',
 	'/portfolios',
 	'/properties',
 	'/units',
+	'/leases',
+	'/leaseInvoices',
 	'/expenses',
 	'/aggregate/incomeByMonth',
 	'/aggregate/expensesByMonth',
@@ -38,23 +40,13 @@ for (const route of notAccessible) {
 	});
 }
 
-test('can only get self from /tenants', async ({ request, token }) => {
-	const res = await request.get('/tenants', {
-		headers: { Authorization: `Bearer ${token}` },
-	});
-	const body = await res.json();
-	expect(body.results.length).toBe(1);
-});
-
-test('cannot get files from "/files"', async ({ request, token }) => {
+test('can get files from "/files"', async ({ request, token }) => {
 	const res = await request.get('/files', {
 		headers: { Authorization: `Bearer ${token}` },
 		params: {
 			relationKey: 'portfolio',
 			relationValue: testPortfolioId,
-			// relationKey: "tenant",
-			// relationValue: testTenantId,
 		},
 	});
-	expect(res.status()).toBe(403);
+	await expect(res).toBeOK();
 });
