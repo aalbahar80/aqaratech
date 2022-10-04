@@ -1,15 +1,9 @@
-import {
-	FetchError,
-	ResponseError,
-	type ValidatedRoleDto,
-	type ValidatedUserDto,
-} from '$api/openapi';
+import type { ValidatedRoleDto, ValidatedUserDto } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import type { RoleSK, User } from '$lib/models/types/auth.type';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing'; // TODO: remove?
-import { error } from '@sveltejs/kit';
 
 const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
 	const defaultRole = roles.find((role) => role.isDefault) || roles[0];
