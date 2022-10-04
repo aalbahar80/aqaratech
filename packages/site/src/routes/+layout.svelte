@@ -4,6 +4,7 @@
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
+	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import { environment } from '$lib/environment';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 	import { getSentryConfig } from '@self/utils';
@@ -83,9 +84,11 @@
 	<Navbar />
 	{#if $page.url.pathname === '/'}
 		<slot />
+		<VersionFooter />
 	{:else}
 		<div class="mx-auto flex max-w-7xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
 			<slot />
+			<VersionFooter />
 		</div>
 	{/if}
 </div>
