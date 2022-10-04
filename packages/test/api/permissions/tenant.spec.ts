@@ -4,7 +4,7 @@ import type { PaginatedTenantDto } from '../../types/api';
 import { test } from '../api-fixtures';
 
 test.use({
-	withRole: testTenantRoleId,
+	withRoleId: testTenantRoleId,
 });
 
 const accessible = ['/leases', '/leaseInvoices'];

@@ -3,7 +3,7 @@ import { testPortfolioId, testPortfolioRoleId } from '@self/seed';
 import { test } from '../api-fixtures';
 
 test.use({
-	withRole: testPortfolioRoleId,
+	withRoleId: testPortfolioRoleId,
 });
 
 const notAccessible: string[] = [];

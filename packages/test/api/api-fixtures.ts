@@ -26,7 +26,7 @@ export const test = base.extend<{
 	unit: UnitDto;
 	file: string;
 	expenseCategory: ExpenseCategoryDto;
-	withRole: string | undefined;
+	withRoleId: string | undefined;
 }>({
 	// Dependency map: org -> request
 	// 1. A new org is created
@@ -55,13 +55,13 @@ export const test = base.extend<{
 	},
 
 	// Takes a role ID and returns a new request with the role cookie set.
-	withRole: [undefined, { option: true }],
+	withRoleId: [undefined, { option: true }],
 
-	request: async ({ org, context, withRole }, use) => {
+	request: async ({ org, context, withRoleId }, use) => {
 		let setRoleCookieAs = undefined;
 
-		if (withRole) {
-			setRoleCookieAs = withRole;
+		if (withRoleId) {
+			setRoleCookieAs = withRoleId;
 		} else {
 			setRoleCookieAs = org.roleId;
 		}
