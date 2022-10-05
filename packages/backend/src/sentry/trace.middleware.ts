@@ -1,6 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { NextFunction, Request, Response } from 'express';
+import { extractTraceData } from 'src/sentry/extract-trace';
 import { getUserSentry } from 'src/sentry/get-user-sentry';
 
 @Injectable()
@@ -10,6 +11,7 @@ export class TraceMiddleware implements NestMiddleware {
 		const transaction = this.sentry.instance().startTransaction({
 			op: 'request',
 			name: req.baseUrl,
+			...extractTraceData(req),
 		});
 
 		this.sentry
