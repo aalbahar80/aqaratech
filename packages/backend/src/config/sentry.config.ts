@@ -1,5 +1,4 @@
 import { getSentryConfig } from '@self/utils';
-import type { NodeOptions } from '@sentry/node';
 import * as Sentry from '@sentry/node';
 import { version } from '../../package.json';
 
@@ -9,7 +8,7 @@ const baseConfig = getSentryConfig({
 	PUBLIC_TRACE_RATE: process.env.PUBLIC_TRACE_RATE,
 });
 
-export const sentryConfig: NodeOptions = {
+export const sentryConfig = {
 	...baseConfig,
 	dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
 	release: `backend-${version}`,
