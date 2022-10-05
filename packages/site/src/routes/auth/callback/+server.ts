@@ -1,6 +1,5 @@
 import { MAX_AGE } from '$lib/constants/misc';
 import { authConfig } from '$lib/environment/auth';
-import { validateToken } from '$lib/server/utils/validate';
 import type { RequestHandler } from '@sveltejs/kit';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
@@ -50,13 +49,7 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 		throw new Error('Unable to get tokens from Auth0');
 	}
 
-	// validate idToken only. Access token is validated by backend.
-	// TODO: validate both?
-	// TODO: consider leaving token validation to hooks.handle instead?
-	await validateToken(tokens.id_token, 'idToken');
-
-	// set cookies
-
+	// set cookies. tokens will be validated in hooks.handle
 	cookies.set('idToken', tokens.id_token, {
 		path: '/',
 		maxAge: MAX_AGE,

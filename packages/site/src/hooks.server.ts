@@ -76,7 +76,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	// consume idToken and set user. Any redirects should be handled by layout/page load functions.
 	if (idToken && accessToken) {
-		// validate the idToken
+		// validate tokens
 		try {
 			await validateToken(idToken, 'idToken');
 			await validateToken(accessToken, 'accessToken');
