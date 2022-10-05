@@ -1,6 +1,7 @@
 import {
 	CacheModule,
 	ClassSerializerInterceptor,
+	MiddlewareConsumer,
 	Module,
 } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -27,6 +28,7 @@ import { SearchModule } from './search/search.module';
 
 // resources
 import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
+import { TraceMiddleware } from 'src/sentry/trace.middleware';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { FilesModule } from './files/files.module';
@@ -96,4 +98,8 @@ import { UsersModule } from './users/users.module';
 		PostmarkService,
 	],
 })
-export class AppModule {}
+export class AppModule {
+	configure(consumer: MiddlewareConsumer): void {
+		consumer.apply(TraceMiddleware).forRoutes('*');
+	}
+}
