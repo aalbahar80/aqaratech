@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.1.0
+
+### Minor Changes
+
+- cf21cf46: enhance sentry(user/trace), local jwks
+
 ## 1.0.0
 
 ### Major Changes
