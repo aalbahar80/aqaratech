@@ -3,31 +3,27 @@ import { expect, test } from '../auth-fixtures';
 // Consider using test.use() to skip global setup login?
 // test.use({ token: { name: 'idToken', value: '123' } });
 
-test.describe('expired jwt', () => {
-	test.beforeEach(async ({ baseURL, page }) => {
-		await page.goto(baseURL!);
-	});
+test('redirect to login form', async ({ page, baseURL }) => {
+	await page.goto(baseURL!);
+	// expect to be redirected to login page
+	const emailInput = page.locator('input[name="username"]');
+	const passwordInput = page.locator('input[name="password"]');
+	await expect(emailInput).toBeVisible();
+	await expect(passwordInput).toBeVisible();
+});
 
-	test('redirect to login form', async ({ page }) => {
-		// expect to be redirected to login page
-		const emailInput = page.locator('input[name="username"]');
-		const passwordInput = page.locator('input[name="password"]');
-		await expect(emailInput).toBeVisible();
-		await expect(passwordInput).toBeVisible();
-	});
+test('cookies are cleared', async ({ page, baseURL }) => {
+	await page.goto(baseURL!);
+	// expect idToken and accessToken to be cleared
+	const cookies = await page.context().cookies();
 
-	test('cookies are cleared', async ({ page }) => {
-		// expect idToken and accessToken to be cleared
-		const cookies = await page.context().cookies();
+	const cookieNames = ['idToken', 'accessToken'];
 
-		const cookieNames = ['idToken', 'accessToken'];
+	for (const cookieName of cookieNames) {
+		const cookie = cookies.find((cookie) => cookie.name === cookieName);
 
-		for (const cookieName of cookieNames) {
-			const cookie = cookies.find((cookie) => cookie.name === cookieName);
-
-			expect(cookie).toBe(undefined);
-		}
-	});
+		expect(cookie).toBe(undefined);
+	}
 });
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
