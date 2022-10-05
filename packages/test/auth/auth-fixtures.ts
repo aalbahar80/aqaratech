@@ -12,6 +12,12 @@ export interface TokenTestOptions {
 export const test = base.extend<TokenTestOptions>({
 	token: [undefined, { option: true }],
 	page: async ({ page, token, baseURL }, use) => {
+		if (!token) {
+			// await use(page);
+			// return;
+			throw new Error('token is not set');
+		}
+
 		const domain = baseURL ? new URL(baseURL).host : 'localhost';
 
 		// replace the idToken cookie with an expired one
