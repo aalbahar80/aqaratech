@@ -101,6 +101,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 		// set user in locals
 		event.locals.user = user;
+
+		Sentry.configureScope((scope) => {
+			scope.setUser(getSentryUser(event.locals.user));
+		});
 	}
 
 	spanCookies.finish();
@@ -132,7 +136,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}`,
 	);
 
+	// Close the Sentry transaction
 	transaction.finish();
+
+	// Unset the Sentry user on the scope
+	Sentry.configureScope((scope) => {
+		scope.setUser(null);
+	});
 
 	return response;
 };
