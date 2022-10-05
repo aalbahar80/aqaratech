@@ -15,11 +15,7 @@ import { isNotFoundError } from '$lib/utils/sentry/redirect';
 import { envCheck, getSentryConfig } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
-import {
-	type Handle,
-	type HandleFetch,
-	type HandleServerError,
-} from '@sveltejs/kit';
+import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
 console.log('Version: ', __AQARATECH_APP_VERSION__);
@@ -86,18 +82,30 @@ export const handle: Handle = async ({ event, resolve }) => {
 			await validateToken(idToken);
 		} catch (error) {
 			// Most likely the token has expired. Delete the cookies and redirect to login.
-			// TODO: make sure both tokens have same expirt. If they don't, we need to also check the access token.
+			// TODO: make sure both tokens have same expiry. If they don't, we need to also check the access token.
 			console.debug('Error validating token', error.message);
 
-			// clear the cookies
-			event.cookies.delete('idToken');
-			event.cookies.delete('accessToken');
+			const clearCookie = (name: string) =>
+				event.cookies.serialize(name, '', {
+					maxAge: 0,
+					path: '/',
+				});
+
+			// prepare the response headers
+			const headers = new Headers();
+
+			// clear cookies
+			const cookieNames = ['idToken', 'accessToken', 'role'];
+			for (const name of cookieNames) {
+				headers.append('Set-Cookie', clearCookie(name));
+			}
+
+			// redirect to login
+			headers.append('Location', LOGIN);
 
 			return new Response(undefined, {
 				status: 302,
-				headers: {
-					location: LOGIN,
-				},
+				headers,
 			});
 		}
 
