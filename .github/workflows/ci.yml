@@ -59,7 +59,7 @@ jobs:
       # TODO add if prod condition here
       - name: Install sentry-cli
         shell: bash
-        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
+        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.7.0" bash
 
       - run: pnpm -F @self/site run sentry:release --version ${{ inputs.siteSentryRelease || inputs.siteTag }} --environment ${{ inputs.environment }}
 
@@ -107,7 +107,7 @@ jobs:
       # TODO export to action
       - name: Install sentry-cli
         shell: bash
-        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.5.2" bash
+        run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.7.0" bash
 
       - run: pnpm -F @self/backend run sentry:release --version ${{ inputs.backendSentryRelease || inputs.backendTag }}  --environment ${{ inputs.environment }}
 
