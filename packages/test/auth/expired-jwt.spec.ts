@@ -40,13 +40,13 @@ test.describe('expired jwt', () => {
 		// expect idToken and accessToken to be cleared
 		const cookies = await page.context().cookies();
 
-		const idTokenCookie = cookies.find((cookie) => cookie.name === 'idToken');
-		expect(idTokenCookie).toBe(undefined);
+		const cookieNames = ['idToken', 'accessToken'];
 
-		const accessTokenCookie = cookies.find(
-			(cookie) => cookie.name === 'accessToken',
-		);
-		expect(accessTokenCookie).toBe(undefined);
+		for (const cookieName of cookieNames) {
+			const cookie = cookies.find((cookie) => cookie.name === cookieName);
+
+			expect(cookie).toBe(undefined);
+		}
 	});
 });
 
