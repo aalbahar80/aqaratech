@@ -7,7 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 // common
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -26,6 +26,7 @@ import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 
 // resources
+import { SentryModule } from '@ntegral/nestjs-sentry';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { FilesModule } from './files/files.module';
@@ -42,7 +43,14 @@ import { UsersModule } from './users/users.module';
 
 @Module({
 	imports: [
-		ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
+		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
+		ConfigModule.forRoot({ load: [configuration], isGlobal: true }), // can take validation schema
+		// or user async: https://github.com/podkrepi-bg/api/blob/f62fba53eea6405539653c022c13f1d49990b93c/apps/api/src/app/app.module.ts#L60
+		SentryModule.forRootAsync({
+			imports: [ConfigModule],
+			inject: [ConfigService],
+			useFactory: async (config: ConfigService) => config.get('sentry', {}),
+		}),
 		CacheModule.register({ isGlobal: true }),
 		PrismaModule,
 		TenantsModule,

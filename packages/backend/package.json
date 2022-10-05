@@ -48,6 +48,7 @@
 		"@nestjs/platform-express": "9.1.2",
 		"@nestjs/swagger": "6.1.2",
 		"@nestjs/terminus": "9.1.2",
+		"@ntegral/nestjs-sentry": "4.0.0",
 		"@prisma/client": "4.4.0",
 		"@self/utils": "workspace:2.0.0",
 		"@sentry/node": "7.14.1",
