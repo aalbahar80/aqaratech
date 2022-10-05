@@ -21,10 +21,11 @@ test.describe('expired jwt', () => {
 				// TODO: differentiate between jwt expiry and cookie expiry. Test both.
 			},
 		]);
+
+		await page.goto(baseURL!);
 	});
 
-	test('redirect to login form', async ({ page, baseURL }) => {
-		await page.goto(baseURL!);
+	test('redirect to login form', async ({ page }) => {
 		// expect to be redirected to login page
 		const emailInput = page.locator('input[name="username"]');
 		const passwordInput = page.locator('input[name="password"]');
@@ -32,11 +33,7 @@ test.describe('expired jwt', () => {
 		await expect(passwordInput).toBeVisible();
 	});
 
-	test('cookies are cleared', async ({ page, baseURL }) => {
-		await page.goto(baseURL!, {
-			waitUntil: 'networkidle',
-		});
-
+	test('cookies are cleared', async ({ page }) => {
 		// expect idToken and accessToken to be cleared
 		const cookies = await page.context().cookies();
 
