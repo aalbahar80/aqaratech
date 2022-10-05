@@ -13,7 +13,9 @@ export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
-	area: areas[Math.floor(Math.random() * areas.length)]![1],
+	area: Factory.each(
+		() => areas[Math.floor(Math.random() * areas.length)]?.[1] || null,
+	),
 	label: null,
 	cost: null, // rm?
 
