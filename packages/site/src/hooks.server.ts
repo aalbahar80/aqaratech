@@ -2,8 +2,10 @@ import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { env } from '$env/dynamic/public';
 import { MAX_AGE } from '$lib/constants/misc';
+import { LOGIN } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
+import { isAuthRoute } from '$lib/utils/is-public-route';
 import {
 	addTraceToHead,
 	extractRequestInfo,
@@ -13,7 +15,11 @@ import { isNotFoundError } from '$lib/utils/sentry/redirect';
 import { envCheck, getSentryConfig } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
-import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
+import {
+	type Handle,
+	type HandleFetch,
+	type HandleServerError,
+} from '@sveltejs/kit';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
 console.log('Version: ', __AQARATECH_APP_VERSION__);
@@ -74,9 +80,26 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const currentRole = event.cookies.get('role');
 
 	// consume idToken and set user. Any redirects should be handled by layout/page load functions.
-	if (idToken && accessToken) {
+	if (idToken && accessToken && !isAuthRoute(event.url.pathname)) {
 		// validate the idToken
-		await validateToken(idToken);
+		try {
+			await validateToken(idToken);
+		} catch (error) {
+			// Most likely the token has expired. Delete the cookies and redirect to login.
+			// TODO: make sure both tokens have same expirt. If they don't, we need to also check the access token.
+			console.debug('Error validating token', error.message);
+
+			// clear the cookies
+			event.cookies.delete('idToken');
+			event.cookies.delete('accessToken');
+
+			return new Response(undefined, {
+				status: 302,
+				headers: {
+					location: LOGIN,
+				},
+			});
+		}
 
 		// get the user
 		const user = await getUser({
