@@ -4,7 +4,6 @@ import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 
 export const getUserSentry = (request: Request) => {
 	const user = request?.user as IUser | AuthenticatedUser | undefined;
-	console.log({ user }, 'get-user-sentry.ts ~ 7');
 
 	let sentryUser: User = {
 		ip_address: request.ip,
