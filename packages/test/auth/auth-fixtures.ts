@@ -1,4 +1,5 @@
 import { test as base } from '@playwright/test';
+import { EXPIRED_ID_TOKEN } from '../constants/expired-id-token';
 
 interface Token {
 	name: string;
@@ -6,11 +7,11 @@ interface Token {
 }
 
 export interface TokenTestOptions {
-	token: Token | undefined;
+	token: Token;
 }
 
 export const test = base.extend<TokenTestOptions>({
-	token: [undefined, { option: true }],
+	token: [EXPIRED_ID_TOKEN, { option: true }],
 	page: async ({ page, token, baseURL }, use) => {
 		if (!token) {
 			// await use(page);
