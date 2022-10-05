@@ -78,7 +78,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (idToken && accessToken) {
 		// validate the idToken
 		try {
-			await validateToken(idToken);
+			await validateToken(idToken, 'idToken');
+			await validateToken(accessToken, 'accessToken');
 		} catch (error) {
 			console.debug('Error validating token', error);
 			return handleInvalidToken(event);
