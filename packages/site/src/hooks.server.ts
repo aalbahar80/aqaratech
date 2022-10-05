@@ -5,7 +5,6 @@ import { MAX_AGE } from '$lib/constants/misc';
 import { LOGIN } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
 import { validateToken } from '$lib/server/utils/validate';
-import { isAuthRoute } from '$lib/utils/is-public-route';
 import {
 	addTraceToHead,
 	extractRequestInfo,
@@ -76,7 +75,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const currentRole = event.cookies.get('role');
 
 	// consume idToken and set user. Any redirects should be handled by layout/page load functions.
-	if (idToken && accessToken && !isAuthRoute(event.url.pathname)) {
+	if (idToken && accessToken) {
 		// validate the idToken
 		try {
 			await validateToken(idToken);
