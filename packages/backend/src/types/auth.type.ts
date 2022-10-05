@@ -1,3 +1,5 @@
+import { JSONWebKey } from 'jwks-rsa';
+
 type AuthConfigKeys =
 	| 'AUTH0_DOMAIN'
 	| 'AUTH0_API_NAMESPACE'
@@ -5,4 +7,6 @@ type AuthConfigKeys =
 
 export type AuthConfigType = {
 	[key in AuthConfigKeys]: string;
+} & {
+	JWKS: { keys: JSONWebKey[] };
 };

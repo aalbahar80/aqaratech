@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { AQARATECH_STAFF_ROLE } from '@self/utils';
 import type { Request } from 'express';
-import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
@@ -18,16 +17,18 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		const domain = configService.get('authConfig.AUTH0_DOMAIN', {
 			infer: true,
 		});
+
 		const audience = configService.get('authConfig.AUTH0_API_AUDIENCE', {
 			infer: true,
 		});
-		if (!domain || !audience) {
+
+		const jwks = configService.get('authConfig.JWKS', { infer: true });
+
+		if (!domain || !audience || !jwks) {
 			throw new Error(
 				'authConfig.AUTH0_DOMAIN and authConfig.AUTH0_API_AUDIENCE must be set',
 			);
 		}
-
-		const jwksUri = `${domain}/.well-known/jwks.json`;
 
 		const cookieExtractor = function (req: Request) {
 			let token: string | null | undefined = undefined;
@@ -57,12 +58,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
 		super({
 			// https://github.com/mikenicholson/passport-jwt#configure-strategy
-			secretOrKeyProvider: passportJwtSecret({
-				cache: true,
-				cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
-				rateLimit: true,
-				jwksUri,
-			}),
+			secretOrKey: jwks,
 			jwtFromRequest: cookieExtractor,
 			audience,
 			domain,
