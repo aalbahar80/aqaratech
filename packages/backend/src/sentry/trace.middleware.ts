@@ -1,6 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { NextFunction, Request, Response } from 'express';
+import { getUserSentry } from 'src/sentry/get-user-sentry';
 
 @Injectable()
 export class TraceMiddleware implements NestMiddleware {
@@ -29,6 +30,12 @@ export class TraceMiddleware implements NestMiddleware {
 		});
 
 		req.on('close', () => {
+			// Add user later, after the request is authenticated
+			this.sentry.instance().configureScope((scope) => {
+				scope.setUser(getUserSentry(req));
+			});
+
+			// Finish the transaction and send it to Sentry
 			transaction.setHttpStatus(res.statusCode);
 			transaction.finish();
 		});
