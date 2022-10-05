@@ -26,7 +26,7 @@ import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 
 // resources
-import { SentryModule } from '@ntegral/nestjs-sentry';
+import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { FilesModule } from './files/files.module';
@@ -85,6 +85,10 @@ import { UsersModule } from './users/users.module';
 			useClass: TimeoutInterceptor,
 		},
 		AppService,
+		{
+			provide: APP_INTERCEPTOR,
+			useFactory: () => new SentryInterceptor(),
+		},
 		{ provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
 		{ provide: APP_GUARD, useClass: AbilitiesGuard },
 		{ provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
