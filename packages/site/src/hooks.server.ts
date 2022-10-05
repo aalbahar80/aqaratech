@@ -2,8 +2,8 @@ import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { env } from '$env/dynamic/public';
 import { MAX_AGE } from '$lib/constants/misc';
-import { LOGIN } from '$lib/constants/routes';
 import { getUser } from '$lib/server/utils/get-user';
+import { handleInvalidToken } from '$lib/server/utils/handle-invalid-token';
 import { validateToken } from '$lib/server/utils/validate';
 import {
 	addTraceToHead,
@@ -80,32 +80,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		try {
 			await validateToken(idToken);
 		} catch (error) {
-			// Most likely the token has expired. Delete the cookies and redirect to login.
-			// TODO: make sure both tokens have same expiry. If they don't, we need to also check the access token.
-			console.debug('Error validating token', error.message);
-
-			const clearCookie = (name: string) =>
-				event.cookies.serialize(name, '', {
-					maxAge: 0,
-					path: '/',
-				});
-
-			// prepare the response headers
-			const headers = new Headers();
-
-			// clear cookies
-			const cookieNames = ['idToken', 'accessToken', 'role'];
-			for (const name of cookieNames) {
-				headers.append('Set-Cookie', clearCookie(name));
-			}
-
-			// redirect to login
-			headers.append('Location', LOGIN);
-
-			return new Response(undefined, {
-				status: 302,
-				headers,
-			});
+			console.debug('Error validating token', error);
+			return handleInvalidToken(event);
 		}
 
 		// get the user
