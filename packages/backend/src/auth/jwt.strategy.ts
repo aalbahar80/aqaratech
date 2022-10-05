@@ -31,8 +31,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 			);
 		}
 
-		const jwksUri = `${domain}/.well-known/jwks.json`;
-
 		const cookieExtractor = function (req: Request) {
 			let token: string | null | undefined = undefined;
 
@@ -65,7 +63,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 				cache: true,
 				cacheMaxAge: 1000 * 60 * 60 * 24, // 24 hours
 				rateLimit: true,
-				jwksUri,
+				jwksUri: `${domain}/.well-known/jwks.json`,
+				// More info: https://github.com/auth0/node-jwks-rsa#loading-keys-from-local-file-environment-variable-or-other-externals
 				// eslint-disable-next-line @typescript-eslint/require-await
 				getKeysInterceptor: async () => {
 					return jwks.keys;
