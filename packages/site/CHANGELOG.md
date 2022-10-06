@@ -1,5 +1,12 @@
 # @self/site
 
+## 1.1.1
+
+### Patch Changes
+
+- 3df61c61: set chart.js as noExternal in vite.config.ts
+- 3df61c61: add db tracing
+
 ## 1.1.0
 
 ### Minor Changes

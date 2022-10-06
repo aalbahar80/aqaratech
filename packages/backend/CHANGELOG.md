@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.1.1
+
+### Patch Changes
+
+- 3df61c61: add db tracing
+
 ## 1.1.0
 
 ### Minor Changes
