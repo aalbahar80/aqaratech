@@ -19,6 +19,10 @@ export default defineConfig(() => {
 			isoImport(),
 			// basicSsl(),
 		],
+		ssr: {
+			// set chart.js as `noExternal` to avoid issues in SSR (when running `vite preview`)
+			noExternal: ['chart.js'],
+		},
 		build: {
 			// Generate sourcemaps for all builds. In production, remove them before building Docker image.
 			// This is to match the random chunk names with their original sourcemaps.

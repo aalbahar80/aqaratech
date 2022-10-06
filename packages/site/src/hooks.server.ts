@@ -18,10 +18,13 @@ import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
 console.log('Version: ', __AQARATECH_APP_VERSION__);
+
 console.log({
-	env,
-	envCheck: envCheck(),
+	'$env/dynamic/public': env,
 });
+
+console.log('process.env check:');
+envCheck();
 
 const sentryConfig = getSentryConfig({
 	PUBLIC_AQ_DEBUG_SENTRY: environment.PUBLIC_AQ_DEBUG_SENTRY,

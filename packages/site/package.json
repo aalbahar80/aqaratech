@@ -7,7 +7,8 @@
 	"scripts": {
 		"dev": "vite dev --port 3000",
 		"build": "rm -rf ./{.svelte-kit,build} && vite build",
-		"preview": ". ../../scripts/export-env.sh ../../.env && PORT=3000 ORIGIN=$PUBLIC_SITE_URL node build/index.js",
+		"preview": "vite preview --port 3000",
+		"preview:node": ". ../../scripts/export-env.sh ../../.env && PORT=3000 ORIGIN=$PUBLIC_SITE_URL node build/index.js",
 		"check": "svelte-kit sync && svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests",
 		"check:watch": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests --watch",
 		"check:old": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --ignore tests",
