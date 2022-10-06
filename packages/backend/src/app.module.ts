@@ -11,6 +11,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import * as Tracing from '@sentry/tracing';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
@@ -28,6 +29,7 @@ import { SearchModule } from './search/search.module';
 
 // resources
 import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { TraceMiddleware } from 'src/sentry/trace.middleware';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
@@ -47,12 +49,26 @@ import { UsersModule } from './users/users.module';
 	imports: [
 		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
 		ConfigModule.forRoot({ load: [configuration], isGlobal: true }), // can take validation schema
-		// or user async: https://github.com/podkrepi-bg/api/blob/f62fba53eea6405539653c022c13f1d49990b93c/apps/api/src/app/app.module.ts#L60
+
+		// or use async: https://github.com/podkrepi-bg/api/blob/f62fba53eea6405539653c022c13f1d49990b93c/apps/api/src/app/app.module.ts#L60
 		SentryModule.forRootAsync({
 			imports: [ConfigModule],
-			inject: [ConfigService],
-			useFactory: async (config: ConfigService) => config.get('sentry', {}),
+			inject: [ConfigService, PrismaService],
+			useFactory: async (
+				config: ConfigService,
+				prismaClient: PrismaService,
+				// eslint-disable-next-line @typescript-eslint/require-await
+			) => {
+				const sentryConfig = config.get('sentry', {});
+				return {
+					...sentryConfig,
+					integrations: [
+						new Tracing.Integrations.Prisma({ client: prismaClient }),
+					],
+				};
+			},
 		}),
+
 		CacheModule.register({ isGlobal: true }),
 		PrismaModule,
 		TenantsModule,
