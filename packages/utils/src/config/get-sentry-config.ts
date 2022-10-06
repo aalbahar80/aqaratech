@@ -1,6 +1,5 @@
 import type { Options } from '@sentry/types';
 import type { AqaratechEnv } from '../../../../types/environment';
-import { shouldEnableSentry } from './should-enable-sentry';
 
 export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 	const { PUBLIC_AQARATECH_ENV, PUBLIC_TRACE_RATE, PUBLIC_AQ_DEBUG_SENTRY } =
@@ -9,10 +8,7 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 	const sampleRate = +(PUBLIC_TRACE_RATE ?? 0);
 
 	return {
-		enabled: shouldEnableSentry({
-			PUBLIC_AQARATECH_ENV,
-			PUBLIC_AQ_DEBUG_SENTRY,
-		}),
+		enabled: true,
 		environment: PUBLIC_AQARATECH_ENV || 'unknown',
 		debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
 		tracesSampleRate: sampleRate,

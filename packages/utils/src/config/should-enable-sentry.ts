@@ -3,7 +3,7 @@ import type { AqaratechEnv } from '../../../../types/environment';
 /**
  * Only run Sentry in production/staging, or when debugging it.
  */
-export const shouldEnableSentry = ({
+const shouldEnableSentry = ({
 	PUBLIC_AQARATECH_ENV,
 	PUBLIC_AQ_DEBUG_SENTRY,
 }: Params) => {
