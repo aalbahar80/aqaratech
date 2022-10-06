@@ -9,9 +9,9 @@ interface RedirectError {
  * Check if the error is a 404.
  */
 export const isNotFoundError = (
-	error: any,
+	error: unknown,
 	event: RequestEvent,
 ): error is RedirectError => {
 	// https://kit.svelte.dev/docs/hooks#shared-hooks-handleerror
-	return event.routeId === null;
+	return !!error && event.routeId === null;
 };
