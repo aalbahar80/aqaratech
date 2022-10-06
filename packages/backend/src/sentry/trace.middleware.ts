@@ -8,9 +8,14 @@ import { getUserSentry } from 'src/sentry/get-user-sentry';
 export class TraceMiddleware implements NestMiddleware {
 	constructor(@InjectSentry() private readonly sentry: SentryService) {}
 	use(req: Request, res: Response, next: NextFunction): void {
+		// TODO: How to use this.sentry.instance().extractRequestData(req) do?;
+		// More info: https://develop.sentry.dev/sdk/event-payloads/request/
 		const transaction = this.sentry.instance().startTransaction({
-			op: 'request',
+			// op conventions: https://develop.sentry.dev/sdk/performance/span-operations/
+			op: 'http.server',
 			name: req.baseUrl,
+			// Consider replacing with `continueFromHeaders` once it is implemented
+			// More info: https://develop.sentry.dev/sdk/performance/#new-span-and-transaction-classes
 			...extractTraceData(req),
 		});
 

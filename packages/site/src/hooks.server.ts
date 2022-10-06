@@ -52,8 +52,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 	// }
 
 	const transaction = Sentry.startTransaction({
-		op: 'sveltekit.handle',
+		op: 'http.server',
+		// op: 'middleware.handle',
 		name: event.request.method + ' ' + event.request.url,
+		description: 'sveltekit.handle',
 	});
 
 	Sentry.configureScope((scope) => {
@@ -69,8 +71,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	);
 
 	const spanCookies = transaction.startChild({
-		op: 'sveltekit.parseCookies',
-		description: 'parse cookies',
+		op: 'http.server',
+		description: 'parse cookies and get user',
 	});
 
 	const idToken = event.cookies.get('idToken');
@@ -119,8 +121,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	const spanResolve = transaction.startChild({
-		op: 'sveltekit.resolve',
-		description: 'resolve',
+		op: 'http.server',
+		description: 'handle.resolve',
 	});
 
 	const response = await resolve(event, {

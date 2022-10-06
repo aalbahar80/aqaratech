@@ -57,7 +57,7 @@ export const api = (loadFetch?: LoadEvent['fetch']) => {
 			// create a new transaction manually
 			// when running in load in the browser, the Sentry browser SDK does not create a transaction (yet)
 			const transaction = SentrySvelte.startTransaction({
-				op: 'site.api.call',
+				op: 'http.client',
 				name: 'api()',
 			});
 
