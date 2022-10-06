@@ -4,7 +4,7 @@ import { expect, test } from '../auth-fixtures';
 // test.use({ token: { name: 'idToken', value: '123' } });
 
 test('redirect to login form', async ({ page, baseURL }) => {
-	await page.goto(baseURL!);
+	await page.goto(baseURL);
 	// expect to be redirected to login page
 	const emailInput = page.locator('input[name="username"]');
 	const passwordInput = page.locator('input[name="password"]');
@@ -13,7 +13,7 @@ test('redirect to login form', async ({ page, baseURL }) => {
 });
 
 test('cookies are cleared', async ({ page, baseURL }) => {
-	await page.goto(baseURL!);
+	await page.goto(baseURL);
 	// expect idToken and accessToken to be cleared
 	const cookies = await page.context().cookies();
 

@@ -10,6 +10,7 @@ type MyFixtures = {
 export const test = base.extend<MyFixtures>({
 	page: async ({ page }, use) => {
 		// TODO replace with page.goto(url, { waitUntil: "networkidle" })
+		// eslint-disable-next-line @typescript-eslint/unbound-method
 		const goto = page.goto;
 		page.goto = async function (url, opts) {
 			const res = await goto.call(page, url, opts);

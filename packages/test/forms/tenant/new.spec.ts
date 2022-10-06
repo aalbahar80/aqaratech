@@ -1,5 +1,4 @@
 import { expect } from '@playwright/test';
-import { sample } from '@self/seed';
 import { test } from '../../config';
 
 test('smoke', async ({ page }, info) => {

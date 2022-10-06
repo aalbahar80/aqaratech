@@ -1,5 +1,6 @@
 import { sample, testOrgRoleId } from '@self/seed';
 import { expect, test } from '../../token';
+import type { PortfolioDto } from '../../types/api';
 
 test.use({
 	extraHTTPHeaders: {
@@ -76,7 +77,7 @@ test(`returns title field`, async ({ request, token }) => {
 		headers: { Authorization: `Bearer ${token}` },
 	});
 
-	const data = await res.json();
+	const data = (await res.json()) as PortfolioDto;
 	expect.soft(data).toHaveProperty('fullName');
 	expect(data).toHaveProperty('title');
 });

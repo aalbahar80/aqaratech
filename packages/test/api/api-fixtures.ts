@@ -163,7 +163,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(key);
 	},
 
-	expenseCategory: async ({ request, org }, use) => {
+	expenseCategory: async ({ request }, use) => {
 		const res = await request.get(`/expense-categories`);
 
 		const categories = (await res.json()) as ExpenseCategoryDto[];

@@ -3,7 +3,7 @@ import { organizationFactory } from '@self/seed';
 import * as R from 'remeda';
 import { test } from './api-fixtures';
 
-test(`can create organization`, async ({ request, org }) => {
+test(`can create organization`, async ({ request }) => {
 	const organization = R.pick(organizationFactory.build(), [
 		'fullName',
 		'label',

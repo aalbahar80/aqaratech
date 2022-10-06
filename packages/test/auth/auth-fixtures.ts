@@ -1,4 +1,4 @@
-import { test as base } from '@playwright/test';
+import { test as base, type BrowserContextOptions } from '@playwright/test';
 import { EXPIRED_ID_TOKEN } from '../constants/expired-id-token';
 
 interface Token {
@@ -8,10 +8,14 @@ interface Token {
 
 export interface TokenTestOptions {
 	token: Token;
+
+	// This is a workaround for baseURL being nullable in Playwright's test fixtures.
+	baseURL: BrowserContextOptions['baseURL'];
 }
 
 export const test = base.extend<TokenTestOptions>({
 	token: [EXPIRED_ID_TOKEN, { option: true }],
+
 	page: async ({ page, token, baseURL }, use) => {
 		if (!token) {
 			// await use(page);

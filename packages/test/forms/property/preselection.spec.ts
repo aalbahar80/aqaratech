@@ -5,7 +5,7 @@ import { entitiesMap } from '@self/utils';
 
 const portfolio = sample.portfolios[0];
 const property = sample.properties[0];
-const updatedArea = 'حولي';
+// const updatedArea = 'حولي';
 
 test('area is preselected', async ({ page }) => {
 	await page.goto(`/${entitiesMap.property.urlName}/${property.id}/edit`);
