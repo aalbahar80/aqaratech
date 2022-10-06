@@ -63,6 +63,8 @@ import { UsersModule } from './users/users.module';
 				return {
 					...sentryConfig,
 					integrations: [
+						// Enabling debug will make sentry list integrations on startup
+						// More info: https://docs.sentry.io/platforms/node/configuration/integrations/default-integrations/
 						new Tracing.Integrations.Prisma({ client: prismaClient }),
 					],
 				};
