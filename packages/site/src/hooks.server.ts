@@ -50,6 +50,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	// 	return fetch(event.request);
 	// }
 
+	// TODO: drop all js.map requests early?
+
 	const transaction = Sentry.startTransaction({
 		op: 'http.server',
 		// op: 'middleware.handle',
