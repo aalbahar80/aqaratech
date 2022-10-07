@@ -68,7 +68,7 @@ export interface AqaratechEnv {
 		| 'info'
 		| 'verbose'
 		| 'debug'
-		| 'silly'
+		// | 'silly'
 		| undefined;
 	readonly PUBLIC_AQ_DEBUG_NEST: string;
 	readonly PUBLIC_AQ_DEBUG_SITE: string;

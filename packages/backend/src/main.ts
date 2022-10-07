@@ -17,13 +17,21 @@ async function bootstrap() {
 	Logger.log(`Version: ${version}`);
 	envCheck();
 
+	const level = process.env.PUBLIC_AQ_DEBUG_LEVEL || 'info';
+	const availableLogLevels = [
+		'error',
+		'warn',
+		'log',
+		'verbose',
+		'debug',
+	] as const;
+
+	Logger.log(`Log level: ${level}`);
+
 	const app = await NestFactory.create(AppModule, {
-		logger: [
-			...(process.env?.PUBLIC_AQ_DEBUG_NEST == '1' ? ['debug'] : ([] as any[])),
-			'log',
-			'warn',
-			'error',
-		],
+		logger: availableLogLevels.slice(
+			availableLogLevels.indexOf(level === 'info' ? 'log' : level),
+		),
 		cors: {
 			origin: process.env.PUBLIC_SITE_URL,
 			credentials: true,
