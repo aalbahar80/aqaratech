@@ -4,6 +4,7 @@ import type { RoleSK, User } from '$lib/models/types/auth.type';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing'; // TODO: remove?
+import type { LoadEvent } from '@sveltejs/kit';
 
 const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
 	const defaultRole = roles.find((role) => role.isDefault) || roles[0];
@@ -26,13 +27,14 @@ const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
  * or if validation fails.
  */
 export const getUser = async ({
-	token,
 	selectedRoleId,
+	loadFetch,
 }: {
-	token: string;
 	selectedRoleId?: string;
+	loadFetch: LoadEvent['fetch'];
 }): Promise<User | undefined> => {
-	const profile = await getProfile(token);
+	console.debug('[getUser] Getting user');
+	const profile = await getProfile(loadFetch);
 
 	// User not in our db, nothing more to do.
 	if (!profile) {
@@ -72,7 +74,7 @@ export const getUser = async ({
 };
 
 const getProfile = async (
-	accessToken: string,
+	loadFetch: LoadEvent['fetch'],
 ): Promise<ValidatedUserDto | undefined> => {
 	// Sentry
 	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();
@@ -82,8 +84,6 @@ const getProfile = async (
 
 	const headers: Record<string, string> = {
 		'Content-Type': 'application/json',
-		// users/me endpoint only requires accessToken, not x-role-id header.
-		Authorization: `Bearer ${accessToken}`,
 	};
 
 	if (span) {
@@ -98,13 +98,9 @@ const getProfile = async (
 		const url = new URL(`${environment.PUBLIC_API_URL_LOCAL}/users/me`);
 
 		// fetch user
-		const res = await fetch(url.toString(), {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				// users/me doesn't require the x-role-id header, but it does require the accessToken.
-				Authorization: `Bearer ${accessToken}`,
-			},
+		// sveltekit's `fetch` allows us to make a credentiale request server-side. The accessToken is stored in a cookie.
+		const res = await loadFetch(url.toString(), {
+			headers,
 		});
 
 		const data = (await res.json()) as ValidatedUserDto;

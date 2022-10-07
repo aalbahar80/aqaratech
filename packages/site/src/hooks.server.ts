@@ -92,8 +92,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 		// get the user
 		const user = await getUser({
-			token: accessToken,
 			selectedRoleId: currentRole,
+			loadFetch: event.fetch,
 		});
 
 		// set the role cookie if it's not yet set
