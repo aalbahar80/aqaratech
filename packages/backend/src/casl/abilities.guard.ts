@@ -9,6 +9,7 @@ import {
 	Logger,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { isHealthCheck } from '@self/utils';
 import { Cache } from 'cache-manager';
 import { Request } from 'express';
 import {
@@ -64,9 +65,10 @@ export class AbilitiesGuard implements CanActivate {
 		);
 
 		if (isPublic || skipAbilityCheck) {
-			this.logger.debug(
-				`Skipping abilities guard. isPublic: ${isPublic}, skipAbilityCheck: ${skipAbilityCheck}`,
-			);
+			const url = context.switchToHttp().getRequest().url;
+			if (!isHealthCheck(url)) {
+				this.logger.debug(`Skipping abilities guard. isPublic: ${isPublic}, skipAbilityCheck: ${skipAbilityCheck}`); // prettier-ignore
+			}
 			return true;
 		}
 
