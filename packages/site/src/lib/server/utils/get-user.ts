@@ -36,13 +36,14 @@ export const getUser = async ({
 	console.debug('[getUser] Getting user');
 	const profile = await getProfile(loadFetch);
 
+	console.log('[getUser] Got profile', profile);
+
 	// User not in our db, nothing more to do.
-	if (!profile) {
+	// TODO: roles can be undefined
+	if (!profile || !profile.roles) {
 		// TODO: use zod to validate profile, roles at lease. This should never happen.
 		return undefined;
 	}
-
-	console.log('[getUser] Got profile', profile);
 
 	// augment each role with metadata
 	const roles = profile.roles.map((role) => ({

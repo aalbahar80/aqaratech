@@ -207,9 +207,19 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 		// Include cookies on server-side fetch requests in load functions
 		// https://kit.svelte.dev/docs/hooks#server-hooks-handlefetch
 		const cookie = event.request.headers.get('cookie');
+		// TODO: rm logs
+		console.log(['event.request.headers.get(cookie)', cookie]);
+		console.log([
+			'request.headers.get(cookie) - before',
+			request.headers.get('cookie'),
+		]);
 		if (cookie) {
 			request.headers.set('cookie', cookie);
 		}
+		console.log([
+			'request.headers.get(cookie) - after',
+			request.headers.get('cookie'),
+		]);
 	}
 
 	return fetch(request);
