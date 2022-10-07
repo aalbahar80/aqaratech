@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.2.0
+
+### Minor Changes
+
+- c6d407c7: only use cookies for backend auth, remove auth header usage
+
 ## 1.1.1
 
 ### Patch Changes
