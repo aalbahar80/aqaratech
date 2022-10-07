@@ -50,15 +50,13 @@ import { UsersModule } from './users/users.module';
 		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
 		ConfigModule.forRoot({ load: [configuration], isGlobal: true }), // can take validation schema
 
+		PrismaModule,
+
 		// or use async: https://github.com/podkrepi-bg/api/blob/f62fba53eea6405539653c022c13f1d49990b93c/apps/api/src/app/app.module.ts#L60
 		SentryModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService, PrismaService],
-			useFactory: async (
-				config: ConfigService,
-				prismaClient: PrismaService,
-				// eslint-disable-next-line @typescript-eslint/require-await
-			) => {
+			useFactory: (config: ConfigService, prismaClient: PrismaService) => {
 				const sentryConfig = config.get('sentry', {});
 				return {
 					...sentryConfig,
@@ -66,13 +64,13 @@ import { UsersModule } from './users/users.module';
 						// Enabling debug will make sentry list integrations on startup
 						// More info: https://docs.sentry.io/platforms/node/configuration/integrations/default-integrations/
 						new Tracing.Integrations.Prisma({ client: prismaClient }),
+						// Potential troublemaker. Investigate: shutdown hooks, add prisma to imports array, prisma in main.ts vs using nestjs-prisma package.
 					],
 				};
 			},
 		}),
 
 		CacheModule.register({ isGlobal: true }),
-		PrismaModule,
 		TenantsModule,
 		PortfoliosModule,
 		CaslModule,
