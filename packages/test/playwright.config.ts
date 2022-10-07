@@ -14,6 +14,7 @@ const API_FILES = '**/api/**/*.spec.ts';
 
 const config: PlaywrightTestConfig<TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),
+	globalTeardown: require.resolve('./global-teardown'),
 	reporter: [
 		['list'],
 		['html', { open: process.env.CI ? 'never' : 'on-failure' }],
