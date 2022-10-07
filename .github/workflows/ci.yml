@@ -31,12 +31,17 @@ env:
 
 jobs:
   build-package:
-    if: ${{ inputs.siteTag }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     strategy:
       matrix:
-        package: [site, backend]
+        include:
+          - name: site
+            tag: ${{ inputs.siteTag }}
+            sentryRelease: ${{ inputs.siteSentryRelease }}
+          - name: backend
+            tag: ${{ inputs.backendTag }}
+            sentryRelease: ${{ inputs.backendSentryRelease }}
 
     steps:
       - name: Check out code
@@ -66,12 +71,8 @@ jobs:
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.7.0" bash
 
       # TODO: rm prod condition
-      - run: pnpm -F @self/site run sentry:release --version ${{ inputs.siteSentryRelease || inputs.siteTag }} --environment ${{ inputs.environment }}
-        if: ${{ matrix.package == 'site' && inputs.environment == 'prod' }}
-
-      # TODO: rm prod condition
-      - run: pnpm -F @self/backend run sentry:release --version ${{ inputs.backendSentryRelease || inputs.backendTag }}  --environment ${{ inputs.environment }}
-        if: ${{ matrix.package == 'backend' && inputs.environment == 'prod' }}
+      - run: pnpm -F @self/${{ matrix.package }} run sentry:release --version ${{ inputs.sentryRelease || inputs.tag }} --environment ${{ inputs.environment }}
+        if: ${{ inputs.environment == 'prod' }}
 
       - if: ${{ inputs.environment == 'prod' && matrix.package == 'site' }}
         name: Delete client sourcemaps
