@@ -27,42 +27,9 @@ export const setupSwagger = async (app: INestApplication) => {
 		.setTitle('Aqaratech')
 		.setDescription('Aqaratech API')
 		.setVersion('1.0')
-		// .addBearerAuth({
-		// 	type: 'http',
-		// 	scheme: 'Bearer',
-		// 	bearerFormat: 'JWT',
-		// 	name: 'JWT',
-		// 	description: 'Enter JWT token',
-		// 	in: 'header',
-		// })
 		.addCookieAuth(Cookie.accessToken, {
 			type: 'apiKey',
 		})
-		// .addSecurityRequirements('oauth-swagger')
-		// .addOAuth2(
-		// 	{
-		// .addSecurityRequirements('oauth-swagger')
-		// .addOAuth2(
-		// 	{
-		// 		type: 'oauth2',
-		// 		// scheme: 'Bearer',
-		// 		flows: {
-		// 			authorizationCode: {
-		// 				authorizationUrl:
-		// 					'https://dev-eehvhdp2.eu.auth0.com/authorize?audience=letand.be/api',
-		// 				tokenUrl: 'https://dev-eehvhdp2.eu.auth0.com/oauth/token',
-		// 				scopes: {
-		// 					'openid profile email': 'default scope',
-		// 					openid:
-		// 						"to indicate that the application intends to use OIDC to verify the user's identity",
-		// 					profile: 'to get name, nickname, and picture',
-		// 					email: 'to get email and email_verified',
-		// 				},
-		// 			},
-		// 		},
-		// 	},
-		// 	'oauth-swagger',
-		// )
 		.build();
 
 	const document = SwaggerModule.createDocument(app, config, {
