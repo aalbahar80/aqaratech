@@ -1,5 +1,12 @@
 # @self/backend
 
+## 1.2.1
+
+### Patch Changes
+
+- 171dfa6c: fix server-side getUser auth bug
+- 0de53414: use sentry version from matrix
+
 ## 1.2.0
 
 ### Minor Changes
