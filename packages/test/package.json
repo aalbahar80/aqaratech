@@ -15,7 +15,9 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@playwright/test": "1.26.1",
+		"@self/backend": "workspace:1.2.1",
 		"@self/seed": "workspace:1.0.0",
+		"@self/site": "workspace:1.2.1",
 		"@self/utils": "workspace:2.0.0",
 		"@tsconfig/node18": "1.0.1",
 		"@tsconfig/node18-strictest": "1.0.0",

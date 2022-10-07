@@ -356,7 +356,9 @@ importers:
   packages/test:
     specifiers:
       '@playwright/test': 1.26.1
+      '@self/backend': workspace:1.2.1
       '@self/seed': workspace:1.0.0
+      '@self/site': workspace:1.2.1
       '@self/utils': workspace:2.0.0
       '@tsconfig/node18': 1.0.1
       '@tsconfig/node18-strictest': 1.0.0
@@ -372,7 +374,9 @@ importers:
       eslint-config-custom: link:../eslint-config-custom
     devDependencies:
       '@playwright/test': 1.26.1
+      '@self/backend': link:../backend
       '@self/seed': link:../seed
+      '@self/site': link:../site
       '@self/utils': link:../utils
       '@tsconfig/node18': 1.0.1
       '@tsconfig/node18-strictest': 1.0.0
