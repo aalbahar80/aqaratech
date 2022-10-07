@@ -27,6 +27,9 @@ services:
 
   site:
     image: registry.digitalocean.com/aqtech/aqaratech-site:latest
+    build:
+      context: ./packages/site
+      dockerfile: ./Dockerfile
     ports:
       - '3000:3000'
     env_file: .env
@@ -36,6 +39,9 @@ services:
 
   backend:
     image: registry.digitalocean.com/aqtech/aqaratech-backend:latest
+    build:
+      context: ./packages/backend
+      dockerfile: ./Dockerfile
     ports:
       - '3002:3002'
     env_file: .env
