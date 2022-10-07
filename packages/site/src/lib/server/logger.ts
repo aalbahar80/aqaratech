@@ -19,7 +19,6 @@ export const logger = createLogger({
 		format.metadata({ fillExcept: ['message', 'level', 'timestamp', 'label'] }),
 	),
 	transports: [new transports.Console()],
-	exitOnError: false,
 });
 
 // example to print an object
