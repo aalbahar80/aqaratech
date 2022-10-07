@@ -33,17 +33,6 @@
 			"dependsOn": ["^build"],
 			"outputs": ["playwright-report/**", "test-results/**"]
 		},
-		"health-check": {
-			"cache": false
-		},
-		"@self/site#dev": {
-			"cache": false,
-			"dependsOn": ["@self/backend#health-check"]
-		},
-		"@self/site#preview": {
-			"cache": false,
-			"dependsOn": ["@self/backend#health-check"]
-		},
 		"//#api:generate": {
 			"outputs": [
 				"packages/site/src/api/openapi/**",

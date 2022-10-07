@@ -41,17 +41,19 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		// To Debug, use env var: DEBUG=pw:webserver
 		{
 			cwd: '../../',
-			command: 'turbo run preview --filter=@self/backend',
+			command: 'pnpm turbo run preview --filter=@self/backend',
 			port: 3002,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
+			// env: { DEBUG: 'pw:webserver' },
 		},
 		{
 			cwd: '../../',
-			command: 'turbo run preview --filter=@self/site',
+			command: 'pnpm turbo run preview --filter=@self/site',
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
+			// env: { DEBUG: 'pw:webserver' },
 		},
 	],
 	projects: [

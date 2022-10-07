@@ -15,8 +15,7 @@
 		"custom-lint": "eslint . --ext .ts,.svelte",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
-		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
-		"health-check": "../../scripts/health-probe.sh $(awk '/^PUBLIC_SITE_URL/' ../../.env | awk -F '=' '{print $2}')/health 30"
+		"sentry:release": "../../scripts/upload-sourcemaps.mjs"
 	},
 	"devDependencies": {
 		"@brainandbones/skeleton": "0.37.32",
