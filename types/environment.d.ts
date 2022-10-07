@@ -62,6 +62,14 @@ export interface AqaratechEnv {
 	readonly MEILISEARCH_API_KEY: string;
 
 	// Debug
+	readonly PUBLIC_AQ_DEBUG_LEVEL:
+		| 'error'
+		| 'warn'
+		| 'info'
+		| 'verbose'
+		| 'debug'
+		| 'silly'
+		| undefined;
 	readonly PUBLIC_AQ_DEBUG_NEST: string;
 	readonly PUBLIC_AQ_DEBUG_SITE: string;
 	readonly PUBLIC_AQ_DEBUG_PRISMA: string;
