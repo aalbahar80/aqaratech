@@ -150,14 +150,6 @@ export class ExpenseCategoriesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/expense-categories`,
@@ -195,14 +187,6 @@ export class ExpenseCategoriesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/expense-categories`,
@@ -258,14 +242,6 @@ export class ExpenseCategoriesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/expense-categories/{id}`.replace(
@@ -319,14 +295,6 @@ export class ExpenseCategoriesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/expense-categories`,

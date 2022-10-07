@@ -217,14 +217,6 @@ export class LeaseInvoicesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/leaseInvoices`,
@@ -307,14 +299,6 @@ export class LeaseInvoicesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/leaseInvoices`,
@@ -359,14 +343,6 @@ export class LeaseInvoicesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/leaseInvoices/{id}`.replace(
@@ -414,14 +390,6 @@ export class LeaseInvoicesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/leaseInvoices/{id}`.replace(
@@ -469,14 +437,6 @@ export class LeaseInvoicesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/leaseInvoices/{id}/send-email`.replace(
@@ -536,14 +496,6 @@ export class LeaseInvoicesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/leaseInvoices/{id}`.replace(

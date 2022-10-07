@@ -191,14 +191,6 @@ export class ExpensesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/expenses`,
@@ -277,14 +269,6 @@ export class ExpensesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/expenses`,
@@ -329,14 +313,6 @@ export class ExpensesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/expenses/{id}`.replace(
@@ -384,14 +360,6 @@ export class ExpensesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/expenses/{id}`.replace(
@@ -451,14 +419,6 @@ export class ExpensesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/expenses/{id}`.replace(

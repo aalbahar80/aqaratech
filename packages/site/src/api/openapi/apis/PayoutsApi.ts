@@ -182,14 +182,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/payouts`,
@@ -248,14 +240,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/payouts`,
@@ -300,14 +284,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/payouts/{id}`.replace(
@@ -355,14 +331,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/payouts/{id}`.replace(
@@ -422,14 +390,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/payouts/{id}`.replace(

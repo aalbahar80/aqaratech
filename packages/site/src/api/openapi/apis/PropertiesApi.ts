@@ -215,14 +215,6 @@ export class PropertiesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/properties`,
@@ -281,14 +273,6 @@ export class PropertiesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/properties`,
@@ -333,14 +317,6 @@ export class PropertiesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/properties/{id}`.replace(
@@ -408,14 +384,6 @@ export class PropertiesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/properties/{id}/units`.replace(
@@ -463,14 +431,6 @@ export class PropertiesApi
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/properties/{id}`.replace(
@@ -530,14 +490,6 @@ export class PropertiesApi
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		if (this.configuration && this.configuration.accessToken) {
-			const token = this.configuration.accessToken;
-			const tokenString = await token('bearer', []);
-
-			if (tokenString) {
-				headerParameters['Authorization'] = `Bearer ${tokenString}`;
-			}
-		}
 		const response = await this.request(
 			{
 				path: `/properties/{id}`.replace(

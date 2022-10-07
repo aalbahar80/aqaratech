@@ -2577,14 +2577,6 @@ info:
 tags: []
 servers: []
 components:
-  securitySchemes:
-    bearer:
-      scheme: Bearer
-      bearerFormat: JWT
-      type: http
-      name: JWT
-      description: Enter JWT token
-      in: header
   schemas:
     CreateTenantDto:
       type: object

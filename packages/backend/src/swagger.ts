@@ -26,14 +26,14 @@ export const setupSwagger = async (app: INestApplication) => {
 		.setTitle('Aqaratech')
 		.setDescription('Aqaratech API')
 		.setVersion('1.0')
-		.addBearerAuth({
-			type: 'http',
-			scheme: 'Bearer',
-			bearerFormat: 'JWT',
-			name: 'JWT',
-			description: 'Enter JWT token',
-			in: 'header',
-		})
+		// .addBearerAuth({
+		// 	type: 'http',
+		// 	scheme: 'Bearer',
+		// 	bearerFormat: 'JWT',
+		// 	name: 'JWT',
+		// 	description: 'Enter JWT token',
+		// 	in: 'header',
+		// })
 		// .addSecurityRequirements('oauth-swagger')
 		// .addOAuth2(
 		// 	{
