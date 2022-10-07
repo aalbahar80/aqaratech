@@ -90,12 +90,13 @@ jobs:
         shell: bash
         run: curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.7.0" bash
 
-      # TODO: rm prod condition
-      - run: pnpm -F @self/${{ matrix.package }} run sentry:release --version ${{ inputs.sentryRelease || inputs.tag }} --environment ${{ inputs.environment }}
+      # TODO: rm prod condition once this task becomes faster
+      - name: Upload source maps to Sentry
+        run: pnpm -F @self/${{ matrix.package }} run sentry:release --version ${{ inputs.sentryRelease || inputs.tag }} --environment ${{ inputs.environment }}
         if: ${{ inputs.environment == 'prod' }}
 
-      - if: ${{ inputs.environment == 'prod' && matrix.package == 'site' }}
-        name: Delete client sourcemaps
+      - name: Delete sourcemaps from client bundle
+        if: ${{ inputs.environment == 'prod' && matrix.package == 'site' }}
         shell: bash
         run: pnpm zx ./scripts/rm-sourcemaps.mjs ./packages/site/build/client --force
 
