@@ -52,6 +52,7 @@ jobs:
   build-package:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
+    needs: matrix_prep
     strategy:
       matrix:
         ${{fromJson(needs.matrix_prep.outputs.matrix)}}
@@ -110,11 +111,7 @@ jobs:
   deploy-app:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    needs: [build-site, build-backend]
-    if: |
-      always() &&
-      (needs.build-site.result == 'success' || needs.build-site.result == 'skipped') &&
-      (needs.build-backend.result == 'success' || needs.build-backend.result == 'skipped')
+    needs: build-package
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
