@@ -40,15 +40,15 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	webServer: [
 		// To Debug, use env var: DEBUG=pw:webserver
 		{
-			cwd: '../backend',
-			command: 'pnpm run preview',
+			cwd: '../../',
+			command: 'turbo run preview --filter=@self/backend',
 			port: 3002,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
 		},
 		{
-			cwd: '../site',
-			command: 'pnpm run preview',
+			cwd: '../../',
+			command: 'turbo run preview --filter=@self/site',
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
