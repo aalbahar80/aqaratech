@@ -16,9 +16,9 @@
 	"devDependencies": {
 		"@babel/preset-typescript": "7.18.6",
 		"@preconstruct/cli": "2.2.2",
-		"@sentry/types": "7.14.1",
+		"@sentry/types": "7.14.2",
 		"@tsconfig/esm": "1.0.2",
-		"@types/node": "18.8.2",
+		"@types/node": "18.8.3",
 		"typescript": "4.8.4"
 	}
 }

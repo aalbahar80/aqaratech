@@ -19,7 +19,7 @@
 		"@self/utils": "workspace:2.0.0",
 		"@tsconfig/node18": "1.0.1",
 		"@tsconfig/node18-strictest": "1.0.0",
-		"@types/node": "18.8.2",
+		"@types/node": "18.8.3",
 		"dotenv": "16.0.3",
 		"eslint": "8.24.0",
 		"jose": "4.10.0",
