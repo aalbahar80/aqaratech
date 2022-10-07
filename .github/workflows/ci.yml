@@ -42,12 +42,15 @@ jobs:
         shell: bash
         run: |
           matrix="{\"include\":[]}"
+
           if [ -n "${{ inputs.siteTag }}" ]; then
-            matrix=$(echo $matrix | jq --arg tag "${{ inputs.siteTag }}" --arg sentryRelease "${{ inputs.siteSentryRelease }}" '.include += [{ "package": "site", "tag": $tag, "sentryRelease": $sentryRelease }]')
+            matrix=$(echo $matrix | jq --arg tag \"${{ inputs.siteTag }}\" '.include += [{\"package\":\"site\",\"tag\":\"${{ inputs.siteTag }}\",\"sentryRelease\":\"${{ inputs.siteSentryRelease }}\"}]')
           fi
+
           if [ -n "${{ inputs.backendTag }}" ]; then
-            matrix=$(echo $matrix | jq --arg tag "${{ inputs.backendTag }}" --arg sentryRelease "${{ inputs.backendSentryRelease }}" '.include += [{ "package": "backend", "tag": $tag, "sentryRelease": $sentryRelease }]')
+            matrix=$(echo $matrix | jq --arg tag \"${{ inputs.backendTag }}\" '.include += [{\"package\":\"backend\",\"tag\":\"${{ inputs.backendTag }}\",\"sentryRelease\":\"${{ inputs.backendSentryRelease }}\"}]')
           fi
+
           echo $matrix
           echo "::set-output name=matrix::$matrix"
 
