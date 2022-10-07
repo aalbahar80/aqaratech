@@ -13,6 +13,7 @@ export const envCheck = () => {
 	console.log('PUBLIC_AQ_DEBUG_SENTRY: ', process.env.PUBLIC_AQ_DEBUG_SENTRY);
 	console.log('MEILISEARCH_HOST: ', process.env.MEILISEARCH_HOST);
 
+	console.log('PUBLIC_AQ_DEBUG_LEVEL: ', process.env.PUBLIC_AQ_DEBUG_LEVEL);
 	console.log('PUBLIC_AQ_DEBUG_NEST: ', process.env.PUBLIC_AQ_DEBUG_NEST);
 	console.log('PUBLIC_AQ_DEBUG_PRISMA: ', process.env.PUBLIC_AQ_DEBUG_PRISMA);
 	console.log('PUBLIC_AQ_DEBUG_SITE: ', process.env.PUBLIC_AQ_DEBUG_SITE);

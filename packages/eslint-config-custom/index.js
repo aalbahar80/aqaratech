@@ -61,6 +61,7 @@ module.exports = {
 					'PUBLIC_SITE_URL',
 					'PUBLIC_API_URL',
 					'PUBLIC_API_URL_LOCAL',
+					'PUBLIC_AQ_DEBUG_LEVEL',
 					'PUBLIC_AQ_DEBUG_SITE',
 					'PUBLIC_AQ_DEBUG_NEST',
 					'PUBLIC_AQ_DEBUG_PRISMA',
