@@ -19,6 +19,7 @@ export default defineConfig(() => {
 			isoImport(),
 			// basicSsl(),
 		],
+		clearScreen: false,
 		ssr: {
 			// set chart.js as `noExternal` to avoid issues in SSR (when running `vite preview`)
 			noExternal: ['chart.js'],
