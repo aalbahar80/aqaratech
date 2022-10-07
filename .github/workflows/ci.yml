@@ -41,6 +41,7 @@ jobs:
         shell: bash
         run: |
           matrix=$(jq -n --arg tag "${{ inputs.siteTag }}" --arg sentryRelease "${{ inputs.siteSentryRelease }}" '{site: {tag: $tag, sentryRelease: $sentryRelease}}')
+          echo $matrix
           echo ::set-output name=matrix::{\"include\":$(echo $matrix)}
 
       - id: set-matrix-backend
@@ -49,6 +50,7 @@ jobs:
         shell: bash
         run: |
           matrix=$(jq -n --arg tag "${{ inputs.backendTag }}" --arg sentryRelease "${{ inputs.backendSentryRelease }}" '{ "backend": { "tag": $tag, "sentryRelease": $sentryRelease } }')
+          echo $matrix
           echo ::set-output name=matrix::$(jq -s add <<< "${{ steps.set-matrix-site.outputs.matrix }}" "$matrix")
 
   build-package:
