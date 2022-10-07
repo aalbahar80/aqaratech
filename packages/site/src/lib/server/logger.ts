@@ -1,4 +1,5 @@
 import { createLogger, format, transports } from 'winston';
+import { environment } from '$aqenvironment';
 
 const { combine, colorize, json, timestamp, label, printf, splat } = format;
 
@@ -7,7 +8,7 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
 });
 
 export const logger = createLogger({
-	level: 'debug',
+	level: environment.PUBLIC_AQ_DEBUG_LEVEL || 'info',
 	format: combine(
 		colorize(),
 		splat(),

@@ -9,9 +9,6 @@ export const GET: RequestHandler = ({ locals }) => {
 
 	let location: string;
 
-	// TODO: rm log
-	console.debug('[concierge.ts]', { locals });
-
 	if (!locals.user?.roles.length) {
 		// if user has no roles yet, redirect to /welcome
 		location = '/welcome';

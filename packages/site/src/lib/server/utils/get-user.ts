@@ -1,6 +1,7 @@
 import type { ValidatedRoleDto, ValidatedUserDto } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import type { RoleSK, User } from '$lib/models/types/auth.type';
+import { logger } from '$lib/server/logger';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
 import { Cookie } from '@self/utils';
 import * as Sentry from '@sentry/node';
@@ -34,11 +35,11 @@ export const getUser = async ({
 	selectedRoleId?: string;
 	event: RequestEvent;
 }): Promise<User | undefined> => {
-	console.debug('[getUser] Getting user');
+	logger.verbose('[getUser] Getting user');
+
 	const profile = await getProfile(event);
 
-	console.log('[getUser] Got profile', profile);
-
+	logger.verbose('[getUser] Got profile %O', profile);
 	// User not in our db, nothing more to do.
 	// TODO: roles can be undefined
 	if (!profile || !profile.roles) {
@@ -125,7 +126,8 @@ const getProfile = async (
 		// 1. user doesn't exist in db
 		// 2. backend not available
 
-		console.error(e);
+		logger.error(e);
+
 		return undefined;
 	} finally {
 		span?.finish();

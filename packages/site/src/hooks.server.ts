@@ -2,6 +2,7 @@ import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { env } from '$env/dynamic/public';
 import { MAX_AGE } from '$lib/constants/misc';
+import { logger } from '$lib/server/logger';
 import { getUser } from '$lib/server/utils/get-user';
 import { handleInvalidToken } from '$lib/server/utils/handle-invalid-token';
 import { validateToken } from '$lib/server/utils/validate';
@@ -211,18 +212,9 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 	// https://kit.svelte.dev/docs/hooks#server-hooks-handlefetch
 	if (request.url.startsWith(publicUrl) || request.url.startsWith(localUrl)) {
 		const cookie = event.request.headers.get('cookie');
-		console.log(['event.request.headers.get(cookie)', cookie]);
-		console.log([
-			'request.headers.get(cookie) - before',
-			request.headers.get('cookie'),
-		]);
 		if (cookie) {
 			request.headers.set('cookie', cookie);
 		}
-		console.log([
-			'request.headers.get(cookie) - after',
-			request.headers.get('cookie'),
-		]);
 	}
 
 	return fetch(request);
