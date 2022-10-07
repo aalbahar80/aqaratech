@@ -35,11 +35,11 @@ export const getUser = async ({
 	selectedRoleId?: string;
 	event: RequestEvent;
 }): Promise<User | undefined> => {
-	logger.verbose('[getUser] Getting user');
+	logger.debug('[getUser] Getting user');
 
 	const profile = await getProfile(event);
 
-	logger.verbose('[getUser] Got profile %O', profile);
+	logger.debug('[getUser] Got profile %O', profile);
 	// User not in our db, nothing more to do.
 	// TODO: roles can be undefined
 	if (!profile || !profile.roles) {

@@ -65,7 +65,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const method = event.request.method;
 
 	logger.log({
-		level: isHealthCheck(event.url.pathname) ? 'verbose' : 'info',
+		level: isHealthCheck(event.url.pathname) ? 'silly' : 'info',
 		message: `Request: ${method} ${event.url.href}: ${
 			event.routeId
 		} ${event.request.headers.get('user-agent')}`,
@@ -135,7 +135,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	spanResolve.finish();
 
 	logger.log({
-		level: isHealthCheck(event.url.pathname) ? 'verbose' : 'info',
+		level: isHealthCheck(event.url.pathname) ? 'silly' : 'info',
 		message: `Response: ${Date.now() - now}ms - ${method} ${
 			event.url.pathname
 		} ${response.status} - ${event.request.headers.get('user-agent')} - ${
