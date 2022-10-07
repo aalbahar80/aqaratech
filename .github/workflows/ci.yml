@@ -92,7 +92,7 @@ jobs:
 
       # TODO: rm prod condition once this task becomes faster
       - name: Upload source maps to Sentry
-        run: pnpm -F @self/${{ matrix.package }} run sentry:release --version ${{ inputs.sentryRelease || inputs.tag }} --environment ${{ inputs.environment }}
+        run: pnpm -F @self/${{ matrix.package }} run sentry:release --version ${{ matrix.sentryRelease || matrix.tag }} --environment ${{ inputs.environment }}
         if: ${{ inputs.environment == 'prod' }}
 
       - name: Delete sourcemaps from client bundle
@@ -106,7 +106,7 @@ jobs:
         with:
           package: ${{ matrix.package }}
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          customTag: ${{ matrix.package == 'site' && inputs.siteTag || inputs.backendTag }}
+          customTag: ${{ matrix.tag }}
 
   deploy-app:
     runs-on: ubuntu-latest
