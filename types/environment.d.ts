@@ -70,8 +70,8 @@ export interface AqaratechEnv {
 		| 'debug'
 		// | 'silly'
 		| undefined;
-	readonly PUBLIC_AQ_DEBUG_NEST: string;
-	readonly PUBLIC_AQ_DEBUG_SITE: string;
+	readonly PUBLIC_AQ_DEBUG_NEST: string; // TODO: remove
+	readonly PUBLIC_AQ_DEBUG_SITE: string; // TODO: remove
 	readonly PUBLIC_AQ_DEBUG_PRISMA: string;
 	readonly PUBLIC_AQ_DEBUG_SENTRY: string;
 
