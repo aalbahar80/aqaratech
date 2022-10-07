@@ -30,18 +30,38 @@ env:
   SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
 jobs:
+  matrix_prep:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix-site
+        if: ${{ inputs.siteTag }}
+        # if inputs.siteTag is set, output a matrix with the following value: { "site": { "tag": inputs.siteTag, "sentryRelease": inputs.siteSentryRelease } }
+        shell: bash
+        run: |
+          echo ::set-output name=matrix::$(jq -n --arg tag "${{ inputs.siteTag }}" --arg sentryRelease "${{ inputs.siteSentryRelease }}" '{ "site": { "tag": $tag, "sentryRelease": $sentryRelease } }')
+
+      - id: set-matrix-backend
+        if: ${{ inputs.backendTag }}
+        # if inputs.backendTag is set, output a matrix with the following value: { "backend": { "tag": inputs.backendTag, "sentryRelease": inputs.backendSentryRelease } }
+        shell: bash
+        run: |
+          echo ::set-output name=matrix::$(jq -n --arg tag "${{ inputs.backendTag }}" --arg sentryRelease "${{ inputs.backendSentryRelease }}" '{ "backend": { "tag": $tag, "sentryRelease": $sentryRelease } }')
+
   build-package:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     strategy:
       matrix:
-        include:
-          - name: site
-            tag: ${{ inputs.siteTag }}
-            sentryRelease: ${{ inputs.siteSentryRelease }}
-          - name: backend
-            tag: ${{ inputs.backendTag }}
-            sentryRelease: ${{ inputs.backendSentryRelease }}
+        ${{fromJson(needs.matrix_prep.outputs.matrix)}}
+        # include:
+        #   - name: site
+        #     tag: ${{ inputs.siteTag }}
+        #     sentryRelease: ${{ inputs.siteSentryRelease }}
+        #   - name: backend
+        #     tag: ${{ inputs.backendTag }}
+        #     sentryRelease: ${{ inputs.backendSentryRelease }}
 
     steps:
       - name: Check out code
