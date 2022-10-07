@@ -104,6 +104,7 @@ const getProfile = async (
 		// sveltekit's `fetch` allows us to make a credentiale request server-side. The accessToken is stored in a cookie.
 		const res = await loadFetch(url.toString(), {
 			headers,
+			credentials: 'include',
 		});
 
 		const data = (await res.json()) as ValidatedUserDto;
