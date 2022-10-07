@@ -33,10 +33,6 @@ services:
     environment:
       - ORIGIN=http://localhost:3000
       - PUBLIC_API_URL_LOCAL=http://backend:3002
-      - PUBLIC_API_URL=http://localhost:3002
-      - PUBLIC_SITE_URL=http://localhost:3000
-
-  #   env_file: .env.docker
 
   backend:
     image: registry.digitalocean.com/aqtech/aqaratech-backend:latest
@@ -44,10 +40,7 @@ services:
       - '3002:3002'
     env_file: .env
     environment:
-      - ORIGIN=http://localhost:3000
       - PUBLIC_API_URL_LOCAL=http://backend:3002
-      - PUBLIC_API_URL=http://localhost:3002
-      - PUBLIC_SITE_URL=http://localhost:3000
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/aq-db
 
   postgres:
