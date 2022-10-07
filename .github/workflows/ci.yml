@@ -40,7 +40,7 @@ jobs:
         # if inputs.siteTag is set, output a matrix with the following value: { "site": { "tag": inputs.siteTag, "sentryRelease": inputs.siteSentryRelease } }
         shell: bash
         run: |
-          matrix=$(jq --arg tag "${{ inputs.siteTag }}" --arg sentryRelease "${{ inputs.siteSentryRelease }}" '.site = { tag: $tag, sentryRelease: $sentryRelease }' matrix_includes.json)
+          matrix=$(jq -n --arg tag "${{ inputs.siteTag }}" --arg sentryRelease "${{ inputs.siteSentryRelease }}" '{site: {tag: $tag, sentryRelease: $sentryRelease}}')
           echo ::set-output name=matrix::{\"include\":$(echo $matrix)}
 
       - id: set-matrix-backend
