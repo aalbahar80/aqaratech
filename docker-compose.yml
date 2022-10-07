@@ -1,35 +1,74 @@
 services:
-  caddy:
-    image: caddy/caddy:2.6.0-alpine
-    container_name: caddy-service
-    restart: unless-stopped
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - $PWD/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-      - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock
-    networks:
-      - aq-network
+  # caddy:
+  #   image: caddy/caddy:2.6.0-alpine
+  #   container_name: caddy-service
+  #   restart: unless-stopped
+  #   ports:
+  #     - '80:80'
+  #     - '443:443'
+  #   volumes:
+  #     - $PWD/Caddyfile:/etc/caddy/Caddyfile
+  #     - caddy_data:/data
+  #     - caddy_config:/config
+  #     - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock
+  #   networks:
+  #     - aq-network
 
-  meilisearch:
-    image: getmeili/meilisearch:v0.28.1
-    container_name: meilisearch
-    volumes:
-      - meili_data:/meili_data
+  # meilisearch:
+  #   image: getmeili/meilisearch:v0.28.1
+  #   container_name: meilisearch
+  #   volumes:
+  #     - meili_data:/meili_data
+  #   environment:
+  #     - MEILI_MASTER_KEY=MASTER_KEY
+  #   networks:
+  #     - aq-network
+  #     
+
+  site:
+    image: registry.digitalocean.com/aqtech/aqaratech-site:latest
+    ports:
+      - '3000:3000'
+    env_file: .env
     environment:
-      - MEILI_MASTER_KEY=MASTER_KEY
-    networks:
-      - aq-network
+      - ORIGIN=http://localhost:3000
+      - PUBLIC_API_URL_LOCAL=http://backend:3002
+      - PUBLIC_API_URL=http://localhost:3002
+      - PUBLIC_SITE_URL=http://localhost:3000
+
+  #   env_file: .env.docker
+
+  backend:
+    image: registry.digitalocean.com/aqtech/aqaratech-backend:latest
+    ports:
+      - '3002:3002'
+    env_file: .env
+    environment:
+      - ORIGIN=http://localhost:3000
+      - PUBLIC_API_URL_LOCAL=http://backend:3002
+      - PUBLIC_API_URL=http://localhost:3002
+      - PUBLIC_SITE_URL=http://localhost:3000
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/aq-db
+
+  postgres:
+    image: postgres:14
+    container_name: test-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5434:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  caddy_data:
-  caddy_config:
-  meili_data:
+  postgres_data:
+    # caddy_data:
+    # caddy_config:
+    # meili_data:
 
-networks:
-  aq-network:
-    driver: bridge
-    name: aq-network
+
+    # networks:
+    #   aq-network:
+    #     driver: bridge
+    #     name: aq-network
