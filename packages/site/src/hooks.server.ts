@@ -201,13 +201,16 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 	const publicUrl = environment.PUBLIC_API_URL;
 	const localUrl = environment.PUBLIC_API_URL_LOCAL;
 
+	// Bypass the public internet when calling our backend from sveltekit server
 	if (publicUrl && localUrl && request.url.startsWith(publicUrl)) {
 		request = new Request(request.url.replace(publicUrl, localUrl), request);
+	}
 
-		// Include cookies on server-side fetch requests in load functions
-		// https://kit.svelte.dev/docs/hooks#server-hooks-handlefetch
+	// Include cookies to any server-side fetch request to the backend
+	// These happend either in load functions or in the handle hook (when calling getUser)
+	// https://kit.svelte.dev/docs/hooks#server-hooks-handlefetch
+	if (request.url.startsWith(publicUrl) || request.url.startsWith(localUrl)) {
 		const cookie = event.request.headers.get('cookie');
-		// TODO: rm logs
 		console.log(['event.request.headers.get(cookie)', cookie]);
 		console.log([
 			'request.headers.get(cookie) - before',
