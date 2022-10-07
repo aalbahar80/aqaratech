@@ -5,6 +5,7 @@ import {
 	Logger,
 	NestInterceptor,
 } from '@nestjs/common';
+import { isHealthCheck } from '@self/utils';
 import { Request, Response } from 'express';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -20,6 +21,12 @@ export class LoggingInterceptor implements NestInterceptor {
 		const request = context.switchToHttp().getRequest() as Request;
 		const { ip, method, url } = request;
 		const userAgent = request.get('user-agent') || '';
+
+		// skip logging health checks
+		if (isHealthCheck(url) && process.env.PUBLIC_AQ_DEBUG_LEVEL !== 'silly') {
+			return next.handle();
+		}
+
 		this.logger.log(
 			`Request: ${method} ${url} ${ip}: ${context.getClass().name} ${
 				context.getHandler().name
