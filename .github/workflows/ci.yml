@@ -43,11 +43,11 @@ jobs:
         run: |
           matrix="{\"include\":[]}"
 
-          if [ -n "${{ inputs.siteTag }}" ]; then
+          if [ -n \"${{ inputs.siteTag }}\" ]; then
             matrix=$(echo $matrix | jq --arg tag \"${{ inputs.siteTag }}\" '.include += [{\"package\":\"site\",\"tag\":\"${{ inputs.siteTag }}\",\"sentryRelease\":\"${{ inputs.siteSentryRelease }}\"}]')
           fi
 
-          if [ -n "${{ inputs.backendTag }}" ]; then
+          if [ -n \"${{ inputs.backendTag }}\" ]; then
             matrix=$(echo $matrix | jq --arg tag \"${{ inputs.backendTag }}\" '.include += [{\"package\":\"backend\",\"tag\":\"${{ inputs.backendTag }}\",\"sentryRelease\":\"${{ inputs.backendSentryRelease }}\"}]')
           fi
 
