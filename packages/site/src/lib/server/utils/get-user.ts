@@ -2,6 +2,7 @@ import type { ValidatedRoleDto, ValidatedUserDto } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import type { RoleSK, User } from '$lib/models/types/auth.type';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
+import { Cookie } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing'; // TODO: remove?
 import type { RequestEvent } from '@sveltejs/kit';
@@ -51,20 +52,24 @@ export const getUser = async ({
 		meta: getRoleMeta(role),
 	}));
 
+	// Resolve user's role
 	let role: RoleSK | undefined;
+
+	// First, try to use the selected role
 	if (selectedRoleId) {
 		console.log(`Attempting to set role to selectedRoleId: ${selectedRoleId}`);
+
 		role = roles.find((role) => role.id === selectedRoleId);
-		if (!role) {
-			console.warn(
-				`Could not find role with selected id: ${selectedRoleId}. Falling back to default role.`,
-			);
-		}
-	} else {
+	}
+
+	// If that fails, or if no role was selected, use the default role
+	if (!role) {
+		// clear the role cookie if it exists since it has failed to lead to a valid role
+		event.cookies.set(Cookie.role, '', { maxAge: 0, path: '/' });
+
+		console.warn(`Falling back to default role.`);
+
 		role = getDefaultRole(roles);
-		console.warn(
-			`No role selected, attempting to use default role: ${role?.id}`,
-		);
 	}
 
 	const user: User = {
