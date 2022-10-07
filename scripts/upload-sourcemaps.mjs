@@ -1,6 +1,8 @@
 #!/usr/bin/env zx
 
 console.log({ argv });
+const TIMER = 'upload-sourcemaps.mjs';
+console.time(TIMER);
 
 const environment = argv['environment'];
 
@@ -41,10 +43,14 @@ if (cwd.endsWith('site')) {
 }
 
 await $`sentry-cli releases new ${prefixedVersion} ${org} ${project} --finalize`;
+console.timeLog(TIMER, 'Created release');
+
 await $`sentry-cli sourcemaps upload ${dir} ${org} ${project} --release ${prefixedVersion}`;
+console.timeLog(TIMER, 'sourcemaps uploaded');
 
 // Use sentry commit tracking. This will automatically associate commits with releases. AKA `suspect commits`.
 await $`sentry-cli releases set-commits --auto ${prefixedVersion} ${org} ${project}`;
+console.timeLog(TIMER, 'commits associated');
 
 // Create a new release deployment. This tells Sentry that a new release is being deployed to an environment. We can also add a URL herer.
 const envName = {
@@ -54,3 +60,4 @@ const envName = {
 
 // @ts-expect-error Limited type safety here.
 await $`sentry-cli releases deploys ${prefixedVersion} new -e ${envName[environment]} ${org} ${project}`;
+console.timeLog(TIMER, 'deployment created');
