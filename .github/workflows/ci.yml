@@ -41,15 +41,16 @@ jobs:
         # Syntax info: https://docs.github.com/en/actions/learn-github-actions/expressions#example-returning-a-json-object
         shell: bash
         run: |
-          matrix="{\"include\":[]}"
-
-          if [ -n \"${{ inputs.siteTag }}\" ]; then
-            matrix=$(echo $matrix | jq --arg tag \"${{ inputs.siteTag }}\" '.include += [{\"package\":\"site\",\"tag\":\"${{ inputs.siteTag }}\",\"sentryRelease\":\"${{ inputs.siteSentryRelease }}\"}]')
+          if [ -n "${{ inputs.siteTag }}" ]; then
+            matrix="{\"include\":[{\"package\":\"site\",\"tag\":\"${{ inputs.siteTag }}\",\"sentryRelease\":\"${{ inputs.siteSentryRelease }}\"}]}"
           fi
 
-          if [ -n \"${{ inputs.backendTag }}\" ]; then
-            matrix=$(echo $matrix | jq --arg tag \"${{ inputs.backendTag }}\" '.include += [{\"package\":\"backend\",\"tag\":\"${{ inputs.backendTag }}\",\"sentryRelease\":\"${{ inputs.backendSentryRelease }}\"}]')
+          if [ -n "${{ inputs.backendTag }}" ]; then
+            matrix="{\"include\":[{\"package\":\"backend\",\"tag\":\"${{ inputs.backendTag }}\",\"sentryRelease\":\"${{ inputs.backendSentryRelease }}\"}]}"
           fi
+
+          if [[ -n "${{ inputs.siteTag }}" && -n "${{ inputs.backendTag }}" ]]; then
+            matrix='[{"package": "site", "tag": "${{ inputs.siteTag }}", "sentryRelease": "${{ inputs.siteSentryRelease }}"}, {"package": "backend", "tag": "${{ inputs.backendTag }}", "sentryRelease": "${{ inputs.backendSentryRelease }}"}]'
 
           echo $matrix
           echo "::set-output name=matrix::$matrix"
