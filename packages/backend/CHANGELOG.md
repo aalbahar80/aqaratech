@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.3.1
+
+### Patch Changes
+
+- ca420c03: remove stale auth header definition from swagger schema and sdk
+
 ## 1.3.0
 
 ### Minor Changes
