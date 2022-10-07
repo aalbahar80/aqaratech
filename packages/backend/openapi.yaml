@@ -2494,6 +2494,11 @@ info:
 tags: []
 servers: []
 components:
+  securitySchemes:
+    cookie:
+      type: apiKey
+      in: cookie
+      name: accessToken
   schemas:
     CreateTenantDto:
       type: object

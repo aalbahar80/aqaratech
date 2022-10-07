@@ -15,6 +15,7 @@ import { UsersModule } from 'src/users/users.module';
 
 import { INestApplication, Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Cookie } from '@self/utils';
 import { writeFileSync } from 'fs';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
@@ -34,6 +35,12 @@ export const setupSwagger = async (app: INestApplication) => {
 		// 	description: 'Enter JWT token',
 		// 	in: 'header',
 		// })
+		.addCookieAuth(Cookie.accessToken, {
+			type: 'apiKey',
+		})
+		// .addSecurityRequirements('oauth-swagger')
+		// .addOAuth2(
+		// 	{
 		// .addSecurityRequirements('oauth-swagger')
 		// .addOAuth2(
 		// 	{
