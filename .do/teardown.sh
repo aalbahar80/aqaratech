@@ -32,7 +32,8 @@ echo "App found. App ID: $APP_ID"
 if [ -z "$APP_ID" ]; then
   echo "No app ID found"
   echo "Exiting..."
-  exit 1
+  # don't exit with error code because sometimes the app was never created to begin with
+  exit 0
 fi
 
 # Check that app belongs to the provided project before deleting
