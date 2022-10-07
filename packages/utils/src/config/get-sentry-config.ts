@@ -8,7 +8,8 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 
 	const sampleRate = +(PUBLIC_TRACE_RATE ?? 0);
 
-	return {
+	// TODO: use new typescript `satisfies` directive for type instead of casting
+	const sentryConfig: Options = {
 		enabled: true,
 		environment: PUBLIC_AQARATECH_ENV || 'unknown',
 		debug: PUBLIC_AQ_DEBUG_SENTRY === '1',
@@ -21,23 +22,23 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 			}
 			return sampleRate;
 		},
+	};
 
-		// We don't want to send errors to Sentry in development/testing
+	const liveEnvs: AqaratechEnv['PUBLIC_AQARATECH_ENV'][] = [
+		'production',
+		'staging',
+	];
+
+	if (!liveEnvs.includes(PUBLIC_AQARATECH_ENV) && !PUBLIC_AQ_DEBUG_SENTRY) {
+		// Disable sending any events to Sentry in non-live environments.
+		// If debugging Sentry, we still want to send events.
+		//
 		// We can't use `enabled: false` because that would disable sentry entirely,
 		// which means that our tests would run without Sentry, causing a large discrepancy between production and testing.
-		// TODO: consider not passing this option at all using conditional
-		beforeSend(event) {
-			const shouldSendEnvs: AqaratechEnv['PUBLIC_AQARATECH_ENV'][] = [
-				'production',
-				'staging',
-			];
-			if (shouldSendEnvs.includes(PUBLIC_AQARATECH_ENV)) {
-				return event;
-			} else {
-				return null;
-			}
-		},
-	};
+		sentryConfig.beforeSend = () => null;
+	}
+
+	return sentryConfig;
 };
 
 type Config = Pick<
