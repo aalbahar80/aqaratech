@@ -50,7 +50,7 @@ jobs:
           fi
 
           if [[ -n "${{ inputs.siteTag }}" && -n "${{ inputs.backendTag }}" ]]; then
-            matrix="[{"package": "site", "tag": "${{ inputs.siteTag }}", "sentryRelease": "${{ inputs.siteSentryRelease }}"}, {"package": "backend", "tag": "${{ inputs.backendTag }}", "sentryRelease": "${{ inputs.backendSentryRelease }}"}]"
+            matrix="{\"include\":[{\"package\":\"site\",\"tag\":\"${{ inputs.siteTag }}\",\"sentryRelease\":\"${{ inputs.siteSentryRelease }}\"},{\"package\":\"backend\",\"tag\":\"${{ inputs.backendTag }}\",\"sentryRelease\":\"${{ inputs.backendSentryRelease }}\"}]}"
           fi
 
           echo $matrix
