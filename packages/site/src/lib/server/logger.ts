@@ -15,6 +15,12 @@ export const logger = createLogger({
 		label({ label: 'site' }),
 		timestamp(),
 		myFormat,
+		format.metadata({ fillExcept: ['message', 'level', 'timestamp', 'label'] }),
 	),
 	transports: [new transports.Console()],
+	exitOnError: false,
 });
+
+// example to print an object
+// const myobj = { ... }
+// logger.info('This message will include a complete object: %O', myobj);
