@@ -36,14 +36,18 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        if: ${{ inputs.siteTag }}
-        # if inputs.siteTag is set, output a matrix with the following value: { include: [{ package: 'site', tag: inputs.siteTag, sentryRelease: inputs.siteSentryRelease }] }
-        # example: run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+        # only include a package if it it has a tag (i.e. it was published)
         # More info: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix
         # Syntax info: https://docs.github.com/en/actions/learn-github-actions/expressions#example-returning-a-json-object
         shell: bash
         run: |
-          matrix="{\"include\":[{\"package\":\"site\",\"tag\":\"${{ inputs.siteTag }}\",\"sentryRelease\":\"${{ inputs.siteSentryRelease }}\"}]}"
+          matrix="{\"include\":[]}"
+          if [ -n "${{ inputs.siteTag }}" ]; then
+            matrix=$(echo $matrix | jq --arg tag "${{ inputs.siteTag }}" --arg sentryRelease "${{ inputs.siteSentryRelease }}" '.include += [{ "package": "site", "tag": $tag, "sentryRelease": $sentryRelease }]')
+          fi
+          if [ -n "${{ inputs.backendTag }}" ]; then
+            matrix=$(echo $matrix | jq --arg tag "${{ inputs.backendTag }}" --arg sentryRelease "${{ inputs.backendSentryRelease }}" '.include += [{ "package": "backend", "tag": $tag, "sentryRelease": $sentryRelease }]')
+          fi
           echo $matrix
           echo "::set-output name=matrix::$matrix"
 
