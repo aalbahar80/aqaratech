@@ -4,7 +4,7 @@ import type { RoleSK, User } from '$lib/models/types/auth.type';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing'; // TODO: remove?
-import type { LoadEvent } from '@sveltejs/kit';
+import type { RequestEvent } from '@sveltejs/kit';
 
 const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
 	const defaultRole = roles.find((role) => role.isDefault) || roles[0];
@@ -28,13 +28,13 @@ const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
  */
 export const getUser = async ({
 	selectedRoleId,
-	loadFetch,
+	event,
 }: {
 	selectedRoleId?: string;
-	loadFetch: LoadEvent['fetch'];
+	event: RequestEvent;
 }): Promise<User | undefined> => {
 	console.debug('[getUser] Getting user');
-	const profile = await getProfile(loadFetch);
+	const profile = await getProfile(event);
 
 	console.log('[getUser] Got profile', profile);
 
@@ -77,7 +77,7 @@ export const getUser = async ({
 };
 
 const getProfile = async (
-	loadFetch: LoadEvent['fetch'],
+	event: RequestEvent,
 ): Promise<ValidatedUserDto | undefined> => {
 	// Sentry
 	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();
@@ -102,7 +102,7 @@ const getProfile = async (
 
 		// fetch user
 		// sveltekit's `fetch` allows us to make a credentiale request server-side. The accessToken is stored in a cookie.
-		const res = await loadFetch(url.toString(), {
+		const res = await event.fetch(url.toString(), {
 			headers,
 			credentials: 'include',
 		});
