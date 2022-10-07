@@ -3,6 +3,7 @@ export interface AqaratechEnv {
 		| 'production'
 		| 'development'
 		| 'staging'
+		| 'testing'
 		| undefined;
 
 	// URL's
