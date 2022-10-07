@@ -18,13 +18,11 @@ import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
-console.log('Version: ', __AQARATECH_APP_VERSION__);
+logger.info('Version: %O', __AQARATECH_APP_VERSION__);
 
-console.log({
-	'$env/dynamic/public': env,
-});
+logger.info('$env/dynamic/public %O', env);
 
-console.log('process.env check:');
+logger.info('process.env check:');
 envCheck();
 
 const sentryConfig = getSentryConfig({
@@ -33,7 +31,7 @@ const sentryConfig = getSentryConfig({
 	PUBLIC_TRACE_RATE: environment.PUBLIC_TRACE_RATE,
 });
 
-console.log('AqaratechConfig', sentryConfig);
+logger.info('AqaratechConfig %O', sentryConfig);
 
 Sentry.init({
 	...sentryConfig,
@@ -65,8 +63,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const now = Date.now();
 	const method = event.request.method;
-	console.log(
-		`${new Date().toISOString()} Request: ${method} ${event.url.href}: ${
+
+	logger.info(
+		`Request: ${method} ${event.url.href}: ${
 			event.routeId
 		} ${event.request.headers.get('user-agent')}`,
 	);
@@ -134,10 +133,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	spanResolve.finish();
 
-	console.log(
-		`${new Date().toISOString()} Response: ${Date.now() - now}ms - ${method} ${
-			event.url.pathname
-		} ${response.status} - ${event.request.headers.get('user-agent')} - ${
+	logger.info(
+		`Response: ${Date.now() - now}ms - ${method} ${event.url.pathname} ${
+			response.status
+		} - ${event.request.headers.get('user-agent')} - ${
 			event.locals.user?.email
 		}`,
 	);
