@@ -107,6 +107,11 @@ const getProfile = async (
 			credentials: 'include',
 		});
 
+		if (!res.ok) {
+			console.warn('[getProfile] Unable to contact backend', res);
+			return undefined;
+		}
+
 		const data = (await res.json()) as ValidatedUserDto;
 
 		return data;
