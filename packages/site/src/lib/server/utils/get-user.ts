@@ -58,7 +58,7 @@ export const getUser = async ({
 
 	// First, try to use the selected role
 	if (selectedRoleId) {
-		console.log(`Attempting to set role to selectedRoleId: ${selectedRoleId}`);
+		logger.debug(`Attempting to set role to selectedRoleId: ${selectedRoleId}`);
 
 		role = roles.find((role) => role.id === selectedRoleId);
 	}

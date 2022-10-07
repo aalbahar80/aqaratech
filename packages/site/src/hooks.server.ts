@@ -12,7 +12,7 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
-import { Cookie, envCheck, getSentryConfig } from '@self/utils';
+import { Cookie, envCheck, getSentryConfig, isHealthCheck } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -64,11 +64,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const now = Date.now();
 	const method = event.request.method;
 
-	logger.info(
-		`Request: ${method} ${event.url.href}: ${
+	logger.log({
+		level: isHealthCheck(event.url.pathname) ? 'verbose' : 'info',
+		message: `Request: ${method} ${event.url.href}: ${
 			event.routeId
 		} ${event.request.headers.get('user-agent')}`,
-	);
+	});
 
 	const spanCookies = transaction.startChild({
 		op: 'http.server',
@@ -133,13 +134,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	spanResolve.finish();
 
-	logger.info(
-		`Response: ${Date.now() - now}ms - ${method} ${event.url.pathname} ${
-			response.status
-		} - ${event.request.headers.get('user-agent')} - ${
+	logger.log({
+		level: isHealthCheck(event.url.pathname) ? 'verbose' : 'info',
+		message: `Response: ${Date.now() - now}ms - ${method} ${
+			event.url.pathname
+		} ${response.status} - ${event.request.headers.get('user-agent')} - ${
 			event.locals.user?.email
 		}`,
-	);
+	});
 
 	// Close the Sentry transaction
 	transaction.finish();

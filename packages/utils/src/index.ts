@@ -1,5 +1,6 @@
 export { envCheck } from './config/env-check';
 export { getSentryConfig } from './config/get-sentry-config';
+export { isHealthCheck } from './config/is-health-check';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
 export { Cookie } from './constants/cookie';
 export { dbEntity, nonDbEntity } from './entity/entity-definition';

@@ -1,4 +1,5 @@
 import { authConfig } from '$lib/environment/auth';
+import { logger } from '$lib/server/logger';
 import { Cookie } from '@self/utils';
 import { createLocalJWKSet, jwtVerify } from 'jose';
 
@@ -9,7 +10,7 @@ type TokenType = Cookie.idToken | Cookie.accessToken;
 export const validateToken = async (token: string, tokenType: TokenType) => {
 	const JWKS = createLocalJWKSet(authConfig.JWKS);
 
-	console.debug(`Validating ${tokenType}...`);
+	logger.debug(`Validating ${tokenType}...`);
 
 	const audience =
 		tokenType === Cookie.accessToken
