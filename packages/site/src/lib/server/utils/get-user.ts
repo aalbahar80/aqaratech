@@ -42,6 +42,8 @@ export const getUser = async ({
 		return undefined;
 	}
 
+	console.log('[getUser] Got profile', profile);
+
 	// augment each role with metadata
 	const roles = profile.roles.map((role) => ({
 		...role,
