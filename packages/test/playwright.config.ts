@@ -48,8 +48,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		{
 			cwd: '../site',
-			// don't use `pnpm run preview` because sourcing the env file will fail in CI
-			command: 'node build/index.js',
+			command: 'pnpm run preview',
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
