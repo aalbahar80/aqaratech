@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.3.0
+
+### Minor Changes
+
+- dee635d4: configure winston logger
+
 ## 1.2.1
 
 ### Patch Changes
