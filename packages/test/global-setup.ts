@@ -1,5 +1,6 @@
 import { chromium, type FullConfig } from '@playwright/test';
 import { testOrgEmail, testPassword } from '@self/seed';
+import { Cookie } from '@self/utils';
 import { getToken } from './utils/get-token';
 
 async function globalSetup(config: FullConfig) {
@@ -16,9 +17,9 @@ async function globalSetup(config: FullConfig) {
 
 	// Avoid logging in again if cookies have not expired
 	try {
-		const idToken = await getToken({ name: 'idToken', domain: baseURL });
+		const idToken = await getToken({ name: Cookie.idToken, domain: baseURL });
 		const accessToken = await getToken({
-			name: 'accessToken',
+			name: Cookie.accessToken,
 			domain: baseURL,
 		});
 

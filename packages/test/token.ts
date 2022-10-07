@@ -1,4 +1,5 @@
 import { test as base } from '@playwright/test';
+import { Cookie } from '@self/utils';
 
 type MyFixtures = {
 	token: string;
@@ -13,7 +14,7 @@ export const test = base.extend<MyFixtures>({
 		let token: string;
 		try {
 			const cookies = (await import('./storageState.json')).cookies;
-			token = cookies.find((c) => c.name === 'accessToken').value;
+			token = cookies.find((c) => c.name === Cookie.accessToken).value;
 		} catch (e) {
 			console.log(e);
 		}

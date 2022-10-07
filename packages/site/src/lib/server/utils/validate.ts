@@ -1,7 +1,8 @@
 import { authConfig } from '$lib/environment/auth';
+import { Cookie } from '@self/utils';
 import { createLocalJWKSet, jwtVerify } from 'jose';
 
-type TokenType = 'idToken' | 'accessToken';
+type TokenType = Cookie.idToken | Cookie.accessToken;
 /**
  * Validates idtoken and returns payload.
  */
@@ -11,7 +12,7 @@ export const validateToken = async (token: string, tokenType: TokenType) => {
 	console.debug(`Validating ${tokenType}...`);
 
 	const audience =
-		tokenType === 'accessToken'
+		tokenType === Cookie.accessToken
 			? authConfig.AUTH0_API_AUDIENCE
 			: authConfig.AUTH0_CLIENT_ID;
 

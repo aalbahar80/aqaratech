@@ -11,7 +11,7 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
-import { envCheck, getSentryConfig } from '@self/utils';
+import { Cookie, envCheck, getSentryConfig } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -75,16 +75,16 @@ export const handle: Handle = async ({ event, resolve }) => {
 		description: 'parse cookies and get user',
 	});
 
-	const idToken = event.cookies.get('idToken');
-	const accessToken = event.cookies.get('accessToken');
-	const currentRole = event.cookies.get('role');
+	const idToken = event.cookies.get(Cookie.idToken);
+	const accessToken = event.cookies.get(Cookie.accessToken);
+	const currentRole = event.cookies.get(Cookie.role);
 
 	// consume idToken and set user. Any redirects should be handled by layout/page load functions.
 	if (idToken && accessToken) {
 		// validate tokens
 		try {
-			await validateToken(idToken, 'idToken');
-			await validateToken(accessToken, 'accessToken');
+			await validateToken(idToken, Cookie.idToken);
+			await validateToken(accessToken, Cookie.accessToken);
 		} catch (error) {
 			console.debug('Error validating token', error);
 			return handleInvalidToken(event);

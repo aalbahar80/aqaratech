@@ -1,7 +1,8 @@
+import type { Cookie } from '@self/utils';
 import { decodeJwt } from 'jose';
 
 interface TokenReq {
-	name: 'accessToken' | 'idToken';
+	name: Cookie.idToken | Cookie.accessToken;
 	domain: string | undefined;
 }
 

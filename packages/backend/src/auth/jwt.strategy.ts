@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { AQARATECH_STAFF_ROLE } from '@self/utils';
+import { AQARATECH_STAFF_ROLE, Cookie } from '@self/utils';
 import type { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { Strategy } from 'passport-jwt';
@@ -32,10 +32,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		}
 
 		const cookieExtractor = function (req: Request) {
-			const token = req.cookies['accessToken'];
+			const token = req.cookies[Cookie.accessToken];
 
 			if (!token) {
-				Logger.debug('No token found in cookies');
+				Logger.debug('No cookie token found');
 			}
 
 			return token;

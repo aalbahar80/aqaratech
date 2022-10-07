@@ -1,4 +1,5 @@
 import { Page, test as base } from '@playwright/test';
+import { Cookie } from '@self/utils';
 import { getToken } from './utils/get-token';
 
 type MyFixtures = {
@@ -22,7 +23,7 @@ export const test = base.extend<MyFixtures>({
 	},
 	token: async ({ baseURL }, use) => {
 		const token = await getToken({
-			name: 'accessToken',
+			name: Cookie.accessToken,
 			domain: baseURL,
 		});
 

@@ -1,26 +1,27 @@
 import { environment } from '$lib/environment';
 import { authConfig } from '$lib/environment/auth';
+import { Cookie } from '@self/utils';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = ({ cookies }) => {
 	// clear cookies (local signout)
 
 	// Why does this not work?
-	// cookies.delete('idToken');
-	// cookies.delete('accessToken');
+	// cookies.delete(Cookie.idToken);
+	// cookies.delete(Cookie.accessToken);
 
 	// Manually set cookies to expire in the past
-	cookies.set('idToken', '', {
+	cookies.set(Cookie.idToken, '', {
 		maxAge: 0,
 		path: '/',
 	});
 
-	cookies.set('accessToken', '', {
+	cookies.set(Cookie.accessToken, '', {
 		maxAge: 0,
 		path: '/',
 	});
 
-	cookies.set('role', '', {
+	cookies.set(Cookie.role, '', {
 		maxAge: 0,
 		path: '/',
 	});

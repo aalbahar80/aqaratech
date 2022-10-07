@@ -1,5 +1,6 @@
 import { MAX_AGE } from '$lib/constants/misc';
 import { authConfig } from '$lib/environment/auth';
+import { Cookie } from '@self/utils';
 import type { RequestHandler } from '@sveltejs/kit';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
@@ -50,12 +51,12 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 	}
 
 	// set cookies. tokens will be validated in hooks.handle
-	cookies.set('idToken', tokens.id_token, {
+	cookies.set(Cookie.idToken, tokens.id_token, {
 		path: '/',
 		maxAge: MAX_AGE,
 	});
 
-	cookies.set('accessToken', tokens.access_token, {
+	cookies.set(Cookie.accessToken, tokens.access_token, {
 		path: '/',
 		maxAge: MAX_AGE,
 	});

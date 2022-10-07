@@ -369,11 +369,11 @@ importers:
       typescript: 4.8.4
       ufo: 0.8.5
     dependencies:
-      '@self/utils': link:../utils
       eslint-config-custom: link:../eslint-config-custom
     devDependencies:
       '@playwright/test': 1.26.1
       '@self/seed': link:../seed
+      '@self/utils': link:../utils
       '@tsconfig/node18': 1.0.1
       '@tsconfig/node18-strictest': 1.0.0
       '@types/node': 18.8.2

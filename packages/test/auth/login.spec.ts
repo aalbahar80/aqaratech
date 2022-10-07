@@ -1,5 +1,6 @@
 import { expect, Page, test as base } from '@playwright/test';
 import { testOrgEmail, testPassword } from '@self/seed';
+import { Cookie } from '@self/utils';
 
 const user = {
 	role: 'orgadmin',
@@ -58,7 +59,7 @@ test('login', async ({ page, baseURL }) => {
 	const domain = new URL(baseURL).hostname;
 
 	const cookies = await page.context().cookies();
-	const accessToken = cookies.find((c) => c.name === 'accessToken');
+	const accessToken = cookies.find((c) => c.name === Cookie.accessToken);
 
 	await expect.soft(page).toHaveURL(user.destination);
 
@@ -75,14 +76,14 @@ test('login', async ({ page, baseURL }) => {
 	};
 
 	expect.soft(accessToken).toMatchObject({
-		name: 'accessToken',
+		name: Cookie.accessToken,
 		...token,
 	});
 
-	const idToken = cookies.find((c) => c.name === 'idToken');
+	const idToken = cookies.find((c) => c.name === Cookie.idToken);
 
 	expect.soft(idToken).toMatchObject({
-		name: 'idToken',
+		name: Cookie.idToken,
 		...token,
 	});
 });

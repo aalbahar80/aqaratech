@@ -1,4 +1,5 @@
 import { LOGIN } from '$lib/constants/routes';
+import { Cookie } from '@self/utils';
 import type { Handle } from '@sveltejs/kit';
 
 type SKEvent = Parameters<Handle>[0]['event'];
@@ -19,7 +20,7 @@ export const handleInvalidToken = async (event: SKEvent) => {
 	const headers = new Headers();
 
 	// clear cookies
-	const cookieNames = ['idToken', 'accessToken', 'role'];
+	const cookieNames = [Cookie.idToken, Cookie.accessToken, Cookie.role];
 
 	for (const name of cookieNames) {
 		headers.append('Set-Cookie', clearCookie(name));
