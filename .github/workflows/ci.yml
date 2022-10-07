@@ -68,7 +68,8 @@ jobs:
         shell: bash
         run: pnpm zx ./scripts/rm-sourcemaps.mjs ./packages/site/build/client --force
 
-      # - run: docker build -f ./packages/site/Dockerfile .
+      - run: pnpm --filter @self/site --prod deploy pruned
+
       - uses: ./.github/actions/build-image
         with:
           package: site
