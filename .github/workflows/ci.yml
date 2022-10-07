@@ -56,15 +56,7 @@ jobs:
     environment: ${{ inputs.environment }}
     needs: matrix_prep
     strategy:
-      matrix:
-        ${{fromJson(needs.matrix_prep.outputs.matrix)}}
-        # include:
-        #   - name: site
-        #     tag: ${{ inputs.siteTag }}
-        #     sentryRelease: ${{ inputs.siteSentryRelease }}
-        #   - name: backend
-        #     tag: ${{ inputs.backendTag }}
-        #     sentryRelease: ${{ inputs.backendSentryRelease }}
+      matrix: ${{ fromJson(needs.matrix_prep.outputs.matrix) }}
 
     steps:
       - name: Check out code
