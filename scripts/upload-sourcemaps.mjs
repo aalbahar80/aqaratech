@@ -77,8 +77,10 @@ if (projectName === 'site') {
 	await $`cp -r build build-temp`;
 	// remove the client directory from the build-temp directory
 	await $`rm -rf build-temp/client`;
+	// flatten sourcemaps using sorcery
+	await $`find build-temp -type f -name '*.js' -exec echo {} \; | xargs -I % /bin/bash -c 'echo flattening sourcemap: %; pnpm sorcery -i %'`;
 	// upload the server sourcemaps
-	await $`sentry-cli sourcemaps upload build-temp .svelte-kit/adapter-node ${org} ${site_server_project} --release ${prefixedVersion}`;
+	await $`sentry-cli sourcemaps upload build-temp ${org} ${site_server_project} --release ${prefixedVersion}`;
 	// alternative: sentry-cli releases files site-server-1.3.1 upload-sourcemaps ./build/server --org aqaratech --project site-server
 	// remove the temporary build directory
 	await $`rm -rf build-temp`;
