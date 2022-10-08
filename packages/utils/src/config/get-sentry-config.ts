@@ -1,6 +1,7 @@
 import type { Options } from '@sentry/types';
 import type { AqaratechEnv } from '../../../../types/environment';
 import { isHealthCheck } from './is-health-check';
+import { getReleaseName } from './sentry/release';
 
 // TODO: use new typescript `satisfies` directive for return type
 export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
@@ -16,6 +17,7 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 		environment: PUBLIC_AQARATECH_ENV || 'unknown',
 		debug,
 		tracesSampleRate: sampleRate,
+		release: getReleaseName(config),
 
 		// Don't spam sentry with health checks
 		tracesSampler(samplingContext) {
@@ -48,10 +50,19 @@ const liveEnvs: AqaratechEnv['PUBLIC_AQARATECH_ENV'][] = [
 	'staging',
 ];
 
-type Config = Pick<
+export type Config = Pick<
 	AqaratechEnv,
-	'PUBLIC_AQARATECH_ENV' | 'PUBLIC_AQ_DEBUG_SENTRY' | 'PUBLIC_TRACE_RATE'
->;
+	| 'PUBLIC_AQARATECH_ENV'
+	| 'PUBLIC_AQ_DEBUG_SENTRY'
+	| 'PUBLIC_TRACE_RATE'
+	| 'PUBLIC_COMMIT_SHA'
+> & {
+	/**
+	 * The version from the package.json.
+	 */
+	version: string;
+	repoName: string;
+};
 
 type AqaratechSentryConfig = Pick<
 	Options,

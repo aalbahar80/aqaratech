@@ -29,15 +29,16 @@ const sentryConfig = getSentryConfig({
 	PUBLIC_AQ_DEBUG_SENTRY: environment.PUBLIC_AQ_DEBUG_SENTRY,
 	PUBLIC_AQARATECH_ENV: environment.PUBLIC_AQARATECH_ENV,
 	PUBLIC_TRACE_RATE: environment.PUBLIC_TRACE_RATE,
+	PUBLIC_COMMIT_SHA: environment.PUBLIC_COMMIT_SHA,
+	version: __AQARATECH_APP_VERSION__,
+	repoName: 'site',
 });
 
 logger.info('AqaratechConfig %O', sentryConfig);
 
 Sentry.init({
 	...sentryConfig,
-	// TODO use environment variable to set the DSN
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
-	release: `site-${__AQARATECH_APP_VERSION__}`,
 	integrations: [
 		// enable HTTP calls tracing
 		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),

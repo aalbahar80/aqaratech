@@ -61,6 +61,8 @@ export interface AqaratechEnv {
 	readonly MEILISEARCH_HOST: string;
 	readonly MEILISEARCH_API_KEY: string;
 
+	readonly PUBLIC_COMMIT_SHA: string;
+
 	// Debug
 	readonly PUBLIC_AQ_DEBUG_LEVEL:
 		| 'error'
