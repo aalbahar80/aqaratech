@@ -14,7 +14,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@playwright/test": "1.26.1",
+		"@playwright/test": "1.27.0",
 		"@self/seed": "workspace:1.0.0",
 		"@self/utils": "workspace:2.0.0",
 		"@tsconfig/node18": "1.0.1",
