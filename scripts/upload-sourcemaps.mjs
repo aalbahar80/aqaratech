@@ -78,7 +78,7 @@ if (projectName === 'site') {
 	// remove the client directory from the build-temp directory
 	await $`rm -rf build-temp/client`;
 	// upload the server sourcemaps
-	await $`sentry-cli sourcemaps upload build-temp ${org} ${site_server_project} --release ${prefixedVersion}`;
+	await $`sentry-cli sourcemaps upload build-temp .svelte-kit/adapter-node ${org} ${site_server_project} --release ${prefixedVersion}`;
 	// alternative: sentry-cli releases files site-server-1.3.1 upload-sourcemaps ./build/server --org aqaratech --project site-server
 	// remove the temporary build directory
 	await $`rm -rf build-temp`;
