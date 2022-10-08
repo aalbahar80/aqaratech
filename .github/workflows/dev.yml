@@ -20,8 +20,9 @@ jobs:
       environment: dev
       # Use PR head branch name if PR, otherwise use branch name
       appName: ${{  github.head_ref || github.ref_name }}
-      siteSentryRelease: ${{ github.sha }}
-      backendSentryRelease: ${{ github.sha }}
+      # change to github.sha when we add the sha to Sentry.init
+      siteSentryRelease: ${{  github.head_ref || github.ref_name }}
+      backendSentryRelease: ${{  github.head_ref || github.ref_name }}
       # TODO: It'd be nice to skip building unchanged images
       # if branch is master, set siteTag to latest, otherwise use branch name
       siteTag: ${{  github.ref_name == 'master' && 'latest' || github.head_ref || github.ref_name }}
