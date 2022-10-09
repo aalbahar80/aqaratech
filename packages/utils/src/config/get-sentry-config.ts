@@ -2,6 +2,7 @@ import type { Options } from '@sentry/types';
 import type { AqaratechEnv } from '../../../../types/environment';
 import { isHealthCheck } from './is-health-check';
 import { getReleaseName } from './sentry/release';
+import { getSendEventConfig } from './sentry/should-send-events';
 
 // TODO: use new typescript `satisfies` directive for return type
 export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
@@ -28,27 +29,15 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 		},
 	};
 
-	if (!liveEnvs.includes(PUBLIC_AQARATECH_ENV) && !debug) {
-		// Disable sending any events to Sentry in non-live environments.
-		// If debugging Sentry, we still want to send events.
-		//
-		// We can't use `enabled: false` because that would disable sentry entirely,
-		// which means that our tests would run without Sentry, causing a large discrepancy between production and testing.
-		sentryConfig.beforeSend = () => {
-			console.log('Sentry disabled in non-live environment', {
-				PUBLIC_AQARATECH_ENV,
-			});
-			return null;
-		};
+	// Suppress sending events in dev unless debugging
+	const sendEventConfig = getSendEventConfig(config, { debug, sampleRate });
+
+	if (!sendEventConfig.shouldAlwaysSend) {
+		sentryConfig.beforeSend = sendEventConfig.beforeSend;
 	}
 
 	return sentryConfig;
 };
-
-const liveEnvs: AqaratechEnv['PUBLIC_AQARATECH_ENV'][] = [
-	'production',
-	'staging',
-];
 
 export type Config = Pick<
 	AqaratechEnv,
