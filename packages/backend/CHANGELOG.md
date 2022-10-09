@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.4.1
+
+### Patch Changes
+
+- ce7bc763: bump all
+
 ## 1.4.0
 
 ### Minor Changes
