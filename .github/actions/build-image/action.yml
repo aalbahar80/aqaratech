@@ -34,7 +34,6 @@ runs:
         tags: |
           type=ref,event=branch
           type=ref,event=pr
-          type=semver,pattern={{version}},enable=${{ github.event_name == 'push' && github.ref == 'refs/heads/prod' }}
           type=raw,value=${{ inputs.customTag }}
 
     - name: Set up Docker Buildx
