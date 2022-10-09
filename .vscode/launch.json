@@ -52,6 +52,17 @@
 			"cwd": "${workspaceFolder}/packages/site",
 			"skipFiles": ["<node_internals>/**"],
 			"args": ["./node_modules/vite/bin/vite", "dev", "--port", "3000"]
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Debug Backend",
+			"cwd": "${workspaceFolder}/packages/backend",
+			"skipFiles": ["<node_internals>/**"],
+			"runtimeExecutable": "pnpm",
+			"runtimeArgs": ["run", "start:debug"],
+			"sourceMaps": true,
+			"resolveSourceMapLocations": ["${workspaceFolder}/packages/backend/**"]
 		}
 	]
 }

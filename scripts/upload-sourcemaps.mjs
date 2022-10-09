@@ -84,6 +84,7 @@ if (projectName === 'site') {
 	// remove the temporary build directory
 	await $`rm -rf build-temp`;
 } else if (projectName === 'backend') {
+	// setting the path to the dist directory is enough because we use inlineSources in tsconfig.json, which embeds the source code in the sourcemaps (in the "sourcesContent" property)
 	await $`sentry-cli sourcemaps upload dist ${org} ${project} --release ${prefixedVersion}`;
 }
 

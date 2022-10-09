@@ -8,6 +8,8 @@
 		"allowSyntheticDefaultImports": true,
 		"target": "ES2022",
 		"sourceMap": true,
+		"inlineSources": true,
+		// "sourceRoot": "/",
 		"outDir": "./dist",
 		"baseUrl": "./",
 		"incremental": true,
