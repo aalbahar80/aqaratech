@@ -15,7 +15,7 @@
 		"custom-lint": "eslint . --ext .ts,.svelte",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
-		"sentry:release": "../../scripts/upload-sourcemaps",
+		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
 		"flatten-sourcemaps": "../../scripts/flatten-sourcemaps.sh"
 	},
 	"devDependencies": {

@@ -20,6 +20,7 @@ const site_client_project = ['--project', 'site-client'];
 let project;
 
 const cwd = process.cwd();
+console.log({ cwd });
 
 let projectName = undefined;
 
