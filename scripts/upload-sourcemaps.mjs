@@ -73,7 +73,7 @@ if (projectName === 'site') {
 
 	// Upload server sourcemaps
 
-	await $`pnpm run flatten-sourcemaps`;
+	await $`pnpm -w run flatten-sourcemaps`;
 
 	// add a prefix to the file paths to match them up with paths in stack traces
 	// use build-temp directory, which contains the flattened sourcemaps courtesy of flatten-sourcemaps.sh
