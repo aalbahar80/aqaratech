@@ -75,7 +75,7 @@ export class CaslAbilityFactory {
 			this.tenantAbility.define(role, can);
 		}
 
-		this.logger.log( `Defined manageable entities for role ${role.id} in ${ Date.now() - now }ms`,); // prettier-ignore
+		this.logger.debug( `Defined manageable entities for role ${role.id} in ${ Date.now() - now }ms`,); // prettier-ignore
 
 		return build();
 	}

@@ -175,11 +175,11 @@ export class AbilitiesGuard implements CanActivate {
 		}
 
 		if (isAllowed) {
-			this.logger.log(
+			this.logger.debug(
 				`User ${request.user.email} has been granted preliminary access to ${request.method} ${request.url} - RoleId: ${xRoleId}`,
 			);
 		} else {
-			this.logger.log(
+			this.logger.debug(
 				`User ${request.user.email} has been denied access to ${request.method} ${request.url} - RoleId: ${xRoleId}`,
 			);
 		}
