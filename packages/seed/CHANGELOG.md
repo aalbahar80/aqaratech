@@ -1,5 +1,11 @@
 # @self/seed
 
+## 1.1.0
+
+### Minor Changes
+
+- 94cade9c: flatten sourcemaps
+
 ## 1.0.0
 
 ### Major Changes

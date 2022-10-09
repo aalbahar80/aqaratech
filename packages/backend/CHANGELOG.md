@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.4.0
+
+### Minor Changes
+
+- 94cade9c: flatten sourcemaps
+
 ## 1.3.1
 
 ### Patch Changes
