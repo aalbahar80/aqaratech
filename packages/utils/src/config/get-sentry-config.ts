@@ -52,15 +52,13 @@ const liveEnvs: AqaratechEnv['PUBLIC_AQARATECH_ENV'][] = [
 
 export type Config = Pick<
 	AqaratechEnv,
-	| 'PUBLIC_AQARATECH_ENV'
-	| 'PUBLIC_AQ_DEBUG_SENTRY'
-	| 'PUBLIC_TRACE_RATE'
-	| 'PUBLIC_COMMIT_SHA'
+	'PUBLIC_AQARATECH_ENV' | 'PUBLIC_AQ_DEBUG_SENTRY' | 'PUBLIC_TRACE_RATE'
 > & {
 	/**
 	 * The version from the package.json.
 	 */
 	version: string;
+	commitSha: string;
 	repoName: string;
 };
 

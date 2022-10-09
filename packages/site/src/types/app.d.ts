@@ -3,6 +3,7 @@
 /// <reference types="unplugin-icons/types/svelte" />
 
 declare const __AQARATECH_APP_VERSION__: string;
+declare const __COMMIT_SHA__: string;
 
 declare namespace App {
 	interface Locals {

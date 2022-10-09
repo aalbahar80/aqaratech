@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { execSync } from 'child_process';
 import icons from 'unplugin-icons/vite';
 import { defineConfig } from 'vite';
 import { isoImport } from 'vite-plugin-iso-import';
@@ -48,15 +49,24 @@ export default defineConfig(() => {
 		// },
 	};
 
+	const appVersion = JSON.stringify(version);
+	const commitSha = JSON.stringify(
+		execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim(),
+	);
+
 	/** @type {import('vite').UserConfig} */
 	const dev = {
-		define: { __AQARATECH_APP_VERSION__: JSON.stringify(version) },
+		define: {
+			__AQARATECH_APP_VERSION__: appVersion,
+			__COMMIT_SHA__: commitSha,
+		},
 	};
 
 	/** @type {import('vite').UserConfig} */
 	const prod = {
 		define: {
-			__AQARATECH_APP_VERSION__: JSON.stringify(version),
+			__AQARATECH_APP_VERSION__: appVersion,
+			__COMMIT_SHA__: commitSha,
 			__SENTRY_DEBUG__: false,
 		},
 	};

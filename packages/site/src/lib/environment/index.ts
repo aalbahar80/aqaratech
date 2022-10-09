@@ -11,7 +11,6 @@ type SiteEnvironment = Pick<
 	| 'PUBLIC_AQ_DEBUG_LEVEL'
 	| 'PUBLIC_AQ_DEBUG_SITE'
 	| 'PUBLIC_AQ_DEBUG_SENTRY'
-	| 'PUBLIC_COMMIT_SHA'
 >;
 
 // TODO: use new typescript `satisfies` directive for return type
@@ -24,5 +23,4 @@ export const environment: SiteEnvironment = {
 	PUBLIC_TRACE_RATE: env.PUBLIC_TRACE_RATE,
 	PUBLIC_AQ_DEBUG_LEVEL: env.PUBLIC_AQ_DEBUG_LEVEL,
 	PUBLIC_AQ_DEBUG_SITE: env.PUBLIC_AQ_DEBUG_SITE,
-	PUBLIC_COMMIT_SHA: env.PUBLIC_COMMIT_SHA,
 };

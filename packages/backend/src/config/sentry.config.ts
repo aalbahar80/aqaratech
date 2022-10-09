@@ -1,12 +1,15 @@
 import { getSentryConfig } from '@self/utils';
 import * as Sentry from '@sentry/node';
+import { execSync } from 'node:child_process';
 import { version } from '../../package.json';
+
+const commitSha = execSync('git rev-parse HEAD').toString().trim();
 
 const baseConfig = getSentryConfig({
 	PUBLIC_AQ_DEBUG_SENTRY: process.env.PUBLIC_AQ_DEBUG_SENTRY,
 	PUBLIC_AQARATECH_ENV: process.env.PUBLIC_AQARATECH_ENV,
 	PUBLIC_TRACE_RATE: process.env.PUBLIC_TRACE_RATE,
-	PUBLIC_COMMIT_SHA: process.env.PUBLIC_COMMIT_SHA,
+	commitSha,
 	version,
 	repoName: 'backend',
 });
