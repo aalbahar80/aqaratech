@@ -1,5 +1,4 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { execSync } from 'child_process';
 import icons from 'unplugin-icons/vite';
 import { defineConfig } from 'vite';
 import { isoImport } from 'vite-plugin-iso-import';
@@ -49,13 +48,8 @@ export default defineConfig(() => {
 });
 
 const getDefine = (PUBLIC_AQARATECH_ENV) => {
-	const commitSha = JSON.stringify(
-		execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim(),
-	);
-
 	const common = {
 		__AQARATECH_APP_VERSION__: JSON.stringify(version),
-		__COMMIT_SHA__: commitSha,
 	};
 
 	if (PUBLIC_AQARATECH_ENV === 'production') {

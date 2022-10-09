@@ -48,6 +48,5 @@ module.exports = {
 	globals: {
 		svelte: 'readonly',
 		__AQARATECH_APP_VERSION__: 'readonly',
-		__COMMIT_SHA__: 'readonly',
 	},
 };

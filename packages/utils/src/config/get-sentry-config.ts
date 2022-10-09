@@ -58,7 +58,7 @@ export type Config = Pick<
 	 * The version from the package.json.
 	 */
 	version: string;
-	commitSha: string;
+	commitSha: string | undefined;
 	repoName: string;
 };
 
