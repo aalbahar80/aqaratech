@@ -2,6 +2,10 @@
 
 FROM node:18.9-alpine
 
+# For sentry.release. Git is not installed in the node-alpine image.
+ARG PUBLIC_COMMIT_HASH
+ENV PUBLIC_COMMIT_HASH=${PUBLIC_COMMIT_HASH}
+
 WORKDIR /app
 
 ENV NODE_ENV=production

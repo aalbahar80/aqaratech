@@ -45,6 +45,8 @@ runs:
       uses: docker/build-push-action@v3
       with:
         context: .
+        build-args: |
+          "PUBLIC_COMMIT_SHA=${{ github.sha }}"
         file: ./packages/${{ inputs.package }}/Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true

@@ -9,9 +9,11 @@ const baseConfig = getSentryConfig({
 	PUBLIC_AQ_DEBUG_SENTRY: process.env.PUBLIC_AQ_DEBUG_SENTRY,
 	PUBLIC_AQARATECH_ENV: process.env.PUBLIC_AQARATECH_ENV,
 	PUBLIC_TRACE_RATE: process.env.PUBLIC_TRACE_RATE,
-	commitSha,
 	version,
 	repoName: 'backend',
+
+	// if in docker, grab commit sha from env, otherwise, grab it from git
+	commitSha: process.env.PUBLIC_COMMIT_SHA || commitSha,
 });
 
 export const sentryConfig = {
