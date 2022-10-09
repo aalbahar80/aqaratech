@@ -33,14 +33,12 @@ export class CaslExceptionFilter
 		// TODO monitor
 		this.logger.debug({ ...exceptionDetails });
 		this.logger.warn(
-			`User: ${JSON.stringify(userSummary)} - is forbidden to - ${
-				exception.action
-			} - ${exception.subjectType} - ${JSON.stringify(exception.subject)}`,
+			`User: ${userSummary} - is forbidden to - ${exception.action} - ${exception.subjectType} - ${exception.subject}`,
 		);
 
 		// respond with 403
 		const responseError = new ForbiddenException();
-		this.logger.log(`Response: ${JSON.stringify(responseError)}`);
+		this.logger.log(`Response: ${responseError}`);
 		response
 			.status(responseError.getStatus())
 			.json(responseError.getResponse());
