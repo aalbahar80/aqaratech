@@ -5,6 +5,9 @@ import { getReleaseName } from './sentry/release';
 import { getSendEventConfig } from './sentry/should-send-events';
 
 // TODO: use new typescript `satisfies` directive for return type
+/**
+ * Events won't be sent in non-live environments unless `debug` is set to true and `sampleRate` is greater than 0.
+ */
 export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 	const { PUBLIC_AQARATECH_ENV, PUBLIC_TRACE_RATE, PUBLIC_AQ_DEBUG_SENTRY } =
 		config;
