@@ -5,7 +5,7 @@ import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
-import { logLevelMap, nestLogLevels } from 'src/constants/log-levels';
+import { getLogLevels } from 'src/constants/log-levels';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
@@ -23,7 +23,7 @@ async function bootstrap() {
 	Logger.log(`Log level: ${level}`);
 
 	const app = await NestFactory.create(AppModule, {
-		logger: nestLogLevels.slice(nestLogLevels.indexOf(logLevelMap[level])),
+		logger: getLogLevels(level),
 		cors: {
 			origin: process.env.PUBLIC_SITE_URL,
 			credentials: true,

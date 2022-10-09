@@ -1,3 +1,5 @@
+import { Logger, LogLevel } from '@nestjs/common';
+
 /**
  * Convert winston log level to a nestjs log level.
  * TODO: Use typescript new `satisfies` directive here.
@@ -22,3 +24,15 @@ export const nestLogLevels = [
 	'verbose',
 	'debug',
 ] as const;
+
+export const getLogLevels = (selection: string): LogLevel[] => {
+	const levels = nestLogLevels.slice(
+		0,
+		// @ts-expect-error TODO: better typing here
+		nestLogLevels.indexOf(logLevelMap[selection]) + 1,
+	);
+
+	Logger.log(levels, 'AqaratechConfig');
+
+	return levels;
+};
