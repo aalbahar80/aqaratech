@@ -1,6 +1,5 @@
 import { Logger } from '@nestjs/common';
 import { getSentryConfig } from '@self/utils';
-import * as Sentry from '@sentry/node';
 import { execSync } from 'node:child_process';
 import { version } from '../../package.json';
 
@@ -22,11 +21,4 @@ Logger.log(baseConfig, 'AqaratechConfig');
 export const sentryConfig = {
 	...baseConfig,
 	dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
-	integrations: [
-		// enable HTTP calls tracing
-		new Sentry.Integrations.Http({
-			tracing: true,
-			// breadcrumbs: true,
-		}),
-	],
 };

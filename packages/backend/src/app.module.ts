@@ -11,6 +11,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
@@ -63,8 +64,14 @@ import { UsersModule } from './users/users.module';
 					integrations: [
 						// Enabling debug will make sentry list integrations on startup
 						// More info: https://docs.sentry.io/platforms/node/configuration/integrations/default-integrations/
-						new Tracing.Integrations.Prisma({ client: prismaClient }),
+						// enable HTTP calls tracing
+						new Sentry.Integrations.Http({
+							tracing: true,
+							// breadcrumbs: true,
+						}),
+
 						// Potential troublemaker. Investigate: shutdown hooks, add prisma to imports array, prisma in main.ts vs using nestjs-prisma package.
+						new Tracing.Integrations.Prisma({ client: prismaClient }),
 					],
 				};
 			},
