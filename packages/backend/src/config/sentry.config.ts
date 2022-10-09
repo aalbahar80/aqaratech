@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { getSentryConfig } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import { execSync } from 'node:child_process';
@@ -15,6 +16,8 @@ const baseConfig = getSentryConfig({
 	// if in docker, grab commit sha from env, otherwise, grab it from git
 	commitSha: process.env.PUBLIC_COMMIT_SHA || commitSha,
 });
+
+Logger.log(baseConfig, 'AqaratechConfig');
 
 export const sentryConfig = {
 	...baseConfig,
