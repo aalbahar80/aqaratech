@@ -1,4 +1,4 @@
-import { authConfig } from '$lib/environment/auth';
+import { authConfig } from '$lib/server/config/auth';
 import { logger } from '$lib/server/logger';
 import { Cookie } from '@self/utils';
 import { createLocalJWKSet, jwtVerify } from 'jose';

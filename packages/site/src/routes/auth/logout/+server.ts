@@ -1,5 +1,5 @@
 import { environment } from '$lib/environment';
-import { authConfig } from '$lib/environment/auth';
+import { authConfig } from '$lib/server/config/auth';
 import { Cookie } from '@self/utils';
 import type { RequestHandler } from '@sveltejs/kit';
 

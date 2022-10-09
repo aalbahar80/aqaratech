@@ -1,5 +1,5 @@
 import { MAX_AGE } from '$lib/constants/misc';
-import { authConfig } from '$lib/environment/auth';
+import { authConfig } from '$lib/server/config/auth';
 import { Cookie } from '@self/utils';
 import type { RequestHandler } from '@sveltejs/kit';
 

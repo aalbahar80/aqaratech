@@ -1,4 +1,4 @@
-import { authConfig } from '$lib/environment/auth';
+import { authConfig } from '$lib/server/config/auth';
 import { AQARATECH_STAFF_ROLE } from '@self/utils';
 
 export const isAqaratechStaff = (payload: Record<string, any>) => {

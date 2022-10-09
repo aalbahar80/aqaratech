@@ -1,4 +1,4 @@
-import { authConfig } from '$lib/environment/auth';
+import { authConfig } from '$lib/server/config/auth';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = () => {
