@@ -3,7 +3,27 @@ import { getSentryConfig } from '@self/utils';
 import { execSync } from 'node:child_process';
 import { version } from '../../package.json';
 
-const commitSha = execSync('git rev-parse HEAD').toString().trim();
+/**
+ * if in docker, grab commit sha from env, otherwise, grab it from git.
+ */
+const getCommitSha = () => {
+	try {
+		const sha = execSync('git rev-parse HEAD').toString().trim();
+		return sha;
+	} catch (e) {
+		Logger.log('Could not get commit sha from git');
+		if (typeof process.env.PUBLIC_COMMIT_SHA === 'string') {
+			Logger.log(
+				`Falling back to sha from process.env`,
+				process.env.PUBLIC_COMMIT_SHA,
+			);
+			return process.env.PUBLIC_COMMIT_SHA;
+		} else {
+			Logger.error('Could not get commit sha from env');
+			return 'unknown';
+		}
+	}
+};
 
 const baseConfig = getSentryConfig({
 	PUBLIC_AQ_DEBUG_SENTRY: process.env.PUBLIC_AQ_DEBUG_SENTRY,
@@ -12,8 +32,7 @@ const baseConfig = getSentryConfig({
 	version,
 	repoName: 'backend',
 
-	// if in docker, grab commit sha from env, otherwise, grab it from git
-	commitSha: process.env.PUBLIC_COMMIT_SHA || commitSha,
+	commitSha: getCommitSha(),
 });
 
 Logger.log(baseConfig, 'AqaratechConfig');
