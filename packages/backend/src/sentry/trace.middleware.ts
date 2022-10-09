@@ -26,7 +26,7 @@ export class TraceMiddleware implements NestMiddleware {
 				scope.addEventProcessor((event) => {
 					event.request = {
 						method: req.method,
-						url: req.url,
+						url: req.baseUrl,
 					};
 					return event;
 				});
