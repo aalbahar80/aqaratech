@@ -6,14 +6,10 @@ import { isoImport } from 'vite-plugin-iso-import';
 import { version } from './package.json';
 // import basicSsl from '@vitejs/plugin-basic-ssl';
 
-// https://vitejs.dev/config/#environment-variables
-// TODO consider using loadEnv helper instead of scripts/export-env.sh in preview command
-
-// TODO don't generate sourcemaps if PUBLIC_AQARATECH_ENV is production
-
 export default defineConfig(() => {
 	/** @type {import('vite').UserConfig} */
-	const common = {
+	const config = {
+		define: getDefine(process.env.PUBLIC_AQARATECH_ENV),
 		plugins: [
 			sveltekit(),
 			icons({ compiler: 'svelte' }),
@@ -49,39 +45,27 @@ export default defineConfig(() => {
 		// },
 	};
 
-	const appVersion = JSON.stringify(version);
+	return config;
+});
+
+const getDefine = (PUBLIC_AQARATECH_ENV) => {
 	const commitSha = JSON.stringify(
 		execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim(),
 	);
 
-	/** @type {import('vite').UserConfig} */
-	const dev = {
-		define: {
-			__AQARATECH_APP_VERSION__: appVersion,
-			__COMMIT_SHA__: commitSha,
-		},
+	const common = {
+		__AQARATECH_APP_VERSION__: JSON.stringify(version),
+		__COMMIT_SHA__: commitSha,
 	};
 
-	/** @type {import('vite').UserConfig} */
-	const prod = {
-		define: {
-			__AQARATECH_APP_VERSION__: appVersion,
-			__COMMIT_SHA__: commitSha,
-			__SENTRY_DEBUG__: false,
-		},
-	};
-
-	if (process.env.PUBLIC_AQARATECH_ENV === 'production') {
+	if (PUBLIC_AQARATECH_ENV === 'production') {
 		console.log('Building for production.');
 		return {
 			...common,
-			...prod,
+			__SENTRY_DEBUG__: false,
 		};
 	} else {
-		console.log('Building for development.');
-		return {
-			...common,
-			...dev,
-		};
+		console.log('Not building for production.');
+		return common;
 	}
-});
+};
