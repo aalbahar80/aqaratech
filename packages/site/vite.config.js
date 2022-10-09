@@ -3,18 +3,12 @@ import icons from 'unplugin-icons/vite';
 import { defineConfig } from 'vite';
 import { isoImport } from 'vite-plugin-iso-import';
 import { version } from './package.json';
-// import basicSsl from '@vitejs/plugin-basic-ssl';
 
 export default defineConfig(() => {
 	/** @type {import('vite').UserConfig} */
 	const config = {
 		define: getDefine(process.env.PUBLIC_AQARATECH_ENV),
-		plugins: [
-			sveltekit(),
-			icons({ compiler: 'svelte' }),
-			isoImport(),
-			// basicSsl(),
-		],
+		plugins: [sveltekit(), icons({ compiler: 'svelte' }), isoImport()],
 		clearScreen: false,
 		ssr: {
 			// set chart.js as `noExternal` to avoid issues in SSR (when running `vite preview`)
