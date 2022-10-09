@@ -73,16 +73,10 @@ if (projectName === 'site') {
 
 	// Upload server sourcemaps
 
-	// copy the build directory to a temporary directory
-	await $`cp -r build build-temp`;
+	await $`pnpm run flatten-sourcemaps`;
 
-	// remove the client directory from the build-temp directory
-	await $`rm -rf build-temp/client`;
-
-	// flatten sourcemaps using sorcery
-	await $`find build-temp -type f -name '*.js' -exec echo {} \\; | xargs -I % /bin/bash -c 'echo flattening sourcemap: %; pnpm sorcery -i % || echo ERROR FLATTENING SOURCEMAP %'`;
-
-	// upload the server sourcemaps, add a prefix to the file paths to match them up with paths in stack traces
+	// add a prefix to the file paths to match them up with paths in stack traces
+	// use build-temp directory, which contains the flattened sourcemaps courtesy of flatten-sourcemaps.sh
 	await $`sentry-cli sourcemaps upload --url-prefix '~/app/build' build-temp ${org} ${site_server_project} --release ${prefixedVersion}`;
 
 	// alternative: sentry-cli releases files site-server-1.3.1 upload-sourcemaps ./build/server --org aqaratech --project site-server

@@ -15,7 +15,8 @@
 		"custom-lint": "eslint . --ext .ts,.svelte",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
-		"sentry:release": "../../scripts/upload-sourcemaps.mjs"
+		"sentry:release": "../../scripts/upload-sourcemaps",
+		"flatten-sourcemaps": "../../scripts/flatten-sourcemaps.sh"
 	},
 	"devDependencies": {
 		"@brainandbones/skeleton": "0.37.32",
