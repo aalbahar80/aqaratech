@@ -1,5 +1,13 @@
 # @self/seed
 
+## 1.1.1
+
+### Patch Changes
+
+- f9ec0d7b: bump again
+- Updated dependencies [f9ec0d7b]
+  - eslint-config-custom@1.0.1
+
 ## 1.1.0
 
 ### Minor Changes

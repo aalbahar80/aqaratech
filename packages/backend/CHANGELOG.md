@@ -1,5 +1,13 @@
 # @self/backend
 
+## 1.4.2
+
+### Patch Changes
+
+- f9ec0d7b: bump again
+- Updated dependencies [f9ec0d7b]
+  - @self/utils@2.0.1
+
 ## 1.4.1
 
 ### Patch Changes

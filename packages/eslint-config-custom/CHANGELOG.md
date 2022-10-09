@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 1.0.1
+
+### Patch Changes
+
+- f9ec0d7b: bump again
+
 ## 1.0.0
 
 ### Major Changes
