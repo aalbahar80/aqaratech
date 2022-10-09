@@ -70,4 +70,5 @@ type AqaratechSentryConfig = Pick<
 	| 'tracesSampler'
 	| 'tracesSampleRate'
 	| 'beforeSend'
+	| 'release'
 >;
