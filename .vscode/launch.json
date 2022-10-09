@@ -62,7 +62,12 @@
 			"runtimeExecutable": "pnpm",
 			"runtimeArgs": ["run", "start:debug"],
 			"sourceMaps": true,
-			"resolveSourceMapLocations": ["${workspaceFolder}/packages/backend/**"]
+			"resolveSourceMapLocations": ["${workspaceFolder}/packages/backend/**"],
+			"pauseForSourceMap": true,
+			"sourceMapPathOverrides": {
+				// we need this because we set "sourceRoot": "/" in tsconfig.json (to help sentry)
+				"/*": "${workspaceFolder}/packages/backend/*"
+			}
 		}
 	]
 }

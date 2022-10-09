@@ -8,8 +8,9 @@
 		"allowSyntheticDefaultImports": true,
 		"target": "ES2022",
 		"sourceMap": true,
+		// https://docs.sentry.io/platforms/javascript/sourcemaps/generating/#typescript
 		"inlineSources": true,
-		// "sourceRoot": "/",
+		"sourceRoot": "/",
 		"outDir": "./dist",
 		"baseUrl": "./",
 		"incremental": true,
