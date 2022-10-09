@@ -2,6 +2,7 @@ import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { env } from '$env/dynamic/public';
 import { MAX_AGE } from '$lib/constants/misc';
+import { sentryConfig } from '$lib/environment/sentry.config';
 import { logger } from '$lib/server/logger';
 import { getUser } from '$lib/server/utils/get-user';
 import { handleInvalidToken } from '$lib/server/utils/handle-invalid-token';
@@ -12,7 +13,7 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
-import { Cookie, envCheck, getSentryConfig, isHealthCheck } from '@self/utils';
+import { Cookie, envCheck, isHealthCheck } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -24,15 +25,6 @@ logger.info('$env/dynamic/public %O', env);
 
 logger.info('process.env check:');
 envCheck();
-
-const sentryConfig = getSentryConfig({
-	PUBLIC_AQ_DEBUG_SENTRY: environment.PUBLIC_AQ_DEBUG_SENTRY,
-	PUBLIC_AQARATECH_ENV: environment.PUBLIC_AQARATECH_ENV,
-	PUBLIC_TRACE_RATE: environment.PUBLIC_TRACE_RATE,
-	commitSha: __COMMIT_SHA__,
-	version: __AQARATECH_APP_VERSION__,
-	repoName: 'site',
-});
 
 logger.info('AqaratechConfig %O', sentryConfig);
 

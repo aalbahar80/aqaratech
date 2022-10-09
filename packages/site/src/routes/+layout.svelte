@@ -6,8 +6,8 @@
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import { environment } from '$lib/environment';
+	import { sentryConfig } from '$lib/environment/sentry.config';
 	import { getSentryUser } from '$lib/utils/sentry/common';
-	import { getSentryConfig } from '@self/utils';
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
 	import { onMount } from 'svelte';
@@ -24,15 +24,6 @@
 
 		// https://github.com/bluwy/vite-plugin-iso-import#what-happens-if-i-use-an-import-value-that-has-been-stripped-off
 		if (!import.meta.env.SSR) {
-			const sentryConfig = getSentryConfig({
-				PUBLIC_AQ_DEBUG_SENTRY: environment.PUBLIC_AQ_DEBUG_SENTRY,
-				PUBLIC_AQARATECH_ENV: environment.PUBLIC_AQARATECH_ENV,
-				PUBLIC_TRACE_RATE: environment.PUBLIC_TRACE_RATE,
-				commitSha: __COMMIT_SHA__,
-				version: __AQARATECH_APP_VERSION__,
-				repoName: 'site',
-			});
-
 			Sentry.init({
 				...sentryConfig,
 				// TODO: use environment variable to set the DSN
