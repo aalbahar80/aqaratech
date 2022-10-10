@@ -39,7 +39,12 @@ export const getUser = async ({
 
 	const profile = await getProfile(event);
 
-	logger.debug('[getUser] Got profile %O', profile);
+	logger.debug('[getUser] Got profile %O', {
+		id: profile?.id,
+		email: profile?.email,
+		roleCount: profile?.roles?.length,
+		createDate: profile?.createdAt,
+	});
 	// User not in our db, nothing more to do.
 	// TODO: roles can be undefined
 	if (!profile || !profile.roles) {
