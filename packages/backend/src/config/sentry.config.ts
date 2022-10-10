@@ -26,6 +26,7 @@ const getCommitSha = () => {
 };
 
 const baseConfig = getSentryConfig({
+	// Need to set debug manually until dep is updated: aqtech/node_modules/.pnpm/@ntegral+nestjs-sentry@4.0.0_crwiabsxshsc3y4hjqoa5hpuxm/node_modules/@ntegral/nestjs-sentry/dist/sentry.service.js
 	PUBLIC_AQ_DEBUG_SENTRY: process.env.PUBLIC_AQ_DEBUG_SENTRY,
 	PUBLIC_AQARATECH_ENV: process.env.PUBLIC_AQARATECH_ENV,
 	PUBLIC_TRACE_RATE: process.env.PUBLIC_TRACE_RATE,
