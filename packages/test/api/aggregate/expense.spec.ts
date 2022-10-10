@@ -11,7 +11,7 @@ test.use({
 			const expense = expenseFactory.build({
 				organizationId: portfolio.organizationId,
 				portfolioId: portfolio.id,
-				date: new Date(2021, month, 1).toISOString(),
+				postAt: new Date(Date.UTC(2021, month, 1)).toISOString(),
 			});
 
 			const picked = R.pick(expense, [
@@ -23,8 +23,6 @@ test.use({
 
 			return [picked, picked];
 		});
-
-		console.log({ expenses });
 
 		// send post request for each expense
 		await Promise.all(
@@ -39,10 +37,7 @@ test.use({
 	},
 });
 
-test(`expenses - data points are equal to the number of months`, async ({
-	request,
-	portfolio,
-}) => {
+test('return 12 data points for a year', async ({ request, portfolio }) => {
 	const res = await request.get('/aggregate/expensesByMonth', {
 		params: {
 			portfolioId: portfolio.id,
@@ -53,8 +48,6 @@ test(`expenses - data points are equal to the number of months`, async ({
 	});
 
 	const body = (await res.json()) as ByMonthDto[];
-
-	console.log({ body }, 'by-month.spec.ts ~ 22');
 
 	expect(body.length).toBe(12);
 });
