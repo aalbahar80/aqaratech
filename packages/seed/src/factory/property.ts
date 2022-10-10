@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import type { Property } from '@prisma/client';
+import type { Property } from '../utils/date-or-string';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
 import { areas } from '../constants';

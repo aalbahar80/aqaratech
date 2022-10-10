@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import type { Expense } from '@prisma/client';
+import type { Expense } from '../utils/date-or-string';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
 import { generateExpenseCategoryTree, TIMESPAN } from '../constants';

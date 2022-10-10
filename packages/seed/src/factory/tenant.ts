@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import type { Tenant } from '@prisma/client';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
+import type { Tenant } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
 
 export const tenantFactory = Factory.Sync.makeFactoryWithRequired<

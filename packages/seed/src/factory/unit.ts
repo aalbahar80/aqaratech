@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import type { Unit } from '@prisma/client';
+import type { Unit } from '../utils/date-or-string';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
 import { unitTypeOptions } from '../constants';

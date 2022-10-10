@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import type { LeaseInvoice } from '@prisma/client';
+import type { LeaseInvoice } from '../utils/date-or-string';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
 import { TIMESPAN } from '../constants';
