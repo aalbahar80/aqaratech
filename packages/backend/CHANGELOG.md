@@ -1,5 +1,13 @@
 # @self/backend
 
+## 1.4.3
+
+### Patch Changes
+
+- 634c52ba: get commit hash from docker env
+- 93736a2d: don't add sentry event req data to avoid max call stack error loop
+- 33c8b62f: add source code to sourcemaps
+
 ## 1.4.2
 
 ### Patch Changes

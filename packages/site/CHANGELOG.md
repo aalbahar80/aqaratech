@@ -1,5 +1,12 @@
 # @self/site
 
+## 1.3.4
+
+### Patch Changes
+
+- 634c52ba: get commit hash from docker env
+- 93736a2d: don't add sentry event req data to avoid max call stack error loop
+
 ## 1.3.3
 
 ### Patch Changes
