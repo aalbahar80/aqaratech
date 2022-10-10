@@ -12,7 +12,7 @@ test.use({
 				organizationId: lease.organizationId,
 				portfolioId: lease.portfolioId,
 				leaseId: lease.id,
-				date: new Date(2021, month, 1).toISOString(),
+				postAt: new Date(Date.UTC(2021, month, 1)).toISOString(),
 			});
 
 			const picked = R.pick(leaseInvoice, [
@@ -39,10 +39,7 @@ test.use({
 	},
 });
 
-test(`leaseInvoices - data points are equal to the number of months`, async ({
-	request,
-	lease,
-}) => {
+test('return 12 data points for a year', async ({ request, lease }) => {
 	const res = await request.get('/aggregate/incomeByMonth', {
 		params: {
 			portfolioId: lease.portfolioId,
@@ -52,7 +49,7 @@ test(`leaseInvoices - data points are equal to the number of months`, async ({
 		},
 	});
 
-	const body = (await res.json()) as ByMonthDto[];
+	const invoices = (await res.json()) as ByMonthDto[];
 
-	expect(body.length).toBe(12);
+	expect(invoices.length).toBe(12);
 });

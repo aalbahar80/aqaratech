@@ -1,11 +1,11 @@
 import { faker } from '@faker-js/faker';
-import type { Lease } from '@prisma/client';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
 import { TIMESPAN } from '../constants';
+import type { Lease } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
 
-export const leaseFactory = Factory.Sync.makeFactoryWithRequired<
+const base = Factory.Sync.makeFactoryWithRequired<
 	Lease,
 	'organizationId' | 'portfolioId' | 'unitId' | 'tenantId'
 >({
@@ -22,4 +22,10 @@ export const leaseFactory = Factory.Sync.makeFactoryWithRequired<
 
 	canPay: Factory.each(() => faker.datatype.boolean()),
 	notify: Factory.each(() => faker.datatype.boolean()),
+});
+
+export const leaseFactory = base.withDerivation('end', (lease) => {
+	const end = new Date(lease.start);
+	end.setFullYear(end.getFullYear() + 1);
+	return end;
 });

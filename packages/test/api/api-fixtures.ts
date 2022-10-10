@@ -157,6 +157,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			portfolioId: unit.portfolioId,
 			unitId: unit.id,
 			tenantId: tenant.id,
+			start: '2021-01-01',
 		});
 
 		const picked = R.pick(lease, [
