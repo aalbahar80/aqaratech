@@ -12,6 +12,7 @@ test.use({
 				organizationId: portfolio.organizationId,
 				portfolioId: portfolio.id,
 				postAt: new Date(Date.UTC(2021, month, 1)).toISOString(),
+				amount: 100,
 			});
 
 			const picked = R.pick(expense, [
@@ -51,3 +52,6 @@ test('return 12 data points for a year', async ({ request, portfolio }) => {
 
 	expect(body.length).toBe(12);
 });
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+test.skip('table shows 12 rows', () => {});
