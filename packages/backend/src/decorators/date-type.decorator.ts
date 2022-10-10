@@ -35,7 +35,7 @@ export function DateType(required = true, readOnly = false): PropertyDecorator {
 					p.value.length > 10 &&
 					!p.value.endsWith('00:00:00.000Z')
 				) {
-					Logger.warn(
+					Logger.debug(
 						'DateType: ISO8601 string is not ending with "00:00:00.000Z"',
 						{ key: p.key, value: p.value, obj: p.obj },
 					);
