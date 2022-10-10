@@ -1,4 +1,6 @@
 export * from './expense';
+export * from './lease';
+export * from './lease-invoice';
 export * from './organization';
 export * from './portfolio';
 export * from './property';

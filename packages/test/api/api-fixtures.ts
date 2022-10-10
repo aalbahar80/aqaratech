@@ -1,5 +1,6 @@
 import { test as base } from '@playwright/test';
 import {
+	leaseFactory,
 	organizationFactory,
 	portfolioFactory,
 	propertyFactory,
@@ -9,6 +10,7 @@ import {
 import * as R from 'remeda';
 import type {
 	ExpenseCategoryDto,
+	LeaseDto,
 	OrganizationCreatedDto,
 	PortfolioDto,
 	PropertyDto,
@@ -113,7 +115,12 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			portfolioId: portfolio.id,
 		});
 
-		const picked = R.pick(property, ['area', 'number']);
+		const picked = R.pick(property, [
+			'area',
+			'number',
+			'organizationId',
+			'portfolioId',
+		]);
 
 		const res = await request.post(`/properties`, { data: picked });
 
@@ -123,18 +130,49 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	},
 
 	unit: async ({ org, property, request }, use) => {
-		// create fresh unit
 		const unit = unitFactory.build({
 			organizationId: org.organization.id,
 			portfolioId: property.portfolioId,
 			propertyId: property.id,
 		});
 
-		const picked = R.pick(unit, ['type', 'unitNumber']);
+		const picked = R.pick(unit, [
+			'type',
+			'unitNumber',
+			'organizationId',
+			'portfolioId',
+			'propertyId',
+		]);
 
 		const res = await request.post(`/units`, { data: picked });
 
 		const created = (await res.json()) as UnitDto;
+
+		await use(created);
+	},
+
+	lease: async ({ org, unit, tenant, request }, use) => {
+		const lease = leaseFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: unit.portfolioId,
+			unitId: unit.id,
+			tenantId: tenant.id,
+		});
+
+		const picked = R.pick(lease, [
+			'start',
+			'end',
+			'monthlyRent',
+			'deposit',
+			'organizationId',
+			'portfolioId',
+			'unitId',
+			'tenantId',
+		]);
+
+		const res = await request.post(`/leases`, { data: picked });
+
+		const created = (await res.json()) as LeaseDto;
 
 		await use(created);
 	},
@@ -182,6 +220,7 @@ interface TestFixtures {
 	portfolio: PortfolioDto;
 	property: PropertyDto;
 	unit: UnitDto;
+	lease: LeaseDto;
 	file: string;
 	expenseCategory: ExpenseCategoryDto;
 }

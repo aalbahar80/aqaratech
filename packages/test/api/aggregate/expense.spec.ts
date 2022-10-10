@@ -24,6 +24,8 @@ test.use({
 			return [picked, picked];
 		});
 
+		console.log({ expenses });
+
 		// send post request for each expense
 		await Promise.all(
 			expenses.map((expense) =>
