@@ -47,11 +47,20 @@ export class LoggingInterceptor implements NestInterceptor {
 				error: (err) => {
 					this.logger.debug(err);
 					if (err instanceof HttpException) {
+						let statusMessage: string | undefined;
+
+						try {
+							statusMessage = (err.getResponse() as Record<string, any>)[
+								'message'
+							] as string;
+						} catch (e) {
+							this.logger.error('Unable to get error status message', e);
+						}
+
 						this.logResponse({
 							request,
 							statusCode: err.getStatus(),
-							// @ts-expect-error
-							statusMessage: err.getResponse().message,
+							statusMessage,
 							now,
 						});
 					} else {
