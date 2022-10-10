@@ -19,19 +19,6 @@ export class TraceMiddleware implements NestMiddleware {
 			...extractTraceData(req),
 		});
 
-		this.sentry
-			.instance()
-			.getCurrentHub()
-			.configureScope((scope) => {
-				scope.addEventProcessor((event) => {
-					event.request = {
-						method: req.method,
-						url: req.baseUrl,
-					};
-					return event;
-				});
-			});
-
 		this.sentry.instance().configureScope((scope) => {
 			scope.setSpan(transaction);
 		});
