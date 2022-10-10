@@ -1,5 +1,4 @@
 import {
-	ArgumentsHost,
 	BadRequestException,
 	Catch,
 	ExceptionFilter,
@@ -9,7 +8,9 @@ import {
 	NotFoundException,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Response } from 'express';
+
+// This filter is used to catch Prisma exceptions and convert them to NestJS exceptions.
+// Can also be implemented as an interceptor. Example: https://docs.nestjs.com/interceptors#exception-mapping
 
 @Catch(Prisma.PrismaClientKnownRequestError, Prisma.NotFoundError)
 export class PrismaExceptionFilter
@@ -22,12 +23,8 @@ export class PrismaExceptionFilter
 
 	catch(
 		exception: Prisma.PrismaClientKnownRequestError | Prisma.NotFoundError,
-		host: ArgumentsHost,
 	) {
 		this.logger.debug(exception);
-
-		const ctx = host.switchToHttp();
-		const response = ctx.getResponse<Response>();
 
 		let responseError: HttpException;
 
