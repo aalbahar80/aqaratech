@@ -1,6 +1,7 @@
 import {
 	CallHandler,
 	ExecutionContext,
+	HttpException,
 	Injectable,
 	Logger,
 	NestInterceptor,
@@ -38,9 +39,22 @@ export class LoggingInterceptor implements NestInterceptor {
 				finalize: () => {
 					const response = context.switchToHttp().getResponse<Response>();
 
-					const { statusCode, statusMessage } = response;
+					const { statusCode } = response;
 
-					this.logResponse(request, statusCode, statusMessage, now);
+					this.logResponse({ request, statusCode, now });
+				},
+
+				error: (err) => {
+					this.logger.debug(err);
+					if (err instanceof HttpException) {
+						this.logResponse({
+							request,
+							statusCode: err.getStatus(),
+							// @ts-expect-error
+							statusMessage: err.getResponse().message,
+							now,
+						});
+					}
 				},
 			}),
 		);
@@ -54,17 +68,23 @@ export class LoggingInterceptor implements NestInterceptor {
 		this.logger.log(`Request: ${method} ${url} ${ip} ${userAgent}`);
 	}
 
-	private logResponse(
-		request: Request,
-		statusCode: number,
-		statusMessage: string,
-		now: number,
-	) {
-		const { ip, method, url } = request;
+	private logResponse({
+		request,
+		statusCode,
+		statusMessage,
+		now,
+	}: {
+		request: Request;
+		statusCode: number;
+		statusMessage?: string;
+		now: number;
+	}) {
+		// TODO: fix ip
+		const { method, url } = request;
 
 		const responseLog = `Response: ${
 			Date.now() - now
-		}ms - ${statusCode} ${statusMessage} ${method} ${url} - ${ip}`;
+		}ms - ${method} ${url} - ${statusCode} ${statusMessage || ''}`;
 
 		if (statusCode >= 500) {
 			this.logger.error(responseLog);
