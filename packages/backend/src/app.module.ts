@@ -67,7 +67,7 @@ import { UsersModule } from './users/users.module';
 						// enable HTTP calls tracing
 						new Sentry.Integrations.Http({
 							tracing: true,
-							// breadcrumbs: true,
+							breadcrumbs: true,
 						}),
 
 						// Potential troublemaker. Investigate: shutdown hooks, add prisma to imports array, prisma in main.ts vs using nestjs-prisma package.
