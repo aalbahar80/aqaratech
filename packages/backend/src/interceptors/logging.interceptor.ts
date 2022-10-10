@@ -54,6 +54,16 @@ export class LoggingInterceptor implements NestInterceptor {
 							statusMessage: err.getResponse().message,
 							now,
 						});
+					} else {
+						// TODO: monitor
+						this.logResponse({
+							request,
+							statusCode: 500,
+							statusMessage: 'Internal Server Error',
+							now,
+						});
+
+						this.logger.error('err is not instance of HttpException', err);
 					}
 				},
 			}),
