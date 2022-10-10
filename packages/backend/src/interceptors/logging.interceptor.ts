@@ -19,38 +19,62 @@ export class LoggingInterceptor implements NestInterceptor {
 		next: CallHandler<any>,
 	): Observable<any> | Promise<Observable<any>> {
 		const request = context.switchToHttp().getRequest() as Request;
-		const { ip, method, url } = request;
-		const userAgent = request.get('user-agent') || '';
+
+		// TODO: req.url vs req.baseUrl vs req.originalUrl
 
 		// skip logging health checks
-		if (isHealthCheck(url) && process.env.PUBLIC_AQ_DEBUG_LEVEL !== 'silly') {
+		if (
+			isHealthCheck(request.url) &&
+			process.env.PUBLIC_AQ_DEBUG_LEVEL !== 'silly'
+		) {
 			return next.handle();
 		}
 
-		this.logger.log(
-			`Request: ${method} ${url} ${ip}: ${context.getClass().name} ${
-				context.getHandler().name
-			}`,
-		);
+		this.logRequest(request);
 
 		const now = Date.now();
 		return next.handle().pipe(
 			tap(
 				() => {
 					const response = context.switchToHttp().getResponse() as Response;
-					const { statusCode } = response;
-					// const contentLength = response.get('content-length');
-					this.logger.log(
-						`Response: ${
-							Date.now() - now
-						}ms - ${statusCode} ${method} ${url} - ${userAgent} ${ip}`,
-					);
-					// this.logger.debug('Response:', res);
+
+					const { statusCode, statusMessage } = response;
+
+					this.logResponse(request, statusCode, statusMessage, now);
 				},
 				(err) => {
 					this.logger.warn(err);
 				},
 			),
 		);
+	}
+
+	private logRequest(request: Request) {
+		const { ip, method, url } = request;
+
+		const userAgent = request.get('user-agent') || '';
+
+		this.logger.log(`Request: ${method} ${url} ${ip} ${userAgent}`);
+	}
+
+	private logResponse(
+		request: Request,
+		statusCode: number,
+		statusMessage: string,
+		now: number,
+	) {
+		const { ip, method, url } = request;
+
+		const responseLog = `Response: ${
+			Date.now() - now
+		}ms - ${statusCode} ${statusMessage} ${method} ${url} - ${ip}`;
+
+		if (statusCode >= 500) {
+			this.logger.error(responseLog);
+		} else if (statusCode >= 400) {
+			this.logger.warn(responseLog);
+		} else {
+			this.logger.log(responseLog);
+		}
 	}
 }
