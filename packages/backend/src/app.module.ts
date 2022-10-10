@@ -30,6 +30,7 @@ import { SearchModule } from './search/search.module';
 
 // resources
 import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
+import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TraceMiddleware } from 'src/sentry/trace.middleware';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
@@ -104,6 +105,10 @@ import { UsersModule } from './users/users.module';
 		{
 			provide: APP_INTERCEPTOR,
 			useClass: LoggingInterceptor,
+		},
+		{
+			provide: APP_INTERCEPTOR,
+			useClass: ErrorsInterceptor,
 		},
 		{
 			provide: APP_INTERCEPTOR,

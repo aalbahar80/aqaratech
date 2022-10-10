@@ -4,7 +4,6 @@ import { envCheck } from '@self/utils';
 import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
-import { CaslExceptionFilter } from 'src/casl/forbidden-error.filter';
 import { getLogLevels } from 'src/constants/log-levels';
 import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -58,7 +57,7 @@ async function bootstrap() {
 	const prismaService = app.get(PrismaService);
 	await prismaService.enableShutdownHooks(app);
 
-	app.useGlobalFilters(new PrismaExceptionFilter(), new CaslExceptionFilter());
+	app.useGlobalFilters(new PrismaExceptionFilter());
 
 	if (process.env.PUBLIC_AQARATECH_ENV === 'development' && !process.env.CI) {
 		await setupSwagger(app);
