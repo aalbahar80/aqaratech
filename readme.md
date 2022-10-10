@@ -79,17 +79,6 @@ pnpm build && pnpm run postbuild:vercel
 pnpm install --filter=@self/site
 ```
 
-> Docs (vercel):
-
-```bash
-# build
-pnpm build
-# install
-pnpm install --filter=@self/docs
-# output dir
-build
-```
-
 > /notify-all cron job (render.com):
 
 ```bash
