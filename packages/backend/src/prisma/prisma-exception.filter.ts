@@ -60,8 +60,6 @@ export class PrismaExceptionFilter
 			responseError = new InternalServerErrorException();
 		}
 
-		response
-			.status(responseError.getStatus())
-			.json(responseError.getResponse());
+		throw responseError;
 	}
 }
