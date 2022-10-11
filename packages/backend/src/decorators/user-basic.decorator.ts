@@ -1,7 +1,7 @@
 import {
-	BadGatewayException,
 	createParamDecorator,
 	ExecutionContext,
+	InternalServerErrorException,
 	Logger,
 } from '@nestjs/common';
 import { Request } from 'express';
@@ -29,7 +29,7 @@ export const UserBasic = createParamDecorator(
 			logger.error(
 				"User not found in request. This decorator shouldn't be used in public routes.",
 			);
-			throw new BadGatewayException();
+			throw new InternalServerErrorException();
 		}
 
 		if ('ability' in request.user) {
