@@ -3,11 +3,10 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
+	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
 	import {
 		DEFAULT_PAGINATION_KEY,
-		ORDER_BY,
 		PAGE_SIZE,
-		SORT_ORDER,
 	} from '$lib/constants/pagination-keys';
 	import {
 		createSvelteTable,
@@ -48,23 +47,8 @@
 			},
 		}));
 
-		const url = new URL($page.url);
-		const key = sorting[0]?.id;
-		const desc = sorting[0]?.desc;
+		await handleServerSorting(sorting, $page.url);
 
-		key
-			? url.searchParams.set(ORDER_BY, key)
-			: url.searchParams.delete(ORDER_BY);
-
-		if (desc === undefined) {
-			url.searchParams.delete(SORT_ORDER);
-		} else if (desc === true) {
-			url.searchParams.set(SORT_ORDER, 'desc');
-		} else if (desc === false) {
-			url.searchParams.set(SORT_ORDER, 'asc');
-		}
-
-		await goto(url, { noscroll: true, keepfocus: true });
 		refreshData();
 	};
 
