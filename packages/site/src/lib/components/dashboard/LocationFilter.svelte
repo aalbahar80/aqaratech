@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { PropertyDto, UnitDto } from '$api/openapi';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Select from '$lib/components/form/inputs/Select.svelte';
-	import type { PropertyDto, UnitDto } from '$api/openapi';
 
 	export let properties: PropertyDto[];
 	export let units: UnitDto[];
@@ -72,7 +72,7 @@
 					url.searchParams.delete('unitId');
 				}
 
-				goto(url, { noscroll: true });
+				await goto(url, { noscroll: true });
 			}}
 		/>
 	</div>

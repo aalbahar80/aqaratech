@@ -9,7 +9,7 @@ import {
 } from '$lib/components/charts/utils/date-range';
 import { parseParams } from '$lib/utils/parse-params';
 
-export const getDashboardData = async ({
+export const getDashboardData = ({
 	api,
 	searchParams,
 	portfolioId,

@@ -90,7 +90,7 @@
 		setActiveOption(undefined);
 	};
 
-	export const setActiveOption = async (option: Option | undefined) => {
+	export const setActiveOption = (option: Option | undefined) => {
 		// await tick();
 		activeOption = option;
 	};

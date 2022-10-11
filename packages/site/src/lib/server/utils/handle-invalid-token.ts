@@ -9,7 +9,7 @@ type SKEvent = Parameters<Handle>[0]['event'];
  *
  * TODO: make sure both tokens have same expiry. If they don't, we need to also check the access token.
  */
-export const handleInvalidToken = async (event: SKEvent) => {
+export const handleInvalidToken = (event: SKEvent) => {
 	const clearCookie = (name: string) =>
 		event.cookies.serialize(name, '', {
 			maxAge: 0,

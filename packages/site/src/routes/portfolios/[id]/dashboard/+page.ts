@@ -25,11 +25,11 @@ export const load: PageLoad = async ({
 	] = await Promise.all([
 		parentStuff.api!.portfolios.findProperties({ id: portfolioId }),
 		parentStuff.api!.portfolios.findUnits({ id: portfolioId }),
-		...(await getDashboardData({
+		...getDashboardData({
 			api: parentStuff.api,
 			searchParams,
 			portfolioId,
-		})),
+		}),
 	]);
 
 	return {
