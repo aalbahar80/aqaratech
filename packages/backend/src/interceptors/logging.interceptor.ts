@@ -36,7 +36,8 @@ export class LoggingInterceptor implements NestInterceptor {
 		const now = Date.now();
 		return next.handle().pipe(
 			tap({
-				finalize: () => {
+				// `complete` is not called when an error is thrown, see `finalize` instead
+				complete: () => {
 					const response = context.switchToHttp().getResponse<Response>();
 
 					const { statusCode } = response;
@@ -45,7 +46,7 @@ export class LoggingInterceptor implements NestInterceptor {
 				},
 
 				error: (err) => {
-					this.logger.debug(err);
+					this.logger.debug({ err });
 					if (err instanceof HttpException) {
 						let statusMessage: string | undefined;
 
