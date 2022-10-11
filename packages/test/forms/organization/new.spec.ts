@@ -5,7 +5,7 @@ test('existing user can create new org', async ({ page, isMobile }) => {
 	await page.goto('/');
 
 	// wait a bit for dropdown to load
-	await page.waitForLoadState('networkidle'); // otherwise flaky/no hydration
+	// await page.waitForLoadState('networkidle'); // otherwise flaky/no hydration
 	if (isMobile) {
 		await page.locator('button:has-text("Open main menu")').click();
 	} else {
