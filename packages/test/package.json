@@ -24,10 +24,8 @@
 		"eslint": "8.25.0",
 		"jose": "4.10.0",
 		"remeda": "1.1.0",
-		"tree-kill": "1.2.2",
 		"typescript": "4.8.4",
-		"ufo": "0.8.5",
-		"zx": "7.1.1"
+		"ufo": "0.8.5"
 	},
 	"dependencies": {
 		"eslint-config-custom": "workspace:*"
