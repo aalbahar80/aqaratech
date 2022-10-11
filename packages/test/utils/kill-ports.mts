@@ -1,4 +1,4 @@
-#!/usr/bin/env zx
+#!/usr/bin/env -S npx tsx
 
 import kill from 'tree-kill';
 import 'zx/globals';
@@ -9,12 +9,27 @@ import 'zx/globals';
 
 console.log({ argv });
 
-let ports;
+const ports: number[] = [];
 
-if (Array.isArray(argv.p)) {
-	ports = argv.p;
+const portArgs: unknown = argv['p'];
+
+const addPort = async (port: unknown) => {
+	if (typeof port === 'number') {
+		ports.push(port);
+	} else if (typeof port === 'string') {
+		ports.push(parseInt(port));
+	} else {
+		console.error('Invalid port', port);
+		await $`exit 1`;
+	}
+};
+
+if (Array.isArray(portArgs)) {
+	for (const port of portArgs) {
+		await addPort(port);
+	}
 } else {
-	ports = [argv.p];
+	await addPort(portArgs);
 }
 
 if (ports.length === 0) {
@@ -22,7 +37,7 @@ if (ports.length === 0) {
 	await $`exit 1`;
 }
 
-let pids = [];
+let pids: number[] = [];
 for (const port of ports) {
 	// find all processes listening on the port
 	let pidRaw;
@@ -43,7 +58,7 @@ for (const port of ports) {
 
 	console.log(`Found process ${processId} on port ${port}`);
 
-	pids = [...pids, processId];
+	pids = [...pids, +processId];
 }
 
 if (pids.length === 0) {
