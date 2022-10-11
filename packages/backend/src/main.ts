@@ -5,7 +5,6 @@ import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { getLogLevels } from 'src/constants/log-levels';
-import { PrismaExceptionFilter } from 'src/prisma/prisma-exception.filter';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
 import { version } from '../package.json';
@@ -56,8 +55,6 @@ async function bootstrap() {
 	// https://docs.nestjs.com/recipes/prisma#issues-with-enableshutdownhooks
 	const prismaService = app.get(PrismaService);
 	await prismaService.enableShutdownHooks(app);
-
-	app.useGlobalFilters(new PrismaExceptionFilter());
 
 	if (process.env.PUBLIC_AQARATECH_ENV === 'development' && !process.env.CI) {
 		await setupSwagger(app);
