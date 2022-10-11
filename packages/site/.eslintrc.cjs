@@ -1,3 +1,5 @@
+// Example of modular eslint config: https://github.com/iotaledger/firefly/blob/45590a1fb60d8210ab2b590ff553274fae25a51c/.eslintrc.js
+
 /**
  * @type {import("eslint").Linter.Config}
  */
@@ -24,6 +26,10 @@ module.exports = {
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2020,
+		project: './tsconfig.json',
+		// Example: https://cs.github.com/iotaledger/firefly/blob/45590a1fb60d8210ab2b590ff553274fae25a51c/.eslintrc.js#L112
+		extraFileExtensions: ['.svelte'],
+		tsconfigRootDir: './',
 	},
 	env: {
 		browser: true,
@@ -44,6 +50,10 @@ module.exports = {
 				destructuring: 'all',
 			},
 		],
+		// Note: you must disable the base rule as it can report incorrect errors
+		// https://typescript-eslint.io/rules/require-await/
+		'require-await': 'off',
+		'@typescript-eslint/require-await': 'error',
 	},
 	globals: {
 		svelte: 'readonly',
