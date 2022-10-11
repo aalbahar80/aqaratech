@@ -63,7 +63,7 @@ for (const port of ports) {
 
 if (pids.length === 0) {
 	console.log('No processes to kill');
-	await $`exit 0`;
+	process.exit(0);
 }
 
 console.log(`Killing processes ${pids.join(', ')}`);
