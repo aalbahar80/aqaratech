@@ -1,13 +1,9 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
+	import { handleServerPagination } from '$lib/components/table/tanstack-table/server-pagination';
 	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
-	import {
-		DEFAULT_PAGINATION_KEY,
-		PAGE_SIZE,
-	} from '$lib/constants/pagination-keys';
 	import {
 		createSvelteTable,
 		flexRender,
@@ -68,17 +64,7 @@
 			},
 		}));
 
-		const url = new URL($page.url);
-
-		url.searchParams.set(
-			DEFAULT_PAGINATION_KEY,
-			// add one to handle zero-based index
-			(pagination.pageIndex + 1).toString(),
-		);
-
-		url.searchParams.set(PAGE_SIZE, pagination.pageSize.toString());
-
-		await goto(url, { noscroll: true, keepfocus: true });
+		await handleServerPagination(pagination, $page.url);
 
 		// update fresh pagecount from server
 		options.update((old) => ({
