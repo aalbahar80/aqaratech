@@ -1,10 +1,11 @@
 import { ForbiddenError } from '@casl/ability';
 import {
-	BadGatewayException,
 	CallHandler,
 	ExecutionContext,
 	ForbiddenException,
+	HttpException,
 	Injectable,
+	InternalServerErrorException,
 	Logger,
 	NestInterceptor,
 } from '@nestjs/common';
@@ -37,6 +38,10 @@ export class ErrorsInterceptor implements NestInterceptor {
 			catchError((err) => {
 				this.logger.error(err);
 				return throwError(() => {
+					if (err instanceof HttpException) {
+						// We don't want to remap HTTP exceptions
+						return err;
+					}
 					// TODO add err.message where appropriate
 					if (err instanceof ForbiddenError) {
 						this.logger.debug(
@@ -50,8 +55,8 @@ export class ErrorsInterceptor implements NestInterceptor {
 					) {
 						return mapPrismaException(err);
 					} else {
-						// return new InternalServerErrorException(); // or InternalServerErrorException
-						return new BadGatewayException(); // or InternalServerErrorException
+						this.logger.verbose('Unknown error. Returning 500');
+						return new InternalServerErrorException();
 					}
 				});
 			}),
