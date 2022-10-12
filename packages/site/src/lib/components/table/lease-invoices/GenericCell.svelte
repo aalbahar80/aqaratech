@@ -3,8 +3,8 @@
 	import clsx from 'clsx';
 
 	export let value: unknown;
-	export let classes: string;
-	export let tooltip: string;
+	export let classes: string | undefined = undefined;
+	export let tooltip: string | undefined = undefined;
 </script>
 
 <span class={clsx('inline-flex items-center gap-x-2', classes)}>
