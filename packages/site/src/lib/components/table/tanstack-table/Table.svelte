@@ -16,6 +16,7 @@
 		type SortingState,
 		type TableOptions,
 	} from '@tanstack/svelte-table';
+	import { clsx } from 'clsx';
 	import { afterUpdate } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -203,7 +204,12 @@
 					{#each $table.getRowModel().rows as row}
 						<tr class="odd:bg-white even:bg-gray-50">
 							{#each row.getVisibleCells() as cell}
-								<td class="py-4 px-2 text-sm text-gray-500">
+								{@const cellValueType = typeof cell.getValue()}
+								<td
+									class={clsx('py-4 px-2 text-sm text-gray-500', {
+										'slashed-zero tabular-nums': cellValueType === 'number',
+									})}
+								>
 									{#if cell.column.id === 'view'}
 										<!-- redundant const for typing purposes -->
 										{@const href = cell.getValue()}

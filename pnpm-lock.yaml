@@ -248,6 +248,7 @@ importers:
       autoprefixer: 10.4.12
       chart.js: 3.9.1
       chartjs-adapter-date-fns: 2.0.0
+      clsx: 1.2.1
       cookie: 0.5.0
       d3: 7.6.1
       date-fns: 2.29.3
@@ -318,6 +319,7 @@ importers:
       autoprefixer: 10.4.12_postcss@8.4.17
       chart.js: 3.9.1
       chartjs-adapter-date-fns: 2.0.0_chart.js@3.9.1
+      clsx: 1.2.1
       cookie: 0.5.0
       d3: 7.6.1
       date-fns: 2.29.3
@@ -5132,6 +5134,11 @@ packages:
   /clone/1.0.4:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
+    dev: true
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
     dev: true
 
   /co/4.6.0:
