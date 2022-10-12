@@ -13,10 +13,13 @@ module.exports = {
 	],
 	plugins: ['svelte3', '@typescript-eslint'],
 	ignorePatterns: [
-		'*.cjs',
 		'currency.ts',
 		'FrappeChart.svelte',
 		'jspdf-invoice-template.js',
+		// Remove once a modular eslint config is implemented. Mainly, typescript-eslint shouldn't be applied for non ts/svelte files.
+		'*.cjs',
+		'svelte.config.js',
+		'vite.config.js',
 	],
 	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
 	settings: {
