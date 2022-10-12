@@ -79,6 +79,12 @@ module.exports = {
 		// Be conservative with maxDepth, as it can be expensive.
 		'import/no-cycle': ['error', { maxDepth: 2 }],
 		'import/no-self-import': 'error',
+
+		'no-unused-vars': 'off',
+		'@typescript-eslint/no-unused-vars': [
+			'error',
+			{ destructuredArrayIgnorePattern: '^_' },
+		],
 	},
 	ignorePatterns: ['.eslintrc.js'],
 };
