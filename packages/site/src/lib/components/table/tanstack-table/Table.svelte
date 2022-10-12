@@ -206,7 +206,7 @@
 							{#each row.getVisibleCells() as cell}
 								{@const cellValueType = typeof cell.getValue()}
 								<td
-									class={clsx('py-4 px-2 text-sm text-gray-500', {
+									class={clsx('py-4 px-2 text-sm text-gray-600', {
 										'slashed-zero tabular-nums': cellValueType === 'number',
 									})}
 								>
