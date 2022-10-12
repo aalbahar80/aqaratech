@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { ByMonthDto } from '$api/openapi';
 	import NetIncomeLineChart from '$lib/components/dashboard/cards/NetIncomeLineChart.svelte';
 	import NetIncomeTable from '$lib/components/dashboard/cards/NetIncomeTable.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
-	import type { ByMonthDto } from '$api/openapi';
 
 	export let invoicesGrouped: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];
@@ -17,6 +17,8 @@
 		<NetIncomeLineChart {invoicesGrouped} {expensesGrouped} />
 	</div>
 	<div slot="data">
-		<NetIncomeTable {invoicesGrouped} {expensesGrouped} />
+		{#key [...expensesGrouped, ...invoicesGrouped]}
+			<NetIncomeTable {invoicesGrouped} {expensesGrouped} />
+		{/key}
 	</div>
 </DashCard>

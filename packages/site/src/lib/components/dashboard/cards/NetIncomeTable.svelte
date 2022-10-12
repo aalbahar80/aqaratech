@@ -5,6 +5,7 @@
 	import { toUTCFormat } from '$lib/utils/common';
 	import { sortingFns, type ColumnDef } from '@tanstack/svelte-table';
 	import * as R from 'remeda';
+	import { fade } from 'svelte/transition';
 
 	export let invoicesGrouped: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];
@@ -67,23 +68,25 @@
 	];
 </script>
 
-<Table
-	{columns}
-	items={tabular}
-	itemCount={tabular.length}
-	sorting={[
-		{
-			id: 'date',
-			desc: false,
-		},
-	]}
-	pagination={{
-		pageIndex: 0,
-		pageSize: 10,
-	}}
-	paginationType="client"
->
-	<div slot="pagination" let:table>
-		<Pagination {table} itemCount={tabular.length} hidePageSizeOptions />
-	</div>
-</Table>
+<div in:fade>
+	<Table
+		{columns}
+		items={tabular}
+		itemCount={tabular.length}
+		sorting={[
+			{
+				id: 'date',
+				desc: false,
+			},
+		]}
+		pagination={{
+			pageIndex: 0,
+			pageSize: 10,
+		}}
+		paginationType="client"
+	>
+		<div slot="pagination" let:table>
+			<Pagination {table} itemCount={tabular.length} hidePageSizeOptions />
+		</div>
+	</Table>
+</div>
