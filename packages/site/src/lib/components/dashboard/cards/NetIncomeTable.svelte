@@ -3,7 +3,8 @@
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { ColumnDef } from '@tanstack/svelte-table';
+	import { sortingFns, type ColumnDef } from '@tanstack/svelte-table';
+	import * as R from 'remeda';
 
 	export let invoicesGrouped: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];
@@ -15,9 +16,7 @@
 	// Sort the resulting array by date.
 
 	const allDates = new Set(
-		[...invoicesGrouped, ...expensesGrouped]
-			.map(({ date }) => date)
-			.sort((a, b) => new Date(a).getTime() - new Date(b).getTime()),
+		[...invoicesGrouped, ...expensesGrouped].map(({ date }) => date),
 	);
 
 	// Create a new array of objects, with the date as the key, and the income and expense as the values.
@@ -38,7 +37,16 @@
 			footer: 'Date',
 			id: 'date',
 			// TODO: review date formatting/timezone
-			accessorFn: (row) => toUTCFormat(new Date(row.date)),
+			accessorFn: (row) => new Date(row.date),
+			cell: (row) => {
+				const val = row.getValue();
+				if (R.isDate(val)) {
+					return toUTCFormat(val);
+				} else {
+					return val;
+				}
+			},
+			sortingFn: sortingFns.datetime,
 		},
 		{
 			header: 'Income',

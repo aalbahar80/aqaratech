@@ -199,14 +199,6 @@
 					{#each $table.getRowModel().rows as row}
 						<tr class="odd:bg-white even:bg-gray-50">
 							{#each row.getVisibleCells() as cell}
-								<!-- <td>
-								<svelte:component
-									this={flexRender(
-										cell.column.columnDef.cell,
-										cell.getContext(),
-									)}
-								/>
-							</td> -->
 								<td class="py-4 px-2 text-sm text-gray-500">
 									{#if cell.column.id === 'view'}
 										<!-- redundant const for typing purposes -->
@@ -217,7 +209,12 @@
 											class="text-indigo-600 hover:text-indigo-900">View</a
 										>
 									{:else}
-										{cell.getValue()}
+										<svelte:component
+											this={flexRender(
+												cell.column.columnDef.cell,
+												cell.getContext(),
+											)}
+										/>
 									{/if}
 								</td>
 							{/each}
