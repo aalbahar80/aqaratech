@@ -30,3 +30,10 @@ export const getColor = (index: number, total: number) => {
 	const backgroundColor = palette[size]?.[index];
 	return backgroundColor;
 };
+
+export const COLORS = {
+	BLUE: '#003f5c',
+	RED: '#f95d6a',
+	GRAY: '#CFD8DC',
+	TEAL: '#00CC99',
+};
