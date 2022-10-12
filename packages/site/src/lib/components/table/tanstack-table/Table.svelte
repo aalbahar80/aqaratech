@@ -24,7 +24,10 @@
 	export let columns: ColumnDef<T>[];
 	export let pagination: PaginationState;
 	export let itemCount: number;
-	export let pageCount: number;
+	/**
+	 * Page count should be defined when using server-side pagination
+	 */
+	export let pageCount: number | undefined = undefined; // TODO: differentiate between client v server pagination config using a type
 	export let paginationType: 'server' | 'client';
 
 	let sorting: SortingState = [];

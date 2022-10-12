@@ -1,54 +1,70 @@
 <script lang="ts">
-	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
-	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
-	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { ByMonthDto } from '$api/openapi';
+	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { toUTCFormat } from '$lib/utils/common';
+	import type { ColumnDef } from '@tanstack/svelte-table';
 
 	export let invoicesGrouped: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];
 
-	$: tabular = invoicesGrouped.map((i, index) => {
-		const expense = expensesGrouped[index]?.amount || 0;
+	type Row = typeof tabular[number];
+
+	// Merge the two arrays into one, using the `date` property as the key.
+	// The resulting array should include all the dates from both arrays.
+	// Sort the resulting array by date.
+
+	const allDates = new Set(
+		[...invoicesGrouped, ...expensesGrouped]
+			.map(({ date }) => date)
+			.sort((a, b) => new Date(a).getTime() - new Date(b).getTime()),
+	);
+
+	// Create a new array of objects, with the date as the key, and the income and expense as the values.
+
+	const tabular = Array.from(allDates).map((date) => {
+		const income = invoicesGrouped.find((i) => i.date === date)?.amount || 0;
+		const expenses = expensesGrouped.find((i) => i.date === date)?.amount || 0;
 		return {
-			id: { label: i.date, hide: true },
-			date: { label: toUTCFormat(new Date(i.date)) },
-			income: {
-				label: kwdFormat(i.amount),
-				extraStyles: ['tabular-nums', 'slashed-zero'],
-			},
-			expense: {
-				label: kwdFormat(expense),
-				extraStyles: ['text-red-600', 'tabular-nums', 'slashed-zero'],
-			},
-			net: {
-				label: kwdFormat(i.amount - expense),
-				extraStyles: ['tabular-nums', 'slashed-zero'],
-			},
+			date,
+			income,
+			expenses,
 		};
 	});
 
-	const headers: TableHeader[] = [
-		{ key: 'date', label: 'Date' },
-		{ key: 'income', label: 'Income' },
-		{ key: 'expense', label: 'Expenses' },
-		{ key: 'net', label: 'Net', style: 'bold1' },
+	const columns: ColumnDef<Row>[] = [
+		{
+			header: 'Date',
+			footer: 'Date',
+			id: 'date',
+			// TODO: review date formatting/timezone
+			accessorFn: (row) => toUTCFormat(new Date(row.date)),
+		},
+		{
+			header: 'Income',
+			footer: 'Income',
+			accessorKey: 'income',
+			cell: (info) => {
+				return info.getValue<Row['income']>().toLocaleString();
+			},
+		},
+		{
+			header: 'Expenses',
+			footer: 'Expenses',
+			accessorKey: 'expenses',
+			cell: (info) => {
+				return info.getValue<Row['expenses']>().toLocaleString();
+			},
+		},
 	];
-
-	$: footer = {
-		date: 'Total for period',
-		income: kwdFormat(invoicesGrouped.reduce((acc, i) => acc + i.amount, 0)),
-		expense: kwdFormat(expensesGrouped.reduce((acc, i) => acc + i.amount, 0)),
-		net: kwdFormat(
-			invoicesGrouped.reduce((acc, i) => acc + i.amount, 0) -
-				expensesGrouped.reduce((acc, i) => acc + i.amount, 0),
-		),
-	};
-
-	$: table = new CTable({
-		headers,
-		rows: tabular || [],
-		footer,
-	});
 </script>
 
-<CondensedTable {table} />
+<Table
+	{columns}
+	items={tabular}
+	itemCount={tabular.length}
+	pagination={{
+		pageIndex: 0,
+		pageSize: 10,
+	}}
+	paginationType="client"
+/>
