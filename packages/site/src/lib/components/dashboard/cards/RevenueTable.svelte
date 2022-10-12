@@ -1,64 +1,82 @@
 <script lang="ts">
-	import CondensedTable from '$lib/components/table/CondensedTable.svelte';
-	import { CTable, type TableHeader } from '$lib/models/classes/table.class';
-	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import type { PaginatedLeaseInvoiceDto } from '$api/openapi';
-	import { entitiesMap } from '@self/utils';
+	import { baseColumns } from '$lib/components/table/lease-invoices/columns';
+	import { getColumnSum } from '$lib/components/table/tanstack-table/aggregation';
+	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
+	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
+	import { sortingFns, type ColumnDef } from '@tanstack/svelte-table';
+	import * as R from 'remeda';
+	import { fade } from 'svelte/transition';
 
 	export let invoices: PaginatedLeaseInvoiceDto;
 
-	$: tabular = invoices.results.map((i) => {
-		return {
-			id: { label: i.id, hide: true },
-			postAt: { label: toUTCFormat(i.postAt) },
-			amount: {
-				label: kwdFormat(i.amount),
-				extraStyles: ['tabular-nums', 'slashed-zero'],
-			},
-			status: {
-				label: i.isPaid ? 'Paid' : 'Unpaid',
-				extraStyles: i.isPaid ? ['text-green-600'] : ['text-red-600'],
-			},
-			property: {
-				label: i.breadcrumbs.property.label,
-				href: `/${entitiesMap.property.urlName}/${i.breadcrumbs.property.id}`,
-			},
-			unit: {
-				label: i.breadcrumbs.unit.label,
-				href: `/${entitiesMap.unit.urlName}/${i.breadcrumbs.unit.id}`,
-			},
-			view: {
-				label: 'View',
-				href: `/${entitiesMap.leaseInvoice.urlName}/${i.id}`,
-			},
-		};
-	});
+	$: tabular = invoices.results;
 
-	const headers: TableHeader[] = [
-		{ key: 'postAt', label: 'Date' },
-		{ key: 'status', label: 'Status', style: 'bold1' },
-		{ key: 'amount', label: 'Amount' },
-		{ key: 'unit', label: 'Unit', isHref: true, style: 'regular' },
-		{ key: 'property', label: 'Property', style: 'regular' },
-		{ key: 'view', label: 'View', isHref: true, hide: true },
+	type Row = typeof tabular[number];
+
+	const columns: ColumnDef<Row>[] = [
+		{
+			...baseColumns.postAt,
+			cell: (row) => {
+				const val = row.getValue();
+				if (R.isDate(val)) {
+					return toUTCFormat(val);
+				} else {
+					return val;
+				}
+			},
+			sortingFn: sortingFns.datetime,
+		},
+		baseColumns.isPaid,
+		{
+			header: 'Amount',
+			accessorKey: 'amount',
+			cell: (info) => {
+				return info.getValue<Row['amount']>().toLocaleString();
+			},
+			footer: ({ table }) => {
+				const sum = getColumnSum(table, 'amount');
+				return kwdFormat(sum);
+			},
+		},
+		{
+			header: 'Location',
+			footer: 'Location',
+			columns: [
+				{
+					...baseColumns.unitId,
+					enableSorting: true,
+				},
+				{
+					...baseColumns.propertyId,
+					enableSorting: true,
+				},
+			],
+		},
+		baseColumns.view,
 	];
-
-	$: footer = {
-		amount: kwdFormat(invoices.results.reduce((acc, i) => acc + i.amount, 0)),
-	};
-
-	$: table = new CTable({
-		headers,
-		rows: tabular || [],
-		footer,
-	});
 </script>
 
-<CondensedTable {table}>
-	<!-- <div slot="pagination">
-		<AnchorPagination
-			pagination={invoices.pagination}
-			key={LEASE_INVOICE_PAGINATION_KEY}
-		/>
-	</div> -->
-</CondensedTable>
+<div in:fade>
+	<Table
+		{columns}
+		items={tabular}
+		itemCount={tabular.length}
+		sorting={[
+			{
+				id: 'postAt',
+				desc: false,
+			},
+		]}
+		pagination={{
+			pageIndex: 0,
+			pageSize: 25,
+		}}
+		paginationType="client"
+	>
+		<div slot="pagination" let:table>
+			<Pagination {table} itemCount={tabular.length} hidePageSizeOptions />
+		</div>
+	</Table>
+</div>

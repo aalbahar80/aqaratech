@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ByMonthDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import RevenueBar from '$lib/components/charts/RevenueBar.svelte';
 	import RevenuePie from '$lib/components/charts/RevenuePie.svelte';
 	import RevenuePolarArea from '$lib/components/charts/RevenuePolarArea.svelte';
@@ -6,7 +7,6 @@
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 	import IncompleteDataAlert from '$lib/components/dashboard/IncompleteDataAlert.svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
-	import type { ByMonthDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 
 	export let invoices: PaginatedLeaseInvoiceDto;
 	export let invoicesGroupedPaid: ByMonthDto[];
