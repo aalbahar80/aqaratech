@@ -1,5 +1,16 @@
 # @self/site
 
+## 1.4.0
+
+### Minor Changes
+
+- edc0372a: replace revenue table with tanstack variant
+
+### Patch Changes
+
+- e12a32b5: update deps
+- b8045c87: fix netincome table missing datapoints
+
 ## 1.3.4
 
 ### Patch Changes

@@ -1,5 +1,18 @@
 # @self/backend
 
+## 1.5.0
+
+### Minor Changes
+
+- e12a32b5: introduce exception mapper
+
+### Patch Changes
+
+- e12a32b5: update deps
+- 472fc662: handle postmark errors
+- Updated dependencies [e12a32b5]
+  - @self/utils@2.0.2
+
 ## 1.4.3
 
 ### Patch Changes

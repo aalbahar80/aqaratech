@@ -1,5 +1,13 @@
 # @self/seed
 
+## 1.1.2
+
+### Patch Changes
+
+- e12a32b5: update deps
+- Updated dependencies [e12a32b5]
+  - eslint-config-custom@1.0.2
+
 ## 1.1.1
 
 ### Patch Changes
