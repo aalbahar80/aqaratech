@@ -10,6 +10,7 @@
 	export let expensesGrouped: ByMonthDto[];
 
 	const datasetCount = 4;
+	const tension = 0.25;
 
 	$: datasets = [
 		{
@@ -23,6 +24,7 @@
 			backgroundColor: getColor(0, datasetCount),
 			// borderRadius: 10,
 			borderDash: [5, 5],
+			tension,
 		},
 		{
 			label: 'Collected',
@@ -34,6 +36,7 @@
 			},
 			backgroundColor: getColor(1, datasetCount),
 			// borderRadius: 10,
+			tension,
 		},
 		{
 			label: 'Uncollected',
@@ -45,6 +48,7 @@
 			},
 			backgroundColor: getColor(2, datasetCount),
 			// borderRadius: 10,
+			tension,
 		},
 		{
 			label: 'Expenses',
@@ -56,6 +60,7 @@
 			},
 			backgroundColor: getColor(3, datasetCount),
 			// borderRadius: 10,
+			tension,
 		},
 	];
 </script>
