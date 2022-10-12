@@ -10,6 +10,9 @@ export const getProgress = (start: string, end: string, ref?: Date): number => {
 	return rounded;
 };
 
+/**
+ * Format a date in UTC timezone.
+ */
 export const toUTCFormat = (
 	date: Date | string,
 	format = 'MMM dd, yy',
