@@ -11,8 +11,8 @@
 </script>
 
 <DashCard
-	title="Net"
-	subtitle="Collected Rent Income vs Total Expenses"
+	title="Rent Income"
+	subtitle="Rent Income vs Expenses"
 	empty={expensesGrouped.length < 1 && invoicesGroupedPaid.length < 1}
 >
 	<div slot="chart">
