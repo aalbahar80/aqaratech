@@ -49,7 +49,7 @@
 				const formatted = kwdFormat(unpaidSum);
 
 				return renderComponent(GenericCellSvelte, {
-					value: formatted,
+					value: `Uncollected: ${formatted}`,
 					classes: 'text-yellow-600',
 				});
 			},
@@ -75,7 +75,7 @@
 				const formatted = kwdFormat(paidSum);
 
 				return renderComponent(GenericCellSvelte, {
-					value: formatted,
+					value: `Collected: ${formatted}`,
 					classes: 'text-green-600',
 				});
 			},
