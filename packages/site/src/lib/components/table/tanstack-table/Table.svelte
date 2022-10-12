@@ -50,9 +50,6 @@
 
 		if (paginationType === 'server') {
 			await handleServerSorting(sorting, $page.url);
-		} else {
-			// await handleClientSorting(sorting, $page.url);
-			throw new Error('Client-side sorting is not yet implemented');
 		}
 
 		refreshData();
@@ -97,19 +94,24 @@
 		pageCount,
 	};
 
+	const clientSortingOptions = {
+		manualSorting: false,
+	};
+
+	const serverSortingOptions = {
+		manualSorting: true,
+	};
+
 	const options = writable<TableOptions<T>>({
 		data: items,
 		columns,
 
-		manualSorting: true,
-		onSortingChange: setSorting,
 		state: {
 			sorting,
 			pagination,
 		},
 
 		getCoreRowModel: getCoreRowModel(),
-		getSortedRowModel: getSortedRowModel(),
 		debugTable: dev,
 
 		// Pagination. Docs: https://tanstack.com/table/v8/docs/api/features/pagination
@@ -117,6 +119,13 @@
 		...(paginationType === 'server'
 			? serverPaginationOptions
 			: clientPaginationOptions),
+
+		// Sorting. Docs: https://tanstack.com/table/v8/docs/api/features/sorting
+		onSortingChange: setSorting,
+		getSortedRowModel: getSortedRowModel(),
+		...(paginationType === 'server'
+			? serverSortingOptions
+			: clientSortingOptions),
 	});
 
 	const refreshData = () => {
