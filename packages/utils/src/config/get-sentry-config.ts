@@ -9,15 +9,19 @@ import { getSendEventConfig } from './sentry/should-send-events';
  * Events won't be sent in non-live environments unless `debug` is set to true and `sampleRate` is greater than 0.
  */
 export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
-	const { PUBLIC_AQARATECH_ENV, PUBLIC_TRACE_RATE, PUBLIC_AQ_DEBUG_SENTRY } =
-		config;
+	const {
+		PUBLIC_AQARATECH_ENV,
+		PUBLIC_TRACE_RATE,
+		PUBLIC_AQ_DEBUG_SENTRY,
+		PUBLIC_AQ_ENABLE_SENTRY,
+	} = config;
 
 	const sampleRate = +(PUBLIC_TRACE_RATE ?? 0);
 	const debug = PUBLIC_AQ_DEBUG_SENTRY === '1';
 
 	// TODO: use new typescript `satisfies` directive for type instead of casting
 	const sentryConfig: Options = {
-		enabled: true,
+		enabled: PUBLIC_AQ_ENABLE_SENTRY === '0' ? false : true,
 		environment: PUBLIC_AQARATECH_ENV || 'unknown',
 		debug,
 		tracesSampleRate: sampleRate,
@@ -44,7 +48,10 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 
 export type Config = Pick<
 	AqaratechEnv,
-	'PUBLIC_AQARATECH_ENV' | 'PUBLIC_AQ_DEBUG_SENTRY' | 'PUBLIC_TRACE_RATE'
+	| 'PUBLIC_AQARATECH_ENV'
+	| 'PUBLIC_AQ_DEBUG_SENTRY'
+	| 'PUBLIC_TRACE_RATE'
+	| 'PUBLIC_AQ_ENABLE_SENTRY'
 > & {
 	/**
 	 * The version from the package.json.

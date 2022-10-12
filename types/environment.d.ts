@@ -55,6 +55,11 @@ export interface AqaratechEnv {
 	readonly R2_SECRET_ACCESS_KEY: string;
 
 	// Sentry
+	/**
+	 * Master toggle for enabling/disabling sentry.
+	 * True by default. Set to `0` to disable.
+	 */
+	readonly PUBLIC_AQ_ENABLE_SENTRY: string;
 	readonly PUBLIC_TRACE_RATE: string;
 
 	// MeiliSearch
