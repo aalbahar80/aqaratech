@@ -1,11 +1,16 @@
 <script lang="ts">
 	import type { PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import { baseColumns } from '$lib/components/table/lease-invoices/columns';
+	import GenericCellSvelte from '$lib/components/table/lease-invoices/GenericCell.svelte';
 	import { getColumnSum } from '$lib/components/table/tanstack-table/aggregation';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
-	import { sortingFns, type ColumnDef } from '@tanstack/svelte-table';
+	import {
+		renderComponent,
+		sortingFns,
+		type ColumnDef,
+	} from '@tanstack/svelte-table';
 	import * as R from 'remeda';
 	import { fade } from 'svelte/transition';
 
@@ -28,16 +33,51 @@
 			},
 			sortingFn: sortingFns.datetime,
 		},
-		baseColumns.isPaid,
+		{
+			...baseColumns.isPaid,
+			footer: ({ table }) => {
+				const unpaidSum = table
+					.getFilteredRowModel()
+					.rows.reduce((total, row) => {
+						if (row.getValue('isPaid') === false) {
+							return total + row.getValue<Row['amount']>('amount');
+						} else {
+							return total;
+						}
+					}, 0);
+
+				const formatted = kwdFormat(unpaidSum);
+
+				return renderComponent(GenericCellSvelte, {
+					value: formatted,
+					classes: 'text-yellow-600',
+				});
+			},
+		},
 		{
 			header: 'Amount',
 			accessorKey: 'amount',
 			cell: (info) => {
 				return info.getValue<Row['amount']>().toLocaleString();
 			},
+
 			footer: ({ table }) => {
-				const sum = getColumnSum(table, 'amount');
-				return kwdFormat(sum);
+				const paidSum = table
+					.getFilteredRowModel()
+					.rows.reduce((total, row) => {
+						if (row.getValue('isPaid') === true) {
+							return total + row.getValue<Row['amount']>('amount');
+						} else {
+							return total;
+						}
+					}, 0);
+
+				const formatted = kwdFormat(paidSum);
+
+				return renderComponent(GenericCellSvelte, {
+					value: formatted,
+					classes: 'text-green-600',
+				});
 			},
 		},
 		{
