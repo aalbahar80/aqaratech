@@ -21,6 +21,8 @@ import type {
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
 export const test = base.extend<TestFixtures & TestOptions>({
+	baseURL: process.env.PUBLIC_API_URL,
+
 	// Dependency map: org -> request
 	// 1. A new org is created
 	// 3. The `request` fixture is overriden with the new page.request, which has the new role cookie set
