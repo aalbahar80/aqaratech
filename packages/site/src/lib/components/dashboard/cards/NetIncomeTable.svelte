@@ -70,6 +70,6 @@
 	paginationType="client"
 >
 	<div slot="pagination" let:table>
-		<Pagination {table} itemCount={tabular.length} />
+		<Pagination {table} itemCount={tabular.length} hidePageSizeOptions />
 	</div>
 </Table>

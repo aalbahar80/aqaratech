@@ -8,6 +8,7 @@
 
 	export let table: Table<any>;
 	export let itemCount: number;
+	export let hidePageSizeOptions: boolean = false;
 
 	$: pageIdx = table.getState().pagination.pageIndex;
 	$: pageSize = table.getState().pagination.pageSize;
@@ -60,18 +61,21 @@
 				<span class="font-medium">{itemCount}</span> results
 			</p>
 		</div>
-		<div class="grow-0">
-			<Select
-				current={table.getState().pagination.pageSize}
-				options={[10, 20, 50, 75, 100].map((size) => ({
-					value: size,
-					label: `Show ${size}`,
-				}))}
-				on:select={(e) => {
-					table.setPageSize(e.detail.value);
-				}}
-			/>
-		</div>
+		<!-- Page size selector -->
+		{#if !hidePageSizeOptions}
+			<div class="grow-0">
+				<Select
+					current={table.getState().pagination.pageSize}
+					options={[10, 20, 50, 75, 100].map((size) => ({
+						value: size,
+						label: `Show ${size}`,
+					}))}
+					on:select={(e) => {
+						table.setPageSize(e.detail.value);
+					}}
+				/>
+			</div>
+		{/if}
 		<div>
 			<nav
 				class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
