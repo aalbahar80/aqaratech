@@ -1,22 +1,9 @@
 import { expect } from '@playwright/test';
-import { sample } from '@self/seed';
-import { entitiesMap } from '@self/utils';
 import { withQuery } from 'ufo';
 import { test } from '../../api/api-fixtures';
 
-const site = process.env.PUBLIC_SITE_URL;
-
-const portfolio = sample.portfolios[0];
-const property = sample.properties[0];
-const unit = sample.units[0];
-
-test('portfolio is preselected', async ({ page }) => {
-	await page.goto(
-		`/${entitiesMap.unit.urlName}/new?portfolioId=${portfolio.id}&propertyId=${property.id}`,
-	);
-
 test('portfolio is preselected', async ({ page, portfolio, unit }) => {
-	const url = withQuery(`${site}/units/new`, {
+	const url = withQuery(`/units/new`, {
 		portfolioId: unit.portfolioId,
 		propertyId: unit.propertyId,
 	});
@@ -30,30 +17,68 @@ test('portfolio is preselected', async ({ page, portfolio, unit }) => {
 	await expect(el).toHaveAttribute('data-value', unit.portfolioId);
 });
 
-test('property is preselected', async ({ page }) => {
-	await page.goto(
-		`/${entitiesMap.unit.urlName}/new?portfolioId=${portfolio.id}&propertyId=${property.id}`,
-	);
+test('property is preselected', async ({ page, property, unit }) => {
+	const url = withQuery(`/units/new`, {
+		portfolioId: unit.portfolioId,
+		propertyId: unit.propertyId,
+	});
+
+	await page.goto(url);
+
 	const el = page.locator('#propertyId');
+
+	if (!property.area) {
+		throw new Error('property.area is not defined');
+	}
+
 	const re = new RegExp(`${property.area}`);
+
 	await expect(el).toHaveValue(re);
+
 	await expect(el).toHaveAttribute('data-value', property.id);
 });
 
-test('unitType is preselected', async ({ page }) => {
-	await page.goto(`/${entitiesMap.unit.urlName}/${unit.id}/edit`);
+test('unitType is preselected', async ({ page, unit }) => {
+	await page.goto(`/units/${unit.id}/edit`);
+
 	const el = page.locator('#type');
+
+	if (!unit.type) {
+		throw new Error('unit.type is not defined');
+	}
+
 	await expect(el).toHaveValue(unit.type);
+});
+
+test('create first unit button has predefined params', async ({
+	page,
+	property,
+}) => {
+	await page.goto(`/properties/${property.id}`);
+
+	const url = withQuery(`/units/new`, {
+		portfolioid: property.portfolioId,
+		propertyId: property.id,
+	});
+
+	const el = page.getByRole('link', { name: 'New unit' });
+
+	await expect(el).toHaveAttribute('href', url);
 });
 
 test('create unit button has predefined params', async ({
 	page,
-	portfolio,
+	property,
+	unit: _unit,
 }) => {
-	await page.goto(`/${entitiesMap.property.urlName}/${property.id}`);
-	const el = page.locator('text=Create new unit');
-	await expect(el).toHaveAttribute(
-		'href',
-		`/${entitiesMap.unit.urlName}/new?portfolioId=${portfolio.id}&propertyId=${property.id}`,
-	);
+	await page.goto(`/properties/${property.id}`);
+
+	const url = withQuery(`/units/new`, {
+		portfolioid: property.portfolioId,
+		propertyId: property.id,
+	});
+
+	const el = page.getByRole('link', { name: 'Create new unit' });
+
+	await expect(el).toHaveAttribute('href', url);
 });
