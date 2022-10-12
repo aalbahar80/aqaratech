@@ -2,7 +2,7 @@
 	import type { ByMonthDto } from '$api/openapi';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { toUTCFormat } from '$lib/utils/common';
+	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { sortingFns, type ColumnDef } from '@tanstack/svelte-table';
 	import * as R from 'remeda';
 	import { fade } from 'svelte/transition';
@@ -51,18 +51,36 @@
 		},
 		{
 			header: 'Income',
-			footer: 'Income',
 			accessorKey: 'income',
 			cell: (info) => {
 				return info.getValue<Row['income']>().toLocaleString();
 			},
+			footer: ({ table }) => {
+				const sum = table
+					.getFilteredRowModel()
+					.rows.reduce(
+						(total, row) => total + row.getValue<Row['income']>('income'),
+						0,
+					);
+
+				return kwdFormat(sum);
+			},
 		},
 		{
 			header: 'Expenses',
-			footer: 'Expenses',
 			accessorKey: 'expenses',
 			cell: (info) => {
 				return info.getValue<Row['expenses']>().toLocaleString();
+			},
+			footer: ({ table }) => {
+				const sum = table
+					.getFilteredRowModel()
+					.rows.reduce(
+						(total, row) => total + row.getValue<Row['expenses']>('expenses'),
+						0,
+					);
+
+				return kwdFormat(sum);
 			},
 		},
 	];
