@@ -88,6 +88,7 @@
 			footer: ({ table }) => {
 				const sum = getColumnSum(table, 'paid');
 				return renderComponent(GenericCellSvelte, {
+					classes: 'text-green-600',
 					value: kwdFormat(sum),
 					tooltip: 'Paid rent',
 				});
@@ -115,7 +116,10 @@
 			},
 			footer: ({ table }) => {
 				const sum = getColumnSum(table, 'expenses');
-				return kwdFormat(sum);
+				return renderComponent(GenericCellSvelte, {
+					classes: 'text-red-600',
+					value: kwdFormat(sum),
+				});
 			},
 		},
 		{
@@ -129,7 +133,7 @@
 				const sum = getColumnSum(table, 'net');
 				return renderComponent(GenericCellSvelte, {
 					value: kwdFormat(sum),
-					tooltip: 'Net = Paid rent - Expenses',
+					tooltip: 'Net = Collected rent - Expenses',
 				});
 			},
 		},
