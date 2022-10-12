@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { ByMonthDto } from '$api/openapi';
+	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type { ColumnDef } from '@tanstack/svelte-table';
@@ -67,4 +68,8 @@
 		pageSize: 10,
 	}}
 	paginationType="client"
-/>
+>
+	<div slot="pagination" let:table>
+		<Pagination {table} itemCount={tabular.length} />
+	</div>
+</Table>

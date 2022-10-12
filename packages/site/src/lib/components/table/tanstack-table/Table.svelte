@@ -238,7 +238,9 @@
 				</tfoot>
 			</table>
 		</div>
-		<Pagination table={$table} {itemCount} />
+		<slot name="pagination" table={$table}>
+			<Pagination table={$table} {itemCount} />
+		</slot>
 	</div>
 </div>
 
