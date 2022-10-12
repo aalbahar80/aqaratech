@@ -20,7 +20,9 @@
 />
 
 <NetIncomeCard
+	invoicesGrouped={data.invoicesGrouped}
 	invoicesGroupedPaid={data.invoicesGroupedPaid}
+	invoicesGroupedUnpaid={data.invoicesGroupedUnpaid}
 	expensesGrouped={data.expensesGrouped}
 />
 <RevenueCard

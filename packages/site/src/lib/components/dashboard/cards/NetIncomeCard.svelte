@@ -4,7 +4,9 @@
 	import NetIncomeTable from '$lib/components/dashboard/cards/NetIncomeTable.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 
+	export let invoicesGrouped: ByMonthDto[];
 	export let invoicesGroupedPaid: ByMonthDto[];
+	export let invoicesGroupedUnpaid: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];
 </script>
 
@@ -17,8 +19,13 @@
 		<NetIncomeLineChart {invoicesGroupedPaid} {expensesGrouped} />
 	</div>
 	<div slot="data">
-		{#key [...expensesGrouped, ...invoicesGroupedPaid]}
-			<NetIncomeTable {invoicesGroupedPaid} {expensesGrouped} />
+		{#key [...expensesGrouped, ...invoicesGrouped]}
+			<NetIncomeTable
+				{invoicesGrouped}
+				{invoicesGroupedPaid}
+				{invoicesGroupedUnpaid}
+				{expensesGrouped}
+			/>
 		{/key}
 	</div>
 </DashCard>
