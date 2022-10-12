@@ -57,6 +57,7 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Debug Backend",
+			"console": "integratedTerminal",
 			"cwd": "${workspaceFolder}/packages/backend",
 			"skipFiles": ["<node_internals>/**"],
 			"runtimeExecutable": "pnpm",
