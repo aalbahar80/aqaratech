@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { ByMonthDto } from '$api/openapi';
+	import { getColumnSum } from '$lib/components/table/tanstack-table/aggregation';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
@@ -56,13 +57,7 @@
 				return info.getValue<Row['income']>().toLocaleString();
 			},
 			footer: ({ table }) => {
-				const sum = table
-					.getFilteredRowModel()
-					.rows.reduce(
-						(total, row) => total + row.getValue<Row['income']>('income'),
-						0,
-					);
-
+				const sum = getColumnSum(table, 'income');
 				return kwdFormat(sum);
 			},
 		},
@@ -73,13 +68,7 @@
 				return info.getValue<Row['expenses']>().toLocaleString();
 			},
 			footer: ({ table }) => {
-				const sum = table
-					.getFilteredRowModel()
-					.rows.reduce(
-						(total, row) => total + row.getValue<Row['expenses']>('expenses'),
-						0,
-					);
-
+				const sum = getColumnSum(table, 'expenses');
 				return kwdFormat(sum);
 			},
 		},
