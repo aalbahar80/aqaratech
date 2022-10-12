@@ -45,6 +45,7 @@
 		pageIndex: data.payouts.pagination.page - 1,
 		pageSize: data.payouts.pagination.take,
 	}}
+	paginationType="server"
 >
 	<div slot="header-actions">
 		<a href={`${$page.url.pathname}/csv`} download="payouts.csv">

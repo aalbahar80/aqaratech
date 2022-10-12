@@ -24,6 +24,7 @@
 	export let pagination: PaginationState;
 	export let itemCount: number;
 	export let pageCount: number;
+	export let paginationType: 'server' | 'client';
 
 	let sorting: SortingState = [];
 
@@ -43,7 +44,12 @@
 			},
 		}));
 
-		await handleServerSorting(sorting, $page.url);
+		if (paginationType === 'server') {
+			await handleServerSorting(sorting, $page.url);
+		} else {
+			// await handleClientSorting(sorting, $page.url);
+			throw new Error('Client-side sorting is not yet implemented');
+		}
 
 		refreshData();
 	};
@@ -64,7 +70,12 @@
 			},
 		}));
 
-		await handleServerPagination(pagination, $page.url);
+		if (paginationType === 'server') {
+			await handleServerPagination(pagination, $page.url);
+		} else {
+			// await handleClientPagination(pagination, $page.url);
+			throw new Error('Client-side pagination is not yet implemented');
+		}
 
 		// update fresh pagecount from server
 		options.update((old) => ({
