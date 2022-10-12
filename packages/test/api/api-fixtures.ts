@@ -18,11 +18,11 @@ import type {
 	UnitDto,
 } from '../types/api';
 
+const apiURL = process.env.PUBLIC_API_URL;
+
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
 export const test = base.extend<TestFixtures & TestOptions>({
-	baseURL: process.env.PUBLIC_API_URL,
-
 	// Dependency map: org -> request
 	// 1. A new org is created
 	// 3. The `request` fixture is overriden with the new page.request, which has the new role cookie set
@@ -40,7 +40,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 		const organization = R.pick(organizationFactory.build(), ['fullName']);
 
-		const res = await context.request.post(`/organizations`, {
+		const res = await context.request.post(`${apiURL}/organizations`, {
 			data: organization,
 		});
 
@@ -85,7 +85,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 		const picked = R.pick(tenant, ['fullName', 'organizationId']);
 
-		const res = await request.post(`/tenants`, { data: picked });
+		const res = await request.post(`${apiURL}/tenants`, { data: picked });
 
 		const created = (await res.json()) as TenantDto;
 
@@ -102,7 +102,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 		const picked = R.pick(portfolio, ['fullName', 'organizationId']);
 
-		const res = await request.post(`/portfolios`, { data: picked });
+		const res = await request.post(`${apiURL}/portfolios`, { data: picked });
 
 		const created = (await res.json()) as PortfolioDto;
 
@@ -124,7 +124,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			'portfolioId',
 		]);
 
-		const res = await request.post(`/properties`, { data: picked });
+		const res = await request.post(`${apiURL}/properties`, { data: picked });
 
 		const created = (await res.json()) as PropertyDto;
 
@@ -146,7 +146,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			'propertyId',
 		]);
 
-		const res = await request.post(`/units`, { data: picked });
+		const res = await request.post(`${apiURL}/units`, { data: picked });
 
 		const created = (await res.json()) as UnitDto;
 
@@ -173,7 +173,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			'tenantId',
 		]);
 
-		const res = await request.post(`/leases`, { data: picked });
+		const res = await request.post(`${apiURL}/leases`, { data: picked });
 
 		const created = (await res.json()) as LeaseDto;
 
@@ -184,7 +184,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	file: async ({ portfolio, request }, use) => {
 		const fileName = 'test.txt';
 
-		const res = await request.post(`/files`, {
+		const res = await request.post(`${apiURL}/files`, {
 			multipart: {
 				fileName: fileName,
 				relationKey: 'portfolio',
@@ -205,7 +205,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	},
 
 	expenseCategory: async ({ request }, use) => {
-		const res = await request.get(`/expense-categories`);
+		const res = await request.get(`${apiURL}/expense-categories`);
 
 		const categories = (await res.json()) as ExpenseCategoryDto[];
 
