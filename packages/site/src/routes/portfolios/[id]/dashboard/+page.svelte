@@ -11,6 +11,7 @@
 
 <div class="prose">
 	<h1>Dashboard</h1>
+	<h3>{data.properties.results[0]?.breadcrumbs.portfolio.label || ''}</h3>
 </div>
 
 <DashboardFilter
