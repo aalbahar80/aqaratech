@@ -23,14 +23,18 @@
 	export let items: T[];
 	export let columns: ColumnDef<T>[];
 	export let pagination: PaginationState;
+	/**
+	 * Allows setting the initial sorting state.
+	 *
+	 * Ideally, _initial_ sorting state should be inferred from the URL when possible when using server-side sorting.
+	 */
+	export let sorting: SortingState = [];
 	export let itemCount: number;
 	/**
 	 * Page count should be defined when using server-side pagination
 	 */
 	export let pageCount: number | undefined = undefined; // TODO: differentiate between client v server pagination config using a type
 	export let paginationType: 'server' | 'client';
-
-	let sorting: SortingState = [];
 
 	const setSorting: OnChangeFn<SortingState> = async (updater) => {
 		// what is this doing?

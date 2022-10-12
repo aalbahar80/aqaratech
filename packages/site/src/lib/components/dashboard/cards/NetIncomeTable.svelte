@@ -71,6 +71,12 @@
 	{columns}
 	items={tabular}
 	itemCount={tabular.length}
+	sorting={[
+		{
+			id: 'date',
+			desc: false,
+		},
+	]}
 	pagination={{
 		pageIndex: 0,
 		pageSize: 10,
