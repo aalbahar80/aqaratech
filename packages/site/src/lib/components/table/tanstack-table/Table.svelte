@@ -8,6 +8,7 @@
 		createSvelteTable,
 		flexRender,
 		getCoreRowModel,
+		getPaginationRowModel,
 		getSortedRowModel,
 		type ColumnDef,
 		type OnChangeFn,
@@ -62,6 +63,16 @@
 			pagination = updater;
 		}
 
+		if (paginationType === 'server') {
+			await handleServerPagination(pagination, $page.url);
+
+			options.update((old) => ({
+				...old,
+				// update fresh pagecount from server
+				pageCount: pageCount,
+			}));
+		}
+
 		options.update((old) => ({
 			...old,
 			state: {
@@ -70,29 +81,22 @@
 			},
 		}));
 
-		if (paginationType === 'server') {
-			await handleServerPagination(pagination, $page.url);
-		} else {
-			// await handleClientPagination(pagination, $page.url);
-			throw new Error('Client-side pagination is not yet implemented');
-		}
-
-		// update fresh pagecount from server
-		options.update((old) => ({
-			...old,
-			pageCount: pageCount,
-		}));
-
 		refreshData();
+	};
+
+	const clientPaginationOptions = {
+		manualPagination: false,
+		getPaginationRowModel: getPaginationRowModel<any>(),
+	};
+
+	const serverPaginationOptions = {
+		manualPagination: true,
+		pageCount,
 	};
 
 	const options = writable<TableOptions<T>>({
 		data: items,
 		columns,
-
-		manualPagination: true,
-		pageCount: pageCount,
-		onPaginationChange: setPagination,
 
 		manualSorting: true,
 		onSortingChange: setSorting,
@@ -104,6 +108,12 @@
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: dev,
+
+		// Pagination. Docs: https://tanstack.com/table/v8/docs/api/features/pagination
+		onPaginationChange: setPagination,
+		...(paginationType === 'server'
+			? serverPaginationOptions
+			: clientPaginationOptions),
 	});
 
 	const refreshData = () => {
