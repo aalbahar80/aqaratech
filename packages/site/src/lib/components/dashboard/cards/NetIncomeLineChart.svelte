@@ -4,14 +4,14 @@
 	import { getColor } from '$lib/utils/colors';
 	import type { ByMonthDto } from '$api/openapi';
 
-	export let invoicesGrouped: ByMonthDto[];
+	export let invoicesGroupedPaid: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];
 
 	$: datasets = [
 		{
 			label: 'Income',
 			borderColor: getColor(0, 2),
-			data: invoicesGrouped,
+			data: invoicesGroupedPaid,
 			parsing: {
 				yAxisKey: 'amount',
 				xAxisKey: 'date',

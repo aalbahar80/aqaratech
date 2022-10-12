@@ -8,7 +8,7 @@
 	import * as R from 'remeda';
 	import { fade } from 'svelte/transition';
 
-	export let invoicesGrouped: ByMonthDto[];
+	export let invoicesGroupedPaid: ByMonthDto[];
 	export let expensesGrouped: ByMonthDto[];
 
 	type Row = typeof tabular[number];
@@ -18,13 +18,14 @@
 	// Sort the resulting array by date.
 
 	const allDates = new Set(
-		[...invoicesGrouped, ...expensesGrouped].map(({ date }) => date),
+		[...invoicesGroupedPaid, ...expensesGrouped].map(({ date }) => date),
 	);
 
 	// Create a new array of objects, with the date as the key, and the income and expense as the values.
 
 	const tabular = Array.from(allDates).map((date) => {
-		const income = invoicesGrouped.find((i) => i.date === date)?.amount || 0;
+		const income =
+			invoicesGroupedPaid.find((i) => i.date === date)?.amount || 0;
 		const expenses = expensesGrouped.find((i) => i.date === date)?.amount || 0;
 		return {
 			date,
