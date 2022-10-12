@@ -16,7 +16,12 @@
 	empty={expensesGrouped.length < 1 && invoicesGroupedPaid.length < 1}
 >
 	<div slot="chart">
-		<NetIncomeLineChart {invoicesGroupedPaid} {expensesGrouped} />
+		<NetIncomeLineChart
+			{invoicesGrouped}
+			{invoicesGroupedPaid}
+			{invoicesGroupedUnpaid}
+			{expensesGrouped}
+		/>
 	</div>
 	<div slot="data">
 		{#key [...expensesGrouped, ...invoicesGrouped]}
