@@ -1,6 +1,4 @@
 import { Page, test as base } from '@playwright/test';
-import { Cookie } from '@self/utils';
-import { getToken } from './utils/get-token';
 
 type MyFixtures = {
 	page: Page;
@@ -21,14 +19,7 @@ export const test = base.extend<MyFixtures>({
 		};
 		await use(page);
 	},
-	token: async ({ baseURL }, use) => {
-		const token = await getToken({
-			name: Cookie.accessToken,
-			domain: baseURL,
-		});
 
-		await use(token);
-	},
 	apiBaseURL: async ({}, use) => {
 		const apiBaseUrl = process.env.PUBLIC_API_URL;
 		await use(apiBaseUrl);

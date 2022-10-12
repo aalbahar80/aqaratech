@@ -1,5 +1,5 @@
 import { APIRequestContext, expect } from '@playwright/test';
-import { sample, testOrgRoleId } from '@self/seed';
+import { sample } from '@self/seed';
 import { entitiesMap } from '@self/utils';
 import { promises } from 'node:fs';
 import { test } from '../../config';
@@ -16,7 +16,7 @@ const params = new URLSearchParams({
 
 const url = `/${fileEntity.urlName}/new?${params.toString()}`;
 
-test('files can be uploaded', async ({ page, request, token, apiBaseURL }) => {
+test('files can be uploaded', async ({ page, request, apiBaseURL }) => {
 	const fileName = 'test-file-upload';
 	// TODO add random characters to file name for cleaner testing
 
@@ -31,7 +31,6 @@ test('files can be uploaded', async ({ page, request, token, apiBaseURL }) => {
 	// grab uploaded file
 	const presignedUrl = await getPresignedUrl({
 		fileName,
-		token,
 		apiBaseURL,
 		request,
 	});
@@ -46,7 +45,7 @@ test('files can be uploaded', async ({ page, request, token, apiBaseURL }) => {
 	expect(uploadedFile.length).toEqual(localFile.length);
 });
 
-test('files can be deleted', async ({ page, request, token, apiBaseURL }) => {
+test('files can be deleted', async ({ page, request, apiBaseURL }) => {
 	const fileName = 'test-file-delete';
 	const key = `${portfolioEntity.title}/${portfolio.id}/${fileName}`;
 
@@ -61,7 +60,6 @@ test('files can be deleted', async ({ page, request, token, apiBaseURL }) => {
 	// grab uploaded file
 	const presignedUrl = await getPresignedUrl({
 		fileName,
-		token,
 		apiBaseURL,
 		request,
 	});
@@ -87,12 +85,10 @@ test('files can be deleted', async ({ page, request, token, apiBaseURL }) => {
 const getPresignedUrl = async ({
 	request,
 	fileName,
-	token,
 	apiBaseURL,
 }: {
 	request: APIRequestContext;
 	fileName: string;
-	token: string;
 	apiBaseURL: string;
 }) => {
 	const key = `${portfolioEntity.title}/${portfolio.id}/${fileName}`;
@@ -100,12 +96,6 @@ const getPresignedUrl = async ({
 		`${apiBaseURL}/${fileEntity.urlName}/find-one?key=${encodeURIComponent(
 			key,
 		)}`,
-		{
-			headers: {
-				Authorization: `Bearer ${token}`,
-				'x-role-id': testOrgRoleId,
-			},
-		},
 	);
 	expect(response.status()).toBe(200);
 

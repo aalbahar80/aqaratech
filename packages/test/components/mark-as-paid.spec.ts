@@ -1,11 +1,11 @@
 import { expect, Page } from '@playwright/test';
-import { sample, testOrgRoleId } from '@self/seed';
+import { sample } from '@self/seed';
 import { test as base } from '../config';
 
 const lease = sample.leases[0];
 
 const test = base.extend<MyFixtures>({
-	invoice: async ({ page, request, token, apiBaseURL }, use) => {
+	invoice: async ({ page, request, apiBaseURL }, use) => {
 		await page.goto(`leases/${lease.id}`);
 
 		const data: Omit<Invoice, 'id'> = {
@@ -19,13 +19,7 @@ const test = base.extend<MyFixtures>({
 			isPaid: false,
 		};
 
-		const res = await request.post(`${apiBaseURL}/leaseInvoices`, {
-			data,
-			headers: {
-				authorization: `Bearer ${token}`,
-				'x-role-id': testOrgRoleId,
-			},
-		});
+		const res = await request.post(`${apiBaseURL}/leaseInvoices`, { data });
 		const invoice = (await res.json()) as Invoice;
 		await use(invoice);
 	},
