@@ -113,7 +113,7 @@ export class RolesService {
 			role.tenant?.organization?.fullName ||
 			'';
 
-		await this.postmarkService.sendEmailWithTemplate({
+		await this.postmarkService.trySendEmail({
 			From: 'Aqaratech <notifications@aqaratech.com>',
 			To: role.user.email,
 			TemplateAlias: 'user-invitation',
