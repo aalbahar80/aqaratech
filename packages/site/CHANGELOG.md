@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.5.0
+
+### Minor Changes
+
+- 917b4ad5: add collected vs uncollected columns in net tabel
+
 ## 1.4.0
 
 ### Minor Changes
