@@ -7,6 +7,7 @@
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
+	import { setContext } from 'svelte';
 	import type { PageData } from './$types';
 
 	$: details = [
@@ -22,6 +23,10 @@
 	] as [string, string | null][];
 
 	export let data: PageData;
+
+	setContext('portfolio', {
+		...data.property.breadcrumbs.portfolio,
+	});
 </script>
 
 <PropertyPage property={data.property} />

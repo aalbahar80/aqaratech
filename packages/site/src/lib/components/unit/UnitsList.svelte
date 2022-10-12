@@ -1,11 +1,12 @@
 <script lang="ts">
+	import type { PaginatedUnitDto, UnitDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import RadioButtons from '$lib/components/buttons/RadioButtons.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import UnitCard from '$lib/components/unit/UnitCard.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedUnitDto, UnitDto } from '$api/openapi';
+	import { getContext } from 'svelte';
 	import { flip } from 'svelte/animate';
 	import { writable } from 'svelte/store';
 
@@ -48,7 +49,7 @@
 		predefined:
 			$page.url.pathname.startsWith('/properties') &&
 			new Map([
-				['portfolioId', units.results[0]?.breadcrumbs.portfolio.id],
+				['portfolioId', getContext('portfolio').id],
 				['propertyId', $page.url.pathname.split('/').pop()],
 			]),
 	})}

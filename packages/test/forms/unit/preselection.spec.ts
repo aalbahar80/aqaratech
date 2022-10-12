@@ -57,7 +57,7 @@ test('create first unit button has predefined params', async ({
 	await page.goto(`/properties/${property.id}`);
 
 	const url = withQuery(`/units/new`, {
-		portfolioid: property.portfolioId,
+		portfolioId: property.portfolioId,
 		propertyId: property.id,
 	});
 
@@ -74,7 +74,7 @@ test('create unit button has predefined params', async ({
 	await page.goto(`/properties/${property.id}`);
 
 	const url = withQuery(`/units/new`, {
-		portfolioid: property.portfolioId,
+		portfolioId: property.portfolioId,
 		propertyId: property.id,
 	});
 
