@@ -67,11 +67,6 @@ console.timeLog(TIMER, 'Created release');
 
 // Upload source maps
 if (projectName === 'site') {
-	// Upload client sourcemaps
-
-	await $`sentry-cli sourcemaps upload build/client ${org} ${site_client_project} --release ${prefixedVersion}`;
-	// alternative: sentry-cli releases files site-client-1.3.1 upload-sourcemaps ./build/client --org aqaratech --project site-client
-
 	// Upload server sourcemaps
 
 	await $`pnpm -w run flatten-sourcemaps`;
@@ -83,6 +78,11 @@ if (projectName === 'site') {
 	// alternative: sentry-cli releases files site-server-1.3.1 upload-sourcemaps ./build/server --org aqaratech --project site-server
 	// remove the temporary build directory
 	await $`rm -rf build-temp`;
+
+	// Upload client sourcemaps
+
+	await $`sentry-cli sourcemaps upload build/client ${org} ${site_client_project} --release ${prefixedVersion}`;
+	// alternative: sentry-cli releases files site-client-1.3.1 upload-sourcemaps ./build/client --org aqaratech --project site-client
 } else if (projectName === 'backend') {
 	// setting the path to the dist directory is enough because we use inlineSources in tsconfig.json, which embeds the source code in the sourcemaps (in the "sourcesContent" property)
 	await $`sentry-cli sourcemaps upload dist ${org} ${project} --release ${prefixedVersion}`;
