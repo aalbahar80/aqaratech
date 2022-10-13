@@ -44,11 +44,12 @@ export const addSuccessToast = (subtitle = '') => {
 	});
 };
 
-export const addErrorToast = () => {
+export const addErrorToast = (subtitle = '') => {
 	addToast({
 		props: {
 			kind: 'error',
 			title: 'Error',
+			subtitle,
 		},
 	});
 };

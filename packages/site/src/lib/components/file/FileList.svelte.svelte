@@ -8,7 +8,11 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import DetailsPaneItem from '$lib/components/details-pane/DetailsPaneItem.svelte';
-	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
+	import {
+		addErrorToast,
+		addSuccessToast,
+		handleApiError,
+	} from '$lib/stores/toast';
 	import { hasFileSupport } from '$lib/utils/file';
 	import { inferRoute } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
@@ -29,7 +33,8 @@
 					relationValue: route.id,
 				});
 		} catch (e) {
-			handleApiError(e);
+			// TODO test if error logged by sentry
+			addErrorToast('Failed to load file list.');
 		}
 	});
 </script>
