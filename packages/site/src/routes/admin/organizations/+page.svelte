@@ -56,4 +56,5 @@
 		pageIndex: data.organizations.pagination.page - 1,
 		pageSize: data.organizations.pagination.take,
 	}}
+	paginationType="server"
 />

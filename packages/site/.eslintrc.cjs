@@ -25,6 +25,7 @@ module.exports = {
 	settings: {
 		'svelte3/typescript': () => require('typescript'),
 		'svelte3/ignore-styles': () => true,
+		'svelte3/ignore-warnings': () => ['a11y-click-events-have-key-events'],
 	},
 	parserOptions: {
 		sourceType: 'module',
