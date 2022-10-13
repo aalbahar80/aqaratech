@@ -10,7 +10,7 @@
 # https://regex101.com/r/Ad250Y/1
 
 # TODO:
-# map /site which uses svelte-chech (use the machine readable output option)
+# map /site which uses svelte-check (use the machine readable output option)
 # map root directory 
 
 # Groups
