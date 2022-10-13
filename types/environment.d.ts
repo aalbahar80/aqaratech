@@ -66,7 +66,8 @@ export interface AqaratechEnv {
 	readonly MEILISEARCH_HOST: string;
 	readonly MEILISEARCH_API_KEY: string;
 
-	readonly PUBLIC_COMMIT_SHA: string | undefined;
+	// Optional: https://github.com/colinhacks/zod/issues/980#issuecomment-1055823443
+	readonly PUBLIC_COMMIT_SHA?: string | undefined;
 
 	// Debug
 	readonly PUBLIC_AQ_DEBUG_LEVEL:
