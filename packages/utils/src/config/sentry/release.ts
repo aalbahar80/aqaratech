@@ -1,4 +1,4 @@
-import type { Config } from '../get-sentry-config';
+import type { Config } from './types';
 
 export const getReleaseName = ({
 	PUBLIC_AQARATECH_ENV,

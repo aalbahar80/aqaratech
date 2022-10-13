@@ -1,8 +1,8 @@
 import type { Options } from '@sentry/types';
-import type { AqaratechEnv } from '../../../../types/environment';
 import { isHealthCheck } from './is-health-check';
 import { getReleaseName } from './sentry/release';
 import { getSendEventConfig } from './sentry/should-send-events';
+import type { Config } from './sentry/types';
 
 // TODO: use new typescript `satisfies` directive for return type
 /**
@@ -44,21 +44,6 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 	}
 
 	return sentryConfig;
-};
-
-export type Config = Pick<
-	AqaratechEnv,
-	| 'PUBLIC_AQARATECH_ENV'
-	| 'PUBLIC_AQ_DEBUG_SENTRY'
-	| 'PUBLIC_TRACE_RATE'
-	| 'PUBLIC_AQ_ENABLE_SENTRY'
-> & {
-	/**
-	 * The version from the package.json.
-	 */
-	version: string;
-	commitSha: string | undefined;
-	repoName: string;
 };
 
 type AqaratechSentryConfig = Pick<

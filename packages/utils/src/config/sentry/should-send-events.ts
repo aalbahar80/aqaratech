@@ -1,6 +1,6 @@
 import type { Options } from '@sentry/types';
 import type { AqaratechEnv } from '../../../../../types/environment';
-import type { Config } from '../get-sentry-config';
+import type { Config } from './types';
 
 /**
  * Environments where we should always send events to Sentry.
