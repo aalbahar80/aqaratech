@@ -1,3 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
-test.skip('should display as many rows as months', async ({ page }) => {});
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+test.skip('should display as many rows as months', async ({}) => {});

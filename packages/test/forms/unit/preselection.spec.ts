@@ -69,6 +69,7 @@ test('create first unit button has predefined params', async ({
 test('create unit button has predefined params', async ({
 	page,
 	property,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	unit: _unit,
 }) => {
 	await page.goto(`/properties/${property.id}`);
