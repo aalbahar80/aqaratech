@@ -15,8 +15,17 @@
 
 	const handleConfirm = async () => {
 		isLoading = true;
+		const plural = entitiesMap[entity].plural;
 		try {
-			const plural = entitiesMap[entity].plural;
+			if (
+				plural === 'maintenanceOrders' ||
+				plural === 'expense categories' ||
+				plural === 'members' ||
+				// file deletions are handled in `FileList.svelte`
+				plural === 'files'
+			) {
+				throw new Error(`Delete not supported for ${entity}`);
+			}
 			await api()[plural].remove({ id });
 			isLoading = false;
 			isOpen = false;
