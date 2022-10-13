@@ -3,6 +3,7 @@ import { environment } from '$aqenvironment';
 import { env } from '$env/dynamic/public';
 import { MAX_AGE } from '$lib/constants/misc';
 import { sentryConfig } from '$lib/environment/sentry.config';
+import type { User } from '$lib/models/types/auth.type';
 import { logger } from '$lib/server/logger';
 import { getUser } from '$lib/server/utils/get-user';
 import { handleInvalidToken } from '$lib/server/utils/handle-invalid-token';
@@ -16,7 +17,12 @@ import { isNotFoundError } from '$lib/utils/sentry/redirect';
 import { Cookie, envCheck, isHealthCheck } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
-import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
+import {
+	error,
+	type Handle,
+	type HandleFetch,
+	type HandleServerError,
+} from '@sveltejs/kit';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
 logger.info('Version: %O', __AQARATECH_APP_VERSION__);
@@ -87,10 +93,20 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 
 		// get the user
-		const user = await getUser({
-			event,
-			selectedRoleId: currentRole,
-		});
+		let user: User | undefined;
+
+		try {
+			user = await getUser({
+				event,
+				selectedRoleId: currentRole,
+			});
+		} catch (err) {
+			// An error here means that the we were not able to connect to the backend.
+			console.error('Error getting user', err);
+			throw error(502, {
+				message: 'Encountered an error while connecting to the backend',
+			});
+		}
 
 		// set the role cookie if it's not yet set
 		if (!currentRole && user?.role) {

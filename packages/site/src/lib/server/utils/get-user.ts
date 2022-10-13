@@ -103,38 +103,33 @@ const getProfile = async (
 	if (span) {
 		headers['sentry-trace'] = `${span.toTraceparent()}`;
 	} else {
-		console.warn('[getProfile] Could not get span/tranaction');
+		console.debug('[getProfile] Could not get span/tranaction');
 	}
 
 	// Either get the user or return undefined.
-	try {
-		// construct url
-		const url = new URL(`${environment.PUBLIC_API_URL_LOCAL}/users/me`);
+	// construct url
+	const url = new URL(`${environment.PUBLIC_API_URL_LOCAL}/users/me`);
 
-		// fetch user
-		// sveltekit's `fetch` allows us to make a credentiale request server-side. The accessToken is stored in a cookie.
-		const res = await event.fetch(url.toString(), {
-			headers,
-			credentials: 'include',
-		});
+	// fetch user
+	// sveltekit's `fetch` allows us to make a credentiale request server-side. The accessToken is stored in a cookie.
+	// try {
+	const res = await event.fetch(url.toString(), {
+		headers,
+		credentials: 'include',
+	});
 
-		if (!res.ok) {
-			console.warn('[getProfile] Unable to contact backend', res);
-			return undefined;
-		}
-
-		const data = (await res.json()) as ValidatedUserDto;
-
-		return data;
-	} catch (e) {
-		// TODO: differentiate between errors caused by:
-		// 1. user doesn't exist in db
-		// 2. backend not available
-
-		logger.error(e);
-
+	if (!res.ok) {
+		// It's important to check for res.ok because fetch will not throw an error.
+		// This means the backend is up. But there was an issue with the request.
+		// Most likely, user does not exist in our db yet.
+		console.warn(
+			'[getProfile] Backend responded with an error when fetching user',
+			res,
+		);
 		return undefined;
-	} finally {
-		span?.finish();
 	}
+
+	const data = (await res.json()) as ValidatedUserDto;
+
+	return data;
 };
