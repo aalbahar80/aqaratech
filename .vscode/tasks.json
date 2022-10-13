@@ -15,11 +15,11 @@
 				"fileLocation": "absolute",
 				"pattern": [
 					{
-						"regexp": "^@self\\/site:lint: ([^\\s].*)$",
+						"regexp": "^@self\\/.*:lint: ([^\\s].*)$",
 						"file": 1
 					},
 					{
-						"regexp": "^@self\\/site:lint: \\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
+						"regexp": "^@self\\/.*:lint: \\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
 						"line": 1,
 						"column": 2,
 						"severity": 3,
