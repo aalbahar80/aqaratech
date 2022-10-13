@@ -14,12 +14,13 @@
 				"base": "$eslint-stylish",
 				"fileLocation": "absolute",
 				"pattern": [
+					// Reference: https://github.com/microsoft/vscode/blob/aea0fb3f03c50844de16ded70b1b45946a5ca914/src/vs/workbench/contrib/tasks/common/problemMatcher.ts#L1297
 					{
-						"regexp": "^.*lint: ([^\\s].*)$",
+						"regexp": "^.*lint: ((?:[a-zA-Z]:)*[./]+.*?)$",
 						"file": 1
 					},
 					{
-						"regexp": "^.*lint: \\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
+						"regexp": "^.*lint: \\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.+?)(?:\\s\\s+(.*))?$",
 						"line": 1,
 						"column": 2,
 						"severity": 3,
