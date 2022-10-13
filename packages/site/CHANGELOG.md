@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.5.1
+
+### Patch Changes
+
+- cf47acb8: conditionally show file actions dropdown
+
 ## 1.5.0
 
 ### Minor Changes
