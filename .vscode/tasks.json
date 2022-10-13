@@ -9,17 +9,17 @@
 		{
 			"label": "lint",
 			"type": "shell",
-			"command": "pnpm turbo run lint --filter @self/site --force",
+			"command": "pnpm run lint:all",
 			"problemMatcher": {
 				"base": "$eslint-stylish",
 				"fileLocation": "absolute",
 				"pattern": [
 					{
-						"regexp": "^@self\\/.*:lint: ([^\\s].*)$",
+						"regexp": "^.*lint: ([^\\s].*)$",
 						"file": 1
 					},
 					{
-						"regexp": "^@self\\/.*:lint: \\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
+						"regexp": "^.*lint: \\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
 						"line": 1,
 						"column": 2,
 						"severity": 3,
