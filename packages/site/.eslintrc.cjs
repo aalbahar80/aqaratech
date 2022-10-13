@@ -30,10 +30,13 @@ module.exports = {
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2020,
-		project: './tsconfig.json',
 		// Example: https://cs.github.com/iotaledger/firefly/blob/45590a1fb60d8210ab2b590ff553274fae25a51c/.eslintrc.js#L112
 		extraFileExtensions: ['.svelte'],
-		tsconfigRootDir: './',
+		// set rootDir to the path of this file. This allows eslint to work from
+		// (a) the root of the project ex. vscode eslint extension,
+		// (b) from within the packages directory, using the eslint/svelte-check cli
+		tsconfigRootDir: __dirname,
+		project: './tsconfig.json',
 	},
 	env: {
 		browser: true,
