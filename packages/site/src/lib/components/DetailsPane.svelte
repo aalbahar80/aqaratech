@@ -1,4 +1,5 @@
 <script lang="ts">
+	import DetailsPaneItem from '$lib/components/details-pane/DetailsPaneItem.svelte';
 	import FileList from '$lib/components/file/FileList.svelte.svelte';
 
 	export let details: [string, string | null][];
@@ -7,23 +8,8 @@
 <div id="detailsPane">
 	<dl class="rounded-lg shadow">
 		{#each details as [key, value]}
-			<div class="row">
-				<dt class="label">{key}</dt>
-				<dd class="definition">{value ?? '-'}</dd>
-			</div>
+			<DetailsPaneItem {key} {value} />
 		{/each}
 		<FileList />
 	</dl>
 </div>
-
-<style lang="postcss">
-	.row {
-		@apply px-4 py-5 first:rounded-t-md last:rounded-b-md odd:bg-gray-50 even:bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6;
-	}
-	.label {
-		@apply text-sm font-medium text-gray-500;
-	}
-	.definition {
-		@apply mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0;
-	}
-</style>
