@@ -5,7 +5,6 @@
 	"module": "dist/self-seed.esm.js",
 	"scripts": {
 		"build": "rm -rf dist && preconstruct build",
-		"test:e2e:prepare": "./create-test-db.sh",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit"

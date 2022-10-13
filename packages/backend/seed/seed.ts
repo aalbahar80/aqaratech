@@ -1,5 +1,7 @@
-import { seed } from './seed.js';
-import prisma from './prisma.js';
+import { PrismaClient } from '@prisma/client';
+import { seed } from '@self/seed';
+
+const prisma = new PrismaClient();
 
 seed({ printOnly: false })
 	.catch((e) => {
