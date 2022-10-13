@@ -20,6 +20,7 @@ import {
 import { OrgAdminAbility } from 'src/casl/abilities/org-admin-ability';
 import { PortfolioAbility } from 'src/casl/abilities/portfolio-ability';
 import { TenantAbility } from 'src/casl/abilities/tenant-ability';
+import { Action } from 'src/casl/action.enum';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -82,14 +83,6 @@ export class CaslAbilityFactory {
 }
 
 export type AppAbility = PrismaAbility<[string, 'all' | Subject]>;
-
-export enum Action {
-	Manage = 'manage',
-	Create = 'create',
-	Read = 'read',
-	Update = 'update',
-	Delete = 'delete',
-}
 
 // type withoutAbstract<T> = Omit<T, 'id' | 'createdAt' | 'updatedAt'>;
 // type P<T> = withoutAbstract<Partial<T>>;

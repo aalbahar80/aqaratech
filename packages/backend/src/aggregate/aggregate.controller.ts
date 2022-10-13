@@ -6,7 +6,7 @@ import {
 } from 'src/aggregate/dto/aggregate.dto';
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
-import { Action } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/action.enum';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';

@@ -6,7 +6,7 @@ import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import { entitiesMap } from '@self/utils';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
-import { Action } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/action.enum';
 import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';

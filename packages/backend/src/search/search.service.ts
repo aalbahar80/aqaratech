@@ -6,7 +6,7 @@ import { entitiesMap } from '@self/utils';
 import { instanceToPlain, plainToClass } from 'class-transformer';
 import { isUUID } from 'class-validator';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
-import { Action } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/action.enum';
 import {
 	RemoveDocumentsEvent,
 	TIndexName,

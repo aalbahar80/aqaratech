@@ -3,7 +3,7 @@ import { accessibleBy } from '@casl/prisma';
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import { DBEntity, entitiesMap } from '@self/utils';
 import { Cache } from 'cache-manager';
-import { Action } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { S3_TTL } from 'src/constants/s3-ttl';
 import {

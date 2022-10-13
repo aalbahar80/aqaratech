@@ -6,7 +6,7 @@ import {
 	Logger,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Action } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/action.enum';
 import {
 	CreateExpenseCategoryDto,
 	ExpenseCategoryDto,

@@ -1,5 +1,6 @@
 import { SetMetadata } from '@nestjs/common';
-import { Action, Subject } from 'src/casl/casl-ability.factory';
+import { Action } from 'src/casl/action.enum';
+import { Subject } from 'src/casl/casl-ability.factory';
 
 export interface RequiredRule {
 	action: Action;
