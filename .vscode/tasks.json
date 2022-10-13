@@ -5,6 +5,30 @@
 			"label": "build site",
 			"type": "shell",
 			"command": "pnpm turbo run build --filter @self/site"
+		},
+		{
+			"label": "lint",
+			"type": "shell",
+			"command": "pnpm turbo run lint --filter @self/site --force",
+			"problemMatcher": {
+				"base": "$eslint-stylish",
+				"fileLocation": "absolute",
+				"pattern": [
+					{
+						"regexp": "^@self\\/site:lint: ([^\\s].*)$",
+						"file": 1
+					},
+					{
+						"regexp": "^@self\\/site:lint: \\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
+						"line": 1,
+						"column": 2,
+						"severity": 3,
+						"message": 4,
+						"code": 5,
+						"loop": true
+					}
+				]
+			}
 		}
 	]
 }
