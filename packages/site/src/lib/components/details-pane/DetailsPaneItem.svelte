@@ -5,7 +5,11 @@
 
 <div class="row">
 	<dt class="label">{key}</dt>
-	<dd class="definition">{value ?? '-'}</dd>
+	<dd class="definition">
+		<slot>
+			{value ?? '-'}
+		</slot>
+	</dd>
 </div>
 
 <style lang="postcss">
