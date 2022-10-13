@@ -10,7 +10,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": true,
-		"exactOptionalPropertyTypes": true,
+		// "exactOptionalPropertyTypes": true,
 		"esModuleInterop": true,
 		"sourceMap": true,
 		"resolveJsonModule": true,

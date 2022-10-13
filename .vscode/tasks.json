@@ -45,6 +45,33 @@
 					}
 				]
 			}
+		},
+		{
+			"label": "svelte-check",
+			"type": "shell",
+			"command": "pnpm run check:all --filter @self/site",
+			"problemMatcher": {
+				"fileLocation": ["relative", "${workspaceFolder}/packages/site"],
+				"pattern": [
+					// Sample output:
+					// 1665691050683 ERROR "src/api/openapi/runtime.ts" 37:3 "Type 'Configuration' is not assignable to type 'ConfigurationParameters' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.\n  Types of property 'fetchApi' are incompatible.\n    Type '((input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>) | undefined' is not assignable to type '(input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>'.\n      Type 'undefined' is not assignable to type '(input: RequestInfo | URL, init?: RequestInit | undefined) => Promise<Response>'."
+					// 1665691050683 ERROR "src/api/openapi/runtime.ts" 177:9 "Type '{ body: any; cache?: RequestCache; credentials: RequestCredentials | undefined; headers: HTTPHeaders | Headers | [string, string][]; ... 8 more ...; window?: null; }' is not assignable to type 'RequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.\n  Types of property 'credentials' are incompatible.\n    Type 'RequestCredentials | undefined' is not assignable to type 'RequestCredentials'."
+					// 1665691050683 ERROR "src/api/openapi/runtime.ts" 180:5 "Type '{ method: HTTPMethod; headers: HTTPHeaders; body: any; credentials: RequestCredentials | undefined; }' is not assignable to type 'HTTPRequestInit' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.\n  Types of property 'credentials' are incompatible.\n    Type 'RequestCredentials | undefined' is not assignable to type 'RequestCredentials'.\n      Type 'undefined' is not assignable to type 'RequestCredentials'."
+					// 1665691050683 ERROR "src/api/openapi/runtime.ts" 198:21 "Function implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions."
+					// 1665691050683 ERROR "src/api/openapi/runtime.ts" 219:33 "Argument of type '{ fetch: (url: string, init: RequestInit) => any; url: string; init: RequestInit; error: unknown; response: Response | undefined; }' is not assignable to parameter of type 'ErrorContext' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.\n  Types of property 'response' are incompatible.\n    Type 'Response | undefined' is not assignable to type 'Response'.\n      Type 'undefined' is not assignable to type 'Response'."
+					// 1665691050683 ERROR "src/api/openapi/runtime.ts" 282:14 "This parameter property must have an 'override' modifier because it overrides a member in base class 'Error'."
+					// @self/site:check: 1665691553445 ERROR "src/api/openapi/runtime.ts" 198:21 "Function implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions."
+					// @self/site:check: 1665691553445 ERROR "src/api/openapi/r
+					{
+						"regexp": "^@self/site:check:\\s+\\d+\\s+(ERROR|WARNING|HINT)\\s+\"([^\"]+)\"\\s+(\\d+):(\\d+)\\s+\"(.*)\"$",
+						"severity": 1,
+						"file": 2,
+						"line": 3,
+						"column": 4,
+						"message": 5
+					}
+				]
+			}
 		}
 	]
 }
