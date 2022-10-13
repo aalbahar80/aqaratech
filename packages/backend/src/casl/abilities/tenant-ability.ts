@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Role } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
-import { TCan } from 'src/casl/casl-ability.factory';
+import type { TCan } from 'src/casl/casl-ability.factory';
 
 @Injectable()
 export class TenantAbility {
