@@ -6,7 +6,7 @@
 	],
 	"scripts": {
 		"dev": "vite dev --port 3000",
-		"build": "rm -rf ./{.svelte-kit,build} && vite build && ./remove-slash.sh ./build",
+		"build": "rm -rf ./{.svelte-kit,build} && vite build && ./remove-slash.sh ./build && ../../scripts/flatten-sourcemaps.sh",
 		"preview": "vite preview --port 3000",
 		"preview:node": ". ../../scripts/export-env.sh ../../.env && PORT=3000 ORIGIN=$PUBLIC_SITE_URL node build/index.js",
 		"check": "svelte-kit sync && svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests",
@@ -15,8 +15,7 @@
 		"custom-lint": "eslint . --ext .ts,.svelte",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
-		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
-		"flatten-sourcemaps": "../../scripts/flatten-sourcemaps.sh"
+		"sentry:release": "../../scripts/upload-sourcemaps.mjs"
 	},
 	"devDependencies": {
 		"@brainandbones/skeleton": "0.37.32",

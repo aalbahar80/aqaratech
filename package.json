@@ -10,7 +10,6 @@
 		"test": "turbo run test:e2e",
 		"dev": "turbo run dev",
 		"sentry:release": "turbo run sentry:release",
-		"flatten-sourcemaps": "turbo run flatten-sourcemaps --filter @self/site",
 		"format": "prettier --check --ignore-path .gitignore \"(**/*.{js,ts,css,md,svelte,yaml,yml,json}|!pnpm-lock.yaml)\"",
 		"format:all": "turbo run format",
 		"format:fix": "prettier --write --ignore-path .gitignore \"(**/*.{js,ts,css,md,svelte,yaml,yml,json}|!pnpm-lock.yaml)\"",

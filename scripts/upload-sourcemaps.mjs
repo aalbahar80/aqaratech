@@ -69,15 +69,11 @@ console.timeLog(TIMER, 'Created release');
 if (projectName === 'site') {
 	// Upload server sourcemaps
 
-	await $`pnpm -w run flatten-sourcemaps`;
-
-	// add a prefix to the file paths to match them up with paths in stack traces
-	// use build-temp directory, which contains the flattened sourcemaps courtesy of flatten-sourcemaps.sh
-	await $`sentry-cli sourcemaps upload --url-prefix '~/app/build' build-temp ${org} ${site_server_project} --release ${prefixedVersion}`;
+	// add a prefix to the file paths to match them up with paths in stack traces. The files in build/server should be flattened for Sentry to properly digest them.
+	// TODO: use `find` command to also add any immediately files of `build` directory
+	await $`sentry-cli sourcemaps upload --url-prefix '~/app/build' build --ignore '**/client/**' ${org} ${site_server_project} --release ${prefixedVersion}`;
 
 	// alternative: sentry-cli releases files site-server-1.3.1 upload-sourcemaps ./build/server --org aqaratech --project site-server
-	// remove the temporary build directory
-	await $`rm -rf build-temp`;
 
 	// Upload client sourcemaps
 
