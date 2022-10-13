@@ -29,10 +29,10 @@
 		{
 			"label": "check",
 			"type": "shell",
-			"command": "pnpm run check:all --filter @self/utils",
+			"command": "./scripts/vscode-task-mapper.sh",
 			"problemMatcher": {
 				"base": "$tsc",
-				"fileLocation": ["relative", "${workspaceFolder}/packages/utils"],
+				"fileLocation": ["relative", "${workspaceFolder}"],
 				"pattern": [
 					// Reference: https://github.com/microsoft/vscode/blob/aea0fb3f03c50844de16ded70b1b45946a5ca914/src/vs/workbench/contrib/tasks/common/problemMatcher.ts#L1297
 					{
