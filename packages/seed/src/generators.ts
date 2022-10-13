@@ -10,7 +10,7 @@ import {
 } from './constants.js';
 
 // consistent id's for testing
-export const testPassword = 'test12';
+export const testPassword = 'cloud12';
 export const testOrgEmail = 'org.demo@mailthink.net';
 export const testOrgId = 'f79a7bd6-698b-4b56-9e86-4338690a7929';
 export const testOrgRoleId = 'e82bdce2-03b6-40aa-9e00-0d95b55b772d';
