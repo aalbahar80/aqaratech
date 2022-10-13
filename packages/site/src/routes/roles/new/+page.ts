@@ -8,7 +8,7 @@ export const load: PageLoad = async ({ url: { searchParams } }) => {
 	const entity = searchParams.get('entity');
 	const entityId = searchParams.get('entityId');
 
-	if (!isEntity(entity) || !entityId) {
+	if (!entity || !isEntity(entity) || !entityId) {
 		throw new Error('No predefined role in url');
 	}
 

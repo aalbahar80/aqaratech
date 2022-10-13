@@ -6,7 +6,6 @@
 	import StackedList from '$lib/components/StackedList.svelte';
 	import UnitCard from '$lib/components/unit/UnitCard.svelte';
 	import { create } from '$lib/utils/route-helpers';
-	import { getContext } from 'svelte';
 	import { flip } from 'svelte/animate';
 	import { writable } from 'svelte/store';
 
@@ -49,7 +48,7 @@
 		predefined:
 			$page.url.pathname.startsWith('/properties') &&
 			new Map([
-				['portfolioId', getContext('portfolio').id],
+				['portfolioId', $page.data.property.breadcrumbs.portfolio.id], // typecheck
 				['propertyId', $page.url.pathname.split('/').pop()],
 			]),
 	})}
