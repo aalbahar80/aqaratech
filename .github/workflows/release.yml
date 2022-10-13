@@ -67,6 +67,9 @@ jobs:
           echo "::set-output name=siteTag::${SITE_TAG}"
           echo "::set-output name=backendTag::${BACKEND_TAG}"
 
+  # TODO optional: add task to purge cloudflare cache
+  # https://api.cloudflare.com/#zone-purge-all-files
+
   publish:
     needs: [create-release-PR]
     # Run this job when changesets publishes a new version
