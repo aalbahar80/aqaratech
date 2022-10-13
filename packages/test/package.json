@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test:e2e": "pnpm run -F @self/backend seed && DEBUG=pw:webserver playwright test",
+		"test": "DEBUG=pw:webserver playwright test",
 		"api:generate": "tsc --project tsconfig.api.json",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",

@@ -14,10 +14,8 @@ const API_FILES = '**/api/**/*.spec.ts';
 
 const config: PlaywrightTestConfig<TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),
-	reporter: [
-		['list'],
-		['html', { open: process.env.CI ? 'never' : 'on-failure' }],
-	],
+	// showing the reporter prevents turbo from caching the test results (on flakey tests)
+	reporter: [['list'], ['html', { open: process.env.CI ? 'never' : 'never' }]],
 	retries: 2,
 	timeout: process.env.CI ? 30 * 1000 : 5 * 1000,
 	maxFailures: 20,

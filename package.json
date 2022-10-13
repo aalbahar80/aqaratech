@@ -7,6 +7,7 @@
 		"build:site": "turbo run build --filter=@self/site",
 		"build:backend": "turbo run build --filter=@self/backend",
 		"test": "turbo run test:e2e",
+		"test:e2e": "pnpm run -F @self/backend seed && pnpm run -F @self/test test",
 		"dev": "turbo run dev",
 		"sentry:release": "turbo run sentry:release",
 		"format": "prettier --check --ignore-path .gitignore \"(**/*.{js,ts,css,md,svelte,yaml,yml,json}|!pnpm-lock.yaml)\"",
