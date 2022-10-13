@@ -1,3 +1,5 @@
+import type { AqaratechEnv } from '../../../../../types/environment';
+
 export type Config = Pick<
 	AqaratechEnv,
 	| 'PUBLIC_AQARATECH_ENV'
