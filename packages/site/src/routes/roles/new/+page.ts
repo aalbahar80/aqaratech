@@ -2,6 +2,7 @@ import type { PredefinedRole } from '$lib/models/interfaces/predefined.interface
 import { entitiesMap, isEntity } from '@self/utils';
 import type { PageLoad } from './$types';
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export const load: PageLoad = async ({ url: { searchParams } }) => {
 	// Check correct url params are present
 	const entity = searchParams.get('entity');

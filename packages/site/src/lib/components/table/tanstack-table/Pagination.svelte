@@ -8,7 +8,7 @@
 
 	export let table: Table<any>;
 	export let itemCount: number;
-	export let hidePageSizeOptions: boolean = false;
+	export let hidePageSizeOptions = false;
 
 	$: pageIdx = table.getState().pagination.pageIndex;
 	$: pageSize = table.getState().pagination.pageSize;

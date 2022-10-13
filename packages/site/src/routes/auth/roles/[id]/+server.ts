@@ -1,6 +1,7 @@
 import { MAX_AGE } from '$lib/constants/misc';
 import type { RequestHandler } from './$types';
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export const GET: RequestHandler = async ({ cookies, params }) => {
 	cookies.set('role', params.id, {
 		path: '/',

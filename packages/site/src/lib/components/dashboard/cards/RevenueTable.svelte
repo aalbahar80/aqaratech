@@ -2,7 +2,6 @@
 	import type { PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import { baseColumns } from '$lib/components/table/lease-invoices/columns';
 	import GenericCellSvelte from '$lib/components/table/lease-invoices/GenericCell.svelte';
-	import { getColumnSum } from '$lib/components/table/tanstack-table/aggregation';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
