@@ -1,4 +1,4 @@
-import { AppAbility } from 'src/casl/casl-ability.factory';
+import { TAppAbility } from 'src/casl/abilities/ability-types';
 import { ValidatedUserDto } from 'src/users/dto/user.dto';
 
 /**
@@ -28,7 +28,7 @@ export interface AuthenticatedUser {
  * Additionally, we have calculated and attached the user's ability.
  */
 export interface IUser extends ValidatedUserDto {
-	ability: AppAbility;
+	ability: TAppAbility;
 	xRoleId: string;
 	role: ValidatedUserDto['roles'][0];
 	isAqaratechStaff: false;

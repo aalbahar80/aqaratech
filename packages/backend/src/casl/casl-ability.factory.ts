@@ -1,22 +1,7 @@
 import { AbilityBuilder, AbilityClass } from '@casl/ability';
-import { PrismaAbility, Subjects } from '@casl/prisma';
+import { PrismaAbility } from '@casl/prisma';
 import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
-import {
-	Expense,
-	Lease,
-	LeaseInvoice,
-	MaintenanceOrder,
-	Organization,
-	Payout,
-	Plan,
-	PlanInvoice,
-	Portfolio,
-	Property,
-	Role,
-	Tenant,
-	Unit,
-	User,
-} from '@prisma/client';
+import { TAppAbility } from 'src/casl/abilities/ability-types';
 import { OrgAdminAbility } from 'src/casl/abilities/org-admin-ability';
 import { PortfolioAbility } from 'src/casl/abilities/portfolio-ability';
 import { TenantAbility } from 'src/casl/abilities/tenant-ability';
@@ -42,7 +27,7 @@ export class CaslAbilityFactory {
 	async defineAbility({ email, xRoleId }: { email: string; xRoleId?: string }) {
 		const now = Date.now();
 
-		const AppAbility = PrismaAbility as AbilityClass<AppAbility>;
+		const AppAbility = PrismaAbility as AbilityClass<TAppAbility>;
 		const { can, cannot, build } = new AbilityBuilder(AppAbility);
 
 		// We use email (NOT xRoleId) to find the user/role info.
@@ -81,31 +66,3 @@ export class CaslAbilityFactory {
 		return build();
 	}
 }
-
-export type AppAbility = PrismaAbility<[string, 'all' | Subject]>;
-
-// type withoutAbstract<T> = Omit<T, 'id' | 'createdAt' | 'updatedAt'>;
-// type P<T> = withoutAbstract<Partial<T>>;
-type P<T> = Partial<T>;
-// type P<T> = T;
-export type Subject = Subjects<{
-	Expense: P<Expense>;
-	Lease: P<Lease>;
-	MaintenanceOrder: P<MaintenanceOrder>;
-	Organization: P<Organization>;
-	Payout: P<Payout>;
-	Plan: P<Plan>;
-	PlanInvoice: P<PlanInvoice>;
-	Portfolio: P<Portfolio>;
-	Property: P<Property>;
-	Role: P<Role>;
-	Tenant: Partial<Tenant>;
-	LeaseInvoice: P<LeaseInvoice>;
-	Unit: P<Unit>;
-	User: P<User>;
-}>;
-
-// Can type exported for use in dependent ability classes.
-type TAbilityBuilder = AbilityBuilder<AppAbility>;
-export type TCan = TAbilityBuilder['can'];
-export type TCannot = TAbilityBuilder['cannot'];

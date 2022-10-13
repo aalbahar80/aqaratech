@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Role } from '@prisma/client';
+import { TCan, TCannot } from 'src/casl/abilities/ability-types';
 import { Action } from 'src/casl/action.enum';
-import type { TCan, TCannot } from 'src/casl/casl-ability.factory';
 
 @Injectable()
 export class OrgAdminAbility {
