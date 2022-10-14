@@ -67,8 +67,11 @@ console.timeLog(TIMER, 'Created release');
 
 // Upload source maps
 if (projectName === 'site') {
-	// Upload server sourcemaps
+	// Prepare sourcemaps for sentry by flattening them
+	await $`pnpm -w exec turbo run flatten-sourcemaps --filter @self/site`;
 
+	// Upload server sourcemaps
+	//
 	// add a prefix to the file paths to match them up with paths in stack traces. The files in build/server should be flattened for Sentry to properly digest them.
 	// TODO: use `find` command to also add any immediately files of `build` directory
 	await $`sentry-cli sourcemaps upload --url-prefix '~/app/build' build --ignore '**/client/**' ${org} ${site_server_project} --release ${prefixedVersion}`;
