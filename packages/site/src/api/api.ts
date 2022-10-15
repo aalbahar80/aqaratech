@@ -1,5 +1,6 @@
 import { environment } from '$aqenvironment';
 import * as SentryNode from '@sentry/node?server';
+import type { Breadcrumb } from '@sentry/svelte';
 import * as SentrySvelte from '@sentry/svelte?client';
 import type { LoadEvent } from '@sveltejs/kit';
 import {
@@ -62,6 +63,7 @@ export const api = (loadFetch?: LoadEvent['fetch']) => {
 			});
 
 			// TODO why is transaction possibly undefined?
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			traceValue = transaction?.toTraceparent();
 		}
 	}
@@ -78,6 +80,27 @@ export const api = (loadFetch?: LoadEvent['fetch']) => {
 		headers,
 		basePath,
 		credentials: 'include',
+		middleware: [
+			{
+				// eslint-disable-next-line @typescript-eslint/require-await
+				async onError(context) {
+					console.error('error in api middleware', context);
+					const breadcrumb: Breadcrumb = {
+						category: 'http',
+						message: `Error in api middleware while fetching: ${context.url}`,
+						level: 'error',
+						...context,
+					};
+					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+					if (import.meta.env.SSR && SentryNode) {
+						SentryNode.addBreadcrumb(breadcrumb);
+						// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+					} else if (!import.meta.env.SSR && SentrySvelte) {
+						SentrySvelte.addBreadcrumb(breadcrumb);
+					}
+				},
+			},
+		],
 	});
 
 	return {
