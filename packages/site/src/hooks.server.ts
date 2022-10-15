@@ -147,11 +147,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	logger.log({
 		level: isHealthCheck(event.url.pathname) ? 'silly' : 'info',
-		message: `Response: ${Date.now() - now}ms - ${method} ${
-			event.url.pathname
-		} ${response.status} - ${event.request.headers.get('user-agent')} - ${
-			event.locals.user?.email
-		}`,
+		message: `Response: ${response.status} - ${
+			Date.now() - now
+		}ms - ${method} ${event.url.pathname} - ${event.request.headers.get(
+			'user-agent',
+		)} - ${event.locals.user?.email}`,
 	});
 
 	// Close the Sentry transaction
