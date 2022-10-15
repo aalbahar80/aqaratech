@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.5.3
+
+### Patch Changes
+
+- e5c16564: change "portfolio" terminology to "owner" in owner-accessible pages
+
 ## 1.5.2
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
 	"name": "@self/backend",
-	"version": "1.5.1",
+	"version": "1.5.2",
 	"description": "",
 	"author": "",
 	"private": true,
@@ -50,7 +50,7 @@
 		"@nestjs/terminus": "9.1.2",
 		"@ntegral/nestjs-sentry": "4.0.0",
 		"@prisma/client": "4.4.0",
-		"@self/utils": "workspace:2.0.2",
+		"@self/utils": "workspace:2.0.3",
 		"@sentry/node": "7.15.0",
 		"@sentry/tracing": "7.15.0",
 		"cache-manager": "4.1.0",

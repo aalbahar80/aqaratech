@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@playwright/test": "1.27.0",
 		"@self/seed": "workspace:1.1.2",
-		"@self/utils": "workspace:2.0.2",
+		"@self/utils": "workspace:2.0.3",
 		"@tsconfig/node18": "1.0.1",
 		"@tsconfig/node18-strictest": "1.0.0",
 		"@types/node": "18.8.4",
