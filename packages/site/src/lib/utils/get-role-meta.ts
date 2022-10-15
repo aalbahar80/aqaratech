@@ -1,5 +1,6 @@
 import type { UserMeta } from '$lib/models/types/auth.type';
 import type { ValidatedRoleDto } from '$api/openapi';
+import { entitiesMap } from '@self/utils';
 
 export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
 	if (role.roleType === 'ORGADMIN') {
@@ -15,7 +16,7 @@ export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
 		};
 	} else if (role.roleType === 'PORTFOLIO') {
 		return {
-			roleLabel: 'Portfolio',
+			roleLabel: entitiesMap.portfolio.singularCap,
 			home: `/portfolios/${role.portfolioId}/dashboard`,
 			navLinks: [
 				{ label: 'Properties', href: '/properties' },

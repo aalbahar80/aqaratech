@@ -21,7 +21,11 @@
 	});
 </script>
 
-<Heading title="Portfolio" id={portfolio.id} entity="portfolio">
+<Heading
+	title={entitiesMap.portfolio.singularCap}
+	id={portfolio.id}
+	entity="portfolio"
+>
 	<div slot="menu-items">
 		<MenuItem as="div" let:active>
 			<a

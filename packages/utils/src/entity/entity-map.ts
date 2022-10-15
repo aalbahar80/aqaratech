@@ -67,9 +67,9 @@ const portfolio = satisfies<EntityNames>()({
 	urlName: 'portfolios',
 	caslName: 'Portfolio',
 	singular: 'portfolio',
-	singularCap: 'Portfolio',
+	singularCap: 'Owner',
 	plural: 'portfolios',
-	pluralCap: 'Portfolios',
+	pluralCap: 'Owners',
 	idField: 'portfolioId',
 });
 
