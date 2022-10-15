@@ -1,21 +1,6 @@
 import { prerendering } from '$app/environment';
 import { env } from '$env/dynamic/public';
 import { z } from 'zod';
-import type { AqaratechEnv } from '../../../../../types/environment';
-
-type SiteEnvironment = Pick<
-	AqaratechEnv,
-	| 'PUBLIC_AQARATECH_ENV'
-	| 'PUBLIC_SITE_URL'
-	| 'PUBLIC_API_URL'
-	| 'PUBLIC_API_URL_LOCAL'
-	| 'PUBLIC_TRACE_RATE'
-	| 'PUBLIC_AQ_DEBUG_LEVEL'
-	| 'PUBLIC_AQ_DEBUG_SITE'
-	| 'PUBLIC_AQ_DEBUG_SENTRY'
-	| 'PUBLIC_COMMIT_SHA'
-	| 'PUBLIC_AQ_ENABLE_SENTRY'
->;
 
 const envSchema = z.object({
 	PUBLIC_AQARATECH_ENV: z.enum([

@@ -1,11 +1,36 @@
+import { prerendering } from '$app/environment';
 import { env as privateEnv } from '$env/dynamic/private';
 import { env as publicEnv } from '$env/dynamic/public';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
-import type { AuthConfigType } from '$lib/models/types/auth.type';
+import { z } from 'zod';
 
-export const prodAuthConfig: AuthConfigType = {
+const secretSchema = z.string({
+	description: 'Auth0 client secret',
+});
+
+/**
+ * Get the auth config for the current environment.
+ */
+export const getAuthConfig = () => {
+	// we don't want to validate during prerendering
+	const secret = prerendering
+		? ''
+		: secretSchema.parse(privateEnv.AUTH0_CLIENT_SECRET);
+
+	return publicEnv.PUBLIC_AQARATECH_ENV === 'production'
+		? {
+				...baseProd,
+				AUTH0_CLIENT_SECRET: secret,
+		  }
+		: {
+				...baseDev,
+				AUTH0_CLIENT_SECRET:
+					'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
+		  };
+};
+
+export const baseProd = {
 	AUTH0_CLIENT_ID: 'BiIwmY0aGldYHDkkdEVsTBbKAAE1AaQV',
-	AUTH0_CLIENT_SECRET: privateEnv.AUTH0_CLIENT_SECRET,
 	AUTH0_DOMAIN: 'https://auth.aqaratech.com',
 	AUTH0_DEFAULT_DOMAIN: 'https://aqaratech.eu.auth0.com',
 	AUTH0_REDIRECT_URI: `https://aqaratech.com${AUTH_CALLBACK}`,
@@ -41,10 +66,8 @@ export const prodAuthConfig: AuthConfigType = {
 	},
 };
 
-export const devAuthConfig: AuthConfigType = {
+export const baseDev = {
 	AUTH0_CLIENT_ID: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
-	AUTH0_CLIENT_SECRET:
-		'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
 	AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 	AUTH0_DEFAULT_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 	AUTH0_REDIRECT_URI: `${publicEnv.PUBLIC_SITE_URL}${AUTH_CALLBACK}`,
