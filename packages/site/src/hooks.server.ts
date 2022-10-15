@@ -77,7 +77,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const method = event.request.method;
 
 	if (!isHealthCheck(event.url.pathname)) {
-		logger.info('Request', {
+		logger.log({
+			level: 'info',
 			message: JSON.stringify({
 				httpType: 'request',
 				method,
@@ -173,7 +174,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 	spanResolve.finish();
 
 	if (!isHealthCheck(event.url.pathname)) {
-		logger.info('Response', {
+		logger.log({
+			level: 'info',
 			message: JSON.stringify({
 				httpType: 'request',
 				status: response.status,
