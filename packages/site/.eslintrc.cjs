@@ -28,6 +28,9 @@ module.exports = {
 				'import/no-mutable-exports': 'off',
 				'import/prefer-default-export': 'off',
 
+				// complains about $app/stores
+				'import/no-unresolved': 'off',
+
 				// disable rules that don't work with svelte's generic props
 				'@typescript-eslint/no-unsafe-assignment': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',

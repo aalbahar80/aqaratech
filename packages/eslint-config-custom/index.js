@@ -82,6 +82,9 @@ module.exports = {
 		'import/no-cycle': ['error', { maxDepth: 2 }],
 		'import/no-self-import': 'error',
 
+		// complains about svelte's $app and $env
+		'import/no-unresolved': 'off',
+
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': [
 			'error',
