@@ -72,6 +72,13 @@
 					}
 				]
 			}
+		},
+		{
+			"label": "open playwright report",
+			"type": "shell",
+			"command": "pnpm -F @self/test exec playwright show-report",
+			"isBackground": true,
+			"problemMatcher": []
 		}
 	]
 }
