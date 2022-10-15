@@ -1,5 +1,5 @@
 import { environment } from '$aqenvironment';
-import { logtail, logtailEnabled } from '$lib/server/utils/logtail';
+import { logtail } from '$lib/server/utils/logtail';
 import { LogtailTransport } from '@logtail/winston';
 import { createLogger, format, transports } from 'winston';
 
@@ -22,7 +22,7 @@ export const logger = createLogger({
 	),
 	transports: [
 		new transports.Console(),
-		...(logtailEnabled ? [new LogtailTransport(logtail)] : []),
+		...(logtail ? [new LogtailTransport(logtail)] : []),
 	],
 });
 

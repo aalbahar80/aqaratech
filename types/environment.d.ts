@@ -46,6 +46,9 @@ export interface AqaratechEnv {
 	// Auth0
 	readonly AUTH0_CLIENT_SECRET: string;
 
+	// Logtail
+	readonly LOGTAIL_TOKEN: string;
+
 	// Postmark
 	readonly POSTMARK_TOKEN: string;
 

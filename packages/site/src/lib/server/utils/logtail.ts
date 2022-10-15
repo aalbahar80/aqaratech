@@ -1,8 +1,7 @@
 import { environment } from '$aqenvironment';
+import { privateEnvironment } from '$lib/server/config/private-environment';
 import { Logtail } from '@logtail/node';
 import type { Middleware } from '@logtail/types';
-
-export const logtail = new Logtail('qsYDfRpM2TXqyGeYhUNFReag');
 
 /*
  * Middleware to add `environment` info to logtail logs.
@@ -14,8 +13,6 @@ export const enrichLogs: Middleware = async (log) => {
 		environment: environment.PUBLIC_AQARATECH_ENV,
 	};
 };
-
-logtail.use(enrichLogs);
 
 /**
  * Only enable logtail in production & staging.
@@ -32,4 +29,17 @@ const shouldEnableLogtail = () => {
 	return result;
 };
 
-export const logtailEnabled = shouldEnableLogtail();
+const createLogtailClient = () => {
+	if (shouldEnableLogtail() && privateEnvironment.LOGTAIL_TOKEN) {
+		const client = new Logtail(privateEnvironment.LOGTAIL_TOKEN);
+
+		client.use(enrichLogs);
+		return client;
+	} else {
+		console.warn('Logtail token not found in environment.');
+
+		return undefined;
+	}
+};
+
+export const logtail = createLogtailClient();

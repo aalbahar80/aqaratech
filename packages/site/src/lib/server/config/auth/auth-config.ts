@@ -1,26 +1,16 @@
-import { prerendering } from '$app/environment';
 import { env as privateEnv } from '$env/dynamic/private';
 import { env as publicEnv } from '$env/dynamic/public';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
-import { z } from 'zod';
-
-const secretSchema = z.string({
-	description: 'Auth0 client secret',
-});
+import { isProd } from '$lib/server/config/is-production';
 
 /**
  * Get the auth config for the current environment.
  */
 export const getAuthConfig = () => {
-	// we don't want to validate during prerendering
-	const secret = prerendering
-		? ''
-		: secretSchema.parse(privateEnv.AUTH0_CLIENT_SECRET);
-
-	return publicEnv.PUBLIC_AQARATECH_ENV === 'production'
+	return isProd
 		? {
 				...baseProd,
-				AUTH0_CLIENT_SECRET: secret,
+				AUTH0_CLIENT_SECRET: privateEnv.AUTH0_CLIENT_SECRET,
 		  }
 		: {
 				...baseDev,

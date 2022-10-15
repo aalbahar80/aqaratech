@@ -147,7 +147,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	spanResolve.finish();
 
 	if (!isHealthCheck(event.url.pathname)) {
-		void logtail.info(
+		void logtail?.info(
 			`Response: ${response.status} - ${Date.now() - now}ms - ${method} ${
 				event.url.pathname
 			}`,

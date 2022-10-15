@@ -38,6 +38,11 @@ const config = {
 			$api: 'src/api/index.ts',
 			'$api/*': 'src/api/*',
 		},
+		prerender: {
+			// Setting prerendering to false because otherwise, errors will be thrown during build.
+			// Examples: No logtail token. Zod errors for env variables.
+			enabled: false,
+		},
 	},
 	// vitePlugin: {
 	// 	experimental: {
