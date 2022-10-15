@@ -6,3 +6,6 @@ export const PAGE_SIZE = 'take';
 export const SORT_ORDER = 'sortOrder';
 export const ORDER_BY = 'orderBy';
 // export const FILTER = 'filter';
+
+export const TAKE_MAX = 200;
+export const TAKE_MAX_EXPENSES = 1000;

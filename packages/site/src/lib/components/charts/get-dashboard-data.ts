@@ -7,6 +7,7 @@ import {
 	getOneYearLater,
 	rangeStart,
 } from '$lib/components/charts/utils/date-range';
+import { TAKE_MAX_EXPENSES } from '$lib/constants/pagination-keys';
 import { parseParams } from '$lib/utils/parse-params';
 
 export const getDashboardData = ({
@@ -32,7 +33,7 @@ export const getDashboardData = ({
 		unitId: unitId || searchParams.get('unitId') || undefined,
 		start: searchParams.get('start') || undefined,
 		end: searchParams.get('end') || undefined,
-		take: 1000,
+		take: TAKE_MAX_EXPENSES,
 	};
 
 	if (!filter.start && !filter.end) {
