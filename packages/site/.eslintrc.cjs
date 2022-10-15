@@ -5,13 +5,7 @@
  */
 module.exports = {
 	root: true,
-	parser: '@typescript-eslint/parser',
-	extends: [
-		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:@typescript-eslint/strict',
-		'prettier',
-	],
+	extends: ['custom'],
 	plugins: ['svelte3', '@typescript-eslint'],
 	ignorePatterns: [
 		'currency.ts',
@@ -23,13 +17,21 @@ module.exports = {
 		'vite.config.js',
 	],
 	overrides: [
-		{ files: ['*.svelte'], processor: 'svelte3/svelte3' },
 		{
-			files: ['*.ts'],
-			extends: [
-				// Doesn't work when using generics in svelte files. Add it to ts files only.
-				'plugin:@typescript-eslint/recommended-requiring-type-checking',
-			],
+			files: ['*.svelte'],
+			processor: 'svelte3/svelte3',
+			rules: {
+				// disable rules that conflict with eslint-plugin-svelte3
+				// List here: https://github.com/sveltejs/eslint-plugin-svelte3/blob/master/OTHER_PLUGINS.md
+				'import/first': 'off',
+				'import/no-duplicates': 'off',
+				'import/no-mutable-exports': 'off',
+				'import/prefer-default-export': 'off',
+
+				// disable rules that don't work with svelte's generic props
+				'@typescript-eslint/no-unsafe-assignment': 'off',
+				'@typescript-eslint/no-unsafe-member-access': 'off',
+			},
 		},
 	],
 	settings: {
@@ -57,21 +59,6 @@ module.exports = {
 		'@typescript-eslint/no-non-null-assertion': 'off',
 		'@typescript-eslint/ban-ts-comment': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
-		'@typescript-eslint/no-unused-vars': [
-			'error',
-			{ destructuredArrayIgnorePattern: '^_' },
-		],
-		'prefer-const': [
-			'error',
-			{
-				destructuring: 'all',
-			},
-		],
-		// Note: you must disable the base rule as it can report incorrect errors
-		// https://typescript-eslint.io/rules/require-await/
-		// part of the recommended-requiring-type-checking ruleset
-		'require-await': 'off',
-		'@typescript-eslint/require-await': 'error',
 	},
 	globals: {
 		svelte: 'readonly',

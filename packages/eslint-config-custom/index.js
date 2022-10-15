@@ -86,6 +86,7 @@ module.exports = {
 			'error',
 			{ destructuredArrayIgnorePattern: '^_' },
 		],
+		'prefer-const': ['error', { destructuring: 'all' }],
 	},
 	ignorePatterns: ['.eslintrc.js'],
 };
