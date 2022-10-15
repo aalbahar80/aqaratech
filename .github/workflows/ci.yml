@@ -122,3 +122,11 @@ jobs:
           appName: ${{ inputs.appName }}
           siteTag: ${{ inputs.siteTag }}
           backendTag: ${{ inputs.backendTag }}
+
+      - name: purge cloudflare cache
+        if: ${{ inputs.environment == 'prod' }}
+        shell: bash
+        run: ./scripts/purge-cloudflare-cache.sh
+        env:
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
