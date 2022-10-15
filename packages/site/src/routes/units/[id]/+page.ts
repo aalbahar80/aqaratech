@@ -28,7 +28,7 @@ export const load: PageLoad = async ({
 	] = await Promise.all([
 		parentStuff.api.units.findOne({ id: unitId }),
 		parentStuff.api.units.findLeases({ id: unitId, ...sParams }),
-		...(await getDashboardData({ api: parentStuff.api, searchParams, unitId })),
+		...getDashboardData({ api: parentStuff.api, searchParams, unitId }),
 	]);
 
 	return {

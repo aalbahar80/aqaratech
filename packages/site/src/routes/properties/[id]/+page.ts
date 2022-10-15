@@ -33,11 +33,11 @@ export const load: PageLoad = async ({
 			...sParams,
 			take: TAKE_MAX,
 		}),
-		...(await getDashboardData({
+		...getDashboardData({
 			api: parentStuff.api,
 			searchParams,
 			propertyId,
-		})),
+		}),
 	]);
 
 	return {
