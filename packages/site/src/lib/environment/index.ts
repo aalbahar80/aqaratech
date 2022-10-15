@@ -1,3 +1,4 @@
+import { prerendering } from '$app/environment';
 import { env } from '$env/dynamic/public';
 import { z } from 'zod';
 import type { AqaratechEnv } from '../../../../../types/environment';
@@ -63,5 +64,8 @@ const environmentInput = {
 	PUBLIC_COMMIT_SHA: env.PUBLIC_COMMIT_SHA,
 };
 
-// validate environment variables using zod
-export const environment: SiteEnvironment = envSchema.parse(environmentInput);
+// Validate environment variables using zod
+// Skip validation when building for production
+export const environment = prerendering
+	? environmentInput
+	: envSchema.parse(environmentInput);
