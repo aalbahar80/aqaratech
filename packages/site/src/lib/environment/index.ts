@@ -28,10 +28,10 @@ const envSchema = z.object({
 	PUBLIC_SITE_URL: z.string(),
 	PUBLIC_API_URL: z.string(),
 	PUBLIC_API_URL_LOCAL: z.string(),
-	PUBLIC_AQ_ENABLE_SENTRY: z.string(),
-	PUBLIC_AQ_DEBUG_SENTRY: z.string(),
+	PUBLIC_AQ_ENABLE_SENTRY: z.string().optional(),
+	PUBLIC_AQ_DEBUG_SENTRY: z.string().optional(),
 	PUBLIC_TRACE_RATE: z.string(),
-	PUBLIC_AQ_DEBUG_SITE: z.string(),
+	PUBLIC_AQ_DEBUG_SITE: z.string().optional(),
 	PUBLIC_COMMIT_SHA: z.string().optional(),
 
 	// validate debug level, if validation fails, set it to verbose
