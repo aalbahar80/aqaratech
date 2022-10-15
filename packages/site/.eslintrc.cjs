@@ -41,7 +41,7 @@ module.exports = {
 	},
 	parserOptions: {
 		sourceType: 'module',
-		ecmaVersion: 2020,
+		ecmaVersion: 'latest',
 		// Example: https://cs.github.com/iotaledger/firefly/blob/45590a1fb60d8210ab2b590ff553274fae25a51c/.eslintrc.js#L112
 		extraFileExtensions: ['.svelte'],
 		// set rootDir to the path of this file. This allows eslint to work from
@@ -54,11 +54,6 @@ module.exports = {
 		browser: true,
 		es2017: true,
 		node: true,
-	},
-	rules: {
-		'@typescript-eslint/no-non-null-assertion': 'off',
-		'@typescript-eslint/ban-ts-comment': 'off',
-		'@typescript-eslint/no-explicit-any': 'off',
 	},
 	globals: {
 		svelte: 'readonly',
