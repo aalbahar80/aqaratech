@@ -10,7 +10,13 @@ type TokenType = Cookie.idToken | Cookie.accessToken;
 export const validateToken = async (token: string, tokenType: TokenType) => {
 	const JWKS = createLocalJWKSet(authConfig.JWKS);
 
-	logger.debug(`Validating %O`, tokenType);
+	logger.log({
+		level: 'debug',
+		message: JSON.stringify({
+			name: 'validateToken',
+			tokenType,
+		}),
+	});
 
 	const audience =
 		tokenType === Cookie.accessToken

@@ -26,14 +26,24 @@ import {
 } from '@sveltejs/kit';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
-logger.info('Version: %O', __AQARATECH_APP_VERSION__);
+logger.log({
+	level: 'info',
+	message: JSON.stringify({
+		name: 'AqaratechConfig',
+		AQARATECH_APP_VERSION: __AQARATECH_APP_VERSION__,
+		...env,
+	}),
+});
 
-logger.info('$env/dynamic/public %O', env);
-
-logger.info('process.env check:');
 envCheck();
 
-logger.info('AqaratechConfig %O', sentryConfig);
+logger.log({
+	level: 'info',
+	message: JSON.stringify({
+		name: 'SentryConfig',
+		...sentryConfig,
+	}),
+});
 
 Sentry.init({
 	...sentryConfig,

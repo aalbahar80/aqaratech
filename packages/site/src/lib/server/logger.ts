@@ -21,10 +21,6 @@ export const logger = createLogger({
 	],
 });
 
-// example to print an object
-// const myobj = { ... }
-// logger.info('This message will include a complete object: %O', myobj);
-
 // Default logging levels:
 // {
 //   error: 0,
