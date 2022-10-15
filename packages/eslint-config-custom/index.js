@@ -27,6 +27,7 @@ module.exports = {
 			'../*/tsconfig.json',
 			// For root: Helps root .eslintrc.js file find its own tsconfig.json file
 			'../../tsconfig.json',
+			// sourceType: 'module',
 		],
 	},
 	root: true,
@@ -86,7 +87,15 @@ module.exports = {
 			'error',
 			{ destructuredArrayIgnorePattern: '^_' },
 		],
-		'prefer-const': ['error', { destructuring: 'all' }],
+
+		// https://eslint.org/docs/latest/rules/prefer-const#options
+		'prefer-const': [
+			'error',
+			{
+				destructuring: 'all',
+				ignoreReadBeforeAssign: false,
+			},
+		],
 	},
 	ignorePatterns: ['.eslintrc.js'],
 };
