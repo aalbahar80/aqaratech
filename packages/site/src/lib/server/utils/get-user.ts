@@ -39,12 +39,15 @@ export const getUser = async ({
 
 	const profile = await getProfile(event);
 
-	logger.debug('[getUser] Got profile %O', {
-		id: profile?.id,
-		email: profile?.email,
-		roleCount: profile?.roles?.length,
-		createDate: profile?.createdAt,
+	logger.log('Got profile', {
+		message: JSON.stringify({
+			id: profile?.id,
+			email: profile?.email,
+			roleCount: profile?.roles?.length,
+			createDate: profile?.createdAt,
+		}),
 	});
+
 	// User not in our db, nothing more to do.
 	// TODO: roles can be undefined
 	if (!profile || !profile.roles) {
@@ -73,7 +76,10 @@ export const getUser = async ({
 		// clear the role cookie if it exists since it has failed to lead to a valid role
 		event.cookies.set(Cookie.role, '', { maxAge: 0, path: '/' });
 
-		console.warn(`Falling back to default role.`);
+		logger.log({
+			level: 'warn',
+			message: 'Could not find selected role. Using default role',
+		});
 
 		role = getDefaultRole(roles);
 	}
@@ -103,7 +109,10 @@ const getProfile = async (
 	if (span) {
 		headers['sentry-trace'] = `${span.toTraceparent()}`;
 	} else {
-		console.debug('[getProfile] Could not get span/tranaction');
+		logger.log({
+			level: 'debug',
+			message: 'Could not get span for getProfile',
+		});
 	}
 
 	// Either get the user or return undefined.
@@ -122,10 +131,26 @@ const getProfile = async (
 		// It's important to check for res.ok because fetch will not throw an error.
 		// This means the backend is up. But there was an issue with the request.
 		// Most likely, user does not exist in our db yet.
-		console.warn(
+		logger.warn(
 			'[getProfile] Backend responded with an error when fetching user',
 			res,
 		);
+
+		logger.log({
+			level: 'warn',
+			message:
+				'Backend responded with an error when fetching user: ' + res.status,
+		});
+
+		logger.log({
+			level: 'warn',
+			message: JSON.stringify({
+				status: res.status,
+				statusText: res.statusText,
+				url: res.url,
+			}),
+		});
+
 		return undefined;
 	}
 

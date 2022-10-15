@@ -5,6 +5,7 @@ import { MAX_AGE } from '$lib/constants/misc';
 import { sentryConfig } from '$lib/environment/sentry.config';
 import type { User } from '$lib/models/types/auth.type';
 import { logger } from '$lib/server/logger';
+import { errorLogger } from '$lib/server/logger/error-logger';
 import { getUser } from '$lib/server/utils/get-user';
 import { handleInvalidToken } from '$lib/server/utils/handle-invalid-token';
 import { validateToken } from '$lib/server/utils/validate';
@@ -94,7 +95,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 			await validateToken(idToken, Cookie.idToken);
 			await validateToken(accessToken, Cookie.accessToken);
 		} catch (error) {
-			console.debug('Error validating token', error);
+			logger.log({
+				level: 'debug',
+				message: 'Invalid token',
+			});
+
 			return handleInvalidToken(event);
 		}
 
@@ -108,7 +113,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 			});
 		} catch (err) {
 			// An error here means that the we were not able to connect to the backend.
-			console.error('Error getting user', err);
+			logger.log({
+				level: 'error',
+				message: 'Error getting user',
+			});
+
+			errorLogger(err);
+
 			throw error(502, {
 				message: 'Encountered an error while connecting to the backend',
 			});
@@ -182,22 +193,12 @@ export const handleError: HandleServerError = ({ error, event }) => {
 		return;
 	}
 
-	if (error instanceof Error) {
-		logger.log({
-			level: 'error',
-			message: JSON.stringify({
-				name: error.name,
-				error: error.message,
-				stack: error.stack,
-				cause: error.cause,
-			}),
-		});
-	}
+	errorLogger(error);
 
 	const info = extractRequestInfo(event);
 	const user = getSentryUser(event.locals.user);
 
-	console.debug({ info, user });
+	logger.debug({ info, user });
 
 	if (isNotFoundError(error, event)) {
 		// Most 404's are from random bots, but some may be legit.
