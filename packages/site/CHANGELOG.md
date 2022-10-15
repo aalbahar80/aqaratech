@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.5.5
+
+### Patch Changes
+
+- 479be7f7: enrich client site sentry events
+
 ## 1.5.4
 
 ### Patch Changes
