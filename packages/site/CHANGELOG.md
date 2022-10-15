@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.5.6
+
+### Patch Changes
+
+- 7af9adc6: add structured winston logs
+
 ## 1.5.5
 
 ### Patch Changes
