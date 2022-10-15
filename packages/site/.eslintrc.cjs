@@ -9,6 +9,7 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
+		'plugin:@typescript-eslint/strict',
 		'prettier',
 	],
 	plugins: ['svelte3', '@typescript-eslint'],
@@ -21,7 +22,16 @@ module.exports = {
 		'svelte.config.js',
 		'vite.config.js',
 	],
-	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
+	overrides: [
+		{ files: ['*.svelte'], processor: 'svelte3/svelte3' },
+		{
+			files: ['*.ts'],
+			extends: [
+				// Doesn't work when using generics in svelte files. Add it to ts files only.
+				'plugin:@typescript-eslint/recommended-requiring-type-checking',
+			],
+		},
+	],
 	settings: {
 		'svelte3/typescript': () => require('typescript'),
 		'svelte3/ignore-styles': () => true,
@@ -59,6 +69,7 @@ module.exports = {
 		],
 		// Note: you must disable the base rule as it can report incorrect errors
 		// https://typescript-eslint.io/rules/require-await/
+		// part of the recommended-requiring-type-checking ruleset
 		'require-await': 'off',
 		'@typescript-eslint/require-await': 'error',
 	},

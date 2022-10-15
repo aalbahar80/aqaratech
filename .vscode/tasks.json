@@ -76,8 +76,15 @@
 		{
 			"label": "open playwright report",
 			"type": "shell",
-			"command": "pnpm -F @self/test exec playwright show-report",
-			"isBackground": true,
+			"command": "tmux send -t dev.1 'pnpm lint' 'C-m'; tmux send -t dev.2 'pnpm eslint ./src/routes/units/\\[id\\]/+page.ts' 'C-m'",
+			"presentation": {
+				"echo": true,
+				"reveal": "never",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			},
 			"problemMatcher": []
 		}
 	]
