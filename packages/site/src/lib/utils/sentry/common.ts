@@ -38,7 +38,10 @@ export const extractRequestInfo = (event: RequestEvent) => {
 		// TODO event vs request?
 		method: event.request.method,
 		url: event.request.url,
-		headers: Object.fromEntries(event.request.headers),
+		// add headers except cookie
+		headers: Object.fromEntries(
+			Object.entries(event.request.headers).filter(([key]) => key !== 'cookie'),
+		),
 		query_string: event.url.search,
 	};
 
