@@ -7,6 +7,7 @@ import type { User } from '$lib/models/types/auth.type';
 import { logger } from '$lib/server/logger';
 import { getUser } from '$lib/server/utils/get-user';
 import { handleInvalidToken } from '$lib/server/utils/handle-invalid-token';
+import { logtail } from '$lib/server/utils/logtail';
 import { validateToken } from '$lib/server/utils/validate';
 import {
 	addTraceToHead,
@@ -67,9 +68,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	logger.log({
 		level: isHealthCheck(event.url.pathname) ? 'silly' : 'info',
-		message: `Request: ${method} ${event.url.href}: ${
-			event.routeId
-		} ${event.request.headers.get('user-agent')}`,
+		message: `Request: ${method} ${event.url.pathname}: ${
+			event.request.headers.get('user-agent') ?? ''
+		}`,
 	});
 
 	const spanCookies = transaction.startChild({
@@ -145,14 +146,24 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	spanResolve.finish();
 
-	logger.log({
-		level: isHealthCheck(event.url.pathname) ? 'silly' : 'info',
-		message: `Response: ${response.status} - ${
-			Date.now() - now
-		}ms - ${method} ${event.url.pathname} - ${event.request.headers.get(
-			'user-agent',
-		)} - ${event.locals.user?.email}`,
-	});
+	if (!isHealthCheck(event.url.pathname)) {
+		void logtail.info(
+			`Response: ${response.status} - ${Date.now() - now}ms - ${method} ${
+				event.url.pathname
+			}`,
+			{
+				resource: {
+					status: response.status,
+					duration: Date.now() - now,
+					method,
+					pathname: event.url.pathname,
+					userAgent: event.request.headers.get('user-agent'),
+					user: event.locals.user?.email ?? null,
+					url: event.url.href,
+				},
+			},
+		);
+	}
 
 	// Close the Sentry transaction
 	transaction.finish();
