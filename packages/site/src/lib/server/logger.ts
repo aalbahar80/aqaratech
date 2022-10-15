@@ -1,4 +1,6 @@
 import { environment } from '$aqenvironment';
+import { logtail, logtailEnabled } from '$lib/server/utils/logtail';
+import { LogtailTransport } from '@logtail/winston';
 import { createLogger, format, transports } from 'winston';
 
 const { combine, colorize, json, timestamp, label, printf, splat } = format;
@@ -18,7 +20,10 @@ export const logger = createLogger({
 		myFormat,
 		format.metadata({ fillExcept: ['message', 'level', 'timestamp', 'label'] }),
 	),
-	transports: [new transports.Console()],
+	transports: [
+		new transports.Console(),
+		...(logtailEnabled ? [new LogtailTransport(logtail)] : []),
+	],
 });
 
 // example to print an object
