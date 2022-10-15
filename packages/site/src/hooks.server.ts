@@ -68,7 +68,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (!isHealthCheck(event.url.pathname)) {
 		logger.info('Request', {
 			message: JSON.stringify({
-				http: 'request',
+				httpType: 'request',
 				method,
 				pathname: event.url.pathname,
 				url: event.url.href,
@@ -154,7 +154,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (!isHealthCheck(event.url.pathname)) {
 		logger.info('Response', {
 			message: JSON.stringify({
-				http: 'response',
+				httpType: 'request',
 				status: response.status,
 				duration: Date.now() - now,
 				method,
@@ -182,7 +182,17 @@ export const handleError: HandleServerError = ({ error, event }) => {
 		return;
 	}
 
-	console.error(error);
+	if (error instanceof Error) {
+		logger.log({
+			level: 'error',
+			message: JSON.stringify({
+				name: error.name,
+				error: error.message,
+				stack: error.stack,
+				cause: error.cause,
+			}),
+		});
+	}
 
 	const info = extractRequestInfo(event);
 	const user = getSentryUser(event.locals.user);

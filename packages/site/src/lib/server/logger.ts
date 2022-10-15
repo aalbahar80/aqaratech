@@ -3,25 +3,20 @@ import { logtail } from '$lib/server/utils/logtail';
 import { LogtailTransport } from '@logtail/winston';
 import { createLogger, format, transports } from 'winston';
 
-const { combine, colorize, json, timestamp, label, printf, splat } = format;
-
-const myFormat = printf(({ level, message, label, timestamp }) => {
-	return `${timestamp} [${label}] ${level}: ${message}`;
-});
+const { combine, colorize, json, timestamp, label, splat, prettyPrint } =
+	format;
 
 export const logger = createLogger({
 	level: environment.PUBLIC_AQ_DEBUG_LEVEL || 'info',
-	format: combine(
-		colorize({ all: true }),
-		splat(),
-		json(),
-		label({ label: 'site' }),
-		timestamp(),
-		myFormat,
-		format.metadata({ fillExcept: ['message', 'level', 'timestamp', 'label'] }),
-	),
+	format: combine(timestamp(), json(), label({ label: 'site' })),
 	transports: [
-		new transports.Console(),
+		new transports.Console({
+			format: combine(
+				prettyPrint(), // remove custom format
+				colorize({ all: true }),
+				splat(),
+			),
+		}),
 		...(logtail ? [new LogtailTransport(logtail)] : []),
 	],
 });
