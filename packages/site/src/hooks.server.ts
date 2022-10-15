@@ -65,16 +65,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const now = Date.now();
 	const method = event.request.method;
 
-	logger.log({
-		level: isHealthCheck(event.url.pathname) ? 'silly' : 'info',
-		message: `Request: ${method} ${event.url.pathname}: ${
-			event.request.headers.get('user-agent') ?? ''
-		}`,
-	});
-
 	if (!isHealthCheck(event.url.pathname)) {
 		logger.info('Request', {
 			message: JSON.stringify({
+				http: 'request',
 				method,
 				pathname: event.url.pathname,
 				url: event.url.href,
@@ -160,6 +154,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (!isHealthCheck(event.url.pathname)) {
 		logger.info('Response', {
 			message: JSON.stringify({
+				http: 'response',
 				status: response.status,
 				duration: Date.now() - now,
 				method,
