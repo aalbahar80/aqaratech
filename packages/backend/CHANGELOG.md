@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.5.1
+
+### Patch Changes
+
+- c5c4ec7b: skip validation of env at build time
+
 ## 1.5.0
 
 ### Minor Changes

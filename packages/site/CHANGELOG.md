@@ -1,5 +1,12 @@
 # @self/site
 
+## 1.5.2
+
+### Patch Changes
+
+- 70a11f53: handle redirect loop when backend does not respond
+- c5c4ec7b: skip validation of env at build time
+
 ## 1.5.1
 
 ### Patch Changes
