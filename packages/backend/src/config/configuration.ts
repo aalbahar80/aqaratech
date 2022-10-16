@@ -13,6 +13,9 @@ export default (): EnvironmentConfig => {
 
 	return {
 		...config,
+		// TODO conf: remove type assertion after validating env config
+		PUBLIC_AQARATECH_ENV: process.env.PUBLIC_AQARATECH_ENV!,
+		LOGTAIL_TOKEN: process.env.LOGTAIL_TOKEN,
 		sentry: sentryConfig,
 		winston: winstonConfig,
 	};

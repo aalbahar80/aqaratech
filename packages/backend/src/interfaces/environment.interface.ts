@@ -22,4 +22,9 @@ export interface EnvironmentConfig {
 	r2Config: R2ConfigType;
 	winston: LoggerOptions;
 	sentry: NodeOptions;
+
+	// from AqaratechEnv
+	// TODO remove explicit declaration and extend from AqaratechEnv interface
+	PUBLIC_AQARATECH_ENV: string;
+	LOGTAIL_TOKEN: string;
 }

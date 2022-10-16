@@ -1,9 +1,17 @@
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 // TODO satisfies: remove this type and use satisfies operator
-export const productionEnvironment = (): Omit<
+export const productionEnvironment = (): Pick<
 	EnvironmentConfig,
-	'sentry' | 'winston'
+	| 'type'
+	| 'envName'
+	| 'apiConfig'
+	| 'authConfig'
+	| 'mailConfig'
+	| 'debug'
+	| 'meiliSearchConfig'
+	| 'siteConfig'
+	| 'r2Config'
 > => ({
 	type: 'PRODUCTION' as const,
 	envName: 'prod',

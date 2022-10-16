@@ -14,4 +14,5 @@ export type {
 } from './entity/entity-map';
 export { fromUrl } from './entity/from-url';
 export { isEntity, isEntityUrlName } from './entity/is-entity';
+export { addEnvLabel } from './logger/enrich-logs';
 export { satisfies } from './satisfies';

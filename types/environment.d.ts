@@ -1,3 +1,4 @@
+// TODO: all properties should be optional, use zod to validate at runtime
 export interface AqaratechEnv {
 	readonly PUBLIC_AQARATECH_ENV:
 		| 'production'
