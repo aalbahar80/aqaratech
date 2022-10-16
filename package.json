@@ -28,7 +28,7 @@
 		"@changesets/changelog-git": "0.1.13",
 		"@changesets/cli": "2.25.0",
 		"@tsconfig/node18-strictest": "1.0.0",
-		"@types/node": "18.8.4",
+		"@types/node": "18.11.0",
 		"eslint": "8.25.0",
 		"eslint-config-custom": "workspace:*",
 		"madge": "5.0.1",
