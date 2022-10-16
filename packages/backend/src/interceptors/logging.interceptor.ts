@@ -138,9 +138,15 @@ export class LoggingInterceptor implements NestInterceptor {
 		});
 
 		if (statusCode >= 500) {
-			this.logger.error(text);
+			this.logger.error({
+				...text,
+				level: 'error',
+			});
 		} else if (statusCode >= 400) {
-			this.logger.warn(text);
+			this.logger.warn({
+				...text,
+				level: 'warn',
+			});
 		} else {
 			this.logger.log(text);
 		}
