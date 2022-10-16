@@ -5,16 +5,26 @@ import { addEnvLabel } from '@self/utils';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
-export class LogtailService extends Logtail {
+export class LogtailService {
 	constructor(readonly config: ConfigService<EnvironmentConfig>) {
-		const token = config.get('LOGTAIL_TOKEN', { infer: true });
+		const liveEnvs = ['production', 'staging'];
 
-		const envLabel = config.get('PUBLIC_AQARATECH_ENV', { infer: true });
+		// TODO conf: remove assertion after validating conf
+		const env = config.get('PUBLIC_AQARATECH_ENV', { infer: true })!;
 
-		// @ts-expect-error remove after validating env config
-		super(token);
+		// TODO conf: remove assertion after validating conf
+		const token = config.get('LOGTAIL_TOKEN', { infer: true })!;
 
-		// @ts-expect-error remove after validating env config
-		this.use(addEnvLabel(envLabel));
+		if (!liveEnvs.includes(env)) {
+			console.log('Logtail is not initialized. Not a live environment.');
+		} else if (!token) {
+			console.log('Logtail is not initialized. No token provided.');
+		} else {
+			this.logtail = new Logtail(token);
+
+			this.logtail.use(addEnvLabel('backend'));
+		}
 	}
+
+	readonly logtail: Logtail | undefined;
 }

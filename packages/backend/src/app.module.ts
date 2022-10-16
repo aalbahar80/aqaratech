@@ -8,7 +8,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 // common
-import { LogtailTransport } from '@logtail/winston';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
@@ -34,7 +33,6 @@ import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import { WinstonModule } from 'nest-winston';
 import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
-import { LogtailService } from 'src/logtail/logtail.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TraceMiddleware } from 'src/sentry/trace.middleware';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
@@ -42,6 +40,7 @@ import { ExpensesModule } from './expenses/expenses.module';
 import { FilesModule } from './files/files.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
 import { LeasesModule } from './leases/leases.module';
+import { LoggerService } from './logger/logger.service';
 import { LogtailModule } from './logtail/logtail.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { PayoutsModule } from './payouts/payouts.module';
@@ -58,23 +57,8 @@ import { UsersModule } from './users/users.module';
 		ConfigModule.forRoot({ load: [configuration], isGlobal: true }), // can take validation schema
 
 		WinstonModule.forRootAsync({
-			// TODO: remove ConfigModule from imports
-			imports: [ConfigModule, LogtailModule],
-			inject: [ConfigService, LogtailService],
-			useFactory: (
-				config: ConfigService<EnvironmentConfig, true>,
-				logtailClient: LogtailService,
-			) => {
-				const winstonConfig = config.get('winston', { infer: true });
-				return {
-					...winstonConfig,
-					transports: [
-						// @ts-expect-error remove after inferring config type
-						...winstonConfig.transports,
-						new LogtailTransport(logtailClient),
-					],
-				};
-			},
+			imports: [LogtailModule],
+			useClass: LoggerService,
 		}),
 
 		PrismaModule,
@@ -128,7 +112,6 @@ import { UsersModule } from './users/users.module';
 		S3Module,
 		FilesModule,
 		PayoutsModule,
-		LogtailModule,
 	],
 	controllers: [AppController],
 	providers: [
