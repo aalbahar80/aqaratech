@@ -89,6 +89,7 @@ importers:
       jwks-rsa: 2.1.5
       lodash: 4.17.21
       meilisearch: 0.27.0
+      nest-winston: 1.7.1
       passport: 0.6.0
       passport-jwt: 4.0.0
       postmark: 3.0.14
@@ -104,6 +105,7 @@ importers:
       tsconfig-paths: 4.1.0
       tsx: 3.10.1
       typescript: 4.8.4
+      winston: 3.8.2
     dependencies:
       '@aws-sdk/client-s3': 3.186.0
       '@aws-sdk/s3-request-presigner': 3.186.0
@@ -133,6 +135,7 @@ importers:
       jwks-rsa: 2.1.5
       lodash: 4.17.21
       meilisearch: 0.27.0
+      nest-winston: 1.7.1_2bjgr4ordwccbpqkkc2aeh7cxy
       passport: 0.6.0
       passport-jwt: 4.0.0
       postmark: 3.0.14
@@ -141,6 +144,7 @@ importers:
       remeda: 1.1.0
       rimraf: 3.0.2
       rxjs: 7.5.7
+      winston: 3.8.2
     devDependencies:
       '@nestjs/cli': 9.1.4
       '@nestjs/schematics': 9.0.3_typescript@4.8.4
@@ -9134,6 +9138,17 @@ packages:
   /neo-async/2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
+
+  /nest-winston/1.7.1_2bjgr4ordwccbpqkkc2aeh7cxy:
+    resolution: {integrity: sha512-wtBxG9/jCDgBV4AV+0l31W/Uc2tx8CiBEhPqK5cNN7u181AaurMdwe2pTNVxwSOtwp2g2mRvhMTLDswma+FQhA==}
+    peerDependencies:
+      '@nestjs/common': ^5.0.0 || ^6.6.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+      winston: ^3.0.0
+    dependencies:
+      '@nestjs/common': 9.1.4_mpbqhbv3qeq77ujihdpg6d4hsy
+      fast-safe-stringify: 2.1.1
+      winston: 3.8.2
+    dev: false
 
   /node-abort-controller/3.0.1:
     resolution: {integrity: sha512-/ujIVxthRs+7q6hsdjHMaj8hRG9NuWmwrz+JdRwZ14jdFoKSkm+vDsCbF9PLpnSqjaWQJuTmVtcWHNLr+vrOFw==}
