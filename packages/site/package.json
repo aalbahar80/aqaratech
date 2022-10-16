@@ -19,7 +19,6 @@
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs"
 	},
 	"devDependencies": {
-		"@brainandbones/skeleton": "0.37.32",
 		"@felte/reporter-svelte": "1.1.4",
 		"@felte/reporter-tippy": "1.1.4",
 		"@felte/validator-zod": "1.0.12",
