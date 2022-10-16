@@ -69,8 +69,11 @@ import { UsersModule } from './users/users.module';
 		SentryModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService, PrismaService],
-			useFactory: (config: ConfigService, prismaClient: PrismaService) => {
-				const sentryConfig = config.get('sentry', {});
+			useFactory: (
+				config: ConfigService<EnvironmentConfig>,
+				prismaClient: PrismaService,
+			) => {
+				const sentryConfig = config.get('sentry', { infer: true })!;
 				return {
 					...sentryConfig,
 					integrations: [
