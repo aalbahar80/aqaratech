@@ -4,7 +4,9 @@ export const formatResponseLog = ({
 	method,
 	start,
 	extra,
+	level = 'info',
 }: {
+	level?: 'debug' | 'info' | 'warn' | 'error';
 	response: LoggedResponse;
 	url: URL;
 	method: string;
@@ -12,11 +14,12 @@ export const formatResponseLog = ({
 	extra?: Record<string, unknown>;
 }) => {
 	return {
-		level: 'info',
+		level,
 		message: JSON.stringify({
 			httpType: 'response',
 			method,
 			status: response.status,
+			// TODO add statusText
 			duration: Date.now() - start,
 			pathname: url.pathname,
 			url: url.href,

@@ -7,7 +7,11 @@ import {
 	LoggerService,
 	NestInterceptor,
 } from '@nestjs/common';
-import { formatRequestLog, isHealthCheck } from '@self/utils';
+import {
+	formatRequestLog,
+	formatResponseLog,
+	isHealthCheck,
+} from '@self/utils';
 import { Request, Response } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Observable } from 'rxjs';
@@ -26,6 +30,11 @@ export class LoggingInterceptor implements NestInterceptor {
 	): Observable<any> | Promise<Observable<any>> {
 		const request = context.switchToHttp().getRequest() as Request;
 
+		const url = new URL(
+			request.originalUrl,
+			`${request.protocol}://${request.get('host')}`,
+		);
+
 		// TODO: req.url vs req.baseUrl vs req.originalUrl
 
 		// skip logging health checks
@@ -36,9 +45,10 @@ export class LoggingInterceptor implements NestInterceptor {
 			return next.handle();
 		}
 
-		this.logRequest(request);
+		this.logRequest(request, url);
 
-		const now = Date.now();
+		const start = Date.now();
+
 		return next.handle().pipe(
 			tap({
 				// `complete` is not called when an error is thrown, see `finalize` instead
@@ -47,7 +57,7 @@ export class LoggingInterceptor implements NestInterceptor {
 
 					const { statusCode } = response;
 
-					this.logResponse({ request, statusCode, now });
+					this.logResponse({ request, url, statusCode, start });
 				},
 
 				error: (err) => {
@@ -65,17 +75,19 @@ export class LoggingInterceptor implements NestInterceptor {
 
 						this.logResponse({
 							request,
+							url,
 							statusCode: err.getStatus(),
 							statusMessage,
-							now,
+							start,
 						});
 					} else {
 						// TODO: monitor
 						this.logResponse({
 							request,
+							url,
 							statusCode: 500,
 							statusMessage: 'Internal Server Error',
-							now,
+							start,
 						});
 
 						this.logger.error('err is not instance of HttpException', err);
@@ -85,12 +97,7 @@ export class LoggingInterceptor implements NestInterceptor {
 		);
 	}
 
-	private logRequest(request: Request) {
-		const url = new URL(
-			request.originalUrl,
-			`${request.protocol}://${request.get('host')}`,
-		);
-
+	private logRequest(request: Request, url: URL) {
 		const log = formatRequestLog({
 			request,
 			url: new URL(url),
@@ -107,26 +114,35 @@ export class LoggingInterceptor implements NestInterceptor {
 		request,
 		statusCode,
 		statusMessage,
-		now,
+		start,
+		url,
 	}: {
 		request: Request;
 		statusCode: number;
 		statusMessage?: string;
-		now: number;
+		start: number;
+		url: URL;
 	}) {
 		// TODO: fix ip
-		const { method, url } = request;
 
-		const responseLog = `Response: ${
-			Date.now() - now
-		}ms - ${method} ${url} - ${statusCode} ${statusMessage || ''}`;
+		const text = formatResponseLog({
+			response: { status: statusCode },
+			method: request.method,
+			url,
+			start,
+			extra: {
+				ip: request.ip,
+				userAgent: request.get('user-agent') ?? '',
+				statusMessage,
+			},
+		});
 
 		if (statusCode >= 500) {
-			this.logger.error(responseLog);
+			this.logger.error(text);
 		} else if (statusCode >= 400) {
-			this.logger.warn(responseLog);
+			this.logger.warn(text);
 		} else {
-			this.logger.log(responseLog);
+			this.logger.log(text);
 		}
 	}
 }
