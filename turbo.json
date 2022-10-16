@@ -41,10 +41,6 @@
 				"packages/test/types/api/**"
 			],
 			"inputs": ["packages/backend/openapi.yaml"]
-		},
-		"flatten-sourcemaps": {
-			"dependsOn": ["build"],
-			"outputs": ["build/**"]
 		}
 	}
 }

@@ -68,7 +68,13 @@ console.timeLog(TIMER, 'Created release');
 // Upload source maps
 if (projectName === 'site') {
 	// Prepare sourcemaps for sentry by flattening them
-	await $`pnpm -w exec turbo run flatten-sourcemaps --filter @self/site`;
+	if (environment === 'prod') {
+		await $`echo "Flattening sourcemaps" `;
+		await $`pnpm run flatten-sourcemaps`;
+	} else {
+		// skip in dev because it takes a long time
+		await $`echo "Skipping flattening sourcemaps"`;
+	}
 
 	// Upload server sourcemaps
 	//
