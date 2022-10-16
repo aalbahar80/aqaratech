@@ -5,7 +5,7 @@
 		"build"
 	],
 	"scripts": {
-		"dev": "vite dev --port 3000",
+		"dev": "vite dev --port 3000 --strictPort",
 		"build": "rm -rf ./{.svelte-kit,build} && vite build && ./remove-slash.sh ./build",
 		"preview": "vite preview --port 3000 --strictPort",
 		"preview:node": ". ../../scripts/export-env.sh ../../.env && PORT=3000 ORIGIN=$PUBLIC_SITE_URL node build/index.js",
