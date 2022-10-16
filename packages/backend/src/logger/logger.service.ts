@@ -1,10 +1,13 @@
 import { LogtailTransport } from '@logtail/winston';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { WinstonModuleOptionsFactory } from 'nest-winston';
+import {
+	utilities as nestWinstonModuleUtilities,
+	WinstonModuleOptionsFactory,
+} from 'nest-winston';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { LogtailService } from 'src/logtail/logtail.service';
-import { LoggerOptions } from 'winston';
+import { format, LoggerOptions, transports } from 'winston';
 
 @Injectable()
 export class LoggerService implements WinstonModuleOptionsFactory {
@@ -16,11 +19,18 @@ export class LoggerService implements WinstonModuleOptionsFactory {
 	createWinstonModuleOptions(): LoggerOptions | Promise<LoggerOptions> {
 		const winstonConfig = this.config.get('winston', { infer: true });
 
+		const nestTransport = new transports.Console({
+			format: format.combine(
+				format.timestamp(),
+				format.ms(),
+				nestWinstonModuleUtilities.format.nestLike('MyApp', {}),
+			),
+		});
+
 		return {
 			...winstonConfig,
 			transports: [
-				// @ts-expect-error remove after inferring config type
-				...winstonConfig.transports,
+				nestTransport,
 
 				...(this.logtailService.logtail
 					? [new LogtailTransport(this.logtailService.logtail)]
