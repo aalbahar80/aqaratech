@@ -15,7 +15,7 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
-import { Cookie, envCheck, isHealthCheck } from '@self/utils';
+import { Cookie, envCheck, formatRequestLog, isHealthCheck } from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import {
@@ -77,17 +77,16 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const method = event.request.method;
 
 	if (!isHealthCheck(event.url.pathname)) {
-		logger.log({
-			level: 'info',
-			message: JSON.stringify({
-				httpType: 'request',
-				method,
-				pathname: event.url.pathname,
-				url: event.url.href,
-				user: event.locals.user?.email ?? null,
-				userAgent: event.request.headers.get('user-agent'),
+		logger.log(
+			formatRequestLog({
+				request: event.request,
+				url: event.url,
+				extra: {
+					user: event.locals.user?.email ?? null,
+					userAgent: event.request.headers.get('user-agent'),
+				},
 			}),
-		});
+		);
 	}
 
 	const spanCookies = transaction.startChild({
