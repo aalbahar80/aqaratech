@@ -11,17 +11,23 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
+import { WinstonModule } from 'nest-winston';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
+import { WinstonConfigService } from 'src/config/winston-config.service';
+import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
 import { TimeoutInterceptor } from 'src/interceptors/timeout.interceptor';
 import { S3Service } from 'src/s3/s3.service';
+import { TraceMiddleware } from 'src/sentry/trace.middleware';
 import { AggregateModule } from './aggregate/aggregate.module';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import configuration from './config/configuration';
+import { LogtailModule } from './logtail/logtail.module';
 import { PostmarkModule } from './postmark/postmark.module';
 import { PostmarkService } from './postmark/postmark.service';
 import { PrismaModule } from './prisma/prisma.module';
@@ -29,19 +35,13 @@ import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 
 // resources
-import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
-import { WinstonModule } from 'nest-winston';
-import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { TraceMiddleware } from 'src/sentry/trace.middleware';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { FilesModule } from './files/files.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
 import { LeasesModule } from './leases/leases.module';
-import { LoggerService } from './logger/logger.service';
-import { LogtailModule } from './logtail/logtail.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { PayoutsModule } from './payouts/payouts.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
@@ -58,7 +58,7 @@ import { UsersModule } from './users/users.module';
 
 		WinstonModule.forRootAsync({
 			imports: [LogtailModule],
-			useClass: LoggerService,
+			useClass: WinstonConfigService,
 		}),
 
 		PrismaModule,

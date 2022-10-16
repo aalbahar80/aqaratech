@@ -10,7 +10,7 @@ import { LogtailService } from 'src/logtail/logtail.service';
 import { format, LoggerOptions, transports } from 'winston';
 
 @Injectable()
-export class LoggerService implements WinstonModuleOptionsFactory {
+export class WinstonConfigService implements WinstonModuleOptionsFactory {
 	constructor(
 		private readonly config: ConfigService<EnvironmentConfig, true>,
 		private readonly logtailService: LogtailService,
