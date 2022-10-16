@@ -2,18 +2,23 @@ import {
 	CallHandler,
 	ExecutionContext,
 	HttpException,
+	Inject,
 	Injectable,
-	Logger,
+	LoggerService,
 	NestInterceptor,
 } from '@nestjs/common';
-import { isHealthCheck } from '@self/utils';
+import { formatRequestLog, isHealthCheck } from '@self/utils';
 import { Request, Response } from 'express';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
-	private readonly logger = new Logger(LoggingInterceptor.name);
+	constructor(
+		@Inject(WINSTON_MODULE_NEST_PROVIDER)
+		private readonly logger: LoggerService,
+	) {}
 
 	intercept(
 		context: ExecutionContext,
@@ -46,7 +51,7 @@ export class LoggingInterceptor implements NestInterceptor {
 				},
 
 				error: (err) => {
-					this.logger.debug({ err });
+					this.logger.debug!({ err });
 					if (err instanceof HttpException) {
 						let statusMessage: string | undefined;
 
@@ -81,11 +86,21 @@ export class LoggingInterceptor implements NestInterceptor {
 	}
 
 	private logRequest(request: Request) {
-		const { ip, method, url } = request;
+		const url = new URL(
+			request.originalUrl,
+			`${request.protocol}://${request.get('host')}`,
+		);
 
-		const userAgent = request.get('user-agent') || '';
+		const log = formatRequestLog({
+			request,
+			url: new URL(url),
+			extra: {
+				ip: request.ip,
+				userAgent: request.get('user-agent') ?? '',
+			},
+		});
 
-		this.logger.log(`Request: ${method} ${url} ${ip} ${userAgent}`);
+		this.logger.log(log);
 	}
 
 	private logResponse({

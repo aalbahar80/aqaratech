@@ -20,9 +20,10 @@ export class LogtailService {
 		} else if (!token) {
 			console.log('Logtail is not initialized. No token provided.');
 		} else {
+			console.log('Logtail is initialized.');
 			this.logtail = new Logtail(token);
 
-			this.logtail.use(addEnvLabel('backend'));
+			this.logtail.use(addEnvLabel(env));
 		}
 	}
 
