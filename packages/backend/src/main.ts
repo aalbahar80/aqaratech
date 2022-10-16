@@ -4,6 +4,7 @@ import { envCheck } from '@self/utils';
 import '@sentry/tracing';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { getLogLevels } from 'src/constants/log-levels';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
@@ -36,6 +37,8 @@ async function bootstrap() {
 			maxAge: 24 * 60 * 60,
 		},
 	});
+
+	app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 
 	app.use(helmet()); // before other middleware
 	app.use(cookieParser());

@@ -46,11 +46,31 @@ import { RolesModule } from './roles/roles.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
+import { WinstonModule } from 'nest-winston';
+import { format, transports } from 'winston';
 
 @Module({
 	imports: [
 		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
 		ConfigModule.forRoot({ load: [configuration], isGlobal: true }), // can take validation schema
+
+		WinstonModule.forRoot({
+			level: process.env.PUBLIC_AQ_DEBUG_LEVEL || 'info',
+			format: format.combine(
+				format.timestamp(),
+				format.json(),
+				format.label({ label: 'backend' }),
+			),
+			transports: [
+				new transports.Console({
+					format: format.combine(
+						format.prettyPrint(), // remove custom format
+						format.colorize({ all: true }),
+						format.splat(),
+					),
+				}),
+			],
+		}),
 
 		PrismaModule,
 
