@@ -23,7 +23,7 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
 			format: format.combine(
 				format.timestamp(),
 				format.ms(),
-				nestWinstonModuleUtilities.format.nestLike('MyApp', {}),
+				nestWinstonModuleUtilities.format.nestLike('backend'),
 			),
 		});
 
