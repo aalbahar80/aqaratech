@@ -1,7 +1,11 @@
-import type { EnvironmentConfig } from '../interfaces/environment.interface';
+import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
-export const productionEnvironment = (): EnvironmentConfig => ({
-	type: 'PRODUCTION',
+// TODO satisfies: remove this type and use satisfies operator
+export const productionEnvironment = (): Omit<
+	EnvironmentConfig,
+	'sentry' | 'winston'
+> => ({
+	type: 'PRODUCTION' as const,
 	envName: 'prod',
 	apiConfig: {
 		PUBLIC_API_URL: process.env.PUBLIC_API_URL,

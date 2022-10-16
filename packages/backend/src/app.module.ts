@@ -30,7 +30,9 @@ import { SearchModule } from './search/search.module';
 
 // resources
 import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
+import { WinstonModule } from 'nest-winston';
 import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
+import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TraceMiddleware } from 'src/sentry/trace.middleware';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
@@ -46,30 +48,19 @@ import { RolesModule } from './roles/roles.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
-import { WinstonModule } from 'nest-winston';
-import { format, transports } from 'winston';
 
 @Module({
 	imports: [
 		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
 		ConfigModule.forRoot({ load: [configuration], isGlobal: true }), // can take validation schema
 
-		WinstonModule.forRoot({
-			level: process.env.PUBLIC_AQ_DEBUG_LEVEL || 'info',
-			format: format.combine(
-				format.timestamp(),
-				format.json(),
-				format.label({ label: 'backend' }),
-			),
-			transports: [
-				new transports.Console({
-					format: format.combine(
-						format.prettyPrint(), // remove custom format
-						format.colorize({ all: true }),
-						format.splat(),
-					),
-				}),
-			],
+		WinstonModule.forRootAsync({
+			imports: [ConfigModule],
+			inject: [ConfigService],
+			useFactory: (config: ConfigService<EnvironmentConfig>) => {
+				const winstonConfig = config.get('winston', { infer: true })!;
+				return winstonConfig;
+			},
 		}),
 
 		PrismaModule,
