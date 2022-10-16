@@ -16,6 +16,7 @@ import {
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
 import { Cookie, envCheck, formatRequestLog, isHealthCheck } from '@self/utils';
+import { formatResponseLog } from '@self/utils/src';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import {
@@ -73,8 +74,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		scope.setSpan(transaction);
 	});
 
-	const now = Date.now();
-	const method = event.request.method;
+	const start = Date.now();
 
 	if (!isHealthCheck(event.url.pathname)) {
 		logger.log(
@@ -173,18 +173,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 	spanResolve.finish();
 
 	if (!isHealthCheck(event.url.pathname)) {
-		logger.log({
-			level: 'info',
-			message: JSON.stringify({
-				httpType: 'request',
-				status: response.status,
-				duration: Date.now() - now,
-				method,
-				pathname: event.url.pathname,
-				user: event.locals.user?.email ?? null,
-				url: event.url.href,
+		logger.log(
+			formatResponseLog({
+				response,
+				method: event.request.method,
+				start,
+				url: event.url,
+				extra: {
+					user: event.locals.user?.email ?? null,
+				},
 			}),
-		});
+		);
 	}
 
 	// Close the Sentry transaction

@@ -1,7 +1,3 @@
-interface LoggedRequest {
-	method: string;
-}
-
 export const formatRequestLog = ({
 	request,
 	url,
@@ -22,3 +18,7 @@ export const formatRequestLog = ({
 		}),
 	};
 };
+
+interface LoggedRequest {
+	method: string;
+}
