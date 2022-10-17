@@ -47,14 +47,14 @@ jobs:
 
       - run: pnpm -F @self/test exec playwright install chromium
 
+      - run: pnpm run build -vvv
+
       - name: Set .env file
         shell: bash
         env:
           # https://docs.github.com/en/actions/security-guides/encrypted-secrets#example-using-bash
           AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
         run: ./scripts/set-env.sh .env.test .env AUTH0_CLIENT_SECRET
-
-      - run: pnpm build
 
       # Move format/lint/check to a seperate job when removing `continue-on-error`
       # - run: pnpm run format:all
@@ -66,7 +66,7 @@ jobs:
       # - run: pnpm run check:all
       #   continue-on-error: true
 
-      - run: pnpm test
+      - run: pnpm run test -vvv
 
       - uses: actions/upload-artifact@v2
         if: failure()
