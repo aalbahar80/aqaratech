@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.5.3
+
+### Patch Changes
+
+- afbeab8c: use same winston logger helpers
+
 ## 1.5.2
 
 ### Patch Changes
