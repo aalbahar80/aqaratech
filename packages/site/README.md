@@ -3,7 +3,7 @@
 # Install
 
 ```bash
-pnpm i
+pnpm install
 ```
 
 # Testing
