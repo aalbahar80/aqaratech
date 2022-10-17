@@ -1,8 +1,6 @@
 import { EntityNames } from '@self/utils';
 
-type AnyClassConstructor = {
-	new (...args: any[]): any;
-};
+type AnyClassConstructor = new (...args: any[]) => any;
 
 export type TIndexName = Extract<
 	EntityNames['title'],
@@ -13,9 +11,7 @@ type Item = {
 	id: string;
 	organizationId: string;
 	// portfolioId: string; // enable if search is enabled for portfolio users
-} & {
-	[key: string]: any;
-};
+} & Record<string, any>;
 
 export class UpdateIndexEvent {
 	constructor(

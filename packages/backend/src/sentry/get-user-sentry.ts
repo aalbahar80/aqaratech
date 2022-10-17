@@ -3,7 +3,7 @@ import { Request } from 'express';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 
 export const getUserSentry = (request: Request) => {
-	const user = request?.user as IUser | AuthenticatedUser | undefined;
+	const user = request.user as IUser | AuthenticatedUser | undefined;
 
 	let sentryUser: User = {
 		ip_address: request.ip,
@@ -15,7 +15,7 @@ export const getUserSentry = (request: Request) => {
 			id: user.id,
 			email: user.email,
 			roleId: user.xRoleId,
-			username: user.fullName || undefined,
+			username: user.fullName ?? undefined,
 			isAqaratechStaff: user.isAqaratechStaff,
 		};
 	} else if (user) {

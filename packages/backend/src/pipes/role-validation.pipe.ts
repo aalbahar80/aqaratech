@@ -12,7 +12,7 @@ import { CreateRoleDto } from 'src/roles/dto/role.dto';
  * Validates that exactly one of organizationId, portfolioId, or tenantId is specified.
  */
 @Injectable()
-export class RoleValidationPipe implements PipeTransform<any, any> {
+export class RoleValidationPipe implements PipeTransform {
 	transform(value: any, { metatype }: ArgumentMetadata) {
 		if (!metatype || !this.toValidate(metatype)) {
 			return value;

@@ -113,23 +113,23 @@ export function StringField(
 ): PropertyDecorator {
 	const decorators = [IsNotEmpty(), IsString(), Trim()];
 
-	if (options?.swagger !== false) {
+	if (options.swagger !== false) {
 		decorators.push(ApiProperty({ type: String, ...options }));
 	}
 
-	if (options?.minLength) {
+	if (options.minLength) {
 		decorators.push(MinLength(options.minLength));
 	}
 
-	if (options?.maxLength) {
+	if (options.maxLength) {
 		decorators.push(MaxLength(options.maxLength));
 	}
 
-	if (options?.toLowerCase) {
+	if (options.toLowerCase) {
 		decorators.push(ToLowerCase());
 	}
 
-	if (options?.toUpperCase) {
+	if (options.toUpperCase) {
 		decorators.push(ToUpperCase());
 	}
 

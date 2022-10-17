@@ -79,7 +79,7 @@ export class AbilitiesGuard implements CanActivate {
 			[];
 
 		const request = context.switchToHttp().getRequest<IRequest>();
-		const xRoleId = request.cookies['role'] as string | undefined;
+		const xRoleId = request.cookies.role as string | undefined;
 		const authenticatedUser = request.user; // safe to use email because it is set by jwt.strategy from accessToken
 
 		if (!xRoleId) {

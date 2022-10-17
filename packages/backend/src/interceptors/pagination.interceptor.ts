@@ -35,7 +35,7 @@ export class PaginationInterceptor<T>
 
 		return next.handle().pipe(
 			map((data: WithCount<T>) => {
-				if (data?.total === undefined) {
+				if (data.total === undefined) {
 					this.logger.error(
 						'No `total` found in response. Attempted to paginate a response that did not have a `total` property.',
 					);

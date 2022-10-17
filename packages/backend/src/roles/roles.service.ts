@@ -108,9 +108,9 @@ export class RolesService {
 		});
 
 		const organizationName =
-			role.organization?.fullName ||
-			role.portfolio?.organization?.fullName ||
-			role.tenant?.organization?.fullName ||
+			role.organization.fullName ||
+			role.portfolio?.organization.fullName ||
+			role.tenant?.organization.fullName ||
 			'';
 
 		await this.postmarkService.trySendEmail({
