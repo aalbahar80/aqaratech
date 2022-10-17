@@ -1,3 +1,4 @@
+import { schema } from 'src/config/config-schema';
 import { sentryConfig } from 'src/config/sentry.config';
 import { winstonConfig } from 'src/config/winston.config';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
@@ -11,11 +12,13 @@ export default (): EnvironmentConfig => {
 			? productionEnvironment()
 			: developmentEnvironment();
 
+	const environment = schema.parse(process.env);
+
 	return {
 		...config,
 		// TODO conf: remove type assertion after validating env config
-		PUBLIC_AQARATECH_ENV: process.env.PUBLIC_AQARATECH_ENV!,
-		LOGTAIL_TOKEN: process.env.LOGTAIL_TOKEN,
+		PUBLIC_AQARATECH_ENV: environment.PUBLIC_AQARATECH_ENV,
+		LOGTAIL_TOKEN: environment.LOGTAIL_TOKEN,
 		sentry: sentryConfig,
 		winston: winstonConfig,
 	};

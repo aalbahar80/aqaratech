@@ -26,5 +26,5 @@ export interface EnvironmentConfig {
 	// from AqaratechEnv
 	// TODO remove explicit declaration and extend from AqaratechEnv interface
 	PUBLIC_AQARATECH_ENV: string;
-	LOGTAIL_TOKEN: string;
+	LOGTAIL_TOKEN?: string | undefined;
 }

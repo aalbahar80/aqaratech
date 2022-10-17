@@ -6,14 +6,12 @@ import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
 export class LogtailService {
-	constructor(readonly config: ConfigService<EnvironmentConfig>) {
+	constructor(readonly config: ConfigService<EnvironmentConfig, true>) {
 		const liveEnvs = ['production', 'staging'];
 
-		// TODO conf: remove assertion after validating conf
-		const env = config.get('PUBLIC_AQARATECH_ENV', { infer: true })!;
+		const env = config.get('PUBLIC_AQARATECH_ENV', { infer: true });
 
-		// TODO conf: remove assertion after validating conf
-		const token = config.get('LOGTAIL_TOKEN', { infer: true })!;
+		const token = config.get('LOGTAIL_TOKEN', { infer: true });
 
 		if (!liveEnvs.includes(env)) {
 			console.log('Logtail is not initialized. Not a live environment.');
