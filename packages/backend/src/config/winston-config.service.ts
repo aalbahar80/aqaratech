@@ -19,7 +19,10 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
 	createWinstonModuleOptions(): LoggerOptions | Promise<LoggerOptions> {
 		const winstonConfig = this.config.get('winston', { infer: true });
 
+		const level = this.config.get('PUBLIC_AQ_DEBUG_LEVEL', { infer: true });
+
 		const nestTransport = new transports.Console({
+			level,
 			format: format.combine(
 				format.timestamp(),
 				format.ms(),
