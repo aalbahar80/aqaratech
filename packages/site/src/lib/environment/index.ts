@@ -10,9 +10,9 @@ const envSchema = z.object({
 		'production',
 	]),
 
-	PUBLIC_SITE_URL: z.string(),
-	PUBLIC_API_URL: z.string(),
-	PUBLIC_API_URL_LOCAL: z.string(),
+	PUBLIC_SITE_URL: z.string().url(),
+	PUBLIC_API_URL: z.string().url(),
+	PUBLIC_API_URL_LOCAL: z.string().url(),
 	PUBLIC_AQ_ENABLE_SENTRY: z.string().optional(),
 	PUBLIC_AQ_DEBUG_SENTRY: z.string().optional(),
 	PUBLIC_TRACE_RATE: z.string(),
@@ -51,6 +51,8 @@ const environmentInput = {
 
 // Validate environment variables using zod
 // Skip validation when building for production
+// TODO satisfies
 export const environment = prerendering
 	? environmentInput
 	: envSchema.parse(environmentInput);
+// : envSchema.parse(environmentInput) satisfies AqaratechEnv;
