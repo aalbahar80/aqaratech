@@ -2,10 +2,9 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { envCheck } from '@self/utils';
 import '@sentry/tracing';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { getLogLevels } from 'src/constants/log-levels';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
 import { version } from '../package.json';
@@ -17,12 +16,7 @@ async function bootstrap() {
 	Logger.log(`Version: ${version}`);
 	envCheck();
 
-	const level = process.env.PUBLIC_AQ_DEBUG_LEVEL || ('info' as const);
-
-	Logger.log(`Log level: ${level}`);
-
 	const app = await NestFactory.create(AppModule, {
-		logger: getLogLevels(level),
 		cors: {
 			origin: process.env.PUBLIC_SITE_URL,
 			credentials: true,

@@ -4,7 +4,6 @@ import {
 	MiddlewareConsumer,
 	Module,
 } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 // common
@@ -113,7 +112,7 @@ import { UsersModule } from './users/users.module';
 		FilesModule,
 		PayoutsModule,
 	],
-	controllers: [AppController],
+	controllers: [],
 	providers: [
 		{
 			provide: APP_INTERCEPTOR,

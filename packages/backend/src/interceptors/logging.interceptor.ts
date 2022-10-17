@@ -26,13 +26,13 @@ export class LoggingInterceptor implements NestInterceptor {
 
 	intercept(
 		context: ExecutionContext,
-		next: CallHandler<any>,
-	): Observable<any> | Promise<Observable<any>> {
-		const request = context.switchToHttp().getRequest() as Request;
+		next: CallHandler,
+	): Observable<Response> | Promise<Observable<Response>> {
+		const request = context.switchToHttp().getRequest<Request>();
 
 		const url = new URL(
 			request.originalUrl,
-			`${request.protocol}://${request.get('host')}`,
+			`${request.protocol}://${request.get('host') ?? ''}`,
 		);
 
 		// TODO: req.url vs req.baseUrl vs req.originalUrl
@@ -61,12 +61,13 @@ export class LoggingInterceptor implements NestInterceptor {
 				},
 
 				error: (err) => {
-					this.logger.debug!({ err });
+					this.logger.error(err);
+
 					if (err instanceof HttpException) {
 						let statusMessage: string | undefined;
 
 						try {
-							statusMessage = (err.getResponse() as Record<string, any>)[
+							statusMessage = (err.getResponse() as Record<string, unknown>)[
 								'message'
 							] as string;
 						} catch (e) {
@@ -100,7 +101,7 @@ export class LoggingInterceptor implements NestInterceptor {
 	private logRequest(request: Request, url: URL) {
 		const log = formatRequestLog({
 			request,
-			url: new URL(url),
+			url,
 			extra: {
 				ip: request.ip,
 				userAgent: request.get('user-agent') ?? '',

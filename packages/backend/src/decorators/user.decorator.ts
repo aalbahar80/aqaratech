@@ -8,11 +8,11 @@ import { Request } from 'express';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 
 export const User = createParamDecorator(
-	(data: unknown, ctx: ExecutionContext) => {
+	(_data: unknown, ctx: ExecutionContext) => {
 		const request = ctx.switchToHttp().getRequest<IncomingRequest>();
 		const logger = new Logger('UserDecorator');
 
-		logger.debug(`User email: ${request.user?.email}`);
+		logger.debug(`User email: ${request.user?.email ?? 'undefined'}`);
 
 		if (!request.user) {
 			// In a public route, both jwt.guard/strategy and abilities.guard are bypassed, so request.user is undefined.

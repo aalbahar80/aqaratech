@@ -1,3 +1,4 @@
+import { NoSuchBucket } from '@aws-sdk/client-s3';
 import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -118,7 +119,7 @@ export class OrganizationsService {
 		try {
 			await this.s3.deleteBucket(id);
 		} catch (error) {
-			if (error.name !== 'NoSuchBucket') {
+			if (error instanceof NoSuchBucket) {
 				// Don't throw if the bucket doesn't exist
 				throw error;
 			}

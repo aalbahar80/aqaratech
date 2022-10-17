@@ -91,12 +91,13 @@ export class ExpenseCategoriesService {
 		categories.forEach((c) => {
 			const category = c as Prisma.JsonObject;
 			const submitted = updateAllExpenseCategoriesDto.items.find(
-				(item) => item.id === category.id,
+				(item) => item.id === category['id'],
 			);
 			if (!submitted) {
-				throw new BadRequestException(
-					`No expenseCategory with id ${category.id} found in updateAll`,
-				);
+				throw new BadRequestException({
+					msg: `No expenseCategory with this id found in updateAll`,
+					id: category['id'],
+				});
 			}
 			this.applyChanges({
 				original: category,
@@ -136,7 +137,7 @@ export class ExpenseCategoriesService {
 
 		categories.forEach((c) => {
 			const category = c as Prisma.JsonObject;
-			if (category.id === expenseCategoryId) {
+			if (category['id'] === expenseCategoryId) {
 				this.applyChanges({
 					original: category,
 					submitted: updateExpenseCategoryDto,
@@ -173,8 +174,7 @@ export class ExpenseCategoriesService {
 			typeof categoriesJson === 'object' &&
 			Array.isArray(categoriesJson)
 		) {
-			const categories = categoriesJson as Prisma.JsonArray;
-			return categories;
+			return categoriesJson;
 		} else {
 			throw new InternalServerErrorException(
 				'Failed to parse expenseCategoryTree',

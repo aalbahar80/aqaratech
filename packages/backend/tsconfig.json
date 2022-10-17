@@ -1,26 +1,26 @@
 {
+	"extends": "@tsconfig/node18-strictest/tsconfig.json",
 	"compilerOptions": {
-		"module": "commonjs",
+		"target": "ES2022",
 		"declaration": true,
 		"removeComments": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"allowSyntheticDefaultImports": true,
-		"target": "ES2022",
+		"resolveJsonModule": true,
+		"incremental": true,
 		"sourceMap": true,
 		// https://docs.sentry.io/platforms/javascript/sourcemaps/generating/#typescript
 		"inlineSources": true,
 		"sourceRoot": "/",
 		"outDir": "./dist",
 		"baseUrl": "./",
-		"incremental": true,
 		"skipLibCheck": true,
-		"strictNullChecks": true,
-		"noImplicitAny": true,
-		"strictBindCallApply": true,
-		"forceConsistentCasingInFileNames": true,
-		"noFallthroughCasesInSwitch": true,
-		"resolveJsonModule": true,
+		"strict": true,
+		"strictPropertyInitialization": false,
+		"importsNotUsedAsValues": "remove",
+		"exactOptionalPropertyTypes": false,
+		"noUncheckedIndexedAccess": false,
 		"paths": {
 			"src": ["./src/"]
 		}

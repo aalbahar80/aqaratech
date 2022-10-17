@@ -2,6 +2,7 @@ import { ExecutionContext, Injectable, Logger } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { isHealthCheck } from '@self/utils';
+import { Request } from 'express';
 import { IS_PUBLIC_KEY } from 'src/auth/public.decorator';
 
 /**
@@ -15,13 +16,13 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
 	private readonly logger = new Logger(JwtAuthGuard.name);
 
-	async canActivate(context: ExecutionContext) {
+	override async canActivate(context: ExecutionContext) {
 		const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
 			context.getHandler(),
 			context.getClass(),
 		]);
 		if (isPublic) {
-			const url = context.switchToHttp().getRequest().url;
+			const url = context.switchToHttp().getRequest<Request>().url;
 			if (!isHealthCheck(url)) {
 				this.logger.debug('Public route, skipping jwt auth guard');
 			}

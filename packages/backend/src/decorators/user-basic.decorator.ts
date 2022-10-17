@@ -16,11 +16,11 @@ import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
  * but haven't yet been added to our database.
  */
 export const UserBasic = createParamDecorator(
-	(data: unknown, ctx: ExecutionContext) => {
+	(_data: unknown, ctx: ExecutionContext) => {
 		const request = ctx.switchToHttp().getRequest<IncomingRequest>();
 		const logger = new Logger('UserBasic');
 
-		logger.debug(`User email: ${request.user?.email}`);
+		logger.debug(`User email: ${request.user?.email ?? 'undefined'}`);
 
 		if (!request.user) {
 			// In a public route, both jwt.guard/strategy and abilities.guard are bypassed, so request.user is undefined.

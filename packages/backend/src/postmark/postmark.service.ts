@@ -30,6 +30,7 @@ export class PostmarkService extends ServerClient {
 			return await this.sendEmailWithTemplate(template, callback);
 		} catch (error) {
 			this.logger.error(error);
+			return;
 		}
 	}
 }

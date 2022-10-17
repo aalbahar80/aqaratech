@@ -24,7 +24,7 @@ export const mapPrismaException = (
 		 *
 		 */
 		// TODO: should be a 404 instead of a 400?
-		responseError = new BadRequestException(exception.meta?.cause);
+		responseError = new BadRequestException(exception.meta?.['cause']);
 	} else if (exception.code === 'P2014') {
 		/**
 		 * P2014
@@ -33,9 +33,15 @@ export const mapPrismaException = (
 		 *
 		 */
 		// TODO should we add a fallback error message?
-		const modela = exception.meta?.model_a_name;
-		const modelb = exception.meta?.model_b_name;
-		const message = `Sorry, but you can't delete a ${modelb} with an existing ${modela}. Please delete the ${modela} first.`;
+		const meta = exception.meta;
+		const modela = meta?.['model_a_name'];
+		const modelb = meta?.['model_b_name'];
+		let message = '';
+
+		if (typeof modela === 'string' && typeof modelb === 'string') {
+			message = `Sorry, but you can't delete a ${modelb} with an existing ${modela}. Please delete the ${modela} first.`;
+		}
+
 		responseError = new BadRequestException(message);
 	} else if (exception.code === 'P2000') {
 		/**
