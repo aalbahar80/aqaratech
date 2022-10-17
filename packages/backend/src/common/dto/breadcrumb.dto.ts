@@ -74,15 +74,16 @@ export class BreadcrumbDto {
 		this.id = id;
 
 		if (rel === Rel.Tenant) {
-			this.label = labelParams.label || labelParams.fullName;
+			this.label = labelParams.label ?? labelParams.fullName;
 		} else if (rel === Rel.Portfolio) {
-			this.label = labelParams.label || labelParams.fullName;
+			this.label = labelParams.label ?? labelParams.fullName;
 		} else if (rel === Rel.Property) {
-			this.label = labelParams.label || getAddress(labelParams);
+			this.label = labelParams.label ?? getAddress(labelParams);
 		} else if (rel === Rel.Unit) {
-			this.label = labelParams.label || getUnitLabel(labelParams);
+			this.label = labelParams.label ?? getUnitLabel(labelParams);
 		} else if (rel === Rel.Lease) {
 			this.label = labelParams.id;
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		} else if (rel === Rel.MaintenanceOrder) {
 			this.label = labelParams.id;
 		}

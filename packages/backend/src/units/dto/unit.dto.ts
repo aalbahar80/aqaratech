@@ -107,7 +107,7 @@ export class UnitDto
 	@Expose()
 	get title(): string {
 		return (
-			this.label ||
+			this.label ??
 			getUnitLabel({ type: this.type, unitNumber: this.unitNumber })
 		);
 	}

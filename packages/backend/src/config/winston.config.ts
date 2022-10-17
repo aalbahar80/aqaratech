@@ -2,7 +2,7 @@ import { format, LoggerOptions, transports } from 'winston';
 
 // TODO: use satisfies operator
 export const winstonConfig: LoggerOptions = {
-	level: process.env.PUBLIC_AQ_DEBUG_LEVEL || 'info',
+	level: process.env.PUBLIC_AQ_DEBUG_LEVEL ?? 'info',
 	format: format.combine(
 		format.timestamp(),
 		format.json(),

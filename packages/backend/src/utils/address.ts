@@ -9,5 +9,5 @@ export const getAddress = (
 };
 
 export const getUnitLabel = (unit: Pick<Unit, 'type' | 'unitNumber'>) => {
-	return `${unit.type} ${unit.unitNumber}`;
+	return `${unit.type ?? ''} ${unit.unitNumber}`;
 };

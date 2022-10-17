@@ -44,7 +44,9 @@ export class CaslAbilityFactory {
 			// Log the userId for our own reference.
 			// But don't return it in the error message as it is priviliged info.
 			this.logger.error(
-				`Could not resolve roleId ${xRoleId} for userId: ${user.id}`,
+				`Could not resolve roleId ${xRoleId ?? 'undefined'} for userId: ${
+					user.id
+				}`,
 			);
 			throw new ForbiddenException('Role not found');
 		}

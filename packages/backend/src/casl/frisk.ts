@@ -22,7 +22,7 @@ export const frisk = <T extends Record<string, any>>({
 		user.ability,
 		Action.Update,
 		SubjectType,
-		{ fieldsFrom: (rule) => rule.fields || fields },
+		{ fieldsFrom: (rule) => rule.fields ?? fields },
 	);
 	// TODO log difference
 	const frisked = R.pick(instance, permittedFields);

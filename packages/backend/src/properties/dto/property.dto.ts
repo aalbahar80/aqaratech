@@ -98,7 +98,7 @@ export class PropertyDto
 	@ApiProperty()
 	@Expose()
 	get title(): string {
-		return this.label || this.address;
+		return this.label ?? this.address;
 	}
 
 	@ApiProperty()

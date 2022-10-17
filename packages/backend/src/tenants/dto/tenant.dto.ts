@@ -60,7 +60,7 @@ export class TenantDto
 	@ApiProperty()
 	@Expose()
 	get title(): string {
-		return this.label || this.fullName;
+		return this.label ?? this.fullName;
 	}
 }
 

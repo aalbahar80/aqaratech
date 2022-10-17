@@ -121,7 +121,7 @@ export class RolesService {
 				invite_sender_email: payload.senderEmail,
 				invite_sender_organization_name: organizationName,
 				// TODO replace with url to either (if user !exists) signup page with email prefilled, or (if user exists) portfolio/tenant portal page
-				action_url: origin || '',
+				action_url: origin ?? '',
 			},
 		});
 	}

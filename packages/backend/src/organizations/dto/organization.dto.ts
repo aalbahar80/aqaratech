@@ -26,7 +26,7 @@ export class OrganizationDto extends IntersectionType(
 	@ApiProperty()
 	@Expose()
 	get title(): string {
-		return this.label || this.fullName;
+		return this.label ?? this.fullName;
 	}
 }
 

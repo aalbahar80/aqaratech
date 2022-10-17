@@ -108,7 +108,7 @@ export class AggregateService {
 
 		// fallback to getting data for next two years max
 		const oneYear = 1000 * 60 * 60 * 24 * 365;
-		const end = filter.end || new Date(Date.now() + oneYear * 2);
+		const end = filter.end ?? new Date(Date.now() + oneYear * 2);
 
 		// loop through each day in the range
 		for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
@@ -182,9 +182,9 @@ export class AggregateService {
 			}),
 		]);
 
-		const leaseInvoiceSum = leaseInvoices._sum.amount || 0;
-		const expenseSum = expenses._sum.amount || 0;
-		const payoutSum = payouts._sum.amount || 0;
+		const leaseInvoiceSum = leaseInvoices._sum.amount ?? 0;
+		const expenseSum = expenses._sum.amount ?? 0;
+		const payoutSum = payouts._sum.amount ?? 0;
 
 		const total = leaseInvoiceSum - expenseSum - payoutSum;
 

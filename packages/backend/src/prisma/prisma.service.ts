@@ -20,7 +20,7 @@ export class PrismaService
 			this.$on('query', (e) => {
 				console.log('Query: ' + e.query);
 				console.log('Params: ' + e.params);
-				console.log('Duration: ' + e.duration + 'ms');
+				console.log(`Duration: ${e.duration}ms`);
 			});
 		}
 	}
