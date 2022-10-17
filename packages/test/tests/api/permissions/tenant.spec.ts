@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { testPortfolioId, testTenantRoleId } from '@self/seed';
-import type { PaginatedTenantDto } from '../../types/api';
+import type { PaginatedTenantDto } from '../../../types/api';
 import { test } from '../api-fixtures';
 
 test.use({

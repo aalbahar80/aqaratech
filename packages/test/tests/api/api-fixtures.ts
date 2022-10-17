@@ -16,7 +16,7 @@ import type {
 	PropertyDto,
 	TenantDto,
 	UnitDto,
-} from '../types/api';
+} from '../../types/api';
 
 const apiURL = process.env.PUBLIC_API_URL;
 

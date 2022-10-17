@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { portfolioFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { PortfolioDto } from '../types/api';
+import type { PortfolioDto } from '../../types/api';
 import { test } from './api-fixtures';
 
 test(`can't be created without orgId`, async ({ request }) => {

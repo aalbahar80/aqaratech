@@ -1,5 +1,5 @@
 import { test as base, type BrowserContextOptions } from '@playwright/test';
-import { EXPIRED_ID_TOKEN } from '../constants/expired-id-token';
+import { EXPIRED_ID_TOKEN } from '../../constants/expired-id-token';
 
 interface Token {
 	name: string;

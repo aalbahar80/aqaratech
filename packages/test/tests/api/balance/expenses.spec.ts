@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { BalanceDto, CreateExpenseDto } from '../../types/api';
+import type { BalanceDto, CreateExpenseDto } from '../../../types/api';
 import { test } from '../api-fixtures';
 
 test(`expense amount`, async ({ request, portfolio, expenseCategory }) => {

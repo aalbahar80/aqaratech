@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { roleFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { PaginatedRoleDto } from '../../types/api';
+import type { PaginatedRoleDto } from '../../../types/api';
 import { test } from '../api-fixtures';
 
 test('orgadmin role', async ({ request, org }) => {

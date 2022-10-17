@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { leaseInvoiceFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { ByMonthDto } from '../../types/api';
+import type { ByMonthDto } from '../../../types/api';
 import { test } from '../api-fixtures';
 
 test.use({
