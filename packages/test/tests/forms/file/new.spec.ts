@@ -2,12 +2,12 @@ import { APIRequestContext, expect } from '@playwright/test';
 import { sample } from '@self/seed';
 import { entitiesMap } from '@self/utils';
 import { promises } from 'node:fs';
-import { test } from '../../config';
+import { test } from '../../../config';
 
 const fileEntity = entitiesMap.file;
 const portfolioEntity = entitiesMap.portfolio;
 const portfolio = sample.portfolios[0];
-const localFilePath = './forms/file/upload-test.png';
+const localFilePath = './tests/forms/file/upload-test.png';
 
 const params = new URLSearchParams({
 	relationKey: portfolioEntity.title,

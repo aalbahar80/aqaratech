@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { sample } from '@self/seed';
-import { test } from '../../config';
+import { test } from '../../../config';
 import { entitiesMap } from '@self/utils';
 
 const portfolio = sample.portfolios[0];

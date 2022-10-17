@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { sample } from '@self/seed';
 import { entitiesMap } from '@self/utils';
-import { test } from '../../config';
+import { test } from '../../../config';
 
 const portfolio = sample.portfolios[0];
 const property = sample.properties[0];

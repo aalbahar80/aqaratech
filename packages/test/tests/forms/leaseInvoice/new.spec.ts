@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { sample } from '@self/seed';
-import { test } from '../../config';
+import { test } from '../../../config';
 
 const lease = sample.leases[0];
 test('smoke', async ({ page }, info) => {

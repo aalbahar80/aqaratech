@@ -1,16 +1,16 @@
 import { devices, type PlaywrightTestConfig } from '@playwright/test';
 import { config as dotenv } from 'dotenv';
-import type { TokenTestOptions } from './auth/auth-fixtures';
 import {
 	EXPIRED_ACCESS_TOKEN,
 	EXPIRED_ID_TOKEN,
 } from './constants/expired-id-token';
+import type { TokenTestOptions } from './tests/auth/auth-fixtures';
 
 dotenv({
 	path: '../../.env',
 });
 
-const API_FILES = '**/api/**/*.spec.ts';
+const API_FILES = '**/tests/api/**/*.spec.ts';
 
 const config: PlaywrightTestConfig<TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),

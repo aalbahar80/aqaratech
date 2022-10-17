@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { sample } from '@self/seed';
-import { test } from '../../config';
+import { test } from '../../../config';
 
 test('smoke', async ({ page }, info) => {
 	await page.goto('/leases/new', { waitUntil: 'networkidle' });

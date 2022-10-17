@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../../config';
+import { test } from '../../../config';
 
 test('smoke', async ({ page }, info) => {
 	await page.goto('/tenants/new');

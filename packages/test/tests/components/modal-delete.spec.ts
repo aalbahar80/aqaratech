@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { sample } from '@self/seed';
-import { test as base } from '../config';
+import { test as base } from '../../config';
 
 const org = sample.organizations[0];
 
