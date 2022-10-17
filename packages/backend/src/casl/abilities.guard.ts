@@ -20,6 +20,7 @@ import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
+import { z } from 'zod';
 
 /**
  * Receives a user of type AuthenticatedUser as returned by the jwt.strategy.
@@ -65,7 +66,7 @@ export class AbilitiesGuard implements CanActivate {
 		);
 
 		if (isPublic || skipAbilityCheck) {
-			const url = context.switchToHttp().getRequest().url;
+			const url = context.switchToHttp().getRequest<Request>().url;
 			if (!isHealthCheck(url)) {
 				this.logger.debug(`Skipping abilities guard. isPublic: ${isPublic}, skipAbilityCheck: ${skipAbilityCheck}`); // prettier-ignore
 			}
@@ -74,12 +75,21 @@ export class AbilitiesGuard implements CanActivate {
 
 		this.logger.debug('Enforcing abilities guard');
 
-		const rules =
-			this.reflector.get<RequiredRule[]>(CHECK_ABILITY, context.getHandler()) ||
-			[];
+		const rules = this.reflector.get<RequiredRule[]>(
+			CHECK_ABILITY,
+			context.getHandler(),
+		);
 
 		const request = context.switchToHttp().getRequest<IRequest>();
-		const xRoleId = request.cookies.role as string | undefined;
+
+		const cookiesSchema = z.object({
+			role: z.string().optional(),
+		});
+
+		const cookies = cookiesSchema.parse(request.cookies);
+
+		const xRoleId = cookies.role;
+
 		const authenticatedUser = request.user; // safe to use email because it is set by jwt.strategy from accessToken
 
 		if (!xRoleId) {

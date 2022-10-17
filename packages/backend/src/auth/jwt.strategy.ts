@@ -34,9 +34,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		}
 
 		const cookieExtractor = function (req: Request) {
-			const cookies = req.cookies as Record<string, string> | undefined;
+			const cookiesSchema = z.object({
+				[Cookie.accessToken]: z.string().optional(),
+			});
 
-			const token = cookies?.[Cookie.accessToken];
+			const cookies = cookiesSchema.parse(req.cookies);
+
+			const token = cookies[Cookie.accessToken];
 
 			if (!token) {
 				Logger.debug('No cookie token found');

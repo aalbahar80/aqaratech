@@ -99,6 +99,13 @@ module.exports = {
 				ignoreReadBeforeAssign: false,
 			},
 		],
+
+		'@typescript-eslint/restrict-template-expressions': [
+			'error',
+			{
+				allowBoolean: true,
+			},
+		],
 	},
 	ignorePatterns: ['.eslintrc.js'],
 };
