@@ -5,9 +5,11 @@ import { AQARATECH_STAFF_ROLE, Cookie } from '@self/utils';
 import type { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { Strategy } from 'passport-jwt';
+import * as R from 'remeda';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
+import { z } from 'zod';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -32,7 +34,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		}
 
 		const cookieExtractor = function (req: Request) {
-			const token = req.cookies[Cookie.accessToken];
+			const cookies = req.cookies as Record<string, string> | undefined;
+
+			const token = cookies?.[Cookie.accessToken];
 
 			if (!token) {
 				Logger.debug('No cookie token found');
@@ -67,10 +71,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 	 * Decorator that serves as an Authorization check only.
 	 * It verifies the jwt token, and if it's valid, injects user's email into request.user
 	 *
-	 * @param payload
+	 * @param rawPayload
 	 * access token as received from Auth0
 	 */
-	validate(payload: any): AuthenticatedUser {
+	validate(rawPayload: unknown): AuthenticatedUser {
 		const apiNamespace = this.configService.get(
 			'authConfig.AUTH0_API_NAMESPACE',
 			{ infer: true },
@@ -80,14 +84,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 			throw new Error('authConfig.AUTH0_API_NAMESPACE must be set');
 		}
 
-		const email = payload[`${apiNamespace}/email`] as unknown as string;
+		const payload = R.isObject(rawPayload) ? rawPayload : undefined;
 
-		// TODO validate email with class-validator
-		if (!email) {
-			throw new Error('email must be set');
-		}
+		const rawEmail = payload?.[`${apiNamespace}/email`];
 
-		const auth0Roles = payload[`${apiNamespace}/roles`] as unknown as string[];
+		const email = z.string().email().parse(rawEmail);
+
+		const auth0Roles = z
+			.array(z.string())
+			.parse(payload?.[`${apiNamespace}/roles`]);
+
 		const isAqaratechStaff = auth0Roles.includes(AQARATECH_STAFF_ROLE);
 
 		this.logger.debug(`Validated user with email ${email}`);
