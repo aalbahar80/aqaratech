@@ -24,7 +24,7 @@
 		"eslint": "8.25.0",
 		"jose": "4.10.0",
 		"remeda": "1.1.0",
-		"typescript": "4.8.4",
+		"typescript": "4.9.1-beta",
 		"ufo": "0.8.6"
 	},
 	"dependencies": {
