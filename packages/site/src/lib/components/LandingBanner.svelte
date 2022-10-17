@@ -1,3 +1,7 @@
+<script lang="ts">
+	import illustration from '$lib/assets/placeholders/cloud-illustration-teal-cyan.svg';
+</script>
+
 <div class="bg-white">
 	<div class="overflow-hidden">
 		<main>
@@ -50,8 +54,8 @@
 								<!-- {/* Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ */} -->
 								<img
 									class="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-									src="/placeholders/cloud-illustration-teal-cyan.svg"
-									alt=""
+									src={illustration}
+									alt="illustration"
 								/>
 							</div>
 						</div>

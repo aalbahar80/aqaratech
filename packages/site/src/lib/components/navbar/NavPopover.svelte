@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import logo from '$lib/assets/placeholders/workflow-mark-teal-500-cyan-600.svg';
 	import { getNavOptions } from '$lib/components/navbar/nav-links';
 	import PopoverItem from '$lib/components/navbar/PopoverItem.svelte';
 	import { LOGIN } from '$lib/constants/routes';
@@ -42,11 +43,7 @@
 			>
 				<div class="flex items-center justify-between px-5 pt-4">
 					<div>
-						<img
-							class="h-8 w-auto"
-							src="/placeholders/workflow-mark-teal-500-cyan-600.svg"
-							alt=""
-						/>
+						<img class="h-8 w-auto" src={logo} alt="logo" />
 					</div>
 					<div class="-mr-2">
 						<PopoverButton
