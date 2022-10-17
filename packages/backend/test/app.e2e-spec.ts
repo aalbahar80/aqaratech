@@ -1,5 +1,5 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
@@ -23,6 +23,8 @@ describe('AppController (e2e)', () => {
 	// });
 
 	it('/ (GET)', () => {
+		// @ts-expect-error not using supertest
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
 		return request(app.getHttpServer()).get('/').expect(401);
 		// .expect('Hello World!');
 	});
