@@ -8,6 +8,11 @@ export class PrismaService
 {
 	// Consider using built-in debug mode
 	// Info: https://www.prisma.io/docs/concepts/components/prisma-client/debugging
+	constructor() {
+		super({
+			log: ['info', 'warn', 'error'],
+		});
+	}
 
 	async onModuleInit() {
 		await this.$connect();
