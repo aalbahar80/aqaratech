@@ -29,11 +29,9 @@
 		"//#check": {
 			"outputs": []
 		},
-		"//#test:e2e": {
-			"outputs": [
-				"packages/test/playwright-report/**",
-				"packages/test/test-results/**"
-			]
+		"test": {
+			"inputs": ["tests/**", "../**/src/**"],
+			"outputs": ["playwright-report/**", "test-results/**"]
 		},
 		"//#api:generate": {
 			"outputs": [
