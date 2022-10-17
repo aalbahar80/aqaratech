@@ -1,29 +1,13 @@
 import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { Prisma, PrismaClient } from '@prisma/client';
-import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
 export class PrismaService
 	extends PrismaClient<Prisma.PrismaClientOptions, 'query'>
 	implements OnModuleInit
 {
-	constructor(readonly configService: ConfigService<EnvironmentConfig>) {
-		const debug = configService.get('debug.DEBUG_PRISMA', {
-			infer: true,
-		});
-		super({
-			log: [...(debug ? ['query'] : ([] as any[])), 'info', 'warn', 'error'],
-		});
-
-		if (debug) {
-			this.$on('query', (e) => {
-				console.log('Query: ' + e.query);
-				console.log('Params: ' + e.params);
-				console.log(`Duration: ${e.duration}ms`);
-			});
-		}
-	}
+	// Consider using built-in debug mode
+	// Info: https://www.prisma.io/docs/concepts/components/prisma-client/debugging
 
 	async onModuleInit() {
 		await this.$connect();
