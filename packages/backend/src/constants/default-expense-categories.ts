@@ -19,7 +19,7 @@ export const generateExpenseCategoryTree = (): ExpenseCategoryDto[] => {
 		return {
 			...category,
 			id: newId ?? generateId(),
-			parentId: newParentId || null,
+			parentId: newParentId ?? null,
 		};
 	});
 

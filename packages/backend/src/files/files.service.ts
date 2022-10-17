@@ -106,8 +106,8 @@ export class FilesService {
 		}
 
 		return {
-			total: objects?.KeyCount || 0,
-			results: objects?.Contents?.map((e) => new FileDto(e)) || [],
+			total: objects?.KeyCount ?? 0,
+			results: objects?.Contents?.map((e) => new FileDto(e)) ?? [],
 		};
 	}
 
