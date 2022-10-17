@@ -75,10 +75,11 @@ export class AbilitiesGuard implements CanActivate {
 
 		this.logger.debug('Enforcing abilities guard');
 
-		const rules = this.reflector.get<RequiredRule[]>(
-			CHECK_ABILITY,
-			context.getHandler(),
-		);
+		const rules =
+			this.reflector.get<RequiredRule[] | undefined>(
+				CHECK_ABILITY,
+				context.getHandler(),
+			) ?? [];
 
 		const request = context.switchToHttp().getRequest<IRequest>();
 
