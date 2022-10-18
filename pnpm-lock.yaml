@@ -263,7 +263,6 @@ importers:
       '@types/jsonwebtoken': 8.5.9
       '@types/lodash-es': 4.17.6
       '@types/papaparse': 5.3.5
-      '@typescript-eslint/eslint-plugin': 5.40.0
       '@typescript-eslint/parser': 5.40.0
       autoprefixer: 10.4.12
       chart.js: 3.9.1
@@ -274,9 +273,7 @@ importers:
       date-fns: 2.29.3
       date-fns-tz: 1.3.7
       debounce: 1.2.1
-      eslint: 8.25.0
       eslint-config-custom: workspace:1.0.2
-      eslint-config-prettier: 8.5.0
       eslint-plugin-svelte: 2.10.0
       felte: 1.2.6
       frappe-charts: 1.6.2
@@ -338,7 +335,6 @@ importers:
       '@types/jsonwebtoken': 8.5.9
       '@types/lodash-es': 4.17.6
       '@types/papaparse': 5.3.5
-      '@typescript-eslint/eslint-plugin': 5.40.0_gawn6jibj3cgkdqyjyolvofrnm
       '@typescript-eslint/parser': 5.40.0_azkfgtafjurpg3ohphpu6qn5xe
       autoprefixer: 10.4.12_postcss@8.4.18
       chart.js: 3.9.1
@@ -349,9 +345,7 @@ importers:
       date-fns: 2.29.3
       date-fns-tz: 1.3.7_date-fns@2.29.3
       debounce: 1.2.1
-      eslint: 8.25.0
       eslint-config-custom: link:../eslint-config-custom
-      eslint-config-prettier: 8.5.0_eslint@8.25.0
       eslint-plugin-svelte: 2.10.0_2h6d4ngklmojchucosx7yvuw7m
       felte: 1.2.6_svelte@3.52.0
       frappe-charts: 1.6.2
