@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import logo from '$lib/assets/placeholders/workflow-mark-teal-500-cyan-600.svg';
 	import { getNavOptions } from '$lib/components/navbar/nav-links';
 	import PopoverItem from '$lib/components/navbar/PopoverItem.svelte';
 	import { LOGIN } from '$lib/constants/routes';
@@ -13,6 +12,7 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import { Menu, X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import logo from '../../../assets/placeholders/workflow-mark-teal-500-cyan-600.svg';
 
 	// Replace type once $page.data is automatically types
 	export let navigation: NonNullable<UserMeta['navLinks']>;

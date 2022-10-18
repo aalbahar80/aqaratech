@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '$lib/assets/placeholders/workflow-mark-teal-200-cyan-400.svg';
+	import logo from '../../../assets/placeholders/workflow-mark-teal-200-cyan-400.svg';
 </script>
 
 <a href="/">

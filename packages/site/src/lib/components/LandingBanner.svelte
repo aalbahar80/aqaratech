@@ -1,5 +1,5 @@
 <script lang="ts">
-	import illustration from '$lib/assets/placeholders/cloud-illustration-teal-cyan.svg';
+	import illustration from '../../assets/placeholders/cloud-illustration-teal-cyan.svg';
 </script>
 
 <div class="bg-white">
