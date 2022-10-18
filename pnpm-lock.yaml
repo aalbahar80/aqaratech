@@ -241,7 +241,7 @@ importers:
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.2
       '@sveltejs/adapter-node': 1.0.0-next.98
-      '@sveltejs/kit': 1.0.0-next.517
+      '@sveltejs/kit': 1.0.0-next.516
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2
       '@tailwindcss/forms': 0.5.3
@@ -312,7 +312,7 @@ importers:
       '@steeze-ui/heroicons': 1.1.1
       '@steeze-ui/svelte-icon': 1.3.2
       '@sveltejs/adapter-node': 1.0.0-next.98
-      '@sveltejs/kit': 1.0.0-next.517_svelte@3.52.0+vite@3.1.8
+      '@sveltejs/kit': 1.0.0-next.516_svelte@3.52.0+vite@3.1.8
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.1.8
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
@@ -3584,8 +3584,8 @@ packages:
       rollup: 2.79.1
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.517_svelte@3.52.0+vite@3.1.8:
-    resolution: {integrity: sha512-DG6RB0akR9StVWulhNo4YXRBlmPWIPXHEfrmhzUi5QgwbDaGEL9wkb43oe/FBlAJCGjB+xDUJgRWKf3oGJIbpA==}
+  /@sveltejs/kit/1.0.0-next.516_svelte@3.52.0+vite@3.1.8:
+    resolution: {integrity: sha512-n0oGcv7xpgJ81ld1oER5HVREP4TdeDUJ8S64XNDcl3Y2xfQLKk8C4SLYQw2D6V+DxUm8V3aRrj7N7/tm4CQm6A==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
