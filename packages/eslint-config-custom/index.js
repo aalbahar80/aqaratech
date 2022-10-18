@@ -29,6 +29,9 @@ module.exports = {
 			'../../tsconfig.json',
 			// sourceType: 'module',
 		],
+		// Either here or in site/.eslintrc.cjs, we need to declare
+		// `extraFileExtensions: ['.svelte']` option for `@typescript-eslint/parser`.
+		extraFileExtensions: ['.svelte'],
 	},
 	root: true,
 	settings: {
