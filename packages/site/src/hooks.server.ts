@@ -15,8 +15,13 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
-import { Cookie, envCheck, formatRequestLog, isHealthCheck } from '@self/utils';
-import { formatResponseLog } from '@self/utils/src';
+import {
+	Cookie,
+	envCheck,
+	formatRequestLog,
+	formatResponseLog,
+	isHealthCheck,
+} from '@self/utils';
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
 import {
