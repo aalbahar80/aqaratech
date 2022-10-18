@@ -14,6 +14,7 @@ const API_FILES = '**/tests/api/**/*.spec.ts';
 
 const config: PlaywrightTestConfig<TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),
+	globalTeardown: require.resolve('./global-teardown'),
 	// showing the reporter prevents turbo from caching the test results (on flakey tests)
 	reporter: [['list'], ['html', { open: process.env.CI ? 'never' : 'never' }]],
 	retries: 2,
@@ -37,9 +38,11 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	},
 	webServer: [
 		// To Debug, use env var: DEBUG=pw:webserver
+		// Build with turbo, then run preview seperately. This is to enable turbo to cache the build.
 		{
 			cwd: '../../',
-			command: 'pnpm turbo run preview --filter=@self/backend',
+			command:
+				'pnpm turbo run build --filter=@self/backend -vvv && pnpm -F @self/backend preview',
 			port: 3002,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
@@ -47,7 +50,8 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		{
 			cwd: '../../',
-			command: 'pnpm turbo run preview --filter=@self/site',
+			command:
+				'pnpm turbo run build --filter=@self/site -vvv && pnpm -F @self/site preview',
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
