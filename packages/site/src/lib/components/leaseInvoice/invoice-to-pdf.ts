@@ -1,5 +1,6 @@
 import type { LeaseInvoiceDto } from '$api/openapi';
 import { satisfies } from '@self/utils';
+import paidStamp from '../../../assets/paid-stamp.png';
 import type jsPDFInvoiceTemplate from '../../pdf/jspdf-invoice-template';
 
 /**
@@ -76,7 +77,7 @@ interface PDFOptions {
 const stamp = satisfies<PdfProps['stamp']>()({
 	inAllPages: true,
 	// src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg',
-	src: '/paid-stamp.png',
+	src: paidStamp,
 	// original aspect ratio = 2185/1332 = 1.64
 	width: 48,
 	height: 30,
