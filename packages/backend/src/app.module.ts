@@ -14,6 +14,7 @@ import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 import { WinstonModule } from 'nest-winston';
+import { AppController } from 'src/app.controller';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { WinstonConfigService } from 'src/config/winston-config.service';
@@ -112,7 +113,7 @@ import { UsersModule } from './users/users.module';
 		FilesModule,
 		PayoutsModule,
 	],
-	controllers: [],
+	controllers: [AppController],
 	providers: [
 		{
 			provide: APP_INTERCEPTOR,

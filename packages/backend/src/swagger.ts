@@ -20,7 +20,6 @@ import { writeFileSync } from 'fs';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ExpenseCategoriesModule } from 'src/expense-categories/expense-categories.module';
-import { AppModule } from './app.module';
 
 export const setupSwagger = async (app: INestApplication) => {
 	const config = new DocumentBuilder()
@@ -34,7 +33,6 @@ export const setupSwagger = async (app: INestApplication) => {
 
 	const document = SwaggerModule.createDocument(app, config, {
 		include: [
-			AppModule,
 			UsersModule,
 			TenantsModule,
 			PortfoliosModule,

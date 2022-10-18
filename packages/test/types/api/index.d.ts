@@ -1776,8 +1776,7 @@ export declare const PaidStatusEnum: {
 	readonly Paid: 'paid';
 	readonly Unpaid: 'unpaid';
 };
-export declare type PaidStatusEnum =
-	typeof PaidStatusEnum[keyof typeof PaidStatusEnum];
+export type PaidStatusEnum = typeof PaidStatusEnum[keyof typeof PaidStatusEnum];
 /**
  *
  * @export
@@ -2578,8 +2577,7 @@ export declare const RoleTypeEnum: {
 	readonly Portfolio: 'PORTFOLIO';
 	readonly Tenant: 'TENANT';
 };
-export declare type RoleTypeEnum =
-	typeof RoleTypeEnum[keyof typeof RoleTypeEnum];
+export type RoleTypeEnum = typeof RoleTypeEnum[keyof typeof RoleTypeEnum];
 /**
  *
  * @export
@@ -2643,8 +2641,7 @@ export declare const SortOrderEnum: {
 	readonly Asc: 'asc';
 	readonly Desc: 'desc';
 };
-export declare type SortOrderEnum =
-	typeof SortOrderEnum[keyof typeof SortOrderEnum];
+export type SortOrderEnum = typeof SortOrderEnum[keyof typeof SortOrderEnum];
 /**
  *
  * @export
