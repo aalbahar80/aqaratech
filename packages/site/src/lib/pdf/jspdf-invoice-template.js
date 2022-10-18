@@ -1,6 +1,7 @@
 import { jsPDF } from 'jspdf';
-// import AmiriRegular from '../../../src/Amiri-Regular.ttf';
-// import AmiriRegular from './Amiri-Regular.ttf';
+// Vite will convert this to the public URL
+// More info: https://vitejs.dev/guide/assets.html#importing-asset-as-url
+import amiriFont from '../../assets/fonts/Amiri-Regular.ttf';
 
 const OutputType = {
 	Save: 'save', //save pdf as a file
@@ -189,8 +190,7 @@ function jsPDFInvoiceTemplate(props) {
 
 	var doc = new jsPDF(options);
 
-	// doc.addFileToVFS('Amiri-Regular.ttf', AmiriRegular);
-	doc.addFont('/Amiri-Regular.ttf', 'Amiri', 'normal');
+	doc.addFont(amiriFont, 'Amiri', 'normal');
 	doc.setFont('Amiri'); // set font
 
 	var docWidth = doc.internal.pageSize.width;
