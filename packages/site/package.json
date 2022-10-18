@@ -57,6 +57,7 @@
 		"eslint": "8.25.0",
 		"eslint-config-custom": "workspace:1.0.2",
 		"eslint-config-prettier": "8.5.0",
+		"eslint-plugin-svelte": "2.10.0",
 		"eslint-plugin-svelte3": "4.0.0",
 		"felte": "1.2.6",
 		"frappe-charts": "1.6.2",

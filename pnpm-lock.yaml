@@ -277,6 +277,7 @@ importers:
       eslint: 8.25.0
       eslint-config-custom: workspace:1.0.2
       eslint-config-prettier: 8.5.0
+      eslint-plugin-svelte: 2.10.0
       eslint-plugin-svelte3: 4.0.0
       felte: 1.2.6
       frappe-charts: 1.6.2
@@ -352,6 +353,7 @@ importers:
       eslint: 8.25.0
       eslint-config-custom: link:../eslint-config-custom
       eslint-config-prettier: 8.5.0_eslint@8.25.0
+      eslint-plugin-svelte: 2.10.0_2h6d4ngklmojchucosx7yvuw7m
       eslint-plugin-svelte3: 4.0.0_2h6d4ngklmojchucosx7yvuw7m
       felte: 1.2.6_svelte@3.52.0
       frappe-charts: 1.6.2
@@ -6992,6 +6994,32 @@ packages:
       prettier-linter-helpers: 1.0.0
     dev: true
 
+  /eslint-plugin-svelte/2.10.0_2h6d4ngklmojchucosx7yvuw7m:
+    resolution: {integrity: sha512-t8n9DFyvO8Kt6VqBlR2sxpUGkvqYgXAS97iyQPw/P5ABCqLFT6dXl05JtU9CFrYvY/MFemC8Lse2FckkP2d9Zw==}
+    engines: {node: ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      eslint: ^7.0.0 || ^8.0.0-0
+      svelte: ^3.37.0
+    peerDependenciesMeta:
+      svelte:
+        optional: true
+    dependencies:
+      debug: 4.3.4
+      eslint: 8.25.0
+      eslint-utils: 3.0.0_eslint@8.25.0
+      esutils: 2.0.3
+      known-css-properties: 0.25.0
+      postcss: 8.4.18
+      postcss-load-config: 3.1.4_postcss@8.4.18
+      postcss-safe-parser: 6.0.0_postcss@8.4.18
+      sourcemap-codec: 1.4.8
+      svelte: 3.52.0
+      svelte-eslint-parser: 0.18.4_svelte@3.52.0
+    transitivePeerDependencies:
+      - supports-color
+      - ts-node
+    dev: true
+
   /eslint-plugin-svelte3/4.0.0_2h6d4ngklmojchucosx7yvuw7m:
     resolution: {integrity: sha512-OIx9lgaNzD02+MDFNLw0GEUbuovNcglg+wnd/UY0fbZmlQSz7GlQiQ1f+yX0XvC07XPcDOnFcichqI3xCwp71g==}
     peerDependencies:
@@ -9120,6 +9148,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /known-css-properties/0.25.0:
+    resolution: {integrity: sha512-b0/9J1O9Jcyik1GC6KC42hJ41jKwdO/Mq8Mdo5sYN+IuRTXs2YFHZC3kZSx6ueusqa95x3wLYe/ytKjbAfGixA==}
+    dev: true
+
   /kolorist/1.6.0:
     resolution: {integrity: sha512-dLkz37Ab97HWMx9KTes3Tbi3D1ln9fCAy2zr2YVExJasDRPGRaKcoE4fycWNtnCAJfjFqe0cnY+f8KT2JePEXQ==}
     dev: true
@@ -10112,6 +10144,15 @@ packages:
     dependencies:
       postcss: 8.4.18
       postcss-selector-parser: 6.0.10
+    dev: true
+
+  /postcss-safe-parser/6.0.0_postcss@8.4.18:
+    resolution: {integrity: sha512-FARHN8pwH+WiS2OPCxJI8FuRJpTVnn6ZNFiqAM2aeW2LwTHWWmWgIyKC6cUo0L8aeKiF/14MNvnpls6R2PBeMQ==}
+    engines: {node: '>=12.0'}
+    peerDependencies:
+      postcss: ^8.3.3
+    dependencies:
+      postcss: 8.4.18
     dev: true
 
   /postcss-selector-parser/6.0.10:
@@ -11199,6 +11240,18 @@ packages:
 
   /svelte-dnd-action/0.9.20:
     resolution: {integrity: sha512-AJIkSNZMPOLsv8UehA4T7wjOqfVhnvWIpdbZp5rXraUfE7Feo/pKG9xpi+2Op+7PZp9qywdCx7LXvtCh37OEMA==}
+    dev: true
+
+  /svelte-eslint-parser/0.18.4_svelte@3.52.0:
+    resolution: {integrity: sha512-mCl/gsshy11LrFCEsTKlbNHXKCGCpan0vJWoBmorn6En11OWRKsrXEi3RwPKUjjcO3WKOWRfG68L3zpCg1BilQ==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      svelte: ^3.37.0
+    dependencies:
+      eslint-scope: 7.1.1
+      eslint-visitor-keys: 3.3.0
+      espree: 9.4.0
+      svelte: 3.52.0
     dev: true
 
   /svelte-frappe-charts/1.9.2_svelte@3.52.0:

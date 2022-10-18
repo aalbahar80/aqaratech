@@ -16,6 +16,7 @@ module.exports = {
 		__AQARATECH_APP_VERSION__: 'readonly',
 	},
 	ignorePatterns: [
+		// '**/*.svelte',
 		'currency.ts',
 		'FrappeChart.svelte',
 		'jspdf-invoice-template.js',
@@ -27,24 +28,8 @@ module.exports = {
 	overrides: [
 		{
 			files: ['*.svelte'],
-			processor: 'svelte3/svelte3',
-			plugins: ['svelte3'],
-			settings: {
-				'svelte3/typescript': () => require('typescript'),
-				'svelte3/ignore-styles': () => true,
-				'svelte3/ignore-warnings': () => ['a11y-click-events-have-key-events'],
-			},
-			parserOptions: {
-				sourceType: 'module',
-				ecmaVersion: 'latest',
-				// Example: https://cs.github.com/iotaledger/firefly/blob/45590a1fb60d8210ab2b590ff553274fae25a51c/.eslintrc.js#L112
-				extraFileExtensions: ['.svelte'],
-				// set rootDir to the path of this file. This allows eslint to work from
-				// (a) the root of the project ex. vscode eslint extension,
-				// (b) from within the packages directory, using the eslint/svelte-check cli
-				tsconfigRootDir: __dirname,
-				project: './tsconfig.json',
-			},
+			extends: ['plugin:svelte/recommended'],
+			parser: 'svelte-eslint-parser',
 			rules: {
 				// disable rules that conflict with eslint-plugin-svelte3
 				// List here: https://github.com/sveltejs/eslint-plugin-svelte3/blob/master/OTHER_PLUGINS.md
@@ -59,6 +44,26 @@ module.exports = {
 				// disable rules that don't work with svelte's generic props
 				'@typescript-eslint/no-unsafe-assignment': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
+			},
+			// processor: 'svelte3/svelte3',
+			// plugins: ['svelte3'],
+			// settings: {
+			// 	'svelte3/typescript': () => require('typescript'),
+			// 	'svelte3/ignore-styles': () => true,
+			// 	'svelte3/ignore-warnings': () => ['a11y-click-events-have-key-events'],
+			// },
+			//
+			parserOptions: {
+				sourceType: 'module',
+				ecmaVersion: 'latest',
+				parser: '@typescript-eslint/parser',
+				// Example: https://cs.github.com/iotaledger/firefly/blob/45590a1fb60d8210ab2b590ff553274fae25a51c/.eslintrc.js#L112
+				extraFileExtensions: ['.svelte'],
+				// set rootDir to the path of this file. This allows eslint to work from
+				// (a) the root of the project ex. vscode eslint extension,
+				// (b) from within the packages directory, using the eslint/svelte-check cli
+				tsconfigRootDir: __dirname,
+				project: './tsconfig.json',
 			},
 		},
 	],
