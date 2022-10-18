@@ -43,7 +43,6 @@
 		"@types/jsonwebtoken": "8.5.9",
 		"@types/lodash-es": "4.17.6",
 		"@types/papaparse": "5.3.5",
-		"@typescript-eslint/parser": "5.40.0",
 		"autoprefixer": "10.4.12",
 		"chart.js": "3.9.1",
 		"chartjs-adapter-date-fns": "2.0.0",
