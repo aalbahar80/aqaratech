@@ -11,8 +11,6 @@ export const wasProcessStartedByPlaywright = (pid: number): boolean => {
 		.toString()
 		.trim();
 
-	console.log(tree);
-
 	// check if any of the parents has a command that contains the string "playwright"
 	const hasPlaywright = tree.includes('playwright');
 
