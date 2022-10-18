@@ -1,6 +1,6 @@
 {
 	"name": "@self/seed",
-	"version": "1.1.2",
+	"version": "1.2.0",
 	"main": "dist/self-seed.cjs.js",
 	"module": "dist/self-seed.esm.js",
 	"scripts": {
@@ -21,7 +21,7 @@
 		"@preconstruct/cli": "2.2.2",
 		"@tsconfig/esm": "1.0.2",
 		"@types/node": "18.11.0",
-		"eslint-config-custom": "workspace:1.0.2",
+		"eslint-config-custom": "workspace:1.1.0",
 		"prisma": "4.5.0",
 		"tsx": "3.10.3",
 		"typescript": "4.9.1-beta"

@@ -1,5 +1,16 @@
 # @self/backend
 
+## 1.6.0
+
+### Minor Changes
+
+- cb82f36a: update deps
+
+### Patch Changes
+
+- Updated dependencies [cb82f36a]
+  - @self/utils@2.1.0
+
 ## 1.5.4
 
 ### Patch Changes

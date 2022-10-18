@@ -1,5 +1,11 @@
 # @self/seed
 
+## 1.2.0
+
+### Minor Changes
+
+- cb82f36a: update deps
+
 ## 1.1.2
 
 ### Patch Changes

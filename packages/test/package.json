@@ -1,6 +1,6 @@
 {
 	"name": "@self/test",
-	"version": "2.0.2",
+	"version": "2.1.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -15,13 +15,13 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@playwright/test": "1.27.1",
-		"@self/seed": "workspace:1.1.2",
-		"@self/utils": "workspace:2.0.3",
+		"@self/seed": "workspace:1.2.0",
+		"@self/utils": "workspace:2.1.0",
 		"@tsconfig/node18": "1.0.1",
 		"@tsconfig/node18-strictest": "1.0.0",
 		"@types/node": "18.11.0",
 		"dotenv": "16.0.3",
-		"eslint-config-custom": "workspace:1.0.2",
+		"eslint-config-custom": "workspace:1.1.0",
 		"jose": "4.10.0",
 		"remeda": "1.1.0",
 		"typescript": "4.9.1-beta",

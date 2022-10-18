@@ -1,5 +1,11 @@
 # @self/test
 
+## 2.1.0
+
+### Minor Changes
+
+- cb82f36a: update deps
+
 ## 2.0.2
 
 ### Patch Changes

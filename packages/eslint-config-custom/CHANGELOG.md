@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 1.1.0
+
+### Minor Changes
+
+- cb82f36a: update deps
+
 ## 1.0.2
 
 ### Patch Changes

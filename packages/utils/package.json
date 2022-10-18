@@ -1,6 +1,6 @@
 {
 	"name": "@self/utils",
-	"version": "2.0.3",
+	"version": "2.1.0",
 	"main": "dist/self-utils.cjs.js",
 	"module": "dist/self-utils.esm.js",
 	"scripts": {
@@ -19,7 +19,7 @@
 		"@sentry/types": "7.15.0",
 		"@tsconfig/esm": "1.0.2",
 		"@types/node": "18.11.0",
-		"eslint-config-custom": "workspace:1.0.2",
+		"eslint-config-custom": "workspace:1.1.0",
 		"typescript": "4.9.1-beta"
 	}
 }
