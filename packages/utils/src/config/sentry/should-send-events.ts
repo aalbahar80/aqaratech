@@ -23,19 +23,20 @@ export const getSendEventConfig = (
 	helpers: { debug: boolean; sampleRate: number },
 ): SendEventConfig => {
 	if (liveEnvs.includes(config.PUBLIC_AQARATECH_ENV)) {
-		console.log('Sending all events to Sentry', config.PUBLIC_AQARATECH_ENV);
+		// TODO: don't log in production, until then disabling this:
+		// console.log('Sending all events to Sentry', config.PUBLIC_AQARATECH_ENV);
 		return {
 			shouldAlwaysSend: true,
 		};
 	} else if (helpers.debug && helpers.sampleRate > 0) {
 		// in dev, we can set debug to true and a sample rate greater than 0 to send events to sentry
-		console.log('Sending events to sentry in dev. Helpers:', helpers);
+		// console.log('Sending events to sentry in dev. Helpers:', helpers);
 		return {
 			shouldAlwaysSend: true,
 		};
 	} else {
 		// in dev, don't send any events to sentry
-		console.log('Suppressing all Sentry events');
+		// console.log('Suppressing all Sentry events');
 		return {
 			shouldAlwaysSend: false,
 			// logging event might cause a loop (throws a max call stack error) if Sentry's Console integration is enabled
