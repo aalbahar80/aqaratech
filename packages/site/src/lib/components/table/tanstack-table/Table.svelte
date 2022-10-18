@@ -216,6 +216,7 @@
 										<a
 											href={typeof href === 'string' ? href : undefined}
 											target="_blank"
+											rel="noreferrer"
 											class="text-indigo-600 hover:text-indigo-900">View</a
 										>
 									{:else}

@@ -28,7 +28,8 @@
 		search or go to the
 		<a
 			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap[entity].urlName}`}
-			target="_blank">{entitiesMap[entity].pluralCap}</a
+			target="_blank"
+			rel="noreferrer">{entitiesMap[entity].pluralCap}</a
 		> page to see all results.
 	</p>
 </div>

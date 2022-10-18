@@ -13,6 +13,7 @@
 	<a
 		href={cell.href}
 		target="_blank"
+		rel="noreferrer"
 		class={classes(
 			'text-indigo-600 hover:text-indigo-900',
 			...(cell.extraStyles || []),
