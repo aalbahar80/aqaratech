@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.6.0
+
+### Minor Changes
+
+- 6484ec34: better svg placeholder caching/bundling
+
 ## 1.5.7
 
 ### Patch Changes

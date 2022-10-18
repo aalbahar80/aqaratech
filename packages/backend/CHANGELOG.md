@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.5.4
+
+### Patch Changes
+
+- f68d59b6: enable strict
+
 ## 1.5.3
 
 ### Patch Changes
