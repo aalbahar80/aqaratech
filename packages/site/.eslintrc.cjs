@@ -16,7 +16,6 @@ module.exports = {
 		__AQARATECH_APP_VERSION__: 'readonly',
 	},
 	ignorePatterns: [
-		// '**/*.svelte',
 		'currency.ts',
 		'FrappeChart.svelte',
 		'jspdf-invoice-template.js',
