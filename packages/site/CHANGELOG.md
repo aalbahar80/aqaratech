@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.7.1
+
+### Patch Changes
+
+- 59280383: add back incomplete data conditional
+
 ## 1.7.0
 
 ### Minor Changes
