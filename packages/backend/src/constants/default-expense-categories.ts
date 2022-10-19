@@ -1,4 +1,4 @@
-import type { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
+import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { generateId } from 'src/utils/generate-id';
 
 /**
