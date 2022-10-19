@@ -1,17 +1,18 @@
+import { api as createApi } from '$api';
 import { getDashboardData } from '$lib/components/charts/get-dashboard-data';
 import { parseParams } from '$lib/utils/parse-params';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({
+	fetch,
 	params,
 	url: { searchParams },
-	parent,
 }) => {
 	const unitId = params.id;
 	// TODO handle pagination defaults
 	const sParams = parseParams(searchParams);
 
-	const parentStuff = await parent();
+	const api = createApi(fetch);
 
 	const [
 		unit,
@@ -26,9 +27,9 @@ export const load: PageLoad = async ({
 		futureOccupancy,
 		categories,
 	] = await Promise.all([
-		parentStuff.api.units.findOne({ id: unitId }),
-		parentStuff.api.units.findLeases({ id: unitId, ...sParams }),
-		...getDashboardData({ api: parentStuff.api, searchParams, unitId }),
+		api.units.findOne({ id: unitId }),
+		api.units.findLeases({ id: unitId, ...sParams }),
+		...getDashboardData({ api: api, searchParams, unitId }),
 	]);
 
 	return {

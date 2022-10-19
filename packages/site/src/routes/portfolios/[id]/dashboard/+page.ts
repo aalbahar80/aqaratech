@@ -1,15 +1,16 @@
+import { api as createApi } from '$api';
 import { getDashboardData } from '$lib/components/charts/get-dashboard-data';
 import { TAKE_MAX } from '$lib/constants/pagination-keys';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({
+	fetch,
 	params,
 	url: { searchParams },
-	parent,
 }) => {
 	const portfolioId = params.id;
 
-	const parentStuff = await parent();
+	const api = createApi(fetch);
 
 	const [
 		properties,
@@ -24,13 +25,13 @@ export const load: PageLoad = async ({
 		futureOccupancy,
 		categories,
 	] = await Promise.all([
-		parentStuff.api!.portfolios.findProperties({
+		api.portfolios.findProperties({
 			id: portfolioId,
 			take: TAKE_MAX,
 		}),
-		parentStuff.api!.portfolios.findUnits({ id: portfolioId, take: TAKE_MAX }),
+		api.portfolios.findUnits({ id: portfolioId, take: TAKE_MAX }),
 		...getDashboardData({
-			api: parentStuff.api,
+			api: api,
 			searchParams,
 			portfolioId,
 		}),
