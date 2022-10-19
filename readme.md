@@ -20,7 +20,7 @@ This repository is a mono-repo containing multiple packages located in the `pack
 
 ```bash
 pnpm dev
-# runs site on port 3000, docs on port 3001, and backend on port 3002.
+# runs site on port 3000, and backend on port 3002.
 
 pnpm outdated --long -r # view outdated deps
 pnpm update -iLr # interactively update deps
