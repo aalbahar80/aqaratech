@@ -1,11 +1,11 @@
+import { createApi } from '$api';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ params, parent }) => {
+export const load: PageLoad = async ({ params, fetch }) => {
+	const api = createApi(fetch);
 	const id = params.id;
 
-	const parentStuff = await parent();
-
-	const payout = await parentStuff.api.payouts.findOne({ id });
+	const payout = await api.payouts.findOne({ id });
 
 	return {
 		payout,

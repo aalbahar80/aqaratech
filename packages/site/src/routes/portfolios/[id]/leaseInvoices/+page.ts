@@ -1,15 +1,16 @@
+import { createApi } from '$api';
 import { parseParams } from '$lib/utils/parse-params';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({
 	params,
 	url: { searchParams },
-	parent,
+	fetch,
 }) => {
-	const parentStuff = await parent();
+	const api = createApi(fetch);
 
 	const { page, take, sortOrder, orderBy } = parseParams(searchParams);
-	const invoices = await parentStuff.api.leaseInvoices.findAll({
+	const invoices = await api.leaseInvoices.findAll({
 		page,
 		take,
 		sortOrder,

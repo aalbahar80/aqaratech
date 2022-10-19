@@ -1,23 +1,24 @@
+import { createApi } from '$api';
 import { parseParams } from '$lib/utils/parse-params';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({
 	params,
 	url: { searchParams },
-	parent,
+	fetch,
 }) => {
-	const parentStuff = await parent();
+	const api = createApi(fetch);
 
 	const sParams = parseParams(searchParams);
 	const id = params.id;
 
 	const [portfolio, properties, roles, balance] = await Promise.all([
-		parentStuff.api!.portfolios.findOne({ id }),
-		parentStuff.api!.portfolios.findProperties({ id, ...sParams }),
+		api.portfolios.findOne({ id }),
+		api.portfolios.findProperties({ id, ...sParams }),
 		// TODO handle pagination & default limit
-		parentStuff.api!.portfolios.findRoles({ id }),
+		api.portfolios.findRoles({ id }),
 		// TODO handle pagination & default limit
-		parentStuff.api!.portfolios.getBalance({ id }),
+		api.portfolios.getBalance({ id }),
 	]);
 
 	return { portfolio, properties, roles, balance };

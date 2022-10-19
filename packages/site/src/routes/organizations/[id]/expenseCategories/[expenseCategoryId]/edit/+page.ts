@@ -1,9 +1,10 @@
+import { createApi } from '$api';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ params, parent }) => {
-	const parentStuff = await parent();
+export const load: PageLoad = async ({ params, fetch }) => {
+	const api = createApi(fetch);
 
-	const categories = await parentStuff.api.expenseCategories.findAll();
+	const categories = await api.expenseCategories.findAll();
 
 	const expenseCategory = categories.find(
 		(category) => category.id === params.expenseCategoryId,
