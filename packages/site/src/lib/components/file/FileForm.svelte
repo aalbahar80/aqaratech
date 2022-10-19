@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import type { CreateRelationKeyEnum } from '$api/openapi';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -49,7 +49,7 @@
 	formType="create"
 	{basicFields}
 	onSubmit={(values) => {
-		return api().files.create(values);
+		return createApi().files.create(values);
 	}}
 	onSuccess={() =>
 		goto(`/${entitiesMap[relationKey].urlName}/${relationValue}`)}

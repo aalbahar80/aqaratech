@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import type { RoleDto } from '$api/openapi';
 	import Badge from '$lib/components/Badge.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
@@ -37,7 +37,7 @@
 							<button
 								class="w-full"
 								on:click={() => {
-									api()
+									createApi()
 										.roles.sendInvite({ id: role.id })
 										.then(() => {
 											addSuccessToast(
@@ -57,7 +57,7 @@
 							<button
 								class="w-full"
 								on:click={() => {
-									api()
+									createApi()
 										.roles.remove({ id: role.id })
 										.then((id) => {
 											dispatch('delete', { id });

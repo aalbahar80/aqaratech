@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import {
 		portfoliosToOptions,
@@ -104,7 +104,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			api().units.update({
+			createApi().units.update({
 				id: data.id,
 				updateUnitDto: values,
 			})}
@@ -116,6 +116,6 @@
 		{formType}
 		{basicFields}
 		{relationalFields}
-		onSubmit={(values) => api().units.create({ createUnitDto: values })}
+		onSubmit={(values) => createApi().units.create({ createUnitDto: values })}
 	/>
 {/if}

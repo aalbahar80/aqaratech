@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
 	import InputWrapper from '$lib/components/form/inputs/InputWrapper.svelte';
 	import {
@@ -77,7 +77,7 @@
 				propertySelector?.clear();
 				const newSelection = e.detail.value;
 				if (typeof newSelection === 'string' && fields[1]) {
-					const children = await api().portfolios.findProperties({
+					const children = await createApi().portfolios.findProperties({
 						id: newSelection,
 						take: 1000,
 					});
@@ -104,7 +104,7 @@
 				unitSelector?.clear();
 				const newSelection = e.detail.value;
 				if (typeof newSelection === 'string' && fields[2]) {
-					const children = await api().properties.findUnits({
+					const children = await createApi().properties.findUnits({
 						id: newSelection,
 						take: 1000,
 					});

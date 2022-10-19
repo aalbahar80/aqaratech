@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
 	import {
 		Dialog,
@@ -30,7 +30,7 @@
 	const search = debounce(async (q: string) => {
 		if (!q || !$page.data.user?.role?.organizationId) return;
 		try {
-			groups = await api().organizations.search({
+			groups = await createApi().organizations.search({
 				id: $page.data.user?.role?.organizationId,
 				query: q,
 			});

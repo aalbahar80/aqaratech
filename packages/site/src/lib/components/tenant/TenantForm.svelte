@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { countries } from '$lib/constants/countries';
 	import { labelHint } from '$lib/constants/form-hints';
@@ -90,7 +90,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data && // type hack
-			api().tenants.update({
+			createApi().tenants.update({
 				id: data.id,
 				updateTenantDto: values,
 			})}
@@ -102,7 +102,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			return api().tenants.create({
+			return createApi().tenants.create({
 				createTenantDto: values,
 			});
 		}}

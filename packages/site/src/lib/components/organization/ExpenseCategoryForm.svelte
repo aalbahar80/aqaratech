@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { addSuccessToast } from '$lib/stores/toast';
@@ -70,7 +70,7 @@
 			if (!expenseCategoryId) {
 				throw new Error('expenseCategoryId not found');
 			}
-			return api().expenseCategories.update({
+			return createApi().expenseCategories.update({
 				id: expenseCategoryId,
 				updateExpenseCategoryDto: { ...values, id: expenseCategoryId },
 			});
@@ -91,7 +91,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			api().expenseCategories.create({
+			createApi().expenseCategories.create({
 				createExpenseCategoryDto: { ...values, parentId: null },
 			})}
 		onSuccess={(value) => {

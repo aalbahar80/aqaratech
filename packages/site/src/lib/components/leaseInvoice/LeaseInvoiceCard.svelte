@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Badge from '$lib/components/Badge.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
@@ -74,7 +74,7 @@
 									class="w-full"
 									on:click={async () => {
 										try {
-											await api().leaseInvoices.update({
+											await createApi().leaseInvoices.update({
 												id: invoice.id,
 												updateLeaseInvoiceDto: {
 													organizationId: invoice.organizationId,
@@ -86,7 +86,7 @@
 											});
 
 											addSuccessToast('Invoice updated');
-											invoice = await api().leaseInvoices.findOne({
+											invoice = await createApi().leaseInvoices.findOne({
 												id: invoice.id,
 											});
 										} catch (e) {

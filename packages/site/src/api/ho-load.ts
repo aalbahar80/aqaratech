@@ -1,4 +1,4 @@
-import { api, type Api } from '$api';
+import { createApi, type Api } from '$api';
 import type { Load } from '@sveltejs/kit';
 
 type Callback<T extends Load, K, WithApi = false> = (
@@ -15,7 +15,7 @@ export const fancy = <ThisLoad extends Load, Output>(
 	fn: Callback<ThisLoad, Output, true>,
 ): Callback<ThisLoad, Output> => {
 	return async (args) => {
-		const apiClient = api(args.fetch);
+		const apiClient = createApi(args.fetch);
 		return fn.call(null, { ...args, api: apiClient });
 	};
 };

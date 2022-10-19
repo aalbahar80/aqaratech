@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import type { LeaseInvoiceDto } from '$api/openapi';
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import Badge from '$lib/components/Badge.svelte';
@@ -57,7 +57,7 @@
 			solid
 			disabled={!sendEnabled}
 			on:click={() => {
-				api()
+				createApi()
 					.leaseInvoices.sendEmail({ id: trx.id })
 					.then((res) => {
 						addSuccessToast(res);

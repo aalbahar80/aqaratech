@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
@@ -54,7 +54,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			api().organizations.update({
+			createApi().organizations.update({
 				id: data.id,
 				updateOrganizationDto: values,
 			})}
@@ -70,7 +70,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			api().organizations.create({
+			createApi().organizations.create({
 				createOrganizationDto: values,
 			})}
 		onSuccess={() => {

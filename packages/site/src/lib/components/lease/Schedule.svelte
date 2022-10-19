@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import type { LeaseDto } from '$api/openapi';
 	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
@@ -29,7 +29,7 @@
 	);
 
 	const onSubmit = async () => {
-		const created = await api().leases.createInvoices({
+		const created = await createApi().leases.createInvoices({
 			id: lease.id,
 			createManyLeaseInvoicesDto: schedule.map((invoice) => ({
 				...invoice,

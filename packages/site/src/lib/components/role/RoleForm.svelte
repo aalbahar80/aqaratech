@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedRole } from '$lib/models/interfaces/predefined.interface';
@@ -34,7 +34,7 @@
 			// type hack
 			throw new Error('No organizationId found in session');
 		}
-		return api().roles.create({
+		return createApi().roles.create({
 			createRoleDto: {
 				roleType: predefined.roleType,
 				organizationId,

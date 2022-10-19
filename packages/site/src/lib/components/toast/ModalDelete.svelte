@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import { goto } from '$app/navigation';
 	import { addToast } from '$lib/stores/toast';
 	import { entitiesMap, type Entity } from '@self/utils';
@@ -26,7 +26,7 @@
 			) {
 				throw new Error(`Delete not supported for ${entity}`);
 			}
-			await api()[plural].remove({ id });
+			await createApi()[plural].remove({ id });
 			isLoading = false;
 			isOpen = false;
 			if (onDelete) {

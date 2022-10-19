@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import type { PaginatedFileDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
@@ -28,7 +28,7 @@
 		const route = inferRoute($page.url.pathname);
 		try {
 			if (hasFileSupport(route.entity.title))
-				files = await api().files.findAll({
+				files = await createApi().files.findAll({
 					relationKey: route.entity.title,
 					relationValue: route.id,
 				});
@@ -65,7 +65,7 @@
 							<button
 								on:click={async () => {
 									// encode file name to avoid special characters
-									const url = await api().files.findOne({
+									const url = await createApi().files.findOne({
 										key: file.key,
 									});
 									// opens in new tab because of content-disposition header
@@ -95,7 +95,7 @@
 													return;
 												}
 												// encode file name to avoid special characters
-												await api().files.remove({
+												await createApi().files.remove({
 													key: file.key,
 												});
 												files.results = [...files.results].filter(

@@ -1,8 +1,6 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-
+	import { createApi } from '$api';
 	import { page } from '$app/stores';
-	import { api } from '$api';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
@@ -17,6 +15,7 @@
 	import { cloneDeep } from 'lodash-es';
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 	import Fa6SolidPlus from '~icons/fa6-solid/plus';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
@@ -52,7 +51,7 @@
 			on:click={() => {
 				console.debug(difference);
 				console.debug(newList);
-				api()
+				createApi()
 					.expenseCategories.updateAll({
 						updateAllExpenseCategoriesDto: { items: newList },
 					})

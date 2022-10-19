@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedInvoice } from '$lib/models/interfaces/predefined.interface';
@@ -99,7 +99,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			api().leaseInvoices.update({
+			createApi().leaseInvoices.update({
 				id: data.id,
 				updateLeaseInvoiceDto: values,
 			})}
@@ -112,7 +112,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			api().leaseInvoices.create({
+			createApi().leaseInvoices.create({
 				createLeaseInvoiceDto: values,
 			})}
 	/>

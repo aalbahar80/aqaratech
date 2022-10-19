@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { portfoliosToOptions } from '$lib/components/form/inputs/to-options';
 	import { areas } from '$lib/constants/areas-kwt';
@@ -107,7 +107,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data &&
-			api().properties.update({
+			createApi().properties.update({
 				id: data.id,
 				updatePropertyDto: values,
 			})}
@@ -120,7 +120,7 @@
 		{basicFields}
 		{relationalFields}
 		onSubmit={(values) =>
-			api().properties.create({
+			createApi().properties.create({
 				createPropertyDto: values,
 			})}
 	/>

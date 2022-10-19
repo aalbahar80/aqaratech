@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { api } from '$api';
+	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
@@ -65,7 +65,7 @@
 		{basicFields}
 		onSubmit={(values) =>
 			data && // type hack
-			api().portfolios.update({
+			createApi().portfolios.update({
 				id: data.id,
 				updatePortfolioDto: values,
 			})}
@@ -77,7 +77,7 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			return api().portfolios.create({
+			return createApi().portfolios.create({
 				createPortfolioDto: values,
 			});
 		}}

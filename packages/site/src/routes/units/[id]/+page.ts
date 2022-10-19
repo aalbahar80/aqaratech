@@ -1,4 +1,4 @@
-import { api as createApi } from '$api';
+import { createApi } from '$api';
 import { getDashboardData } from '$lib/components/charts/get-dashboard-data';
 import { parseParams } from '$lib/utils/parse-params';
 import type { PageLoad } from './$types';

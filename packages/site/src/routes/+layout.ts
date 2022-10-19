@@ -1,4 +1,4 @@
-import { api } from '$api';
+import { createApi } from '$api';
 import { LOGIN } from '$lib/constants/routes';
 import { isPublicRoute } from '$lib/utils/is-public-route';
 import { redirect } from '@sveltejs/kit';
@@ -10,7 +10,7 @@ export const load: LayoutLoad = async ({ fetch, data, url: { pathname } }) => {
 		throw redirect(302, LOGIN);
 	}
 
-	const apiClient = api(fetch);
+	const apiClient = createApi(fetch);
 
 	return {
 		api: apiClient,
