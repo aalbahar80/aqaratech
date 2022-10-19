@@ -1,2 +1,2 @@
-export { api as createApi } from './api';
+export { createApi } from './api';
 export type { Api } from './api';

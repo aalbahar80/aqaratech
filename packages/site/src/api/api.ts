@@ -22,7 +22,7 @@ import {
 	UsersApi,
 } from './openapi';
 
-export const api = (loadFetch?: LoadEvent['fetch']) => {
+export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 	const headers: Record<string, string> = {
 		// origin: PUBLIC_SITE_URL,
 	};
@@ -122,4 +122,4 @@ export const api = (loadFetch?: LoadEvent['fetch']) => {
 	};
 };
 
-export type Api = ReturnType<typeof api>;
+export type Api = ReturnType<typeof createApi>;
