@@ -19,12 +19,12 @@
 	empty={expenses.results.length < 1}
 >
 	<div slot="alert">
-		<!-- {#if expenses.pagination.hasNextPage} -->
-		<IncompleteDataAlert
-			entity="expense"
-			count={expenses.pagination.pageSize}
-		/>
-		<!-- {/if} -->
+		{#if expenses.pagination.hasNextPage}
+			<IncompleteDataAlert
+				entity="expense"
+				count={expenses.pagination.pageSize}
+			/>
+		{/if}
 	</div>
 	<div slot="groupBy" class="flex h-14 pb-4 md:w-2/5">
 		<span
