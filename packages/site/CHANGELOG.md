@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.7.2
+
+### Patch Changes
+
+- e1081964: create fresh api in dashboards
+
 ## 1.7.1
 
 ### Patch Changes
