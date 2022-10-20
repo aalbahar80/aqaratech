@@ -8,6 +8,7 @@ import {
 	Post,
 	Query,
 	UseGuards,
+	UsePipes,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
@@ -23,11 +24,11 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
-import { CreateTenantZodDto } from 'src/tenants/dto/tenant-zod.dto';
 import { tenantSchema } from 'src/tenants/dto/tenant.schema';
 import { TenantsService } from 'src/tenants/tenants.service';
 import {
@@ -139,16 +140,15 @@ export class OrganizationsController {
 
 	@Post('/:organizationId/tenants')
 	@UseGuards(AuthzGuard)
+	@UsePipes(new ZodValidationPipe(tenantSchema))
 	@CheckAbilities({ action: Action.Create, subject: 'Tenant' })
 	createTenant(
 		@Param('organizationId') organizationId: string,
-		@Body() createTenantDtoZodInput: CreateTenantZodDto,
+		// @Body() createTenantDtoZodInput: CreateTenantZodDto,
+		@Body() createTenantZodDto: any,
 	) {
-		const createTenantDtoZodOutput = tenantSchema.parse(
-			createTenantDtoZodInput,
-		);
 		return this.tenantsService.create({
-			createTenantDto: createTenantDtoZodOutput,
+			createTenantDto: createTenantZodDto,
 			organizationId,
 		});
 	}
