@@ -402,10 +402,14 @@ importers:
       '@tsconfig/esm': 1.0.2
       '@types/node': 18.11.0
       eslint-config-custom: workspace:1.1.0
+      remeda: 1.1.0
       ts-toolbelt: 9.6.0
       typescript: 4.9.1-beta
+      zod: 3.19.1
     dependencies:
+      remeda: 1.1.0
       ts-toolbelt: 9.6.0
+      zod: 3.19.1
     devDependencies:
       '@babel/preset-typescript': 7.18.6_@babel+core@7.19.3
       '@logtail/types': 0.1.12

@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { tenantSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -29,7 +30,6 @@ import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
 import { CreateTenantZodDto } from 'src/tenants/dto/tenant-zod.dto';
-import { tenantSchema } from 'src/tenants/dto/tenant.schema';
 import { TenantsService } from 'src/tenants/tenants.service';
 import {
 	CreateOrganizationDto,

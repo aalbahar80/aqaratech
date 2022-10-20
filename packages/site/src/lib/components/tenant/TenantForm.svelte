@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { createApi } from '$api';
+	import type { TenantDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { countries } from '$lib/constants/countries';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
-	import { schema } from '$models/schemas/tenant.schema';
-	import type { TenantDto } from '$api/openapi';
+	import { tenantSchema as schema } from '@self/utils';
 
 	type TTenantDto = $$Generic<
 		// eslint-disable-next-line no-undef

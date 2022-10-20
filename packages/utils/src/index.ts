@@ -18,3 +18,4 @@ export { addEnvLabel } from './logger/enrich-logs';
 export { formatRequestLog } from './logger/format-request-log';
 export { formatResponseLog } from './logger/format-response-log';
 export { satisfies } from './satisfies';
+export { tenantSchema } from './schemas';

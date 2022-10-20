@@ -1,4 +1,4 @@
-import { tenantSchema } from 'src/tenants/dto/tenant.schema';
+import { tenantSchema } from '@self/utils';
 import { z } from 'zod';
 
 // change z.input after creating validation pipe

@@ -1,5 +1,5 @@
-import { digitsOnly, trim } from 'src/zod/zodTransformers';
 import { z } from 'zod';
+import { digitsOnly, trim } from './utils/zodTransformers';
 
 export const tenantSchema = z.object({
 	fullName: z.string().min(1, { message: 'Required' }).transform(trim),

@@ -10,7 +10,9 @@
 		"check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"ts-toolbelt": "9.6.0"
+		"remeda": "1.1.0",
+		"ts-toolbelt": "9.6.0",
+		"zod": "3.19.1"
 	},
 	"devDependencies": {
 		"@babel/preset-typescript": "7.18.6",
