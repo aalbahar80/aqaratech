@@ -2362,7 +2362,7 @@ paths:
                   $ref: '#/components/schemas/SearchDto'
       tags: *ref_19
       security: *ref_20
-  /organizations/{id}/tenants:
+  /organizations/{organizationId}/tenants:
     post:
       operationId: OrganizationsController_createTenant
       summary: ''

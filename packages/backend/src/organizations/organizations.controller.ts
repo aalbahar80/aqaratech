@@ -15,6 +15,7 @@ import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
+import { AuthzGuard } from 'src/casl/authz.guard';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -136,7 +137,8 @@ export class OrganizationsController {
 		return this.searchService.search({ query, organizationId: id, user });
 	}
 
-	@Post('/:id/tenants')
+	@UseGuards(AuthzGuard)
+	@Post('/:organizationId/tenants')
 	createTenant(
 		@Param('id') id: string,
 		// @ts-expect-error test
