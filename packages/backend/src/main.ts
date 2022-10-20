@@ -40,9 +40,9 @@ async function bootstrap() {
 	app.useGlobalPipes(
 		new ValidationPipe({
 			transform: true,
-			forbidUnknownValues: true,
+			// forbidUnknownValues: true,
 			forbidNonWhitelisted: true,
-			whitelist: true,
+			// whitelist: true,
 			// validateCustomDecorators: true, // fails eveything?
 			enableDebugMessages: process.env.PUBLIC_AQ_DEBUG_NEST == '1',
 			disableErrorMessages: false,

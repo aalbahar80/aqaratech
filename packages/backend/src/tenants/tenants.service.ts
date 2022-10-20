@@ -45,7 +45,7 @@ export class TenantsService {
 			new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
 		);
 
-		return tenant.id;
+		return tenant;
 	}
 
 	async findAll({
