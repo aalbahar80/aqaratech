@@ -5,12 +5,12 @@ import { z } from 'zod';
 export class CreateTenantZodDtoOutput implements z.infer<typeof tenantSchema> {
 	organizationId: string; // TODO: remove
 	fullName: string;
-	label: string | null;
-	civilid: string | null;
-	phone: string | null;
-	dob: string | null;
-	nationality: string | null;
-	passportNum: string | null;
-	residencyEnd: string | null;
-	residencyNum: string | null;
+	label?: string | null | undefined;
+	civilid?: string | null | undefined;
+	phone?: string | null | undefined;
+	dob?: string | null | undefined;
+	nationality?: string | null | undefined;
+	passportNum?: string | null | undefined;
+	residencyEnd?: string | null | undefined;
+	residencyNum?: string | null | undefined;
 }

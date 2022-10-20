@@ -13,6 +13,7 @@ import {
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
+import { CreateTenantZodDtoOutput } from 'src/tenants/dto/tenant-zod.dto';
 import {
 	CreateTenantDto,
 	TenantDto,
@@ -29,18 +30,31 @@ export class TenantsService {
 	IndexName = 'tenant' as const;
 	IndexConstructor = TenantSearchDocument;
 
+	async createZod({
+		createTenantDto,
+	}: {
+		createTenantDto: CreateTenantZodDtoOutput;
+	}) {
+		const tenant = await this.prisma.tenant.create({ data: createTenantDto });
+
+		this.eventEmitter.emit(
+			'update.index',
+			new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
+		);
+
+		return new TenantDto(tenant);
+	}
 	async create({
 		createTenantDto,
-		// @ts-expect-error test
 		user,
 	}: {
 		createTenantDto: CreateTenantDto;
-		user?: IUser;
+		user: IUser;
 	}) {
-		// ForbiddenError.from(user.ability).throwUnlessCan(
-		// 	Action.Create,
-		// 	subject(this.SubjectType, createTenantDto),
-		// );
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Create,
+			subject(this.SubjectType, createTenantDto),
+		);
 
 		const tenant = await this.prisma.tenant.create({ data: createTenantDto });
 
