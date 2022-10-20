@@ -13,7 +13,7 @@ import {
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
-import { CreateTenantZodDtoOutput } from 'src/tenants/dto/tenant-zod.dto';
+import { CreateTenantZodDto } from 'src/tenants/dto/tenant-zod.dto';
 import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
 
 @Injectable()
@@ -30,7 +30,7 @@ export class TenantsService {
 		createTenantDto,
 		organizationId,
 	}: {
-		createTenantDto: CreateTenantZodDtoOutput;
+		createTenantDto: CreateTenantZodDto;
 		organizationId: string;
 	}) {
 		const tenant = await this.prisma.tenant.create({
