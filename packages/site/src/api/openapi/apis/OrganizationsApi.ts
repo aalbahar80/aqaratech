@@ -22,6 +22,7 @@ import type {
 	PaginatedRoleDto,
 	SearchDto,
 	SortOrderEnum,
+	TenantDto,
 	UpdateOrganizationDto,
 } from '../models';
 
@@ -97,7 +98,7 @@ export interface OrganizationsApiInterface {
 	createTenantRaw(
 		requestParameters: OrganizationsApiCreateTenantRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>>;
+	): Promise<runtime.ApiResponse<TenantDto>>;
 
 	/**
 	 *
@@ -106,7 +107,7 @@ export interface OrganizationsApiInterface {
 	createTenant(
 		requestParameters: OrganizationsApiCreateTenantRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string>;
+	): Promise<TenantDto>;
 
 	/**
 	 *
@@ -291,7 +292,7 @@ export class OrganizationsApi
 	async createTenantRaw(
 		requestParameters: OrganizationsApiCreateTenantRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>> {
+	): Promise<runtime.ApiResponse<TenantDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -332,7 +333,7 @@ export class OrganizationsApi
 			initOverrides,
 		);
 
-		return new runtime.TextApiResponse(response) as any;
+		return new runtime.JSONApiResponse(response);
 	}
 
 	/**
@@ -342,7 +343,7 @@ export class OrganizationsApi
 	async createTenant(
 		requestParameters: OrganizationsApiCreateTenantRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string> {
+	): Promise<TenantDto> {
 		const response = await this.createTenantRaw(
 			requestParameters,
 			initOverrides,

@@ -2365,7 +2365,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/TenantDto'
       tags: *ref_19
       security: *ref_20
   /expense-categories:
