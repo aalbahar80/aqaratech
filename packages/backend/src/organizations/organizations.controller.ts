@@ -137,8 +137,9 @@ export class OrganizationsController {
 		return this.searchService.search({ query, organizationId: id, user });
 	}
 
-	@UseGuards(AuthzGuard)
 	@Post('/:organizationId/tenants')
+	@UseGuards(AuthzGuard)
+	@CheckAbilities({ action: Action.Create, subject: 'Tenant' })
 	createTenant(
 		@Param('organizationId') organizationId: string,
 		// @ts-expect-error test
