@@ -96,6 +96,7 @@ export class ExpenseDto
 	@ApiProperty()
 	@Expose()
 	get breadcrumbs(): ExpenseBreadcrumbsDto {
+		// @ts-ignore
 		const crumbs: ExpenseBreadcrumbsDto = {
 			portfolio: new BreadcrumbDto({
 				rel: Rel.Portfolio,
