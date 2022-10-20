@@ -12,9 +12,12 @@ test(`can't be created without orgId`, async ({ request, org }) => {
 		['fullName'],
 	);
 
-	const res = await request.post(`/tenants`, {
-		data: tenant,
-	});
+	const res = await request.post(
+		`/organizations/${org.organization.id}/tenants`,
+		{
+			data: tenant,
+		},
+	);
 
 	await expect(res).not.toBeOK();
 	expect(res.status()).toBe(400);
@@ -28,9 +31,12 @@ test(`can't be created without fullName`, async ({ request, org }) => {
 		['organizationId'],
 	);
 
-	const res = await request.post(`/tenants`, {
-		data: tenant,
-	});
+	const res = await request.post(
+		`/organizations/${org.organization.id}/tenants`,
+		{
+			data: tenant,
+		},
+	);
 
 	await expect(res).not.toBeOK();
 	expect(res.status()).toBe(400);
@@ -44,9 +50,12 @@ test(`can be created with minimal fields`, async ({ request, org }) => {
 		['organizationId', 'fullName'],
 	);
 
-	const res = await request.post(`/tenants`, {
-		data: tenant,
-	});
+	const res = await request.post(
+		`/organizations/${org.organization.id}/tenants`,
+		{
+			data: tenant,
+		},
+	);
 
 	await expect(res).toBeOK();
 	expect(res.status()).toBe(201);

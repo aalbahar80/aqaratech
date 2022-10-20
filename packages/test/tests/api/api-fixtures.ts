@@ -85,7 +85,8 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 		const picked = R.pick(tenant, ['fullName', 'organizationId']);
 
-		const res = await request.post(`${apiURL}/tenants`, { data: picked });
+		const url = `${apiURL}/organizations/${org.organization.id}/tenants`;
+		const res = await request.post(url, { data: picked });
 
 		const created = (await res.json()) as TenantDto;
 
