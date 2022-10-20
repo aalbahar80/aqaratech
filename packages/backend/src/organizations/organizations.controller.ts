@@ -140,7 +140,7 @@ export class OrganizationsController {
 	@UseGuards(AuthzGuard)
 	@Post('/:organizationId/tenants')
 	createTenant(
-		@Param('id') id: string,
+		@Param('organizationId') organizationId: string,
 		// @ts-expect-error test
 		@Body() createTenantDtoZodInput,
 	): Promise<TenantDto> {
@@ -148,10 +148,8 @@ export class OrganizationsController {
 			createTenantDtoZodInput,
 		);
 		return this.tenantsService.createZod({
-			createTenantDto: {
-				...createTenantDtoZodOutput,
-				organizationId: id,
-			},
+			createTenantDto: createTenantDtoZodOutput,
+			organizationId,
 		});
 	}
 }

@@ -2368,7 +2368,7 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: id
+        - name: organizationId
           required: true
           in: path
           schema:

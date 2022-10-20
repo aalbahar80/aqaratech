@@ -32,10 +32,17 @@ export class TenantsService {
 
 	async createZod({
 		createTenantDto,
+		organizationId,
 	}: {
 		createTenantDto: CreateTenantZodDtoOutput;
+		organizationId: string;
 	}) {
-		const tenant = await this.prisma.tenant.create({ data: createTenantDto });
+		const tenant = await this.prisma.tenant.create({
+			data: {
+				...createTenantDto,
+				organizationId,
+			},
+		});
 
 		this.eventEmitter.emit(
 			'update.index',

@@ -49,5 +49,5 @@ test('cannot create tenant in non-existing org', async ({ request, org }) => {
 
 	await expect.soft(res).not.toBeOK();
 
-	expect(res.status()).toBe(403); // or 404?
+	expect(res.status()).toBe(403); // won't pass guard
 });
