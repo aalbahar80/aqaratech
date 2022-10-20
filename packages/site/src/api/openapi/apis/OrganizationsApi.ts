@@ -21,11 +21,16 @@ import type {
 	PaginatedRoleDto,
 	SearchDto,
 	SortOrderEnum,
+	TenantDto,
 	UpdateOrganizationDto,
 } from '../models';
 
 export interface OrganizationsApiCreateRequest {
 	createOrganizationDto: CreateOrganizationDto;
+}
+
+export interface OrganizationsApiCreateTenantRequest {
+	organizationId: string;
 }
 
 export interface OrganizationsApiFindOneRequest {
@@ -81,6 +86,26 @@ export interface OrganizationsApiInterface {
 		requestParameters: OrganizationsApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<OrganizationCreatedDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	createTenantRaw(
+		requestParameters: OrganizationsApiCreateTenantRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<TenantDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createTenant(
+		requestParameters: OrganizationsApiCreateTenantRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<TenantDto>;
 
 	/**
 	 *
@@ -255,6 +280,59 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<OrganizationCreatedDto> {
 		const response = await this.createRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createTenantRaw(
+		requestParameters: OrganizationsApiCreateTenantRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<TenantDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createTenant.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/tenants`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createTenant(
+		requestParameters: OrganizationsApiCreateTenantRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<TenantDto> {
+		const response = await this.createTenantRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 
