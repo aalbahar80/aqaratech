@@ -5,12 +5,12 @@ import { z } from 'zod';
 // Doesn't error if we add extra fields, is there a version of implement that does?
 export class CreateTenantZodDto implements z.infer<typeof tenantSchema> {
 	fullName: string;
-	label?: string | null | undefined;
-	civilid?: string | null | undefined;
-	phone?: string | null | undefined;
-	dob?: string | null | undefined;
-	nationality?: string | null | undefined;
-	passportNum?: string | null | undefined;
-	residencyEnd?: string | null | undefined;
-	residencyNum?: string | null | undefined;
+	label?: string | null;
+	civilid?: string | null;
+	phone?: string | null;
+	dob?: string | null;
+	nationality?: string | null;
+	passportNum?: string | null;
+	residencyEnd?: string | null;
+	residencyNum?: string | null;
 }

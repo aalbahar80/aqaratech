@@ -2353,6 +2353,12 @@ paths:
           in: path
           schema:
             type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantZodDto'
       responses:
         '201':
           description: ''
@@ -4147,6 +4153,37 @@ components:
         - processingTimeMs
         - query
         - estimatedTotalHits
+    CreateTenantZodDto:
+      type: object
+      properties:
+        fullName:
+          type: string
+        label:
+          type: string
+          nullable: true
+        civilid:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        dob:
+          type: string
+          nullable: true
+        nationality:
+          type: string
+          nullable: true
+        passportNum:
+          type: string
+          nullable: true
+        residencyEnd:
+          type: string
+          nullable: true
+        residencyNum:
+          type: string
+          nullable: true
+      required:
+        - fullName
     CreateExpenseCategoryDto:
       type: object
       properties:

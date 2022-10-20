@@ -782,6 +782,67 @@ export interface CreateRoleDto {
 /**
  *
  * @export
+ * @interface CreateTenantZodDto
+ */
+export interface CreateTenantZodDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantZodDto
+	 */
+	fullName: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantZodDto
+	 */
+	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantZodDto
+	 */
+	civilid?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantZodDto
+	 */
+	phone?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantZodDto
+	 */
+	dob?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantZodDto
+	 */
+	nationality?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantZodDto
+	 */
+	passportNum?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantZodDto
+	 */
+	residencyEnd?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateTenantZodDto
+	 */
+	residencyNum?: string | null;
+}
+/**
+ *
+ * @export
  * @interface CreateUnitDto
  */
 export interface CreateUnitDto {

@@ -27,7 +27,7 @@ import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
-import { TenantDto } from 'src/tenants/dto/tenant.dto';
+import { CreateTenantZodDto } from 'src/tenants/dto/tenant-zod.dto';
 import { tenantSchema } from 'src/tenants/dto/tenant.schema';
 import { TenantsService } from 'src/tenants/tenants.service';
 import {
@@ -142,8 +142,7 @@ export class OrganizationsController {
 	@CheckAbilities({ action: Action.Create, subject: 'Tenant' })
 	createTenant(
 		@Param('organizationId') organizationId: string,
-		// @ts-expect-error test
-		@Body() createTenantDtoZodInput,
+		@Body() createTenantDtoZodInput: CreateTenantZodDto,
 	) {
 		const createTenantDtoZodOutput = tenantSchema.parse(
 			createTenantDtoZodInput,
