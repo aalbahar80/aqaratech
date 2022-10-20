@@ -69,6 +69,21 @@
 				// we need this because we set "sourceRoot": "/" in tsconfig.json (to help sentry)
 				"/*": "${workspaceFolder}/packages/backend/*"
 			}
+		},
+		{
+			"type": "node",
+			"request": "attach",
+			"name": "Debug Backend (attach)",
+			"restart": true,
+			"cwd": "${workspaceFolder}/packages/backend",
+			"skipFiles": ["<node_internals>/**"],
+			"sourceMaps": true,
+			"resolveSourceMapLocations": ["${workspaceFolder}/packages/backend/**"],
+			"pauseForSourceMap": true,
+			"sourceMapPathOverrides": {
+				// we need this because we set "sourceRoot": "/" in tsconfig.json (to help sentry)
+				"/*": "${workspaceFolder}/packages/backend/*"
+			}
 		}
 	]
 }
