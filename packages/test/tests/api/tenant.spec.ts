@@ -4,25 +4,6 @@ import * as R from 'remeda';
 import type { TenantDto } from '../../types/api';
 import { test } from './api-fixtures';
 
-test(`can't be created without orgId`, async ({ request, org }) => {
-	const tenant = R.pick(
-		tenantFactory.build({
-			organizationId: org.organization.id,
-		}),
-		['fullName'],
-	);
-
-	const res = await request.post(
-		`/organizations/${org.organization.id}/tenants`,
-		{
-			data: tenant,
-		},
-	);
-
-	await expect(res).not.toBeOK();
-	expect(res.status()).toBe(400);
-});
-
 test(`can't be created without fullName`, async ({ request, org }) => {
 	const tenant = R.pick(
 		tenantFactory.build({
@@ -47,7 +28,7 @@ test(`can be created with minimal fields`, async ({ request, org }) => {
 		tenantFactory.build({
 			organizationId: org.organization.id,
 		}),
-		['organizationId', 'fullName'],
+		['fullName'],
 	);
 
 	const res = await request.post(
@@ -89,4 +70,29 @@ test(`returns title field`, async ({ request, tenant }) => {
 	const data = (await res.json()) as TenantDto;
 	expect.soft(data).toHaveProperty('fullName');
 	expect(data).toHaveProperty('title');
+});
+
+test(`fullName is trimmed`, async ({ request, org }) => {
+	const tenant = R.pick(
+		tenantFactory.build({
+			organizationId: org.organization.id,
+		}),
+		['organizationId', 'fullName'],
+	);
+
+	const res = await request.post(
+		`/organizations/${org.organization.id}/tenants`,
+		{
+			data: {
+				...tenant,
+				fullName: ` ${tenant.fullName} `,
+			},
+		},
+	);
+
+	const data = (await res.json()) as TenantDto;
+
+	expect.soft(data).toHaveProperty('fullName');
+
+	expect(data.fullName).toBe(tenant.fullName.trim());
 });
