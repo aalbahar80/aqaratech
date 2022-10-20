@@ -144,11 +144,11 @@ export class OrganizationsController {
 		@Param('organizationId') organizationId: string,
 		// @ts-expect-error test
 		@Body() createTenantDtoZodInput,
-	): Promise<TenantDto> {
+	) {
 		const createTenantDtoZodOutput = tenantSchema.parse(
 			createTenantDtoZodInput,
 		);
-		return this.tenantsService.createZod({
+		return this.tenantsService.create({
 			createTenantDto: createTenantDtoZodOutput,
 			organizationId,
 		});

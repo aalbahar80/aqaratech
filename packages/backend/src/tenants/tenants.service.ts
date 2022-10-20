@@ -14,11 +14,7 @@ import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 import { CreateTenantZodDtoOutput } from 'src/tenants/dto/tenant-zod.dto';
-import {
-	CreateTenantDto,
-	TenantDto,
-	UpdateTenantDto,
-} from 'src/tenants/dto/tenant.dto';
+import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
 
 @Injectable()
 export class TenantsService {
@@ -30,7 +26,7 @@ export class TenantsService {
 	IndexName = 'tenant' as const;
 	IndexConstructor = TenantSearchDocument;
 
-	async createZod({
+	async create({
 		createTenantDto,
 		organizationId,
 	}: {
@@ -49,28 +45,7 @@ export class TenantsService {
 			new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
 		);
 
-		return new TenantDto(tenant);
-	}
-	async create({
-		createTenantDto,
-		user,
-	}: {
-		createTenantDto: CreateTenantDto;
-		user: IUser;
-	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject(this.SubjectType, createTenantDto),
-		);
-
-		const tenant = await this.prisma.tenant.create({ data: createTenantDto });
-
-		this.eventEmitter.emit(
-			'update.index',
-			new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
-		);
-
-		return new TenantDto(tenant);
+		return tenant.id;
 	}
 
 	async findAll({
