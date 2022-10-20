@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CreateTenantDto,
 	PaginatedLeaseDto,
 	PaginatedLeaseInvoiceDto,
 	PaginatedRoleDto,
@@ -24,10 +23,6 @@ import type {
 	TenantDto,
 	UpdateTenantDto,
 } from '../models';
-
-export interface TenantsApiCreateRequest {
-	createTenantDto: CreateTenantDto;
-}
 
 export interface TenantsApiFindAllRequest {
 	page?: number;
@@ -90,26 +85,6 @@ export interface TenantsApiUpdateRequest {
  * @interface TenantsApiInterface
  */
 export interface TenantsApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof TenantsApiInterface
-	 */
-	createRaw(
-		requestParameters: TenantsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<TenantDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	create(
-		requestParameters: TenantsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<TenantDto>;
-
 	/**
 	 *
 	 * @summary
@@ -255,56 +230,6 @@ export interface TenantsApiInterface {
  *
  */
 export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
-	/**
-	 *
-	 *
-	 */
-	async createRaw(
-		requestParameters: TenantsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<TenantDto>> {
-		if (
-			requestParameters.createTenantDto === null ||
-			requestParameters.createTenantDto === undefined
-		) {
-			throw new runtime.RequiredError(
-				'createTenantDto',
-				'Required parameter requestParameters.createTenantDto was null or undefined when calling create.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		headerParameters['Content-Type'] = 'application/json';
-
-		const response = await this.request(
-			{
-				path: `/tenants`,
-				method: 'POST',
-				headers: headerParameters,
-				query: queryParameters,
-				body: requestParameters.createTenantDto,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async create(
-		requestParameters: TenantsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<TenantDto> {
-		const response = await this.createRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *

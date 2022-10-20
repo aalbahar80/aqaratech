@@ -1,28 +1,6 @@
 openapi: 3.0.0
 paths:
   /tenants:
-    post:
-      operationId: TenantsController_create
-      summary: ''
-      description: ''
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateTenantDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TenantDto'
-      tags: &ref_0
-        - tenants
-      security: &ref_1
-        - accessToken: []
     get:
       operationId: TenantsController_findAll
       summary: ''
@@ -74,8 +52,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/TenantDto'
-      tags: *ref_0
-      security: *ref_1
+      tags: &ref_0
+        - tenants
+      security: &ref_1
+        - accessToken: []
   /tenants/{id}:
     get:
       operationId: TenantsController_findOne
@@ -2588,42 +2568,6 @@ components:
       in: cookie
       name: accessToken
   schemas:
-    CreateTenantDto:
-      type: object
-      properties:
-        dob:
-          type: string
-          nullable: true
-        residencyEnd:
-          type: string
-          nullable: true
-        organizationId:
-          type: string
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
-        label:
-          type: string
-          nullable: true
-        civilid:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-        passportNum:
-          type: string
-          nullable: true
-        nationality:
-          type: string
-          nullable: true
-        residencyNum:
-          type: string
-          nullable: true
-      required:
-        - organizationId
-        - fullName
     TenantDto:
       type: object
       properties:

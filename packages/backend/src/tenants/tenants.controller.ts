@@ -5,10 +5,9 @@ import {
 	Get,
 	Param,
 	Patch,
-	Post,
 	Query,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -26,11 +25,7 @@ import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
-import {
-	CreateTenantDto,
-	TenantDto,
-	UpdateTenantDto,
-} from 'src/tenants/dto/tenant.dto';
+import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
 import { TenantsService } from './tenants.service';
 
 const SubjectType = 'Tenant';
@@ -45,16 +40,6 @@ export class TenantsController {
 		private readonly leaseInvoicesService: LeaseInvoicesService,
 		private readonly rolesService: RolesService,
 	) {}
-
-	@Post()
-	@CheckAbilities({ action: Action.Create, subject: SubjectType })
-	@ApiCreatedResponse({ type: TenantDto })
-	create(
-		@User() user: IUser,
-		@Body() createTenantDto: CreateTenantDto,
-	): Promise<TenantDto> {
-		return this.tenantsService.create({ createTenantDto, user });
-	}
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
