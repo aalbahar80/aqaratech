@@ -18,7 +18,7 @@
 		"skipLibCheck": true,
 		"strict": true,
 		"strictPropertyInitialization": false,
-		"importsNotUsedAsValues": "remove",
+		"importsNotUsedAsValues": "preserve",
 		"exactOptionalPropertyTypes": false,
 		"noUncheckedIndexedAccess": false,
 		"paths": {
