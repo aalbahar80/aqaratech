@@ -13,8 +13,8 @@ import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
-import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
 import { Action } from 'src/casl/action.enum';
+import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -26,6 +26,9 @@ import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
+import { TenantDto } from 'src/tenants/dto/tenant.dto';
+import { tenantSchema } from 'src/tenants/dto/tenant.schema';
+import { TenantsService } from 'src/tenants/tenants.service';
 import {
 	CreateOrganizationDto,
 	OrganizationCreatedDto,
@@ -44,6 +47,7 @@ export class OrganizationsController {
 		private readonly organizationsService: OrganizationsService,
 		private rolesService: RolesService,
 		private readonly searchService: SearchService,
+		private readonly tenantsService: TenantsService,
 	) {}
 
 	@Post()
@@ -130,5 +134,30 @@ export class OrganizationsController {
 		@Query('query') query: string,
 	): Promise<SearchDto[]> {
 		return this.searchService.search({ query, organizationId: id, user });
+	}
+
+	@Post('/:id/tenants')
+	createTenant(
+		@Param('id') id: string,
+		// @ts-ignore
+		@Body() createTenantDtoZodInput,
+	): Promise<TenantDto> {
+		console.log(
+			{ createTenantDtoZodInput },
+			'organizations.controller.ts ~ 144',
+		);
+		const createTenantDtoZodOutput = tenantSchema.parse(
+			createTenantDtoZodInput,
+		);
+		console.log(
+			{ createTenantDtoZodOutput },
+			'organizations.controller.ts ~ 147',
+		);
+		return this.tenantsService.create({
+			createTenantDto: {
+				...createTenantDtoZodInput,
+				organizationId: id,
+			},
+		});
 	}
 }

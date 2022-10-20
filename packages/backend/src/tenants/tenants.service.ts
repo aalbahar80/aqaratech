@@ -31,15 +31,16 @@ export class TenantsService {
 
 	async create({
 		createTenantDto,
+		// @ts-expect-error test
 		user,
 	}: {
 		createTenantDto: CreateTenantDto;
-		user: IUser;
+		user?: IUser;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject(this.SubjectType, createTenantDto),
-		);
+		// ForbiddenError.from(user.ability).throwUnlessCan(
+		// 	Action.Create,
+		// 	subject(this.SubjectType, createTenantDto),
+		// );
 
 		const tenant = await this.prisma.tenant.create({ data: createTenantDto });
 
