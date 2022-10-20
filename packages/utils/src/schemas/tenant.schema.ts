@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { digitsOnly, trim } from './utils/zodTransformers';
 
+// TODO satisfies CreateTenant? (depends on if we add multiple schemas) from '@prisma/client', minus organizationId
 export const tenantSchema = z.object({
 	fullName: z.string().min(1, { message: 'Required' }).transform(trim),
 	label: z.string().nullish().transform(trim),
