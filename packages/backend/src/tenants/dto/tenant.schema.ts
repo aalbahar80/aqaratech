@@ -1,4 +1,3 @@
-import { zodIsDateOptional } from 'src/zod/zod-validators';
 import { digitsOnly, trim } from 'src/zod/zodTransformers';
 import { z } from 'zod';
 
@@ -29,5 +28,5 @@ export const tenantSchema = z.object({
 	passportNum: z.string().transform(trim).nullish(),
 	residencyNum: z.string().transform(trim).nullish(),
 	nationality: z.string().transform(trim).nullish(),
-	residencyEnd: zodIsDateOptional(),
+	residencyEnd: z.string().nullish(), // TODO: add date validator
 });
