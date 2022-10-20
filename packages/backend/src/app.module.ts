@@ -8,7 +8,7 @@ import { AppService } from './app.service';
 
 // common
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import * as Sentry from '@sentry/node';
@@ -36,6 +36,7 @@ import { SearchModule } from './search/search.module';
 
 // resources
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
+import { MyValidationPipe } from 'src/pipes/my-validation.pipe';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
@@ -134,6 +135,7 @@ import { UsersModule } from './users/users.module';
 		},
 		{ provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
 		{ provide: APP_GUARD, useClass: AbilitiesGuard },
+		{ provide: APP_PIPE, useClass: MyValidationPipe },
 		{ provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
 		S3Service,
 		PostmarkService,

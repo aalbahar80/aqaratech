@@ -1,10 +1,11 @@
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { envCheck } from '@self/utils';
 import '@sentry/tracing';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { MyValidationPipe } from 'src/pipes/my-validation.pipe';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
 import { version } from '../package.json';
@@ -38,11 +39,11 @@ async function bootstrap() {
 	app.use(cookieParser());
 
 	app.useGlobalPipes(
-		new ValidationPipe({
+		new MyValidationPipe({
 			transform: true,
-			// forbidUnknownValues: true,
+			forbidUnknownValues: true,
 			forbidNonWhitelisted: true,
-			// whitelist: true,
+			whitelist: true,
 			// validateCustomDecorators: true, // fails eveything?
 			enableDebugMessages: process.env.PUBLIC_AQ_DEBUG_NEST == '1',
 			disableErrorMessages: false,
