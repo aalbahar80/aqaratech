@@ -1,8 +1,8 @@
-import { isID } from '$lib/models/schemas/id.schema';
-import { falsyToNull, trim } from '$lib/zodTransformers.js';
 import { z } from 'zod';
+import { isID } from './utils/id.schema';
+import { falsyToNull, trim } from './utils/zodTransformers';
 
-export const updateSchema = z.object({
+export const propertyUpdateSchema = z.object({
 	label: z.string().nullable().transform(trim).transform(falsyToNull),
 	area: z
 		.string()
@@ -33,6 +33,6 @@ export const updateSchema = z.object({
 	organizationId: isID,
 });
 
-export const createSchema = updateSchema.extend({
+export const propertyCreateSchema = propertyUpdateSchema.extend({
 	portfolioId: isID,
 });

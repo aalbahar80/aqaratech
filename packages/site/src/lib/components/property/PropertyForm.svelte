@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { createApi } from '$api';
+	import type { PaginatedPortfolioDto, PropertyDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { portfoliosToOptions } from '$lib/components/form/inputs/to-options';
 	import { areas } from '$lib/constants/areas-kwt';
@@ -8,12 +9,8 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedProperty } from '$lib/models/interfaces/predefined.interface';
-	import {
-		createSchema,
-		updateSchema,
-	} from '$lib/models/schemas/property.schema';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
-	import type { PaginatedPortfolioDto, PropertyDto } from '$api/openapi';
+	import { propertyCreateSchema, propertyUpdateSchema } from '@self/utils';
 
 	type TPredefinedProperty = $$Generic<PredefinedProperty | undefined>;
 	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;
@@ -101,7 +98,7 @@
 
 {#if formType === 'update'}
 	<Form
-		schema={updateSchema}
+		schema={propertyUpdateSchema}
 		entity="property"
 		{formType}
 		{basicFields}
@@ -114,7 +111,7 @@
 	/>
 {:else}
 	<Form
-		schema={createSchema}
+		schema={propertyCreateSchema}
 		entity="property"
 		{formType}
 		{basicFields}
