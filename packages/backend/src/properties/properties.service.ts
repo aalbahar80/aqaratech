@@ -33,19 +33,21 @@ export class PropertiesService {
 
 	async create({
 		createPropertyDto,
-		user,
+		portfolioId,
+		organizationId,
 	}: {
 		createPropertyDto: CreatePropertyDto;
-		user: IUser;
+		portfolioId: string;
+		organizationId: string;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject(this.SubjectType, createPropertyDto),
-		);
-
 		const created = await this.prisma.property.create({
-			data: createPropertyDto,
+			data: {
+				...createPropertyDto,
+				portfolioId,
+				organizationId,
+			},
 		});
+
 		const property = new PropertyDto(created);
 
 		this.eventEmitter.emit(

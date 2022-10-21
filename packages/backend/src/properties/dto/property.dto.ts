@@ -6,6 +6,7 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { Property } from '@prisma/client';
+import { propertyCreateSchema, propertyUpdateSchema } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import {
 	IsLatitude,
@@ -22,6 +23,7 @@ import {
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IsID } from 'src/decorators/field.decorators';
+import { z } from 'zod';
 
 class PropertyRequiredDto {
 	@IsID()
@@ -117,11 +119,17 @@ export class PropertyDto
 	}
 }
 
-export class CreatePropertyDto
-	extends IntersectionType(
-		PropertyRequiredDto,
-		PartialType(PropertyOptionalDto),
-	)
-	implements Partial<Property> {}
+export class CreatePropertyDto implements z.infer<typeof propertyCreateSchema> {
+	number: string;
+	area: string;
+	block: string;
+	street: string;
+	label?: string | null;
+	avenue?: string | null;
+	parcel?: string | null;
+	paci?: string | null;
+}
 
-export class UpdatePropertyDto extends PartialType(CreatePropertyDto) {}
+export class UpdatePropertyDto
+	extends PartialType(CreatePropertyDto)
+	implements z.infer<typeof propertyUpdateSchema> {}

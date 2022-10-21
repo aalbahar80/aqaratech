@@ -1,6 +1,11 @@
 import { ArgumentMetadata, Injectable, ValidationPipe } from '@nestjs/common';
 
-const shouldSkip = ['CreateTenantDto', 'UpdateTenantDto'];
+const shouldSkip = [
+	'CreateTenantDto',
+	'UpdateTenantDto',
+	'CreatePropertyDto',
+	// 'UpdatePropertyDto',
+];
 
 // Reference: https://github.com/nestjs/nest/issues/2390#issuecomment-517623971
 // More about DI in global pipes: https://docs.nestjs.com/guards#binding-guards

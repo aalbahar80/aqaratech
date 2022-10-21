@@ -5,10 +5,9 @@ import {
 	Get,
 	Param,
 	Patch,
-	Post,
 	Query,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -20,7 +19,6 @@ import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
 import {
-	CreatePropertyDto,
 	PropertyDto,
 	UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
@@ -38,16 +36,6 @@ export class PropertiesController {
 		private readonly propertiesService: PropertiesService,
 		private unitsService: UnitsService,
 	) {}
-
-	@Post()
-	@CheckAbilities({ action: Action.Create, subject: SubjectType })
-	@ApiCreatedResponse({ type: PropertyDto })
-	create(
-		@User() user: IUser,
-		@Body() createPropertyDto: CreatePropertyDto,
-	): Promise<PropertyDto> {
-		return this.propertiesService.create({ createPropertyDto, user });
-	}
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })

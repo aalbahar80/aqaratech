@@ -118,14 +118,11 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			portfolioId: portfolio.id,
 		});
 
-		const picked = R.pick(property, [
-			'area',
-			'number',
-			'organizationId',
-			'portfolioId',
-		]);
+		const picked = R.pick(property, ['area', 'block', 'street', 'number']);
 
-		const res = await request.post(`${apiURL}/properties`, { data: picked });
+		const url = `${apiURL}/organizations/${portfolio.organizationId}/portfolios/${portfolio.id}/properties`;
+
+		const res = await request.post(url, { data: picked });
 
 		const created = (await res.json()) as PropertyDto;
 
