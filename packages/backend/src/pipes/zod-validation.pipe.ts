@@ -23,7 +23,7 @@ export class ZodValidationPipe implements PipeTransform {
 			return parsed.data as unknown;
 		}
 
-		const errors = parsed.error.formErrors.fieldErrors;
+		const errors = parsed.error.formErrors;
 
 		throw new BadRequestException(errors);
 	}

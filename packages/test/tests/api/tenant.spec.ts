@@ -25,7 +25,9 @@ test(`can't be created without fullName`, async ({ request, org }) => {
 
 	const body: unknown = await res.json();
 
-	expect(body).toHaveProperty('fullName', ['Required']);
+	expect(body).toHaveProperty('fieldErrors', {
+		fullName: ['Required'],
+	});
 });
 
 test(`can't be created with additional properties`, async ({
@@ -44,8 +46,6 @@ test(`can't be created with additional properties`, async ({
 		{
 			data: {
 				...tenant,
-				start: '2021-01-01',
-				label: 23,
 				abc: 123,
 			},
 		},
@@ -55,10 +55,11 @@ test(`can't be created with additional properties`, async ({
 
 	expect(res.status()).toBe(400);
 
-	// TODO add error message
-	// const body: unknown = await res.json();
+	const body: unknown = await res.json();
 
-	// expect(body).toHaveProperty('fullName', ['Required']);
+	expect(body).toHaveProperty('formErrors', [
+		"Unrecognized key(s) in object: 'abc'",
+	]);
 });
 
 test(`can be created with minimal fields`, async ({ request, org }) => {
