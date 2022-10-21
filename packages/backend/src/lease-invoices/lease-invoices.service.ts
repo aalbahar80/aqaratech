@@ -180,7 +180,7 @@ export class LeaseInvoicesService {
 			this.logger.warn('No site origin configured');
 		}
 
-		return this.postmarkService.trySendEmail({
+		return this.postmarkService.sendEmail({
 			From: 'Aqaratech <notifications@aqaratech.com>',
 			To: payload.email,
 			TemplateAlias: 'invoice',
