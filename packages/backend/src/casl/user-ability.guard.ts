@@ -34,10 +34,14 @@ export class UserAbilityGuard implements CanActivate {
 	async canActivate(context: ExecutionContext): Promise<boolean> {
 		const request = context.switchToHttp().getRequest<IRequest>();
 
+		// Get user
+
 		if (!request.user) {
 			// Can't add abilities if there is no user.
 			return true;
 		}
+
+		// Get Role
 
 		const cookiesSchema = z.object({
 			role: z.string().optional(),
@@ -50,7 +54,8 @@ export class UserAbilityGuard implements CanActivate {
 		const authenticatedUser = request.user; // safe to use email because it is set by jwt.strategy from accessToken
 
 		if (!xRoleId) {
-			throw new ForbiddenException('Missing role header');
+			// Can't add abilities if there is no role.
+			return true;
 		}
 
 		// Get the cached user/role.
