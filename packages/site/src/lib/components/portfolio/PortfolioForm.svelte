@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { createApi } from '$api';
+	import type { PortfolioDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
-	import { schema } from '$models/schemas/portfolio.schema';
-	import type { PortfolioDto } from '$api/openapi';
+	import { portfolioCreateSchema, portfolioUpdateSchema } from '@self/utils';
 
 	type TPortfolioDto = $$Generic<
 		// eslint-disable-next-line no-undef
@@ -59,7 +59,7 @@
 
 {#if formType === 'update'}
 	<Form
-		{schema}
+		schema={portfolioUpdateSchema}
 		entity="portfolio"
 		{formType}
 		{basicFields}
@@ -72,7 +72,7 @@
 	/>
 {:else}
 	<Form
-		{schema}
+		schema={portfolioCreateSchema}
 		entity="portfolio"
 		{formType}
 		{basicFields}
