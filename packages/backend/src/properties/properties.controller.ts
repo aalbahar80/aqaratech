@@ -56,7 +56,6 @@ export class PropertiesController {
 
 	@Patch(':id')
 	@CheckAbilities({ action: Action.Update, subject: SubjectType })
-	@ApiOkResponse({ type: PropertyDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,

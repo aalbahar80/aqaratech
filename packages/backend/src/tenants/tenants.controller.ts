@@ -63,7 +63,6 @@ export class TenantsController {
 
 	@Patch(':id')
 	@SkipAbilityCheck() // TODO rm
-	@ApiOkResponse({ type: TenantDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
