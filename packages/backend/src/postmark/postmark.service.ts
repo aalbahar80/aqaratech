@@ -1,15 +1,18 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, LoggerService } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { ServerClient, TemplatedMessage } from 'postmark';
 import { Callback, MessageSendingResponse } from 'postmark/dist/client/models';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
 export class PostmarkService {
-	private readonly logger = new Logger(PostmarkService.name);
-
-	constructor(readonly configService: ConfigService<EnvironmentConfig>) {
-		const token = configService.get('mailConfig.POSTMARK_TOKEN', {
+	constructor(
+		private readonly configService: ConfigService<EnvironmentConfig>,
+		@Inject(WINSTON_MODULE_NEST_PROVIDER)
+		private readonly logger: LoggerService,
+	) {
+		const token = this.configService.get('mailConfig.POSTMARK_TOKEN', {
 			infer: true,
 		});
 
@@ -17,7 +20,7 @@ export class PostmarkService {
 			this.logger.log('Token detected. Initializing Postmark client.');
 			this.postmark = new ServerClient(token);
 		} else {
-			this.logger.log('No token detected. Postmark client not initialized.');
+			this.logger.warn('No token detected. Postmark client not initialized.');
 		}
 	}
 
