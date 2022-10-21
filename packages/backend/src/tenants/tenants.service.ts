@@ -13,8 +13,11 @@ import {
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
-import { CreateTenantZodDto } from 'src/tenants/dto/tenant-zod.dto';
-import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
+import {
+	CreateTenantDto,
+	TenantDto,
+	UpdateTenantDto,
+} from 'src/tenants/dto/tenant.dto';
 
 @Injectable()
 export class TenantsService {
@@ -30,7 +33,7 @@ export class TenantsService {
 		createTenantDto,
 		organizationId,
 	}: {
-		createTenantDto: CreateTenantZodDto;
+		createTenantDto: CreateTenantDto;
 		organizationId: string;
 	}) {
 		const tenant = await this.prisma.tenant.create({
@@ -100,6 +103,7 @@ export class TenantsService {
 	}) {
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Update,
+			// @ts-expect-error test datetostring
 			subject(this.SubjectType, updateTenantDto),
 		);
 

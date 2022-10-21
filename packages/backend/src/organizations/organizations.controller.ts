@@ -29,7 +29,7 @@ import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
-import { CreateTenantZodDto } from 'src/tenants/dto/tenant-zod.dto';
+import { CreateTenantDto } from 'src/tenants/dto/tenant.dto';
 import { TenantsService } from 'src/tenants/tenants.service';
 import {
 	CreateOrganizationDto,
@@ -144,10 +144,10 @@ export class OrganizationsController {
 	createTenant(
 		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(tenantCreateSchema))
-		createTenantZodDto: CreateTenantZodDto,
+		CreateTenantDto: CreateTenantDto,
 	) {
 		return this.tenantsService.create({
-			createTenantDto: createTenantZodDto,
+			createTenantDto: CreateTenantDto,
 			organizationId,
 		});
 	}

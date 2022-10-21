@@ -102,8 +102,9 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) => {
-			return createApi().tenants.create({
+			return createApi().organizations.createTenant({
 				createTenantDto: values,
+				organizationId: $page.data.user?.role?.organizationId ?? '', // type hack
 			});
 		}}
 	/>
