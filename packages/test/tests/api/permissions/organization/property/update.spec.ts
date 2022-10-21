@@ -4,20 +4,15 @@ import { randomUUID } from 'crypto';
 import * as R from 'remeda';
 import { test } from '../../../api-fixtures';
 
-test('can update property in own org', async ({
-	request,
-	org,
-	portfolio,
-	property,
-}) => {
-	const newProperty = R.pick(
-		propertyFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: portfolio.id,
-		}),
-		['area', 'block', 'street', 'number'],
-	);
+const newProperty = R.pick(
+	propertyFactory.build({
+		organizationId: '',
+		portfolioId: '',
+	}),
+	['area', 'block', 'street', 'number'],
+);
 
+test('can update property in own org', async ({ request, property }) => {
 	const res = await request.patch(`/properties/${property.id}`, {
 		data: newProperty,
 	});
@@ -30,9 +25,7 @@ test('cannot update property in another org', async ({
 	org: _org,
 }) => {
 	const res = await request.patch(`/properties/${sample.properties[0]!.id}`, {
-		data: {
-			fullName: 'should not work',
-		},
+		data: newProperty,
 	});
 
 	await expect.soft(res).not.toBeOK();
@@ -42,9 +35,7 @@ test('cannot update property in another org', async ({
 
 test('cannot update non-existing property', async ({ request }) => {
 	const res = await request.patch(`/properties/${randomUUID()}`, {
-		data: {
-			fullName: 'should not work',
-		},
+		data: newProperty,
 	});
 
 	await expect.soft(res).not.toBeOK();
