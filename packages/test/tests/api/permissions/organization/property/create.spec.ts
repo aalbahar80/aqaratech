@@ -53,7 +53,7 @@ test('cannot create property in non-existing portfolio', async ({
 			organizationId: org.organization.id,
 			portfolioId: randomUUID(),
 		}),
-		['area', 'street'],
+		['area', 'block', 'street', 'number'],
 	);
 
 	const url = `/organizations/${
@@ -64,5 +64,5 @@ test('cannot create property in non-existing portfolio', async ({
 
 	await expect.soft(res).not.toBeOK();
 
-	expect(res.status()).toBe(403); // won't pass guard
+	expect(res.status()).toBe(404);
 });

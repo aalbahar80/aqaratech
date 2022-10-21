@@ -60,6 +60,13 @@ export const mapPrismaException = (
 		 *
 		 */
 		responseError = new ConflictException();
+	} else if (exception.code === 'P2003') {
+		/**
+		 * P2003
+		 * Foreign key constraint failed on the field: {field_name}
+		 *
+		 */
+		responseError = new NotFoundException();
 	} else {
 		// TODO return error message?
 		// TODO Test minimial error message (auto set in prod by Prisma)
