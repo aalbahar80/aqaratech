@@ -9,6 +9,8 @@ import {
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { propertyUpdateSchema } from '@self/utils';
+import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -18,6 +20,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import {
 	PropertyDto,
 	UpdatePropertyDto,
@@ -55,11 +58,13 @@ export class PropertiesController {
 	}
 
 	@Patch(':id')
-	@CheckAbilities({ action: Action.Update, subject: SubjectType })
+	// @CheckAbilities({ action: Action.Update, subject: SubjectType })
+	@SkipAbilityCheck() // TODO rm
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@Body() updatePropertyDto: UpdatePropertyDto,
+		@Body(new ZodValidationPipe(propertyUpdateSchema))
+		updatePropertyDto: UpdatePropertyDto,
 	): Promise<PropertyDto> {
 		return this.propertiesService.update({ id, updatePropertyDto, user });
 	}

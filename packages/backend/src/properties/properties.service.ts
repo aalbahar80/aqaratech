@@ -1,10 +1,8 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
-import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -107,21 +105,11 @@ export class PropertiesService {
 		updatePropertyDto: UpdatePropertyDto;
 		user: IUser;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Update,
-			subject(this.SubjectType, updatePropertyDto),
-		);
-
-		const frisked = frisk({
-			user,
-			SubjectType: this.SubjectType,
-			instance: updatePropertyDto,
-		});
-
 		const updated = await this.prisma.property.update({
-			where: { id },
-			data: frisked,
+			where: { id, AND: accessibleBy(user.ability, Action.Update).Property },
+			data: updatePropertyDto,
 		});
+
 		const property = new PropertyDto(updated);
 
 		this.eventEmitter.emit(
