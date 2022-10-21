@@ -782,61 +782,61 @@ export interface CreateRoleDto {
 /**
  *
  * @export
- * @interface CreateTenantZodDto
+ * @interface CreateTenantDto
  */
-export interface CreateTenantZodDto {
+export interface CreateTenantDto {
 	/**
 	 *
 	 * @type {string}
-	 * @memberof CreateTenantZodDto
+	 * @memberof CreateTenantDto
 	 */
 	fullName: string;
 	/**
 	 *
 	 * @type {string}
-	 * @memberof CreateTenantZodDto
+	 * @memberof CreateTenantDto
 	 */
 	label?: string | null;
 	/**
 	 *
 	 * @type {string}
-	 * @memberof CreateTenantZodDto
+	 * @memberof CreateTenantDto
 	 */
 	civilid?: string | null;
 	/**
 	 *
 	 * @type {string}
-	 * @memberof CreateTenantZodDto
+	 * @memberof CreateTenantDto
 	 */
 	phone?: string | null;
 	/**
 	 *
 	 * @type {string}
-	 * @memberof CreateTenantZodDto
+	 * @memberof CreateTenantDto
 	 */
 	dob?: string | null;
 	/**
 	 *
 	 * @type {string}
-	 * @memberof CreateTenantZodDto
+	 * @memberof CreateTenantDto
 	 */
 	nationality?: string | null;
 	/**
 	 *
 	 * @type {string}
-	 * @memberof CreateTenantZodDto
+	 * @memberof CreateTenantDto
 	 */
 	passportNum?: string | null;
 	/**
 	 *
 	 * @type {string}
-	 * @memberof CreateTenantZodDto
+	 * @memberof CreateTenantDto
 	 */
 	residencyEnd?: string | null;
 	/**
 	 *
 	 * @type {string}
-	 * @memberof CreateTenantZodDto
+	 * @memberof CreateTenantDto
 	 */
 	residencyNum?: string | null;
 }
@@ -3344,24 +3344,6 @@ export interface UpdateTenantDto {
 	 * @type {string}
 	 * @memberof UpdateTenantDto
 	 */
-	dob?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateTenantDto
-	 */
-	residencyEnd?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateTenantDto
-	 */
-	organizationId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateTenantDto
-	 */
 	fullName?: string;
 	/**
 	 *
@@ -3386,13 +3368,25 @@ export interface UpdateTenantDto {
 	 * @type {string}
 	 * @memberof UpdateTenantDto
 	 */
-	passportNum?: string | null;
+	dob?: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UpdateTenantDto
 	 */
 	nationality?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	passportNum?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateTenantDto
+	 */
+	residencyEnd?: string | null;
 	/**
 	 *
 	 * @type {string}

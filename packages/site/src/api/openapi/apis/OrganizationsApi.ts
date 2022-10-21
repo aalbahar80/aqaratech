@@ -15,7 +15,7 @@
 import * as runtime from '../runtime';
 import type {
 	CreateOrganizationDto,
-	CreateTenantZodDto,
+	CreateTenantDto,
 	OrganizationCreatedDto,
 	OrganizationDto,
 	PaginatedOrganizationDto,
@@ -32,7 +32,7 @@ export interface OrganizationsApiCreateRequest {
 
 export interface OrganizationsApiCreateTenantRequest {
 	organizationId: string;
-	createTenantZodDto: CreateTenantZodDto;
+	createTenantDto: CreateTenantDto;
 }
 
 export interface OrganizationsApiFindOneRequest {
@@ -304,12 +304,12 @@ export class OrganizationsApi
 		}
 
 		if (
-			requestParameters.createTenantZodDto === null ||
-			requestParameters.createTenantZodDto === undefined
+			requestParameters.createTenantDto === null ||
+			requestParameters.createTenantDto === undefined
 		) {
 			throw new runtime.RequiredError(
-				'createTenantZodDto',
-				'Required parameter requestParameters.createTenantZodDto was null or undefined when calling createTenant.',
+				'createTenantDto',
+				'Required parameter requestParameters.createTenantDto was null or undefined when calling createTenant.',
 			);
 		}
 
@@ -328,7 +328,7 @@ export class OrganizationsApi
 				method: 'POST',
 				headers: headerParameters,
 				query: queryParameters,
-				body: requestParameters.createTenantZodDto,
+				body: requestParameters.createTenantDto,
 			},
 			initOverrides,
 		);

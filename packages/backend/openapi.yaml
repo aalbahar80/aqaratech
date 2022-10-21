@@ -2358,7 +2358,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTenantZodDto'
+              $ref: '#/components/schemas/CreateTenantDto'
       responses:
         '201':
           description: ''
@@ -2641,18 +2641,8 @@ components:
     UpdateTenantDto:
       type: object
       properties:
-        dob:
-          type: string
-          nullable: true
-        residencyEnd:
-          type: string
-          nullable: true
-        organizationId:
-          type: string
         fullName:
           type: string
-          minLength: 1
-          maxLength: 255
         label:
           type: string
           nullable: true
@@ -2662,10 +2652,16 @@ components:
         phone:
           type: string
           nullable: true
-        passportNum:
+        dob:
           type: string
           nullable: true
         nationality:
+          type: string
+          nullable: true
+        passportNum:
+          type: string
+          nullable: true
+        residencyEnd:
           type: string
           nullable: true
         residencyNum:
@@ -4153,7 +4149,7 @@ components:
         - processingTimeMs
         - query
         - estimatedTotalHits
-    CreateTenantZodDto:
+    CreateTenantDto:
       type: object
       properties:
         fullName:

@@ -1,6 +1,6 @@
 import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
-import { tenantCreateSchema } from '@self/utils';
+import { tenantCreateSchema, tenantUpdateSchema } from '@self/utils';
 import { Expose } from 'class-transformer';
 import {
 	IsISO31661Alpha3,
@@ -80,4 +80,6 @@ export class CreateTenantDto implements z.infer<typeof tenantCreateSchema> {
 	residencyNum?: string | null;
 }
 
-export class UpdateTenantDto extends PartialType(CreateTenantDto) {}
+export class UpdateTenantDto
+	extends PartialType(CreateTenantDto)
+	implements z.infer<typeof tenantUpdateSchema> {}

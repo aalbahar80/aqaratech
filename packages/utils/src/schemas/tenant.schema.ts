@@ -31,3 +31,6 @@ export const tenantCreateSchema = z.object({
 	nationality: z.string().transform(trim).nullish(),
 	residencyEnd: z.string().nullish(), // TODO: add date validator
 });
+
+// updateTenantschema is the same but everything is optional
+export const tenantUpdateSchema = tenantCreateSchema.partial();

@@ -22,4 +22,5 @@ export {
 	propertyCreateSchema,
 	propertyUpdateSchema,
 	tenantCreateSchema,
+	tenantUpdateSchema,
 } from './schemas';

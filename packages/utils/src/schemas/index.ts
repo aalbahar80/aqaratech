@@ -1,2 +1,2 @@
-export { propertyCreateSchema, propertyUpdateSchema } from './property.schema';
-export { tenantCreateSchema } from './tenant.schema';
+export * from './property.schema';
+export * from './tenant.schema';

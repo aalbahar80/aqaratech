@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { tenantUpdateSchema } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -23,6 +24,7 @@ import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
@@ -64,7 +66,8 @@ export class TenantsController {
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@Body() updateTenantDto: UpdateTenantDto,
+		@Body(new ZodValidationPipe(tenantUpdateSchema))
+		updateTenantDto: UpdateTenantDto,
 	): Promise<TenantDto> {
 		return this.tenantsService.update({ id, updateTenantDto, user });
 	}
