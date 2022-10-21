@@ -1,8 +1,7 @@
 import { z } from 'zod';
-import { falsyToNull } from './zodTransformers';
 
-export const zodIsDateRequired = () =>
-	z.string().min(1, { message: 'Required' });
-
-export const zodIsDateOptional = () =>
-	z.string().nullish().transform(falsyToNull);
+// TODO: add date validator
+/**
+ * Currently only checks for a string
+ */
+export const zodIsDateOnlyOptional = () => z.string().nullish();
