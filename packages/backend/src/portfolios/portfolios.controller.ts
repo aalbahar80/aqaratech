@@ -5,10 +5,9 @@ import {
 	Get,
 	Param,
 	Patch,
-	Post,
 	Query,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { AggregateService } from 'src/aggregate/aggregate.service';
 import { BalanceDto } from 'src/aggregate/dto/balance.dto';
@@ -28,11 +27,7 @@ import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { UnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from 'src/units/units.service';
-import {
-	CreatePortfolioDto,
-	PortfolioDto,
-	UpdatePortfolioDto,
-} from './dto/portfolio.dto';
+import { PortfolioDto, UpdatePortfolioDto } from './dto/portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 
 const SubjectType = 'Portfolio';
@@ -49,16 +44,6 @@ export class PortfoliosController {
 		private readonly aggregateService: AggregateService,
 		private unitsService: UnitsService,
 	) {}
-
-	@Post()
-	@CheckAbilities({ action: Action.Create, subject: SubjectType })
-	@ApiCreatedResponse({ type: PortfolioDto })
-	create(
-		@User() user: IUser,
-		@Body() createPortfolioDto: CreatePortfolioDto,
-	): Promise<PortfolioDto> {
-		return this.portfoliosService.create({ createPortfolioDto, user });
-	}
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })

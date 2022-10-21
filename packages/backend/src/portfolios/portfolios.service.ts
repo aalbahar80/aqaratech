@@ -31,18 +31,16 @@ export class PortfoliosService {
 
 	async create({
 		createPortfolioDto,
-		user,
+		organizationId,
 	}: {
 		createPortfolioDto: CreatePortfolioDto;
-		user: IUser;
+		organizationId: string;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject(this.SubjectType, createPortfolioDto),
-		);
-
 		const portfolio = await this.prisma.portfolio.create({
-			data: createPortfolioDto,
+			data: {
+				...createPortfolioDto,
+				organizationId,
+			},
 		});
 
 		this.eventEmitter.emit(
@@ -97,6 +95,7 @@ export class PortfoliosService {
 	}) {
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Update,
+			// @ts-expect-error temp
 			subject(this.SubjectType, updatePortfolioDto),
 		);
 

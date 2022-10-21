@@ -3,6 +3,8 @@ import { ArgumentMetadata, Injectable, ValidationPipe } from '@nestjs/common';
 const shouldSkip = [
 	'CreateTenantDto',
 	'UpdateTenantDto',
+	'CreatePortfolioDto',
+	'UpdatePortfolioDto',
 	'CreatePropertyDto',
 	'UpdatePropertyDto',
 ];

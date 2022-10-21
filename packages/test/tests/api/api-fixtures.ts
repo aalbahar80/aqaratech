@@ -103,7 +103,9 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 		const picked = R.pick(portfolio, ['fullName', 'organizationId']);
 
-		const res = await request.post(`${apiURL}/portfolios`, { data: picked });
+		const url = `${apiURL}/organizations/${org.organization.id}/portfolios`;
+
+		const res = await request.post(url, { data: picked });
 
 		const created = (await res.json()) as PortfolioDto;
 

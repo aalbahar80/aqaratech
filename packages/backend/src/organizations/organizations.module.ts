@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { OrganizationsAdminController } from 'src/organizations/organizations-admin.controller';
+import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { PropertiesModule } from 'src/properties/properties.module';
 import { RolesModule } from 'src/roles/roles.module';
 import { S3Module } from 'src/s3/s3.module';
@@ -16,6 +17,7 @@ import { OrganizationsService } from './organizations.service';
 		SearchModule,
 		S3Module,
 		TenantsModule,
+		PortfoliosModule,
 		PropertiesModule,
 	],
 })

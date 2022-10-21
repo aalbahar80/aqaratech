@@ -1,11 +1,17 @@
 import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { propertyCreateSchema, tenantCreateSchema } from '@self/utils';
+import {
+	portfolioCreateSchema,
+	propertyCreateSchema,
+	tenantCreateSchema,
+} from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { AuthzGuard } from 'src/casl/authz.guard';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
+import { CreatePortfolioDto } from 'src/portfolios/dto/portfolio.dto';
+import { PortfoliosService } from 'src/portfolios/portfolios.service';
 import { CreatePropertyDto } from 'src/properties/dto/property.dto';
 import { PropertiesService } from 'src/properties/properties.service';
 import { CreateTenantDto } from 'src/tenants/dto/tenant.dto';
@@ -18,6 +24,7 @@ import { TenantsService } from 'src/tenants/tenants.service';
 export class OrganizationsAdminController {
 	constructor(
 		private readonly tenantsService: TenantsService,
+		private readonly portfoliosService: PortfoliosService,
 		private readonly propertiesService: PropertiesService,
 	) {}
 
@@ -30,6 +37,19 @@ export class OrganizationsAdminController {
 	) {
 		return this.tenantsService.create({
 			createTenantDto: createTenantDto,
+			organizationId,
+		});
+	}
+
+	@Post('/portfolios')
+	@CheckAbilities({ action: Action.Create, subject: 'Portfolio' })
+	createPortfolio(
+		@Param('organizationId') organizationId: string,
+		@Body(new ZodValidationPipe(portfolioCreateSchema))
+		createPortfolioDto: CreatePortfolioDto,
+	) {
+		return this.portfoliosService.create({
+			createPortfolioDto: createPortfolioDto,
 			organizationId,
 		});
 	}

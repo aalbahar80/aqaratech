@@ -844,28 +844,6 @@ paths:
       tags: *ref_5
       security: *ref_6
   /portfolios:
-    post:
-      operationId: PortfoliosController_create
-      summary: ''
-      description: ''
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreatePortfolioDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PortfolioDto'
-      tags: &ref_7
-        - portfolios
-      security: &ref_8
-        - accessToken: []
     get:
       operationId: PortfoliosController_findAll
       summary: ''
@@ -917,8 +895,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: &ref_7
+        - portfolios
+      security: &ref_8
+        - accessToken: []
   /portfolios/{id}:
     get:
       operationId: PortfoliosController_findOne
@@ -2350,6 +2330,32 @@ paths:
         - organizations
       security: &ref_22
         - accessToken: []
+  /organizations/{organizationId}/portfolios:
+    post:
+      operationId: OrganizationsAdminController_createPortfolio
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePortfolioDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioDto'
+      tags: *ref_21
+      security: *ref_22
   /organizations/{organizationId}/properties:
     post:
       operationId: OrganizationsAdminController_createProperty
@@ -3172,30 +3178,6 @@ components:
         - organizationId
         - portfolioId
         - amount
-    CreatePortfolioDto:
-      type: object
-      properties:
-        dob:
-          type: string
-          nullable: true
-        organizationId:
-          type: string
-        fullName:
-          type: string
-          minLength: 1
-          maxLength: 255
-        label:
-          type: string
-          nullable: true
-        civilid:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-      required:
-        - organizationId
-        - fullName
     PortfolioDto:
       type: object
       properties:
@@ -3242,22 +3224,18 @@ components:
     UpdatePortfolioDto:
       type: object
       properties:
-        dob:
-          type: string
-          nullable: true
-        organizationId:
-          type: string
         fullName:
           type: string
-          minLength: 1
-          maxLength: 255
         label:
+          type: string
+          nullable: true
+        phone:
           type: string
           nullable: true
         civilid:
           type: string
           nullable: true
-        phone:
+        dob:
           type: string
           nullable: true
     PropertyBreadcrumbsDto:
@@ -4119,6 +4097,25 @@ components:
           type: string
           nullable: true
         residencyNum:
+          type: string
+          nullable: true
+      required:
+        - fullName
+    CreatePortfolioDto:
+      type: object
+      properties:
+        fullName:
+          type: string
+        label:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        civilid:
+          type: string
+          nullable: true
+        dob:
           type: string
           nullable: true
       required:
