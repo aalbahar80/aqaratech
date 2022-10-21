@@ -2350,18 +2350,13 @@ paths:
         - organizations
       security: &ref_22
         - accessToken: []
-  /organizations/{organizationId}/portfolios/{portfolioId}/properties:
+  /organizations/{organizationId}/properties:
     post:
       operationId: OrganizationsAdminController_createProperty
       summary: ''
       description: ''
       parameters:
         - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: portfolioId
           required: true
           in: path
           schema:
@@ -4131,6 +4126,8 @@ components:
     CreatePropertyDto:
       type: object
       properties:
+        portfolioId:
+          type: string
         number:
           type: string
         area:
@@ -4152,6 +4149,7 @@ components:
           type: string
           nullable: true
       required:
+        - portfolioId
         - number
         - area
         - block

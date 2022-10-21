@@ -2,6 +2,7 @@ import {
 	ApiHideProperty,
 	ApiProperty,
 	IntersectionType,
+	OmitType,
 	PartialType,
 	PickType,
 } from '@nestjs/swagger';
@@ -120,6 +121,7 @@ export class PropertyDto
 }
 
 export class CreatePropertyDto implements z.infer<typeof propertyCreateSchema> {
+	portfolioId: string;
 	number: string;
 	area: string;
 	block: string;
@@ -131,5 +133,5 @@ export class CreatePropertyDto implements z.infer<typeof propertyCreateSchema> {
 }
 
 export class UpdatePropertyDto
-	extends PartialType(CreatePropertyDto)
+	extends PartialType(OmitType(CreatePropertyDto, ['portfolioId']))
 	implements z.infer<typeof propertyUpdateSchema> {}

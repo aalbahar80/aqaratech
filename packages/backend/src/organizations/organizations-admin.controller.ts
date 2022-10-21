@@ -34,17 +34,15 @@ export class OrganizationsAdminController {
 		});
 	}
 
-	@Post('/portfolios/:portfolioId/properties')
+	@Post('/properties')
 	@CheckAbilities({ action: Action.Create, subject: 'Property' })
 	createProperty(
 		@Param('organizationId') organizationId: string,
-		@Param('portfolioId') portfolioId: string,
 		@Body(new ZodValidationPipe(propertyCreateSchema))
 		createPropertyDto: CreatePropertyDto,
 	) {
 		return this.propertiesService.create({
 			createPropertyDto,
-			portfolioId,
 			organizationId,
 		});
 	}

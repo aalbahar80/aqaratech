@@ -10,10 +10,10 @@ test('can create property in own org', async ({ request, org, portfolio }) => {
 			organizationId: org.organization.id,
 			portfolioId: portfolio.id,
 		}),
-		['area', 'block', 'street', 'number'],
+		['portfolioId', 'area', 'block', 'street', 'number'],
 	);
 
-	const url = `/organizations/${org.organization.id}/portfolios/${portfolio.id}/properties`;
+	const url = `/organizations/${org.organization.id}/properties`;
 
 	const res = await request.post(url, { data: property });
 
@@ -30,12 +30,10 @@ test('cannot create property in another org', async ({
 			organizationId: org.organization.id,
 			portfolioId: portfolio.id,
 		}),
-		['area', 'street'],
+		['portfolioId', 'area', 'street'],
 	);
 
-	const url = `/organizations/${sample.organizations[0]!.id}/portfolios/${
-		portfolio.id
-	}/properties`;
+	const url = `/organizations/${sample.organizations[0]!.id}/properties`;
 
 	const res = await request.post(url, { data: property });
 
@@ -53,12 +51,10 @@ test('cannot create property in non-existing portfolio', async ({
 			organizationId: org.organization.id,
 			portfolioId: randomUUID(),
 		}),
-		['area', 'block', 'street', 'number'],
+		['portfolioId', 'area', 'block', 'street', 'number'],
 	);
 
-	const url = `/organizations/${
-		org.organization.id
-	}/portfolios/${randomUUID()}/properties`;
+	const url = `/organizations/${org.organization.id}/properties`;
 
 	const res = await request.post(url, { data: property });
 

@@ -118,9 +118,15 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			portfolioId: portfolio.id,
 		});
 
-		const picked = R.pick(property, ['area', 'block', 'street', 'number']);
+		const picked = R.pick(property, [
+			'portfolioId',
+			'area',
+			'block',
+			'street',
+			'number',
+		]);
 
-		const url = `${apiURL}/organizations/${portfolio.organizationId}/portfolios/${portfolio.id}/properties`;
+		const url = `${apiURL}/organizations/${portfolio.organizationId}/properties`;
 
 		const res = await request.post(url, { data: picked });
 

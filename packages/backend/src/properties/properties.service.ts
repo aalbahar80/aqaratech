@@ -33,17 +33,14 @@ export class PropertiesService {
 
 	async create({
 		createPropertyDto,
-		portfolioId,
 		organizationId,
 	}: {
 		createPropertyDto: CreatePropertyDto;
-		portfolioId: string;
 		organizationId: string;
 	}) {
 		const created = await this.prisma.property.create({
 			data: {
 				...createPropertyDto,
-				portfolioId,
 				organizationId,
 			},
 		});
