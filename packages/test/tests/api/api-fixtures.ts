@@ -101,7 +101,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			organizationId: org.organization.id,
 		});
 
-		const picked = R.pick(portfolio, ['fullName', 'organizationId']);
+		const picked = R.pick(portfolio, ['fullName']);
 
 		const url = `${apiURL}/organizations/${org.organization.id}/portfolios`;
 

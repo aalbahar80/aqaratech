@@ -1,9 +1,7 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Action } from 'src/casl/action.enum';
-import { frisk } from 'src/casl/frisk';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import {
@@ -93,21 +91,9 @@ export class PortfoliosService {
 		updatePortfolioDto: UpdatePortfolioDto;
 		user: IUser;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Update,
-			// @ts-expect-error temp
-			subject(this.SubjectType, updatePortfolioDto),
-		);
-
-		const frisked = frisk({
-			user,
-			SubjectType: this.SubjectType,
-			instance: updatePortfolioDto,
-		});
-
 		const portfolio = await this.prisma.portfolio.update({
-			where: { id },
-			data: frisked,
+			where: { id, AND: accessibleBy(user.ability, Action.Update).Portfolio },
+			data: updatePortfolioDto,
 		});
 
 		this.eventEmitter.emit(

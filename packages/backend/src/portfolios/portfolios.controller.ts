@@ -9,8 +9,10 @@ import {
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { portfolioUpdateSchema } from '@self/utils';
 import { AggregateService } from 'src/aggregate/aggregate.service';
 import { BalanceDto } from 'src/aggregate/dto/balance.dto';
+import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -21,6 +23,7 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { PayoutDto } from 'src/payouts/dto/payout.dto';
 import { PayoutsService } from 'src/payouts/payouts.service';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 import { PropertiesService } from 'src/properties/properties.service';
 import { RoleDto } from 'src/roles/dto/role.dto';
@@ -63,12 +66,12 @@ export class PortfoliosController {
 	}
 
 	@Patch(':id')
-	@CheckAbilities({ action: Action.Update, subject: SubjectType })
-	@ApiOkResponse({ type: PortfolioDto })
+	@SkipAbilityCheck() // TODO rm
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@Body() updatePortfolioDto: UpdatePortfolioDto,
+		@Body(new ZodValidationPipe(portfolioUpdateSchema))
+		updatePortfolioDto: UpdatePortfolioDto,
 	): Promise<PortfolioDto> {
 		return this.portfoliosService.update({ id, updatePortfolioDto, user });
 	}
