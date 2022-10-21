@@ -9,7 +9,7 @@ test(`can't be created without fullName`, async ({ request, org }) => {
 		tenantFactory.build({
 			organizationId: org.organization.id,
 		}),
-		['organizationId'],
+		['label'],
 	);
 
 	const res = await request.post(
@@ -20,7 +20,45 @@ test(`can't be created without fullName`, async ({ request, org }) => {
 	);
 
 	await expect(res).not.toBeOK();
+
 	expect(res.status()).toBe(400);
+
+	const body: unknown = await res.json();
+
+	expect(body).toHaveProperty('fullName', ['Required']);
+});
+
+test(`can't be created with additional properties`, async ({
+	request,
+	org,
+}) => {
+	const tenant = R.pick(
+		tenantFactory.build({
+			organizationId: org.organization.id,
+		}),
+		['fullName'],
+	);
+
+	const res = await request.post(
+		`/organizations/${org.organization.id}/tenants`,
+		{
+			data: {
+				...tenant,
+				start: '2021-01-01',
+				label: 23,
+				abc: 123,
+			},
+		},
+	);
+
+	await expect(res).not.toBeOK();
+
+	expect(res.status()).toBe(400);
+
+	// TODO add error message
+	// const body: unknown = await res.json();
+
+	// expect(body).toHaveProperty('fullName', ['Required']);
 });
 
 test(`can be created with minimal fields`, async ({ request, org }) => {

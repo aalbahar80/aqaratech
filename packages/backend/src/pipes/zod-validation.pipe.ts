@@ -16,12 +16,15 @@ export class ZodValidationPipe implements PipeTransform {
 			return value;
 		}
 
+		// TODO fail if extra fields are present
 		const parsed = this.schema.safeParse(value);
 
 		if (parsed.success) {
 			return parsed.data as unknown;
 		}
 
-		throw new BadRequestException('Validation failed');
+		const errors = parsed.error.formErrors.fieldErrors;
+
+		throw new BadRequestException(errors);
 	}
 }
