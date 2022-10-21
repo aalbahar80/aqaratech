@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { OrganizationsAdminController } from 'src/organizations/organizations-admin.controller';
 import { RolesModule } from 'src/roles/roles.module';
 import { S3Module } from 'src/s3/s3.module';
 import { SearchModule } from 'src/search/search.module';
@@ -7,7 +8,7 @@ import { OrganizationsController } from './organizations.controller';
 import { OrganizationsService } from './organizations.service';
 
 @Module({
-	controllers: [OrganizationsController],
+	controllers: [OrganizationsController, OrganizationsAdminController],
 	providers: [OrganizationsService],
 	imports: [RolesModule, SearchModule, S3Module, TenantsModule],
 })

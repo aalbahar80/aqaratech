@@ -11,12 +11,10 @@ import {
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
-import { tenantCreateSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
-import { AuthzGuard } from 'src/casl/authz.guard';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -24,13 +22,10 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
-import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
-import { CreateTenantDto } from 'src/tenants/dto/tenant.dto';
-import { TenantsService } from 'src/tenants/tenants.service';
 import {
 	CreateOrganizationDto,
 	OrganizationCreatedDto,
@@ -47,9 +42,8 @@ const SubjectType = 'Organization';
 export class OrganizationsController {
 	constructor(
 		private readonly organizationsService: OrganizationsService,
-		private rolesService: RolesService,
+		private readonly rolesService: RolesService,
 		private readonly searchService: SearchService,
-		private readonly tenantsService: TenantsService,
 	) {}
 
 	@Post()
@@ -136,19 +130,5 @@ export class OrganizationsController {
 		@Query('query') query: string,
 	): Promise<SearchDto[]> {
 		return this.searchService.search({ query, organizationId: id, user });
-	}
-
-	@Post('/:organizationId/tenants')
-	@UseGuards(AuthzGuard)
-	@CheckAbilities({ action: Action.Create, subject: 'Tenant' })
-	createTenant(
-		@Param('organizationId') organizationId: string,
-		@Body(new ZodValidationPipe(tenantCreateSchema))
-		CreateTenantDto: CreateTenantDto,
-	) {
-		return this.tenantsService.create({
-			createTenantDto: CreateTenantDto,
-			organizationId,
-		});
 	}
 }

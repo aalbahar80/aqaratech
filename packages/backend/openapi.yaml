@@ -2344,7 +2344,7 @@ paths:
       security: *ref_20
   /organizations/{organizationId}/tenants:
     post:
-      operationId: OrganizationsController_createTenant
+      operationId: OrganizationsAdminController_createTenant
       summary: ''
       description: ''
       parameters:
@@ -2366,8 +2366,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: *ref_19
-      security: *ref_20
+      tags:
+        - organizations
+      security:
+        - accessToken: []
   /expense-categories:
     post:
       operationId: ExpenseCategoriesController_create

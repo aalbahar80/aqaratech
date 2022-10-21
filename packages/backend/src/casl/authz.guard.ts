@@ -10,7 +10,13 @@ import { IUser } from 'src/interfaces/user.interface';
 // user.ability - done
 // Action type
 // subject (subjectType, subjectObject)
-
+/**
+ * This guard checks if the user has the required abilities to access the route.
+ *
+ * Currently, this is only used for POST routes in the organizations-admin controller.
+ *
+ * Other routes (non-POST) should use `accessiblyBy` in the service.
+ */
 @Injectable()
 export class AuthzGuard implements CanActivate {
 	constructor(private reflector: Reflector) {}
