@@ -7,7 +7,7 @@
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
-	import { tenantSchema as schema } from '@self/utils';
+	import { tenantCreateSchema as schema } from '@self/utils';
 
 	type TTenantDto = $$Generic<
 		// eslint-disable-next-line no-undef

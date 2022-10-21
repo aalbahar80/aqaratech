@@ -1,9 +1,9 @@
-import { tenantSchema } from '@self/utils';
+import { tenantCreateSchema } from '@self/utils';
 import { z } from 'zod';
 
 // change z.input after creating validation pipe
 // Doesn't error if we add extra fields, is there a version of implement that does?
-export class CreateTenantZodDto implements z.infer<typeof tenantSchema> {
+export class CreateTenantZodDto implements z.infer<typeof tenantCreateSchema> {
 	fullName: string;
 	label?: string | null;
 	civilid?: string | null;

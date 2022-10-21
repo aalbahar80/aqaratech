@@ -1,4 +1,4 @@
-import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
+import { ApiProperty, IntersectionType } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
 import { Expose } from 'class-transformer';
 import {
@@ -63,9 +63,3 @@ export class TenantDto
 		return this.label ?? this.fullName;
 	}
 }
-
-export class CreateTenantDto
-	extends IntersectionType(TenantRequiredDto, PartialType(TenantOptionalDto))
-	implements Partial<Tenant> {}
-
-export class UpdateTenantDto extends PartialType(CreateTenantDto) {}

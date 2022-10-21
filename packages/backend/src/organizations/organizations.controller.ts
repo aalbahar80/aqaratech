@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
-import { tenantSchema } from '@self/utils';
+import { tenantCreateSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -143,7 +143,7 @@ export class OrganizationsController {
 	@CheckAbilities({ action: Action.Create, subject: 'Tenant' })
 	createTenant(
 		@Param('organizationId') organizationId: string,
-		@Body(new ZodValidationPipe(tenantSchema))
+		@Body(new ZodValidationPipe(tenantCreateSchema))
 		createTenantZodDto: CreateTenantZodDto,
 	) {
 		return this.tenantsService.create({
