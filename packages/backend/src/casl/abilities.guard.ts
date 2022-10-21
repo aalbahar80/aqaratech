@@ -22,6 +22,8 @@ import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
 import { z } from 'zod';
 
+// TODO remove adding user.abilities to request.user from this guard.
+
 /**
  * Receives a user of type AuthenticatedUser as returned by the jwt.strategy.
  * Uses the user's email to enhance the `request.user` object with additional information,

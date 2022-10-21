@@ -1,9 +1,7 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Action } from 'src/casl/action.enum';
-import { frisk } from 'src/casl/frisk';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import {
@@ -101,21 +99,13 @@ export class TenantsService {
 		updateTenantDto: UpdateTenantDto;
 		user: IUser;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Update,
-			// @ts-expect-error test datetostring
-			subject(this.SubjectType, updateTenantDto),
-		);
-
-		const frisked = frisk({
-			user,
-			SubjectType: this.SubjectType,
-			instance: updateTenantDto,
-		});
-
 		const tenant = await this.prisma.tenant.update({
-			where: { id },
-			data: frisked,
+			where: {
+				id,
+				// TODO double check this
+				AND: [accessibleBy(user.ability, Action.Update).Tenant],
+			},
+			data: updateTenantDto,
 		});
 
 		this.eventEmitter.emit(

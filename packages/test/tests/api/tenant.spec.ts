@@ -84,7 +84,6 @@ test(`can be created with minimal fields`, async ({ request, org }) => {
 test(`can update fullName only`, async ({ request, tenant }) => {
 	const res = await request.patch(`/tenants/${tenant.id}`, {
 		data: {
-			organizationId: tenant.organizationId,
 			fullName: 'Test Tenant',
 		},
 	});
@@ -95,7 +94,6 @@ test(`can update fullName only`, async ({ request, tenant }) => {
 test(`can update single field only`, async ({ request, tenant }) => {
 	const res = await request.patch(`/tenants/${tenant.id}`, {
 		data: {
-			organizationId: tenant.organizationId,
 			label: 'Test Tenant label',
 		},
 	});
@@ -116,7 +114,7 @@ test(`fullName is trimmed`, async ({ request, org }) => {
 		tenantFactory.build({
 			organizationId: org.organization.id,
 		}),
-		['organizationId', 'fullName'],
+		['fullName'],
 	);
 
 	const res = await request.post(

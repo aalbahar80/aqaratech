@@ -10,6 +10,7 @@ import {
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { tenantUpdateSchema } from '@self/utils';
+import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -61,14 +62,14 @@ export class TenantsController {
 	}
 
 	@Patch(':id')
-	@CheckAbilities({ action: Action.Update, subject: SubjectType })
+	@SkipAbilityCheck() // TODO rm
 	@ApiOkResponse({ type: TenantDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
 		@Body(new ZodValidationPipe(tenantUpdateSchema))
 		updateTenantDto: UpdateTenantDto,
-	): Promise<TenantDto> {
+	) {
 		return this.tenantsService.update({ id, updateTenantDto, user });
 	}
 

@@ -83,7 +83,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			organizationId: org.organization.id,
 		});
 
-		const picked = R.pick(tenant, ['fullName', 'organizationId']);
+		const picked = R.pick(tenant, ['fullName']);
 
 		const url = `${apiURL}/organizations/${org.organization.id}/tenants`;
 		const res = await request.post(url, { data: picked });

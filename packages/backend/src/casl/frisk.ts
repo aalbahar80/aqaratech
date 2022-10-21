@@ -4,7 +4,8 @@ import * as R from 'remeda';
 import { Action } from 'src/casl/action.enum';
 import { IUser } from 'src/interfaces/user.interface';
 
-// TODO move to class?
+// TODO remove and replace with new prisma feature extendedWhereUnique
+// more info: https://github.com/prisma/prisma/releases/tag/4.5.0
 /**
  * Strip out fields that are not permitted to be updated by the user.
  */

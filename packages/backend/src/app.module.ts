@@ -35,6 +35,7 @@ import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 
 // resources
+import { UserAbilityGuard } from 'src/casl/user-ability.guard';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { MyValidationPipe } from 'src/pipes/my-validation.pipe';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -134,6 +135,7 @@ import { UsersModule } from './users/users.module';
 			useFactory: () => new SentryInterceptor(),
 		},
 		{ provide: APP_GUARD, useClass: JwtAuthGuard }, // parses JWT and sets user in request
+		{ provide: APP_GUARD, useClass: UserAbilityGuard }, // adds user ability to request
 		{ provide: APP_GUARD, useClass: AbilitiesGuard },
 		{ provide: APP_PIPE, useClass: MyValidationPipe },
 		{ provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },

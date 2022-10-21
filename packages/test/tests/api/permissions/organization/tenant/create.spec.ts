@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { sample, tenantFactory } from '@self/seed';
 import { randomUUID } from 'crypto';
 import * as R from 'remeda';
-import { test } from '../../api-fixtures';
+import { test } from '../../../api-fixtures';
 
 test('can create tenant in own org', async ({ request, org }) => {
 	const tenant = R.pick(
