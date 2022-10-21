@@ -6,6 +6,9 @@ module.exports = {
 	extends: ['custom'],
 	rules: {
 		'no-empty-pattern': 'off',
+
+		// Playwright fixtures can be unused
+		'@typescript-eslint/no-unused-vars': 'off',
 	},
 	globals: {
 		$: 'readonly',

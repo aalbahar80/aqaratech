@@ -13,7 +13,6 @@ test('can update tenant in own org', async ({ request, tenant }) => {
 	expect(res.status()).toBe(200);
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 test('cannot update tenant in another org', async ({ request, org: _org }) => {
 	const res = await request.patch(`/tenants/${sample.tenants[0]!.id}`, {
 		data: {
