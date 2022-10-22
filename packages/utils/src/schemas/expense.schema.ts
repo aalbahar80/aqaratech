@@ -1,7 +1,7 @@
 import { z } from 'zod';
+import { zodDateOnly } from './utils/date/zod-date-only';
 import { isID } from './utils/id.schema';
-import { zodIsDateString } from './utils/zod-date-string';
-import { trim } from './utils/zodTransformers';
+import { trim } from './utils/zod-transformers';
 
 export const expenseCreateSchema = z
 	.object({
@@ -10,7 +10,7 @@ export const expenseCreateSchema = z
 		unitId: isID.nullish(),
 		amount: z.number().gt(0),
 		categoryId: z.string().transform(trim).nullish(),
-		postAt: zodIsDateString(),
+		postAt: zodDateOnly(),
 		label: z.string().transform(trim).nullish(),
 		memo: z.string().transform(trim).nullish(),
 	})

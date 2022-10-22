@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { civilidSchema } from './utils/civilid.schema';
 import { phoneSchema } from './utils/phone.schema';
 import { zodIsDateString } from './utils/zod-date-string';
-import { trim } from './utils/zodTransformers';
+import { trim } from './utils/zod-transformers';
 
 // TODO satisfies CreateTenant? (depends on if we add multiple schemas) from '@prisma/client', minus organizationId
 export const tenantCreateSchema = z

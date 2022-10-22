@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { isID } from './utils/id.schema';
-import { trim } from './utils/zodTransformers';
+import { trim } from './utils/zod-transformers';
 
 export const propertyCreateSchema = z
 	.object({

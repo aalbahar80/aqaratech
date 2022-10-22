@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { digitsOnly, trim } from './zodTransformers';
+import { digitsOnly, trim } from './zod-transformers';
 
 export const civilidSchema = z
 	.string()

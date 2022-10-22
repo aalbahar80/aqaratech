@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { isID } from './utils/id.schema';
 import { stringToNumber } from './utils/string-to-number';
-import { trim } from './utils/zodTransformers';
+import { trim } from './utils/zod-transformers';
 
 export const unitCreateSchema = z
 	.object({
