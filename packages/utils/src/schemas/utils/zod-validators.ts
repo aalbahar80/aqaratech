@@ -15,11 +15,10 @@ const ISO_8601_WITH_TIME = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx";
  */
 export const zodIsDateOnlyOptional = () => z.string().nullish();
 
-// TODO: add date validator
 /**
- * Check if a string is a date
+ * Check if a string is a valid datestring
  */
-export const zodIsDateOnlyRequired = () =>
+export const zodIsDateString = () =>
 	z.string().transform((val, ctx) => {
 		if (!isValid(new Date(val))) {
 			ctx.addIssue({
