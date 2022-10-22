@@ -57,12 +57,9 @@
 				<div class="pt-5 pb-6">
 					<div class="space-y-1 px-2">
 						<!-- Entity nav links -->
+						<!-- TODO add back prefetch -->
 						{#each navigation as option (option.label)}
-							<a
-								on:click={() => close(null)}
-								data-sveltekit-prefetch
-								href={option.href}
-							>
+							<a on:click={() => close(null)} href={option.href}>
 								<PopoverItem option={{ label: option.label }} />
 							</a>
 						{/each}

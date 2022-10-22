@@ -23,8 +23,8 @@
 			<DashboardButton />
 			<!-- Large screen: nav links -->
 			{#each navigation as item (item.label)}
+				<!-- TODO add back prefetch -->
 				<a
-					data-sveltekit-prefetch
 					href={item.href}
 					class="flex rounded-md py-3 px-4 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
 				>

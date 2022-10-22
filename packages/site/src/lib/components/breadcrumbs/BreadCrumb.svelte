@@ -1,7 +1,7 @@
 <script lang="ts">
+	import type { BreadcrumbsDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
-	import type { BreadcrumbsDto } from '$api/openapi';
 	import { entitiesMap, isEntity } from '@self/utils';
 	import * as R from 'remeda';
 
@@ -47,6 +47,8 @@
 										<path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
 									</svg>
 								{/if}
+
+								<!-- TODO add back prefetch -->
 								<a
 									href={currentPage ? null : href}
 									class={classes(
@@ -56,7 +58,6 @@
 											: 'text-gray-500 hover:text-gray-700',
 									)}
 									class:ml-4={idx !== 0}
-									data-sveltekit-prefetch
 								>
 									{entitiesMap[title].singularCap}
 								</a>

@@ -13,12 +13,12 @@
 	export let prefetch: true | undefined = undefined;
 </script>
 
+<!-- TODO add back prefetch attribute after optimization -->
 <svelte:element
 	this={disabled ? 'button' : as}
 	id="sbutton"
 	class={$$props.class}
 	{href}
-	data-sveltekit-prefetch={prefetch ? '' : 'off'}
 	type="submit"
 	{disabled}
 	on:click
