@@ -6,8 +6,8 @@ import { trim } from './utils/zodTransformers';
 export const expenseCreateSchema = z
 	.object({
 		portfolioId: isID,
-		propertyId: isID.nullable(),
-		unitId: isID.nullable(),
+		propertyId: isID.nullish(),
+		unitId: isID.nullish(),
 		amount: z.number().gt(0),
 		categoryId: z.string().transform(trim).nullish(),
 		postAt: zodIsDateString(),

@@ -15,20 +15,17 @@ test.use({
 				amount: 100,
 			});
 
-			const picked = R.pick(expense, [
-				'amount',
-				'postAt',
-				'portfolioId',
-				'organizationId',
-			]);
+			const picked = R.pick(expense, ['amount', 'postAt', 'portfolioId']);
 
 			return [picked, picked];
 		});
 
 		// send post request for each expense
+		const url = `/organizations/${portfolio.organizationId}/expenses`;
+
 		await Promise.all(
 			expenses.map((expense) =>
-				request.post('/expenses', {
+				request.post(url, {
 					data: expense,
 				}),
 			),

@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { BalanceDto, CreateExpenseDto } from '../../../types/api';
+import type { BalanceDto } from '../../../types/api';
 import { test } from '../api-fixtures';
 
 test(`expense amount`, async ({ request, portfolio, expenseCategory }) => {
@@ -14,19 +14,20 @@ test(`expense amount`, async ({ request, portfolio, expenseCategory }) => {
 	const sum = expenses.reduce((acc, expense) => acc + expense.amount, 0);
 
 	// send post request for each expense
+	const url = `/organizations/${portfolio.organizationId}/expenses`;
+
 	await Promise.all(
 		expenses.map((e) => {
 			// only submit necessary fields
-			const expense: CreateExpenseDto = R.pick(e, [
+			const expense = R.pick(e, [
 				'amount',
 				'categoryId',
 				'portfolioId',
-				'organizationId',
 				'categoryId',
 				'postAt',
 			]);
 
-			return request.post('/expenses', { data: expense });
+			return request.post(url, { data: expense });
 		}),
 	);
 

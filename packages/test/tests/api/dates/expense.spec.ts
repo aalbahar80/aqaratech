@@ -11,13 +11,9 @@ test('postAt defaults to midnight UTC', async ({ request, portfolio }) => {
 		postAt: '2021-01-01',
 	});
 
-	const res = await request.post('/expenses', {
-		data: R.pick(expense, [
-			'organizationId',
-			'portfolioId',
-			'amount',
-			'postAt',
-		]),
+	const url = `/organizations/${portfolio.organizationId}/expenses`;
+	const res = await request.post(url, {
+		data: R.pick(expense, ['portfolioId', 'amount', 'postAt']),
 	});
 
 	const body = (await res.json()) as ExpenseDto;
