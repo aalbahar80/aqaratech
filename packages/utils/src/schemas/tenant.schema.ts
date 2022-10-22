@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { civilidSchema } from './utils/civilid.schema';
 import { phoneSchema } from './utils/phone.schema';
-import { zodIsDateOnlyOptional } from './utils/zod-validators';
+import { zodIsDateString } from './utils/zod-validators';
 import { trim } from './utils/zodTransformers';
 
 // TODO satisfies CreateTenant? (depends on if we add multiple schemas) from '@prisma/client', minus organizationId
@@ -10,12 +10,12 @@ export const tenantCreateSchema = z
 		fullName: z.string().min(1, { message: 'Required' }).transform(trim),
 		label: z.string().nullish().transform(trim),
 		phone: phoneSchema,
-		dob: zodIsDateOnlyOptional(),
+		dob: zodIsDateString().nullish(),
 		civilid: civilidSchema,
 		passportNum: z.string().transform(trim).nullish(),
 		residencyNum: z.string().transform(trim).nullish(),
 		nationality: z.string().transform(trim).nullish(),
-		residencyEnd: zodIsDateOnlyOptional(),
+		residencyEnd: zodIsDateString().nullish(),
 	})
 	.strict();
 

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { civilidSchema } from './utils/civilid.schema';
 import { phoneSchema } from './utils/phone.schema';
-import { zodIsDateOnlyOptional } from './utils/zod-validators';
+import { zodIsDateString } from './utils/zod-validators';
 import { trim } from './utils/zodTransformers';
 
 export const portfolioCreateSchema = z
@@ -10,7 +10,7 @@ export const portfolioCreateSchema = z
 		label: z.string().nullish().transform(trim),
 		phone: phoneSchema,
 		civilid: civilidSchema,
-		dob: zodIsDateOnlyOptional(),
+		dob: zodIsDateString().nullish(),
 	})
 	.strict();
 
