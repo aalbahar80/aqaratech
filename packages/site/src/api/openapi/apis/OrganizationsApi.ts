@@ -14,6 +14,7 @@
 
 import * as runtime from '../runtime';
 import type {
+	CreateLeaseDto,
 	CreateOrganizationDto,
 	CreatePortfolioDto,
 	CreatePropertyDto,
@@ -23,6 +24,7 @@ import type {
 	OrganizationDto,
 	PaginatedOrganizationDto,
 	PaginatedRoleDto,
+	PartialLeaseDto,
 	PartialUnitDto,
 	PortfolioDto,
 	PropertyDto,
@@ -34,6 +36,11 @@ import type {
 
 export interface OrganizationsApiCreateRequest {
 	createOrganizationDto: CreateOrganizationDto;
+}
+
+export interface OrganizationsApiCreateLeaseRequest {
+	organizationId: string;
+	createLeaseDto: CreateLeaseDto;
 }
 
 export interface OrganizationsApiCreatePortfolioRequest {
@@ -109,6 +116,26 @@ export interface OrganizationsApiInterface {
 		requestParameters: OrganizationsApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<OrganizationCreatedDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	createLeaseRaw(
+		requestParameters: OrganizationsApiCreateLeaseRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PartialLeaseDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createLease(
+		requestParameters: OrganizationsApiCreateLeaseRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PartialLeaseDto>;
 
 	/**
 	 *
@@ -363,6 +390,72 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<OrganizationCreatedDto> {
 		const response = await this.createRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createLeaseRaw(
+		requestParameters: OrganizationsApiCreateLeaseRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PartialLeaseDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createLease.',
+			);
+		}
+
+		if (
+			requestParameters.createLeaseDto === null ||
+			requestParameters.createLeaseDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createLeaseDto',
+				'Required parameter requestParameters.createLeaseDto was null or undefined when calling createLease.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/leases`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createLeaseDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createLease(
+		requestParameters: OrganizationsApiCreateLeaseRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PartialLeaseDto> {
+		const response = await this.createLeaseRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

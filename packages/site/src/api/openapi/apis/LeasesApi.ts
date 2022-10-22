@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CreateLeaseDto,
 	CreateManyLeaseInvoicesDto,
 	LeaseDto,
 	PaginatedLeaseDto,
@@ -24,10 +23,6 @@ import type {
 	SortOrderEnum,
 	UpdateLeaseDto,
 } from '../models';
-
-export interface LeasesApiCreateRequest {
-	createLeaseDto: CreateLeaseDto;
-}
 
 export interface LeasesApiCreateInvoicesRequest {
 	id: string;
@@ -77,26 +72,6 @@ export interface LeasesApiUpdateRequest {
  * @interface LeasesApiInterface
  */
 export interface LeasesApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof LeasesApiInterface
-	 */
-	createRaw(
-		requestParameters: LeasesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialLeaseDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	create(
-		requestParameters: LeasesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialLeaseDto>;
-
 	/**
 	 *
 	 * @summary
@@ -222,56 +197,6 @@ export interface LeasesApiInterface {
  *
  */
 export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
-	/**
-	 *
-	 *
-	 */
-	async createRaw(
-		requestParameters: LeasesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialLeaseDto>> {
-		if (
-			requestParameters.createLeaseDto === null ||
-			requestParameters.createLeaseDto === undefined
-		) {
-			throw new runtime.RequiredError(
-				'createLeaseDto',
-				'Required parameter requestParameters.createLeaseDto was null or undefined when calling create.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		headerParameters['Content-Type'] = 'application/json';
-
-		const response = await this.request(
-			{
-				path: `/leases`,
-				method: 'POST',
-				headers: headerParameters,
-				query: queryParameters,
-				body: requestParameters.createLeaseDto,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async create(
-		requestParameters: LeasesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialLeaseDto> {
-		const response = await this.createRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *

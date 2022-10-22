@@ -356,25 +356,13 @@ export interface CreateLeaseDto {
 	 * @type {string}
 	 * @memberof CreateLeaseDto
 	 */
-	start: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateLeaseDto
-	 */
-	end: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateLeaseDto
-	 */
-	organizationId: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateLeaseDto
-	 */
 	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseDto
+	 */
+	unitId: string;
 	/**
 	 *
 	 * @type {string}
@@ -386,7 +374,7 @@ export interface CreateLeaseDto {
 	 * @type {string}
 	 * @memberof CreateLeaseDto
 	 */
-	unitId: string;
+	start: string;
 	/**
 	 *
 	 * @type {number}
@@ -395,28 +383,22 @@ export interface CreateLeaseDto {
 	monthlyRent: number;
 	/**
 	 *
-	 * @type {number}
-	 * @memberof CreateLeaseDto
-	 */
-	deposit?: number;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof CreateLeaseDto
-	 */
-	canPay?: boolean;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof CreateLeaseDto
-	 */
-	notify?: boolean;
-	/**
-	 *
 	 * @type {string}
 	 * @memberof CreateLeaseDto
 	 */
-	license?: string | null;
+	end: string;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateLeaseDto
+	 */
+	notify: boolean;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateLeaseDto
+	 */
+	canPay: boolean;
 }
 /**
  *
@@ -2987,52 +2969,16 @@ export interface UpdateLeaseDto {
 	start?: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseDto
-	 */
-	end?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseDto
-	 */
-	organizationId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseDto
-	 */
-	portfolioId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseDto
-	 */
-	tenantId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseDto
-	 */
-	unitId?: string;
-	/**
-	 *
 	 * @type {number}
 	 * @memberof UpdateLeaseDto
 	 */
 	monthlyRent?: number;
 	/**
 	 *
-	 * @type {number}
+	 * @type {string}
 	 * @memberof UpdateLeaseDto
 	 */
-	deposit?: number;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof UpdateLeaseDto
-	 */
-	canPay?: boolean;
+	end?: string;
 	/**
 	 *
 	 * @type {boolean}
@@ -3041,10 +2987,10 @@ export interface UpdateLeaseDto {
 	notify?: boolean;
 	/**
 	 *
-	 * @type {string}
+	 * @type {boolean}
 	 * @memberof UpdateLeaseDto
 	 */
-	license?: string | null;
+	canPay?: boolean;
 }
 /**
  *
