@@ -7,7 +7,7 @@ import { isDatetime } from './is-date-time';
  *
  * Transforms date-only strings to midnight UTC.
  */
-export const zodIsDateString = () =>
+export const zodDateOnly = () =>
 	z.string().transform((val, ctx) => {
 		if (isDatetime(val)) {
 			ctx.addIssue({
