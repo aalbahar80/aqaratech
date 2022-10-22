@@ -1,6 +1,6 @@
 import { subMonths } from 'date-fns';
 
-export const defaultRange = 6;
+export const defaultRange = 3;
 
 /**
  * Figures out the date N months ago. Then returns the first day of that month.
