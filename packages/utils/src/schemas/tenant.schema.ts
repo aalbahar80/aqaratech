@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { civilidSchema } from './utils/civilid.schema';
-import { zodDateOnly } from './utils/date/zod-date-only';
+import { zodDateOnly, zodDateOnlyOptional } from './utils/date/zod-date-only';
 import { phoneSchema } from './utils/phone.schema';
 import { trim } from './utils/zod-transformers';
 
@@ -10,7 +10,7 @@ export const tenantCreateSchema = z
 		fullName: z.string().min(1, { message: 'Required' }).transform(trim),
 		label: z.string().nullish().transform(trim),
 		phone: phoneSchema,
-		dob: zodDateOnly().nullish(),
+		dob: zodDateOnlyOptional(),
 		civilid: civilidSchema,
 		passportNum: z.string().transform(trim).nullish(),
 		residencyNum: z.string().transform(trim).nullish(),
