@@ -10,7 +10,8 @@
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit",
-		"test": "vitest --ui"
+		"test": "vitest --run",
+		"test:ui": "vitest --ui"
 	},
 	"dependencies": {
 		"date-fns": "2.29.3",
