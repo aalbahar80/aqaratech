@@ -10,6 +10,7 @@
 		"check": "tsc --noEmit"
 	},
 	"dependencies": {
+		"date-fns": "2.29.3",
 		"remeda": "1.1.0",
 		"ts-toolbelt": "9.6.0",
 		"zod": "3.19.1"

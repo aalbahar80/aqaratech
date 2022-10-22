@@ -401,12 +401,14 @@ importers:
       '@sentry/types': 7.15.0
       '@tsconfig/esm': 1.0.2
       '@types/node': 18.11.0
+      date-fns: 2.29.3
       eslint-config-custom: workspace:1.1.0
       remeda: 1.1.0
       ts-toolbelt: 9.6.0
       typescript: 4.9.1-beta
       zod: 3.19.1
     dependencies:
+      date-fns: 2.29.3
       remeda: 1.1.0
       ts-toolbelt: 9.6.0
       zod: 3.19.1
