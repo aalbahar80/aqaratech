@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.7.3
+
+### Patch Changes
+
+- dbe4f879: reduce default dashboard range, disable prefetching, until optimization
+
 ## 1.7.2
 
 ### Patch Changes

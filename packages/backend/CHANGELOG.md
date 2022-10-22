@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.6.1
+
+### Patch Changes
+
+- dbe4f879: add context to logging interceptor
+
 ## 1.6.0
 
 ### Minor Changes
