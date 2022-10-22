@@ -17,7 +17,7 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
 	) {}
 
 	createWinstonModuleOptions(): LoggerOptions | Promise<LoggerOptions> {
-		const winstonConfig = this.config.get('winston', { infer: true });
+		// const winstonConfig = this.config.get('winston', { infer: true });
 
 		const level = this.config.get('PUBLIC_AQ_DEBUG_LEVEL', { infer: true });
 
@@ -25,12 +25,15 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
 			format: format.combine(
 				format.timestamp(),
 				format.ms(),
-				nestWinstonModuleUtilities.format.nestLike('backend'),
+				nestWinstonModuleUtilities.format.nestLike('backend', {
+					prettyPrint: true, // explicitly setting this for pretty error logging
+					colors: true,
+				}),
 			),
 		});
 
 		return {
-			...winstonConfig,
+			// ...winstonConfig,
 			level,
 			transports: [
 				nestTransport,
