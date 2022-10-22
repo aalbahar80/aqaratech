@@ -14,17 +14,12 @@
 
 import * as runtime from '../runtime';
 import type {
-	CreatePropertyDto,
 	PaginatedPropertyDto,
 	PaginatedUnitDto,
 	PropertyDto,
 	SortOrderEnum,
 	UpdatePropertyDto,
 } from '../models';
-
-export interface PropertiesApiCreateRequest {
-	createPropertyDto: CreatePropertyDto;
-}
 
 export interface PropertiesApiFindAllRequest {
 	page?: number;
@@ -63,26 +58,6 @@ export interface PropertiesApiUpdateRequest {
  * @interface PropertiesApiInterface
  */
 export interface PropertiesApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof PropertiesApiInterface
-	 */
-	createRaw(
-		requestParameters: PropertiesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PropertyDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	create(
-		requestParameters: PropertiesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PropertyDto>;
-
 	/**
 	 *
 	 * @summary
@@ -191,56 +166,6 @@ export class PropertiesApi
 	extends runtime.BaseAPI
 	implements PropertiesApiInterface
 {
-	/**
-	 *
-	 *
-	 */
-	async createRaw(
-		requestParameters: PropertiesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PropertyDto>> {
-		if (
-			requestParameters.createPropertyDto === null ||
-			requestParameters.createPropertyDto === undefined
-		) {
-			throw new runtime.RequiredError(
-				'createPropertyDto',
-				'Required parameter requestParameters.createPropertyDto was null or undefined when calling create.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		headerParameters['Content-Type'] = 'application/json';
-
-		const response = await this.request(
-			{
-				path: `/properties`,
-				method: 'POST',
-				headers: headerParameters,
-				query: queryParameters,
-				body: requestParameters.createPropertyDto,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async create(
-		requestParameters: PropertiesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PropertyDto> {
-		const response = await this.createRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *

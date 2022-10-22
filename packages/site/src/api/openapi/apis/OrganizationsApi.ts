@@ -15,11 +15,15 @@
 import * as runtime from '../runtime';
 import type {
 	CreateOrganizationDto,
+	CreatePortfolioDto,
+	CreatePropertyDto,
 	CreateTenantDto,
 	OrganizationCreatedDto,
 	OrganizationDto,
 	PaginatedOrganizationDto,
 	PaginatedRoleDto,
+	PortfolioDto,
+	PropertyDto,
 	SearchDto,
 	SortOrderEnum,
 	TenantDto,
@@ -28,6 +32,16 @@ import type {
 
 export interface OrganizationsApiCreateRequest {
 	createOrganizationDto: CreateOrganizationDto;
+}
+
+export interface OrganizationsApiCreatePortfolioRequest {
+	organizationId: string;
+	createPortfolioDto: CreatePortfolioDto;
+}
+
+export interface OrganizationsApiCreatePropertyRequest {
+	organizationId: string;
+	createPropertyDto: CreatePropertyDto;
 }
 
 export interface OrganizationsApiCreateTenantRequest {
@@ -88,6 +102,46 @@ export interface OrganizationsApiInterface {
 		requestParameters: OrganizationsApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<OrganizationCreatedDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	createPortfolioRaw(
+		requestParameters: OrganizationsApiCreatePortfolioRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PortfolioDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createPortfolio(
+		requestParameters: OrganizationsApiCreatePortfolioRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PortfolioDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	createPropertyRaw(
+		requestParameters: OrganizationsApiCreatePropertyRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PropertyDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createProperty(
+		requestParameters: OrganizationsApiCreatePropertyRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PropertyDto>;
 
 	/**
 	 *
@@ -282,6 +336,138 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<OrganizationCreatedDto> {
 		const response = await this.createRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createPortfolioRaw(
+		requestParameters: OrganizationsApiCreatePortfolioRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PortfolioDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createPortfolio.',
+			);
+		}
+
+		if (
+			requestParameters.createPortfolioDto === null ||
+			requestParameters.createPortfolioDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createPortfolioDto',
+				'Required parameter requestParameters.createPortfolioDto was null or undefined when calling createPortfolio.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/portfolios`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createPortfolioDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createPortfolio(
+		requestParameters: OrganizationsApiCreatePortfolioRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PortfolioDto> {
+		const response = await this.createPortfolioRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createPropertyRaw(
+		requestParameters: OrganizationsApiCreatePropertyRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PropertyDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createProperty.',
+			);
+		}
+
+		if (
+			requestParameters.createPropertyDto === null ||
+			requestParameters.createPropertyDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createPropertyDto',
+				'Required parameter requestParameters.createPropertyDto was null or undefined when calling createProperty.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/properties`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createPropertyDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createProperty(
+		requestParameters: OrganizationsApiCreatePropertyRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PropertyDto> {
+		const response = await this.createPropertyRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

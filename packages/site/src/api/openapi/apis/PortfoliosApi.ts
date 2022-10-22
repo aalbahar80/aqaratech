@@ -15,7 +15,6 @@
 import * as runtime from '../runtime';
 import type {
 	BalanceDto,
-	CreatePortfolioDto,
 	PaginatedPayoutDto,
 	PaginatedPortfolioDto,
 	PaginatedPropertyDto,
@@ -25,10 +24,6 @@ import type {
 	SortOrderEnum,
 	UpdatePortfolioDto,
 } from '../models';
-
-export interface PortfoliosApiCreateRequest {
-	createPortfolioDto: CreatePortfolioDto;
-}
 
 export interface PortfoliosApiFindAllRequest {
 	page?: number;
@@ -98,26 +93,6 @@ export interface PortfoliosApiUpdateRequest {
  * @interface PortfoliosApiInterface
  */
 export interface PortfoliosApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof PortfoliosApiInterface
-	 */
-	createRaw(
-		requestParameters: PortfoliosApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PortfolioDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	create(
-		requestParameters: PortfoliosApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PortfolioDto>;
-
 	/**
 	 *
 	 * @summary
@@ -306,56 +281,6 @@ export class PortfoliosApi
 	extends runtime.BaseAPI
 	implements PortfoliosApiInterface
 {
-	/**
-	 *
-	 *
-	 */
-	async createRaw(
-		requestParameters: PortfoliosApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PortfolioDto>> {
-		if (
-			requestParameters.createPortfolioDto === null ||
-			requestParameters.createPortfolioDto === undefined
-		) {
-			throw new runtime.RequiredError(
-				'createPortfolioDto',
-				'Required parameter requestParameters.createPortfolioDto was null or undefined when calling create.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		headerParameters['Content-Type'] = 'application/json';
-
-		const response = await this.request(
-			{
-				path: `/portfolios`,
-				method: 'POST',
-				headers: headerParameters,
-				query: queryParameters,
-				body: requestParameters.createPortfolioDto,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async create(
-		requestParameters: PortfoliosApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PortfolioDto> {
-		const response = await this.createRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *

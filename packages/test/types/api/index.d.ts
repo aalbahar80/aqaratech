@@ -613,18 +613,6 @@ export interface CreatePortfolioDto {
 	 * @type {string}
 	 * @memberof CreatePortfolioDto
 	 */
-	dob?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreatePortfolioDto
-	 */
-	organizationId: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreatePortfolioDto
-	 */
 	fullName: string;
 	/**
 	 *
@@ -637,13 +625,19 @@ export interface CreatePortfolioDto {
 	 * @type {string}
 	 * @memberof CreatePortfolioDto
 	 */
+	phone?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePortfolioDto
+	 */
 	civilid?: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof CreatePortfolioDto
 	 */
-	phone?: string | null;
+	dob?: string | null;
 }
 /**
  *
@@ -656,43 +650,43 @@ export interface CreatePropertyDto {
 	 * @type {string}
 	 * @memberof CreatePropertyDto
 	 */
-	organizationId: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreatePropertyDto
-	 */
 	portfolioId: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof CreatePropertyDto
 	 */
-	area: string | null;
+	number: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof CreatePropertyDto
 	 */
-	block?: string | null;
+	area: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	block: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	street: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePropertyDto
+	 */
+	label?: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof CreatePropertyDto
 	 */
 	avenue?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreatePropertyDto
-	 */
-	street?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreatePropertyDto
-	 */
-	number?: string | null;
 	/**
 	 *
 	 * @type {string}
@@ -705,30 +699,6 @@ export interface CreatePropertyDto {
 	 * @memberof CreatePropertyDto
 	 */
 	paci?: string | null;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof CreatePropertyDto
-	 */
-	cost?: number | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreatePropertyDto
-	 */
-	label?: string | null;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof CreatePropertyDto
-	 */
-	_long?: number | null;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof CreatePropertyDto
-	 */
-	lat?: number | null;
 }
 /**
  *
@@ -3216,18 +3186,6 @@ export interface UpdatePortfolioDto {
 	 * @type {string}
 	 * @memberof UpdatePortfolioDto
 	 */
-	dob?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdatePortfolioDto
-	 */
-	organizationId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdatePortfolioDto
-	 */
 	fullName?: string;
 	/**
 	 *
@@ -3240,13 +3198,19 @@ export interface UpdatePortfolioDto {
 	 * @type {string}
 	 * @memberof UpdatePortfolioDto
 	 */
+	phone?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePortfolioDto
+	 */
 	civilid?: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UpdatePortfolioDto
 	 */
-	phone?: string | null;
+	dob?: string | null;
 }
 /**
  *
@@ -3259,43 +3223,37 @@ export interface UpdatePropertyDto {
 	 * @type {string}
 	 * @memberof UpdatePropertyDto
 	 */
-	organizationId?: string;
+	number?: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UpdatePropertyDto
 	 */
-	portfolioId?: string;
+	area?: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UpdatePropertyDto
 	 */
-	area?: string | null;
+	block?: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UpdatePropertyDto
 	 */
-	block?: string | null;
+	street?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatePropertyDto
+	 */
+	label?: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UpdatePropertyDto
 	 */
 	avenue?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdatePropertyDto
-	 */
-	street?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdatePropertyDto
-	 */
-	number?: string | null;
 	/**
 	 *
 	 * @type {string}
@@ -3308,30 +3266,6 @@ export interface UpdatePropertyDto {
 	 * @memberof UpdatePropertyDto
 	 */
 	paci?: string | null;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof UpdatePropertyDto
-	 */
-	cost?: number | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdatePropertyDto
-	 */
-	label?: string | null;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof UpdatePropertyDto
-	 */
-	_long?: number | null;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof UpdatePropertyDto
-	 */
-	lat?: number | null;
 }
 /**
  *
