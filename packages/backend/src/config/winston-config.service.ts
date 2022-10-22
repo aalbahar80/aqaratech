@@ -22,7 +22,6 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
 		const level = this.config.get('PUBLIC_AQ_DEBUG_LEVEL', { infer: true });
 
 		const nestTransport = new transports.Console({
-			level,
 			format: format.combine(
 				format.timestamp(),
 				format.ms(),
@@ -32,6 +31,7 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
 
 		return {
 			...winstonConfig,
+			level,
 			transports: [
 				nestTransport,
 
