@@ -1,6 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { createApi } from '$api';
+	import type {
+		ExpenseCategoryDto,
+		ExpenseDto,
+		PaginatedPortfolioDto,
+		PaginatedPropertyDto,
+		PaginatedUnitDto,
+	} from '$api/openapi';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import {
 		portfoliosToOptions,
@@ -12,14 +19,7 @@
 	import type { PredefinedExpense } from '$lib/models/interfaces/predefined.interface';
 	import { toOptions } from '$lib/utils/expense-type-options';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
-	import { createSchema, updateSchema } from '$models/schemas/expense.schema';
-	import type {
-		ExpenseCategoryDto,
-		ExpenseDto,
-		PaginatedPortfolioDto,
-		PaginatedPropertyDto,
-		PaginatedUnitDto,
-	} from '$api/openapi';
+	import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
 
 	type TPredefinedExpense = $$Generic<PredefinedExpense | undefined>;
 	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;
@@ -119,7 +119,7 @@
 
 {#if formType === 'update'}
 	<Form
-		schema={updateSchema}
+		schema={expenseUpdateSchema}
 		entity="expense"
 		{formType}
 		{basicFields}
@@ -132,7 +132,7 @@
 	/>
 {:else}
 	<Form
-		schema={createSchema}
+		schema={expenseCreateSchema}
 		entity="expense"
 		{formType}
 		{basicFields}

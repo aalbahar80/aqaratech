@@ -1,9 +1,7 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
-import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { parseLocationFilter } from 'src/common/parse-location-filter';
@@ -25,22 +23,24 @@ export class ExpensesService {
 	async create({
 		createExpenseDto,
 		user,
+		organizationId,
 	}: {
 		createExpenseDto: CreateExpenseDto;
 		user: IUser;
+		organizationId: string;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject(this.SubjectType, createExpenseDto),
-		);
-
 		// VALIDATE EXPENSE CATEGORY
 
 		if (createExpenseDto.categoryId) {
 			await this.validateCategoryId(createExpenseDto.categoryId, user);
 		}
 
-		return this.prisma.expense.create({ data: createExpenseDto });
+		return this.prisma.expense.create({
+			data: {
+				...createExpenseDto,
+				organizationId,
+			},
+		});
 	}
 
 	async findAll({
@@ -136,23 +136,15 @@ export class ExpensesService {
 		updateExpenseDto: UpdateExpenseDto;
 		user: IUser;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Update,
-			subject(this.SubjectType, updateExpenseDto),
-		);
-
 		// VALIDATE EXPENSE CATEGORY
 		if (updateExpenseDto.categoryId) {
 			await this.validateCategoryId(updateExpenseDto.categoryId, user);
 		}
 
-		const frisked = frisk({
-			user,
-			SubjectType: this.SubjectType,
-			instance: updateExpenseDto,
+		return this.prisma.expense.update({
+			where: { id, AND: accessibleBy(user.ability, Action.Update).Expense },
+			data: updateExpenseDto,
 		});
-
-		return this.prisma.expense.update({ where: { id }, data: frisked });
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {

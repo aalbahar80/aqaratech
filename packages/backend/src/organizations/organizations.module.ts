@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ExpensesModule } from 'src/expenses/expenses.module';
 import { LeasesModule } from 'src/leases/leases.module';
 import { OrganizationsAdminController } from 'src/organizations/organizations-admin.controller';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
@@ -23,6 +24,7 @@ import { OrganizationsService } from './organizations.service';
 		PropertiesModule,
 		UnitsModule,
 		LeasesModule,
+		ExpensesModule,
 	],
 })
 export class OrganizationsModule {}

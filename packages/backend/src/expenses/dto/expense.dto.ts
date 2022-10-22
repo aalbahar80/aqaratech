@@ -2,10 +2,12 @@ import {
 	ApiHideProperty,
 	ApiProperty,
 	IntersectionType,
+	OmitType,
 	PartialType,
 	PickType,
 } from '@nestjs/swagger';
 import { Expense } from '@prisma/client';
+import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsOptional, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -18,6 +20,7 @@ import { Rel } from 'src/constants/rel.enum';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { IsID } from 'src/decorators/field.decorators';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
+import { z } from 'zod';
 
 class ExpenseRequiredDto {
 	@IsID()
@@ -124,8 +127,19 @@ export class ExpenseDto
 
 export class PartialExpenseDto extends PartialType(ExpenseDto) {}
 
-export class CreateExpenseDto
-	extends IntersectionType(ExpenseRequiredDto, PartialType(ExpenseOptionalDto))
-	implements Partial<Expense> {}
+export class CreateExpenseDto implements z.infer<typeof expenseCreateSchema> {
+	portfolioId: string;
+	propertyId: string | null;
+	unitId: string | null;
+	amount: number;
+	postAt: string;
+	categoryId?: string | null;
+	memo?: string | null;
+	label?: string | null;
+}
 
-export class UpdateExpenseDto extends PartialType(CreateExpenseDto) {}
+export class UpdateExpenseDto
+	extends PartialType(
+		OmitType(CreateExpenseDto, ['portfolioId', 'propertyId', 'unitId']),
+	)
+	implements z.infer<typeof expenseUpdateSchema> {}

@@ -5,10 +5,11 @@ import {
 	Get,
 	Param,
 	Patch,
-	Post,
 	Query,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { expenseUpdateSchema } from '@self/utils';
+import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -18,12 +19,12 @@ import { User } from 'src/decorators/user.decorator';
 import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 
 import {
-	CreateExpenseDto,
 	ExpenseDto,
 	PartialExpenseDto,
 	UpdateExpenseDto,
 } from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { ExpensesService } from './expenses.service';
 
 const SubjectType = 'Expense';
@@ -33,16 +34,6 @@ const SubjectType = 'Expense';
 @SwaggerAuth()
 export class ExpensesController {
 	constructor(private readonly expensesService: ExpensesService) {}
-
-	@Post()
-	@CheckAbilities({ action: Action.Create, subject: SubjectType })
-	@ApiCreatedResponse({ type: PartialExpenseDto })
-	create(
-		@User() user: IUser,
-		@Body() createExpenseDto: CreateExpenseDto,
-	): Promise<PartialExpenseDto> {
-		return this.expensesService.create({ createExpenseDto, user });
-	}
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
@@ -62,12 +53,13 @@ export class ExpensesController {
 	}
 
 	@Patch(':id')
-	@CheckAbilities({ action: Action.Update, subject: SubjectType })
+	@SkipAbilityCheck() // TODO rm
 	@ApiOkResponse({ type: PartialExpenseDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@Body() updateExpenseDto: UpdateExpenseDto,
+		@Body(new ZodValidationPipe(expenseUpdateSchema))
+		updateExpenseDto: UpdateExpenseDto,
 	): Promise<PartialExpenseDto> {
 		return this.expensesService.update({ id, updateExpenseDto, user });
 	}

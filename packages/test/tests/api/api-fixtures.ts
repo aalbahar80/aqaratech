@@ -1,5 +1,6 @@
 import { test as base } from '@playwright/test';
 import {
+	expenseFactory,
 	leaseFactory,
 	organizationFactory,
 	portfolioFactory,
@@ -10,6 +11,7 @@ import {
 import * as R from 'remeda';
 import type {
 	ExpenseCategoryDto,
+	ExpenseDto,
 	LeaseDto,
 	OrganizationCreatedDto,
 	PortfolioDto,
@@ -188,6 +190,29 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(created);
 	},
 
+	expense: async ({ org, property, request }, use) => {
+		const expense = expenseFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: property.portfolioId,
+		});
+
+		const picked = R.pick(expense, [
+			'portfolioId',
+			'propertyId',
+			'unitId',
+			'amount',
+			'postAt',
+		]);
+
+		const url = `${apiURL}/organizations/${org.organization.id}/expenses`;
+
+		const res = await request.post(url, { data: picked });
+
+		const created = (await res.json()) as ExpenseDto;
+
+		await use(created);
+	},
+
 	// A fixture that returns a fresh file in a fresh portfolio.
 	file: async ({ portfolio, request }, use) => {
 		const fileName = 'test.txt';
@@ -232,6 +257,7 @@ interface TestFixtures {
 	property: PropertyDto;
 	unit: UnitDto;
 	lease: LeaseDto;
+	expense: ExpenseDto;
 	file: string;
 	expenseCategory: ExpenseCategoryDto;
 }

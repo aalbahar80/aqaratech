@@ -1,6 +1,7 @@
 import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import {
+	expenseCreateSchema,
 	leaseCreateSchema,
 	portfolioCreateSchema,
 	propertyCreateSchema,
@@ -11,6 +12,13 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { AuthzGuard } from 'src/casl/authz.guard';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
+import { User } from 'src/decorators/user.decorator';
+import {
+	CreateExpenseDto,
+	PartialExpenseDto,
+} from 'src/expenses/dto/expense.dto';
+import { ExpensesService } from 'src/expenses/expenses.service';
+import { IUser } from 'src/interfaces/user.interface';
 import { CreateLeaseDto, PartialLeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
@@ -34,6 +42,7 @@ export class OrganizationsAdminController {
 		private readonly propertiesService: PropertiesService,
 		private readonly unitsService: UnitsService,
 		private readonly leasesService: LeasesService,
+		private readonly expensesService: ExpensesService,
 	) {}
 
 	@Post('/tenants')
@@ -101,6 +110,22 @@ export class OrganizationsAdminController {
 		return this.leasesService.create({
 			createLeaseDto,
 			organizationId,
+		});
+	}
+
+	@Post('/expenses')
+	@CheckAbilities({ action: Action.Create, subject: 'Expense' })
+	@ApiCreatedResponse({ type: PartialExpenseDto })
+	createExpense(
+		@User() user: IUser,
+		@Param('organizationId') organizationId: string,
+		@Body(new ZodValidationPipe(expenseCreateSchema))
+		createExpenseDto: CreateExpenseDto,
+	): Promise<PartialExpenseDto> {
+		return this.expensesService.create({
+			createExpenseDto,
+			organizationId,
+			user,
 		});
 	}
 }
