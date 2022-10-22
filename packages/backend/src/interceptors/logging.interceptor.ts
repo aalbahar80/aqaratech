@@ -108,7 +108,7 @@ export class LoggingInterceptor implements NestInterceptor {
 			},
 		});
 
-		this.logger.log(log);
+		this.logger.log(log, 'Request');
 	}
 
 	private logResponse({
@@ -139,17 +139,23 @@ export class LoggingInterceptor implements NestInterceptor {
 		});
 
 		if (statusCode >= 500) {
-			this.logger.error({
-				...text,
-				level: 'error',
-			});
+			this.logger.error(
+				{
+					...text,
+					level: 'error',
+				},
+				'Response',
+			);
 		} else if (statusCode >= 400) {
-			this.logger.warn({
-				...text,
-				level: 'warn',
-			});
+			this.logger.warn(
+				{
+					...text,
+					level: 'warn',
+				},
+				'Response',
+			);
 		} else {
-			this.logger.log(text);
+			this.logger.log(text, 'Response');
 		}
 	}
 }
