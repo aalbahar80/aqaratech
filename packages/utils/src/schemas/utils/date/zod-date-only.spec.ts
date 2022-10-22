@@ -20,20 +20,6 @@ test('short dates are transformed to midnight UTC', () => {
 	expect(schema.parse(date)).toBe('2021-01-01T00:00:00.000Z');
 });
 
-test.each(DATE_ONLY.VALID)('date transformation is idempotent: %s', (date) => {
-	const first = schema.parse(date);
-
-	expect(schema.parse(first)).toBe(first);
-});
-
-test('date transformation is idempotent for full datetime strings', () => {
-	const date = '2021-01-01T00:00:00.000Z';
-
-	const first = schema.parse(date);
-
-	expect(schema.parse(first)).toBe(date);
-});
-
 test('always returns midnight UTC', () => {
 	const date = '2021-01-01T05:12:34.000Z';
 
