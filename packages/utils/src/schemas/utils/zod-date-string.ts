@@ -1,4 +1,4 @@
-import { isMatch, isValid } from 'date-fns';
+import { isMatch } from 'date-fns';
 import { z } from 'zod';
 
 // Reference: https://date-fns.org/v2.29.3/docs/isMatch
@@ -20,22 +20,15 @@ export const zodIsDateOnlyOptional = () => z.string().nullish();
  */
 export const zodIsDateString = () =>
 	z.string().transform((val, ctx) => {
-		if (!isValid(new Date(val))) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
-				message: 'Invalid date',
-			});
-
-			return z.NEVER;
-		} else if (isMatch(val, ISO_8601_WITH_TIME)) {
+		if (isMatch(val, ISO_8601_WITH_TIME) && val.length === 24) {
 			// return val.endsWith('00:00:00.000Z');
 			return val;
-		} else if (isMatch(val, ISO_8601)) {
+		} else if (isMatch(val, ISO_8601) && val.length === 10) {
 			return new Date(val).toISOString();
 		} else {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: 'Invalid date format',
+				message: 'Invalid date',
 			});
 
 			return z.NEVER;

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { isID } from './utils/id.schema';
-import { zodIsDateString } from './utils/zod-validators';
+import { zodIsDateString } from './utils/zod-date-string';
 
 const base = z
 	.object({

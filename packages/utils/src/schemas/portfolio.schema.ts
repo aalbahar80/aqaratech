@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { civilidSchema } from './utils/civilid.schema';
 import { phoneSchema } from './utils/phone.schema';
-import { zodIsDateString } from './utils/zod-validators';
+import { zodIsDateString } from './utils/zod-date-string';
 import { trim } from './utils/zodTransformers';
 
 export const portfolioCreateSchema = z
