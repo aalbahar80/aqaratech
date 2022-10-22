@@ -16,18 +16,12 @@
 		"outDir": "./dist",
 		"baseUrl": "./",
 		"skipLibCheck": true,
-		// "strict": false,
+		"strict": true,
+		"noUnusedLocals": false,
 		"strictPropertyInitialization": false,
 		"importsNotUsedAsValues": "remove",
 		"exactOptionalPropertyTypes": false,
 		"noUncheckedIndexedAccess": false,
-		// "noFallthroughCasesInSwitch": false,
-		// "noImplicitOverride": false,
-		// "noImplicitReturns": false,
-		// "noPropertyAccessFromIndexSignature": false,
-		"noUnusedLocals": false,
-		"noUnusedParameters": false,
-		// "noImplicitAny": false,
 		"paths": {
 			"src": ["./src/"]
 		}
