@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CreateUnitDto,
 	PaginatedLeaseDto,
 	PaginatedUnitDto,
 	PartialUnitDto,
@@ -22,10 +21,6 @@ import type {
 	UnitDto,
 	UpdateUnitDto,
 } from '../models';
-
-export interface UnitsApiCreateRequest {
-	createUnitDto: CreateUnitDto;
-}
 
 export interface UnitsApiFindAllRequest {
 	page?: number;
@@ -64,26 +59,6 @@ export interface UnitsApiUpdateRequest {
  * @interface UnitsApiInterface
  */
 export interface UnitsApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof UnitsApiInterface
-	 */
-	createRaw(
-		requestParameters: UnitsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialUnitDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	create(
-		requestParameters: UnitsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialUnitDto>;
-
 	/**
 	 *
 	 * @summary
@@ -189,56 +164,6 @@ export interface UnitsApiInterface {
  *
  */
 export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
-	/**
-	 *
-	 *
-	 */
-	async createRaw(
-		requestParameters: UnitsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialUnitDto>> {
-		if (
-			requestParameters.createUnitDto === null ||
-			requestParameters.createUnitDto === undefined
-		) {
-			throw new runtime.RequiredError(
-				'createUnitDto',
-				'Required parameter requestParameters.createUnitDto was null or undefined when calling create.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		headerParameters['Content-Type'] = 'application/json';
-
-		const response = await this.request(
-			{
-				path: `/units`,
-				method: 'POST',
-				headers: headerParameters,
-				query: queryParameters,
-				body: requestParameters.createUnitDto,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async create(
-		requestParameters: UnitsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialUnitDto> {
-		const response = await this.createRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *

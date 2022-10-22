@@ -2,10 +2,12 @@ import {
 	ApiHideProperty,
 	ApiProperty,
 	IntersectionType,
+	OmitType,
 	PartialType,
 	PickType,
 } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
+import { unitCreateSchema, unitUpdateSchema } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { formatDistance } from 'date-fns';
@@ -20,6 +22,7 @@ import { IsID } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 import { getUnitLabel } from 'src/utils/address';
+import { z } from 'zod';
 
 class UnitRequiredDto {
 	@IsID()
@@ -60,14 +63,6 @@ class UnitOptionalDto {
 	@IsString()
 	label: string | null;
 }
-
-// InputDtos
-
-export class CreateUnitDto
-	extends IntersectionType(UnitRequiredDto, PartialType(UnitOptionalDto))
-	implements Partial<Unit> {}
-
-export class UpdateUnitDto extends PartialType(CreateUnitDto) {}
 
 // OutputDtos
 
@@ -157,5 +152,23 @@ export class UnitDto
 		};
 	}
 }
+
+export class CreateUnitDto implements z.infer<typeof unitCreateSchema> {
+	portfolioId: string;
+	propertyId: string;
+	unitNumber: string;
+	marketRent?: number | null;
+	label?: string | null;
+	type?: string | null;
+	bed?: number | null;
+	bath?: number | null;
+	size?: number | null;
+	floor?: number | null;
+	usage?: string | null;
+}
+
+export class UpdateUnitDto
+	extends PartialType(OmitType(CreateUnitDto, ['portfolioId', 'propertyId']))
+	implements z.infer<typeof unitUpdateSchema> {}
 
 export class PartialUnitDto extends PartialType(UnitDto) {}

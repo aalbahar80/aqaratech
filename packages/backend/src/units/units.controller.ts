@@ -5,11 +5,12 @@ import {
 	Get,
 	Param,
 	Patch,
-	Post,
 	Query,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { unitUpdateSchema } from '@self/utils';
+import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -21,12 +22,8 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
-import {
-	CreateUnitDto,
-	PartialUnitDto,
-	UnitDto,
-	UpdateUnitDto,
-} from 'src/units/dto/unit.dto';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
+import { PartialUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from './units.service';
 
 const SubjectType = 'Unit';
@@ -39,16 +36,6 @@ export class UnitsController {
 		private readonly unitsService: UnitsService,
 		private leasesService: LeasesService,
 	) {}
-
-	@Post()
-	@CheckAbilities({ action: Action.Create, subject: SubjectType })
-	@ApiCreatedResponse({ type: PartialUnitDto })
-	create(
-		@User() user: IUser,
-		@Body() createUnitDto: CreateUnitDto,
-	): Promise<PartialUnitDto> {
-		return this.unitsService.create({ createUnitDto, user });
-	}
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
@@ -68,12 +55,14 @@ export class UnitsController {
 	}
 
 	@Patch(':id')
-	@CheckAbilities({ action: Action.Update, subject: SubjectType })
+	@SkipAbilityCheck() // TODO rm
+	// TODO: review if PartialUnitDto needed
 	@ApiOkResponse({ type: PartialUnitDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@Body() updateUnitDto: UpdateUnitDto,
+		@Body(new ZodValidationPipe(unitUpdateSchema))
+		updateUnitDto: UpdateUnitDto,
 	): Promise<PartialUnitDto> {
 		return this.unitsService.update({ id, updateUnitDto, user });
 	}

@@ -147,12 +147,13 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		const picked = R.pick(unit, [
 			'type',
 			'unitNumber',
-			'organizationId',
 			'portfolioId',
 			'propertyId',
 		]);
 
-		const res = await request.post(`${apiURL}/units`, { data: picked });
+		const url = `${apiURL}/organizations/${org.organization.id}/units`;
+
+		const res = await request.post(url, { data: picked });
 
 		const created = (await res.json()) as UnitDto;
 

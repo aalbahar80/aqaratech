@@ -1,9 +1,7 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
-import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -18,17 +16,18 @@ export class UnitsService {
 
 	async create({
 		createUnitDto,
-		user,
+		organizationId,
 	}: {
 		createUnitDto: CreateUnitDto;
-		user: IUser;
+		organizationId: string;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject(this.SubjectType, createUnitDto),
-		);
+		const created = await this.prisma.unit.create({
+			data: {
+				...createUnitDto,
+				organizationId,
+			},
+		});
 
-		const created = await this.prisma.unit.create({ data: createUnitDto });
 		return created;
 	}
 
@@ -96,21 +95,11 @@ export class UnitsService {
 		updateUnitDto: UpdateUnitDto;
 		user: IUser;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Update,
-			subject(this.SubjectType, updateUnitDto),
-		);
-
-		const frisked = frisk({
-			user,
-			SubjectType: this.SubjectType,
-			instance: updateUnitDto,
-		});
-
 		const updated = await this.prisma.unit.update({
-			where: { id },
-			data: frisked,
+			where: { id, AND: accessibleBy(user.ability, Action.Update).Unit },
+			data: updateUnitDto,
 		});
+
 		return updated;
 	}
 

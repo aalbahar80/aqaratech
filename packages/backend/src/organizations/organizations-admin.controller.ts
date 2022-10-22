@@ -1,9 +1,10 @@
 import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import {
 	portfolioCreateSchema,
 	propertyCreateSchema,
 	tenantCreateSchema,
+	unitCreateSchema,
 } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -16,6 +17,8 @@ import { CreatePropertyDto } from 'src/properties/dto/property.dto';
 import { PropertiesService } from 'src/properties/properties.service';
 import { CreateTenantDto } from 'src/tenants/dto/tenant.dto';
 import { TenantsService } from 'src/tenants/tenants.service';
+import { CreateUnitDto, PartialUnitDto } from 'src/units/dto/unit.dto';
+import { UnitsService } from 'src/units/units.service';
 
 @Controller('organizations/:organizationId')
 @ApiTags('organizations')
@@ -26,6 +29,7 @@ export class OrganizationsAdminController {
 		private readonly tenantsService: TenantsService,
 		private readonly portfoliosService: PortfoliosService,
 		private readonly propertiesService: PropertiesService,
+		private readonly unitsService: UnitsService,
 	) {}
 
 	@Post('/tenants')
@@ -63,6 +67,21 @@ export class OrganizationsAdminController {
 	) {
 		return this.propertiesService.create({
 			createPropertyDto,
+			organizationId,
+		});
+	}
+
+	@Post('/units')
+	@CheckAbilities({ action: Action.Create, subject: 'Unit' })
+	// TODO: review if PartialUnitDto is needed
+	@ApiCreatedResponse({ type: PartialUnitDto })
+	createUnit(
+		@Param('organizationId') organizationId: string,
+		@Body(new ZodValidationPipe(unitCreateSchema))
+		createUnitDto: CreateUnitDto,
+	): Promise<PartialUnitDto> {
+		return this.unitsService.create({
+			createUnitDto,
 			organizationId,
 		});
 	}

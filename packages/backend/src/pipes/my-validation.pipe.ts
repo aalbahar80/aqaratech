@@ -7,6 +7,8 @@ const shouldSkip = [
 	'UpdatePortfolioDto',
 	'CreatePropertyDto',
 	'UpdatePropertyDto',
+	'CreateUnitDto',
+	'UpdateUnitDto',
 ];
 
 // Reference: https://github.com/nestjs/nest/issues/2390#issuecomment-517623971

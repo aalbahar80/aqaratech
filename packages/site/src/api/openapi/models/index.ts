@@ -823,12 +823,6 @@ export interface CreateUnitDto {
 	 * @type {string}
 	 * @memberof CreateUnitDto
 	 */
-	organizationId: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateUnitDto
-	 */
 	portfolioId: string;
 	/**
 	 *
@@ -847,13 +841,19 @@ export interface CreateUnitDto {
 	 * @type {number}
 	 * @memberof CreateUnitDto
 	 */
-	floor?: number | null;
+	marketRent?: number | null;
 	/**
 	 *
-	 * @type {number}
+	 * @type {string}
 	 * @memberof CreateUnitDto
 	 */
-	size?: number | null;
+	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateUnitDto
+	 */
+	type?: string | null;
 	/**
 	 *
 	 * @type {number}
@@ -871,25 +871,19 @@ export interface CreateUnitDto {
 	 * @type {number}
 	 * @memberof CreateUnitDto
 	 */
-	marketRent?: number | null;
+	size?: number | null;
 	/**
 	 *
-	 * @type {string}
+	 * @type {number}
 	 * @memberof CreateUnitDto
 	 */
-	type?: string | null;
+	floor?: number | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof CreateUnitDto
 	 */
 	usage?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateUnitDto
-	 */
-	label?: string | null;
 }
 /**
  *
@@ -3347,37 +3341,25 @@ export interface UpdateUnitDto {
 	 * @type {string}
 	 * @memberof UpdateUnitDto
 	 */
-	organizationId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateUnitDto
-	 */
-	portfolioId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateUnitDto
-	 */
-	propertyId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateUnitDto
-	 */
 	unitNumber?: string;
 	/**
 	 *
 	 * @type {number}
 	 * @memberof UpdateUnitDto
 	 */
-	floor?: number | null;
+	marketRent?: number | null;
 	/**
 	 *
-	 * @type {number}
+	 * @type {string}
 	 * @memberof UpdateUnitDto
 	 */
-	size?: number | null;
+	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateUnitDto
+	 */
+	type?: string | null;
 	/**
 	 *
 	 * @type {number}
@@ -3395,25 +3377,19 @@ export interface UpdateUnitDto {
 	 * @type {number}
 	 * @memberof UpdateUnitDto
 	 */
-	marketRent?: number | null;
+	size?: number | null;
 	/**
 	 *
-	 * @type {string}
+	 * @type {number}
 	 * @memberof UpdateUnitDto
 	 */
-	type?: string | null;
+	floor?: number | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UpdateUnitDto
 	 */
 	usage?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateUnitDto
-	 */
-	label?: string | null;
 }
 /**
  *

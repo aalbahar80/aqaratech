@@ -18,10 +18,12 @@ import type {
 	CreatePortfolioDto,
 	CreatePropertyDto,
 	CreateTenantDto,
+	CreateUnitDto,
 	OrganizationCreatedDto,
 	OrganizationDto,
 	PaginatedOrganizationDto,
 	PaginatedRoleDto,
+	PartialUnitDto,
 	PortfolioDto,
 	PropertyDto,
 	SearchDto,
@@ -47,6 +49,11 @@ export interface OrganizationsApiCreatePropertyRequest {
 export interface OrganizationsApiCreateTenantRequest {
 	organizationId: string;
 	createTenantDto: CreateTenantDto;
+}
+
+export interface OrganizationsApiCreateUnitRequest {
+	organizationId: string;
+	createUnitDto: CreateUnitDto;
 }
 
 export interface OrganizationsApiFindOneRequest {
@@ -162,6 +169,26 @@ export interface OrganizationsApiInterface {
 		requestParameters: OrganizationsApiCreateTenantRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<TenantDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	createUnitRaw(
+		requestParameters: OrganizationsApiCreateUnitRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PartialUnitDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createUnit(
+		requestParameters: OrganizationsApiCreateUnitRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PartialUnitDto>;
 
 	/**
 	 *
@@ -534,6 +561,69 @@ export class OrganizationsApi
 			requestParameters,
 			initOverrides,
 		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createUnitRaw(
+		requestParameters: OrganizationsApiCreateUnitRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PartialUnitDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createUnit.',
+			);
+		}
+
+		if (
+			requestParameters.createUnitDto === null ||
+			requestParameters.createUnitDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createUnitDto',
+				'Required parameter requestParameters.createUnitDto was null or undefined when calling createUnit.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/units`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createUnitDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createUnit(
+		requestParameters: OrganizationsApiCreateUnitRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PartialUnitDto> {
+		const response = await this.createUnitRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
 

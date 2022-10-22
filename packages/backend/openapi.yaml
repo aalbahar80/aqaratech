@@ -1399,28 +1399,6 @@ paths:
       tags: *ref_9
       security: *ref_10
   /units:
-    post:
-      operationId: UnitsController_create
-      summary: ''
-      description: ''
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateUnitDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PartialUnitDto'
-      tags: &ref_11
-        - units
-      security: &ref_12
-        - accessToken: []
     get:
       operationId: UnitsController_findAll
       summary: ''
@@ -1472,8 +1450,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_11
-      security: *ref_12
+      tags: &ref_11
+        - units
+      security: &ref_12
+        - accessToken: []
   /units/{id}:
     get:
       operationId: UnitsController_findOne
@@ -2380,6 +2360,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
+      tags: *ref_21
+      security: *ref_22
+  /organizations/{organizationId}/units:
+    post:
+      operationId: OrganizationsAdminController_createUnit
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUnitDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialUnitDto'
       tags: *ref_21
       security: *ref_22
   /expense-categories:
@@ -3520,52 +3526,35 @@ components:
         paci:
           type: string
           nullable: true
-    CreateUnitDto:
+    UpdateUnitDto:
       type: object
       properties:
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        propertyId:
-          type: string
         unitNumber:
           type: string
-          minLength: 1
-          maxLength: 255
-        floor:
+        marketRent:
+          type: number
+          nullable: true
+        label:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        bed:
+          type: number
+          nullable: true
+        bath:
           type: number
           nullable: true
         size:
           type: number
           nullable: true
-          minimum: 1
-        bed:
+        floor:
           type: number
-          nullable: true
-          minimum: 1
-        bath:
-          type: number
-          nullable: true
-          minimum: 1
-        marketRent:
-          type: number
-          nullable: true
-          minimum: 1
-        type:
-          type: string
           nullable: true
         usage:
           type: string
           nullable: true
-        label:
-          type: string
-          nullable: true
-      required:
-        - organizationId
-        - portfolioId
-        - propertyId
-        - unitNumber
     PartialUnitDto:
       type: object
       properties:
@@ -3584,47 +3573,6 @@ components:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        propertyId:
-          type: string
-        unitNumber:
-          type: string
-          minLength: 1
-          maxLength: 255
-        floor:
-          type: number
-          nullable: true
-        size:
-          type: number
-          nullable: true
-          minimum: 1
-        bed:
-          type: number
-          nullable: true
-          minimum: 1
-        bath:
-          type: number
-          nullable: true
-          minimum: 1
-        marketRent:
-          type: number
-          nullable: true
-          minimum: 1
-        type:
-          type: string
-          nullable: true
-        usage:
-          type: string
-          nullable: true
-        label:
-          type: string
-          nullable: true
-    UpdateUnitDto:
-      type: object
-      properties:
         organizationId:
           type: string
         portfolioId:
@@ -4151,6 +4099,43 @@ components:
         - area
         - block
         - street
+    CreateUnitDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        propertyId:
+          type: string
+        unitNumber:
+          type: string
+        marketRent:
+          type: number
+          nullable: true
+        label:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        bed:
+          type: number
+          nullable: true
+        bath:
+          type: number
+          nullable: true
+        size:
+          type: number
+          nullable: true
+        floor:
+          type: number
+          nullable: true
+        usage:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
+        - propertyId
+        - unitNumber
     CreateExpenseCategoryDto:
       type: object
       properties:

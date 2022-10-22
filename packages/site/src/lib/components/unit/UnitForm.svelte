@@ -1,6 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { createApi } from '$api';
+	import type {
+		PaginatedPortfolioDto,
+		PaginatedPropertyDto,
+		UnitDto,
+	} from '$api/openapi';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import {
 		portfoliosToOptions,
@@ -12,12 +17,7 @@
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
-	import { createSchema, updateSchema } from '$models/schemas/unit.schema';
-	import type {
-		PaginatedPortfolioDto,
-		PaginatedPropertyDto,
-		UnitDto,
-	} from '$api/openapi';
+	import { unitCreateSchema, unitUpdateSchema } from '@self/utils';
 
 	type TPredefinedUnit = $$Generic<PredefinedUnit | undefined>;
 	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;
@@ -98,7 +98,7 @@
 
 {#if formType === 'update'}
 	<Form
-		schema={updateSchema}
+		schema={unitUpdateSchema}
 		entity="unit"
 		{formType}
 		{basicFields}
@@ -111,7 +111,7 @@
 	/>
 {:else}
 	<Form
-		schema={createSchema}
+		schema={unitCreateSchema}
 		entity="unit"
 		{formType}
 		{basicFields}
