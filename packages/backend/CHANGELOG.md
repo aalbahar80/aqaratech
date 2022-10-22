@@ -1,5 +1,11 @@
 # @self/backend
 
+## 1.6.2
+
+### Patch Changes
+
+- 34ccf625: revert backend importsNotUsedAsValues
+
 ## 1.6.1
 
 ### Patch Changes
