@@ -1,25 +1,14 @@
 import { expect, test } from 'vitest';
+import { DATE_ONLY } from './date/dates.constants';
 import { zodIsDatetimeString } from './zod-date-string';
 
 const schema = zodIsDatetimeString();
 
-const valid = ['2021-01-01'];
-
-test.each(valid)('valid: %s', (value) => {
+test.each(DATE_ONLY.VALID)('valid: %s', (value) => {
 	expect(schema.safeParse(value).success).toBe(true);
 });
 
-const invalid = [
-	'2021-00-01',
-	'2021-00-00',
-	'2021-01-00',
-	'2021-01-01T00:00:00.000Z',
-	'2021-1-1',
-	'2021-1-1T00:00:00.000Z',
-	'2019-09-26T07:58:30.996+0200',
-];
-
-test.each(invalid)('invalid date: %s', (date) => {
+test.each(DATE_ONLY.INVALID)('invalid date: %s', (date) => {
 	expect(schema.safeParse(date).success).toBe(false);
 
 	expect(() => schema.parse(date)).toThrowError();
@@ -31,7 +20,7 @@ test('short dates are transformed to midnight UTC', () => {
 	expect(schema.parse(date)).toBe('2021-01-01T00:00:00.000Z');
 });
 
-test.each(valid)('date transformation is idempotent: %s', (date) => {
+test.each(DATE_ONLY.VALID)('date transformation is idempotent: %s', (date) => {
 	const first = schema.parse(date);
 
 	expect(schema.parse(first)).toBe(first);
