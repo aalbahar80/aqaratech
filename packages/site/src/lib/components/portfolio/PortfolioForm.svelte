@@ -5,7 +5,6 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
-	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { portfolioCreateSchema, portfolioUpdateSchema } from '@self/utils';
 
 	type TPortfolioDto = $$Generic<
@@ -32,9 +31,6 @@
 	export let data: TPortfolioDto = undefined as TPortfolioDto;
 
 	const basicFields = [
-		OrganizationIdField(
-			data?.organizationId || $page.data.user?.role?.organizationId,
-		),
 		new Field('fullName', {
 			required: true,
 			value: data?.fullName,

@@ -6,7 +6,6 @@
 	import { countries } from '$lib/constants/countries';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
-	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { tenantCreateSchema as schema } from '@self/utils';
 
 	type TTenantDto = $$Generic<
@@ -33,9 +32,6 @@
 	export let data: TTenantDto = undefined as TTenantDto;
 
 	const basicFields = [
-		OrganizationIdField(
-			data?.organizationId || $page.data.user?.role?.organizationId,
-		),
 		new Field('fullName', {
 			required: true,
 			value: data?.fullName,

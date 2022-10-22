@@ -9,7 +9,6 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedProperty } from '$lib/models/interfaces/predefined.interface';
-	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { propertyCreateSchema, propertyUpdateSchema } from '@self/utils';
 
 	type TPredefinedProperty = $$Generic<PredefinedProperty | undefined>;
@@ -56,9 +55,6 @@
 			: [];
 
 	const basicFields = [
-		OrganizationIdField(
-			data?.organizationId || $page.data.user?.role?.organizationId,
-		),
 		new SelectField('area', {
 			required: true,
 			value: data?.area,

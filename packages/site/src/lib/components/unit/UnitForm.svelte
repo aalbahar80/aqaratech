@@ -16,7 +16,6 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
-	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { unitCreateSchema, unitUpdateSchema } from '@self/utils';
 
 	type TPredefinedUnit = $$Generic<PredefinedUnit | undefined>;
@@ -74,9 +73,6 @@
 			: [];
 
 	const basicFields = [
-		OrganizationIdField(
-			data?.organizationId || $page.data.user?.role?.organizationId,
-		),
 		new SelectField('type', {
 			value: data?.type,
 			options: unitTypeOptions,

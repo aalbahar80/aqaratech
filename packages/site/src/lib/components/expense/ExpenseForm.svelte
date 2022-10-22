@@ -18,7 +18,6 @@
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedExpense } from '$lib/models/interfaces/predefined.interface';
 	import { toOptions } from '$lib/utils/expense-type-options';
-	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
 
 	type TPredefinedExpense = $$Generic<PredefinedExpense | undefined>;
@@ -89,9 +88,6 @@
 			: [];
 
 	const basicFields = [
-		OrganizationIdField(
-			data?.organizationId || $page.data.user?.role?.organizationId,
-		),
 		new Field('amount', {
 			required: true,
 			type: 'number',

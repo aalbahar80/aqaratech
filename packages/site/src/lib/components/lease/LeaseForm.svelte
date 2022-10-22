@@ -18,7 +18,6 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedLease } from '$lib/models/interfaces/predefined.interface';
-	import { OrganizationIdField } from '$lib/utils/form/common-fields';
 	import { leaseCreateSchema, leaseUpdateSchema } from '@self/utils';
 
 	type TPredefinedLease = $$Generic<PredefinedLease | undefined>;
@@ -98,9 +97,6 @@
 			: [];
 
 	const basicFields = [
-		OrganizationIdField(
-			data?.organizationId || $page.data.user?.role?.organizationId,
-		),
 		new Field('monthlyRent', {
 			type: 'number',
 			required: true,
