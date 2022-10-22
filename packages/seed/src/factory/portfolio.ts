@@ -1,8 +1,9 @@
 import { faker } from '@faker-js/faker';
-import type { Portfolio } from '../utils/date-or-string';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
+import type { Portfolio } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
+import { fakeDate } from '../utils/fake-date';
 
 export const portfolioFactory = Factory.Sync.makeFactoryWithRequired<
 	Portfolio,
@@ -17,6 +18,6 @@ export const portfolioFactory = Factory.Sync.makeFactoryWithRequired<
 	civilid: faker.datatype
 		.number({ min: 200000000000, max: 399999999999 })
 		.toString(),
-	dob: faker.date.past(),
+	dob: Factory.each(() => fakeDate()),
 	phone: faker.phone.number('9#######'),
 });

@@ -3,6 +3,7 @@ import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
 import type { Tenant } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
+import { fakeDate } from '../utils/fake-date';
 
 export const tenantFactory = Factory.Sync.makeFactoryWithRequired<
 	Tenant,
@@ -17,7 +18,7 @@ export const tenantFactory = Factory.Sync.makeFactoryWithRequired<
 	civilid: faker.datatype
 		.number({ min: 200000000000, max: 399999999999 })
 		.toString(),
-	dob: faker.date.past(),
+	dob: Factory.each(() => fakeDate()),
 	phone: faker.phone.number('9#######'),
 	passportNum: faker.datatype
 		.number({ min: 100000000, max: 999999999 })

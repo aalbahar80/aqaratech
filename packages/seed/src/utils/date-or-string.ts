@@ -13,7 +13,11 @@ import type {
 } from '@prisma/client';
 
 type DateAsString<T> = {
-	[K in keyof T]: T[K] extends Date ? Date | string : T[K];
+	[K in keyof T]: T[K] extends Date
+		? Date | string
+		: T[K] extends Date | null
+		? Date | string | null
+		: T[K];
 };
 
 export type User = DateAsString<UserBase>;

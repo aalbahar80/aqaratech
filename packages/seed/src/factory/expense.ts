@@ -1,9 +1,10 @@
 import { faker } from '@faker-js/faker';
-import type { Expense } from '../utils/date-or-string';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
-import { generateExpenseCategoryTree, TIMESPAN } from '../constants';
+import { generateExpenseCategoryTree } from '../constants';
+import type { Expense } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
+import { fakeDate } from '../utils/fake-date';
 
 export const expenseFactory = Factory.Sync.makeFactoryWithRequired<
 	Expense,
@@ -18,7 +19,7 @@ export const expenseFactory = Factory.Sync.makeFactoryWithRequired<
 		generateExpenseCategoryTree().filter((c) => !c.isGroup),
 	).id,
 	memo: Factory.each(() => faker.lorem.sentence()),
-	postAt: Factory.each(() => faker.date.past(TIMESPAN)),
+	postAt: Factory.each(() => fakeDate()),
 	maintenanceOrderId: null,
 	propertyId: null,
 	unitId: null,

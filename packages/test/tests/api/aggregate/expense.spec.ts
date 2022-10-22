@@ -11,7 +11,7 @@ test.use({
 			const expense = expenseFactory.build({
 				organizationId: portfolio.organizationId,
 				portfolioId: portfolio.id,
-				postAt: new Date(Date.UTC(2021, month, 1)).toISOString(),
+				postAt: new Date(Date.UTC(2021, month, 1)).toISOString().slice(0, 10),
 				amount: 100,
 			});
 

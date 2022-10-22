@@ -12,7 +12,7 @@ test.use({
 				organizationId: lease.organizationId,
 				portfolioId: lease.portfolioId,
 				leaseId: lease.id,
-				postAt: new Date(Date.UTC(2021, month, 1)).toISOString(),
+				postAt: new Date(Date.UTC(2021, month, 1)).toISOString().slice(0, 10),
 			});
 
 			const picked = R.pick(leaseInvoice, [
