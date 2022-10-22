@@ -1,6 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { createApi } from '$api';
+	import type {
+		LeaseDto,
+		PaginatedPortfolioDto,
+		PaginatedPropertyDto,
+		PaginatedTenantDto,
+		PaginatedUnitDto,
+	} from '$api/openapi';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import {
 		portfoliosToOptions,
@@ -12,14 +19,7 @@
 	import type { RelOption } from '$lib/models/interfaces/option.interface';
 	import type { PredefinedLease } from '$lib/models/interfaces/predefined.interface';
 	import { OrganizationIdField } from '$lib/utils/form/common-fields';
-	import { createSchema, updateSchema } from '$models/schemas/lease.schema';
-	import type {
-		LeaseDto,
-		PaginatedPortfolioDto,
-		PaginatedPropertyDto,
-		PaginatedTenantDto,
-		PaginatedUnitDto,
-	} from '$api/openapi';
+	import { leaseCreateSchema, leaseUpdateSchema } from '@self/utils';
 
 	type TPredefinedLease = $$Generic<PredefinedLease | undefined>;
 	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;
@@ -133,7 +133,7 @@
 
 {#if formType === 'update'}
 	<Form
-		schema={updateSchema}
+		schema={leaseUpdateSchema}
 		entity="lease"
 		{formType}
 		{basicFields}
@@ -146,7 +146,7 @@
 	/>
 {:else}
 	<Form
-		schema={createSchema}
+		schema={leaseCreateSchema}
 		entity="lease"
 		{formType}
 		{basicFields}

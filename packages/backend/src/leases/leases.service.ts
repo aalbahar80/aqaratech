@@ -1,9 +1,7 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
-import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -23,17 +21,18 @@ export class LeasesService {
 
 	async create({
 		createLeaseDto,
-		user,
+		organizationId,
 	}: {
 		createLeaseDto: CreateLeaseDto;
-		user: IUser;
+		organizationId: string;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject(this.SubjectType, createLeaseDto),
-		);
-
-		return this.prisma.lease.create({ data: createLeaseDto });
+		// TODO: consider returning a lease dto class
+		return this.prisma.lease.create({
+			data: {
+				...createLeaseDto,
+				organizationId,
+			},
+		});
 	}
 
 	async findAll({
@@ -93,18 +92,10 @@ export class LeasesService {
 		updateLeaseDto: UpdateLeaseDto;
 		user: IUser;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Update,
-			subject(this.SubjectType, updateLeaseDto),
-		);
-
-		const frisked = frisk({
-			user,
-			SubjectType: this.SubjectType,
-			instance: updateLeaseDto,
+		return this.prisma.lease.update({
+			where: { id, AND: accessibleBy(user.ability, Action.Update).Lease },
+			data: updateLeaseDto,
 		});
-
-		return this.prisma.lease.update({ where: { id }, data: frisked });
 	}
 
 	async remove({ id }: { id: string }) {

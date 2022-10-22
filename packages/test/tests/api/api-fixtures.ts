@@ -166,21 +166,22 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			portfolioId: unit.portfolioId,
 			unitId: unit.id,
 			tenantId: tenant.id,
-			start: '2021-01-01',
 		});
 
 		const picked = R.pick(lease, [
-			'start',
-			'end',
-			'monthlyRent',
-			'deposit',
-			'organizationId',
 			'portfolioId',
 			'unitId',
 			'tenantId',
+			'start',
+			'end',
+			'monthlyRent',
+			'notify',
+			'canPay',
 		]);
 
-		const res = await request.post(`${apiURL}/leases`, { data: picked });
+		const url = `${apiURL}/organizations/${org.organization.id}/leases`;
+
+		const res = await request.post(url, { data: picked });
 
 		const created = (await res.json()) as LeaseDto;
 

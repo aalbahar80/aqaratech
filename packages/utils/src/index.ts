@@ -19,6 +19,8 @@ export { formatRequestLog } from './logger/format-request-log';
 export { formatResponseLog } from './logger/format-response-log';
 export { satisfies } from './satisfies';
 export {
+	leaseCreateSchema,
+	leaseUpdateSchema,
 	portfolioCreateSchema,
 	portfolioUpdateSchema,
 	propertyCreateSchema,
@@ -28,3 +30,4 @@ export {
 	unitCreateSchema,
 	unitUpdateSchema,
 } from './schemas';
+export type { LeaseCreateSchema, LeaseUpdateSchema } from './schemas';

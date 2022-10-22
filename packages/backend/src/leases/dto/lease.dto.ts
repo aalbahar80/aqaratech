@@ -2,10 +2,12 @@ import {
 	ApiHideProperty,
 	ApiProperty,
 	IntersectionType,
+	OmitType,
 	PartialType,
 	PickType,
 } from '@nestjs/swagger';
 import { Lease } from '@prisma/client';
+import { LeaseCreateSchema, LeaseUpdateSchema } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsBoolean, IsNumber, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -101,8 +103,19 @@ export class LeaseDto
 
 export class PartialLeaseDto extends PartialType(LeaseDto) {}
 
-export class CreateLeaseDto
-	extends IntersectionType(LeaseRequiredDto, PartialType(LeaseOptionalDto))
-	implements Partial<Lease> {}
+export class CreateLeaseDto implements LeaseCreateSchema {
+	portfolioId: string;
+	unitId: string;
+	tenantId: string;
+	start: string;
+	monthlyRent: number;
+	end: string;
+	notify: boolean;
+	canPay: boolean;
+}
 
-export class UpdateLeaseDto extends PartialType(CreateLeaseDto) {}
+export class UpdateLeaseDto
+	extends PartialType(
+		OmitType(CreateLeaseDto, ['portfolioId', 'unitId', 'tenantId']),
+	)
+	implements LeaseUpdateSchema {}

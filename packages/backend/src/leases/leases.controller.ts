@@ -16,6 +16,8 @@ import {
 	ApiTags,
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { leaseUpdateSchema } from '@self/utils';
+import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -32,11 +34,11 @@ import {
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import {
-	CreateLeaseDto,
 	LeaseDto,
 	PartialLeaseDto,
 	UpdateLeaseDto,
 } from 'src/leases/dto/lease.dto';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { LeasesService } from './leases.service';
 
 const SubjectType = 'Lease';
@@ -49,16 +51,6 @@ export class LeasesController {
 		private readonly leasesService: LeasesService,
 		private readonly leaseInvoicesService: LeaseInvoicesService,
 	) {}
-
-	@Post()
-	@CheckAbilities({ action: Action.Create, subject: SubjectType })
-	@ApiCreatedResponse({ type: PartialLeaseDto })
-	create(
-		@User() user: IUser,
-		@Body() createLeaseDto: CreateLeaseDto,
-	): Promise<PartialLeaseDto> {
-		return this.leasesService.create({ createLeaseDto, user });
-	}
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
@@ -83,12 +75,13 @@ export class LeasesController {
 	}
 
 	@Patch(':id')
-	@CheckAbilities({ action: Action.Update, subject: SubjectType })
+	@SkipAbilityCheck() // TODO rm
 	@ApiOkResponse({ type: PartialLeaseDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@Body() updateLeaseDto: UpdateLeaseDto,
+		@Body(new ZodValidationPipe(leaseUpdateSchema))
+		updateLeaseDto: UpdateLeaseDto,
 	): Promise<PartialLeaseDto> {
 		return this.leasesService.update({ id, updateLeaseDto, user });
 	}
