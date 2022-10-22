@@ -103,7 +103,6 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			data &&
 			createApi().units.update({
 				id: data.id,
 				updateUnitDto: values,
@@ -116,6 +115,10 @@
 		{formType}
 		{basicFields}
 		{relationalFields}
-		onSubmit={(values) => createApi().units.create({ createUnitDto: values })}
+		onSubmit={(values) =>
+			createApi().organizations.createUnit({
+				createUnitDto: values,
+				organizationId: $page.data.user?.role?.organizationId,
+			})}
 	/>
 {/if}

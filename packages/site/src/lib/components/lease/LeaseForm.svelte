@@ -138,7 +138,6 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			data &&
 			createApi().leases.update({
 				id: data.id,
 				updateLeaseDto: values,
@@ -151,6 +150,10 @@
 		{formType}
 		{basicFields}
 		{relationalFields}
-		onSubmit={(values) => createApi().leases.create({ createLeaseDto: values })}
+		onSubmit={(values) =>
+			createApi().organizations.createLease({
+				createLeaseDto: values,
+				organizationId: $page.data.user?.role?.organizationId,
+			})}
 	/>
 {/if}

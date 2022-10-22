@@ -103,7 +103,6 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			data &&
 			createApi().properties.update({
 				id: data.id,
 				updatePropertyDto: values,
@@ -117,8 +116,9 @@
 		{basicFields}
 		{relationalFields}
 		onSubmit={(values) =>
-			createApi().properties.create({
+			createApi().organizations.createProperty({
 				createPropertyDto: values,
+				organizationId: $page.data.user?.role?.organizationId,
 			})}
 	/>
 {/if}

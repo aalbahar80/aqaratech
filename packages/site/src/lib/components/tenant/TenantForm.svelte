@@ -89,7 +89,6 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			data && // type hack
 			createApi().tenants.update({
 				id: data.id,
 				updateTenantDto: values,
