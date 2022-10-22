@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { isDateOnly } from './date/is-date-only';
-import { isDatetime } from './date/is-date-time';
+import { isDateOnly } from './is-date-only';
+import { isDatetime } from './is-date-time';
 
 /**
  * Check if a string is a valid datestring or datetime string.

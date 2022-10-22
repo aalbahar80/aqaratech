@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest';
-import { DATE_TIME } from './date/dates.constants';
-import { zodIsDatetimeString } from './zod-date-string';
+import { DATE_TIME } from './dates.constants';
+import { zodDatetime } from './zod-date-time';
 
-const schema = zodIsDatetimeString();
+const schema = zodDatetime();
 
 test.each(DATE_TIME.VALID)('valid: %s', (value) => {
 	expect(schema.safeParse(value).success).toBe(true);
