@@ -14,6 +14,7 @@
 
 import * as runtime from '../runtime';
 import type {
+	CreateExpenseDto,
 	CreateLeaseDto,
 	CreateOrganizationDto,
 	CreatePortfolioDto,
@@ -24,6 +25,7 @@ import type {
 	OrganizationDto,
 	PaginatedOrganizationDto,
 	PaginatedRoleDto,
+	PartialExpenseDto,
 	PartialLeaseDto,
 	PartialUnitDto,
 	PortfolioDto,
@@ -36,6 +38,11 @@ import type {
 
 export interface OrganizationsApiCreateRequest {
 	createOrganizationDto: CreateOrganizationDto;
+}
+
+export interface OrganizationsApiCreateExpenseRequest {
+	organizationId: string;
+	createExpenseDto: CreateExpenseDto;
 }
 
 export interface OrganizationsApiCreateLeaseRequest {
@@ -116,6 +123,26 @@ export interface OrganizationsApiInterface {
 		requestParameters: OrganizationsApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<OrganizationCreatedDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	createExpenseRaw(
+		requestParameters: OrganizationsApiCreateExpenseRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PartialExpenseDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createExpense(
+		requestParameters: OrganizationsApiCreateExpenseRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PartialExpenseDto>;
 
 	/**
 	 *
@@ -390,6 +417,72 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<OrganizationCreatedDto> {
 		const response = await this.createRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createExpenseRaw(
+		requestParameters: OrganizationsApiCreateExpenseRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PartialExpenseDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createExpense.',
+			);
+		}
+
+		if (
+			requestParameters.createExpenseDto === null ||
+			requestParameters.createExpenseDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createExpenseDto',
+				'Required parameter requestParameters.createExpenseDto was null or undefined when calling createExpense.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/expenses`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createExpenseDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createExpense(
+		requestParameters: OrganizationsApiCreateExpenseRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PartialExpenseDto> {
+		const response = await this.createExpenseRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

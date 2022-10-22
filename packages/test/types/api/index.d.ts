@@ -295,19 +295,19 @@ export interface CreateExpenseDto {
 	 * @type {string}
 	 * @memberof CreateExpenseDto
 	 */
-	postAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateExpenseDto
-	 */
-	organizationId: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateExpenseDto
-	 */
 	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	propertyId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	unitId: string | null;
 	/**
 	 *
 	 * @type {number}
@@ -319,31 +319,25 @@ export interface CreateExpenseDto {
 	 * @type {string}
 	 * @memberof CreateExpenseDto
 	 */
-	memo?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateExpenseDto
-	 */
-	unitId?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateExpenseDto
-	 */
-	propertyId?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateExpenseDto
-	 */
-	maintenanceOrderId?: string | null;
+	postAt: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof CreateExpenseDto
 	 */
 	categoryId?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseDto
+	 */
+	label?: string | null;
 }
 /**
  *
@@ -971,10 +965,10 @@ export interface ExpenseDto {
 	breadcrumbs: ExpenseBreadcrumbsDto;
 	/**
 	 *
-	 * @type {PartialExpenseDtoExpenseType}
+	 * @type {ExpenseDtoExpenseType}
 	 * @memberof ExpenseDto
 	 */
-	expenseType: PartialExpenseDtoExpenseType | null;
+	expenseType: ExpenseDtoExpenseType | null;
 	/**
 	 *
 	 * @type {string}
@@ -1023,6 +1017,49 @@ export interface ExpenseDto {
 	 * @memberof ExpenseDto
 	 */
 	categoryId: string | null;
+}
+/**
+ *
+ * @export
+ * @interface ExpenseDtoExpenseType
+ */
+export interface ExpenseDtoExpenseType {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDtoExpenseType
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDtoExpenseType
+	 */
+	labelEn: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDtoExpenseType
+	 */
+	parentId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDtoExpenseType
+	 */
+	labelAr: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDtoExpenseType
+	 */
+	description?: string | null;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof ExpenseDtoExpenseType
+	 */
+	isGroup: boolean;
 }
 /**
  *
@@ -1803,53 +1840,10 @@ export interface PartialExpenseDto {
 	categoryId?: string | null;
 	/**
 	 *
-	 * @type {PartialExpenseDtoExpenseType}
+	 * @type {ExpenseDtoExpenseType}
 	 * @memberof PartialExpenseDto
 	 */
-	expenseType?: PartialExpenseDtoExpenseType | null;
-}
-/**
- *
- * @export
- * @interface PartialExpenseDtoExpenseType
- */
-export interface PartialExpenseDtoExpenseType {
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDtoExpenseType
-	 */
-	id: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDtoExpenseType
-	 */
-	labelEn: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDtoExpenseType
-	 */
-	parentId: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDtoExpenseType
-	 */
-	labelAr: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDtoExpenseType
-	 */
-	description?: string | null;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof PartialExpenseDtoExpenseType
-	 */
-	isGroup: boolean;
+	expenseType?: ExpenseDtoExpenseType | null;
 }
 /**
  *
@@ -2902,6 +2896,12 @@ export interface UpdateExpenseCategoryDto {
 export interface UpdateExpenseDto {
 	/**
 	 *
+	 * @type {number}
+	 * @memberof UpdateExpenseDto
+	 */
+	amount?: number;
+	/**
+	 *
 	 * @type {string}
 	 * @memberof UpdateExpenseDto
 	 */
@@ -2911,19 +2911,7 @@ export interface UpdateExpenseDto {
 	 * @type {string}
 	 * @memberof UpdateExpenseDto
 	 */
-	organizationId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateExpenseDto
-	 */
-	portfolioId?: string;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof UpdateExpenseDto
-	 */
-	amount?: number;
+	categoryId?: string | null;
 	/**
 	 *
 	 * @type {string}
@@ -2935,25 +2923,7 @@ export interface UpdateExpenseDto {
 	 * @type {string}
 	 * @memberof UpdateExpenseDto
 	 */
-	unitId?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateExpenseDto
-	 */
-	propertyId?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateExpenseDto
-	 */
-	maintenanceOrderId?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateExpenseDto
-	 */
-	categoryId?: string | null;
+	label?: string | null;
 }
 /**
  *

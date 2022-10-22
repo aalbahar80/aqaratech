@@ -14,17 +14,12 @@
 
 import * as runtime from '../runtime';
 import type {
-	CreateExpenseDto,
 	ExpenseDto,
 	PaginatedExpenseDto,
 	PartialExpenseDto,
 	SortOrderEnum,
 	UpdateExpenseDto,
 } from '../models';
-
-export interface ExpensesApiCreateRequest {
-	createExpenseDto: CreateExpenseDto;
-}
 
 export interface ExpensesApiFindAllRequest {
 	page?: number;
@@ -59,26 +54,6 @@ export interface ExpensesApiUpdateRequest {
  * @interface ExpensesApiInterface
  */
 export interface ExpensesApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof ExpensesApiInterface
-	 */
-	createRaw(
-		requestParameters: ExpensesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialExpenseDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	create(
-		requestParameters: ExpensesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialExpenseDto>;
-
 	/**
 	 *
 	 * @summary
@@ -167,56 +142,6 @@ export class ExpensesApi
 	extends runtime.BaseAPI
 	implements ExpensesApiInterface
 {
-	/**
-	 *
-	 *
-	 */
-	async createRaw(
-		requestParameters: ExpensesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialExpenseDto>> {
-		if (
-			requestParameters.createExpenseDto === null ||
-			requestParameters.createExpenseDto === undefined
-		) {
-			throw new runtime.RequiredError(
-				'createExpenseDto',
-				'Required parameter requestParameters.createExpenseDto was null or undefined when calling create.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		headerParameters['Content-Type'] = 'application/json';
-
-		const response = await this.request(
-			{
-				path: `/expenses`,
-				method: 'POST',
-				headers: headerParameters,
-				query: queryParameters,
-				body: requestParameters.createExpenseDto,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async create(
-		requestParameters: ExpensesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialExpenseDto> {
-		const response = await this.createRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *
