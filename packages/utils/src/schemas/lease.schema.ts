@@ -1,12 +1,12 @@
 import { z } from 'zod';
+import { zodDateOnly } from './utils/date/zod-date-only';
 import { isID } from './utils/id.schema';
-import { zodIsDateString } from './utils/zod-date-string';
 
 const base = z
 	.object({
 		monthlyRent: z.number().min(1),
-		start: zodIsDateString(),
-		end: zodIsDateString(),
+		start: zodDateOnly(),
+		end: zodDateOnly(),
 		notify: z.boolean(),
 		canPay: z.boolean(),
 	})
