@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ResponseError } from '$api/openapi';
 	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/buttons/Button.svelte';
@@ -7,7 +8,6 @@
 	import type { Field, SelectField } from '$lib/models/classes/Field.class';
 	import { addToast } from '$lib/stores/toast';
 	import { validator } from '@felte/validator-zod';
-	import { ResponseError } from '$api/openapi';
 	import { entitiesMap, type Entity } from '@self/utils';
 	import { createForm } from 'felte';
 	import type { z, ZodSchema } from 'zod';
@@ -65,11 +65,8 @@
 		],
 
 		onSubmit: async (original) => {
-			console.debug({ originalFormValues: original });
-			const parsed = schema.parse(original);
-			console.debug({ parsed });
-			const value = await onSubmit(parsed);
-			onSuccess(value);
+			const value = await onSubmit(original);
+			await onSuccess(value);
 		},
 
 		onError: async (error: any) => {
