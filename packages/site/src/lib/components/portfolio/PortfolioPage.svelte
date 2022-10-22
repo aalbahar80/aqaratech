@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { PortfolioDto } from '$api/openapi';
-	import { afterNavigate, prefetch } from '$app/navigation';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
@@ -13,12 +12,6 @@
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let portfolio: PortfolioDto;
-
-	afterNavigate(async () => {
-		// prefetch in afterNavigate otherwise prefetching will only happen on first load.
-		// Example: Going from /portfolios/1 -> /portfolios/2 from a search result will not trigger prefetching.
-		await prefetch(`/portfolios/${portfolio.id}/dashboard`);
-	});
 </script>
 
 <Heading
@@ -61,7 +54,6 @@
 			as="a"
 			href={`/portfolios/${portfolio.id}/dashboard`}
 			class="w-full sm:w-auto"
-			prefetch
 		/>
 	</svelte:fragment>
 </Heading>
