@@ -10,7 +10,7 @@
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit",
-		"test": "vitest"
+		"test": "vitest --ui"
 	},
 	"dependencies": {
 		"date-fns": "2.29.3",
@@ -25,6 +25,7 @@
 		"@tsconfig/esm": "1.0.2",
 		"@tsconfig/node18-strictest-esm": "1.0.1",
 		"@types/node": "18.11.0",
+		"@vitest/ui": "0.24.3",
 		"eslint-config-custom": "workspace:1.1.0",
 		"tsup": "6.3.0",
 		"typescript": "4.9.1-beta",

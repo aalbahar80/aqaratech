@@ -3,7 +3,7 @@ import { zodIsDatetimeString } from './zod-date-string';
 
 const schema = zodIsDatetimeString();
 
-const valid = ['2021-01-01'];
+const valid = ['2021-01-01', '2021-01-01T00:00:00.000Z'];
 
 test.each(valid)('valid: %s', (value) => {
 	expect(schema.safeParse(value).success).toBe(true);
@@ -13,7 +13,6 @@ const invalid = [
 	'2021-00-01',
 	'2021-00-00',
 	'2021-01-00',
-	'2021-01-01T00:00:00.000Z',
 	'2021-1-1',
 	'2021-1-1T00:00:00.000Z',
 	'2019-09-26T07:58:30.996+0200',
@@ -43,10 +42,4 @@ test('date transformation is idempotent for full datetime strings', () => {
 	const first = schema.parse(date);
 
 	expect(schema.parse(first)).toBe(date);
-});
-
-test('always returns midnight UTC', () => {
-	const date = '2021-01-01T05:12:34.000Z';
-
-	expect(() => schema.parse(date)).toThrowError();
 });

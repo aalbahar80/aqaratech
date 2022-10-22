@@ -16,13 +16,41 @@ const ISO_8601_WITH_TIME = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx";
 export const zodIsDateOnlyOptional = () => z.string().nullish();
 
 /**
- * Check if a string is a valid datestring
+ * Check if a string is a valid datestring or datetime string.
+ *
+ * Transforms date-only strings to midnight UTC.
  */
-export const zodIsDateString = () =>
+export const zodIsDatetimeString = () =>
 	z.string().transform((val, ctx) => {
 		if (isMatch(val, ISO_8601_WITH_TIME) && val.length === 24) {
 			// return val.endsWith('00:00:00.000Z');
 			return val;
+		} else if (isMatch(val, ISO_8601) && val.length === 10) {
+			return new Date(val).toISOString();
+		} else {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: 'Invalid date',
+			});
+
+			return z.NEVER;
+		}
+	});
+
+/**
+ * Check if a string is a valid datestring. Fails if time is present.
+ *
+ * Transforms date-only strings to midnight UTC.
+ */
+export const zodIsDateString = () =>
+	z.string().transform((val, ctx) => {
+		if (isMatch(val, ISO_8601_WITH_TIME) && val.length === 24) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: `Invalid date. Expected date format: ${ISO_8601}`,
+			});
+
+			return z.NEVER;
 		} else if (isMatch(val, ISO_8601) && val.length === 10) {
 			return new Date(val).toISOString();
 		} else {
