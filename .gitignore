@@ -18,6 +18,8 @@ build
 
 dist
 
+vite.config.js.timestamp*
+
 # test
 test-results/
 playwright-report/
