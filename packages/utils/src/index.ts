@@ -34,4 +34,8 @@ export {
 	unitCreateSchema,
 	unitUpdateSchema,
 } from './schemas';
-export type { LeaseCreateSchema, LeaseUpdateSchema } from './schemas';
+export type {
+	FileRelationKey,
+	LeaseCreateSchema,
+	LeaseUpdateSchema,
+} from './schemas';
