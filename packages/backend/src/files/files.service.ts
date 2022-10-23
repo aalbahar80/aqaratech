@@ -36,7 +36,7 @@ export class FilesService {
 		file: Express.Multer.File;
 		user: IUser;
 	}) {
-		const key = this.parseFileKey({
+		const key = this.computeFileKey({
 			relationKey: createFileDto.relationKey,
 			relationValue: createFileDto.relationValue,
 			fileName: createFileDto.fileName,
@@ -215,7 +215,7 @@ export class FilesService {
 		});
 	}
 
-	parseFileKey({
+	computeFileKey({
 		relationKey,
 		relationValue,
 		fileName,
