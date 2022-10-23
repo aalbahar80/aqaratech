@@ -42,11 +42,11 @@ export class FilesService {
 			fileName: createFileDto.fileName,
 		});
 
-		const directory = this.parseFileDirectory({ key });
+		const directory = this.getFileDirectory({ key });
 
-		const { entity, entityId } = this.parseFileDetails({ directory });
+		const { entity, entityId } = this.getFileDetails({ directory });
 
-		const bucket = this.parseFileBucket({ user });
+		const bucket = this.getFileBucket({ user });
 
 		this.logger.debug(
 			`Attempting to create file: ${key} in bucket: ${bucket} in directory: ${directory}`,
@@ -230,7 +230,7 @@ export class FilesService {
 		return key;
 	}
 
-	parseFileDirectory({ key }: { key: string }) {
+	getFileDirectory({ key }: { key: string }) {
 		const directory = key.split('/').slice(0, -1).join('/');
 
 		return directory;
@@ -238,7 +238,7 @@ export class FilesService {
 
 	// TODO: use directory type
 	// TODO: rename
-	parseFileDetails({ directory }: { directory: string }) {
+	getFileDetails({ directory }: { directory: string }) {
 		// TODO: rm
 		const relationKey = directory.split('/')[0] as FileForeignKeys; // TODO don't cast?
 		// const relationKey = directory.split('/')[0];
@@ -252,7 +252,7 @@ export class FilesService {
 		return { entity, entityId, relationKey };
 	}
 
-	parseFileBucket({ user }: { user: IUser }) {
+	getFileBucket({ user }: { user: IUser }) {
 		const bucket = user.role.organizationId;
 
 		return bucket;
