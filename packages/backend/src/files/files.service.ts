@@ -1,17 +1,15 @@
 import { ListObjectsV2CommandOutput } from '@aws-sdk/client-s3';
 import { accessibleBy } from '@casl/prisma';
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
-import { DBEntity, entitiesMap, fileCreateSchema } from '@self/utils';
+import { DBEntity, entitiesMap, FileRelationKey } from '@self/utils';
 import { Cache } from 'cache-manager';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { S3_TTL } from 'src/constants/s3-ttl';
-import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
-import { z } from 'zod';
 
 @Injectable()
 export class FilesService {
@@ -73,13 +71,12 @@ export class FilesService {
 
 	async findAll({
 		user,
-		// TODO: type or validate relationKey and relationValue
+		// TODO: validate relationKey and relationValue
 		relationKey,
 		relationValue,
 	}: {
 		user: IUser;
-		// TODO: infer from file.schema
-		relationKey: z.infer<typeof fileCreateSchema>['relationKey'];
+		relationKey: FileRelationKey;
 		relationValue: string;
 	}): Promise<WithCount<FileDto>> {
 		const bucket = this.getFileBucket({ user });
@@ -225,8 +222,8 @@ export class FilesService {
 		relationValue,
 		fileName,
 	}: {
-		// TODO: infer from file.schema
-		relationKey: string;
+		// TODO: validate relationKey and relationValue upstream
+		relationKey: FileRelationKey;
 		relationValue: string;
 		fileName: string;
 	}) {
@@ -263,7 +260,7 @@ export class FilesService {
 	// TODO: rename
 	getFileDetails({ directory }: { directory: string }) {
 		// TODO: rm
-		const relationKey = directory.split('/')[0] as FileForeignKeys; // TODO don't cast?
+		const relationKey = directory.split('/')[0] as FileRelationKey; // TODO don't cast?
 		// const relationKey = directory.split('/')[0];
 
 		// TODO: Don't use zod here. This should already be verified as a valid key
@@ -282,11 +279,7 @@ export class FilesService {
 	}
 
 	// TODO: validate relationKey upstream
-	getFileEntity({
-		relationKey,
-	}: {
-		relationKey: z.infer<typeof fileCreateSchema>['relationKey'];
-	}) {
+	getFileEntity({ relationKey }: { relationKey: FileRelationKey }) {
 		const entity = entitiesMap[relationKey].singular;
 
 		return entity;

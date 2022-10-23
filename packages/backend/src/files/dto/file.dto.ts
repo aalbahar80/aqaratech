@@ -1,7 +1,11 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { InternalServerErrorException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { fileCreateSchema, FileRelationKeyEnum } from '@self/utils';
+import {
+	fileCreateSchema,
+	FileRelationKey,
+	FileRelationKeyEnum,
+} from '@self/utils';
 import { IsNumber, IsString } from 'class-validator';
 import { z } from 'zod';
 
@@ -28,15 +32,6 @@ export class CreateFileDto implements z.infer<typeof fileCreateSchema> {
 	fileName: string;
 	relationValue: string;
 
-	// TODO: can infer? or use typeof FileRelationKeyEnum?
 	@ApiProperty({ enum: FileRelationKeyEnum, enumName: 'FileRelationKeyEnum' })
-	relationKey:
-		| 'tenant'
-		| 'portfolio'
-		| 'property'
-		| 'unit'
-		| 'lease'
-		| 'leaseInvoice'
-		| 'expense'
-		| 'maintenanceOrder';
+	relationKey: FileRelationKey;
 }

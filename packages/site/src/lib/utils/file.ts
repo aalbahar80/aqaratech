@@ -1,5 +1,5 @@
 import { create, inferRoute } from '$lib/utils/route-helpers';
-import { CreateRelationKeyEnum } from '$api/openapi';
+import { FileRelationKeyEnum, type FileRelationKey } from '@self/utils';
 
 export const createFileHref = (pathname: string) => {
 	const current = inferRoute(pathname);
@@ -15,8 +15,8 @@ export const createFileHref = (pathname: string) => {
 
 export const hasFileSupport = (
 	entityTitle: string,
-): entityTitle is CreateRelationKeyEnum => {
-	const isValid = Object.values(CreateRelationKeyEnum).find(
+): entityTitle is FileRelationKey => {
+	const isValid = Object.values(FileRelationKeyEnum).find(
 		(key) => key === entityTitle,
 	);
 	return !!isValid;

@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { createApi } from '$api';
-	import type { CreateRelationKeyEnum } from '$api/openapi';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
-	import { entitiesMap, fileCreateSchema } from '@self/utils';
+	import {
+		entitiesMap,
+		fileCreateSchema,
+		type FileRelationKey,
+	} from '@self/utils';
 
-	export let relationKey: CreateRelationKeyEnum;
+	export let relationKey: FileRelationKey;
 	export let relationValue: string;
 
 	const basicFields = [
