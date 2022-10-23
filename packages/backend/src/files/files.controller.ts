@@ -26,12 +26,7 @@ import {
 	FileFindAllOptionsDto,
 	FileFindOneOptionsDto,
 } from 'src/files/dto/file-find-all-options.dto';
-import {
-	CreateFileDto,
-	DirectoryRequestDto,
-	FileDto,
-	FileRequestDto,
-} from 'src/files/dto/file.dto';
+import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { FilesService } from './files.service';
@@ -67,9 +62,7 @@ export class FilesController {
 		@Query() fileFindAllOptionsDto: FileFindAllOptionsDto,
 	): Promise<WithCount<FileDto>> {
 		const { relationKey, relationValue } = fileFindAllOptionsDto;
-		const directory = `${relationKey}/${relationValue}`;
-		const directoryRequestDto = new DirectoryRequestDto({ directory, user });
-		return this.filesService.findAll({ directoryRequestDto, user });
+		return this.filesService.findAll({ relationKey, relationValue, user });
 	}
 
 	@Get('/find-one')

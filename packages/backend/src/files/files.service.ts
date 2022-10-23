@@ -1,21 +1,17 @@
 import { ListObjectsV2CommandOutput } from '@aws-sdk/client-s3';
 import { accessibleBy } from '@casl/prisma';
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
-import { DBEntity, entitiesMap } from '@self/utils';
+import { DBEntity, entitiesMap, fileCreateSchema } from '@self/utils';
 import { Cache } from 'cache-manager';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { S3_TTL } from 'src/constants/s3-ttl';
 import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
-import {
-	CreateFileDto,
-	DirectoryRequestDto,
-	FileDto,
-	FileRequestDto,
-} from 'src/files/dto/file.dto';
+import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
+import { z } from 'zod';
 
 @Injectable()
 export class FilesService {
@@ -76,13 +72,26 @@ export class FilesService {
 	}
 
 	async findAll({
-		directoryRequestDto,
 		user,
+		// TODO: type or validate relationKey and relationValue
+		relationKey,
+		relationValue,
 	}: {
-		directoryRequestDto: DirectoryRequestDto;
 		user: IUser;
+		// TODO: infer from file.schema
+		relationKey: z.infer<typeof fileCreateSchema>['relationKey'];
+		relationValue: string;
 	}): Promise<WithCount<FileDto>> {
-		const { bucket, directory, entity, entityId } = directoryRequestDto;
+		const bucket = this.getFileBucket({ user });
+
+		const directory = this.computeDirectoryKey({
+			relationKey,
+			relationValue,
+		});
+
+		const entity = this.getFileEntity({ relationKey });
+
+		const entityId = directory.split('/')[1];
 
 		await this.canAccess({
 			entity,
@@ -225,10 +234,41 @@ export class FilesService {
 		relationValue: string;
 		fileName: string;
 	}) {
-		const key = `${relationKey}/${relationValue}/${fileName}`; // TODO dedupe
+		const directory = this.computeDirectoryKey({
+			relationKey,
+			relationValue,
+		});
+
+		const key = `${directory}/${fileName}`;
 
 		return key;
 	}
+
+	computeDirectoryKey({
+		relationKey,
+		relationValue,
+	}: {
+		// TODO: infer from file.schema
+		relationKey: string;
+		relationValue: string;
+	}) {
+		const key = `${relationKey}/${relationValue}`;
+
+		return key;
+	}
+
+	// parseFileKey(key: string) {
+
+	// constructor({ key, user }: { key: string; user: IUser }) {
+	// 	// set directory to everything before the last slash
+	// 	const directory = key.split('/').slice(0, -1).join('/');
+	// 	super({ directory, user });
+	// 	this.key = key;
+	// }
+
+	// @IsString()
+	// key: string; // full key (directory + filename)
+	// }
 
 	getFileDirectory({ key }: { key: string }) {
 		const directory = key.split('/').slice(0, -1).join('/');
@@ -256,5 +296,16 @@ export class FilesService {
 		const bucket = user.role.organizationId;
 
 		return bucket;
+	}
+
+	// TODO: validate relationKey upstream
+	getFileEntity({
+		relationKey,
+	}: {
+		relationKey: z.infer<typeof fileCreateSchema>['relationKey'];
+	}) {
+		const entity = entitiesMap[relationKey].singular;
+
+		return entity;
 	}
 }
