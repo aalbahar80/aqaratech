@@ -13,19 +13,17 @@
  */
 
 import * as runtime from '../runtime';
-import type { PaginatedFileDto } from '../models';
+import type { FileRelationKeyEnum, PaginatedFileDto } from '../models';
 
 export interface FilesApiCreateRequest {
-	relationKey: CreateRelationKeyEnum;
+	relationKey: FileRelationKeyEnum;
 	file: Blob;
 	organizationId: string;
-	relationValue: string;
 	fileName: string;
-	label?: string | null;
+	relationValue: string;
 }
 
 export interface FilesApiFindAllRequest {
-	relationKey: FindAllRelationKeyEnum;
 	relationValue: string;
 }
 
@@ -168,22 +166,22 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		}
 
 		if (
-			requestParameters.relationValue === null ||
-			requestParameters.relationValue === undefined
-		) {
-			throw new runtime.RequiredError(
-				'relationValue',
-				'Required parameter requestParameters.relationValue was null or undefined when calling create.',
-			);
-		}
-
-		if (
 			requestParameters.fileName === null ||
 			requestParameters.fileName === undefined
 		) {
 			throw new runtime.RequiredError(
 				'fileName',
 				'Required parameter requestParameters.fileName was null or undefined when calling create.',
+			);
+		}
+
+		if (
+			requestParameters.relationValue === null ||
+			requestParameters.relationValue === undefined
+		) {
+			throw new runtime.RequiredError(
+				'relationValue',
+				'Required parameter requestParameters.relationValue was null or undefined when calling create.',
 			);
 		}
 
@@ -208,7 +206,12 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		}
 
 		if (requestParameters.relationKey !== undefined) {
-			formParams.append('relationKey', requestParameters.relationKey as any);
+			formParams.append(
+				'relationKey',
+				new Blob([JSON.stringify(requestParameters.relationKey)], {
+					type: 'application/json',
+				}),
+			);
 		}
 
 		if (requestParameters.file !== undefined) {
@@ -222,19 +225,15 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 			);
 		}
 
+		if (requestParameters.fileName !== undefined) {
+			formParams.append('fileName', requestParameters.fileName as any);
+		}
+
 		if (requestParameters.relationValue !== undefined) {
 			formParams.append(
 				'relationValue',
 				requestParameters.relationValue as any,
 			);
-		}
-
-		if (requestParameters.fileName !== undefined) {
-			formParams.append('fileName', requestParameters.fileName as any);
-		}
-
-		if (requestParameters.label !== undefined) {
-			formParams.append('label', requestParameters.label as any);
 		}
 
 		const response = await this.request(
@@ -272,16 +271,6 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<PaginatedFileDto>> {
 		if (
-			requestParameters.relationKey === null ||
-			requestParameters.relationKey === undefined
-		) {
-			throw new runtime.RequiredError(
-				'relationKey',
-				'Required parameter requestParameters.relationKey was null or undefined when calling findAll.',
-			);
-		}
-
-		if (
 			requestParameters.relationValue === null ||
 			requestParameters.relationValue === undefined
 		) {
@@ -292,10 +281,6 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		}
 
 		const queryParameters: any = {};
-
-		if (requestParameters.relationKey !== undefined) {
-			queryParameters['relationKey'] = requestParameters.relationKey;
-		}
 
 		if (requestParameters.relationValue !== undefined) {
 			queryParameters['relationValue'] = requestParameters.relationValue;
@@ -424,34 +409,3 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		return await response.value();
 	}
 }
-
-/**
- * @export
- */
-export const CreateRelationKeyEnum = {
-	Tenant: 'tenant',
-	Portfolio: 'portfolio',
-	Property: 'property',
-	Unit: 'unit',
-	Expense: 'expense',
-	Lease: 'lease',
-	LeaseInvoice: 'leaseInvoice',
-	MaintenanceOrder: 'maintenanceOrder',
-} as const;
-export type CreateRelationKeyEnum =
-	typeof CreateRelationKeyEnum[keyof typeof CreateRelationKeyEnum];
-/**
- * @export
- */
-export const FindAllRelationKeyEnum = {
-	Tenant: 'tenant',
-	Portfolio: 'portfolio',
-	Property: 'property',
-	Unit: 'unit',
-	Expense: 'expense',
-	Lease: 'lease',
-	LeaseInvoice: 'leaseInvoice',
-	MaintenanceOrder: 'maintenanceOrder',
-} as const;
-export type FindAllRelationKeyEnum =
-	typeof FindAllRelationKeyEnum[keyof typeof FindAllRelationKeyEnum];

@@ -4165,7 +4165,8 @@ components:
         relationKey:
           $ref: '#/components/schemas/FileRelationKeyEnum'
         file:
-          type: object
+          type: string
+          format: binary
         organizationId:
           type: string
         fileName:

@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
+	ApiBody,
 	ApiConsumes,
 	ApiCreatedResponse,
 	ApiOkResponse,
@@ -38,9 +39,10 @@ export class FilesController {
 	constructor(private readonly filesService: FilesService) {}
 
 	@Post()
-	@ApiConsumes('multipart/form-data')
 	@ApiCreatedResponse({ type: String })
 	@UseInterceptors(FileInterceptor('file'))
+	@ApiConsumes('multipart/form-data')
+	@ApiBody({ type: CreateFileDto })
 	create(
 		@User() user: IUser,
 		@UploadedFile(
@@ -50,7 +52,7 @@ export class FilesController {
 		)
 		file: Express.Multer.File,
 		@Body(new ZodValidationPipe(fileCreateSchema))
-		createFileDto: CreateFileDto,
+		createFileDto: Omit<CreateFileDto, 'file'>,
 	): Promise<string> {
 		return this.filesService.create({ user, file, createFileDto });
 	}

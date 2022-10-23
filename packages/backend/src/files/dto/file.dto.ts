@@ -27,11 +27,13 @@ export class FileDto {
 }
 
 export class CreateFileDto implements z.infer<typeof fileCreateSchema> {
-	file: Express.Multer.File;
 	organizationId: string; // TODO rm
 	fileName: string;
 	relationValue: string;
 
 	@ApiProperty({ enum: FileRelationKeyEnum, enumName: 'FileRelationKeyEnum' })
 	relationKey: FileRelationKey;
+
+	@ApiProperty({ type: 'string', format: 'binary' })
+	file: Express.Multer.File;
 }

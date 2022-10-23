@@ -26,7 +26,7 @@ export class FilesService {
 		file,
 		user,
 	}: {
-		createFileDto: CreateFileDto;
+		createFileDto: Omit<CreateFileDto, 'file'>;
 		file: Express.Multer.File;
 		user: IUser;
 	}) {
