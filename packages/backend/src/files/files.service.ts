@@ -172,14 +172,12 @@ export class FilesService {
 		return presignedUrl;
 	}
 
-	async remove({
-		fileRequestDto,
-		user,
-	}: {
-		fileRequestDto: FileRequestDto;
-		user: IUser;
-	}) {
-		const { key, directory, bucket, entity, entityId } = fileRequestDto;
+	async remove({ key, user }: { key: string; user: IUser }) {
+		const bucket = this.getFileBucket({ user });
+
+		const directory = this.getFileDirectory({ key });
+
+		const { entity, entityId } = this.getFileDetails({ directory });
 
 		await this.canAccess({
 			entity,

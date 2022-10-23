@@ -2515,11 +2515,6 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: relationKey
-          required: true
-          in: query
-          schema:
-            type: string
         - name: relationValue
           required: true
           in: query
