@@ -1,5 +1,12 @@
 # @self/backend
 
+## 1.6.3
+
+### Patch Changes
+
+- 83b89e4f: log in timeout interceptor
+- 83b89e4f: increase timeout interceptor to 45s
+
 ## 1.6.2
 
 ### Patch Changes
