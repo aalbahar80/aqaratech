@@ -131,14 +131,12 @@ export class FilesService {
 		};
 	}
 
-	async findOne({
-		fileRequestDto,
-		user,
-	}: {
-		fileRequestDto: FileRequestDto;
-		user: IUser;
-	}) {
-		const { key, bucket, entity, entityId } = fileRequestDto;
+	async findOne({ key, user }: { key: string; user: IUser }) {
+		const bucket = this.getFileBucket({ user });
+
+		const directory = this.getFileDirectory({ key });
+
+		const { entity, entityId } = this.getFileDetails({ directory });
 
 		await this.canAccess({
 			entity,
@@ -256,19 +254,6 @@ export class FilesService {
 
 		return key;
 	}
-
-	// parseFileKey(key: string) {
-
-	// constructor({ key, user }: { key: string; user: IUser }) {
-	// 	// set directory to everything before the last slash
-	// 	const directory = key.split('/').slice(0, -1).join('/');
-	// 	super({ directory, user });
-	// 	this.key = key;
-	// }
-
-	// @IsString()
-	// key: string; // full key (directory + filename)
-	// }
 
 	getFileDirectory({ key }: { key: string }) {
 		const directory = key.split('/').slice(0, -1).join('/');

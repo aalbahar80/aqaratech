@@ -71,11 +71,9 @@ export class FilesController {
 		@User() user: IUser,
 		@Query() fileFindOneOptionsDto: FileFindOneOptionsDto,
 	): Promise<string> {
-		const fileRequestDto = new FileRequestDto({
-			key: fileFindOneOptionsDto.key,
-			user,
-		});
-		return this.filesService.findOne({ fileRequestDto, user });
+		const key = fileFindOneOptionsDto.key;
+
+		return this.filesService.findOne({ key, user });
 	}
 
 	@Delete()
