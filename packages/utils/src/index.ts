@@ -21,6 +21,7 @@ export { satisfies } from './satisfies';
 export {
 	expenseCreateSchema,
 	expenseUpdateSchema,
+	fileCreateSchema,
 	leaseCreateSchema,
 	leaseUpdateSchema,
 	portfolioCreateSchema,

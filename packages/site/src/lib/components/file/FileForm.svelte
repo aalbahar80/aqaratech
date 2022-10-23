@@ -5,8 +5,7 @@
 	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
-	import { schema } from '$lib/models/schemas/file-schema';
-	import { entitiesMap } from '@self/utils';
+	import { entitiesMap, fileCreateSchema } from '@self/utils';
 
 	export let relationKey: CreateRelationKeyEnum;
 	export let relationValue: string;
@@ -44,7 +43,7 @@
 </script>
 
 <Form
-	{schema}
+	schema={fileCreateSchema}
 	entity="file"
 	formType="create"
 	{basicFields}
