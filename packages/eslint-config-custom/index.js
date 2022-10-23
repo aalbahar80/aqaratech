@@ -113,5 +113,5 @@ module.exports = {
 			},
 		],
 	},
-	ignorePatterns: ['.eslintrc.*'],
+	ignorePatterns: ['.eslintrc.*', '*.sh'],
 };

@@ -14,6 +14,7 @@ module.exports = {
 	globals: {
 		svelte: 'readonly',
 		__AQARATECH_APP_VERSION__: 'readonly',
+		$$Generic: 'readonly',
 	},
 	ignorePatterns: [
 		'currency.ts',
@@ -65,6 +66,9 @@ module.exports = {
 						allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
 					},
 				],
+
+				// tslint comments in generated api files
+				'@typescript-eslint/ban-tslint-comment': 'off',
 
 				// TODO add rules from: https://ota-meshi.github.io/eslint-plugin-svelte/rules/
 			},
