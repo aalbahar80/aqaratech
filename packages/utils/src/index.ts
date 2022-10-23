@@ -22,6 +22,7 @@ export {
 	expenseCreateSchema,
 	expenseUpdateSchema,
 	fileCreateSchema,
+	FileRelationKeyEnum,
 	leaseCreateSchema,
 	leaseUpdateSchema,
 	portfolioCreateSchema,

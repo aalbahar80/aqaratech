@@ -1,12 +1,17 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { InternalServerErrorException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { DBEntitiesMap, entitiesMap } from '@self/utils';
-import { Expose } from 'class-transformer';
-import { Allow, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+	DBEntitiesMap,
+	entitiesMap,
+	fileCreateSchema,
+	FileRelationKeyEnum,
+} from '@self/utils';
+import { IsNumber, IsString } from 'class-validator';
 import { IsID } from 'src/decorators/field.decorators';
 import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 import { IUser } from 'src/interfaces/user.interface';
+import { z } from 'zod';
 
 export class FileDto {
 	constructor(obj: NonNullable<ListObjectsV2Output['Contents']>[0]) {
@@ -62,42 +67,21 @@ export class FileRequestDto extends DirectoryRequestDto {
 	key: string; // full key (directory + filename)
 }
 
-export class CreateFileDto {
-	@IsID()
-	organizationId: string;
-
-	@ApiProperty({
-		type: 'string',
-		enum: FileForeignKeys,
-		// Setting an enum name will cause these issues:
-		// https://github.com/OpenAPITools/openapi-generator/issues/11613
-		// https://github.com/OpenAPITools/openapi-generator/issues/9897
-		// enumName: 'FileForeignKeys',
-	})
-	@IsEnum(FileForeignKeys)
-	relationKey: FileForeignKeys;
-
-	@IsID()
+export class CreateFileDto implements z.infer<typeof fileCreateSchema> {
+	file: Express.Multer.File;
+	organizationId: string; // TODO rm
+	fileName: string;
 	relationValue: string;
 
-	// TODO check name has no delimiters (:/ or whitespace)
-	@IsString()
-	fileName: string;
-
-	@IsString()
-	@IsOptional()
-	label?: string | null;
-
-	@Expose({ toClassOnly: true })
-	get fileRequestDto(): FileRequestDto {
-		const key = `${this.relationKey}/${this.relationValue}/${this.fileName}`; // TODO dedupe
-		return new FileRequestDto({
-			key: key,
-			user: { role: { organizationId: this.organizationId } } as IUser, // TODO just pass string
-		});
-	}
-
-	@Allow()
-	@ApiProperty({ type: 'string', format: 'binary' })
-	file: Express.Multer.File;
+	// TODO: can infer? or use typeof FileRelationKeyEnum?
+	@ApiProperty({ enum: FileRelationKeyEnum, enumName: 'FileRelationKeyEnum' })
+	relationKey:
+		| 'tenant'
+		| 'portfolio'
+		| 'property'
+		| 'unit'
+		| 'lease'
+		| 'leaseInvoice'
+		| 'expense'
+		| 'maintenanceOrder';
 }

@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { isID } from './utils/id.schema';
 import { trim } from './utils/zod-transformers';
 
-const RelationKeyEnum = [
+export const FileRelationKeyEnum = [
 	'tenant',
 	'portfolio',
 	'property',
@@ -13,13 +13,12 @@ const RelationKeyEnum = [
 	'maintenanceOrder',
 ] as const;
 
-export const fileCreateSchema = z.object({
-	organizationId: isID,
-	fileName: z.string().min(1, { message: 'Required' }).transform(trim),
+export const fileCreateSchema = z
+	.object({
+		organizationId: isID,
+		fileName: z.string().min(1, { message: 'Required' }).transform(trim),
 
-	// only check if file is truthy, server will check if file is valid
-	file: z.any().refine((value) => !!value, { message: 'Required' }),
-
-	relationKey: z.enum(RelationKeyEnum),
-	relationValue: isID,
-});
+		relationKey: z.enum(FileRelationKeyEnum),
+		relationValue: isID,
+	})
+	.strict();

@@ -13,6 +13,7 @@ const shouldSkip = [
 	'UpdateLeaseDto',
 	'CreateExpenseDto',
 	'UpdateExpenseDto',
+	'CreateFileDto',
 ];
 
 // Reference: https://github.com/nestjs/nest/issues/2390#issuecomment-517623971

@@ -2519,15 +2519,6 @@ paths:
           required: true
           in: query
           schema:
-            enum: &ref_27
-              - tenant
-              - portfolio
-              - property
-              - unit
-              - expense
-              - lease
-              - leaseInvoice
-              - maintenanceOrder
             type: string
         - name: relationValue
           required: true
@@ -4162,30 +4153,36 @@ components:
             $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - items
+    FileRelationKeyEnum:
+      type: string
+      enum:
+        - tenant
+        - portfolio
+        - property
+        - unit
+        - expense
+        - lease
+        - leaseInvoice
+        - maintenanceOrder
     CreateFileDto:
       type: object
       properties:
         relationKey:
-          enum: *ref_27
-          type: string
+          $ref: '#/components/schemas/FileRelationKeyEnum'
         file:
-          type: string
-          format: binary
+          type: object
         organizationId:
-          type: string
-        relationValue:
           type: string
         fileName:
           type: string
-        label:
+        relationValue:
           type: string
-          nullable: true
       required:
         - relationKey
         - file
         - organizationId
-        - relationValue
         - fileName
+        - relationValue
     FileDto:
       type: object
       properties:

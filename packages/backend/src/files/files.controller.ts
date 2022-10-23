@@ -17,6 +17,7 @@ import {
 	ApiOkResponse,
 	ApiTags,
 } from '@nestjs/swagger';
+import { fileCreateSchema } from '@self/utils';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
@@ -32,6 +33,7 @@ import {
 	FileRequestDto,
 } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { FilesService } from './files.service';
 
 @Controller('files')
@@ -52,7 +54,8 @@ export class FilesController {
 			}),
 		)
 		file: Express.Multer.File,
-		@Body() createFileDto: CreateFileDto,
+		@Body(new ZodValidationPipe(fileCreateSchema))
+		createFileDto: CreateFileDto,
 	): Promise<string> {
 		return this.filesService.create({ user, file, createFileDto });
 	}

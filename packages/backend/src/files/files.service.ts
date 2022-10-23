@@ -6,6 +6,7 @@ import { Cache } from 'cache-manager';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { S3_TTL } from 'src/constants/s3-ttl';
+import { FileForeignKeys } from 'src/files/dto/file-foreign-keys';
 import {
 	CreateFileDto,
 	DirectoryRequestDto,
@@ -35,8 +36,18 @@ export class FilesService {
 		file: Express.Multer.File;
 		user: IUser;
 	}) {
-		const { bucket, directory, key, entity, entityId } =
-			createFileDto.fileRequestDto;
+		const key = this.parseFileKey({
+			relationKey: createFileDto.relationKey,
+			relationValue: createFileDto.relationValue,
+			fileName: createFileDto.fileName,
+		});
+
+		const directory = this.parseFileDirectory({ key });
+
+		const { entity, entityId } = this.parseFileDetails({ directory });
+
+		const bucket = this.parseFileBucket({ user });
+
 		this.logger.debug(
 			`Attempting to create file: ${key} in bucket: ${bucket} in directory: ${directory}`,
 		);
@@ -202,5 +213,48 @@ export class FilesService {
 				],
 			},
 		});
+	}
+
+	parseFileKey({
+		relationKey,
+		relationValue,
+		fileName,
+	}: {
+		// TODO: infer from file.schema
+		relationKey: string;
+		relationValue: string;
+		fileName: string;
+	}) {
+		const key = `${relationKey}/${relationValue}/${fileName}`; // TODO dedupe
+
+		return key;
+	}
+
+	parseFileDirectory({ key }: { key: string }) {
+		const directory = key.split('/').slice(0, -1).join('/');
+
+		return directory;
+	}
+
+	// TODO: use directory type
+	// TODO: rename
+	parseFileDetails({ directory }: { directory: string }) {
+		// TODO: rm
+		const relationKey = directory.split('/')[0] as FileForeignKeys; // TODO don't cast?
+		// const relationKey = directory.split('/')[0];
+
+		// TODO: Don't use zod here. This should already be verified as a valid key
+
+		const entity = entitiesMap[relationKey].singular;
+
+		const entityId = directory.split('/')[1];
+
+		return { entity, entityId, relationKey };
+	}
+
+	parseFileBucket({ user }: { user: IUser }) {
+		const bucket = user.role.organizationId;
+
+		return bucket;
 	}
 }
