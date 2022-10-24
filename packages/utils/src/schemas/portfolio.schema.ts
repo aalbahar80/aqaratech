@@ -2,15 +2,15 @@ import { z } from 'zod';
 import { civilidSchema } from './utils/civilid.schema';
 import { zodDateOnlyOptional } from './utils/date/zod-date-only';
 import { phoneSchema } from './utils/phone.schema';
-import { trim } from './utils/zod-transformers';
+import { zodString, zodStringOptional } from './utils/zod-string';
 
 export const portfolioCreateSchema = z
 	.object({
-		fullName: z.string().min(1, { message: 'Required' }).transform(trim),
-		label: z.string().nullish().transform(trim),
+		fullName: zodString,
+		label: zodStringOptional,
 		phone: phoneSchema,
 		civilid: civilidSchema,
-		dob: zodDateOnlyOptional(),
+		dob: zodDateOnlyOptional,
 	})
 	.strict();
 

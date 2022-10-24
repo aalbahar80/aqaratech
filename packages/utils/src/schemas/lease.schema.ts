@@ -5,8 +5,8 @@ import { isID } from './utils/id.schema';
 const base = z
 	.object({
 		monthlyRent: z.number().min(1),
-		start: zodDateOnly(),
-		end: zodDateOnly(),
+		start: zodDateOnly,
+		end: zodDateOnly,
 		notify: z.boolean(),
 		canPay: z.boolean(),
 	})

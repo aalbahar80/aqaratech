@@ -2,8 +2,8 @@ import { expect, test } from 'vitest';
 import { DATE_ONLY } from './dates.constants';
 import { zodDateOnly, zodDateOnlyOptional } from './zod-date-only';
 
-const schema = zodDateOnly();
-const optionalSchema = zodDateOnlyOptional();
+const schema = zodDateOnly;
+const optionalSchema = zodDateOnlyOptional;
 
 test.each(DATE_ONLY.VALID)('valid: %s', (value) => {
 	expect(schema.safeParse(value).success).toBe(true);

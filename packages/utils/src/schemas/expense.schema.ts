@@ -10,7 +10,7 @@ export const expenseCreateSchema = z
 		unitId: isID.nullish(),
 		amount: z.number().gt(0),
 		categoryId: z.string().transform(trim).nullish(),
-		postAt: zodDateOnly(),
+		postAt: zodDateOnly,
 		label: z.string().transform(trim).nullish(),
 		memo: z.string().transform(trim).nullish(),
 	})
