@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { leaseInvoiceFactory, sample } from '@self/seed';
 import { randomUUID } from 'crypto';
 import * as R from 'remeda';
+import { PostUrl } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
 
 const keys = [
@@ -15,8 +16,6 @@ const keys = [
 	'dueAt',
 ] as const;
 
-const url = (orgId: string) => `/organizations/${orgId}/leaseInvoices`;
-
 test('can create leaseInvoice in own org', async ({ request, org, lease }) => {
 	const leaseInvoice = R.pick(
 		leaseInvoiceFactory.build({
@@ -27,7 +26,7 @@ test('can create leaseInvoice in own org', async ({ request, org, lease }) => {
 		keys,
 	);
 
-	const res = await request.post(url(org.organization.id), {
+	const res = await request.post(PostUrl(org.organization.id).invoice, {
 		data: leaseInvoice,
 	});
 
@@ -48,7 +47,7 @@ test('cannot create leaseInvoice in another org', async ({
 		keys,
 	);
 
-	const res = await request.post(url(sample.organizations[0]!.id), {
+	const res = await request.post(PostUrl(sample.organizations[0]!.id).invoice, {
 		data: leaseInvoice,
 	});
 
@@ -71,7 +70,7 @@ test('cannot create leaseInvoice in non-existing lease', async ({
 		keys,
 	);
 
-	const res = await request.post(url(org.organization.id), {
+	const res = await request.post(PostUrl(org.organization.id).invoice, {
 		data: leaseInvoice,
 	});
 
@@ -94,7 +93,7 @@ test('cannot create leaseInvoice in non-existing portfolio', async ({
 		keys,
 	);
 
-	const res = await request.post(url(org.organization.id), {
+	const res = await request.post(PostUrl(org.organization.id).invoice, {
 		data: leaseInvoice,
 	});
 
@@ -116,7 +115,9 @@ test('cannot create leaseInvoice in non-existing organization', async ({
 		keys,
 	);
 
-	const res = await request.post(url(randomUUID()), { data: leaseInvoice });
+	const res = await request.post(PostUrl(randomUUID()).invoice, {
+		data: leaseInvoice,
+	});
 
 	await expect.soft(res).not.toBeOK();
 
