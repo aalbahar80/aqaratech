@@ -3,6 +3,7 @@
 	"extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
 	"compilerOptions": {
 		"types": ["node"],
+		"lib": ["DOM"],
 		"outDir": "./dist",
 		"declaration": true,
 		"declarationDir": "./dist",
