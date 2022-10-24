@@ -1,7 +1,7 @@
 import { z } from 'zod';
+import { zodEmpty } from '../zod-empty';
 import { isDateOnly, ISO_8601 } from './is-date-only';
 import { isDatetime } from './is-date-time';
-import { zodEmptyDate } from './zod-empty-date';
 
 /**
  * Check if a string is a valid datestring. Fails if time is present.
@@ -29,5 +29,4 @@ export const zodDateOnly = () =>
 		}
 	});
 
-export const zodDateOnlyOptional = () =>
-	z.union([zodDateOnly(), zodEmptyDate()]);
+export const zodDateOnlyOptional = () => z.union([zodDateOnly(), zodEmpty()]);
