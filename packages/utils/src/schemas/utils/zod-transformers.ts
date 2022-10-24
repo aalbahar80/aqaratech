@@ -23,7 +23,3 @@ export function undefinedToNull<T>(v: T) {
 export function digitsOnly(v: string) {
 	return v.match(/^[0-9]+$/) !== null;
 }
-
-export function nullifyEmptyString(v: string) {
-	return v.trim() === '' ? null : v;
-}
