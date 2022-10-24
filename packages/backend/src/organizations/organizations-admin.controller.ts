@@ -1,7 +1,24 @@
-import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import {
+	Body,
+	Controller,
+	MaxFileSizeValidator,
+	Param,
+	ParseFilePipe,
+	Post,
+	UploadedFile,
+	UseGuards,
+	UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import {
+	ApiBody,
+	ApiConsumes,
+	ApiCreatedResponse,
+	ApiTags,
+} from '@nestjs/swagger';
 import {
 	expenseCreateSchema,
+	fileCreateSchema,
 	leaseCreateSchema,
 	portfolioCreateSchema,
 	propertyCreateSchema,
@@ -18,6 +35,8 @@ import {
 	PartialExpenseDto,
 } from 'src/expenses/dto/expense.dto';
 import { ExpensesService } from 'src/expenses/expenses.service';
+import { CreateFileDto } from 'src/files/dto/file.dto';
+import { FilesService } from 'src/files/files.service';
 import { IUser } from 'src/interfaces/user.interface';
 import { CreateLeaseDto, PartialLeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
@@ -43,6 +62,7 @@ export class OrganizationsAdminController {
 		private readonly unitsService: UnitsService,
 		private readonly leasesService: LeasesService,
 		private readonly expensesService: ExpensesService,
+		private readonly filesService: FilesService,
 	) {}
 
 	@Post('/tenants')
@@ -127,5 +147,25 @@ export class OrganizationsAdminController {
 			organizationId,
 			user,
 		});
+	}
+
+	@Post('/files')
+	@CheckAbilities({ action: Action.Create, subject: 'File' })
+	@ApiCreatedResponse({ type: String })
+	@UseInterceptors(FileInterceptor('file'))
+	@ApiConsumes('multipart/form-data')
+	@ApiBody({ type: CreateFileDto })
+	create(
+		@User() user: IUser,
+		@UploadedFile(
+			new ParseFilePipe({
+				validators: [new MaxFileSizeValidator({ maxSize: 100 * 1000 * 1000 })],
+			}),
+		)
+		file: Express.Multer.File,
+		@Body(new ZodValidationPipe(fileCreateSchema.omit({ file: true })))
+		createFileDto: Omit<CreateFileDto, 'file'>,
+	): Promise<string> {
+		return this.filesService.create({ user, file, createFileDto });
 	}
 }

@@ -38,20 +38,11 @@ export class FilesService {
 
 		const directory = this.getFileDirectory({ key });
 
-		const { entity, entityId } = this.getFileDetails({ directory });
-
 		const bucket = this.getFileBucket({ user });
 
 		this.logger.debug(
 			`Attempting to create file: ${key} in bucket: ${bucket} in directory: ${directory}`,
 		);
-
-		await this.canAccess({
-			entity,
-			entityId,
-			user,
-			action: Action.Update,
-		});
 
 		// bust cache for file and directory (prefix)
 		this.logger.debug(`CACHE BUST: key: ${key}`);

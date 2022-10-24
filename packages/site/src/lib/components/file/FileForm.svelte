@@ -53,7 +53,6 @@
 	{basicFields}
 	onSubmit={async (values) => {
 		// Avoid using FilesApi.createFile() because of a bug with uploading files.
-		const url = `${environment.PUBLIC_API_URL}/files`;
 
 		const formData = new FormData();
 
@@ -61,6 +60,7 @@
 			formData.append(key, values[key]);
 		}
 
+		const url = `${environment.PUBLIC_API_URL}/organizations/${$page.data.user?.role?.organizationId}/files`;
 		await fetch(url, {
 			method: 'POST',
 			credentials: 'include',

@@ -2400,96 +2400,9 @@ paths:
                 $ref: '#/components/schemas/PartialExpenseDto'
       tags: *ref_21
       security: *ref_22
-  /expense-categories:
+  /organizations/{organizationId}/files:
     post:
-      operationId: ExpenseCategoriesController_create
-      summary: ''
-      description: ''
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateExpenseCategoryDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: &ref_23
-        - expense-categories
-      security: &ref_24
-        - accessToken: []
-    get:
-      operationId: ExpenseCategoriesController_findAll
-      summary: ''
-      description: ''
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_23
-      security: *ref_24
-    patch:
-      operationId: ExpenseCategoriesController_updateAll
-      summary: ''
-      description: ''
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateAllExpenseCategoriesDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_23
-      security: *ref_24
-  /expense-categories/{id}:
-    patch:
-      operationId: ExpenseCategoriesController_update
-      summary: ''
-      description: ''
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateExpenseCategoryDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_23
-      security: *ref_24
-  /files:
-    post:
-      operationId: FilesController_create
+      operationId: OrganizationsAdminController_create
       summary: ''
       description: ''
       parameters: []
@@ -2506,10 +2419,9 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: &ref_25
-        - files
-      security: &ref_26
-        - accessToken: []
+      tags: *ref_21
+      security: *ref_22
+  /files:
     get:
       operationId: FilesController_findAll
       summary: ''
@@ -2542,8 +2454,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/FileDto'
-      tags: *ref_25
-      security: *ref_26
+      tags: &ref_23
+        - files
+      security: &ref_24
+        - accessToken: []
     delete:
       operationId: FilesController_remove
       summary: ''
@@ -2561,8 +2475,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_25
-      security: *ref_26
+      tags: *ref_23
+      security: *ref_24
   /files/find-one:
     get:
       operationId: FilesController_findOne
@@ -2574,6 +2488,93 @@ paths:
           in: query
           schema:
             type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_23
+      security: *ref_24
+  /expense-categories:
+    post:
+      operationId: ExpenseCategoriesController_create
+      summary: ''
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseCategoryDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: &ref_25
+        - expense-categories
+      security: &ref_26
+        - accessToken: []
+    get:
+      operationId: ExpenseCategoriesController_findAll
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseCategoryDto'
+      tags: *ref_25
+      security: *ref_26
+    patch:
+      operationId: ExpenseCategoriesController_updateAll
+      summary: ''
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAllExpenseCategoriesDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseCategoryDto'
+      tags: *ref_25
+      security: *ref_26
+  /expense-categories/{id}:
+    patch:
+      operationId: ExpenseCategoriesController_update
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       responses:
         '200':
           description: ''
@@ -4105,6 +4106,47 @@ components:
         - unitId
         - amount
         - postAt
+    FileRelationKeyEnum:
+      type: string
+      enum:
+        - tenant
+        - portfolio
+        - property
+        - unit
+        - expense
+        - lease
+        - leaseInvoice
+        - maintenanceOrder
+    CreateFileDto:
+      type: object
+      properties:
+        relationKey:
+          $ref: '#/components/schemas/FileRelationKeyEnum'
+        file:
+          type: string
+          format: binary
+        organizationId:
+          type: string
+        fileName:
+          type: string
+        relationValue:
+          type: string
+      required:
+        - relationKey
+        - file
+        - organizationId
+        - fileName
+        - relationValue
+    FileDto:
+      type: object
+      properties:
+        key:
+          type: string
+        size:
+          type: number
+      required:
+        - key
+        - size
     CreateExpenseCategoryDto:
       type: object
       properties:
@@ -4153,47 +4195,6 @@ components:
             $ref: '#/components/schemas/UpdateExpenseCategoryDto'
       required:
         - items
-    FileRelationKeyEnum:
-      type: string
-      enum:
-        - tenant
-        - portfolio
-        - property
-        - unit
-        - expense
-        - lease
-        - leaseInvoice
-        - maintenanceOrder
-    CreateFileDto:
-      type: object
-      properties:
-        relationKey:
-          $ref: '#/components/schemas/FileRelationKeyEnum'
-        file:
-          type: string
-          format: binary
-        organizationId:
-          type: string
-        fileName:
-          type: string
-        relationValue:
-          type: string
-      required:
-        - relationKey
-        - file
-        - organizationId
-        - fileName
-        - relationValue
-    FileDto:
-      type: object
-      properties:
-        key:
-          type: string
-        size:
-          type: number
-      required:
-        - key
-        - size
     BreadcrumbsDto:
       type: object
       properties:

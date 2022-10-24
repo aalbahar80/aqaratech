@@ -1,24 +1,5 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	MaxFileSizeValidator,
-	ParseFilePipe,
-	Post,
-	Query,
-	UploadedFile,
-	UseInterceptors,
-} from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import {
-	ApiBody,
-	ApiConsumes,
-	ApiCreatedResponse,
-	ApiOkResponse,
-	ApiTags,
-} from '@nestjs/swagger';
-import { fileCreateSchema } from '@self/utils';
+import { Controller, Delete, Get, Query } from '@nestjs/common';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
@@ -27,9 +8,8 @@ import {
 	FileFindAllOptionsDto,
 	FileFindOneOptionsDto,
 } from 'src/files/dto/file-find-all-options.dto';
-import { CreateFileDto, FileDto } from 'src/files/dto/file.dto';
+import { FileDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
-import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { FilesService } from './files.service';
 
 @Controller('files')
@@ -37,25 +17,6 @@ import { FilesService } from './files.service';
 @SwaggerAuth()
 export class FilesController {
 	constructor(private readonly filesService: FilesService) {}
-
-	@Post()
-	@ApiCreatedResponse({ type: String })
-	@UseInterceptors(FileInterceptor('file'))
-	@ApiConsumes('multipart/form-data')
-	@ApiBody({ type: CreateFileDto })
-	create(
-		@User() user: IUser,
-		@UploadedFile(
-			new ParseFilePipe({
-				validators: [new MaxFileSizeValidator({ maxSize: 100 * 1000 * 1000 })],
-			}),
-		)
-		file: Express.Multer.File,
-		@Body(new ZodValidationPipe(fileCreateSchema.omit({ file: true })))
-		createFileDto: Omit<CreateFileDto, 'file'>,
-	): Promise<string> {
-		return this.filesService.create({ user, file, createFileDto });
-	}
 
 	@Get()
 	@ApiPaginatedResponse(FileDto)

@@ -38,6 +38,9 @@ export type Subject = Subjects<{
 	LeaseInvoice: P<LeaseInvoice>;
 	Unit: P<Unit>;
 	User: P<User>;
+	File: {
+		organizationId: string;
+	};
 }>;
 
 // Can type exported for use in dependent ability classes.

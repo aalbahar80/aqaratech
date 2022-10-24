@@ -21,6 +21,7 @@ import type {
 	CreatePropertyDto,
 	CreateTenantDto,
 	CreateUnitDto,
+	FileRelationKeyEnum,
 	OrganizationCreatedDto,
 	OrganizationDto,
 	PaginatedOrganizationDto,
@@ -68,6 +69,14 @@ export interface OrganizationsApiCreateTenantRequest {
 export interface OrganizationsApiCreateUnitRequest {
 	organizationId: string;
 	createUnitDto: CreateUnitDto;
+}
+
+export interface OrganizationsApiCreate0Request {
+	relationKey: FileRelationKeyEnum;
+	file: Blob;
+	organizationId: string;
+	fileName: string;
+	relationValue: string;
 }
 
 export interface OrganizationsApiFindOneRequest {
@@ -243,6 +252,26 @@ export interface OrganizationsApiInterface {
 		requestParameters: OrganizationsApiCreateUnitRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PartialUnitDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	create_1Raw(
+		requestParameters: OrganizationsApiCreate0Request,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<string>>;
+
+	/**
+	 *
+	 *
+	 */
+	create_1(
+		requestParameters: OrganizationsApiCreate0Request,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<string>;
 
 	/**
 	 *
@@ -810,6 +839,141 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PartialUnitDto> {
 		const response = await this.createUnitRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async create_1Raw(
+		requestParameters: OrganizationsApiCreate0Request,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<string>> {
+		if (
+			requestParameters.relationKey === null ||
+			requestParameters.relationKey === undefined
+		) {
+			throw new runtime.RequiredError(
+				'relationKey',
+				'Required parameter requestParameters.relationKey was null or undefined when calling create_1.',
+			);
+		}
+
+		if (
+			requestParameters.file === null ||
+			requestParameters.file === undefined
+		) {
+			throw new runtime.RequiredError(
+				'file',
+				'Required parameter requestParameters.file was null or undefined when calling create_1.',
+			);
+		}
+
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling create_1.',
+			);
+		}
+
+		if (
+			requestParameters.fileName === null ||
+			requestParameters.fileName === undefined
+		) {
+			throw new runtime.RequiredError(
+				'fileName',
+				'Required parameter requestParameters.fileName was null or undefined when calling create_1.',
+			);
+		}
+
+		if (
+			requestParameters.relationValue === null ||
+			requestParameters.relationValue === undefined
+		) {
+			throw new runtime.RequiredError(
+				'relationValue',
+				'Required parameter requestParameters.relationValue was null or undefined when calling create_1.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const consumes: runtime.Consume[] = [
+			{ contentType: 'multipart/form-data' },
+		];
+		// @ts-ignore: canConsumeForm may be unused
+		const canConsumeForm = runtime.canConsumeForm(consumes);
+
+		let formParams: { append(param: string, value: any): any };
+		let useForm = false;
+		// use FormData to transmit files using content-type "multipart/form-data"
+		useForm = canConsumeForm;
+		if (useForm) {
+			formParams = new FormData();
+		} else {
+			formParams = new URLSearchParams();
+		}
+
+		if (requestParameters.relationKey !== undefined) {
+			formParams.append(
+				'relationKey',
+				new Blob([JSON.stringify(requestParameters.relationKey)], {
+					type: 'application/json',
+				}),
+			);
+		}
+
+		if (requestParameters.file !== undefined) {
+			formParams.append('file', requestParameters.file as any);
+		}
+
+		if (requestParameters.organizationId !== undefined) {
+			formParams.append(
+				'organizationId',
+				requestParameters.organizationId as any,
+			);
+		}
+
+		if (requestParameters.fileName !== undefined) {
+			formParams.append('fileName', requestParameters.fileName as any);
+		}
+
+		if (requestParameters.relationValue !== undefined) {
+			formParams.append(
+				'relationValue',
+				requestParameters.relationValue as any,
+			);
+		}
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/files`,
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: formParams,
+			},
+			initOverrides,
+		);
+
+		return new runtime.TextApiResponse(response) as any;
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async create_1(
+		requestParameters: OrganizationsApiCreate0Request,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<string> {
+		const response = await this.create_1Raw(requestParameters, initOverrides);
 		return await response.value();
 	}
 

@@ -15,14 +15,6 @@
 import * as runtime from '../runtime';
 import type { FileRelationKeyEnum, PaginatedFileDto } from '../models';
 
-export interface FilesApiCreateRequest {
-	relationKey: FileRelationKeyEnum;
-	file: Blob;
-	organizationId: string;
-	fileName: string;
-	relationValue: string;
-}
-
 export interface FilesApiFindAllRequest {
 	relationKey: FileRelationKeyEnum;
 	relationValue: string;
@@ -43,26 +35,6 @@ export interface FilesApiRemoveRequest {
  * @interface FilesApiInterface
  */
 export interface FilesApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof FilesApiInterface
-	 */
-	createRaw(
-		requestParameters: FilesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>>;
-
-	/**
-	 *
-	 *
-	 */
-	create(
-		requestParameters: FilesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string>;
-
 	/**
 	 *
 	 * @summary
@@ -128,141 +100,6 @@ export interface FilesApiInterface {
  *
  */
 export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
-	/**
-	 *
-	 *
-	 */
-	async createRaw(
-		requestParameters: FilesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>> {
-		if (
-			requestParameters.relationKey === null ||
-			requestParameters.relationKey === undefined
-		) {
-			throw new runtime.RequiredError(
-				'relationKey',
-				'Required parameter requestParameters.relationKey was null or undefined when calling create.',
-			);
-		}
-
-		if (
-			requestParameters.file === null ||
-			requestParameters.file === undefined
-		) {
-			throw new runtime.RequiredError(
-				'file',
-				'Required parameter requestParameters.file was null or undefined when calling create.',
-			);
-		}
-
-		if (
-			requestParameters.organizationId === null ||
-			requestParameters.organizationId === undefined
-		) {
-			throw new runtime.RequiredError(
-				'organizationId',
-				'Required parameter requestParameters.organizationId was null or undefined when calling create.',
-			);
-		}
-
-		if (
-			requestParameters.fileName === null ||
-			requestParameters.fileName === undefined
-		) {
-			throw new runtime.RequiredError(
-				'fileName',
-				'Required parameter requestParameters.fileName was null or undefined when calling create.',
-			);
-		}
-
-		if (
-			requestParameters.relationValue === null ||
-			requestParameters.relationValue === undefined
-		) {
-			throw new runtime.RequiredError(
-				'relationValue',
-				'Required parameter requestParameters.relationValue was null or undefined when calling create.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		const consumes: runtime.Consume[] = [
-			{ contentType: 'multipart/form-data' },
-		];
-		// @ts-ignore: canConsumeForm may be unused
-		const canConsumeForm = runtime.canConsumeForm(consumes);
-
-		let formParams: { append(param: string, value: any): any };
-		let useForm = false;
-		// use FormData to transmit files using content-type "multipart/form-data"
-		useForm = canConsumeForm;
-		if (useForm) {
-			formParams = new FormData();
-		} else {
-			formParams = new URLSearchParams();
-		}
-
-		if (requestParameters.relationKey !== undefined) {
-			formParams.append(
-				'relationKey',
-				new Blob([JSON.stringify(requestParameters.relationKey)], {
-					type: 'application/json',
-				}),
-			);
-		}
-
-		if (requestParameters.file !== undefined) {
-			formParams.append('file', requestParameters.file as any);
-		}
-
-		if (requestParameters.organizationId !== undefined) {
-			formParams.append(
-				'organizationId',
-				requestParameters.organizationId as any,
-			);
-		}
-
-		if (requestParameters.fileName !== undefined) {
-			formParams.append('fileName', requestParameters.fileName as any);
-		}
-
-		if (requestParameters.relationValue !== undefined) {
-			formParams.append(
-				'relationValue',
-				requestParameters.relationValue as any,
-			);
-		}
-
-		const response = await this.request(
-			{
-				path: `/files`,
-				method: 'POST',
-				headers: headerParameters,
-				query: queryParameters,
-				body: formParams,
-			},
-			initOverrides,
-		);
-
-		return new runtime.TextApiResponse(response) as any;
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async create(
-		requestParameters: FilesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string> {
-		const response = await this.createRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *
