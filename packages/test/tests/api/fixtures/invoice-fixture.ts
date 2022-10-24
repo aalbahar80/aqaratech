@@ -15,7 +15,16 @@ export const test = base.extend<{ invoice: LeaseInvoiceDto; isPaid: boolean }>({
 				leaseId: lease.id,
 				isPaid,
 			}),
-			['portfolioId', 'leaseId', 'postAt', 'amount', 'isPaid', 'memo'],
+			[
+				'portfolioId',
+				'leaseId',
+				'amount',
+				'isPaid',
+				'memo',
+				'postAt',
+				'paidAt',
+				'dueAt',
+			],
 		);
 
 		const url = `${apiURL}/organizations/${org.organization.id}/leaseInvoices`;

@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from '../api/fixtures/invoice-fixture';
 
+test.use({ isPaid: false });
+
 test('can toggle paid status', async ({ page, invoice }) => {
 	await page.goto(`leases/${invoice.leaseId}`);
 
