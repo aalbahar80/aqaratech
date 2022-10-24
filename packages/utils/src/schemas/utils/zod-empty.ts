@@ -9,17 +9,16 @@ import { z } from 'zod';
  *
  * Usage: Add this to a union with any other schema to make it optional.
  */
-export const zodEmpty = () =>
-	z
-		.string()
-		.transform((val, ctx) => {
-			if (val === '') {
-				return null;
-			} else {
-				ctx.addIssue({
-					code: z.ZodIssueCode.custom,
-				});
-				return z.NEVER;
-			}
-		})
-		.nullish();
+export const zodEmpty = z
+	.string()
+	.transform((val, ctx) => {
+		if (val === '') {
+			return null;
+		} else {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+			});
+			return z.NEVER;
+		}
+	})
+	.nullish();
