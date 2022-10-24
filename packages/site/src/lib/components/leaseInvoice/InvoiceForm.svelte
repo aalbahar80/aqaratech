@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { createApi } from '$api';
+	import type { LeaseInvoiceDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedInvoice } from '$lib/models/interfaces/predefined.interface';
@@ -9,11 +10,10 @@
 		PortfolioIdField,
 	} from '$lib/utils/form/common-fields';
 	import {
-		createSchema,
-		updateSchema,
-		warnSchema,
-	} from '$models/schemas/lease-invoice.schema';
-	import type { LeaseInvoiceDto } from '$api/openapi';
+		leaseInvoiceCreateSchema,
+		leaseInvoiceUpdateSchema,
+		leaseInvoiceWarnSchema,
+	} from '@self/utils';
 
 	type TPredefinedInvoice = $$Generic<PredefinedInvoice | undefined>;
 
@@ -92,7 +92,7 @@
 
 {#if formType === 'update'}
 	<Form
-		schema={updateSchema}
+		schema={leaseInvoiceUpdateSchema}
 		{warnSchema}
 		entity="leaseInvoice"
 		{formType}
@@ -106,8 +106,8 @@
 	/>
 {:else}
 	<Form
-		schema={createSchema}
-		{warnSchema}
+		schema={leaseInvoiceCreateSchema}
+		warnSchema={leaseInvoiceWarnSchema}
 		entity="leaseInvoice"
 		{formType}
 		{basicFields}
