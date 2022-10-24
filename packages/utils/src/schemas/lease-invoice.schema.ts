@@ -19,11 +19,22 @@ const baseCreate = base.extend({
 	leaseId: isID,
 });
 
+const baseCreateMany = base.extend({
+	portfolioId: isID,
+});
+
 const baseUpdate = base.partial();
 
 export const leaseInvoiceCreateSchema = refineSchema(baseCreate);
 
 export const leaseInvoiceUpdateSchema = refineSchema(baseUpdate);
+
+export const leaseInvoiceCreateManySchema =
+	refineSchema(baseCreateMany).array();
+
+export const leaseInvoiceCreateManySchema2 = z.array(
+	refineSchema(baseCreateMany),
+);
 
 // Version 3.19.1 breaks this type. Wait for a fix before upgrading.
 // Issue: https://github.com/colinhacks/zod/issues/1473
@@ -64,7 +75,9 @@ function refineSchema<T extends z.ZodType<Base>>(schema: T) {
 		);
 }
 
-type Base = z.infer<typeof baseCreate | typeof baseUpdate>;
+type Base = z.infer<
+	typeof baseCreate | typeof baseUpdate | typeof baseCreateMany
+>;
 
 /**
  * Exported seperately to make it easy to implement in DTO
@@ -75,3 +88,11 @@ export type LeaseInvoiceCreateSchema = z.infer<typeof baseCreate>;
  * Exported seperately to make it easy to implement in DTO
  */
 export type LeaseInvoiceUpdateSchema = z.infer<typeof baseUpdate>;
+
+// Manually set type until zod can infer the leaseId does not exist in the baseCreateMany schema.
+export type LeaseInvoiceCreateManySchema = z.infer<typeof baseCreateMany>;
+
+// Doesn't infer the type correctly.
+// export type LeaseInvoiceCreateManySchema = z.infer<
+// 	typeof leaseInvoiceCreateManySchema
+// >;

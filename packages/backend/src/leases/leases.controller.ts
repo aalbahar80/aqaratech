@@ -5,16 +5,9 @@ import {
 	Get,
 	Param,
 	Patch,
-	Post,
 	Query,
 } from '@nestjs/common';
-import {
-	ApiBody,
-	ApiCreatedResponse,
-	ApiOkResponse,
-	ApiQuery,
-	ApiTags,
-} from '@nestjs/swagger';
+import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { leaseUpdateSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
@@ -28,10 +21,7 @@ import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
-import {
-	CreateManyLeaseInvoicesDto,
-	LeaseInvoiceDto,
-} from 'src/lease-invoices/dto/lease-invoice.dto';
+import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import {
 	LeaseDto,
@@ -106,22 +96,5 @@ export class LeasesController {
 	): Promise<WithCount<LeaseInvoiceDto>> {
 		const where: Prisma.LeaseInvoiceWhereInput = { leaseId: { equals: id } };
 		return this.leaseInvoicesService.findAll({ user, pageOptionsDto, where });
-	}
-
-	@Post('/:id/invoices')
-	@CheckAbilities(
-		{ action: Action.Update, subject: SubjectType },
-		{ action: Action.Update, subject: 'LeaseInvoice' },
-	)
-	@ApiBody({ type: CreateManyLeaseInvoicesDto, isArray: true })
-	@ApiCreatedResponse({ type: String })
-	createInvoices(
-		@Param('id') id: string,
-		@Body() createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[],
-	): Promise<string> {
-		return this.leasesService.createInvoices({
-			leaseId: id,
-			createManyLeaseInvoicesDto,
-		});
 	}
 }

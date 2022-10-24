@@ -776,33 +776,6 @@ paths:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
       tags: *ref_5
       security: *ref_6
-    post:
-      operationId: LeasesController_createInvoices
-      summary: ''
-      description: ''
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/CreateManyLeaseInvoicesDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_5
-      security: *ref_6
   /portfolios:
     get:
       operationId: PortfoliosController_findAll
@@ -2380,6 +2353,39 @@ paths:
                 $ref: '#/components/schemas/PartialLeaseInvoiceDto'
       tags: *ref_21
       security: *ref_22
+  /organizations/{organizationId}/lease/{id}/leaseInvoices:
+    post:
+      operationId: OrganizationsAdminController_createInvoices
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateManyLeaseInvoicesDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_21
+      security: *ref_22
   /organizations/{organizationId}/expenses:
     post:
       operationId: OrganizationsAdminController_createExpense
@@ -3070,31 +3076,6 @@ components:
         license:
           type: string
           nullable: true
-    CreateManyLeaseInvoicesDto:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        amount:
-          type: number
-        isPaid:
-          type: boolean
-        postAt:
-          type: string
-        dueAt:
-          type: string
-          nullable: true
-        paidAt:
-          type: string
-          nullable: true
-        memo:
-          type: string
-          nullable: true
-      required:
-        - portfolioId
-        - amount
-        - isPaid
-        - postAt
     PortfolioDto:
       type: object
       properties:
@@ -4057,6 +4038,31 @@ components:
       required:
         - portfolioId
         - leaseId
+        - amount
+        - isPaid
+        - postAt
+    CreateManyLeaseInvoicesDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        amount:
+          type: number
+        isPaid:
+          type: boolean
+        postAt:
+          type: string
+        dueAt:
+          type: string
+          nullable: true
+        paidAt:
+          type: string
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
         - amount
         - isPaid
         - postAt

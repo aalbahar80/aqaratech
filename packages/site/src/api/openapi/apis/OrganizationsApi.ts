@@ -17,6 +17,7 @@ import type {
 	CreateExpenseDto,
 	CreateLeaseDto,
 	CreateLeaseInvoiceDto,
+	CreateManyLeaseInvoicesDto,
 	CreateOrganizationDto,
 	CreatePortfolioDto,
 	CreatePropertyDto,
@@ -46,6 +47,12 @@ export interface OrganizationsApiCreateRequest {
 export interface OrganizationsApiCreateExpenseRequest {
 	organizationId: string;
 	createExpenseDto: CreateExpenseDto;
+}
+
+export interface OrganizationsApiCreateInvoicesRequest {
+	organizationId: string;
+	id: string;
+	createManyLeaseInvoicesDto: Array<CreateManyLeaseInvoicesDto>;
 }
 
 export interface OrganizationsApiCreateLeaseRequest {
@@ -159,6 +166,26 @@ export interface OrganizationsApiInterface {
 		requestParameters: OrganizationsApiCreateExpenseRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PartialExpenseDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	createInvoicesRaw(
+		requestParameters: OrganizationsApiCreateInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<string>>;
+
+	/**
+	 *
+	 *
+	 */
+	createInvoices(
+		requestParameters: OrganizationsApiCreateInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<string>;
 
 	/**
 	 *
@@ -536,6 +563,84 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PartialExpenseDto> {
 		const response = await this.createExpenseRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createInvoicesRaw(
+		requestParameters: OrganizationsApiCreateInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<string>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createInvoices.',
+			);
+		}
+
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling createInvoices.',
+			);
+		}
+
+		if (
+			requestParameters.createManyLeaseInvoicesDto === null ||
+			requestParameters.createManyLeaseInvoicesDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createManyLeaseInvoicesDto',
+				'Required parameter requestParameters.createManyLeaseInvoicesDto was null or undefined when calling createInvoices.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/lease/{id}/leaseInvoices`
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					)
+					.replace(
+						`{${'id'}}`,
+						encodeURIComponent(String(requestParameters.id)),
+					),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createManyLeaseInvoicesDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.TextApiResponse(response) as any;
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createInvoices(
+		requestParameters: OrganizationsApiCreateInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<string> {
+		const response = await this.createInvoicesRaw(
 			requestParameters,
 			initOverrides,
 		);

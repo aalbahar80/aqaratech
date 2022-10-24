@@ -20,6 +20,7 @@ import {
 	expenseCreateSchema,
 	fileCreateSchema,
 	leaseCreateSchema,
+	leaseInvoiceCreateManySchema,
 	leaseInvoiceCreateSchema,
 	portfolioCreateSchema,
 	propertyCreateSchema,
@@ -41,6 +42,7 @@ import { FilesService } from 'src/files/files.service';
 import { IUser } from 'src/interfaces/user.interface';
 import {
 	CreateLeaseInvoiceDto,
+	CreateManyLeaseInvoicesDto,
 	PartialLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -150,6 +152,23 @@ export class OrganizationsAdminController {
 	): Promise<PartialLeaseInvoiceDto> {
 		return this.leaseInvoicesService.create({
 			createLeaseInvoiceDto,
+			organizationId,
+		});
+	}
+
+	@Post('/lease/:id/leaseInvoices')
+	@CheckAbilities({ action: Action.Create, subject: 'LeaseInvoice' })
+	@ApiBody({ type: CreateManyLeaseInvoicesDto, isArray: true })
+	@ApiCreatedResponse({ type: String })
+	createInvoices(
+		@Param('organizationId') organizationId: string,
+		@Param('id') id: string,
+		@Body(new ZodValidationPipe(leaseInvoiceCreateManySchema))
+		createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[],
+	): Promise<string> {
+		return this.leasesService.createInvoices({
+			leaseId: id,
+			createManyLeaseInvoicesDto,
 			organizationId,
 		});
 	}

@@ -108,16 +108,21 @@ export class LeasesService {
 	async createInvoices({
 		leaseId,
 		createManyLeaseInvoicesDto,
+		organizationId,
 	}: {
 		leaseId: string;
 		createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[];
+		organizationId: string;
 	}) {
 		const updated = await this.prisma.lease.update({
 			where: { id: leaseId },
 			data: {
 				leaseInvoices: {
 					createMany: {
-						data: createManyLeaseInvoicesDto,
+						data: createManyLeaseInvoicesDto.map((val) => ({
+							...val,
+							organizationId,
+						})),
 					},
 				},
 			},

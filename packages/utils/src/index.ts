@@ -24,6 +24,7 @@ export {
 	fileCreateSchema,
 	FileRelationKeyEnum,
 	leaseCreateSchema,
+	leaseInvoiceCreateManySchema,
 	leaseInvoiceCreateSchema,
 	leaseInvoiceUpdateSchema,
 	leaseInvoiceWarnSchema,
@@ -40,6 +41,7 @@ export {
 export type {
 	FileRelationKey,
 	LeaseCreateSchema,
+	LeaseInvoiceCreateManySchema,
 	LeaseInvoiceCreateSchema,
 	LeaseInvoiceUpdateSchema,
 	LeaseUpdateSchema,

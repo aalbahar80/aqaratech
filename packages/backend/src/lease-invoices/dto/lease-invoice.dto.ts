@@ -8,6 +8,7 @@ import {
 } from '@nestjs/swagger';
 import { LeaseInvoice } from '@prisma/client';
 import {
+	LeaseInvoiceCreateManySchema,
 	LeaseInvoiceCreateSchema,
 	LeaseInvoiceUpdateSchema,
 } from '@self/utils';
@@ -129,7 +130,6 @@ export class UpdateLeaseInvoiceDto
 	)
 	implements LeaseInvoiceUpdateSchema {}
 
-export class CreateManyLeaseInvoicesDto extends OmitType(
-	CreateLeaseInvoiceDto,
-	['leaseId'],
-) {}
+export class CreateManyLeaseInvoicesDto
+	extends OmitType(CreateLeaseInvoiceDto, ['leaseId'])
+	implements LeaseInvoiceCreateManySchema {}
