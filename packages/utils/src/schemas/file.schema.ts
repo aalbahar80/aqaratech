@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { fileRelationKeySchema } from './file-relation-key.schema';
+import { filenameSchema } from './utils/filename.schema';
 import { isID } from './utils/id.schema';
-import { zodString } from './utils/zod-string';
 
 export const fileCreateSchema = z
 	.object({
 		organizationId: isID,
-		fileName: zodString,
+		fileName: filenameSchema,
 		file: z.record(z.any()).transform((value) => value as File),
 
 		relationKey: fileRelationKeySchema,
