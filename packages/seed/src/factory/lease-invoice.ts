@@ -42,3 +42,7 @@ export const leaseInvoiceFactory = addDueDate.withDerivation(
 		return paidAt.toISOString().slice(0, 10);
 	},
 );
+
+export type LeaseInvoiceFactoryParams = Partial<
+	Parameters<typeof leaseInvoiceFactory.build>[0]
+>;
