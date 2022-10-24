@@ -1,9 +1,10 @@
-import { FileRelationKey } from '@self/utils';
-import { IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { FileRelationKey, FileRelationKeyEnum } from '@self/utils';
+import { IsEnum, IsString } from 'class-validator';
 
-// TODO: better types
 export class FileFindAllOptionsDto {
-	@IsString()
+	@IsEnum(FileRelationKeyEnum)
+	@ApiProperty({ enum: FileRelationKeyEnum, enumName: 'FileRelationKeyEnum' })
 	relationKey: FileRelationKey;
 
 	@IsString()
