@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../api/fixtures/invoice-fixture';
+import { test } from '../api/api-fixtures';
 
 test.use({
 	invoiceParams: {

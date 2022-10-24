@@ -13,15 +13,18 @@ import type {
 	ExpenseCategoryDto,
 	ExpenseDto,
 	LeaseDto,
-	LeaseInvoiceDto,
 	OrganizationCreatedDto,
 	PortfolioDto,
 	PropertyDto,
 	TenantDto,
 	UnitDto,
 } from '../../types/api';
-
-export const apiURL = process.env.PUBLIC_API_URL;
+import { apiURL } from './fixtures/api-url';
+import { invoiceFixtures } from './fixtures/invoice-fixture';
+import type {
+	TestFixtures,
+	TestOptions,
+} from './fixtures/test-fixtures.interface';
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
@@ -191,6 +194,8 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(created);
 	},
 
+	...invoiceFixtures,
+
 	expense: async ({ org, property, request }, use) => {
 		const expense = expenseFactory.build({
 			organizationId: org.organization.id,
@@ -251,20 +256,3 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(category);
 	},
 });
-
-interface TestFixtures {
-	org: OrganizationCreatedDto;
-	tenant: TenantDto;
-	portfolio: PortfolioDto;
-	property: PropertyDto;
-	unit: UnitDto;
-	lease: LeaseDto;
-	invoice: LeaseInvoiceDto;
-	expense: ExpenseDto;
-	file: string;
-	expenseCategory: ExpenseCategoryDto;
-}
-
-interface TestOptions {
-	withRoleId: string | undefined;
-}

@@ -1,12 +1,10 @@
-import { leaseInvoiceFactory, LeaseInvoiceFactoryParams } from '@self/seed';
+import { leaseInvoiceFactory } from '@self/seed';
 import * as R from 'remeda';
 import type { LeaseInvoiceDto } from '../../../types/api';
-import { apiURL, test as base } from '../api-fixtures';
+import { apiURL } from './api-url';
+import type { AllFixtures } from './test-fixtures.interface';
 
-export const test = base.extend<{
-	invoice: LeaseInvoiceDto;
-	invoiceParams: LeaseInvoiceFactoryParams | undefined;
-}>({
+export const invoiceFixtures: AllFixtures = {
 	invoiceParams: [undefined, { option: true }],
 
 	invoice: async ({ org, portfolio, lease, request, invoiceParams }, use) => {
@@ -39,4 +37,4 @@ export const test = base.extend<{
 
 		await use(created);
 	},
-});
+};
