@@ -7,6 +7,7 @@ export const fileCreateSchema = z
 	.object({
 		organizationId: isID,
 		fileName: z.string().min(1, { message: 'Required' }).transform(trim),
+		file: z.record(z.any()),
 
 		relationKey: fileRelationKeySchema,
 		relationValue: isID,

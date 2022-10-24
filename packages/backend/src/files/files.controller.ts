@@ -51,7 +51,7 @@ export class FilesController {
 			}),
 		)
 		file: Express.Multer.File,
-		@Body(new ZodValidationPipe(fileCreateSchema))
+		@Body(new ZodValidationPipe(fileCreateSchema.omit({ file: true })))
 		createFileDto: Omit<CreateFileDto, 'file'>,
 	): Promise<string> {
 		return this.filesService.create({ user, file, createFileDto });
