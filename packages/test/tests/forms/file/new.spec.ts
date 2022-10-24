@@ -16,6 +16,8 @@ const params = new URLSearchParams({
 
 const url = `/${fileEntity.urlName}/new?${params.toString()}`;
 
+test.setTimeout(20000);
+
 test('files can be uploaded', async ({ page, request, apiBaseURL }) => {
 	const fileName = 'test-file-upload';
 	// TODO add random characters to file name for cleaner testing
