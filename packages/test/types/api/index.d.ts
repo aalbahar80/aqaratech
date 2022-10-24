@@ -1083,6 +1083,22 @@ export interface FileDto {
 /**
  *
  * @export
+ */
+export declare const FileRelationKeyEnum: {
+	readonly Tenant: 'tenant';
+	readonly Portfolio: 'portfolio';
+	readonly Property: 'property';
+	readonly Unit: 'unit';
+	readonly Expense: 'expense';
+	readonly Lease: 'lease';
+	readonly LeaseInvoice: 'leaseInvoice';
+	readonly MaintenanceOrder: 'maintenanceOrder';
+};
+export type FileRelationKeyEnum =
+	typeof FileRelationKeyEnum[keyof typeof FileRelationKeyEnum];
+/**
+ *
+ * @export
  * @interface HitDto
  */
 export interface HitDto {

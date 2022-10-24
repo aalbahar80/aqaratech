@@ -24,6 +24,7 @@ export interface FilesApiCreateRequest {
 }
 
 export interface FilesApiFindAllRequest {
+	relationKey: FileRelationKeyEnum;
 	relationValue: string;
 }
 
@@ -271,6 +272,16 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<PaginatedFileDto>> {
 		if (
+			requestParameters.relationKey === null ||
+			requestParameters.relationKey === undefined
+		) {
+			throw new runtime.RequiredError(
+				'relationKey',
+				'Required parameter requestParameters.relationKey was null or undefined when calling findAll.',
+			);
+		}
+
+		if (
 			requestParameters.relationValue === null ||
 			requestParameters.relationValue === undefined
 		) {
@@ -281,6 +292,10 @@ export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
 		}
 
 		const queryParameters: any = {};
+
+		if (requestParameters.relationKey !== undefined) {
+			queryParameters['relationKey'] = requestParameters.relationKey;
+		}
 
 		if (requestParameters.relationValue !== undefined) {
 			queryParameters['relationValue'] = requestParameters.relationValue;

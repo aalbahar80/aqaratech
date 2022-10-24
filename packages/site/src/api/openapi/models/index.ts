@@ -1082,6 +1082,24 @@ export interface FileDto {
 	 */
 	size: number;
 }
+
+/**
+ *
+ * @export
+ */
+export const FileRelationKeyEnum = {
+	Tenant: 'tenant',
+	Portfolio: 'portfolio',
+	Property: 'property',
+	Unit: 'unit',
+	Expense: 'expense',
+	Lease: 'lease',
+	LeaseInvoice: 'leaseInvoice',
+	MaintenanceOrder: 'maintenanceOrder',
+} as const;
+export type FileRelationKeyEnum =
+	typeof FileRelationKeyEnum[keyof typeof FileRelationKeyEnum];
+
 /**
  *
  * @export
