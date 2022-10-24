@@ -4140,20 +4140,23 @@ components:
     CreateExpenseCategoryDto:
       type: object
       properties:
+        id:
+          type: string
         labelEn:
           type: string
-        isGroup:
-          type: boolean
-        parentId:
-          type: string
-          nullable: true
         labelAr:
           type: string
           nullable: true
         description:
           type: string
           nullable: true
+        parentId:
+          type: string
+          nullable: true
+        isGroup:
+          type: boolean
       required:
+        - id
         - labelEn
         - isGroup
     UpdateExpenseCategoryDto:
@@ -4163,19 +4166,18 @@ components:
           type: string
         labelEn:
           type: string
-        parentId:
-          type: string
-          nullable: true
         labelAr:
           type: string
           nullable: true
         description:
           type: string
           nullable: true
-        isGroup:
-          type: boolean
+        parentId:
+          type: string
+          nullable: true
       required:
         - id
+        - labelEn
     UpdateAllExpenseCategoriesDto:
       type: object
       properties:

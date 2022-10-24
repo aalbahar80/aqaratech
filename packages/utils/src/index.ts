@@ -19,6 +19,8 @@ export { formatRequestLog } from './logger/format-request-log';
 export { formatResponseLog } from './logger/format-response-log';
 export { satisfies } from './satisfies';
 export {
+	expenseCategoryCreateSchema,
+	expenseCategoryUpdateSchema,
 	expenseCreateSchema,
 	expenseUpdateSchema,
 	fileCreateSchema,

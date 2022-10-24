@@ -1,3 +1,4 @@
+export * from './expense-category.schema';
 export * from './expense.schema';
 export * from './file-relation-key.schema';
 export * from './file.schema';

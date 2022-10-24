@@ -1,16 +1,16 @@
 <script lang="ts">
+	import { createApi } from '$api';
+	import type { ExpenseCategoryDto } from '$api/openapi';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { settings } from '$lib/utils/route-helpers';
 	import {
-		createSchema,
-		updateSchema,
-	} from '$models/schemas/expenseCategory.schema';
-	import type { ExpenseCategoryDto } from '$api/openapi';
+		expenseCategoryCreateSchema,
+		expenseCategoryUpdateSchema,
+	} from '@self/utils';
 
 	type TExpenseCategoryDto = $$Generic<
 		// eslint-disable-next-line no-undef
@@ -61,7 +61,7 @@
 
 {#if formType === 'update'}
 	<Form
-		schema={updateSchema}
+		schema={expenseCategoryUpdateSchema}
 		entity="expenseCategory"
 		{formType}
 		{basicFields}
@@ -86,7 +86,7 @@
 	/>
 {:else}
 	<Form
-		schema={createSchema}
+		schema={expenseCategoryCreateSchema}
 		entity="expenseCategory"
 		{formType}
 		{basicFields}

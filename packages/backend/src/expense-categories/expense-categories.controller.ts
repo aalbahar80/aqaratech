@@ -1,5 +1,9 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+	expenseCategoryCreateSchema,
+	expenseCategoryUpdateSchema,
+} from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
@@ -11,6 +15,7 @@ import {
 	UpdateExpenseCategoryDto,
 } from 'src/expense-categories/expense-category.dto';
 import { IUser } from 'src/interfaces/user.interface';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { ExpenseCategoriesService } from './expense-categories.service';
 
 @Controller('expense-categories')
@@ -26,7 +31,8 @@ export class ExpenseCategoriesController {
 	@ApiCreatedResponse({ type: String })
 	create(
 		@User() user: IUser,
-		@Body() createExpenseCategoryDto: CreateExpenseCategoryDto,
+		@Body(new ZodValidationPipe(expenseCategoryCreateSchema))
+		createExpenseCategoryDto: CreateExpenseCategoryDto,
 	): Promise<string> {
 		return this.expenseCategoriesService.create({
 			organizationId: user.role.organizationId,
@@ -65,7 +71,8 @@ export class ExpenseCategoriesController {
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@Body() updateExpenseCategoryDto: UpdateExpenseCategoryDto,
+		@Body(new ZodValidationPipe(expenseCategoryUpdateSchema))
+		updateExpenseCategoryDto: UpdateExpenseCategoryDto,
 	): Promise<string> {
 		return this.expenseCategoriesService.update({
 			organizationId: user.role.organizationId,
