@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
+	import { environment } from '$lib/environment';
 	import { Field } from '$lib/models/classes/Field.class';
 	import {
 		entitiesMap,
@@ -50,8 +51,21 @@
 	entity="file"
 	formType="create"
 	{basicFields}
-	onSubmit={(values) => {
-		return createApi().files.create(values);
+	onSubmit={async (values) => {
+		// Avoid using FilesApi.createFile() because of a bug with uploading files.
+		const url = `${environment.PUBLIC_API_URL}/files`;
+
+		const formData = new FormData();
+
+		for (const key in values) {
+			formData.append(key, values[key]);
+		}
+
+		await fetch(url, {
+			method: 'POST',
+			credentials: 'include',
+			body: formData,
+		});
 	}}
 	onSuccess={() =>
 		goto(`/${entitiesMap[relationKey].urlName}/${relationValue}`)}
