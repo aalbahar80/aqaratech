@@ -1,0 +1,124 @@
+import { expect } from '@playwright/test';
+import { leaseInvoiceFactory, sample } from '@self/seed';
+import { randomUUID } from 'crypto';
+import * as R from 'remeda';
+import { test } from '../../../api-fixtures';
+
+const keys = [
+	'portfolioId',
+	'leaseId',
+	'amount',
+	'isPaid',
+	'memo',
+	'postAt',
+	'paidAt',
+	'dueAt',
+] as const;
+
+const url = (orgId: string) => `/organizations/${orgId}/leaseInvoices`;
+
+test('can create leaseInvoice in own org', async ({ request, org, lease }) => {
+	const leaseInvoice = R.pick(
+		leaseInvoiceFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: lease.portfolioId,
+			leaseId: lease.id,
+		}),
+		keys,
+	);
+
+	const res = await request.post(url(org.organization.id), {
+		data: leaseInvoice,
+	});
+
+	expect(res.status()).toBe(201);
+});
+
+test('cannot create leaseInvoice in another org', async ({
+	request,
+	org,
+	lease,
+}) => {
+	const leaseInvoice = R.pick(
+		leaseInvoiceFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: lease.portfolioId,
+			leaseId: lease.id,
+		}),
+		keys,
+	);
+
+	const res = await request.post(url(sample.organizations[0]!.id), {
+		data: leaseInvoice,
+	});
+
+	await expect.soft(res).not.toBeOK();
+
+	expect(res.status()).toBe(403); // or 404?
+});
+
+test('cannot create leaseInvoice in non-existing lease', async ({
+	request,
+	org,
+	portfolio,
+}) => {
+	const leaseInvoice = R.pick(
+		leaseInvoiceFactory.build({
+			organizationId: randomUUID(),
+			portfolioId: portfolio.id,
+			leaseId: randomUUID(),
+		}),
+		keys,
+	);
+
+	const res = await request.post(url(org.organization.id), {
+		data: leaseInvoice,
+	});
+
+	await expect.soft(res).not.toBeOK();
+
+	expect(res.status()).toBe(404);
+});
+
+test('cannot create leaseInvoice in non-existing portfolio', async ({
+	request,
+	org,
+	lease,
+}) => {
+	const leaseInvoice = R.pick(
+		leaseInvoiceFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: randomUUID(),
+			leaseId: lease.id,
+		}),
+		keys,
+	);
+
+	const res = await request.post(url(org.organization.id), {
+		data: leaseInvoice,
+	});
+
+	await expect.soft(res).not.toBeOK();
+
+	expect(res.status()).toBe(404);
+});
+
+test('cannot create leaseInvoice in non-existing organization', async ({
+	request,
+	lease,
+}) => {
+	const leaseInvoice = R.pick(
+		leaseInvoiceFactory.build({
+			organizationId: randomUUID(),
+			portfolioId: lease.portfolioId,
+			leaseId: lease.id,
+		}),
+		keys,
+	);
+
+	const res = await request.post(url(randomUUID()), { data: leaseInvoice });
+
+	await expect.soft(res).not.toBeOK();
+
+	expect(res.status()).toBe(403);
+});
