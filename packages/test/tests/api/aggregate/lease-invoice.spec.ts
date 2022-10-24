@@ -18,7 +18,9 @@ test.use({
 			const picked = R.pick(leaseInvoice, [
 				'amount',
 				'postAt',
-				'organizationId',
+				'isPaid',
+				'dueAt',
+				'paidAt',
 				'portfolioId',
 				'leaseId',
 			]);
@@ -26,10 +28,12 @@ test.use({
 			return [picked, picked];
 		});
 
+		const url = `/organizations/${lease.organizationId}/leaseInvoices`;
+
 		// send post request for each leaseInvoice
 		await Promise.all(
 			leaseInvoices.map((leaseInvoice) =>
-				request.post('/leaseInvoices', {
+				request.post(url, {
 					data: leaseInvoice,
 				}),
 			),

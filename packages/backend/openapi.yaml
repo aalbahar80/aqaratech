@@ -383,28 +383,6 @@ paths:
           description: ''
       tags: *ref_2
   /leaseInvoices:
-    post:
-      operationId: LeaseInvoicesController_create
-      summary: ''
-      description: ''
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateLeaseInvoiceDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PartialLeaseInvoiceDto'
-      tags: &ref_3
-        - leaseInvoices
-      security: &ref_4
-        - accessToken: []
     get:
       operationId: LeaseInvoicesController_findAll
       summary: ''
@@ -486,8 +464,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_3
-      security: *ref_4
+      tags: &ref_3
+        - leaseInvoices
+      security: &ref_4
+        - accessToken: []
   /leaseInvoices/{id}:
     get:
       operationId: LeaseInvoicesController_findOne
@@ -2374,6 +2354,32 @@ paths:
                 $ref: '#/components/schemas/PartialLeaseDto'
       tags: *ref_21
       security: *ref_22
+  /organizations/{organizationId}/leaseInvoices:
+    post:
+      operationId: OrganizationsAdminController_createLeaseInvoice
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLeaseInvoiceDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartialLeaseInvoiceDto'
+      tags: *ref_21
+      security: *ref_22
   /organizations/{organizationId}/expenses:
     post:
       operationId: OrganizationsAdminController_createExpense
@@ -2956,9 +2962,13 @@ components:
         - createdAt
         - updatedAt
         - email
-    CreateLeaseInvoiceDto:
+    UpdateLeaseInvoiceDto:
       type: object
       properties:
+        amount:
+          type: number
+        isPaid:
+          type: boolean
         postAt:
           type: string
         dueAt:
@@ -2967,29 +2977,9 @@ components:
         paidAt:
           type: string
           nullable: true
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        amount:
-          type: number
-          minimum: 1
-        leaseId:
-          type: string
-        isPaid:
-          type: boolean
         memo:
           type: string
           nullable: true
-        mfPaymentId:
-          type: string
-          nullable: true
-      required:
-        - postAt
-        - organizationId
-        - portfolioId
-        - amount
-        - leaseId
     PartialLeaseInvoiceDto:
       type: object
       properties:
@@ -3012,34 +3002,6 @@ components:
           nullable: true
         breadcrumbs:
           $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        amount:
-          type: number
-          minimum: 1
-        leaseId:
-          type: string
-        isPaid:
-          type: boolean
-        memo:
-          type: string
-          nullable: true
-        mfPaymentId:
-          type: string
-          nullable: true
-    UpdateLeaseInvoiceDto:
-      type: object
-      properties:
-        postAt:
-          type: string
-        dueAt:
-          type: string
-          nullable: true
-        paidAt:
-          type: string
-          nullable: true
         organizationId:
           type: string
         portfolioId:
@@ -3111,6 +3073,12 @@ components:
     CreateManyLeaseInvoicesDto:
       type: object
       properties:
+        portfolioId:
+          type: string
+        amount:
+          type: number
+        isPaid:
+          type: boolean
         postAt:
           type: string
         dueAt:
@@ -3119,26 +3087,14 @@ components:
         paidAt:
           type: string
           nullable: true
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        amount:
-          type: number
-          minimum: 1
-        isPaid:
-          type: boolean
         memo:
           type: string
           nullable: true
-        mfPaymentId:
-          type: string
-          nullable: true
       required:
-        - postAt
-        - organizationId
         - portfolioId
         - amount
+        - isPaid
+        - postAt
     PortfolioDto:
       type: object
       properties:
@@ -4076,6 +4032,34 @@ components:
         - end
         - notify
         - canPay
+    CreateLeaseInvoiceDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        leaseId:
+          type: string
+        amount:
+          type: number
+        isPaid:
+          type: boolean
+        postAt:
+          type: string
+        dueAt:
+          type: string
+          nullable: true
+        paidAt:
+          type: string
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
+        - leaseId
+        - amount
+        - isPaid
+        - postAt
     CreateExpenseDto:
       type: object
       properties:

@@ -19,7 +19,6 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import {
-	CreateLeaseInvoiceDto,
 	LeaseInvoiceDto,
 	PartialLeaseInvoiceDto,
 	UpdateLeaseInvoiceDto,
@@ -33,16 +32,6 @@ const SubjectType = 'LeaseInvoice';
 @SwaggerAuth()
 export class LeaseInvoicesController {
 	constructor(private readonly leaseInvoicesService: LeaseInvoicesService) {}
-
-	@Post()
-	@CheckAbilities({ action: Action.Create, subject: SubjectType })
-	@ApiCreatedResponse({ type: PartialLeaseInvoiceDto })
-	create(
-		@User() user: IUser,
-		@Body() createLeaseInvoiceDto: CreateLeaseInvoiceDto,
-	): Promise<PartialLeaseInvoiceDto> {
-		return this.leaseInvoicesService.create({ createLeaseInvoiceDto, user });
-	}
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })

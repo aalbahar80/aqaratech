@@ -16,6 +16,7 @@ import * as runtime from '../runtime';
 import type {
 	CreateExpenseDto,
 	CreateLeaseDto,
+	CreateLeaseInvoiceDto,
 	CreateOrganizationDto,
 	CreatePortfolioDto,
 	CreatePropertyDto,
@@ -28,6 +29,7 @@ import type {
 	PaginatedRoleDto,
 	PartialExpenseDto,
 	PartialLeaseDto,
+	PartialLeaseInvoiceDto,
 	PartialUnitDto,
 	PortfolioDto,
 	PropertyDto,
@@ -49,6 +51,11 @@ export interface OrganizationsApiCreateExpenseRequest {
 export interface OrganizationsApiCreateLeaseRequest {
 	organizationId: string;
 	createLeaseDto: CreateLeaseDto;
+}
+
+export interface OrganizationsApiCreateLeaseInvoiceRequest {
+	organizationId: string;
+	createLeaseInvoiceDto: CreateLeaseInvoiceDto;
 }
 
 export interface OrganizationsApiCreatePortfolioRequest {
@@ -172,6 +179,26 @@ export interface OrganizationsApiInterface {
 		requestParameters: OrganizationsApiCreateLeaseRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PartialLeaseDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	createLeaseInvoiceRaw(
+		requestParameters: OrganizationsApiCreateLeaseInvoiceRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PartialLeaseInvoiceDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createLeaseInvoice(
+		requestParameters: OrganizationsApiCreateLeaseInvoiceRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PartialLeaseInvoiceDto>;
 
 	/**
 	 *
@@ -575,6 +602,72 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PartialLeaseDto> {
 		const response = await this.createLeaseRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createLeaseInvoiceRaw(
+		requestParameters: OrganizationsApiCreateLeaseInvoiceRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PartialLeaseInvoiceDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createLeaseInvoice.',
+			);
+		}
+
+		if (
+			requestParameters.createLeaseInvoiceDto === null ||
+			requestParameters.createLeaseInvoiceDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createLeaseInvoiceDto',
+				'Required parameter requestParameters.createLeaseInvoiceDto was null or undefined when calling createLeaseInvoice.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/leaseInvoices`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createLeaseInvoiceDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createLeaseInvoice(
+		requestParameters: OrganizationsApiCreateLeaseInvoiceRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PartialLeaseInvoiceDto> {
+		const response = await this.createLeaseInvoiceRaw(
 			requestParameters,
 			initOverrides,
 		);

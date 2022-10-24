@@ -5,10 +5,7 @@
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedInvoice } from '$lib/models/interfaces/predefined.interface';
-	import {
-		OrganizationIdField,
-		PortfolioIdField,
-	} from '$lib/utils/form/common-fields';
+	import { PortfolioIdField } from '$lib/utils/form/common-fields';
 	import {
 		leaseInvoiceCreateSchema,
 		leaseInvoiceUpdateSchema,
@@ -42,9 +39,6 @@
 	export let predefined: TPredefinedInvoice = undefined as TPredefinedInvoice;
 
 	const basicFields = [
-		OrganizationIdField(
-			data?.organizationId || $page.data.user?.role?.organizationId,
-		),
 		PortfolioIdField(data?.portfolioId || predefined?.portfolioId),
 		new Field('leaseId', {
 			value: data?.leaseId || predefined?.leaseId,
@@ -93,7 +87,7 @@
 {#if formType === 'update'}
 	<Form
 		schema={leaseInvoiceUpdateSchema}
-		{warnSchema}
+		warnSchema={leaseInvoiceWarnSchema}
 		entity="leaseInvoice"
 		{formType}
 		{basicFields}
@@ -112,8 +106,9 @@
 		{formType}
 		{basicFields}
 		onSubmit={(values) =>
-			createApi().leaseInvoices.create({
+			createApi().organizations.createLeaseInvoice({
 				createLeaseInvoiceDto: values,
+				organizationId: $page.data.user?.role?.organizationId,
 			})}
 	/>
 {/if}

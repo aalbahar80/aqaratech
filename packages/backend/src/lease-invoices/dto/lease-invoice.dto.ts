@@ -7,6 +7,10 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { LeaseInvoice } from '@prisma/client';
+import {
+	LeaseInvoiceCreateSchema,
+	LeaseInvoiceUpdateSchema,
+} from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsBoolean, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -108,16 +112,24 @@ export class LeaseInvoiceDto
 
 export class PartialLeaseInvoiceDto extends PartialType(LeaseInvoiceDto) {}
 
-export class CreateLeaseInvoiceDto
-	extends IntersectionType(
-		LeaseInvoiceRequiredDto,
-		PartialType(LeaseInvoiceOptionalDto),
+export class CreateLeaseInvoiceDto implements LeaseInvoiceCreateSchema {
+	portfolioId: string;
+	leaseId: string;
+	amount: number;
+	isPaid: boolean;
+	postAt: string;
+	dueAt?: string | null;
+	paidAt?: string | null;
+	memo?: string | null;
+}
+
+export class UpdateLeaseInvoiceDto
+	extends PartialType(
+		OmitType(CreateLeaseInvoiceDto, ['portfolioId', 'leaseId']),
 	)
-	implements Partial<LeaseInvoice> {}
+	implements LeaseInvoiceUpdateSchema {}
 
 export class CreateManyLeaseInvoicesDto extends OmitType(
 	CreateLeaseInvoiceDto,
 	['leaseId'],
 ) {}
-
-export class UpdateLeaseInvoiceDto extends PartialType(CreateLeaseInvoiceDto) {}

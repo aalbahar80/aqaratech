@@ -40,5 +40,7 @@ export {
 export type {
 	FileRelationKey,
 	LeaseCreateSchema,
+	LeaseInvoiceCreateSchema,
+	LeaseInvoiceUpdateSchema,
 	LeaseUpdateSchema,
 } from './schemas';

@@ -14,7 +14,6 @@
 
 import * as runtime from '../runtime';
 import type {
-	CreateLeaseInvoiceDto,
 	LeaseInvoiceDto,
 	PaginatedLeaseInvoiceDto,
 	PaidStatusEnum,
@@ -22,10 +21,6 @@ import type {
 	SortOrderEnum,
 	UpdateLeaseInvoiceDto,
 } from '../models';
-
-export interface LeaseInvoicesApiCreateRequest {
-	createLeaseInvoiceDto: CreateLeaseInvoiceDto;
-}
 
 export interface LeaseInvoicesApiFindAllRequest {
 	page?: number;
@@ -65,26 +60,6 @@ export interface LeaseInvoicesApiUpdateRequest {
  * @interface LeaseInvoicesApiInterface
  */
 export interface LeaseInvoicesApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof LeaseInvoicesApiInterface
-	 */
-	createRaw(
-		requestParameters: LeaseInvoicesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialLeaseInvoiceDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	create(
-		requestParameters: LeaseInvoicesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialLeaseInvoiceDto>;
-
 	/**
 	 *
 	 * @summary
@@ -193,56 +168,6 @@ export class LeaseInvoicesApi
 	extends runtime.BaseAPI
 	implements LeaseInvoicesApiInterface
 {
-	/**
-	 *
-	 *
-	 */
-	async createRaw(
-		requestParameters: LeaseInvoicesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialLeaseInvoiceDto>> {
-		if (
-			requestParameters.createLeaseInvoiceDto === null ||
-			requestParameters.createLeaseInvoiceDto === undefined
-		) {
-			throw new runtime.RequiredError(
-				'createLeaseInvoiceDto',
-				'Required parameter requestParameters.createLeaseInvoiceDto was null or undefined when calling create.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		headerParameters['Content-Type'] = 'application/json';
-
-		const response = await this.request(
-			{
-				path: `/leaseInvoices`,
-				method: 'POST',
-				headers: headerParameters,
-				query: queryParameters,
-				body: requestParameters.createLeaseInvoiceDto,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async create(
-		requestParameters: LeaseInvoicesApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialLeaseInvoiceDto> {
-		const response = await this.createRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *

@@ -14,6 +14,8 @@ const shouldSkip = [
 	'CreateExpenseDto',
 	'UpdateExpenseDto',
 	'CreateFileDto',
+	'CreateLeaseInvoiceDto',
+	'UpdateLeaseInvoiceDto',
 ];
 
 // Reference: https://github.com/nestjs/nest/issues/2390#issuecomment-517623971

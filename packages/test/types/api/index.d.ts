@@ -405,6 +405,30 @@ export interface CreateLeaseInvoiceDto {
 	 * @type {string}
 	 * @memberof CreateLeaseInvoiceDto
 	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	leaseId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
+	isPaid: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseInvoiceDto
+	 */
 	postAt: string;
 	/**
 	 *
@@ -423,43 +447,7 @@ export interface CreateLeaseInvoiceDto {
 	 * @type {string}
 	 * @memberof CreateLeaseInvoiceDto
 	 */
-	organizationId: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateLeaseInvoiceDto
-	 */
-	portfolioId: string;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof CreateLeaseInvoiceDto
-	 */
-	amount: number;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateLeaseInvoiceDto
-	 */
-	leaseId: string;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof CreateLeaseInvoiceDto
-	 */
-	isPaid?: boolean;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateLeaseInvoiceDto
-	 */
 	memo?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateLeaseInvoiceDto
-	 */
-	mfPaymentId?: string | null;
 }
 /**
  *
@@ -472,6 +460,24 @@ export interface CreateManyLeaseInvoicesDto {
 	 * @type {string}
 	 * @memberof CreateManyLeaseInvoicesDto
 	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
+	isPaid: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateManyLeaseInvoicesDto
+	 */
 	postAt: string;
 	/**
 	 *
@@ -490,37 +496,7 @@ export interface CreateManyLeaseInvoicesDto {
 	 * @type {string}
 	 * @memberof CreateManyLeaseInvoicesDto
 	 */
-	organizationId: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateManyLeaseInvoicesDto
-	 */
-	portfolioId: string;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof CreateManyLeaseInvoicesDto
-	 */
-	amount: number;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof CreateManyLeaseInvoicesDto
-	 */
-	isPaid?: boolean;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateManyLeaseInvoicesDto
-	 */
 	memo?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateManyLeaseInvoicesDto
-	 */
-	mfPaymentId?: string | null;
 }
 /**
  *
@@ -2986,6 +2962,18 @@ export interface UpdateLeaseDto {
 export interface UpdateLeaseInvoiceDto {
 	/**
 	 *
+	 * @type {number}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	amount?: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof UpdateLeaseInvoiceDto
+	 */
+	isPaid?: boolean;
+	/**
+	 *
 	 * @type {string}
 	 * @memberof UpdateLeaseInvoiceDto
 	 */
@@ -3007,43 +2995,7 @@ export interface UpdateLeaseInvoiceDto {
 	 * @type {string}
 	 * @memberof UpdateLeaseInvoiceDto
 	 */
-	organizationId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseInvoiceDto
-	 */
-	portfolioId?: string;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof UpdateLeaseInvoiceDto
-	 */
-	amount?: number;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseInvoiceDto
-	 */
-	leaseId?: string;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof UpdateLeaseInvoiceDto
-	 */
-	isPaid?: boolean;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseInvoiceDto
-	 */
 	memo?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseInvoiceDto
-	 */
-	mfPaymentId?: string | null;
 }
 /**
  *

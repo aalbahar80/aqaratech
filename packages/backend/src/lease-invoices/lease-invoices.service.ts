@@ -38,17 +38,17 @@ export class LeaseInvoicesService {
 
 	async create({
 		createLeaseInvoiceDto,
-		user,
+		organizationId,
 	}: {
 		createLeaseInvoiceDto: CreateLeaseInvoiceDto;
-		user: IUser;
+		organizationId: string;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject(this.SubjectType, createLeaseInvoiceDto),
-		);
-
-		return this.prisma.leaseInvoice.create({ data: createLeaseInvoiceDto });
+		return this.prisma.leaseInvoice.create({
+			data: {
+				...createLeaseInvoiceDto,
+				organizationId,
+			},
+		});
 	}
 
 	async findAll({
