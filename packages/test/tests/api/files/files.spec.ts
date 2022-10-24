@@ -19,7 +19,7 @@ test('handle noSuchBucket gracefully', async ({ request, portfolio }) => {
 });
 
 test('buckets are automatically created', async ({ request, portfolio }) => {
-	const url = withQuery('/files', {
+	const url = withQuery(`organizations/${portfolio.organizationId}/files`, {
 		relationKey: 'portfolio',
 		relationValue: portfolio.id,
 	});

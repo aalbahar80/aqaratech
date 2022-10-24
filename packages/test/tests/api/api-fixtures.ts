@@ -217,7 +217,8 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	file: async ({ portfolio, request }, use) => {
 		const fileName = 'test.txt';
 
-		const res = await request.post(`${apiURL}/files`, {
+		const url = `${apiURL}/organizations/${portfolio.organizationId}/files`;
+		const res = await request.post(url, {
 			multipart: {
 				fileName: fileName,
 				relationKey: 'portfolio',
