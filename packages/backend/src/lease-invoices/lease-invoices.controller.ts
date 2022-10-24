@@ -9,6 +9,7 @@ import {
 	Query,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { leaseInvoiceUpdateSchema } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -23,6 +24,7 @@ import {
 	PartialLeaseInvoiceDto,
 	UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { LeaseInvoicesService } from './lease-invoices.service';
 
 const SubjectType = 'LeaseInvoice';
@@ -59,7 +61,8 @@ export class LeaseInvoicesController {
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@Body() updateLeaseInvoiceDto: UpdateLeaseInvoiceDto,
+		@Body(new ZodValidationPipe(leaseInvoiceUpdateSchema))
+		updateLeaseInvoiceDto: UpdateLeaseInvoiceDto,
 	): Promise<PartialLeaseInvoiceDto> {
 		return this.leaseInvoicesService.update({
 			id,

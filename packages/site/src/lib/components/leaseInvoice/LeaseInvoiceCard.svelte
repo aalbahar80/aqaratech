@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { createApi } from '$api';
+	import type { LeaseInvoiceDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
@@ -10,7 +11,6 @@
 	import { kwdFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarDay from '~icons/fa6-solid/calendar-day';
@@ -77,11 +77,10 @@
 											await createApi().leaseInvoices.update({
 												id: invoice.id,
 												updateLeaseInvoiceDto: {
-													organizationId: invoice.organizationId,
 													isPaid: !invoice.isPaid,
 													paidAt: invoice.isPaid
 														? null
-														: new Date().toISOString(),
+														: new Date().toISOString().split('T')[0],
 												},
 											});
 

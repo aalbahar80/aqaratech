@@ -1,4 +1,3 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -7,7 +6,6 @@ import { Prisma } from '@prisma/client';
 import { entitiesMap } from '@self/utils';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/action.enum';
-import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
@@ -107,18 +105,13 @@ export class LeaseInvoicesService {
 		updateLeaseInvoiceDto: UpdateLeaseInvoiceDto;
 		user: IUser;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Update,
-			subject(this.SubjectType, updateLeaseInvoiceDto),
-		);
-
-		const frisked = frisk({
-			user,
-			SubjectType: this.SubjectType,
-			instance: updateLeaseInvoiceDto,
+		return this.prisma.leaseInvoice.update({
+			where: {
+				id,
+				AND: accessibleBy(user.ability, Action.Update).LeaseInvoice,
+			},
+			data: updateLeaseInvoiceDto,
 		});
-
-		return this.prisma.leaseInvoice.update({ where: { id }, data: frisked });
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {

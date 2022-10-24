@@ -13,6 +13,7 @@ import type {
 	ExpenseCategoryDto,
 	ExpenseDto,
 	LeaseDto,
+	LeaseInvoiceDto,
 	OrganizationCreatedDto,
 	PortfolioDto,
 	PropertyDto,
@@ -20,7 +21,7 @@ import type {
 	UnitDto,
 } from '../../types/api';
 
-const apiURL = process.env.PUBLIC_API_URL;
+export const apiURL = process.env.PUBLIC_API_URL;
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
@@ -258,6 +259,7 @@ interface TestFixtures {
 	property: PropertyDto;
 	unit: UnitDto;
 	lease: LeaseDto;
+	invoice: LeaseInvoiceDto;
 	expense: ExpenseDto;
 	file: string;
 	expenseCategory: ExpenseCategoryDto;

@@ -39,7 +39,9 @@ function refineSchema<T extends z.ZodType<Base>>(schema: T) {
 					val.postAt &&
 					Date.parse(val.dueAt) >= Date.parse(val.postAt);
 
+				// Return true if `dueAt` is not set to skip validation.
 				return (
+					val.dueAt === undefined ||
 					val.dueAt === null ||
 					val.dueAt === '' ||
 					// Date.parse(val.postAt) <= Date.parse(val.dueAt)

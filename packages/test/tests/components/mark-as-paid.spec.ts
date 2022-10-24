@@ -1,33 +1,11 @@
-import { expect, Page } from '@playwright/test';
-import { sample } from '@self/seed';
-import { test as base } from '../../config';
-
-const lease = sample.leases[0];
-
-const test = base.extend<MyFixtures>({
-	invoice: async ({ page, request, apiBaseURL }, use) => {
-		await page.goto(`leases/${lease.id}`);
-
-		const data: Omit<Invoice, 'id'> = {
-			organizationId: lease.organizationId,
-			portfolioId: lease.portfolioId,
-			leaseId: lease.id,
-			amount: lease.monthlyRent,
-			postAt: new Date(),
-			// due tomorrow
-			dueAt: new Date(new Date().setDate(new Date().getDate() + 1)),
-			isPaid: false,
-		};
-
-		const res = await request.post(`${apiBaseURL}/leaseInvoices`, { data });
-		const invoice = (await res.json()) as Invoice;
-		await use(invoice);
-	},
-});
+import { expect } from '@playwright/test';
+import { test } from '../api/fixtures/invoice-fixture';
 
 test('can toggle paid status', async ({ page, invoice }) => {
-	await page.goto(`leases/${lease.id}`);
+	await page.goto(`leases/${invoice.leaseId}`);
+
 	const card = page.locator(`data-testid=${invoice.id}`);
+
 	const badgeDue = card.locator('text=Due');
 
 	// Due badge exists
@@ -48,10 +26,3 @@ test('can toggle paid status', async ({ page, invoice }) => {
 	// Due badge exists
 	await expect.soft(badgeDue).toBeVisible();
 });
-
-type Invoice = typeof sample.leaseInvoices[number];
-
-type MyFixtures = {
-	page: Page;
-	invoice: Invoice;
-};

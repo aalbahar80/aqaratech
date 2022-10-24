@@ -38,7 +38,7 @@
 	export let data: TLeaseInvoiceDto = undefined as TLeaseInvoiceDto;
 	export let predefined: TPredefinedInvoice = undefined as TPredefinedInvoice;
 
-	const basicFields = [
+	const createFields = [
 		PortfolioIdField(data?.portfolioId || predefined?.portfolioId),
 		new Field('leaseId', {
 			value: data?.leaseId || predefined?.leaseId,
@@ -46,6 +46,9 @@
 			autoInit: true,
 			hidden: true,
 		}),
+	];
+
+	const basicFields = [
 		new Field('isPaid', {
 			label: 'Paid',
 			type: 'checkbox',
@@ -104,7 +107,7 @@
 		warnSchema={leaseInvoiceWarnSchema}
 		entity="leaseInvoice"
 		{formType}
-		{basicFields}
+		basicFields={[...createFields, ...basicFields]}
 		onSubmit={(values) =>
 			createApi().organizations.createLeaseInvoice({
 				createLeaseInvoiceDto: values,
