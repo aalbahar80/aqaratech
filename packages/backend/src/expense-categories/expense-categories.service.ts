@@ -17,6 +17,7 @@ import {
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { generateId } from 'src/utils/generate-id';
+import { z } from 'zod';
 
 @Injectable()
 export class ExpenseCategoriesService {
@@ -138,7 +139,8 @@ export class ExpenseCategoriesService {
 		const categories = await this.fetchJsonCategories({ organizationId });
 
 		categories.forEach((c) => {
-			const category = c as Prisma.JsonObject;
+			const category = c;
+
 			if (category['id'] === expenseCategoryId) {
 				this.applyChanges({
 					original: category,
@@ -193,30 +195,17 @@ export class ExpenseCategoriesService {
 		original,
 		submitted,
 	}: {
-		original: Prisma.JsonObject;
+		original: ExpenseCategoryDto;
 		submitted: UpdateExpenseCategoryDto;
 	}) {
-		this.logger.debug({ submitted });
-		this.logger.debug({ beforeUpdate: original });
-		// TODO Use class-tranformer instead
-		// only update the fields that exist in the submitted DTO and are not undefined
+		// submitted should not include any fields that are undefined
+		const filtered = z
+			.record(z.unknown().refine((v) => v !== undefined))
+			.parse(submitted);
 
-		// TODO if we add new updateable fields to the ExpenseCategoryDto, we need to add them here
-		const updatableKeys: (keyof UpdateExpenseCategoryDto)[] = [
-			'parentId',
-			'labelEn',
-			'labelAr',
-			'description',
-		];
-
-		updatableKeys.forEach((key) => {
-			if (key in submitted && submitted[key] !== undefined) {
-				this.logger.debug(
-					`updating ${key} from ${original[key]} to ${submitted[key]}`,
-				);
-				original[key] = submitted[key];
-			}
-		});
-		this.logger.debug({ afterUpdate: original });
+		return {
+			...original,
+			...filtered,
+		};
 	}
 }
