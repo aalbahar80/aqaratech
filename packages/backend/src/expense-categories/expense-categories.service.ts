@@ -80,20 +80,19 @@ export class ExpenseCategoriesService {
 
 		// Currently, this applies the changes to all categories.
 		categories.forEach((c) => {
-			const category = c;
 			const submitted = updateExpenseCategoryTreeDto.find(
-				(item) => item.id === category.id,
+				(item) => item.id === c.id,
 			);
 
 			if (!submitted) {
 				throw new BadRequestException({
 					msg: `No expenseCategory with this id found in updateAll`,
-					id: category.id,
+					id: c.id,
 				});
 			}
 
 			this.applyChanges({
-				original: category,
+				original: c,
 				submitted: submitted,
 			});
 		});
