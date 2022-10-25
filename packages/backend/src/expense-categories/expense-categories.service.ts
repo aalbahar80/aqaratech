@@ -15,7 +15,6 @@ import {
 	UpdateExpenseCategoryTreeDto,
 } from 'src/expense-categories/expense-category.dto';
 import { IUser } from 'src/interfaces/user.interface';
-import { OrganizationSettingsDto } from 'src/organizations/dto/organizationSettings.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { generateId } from 'src/utils/generate-id';
 
@@ -66,12 +65,12 @@ export class ExpenseCategoriesService {
 		const data = await this.prisma.organizationSettings.findUniqueOrThrow({
 			where: { organizationId },
 		});
-		const settings = new OrganizationSettingsDto({
-			...data,
-			expenseCategoryTree:
-				data.expenseCategoryTree as unknown as ExpenseCategoryDto[],
-		});
-		return settings.expenseCategoryTree;
+
+		const categories = expenseCategorySchema
+			.array()
+			.parse(data.expenseCategoryTree);
+
+		return categories;
 	}
 
 	async updateAll({
