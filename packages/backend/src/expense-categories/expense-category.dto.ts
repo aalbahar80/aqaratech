@@ -59,4 +59,7 @@ export class CreateExpenseCategoryDto
 
 export class UpdateExpenseCategoryDto
 	extends OmitType(CreateExpenseCategoryDto, ['isGroup'])
-	implements z.infer<typeof expenseCategoryUpdateSchema> {}
+	implements z.infer<typeof expenseCategoryUpdateSchema>
+{
+	id: string;
+}
