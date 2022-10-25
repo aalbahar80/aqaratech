@@ -52,12 +52,6 @@ export class ExpensesService {
 	}): Promise<WithCount<ExpenseDto>> {
 		const { page, take, start, end, sortOrder, orderBy } = pageOptionsDto;
 
-		// TODO use this instead:
-		// const organizationId = user.role.organizationId;
-		const organizationId = user.roles.find(
-			(r) => r.id === user.role.id,
-		)?.organizationId;
-
 		const filter: Prisma.ExpenseWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Expense,
@@ -86,7 +80,7 @@ export class ExpensesService {
 
 			// TODO get from orgservice
 			this.prisma.organizationSettings.findUniqueOrThrow({
-				where: { organizationId },
+				where: { organizationId: user.role.organizationId },
 				select: { expenseCategoryTree: true },
 			}),
 		]);
@@ -98,10 +92,6 @@ export class ExpensesService {
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const organizationId = user.roles.find(
-			(r) => r.id === user.role.id,
-		)?.organizationId;
-
 		const [data, settings] = await Promise.all([
 			this.prisma.expense.findFirstOrThrow({
 				where: {
@@ -116,7 +106,7 @@ export class ExpensesService {
 
 			// TODO get from orgservice
 			this.prisma.organizationSettings.findUniqueOrThrow({
-				where: { organizationId },
+				where: { organizationId: user.role.organizationId },
 				select: { expenseCategoryTree: true },
 			}),
 		]);
@@ -162,14 +152,8 @@ export class ExpensesService {
 	// ::: HELPERS :::
 
 	async validateCategoryId(categoryId: string, user: IUser) {
-		// TODO use this instead:
-		// const organizationId = user.role.organizationId;
-		const organizationId = user.roles.find(
-			(r) => r.id === user.role.id,
-		)?.organizationId;
-
 		const settings = await this.prisma.organizationSettings.findUniqueOrThrow({
-			where: { organizationId },
+			where: { organizationId: user.role.organizationId },
 			select: { expenseCategoryTree: true },
 		});
 

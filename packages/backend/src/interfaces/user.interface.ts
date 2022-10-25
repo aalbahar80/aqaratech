@@ -27,7 +27,7 @@ export interface AuthenticatedUser {
  * And attached that info to the request.user.
  * Additionally, we have calculated and attached the user's ability.
  */
-export interface IUser extends ValidatedUserDto {
+export interface IUser extends Omit<ValidatedUserDto, 'roles'> {
 	ability: TAppAbility;
 	role: ValidatedUserDto['roles'][0]; // TODO rm?
 	isAqaratechStaff: false;
