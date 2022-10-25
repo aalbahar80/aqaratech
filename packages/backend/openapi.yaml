@@ -3654,13 +3654,13 @@ components:
           type: string
         labelEn:
           type: string
-        parentId:
-          type: string
-          nullable: true
         labelAr:
           type: string
           nullable: true
         description:
+          type: string
+          nullable: true
+        parentId:
           type: string
           nullable: true
         isGroup:
@@ -3668,8 +3668,6 @@ components:
       required:
         - id
         - labelEn
-        - parentId
-        - labelAr
         - isGroup
     ExpenseDto:
       type: object

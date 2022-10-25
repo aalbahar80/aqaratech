@@ -50,7 +50,7 @@ export class ExpenseCategoriesController {
 		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(expenseCategoryCreateSchema))
 		createExpenseCategoryDto: CreateExpenseCategoryDto,
-	): Promise<string> {
+	): Promise<ExpenseCategoryDto> {
 		return this.expenseCategoriesService.create({
 			organizationId,
 			createExpenseCategoryDto,

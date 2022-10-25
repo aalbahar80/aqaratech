@@ -7,7 +7,11 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { Expense } from '@prisma/client';
-import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
+import {
+	expenseCategorySchema,
+	expenseCreateSchema,
+	expenseUpdateSchema,
+} from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsOptional, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -77,7 +81,7 @@ export class ExpenseDto
 		if (tree && Array.isArray(tree) && this.categoryId) {
 			const rawCategory = tree.find((c) => c.id === this.categoryId);
 			if (rawCategory) {
-				this.expenseType = new ExpenseCategoryDto(rawCategory);
+				this.expenseType = expenseCategorySchema.parse(rawCategory);
 			}
 		}
 	}

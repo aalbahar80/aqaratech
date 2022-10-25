@@ -6,6 +6,7 @@ import {
 	Logger,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { expenseCategorySchema } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import {
 	CreateExpenseCategoryDto,
@@ -42,10 +43,12 @@ export class ExpenseCategoriesService {
 		const categories = await this.fetchJsonCategories({ organizationId });
 
 		const id = generateId();
-		categories.push({
+		const newCategory = {
 			...createExpenseCategoryDto,
 			id,
-		});
+		};
+
+		categories.push(newCategory);
 
 		const updated = await this.prisma.organizationSettings.update({
 			where: { organizationId },
@@ -56,7 +59,7 @@ export class ExpenseCategoriesService {
 			categories: updated.expenseCategoryTree,
 		});
 
-		return id;
+		return expenseCategorySchema.parse(newCategory);
 	}
 
 	async findAll({ organizationId }: { organizationId: string }) {

@@ -1,6 +1,7 @@
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { expenseCategorySchema } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -157,16 +158,9 @@ export class ExpensesService {
 			select: { expenseCategoryTree: true },
 		});
 
-		const categories = Array.isArray(settings.expenseCategoryTree)
-			? settings.expenseCategoryTree
-					.filter((e) => e)
-					.map(
-						(e) =>
-							new ExpenseCategoryDto(
-								e as unknown as Partial<ExpenseCategoryDto>,
-							),
-					)
-			: [];
+		const categories = expenseCategorySchema
+			.array()
+			.parse(settings.expenseCategoryTree);
 
 		// 1. Does the category exist?
 		const category = categories.find((c) => c.id === categoryId);
