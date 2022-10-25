@@ -19,17 +19,11 @@ export class CaslAbilityFactory {
 	 * id's of all the objects that the role has access to.
 	 * Then, creates the ability using the id's.
 	 */
-	public defineAbility = async ({
-		email,
-		roleId,
-	}: {
-		email: string;
-		roleId?: string;
-	}) => {
+	async defineAbility({ email, roleId }: { email: string; roleId?: string }) {
 		const now = Date.now();
 
 		const AppAbility = PrismaAbility as AbilityClass<TAppAbility>;
-		const ability = new AbilityBuilder(AppAbility);
+		const { can, cannot, build } = new AbilityBuilder(AppAbility);
 
 		// We use email (NOT roleId) to find the user/role info.
 		// Email is verified by Auth0/jwt, so it's safe to use.
@@ -54,18 +48,18 @@ export class CaslAbilityFactory {
 
 		// ### DEFINE ABILITY ###
 
-		ability.can(Action.Read, ['User'], { id: { equals: user.id } });
+		can(Action.Read, ['User'], { id: { equals: user.id } });
 
 		if (role.roleType === 'ORGADMIN') {
-			defineOrgAdminAbility(role, ability.can, ability.cannot);
+			defineOrgAdminAbility(role, can, cannot);
 		} else if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
-			definePortfolioAbility(role, ability.can);
+			definePortfolioAbility(role, can);
 		} else if (role.roleType === 'TENANT' && role.tenantId) {
-			defineTenantAbility(role, ability.can);
+			defineTenantAbility(role, can);
 		}
 
 		this.logger.debug( `Defined manageable entities for role ${role.id} in ${ Date.now() - now }ms`,); // prettier-ignore
 
-		return ability.build();
-	};
+		return build();
+	}
 }
