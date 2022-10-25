@@ -1,12 +1,8 @@
 import { expect } from '@playwright/test';
-import { expenseCategoryFactory } from '@self/seed';
 import * as R from 'remeda';
+import type { ExpenseCategoryDto } from '../../../../../types/api';
 import { PostUrl } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
-
-const categories = Array.from({ length: 3 }, () =>
-	expenseCategoryFactory.build(),
-);
 
 test.use({
 	expenseCategoryParams: {
@@ -19,22 +15,29 @@ test('can update tree in own org', async ({
 	org,
 	expenseCategory,
 }) => {
-	console.log({ expenseCategory }, 'update-tree.spec.ts ~ 22');
 	const url = PostUrl(org.organization.id).expenseCategory;
 
-	await Promise.all(
-		categories.map((category) =>
-			request.post(url, { data: R.omit(category, ['id']) }),
-		),
-	);
+	const all = (await (await request.get(url)).json()) as ExpenseCategoryDto[];
+
+	const proposed = all.map((c) => {
+		if (c.id === expenseCategory.id) {
+			return c;
+		} else {
+			return {
+				...c,
+				// labelEn: 'updated',
+				parentId: expenseCategory.id,
+			};
+		}
+	});
 
 	const res = await request.patch(url, {
-		data: categories.map((category) => ({
-			...category,
-			isGroup: undefined,
-			parentId: expenseCategory.id,
-		})),
+		data: proposed.map((c) => R.omit(c, ['isGroup'])),
 	});
 
 	expect(res.status()).toBe(200);
+
+	const updated = (await res.json()) as ExpenseCategoryDto[];
+
+	expect(updated).toEqual(proposed);
 });
