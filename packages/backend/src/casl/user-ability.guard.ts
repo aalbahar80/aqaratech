@@ -2,7 +2,6 @@ import {
 	CACHE_MANAGER,
 	CanActivate,
 	ExecutionContext,
-	ForbiddenException,
 	Inject,
 	Injectable,
 	InternalServerErrorException,
@@ -49,45 +48,45 @@ export class UserAbilityGuard implements CanActivate {
 
 		const cookies = cookiesSchema.parse(request.cookies);
 
-		const xRoleId = cookies.role;
+		const roleId = cookies.role;
 
 		const authenticatedUser = request.user; // safe to use email because it is set by jwt.strategy from accessToken
 
-		if (!xRoleId) {
+		if (!roleId) {
 			// Can't add abilities if there is no role.
 			return true;
 		}
 
 		// Get the cached user/role.
 		// Caching ttl should be configured based on whether a role can be updated (ex. Permissions field).
-		const userCacheKey = `${authenticatedUser.email}:${xRoleId}`;
+		const userCacheKey = `${authenticatedUser.email}:${roleId}`;
 		const cached = await this.cacheManager.get<IUser>(userCacheKey);
 
 		let user: IUser;
 
 		if (cached) {
 			this.logger.debug!(
-				`CACHE HIT: User ${request.user.email} - RoleId: ${xRoleId}`,
+				`CACHE HIT: User ${request.user.email} - RoleId: ${roleId}`,
 			);
 
 			user = cached;
 		} else {
 			this.logger.debug!(
-				`CACHE MISS: User ${request.user.email} - RoleId: ${xRoleId}`,
+				`CACHE MISS: User ${request.user.email} - RoleId: ${roleId}`,
 			);
 
 			const [validatedUser, ability] = await Promise.all([
 				this.usersService.findOneByEmail(authenticatedUser.email),
 				this.caslAbilityFactory.defineAbility({
 					email: authenticatedUser.email,
-					xRoleId,
+					roleId,
 				}),
 			]);
 
-			const role = validatedUser.roles.find((r) => r.id === xRoleId);
+			const role = validatedUser.roles.find((r) => r.id === roleId);
 			if (!role) {
 				this.logger.error(
-					`Role ${xRoleId} not found for user ${authenticatedUser.email}`,
+					`Role ${roleId} not found for user ${authenticatedUser.email}`,
 				);
 				throw new InternalServerErrorException();
 			}
@@ -95,7 +94,7 @@ export class UserAbilityGuard implements CanActivate {
 			user = {
 				...validatedUser,
 				ability,
-				xRoleId,
+				roleId: roleId,
 				role,
 				isAqaratechStaff: false,
 			};
@@ -116,7 +115,7 @@ export class UserAbilityGuard implements CanActivate {
 			...request.user,
 			...user,
 			ability: user.ability,
-			xRoleId,
+			roleId: roleId,
 			isAqaratechStaff: false,
 		} as IUser;
 

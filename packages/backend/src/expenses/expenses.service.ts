@@ -55,7 +55,7 @@ export class ExpensesService {
 		// TODO use this instead:
 		// const organizationId = user.role.organizationId;
 		const organizationId = user.roles.find(
-			(r) => r.id === user.xRoleId,
+			(r) => r.id === user.roleId,
 		)?.organizationId;
 
 		const filter: Prisma.ExpenseWhereInput = {
@@ -99,7 +99,7 @@ export class ExpensesService {
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
 		const organizationId = user.roles.find(
-			(r) => r.id === user.xRoleId,
+			(r) => r.id === user.roleId,
 		)?.organizationId;
 
 		const [data, settings] = await Promise.all([
@@ -165,7 +165,7 @@ export class ExpensesService {
 		// TODO use this instead:
 		// const organizationId = user.role.organizationId;
 		const organizationId = user.roles.find(
-			(r) => r.id === user.xRoleId,
+			(r) => r.id === user.roleId,
 		)?.organizationId;
 
 		const settings = await this.prisma.organizationSettings.findUniqueOrThrow({
