@@ -17,7 +17,7 @@ import { z } from 'zod';
  *
  * This guard:
  * 1. Checks for a valid roleId
- * 2. Adds roleId to request.user
+ * 2. Adds role to request.user
  * 3. Adds ability to request.user
  *
  */
@@ -110,7 +110,8 @@ export class RoleGuard implements CanActivate {
 		request.user = {
 			...request.user,
 			ability,
-			roleId: roleId,
+			roleId,
+			role,
 		} as IUser;
 
 		return true;
