@@ -13,3 +13,7 @@ export const expenseCategoryFactory = Factory.Sync.makeFactory<ExpenseCategory>(
 		parentId: null,
 	},
 );
+
+export type ExpenseCategoryFactoryParams = Partial<
+	Parameters<typeof expenseCategoryFactory.build>[0]
+>;

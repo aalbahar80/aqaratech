@@ -1,5 +1,8 @@
 import type { Fixtures, PlaywrightTestArgs } from '@playwright/test';
-import type { LeaseInvoiceFactoryParams } from '@self/seed';
+import type {
+	ExpenseCategoryFactoryParams,
+	LeaseInvoiceFactoryParams,
+} from '@self/seed';
 import type {
 	ExpenseCategoryDto,
 	ExpenseDto,
@@ -28,6 +31,7 @@ export interface TestFixtures {
 export interface TestOptions {
 	withRoleId: string | undefined;
 	invoiceParams: LeaseInvoiceFactoryParams | undefined;
+	expenseCategoryParams: ExpenseCategoryFactoryParams | undefined;
 }
 
 export type AllFixtures = Fixtures<

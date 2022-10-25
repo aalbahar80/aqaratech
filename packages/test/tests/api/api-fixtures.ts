@@ -10,7 +10,6 @@ import {
 } from '@self/seed';
 import * as R from 'remeda';
 import type {
-	ExpenseCategoryDto,
 	ExpenseDto,
 	LeaseDto,
 	OrganizationCreatedDto,
@@ -20,6 +19,7 @@ import type {
 	UnitDto,
 } from '../../types/api';
 import { apiURL } from './fixtures/api-url';
+import { expenseCategoryFixtures } from './fixtures/expense-category.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
 import type {
 	TestFixtures,
@@ -194,8 +194,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(created);
 	},
 
-	...invoiceFixtures,
-
 	expense: async ({ org, property, request }, use) => {
 		const expense = expenseFactory.build({
 			organizationId: org.organization.id,
@@ -244,17 +242,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(key);
 	},
 
-	expenseCategory: async ({ request, org }, use) => {
-		const res = await request.get(
-			`${apiURL}/organizations/${org.organization.id}/expense-categories`,
-		);
-
-		const categories = (await res.json()) as ExpenseCategoryDto[];
-
-		const category = categories.find((c) => !c.isGroup);
-
-		if (!category) throw new Error('No expense category found');
-
-		await use(category);
-	},
+	...invoiceFixtures,
+	...expenseCategoryFixtures,
 });
