@@ -1,11 +1,5 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import {
-	BadRequestException,
-	Injectable,
-	InternalServerErrorException,
-	Logger,
-} from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { expenseCategorySchema } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import {
@@ -50,13 +44,9 @@ export class ExpenseCategoriesService {
 
 		categories.push(newCategory);
 
-		const updated = await this.prisma.organizationSettings.update({
+		await this.prisma.organizationSettings.update({
 			where: { organizationId },
 			data: { expenseCategoryTree: categories },
-		});
-
-		this.validateJsonCategories({
-			categories: updated.expenseCategoryTree,
 		});
 
 		return expenseCategorySchema.parse(newCategory);
@@ -108,16 +98,14 @@ export class ExpenseCategoriesService {
 			});
 		});
 
+		const proposed = expenseCategorySchema.array().parse(categories);
+
 		const updated = await this.prisma.organizationSettings.update({
 			where: { organizationId },
-			data: { expenseCategoryTree: categories },
+			data: { expenseCategoryTree: proposed },
 		});
 
-		const newCategories = this.validateJsonCategories({
-			categories: updated.expenseCategoryTree,
-		});
-
-		return newCategories as unknown as ExpenseCategoryDto[];
+		return expenseCategorySchema.array().parse(updated.expenseCategoryTree);
 	}
 
 	async update({
@@ -149,17 +137,22 @@ export class ExpenseCategoriesService {
 			}
 		});
 
-		const updated = await this.prisma.organizationSettings.update({
+		const settings = await this.prisma.organizationSettings.update({
 			where: { organizationId },
 			data: { expenseCategoryTree: categories },
 		});
 
-		this.validateJsonCategories({
-			categories: updated.expenseCategoryTree,
-		});
+		const tree = expenseCategorySchema
+			.array()
+			.parse(settings.expenseCategoryTree);
 
-		// TODO return the updated expenseCategory for easier testing
-		return expenseCategoryId;
+		const updated = tree.find((c) => c.id === expenseCategoryId);
+
+		if (!updated) {
+			throw new Error(`Unable to find updated category`);
+		} else {
+			return updated;
+		}
 	}
 
 	// HELPERS
@@ -174,21 +167,6 @@ export class ExpenseCategoriesService {
 		const categoriesJson = settings.expenseCategoryTree;
 
 		return expenseCategorySchema.array().parse(categoriesJson);
-	}
-
-	validateJsonCategories({ categories }: { categories: Prisma.JsonValue }) {
-		if (
-			categories &&
-			typeof categories === 'object' &&
-			Array.isArray(categories)
-		) {
-			return categories;
-		} else {
-			this.logger.warn(
-				'Failed to properly handle JSON value in expenseCategoryTree',
-			);
-			throw new InternalServerErrorException();
-		}
 	}
 
 	applyChanges({
