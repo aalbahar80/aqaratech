@@ -2,20 +2,15 @@ import { AbilityBuilder, AbilityClass } from '@casl/ability';
 import { PrismaAbility } from '@casl/prisma';
 import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { TAppAbility } from 'src/casl/abilities/ability-types';
-import { OrgAdminAbility } from 'src/casl/abilities/org-admin-ability';
-import { PortfolioAbility } from 'src/casl/abilities/portfolio-ability';
-import { TenantAbility } from 'src/casl/abilities/tenant-ability';
+import { defineOrgAdminAbility } from 'src/casl/abilities/org-admin-ability';
+import { definePortfolioAbility } from 'src/casl/abilities/portfolio-ability';
+import { defineTenantAbility } from 'src/casl/abilities/tenant-ability';
 import { Action } from 'src/casl/action.enum';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class CaslAbilityFactory {
-	constructor(
-		private readonly prisma: PrismaService,
-		private orgAdminAbility: OrgAdminAbility,
-		private portfolioAbility: PortfolioAbility,
-		private tenantAbility: TenantAbility,
-	) {}
+	constructor(private readonly prisma: PrismaService) {}
 
 	private readonly logger = new Logger(CaslAbilityFactory.name);
 
@@ -24,13 +19,19 @@ export class CaslAbilityFactory {
 	 * id's of all the objects that the role has access to.
 	 * Then, creates the ability using the id's.
 	 */
-	async defineAbility({ email, roleId }: { email: string; roleId?: string }) {
+	public defineAbility = async ({
+		email,
+		roleId,
+	}: {
+		email: string;
+		roleId?: string;
+	}) => {
 		const now = Date.now();
 
 		const AppAbility = PrismaAbility as AbilityClass<TAppAbility>;
-		const { can, cannot, build } = new AbilityBuilder(AppAbility);
+		const ability = new AbilityBuilder(AppAbility);
 
-		// We use email (NOT xRoleId) to find the user/role info.
+		// We use email (NOT roleId) to find the user/role info.
 		// Email is verified by Auth0/jwt, so it's safe to use.
 		const user = await this.prisma.user.findUniqueOrThrow({
 			where: { email },
@@ -53,18 +54,18 @@ export class CaslAbilityFactory {
 
 		// ### DEFINE ABILITY ###
 
-		can(Action.Read, ['User'], { id: { equals: user.id } });
+		ability.can(Action.Read, ['User'], { id: { equals: user.id } });
 
 		if (role.roleType === 'ORGADMIN') {
-			this.orgAdminAbility.define(role, can, cannot);
+			defineOrgAdminAbility(role, ability.can, ability.cannot);
 		} else if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
-			this.portfolioAbility.define(role, can);
+			definePortfolioAbility(role, ability.can);
 		} else if (role.roleType === 'TENANT' && role.tenantId) {
-			this.tenantAbility.define(role, can);
+			defineTenantAbility(role, ability.can);
 		}
 
 		this.logger.debug( `Defined manageable entities for role ${role.id} in ${ Date.now() - now }ms`,); // prettier-ignore
 
-		return build();
-	}
+		return ability.build();
+	};
 }
