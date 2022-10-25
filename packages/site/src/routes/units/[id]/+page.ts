@@ -7,7 +7,10 @@ export const load: PageLoad = async ({
 	fetch,
 	params,
 	url: { searchParams },
+	parent,
 }) => {
+	const organizationId = (await parent()).user?.role?.organizationId;
+
 	const unitId = params.id;
 	// TODO handle pagination defaults
 	const sParams = parseParams(searchParams);
@@ -29,7 +32,7 @@ export const load: PageLoad = async ({
 	] = await Promise.all([
 		api.units.findOne({ id: unitId }),
 		api.units.findLeases({ id: unitId, ...sParams }),
-		...getDashboardData({ api: api, searchParams, unitId }),
+		...getDashboardData({ api: api, searchParams, unitId, organizationId }),
 	]);
 
 	return {

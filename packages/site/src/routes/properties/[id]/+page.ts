@@ -8,7 +8,10 @@ export const load: PageLoad = async ({
 	fetch,
 	params,
 	url: { searchParams },
+	parent,
 }) => {
+	const organizationId = (await parent()).user?.role?.organizationId;
+
 	const propertyId = params.id;
 	// TODO handle pagination defaults
 	const sParams = parseParams(searchParams);
@@ -38,6 +41,7 @@ export const load: PageLoad = async ({
 			api: api,
 			searchParams,
 			propertyId,
+			organizationId,
 		}),
 	]);
 

@@ -16,13 +16,19 @@ export const getDashboardData = ({
 	portfolioId,
 	propertyId,
 	unitId,
+	organizationId,
 }: {
 	api: Api;
 	searchParams: URLSearchParams;
 	portfolioId?: string;
 	propertyId?: string;
 	unitId?: string;
+	organizationId: string | undefined;
 }) => {
+	if (!organizationId) {
+		throw new Error('Organization ID is required');
+	}
+
 	const sParams = parseParams(searchParams);
 
 	// TODO handle pagination defaults
@@ -72,7 +78,9 @@ export const getDashboardData = ({
 			start: new Date().toISOString().split('T')[0], // including time will cause the query to be refetech on the client because the url will be slightly different
 			end: getOneYearLater().toISOString(),
 		}),
-		api.expenseCategories.findAll(),
+		api.expenseCategories.findAll({
+			organizationId,
+		}),
 	] as const;
 
 	return requests;
