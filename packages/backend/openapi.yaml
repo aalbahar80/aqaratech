@@ -2514,7 +2514,12 @@ paths:
       operationId: ExpenseCategoriesController_create
       summary: ''
       description: ''
-      parameters: []
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -2536,7 +2541,12 @@ paths:
       operationId: ExpenseCategoriesController_findAll
       summary: ''
       description: ''
-      parameters: []
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -2552,7 +2562,12 @@ paths:
       operationId: ExpenseCategoriesController_updateAll
       summary: ''
       description: ''
-      parameters: []
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -2578,6 +2593,11 @@ paths:
       summary: ''
       description: ''
       parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
         - name: id
           required: true
           in: path

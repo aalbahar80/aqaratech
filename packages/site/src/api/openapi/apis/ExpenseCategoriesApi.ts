@@ -21,15 +21,22 @@ import type {
 } from '../models';
 
 export interface ExpenseCategoriesApiCreateRequest {
+	organizationId: string;
 	createExpenseCategoryDto: CreateExpenseCategoryDto;
 }
 
+export interface ExpenseCategoriesApiFindAllRequest {
+	organizationId: string;
+}
+
 export interface ExpenseCategoriesApiUpdateRequest {
+	organizationId: string;
 	id: string;
 	updateExpenseCategoryDto: UpdateExpenseCategoryDto;
 }
 
 export interface ExpenseCategoriesApiUpdateAllRequest {
+	organizationId: string;
 	updateExpenseCategoryTreeDto: Array<UpdateExpenseCategoryTreeDto>;
 }
 
@@ -67,6 +74,7 @@ export interface ExpenseCategoriesApiInterface {
 	 * @memberof ExpenseCategoriesApiInterface
 	 */
 	findAllRaw(
+		requestParameters: ExpenseCategoriesApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ExpenseCategoryDto>>>;
 
@@ -75,6 +83,7 @@ export interface ExpenseCategoriesApiInterface {
 	 *
 	 */
 	findAll(
+		requestParameters: ExpenseCategoriesApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<ExpenseCategoryDto>>;
 
@@ -135,6 +144,16 @@ export class ExpenseCategoriesApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<string>> {
 		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling create.',
+			);
+		}
+
+		if (
 			requestParameters.createExpenseCategoryDto === null ||
 			requestParameters.createExpenseCategoryDto === undefined
 		) {
@@ -152,7 +171,10 @@ export class ExpenseCategoriesApi
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/expense-categories`,
+				path: `/organizations/{organizationId}/expense-categories`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
 				method: 'POST',
 				headers: headerParameters,
 				query: queryParameters,
@@ -181,15 +203,29 @@ export class ExpenseCategoriesApi
 	 *
 	 */
 	async findAllRaw(
+		requestParameters: ExpenseCategoriesApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ExpenseCategoryDto>>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling findAll.',
+			);
+		}
+
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/expense-categories`,
+				path: `/organizations/{organizationId}/expense-categories`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters,
@@ -205,9 +241,10 @@ export class ExpenseCategoriesApi
 	 *
 	 */
 	async findAll(
+		requestParameters: ExpenseCategoriesApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<ExpenseCategoryDto>> {
-		const response = await this.findAllRaw(initOverrides);
+		const response = await this.findAllRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
 
@@ -219,6 +256,16 @@ export class ExpenseCategoriesApi
 		requestParameters: ExpenseCategoriesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<string>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling update.',
+			);
+		}
+
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -244,10 +291,15 @@ export class ExpenseCategoriesApi
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/expense-categories/{id}`.replace(
-					`{${'id'}}`,
-					encodeURIComponent(String(requestParameters.id)),
-				),
+				path: `/organizations/{organizationId}/expense-categories/{id}`
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					)
+					.replace(
+						`{${'id'}}`,
+						encodeURIComponent(String(requestParameters.id)),
+					),
 				method: 'PATCH',
 				headers: headerParameters,
 				query: queryParameters,
@@ -280,6 +332,16 @@ export class ExpenseCategoriesApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ExpenseCategoryDto>>> {
 		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling updateAll.',
+			);
+		}
+
+		if (
 			requestParameters.updateExpenseCategoryTreeDto === null ||
 			requestParameters.updateExpenseCategoryTreeDto === undefined
 		) {
@@ -297,7 +359,10 @@ export class ExpenseCategoriesApi
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/expense-categories`,
+				path: `/organizations/{organizationId}/expense-categories`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
 				method: 'PATCH',
 				headers: headerParameters,
 				query: queryParameters,

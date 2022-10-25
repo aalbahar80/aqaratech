@@ -57,6 +57,7 @@
 						updateExpenseCategoryTreeDto: newList.map((category) =>
 							R.omit(category, ['isGroup']),
 						),
+						organizationId: $page.params.id,
 					})
 					.then((res) => {
 						addSuccessToast();

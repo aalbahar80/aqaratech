@@ -2,7 +2,13 @@ import { createApi } from '$api';
 import type { PredefinedExpense } from '$lib/models/interfaces/predefined.interface';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ url: { searchParams }, fetch }) => {
+export const load: PageLoad = async ({
+	url: { searchParams },
+	fetch,
+	parent,
+}) => {
+	const organizationId = (await parent()).user?.role?.organizationId;
+
 	const api = createApi(fetch);
 
 	const predefined: PredefinedExpense = {
@@ -28,7 +34,9 @@ export const load: PageLoad = async ({ url: { searchParams }, fetch }) => {
 			  })
 			: undefined,
 
-		api.expenseCategories.findAll(),
+		api.expenseCategories.findAll({
+			organizationId,
+		}),
 	]);
 
 	return { portfolios, properties, units, predefined, expenseTypes };

@@ -36,7 +36,6 @@ import { ExpenseCategoriesService } from './expense-categories.service';
 @Controller('organizations/:organizationId/expense-categories')
 @ApiTags('expense-categories')
 @SwaggerAuth()
-@UseGuards(AuthzGuard)
 export class ExpenseCategoriesController {
 	constructor(
 		private readonly expenseCategoriesService: ExpenseCategoriesService,
@@ -44,14 +43,16 @@ export class ExpenseCategoriesController {
 
 	@Post()
 	@CheckAbilities({ action: Action.Create, subject: 'ExpenseCategory' })
+	@UseGuards(AuthzGuard)
 	@ApiCreatedResponse({ type: String })
 	create(
 		@User() user: IUser,
+		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(expenseCategoryCreateSchema))
 		createExpenseCategoryDto: CreateExpenseCategoryDto,
 	): Promise<string> {
 		return this.expenseCategoriesService.create({
-			organizationId: user.role.organizationId,
+			organizationId,
 			createExpenseCategoryDto,
 			user,
 		});
@@ -61,9 +62,11 @@ export class ExpenseCategoriesController {
 	// OrgId is trusted (inferred from the token). Therefore, being able to read an expense is sufficient.
 	@CheckAbilities({ action: Action.Read, subject: 'Expense' })
 	@ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
-	findAll(@User() user: IUser): Promise<ExpenseCategoryDto[]> {
+	findAll(
+		@Param('organizationId') organizationId: string,
+	): Promise<ExpenseCategoryDto[]> {
 		return this.expenseCategoriesService.findAll({
-			organizationId: user.role.organizationId,
+			organizationId,
 		});
 	}
 
@@ -73,11 +76,12 @@ export class ExpenseCategoriesController {
 	@ApiBody({ type: UpdateExpenseCategoryTreeDto, isArray: true })
 	updateAll(
 		@User() user: IUser,
+		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(expenseCategoryTreeSchema))
 		updateExpenseCategoryTreeDto: UpdateExpenseCategoryTreeDto[],
 	): Promise<ExpenseCategoryDto[]> {
 		return this.expenseCategoriesService.updateAll({
-			organizationId: user.role.organizationId,
+			organizationId,
 			updateExpenseCategoryTreeDto,
 			user,
 		});
@@ -88,12 +92,13 @@ export class ExpenseCategoriesController {
 	@ApiOkResponse({ type: String })
 	update(
 		@User() user: IUser,
+		@Param('organizationId') organizationId: string,
 		@Param('id') id: string,
 		@Body(new ZodValidationPipe(expenseCategoryUpdateSchema))
 		updateExpenseCategoryDto: UpdateExpenseCategoryDto,
 	): Promise<string> {
 		return this.expenseCategoriesService.update({
-			organizationId: user.role.organizationId,
+			organizationId,
 			expenseCategoryId: id,
 			updateExpenseCategoryDto,
 			user,

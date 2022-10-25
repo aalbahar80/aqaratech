@@ -4,7 +4,9 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async ({ params, fetch }) => {
 	const api = createApi(fetch);
 
-	const categories = await api.expenseCategories.findAll();
+	const categories = await api.expenseCategories.findAll({
+		organizationId: params.id,
+	});
 
 	const expenseCategory = categories.find(
 		(category) => category.id === params.expenseCategoryId,

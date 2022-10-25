@@ -72,7 +72,10 @@
 			}
 			return createApi().expenseCategories.update({
 				id: expenseCategoryId,
-				updateExpenseCategoryDto: { ...values, id: expenseCategoryId },
+				organizationId: $page.params.id,
+				updateExpenseCategoryDto: {
+					...values,
+				},
 			});
 		}}
 		onSuccess={(value) => {
@@ -81,7 +84,7 @@
 				throw new Error('organizationId not found');
 			}
 			addSuccessToast();
-			return goto(settings(organizationId).tree + '#' + value);
+			return goto(settings($page.params.id).tree + '#' + value);
 		}}
 	/>
 {:else}
@@ -92,15 +95,15 @@
 		{basicFields}
 		onSubmit={(values) =>
 			createApi().expenseCategories.create({
-				createExpenseCategoryDto: { ...values, parentId: null },
+				organizationId: $page.params.id,
+				createExpenseCategoryDto: {
+					...values,
+					parentId: null,
+				},
 			})}
 		onSuccess={(value) => {
-			const organizationId = $page.params.id;
-			if (!organizationId) {
-				throw new Error('organiztionId not found');
-			}
 			addSuccessToast();
-			return goto(settings(organizationId).tree + '#' + value);
+			return goto(settings($page.params.id).tree + '#' + value);
 		}}
 	/>
 {/if}
