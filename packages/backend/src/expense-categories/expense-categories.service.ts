@@ -92,7 +92,7 @@ export class ExpenseCategoriesService {
 
 		// Currently, this applies the changes to all categories.
 		categories.forEach((c) => {
-			const category = c as Prisma.JsonObject;
+			const category = c;
 			const submitted = updateExpenseCategoryTreeDto.find(
 				(item) => item.id === category['id'],
 			);
@@ -172,17 +172,7 @@ export class ExpenseCategoriesService {
 
 		const categoriesJson = settings.expenseCategoryTree;
 
-		if (
-			categoriesJson &&
-			typeof categoriesJson === 'object' &&
-			Array.isArray(categoriesJson)
-		) {
-			return categoriesJson;
-		} else {
-			throw new InternalServerErrorException(
-				'Failed to parse expenseCategoryTree',
-			);
-		}
+		return expenseCategorySchema.array().parse(categoriesJson);
 	}
 
 	validateJsonCategories({ categories }: { categories: Prisma.JsonValue }) {
