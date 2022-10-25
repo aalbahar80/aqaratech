@@ -111,6 +111,8 @@ export class RoleGuard implements CanActivate {
 			...request.user,
 			ability,
 			role,
+			id: user.id,
+			fullName: user.fullName,
 		} as IUser;
 
 		return true;
