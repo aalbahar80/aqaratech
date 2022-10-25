@@ -24,11 +24,11 @@ export class FilesService {
 	async create({
 		createFileDto,
 		file,
-		user,
+		organizationId,
 	}: {
 		createFileDto: Omit<CreateFileDto, 'file'>;
 		file: Express.Multer.File;
-		user: IUser;
+		organizationId: string;
 	}) {
 		const key = this.computeFileKey({
 			relationKey: createFileDto.relationKey,
@@ -38,7 +38,7 @@ export class FilesService {
 
 		const directory = this.getFileDirectory({ key });
 
-		const bucket = this.getFileBucket({ user });
+		const bucket = organizationId;
 
 		this.logger.debug(
 			`Attempting to create file: ${key} in bucket: ${bucket} in directory: ${directory}`,
@@ -264,6 +264,7 @@ export class FilesService {
 	}
 
 	getFileBucket({ user }: { user: IUser }) {
+		// TODO: organizationId is better gotten from the url param
 		const bucket = user.role.organizationId;
 
 		return bucket;

@@ -196,7 +196,7 @@ export class OrganizationsAdminController {
 	@ApiConsumes('multipart/form-data')
 	@ApiBody({ type: CreateFileDto })
 	create(
-		@User() user: IUser,
+		@Param('organizationId') organizationId: string,
 		@UploadedFile(
 			new ParseFilePipe({
 				validators: [new MaxFileSizeValidator({ maxSize: 100 * 1000 * 1000 })],
@@ -206,6 +206,6 @@ export class OrganizationsAdminController {
 		@Body(new ZodValidationPipe(fileCreateSchema.omit({ file: true })))
 		createFileDto: Omit<CreateFileDto, 'file'>,
 	): Promise<string> {
-		return this.filesService.create({ user, file, createFileDto });
+		return this.filesService.create({ file, createFileDto, organizationId });
 	}
 }

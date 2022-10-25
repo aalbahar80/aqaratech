@@ -2417,7 +2417,12 @@ paths:
       operationId: OrganizationsAdminController_create
       summary: ''
       description: ''
-      parameters: []
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
       requestBody:
         required: true
         content:

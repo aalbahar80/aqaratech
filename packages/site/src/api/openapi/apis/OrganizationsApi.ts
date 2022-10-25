@@ -86,9 +86,10 @@ export interface OrganizationsApiCreateUnitRequest {
 }
 
 export interface OrganizationsApiCreate0Request {
+	organizationId: string;
 	relationKey: FileRelationKeyEnum;
 	file: Blob;
-	organizationId: string;
+	organizationId2: string;
 	fileName: string;
 	relationValue: string;
 }
@@ -1049,6 +1050,16 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<string>> {
 		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling create_1.',
+			);
+		}
+
+		if (
 			requestParameters.relationKey === null ||
 			requestParameters.relationKey === undefined
 		) {
@@ -1069,12 +1080,12 @@ export class OrganizationsApi
 		}
 
 		if (
-			requestParameters.organizationId === null ||
-			requestParameters.organizationId === undefined
+			requestParameters.organizationId2 === null ||
+			requestParameters.organizationId2 === undefined
 		) {
 			throw new runtime.RequiredError(
-				'organizationId',
-				'Required parameter requestParameters.organizationId was null or undefined when calling create_1.',
+				'organizationId2',
+				'Required parameter requestParameters.organizationId2 was null or undefined when calling create_1.',
 			);
 		}
 
@@ -1131,10 +1142,10 @@ export class OrganizationsApi
 			formParams.append('file', requestParameters.file as any);
 		}
 
-		if (requestParameters.organizationId !== undefined) {
+		if (requestParameters.organizationId2 !== undefined) {
 			formParams.append(
 				'organizationId',
-				requestParameters.organizationId as any,
+				requestParameters.organizationId2 as any,
 			);
 		}
 
@@ -1151,7 +1162,10 @@ export class OrganizationsApi
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/files`,
+				path: `/organizations/{organizationId}/files`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
 				method: 'POST',
 				headers: headerParameters,
 				query: queryParameters,
