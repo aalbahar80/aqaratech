@@ -1,43 +1,28 @@
-import {
-	BadGatewayException,
-	createParamDecorator,
-	ExecutionContext,
-	Logger,
-} from '@nestjs/common';
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { Request } from 'express';
-import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
+import { IUser } from 'src/interfaces/user.interface';
 
+/**
+ * Should *not* be used with the following decorators:
+ *
+ * `@SkipRouteGuard()`
+ * `@SkipAbilityCheck()`
+ * `@Public()`.
+ */
 export const User = createParamDecorator(
 	(_data: unknown, ctx: ExecutionContext) => {
-		const request = ctx.switchToHttp().getRequest<IncomingRequest>();
-		const logger = new Logger('UserDecorator');
-
-		logger.debug(`User email: ${request.user?.email ?? 'undefined'}`);
+		const request = ctx.switchToHttp().getRequest<Request>();
 
 		if (!request.user) {
 			// In a public route, both jwt.guard/strategy and abilities.guard are bypassed, so request.user is undefined.
-			// Therefore, either don't use this decorator in public routes, or try to get the user in a different way.
-
-			logger.error(
-				"User not found in request. This decorator shouldn't be used in public routes.",
-			);
-			throw new BadGatewayException();
+			throw new Error('Tried to use User decorator in a public route.');
 		}
 
 		if (!('ability' in request.user)) {
-			logger.error(
-				"No ability found in request.user. This decorator shouldn't be used in routes marked with `@SkipAbilityCheck()`.",
-			);
-			throw new BadGatewayException();
+			// This decorator should only be used in routes that require authorization.
+			throw new Error('Ability property not found in request.user.');
 		}
 
-		return request.user;
+		return request.user as unknown as IUser;
 	},
 );
-
-/**
- * User could be undefined if we use this decorator in a public route.
- */
-interface IncomingRequest extends Request {
-	user?: AuthenticatedUser | IUser | undefined;
-}
