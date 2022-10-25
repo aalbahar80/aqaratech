@@ -12,7 +12,6 @@ import { UsersService } from 'src/users/users.service';
 import { z } from 'zod';
 
 /**
- * TODO: Rename to RoleGuard.
  *
  * This guard:
  * 1. Checks for a valid roleId
@@ -21,7 +20,7 @@ import { z } from 'zod';
  *
  */
 @Injectable()
-export class UserAbilityGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
 	constructor(
 		private readonly usersService: UsersService,
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
@@ -37,7 +36,7 @@ export class UserAbilityGuard implements CanActivate {
 					level: 'warn',
 					message: 'No user found in request',
 				},
-				UserAbilityGuard.name,
+				RoleGuard.name,
 			);
 
 			return false;
@@ -63,7 +62,7 @@ export class UserAbilityGuard implements CanActivate {
 					level: 'warn',
 					message: 'No roleId found in request',
 				},
-				UserAbilityGuard.name,
+				RoleGuard.name,
 			);
 
 			return false;
@@ -81,7 +80,7 @@ export class UserAbilityGuard implements CanActivate {
 					level: 'warn',
 					message: `User does not have role with roleId ${roleId}`,
 				},
-				UserAbilityGuard.name,
+				RoleGuard.name,
 			);
 
 			return false;
