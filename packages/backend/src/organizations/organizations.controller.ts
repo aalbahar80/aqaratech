@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
-import { SkipAbilityCheck } from 'src/auth/public.decorator';
+import { SkipAbilityCheck, SkipRoleGuard } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
@@ -49,6 +49,7 @@ export class OrganizationsController {
 	@Post()
 	// No need to check abilities here. Any authenticated user can create an organization.
 	@SkipAbilityCheck()
+	@SkipRoleGuard()
 	@ApiCreatedResponse({ type: OrganizationCreatedDto })
 	create(
 		@UserBasic() user: AuthenticatedUser,
