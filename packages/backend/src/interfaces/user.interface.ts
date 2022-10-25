@@ -29,7 +29,6 @@ export interface AuthenticatedUser {
  */
 export interface IUser extends ValidatedUserDto {
 	ability: TAppAbility;
-	roleId: string;
 	role: ValidatedUserDto['roles'][0]; // TODO rm?
 	isAqaratechStaff: false;
 }

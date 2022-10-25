@@ -110,7 +110,6 @@ export class RoleGuard implements CanActivate {
 		request.user = {
 			...request.user,
 			ability,
-			roleId,
 			role,
 		} as IUser;
 

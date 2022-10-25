@@ -14,7 +14,7 @@ export const getUserSentry = (request: Request) => {
 			...sentryUser,
 			id: user.id,
 			email: user.email,
-			roleId: user.roleId,
+			roleId: user.role.id,
 			username: user.fullName ?? undefined,
 			isAqaratechStaff: user.isAqaratechStaff,
 		};
