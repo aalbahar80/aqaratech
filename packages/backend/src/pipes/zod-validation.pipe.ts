@@ -2,6 +2,7 @@ import {
 	ArgumentMetadata,
 	BadRequestException,
 	Injectable,
+	Logger,
 	PipeTransform,
 } from '@nestjs/common';
 import { ZodSchema } from 'zod';
@@ -9,6 +10,8 @@ import { ZodSchema } from 'zod';
 @Injectable()
 export class ZodValidationPipe implements PipeTransform {
 	constructor(private schema: ZodSchema) {}
+
+	private readonly logger = new Logger(ZodValidationPipe.name);
 
 	transform(value: unknown, metadata: ArgumentMetadata) {
 		// only apply validation to the body
@@ -22,6 +25,8 @@ export class ZodValidationPipe implements PipeTransform {
 		if (parsed.success) {
 			return parsed.data as unknown;
 		}
+
+		this.logger.debug(parsed.error);
 
 		const errors = parsed.error.formErrors;
 
