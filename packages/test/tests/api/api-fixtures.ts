@@ -244,8 +244,10 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(key);
 	},
 
-	expenseCategory: async ({ request }, use) => {
-		const res = await request.get(`${apiURL}/expense-categories`);
+	expenseCategory: async ({ request, org }, use) => {
+		const res = await request.get(
+			`${apiURL}/organizations/${org.organization.id}/expense-categories`,
+		);
 
 		const categories = (await res.json()) as ExpenseCategoryDto[];
 
