@@ -1,16 +1,10 @@
 import { OmitType } from '@nestjs/swagger';
 import {
 	expenseCategoryCreateSchema,
+	expenseCategoryTreeSchema,
 	expenseCategoryUpdateSchema,
 } from '@self/utils';
-import { Type } from 'class-transformer';
-import {
-	IsArray,
-	IsBoolean,
-	IsOptional,
-	IsString,
-	ValidateNested,
-} from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 import { IsID } from 'src/decorators/field.decorators';
 import { z } from 'zod';
 
@@ -40,13 +34,6 @@ export class ExpenseCategoryDto {
 	isGroup: boolean;
 }
 
-export class UpdateAllExpenseCategoriesDto {
-	@IsArray()
-	@ValidateNested({ each: true })
-	@Type(() => UpdateExpenseCategoryDto)
-	items: UpdateExpenseCategoryDto[];
-}
-
 export class CreateExpenseCategoryDto
 	implements z.infer<typeof expenseCategoryCreateSchema>
 {
@@ -59,7 +46,11 @@ export class CreateExpenseCategoryDto
 
 export class UpdateExpenseCategoryDto
 	extends OmitType(CreateExpenseCategoryDto, ['isGroup'])
-	implements z.infer<typeof expenseCategoryUpdateSchema>
+	implements z.infer<typeof expenseCategoryUpdateSchema> {}
+
+export class UpdateExpenseCategoryTreeDto
+	extends OmitType(CreateExpenseCategoryDto, ['isGroup'])
+	implements z.infer<typeof expenseCategoryTreeSchema['element']>
 {
 	id: string;
 }

@@ -16,8 +16,8 @@ import * as runtime from '../runtime';
 import type {
 	CreateExpenseCategoryDto,
 	ExpenseCategoryDto,
-	UpdateAllExpenseCategoriesDto,
 	UpdateExpenseCategoryDto,
+	UpdateExpenseCategoryTreeDto,
 } from '../models';
 
 export interface ExpenseCategoriesApiCreateRequest {
@@ -30,7 +30,7 @@ export interface ExpenseCategoriesApiUpdateRequest {
 }
 
 export interface ExpenseCategoriesApiUpdateAllRequest {
-	updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto;
+	updateExpenseCategoryTreeDto: Array<UpdateExpenseCategoryTreeDto>;
 }
 
 /**
@@ -280,12 +280,12 @@ export class ExpenseCategoriesApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ExpenseCategoryDto>>> {
 		if (
-			requestParameters.updateAllExpenseCategoriesDto === null ||
-			requestParameters.updateAllExpenseCategoriesDto === undefined
+			requestParameters.updateExpenseCategoryTreeDto === null ||
+			requestParameters.updateExpenseCategoryTreeDto === undefined
 		) {
 			throw new runtime.RequiredError(
-				'updateAllExpenseCategoriesDto',
-				'Required parameter requestParameters.updateAllExpenseCategoriesDto was null or undefined when calling updateAll.',
+				'updateExpenseCategoryTreeDto',
+				'Required parameter requestParameters.updateExpenseCategoryTreeDto was null or undefined when calling updateAll.',
 			);
 		}
 
@@ -301,7 +301,7 @@ export class ExpenseCategoriesApi
 				method: 'PATCH',
 				headers: headerParameters,
 				query: queryParameters,
-				body: requestParameters.updateAllExpenseCategoriesDto,
+				body: requestParameters.updateExpenseCategoryTreeDto,
 			},
 			initOverrides,
 		);

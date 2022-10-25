@@ -263,18 +263,6 @@ export interface CreateExpenseCategoryDto {
 	labelEn: string;
 	/**
 	 *
-	 * @type {boolean}
-	 * @memberof CreateExpenseCategoryDto
-	 */
-	isGroup: boolean;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateExpenseCategoryDto
-	 */
-	parentId?: string | null;
-	/**
-	 *
 	 * @type {string}
 	 * @memberof CreateExpenseCategoryDto
 	 */
@@ -285,6 +273,18 @@ export interface CreateExpenseCategoryDto {
 	 * @memberof CreateExpenseCategoryDto
 	 */
 	description?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateExpenseCategoryDto
+	 */
+	parentId?: string | null;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof CreateExpenseCategoryDto
+	 */
+	isGroup: boolean;
 }
 /**
  *
@@ -2837,19 +2837,6 @@ export interface UnitVacancy {
 /**
  *
  * @export
- * @interface UpdateAllExpenseCategoriesDto
- */
-export interface UpdateAllExpenseCategoriesDto {
-	/**
-	 *
-	 * @type {Array<UpdateExpenseCategoryDto>}
-	 * @memberof UpdateAllExpenseCategoriesDto
-	 */
-	items: Array<UpdateExpenseCategoryDto>;
-}
-/**
- *
- * @export
  * @interface UpdateExpenseCategoryDto
  */
 export interface UpdateExpenseCategoryDto {
@@ -2858,19 +2845,7 @@ export interface UpdateExpenseCategoryDto {
 	 * @type {string}
 	 * @memberof UpdateExpenseCategoryDto
 	 */
-	id: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateExpenseCategoryDto
-	 */
-	labelEn?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateExpenseCategoryDto
-	 */
-	parentId?: string | null;
+	labelEn: string;
 	/**
 	 *
 	 * @type {string}
@@ -2885,10 +2860,47 @@ export interface UpdateExpenseCategoryDto {
 	description?: string | null;
 	/**
 	 *
-	 * @type {boolean}
+	 * @type {string}
 	 * @memberof UpdateExpenseCategoryDto
 	 */
-	isGroup?: boolean;
+	parentId?: string | null;
+}
+/**
+ *
+ * @export
+ * @interface UpdateExpenseCategoryTreeDto
+ */
+export interface UpdateExpenseCategoryTreeDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryTreeDto
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryTreeDto
+	 */
+	labelEn: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryTreeDto
+	 */
+	labelAr?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryTreeDto
+	 */
+	description?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateExpenseCategoryTreeDto
+	 */
+	parentId?: string | null;
 }
 /**
  *

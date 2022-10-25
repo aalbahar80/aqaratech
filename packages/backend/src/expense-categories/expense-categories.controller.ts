@@ -1,7 +1,13 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+	ApiBody,
+	ApiCreatedResponse,
+	ApiOkResponse,
+	ApiTags,
+} from '@nestjs/swagger';
 import {
 	expenseCategoryCreateSchema,
+	expenseCategoryTreeSchema,
 	expenseCategoryUpdateSchema,
 } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
@@ -11,8 +17,8 @@ import { User } from 'src/decorators/user.decorator';
 import {
 	CreateExpenseCategoryDto,
 	ExpenseCategoryDto,
-	UpdateAllExpenseCategoriesDto,
 	UpdateExpenseCategoryDto,
+	UpdateExpenseCategoryTreeDto,
 } from 'src/expense-categories/expense-category.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
@@ -54,13 +60,15 @@ export class ExpenseCategoriesController {
 	@Patch()
 	@CheckAbilities({ action: Action.Update, subject: 'Organization' })
 	@ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
+	@ApiBody({ type: UpdateExpenseCategoryTreeDto, isArray: true })
 	updateAll(
 		@User() user: IUser,
-		@Body() updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto,
+		@Body(new ZodValidationPipe(expenseCategoryTreeSchema))
+		updateExpenseCategoryTreeDto: UpdateExpenseCategoryTreeDto[],
 	): Promise<ExpenseCategoryDto[]> {
 		return this.expenseCategoriesService.updateAll({
 			organizationId: user.role.organizationId,
-			updateAllExpenseCategoriesDto,
+			updateExpenseCategoryTreeDto,
 			user,
 		});
 	}

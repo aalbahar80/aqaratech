@@ -20,6 +20,8 @@ export { formatResponseLog } from './logger/format-response-log';
 export { satisfies } from './satisfies';
 export {
 	expenseCategoryCreateSchema,
+	expenseCategorySchema,
+	expenseCategoryTreeSchema,
 	expenseCategoryUpdateSchema,
 	expenseCreateSchema,
 	expenseUpdateSchema,

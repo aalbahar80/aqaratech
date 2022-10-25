@@ -13,6 +13,7 @@
 	import { Check } from '@steeze-ui/heroicons';
 	import { diff } from 'just-diff';
 	import { cloneDeep } from 'lodash-es';
+	import * as R from 'remeda';
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 	import Fa6SolidPlus from '~icons/fa6-solid/plus';
 	import type { PageData } from './$types';
@@ -53,7 +54,9 @@
 				console.debug(newList);
 				createApi()
 					.expenseCategories.updateAll({
-						updateAllExpenseCategoriesDto: { items: newList },
+						updateExpenseCategoryTreeDto: newList.map((category) =>
+							R.omit(category, ['isGroup']),
+						),
 					})
 					.then((res) => {
 						addSuccessToast();

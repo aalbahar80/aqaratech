@@ -2558,7 +2558,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAllExpenseCategoriesDto'
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateExpenseCategoryTreeDto'
       responses:
         '200':
           description: ''
@@ -4140,8 +4142,6 @@ components:
     CreateExpenseCategoryDto:
       type: object
       properties:
-        id:
-          type: string
         labelEn:
           type: string
         labelAr:
@@ -4156,10 +4156,9 @@ components:
         isGroup:
           type: boolean
       required:
-        - id
         - labelEn
         - isGroup
-    UpdateExpenseCategoryDto:
+    UpdateExpenseCategoryTreeDto:
       type: object
       properties:
         id:
@@ -4178,15 +4177,22 @@ components:
       required:
         - id
         - labelEn
-    UpdateAllExpenseCategoriesDto:
+    UpdateExpenseCategoryDto:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateExpenseCategoryDto'
+        labelEn:
+          type: string
+        labelAr:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        parentId:
+          type: string
+          nullable: true
       required:
-        - items
+        - labelEn
     BreadcrumbsDto:
       type: object
       properties:

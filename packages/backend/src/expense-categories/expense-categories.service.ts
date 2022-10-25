@@ -10,8 +10,8 @@ import { Action } from 'src/casl/action.enum';
 import {
 	CreateExpenseCategoryDto,
 	ExpenseCategoryDto,
-	UpdateAllExpenseCategoriesDto,
 	UpdateExpenseCategoryDto,
+	UpdateExpenseCategoryTreeDto,
 } from 'src/expense-categories/expense-category.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { OrganizationSettingsDto } from 'src/organizations/dto/organizationSettings.dto';
@@ -73,11 +73,11 @@ export class ExpenseCategoriesService {
 
 	async updateAll({
 		organizationId,
-		updateAllExpenseCategoriesDto,
+		updateExpenseCategoryTreeDto,
 		user,
 	}: {
 		organizationId: string;
-		updateAllExpenseCategoriesDto: UpdateAllExpenseCategoriesDto;
+		updateExpenseCategoryTreeDto: UpdateExpenseCategoryTreeDto[];
 		user: IUser;
 	}) {
 		ForbiddenError.from(user.ability).throwUnlessCan(
@@ -90,7 +90,7 @@ export class ExpenseCategoriesService {
 		// Currently, this applies the changes to all categories.
 		categories.forEach((c) => {
 			const category = c as Prisma.JsonObject;
-			const submitted = updateAllExpenseCategoriesDto.items.find(
+			const submitted = updateExpenseCategoryTreeDto.find(
 				(item) => item.id === category['id'],
 			);
 			if (!submitted) {
