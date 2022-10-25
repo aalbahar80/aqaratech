@@ -13,25 +13,6 @@ export class UsersService {
 		return this.prisma.user.create({ data: createUserDto });
 	}
 
-	// findAll() {
-	//   return this.prisma.user.findMany({
-	//     include: {
-	//       roles: true,
-	//     },
-	//   });
-	// }
-
-	// findOne(id: string): Promise<ValidatedUserDto> {
-	//   return this.prisma.user.findUniqueOrThrow({
-	//     where: { id },
-	//     include: {
-	//       roles: {
-	//         include: { organization: { select: { id: true, fullName: true } } },
-	//       },
-	//     },
-	//   });
-	// }
-
 	async findOneByEmail(email: string): Promise<ValidatedUserDto> {
 		let user = await this.prisma.user.findUnique({
 			where: { email },
