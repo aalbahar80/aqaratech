@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { SkipAbilityCheck } from 'src/auth/public.decorator';
+import { SkipAbilityCheck, SkipRoleGuard } from 'src/auth/public.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
@@ -29,6 +29,7 @@ export class UsersController {
 	// to endpoints that require an ability check.
 	@Get('me')
 	@SkipAbilityCheck()
+	@SkipRoleGuard()
 	@ApiOkResponse({ type: ValidatedUserDto })
 	@ApiNotFoundResponse()
 	findProfile(@UserBasic() user: AuthenticatedUser): Promise<ValidatedUserDto> {

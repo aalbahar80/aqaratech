@@ -8,7 +8,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { SKIP_ABILITY_CHECK_KEY } from 'src/auth/public.decorator';
+import { IS_PUBLIC_KEY, SKIP_ROLE_GUARD_KEY } from 'src/auth/public.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
 import { z } from 'zod';
@@ -31,12 +31,17 @@ export class RoleGuard implements CanActivate {
 	) {}
 
 	async canActivate(context: ExecutionContext): Promise<boolean> {
-		const skipAbilityCheck = this.reflector.getAllAndOverride<boolean>(
-			SKIP_ABILITY_CHECK_KEY,
+		const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+			context.getHandler(),
+			context.getClass(),
+		]);
+
+		const skipRoleGuard = this.reflector.getAllAndOverride<boolean>(
+			SKIP_ROLE_GUARD_KEY,
 			[context.getHandler(), context.getClass()],
 		);
 
-		if (skipAbilityCheck) {
+		if (isPublic || skipRoleGuard) {
 			return true;
 		}
 

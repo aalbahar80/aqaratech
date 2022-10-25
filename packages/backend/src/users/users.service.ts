@@ -74,7 +74,7 @@ export class UsersService {
 			return cached;
 		} else {
 			// define fresh ability
-			const ability = this.caslAbilityFactory.defineAbility({
+			const ability = await this.caslAbilityFactory.defineAbility({
 				email,
 				roleId: role.id,
 			});
