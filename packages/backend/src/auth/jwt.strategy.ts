@@ -5,7 +5,6 @@ import { AQARATECH_STAFF_ROLE, Cookie } from '@self/utils';
 import type { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { Strategy } from 'passport-jwt';
-import * as R from 'remeda';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
@@ -88,20 +87,22 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 			throw new Error('authConfig.AUTH0_API_NAMESPACE must be set');
 		}
 
-		const payload = R.isObject(rawPayload) ? rawPayload : undefined;
+		const payload = payloadSchema(apiNamespace).parse(rawPayload);
 
-		const rawEmail = payload?.[`${apiNamespace}/email`];
+		const emailKey = `${apiNamespace}/email`;
+		const email = z.string().parse(payload[emailKey]);
 
-		const email = z.string().email().parse(rawEmail);
+		const rolesKey = `${apiNamespace}/roles`;
+		const roles = z.array(z.string()).parse(payload[rolesKey]);
 
-		const auth0Roles = z
-			.array(z.string())
-			.parse(payload?.[`${apiNamespace}/roles`]);
-
-		const isAqaratechStaff = auth0Roles.includes(AQARATECH_STAFF_ROLE);
-
-		this.logger.debug(`Validated user with email ${email}`);
+		const isAqaratechStaff = roles.includes(AQARATECH_STAFF_ROLE);
 
 		return { email, isAqaratechStaff };
 	}
 }
+
+const payloadSchema = (namespace: string) =>
+	z.object({
+		[`${namespace}/email`]: z.string().email(),
+		[`${namespace}/roles`]: z.array(z.string()),
+	});
