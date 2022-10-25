@@ -7,12 +7,7 @@ import {
 	Post,
 	UseGuards,
 } from '@nestjs/common';
-import {
-	ApiBody,
-	ApiCreatedResponse,
-	ApiOkResponse,
-	ApiTags,
-} from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import {
 	expenseCategoryCreateSchema,
 	expenseCategoryTreeSchema,
@@ -44,7 +39,6 @@ export class ExpenseCategoriesController {
 	@Post()
 	@CheckAbilities({ action: Action.Create, subject: 'ExpenseCategory' })
 	@UseGuards(AuthzGuard)
-	@ApiCreatedResponse({ type: String })
 	create(
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
@@ -61,7 +55,6 @@ export class ExpenseCategoriesController {
 	@Get()
 	// OrgId is trusted (inferred from the token). Therefore, being able to read an expense is sufficient.
 	@CheckAbilities({ action: Action.Read, subject: 'Expense' })
-	@ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
 	findAll(
 		@Param('organizationId') organizationId: string,
 	): Promise<ExpenseCategoryDto[]> {
@@ -72,7 +65,6 @@ export class ExpenseCategoriesController {
 
 	@Patch()
 	@CheckAbilities({ action: Action.Update, subject: 'Organization' })
-	@ApiOkResponse({ type: ExpenseCategoryDto, isArray: true })
 	@ApiBody({ type: UpdateExpenseCategoryTreeDto, isArray: true })
 	updateAll(
 		@User() user: IUser,
@@ -89,14 +81,13 @@ export class ExpenseCategoriesController {
 
 	@Patch(':id')
 	@CheckAbilities({ action: Action.Update, subject: 'Organization' })
-	@ApiOkResponse({ type: String })
 	update(
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
 		@Param('id') id: string,
 		@Body(new ZodValidationPipe(expenseCategoryUpdateSchema))
 		updateExpenseCategoryDto: UpdateExpenseCategoryDto,
-	): Promise<string> {
+	): Promise<ExpenseCategoryDto> {
 		return this.expenseCategoriesService.update({
 			organizationId,
 			expenseCategoryId: id,

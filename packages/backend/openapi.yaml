@@ -2537,7 +2537,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/ExpenseCategoryDto'
       tags: &ref_25
         - expense-categories
       security: &ref_26
@@ -2620,7 +2620,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/ExpenseCategoryDto'
       tags: *ref_25
       security: *ref_26
 info:
