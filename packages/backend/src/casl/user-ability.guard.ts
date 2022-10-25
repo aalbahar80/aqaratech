@@ -70,11 +70,11 @@ export class UserAbilityGuard implements CanActivate {
 			return false;
 		}
 
-		const validatedUser = await this.usersService.findOneByEmail(
+		const user = await this.usersService.findOneByEmail(
 			authenticatedUser.email,
 		);
 
-		const role = validatedUser.roles.find((r) => r.id === roleId);
+		const role = user.roles.find((r) => r.id === roleId);
 
 		if (!role) {
 			this.logger.error(
@@ -84,10 +84,7 @@ export class UserAbilityGuard implements CanActivate {
 			throw new InternalServerErrorException();
 		}
 
-		const ability = await this.usersService.getAbility(
-			validatedUser.email,
-			role,
-		);
+		const ability = await this.usersService.getAbility(user.email, role);
 
 		// attach ability & roleId to request
 		// TODO spreading here works ok for nested object?
