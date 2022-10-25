@@ -5,8 +5,10 @@ import {
 	Injectable,
 	LoggerService,
 } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { SKIP_ABILITY_CHECK_KEY } from 'src/auth/public.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
 import { z } from 'zod';
@@ -22,12 +24,22 @@ import { z } from 'zod';
 @Injectable()
 export class RoleGuard implements CanActivate {
 	constructor(
+		private reflector: Reflector,
 		private readonly usersService: UsersService,
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
 	) {}
 
 	async canActivate(context: ExecutionContext): Promise<boolean> {
+		const skipAbilityCheck = this.reflector.getAllAndOverride<boolean>(
+			SKIP_ABILITY_CHECK_KEY,
+			[context.getHandler(), context.getClass()],
+		);
+
+		if (skipAbilityCheck) {
+			return true;
+		}
+
 		const request = context.switchToHttp().getRequest<IRequest>();
 
 		if (!request.user) {
