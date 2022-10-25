@@ -25,7 +25,10 @@ test('can update tree in own org', async ({
 		} else {
 			return {
 				...c,
-				// labelEn: 'updated',
+				labelEn: 'updated',
+				// labelAr: 'تحديث',
+				// labelAr: undefined,
+				description: undefined,
 				parentId: expenseCategory.id,
 			};
 		}

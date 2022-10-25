@@ -1,5 +1,5 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { expenseCategorySchema } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import {
@@ -76,35 +76,34 @@ export class ExpenseCategoriesService {
 			subject(this.SubjectType, { id: organizationId }),
 		);
 
-		const categories = await this.fetchJsonCategories({ organizationId });
+		const originalTree = await this.fetchJsonCategories({ organizationId });
 
 		// Currently, this applies the changes to all categories.
-		categories.forEach((c) => {
-			const submitted = updateExpenseCategoryTreeDto.find(
-				(item) => item.id === c.id,
-			);
+		const proposed = updateExpenseCategoryTreeDto.map((submitted) => {
+			const original = originalTree.find((c) => c.id === submitted.id);
 
-			if (!submitted) {
-				throw new BadRequestException({
-					msg: `No expenseCategory with this id found in updateAll`,
-					id: c.id,
+			if (!original) {
+				throw new Error('updateAll should not be called with new categories', {
+					cause: 'unknown category',
 				});
 			}
 
-			this.applyChanges({
-				original: c,
-				submitted: submitted,
-			});
+			return this.applyChanges({ original, submitted });
 		});
 
-		const proposed = expenseCategorySchema.array().parse(categories);
+		// check lengths match
+		if (originalTree.length !== proposed.length) {
+			throw new Error('updateAll should not be called with new categories', {
+				cause: 'lengths do not match',
+			});
+		}
 
-		const updated = await this.prisma.organizationSettings.update({
+		const settings = await this.prisma.organizationSettings.update({
 			where: { organizationId },
 			data: { expenseCategoryTree: proposed },
 		});
 
-		return expenseCategorySchema.array().parse(updated.expenseCategoryTree);
+		return expenseCategorySchema.array().parse(settings.expenseCategoryTree);
 	}
 
 	async update({
