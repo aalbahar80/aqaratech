@@ -152,7 +152,7 @@ export class ExpenseCategoriesApi
 
 		const response = await this.request(
 			{
-				path: `/expense-categories`,
+				path: `/organizations/{organizationId}/expense-categories`,
 				method: 'POST',
 				headers: headerParameters,
 				query: queryParameters,
@@ -189,7 +189,7 @@ export class ExpenseCategoriesApi
 
 		const response = await this.request(
 			{
-				path: `/expense-categories`,
+				path: `/organizations/{organizationId}/expense-categories`,
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters,
@@ -244,7 +244,7 @@ export class ExpenseCategoriesApi
 
 		const response = await this.request(
 			{
-				path: `/expense-categories/{id}`.replace(
+				path: `/organizations/{organizationId}/expense-categories/{id}`.replace(
 					`{${'id'}}`,
 					encodeURIComponent(String(requestParameters.id)),
 				),
@@ -297,7 +297,7 @@ export class ExpenseCategoriesApi
 
 		const response = await this.request(
 			{
-				path: `/expense-categories`,
+				path: `/organizations/{organizationId}/expense-categories`,
 				method: 'PATCH',
 				headers: headerParameters,
 				query: queryParameters,

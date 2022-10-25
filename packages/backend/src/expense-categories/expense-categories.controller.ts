@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Get,
+	Param,
+	Patch,
+	Post,
+	UseGuards,
+} from '@nestjs/common';
 import {
 	ApiBody,
 	ApiCreatedResponse,
@@ -12,6 +20,7 @@ import {
 } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
+import { AuthzGuard } from 'src/casl/authz.guard';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import {
@@ -24,16 +33,17 @@ import { IUser } from 'src/interfaces/user.interface';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { ExpenseCategoriesService } from './expense-categories.service';
 
-@Controller('expense-categories')
+@Controller('organizations/:organizationId/expense-categories')
 @ApiTags('expense-categories')
 @SwaggerAuth()
+@UseGuards(AuthzGuard)
 export class ExpenseCategoriesController {
 	constructor(
 		private readonly expenseCategoriesService: ExpenseCategoriesService,
 	) {}
 
 	@Post()
-	@CheckAbilities({ action: Action.Update, subject: 'Organization' })
+	@CheckAbilities({ action: Action.Create, subject: 'ExpenseCategory' })
 	@ApiCreatedResponse({ type: String })
 	create(
 		@User() user: IUser,

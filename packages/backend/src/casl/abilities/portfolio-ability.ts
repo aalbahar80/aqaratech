@@ -50,5 +50,9 @@ export class PortfolioAbility {
 		can(Action.Read, ['Payout'], {
 			portfolioId: { equals: role.portfolioId },
 		});
+
+		can(Action.Read, 'ExpenseCategory', {
+			organizationId: { equals: role.organizationId },
+		});
 	}
 }

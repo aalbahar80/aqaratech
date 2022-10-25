@@ -63,6 +63,10 @@ export class OrgAdminAbility {
 			organizationId: { equals: role.organizationId },
 		});
 
+		can(Action.Manage, 'ExpenseCategory', {
+			organizationId: { equals: role.organizationId },
+		});
+
 		// These fields are never allowed to be updated. This is necessary to prevent data from going out of sync.
 		// Restrict updating any foreign key. Especially important for the organizationId, portfolioId, tenantId.
 		cannot(Action.Update, 'all', [

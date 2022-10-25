@@ -2509,7 +2509,7 @@ paths:
                 type: string
       tags: *ref_23
       security: *ref_24
-  /expense-categories:
+  /organizations/{organizationId}/expense-categories:
     post:
       operationId: ExpenseCategoriesController_create
       summary: ''
@@ -2572,7 +2572,7 @@ paths:
                   $ref: '#/components/schemas/ExpenseCategoryDto'
       tags: *ref_25
       security: *ref_26
-  /expense-categories/{id}:
+  /organizations/{organizationId}/expense-categories/{id}:
     patch:
       operationId: ExpenseCategoriesController_update
       summary: ''

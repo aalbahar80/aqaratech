@@ -41,6 +41,9 @@ export type Subject = Subjects<{
 	File: {
 		organizationId: string;
 	};
+	ExpenseCategory: {
+		organizationId: string;
+	};
 }>;
 
 // Can type exported for use in dependent ability classes.

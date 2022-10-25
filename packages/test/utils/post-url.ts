@@ -6,6 +6,7 @@ export const PostUrl = (orgId: string) => {
 		lease: `/organizations/${orgId}/leases`,
 		invoice: `/organizations/${orgId}/leaseInvoices`,
 		expense: `/organizations/${orgId}/expenses`,
+		expenseCategory: `/organizations/${orgId}/expense-categories`,
 		file: `/organizations/${orgId}/files`,
 	};
 };
