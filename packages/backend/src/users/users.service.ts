@@ -1,11 +1,19 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
+import { Role } from '@prisma/client';
+import { Cache } from 'cache-manager';
+import { TAppAbility } from 'src/casl/abilities/ability-types';
+import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { OrganizationDto } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class UsersService {
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(
+		private readonly prisma: PrismaService,
+		private readonly caslAbilityFactory: CaslAbilityFactory,
+		@Inject(CACHE_MANAGER) private cacheManager: Cache,
+	) {}
 
 	private readonly logger = new Logger(UsersService.name);
 
@@ -57,13 +65,26 @@ export class UsersService {
 		};
 	}
 
-	async getRoles(id: string) {
-		const result = await this.prisma.user.findUniqueOrThrow({
-			where: { id },
-			select: {
-				roles: true,
-			},
-		});
-		return result;
+	async getAbility(email: string, role: Omit<Role, 'permissions'>) {
+		const cacheKey = `${email}:${role.id}:ability`;
+
+		const cached = await this.cacheManager.get<TAppAbility>(cacheKey);
+
+		if (cached) {
+			return cached;
+		} else {
+			// define fresh ability
+			const ability = this.caslAbilityFactory.defineAbility({
+				email,
+				roleId: role.id,
+			});
+
+			// cache it
+			await this.cacheManager.set(cacheKey, ability, {
+				ttl: 60 * 60,
+			});
+
+			return ability;
+		}
 	}
 }

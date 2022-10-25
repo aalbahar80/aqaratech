@@ -1,5 +1,4 @@
 import {
-	CACHE_MANAGER,
 	CanActivate,
 	ExecutionContext,
 	Inject,
@@ -7,24 +6,24 @@ import {
 	InternalServerErrorException,
 	LoggerService,
 } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { Cache } from 'cache-manager';
 import { Request } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
 import { z } from 'zod';
 
 /**
- * Not really a "guard". Just adds the user's abilities to the request.user object.
+ * TODO: Rename to RoleGuard.
+ *
+ * This guard:
+ * 1. Checks for a valid roleId
+ * 2. Adds roleId to request.user
+ * 3. Adds ability to request.user
+ *
  */
 @Injectable()
 export class UserAbilityGuard implements CanActivate {
 	constructor(
-		@Inject(CACHE_MANAGER) private cacheManager: Cache,
-		private readonly reflector: Reflector,
-		private readonly caslAbilityFactory: CaslAbilityFactory,
 		private readonly usersService: UsersService,
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
@@ -33,11 +32,16 @@ export class UserAbilityGuard implements CanActivate {
 	async canActivate(context: ExecutionContext): Promise<boolean> {
 		const request = context.switchToHttp().getRequest<IRequest>();
 
-		// Get user
-
 		if (!request.user) {
-			// Can't add abilities if there is no user.
-			return true;
+			this.logger.warn(
+				{
+					level: 'warn',
+					message: 'No user found in request',
+				},
+				UserAbilityGuard.name,
+			);
+
+			return false;
 		}
 
 		// Get Role
@@ -54,69 +58,43 @@ export class UserAbilityGuard implements CanActivate {
 
 		if (!roleId) {
 			// Can't add abilities if there is no role.
-			return true;
-		}
 
-		// Get the cached user/role.
-		// Caching ttl should be configured based on whether a role can be updated (ex. Permissions field).
-		const userCacheKey = `${authenticatedUser.email}:${roleId}`;
-		const cached = await this.cacheManager.get<IUser>(userCacheKey);
-
-		let user: IUser;
-
-		if (cached) {
-			this.logger.debug!(
-				`CACHE HIT: User ${request.user.email} - RoleId: ${roleId}`,
+			this.logger.warn(
+				{
+					level: 'warn',
+					message: 'No roleId found in request',
+				},
+				UserAbilityGuard.name,
 			);
 
-			user = cached;
-		} else {
-			this.logger.debug!(
-				`CACHE MISS: User ${request.user.email} - RoleId: ${roleId}`,
-			);
-
-			const [validatedUser, ability] = await Promise.all([
-				this.usersService.findOneByEmail(authenticatedUser.email),
-				this.caslAbilityFactory.defineAbility({
-					email: authenticatedUser.email,
-					roleId,
-				}),
-			]);
-
-			const role = validatedUser.roles.find((r) => r.id === roleId);
-			if (!role) {
-				this.logger.error(
-					`Role ${roleId} not found for user ${authenticatedUser.email}`,
-				);
-				throw new InternalServerErrorException();
-			}
-
-			user = {
-				...validatedUser,
-				ability,
-				roleId: roleId,
-				role,
-				isAqaratechStaff: false,
-			};
-
-			// TODO handle cache ttl/invalidation
-			// TODO use cache key variable
-			await this.cacheManager.set(userCacheKey, user, {
-				ttl: 60 * 60 * 24, // TODO adjust
-			});
+			return false;
 		}
 
-		// TODO add event listener to invalidate all cache entries whenever resource is created/updated
-		// https://docs.nestjs.com/techniques/events
+		const validatedUser = await this.usersService.findOneByEmail(
+			authenticatedUser.email,
+		);
 
-		// attach ability to request, to be used by services for any further permission checks
+		const role = validatedUser.roles.find((r) => r.id === roleId);
+
+		if (!role) {
+			this.logger.error(
+				`Role ${roleId} not found for user ${authenticatedUser.email}`,
+			);
+
+			throw new InternalServerErrorException();
+		}
+
+		const ability = await this.usersService.getAbility(
+			validatedUser.email,
+			role,
+		);
+
+		// attach ability & roleId to request
 		// TODO spreading here works ok for nested object?
 		request.user = {
 			...request.user,
-			...user,
-			ability: user.ability,
+			ability,
 			roleId: roleId,
-			isAqaratechStaff: false,
 		} as IUser;
 
 		return true;
