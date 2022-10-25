@@ -25,3 +25,5 @@ export const expenseCategoryUpdateSchema = expenseCategorySchema.omit({
 export const expenseCategoryTreeSchema = z.array(
 	expenseCategorySchema.omit({ isGroup: true }),
 );
+
+export type ExpenseCategory = z.infer<typeof expenseCategorySchema>;

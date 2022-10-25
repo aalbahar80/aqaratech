@@ -43,6 +43,7 @@ export {
 	unitUpdateSchema,
 } from './schemas';
 export type {
+	ExpenseCategory,
 	FileRelationKey,
 	LeaseCreateSchema,
 	LeaseInvoiceCreateManySchema,

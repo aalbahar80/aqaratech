@@ -199,6 +199,7 @@ importers:
       '@faker-js/faker': 7.6.0
       '@preconstruct/cli': 2.2.2
       '@prisma/client': 4.5.0
+      '@self/utils': workspace:2.1.0
       '@tsconfig/esm': 1.0.2
       '@types/node': 18.11.0
       date-fns: 2.29.3
@@ -217,6 +218,7 @@ importers:
     devDependencies:
       '@babel/preset-typescript': 7.18.6_@babel+core@7.19.6
       '@preconstruct/cli': 2.2.2
+      '@self/utils': link:../utils
       '@tsconfig/esm': 1.0.2
       '@types/node': 18.11.0
       eslint-config-custom: link:../eslint-config-custom
@@ -2004,7 +2006,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.18.6
-      '@babel/parser': 7.19.4
+      '@babel/parser': 7.19.6
       '@babel/types': 7.19.4
     dev: true
 

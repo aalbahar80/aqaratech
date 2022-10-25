@@ -1,4 +1,5 @@
 export * from './expense';
+export * from './expense-category';
 export * from './lease';
 export * from './lease-invoice';
 export * from './organization';
