@@ -43,9 +43,9 @@ export class AbilitiesGuard implements CanActivate {
 			const isAllowed = user.ability.can(rule.action, rule.subject);
 
 			if (!isAllowed) {
-				this.logger.error(
+				this.logger.warn(
 					{
-						level: 'error',
+						level: 'warn',
 						message: 'Rule failed',
 						action: rule.action,
 						subject: rule.subject,
