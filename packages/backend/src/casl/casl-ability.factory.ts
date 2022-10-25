@@ -1,6 +1,6 @@
 import { AbilityBuilder, AbilityClass } from '@casl/ability';
 import { PrismaAbility } from '@casl/prisma';
-import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { TAppAbility } from 'src/casl/abilities/ability-types';
 import { defineOrgAdminAbility } from 'src/casl/abilities/org-admin-ability';
 import { definePortfolioAbility } from 'src/casl/abilities/portfolio-ability';
@@ -19,7 +19,7 @@ export class CaslAbilityFactory {
 	 * id's of all the objects that the role has access to.
 	 * Then, creates the ability using the id's.
 	 */
-	async defineAbility({ email, roleId }: { email: string; roleId?: string }) {
+	async defineAbility({ email, roleId }: { email: string; roleId: string }) {
 		const now = Date.now();
 
 		const AppAbility = PrismaAbility as AbilityClass<TAppAbility>;
@@ -32,18 +32,13 @@ export class CaslAbilityFactory {
 			include: { roles: true },
 		});
 
-		// Once we retrieve the user, we can then use the xRoleId header to select their desired role.
+		// Get the specific role that the user is using.
 		const role = user.roles.find((role) => role.id === roleId);
+
 		if (!role) {
-			this.logger.log(user);
-			// Log the userId for our own reference.
-			// But don't return it in the error message as it is priviliged info.
-			this.logger.error(
-				`Could not resolve roleId ${roleId ?? 'undefined'} for userId: ${
-					user.id
-				}`,
-			);
-			throw new ForbiddenException('Role not found');
+			throw new Error(`Role not found`, {
+				cause: `Role ${roleId} not found for user ${email}`,
+			});
 		}
 
 		// ### DEFINE ABILITY ###
