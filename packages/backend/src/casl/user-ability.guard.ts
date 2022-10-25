@@ -3,7 +3,6 @@ import {
 	ExecutionContext,
 	Inject,
 	Injectable,
-	InternalServerErrorException,
 	LoggerService,
 } from '@nestjs/common';
 import { Request } from 'express';
@@ -77,11 +76,15 @@ export class UserAbilityGuard implements CanActivate {
 		const role = user.roles.find((r) => r.id === roleId);
 
 		if (!role) {
-			this.logger.error(
-				`Role ${roleId} not found for user ${authenticatedUser.email}`,
+			this.logger.warn(
+				{
+					level: 'warn',
+					message: `User does not have role with roleId ${roleId}`,
+				},
+				UserAbilityGuard.name,
 			);
 
-			throw new InternalServerErrorException();
+			return false;
 		}
 
 		const ability = await this.usersService.getAbility(user.email, role);
