@@ -1,5 +1,5 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { expenseCategorySchema } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import {
@@ -17,8 +17,6 @@ import { z } from 'zod';
 export class ExpenseCategoriesService {
 	constructor(private readonly prisma: PrismaService) {}
 	SubjectType = 'Organization' as const;
-
-	private readonly logger = new Logger(ExpenseCategoriesService.name);
 
 	async create({
 		organizationId,
@@ -84,14 +82,16 @@ export class ExpenseCategoriesService {
 		categories.forEach((c) => {
 			const category = c;
 			const submitted = updateExpenseCategoryTreeDto.find(
-				(item) => item.id === category['id'],
+				(item) => item.id === category.id,
 			);
+
 			if (!submitted) {
 				throw new BadRequestException({
 					msg: `No expenseCategory with this id found in updateAll`,
-					id: category['id'],
+					id: category.id,
 				});
 			}
+
 			this.applyChanges({
 				original: category,
 				submitted: submitted,
@@ -127,11 +127,9 @@ export class ExpenseCategoriesService {
 		const categories = await this.fetchJsonCategories({ organizationId });
 
 		categories.forEach((c) => {
-			const category = c;
-
-			if (category['id'] === expenseCategoryId) {
+			if (c.id === expenseCategoryId) {
 				this.applyChanges({
-					original: category,
+					original: c,
 					submitted: updateExpenseCategoryDto,
 				});
 			}
