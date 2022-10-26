@@ -59,7 +59,7 @@ test('files can be deleted', async ({ request, file }) => {
 		key: file,
 	});
 
-	console.log({ url });
+	// console.log({ url });
 	const res = await request.delete(url);
 
 	expect(res.status()).toBe(200);
@@ -71,7 +71,7 @@ test('files can be downloaded', async ({ request, file }) => {
 		key: file,
 	});
 
-	console.log({ url });
+	// console.log({ url });
 	const res = await request.fetch(url); // request.get fails here
 
 	expect.soft(res.status()).toBe(200);

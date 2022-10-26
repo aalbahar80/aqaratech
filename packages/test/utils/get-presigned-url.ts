@@ -1,5 +1,6 @@
 import { APIRequestContext, expect } from '@playwright/test';
 import { withQuery } from 'ufo';
+import { apiURL } from '../tests/api/fixtures/api-url';
 
 export const getPresignedUrl = async ({
 	request,
@@ -8,7 +9,7 @@ export const getPresignedUrl = async ({
 	request: APIRequestContext;
 	key: string;
 }) => {
-	const url = withQuery('/files/find-one', {
+	const url = withQuery(`${apiURL}/files/find-one`, {
 		key,
 	});
 
@@ -17,7 +18,6 @@ export const getPresignedUrl = async ({
 	expect.soft(response.status()).toBe(200);
 
 	const presignedUrl = await response.text();
-	console.log({ presignedUrl });
 
 	return presignedUrl;
 };
