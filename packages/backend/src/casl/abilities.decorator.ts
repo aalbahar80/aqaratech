@@ -4,7 +4,13 @@ import { Action } from 'src/casl/action.enum';
 
 export interface RequiredRule {
 	action: Action;
+
 	subject: SubjectName;
+
+	/**
+	 * If true, url params will be used to construct the subject object before checking abilities.
+	 * Useful for guarding POST requests.
+	 */
 	useParams?: boolean;
 }
 export const CHECK_ABILITY = 'check_ability';
