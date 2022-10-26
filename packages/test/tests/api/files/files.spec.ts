@@ -5,6 +5,12 @@ import { test } from '../api-fixtures';
 
 test.setTimeout(20000);
 
+test.describe.configure({ mode: 'parallel' });
+
+test.use({
+	baseURL: process.env.PUBLIC_API_URL,
+});
+
 test('handle noSuchBucket gracefully', async ({ request, portfolio }) => {
 	const url = withQuery('/files', {
 		relationKey: 'portfolio',

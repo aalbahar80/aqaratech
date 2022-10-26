@@ -64,6 +64,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			name: 'chromium',
 			testIgnore: [API_FILES],
+			grepInvert: [/file/],
 			use: {
 				...devices['Desktop Chrome'],
 				launchOptions: {
@@ -74,9 +75,14 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			name: 'api',
 			testMatch: [API_FILES],
+			grepInvert: [/file/],
 			use: {
 				baseURL: process.env.PUBLIC_API_URL,
 			},
+		},
+		{
+			name: 'files',
+			grep: [/file/],
 		},
 		{
 			name: 'idToken',
