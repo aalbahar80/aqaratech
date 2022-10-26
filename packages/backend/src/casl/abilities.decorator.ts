@@ -1,10 +1,11 @@
 import { SetMetadata } from '@nestjs/common';
-import { Subject } from 'src/casl/abilities/ability-types';
+import { SubjectName } from 'src/casl/abilities/ability-types';
 import { Action } from 'src/casl/action.enum';
 
 export interface RequiredRule {
 	action: Action;
-	subject: Subject;
+	subject: SubjectName;
+	useParams?: boolean;
 }
 export const CHECK_ABILITY = 'check_ability';
 

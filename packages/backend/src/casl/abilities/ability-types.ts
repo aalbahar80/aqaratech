@@ -50,3 +50,6 @@ export type Subject = Subjects<{
 type TAbilityBuilder = AbilityBuilder<TAppAbility>;
 export type TCan = TAbilityBuilder['can'];
 export type TCannot = TAbilityBuilder['cannot'];
+
+type StringsOnly<T> = T extends string ? T : never;
+export type SubjectName = StringsOnly<Subject>;

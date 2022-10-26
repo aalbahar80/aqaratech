@@ -1,3 +1,4 @@
+import { subject } from '@casl/ability';
 import {
 	CanActivate,
 	ExecutionContext,
@@ -9,6 +10,7 @@ import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { CHECK_ABILITY, RequiredRule } from 'src/casl/abilities.decorator';
+import { Subject, SubjectName } from 'src/casl/abilities/ability-types';
 import { IUser } from 'src/interfaces/user.interface';
 
 /**
@@ -34,9 +36,15 @@ export class AbilitiesGuard implements CanActivate {
 				context.getHandler(),
 			) ?? [];
 
-		const canProceed = rules.every((rule) =>
-			this.isAllowed(user.ability, rule, request.params),
-		);
+		const canProceed = rules.every((rule) => {
+			const subjectObj = this.contructSubject({
+				subjectName: rule.subject,
+				params: request.params,
+				rule,
+			});
+
+			return this.isAllowed({ ability: user.ability, rule, subjectObj });
+		});
 
 		if (canProceed) {
 			return true;
@@ -45,12 +53,16 @@ export class AbilitiesGuard implements CanActivate {
 		return false;
 	}
 
-	private isAllowed(
-		ability: IUser['ability'],
-		rule: RequiredRule,
-		params: Request['params'],
-	): boolean {
-		const result = ability.can(rule.action, rule.subject);
+	private isAllowed({
+		ability,
+		rule,
+		subjectObj,
+	}: {
+		ability: IUser['ability'];
+		rule: RequiredRule;
+		subjectObj: Subject;
+	}): boolean {
+		const result = ability.can(rule.action, subjectObj);
 
 		if (result) {
 			return result;
@@ -70,14 +82,29 @@ export class AbilitiesGuard implements CanActivate {
 					level: 'warn',
 					message: 'Rule failed',
 					action: rule.action,
-					subject: rule.subject,
+					subjectObj,
 				},
 				AbilitiesGuard.name,
 			);
 
 			return false;
 		}
+	}
 
-		// private contructSubject(subject: string, params: Request['params'])
+	private contructSubject({
+		subjectName,
+		params,
+		rule,
+	}: {
+		subjectName: RequiredRule['subject'];
+		params: Request['params'];
+		rule: RequiredRule;
+	}): Subject | SubjectName {
+		if (rule.useParams) {
+			// @ts-expect-error type error
+			return subject(subjectName, params);
+		} else {
+			return subjectName;
+		}
 	}
 }

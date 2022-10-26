@@ -53,7 +53,6 @@ export class AuthzGuard implements CanActivate {
 
 		const result = user.ability.can(
 			rule.action,
-			// @ts-expect-error until isSubject check
 			subject(rule.subject, {
 				...subjectObject,
 				organizationId: orgIdFromUrl,
