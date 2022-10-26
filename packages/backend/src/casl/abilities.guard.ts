@@ -41,6 +41,7 @@ export class AbilitiesGuard implements CanActivate {
 				subjectName: rule.subject,
 				params: request.params,
 				rule,
+				method: request.method,
 			});
 
 			return this.isAllowed({ ability: user.ability, rule, subjectObj });
@@ -95,11 +96,20 @@ export class AbilitiesGuard implements CanActivate {
 		subjectName,
 		params,
 		rule,
+		method,
 	}: {
 		subjectName: RequiredRule['subject'];
 		params: Request['params'];
 		rule: RequiredRule;
+		method: string;
 	}): Subject | SubjectName {
+		if (rule.useParams === undefined && method === 'POST') {
+			this.logger.warn(
+				'"useParams" is undefined in a POST request. To suppress this warning, explicilty set "useParams" to false',
+				AbilitiesGuard.name,
+			);
+		}
+
 		if (rule.useParams) {
 			// @ts-expect-error type error
 			return subject(subjectName, params);

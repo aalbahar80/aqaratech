@@ -6,7 +6,6 @@ import {
 	ParseFilePipe,
 	Post,
 	UploadedFile,
-	UseGuards,
 	UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -29,7 +28,6 @@ import {
 } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
-import { AuthzGuard } from 'src/casl/authz.guard';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import {
@@ -61,7 +59,6 @@ import { UnitsService } from 'src/units/units.service';
 @Controller('organizations/:organizationId')
 @ApiTags('organizations')
 @SwaggerAuth()
-@UseGuards(AuthzGuard)
 export class OrganizationsAdminController {
 	constructor(
 		private readonly tenantsService: TenantsService,
@@ -75,7 +72,7 @@ export class OrganizationsAdminController {
 	) {}
 
 	@Post('/tenants')
-	@CheckAbilities({ action: Action.Create, subject: 'Tenant' })
+	@CheckAbilities({ action: Action.Create, subject: 'Tenant', useParams: true })
 	createTenant(
 		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(tenantCreateSchema))
@@ -88,7 +85,11 @@ export class OrganizationsAdminController {
 	}
 
 	@Post('/portfolios')
-	@CheckAbilities({ action: Action.Create, subject: 'Portfolio' })
+	@CheckAbilities({
+		action: Action.Create,
+		subject: 'Portfolio',
+		useParams: true,
+	})
 	createPortfolio(
 		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(portfolioCreateSchema))
@@ -101,7 +102,11 @@ export class OrganizationsAdminController {
 	}
 
 	@Post('/properties')
-	@CheckAbilities({ action: Action.Create, subject: 'Property' })
+	@CheckAbilities({
+		action: Action.Create,
+		subject: 'Property',
+		useParams: true,
+	})
 	createProperty(
 		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(propertyCreateSchema))
@@ -114,7 +119,7 @@ export class OrganizationsAdminController {
 	}
 
 	@Post('/units')
-	@CheckAbilities({ action: Action.Create, subject: 'Unit' })
+	@CheckAbilities({ action: Action.Create, subject: 'Unit', useParams: true })
 	// TODO: review if PartialUnitDto is needed
 	@ApiCreatedResponse({ type: PartialUnitDto })
 	createUnit(
@@ -129,7 +134,7 @@ export class OrganizationsAdminController {
 	}
 
 	@Post('/leases')
-	@CheckAbilities({ action: Action.Create, subject: 'Lease' })
+	@CheckAbilities({ action: Action.Create, subject: 'Lease', useParams: true })
 	@ApiCreatedResponse({ type: PartialLeaseDto })
 	createLease(
 		@Param('organizationId') organizationId: string,
@@ -143,7 +148,11 @@ export class OrganizationsAdminController {
 	}
 
 	@Post('/leaseInvoices')
-	@CheckAbilities({ action: Action.Create, subject: 'LeaseInvoice' })
+	@CheckAbilities({
+		action: Action.Create,
+		subject: 'LeaseInvoice',
+		useParams: true,
+	})
 	@ApiCreatedResponse({ type: PartialLeaseInvoiceDto })
 	createLeaseInvoice(
 		@Param('organizationId') organizationId: string,
@@ -157,7 +166,11 @@ export class OrganizationsAdminController {
 	}
 
 	@Post('/lease/:id/leaseInvoices')
-	@CheckAbilities({ action: Action.Create, subject: 'LeaseInvoice' })
+	@CheckAbilities({
+		action: Action.Create,
+		subject: 'LeaseInvoice',
+		useParams: true,
+	})
 	@ApiBody({ type: CreateManyLeaseInvoicesDto, isArray: true })
 	@ApiCreatedResponse({ type: String })
 	createInvoices(
@@ -174,7 +187,11 @@ export class OrganizationsAdminController {
 	}
 
 	@Post('/expenses')
-	@CheckAbilities({ action: Action.Create, subject: 'Expense' })
+	@CheckAbilities({
+		action: Action.Create,
+		subject: 'Expense',
+		useParams: true,
+	})
 	@ApiCreatedResponse({ type: PartialExpenseDto })
 	createExpense(
 		@User() user: IUser,
@@ -190,7 +207,7 @@ export class OrganizationsAdminController {
 	}
 
 	@Post('/files')
-	@CheckAbilities({ action: Action.Create, subject: 'File' })
+	@CheckAbilities({ action: Action.Create, subject: 'File', useParams: true })
 	@ApiCreatedResponse({ type: String })
 	@UseInterceptors(FileInterceptor('file'))
 	@ApiConsumes('multipart/form-data')

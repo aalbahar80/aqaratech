@@ -1,12 +1,4 @@
-import {
-	Body,
-	Controller,
-	Get,
-	Param,
-	Patch,
-	Post,
-	UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import {
 	expenseCategoryCreateSchema,
@@ -15,7 +7,6 @@ import {
 } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
-import { AuthzGuard } from 'src/casl/authz.guard';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import {
@@ -37,10 +28,12 @@ export class ExpenseCategoriesController {
 	) {}
 
 	@Post()
-	@CheckAbilities({ action: Action.Create, subject: 'ExpenseCategory' })
-	@UseGuards(AuthzGuard)
+	@CheckAbilities({
+		action: Action.Create,
+		subject: 'ExpenseCategory',
+		useParams: true,
+	})
 	create(
-		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(expenseCategoryCreateSchema))
 		createExpenseCategoryDto: CreateExpenseCategoryDto,
@@ -48,7 +41,6 @@ export class ExpenseCategoriesController {
 		return this.expenseCategoriesService.create({
 			organizationId,
 			createExpenseCategoryDto,
-			user,
 		});
 	}
 

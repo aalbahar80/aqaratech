@@ -21,17 +21,10 @@ export class ExpenseCategoriesService {
 	async create({
 		organizationId,
 		createExpenseCategoryDto,
-		user,
 	}: {
 		organizationId: string;
 		createExpenseCategoryDto: CreateExpenseCategoryDto;
-		user: IUser;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Update,
-			subject(this.SubjectType, { id: organizationId }),
-		);
-
 		const categories = await this.fetchJsonCategories({ organizationId });
 
 		const id = generateId();
