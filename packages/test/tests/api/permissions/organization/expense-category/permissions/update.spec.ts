@@ -2,8 +2,8 @@ import { expect } from '@playwright/test';
 import { expenseCategoryFactory, sample } from '@self/seed';
 import { randomUUID } from 'crypto';
 import * as R from 'remeda';
-import { PostUrl } from '../../../../../utils/post-url';
-import { test } from '../../../api-fixtures';
+import { PostUrl } from '../../../../../../utils/post-url';
+import { test } from '../../../../api-fixtures';
 
 const updated = R.pick(expenseCategoryFactory.build(), [
 	'labelEn',

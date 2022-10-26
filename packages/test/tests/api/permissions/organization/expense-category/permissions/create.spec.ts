@@ -2,8 +2,8 @@
 import { expect } from '@playwright/test';
 import { expenseCategoryFactory, sample } from '@self/seed';
 import * as R from 'remeda';
-import { PostUrl } from '../../../../../utils/post-url';
-import { test } from '../../../api-fixtures';
+import { PostUrl } from '../../../../../../utils/post-url';
+import { test } from '../../../../api-fixtures';
 
 const expenseCategory = R.omit(expenseCategoryFactory.build(), ['id']);
 
