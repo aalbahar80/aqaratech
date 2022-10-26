@@ -12,8 +12,8 @@ dotenv({
 
 const API_FILES = '**/tests/api/**/*.spec.ts';
 const FILE_TESTS = [
-	'./tests/forms/file/**/*.spec.ts',
-	'./tests/api/files/**/*.spec.ts',
+	'**/tests/forms/file/**/*.spec.ts',
+	'**/tests/api/files/**/*.spec.ts',
 ];
 
 const config: PlaywrightTestConfig<TokenTestOptions> = {
