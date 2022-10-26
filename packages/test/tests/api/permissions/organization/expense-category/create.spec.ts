@@ -85,6 +85,7 @@ test('cannot create expenseCategory with invalid isGroup', async ({
 const invalidLabelEn = [null, undefined, 1, true, false, [], {}, ''];
 
 for (const [index, labelEn] of invalidLabelEn.entries()) {
+	// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 	test(`cannot create expenseCategory with invalid labelEn ${index}: ${labelEn}`, async ({
 		request,
 		org,
@@ -101,12 +102,40 @@ for (const [index, labelEn] of invalidLabelEn.entries()) {
 		await expect.soft(res).not.toBeOK();
 
 		expect(res.status()).toBe(400);
+
+		expect(await res.json()).toHaveProperty('fieldErrors.labelEn');
+	});
+}
+
+const invalidLabelAr = [1, true, false, [], {}];
+
+for (const [index, labelAr] of invalidLabelAr.entries()) {
+	// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+	test(`cannot create expenseCategory with invalid labelAr ${index}: ${labelAr}`, async ({
+		request,
+		org,
+	}) => {
+		const url = PostUrl(org.organization.id).expenseCategory;
+
+		const res = await request.post(url, {
+			data: {
+				...R.pick(expenseCategory, ['labelEn', 'isGroup']),
+				labelAr,
+			},
+		});
+
+		await expect.soft(res).not.toBeOK();
+
+		expect(res.status()).toBe(400);
+
+		expect(await res.json()).toHaveProperty('fieldErrors.labelAr');
 	});
 }
 
 const invalidIsGroup = [null, undefined, 1, [], {}, '', 'invalid'];
 
 for (const [index, isGroup] of invalidIsGroup.entries()) {
+	// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 	test(`cannot create expenseCategory with invalid isGroup ${index}: ${isGroup}`, async ({
 		request,
 		org,
@@ -123,5 +152,7 @@ for (const [index, isGroup] of invalidIsGroup.entries()) {
 		await expect.soft(res).not.toBeOK();
 
 		expect(res.status()).toBe(400);
+
+		expect(await res.json()).toHaveProperty('fieldErrors.isGroup');
 	});
 }
