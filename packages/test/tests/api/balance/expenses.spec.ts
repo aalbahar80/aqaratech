@@ -4,6 +4,12 @@ import * as R from 'remeda';
 import type { BalanceDto } from '../../../types/api';
 import { test } from '../api-fixtures';
 
+test.use({
+	expenseCategoryParams: {
+		isGroup: false,
+	},
+});
+
 test(`expense amount`, async ({ request, portfolio, expenseCategory }) => {
 	const expenses = expenseFactory.buildList(2, {
 		portfolioId: portfolio.id,
