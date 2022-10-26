@@ -883,19 +883,19 @@ export interface ExpenseCategoryDto {
 	 * @type {string}
 	 * @memberof ExpenseCategoryDto
 	 */
-	parentId: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseCategoryDto
-	 */
-	labelAr: string | null;
+	labelAr?: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof ExpenseCategoryDto
 	 */
 	description?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseCategoryDto
+	 */
+	parentId?: string | null;
 	/**
 	 *
 	 * @type {boolean}
@@ -1017,19 +1017,19 @@ export interface ExpenseDtoExpenseType {
 	 * @type {string}
 	 * @memberof ExpenseDtoExpenseType
 	 */
-	parentId: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseDtoExpenseType
-	 */
-	labelAr: string | null;
+	labelAr?: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof ExpenseDtoExpenseType
 	 */
 	description?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDtoExpenseType
+	 */
+	parentId?: string | null;
 	/**
 	 *
 	 * @type {boolean}

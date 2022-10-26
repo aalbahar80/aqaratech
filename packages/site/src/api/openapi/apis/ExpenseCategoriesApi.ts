@@ -56,7 +56,7 @@ export interface ExpenseCategoriesApiInterface {
 	createRaw(
 		requestParameters: ExpenseCategoriesApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>>;
+	): Promise<runtime.ApiResponse<ExpenseCategoryDto>>;
 
 	/**
 	 *
@@ -65,7 +65,7 @@ export interface ExpenseCategoriesApiInterface {
 	create(
 		requestParameters: ExpenseCategoriesApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string>;
+	): Promise<ExpenseCategoryDto>;
 
 	/**
 	 *
@@ -96,7 +96,7 @@ export interface ExpenseCategoriesApiInterface {
 	updateRaw(
 		requestParameters: ExpenseCategoriesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>>;
+	): Promise<runtime.ApiResponse<ExpenseCategoryDto>>;
 
 	/**
 	 *
@@ -105,7 +105,7 @@ export interface ExpenseCategoriesApiInterface {
 	update(
 		requestParameters: ExpenseCategoriesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string>;
+	): Promise<ExpenseCategoryDto>;
 
 	/**
 	 *
@@ -142,7 +142,7 @@ export class ExpenseCategoriesApi
 	async createRaw(
 		requestParameters: ExpenseCategoriesApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>> {
+	): Promise<runtime.ApiResponse<ExpenseCategoryDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -183,7 +183,7 @@ export class ExpenseCategoriesApi
 			initOverrides,
 		);
 
-		return new runtime.TextApiResponse(response) as any;
+		return new runtime.JSONApiResponse(response);
 	}
 
 	/**
@@ -193,7 +193,7 @@ export class ExpenseCategoriesApi
 	async create(
 		requestParameters: ExpenseCategoriesApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string> {
+	): Promise<ExpenseCategoryDto> {
 		const response = await this.createRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
@@ -255,7 +255,7 @@ export class ExpenseCategoriesApi
 	async updateRaw(
 		requestParameters: ExpenseCategoriesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>> {
+	): Promise<runtime.ApiResponse<ExpenseCategoryDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -308,7 +308,7 @@ export class ExpenseCategoriesApi
 			initOverrides,
 		);
 
-		return new runtime.TextApiResponse(response) as any;
+		return new runtime.JSONApiResponse(response);
 	}
 
 	/**
@@ -318,7 +318,7 @@ export class ExpenseCategoriesApi
 	async update(
 		requestParameters: ExpenseCategoriesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string> {
+	): Promise<ExpenseCategoryDto> {
 		const response = await this.updateRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
