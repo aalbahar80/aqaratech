@@ -33,8 +33,6 @@ export const invoiceFixtures: AllFixtures = {
 
 		const created = (await res.json()) as LeaseInvoiceDto;
 
-		console.log({ created }, 'invoice-fixture.ts ~ 30');
-
 		await use(created);
 	},
 };
