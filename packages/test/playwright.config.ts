@@ -11,6 +11,10 @@ dotenv({
 });
 
 const API_FILES = '**/tests/api/**/*.spec.ts';
+const FILE_TESTS = [
+	'./tests/forms/file/**/*.spec.ts',
+	'./tests/api/files/**/*.spec.ts',
+];
 
 const config: PlaywrightTestConfig<TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),
@@ -63,8 +67,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	projects: [
 		{
 			name: 'chromium',
-			testIgnore: [API_FILES],
-			grepInvert: [/file/],
+			testIgnore: [API_FILES, ...FILE_TESTS],
 			use: {
 				...devices['Desktop Chrome'],
 				launchOptions: {
@@ -75,14 +78,14 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			name: 'api',
 			testMatch: [API_FILES],
-			grepInvert: [/file/],
+			testIgnore: [...FILE_TESTS],
 			use: {
 				baseURL: process.env.PUBLIC_API_URL,
 			},
 		},
 		{
 			name: 'files',
-			grep: [/file/],
+			testMatch: [...FILE_TESTS],
 		},
 		{
 			name: 'idToken',
