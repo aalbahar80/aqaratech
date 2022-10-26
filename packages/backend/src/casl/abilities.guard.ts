@@ -34,33 +34,50 @@ export class AbilitiesGuard implements CanActivate {
 				context.getHandler(),
 			) ?? [];
 
-		/**
-		 * `isAllowed` here refers to the rule defined in the guard decorator.
-		 *
-		 */
-
-		const canProceed = rules.every((rule) => {
-			const isAllowed = user.ability.can(rule.action, rule.subject);
-
-			if (!isAllowed) {
-				this.logger.warn(
-					{
-						level: 'warn',
-						message: 'Rule failed',
-						action: rule.action,
-						subject: rule.subject,
-					},
-					AbilitiesGuard.name,
-				);
-			}
-
-			return isAllowed;
-		});
+		const canProceed = rules.every((rule) =>
+			this.isAllowed(user.ability, rule, request.params),
+		);
 
 		if (canProceed) {
 			return true;
 		}
 
 		return false;
+	}
+
+	private isAllowed(
+		ability: IUser['ability'],
+		rule: RequiredRule,
+		params: Request['params'],
+	): boolean {
+		const result = ability.can(rule.action, rule.subject);
+
+		if (result) {
+			return result;
+		} else {
+			// this.logger.debug!(
+			// 	{
+			// 		level: 'debug',
+			// 		message: 'Rule failed',
+			// 		action: rule.action,
+			// 		subject: rule.subject,
+			// 	},
+			// 	AbilitiesGuard.name,
+			// );
+
+			this.logger.warn(
+				{
+					level: 'warn',
+					message: 'Rule failed',
+					action: rule.action,
+					subject: rule.subject,
+				},
+				AbilitiesGuard.name,
+			);
+
+			return false;
+		}
+
+		// private contructSubject(subject: string, params: Request['params'])
 	}
 }
