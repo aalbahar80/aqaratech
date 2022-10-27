@@ -7,5 +7,6 @@ export * from './lease-invoice.schema';
 export * from './lease.schema';
 export * from './portfolio.schema';
 export * from './property.schema';
+export * from './role.schema';
 export * from './tenant.schema';
 export * from './unit.schema';

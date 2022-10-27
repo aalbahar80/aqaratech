@@ -1,4 +1,3 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
@@ -12,7 +11,7 @@ import { CreateRoleDto } from 'src/roles/dto/role.dto';
 import { UserDto } from 'src/users/dto/user.dto';
 import { RolesService } from './roles.service';
 
-@Controller('roles')
+@Controller('organizations/:organizationId/roles')
 @ApiTags('roles')
 export class RolesController {
 	constructor(
@@ -22,16 +21,12 @@ export class RolesController {
 
 	@Post()
 	// return email string?
-	@CheckAbilities({ action: Action.Create, subject: 'Role' })
+	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
 	@ApiCreatedResponse({ type: UserDto })
 	create(
 		@User() user: IUser,
 		@Body(new RoleValidationPipe()) createRoleDto: CreateRoleDto,
 	) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject('Role', createRoleDto),
-		);
 		return this.rolesService.create({ createRoleDto, user });
 	}
 

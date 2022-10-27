@@ -37,6 +37,7 @@ export {
 	portfolioUpdateSchema,
 	propertyCreateSchema,
 	propertyUpdateSchema,
+	roleCreateSchema,
 	tenantCreateSchema,
 	tenantUpdateSchema,
 	unitCreateSchema,
@@ -50,4 +51,5 @@ export type {
 	LeaseInvoiceCreateSchema,
 	LeaseInvoiceUpdateSchema,
 	LeaseUpdateSchema,
+	RoleCreateSchema,
 } from './schemas';

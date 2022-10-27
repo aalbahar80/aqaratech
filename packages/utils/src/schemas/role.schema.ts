@@ -1,14 +1,14 @@
-import { isID } from '$lib/models/schemas/id.schema';
 import { z } from 'zod';
+import { isID } from './utils/id.schema';
 
 export const base = z.object({
-	organizationId: isID.optional(),
-	portfolioId: isID.optional(),
-	tenantId: isID.optional(),
+	organizationId: isID.nullish(),
+	portfolioId: isID.nullish(),
+	tenantId: isID.nullish(),
 	email: z.string().email(),
 });
 
-export const createSchema = base.superRefine((val, ctx) => {
+export const roleCreateSchema = base.superRefine((val, ctx) => {
 	if (
 		+Boolean(val.organizationId) +
 			+Boolean(val.portfolioId) +
@@ -32,3 +32,5 @@ export const createSchema = base.superRefine((val, ctx) => {
 		});
 	}
 });
+
+export type RoleCreateSchema = z.infer<typeof roleCreateSchema>;
