@@ -17,7 +17,15 @@ export const includeHttp = (include: boolean) =>
 		}
 	});
 
-export const httpFormat = format.printf((info) => {
+export const devConsoleFormat = format.printf((info) => {
+	if (info.level === 'http') {
+		return formatHttp(info);
+	} else {
+		return `[${info.label}] ${info.timestamp} [${info.level}] ${info.message}`;
+	}
+});
+
+const formatHttp = (info) => {
 	const message = JSON.parse(info.message);
 
 	return `[${info.label}] ${info.timestamp} [${message.httpType}]  ${
@@ -25,4 +33,4 @@ export const httpFormat = format.printf((info) => {
 	} ${message.pathname} ${message.status ?? ''} ${message.duration ?? ''}${
 		message.duration ? 'ms' : ''
 	}`;
-});
+};

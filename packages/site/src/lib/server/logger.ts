@@ -1,15 +1,10 @@
 import { environment } from '$aqenvironment';
-import {
-	httpFormat,
-	httpOnlyFilter,
-	includeHttp,
-} from '$lib/server/utils/http-log-format';
+import { devConsoleFormat } from '$lib/server/utils/http-log-format';
 import { logtail } from '$lib/server/utils/logtail';
 import { LogtailTransport } from '@logtail/winston';
 import { createLogger, format, transports } from 'winston';
 
-const { combine, colorize, json, timestamp, label, splat, prettyPrint } =
-	format;
+const { combine, colorize, timestamp, label } = format;
 
 export const logger = createLogger({
 	level: environment.PUBLIC_AQ_DEBUG_LEVEL || 'info',
@@ -18,16 +13,7 @@ export const logger = createLogger({
 		// TODO: disable in production
 		new transports.Console({
 			level: 'http',
-			format: combine(httpOnlyFilter(), httpFormat, colorize({ all: true })),
-		}),
-		new transports.Console({
-			format: combine(
-				includeHttp(false)(),
-				json(),
-				prettyPrint(),
-				splat(),
-				colorize({ all: true }),
-			),
+			format: combine(devConsoleFormat, colorize({ all: true })),
 		}),
 		...(logtail ? [new LogtailTransport(logtail)] : []),
 	],
