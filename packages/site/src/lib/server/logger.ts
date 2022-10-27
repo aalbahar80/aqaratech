@@ -1,10 +1,10 @@
 import { environment } from '$aqenvironment';
-import { devConsoleFormat } from '$lib/server/utils/http-log-format';
+import { nestLikeConsoleFormat } from '$lib/server/utils/http-log-format';
 import { logtail } from '$lib/server/utils/logtail';
 import { LogtailTransport } from '@logtail/winston';
 import { createLogger, format, transports } from 'winston';
 
-const { combine, colorize, timestamp, label } = format;
+const { combine, timestamp, label } = format;
 
 export const logger = createLogger({
 	level: environment.PUBLIC_AQ_DEBUG_LEVEL || 'info',
@@ -13,7 +13,7 @@ export const logger = createLogger({
 		// TODO: disable in production
 		new transports.Console({
 			level: 'http',
-			format: combine(devConsoleFormat, colorize({ all: true })),
+			format: nestLikeConsoleFormat('site'),
 		}),
 		...(logtail ? [new LogtailTransport(logtail)] : []),
 	],
