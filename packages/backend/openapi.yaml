@@ -2953,25 +2953,9 @@ components:
     CreateRoleDto:
       type: object
       properties:
-        roleType:
-          $ref: '#/components/schemas/RoleTypeEnum'
-        organizationId:
-          type: string
         email:
           type: string
-        portfolioId:
-          type: string
-          nullable: true
-        tenantId:
-          type: string
-          nullable: true
-        isAccepted:
-          type: boolean
-        isDefault:
-          type: boolean
       required:
-        - roleType
-        - organizationId
         - email
     UserDto:
       type: object

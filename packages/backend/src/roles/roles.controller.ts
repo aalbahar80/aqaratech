@@ -32,14 +32,14 @@ export class RolesController {
 
 	@CheckAbilities({ action: Action.Delete, subject: 'Role' })
 	@ApiOkResponse({ type: String })
-	@Delete(':id')
-	remove(@Param('id') id: string): Promise<string> {
+	@Delete(':roleId')
+	remove(@Param('roleId') id: string): Promise<string> {
 		return this.rolesService.remove(id);
 	}
 
 	@CheckAbilities({ action: Action.Manage, subject: 'Role' })
-	@Post(':id/send-invite')
-	sendInvite(@User() user: IUser, @Param('id') id: string) {
+	@Post(':roleId/send-invite')
+	sendInvite(@User() user: IUser, @Param('roleId') id: string) {
 		this.eventEmitter.emit(
 			'role.created',
 			new RoleCreatedEvent(id, user.email),

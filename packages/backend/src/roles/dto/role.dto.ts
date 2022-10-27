@@ -1,10 +1,6 @@
-import {
-	ApiProperty,
-	IntersectionType,
-	OmitType,
-	PartialType,
-} from '@nestjs/swagger';
-import { Role, RoleType } from '@prisma/client';
+import { ApiProperty, IntersectionType, OmitType } from '@nestjs/swagger';
+import { RoleType } from '@prisma/client';
+import { RoleCreateSchema } from '@self/utils';
 import { IsBoolean, IsEmail, IsEnum } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { IsID } from 'src/decorators/field.decorators';
@@ -45,8 +41,6 @@ export class RoleDto extends IntersectionType(
 	email?: string;
 }
 
-export class CreateRoleDto
-	extends IntersectionType(RoleRequiredDto, PartialType(RoleOptionalDto))
-	implements Partial<Role> {}
-
-// export class UpdateRoleDto extends PartialType(CreateRoleDto) {}
+export class CreateRoleDto implements RoleCreateSchema {
+	email: string;
+}
