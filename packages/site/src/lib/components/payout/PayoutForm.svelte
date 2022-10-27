@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { createApi } from '$api';
+	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
 	import type { PredefinedPayout } from '$lib/models/interfaces/predefined.interface';
@@ -8,7 +8,7 @@
 		OrganizationIdField,
 		PortfolioIdField,
 	} from '$lib/utils/form/common-fields';
-	import { createSchema } from '$models/schemas/payout.schema';
+	import { payoutCreateSchema } from '@self/utils';
 
 	export let predefined: PredefinedPayout;
 
@@ -32,7 +32,7 @@
 </script>
 
 <Form
-	schema={createSchema}
+	schema={payoutCreateSchema}
 	entity="payout"
 	formType="create"
 	{basicFields}

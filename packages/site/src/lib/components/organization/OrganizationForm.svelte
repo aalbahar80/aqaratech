@@ -1,13 +1,13 @@
 <script lang="ts">
+	import { createApi } from '$api';
+	import type { OrganizationDto } from '$api/openapi';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { createApi } from '$api';
 	import Form from '$lib/components/form/Form.svelte';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { Field } from '$lib/models/classes/Field.class';
 	import { addSuccessToast } from '$lib/stores/toast';
-	import { schema } from '$models/schemas/organization.schema';
-	import type { OrganizationDto } from '$api/openapi';
+	import { organizationSchema } from '@self/utils';
 
 	type TOrganizationDto = $$Generic<
 		// eslint-disable-next-line no-undef
@@ -48,7 +48,7 @@
 
 {#if formType === 'update'}
 	<Form
-		{schema}
+		schema={organizationSchema}
 		entity="organization"
 		{formType}
 		{basicFields}
@@ -65,7 +65,7 @@
 	/>
 {:else}
 	<Form
-		{schema}
+		schema={organizationSchema}
 		entity="organization"
 		{formType}
 		{basicFields}

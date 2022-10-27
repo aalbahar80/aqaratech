@@ -33,6 +33,8 @@ export {
 	leaseInvoiceUpdateSchema,
 	leaseInvoiceWarnSchema,
 	leaseUpdateSchema,
+	organizationSchema,
+	payoutCreateSchema,
 	portfolioCreateSchema,
 	portfolioUpdateSchema,
 	propertyCreateSchema,

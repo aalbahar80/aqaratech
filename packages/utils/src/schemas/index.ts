@@ -5,6 +5,8 @@ export * from './file.schema';
 export * from './lease-invoice-warn.schema';
 export * from './lease-invoice.schema';
 export * from './lease.schema';
+export * from './organization.schema';
+export * from './payout.schema';
 export * from './portfolio.schema';
 export * from './property.schema';
 export * from './role.schema';
