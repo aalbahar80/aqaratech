@@ -6,7 +6,11 @@ import { plainToInstance } from 'class-transformer';
 import { Action } from 'src/casl/action.enum';
 import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
-import { OrganizationDto } from 'src/organizations/dto/organization.dto';
+import {
+	CreateOrganizationDto,
+	OrganizationDto,
+	UpdateOrganizationDto,
+} from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
 
@@ -18,20 +22,20 @@ export class OrganizationsService {
 	private readonly logger = new Logger(OrganizationsService.name);
 
 	async create({
-		organizationDto,
+		createOrganizationDto,
 		user,
 	}: {
-		organizationDto: OrganizationDto;
+		createOrganizationDto: CreateOrganizationDto;
 		user: AuthenticatedUser;
 	}) {
 		this.logger.debug(
-			`${user.email} creating organization ${organizationDto.fullName}`,
+			`${user.email} creating organization ${createOrganizationDto.fullName}`,
 		);
 
 		const organization = await this.prisma.organization.create({
 			data: {
-				fullName: organizationDto.fullName,
-				label: organizationDto.label,
+				fullName: createOrganizationDto.fullName,
+				label: createOrganizationDto.label,
 				roles: {
 					create: [
 						{
@@ -56,7 +60,9 @@ export class OrganizationsService {
 		});
 
 		return {
-			organization: plainToInstance(OrganizationDto, organization),
+			organization: plainToInstance(OrganizationDto, organization, {
+				excludeExtraneousValues: true,
+			}),
 			roleId: organization.roles[0].id,
 		};
 	}
@@ -70,31 +76,36 @@ export class OrganizationsService {
 		const data = await this.prisma.organization.findUniqueOrThrow({
 			where: { id },
 		});
-		return plainToInstance(OrganizationDto, data);
+		return plainToInstance(OrganizationDto, data, {
+			excludeExtraneousValues: true,
+		});
 	}
 
 	async update({
 		id,
-		organizationDto,
+		updateOrganizationDto,
 		user,
 	}: {
 		id: string;
-		organizationDto: OrganizationDto;
+		updateOrganizationDto: UpdateOrganizationDto;
 		user: IUser;
 	}) {
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Update,
-			subject(this.SubjectType, { ...organizationDto, id }),
+			subject(this.SubjectType, { ...updateOrganizationDto, id }),
 		);
 
 		const updated = await this.prisma.organization.update({
 			where: { id },
 			data: {
-				fullName: organizationDto.fullName,
-				label: organizationDto.label,
+				fullName: updateOrganizationDto.fullName,
+				label: updateOrganizationDto.label,
 			},
 		});
-		return updated.id;
+
+		return plainToInstance(OrganizationDto, updated, {
+			excludeExtraneousValues: true,
+		});
 	}
 
 	async findAll() {
@@ -103,7 +114,12 @@ export class OrganizationsService {
 			this.prisma.organization.count(),
 		]);
 
-		return { total, results: plainToInstance(OrganizationDto, results) };
+		return {
+			total,
+			results: plainToInstance(OrganizationDto, results, {
+				excludeExtraneousValues: true,
+			}),
+		};
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
@@ -126,6 +142,8 @@ export class OrganizationsService {
 		const deleted = await this.prisma.organization.delete({ where: { id } });
 		this.logger.log(`Deleted organization ${id}`);
 
-		return plainToInstance(OrganizationDto, deleted);
+		return plainToInstance(OrganizationDto, deleted, {
+			excludeExtraneousValues: true,
+		});
 	}
 }

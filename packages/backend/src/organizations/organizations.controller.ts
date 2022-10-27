@@ -29,8 +29,10 @@ import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
 import {
+	CreateOrganizationDto,
 	OrganizationCreatedDto,
 	OrganizationDto,
+	UpdateOrganizationDto,
 } from './dto/organization.dto';
 import { OrganizationsService } from './organizations.service';
 
@@ -54,11 +56,11 @@ export class OrganizationsController {
 	create(
 		@UserBasic() user: AuthenticatedUser,
 		@Body(new ZodValidationPipe(organizationSchema))
-		organizationDto: OrganizationDto,
+		createOrganizationDto: CreateOrganizationDto,
 	): Promise<OrganizationCreatedDto> {
 		// also returns the roleId for the created organization admin
 		return this.organizationsService.create({
-			organizationDto,
+			createOrganizationDto,
 			user,
 		});
 	}
@@ -81,7 +83,7 @@ export class OrganizationsController {
 		return this.organizationsService.findOne({ id, user });
 	}
 
-	@Patch(':organizationId')
+	@Patch(':id')
 	@CheckAbilities({
 		action: Action.Update,
 		subject: SubjectType,
@@ -89,13 +91,13 @@ export class OrganizationsController {
 	})
 	update(
 		@User() user: IUser,
-		@Param('organizationId') id: string,
+		@Param('id') id: string,
 		@Body(new ZodValidationPipe(organizationSchema))
-		organizationDto: OrganizationDto,
+		updateOrganizationDto: UpdateOrganizationDto,
 	) {
 		return this.organizationsService.update({
 			id,
-			organizationDto,
+			updateOrganizationDto,
 			user,
 		});
 	}
