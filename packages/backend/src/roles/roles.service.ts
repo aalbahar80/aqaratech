@@ -73,7 +73,14 @@ export class RolesService {
 			new RoleCreatedEvent(role.id, user.email),
 		);
 
-		return createRoleDto.email;
+		return {
+			id: role.id,
+			email: createRoleDto.email,
+			roleType: role.roleType,
+			organizationId: role.organizationId,
+			portfolioId: role.portfolioId,
+			tenantId: role.tenantId,
+		};
 	}
 
 	@OnEvent('role.created')

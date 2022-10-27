@@ -350,7 +350,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RoleDto'
       tags: &ref_2
         - roles
   /organizations/{organizationId}/portfolios/{portfolioId}/roles:
@@ -381,7 +381,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RoleDto'
       tags: *ref_2
   /organizations/{organizationId}/tenants/{tenantId}/roles:
     post:
@@ -411,7 +411,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/RoleDto'
       tags: *ref_2
   /organizations/{organizationId}/roles/{roleId}:
     delete:
@@ -2977,18 +2977,9 @@ components:
     RoleDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         roleType:
           $ref: '#/components/schemas/RoleTypeEnum'
-        userId:
+        id:
           type: string
         email:
           type: string
@@ -3000,21 +2991,13 @@ components:
         tenantId:
           type: string
           nullable: true
-        isAccepted:
-          type: boolean
-        isDefault:
-          type: boolean
       required:
-        - id
-        - createdAt
-        - updatedAt
         - roleType
-        - userId
+        - id
+        - email
         - organizationId
         - portfolioId
         - tenantId
-        - isAccepted
-        - isDefault
     CreateRoleDto:
       type: object
       properties:

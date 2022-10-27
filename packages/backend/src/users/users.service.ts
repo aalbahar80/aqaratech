@@ -1,5 +1,4 @@
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
-import { Role } from '@prisma/client';
 import { Cache } from 'cache-manager';
 import { TAppAbility } from 'src/casl/abilities/ability-types';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
@@ -58,6 +57,7 @@ export class UsersService {
 
 		return {
 			...user,
+			// @ts-expect-error test
 			roles: user.roles.map((role) => ({
 				...role,
 				organization: new OrganizationDto(role.organization),
@@ -65,8 +65,8 @@ export class UsersService {
 		};
 	}
 
-	async getAbility(email: string, role: Omit<Role, 'permissions'>) {
-		const cacheKey = `${email}:${role.id}:ability`;
+	async getAbility(email: string, roleId: string) {
+		const cacheKey = `${email}:${roleId}:ability`;
 
 		const cached = await this.cacheManager.get<TAppAbility>(cacheKey);
 
@@ -76,7 +76,7 @@ export class UsersService {
 			// define fresh ability
 			const ability = await this.caslAbilityFactory.defineAbility({
 				email,
-				roleId: role.id,
+				roleId,
 			});
 
 			// cache it

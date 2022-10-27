@@ -8,7 +8,7 @@ import { User } from 'src/decorators/user.decorator';
 import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
-import { CreateRoleDto } from 'src/roles/dto/role.dto';
+import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from './roles.service';
 
 @Controller('organizations/:organizationId')
@@ -26,7 +26,7 @@ export class RolesController {
 		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(roleCreateSchema))
 		createRoleDto: CreateRoleDto,
-	) {
+	): Promise<RoleDto> {
 		return this.rolesService.create({
 			roleType: 'ORGADMIN',
 			organizationId,
@@ -45,7 +45,7 @@ export class RolesController {
 		@Param('portfolioId') portfolioId: string,
 		@Body(new ZodValidationPipe(roleCreateSchema))
 		createRoleDto: CreateRoleDto,
-	) {
+	): Promise<RoleDto> {
 		return this.rolesService.create({
 			roleType: 'PORTFOLIO',
 			organizationId,
@@ -64,7 +64,7 @@ export class RolesController {
 		@Param('tenantId') tenantId: string,
 		@Body(new ZodValidationPipe(roleCreateSchema))
 		createRoleDto: CreateRoleDto,
-	) {
+	): Promise<RoleDto> {
 		return this.rolesService.create({
 			roleType: 'TENANT',
 			organizationId,

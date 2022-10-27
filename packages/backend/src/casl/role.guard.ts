@@ -103,7 +103,7 @@ export class RoleGuard implements CanActivate {
 			return false;
 		}
 
-		const ability = await this.usersService.getAbility(user.email, role);
+		const ability = await this.usersService.getAbility(user.email, role.id);
 
 		// attach ability & roleId to request
 		// TODO spreading here works ok for nested object?
