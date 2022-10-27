@@ -369,6 +369,7 @@ importers:
 
   packages/test:
     specifiers:
+      '@faker-js/faker': 7.6.0
       '@playwright/test': 1.27.1
       '@self/seed': workspace:1.2.0
       '@self/utils': workspace:2.1.0
@@ -382,6 +383,7 @@ importers:
       typescript: 4.9.1-beta
       ufo: 0.8.6
     devDependencies:
+      '@faker-js/faker': 7.6.0
       '@playwright/test': 1.27.1
       '@self/seed': link:../seed
       '@self/utils': link:../utils
@@ -2368,7 +2370,6 @@ packages:
   /@faker-js/faker/7.6.0:
     resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
-    dev: false
 
   /@felte/common/1.1.3:
     resolution: {integrity: sha512-47OJYohloUT9FOgXRxEIaSkaveDB70/eRv3+6MfYDZbc44XfojHJLiUOz3uSWRwfl8f2wonhkhIPCYkzIUltTg==}

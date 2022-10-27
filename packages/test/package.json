@@ -14,6 +14,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"@faker-js/faker": "7.6.0",
 		"@playwright/test": "1.27.1",
 		"@self/seed": "workspace:1.2.0",
 		"@self/utils": "workspace:2.1.0",
