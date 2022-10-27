@@ -9,7 +9,7 @@ import { IUser } from 'src/interfaces/user.interface';
 import { CreateRoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from './roles.service';
 
-@Controller('organizations/:organizationId/roles')
+@Controller('organizations/:organizationId')
 @ApiTags('roles')
 export class RolesController {
 	constructor(
@@ -17,9 +17,9 @@ export class RolesController {
 		private readonly eventEmitter: EventEmitter2,
 	) {}
 
-	@Post()
+	@Post('roles')
 	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
-	create(
+	createOrgAdminRole(
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
 		@Body() createRoleDto: CreateRoleDto,
@@ -36,13 +36,13 @@ export class RolesController {
 
 	@CheckAbilities({ action: Action.Delete, subject: 'Role' })
 	@ApiOkResponse({ type: String })
-	@Delete(':roleId')
+	@Delete('roles/:roleId')
 	remove(@Param('roleId') id: string): Promise<string> {
 		return this.rolesService.remove(id);
 	}
 
 	@CheckAbilities({ action: Action.Manage, subject: 'Role' })
-	@Post(':roleId/send-invite')
+	@Post('roles/:roleId/send-invite')
 	sendInvite(@User() user: IUser, @Param('roleId') id: string) {
 		this.eventEmitter.emit(
 			'role.created',

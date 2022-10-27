@@ -329,7 +329,7 @@ paths:
       security: *ref_1
   /organizations/{organizationId}/roles:
     post:
-      operationId: RolesController_create
+      operationId: RolesController_createOrgAdminRole
       summary: ''
       description: ''
       parameters:
