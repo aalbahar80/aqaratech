@@ -39,7 +39,7 @@ export const getUser = async ({
 
 	const profile = await getProfile(event);
 
-	logger.log('Got profile', {
+	logger.info('Got profile', {
 		message: JSON.stringify({
 			id: profile?.id,
 			email: profile?.email,
