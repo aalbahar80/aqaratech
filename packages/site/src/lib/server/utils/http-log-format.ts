@@ -105,14 +105,13 @@ export const nestLikeConsoleFormat = (
 		const yellow = options.colors ? clc.yellow : (text: string): string => text;
 
 		// const stringifiedMeta = safeStringify(meta);
-		const stringifiedMeta = JSON.stringify(meta, null, 2);
-		const formattedMeta = options.prettyPrint
-			? inspect(JSON.parse(stringifiedMeta), {
-					colors: options.colors,
-					depth: null,
-			  })
-			: stringifiedMeta;
-
+		// const stringifiedMeta = JSON.stringify(meta, null, 2);
+		// const formattedMeta = options.prettyPrint
+		// 	? inspect(JSON.parse(stringifiedMeta), {
+		// 			colors: options.colors,
+		// 			depth: null,
+		// 	  })
+		// 	: stringifiedMeta;
 		return (
 			`${color(`[${appName}]`)} ` +
 			`${yellow(level.charAt(0).toUpperCase() + level.slice(1))}\t` +
@@ -120,8 +119,8 @@ export const nestLikeConsoleFormat = (
 			('undefined' !== typeof context
 				? `${yellow('[' + context + ']')} `
 				: '') +
-			`${color(myFormat(message))} - ` +
-			`${formattedMeta}` +
+			`${color(myFormat(message))}` +
+			// ` - ${formattedMeta}` +
 			('undefined' !== typeof ms ? ` ${yellow(ms)}` : '')
 		);
 	});
