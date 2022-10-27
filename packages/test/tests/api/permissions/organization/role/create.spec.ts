@@ -5,7 +5,7 @@ import { randomUUID } from 'crypto';
 import { PostUrlRole } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
 
-const roleTypes = ['orgadmin', 'portfolio', 'tenant'] as const;
+const roleTypes = ['ORGADMIN', 'PORTFOLIO', 'TENANT'] as const;
 
 for (const roleType of roleTypes) {
 	test(`can create role in own org: ${roleType}`, async ({

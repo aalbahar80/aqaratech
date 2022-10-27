@@ -660,46 +660,10 @@ export interface CreatePropertyDto {
 export interface CreateRoleDto {
 	/**
 	 *
-	 * @type {RoleTypeEnum}
-	 * @memberof CreateRoleDto
-	 */
-	roleType: RoleTypeEnum;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateRoleDto
-	 */
-	organizationId: string;
-	/**
-	 *
 	 * @type {string}
 	 * @memberof CreateRoleDto
 	 */
 	email: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateRoleDto
-	 */
-	portfolioId?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateRoleDto
-	 */
-	tenantId?: string | null;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof CreateRoleDto
-	 */
-	isAccepted?: boolean;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof CreateRoleDto
-	 */
-	isDefault?: boolean;
 }
 /**
  *
@@ -2429,24 +2393,6 @@ export interface PropertyDto {
 export interface RoleDto {
 	/**
 	 *
-	 * @type {string}
-	 * @memberof RoleDto
-	 */
-	readonly id: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof RoleDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof RoleDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
 	 * @type {RoleTypeEnum}
 	 * @memberof RoleDto
 	 */
@@ -2456,13 +2402,13 @@ export interface RoleDto {
 	 * @type {string}
 	 * @memberof RoleDto
 	 */
-	userId: string;
+	id: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof RoleDto
 	 */
-	email?: string;
+	email: string;
 	/**
 	 *
 	 * @type {string}
@@ -2481,18 +2427,6 @@ export interface RoleDto {
 	 * @memberof RoleDto
 	 */
 	tenantId: string | null;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof RoleDto
-	 */
-	isAccepted: boolean;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof RoleDto
-	 */
-	isDefault: boolean;
 }
 /**
  *
@@ -3282,64 +3216,9 @@ export interface UpdateUnitDto {
 /**
  *
  * @export
- * @interface UserDto
- */
-export interface UserDto {
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UserDto
-	 */
-	readonly id: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UserDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UserDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UserDto
-	 */
-	fullName?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UserDto
-	 */
-	email: string;
-}
-/**
- *
- * @export
  * @interface ValidatedRoleDto
  */
 export interface ValidatedRoleDto {
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ValidatedRoleDto
-	 */
-	readonly id: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ValidatedRoleDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ValidatedRoleDto
-	 */
-	readonly updatedAt: string;
 	/**
 	 *
 	 * @type {RoleTypeEnum}
@@ -3351,13 +3230,13 @@ export interface ValidatedRoleDto {
 	 * @type {string}
 	 * @memberof ValidatedRoleDto
 	 */
-	userId: string;
+	id: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof ValidatedRoleDto
 	 */
-	email?: string;
+	email: string;
 	/**
 	 *
 	 * @type {string}
@@ -3376,18 +3255,6 @@ export interface ValidatedRoleDto {
 	 * @memberof ValidatedRoleDto
 	 */
 	tenantId: string | null;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof ValidatedRoleDto
-	 */
-	isAccepted: boolean;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof ValidatedRoleDto
-	 */
-	isDefault: boolean;
 	/**
 	 *
 	 * @type {ValidatedRoleDtoAllOfOrganization}

@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import type { Role } from '../utils/date-or-string';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
+import type { Role } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
 
 export const roleFactory = Factory.Sync.makeFactoryWithRequired<
@@ -21,3 +21,7 @@ export const roleFactory = Factory.Sync.makeFactoryWithRequired<
 	permissions: Factory.each(() => null),
 	email: Factory.each(() => faker.internet.email()),
 });
+
+export type RoleFactoryParams = Partial<
+	Parameters<typeof roleFactory.build>[0]
+>;

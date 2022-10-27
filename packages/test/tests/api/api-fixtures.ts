@@ -21,6 +21,7 @@ import type {
 import { apiURL } from './fixtures/api-url';
 import { expenseCategoryFixtures } from './fixtures/expense-category.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
+import { roleFixtures } from './fixtures/role.fixture';
 import type {
 	TestFixtures,
 	TestOptions,
@@ -244,4 +245,5 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 	...invoiceFixtures,
 	...expenseCategoryFixtures,
+	...roleFixtures,
 });

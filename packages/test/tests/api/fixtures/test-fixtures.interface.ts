@@ -2,6 +2,7 @@ import type { Fixtures, PlaywrightTestArgs } from '@playwright/test';
 import type {
 	ExpenseCategoryFactoryParams,
 	LeaseInvoiceFactoryParams,
+	RoleFactoryParams,
 } from '@self/seed';
 import type {
 	ExpenseCategoryDto,
@@ -11,6 +12,7 @@ import type {
 	OrganizationCreatedDto,
 	PortfolioDto,
 	PropertyDto,
+	RoleDto,
 	TenantDto,
 	UnitDto,
 } from '../../../types/api';
@@ -26,12 +28,14 @@ export interface TestFixtures {
 	expense: ExpenseDto;
 	file: string;
 	expenseCategory: ExpenseCategoryDto;
+	role: RoleDto;
 }
 
 export interface TestOptions {
 	withRoleId: string | undefined;
 	invoiceParams: LeaseInvoiceFactoryParams | undefined;
 	expenseCategoryParams: ExpenseCategoryFactoryParams | undefined;
+	roleParams: RoleFactoryParams | undefined;
 }
 
 export type AllFixtures = Fixtures<

@@ -20,7 +20,7 @@ export const PostUrlRole = ({
 	portfolioId: string;
 	tenantId: string;
 }) => ({
-	orgadmin: `/organizations/${organizationId}/roles`,
-	portfolio: `/organizations/${organizationId}/portfolios/${portfolioId}/roles`,
-	tenant: `/organizations/${organizationId}/tenants/${tenantId}/roles`,
+	ORGADMIN: `/organizations/${organizationId}/roles`,
+	PORTFOLIO: `/organizations/${organizationId}/portfolios/${portfolioId}/roles`,
+	TENANT: `/organizations/${organizationId}/tenants/${tenantId}/roles`,
 });

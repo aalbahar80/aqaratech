@@ -13,18 +13,31 @@
  */
 
 import * as runtime from '../runtime';
-import type { CreateRoleDto, UserDto } from '../models';
+import type { CreateRoleDto, RoleDto } from '../models';
 
-export interface RolesApiCreateRequest {
+export interface RolesApiCreateOrgAdminRoleRequest {
+	organizationId: string;
+	createRoleDto: CreateRoleDto;
+}
+
+export interface RolesApiCreatePortfolioRoleRequest {
+	organizationId: string;
+	portfolioId: string;
+	createRoleDto: CreateRoleDto;
+}
+
+export interface RolesApiCreateTenantRoleRequest {
+	organizationId: string;
+	tenantId: string;
 	createRoleDto: CreateRoleDto;
 }
 
 export interface RolesApiRemoveRequest {
-	id: string;
+	roleId: string;
 }
 
 export interface RolesApiSendInviteRequest {
-	id: string;
+	roleId: string;
 }
 
 /**
@@ -40,19 +53,59 @@ export interface RolesApiInterface {
 	 * @throws {RequiredError}
 	 * @memberof RolesApiInterface
 	 */
-	createRaw(
-		requestParameters: RolesApiCreateRequest,
+	createOrgAdminRoleRaw(
+		requestParameters: RolesApiCreateOrgAdminRoleRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<UserDto>>;
+	): Promise<runtime.ApiResponse<RoleDto>>;
 
 	/**
 	 *
 	 *
 	 */
-	create(
-		requestParameters: RolesApiCreateRequest,
+	createOrgAdminRole(
+		requestParameters: RolesApiCreateOrgAdminRoleRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<UserDto>;
+	): Promise<RoleDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof RolesApiInterface
+	 */
+	createPortfolioRoleRaw(
+		requestParameters: RolesApiCreatePortfolioRoleRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<RoleDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createPortfolioRole(
+		requestParameters: RolesApiCreatePortfolioRoleRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<RoleDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof RolesApiInterface
+	 */
+	createTenantRoleRaw(
+		requestParameters: RolesApiCreateTenantRoleRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<RoleDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createTenantRole(
+		requestParameters: RolesApiCreateTenantRoleRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<RoleDto>;
 
 	/**
 	 *
@@ -103,17 +156,27 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 	 *
 	 *
 	 */
-	async createRaw(
-		requestParameters: RolesApiCreateRequest,
+	async createOrgAdminRoleRaw(
+		requestParameters: RolesApiCreateOrgAdminRoleRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<UserDto>> {
+	): Promise<runtime.ApiResponse<RoleDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createOrgAdminRole.',
+			);
+		}
+
 		if (
 			requestParameters.createRoleDto === null ||
 			requestParameters.createRoleDto === undefined
 		) {
 			throw new runtime.RequiredError(
 				'createRoleDto',
-				'Required parameter requestParameters.createRoleDto was null or undefined when calling create.',
+				'Required parameter requestParameters.createRoleDto was null or undefined when calling createOrgAdminRole.',
 			);
 		}
 
@@ -125,7 +188,10 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 
 		const response = await this.request(
 			{
-				path: `/roles`,
+				path: `/organizations/{organizationId}/roles`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
 				method: 'POST',
 				headers: headerParameters,
 				query: queryParameters,
@@ -141,11 +207,176 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 	 *
 	 *
 	 */
-	async create(
-		requestParameters: RolesApiCreateRequest,
+	async createOrgAdminRole(
+		requestParameters: RolesApiCreateOrgAdminRoleRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<UserDto> {
-		const response = await this.createRaw(requestParameters, initOverrides);
+	): Promise<RoleDto> {
+		const response = await this.createOrgAdminRoleRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createPortfolioRoleRaw(
+		requestParameters: RolesApiCreatePortfolioRoleRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<RoleDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createPortfolioRole.',
+			);
+		}
+
+		if (
+			requestParameters.portfolioId === null ||
+			requestParameters.portfolioId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'portfolioId',
+				'Required parameter requestParameters.portfolioId was null or undefined when calling createPortfolioRole.',
+			);
+		}
+
+		if (
+			requestParameters.createRoleDto === null ||
+			requestParameters.createRoleDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createRoleDto',
+				'Required parameter requestParameters.createRoleDto was null or undefined when calling createPortfolioRole.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/portfolios/{portfolioId}/roles`
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					)
+					.replace(
+						`{${'portfolioId'}}`,
+						encodeURIComponent(String(requestParameters.portfolioId)),
+					),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createRoleDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createPortfolioRole(
+		requestParameters: RolesApiCreatePortfolioRoleRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<RoleDto> {
+		const response = await this.createPortfolioRoleRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createTenantRoleRaw(
+		requestParameters: RolesApiCreateTenantRoleRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<RoleDto>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createTenantRole.',
+			);
+		}
+
+		if (
+			requestParameters.tenantId === null ||
+			requestParameters.tenantId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'tenantId',
+				'Required parameter requestParameters.tenantId was null or undefined when calling createTenantRole.',
+			);
+		}
+
+		if (
+			requestParameters.createRoleDto === null ||
+			requestParameters.createRoleDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createRoleDto',
+				'Required parameter requestParameters.createRoleDto was null or undefined when calling createTenantRole.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/tenants/{tenantId}/roles`
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					)
+					.replace(
+						`{${'tenantId'}}`,
+						encodeURIComponent(String(requestParameters.tenantId)),
+					),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createRoleDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createTenantRole(
+		requestParameters: RolesApiCreateTenantRoleRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<RoleDto> {
+		const response = await this.createTenantRoleRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 
@@ -157,10 +388,13 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 		requestParameters: RolesApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<string>> {
-		if (requestParameters.id === null || requestParameters.id === undefined) {
+		if (
+			requestParameters.roleId === null ||
+			requestParameters.roleId === undefined
+		) {
 			throw new runtime.RequiredError(
-				'id',
-				'Required parameter requestParameters.id was null or undefined when calling remove.',
+				'roleId',
+				'Required parameter requestParameters.roleId was null or undefined when calling remove.',
 			);
 		}
 
@@ -170,9 +404,9 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 
 		const response = await this.request(
 			{
-				path: `/roles/{id}`.replace(
-					`{${'id'}}`,
-					encodeURIComponent(String(requestParameters.id)),
+				path: `/organizations/{organizationId}/roles/{roleId}`.replace(
+					`{${'roleId'}}`,
+					encodeURIComponent(String(requestParameters.roleId)),
 				),
 				method: 'DELETE',
 				headers: headerParameters,
@@ -204,10 +438,13 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 		requestParameters: RolesApiSendInviteRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<void>> {
-		if (requestParameters.id === null || requestParameters.id === undefined) {
+		if (
+			requestParameters.roleId === null ||
+			requestParameters.roleId === undefined
+		) {
 			throw new runtime.RequiredError(
-				'id',
-				'Required parameter requestParameters.id was null or undefined when calling sendInvite.',
+				'roleId',
+				'Required parameter requestParameters.roleId was null or undefined when calling sendInvite.',
 			);
 		}
 
@@ -217,9 +454,9 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 
 		const response = await this.request(
 			{
-				path: `/roles/{id}/send-invite`.replace(
-					`{${'id'}}`,
-					encodeURIComponent(String(requestParameters.id)),
+				path: `/organizations/{organizationId}/roles/{roleId}/send-invite`.replace(
+					`{${'roleId'}}`,
+					encodeURIComponent(String(requestParameters.roleId)),
 				),
 				method: 'POST',
 				headers: headerParameters,
