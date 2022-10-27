@@ -332,7 +332,12 @@ paths:
       operationId: RolesController_create
       summary: ''
       description: ''
-      parameters: []
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -345,16 +350,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDto'
+                type: string
       tags: &ref_2
         - roles
-  /organizations/{organizationId}/roles/{id}:
+  /organizations/{organizationId}/roles/{roleId}:
     delete:
       operationId: RolesController_remove
       summary: ''
       description: ''
       parameters:
-        - name: id
+        - name: roleId
           required: true
           in: path
           schema:
@@ -367,13 +372,13 @@ paths:
               schema:
                 type: string
       tags: *ref_2
-  /organizations/{organizationId}/roles/{id}/send-invite:
+  /organizations/{organizationId}/roles/{roleId}/send-invite:
     post:
       operationId: RolesController_sendInvite
       summary: ''
       description: ''
       parameters:
-        - name: id
+        - name: roleId
           required: true
           in: path
           schema:
@@ -2956,28 +2961,6 @@ components:
         email:
           type: string
       required:
-        - email
-    UserDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
-        fullName:
-          type: string
-          nullable: true
-        email:
-          type: string
-      required:
-        - id
-        - createdAt
-        - updatedAt
         - email
     UpdateLeaseInvoiceDto:
       type: object

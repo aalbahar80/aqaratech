@@ -1,13 +1,12 @@
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { User } from 'src/decorators/user.decorator';
 import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { CreateRoleDto } from 'src/roles/dto/role.dto';
-import { UserDto } from 'src/users/dto/user.dto';
 import { RolesService } from './roles.service';
 
 @Controller('organizations/:organizationId/roles')
@@ -19,11 +18,20 @@ export class RolesController {
 	) {}
 
 	@Post()
-	// return email string?
 	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
-	@ApiCreatedResponse({ type: UserDto })
-	create(@User() user: IUser, @Body() createRoleDto: CreateRoleDto) {
-		return this.rolesService.create({ createRoleDto, user });
+	create(
+		@User() user: IUser,
+		@Param('organizationId') organizationId: string,
+		@Body() createRoleDto: CreateRoleDto,
+	) {
+		return this.rolesService.create({
+			roleType: 'ORGADMIN',
+			organizationId,
+			portfolioId: null,
+			tenantId: null,
+			createRoleDto,
+			user,
+		});
 	}
 
 	@CheckAbilities({ action: Action.Delete, subject: 'Role' })

@@ -2,7 +2,7 @@ import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
-import { Prisma } from '@prisma/client';
+import { Prisma, Role } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -17,49 +17,38 @@ import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
 export class RolesService {
 	constructor(
 		private readonly prisma: PrismaService,
-		private postmarkService: PostmarkService,
+		private readonly postmarkService: PostmarkService,
 		private readonly eventEmitter: EventEmitter2,
-		readonly configService: ConfigService<EnvironmentConfig>,
+		private readonly configService: ConfigService<EnvironmentConfig>,
 	) {}
 
 	private readonly logger = new Logger(RolesService.name);
 
 	async create({
 		createRoleDto,
+		roleType,
+		organizationId,
+		portfolioId,
+		tenantId,
 		user,
 	}: {
 		createRoleDto: CreateRoleDto;
+		roleType: Role['roleType'];
+		organizationId: string;
+		portfolioId: string | null;
+		tenantId: string | null;
 		user: IUser;
 	}) {
-		let create: Prisma.RoleCreateNestedManyWithoutUserInput['create'];
 		// TODO test verification only one or zero of portfolio or tenant is set
-		if (createRoleDto.roleType === 'PORTFOLIO' && createRoleDto.portfolioId) {
-			create = {
-				roleType: createRoleDto.roleType,
-				portfolio: { connect: { id: createRoleDto.portfolioId } },
-				organization: { connect: { id: createRoleDto.organizationId } },
-			};
-		} else if (createRoleDto.roleType === 'TENANT' && createRoleDto.tenantId) {
-			create = {
-				roleType: createRoleDto.roleType,
-				tenant: { connect: { id: createRoleDto.tenantId } },
-				organization: { connect: { id: createRoleDto.organizationId } },
-			};
-		} else if (createRoleDto.roleType === 'ORGADMIN') {
-			create = {
-				roleType: createRoleDto.roleType,
-				organization: { connect: { id: createRoleDto.organizationId } },
-			};
-		} else {
-			throw new BadRequestException('Invalid role type');
-		}
+		// TODO test multiple roles for same user
 
 		const existingRole = await this.prisma.role.findFirst({
 			where: {
 				user: { email: createRoleDto.email },
-				organizationId: createRoleDto.organizationId,
-				portfolioId: createRoleDto.portfolioId,
-				tenantId: createRoleDto.tenantId,
+				roleType,
+				organizationId: organizationId,
+				portfolioId: portfolioId,
+				tenantId: tenantId,
 			},
 		});
 
@@ -69,7 +58,10 @@ export class RolesService {
 
 		const role = await this.prisma.role.create({
 			data: {
-				...create,
+				roleType,
+				organization: { connect: { id: organizationId } },
+				portfolio: portfolioId ? { connect: { id: portfolioId } } : undefined,
+				tenant: tenantId ? { connect: { id: tenantId } } : undefined,
 				user: {
 					connectOrCreate: {
 						where: { email: createRoleDto.email },
@@ -84,7 +76,7 @@ export class RolesService {
 			new RoleCreatedEvent(role.id, user.email),
 		);
 
-		return role;
+		return createRoleDto.email;
 	}
 
 	@OnEvent('role.created')
