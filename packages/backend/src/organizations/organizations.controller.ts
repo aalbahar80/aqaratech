@@ -74,7 +74,11 @@ export class OrganizationsController {
 	}
 
 	@Get(':id')
-	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@CheckAbilities({
+		action: Action.Read,
+		subject: SubjectType,
+		useParams: true,
+	})
 	@ApiOkResponse({ type: OrganizationDto })
 	findOne(
 		@User() user: IUser,

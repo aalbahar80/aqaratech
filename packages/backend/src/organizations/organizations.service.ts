@@ -1,5 +1,6 @@
 import { NoSuchBucket } from '@aws-sdk/client-s3';
 import { ForbiddenError, subject } from '@casl/ability';
+import { accessibleBy } from '@casl/prisma';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
@@ -68,14 +69,10 @@ export class OrganizationsService {
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Read,
-			subject(this.SubjectType, { id }),
-		);
-
 		const data = await this.prisma.organization.findUniqueOrThrow({
-			where: { id },
+			where: { id, AND: accessibleBy(user.ability, Action.Read).Organization },
 		});
+
 		return plainToInstance(OrganizationDto, data, {
 			excludeExtraneousValues: true,
 		});
