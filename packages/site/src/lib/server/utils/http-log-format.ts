@@ -25,12 +25,21 @@ export const devConsoleFormat = format.printf((info) => {
 	}
 });
 
+const clc = {
+	bold: (text: string) => `\x1B[1m${text}\x1B[0m`,
+	green: (text: string) => `\x1B[32m${text}\x1B[39m`,
+	yellow: (text: string) => `\x1B[33m${text}\x1B[39m`,
+	red: (text: string) => `\x1B[31m${text}\x1B[39m`,
+	magentaBright: (text: string) => `\x1B[95m${text}\x1B[39m`,
+	cyanBright: (text: string) => `\x1B[96m${text}\x1B[39m`,
+};
+
 const formatHttp = (info) => {
 	const message = JSON.parse(info.message);
 
-	return `[${info.label}] ${info.timestamp} [${message.httpType}]  ${
-		message.method
-	} ${message.pathname} ${message.status ?? ''} ${message.duration ?? ''}${
-		message.duration ? 'ms' : ''
-	}`;
+	return `[${info.label}] ${info.timestamp} ${clc.yellow(
+		'[' + message.httpType + ']',
+	)}  ${message.method} ${message.pathname} ${message.status ?? ''} ${
+		message.duration ?? ''
+	}${message.duration ? 'ms' : ''}`;
 };
