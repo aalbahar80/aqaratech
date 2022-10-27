@@ -2,21 +2,8 @@ import { faker } from '@faker-js/faker';
 import { expect } from '@playwright/test';
 import { sample } from '@self/seed';
 import { randomUUID } from 'crypto';
+import { PostUrlRole } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
-
-const PostUrl = ({
-	organizationId,
-	portfolioId,
-	tenantId,
-}: {
-	organizationId: string;
-	portfolioId: string;
-	tenantId: string;
-}) => ({
-	orgadmin: `/organizations/${organizationId}/roles`,
-	portfolio: `/organizations/${organizationId}/portfolios/${portfolioId}/roles`,
-	tenant: `/organizations/${organizationId}/tenants/${tenantId}/roles`,
-});
 
 const roleTypes = ['orgadmin', 'portfolio', 'tenant'] as const;
 
@@ -29,7 +16,7 @@ for (const roleType of roleTypes) {
 	}) => {
 		const email = faker.internet.email();
 
-		const url = PostUrl({
+		const url = PostUrlRole({
 			organizationId: org.organization.id,
 			portfolioId: portfolio.id,
 			tenantId: tenant.id,
@@ -48,7 +35,7 @@ for (const roleType of roleTypes) {
 	}) => {
 		const email = faker.internet.email();
 
-		const url = PostUrl({
+		const url = PostUrlRole({
 			organizationId: sample.organizations[0]!.id,
 			portfolioId: portfolio.id,
 			tenantId: tenant.id,
@@ -69,7 +56,7 @@ for (const roleType of roleTypes) {
 	}) => {
 		const email = faker.internet.email();
 
-		const url = PostUrl({
+		const url = PostUrlRole({
 			organizationId: randomUUID(),
 			portfolioId: portfolio.id,
 			tenantId: tenant.id,
@@ -88,7 +75,7 @@ for (const roleType of roleTypes) {
 		portfolio,
 		tenant,
 	}) => {
-		const url = PostUrl({
+		const url = PostUrlRole({
 			organizationId: org.organization.id,
 			portfolioId: portfolio.id,
 			tenantId: tenant.id,
@@ -111,7 +98,7 @@ for (const roleType of roleTypes) {
 	}) => {
 		const email = faker.internet.email();
 
-		const url = PostUrl({
+		const url = PostUrlRole({
 			organizationId: org.organization.id,
 			portfolioId: portfolio.id,
 			tenantId: tenant.id,

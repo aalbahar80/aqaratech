@@ -10,3 +10,17 @@ export const PostUrl = (orgId: string) => {
 		file: `/organizations/${orgId}/files`,
 	};
 };
+
+export const PostUrlRole = ({
+	organizationId,
+	portfolioId,
+	tenantId,
+}: {
+	organizationId: string;
+	portfolioId: string;
+	tenantId: string;
+}) => ({
+	orgadmin: `/organizations/${organizationId}/roles`,
+	portfolio: `/organizations/${organizationId}/portfolios/${portfolioId}/roles`,
+	tenant: `/organizations/${organizationId}/tenants/${tenantId}/roles`,
+});
