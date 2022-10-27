@@ -6,7 +6,6 @@ import { Action } from 'src/casl/action.enum';
 import { User } from 'src/decorators/user.decorator';
 import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
-import { RoleValidationPipe } from 'src/pipes/role-validation.pipe';
 import { CreateRoleDto } from 'src/roles/dto/role.dto';
 import { UserDto } from 'src/users/dto/user.dto';
 import { RolesService } from './roles.service';
@@ -23,10 +22,7 @@ export class RolesController {
 	// return email string?
 	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
 	@ApiCreatedResponse({ type: UserDto })
-	create(
-		@User() user: IUser,
-		@Body(new RoleValidationPipe()) createRoleDto: CreateRoleDto,
-	) {
+	create(@User() user: IUser, @Body() createRoleDto: CreateRoleDto) {
 		return this.rolesService.create({ createRoleDto, user });
 	}
 
