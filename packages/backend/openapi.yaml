@@ -2233,13 +2233,13 @@ paths:
                           $ref: '#/components/schemas/RoleDto'
       tags: *ref_19
       security: *ref_20
-  /organizations/{id}/search:
+  /organizations/{organizationId}/search:
     get:
       operationId: OrganizationsController_search
       summary: ''
       description: ''
       parameters:
-        - name: id
+        - name: organizationId
           required: true
           in: path
           schema:

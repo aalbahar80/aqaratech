@@ -122,14 +122,18 @@ export class OrganizationsController {
 		return this.rolesService.findAll({ user, pageOptionsDto, where });
 	}
 
-	@Get(':id/search')
-	@CheckAbilities({ action: Action.Manage, subject: SubjectType })
+	@Get(':organizationId/search')
+	@CheckAbilities({
+		action: Action.Manage,
+		subject: SubjectType,
+		useParams: true,
+	})
 	@ApiOkResponse({ type: SearchDto, isArray: true })
 	search(
 		@User() user: IUser,
-		@Param('id') id: string,
+		@Param('organizationId') organizationId: string,
 		@Query('query') query: string,
 	): Promise<SearchDto[]> {
-		return this.searchService.search({ query, organizationId: id, user });
+		return this.searchService.search({ query, organizationId, user });
 	}
 }
