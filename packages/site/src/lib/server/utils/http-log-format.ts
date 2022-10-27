@@ -2,46 +2,20 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { inspect } from 'util';
 import { format } from 'winston';
 
-export const httpOnlyFilter = format((info) => {
-	if (info.level === 'http') {
-		return info;
+const colorHttpMessage = (message: Record<string, any>) => {
+	const firstdigit = message.status?.toString().charAt(0);
+
+	if (firstdigit in Object.keys(httpResponseColorScheme)) {
+		return httpResponseColorScheme[firstdigit](formatHttpMessage(message));
 	} else {
-		return false;
+		return formatHttpMessage(message);
 	}
-});
-
-export const includeHttp = (include: boolean) =>
-	format((info) => {
-		if (info.level === 'http') {
-			return include ? info : false;
-		} else {
-			return info;
-		}
-	});
-
-export const devConsoleFormat = format.printf((info) => {
-	if (info.level === 'http') {
-		return formatHttp(info);
-	} else {
-		return `[${info.label}] ${info.timestamp} [${info.level}] ${info.message}`;
-	}
-});
-
-const formatHttp = (info) => {
-	const message = JSON.parse(info.message);
-
-	return `[${info.label}] ${info.timestamp} ${clc.yellow(
-		'[' + message.httpType + ']',
-	)}  ${message.method} ${message.pathname} ${message.status ?? ''} ${
-		message.duration ?? ''
-	}${message.duration ? 'ms' : ''}`;
 };
 
-const formatHttpMessage = (message) => {
-	return `${clc.yellow('[' + message.httpType + ']')}  ${message.method} ${
+const formatHttpMessage = (message: Record<string, any>) => {
+	return `${'[' + message.httpType + ']'}  ${message.method} ${
 		message.pathname
 	} ${message.status ?? ''} ${message.duration ?? ''}${
 		message.duration ? 'ms' : ''
@@ -52,7 +26,7 @@ const myFormat = (message: string) => {
 	try {
 		const parsed = JSON.parse(message);
 		if ('httpType' in parsed) {
-			return formatHttpMessage(parsed);
+			return colorHttpMessage(parsed);
 		} else {
 			return message;
 		}
@@ -78,6 +52,13 @@ const nestLikeColorScheme: Record<string, (text: string) => string> = {
 	verbose: clc.cyanBright,
 };
 
+const httpResponseColorScheme: Record<string, (text: string) => string> = {
+	2: clc.green,
+	5: clc.red,
+	4: clc.yellow,
+	3: clc.magentaBright,
+};
+
 export const nestLikeConsoleFormat = (
 	appName = 'NestWinston',
 	options = {
@@ -98,10 +79,10 @@ export const nestLikeConsoleFormat = (
 			}
 		}
 
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		const color =
 			(options.colors && nestLikeColorScheme[level]) ||
 			((text: string): string => text);
+
 		const yellow = options.colors ? clc.yellow : (text: string): string => text;
 
 		// const stringifiedMeta = safeStringify(meta);
