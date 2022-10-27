@@ -82,7 +82,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const start = Date.now();
 
 	if (!isHealthCheck(event.url.pathname)) {
-		logger.log(
+		logger.http(
 			formatRequestLog({
 				request: event.request,
 				url: event.url,
@@ -178,7 +178,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	spanResolve.finish();
 
 	if (!isHealthCheck(event.url.pathname)) {
-		logger.log(
+		logger.http(
 			formatResponseLog({
 				response,
 				method: event.request.method,

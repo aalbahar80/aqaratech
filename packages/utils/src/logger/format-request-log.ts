@@ -8,7 +8,7 @@ export const formatRequestLog = ({
 	extra?: Record<string, unknown>;
 }) => {
 	return {
-		level: 'info',
+		level: 'http',
 		message: JSON.stringify({
 			httpType: 'request',
 			method: request.method,

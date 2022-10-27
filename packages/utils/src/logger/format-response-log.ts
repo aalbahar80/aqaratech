@@ -4,9 +4,9 @@ export const formatResponseLog = ({
 	method,
 	start,
 	extra,
-	level = 'info',
+	level = 'http',
 }: {
-	level?: 'debug' | 'info' | 'warn' | 'error';
+	level?: 'debug' | 'http' | 'info' | 'warn' | 'error';
 	response: LoggedResponse;
 	url: URL;
 	method: string;
