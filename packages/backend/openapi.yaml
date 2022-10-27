@@ -353,6 +353,66 @@ paths:
                 type: string
       tags: &ref_2
         - roles
+  /organizations/{organizationId}/portfolios/{portfolioId}/roles:
+    post:
+      operationId: RolesController_createPortfolioRole
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: portfolioId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_2
+  /organizations/{organizationId}/tenants/{tenantId}/roles:
+    post:
+      operationId: RolesController_createTenantRole
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: tenantId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_2
   /organizations/{organizationId}/roles/{roleId}:
     delete:
       operationId: RolesController_remove

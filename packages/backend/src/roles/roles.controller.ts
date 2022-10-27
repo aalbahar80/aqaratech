@@ -34,6 +34,42 @@ export class RolesController {
 		});
 	}
 
+	@Post('portfolios/:portfolioId/roles')
+	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
+	createPortfolioRole(
+		@User() user: IUser,
+		@Param('organizationId') organizationId: string,
+		@Param('portfolioId') portfolioId: string,
+		@Body() createRoleDto: CreateRoleDto,
+	) {
+		return this.rolesService.create({
+			roleType: 'PORTFOLIO',
+			organizationId,
+			portfolioId,
+			tenantId: null,
+			createRoleDto,
+			user,
+		});
+	}
+
+	@Post('tenants/:tenantId/roles')
+	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
+	createTenantRole(
+		@User() user: IUser,
+		@Param('organizationId') organizationId: string,
+		@Param('tenantId') tenantId: string,
+		@Body() createRoleDto: CreateRoleDto,
+	) {
+		return this.rolesService.create({
+			roleType: 'TENANT',
+			organizationId,
+			portfolioId: null,
+			tenantId,
+			createRoleDto,
+			user,
+		});
+	}
+
 	@CheckAbilities({ action: Action.Delete, subject: 'Role' })
 	@ApiOkResponse({ type: String })
 	@Delete('roles/:roleId')
