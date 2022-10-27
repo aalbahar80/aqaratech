@@ -22,6 +22,8 @@ const shouldSkip = [
 	'UpdateExpenseCategoryTreeDto',
 	'ExpenseCategoryDto',
 	'CreateRoleDto',
+	'CreatePayoutDto',
+	'OrganizationDto',
 ];
 
 // Reference: https://github.com/nestjs/nest/issues/2390#issuecomment-517623971

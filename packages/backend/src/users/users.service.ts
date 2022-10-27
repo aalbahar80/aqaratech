@@ -1,5 +1,6 @@
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import { Cache } from 'cache-manager';
+import { plainToInstance } from 'class-transformer';
 import { TAppAbility } from 'src/casl/abilities/ability-types';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { OrganizationDto } from 'src/organizations/dto/organization.dto';
@@ -60,7 +61,7 @@ export class UsersService {
 			// @ts-expect-error test
 			roles: user.roles.map((role) => ({
 				...role,
-				organization: new OrganizationDto(role.organization),
+				organization: plainToInstance(OrganizationDto, role.organization),
 			})),
 		};
 	}

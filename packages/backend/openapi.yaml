@@ -2074,7 +2074,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateOrganizationDto'
+              $ref: '#/components/schemas/OrganizationDto'
       responses:
         '201':
           description: ''
@@ -2130,31 +2130,6 @@ paths:
                 $ref: '#/components/schemas/OrganizationDto'
       tags: *ref_19
       security: *ref_20
-    patch:
-      operationId: OrganizationsController_update
-      summary: ''
-      description: ''
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateOrganizationDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_19
-      security: *ref_20
     delete:
       operationId: OrganizationsController_remove
       summary: ''
@@ -2172,6 +2147,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
+      tags: *ref_19
+      security: *ref_20
+  /organizations/{organizationId}:
+    patch:
+      operationId: OrganizationsController_update
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
       tags: *ref_19
       security: *ref_20
   /organizations/{id}/roles:
@@ -3794,46 +3795,19 @@ components:
           nullable: true
           allOf:
             - $ref: '#/components/schemas/ExpenseCategoryDto'
-    CreateOrganizationDto:
-      type: object
-      properties:
-        fullName:
-          type: string
-          minLength: 3
-          maxLength: 100
-        label:
-          type: string
-          nullable: true
-      required:
-        - fullName
     OrganizationDto:
       type: object
       properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         title:
           type: string
         fullName:
           type: string
-          minLength: 3
-          maxLength: 100
         label:
           type: string
           nullable: true
       required:
-        - id
-        - createdAt
-        - updatedAt
         - title
         - fullName
-        - label
     OrganizationCreatedDto:
       type: object
       properties:
@@ -3844,16 +3818,6 @@ components:
       required:
         - organization
         - roleId
-    UpdateOrganizationDto:
-      type: object
-      properties:
-        fullName:
-          type: string
-          minLength: 3
-          maxLength: 100
-        label:
-          type: string
-          nullable: true
     SearchDto:
       type: object
       properties:

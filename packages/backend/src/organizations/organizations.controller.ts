@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { organizationSchema } from '@self/utils';
 import { SkipAbilityCheck, SkipRoleGuard } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -22,15 +23,14 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
 import {
-	CreateOrganizationDto,
 	OrganizationCreatedDto,
 	OrganizationDto,
-	UpdateOrganizationDto,
 } from './dto/organization.dto';
 import { OrganizationsService } from './organizations.service';
 
@@ -53,10 +53,14 @@ export class OrganizationsController {
 	@ApiCreatedResponse({ type: OrganizationCreatedDto })
 	create(
 		@UserBasic() user: AuthenticatedUser,
-		@Body() createOrganizationDto: CreateOrganizationDto,
+		@Body(new ZodValidationPipe(organizationSchema))
+		organizationDto: OrganizationDto,
 	): Promise<OrganizationCreatedDto> {
 		// also returns the roleId for the created organization admin
-		return this.organizationsService.create({ createOrganizationDto, user });
+		return this.organizationsService.create({
+			organizationDto,
+			user,
+		});
 	}
 
 	@Get()
@@ -77,17 +81,21 @@ export class OrganizationsController {
 		return this.organizationsService.findOne({ id, user });
 	}
 
-	@Patch(':id')
-	@CheckAbilities({ action: Action.Update, subject: SubjectType })
-	@ApiOkResponse({ type: String })
+	@Patch(':organizationId')
+	@CheckAbilities({
+		action: Action.Update,
+		subject: SubjectType,
+		useParams: true,
+	})
 	update(
 		@User() user: IUser,
-		@Param('id') id: string,
-		@Body() updateOrganizationDto: UpdateOrganizationDto,
-	): Promise<string> {
+		@Param('organizationId') id: string,
+		@Body(new ZodValidationPipe(organizationSchema))
+		organizationDto: OrganizationDto,
+	) {
 		return this.organizationsService.update({
 			id,
-			updateOrganizationDto,
+			organizationDto,
 			user,
 		});
 	}

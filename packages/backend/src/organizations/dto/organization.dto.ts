@@ -1,27 +1,12 @@
-import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
-import { Organization } from '@prisma/client';
+import { ApiProperty } from '@nestjs/swagger';
+import { organizationSchema } from '@self/utils';
 import { Expose } from 'class-transformer';
-import { IsString, Length } from 'class-validator';
-import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { z } from 'zod';
 
-class OrganizationRequiredDto {
-	@Length(3, 100)
+export class OrganizationDto implements z.infer<typeof organizationSchema> {
 	fullName: string;
-}
 
-class OrganizationOptionalDto {
-	@IsString()
-	label: string | null;
-}
-
-export class OrganizationDto extends IntersectionType(
-	AbstractDto,
-	IntersectionType(OrganizationRequiredDto, OrganizationOptionalDto),
-) {
-	constructor(partial: Partial<OrganizationDto>) {
-		super();
-		Object.assign(this, partial);
-	}
+	label?: string | null;
 
 	@ApiProperty()
 	@Expose()
@@ -29,15 +14,6 @@ export class OrganizationDto extends IntersectionType(
 		return this.label ?? this.fullName;
 	}
 }
-
-export class CreateOrganizationDto
-	extends IntersectionType(
-		OrganizationRequiredDto,
-		PartialType(OrganizationOptionalDto),
-	)
-	implements Partial<Organization> {}
-
-export class UpdateOrganizationDto extends PartialType(CreateOrganizationDto) {}
 
 export class OrganizationCreatedDto {
 	organization: OrganizationDto;

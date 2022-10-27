@@ -6,11 +6,7 @@ import { plainToInstance } from 'class-transformer';
 import { Action } from 'src/casl/action.enum';
 import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
-import {
-	CreateOrganizationDto,
-	OrganizationDto,
-	UpdateOrganizationDto,
-} from 'src/organizations/dto/organization.dto';
+import { OrganizationDto } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
 
@@ -22,20 +18,20 @@ export class OrganizationsService {
 	private readonly logger = new Logger(OrganizationsService.name);
 
 	async create({
-		createOrganizationDto,
+		organizationDto,
 		user,
 	}: {
-		createOrganizationDto: CreateOrganizationDto;
+		organizationDto: OrganizationDto;
 		user: AuthenticatedUser;
 	}) {
 		this.logger.debug(
-			`${user.email} creating organization ${createOrganizationDto.fullName}`,
+			`${user.email} creating organization ${organizationDto.fullName}`,
 		);
 
 		const organization = await this.prisma.organization.create({
 			data: {
-				fullName: createOrganizationDto.fullName,
-				label: createOrganizationDto.label,
+				fullName: organizationDto.fullName,
+				label: organizationDto.label,
 				roles: {
 					create: [
 						{
@@ -60,7 +56,7 @@ export class OrganizationsService {
 		});
 
 		return {
-			organization: new OrganizationDto(organization),
+			organization: plainToInstance(OrganizationDto, organization),
 			roleId: organization.roles[0].id,
 		};
 	}
@@ -74,28 +70,28 @@ export class OrganizationsService {
 		const data = await this.prisma.organization.findUniqueOrThrow({
 			where: { id },
 		});
-		return new OrganizationDto(data);
+		return plainToInstance(OrganizationDto, data);
 	}
 
 	async update({
 		id,
-		updateOrganizationDto,
+		organizationDto,
 		user,
 	}: {
 		id: string;
-		updateOrganizationDto: UpdateOrganizationDto;
+		organizationDto: OrganizationDto;
 		user: IUser;
 	}) {
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Update,
-			subject(this.SubjectType, { ...updateOrganizationDto, id }),
+			subject(this.SubjectType, { ...organizationDto, id }),
 		);
 
 		const updated = await this.prisma.organization.update({
 			where: { id },
 			data: {
-				fullName: updateOrganizationDto.fullName,
-				label: updateOrganizationDto.label,
+				fullName: organizationDto.fullName,
+				label: organizationDto.label,
 			},
 		});
 		return updated.id;
@@ -130,6 +126,6 @@ export class OrganizationsService {
 		const deleted = await this.prisma.organization.delete({ where: { id } });
 		this.logger.log(`Deleted organization ${id}`);
 
-		return new OrganizationDto(deleted);
+		return plainToInstance(OrganizationDto, deleted);
 	}
 }
