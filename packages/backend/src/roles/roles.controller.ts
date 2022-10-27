@@ -1,11 +1,13 @@
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { roleCreateSchema } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { User } from 'src/decorators/user.decorator';
 import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { CreateRoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from './roles.service';
 
@@ -22,7 +24,8 @@ export class RolesController {
 	createOrgAdminRole(
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
-		@Body() createRoleDto: CreateRoleDto,
+		@Body(new ZodValidationPipe(roleCreateSchema))
+		createRoleDto: CreateRoleDto,
 	) {
 		return this.rolesService.create({
 			roleType: 'ORGADMIN',
@@ -40,7 +43,8 @@ export class RolesController {
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
 		@Param('portfolioId') portfolioId: string,
-		@Body() createRoleDto: CreateRoleDto,
+		@Body(new ZodValidationPipe(roleCreateSchema))
+		createRoleDto: CreateRoleDto,
 	) {
 		return this.rolesService.create({
 			roleType: 'PORTFOLIO',
@@ -58,7 +62,8 @@ export class RolesController {
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
 		@Param('tenantId') tenantId: string,
-		@Body() createRoleDto: CreateRoleDto,
+		@Body(new ZodValidationPipe(roleCreateSchema))
+		createRoleDto: CreateRoleDto,
 	) {
 		return this.rolesService.create({
 			roleType: 'TENANT',
