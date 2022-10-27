@@ -102,4 +102,34 @@ for (const roleType of roleTypes) {
 
 		expect(await res.json()).toHaveProperty('fieldErrors.email');
 	});
+
+	test(`cannot create the same role twice ${roleType}`, async ({
+		request,
+		org,
+		portfolio,
+		tenant,
+	}) => {
+		const email = faker.internet.email();
+
+		const url = PostUrl({
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+			tenantId: tenant.id,
+		})[roleType];
+
+		const res = await request.post(url, { data: { email } });
+
+		expect(res.status()).toBe(201);
+
+		const res2 = await request.post(url, { data: { email } });
+
+		await expect.soft(res2).not.toBeOK();
+
+		expect(res2.status()).toBe(400);
+
+		expect(await res2.json()).toHaveProperty(
+			'message',
+			'Role already exists for this user',
+		);
+	});
 }

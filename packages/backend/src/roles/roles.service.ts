@@ -39,9 +39,6 @@ export class RolesService {
 		tenantId: string | null;
 		user: IUser;
 	}) {
-		// TODO test verification only one or zero of portfolio or tenant is set
-		// TODO test multiple roles for same user
-
 		const existingRole = await this.prisma.role.findFirst({
 			where: {
 				user: { email: createRoleDto.email },
