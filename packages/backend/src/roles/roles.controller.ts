@@ -75,14 +75,13 @@ export class RolesController {
 		});
 	}
 
-	@CheckAbilities({ action: Action.Delete, subject: 'Role' })
-	@ApiOkResponse({ type: String })
+	@CheckAbilities({ action: Action.Delete, subject: 'Role', useParams: true })
 	@Delete('roles/:roleId')
 	remove(@Param('roleId') id: string): Promise<string> {
 		return this.rolesService.remove(id);
 	}
 
-	@CheckAbilities({ action: Action.Manage, subject: 'Role' })
+	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
 	@Post('roles/:roleId/send-invite')
 	sendInvite(@User() user: IUser, @Param('roleId') id: string) {
 		this.eventEmitter.emit(
