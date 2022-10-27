@@ -9,6 +9,7 @@ export * from './organization.schema';
 export * from './payout.schema';
 export * from './portfolio.schema';
 export * from './property.schema';
+export * from './query-options.schema';
 export * from './role.schema';
 export * from './tenant.schema';
 export * from './unit.schema';

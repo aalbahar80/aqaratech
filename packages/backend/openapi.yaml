@@ -1085,35 +1085,6 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
@@ -1343,35 +1314,6 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
@@ -1401,36 +1343,7 @@ paths:
       operationId: UnitsController_findAll
       summary: ''
       description: ''
-      parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
+      parameters: []
       responses:
         '200':
           description: ''

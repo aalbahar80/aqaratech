@@ -3,8 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
@@ -32,16 +32,14 @@ export class UnitsService {
 	}
 
 	async findAll({
-		pageOptionsDto,
+		queryOptions,
 		user,
 		where,
 	}: {
-		pageOptionsDto: PageOptionsDto;
+		queryOptions: QueryOptionsDto;
 		user: IUser;
 		where?: Prisma.UnitWhereInput;
 	}): Promise<WithCount<UnitDto>> {
-		const { page, take } = pageOptionsDto;
-
 		const filter: Prisma.UnitWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
@@ -51,8 +49,8 @@ export class UnitsService {
 
 		const [data, total] = await Promise.all([
 			this.prisma.unit.findMany({
-				take,
-				skip: (page - 1) * take,
+				take: queryOptions.take,
+				skip: queryOptions.skip,
 				orderBy: { unitNumber: 'asc' },
 				where: filter,
 				include: {

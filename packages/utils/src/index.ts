@@ -39,6 +39,7 @@ export {
 	portfolioUpdateSchema,
 	propertyCreateSchema,
 	propertyUpdateSchema,
+	queryOptionsSchema,
 	roleCreateSchema,
 	tenantCreateSchema,
 	tenantUpdateSchema,

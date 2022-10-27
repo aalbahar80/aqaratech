@@ -8,6 +8,7 @@ import {
 	Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { RequestParser } from '@prisma-utils/nestjs-request-parser';
 import { Prisma } from '@prisma/client';
 import { portfolioUpdateSchema } from '@self/utils';
 import { AggregateService } from 'src/aggregate/aggregate.service';
@@ -17,6 +18,7 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -124,13 +126,13 @@ export class PortfoliosController {
 	@ApiPaginatedResponse(UnitDto)
 	findUnits(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@RequestParser() queryOptions: QueryOptionsDto,
 		@Param('id') id: string,
 	): Promise<WithCount<UnitDto>> {
 		const where: Prisma.UnitWhereInput = {
 			property: { portfolioId: { equals: id } },
 		};
-		return this.unitsService.findAll({ user, pageOptionsDto, where });
+		return this.unitsService.findAll({ user, queryOptions, where });
 	}
 
 	@Get(':id/payouts')
