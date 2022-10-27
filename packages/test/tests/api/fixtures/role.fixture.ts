@@ -22,7 +22,7 @@ export const roleFixtures: AllFixtures = {
 			tenantId: role.tenantId,
 		})[role.roleType];
 
-		const res = await request.post(`${apiURL}/${url}`, {
+		const res = await request.post(`${apiURL}${url}`, {
 			data: R.pick(role, ['email']),
 		});
 

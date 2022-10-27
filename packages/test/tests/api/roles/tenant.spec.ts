@@ -1,21 +1,14 @@
 import { expect } from '@playwright/test';
-import { roleFactory } from '@self/seed';
-import * as R from 'remeda';
 import type { PaginatedRoleDto } from '../../../types/api';
 import { test } from '../api-fixtures';
 
-test('tenant role', async ({ request, org, tenant }) => {
-	const role = R.pick(
-		roleFactory.build({
-			organizationId: org.organization.id,
-			tenantId: tenant.id,
-			roleType: 'TENANT',
-		}),
-		['organizationId', 'roleType', 'tenantId', 'email'],
-	);
+test.use({
+	roleParams: {
+		roleType: 'TENANT',
+	},
+});
 
-	await request.post(`/roles`, { data: role });
-
+test('tenant role', async ({ request, org, tenant, role: _role }) => {
 	const res = await request.get(`/tenants/${tenant.id}/roles`);
 
 	expect.soft(res.status()).toBe(200);
