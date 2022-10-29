@@ -1555,28 +1555,6 @@ paths:
       tags: *ref_11
       security: *ref_12
   /payouts:
-    post:
-      operationId: PayoutsController_create
-      summary: ''
-      description: ''
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreatePayoutDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PayoutDto'
-      tags: &ref_13
-        - payouts
-      security: &ref_14
-        - accessToken: []
     get:
       operationId: PayoutsController_findAll
       summary: ''
@@ -1628,8 +1606,10 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_13
-      security: *ref_14
+      tags: &ref_13
+        - payouts
+      security: &ref_14
+        - accessToken: []
   /payouts/{id}:
     get:
       operationId: PayoutsController_findOne
@@ -2454,6 +2434,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialExpenseDto'
+      tags: *ref_21
+      security: *ref_22
+  /organizations/{organizationId}/payouts:
+    post:
+      operationId: OrganizationsAdminController_createPayout
+      summary: ''
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePayoutDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutDto'
       tags: *ref_21
       security: *ref_22
   /organizations/{organizationId}/files:
@@ -3519,26 +3520,6 @@ components:
         label:
           type: string
           nullable: true
-    CreatePayoutDto:
-      type: object
-      properties:
-        postAt:
-          type: string
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        amount:
-          type: number
-          minimum: 1
-        memo:
-          type: string
-          nullable: true
-      required:
-        - postAt
-        - organizationId
-        - portfolioId
-        - amount
     UpdatePayoutDto:
       type: object
       properties:
@@ -4096,6 +4077,26 @@ components:
         - unitId
         - amount
         - postAt
+    CreatePayoutDto:
+      type: object
+      properties:
+        postAt:
+          type: string
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+        amount:
+          type: number
+          minimum: 1
+        memo:
+          type: string
+          nullable: true
+      required:
+        - postAt
+        - organizationId
+        - portfolioId
+        - amount
     FileRelationKeyEnum:
       type: string
       enum:

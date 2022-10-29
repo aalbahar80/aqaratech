@@ -4,6 +4,7 @@ import { FilesModule } from 'src/files/files.module';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
 import { OrganizationsAdminController } from 'src/organizations/organizations-admin.controller';
+import { PayoutsModule } from 'src/payouts/payouts.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { PropertiesModule } from 'src/properties/properties.module';
 import { RolesModule } from 'src/roles/roles.module';
@@ -28,6 +29,7 @@ import { OrganizationsService } from './organizations.service';
 		LeasesModule,
 		LeaseInvoicesModule,
 		ExpensesModule,
+		PayoutsModule,
 		FilesModule,
 	],
 })

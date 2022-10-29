@@ -21,6 +21,7 @@ import {
 	leaseCreateSchema,
 	leaseInvoiceCreateManySchema,
 	leaseInvoiceCreateSchema,
+	payoutCreateSchema,
 	portfolioCreateSchema,
 	propertyCreateSchema,
 	tenantCreateSchema,
@@ -46,6 +47,8 @@ import {
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { CreateLeaseDto, PartialLeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
+import { CreatePayoutDto, PayoutDto } from 'src/payouts/dto/payout.dto';
+import { PayoutsService } from 'src/payouts/payouts.service';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { CreatePortfolioDto } from 'src/portfolios/dto/portfolio.dto';
 import { PortfoliosService } from 'src/portfolios/portfolios.service';
@@ -68,6 +71,7 @@ export class OrganizationsAdminController {
 		private readonly leasesService: LeasesService,
 		private readonly leaseInvoicesService: LeaseInvoicesService,
 		private readonly expensesService: ExpensesService,
+		private readonly payoutsService: PayoutsService,
 		private readonly filesService: FilesService,
 	) {}
 
@@ -204,6 +208,16 @@ export class OrganizationsAdminController {
 			organizationId,
 			user,
 		});
+	}
+
+	@Post('/payouts')
+	@CheckAbilities({ action: Action.Create, subject: 'Payout' })
+	createPayout(
+		@User() user: IUser,
+		@Body(new ZodValidationPipe(payoutCreateSchema))
+		createPayoutDto: CreatePayoutDto,
+	): Promise<PayoutDto> {
+		return this.payoutsService.create({ createPayoutDto, user });
 	}
 
 	@Post('/files')

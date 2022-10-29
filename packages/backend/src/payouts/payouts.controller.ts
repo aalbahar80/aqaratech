@@ -5,10 +5,9 @@ import {
 	Get,
 	Param,
 	Patch,
-	Post,
 	Query,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
@@ -17,11 +16,7 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
-import {
-	CreatePayoutDto,
-	PayoutDto,
-	UpdatePayoutDto,
-} from 'src/payouts/dto/payout.dto';
+import { PayoutDto, UpdatePayoutDto } from 'src/payouts/dto/payout.dto';
 import { PayoutsService } from './payouts.service';
 
 const SubjectType = 'Payout';
@@ -31,16 +26,6 @@ const SubjectType = 'Payout';
 @SwaggerAuth()
 export class PayoutsController {
 	constructor(private readonly payoutsService: PayoutsService) {}
-
-	@Post()
-	@CheckAbilities({ action: Action.Create, subject: SubjectType })
-	@ApiCreatedResponse({ type: PayoutDto })
-	create(
-		@User() user: IUser,
-		@Body() createPayoutDto: CreatePayoutDto,
-	): Promise<PayoutDto> {
-		return this.payoutsService.create({ createPayoutDto, user });
-	}
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })

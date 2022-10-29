@@ -19,6 +19,7 @@ import type {
 	CreateLeaseInvoiceDto,
 	CreateManyLeaseInvoicesDto,
 	CreateOrganizationDto,
+	CreatePayoutDto,
 	CreatePortfolioDto,
 	CreatePropertyDto,
 	CreateTenantDto,
@@ -32,6 +33,7 @@ import type {
 	PartialLeaseDto,
 	PartialLeaseInvoiceDto,
 	PartialUnitDto,
+	PayoutDto,
 	PortfolioDto,
 	PropertyDto,
 	SearchDto,
@@ -63,6 +65,10 @@ export interface OrganizationsApiCreateLeaseRequest {
 export interface OrganizationsApiCreateLeaseInvoiceRequest {
 	organizationId: string;
 	createLeaseInvoiceDto: CreateLeaseInvoiceDto;
+}
+
+export interface OrganizationsApiCreatePayoutRequest {
+	createPayoutDto: CreatePayoutDto;
 }
 
 export interface OrganizationsApiCreatePortfolioRequest {
@@ -227,6 +233,26 @@ export interface OrganizationsApiInterface {
 		requestParameters: OrganizationsApiCreateLeaseInvoiceRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PartialLeaseInvoiceDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof OrganizationsApiInterface
+	 */
+	createPayoutRaw(
+		requestParameters: OrganizationsApiCreatePayoutRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PayoutDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	createPayout(
+		requestParameters: OrganizationsApiCreatePayoutRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PayoutDto>;
 
 	/**
 	 *
@@ -774,6 +800,59 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PartialLeaseInvoiceDto> {
 		const response = await this.createLeaseInvoiceRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createPayoutRaw(
+		requestParameters: OrganizationsApiCreatePayoutRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PayoutDto>> {
+		if (
+			requestParameters.createPayoutDto === null ||
+			requestParameters.createPayoutDto === undefined
+		) {
+			throw new runtime.RequiredError(
+				'createPayoutDto',
+				'Required parameter requestParameters.createPayoutDto was null or undefined when calling createPayout.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		headerParameters['Content-Type'] = 'application/json';
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/payouts`,
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+				body: requestParameters.createPayoutDto,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async createPayout(
+		requestParameters: OrganizationsApiCreatePayoutRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PayoutDto> {
+		const response = await this.createPayoutRaw(
 			requestParameters,
 			initOverrides,
 		);

@@ -14,16 +14,11 @@
 
 import * as runtime from '../runtime';
 import type {
-	CreatePayoutDto,
 	PaginatedPayoutDto,
 	PayoutDto,
 	SortOrderEnum,
 	UpdatePayoutDto,
 } from '../models';
-
-export interface PayoutsApiCreateRequest {
-	createPayoutDto: CreatePayoutDto;
-}
 
 export interface PayoutsApiFindAllRequest {
 	page?: number;
@@ -53,26 +48,6 @@ export interface PayoutsApiUpdateRequest {
  * @interface PayoutsApiInterface
  */
 export interface PayoutsApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof PayoutsApiInterface
-	 */
-	createRaw(
-		requestParameters: PayoutsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PayoutDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	create(
-		requestParameters: PayoutsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PayoutDto>;
-
 	/**
 	 *
 	 * @summary
@@ -158,56 +133,6 @@ export interface PayoutsApiInterface {
  *
  */
 export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
-	/**
-	 *
-	 *
-	 */
-	async createRaw(
-		requestParameters: PayoutsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PayoutDto>> {
-		if (
-			requestParameters.createPayoutDto === null ||
-			requestParameters.createPayoutDto === undefined
-		) {
-			throw new runtime.RequiredError(
-				'createPayoutDto',
-				'Required parameter requestParameters.createPayoutDto was null or undefined when calling create.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		headerParameters['Content-Type'] = 'application/json';
-
-		const response = await this.request(
-			{
-				path: `/payouts`,
-				method: 'POST',
-				headers: headerParameters,
-				query: queryParameters,
-				body: requestParameters.createPayoutDto,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async create(
-		requestParameters: PayoutsApiCreateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PayoutDto> {
-		const response = await this.createRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *
