@@ -1,6 +1,6 @@
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
-import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
+import HeroiconsOutlineDocumentReport from '~icons/heroicons-outline/document-report';
 import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text';
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
@@ -9,7 +9,7 @@ export const navigationTree: NavigationItem[] = [
 	{
 		name: 'Financials',
 		href: '/tempsample/',
-		icon: HeroiconsOutlineCollection,
+		icon: HeroiconsOutlineDocumentReport,
 		children: [
 			{ name: 'Summary', href: '/financials/summary/' },
 			{
