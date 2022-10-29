@@ -87,35 +87,6 @@ export class PayoutsService {
 		return new PayoutDto(payout);
 	}
 
-	async update({
-		id,
-		updatePayoutDto,
-		user,
-	}: {
-		id: string;
-		updatePayoutDto: UpdatePayoutDto;
-		user: IUser;
-	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Update,
-			subject(this.SubjectType, updatePayoutDto),
-		);
-
-		const frisked = frisk({
-			user,
-			SubjectType: this.SubjectType,
-			instance: updatePayoutDto,
-		});
-
-		const updated = await this.prisma.payout.update({
-			where: { id },
-			data: frisked,
-		});
-		const payout = new PayoutDto(updated);
-
-		return payout;
-	}
-
 	async remove({ id, user }: { id: string; user: IUser }) {
 		await this.prisma.payout.findFirstOrThrow({
 			where: {

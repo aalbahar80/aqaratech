@@ -1,12 +1,4 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Patch,
-	Query,
-} from '@nestjs/common';
+import { Controller, Delete, Get, Param, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -16,7 +8,7 @@ import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
-import { PayoutDto, UpdatePayoutDto } from 'src/payouts/dto/payout.dto';
+import { PayoutDto } from 'src/payouts/dto/payout.dto';
 import { PayoutsService } from './payouts.service';
 
 const SubjectType = 'Payout';
@@ -42,17 +34,6 @@ export class PayoutsController {
 	@ApiOkResponse({ type: PayoutDto })
 	findOne(@User() user: IUser, @Param('id') id: string): Promise<PayoutDto> {
 		return this.payoutsService.findOne({ id, user });
-	}
-
-	@Patch(':id')
-	@CheckAbilities({ action: Action.Update, subject: SubjectType })
-	@ApiOkResponse({ type: PayoutDto })
-	update(
-		@User() user: IUser,
-		@Param('id') id: string,
-		@Body() updatePayoutDto: UpdatePayoutDto,
-	): Promise<PayoutDto> {
-		return this.payoutsService.update({ id, updatePayoutDto, user });
 	}
 
 	@Delete(':id')
