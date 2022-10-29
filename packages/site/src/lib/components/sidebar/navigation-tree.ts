@@ -1,11 +1,15 @@
+// Types
 import type { NavigationItem } from '$lib/components/sidebar/types';
+import type { User } from '$lib/models/types/auth.type';
+
+// Icons
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineDocumentReport from '~icons/heroicons-outline/document-report';
 import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text';
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
 
-export const navigationTree: NavigationItem[] = [
+export const getNavigationTree = (user: User): NavigationItem[] => [
 	{
 		name: 'Financials',
 		href: '/tempsample/',
@@ -35,7 +39,7 @@ export const navigationTree: NavigationItem[] = [
 	},
 	{
 		name: 'Account',
-		href: '/account/',
+		href: `/users/${user.id}/roles`,
 		icon: HeroiconsOutlineUser,
 		divided: true,
 	},
