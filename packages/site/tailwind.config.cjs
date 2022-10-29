@@ -20,6 +20,8 @@ module.exports = {
 		require('@tailwindcss/aspect-ratio'),
 	],
 
+	darkMode: 'class', // disable auto dark mode
+
 	// corePlugins: {
 	// 	preflight: false,
 	// }
