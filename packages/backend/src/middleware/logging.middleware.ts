@@ -20,10 +20,6 @@ export class LoggingMiddleware implements NestMiddleware {
 			const { statusCode } = response;
 
 			this.httpLogger.logResponse({ request, url, statusCode, start });
-			this.httpLogger.logResponse({ request, url, statusCode, start });
-			this.httpLogger.logResponse({ request, url, statusCode, start });
-			this.httpLogger.logResponse({ request, url, statusCode, start });
-			this.httpLogger.logResponse({ request, url, statusCode, start });
 		});
 
 		next();
