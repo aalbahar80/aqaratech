@@ -211,7 +211,7 @@ export class OrganizationsAdminController {
 	}
 
 	@Post('/payouts')
-	@CheckAbilities({ action: Action.Create, subject: 'Payout' })
+	@CheckAbilities({ action: Action.Create, subject: 'Payout', useParams: true })
 	createPayout(
 		@User() user: IUser,
 		@Body(new ZodValidationPipe(payoutCreateSchema))

@@ -2,10 +2,10 @@ import {
 	ApiHideProperty,
 	ApiProperty,
 	IntersectionType,
-	PartialType,
 	PickType,
 } from '@nestjs/swagger';
 import { Payout } from '@prisma/client';
+import { payoutCreateSchema } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsOptional, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -17,6 +17,7 @@ import {
 import { Rel } from 'src/constants/rel.enum';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { IsID } from 'src/decorators/field.decorators';
+import { z } from 'zod';
 
 class PayoutRequiredDto {
 	@IsID()
@@ -63,7 +64,9 @@ export class PayoutDto
 	}
 }
 
-export class CreatePayoutDto
-	extends PayoutRequiredDto
-	implements Partial<Payout> {}
-export class UpdatePayoutDto extends PartialType(CreatePayoutDto) {}
+export class CreatePayoutDto implements z.infer<typeof payoutCreateSchema> {
+	portfolioId: string;
+	amount: number;
+	postAt: string;
+	memo?: string | null;
+}
