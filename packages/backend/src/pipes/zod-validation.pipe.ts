@@ -15,13 +15,8 @@ export class ZodValidationPipe<S extends z.ZodTypeAny>
 
 	private readonly logger = new Logger(ZodValidationPipe.name);
 
-	transform(value: unknown, metadata: ArgumentMetadata): z.infer<S> {
-		// only apply validation to the body
-		if (metadata.type !== 'body') {
-			return value;
-		}
-
-		// TODO fail if extra fields are present
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	transform(value: unknown, _metadata: ArgumentMetadata): z.infer<S> {
 		const parsed = this.schema.safeParse(value);
 
 		if (parsed.success) {

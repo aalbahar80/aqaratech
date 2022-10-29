@@ -1090,6 +1090,28 @@ paths:
           in: path
           schema:
             type: string
+        - required: true
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: ''
@@ -1319,6 +1341,28 @@ paths:
           in: path
           schema:
             type: string
+        - required: true
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: ''
@@ -1343,7 +1387,29 @@ paths:
       operationId: UnitsController_findAll
       summary: ''
       description: ''
-      parameters: []
+      parameters:
+        - required: true
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: ''

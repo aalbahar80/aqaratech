@@ -8,7 +8,6 @@ import {
 	Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { RequestParser } from '@prisma-utils/nestjs-request-parser';
 import { Prisma } from '@prisma/client';
 import { portfolioUpdateSchema } from '@self/utils';
 import { AggregateService } from 'src/aggregate/aggregate.service';
@@ -20,6 +19,10 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import {
+	ApiQueryOptions,
+	QueryParser,
+} from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
@@ -123,11 +126,12 @@ export class PortfoliosController {
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'Unit' },
 	)
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(UnitDto)
 	findUnits(
 		@User() user: IUser,
-		@RequestParser() queryOptions: QueryOptionsDto,
 		@Param('id') id: string,
+		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<UnitDto>> {
 		const where: Prisma.UnitWhereInput = {
 			property: { portfolioId: { equals: id } },

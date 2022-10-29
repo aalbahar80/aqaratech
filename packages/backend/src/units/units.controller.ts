@@ -8,7 +8,6 @@ import {
 	Query,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { RequestParser } from '@prisma-utils/nestjs-request-parser';
 import { Prisma } from '@prisma/client';
 import { unitUpdateSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
@@ -18,6 +17,10 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import {
+	ApiQueryOptions,
+	QueryParser,
+} from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
@@ -41,10 +44,11 @@ export class UnitsController {
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(UnitDto)
 	findAll(
 		@User() user: IUser,
-		@RequestParser() queryOptions: QueryOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<UnitDto>> {
 		return this.unitsService.findAll({
 			user,

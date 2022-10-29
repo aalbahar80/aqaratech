@@ -1385,25 +1385,13 @@ export interface OrganizationDto {
 	 * @type {string}
 	 * @memberof OrganizationDto
 	 */
-	readonly id: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof OrganizationDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof OrganizationDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof OrganizationDto
-	 */
 	title: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof OrganizationDto
+	 */
+	id: string;
 	/**
 	 *
 	 * @type {string}
@@ -1415,7 +1403,7 @@ export interface OrganizationDto {
 	 * @type {string}
 	 * @memberof OrganizationDto
 	 */
-	label: string | null;
+	label?: string | null;
 }
 /**
  *
@@ -2954,7 +2942,7 @@ export interface UpdateOrganizationDto {
 	 * @type {string}
 	 * @memberof UpdateOrganizationDto
 	 */
-	fullName?: string;
+	fullName: string;
 	/**
 	 *
 	 * @type {string}

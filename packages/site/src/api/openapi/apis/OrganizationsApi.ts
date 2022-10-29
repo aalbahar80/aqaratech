@@ -112,7 +112,7 @@ export interface OrganizationsApiRemoveRequest {
 }
 
 export interface OrganizationsApiSearchRequest {
-	id: string;
+	organizationId: string;
 	query: string;
 }
 
@@ -435,7 +435,7 @@ export interface OrganizationsApiInterface {
 	updateRaw(
 		requestParameters: OrganizationsApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>>;
+	): Promise<runtime.ApiResponse<OrganizationDto>>;
 
 	/**
 	 *
@@ -444,7 +444,7 @@ export interface OrganizationsApiInterface {
 	update(
 		requestParameters: OrganizationsApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string>;
+	): Promise<OrganizationDto>;
 }
 
 /**
@@ -1393,10 +1393,13 @@ export class OrganizationsApi
 		requestParameters: OrganizationsApiSearchRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<SearchDto>>> {
-		if (requestParameters.id === null || requestParameters.id === undefined) {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
 			throw new runtime.RequiredError(
-				'id',
-				'Required parameter requestParameters.id was null or undefined when calling search.',
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling search.',
 			);
 		}
 
@@ -1420,9 +1423,9 @@ export class OrganizationsApi
 
 		const response = await this.request(
 			{
-				path: `/organizations/{id}/search`.replace(
-					`{${'id'}}`,
-					encodeURIComponent(String(requestParameters.id)),
+				path: `/organizations/{organizationId}/search`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
 				),
 				method: 'GET',
 				headers: headerParameters,
@@ -1453,7 +1456,7 @@ export class OrganizationsApi
 	async updateRaw(
 		requestParameters: OrganizationsApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>> {
+	): Promise<runtime.ApiResponse<OrganizationDto>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -1491,7 +1494,7 @@ export class OrganizationsApi
 			initOverrides,
 		);
 
-		return new runtime.TextApiResponse(response) as any;
+		return new runtime.JSONApiResponse(response);
 	}
 
 	/**
@@ -1501,7 +1504,7 @@ export class OrganizationsApi
 	async update(
 		requestParameters: OrganizationsApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string> {
+	): Promise<OrganizationDto> {
 		const response = await this.updateRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
