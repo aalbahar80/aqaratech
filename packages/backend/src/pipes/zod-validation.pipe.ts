@@ -5,15 +5,17 @@ import {
 	Logger,
 	PipeTransform,
 } from '@nestjs/common';
-import { ZodSchema } from 'zod';
+import { z } from 'zod';
 
 @Injectable()
-export class ZodValidationPipe implements PipeTransform {
-	constructor(private schema: ZodSchema) {}
+export class ZodValidationPipe<S extends z.ZodTypeAny>
+	implements PipeTransform<unknown, z.infer<S>>
+{
+	constructor(private schema: S) {}
 
 	private readonly logger = new Logger(ZodValidationPipe.name);
 
-	transform(value: unknown, metadata: ArgumentMetadata) {
+	transform(value: unknown, metadata: ArgumentMetadata): z.infer<S> {
 		// only apply validation to the body
 		if (metadata.type !== 'body') {
 			return value;
