@@ -17,11 +17,6 @@ export const QueryParser = createParamDecorator(
 	(options: Partial<RequestQueryOptions>, ctx: ExecutionContext) => {
 		const request = ctx.switchToHttp().getRequest<Request>();
 
-		// validate input
-		// new ZodValidationPipe(queryOptionsRequestSchema).transform(request.query, {
-		// 	type: 'query',
-		// });
-
 		// parse with prisma-utils
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { filter, ...parsed } = new RequestParserService().parseQuery(

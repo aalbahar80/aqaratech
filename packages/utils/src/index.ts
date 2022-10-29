@@ -40,7 +40,6 @@ export {
 	propertyCreateSchema,
 	propertyUpdateSchema,
 	queryOptionsParsedSchema,
-	queryOptionsRequestSchema,
 	roleCreateSchema,
 	tenantCreateSchema,
 	tenantUpdateSchema,
