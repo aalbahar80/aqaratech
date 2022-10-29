@@ -19,7 +19,6 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { WinstonConfigService } from 'src/config/winston-config.service';
 import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
-import { LoggingInterceptor } from 'src/interceptors/logging.interceptor';
 import { TimeoutInterceptor } from 'src/interceptors/timeout.interceptor';
 import { S3Service } from 'src/s3/s3.service';
 import { TraceMiddleware } from 'src/sentry/trace.middleware';
@@ -38,6 +37,7 @@ import { SearchModule } from './search/search.module';
 import { RoleGuard } from 'src/casl/role.guard';
 import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
+import { LoggingMiddleware } from 'src/middleware/logging.middleware';
 import { MyValidationPipe } from 'src/pipes/my-validation.pipe';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
@@ -120,10 +120,6 @@ import { UsersModule } from './users/users.module';
 	providers: [
 		{
 			provide: APP_INTERCEPTOR,
-			useClass: LoggingInterceptor,
-		},
-		{
-			provide: APP_INTERCEPTOR,
 			useClass: ErrorsInterceptor,
 		},
 		{
@@ -147,7 +143,7 @@ import { UsersModule } from './users/users.module';
 })
 export class AppModule {
 	configure(consumer: MiddlewareConsumer): void {
-		// consumer.apply(LoggingMiddleware).forRoutes('*');
+		consumer.apply(LoggingMiddleware).forRoutes('*');
 		consumer.apply(TraceMiddleware).forRoutes('*');
 	}
 }
