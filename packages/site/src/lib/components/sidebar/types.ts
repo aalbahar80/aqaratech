@@ -1,8 +1,10 @@
+import type { SvelteComponentTyped } from 'svelte';
+
 export interface NavigationItem {
 	name: string;
 	href: string;
 	// TODO: change to icon type
-	icon?: any;
+	icon?: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
 	children?: {
 		name: string;
 		href: string;
