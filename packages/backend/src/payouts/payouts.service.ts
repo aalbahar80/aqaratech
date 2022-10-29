@@ -1,18 +1,12 @@
-import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
-import { frisk } from 'src/casl/frisk';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { IUser } from 'src/interfaces/user.interface';
-import {
-	CreatePayoutDto,
-	PayoutDto,
-	UpdatePayoutDto,
-} from 'src/payouts/dto/payout.dto';
+import { CreatePayoutDto, PayoutDto } from 'src/payouts/dto/payout.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -22,19 +16,18 @@ export class PayoutsService {
 
 	async create({
 		createPayoutDto,
-		user,
+		organizationId,
 	}: {
 		createPayoutDto: CreatePayoutDto;
-		user: IUser;
+		organizationId: string;
 	}) {
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Create,
-			subject(this.SubjectType, createPayoutDto),
-		);
-
 		const created = await this.prisma.payout.create({
-			data: createPayoutDto,
+			data: {
+				...createPayoutDto,
+				organizationId,
+			},
 		});
+
 		const payout = new PayoutDto(created);
 
 		return payout;

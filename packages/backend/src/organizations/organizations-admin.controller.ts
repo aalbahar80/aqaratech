@@ -213,11 +213,11 @@ export class OrganizationsAdminController {
 	@Post('/payouts')
 	@CheckAbilities({ action: Action.Create, subject: 'Payout', useParams: true })
 	createPayout(
-		@User() user: IUser,
+		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(payoutCreateSchema))
 		createPayoutDto: CreatePayoutDto,
 	): Promise<PayoutDto> {
-		return this.payoutsService.create({ createPayoutDto, user });
+		return this.payoutsService.create({ createPayoutDto, organizationId });
 	}
 
 	@Post('/files')

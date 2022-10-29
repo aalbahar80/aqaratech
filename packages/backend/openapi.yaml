@@ -1630,31 +1630,6 @@ paths:
                 $ref: '#/components/schemas/PayoutDto'
       tags: *ref_13
       security: *ref_14
-    patch:
-      operationId: PayoutsController_update
-      summary: ''
-      description: ''
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdatePayoutDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_13
-      security: *ref_14
     delete:
       operationId: PayoutsController_remove
       summary: ''
@@ -2441,7 +2416,12 @@ paths:
       operationId: OrganizationsAdminController_createPayout
       summary: ''
       description: ''
-      parameters: []
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -3520,21 +3500,6 @@ components:
         label:
           type: string
           nullable: true
-    UpdatePayoutDto:
-      type: object
-      properties:
-        postAt:
-          type: string
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        amount:
-          type: number
-          minimum: 1
-        memo:
-          type: string
-          nullable: true
     ByMonthDto:
       type: object
       properties:
@@ -4080,23 +4045,19 @@ components:
     CreatePayoutDto:
       type: object
       properties:
-        postAt:
-          type: string
-        organizationId:
-          type: string
         portfolioId:
           type: string
         amount:
           type: number
-          minimum: 1
+        postAt:
+          type: string
         memo:
           type: string
           nullable: true
       required:
-        - postAt
-        - organizationId
         - portfolioId
         - amount
+        - postAt
     FileRelationKeyEnum:
       type: string
       enum:
