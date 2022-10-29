@@ -7,7 +7,7 @@ import {
 	LoggerService,
 	NestInterceptor,
 } from '@nestjs/common';
-import { formatResponseLog, isHealthCheck } from '@self/utils';
+import { isHealthCheck } from '@self/utils';
 import { Request, Response } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Observable } from 'rxjs';
@@ -53,7 +53,7 @@ export class LoggingInterceptor implements NestInterceptor {
 
 					const { statusCode } = response;
 
-					this.logResponse({ request, url, statusCode, start });
+					this.httpLogger.logResponse({ request, url, statusCode, start });
 				},
 
 				error: (err) => {
@@ -70,7 +70,7 @@ export class LoggingInterceptor implements NestInterceptor {
 							this.logger.error('Unable to get error status message', e);
 						}
 
-						this.logResponse({
+						this.httpLogger.logResponse({
 							request,
 							url,
 							statusCode: err.getStatus(),
@@ -79,7 +79,7 @@ export class LoggingInterceptor implements NestInterceptor {
 						});
 					} else {
 						// TODO: monitor
-						this.logResponse({
+						this.httpLogger.logResponse({
 							request,
 							url,
 							statusCode: 500,
@@ -92,53 +92,5 @@ export class LoggingInterceptor implements NestInterceptor {
 				},
 			}),
 		);
-	}
-
-	private logResponse({
-		request,
-		statusCode,
-		statusMessage,
-		start,
-		url,
-	}: {
-		request: Request;
-		statusCode: number;
-		statusMessage?: string;
-		start: number;
-		url: URL;
-	}) {
-		// TODO: fix ip
-
-		const text = formatResponseLog({
-			response: { status: statusCode },
-			method: request.method,
-			url,
-			start,
-			extra: {
-				ip: request.ip,
-				userAgent: request.get('user-agent') ?? '',
-				statusMessage,
-			},
-		});
-
-		if (statusCode >= 500) {
-			this.logger.error(
-				{
-					...text,
-					level: 'error',
-				},
-				'Response',
-			);
-		} else if (statusCode >= 400) {
-			this.logger.warn(
-				{
-					...text,
-					level: 'warn',
-				},
-				'Response',
-			);
-		} else {
-			this.logger.log(text, 'Response');
-		}
 	}
 }
