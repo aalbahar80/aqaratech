@@ -43,19 +43,6 @@
 					<SidebarItem {item} />
 				{/each}
 			</nav>
-
-			<div class="-mx-2 flex items-center px-4">
-				<img
-					class="mx-2 h-9 w-9 rounded-full object-cover"
-					src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-					alt="avatar"
-				/>
-				<h4
-					class="mx-2 font-medium text-gray-800 hover:underline dark:text-gray-200"
-				>
-					John Doe
-				</h4>
-			</div>
 		</div>
 	</div>
 </aside>
