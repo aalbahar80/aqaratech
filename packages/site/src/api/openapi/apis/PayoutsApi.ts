@@ -13,12 +13,7 @@
  */
 
 import * as runtime from '../runtime';
-import type {
-	PaginatedPayoutDto,
-	PayoutDto,
-	SortOrderEnum,
-	UpdatePayoutDto,
-} from '../models';
+import type { PaginatedPayoutDto, PayoutDto, SortOrderEnum } from '../models';
 
 export interface PayoutsApiFindAllRequest {
 	page?: number;
@@ -34,11 +29,6 @@ export interface PayoutsApiFindOneRequest {
 
 export interface PayoutsApiRemoveRequest {
 	id: string;
-}
-
-export interface PayoutsApiUpdateRequest {
-	id: string;
-	updatePayoutDto: UpdatePayoutDto;
 }
 
 /**
@@ -107,26 +97,6 @@ export interface PayoutsApiInterface {
 		requestParameters: PayoutsApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<string>;
-
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof PayoutsApiInterface
-	 */
-	updateRaw(
-		requestParameters: PayoutsApiUpdateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PayoutDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	update(
-		requestParameters: PayoutsApiUpdateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PayoutDto>;
 }
 
 /**
@@ -281,66 +251,6 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<string> {
 		const response = await this.removeRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async updateRaw(
-		requestParameters: PayoutsApiUpdateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PayoutDto>> {
-		if (requestParameters.id === null || requestParameters.id === undefined) {
-			throw new runtime.RequiredError(
-				'id',
-				'Required parameter requestParameters.id was null or undefined when calling update.',
-			);
-		}
-
-		if (
-			requestParameters.updatePayoutDto === null ||
-			requestParameters.updatePayoutDto === undefined
-		) {
-			throw new runtime.RequiredError(
-				'updatePayoutDto',
-				'Required parameter requestParameters.updatePayoutDto was null or undefined when calling update.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		headerParameters['Content-Type'] = 'application/json';
-
-		const response = await this.request(
-			{
-				path: `/payouts/{id}`.replace(
-					`{${'id'}}`,
-					encodeURIComponent(String(requestParameters.id)),
-				),
-				method: 'PATCH',
-				headers: headerParameters,
-				query: queryParameters,
-				body: requestParameters.updatePayoutDto,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async update(
-		requestParameters: PayoutsApiUpdateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PayoutDto> {
-		const response = await this.updateRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
 }

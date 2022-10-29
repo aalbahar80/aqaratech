@@ -528,18 +528,6 @@ export interface CreatePayoutDto {
 	 * @type {string}
 	 * @memberof CreatePayoutDto
 	 */
-	postAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreatePayoutDto
-	 */
-	organizationId: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreatePayoutDto
-	 */
 	portfolioId: string;
 	/**
 	 *
@@ -547,6 +535,12 @@ export interface CreatePayoutDto {
 	 * @memberof CreatePayoutDto
 	 */
 	amount: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatePayoutDto
+	 */
+	postAt: string;
 	/**
 	 *
 	 * @type {string}
@@ -2949,43 +2943,6 @@ export interface UpdateOrganizationDto {
 	 * @memberof UpdateOrganizationDto
 	 */
 	label?: string | null;
-}
-/**
- *
- * @export
- * @interface UpdatePayoutDto
- */
-export interface UpdatePayoutDto {
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdatePayoutDto
-	 */
-	postAt?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdatePayoutDto
-	 */
-	organizationId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdatePayoutDto
-	 */
-	portfolioId?: string;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof UpdatePayoutDto
-	 */
-	amount?: number;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdatePayoutDto
-	 */
-	memo?: string | null;
 }
 /**
  *

@@ -68,6 +68,7 @@ export interface OrganizationsApiCreateLeaseInvoiceRequest {
 }
 
 export interface OrganizationsApiCreatePayoutRequest {
+	organizationId: string;
 	createPayoutDto: CreatePayoutDto;
 }
 
@@ -815,6 +816,16 @@ export class OrganizationsApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<PayoutDto>> {
 		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling createPayout.',
+			);
+		}
+
+		if (
 			requestParameters.createPayoutDto === null ||
 			requestParameters.createPayoutDto === undefined
 		) {
@@ -832,7 +843,10 @@ export class OrganizationsApi
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/payouts`,
+				path: `/organizations/{organizationId}/payouts`.replace(
+					`{${'organizationId'}}`,
+					encodeURIComponent(String(requestParameters.organizationId)),
+				),
 				method: 'POST',
 				headers: headerParameters,
 				query: queryParameters,
