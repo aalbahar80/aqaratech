@@ -4,13 +4,15 @@ import {
 	ExecutionContext,
 	ForbiddenException,
 	HttpException,
+	Inject,
 	Injectable,
 	InternalServerErrorException,
-	Logger,
+	LoggerService,
 	NestInterceptor,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Request } from 'express';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { mapPrismaException } from 'src/prisma/prisma-exception-mapper';
@@ -28,7 +30,10 @@ import { UserDto } from 'src/users/dto/user.dto';
  */
 @Injectable()
 export class ErrorsInterceptor implements NestInterceptor {
-	private readonly logger = new Logger(ErrorsInterceptor.name);
+	constructor(
+		@Inject(WINSTON_MODULE_NEST_PROVIDER)
+		private readonly logger: LoggerService,
+	) {}
 
 	intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
 		const request = context.switchToHttp().getRequest<Request>();
@@ -44,7 +49,7 @@ export class ErrorsInterceptor implements NestInterceptor {
 					}
 					// TODO add err.message where appropriate
 					if (err instanceof ForbiddenError) {
-						this.logger.debug(
+						this.logger.debug?.(
 							`User with id: ${user.id} email: ${user.email} - is forbidden to - ${err.action} - ${err.subjectType} - ${err.subject}`,
 						);
 
@@ -55,7 +60,7 @@ export class ErrorsInterceptor implements NestInterceptor {
 					) {
 						return mapPrismaException(err);
 					} else {
-						this.logger.verbose('Unknown error. Returning 500');
+						this.logger.verbose?.('Unknown error. Returning 500');
 						return new InternalServerErrorException();
 					}
 				});
