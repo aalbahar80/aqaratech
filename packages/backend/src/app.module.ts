@@ -36,6 +36,7 @@ import { SearchModule } from './search/search.module';
 // resources
 import { RoleGuard } from 'src/casl/role.guard';
 import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
+import { ResponseInterceptor } from 'src/http-logger/response.interceptor';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { LoggingMiddleware } from 'src/middleware/logging.middleware';
 import { MyValidationPipe } from 'src/pipes/my-validation.pipe';
@@ -118,6 +119,10 @@ import { UsersModule } from './users/users.module';
 	],
 	controllers: [AppController],
 	providers: [
+		{
+			provide: APP_INTERCEPTOR,
+			useClass: ResponseInterceptor,
+		},
 		{
 			provide: APP_INTERCEPTOR,
 			useClass: ErrorsInterceptor,
