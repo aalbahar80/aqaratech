@@ -7,7 +7,11 @@ import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineDocumentReport from '~icons/heroicons-outline/document-report';
 import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text';
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
+import HeroiconsOutlineLogout from '~icons/heroicons-outline/logout';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
+
+// Links
+import { LOGOUT } from '$lib/constants/routes';
 
 export const getNavigationTree = (user: User): NavigationItem[] => [
 	{
@@ -48,5 +52,10 @@ export const getNavigationTree = (user: User): NavigationItem[] => [
 		href: '/settings/',
 		icon: HeroiconsOutlineCog8Tooth,
 		// path: '/settings/',
+	},
+	{
+		name: 'Logout',
+		href: LOGOUT,
+		icon: HeroiconsOutlineLogout,
 	},
 ];
