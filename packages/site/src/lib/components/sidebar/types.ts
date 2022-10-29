@@ -1,4 +1,4 @@
-export interface Navigation {
+export interface NavigationItem {
 	name: string;
 	href: string;
 	// TODO: change to icon type
