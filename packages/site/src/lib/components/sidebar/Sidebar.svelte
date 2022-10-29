@@ -9,7 +9,9 @@
 	<div
 		class="flex h-screen w-64 flex-col border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900"
 	>
-		<h2 class="text-3xl font-semibold text-gray-800 dark:text-white">Brand</h2>
+		<h2 class="text-3xl font-semibold text-gray-800 dark:text-white">
+			Aqaratech
+		</h2>
 
 		<div class="relative mt-6">
 			<span class="absolute inset-y-0 left-0 flex items-center pl-3">
