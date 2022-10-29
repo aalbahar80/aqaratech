@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
+	import SidebarItemExpandable from '$lib/components/sidebar/SidebarItemExpandable.svelte';
 </script>
 
 <div
@@ -29,8 +30,8 @@
 
 	<div class="mt-6 flex flex-1 flex-col justify-between">
 		<nav>
-			<a href="#"
-				><SidebarItem text="Dashboard">
+			<a href="#">
+				<SidebarItem text="Dashboard">
 					<svg
 						class="h-5 w-5"
 						viewBox="0 0 24 24"
@@ -45,13 +46,15 @@
 							stroke-linejoin="round"
 						/>
 					</svg>
-				</SidebarItem></a
-			>
+				</SidebarItem>
+			</a>
+
+			<SidebarItemExpandable text="Financials" />
 
 			<hr class="my-6 border-gray-200 dark:border-gray-600" />
 
-			<a href="#"
-				><SidebarItem text="Account">
+			<a href="#">
+				<SidebarItem text="Account">
 					<svg
 						class="h-5 w-5"
 						viewBox="0 0 24 24"
@@ -73,11 +76,11 @@
 							stroke-linejoin="round"
 						/>
 					</svg>
-				</SidebarItem></a
-			>
+				</SidebarItem>
+			</a>
 
-			<a href="#"
-				><SidebarItem text="Settings">
+			<a href="#">
+				<SidebarItem text="Settings">
 					<svg
 						class="h-5 w-5"
 						viewBox="0 0 24 24"
@@ -99,8 +102,8 @@
 							stroke-linejoin="round"
 						/>
 					</svg>
-				</SidebarItem></a
-			>
+				</SidebarItem>
+			</a>
 		</nav>
 
 		<div class="-mx-2 flex items-center px-4">
