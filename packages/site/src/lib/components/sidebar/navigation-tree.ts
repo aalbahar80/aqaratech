@@ -1,5 +1,9 @@
 import type { NavigationItem } from '$lib/components/sidebar/types';
+import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
+import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text';
+import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
+import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
 
 export const navigationTree: NavigationItem[] = [
 	{
@@ -22,22 +26,23 @@ export const navigationTree: NavigationItem[] = [
 	{
 		name: 'Properties',
 		href: '/properties/',
-		icon: HeroiconsOutlineCollection,
+		icon: HeroiconsOutlineHome,
 	},
 	{
 		name: 'Leases',
 		href: '/leases/',
-		icon: HeroiconsOutlineCollection,
+		icon: HeroiconsOutlineDocumentText,
 	},
 	{
 		name: 'Account',
 		href: '/account/',
-		icon: HeroiconsOutlineCollection,
+		icon: HeroiconsOutlineUser,
+		divided: true,
 	},
 	{
 		name: 'Settings',
 		href: '/settings/',
-		icon: HeroiconsOutlineCollection,
+		icon: HeroiconsOutlineCog8Tooth,
 		// path: '/settings/',
 	},
 ];

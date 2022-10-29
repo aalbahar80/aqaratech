@@ -10,4 +10,5 @@ export interface NavigationItem {
 		href: string;
 	}[];
 	path?: string;
+	divided?: boolean;
 }

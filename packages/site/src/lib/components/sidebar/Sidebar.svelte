@@ -34,10 +34,12 @@
 		<div class="mt-6 flex flex-1 flex-col justify-between">
 			<nav>
 				{#each navigationTree as item}
+					{#if item.divided}
+						<hr class="my-6 border-gray-200 dark:border-gray-600" />
+					{/if}
+
 					<SidebarItem {item} />
 				{/each}
-
-				<hr class="my-6 border-gray-200 dark:border-gray-600" />
 			</nav>
 
 			<div class="-mx-2 flex items-center px-4">
