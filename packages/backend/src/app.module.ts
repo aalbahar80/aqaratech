@@ -36,6 +36,7 @@ import { SearchModule } from './search/search.module';
 
 // resources
 import { RoleGuard } from 'src/casl/role.guard';
+import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { MyValidationPipe } from 'src/pipes/my-validation.pipe';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -141,10 +142,12 @@ import { UsersModule } from './users/users.module';
 		{ provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
 		S3Service,
 		PostmarkService,
+		HttpLoggerService,
 	],
 })
 export class AppModule {
 	configure(consumer: MiddlewareConsumer): void {
+		// consumer.apply(LoggingMiddleware).forRoutes('*');
 		consumer.apply(TraceMiddleware).forRoutes('*');
 	}
 }

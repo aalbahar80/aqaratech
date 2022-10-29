@@ -7,21 +7,19 @@ import {
 	LoggerService,
 	NestInterceptor,
 } from '@nestjs/common';
-import {
-	formatRequestLog,
-	formatResponseLog,
-	isHealthCheck,
-} from '@self/utils';
+import { formatResponseLog, isHealthCheck } from '@self/utils';
 import { Request, Response } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
 	constructor(
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
+		private readonly httpLogger: HttpLoggerService,
 	) {}
 
 	intercept(
@@ -35,8 +33,6 @@ export class LoggingInterceptor implements NestInterceptor {
 			`${request.protocol}://${request.get('host') ?? ''}`,
 		);
 
-		// TODO: req.url vs req.baseUrl vs req.originalUrl
-
 		// skip logging health checks
 		if (
 			isHealthCheck(request.url) &&
@@ -45,7 +41,7 @@ export class LoggingInterceptor implements NestInterceptor {
 			return next.handle();
 		}
 
-		this.logRequest(request, url);
+		this.httpLogger.logRequest(request, url);
 
 		const start = Date.now();
 
@@ -96,19 +92,6 @@ export class LoggingInterceptor implements NestInterceptor {
 				},
 			}),
 		);
-	}
-
-	private logRequest(request: Request, url: URL) {
-		const log = formatRequestLog({
-			request,
-			url,
-			extra: {
-				ip: request.ip,
-				userAgent: request.get('user-agent') ?? '',
-			},
-		});
-
-		this.logger.log(log, 'Request');
 	}
 
 	private logResponse({
