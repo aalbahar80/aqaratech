@@ -1,8 +1,7 @@
 import { expect } from '@playwright/test';
 import { getUrl } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
-
-const aggregateTypes = ['incomeAggregate', 'expensesAggregate'] as const;
+import { aggregateTypes } from './aggregate-types';
 
 for (const agg of aggregateTypes) {
 	test(`${agg} returns array of date & amount`, async ({
