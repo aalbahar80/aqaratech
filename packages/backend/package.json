@@ -65,6 +65,8 @@
 		"jwks-rsa": "2.1.5",
 		"lodash": "4.17.21",
 		"meilisearch": "0.27.0",
+		"moment": "2.29.4",
+		"moment-range": "4.0.2",
 		"nest-winston": "1.7.1",
 		"passport": "0.6.0",
 		"passport-jwt": "4.0.0",

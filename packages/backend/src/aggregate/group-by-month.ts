@@ -1,6 +1,9 @@
+import { monthsInRange } from 'src/utils/months-in-range';
+
 export const groupByMonth = (
-	records: { amount: number; postAt: Date }[],
-): { date: string; amount: number }[] => {
+	records: Records[],
+	options?: GroupByMonthOptions,
+): GroupedByMonth[] => {
 	const byMonth = records.reduce<Record<string, number>>((acc, record) => {
 		const date = record.postAt.toISOString().split('T')[0];
 		const month = date.split('-')[1];
@@ -31,5 +34,56 @@ export const groupByMonth = (
 		return bDate.getTime() - aDate.getTime();
 	});
 
-	return byMonthArray;
+	// fill in missing months
+	if (options?.includeEmptyMonths) {
+		const withEmptyMonths = addEmptyMonths(byMonthArray, {
+			start: options.start,
+			end: options.end,
+		});
+
+		return withEmptyMonths;
+	} else {
+		return byMonthArray;
+	}
 };
+
+export const addEmptyMonths = (
+	records: GroupedByMonth[],
+	options: { start: string; end: string },
+) => {
+	const months = monthsInRange(options.start, options.end);
+
+	const recordsWithEmptyMonths = months.map((month) => {
+		const record = records.find((r) => r.date === month);
+		if (record) {
+			return record;
+		} else {
+			return {
+				date: month,
+				amount: 0,
+			};
+		}
+	});
+
+	return recordsWithEmptyMonths;
+};
+
+interface Records {
+	amount: number;
+	postAt: Date;
+}
+
+export interface GroupedByMonth {
+	date: string;
+	amount: number;
+}
+
+type GroupByMonthOptions =
+	| {
+			includeEmptyMonths: false;
+	  }
+	| {
+			includeEmptyMonths: true;
+			start: string;
+			end: string;
+	  };
