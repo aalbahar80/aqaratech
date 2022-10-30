@@ -1,36 +1,7 @@
 import { chromium, type FullConfig } from '@playwright/test';
-import {
-	testOrgEmail,
-	testPassword,
-	testPortfolioEmail,
-	testTenantEmail,
-} from '@self/seed';
 import { Cookie } from '@self/utils';
+import { testUsers } from './tests/api/fixtures/users/test-users';
 import { getToken } from './utils/get-token';
-
-const roles = [
-	{
-		roleType: 'ORGADMIN',
-		email: testOrgEmail,
-		password: testPassword,
-		storageStatePath: 'storage-state/org-admin.json',
-		storageStateFilename: 'org-admin.json',
-	},
-	{
-		roleType: 'PORTFOLIO',
-		email: testPortfolioEmail,
-		password: testPassword,
-		storageStatePath: 'storage-state/portfolio.json',
-		storageStateFilename: 'portfolio.json',
-	},
-	{
-		roleType: 'TENANT',
-		email: testTenantEmail,
-		password: testPassword,
-		storageStatePath: 'storage-state/tenant.json',
-		storageStateFilename: 'tenant.json',
-	},
-];
 
 async function globalSetup(config: FullConfig) {
 	const project = config.projects[0];
@@ -52,8 +23,8 @@ async function globalSetup(config: FullConfig) {
 		password,
 		storageStatePath,
 		storageStateFilename,
-	} of roles) {
-		console.log(`Checking auth cookies for roletype: ${roleType}...`);
+	} of testUsers) {
+		console.log(`Checking auth cookies for user.roletype: ${roleType}...`);
 
 		// Avoid logging in again if cookies have not expired
 		try {
