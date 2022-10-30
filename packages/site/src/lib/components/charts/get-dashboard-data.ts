@@ -5,10 +5,10 @@ import {
 	defaultRangeEnd,
 	getOneYearAgo,
 	getOneYearLater,
-	rangeStart,
 } from '$lib/components/charts/utils/date-range';
 import { TAKE_MAX_EXPENSES } from '$lib/constants/pagination-keys';
 import { parseParams } from '$lib/utils/parse-params';
+import { startOfMonthN } from '@self/utils';
 
 export const getDashboardData = ({
 	api,
@@ -43,7 +43,7 @@ export const getDashboardData = ({
 	};
 
 	if (!filter.start && !filter.end) {
-		filter.start = rangeStart(defaultRange);
+		filter.start = startOfMonthN(defaultRange);
 		filter.end = defaultRangeEnd();
 	}
 
@@ -67,8 +67,8 @@ export const getDashboardData = ({
 			...filter,
 			// Always get the last year's occupancy (atleast)
 			start: clampedDate(
-				filter.start || rangeStart(defaultRange),
-				filter.start || rangeStart(defaultRange),
+				filter.start || startOfMonthN(defaultRange),
+				filter.start || startOfMonthN(defaultRange),
 				getOneYearAgo().toISOString(),
 			),
 		}),

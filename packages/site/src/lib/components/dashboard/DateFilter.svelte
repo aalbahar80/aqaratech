@@ -4,12 +4,12 @@
 	import {
 		defaultRange,
 		defaultRangeEnd,
-		rangeStart,
 	} from '$lib/components/charts/utils/date-range';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { toDateInput } from '$lib/utils/common';
+	import { startOfMonthN } from '@self/utils';
 
-	$: start = $page.url.searchParams.get('start') || rangeStart(defaultRange);
+	$: start = $page.url.searchParams.get('start') || startOfMonthN(defaultRange);
 	$: end = $page.url.searchParams.get('end') || defaultRangeEnd();
 
 	const rangeOptions = [
@@ -49,7 +49,7 @@
 				if (value !== null && value !== undefined) {
 					// value of zero is acceptable here since it represents month-to-date
 					const url = new URL($page.url);
-					url.searchParams.set('start', rangeStart(value));
+					url.searchParams.set('start', startOfMonthN(value));
 					url.searchParams.set('end', new Date().toISOString());
 					goto(url, { noscroll: true, keepfocus: true });
 				}

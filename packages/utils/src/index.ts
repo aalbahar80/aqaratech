@@ -3,6 +3,8 @@ export { getSentryConfig } from './config/get-sentry-config';
 export { isHealthCheck } from './config/is-health-check';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
 export { Cookie } from './constants/cookie';
+export { endOfMonthN } from './date/end-of-month-n';
+export { startOfMonthN } from './date/start-of-month-n';
 export { dbEntity, nonDbEntity } from './entity/entity-definition';
 export type { DBEntity, Entity, NonDBEntity } from './entity/entity-definition';
 export { entitiesMap } from './entity/entity-map';
