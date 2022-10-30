@@ -6,8 +6,11 @@ interface TokenReq {
 	domain: string | undefined;
 }
 
-export const getToken = async ({ name, domain }: TokenReq) => {
-	const cookies = await getCookies();
+export const getToken = async (
+	{ name, domain }: TokenReq,
+	filename: string,
+) => {
+	const cookies = await getCookies(filename);
 
 	const token = cookies.find((c) => c.name === name);
 
@@ -28,8 +31,11 @@ export const getToken = async ({ name, domain }: TokenReq) => {
 	return token.value;
 };
 
-const getCookies = async () => {
-	const cookies = (await import('../storageState.json')).cookies;
+const getCookies = async (filename: string) => {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+	const cookies = (await import(`../storage-state/${filename}`))
+		.cookies as Cookies;
+
 	return cookies;
 };
 
@@ -39,3 +45,5 @@ const hasJWTExpired = (token: string) => {
 	const payload = decodeJwt(token);
 	return !payload.exp || hasExpired(payload?.exp);
 };
+
+type Cookies = typeof import('../storage-state/org-admin.json')['cookies'];

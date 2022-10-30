@@ -26,7 +26,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	maxFailures: 20,
 	grepInvert: [/smoke/],
 	use: {
-		storageState: 'storageState.json',
+		storageState: 'storage-state/org-admin.json',
 		headless: true,
 		ignoreHTTPSErrors: true,
 		bypassCSP: true,

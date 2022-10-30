@@ -26,3 +26,4 @@ test-results/
 playwright-report/
 storageState.json
 **/*snapshots/*.png
+storage-state
