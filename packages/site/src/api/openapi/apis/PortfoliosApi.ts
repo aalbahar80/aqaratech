@@ -77,6 +77,14 @@ export interface PortfoliosApiGetBalanceRequest {
 	id: string;
 }
 
+export interface PortfoliosApiGetExpensesByMonthRequest {
+	portfolioId: string;
+	start?: string;
+	end?: string;
+	propertyId?: string;
+	unitId?: string;
+}
+
 export interface PortfoliosApiGetIncomeByMonthRequest {
 	portfolioId: string;
 	start?: string;
@@ -240,6 +248,26 @@ export interface PortfoliosApiInterface {
 		requestParameters: PortfoliosApiGetBalanceRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<BalanceDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof PortfoliosApiInterface
+	 */
+	getExpensesByMonthRaw(
+		requestParameters: PortfoliosApiGetExpensesByMonthRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<Array<GroupByMonthDto>>>;
+
+	/**
+	 *
+	 *
+	 */
+	getExpensesByMonth(
+		requestParameters: PortfoliosApiGetExpensesByMonthRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<Array<GroupByMonthDto>>;
 
 	/**
 	 *
@@ -767,6 +795,75 @@ export class PortfoliosApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<BalanceDto> {
 		const response = await this.getBalanceRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async getExpensesByMonthRaw(
+		requestParameters: PortfoliosApiGetExpensesByMonthRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<Array<GroupByMonthDto>>> {
+		if (
+			requestParameters.portfolioId === null ||
+			requestParameters.portfolioId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'portfolioId',
+				'Required parameter requestParameters.portfolioId was null or undefined when calling getExpensesByMonth.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		if (requestParameters.start !== undefined) {
+			queryParameters['start'] = requestParameters.start;
+		}
+
+		if (requestParameters.end !== undefined) {
+			queryParameters['end'] = requestParameters.end;
+		}
+
+		if (requestParameters.propertyId !== undefined) {
+			queryParameters['propertyId'] = requestParameters.propertyId;
+		}
+
+		if (requestParameters.unitId !== undefined) {
+			queryParameters['unitId'] = requestParameters.unitId;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses`.replace(
+					`{${'portfolioId'}}`,
+					encodeURIComponent(String(requestParameters.portfolioId)),
+				),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async getExpensesByMonth(
+		requestParameters: PortfoliosApiGetExpensesByMonthRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<Array<GroupByMonthDto>> {
+		const response = await this.getExpensesByMonthRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

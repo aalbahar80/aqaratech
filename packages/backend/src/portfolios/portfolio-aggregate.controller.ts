@@ -37,4 +37,27 @@ export class PortfolioAggregateController {
 			options: queryOptions,
 		});
 	}
+
+	@Get('/expenses')
+	@CheckAbilities({
+		action: Action.Read,
+		subject: 'Portfolio',
+		useParams: true,
+		overrideParams: {
+			portfolioId: 'id',
+		},
+	})
+	// Will NOT return a 404 if all the following is true:
+	// 1. the portfolio does not exist
+	// 2. user.role is ORGADMIN & has access to organizationId in params
+	getExpensesByMonth(
+		@Param('portfolioId') portfolioId: string,
+		@Query(new ZodValidationPipe(aggregateOptionsSchema))
+		queryOptions: AggregateOptionsDto,
+	): Promise<GroupByMonthDto[]> {
+		return this.aggregateService.portfolioExpensesByMonth({
+			portfolioId,
+			options: queryOptions,
+		});
+	}
 }

@@ -71,6 +71,36 @@ export class AggregateService {
 		return grouped;
 	}
 
+	async portfolioExpensesByMonth({
+		portfolioId,
+		options,
+	}: {
+		portfolioId: string;
+		options: AggregateOptionsDto;
+	}) {
+		const expenses = await this.prisma.expense.findMany({
+			where: {
+				AND: [
+					{
+						portfolioId,
+						propertyId: options.propertyId,
+						unitId: options.unitId,
+						postAt: { gte: options.start, lte: options.end },
+					},
+				],
+			},
+			select: { amount: true, postAt: true },
+		});
+
+		const grouped = groupByMonth(expenses, {
+			includeEmptyMonths: true,
+			start: options.start,
+			end: options.end,
+		});
+
+		return grouped;
+	}
+
 	async expensesByMonth({
 		filter,
 		user,

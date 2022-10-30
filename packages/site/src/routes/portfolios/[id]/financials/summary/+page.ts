@@ -4,7 +4,7 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async ({ fetch, params }) => {
 	const api = createApi(fetch);
 
-	const [properties, income] = await Promise.all([
+	const [properties, income, expenses] = await Promise.all([
 		api.portfolios.findProperties({
 			id: params.id,
 		}),
@@ -12,10 +12,15 @@ export const load: PageLoad = async ({ fetch, params }) => {
 		api.portfolios.getIncomeByMonth({
 			portfolioId: params.id,
 		}),
+
+		api.portfolios.getExpensesByMonth({
+			portfolioId: params.id,
+		}),
 	]);
 
 	return {
 		properties,
 		income,
+		expenses,
 	};
 };

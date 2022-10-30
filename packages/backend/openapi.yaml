@@ -1250,10 +1250,52 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GroupByMonthDto'
-      tags:
+      tags: &ref_9
         - portfolios
-      security:
+      security: &ref_10
         - accessToken: []
+  /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses:
+    get:
+      operationId: PortfolioAggregateController_getExpensesByMonth
+      summary: ''
+      description: ''
+      parameters:
+        - name: portfolioId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupByMonthDto'
+      tags: *ref_9
+      security: *ref_10
   /properties:
     get:
       operationId: PropertiesController_findAll
@@ -1306,9 +1348,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: &ref_9
+      tags: &ref_11
         - properties
-      security: &ref_10
+      security: &ref_12
         - accessToken: []
   /properties/{id}:
     get:
@@ -1328,8 +1370,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_11
+      security: *ref_12
     patch:
       operationId: PropertiesController_update
       summary: ''
@@ -1353,8 +1395,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_11
+      security: *ref_12
     delete:
       operationId: PropertiesController_remove
       summary: ''
@@ -1372,8 +1414,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_11
+      security: *ref_12
   /properties/{id}/units:
     get:
       operationId: PropertiesController_findUnits
@@ -1424,8 +1466,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_11
+      security: *ref_12
   /units:
     get:
       operationId: UnitsController_findAll
@@ -1471,9 +1513,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: &ref_11
+      tags: &ref_13
         - units
-      security: &ref_12
+      security: &ref_14
         - accessToken: []
   /units/{id}:
     get:
@@ -1493,8 +1535,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_11
-      security: *ref_12
+      tags: *ref_13
+      security: *ref_14
     patch:
       operationId: UnitsController_update
       summary: ''
@@ -1518,8 +1560,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialUnitDto'
-      tags: *ref_11
-      security: *ref_12
+      tags: *ref_13
+      security: *ref_14
     delete:
       operationId: UnitsController_remove
       summary: ''
@@ -1537,8 +1579,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_11
-      security: *ref_12
+      tags: *ref_13
+      security: *ref_14
   /units/{id}/leases:
     get:
       operationId: UnitsController_findLeases
@@ -1596,8 +1638,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_11
-      security: *ref_12
+      tags: *ref_13
+      security: *ref_14
   /payouts:
     get:
       operationId: PayoutsController_findAll
@@ -1650,9 +1692,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PayoutDto'
-      tags: &ref_13
+      tags: &ref_15
         - payouts
-      security: &ref_14
+      security: &ref_16
         - accessToken: []
   /payouts/{id}:
     get:
@@ -1672,8 +1714,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_13
-      security: *ref_14
+      tags: *ref_15
+      security: *ref_16
     delete:
       operationId: PayoutsController_remove
       summary: ''
@@ -1691,8 +1733,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_13
-      security: *ref_14
+      tags: *ref_15
+      security: *ref_16
   /aggregate/incomeByMonth:
     get:
       operationId: AggregateController_getIncomeByMonth
@@ -1767,7 +1809,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: &ref_15
+      tags: &ref_17
         - aggregate
   /aggregate/expensesByMonth:
     get:
@@ -1809,7 +1851,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ByMonthDto'
-      tags: *ref_15
+      tags: *ref_17
   /aggregate/occupancy:
     get:
       operationId: AggregateController_getOccupancy
@@ -1850,7 +1892,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Occupancy'
-      tags: *ref_15
+      tags: *ref_17
   /users/me:
     get:
       operationId: UsersController_findProfile
@@ -1947,9 +1989,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ExpenseDto'
-      tags: &ref_16
+      tags: &ref_18
         - expenses
-      security: &ref_17
+      security: &ref_19
         - accessToken: []
   /expenses/{id}:
     get:
@@ -1969,8 +2011,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_16
-      security: *ref_17
+      tags: *ref_18
+      security: *ref_19
     patch:
       operationId: ExpensesController_update
       summary: ''
@@ -1994,8 +2036,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialExpenseDto'
-      tags: *ref_16
-      security: *ref_17
+      tags: *ref_18
+      security: *ref_19
     delete:
       operationId: ExpensesController_remove
       summary: ''
@@ -2013,8 +2055,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_16
-      security: *ref_17
+      tags: *ref_18
+      security: *ref_19
   /search:
     post:
       operationId: SearchController_reindexAll
@@ -2024,7 +2066,7 @@ paths:
       responses:
         '201':
           description: ''
-      tags: &ref_18
+      tags: &ref_20
         - search
     delete:
       operationId: SearchController_remove
@@ -2040,7 +2082,7 @@ paths:
                 type: array
                 items:
                   type: object
-      tags: *ref_18
+      tags: *ref_20
   /organizations:
     post:
       operationId: OrganizationsController_create
@@ -2060,9 +2102,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationCreatedDto'
-      tags: &ref_19
+      tags: &ref_21
         - organizations
-      security: &ref_20
+      security: &ref_22
         - accessToken: []
     get:
       operationId: OrganizationsController_findAll
@@ -2086,8 +2128,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_19
-      security: *ref_20
+      tags: *ref_21
+      security: *ref_22
   /organizations/{id}:
     get:
       operationId: OrganizationsController_findOne
@@ -2106,8 +2148,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_19
-      security: *ref_20
+      tags: *ref_21
+      security: *ref_22
     patch:
       operationId: OrganizationsController_update
       summary: ''
@@ -2131,8 +2173,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_19
-      security: *ref_20
+      tags: *ref_21
+      security: *ref_22
     delete:
       operationId: OrganizationsController_remove
       summary: ''
@@ -2150,8 +2192,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_19
-      security: *ref_20
+      tags: *ref_21
+      security: *ref_22
   /organizations/{id}/roles:
     get:
       operationId: OrganizationsController_findRoles
@@ -2209,8 +2251,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_19
-      security: *ref_20
+      tags: *ref_21
+      security: *ref_22
   /organizations/{organizationId}/search:
     get:
       operationId: OrganizationsController_search
@@ -2236,8 +2278,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/SearchDto'
-      tags: *ref_19
-      security: *ref_20
+      tags: *ref_21
+      security: *ref_22
   /organizations/{organizationId}/tenants:
     post:
       operationId: OrganizationsAdminController_createTenant
@@ -2262,9 +2304,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: &ref_21
+      tags: &ref_23
         - organizations
-      security: &ref_22
+      security: &ref_24
         - accessToken: []
   /organizations/{organizationId}/portfolios:
     post:
@@ -2290,8 +2332,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_23
+      security: *ref_24
   /organizations/{organizationId}/properties:
     post:
       operationId: OrganizationsAdminController_createProperty
@@ -2316,8 +2358,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_23
+      security: *ref_24
   /organizations/{organizationId}/units:
     post:
       operationId: OrganizationsAdminController_createUnit
@@ -2342,8 +2384,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialUnitDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_23
+      security: *ref_24
   /organizations/{organizationId}/leases:
     post:
       operationId: OrganizationsAdminController_createLease
@@ -2368,8 +2410,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialLeaseDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_23
+      security: *ref_24
   /organizations/{organizationId}/leaseInvoices:
     post:
       operationId: OrganizationsAdminController_createLeaseInvoice
@@ -2394,8 +2436,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialLeaseInvoiceDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_23
+      security: *ref_24
   /organizations/{organizationId}/lease/{id}/leaseInvoices:
     post:
       operationId: OrganizationsAdminController_createInvoices
@@ -2427,8 +2469,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_23
+      security: *ref_24
   /organizations/{organizationId}/expenses:
     post:
       operationId: OrganizationsAdminController_createExpense
@@ -2453,8 +2495,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartialExpenseDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_23
+      security: *ref_24
   /organizations/{organizationId}/payouts:
     post:
       operationId: OrganizationsAdminController_createPayout
@@ -2479,8 +2521,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_23
+      security: *ref_24
   /organizations/{organizationId}/files:
     post:
       operationId: OrganizationsAdminController_create
@@ -2505,8 +2547,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_21
-      security: *ref_22
+      tags: *ref_23
+      security: *ref_24
   /files:
     get:
       operationId: FilesController_findAll
@@ -2540,9 +2582,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/FileDto'
-      tags: &ref_23
+      tags: &ref_25
         - files
-      security: &ref_24
+      security: &ref_26
         - accessToken: []
     delete:
       operationId: FilesController_remove
@@ -2561,8 +2603,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_23
-      security: *ref_24
+      tags: *ref_25
+      security: *ref_26
   /files/find-one:
     get:
       operationId: FilesController_findOne
@@ -2581,8 +2623,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_23
-      security: *ref_24
+      tags: *ref_25
+      security: *ref_26
   /organizations/{organizationId}/expense-categories:
     post:
       operationId: ExpenseCategoriesController_create
@@ -2607,9 +2649,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: &ref_25
+      tags: &ref_27
         - expense-categories
-      security: &ref_26
+      security: &ref_28
         - accessToken: []
     get:
       operationId: ExpenseCategoriesController_findAll
@@ -2630,8 +2672,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_25
-      security: *ref_26
+      tags: *ref_27
+      security: *ref_28
     patch:
       operationId: ExpenseCategoriesController_updateAll
       summary: ''
@@ -2659,8 +2701,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_25
-      security: *ref_26
+      tags: *ref_27
+      security: *ref_28
   /organizations/{organizationId}/expense-categories/{id}:
     patch:
       operationId: ExpenseCategoriesController_update
@@ -2690,8 +2732,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_25
-      security: *ref_26
+      tags: *ref_27
+      security: *ref_28
 info:
   title: Aqaratech
   description: Aqaratech API
