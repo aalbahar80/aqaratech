@@ -1,6 +1,7 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
+import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { groupByMonth } from 'src/aggregate/group-by-month';
@@ -36,6 +37,38 @@ export class AggregateService {
 		});
 
 		return groupByMonth(leaseInvoices);
+	}
+
+	async portfolioIncomeByMonth({
+		portfolioId,
+		options,
+	}: {
+		portfolioId: string;
+		options: AggregateOptionsDto;
+	}) {
+		const leaseInvoices = await this.prisma.leaseInvoice.findMany({
+			where: {
+				AND: [
+					{ portfolioId, postAt: { gte: options.start, lte: options.end } },
+					this.leaseInvoicesService.parseLocationFilter({
+						filter: {
+							portfolioId,
+							propertyId: options.propertyId,
+							unitId: options.unitId,
+						},
+					}),
+				],
+			},
+			select: { amount: true, postAt: true },
+		});
+
+		const grouped = groupByMonth(leaseInvoices, {
+			includeEmptyMonths: true,
+			start: options.start,
+			end: options.end,
+		});
+
+		return grouped;
 	}
 
 	async expensesByMonth({

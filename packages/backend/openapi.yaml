@@ -1210,6 +1210,50 @@ paths:
                 $ref: '#/components/schemas/BalanceDto'
       tags: *ref_7
       security: *ref_8
+  /portfolios/{portfolioId}/aggregate/income:
+    get:
+      operationId: PortfolioAggregateController_getIncomeByMonth
+      summary: ''
+      description: ''
+      parameters:
+        - name: portfolioId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags:
+        - portfolios
+      security:
+        - accessToken: []
   /properties:
     get:
       operationId: PropertiesController_findAll
