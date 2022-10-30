@@ -94,7 +94,7 @@
 		"@types/js-yaml": "4.0.5",
 		"@types/lodash": "4.14.186",
 		"@types/multer": "1.4.7",
-		"@types/node": "18.11.0",
+		"@types/node": "18.11.8",
 		"@types/passport-jwt": "3.0.7",
 		"@types/supertest": "2.0.12",
 		"eslint-config-custom": "workspace:1.1.0",
