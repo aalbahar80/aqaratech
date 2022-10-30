@@ -23,24 +23,24 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 	return [
 		{
 			name: 'Financials',
-			href: '/tempsample/',
+			href: `/portfolios/${user.role.portfolioId}/financials/summary/`,
 			icon: HeroiconsOutlineDocumentReport,
 			children: [
 				{
 					name: 'Summary',
-					href: `portfolios/${user.role.portfolioId}/financials/summary/`,
+					href: `/portfolios/${user.role.portfolioId}/financials/summary/`,
 				},
 				{
 					name: 'Income',
-					href: `portfolios/${user.role.portfolioId}/financials/income/`,
+					href: `/portfolios/${user.role.portfolioId}/financials/income/`,
 				},
 				{
 					name: 'Expenses',
-					href: `portfolios/${user.role.portfolioId}/financials/expenses/`,
+					href: `/portfolios/${user.role.portfolioId}/financials/expenses/`,
 				},
 				{
 					name: 'Payouts',
-					href: `portfolios/${user.role.portfolioId}/financials/payouts/`,
+					href: `/portfolios/${user.role.portfolioId}/financials/payouts/`,
 				},
 			],
 		},
