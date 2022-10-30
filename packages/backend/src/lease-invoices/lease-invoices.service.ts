@@ -218,12 +218,12 @@ export class LeaseInvoicesService {
 	}): Prisma.LeaseInvoiceWhereInput {
 		let locationFilter: Prisma.LeaseInvoiceWhereInput;
 		if (filter?.unitId) {
-			locationFilter = { lease: { unit: { id: filter.unitId } } };
+			locationFilter = { lease: { unitId: filter.unitId } };
 		} else if (filter?.propertyId) {
 			locationFilter = { lease: { unit: { propertyId: filter.propertyId } } };
 		} else {
 			locationFilter = {
-				lease: { portfolioId: filter?.portfolioId },
+				portfolioId: filter?.portfolioId,
 			};
 		}
 		return locationFilter;
