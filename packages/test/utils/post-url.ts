@@ -41,4 +41,5 @@ export const getUrl = ({
 	tenantId?: string | null;
 }) => ({
 	incomeAggregate: `/organizations/${organizationId}/portfolios/${portfolioId}/aggregate/income`,
+	expensesAggregate: `/organizations/${organizationId}/portfolios/${portfolioId}/aggregate/expenses`,
 });
