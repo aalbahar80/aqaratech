@@ -12,16 +12,50 @@ import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
 
 // Links
 import { LOGOUT } from '$lib/constants/routes';
+import { settings } from '$lib/utils/route-helpers';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
-	if (!user.role?.portfolioId) {
-		throw new Error(
-			'Tried to get portfolio navigation tree without portfolioId',
-		);
+	const tree: NavigationItem[] = [
+		{
+			name: 'Properties',
+			href: '/properties/',
+			icon: HeroiconsOutlineHome,
+		},
+		{
+			name: 'Leases',
+			href: '/leases/',
+			icon: HeroiconsOutlineDocumentText,
+		},
+		{
+			name: 'Account',
+			href: `/users/${user.id}/roles`,
+			icon: HeroiconsOutlineUser,
+			divided: true,
+		},
+		{
+			name: 'Logout',
+			href: LOGOUT,
+			icon: HeroiconsOutlineLogout,
+		},
+	];
+
+	if (user.role?.roleType === 'ORGADMIN') {
+		tree.splice(0, 0, {
+			name: 'Portfolios',
+			href: `/portfolios`,
+			icon: HeroiconsOutlineDocumentReport,
+		});
+
+		tree.splice(-1, 0, {
+			name: 'Settings',
+			href: settings(user.role.organizationId).organization,
+			icon: HeroiconsOutlineCog8Tooth,
+			// path: '/settings/',
+		});
 	}
 
-	return [
-		{
+	if (user.role?.roleType === 'PORTFOLIO' && user.role.portfolioId) {
+		tree.splice(0, 0, {
 			name: 'Financials',
 			href: `/portfolios/${user.role.portfolioId}/financials/summary/`,
 			icon: HeroiconsOutlineDocumentReport,
@@ -43,33 +77,8 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 					href: `/portfolios/${user.role.portfolioId}/financials/payouts/`,
 				},
 			],
-		},
-		{
-			name: 'Properties',
-			href: '/properties/',
-			icon: HeroiconsOutlineHome,
-		},
-		{
-			name: 'Leases',
-			href: '/leases/',
-			icon: HeroiconsOutlineDocumentText,
-		},
-		{
-			name: 'Account',
-			href: `/users/${user.id}/roles`,
-			icon: HeroiconsOutlineUser,
-			divided: true,
-		},
-		{
-			name: 'Settings',
-			href: '/settings/',
-			icon: HeroiconsOutlineCog8Tooth,
-			// path: '/settings/',
-		},
-		{
-			name: 'Logout',
-			href: LOGOUT,
-			icon: HeroiconsOutlineLogout,
-		},
-	];
+		});
+	}
+
+	return tree;
 };
