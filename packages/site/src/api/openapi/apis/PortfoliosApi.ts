@@ -16,6 +16,7 @@ import * as runtime from '../runtime';
 import type {
 	BalanceDto,
 	GroupByMonthDto,
+	IncomeByMonthDto,
 	PaginatedPayoutDto,
 	PaginatedPortfolioDto,
 	PaginatedPropertyDto,
@@ -278,7 +279,7 @@ export interface PortfoliosApiInterface {
 	getIncomeByMonthRaw(
 		requestParameters: PortfoliosApiGetIncomeByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<Array<GroupByMonthDto>>>;
+	): Promise<runtime.ApiResponse<IncomeByMonthDto>>;
 
 	/**
 	 *
@@ -287,7 +288,7 @@ export interface PortfoliosApiInterface {
 	getIncomeByMonth(
 		requestParameters: PortfoliosApiGetIncomeByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<Array<GroupByMonthDto>>;
+	): Promise<IncomeByMonthDto>;
 
 	/**
 	 *
@@ -874,7 +875,7 @@ export class PortfoliosApi
 	async getIncomeByMonthRaw(
 		requestParameters: PortfoliosApiGetIncomeByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<Array<GroupByMonthDto>>> {
+	): Promise<runtime.ApiResponse<IncomeByMonthDto>> {
 		if (
 			requestParameters.portfolioId === null ||
 			requestParameters.portfolioId === undefined
@@ -928,7 +929,7 @@ export class PortfoliosApi
 	async getIncomeByMonth(
 		requestParameters: PortfoliosApiGetIncomeByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<Array<GroupByMonthDto>> {
+	): Promise<IncomeByMonthDto> {
 		const response = await this.getIncomeByMonthRaw(
 			requestParameters,
 			initOverrides,

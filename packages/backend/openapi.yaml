@@ -1247,9 +1247,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GroupByMonthDto'
+                $ref: '#/components/schemas/IncomeByMonthDto'
       tags: &ref_9
         - portfolios
       security: &ref_10
@@ -3488,6 +3486,25 @@ components:
       required:
         - date
         - amount
+    IncomeByMonthDto:
+      type: object
+      properties:
+        total:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupByMonthDto'
+        paid:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupByMonthDto'
+        unpaid:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupByMonthDto'
+      required:
+        - total
+        - paid
+        - unpaid
     UpdatePropertyDto:
       type: object
       properties:

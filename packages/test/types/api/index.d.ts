@@ -1096,6 +1096,31 @@ export interface HitDtoFormatted {
 /**
  *
  * @export
+ * @interface IncomeByMonthDto
+ */
+export interface IncomeByMonthDto {
+	/**
+	 *
+	 * @type {Array<GroupByMonthDto>}
+	 * @memberof IncomeByMonthDto
+	 */
+	total: Array<GroupByMonthDto>;
+	/**
+	 *
+	 * @type {Array<GroupByMonthDto>}
+	 * @memberof IncomeByMonthDto
+	 */
+	paid: Array<GroupByMonthDto>;
+	/**
+	 *
+	 * @type {Array<GroupByMonthDto>}
+	 * @memberof IncomeByMonthDto
+	 */
+	unpaid: Array<GroupByMonthDto>;
+}
+/**
+ *
+ * @export
  * @interface LeaseBreadcrumbsDto
  */
 export interface LeaseBreadcrumbsDto {

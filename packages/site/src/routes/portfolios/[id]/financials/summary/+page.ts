@@ -20,7 +20,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 	]);
 
 	return {
-		net: calculateNet(income, expenses),
+		net: calculateNet(income.paid, expenses),
 		properties,
 		income,
 		expenses,

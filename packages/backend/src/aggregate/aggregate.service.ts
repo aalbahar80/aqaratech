@@ -7,6 +7,7 @@ import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { groupByMonth } from 'src/aggregate/group-by-month';
 import { Action } from 'src/casl/action.enum';
 import { parseLocationFilter } from 'src/common/parse-location-filter';
+import { PaidStatus } from 'src/constants/paid-status.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -42,9 +43,11 @@ export class AggregateService {
 	async portfolioIncomeByMonth({
 		portfolioId,
 		options,
+		paidStatus,
 	}: {
 		portfolioId: string;
 		options: AggregateOptionsDto;
+		paidStatus: PaidStatus;
 	}) {
 		const leaseInvoices = await this.prisma.leaseInvoice.findMany({
 			where: {
@@ -57,6 +60,7 @@ export class AggregateService {
 							unitId: options.unitId,
 						},
 					}),
+					this.leaseInvoicesService.parseIsPaidFilter({ paidStatus }),
 				],
 			},
 			select: { amount: true, postAt: true },

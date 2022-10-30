@@ -3,9 +3,13 @@ import { ApiTags } from '@nestjs/swagger';
 import { AggregateService } from 'src/aggregate/aggregate.service';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { aggregateOptionsSchema } from 'src/aggregate/dto/aggregate-options.schema';
-import { GroupByMonthDto } from 'src/aggregate/dto/grouped-by-month.dto';
+import {
+	GroupByMonthDto,
+	IncomeByMonthDto,
+} from 'src/aggregate/dto/grouped-by-month.dto';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
+import { PaidStatus } from 'src/constants/paid-status.enum';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 
@@ -27,15 +31,32 @@ export class PortfolioAggregateController {
 	// Will NOT return a 404 if all the following is true:
 	// 1. the portfolio does not exist
 	// 2. user.role is ORGADMIN & has access to organizationId in params
-	getIncomeByMonth(
+	async getIncomeByMonth(
 		@Param('portfolioId') portfolioId: string,
 		@Query(new ZodValidationPipe(aggregateOptionsSchema))
 		queryOptions: AggregateOptionsDto,
-	): Promise<GroupByMonthDto[]> {
-		return this.aggregateService.portfolioIncomeByMonth({
-			portfolioId,
-			options: queryOptions,
-		});
+	): Promise<IncomeByMonthDto> {
+		const [total, paid, unpaid] = await Promise.all([
+			this.aggregateService.portfolioIncomeByMonth({
+				portfolioId,
+				options: queryOptions,
+				paidStatus: PaidStatus.ALL,
+			}),
+
+			this.aggregateService.portfolioIncomeByMonth({
+				portfolioId,
+				options: queryOptions,
+				paidStatus: PaidStatus.PAID,
+			}),
+
+			this.aggregateService.portfolioIncomeByMonth({
+				portfolioId,
+				options: queryOptions,
+				paidStatus: PaidStatus.UNPAID,
+			}),
+		]);
+
+		return { total, paid, unpaid };
 	}
 
 	@Get('/expenses')
