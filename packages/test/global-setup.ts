@@ -23,7 +23,7 @@ async function globalSetup(config: FullConfig) {
 		password,
 		storageStatePath,
 		storageStateFilename,
-	} of testUsers) {
+	} of [testUsers.orgAdmin, testUsers.portfolio, testUsers.tenant]) {
 		console.log(`Checking auth cookies for user.roletype: ${roleType}...`);
 
 		// Avoid logging in again if cookies have not expired
