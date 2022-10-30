@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { getUrl } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
 import { apiURL } from '../../../fixtures/api-url';
 
@@ -6,9 +7,12 @@ test('aggregate income returns array of date & amount', async ({
 	request,
 	portfolio,
 }) => {
-	const res = await request.get(
-		`${apiURL}/portfolios/${portfolio.id}/aggregate/income`,
-	);
+	const url = getUrl({
+		organizationId: portfolio.organizationId,
+		portfolioId: portfolio.id,
+	}).incomeAggregate;
+
+	const res = await request.get(url);
 
 	expect(res.status()).toBe(200);
 
@@ -49,10 +53,12 @@ for (const { start, end, expected } of inputs) {
 		request,
 		portfolio,
 	}) => {
-		const res = await request.get(
-			`${apiURL}/portfolios/${portfolio.id}/aggregate/income`,
-			{ params: { start, end } },
-		);
+		const url = getUrl({
+			organizationId: portfolio.organizationId,
+			portfolioId: portfolio.id,
+		}).incomeAggregate;
+
+		const res = await request.get(url, { params: { start, end } });
 
 		expect.soft(res.status()).toBe(200);
 
@@ -66,9 +72,12 @@ test('aggregate income query defaults to last two months', async ({
 	request,
 	portfolio,
 }) => {
-	const res = await request.get(
-		`${apiURL}/portfolios/${portfolio.id}/aggregate/income`,
-	);
+	const url = getUrl({
+		organizationId: portfolio.organizationId,
+		portfolioId: portfolio.id,
+	}).incomeAggregate;
+
+	const res = await request.get(url);
 
 	expect(res.status()).toBe(200);
 

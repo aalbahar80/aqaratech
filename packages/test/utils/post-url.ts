@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 export const PostUrl = (orgId: string) => {
 	return {
 		tenant: `/organizations/${orgId}/tenants`,
@@ -28,4 +29,16 @@ export const PostUrlRole = ({
 	TENANT: tenantId
 		? `/organizations/${organizationId}/tenants/${tenantId}/roles`
 		: '',
+});
+
+export const getUrl = ({
+	organizationId,
+	portfolioId,
+	tenantId,
+}: {
+	organizationId?: string;
+	portfolioId?: string | null;
+	tenantId?: string | null;
+}) => ({
+	incomeAggregate: `/organizations/${organizationId}/portfolios/${portfolioId}/aggregate/income`,
 });
