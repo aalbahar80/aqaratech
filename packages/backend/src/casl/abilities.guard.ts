@@ -111,10 +111,47 @@ export class AbilitiesGuard implements CanActivate {
 		}
 
 		if (rule.useParams) {
+			const subjectProps = this.applyParamOverrides({ rule, params });
+
 			// @ts-expect-error type error
-			return subject(subjectName, params);
+			return subject(subjectName, subjectProps);
 		} else {
 			return subjectName;
 		}
+	}
+
+	private applyParamOverrides({
+		rule,
+		params,
+	}: {
+		rule: RequiredRule;
+		params: Request['params'];
+	}): Record<string, string> {
+		if (!rule.overrideParams) {
+			return params;
+		}
+
+		/**
+		 * URL parameter map
+		 */
+		const urlParams = new Map(Object.entries(params));
+
+		const overrides = new Map(Object.entries(rule.overrideParams));
+
+		/**
+		 * Props to pass to the subject constructor.
+		 */
+		const subjectProps = new Map<string, string>();
+
+		urlParams.forEach((value, key) => {
+			if (overrides.has(key)) {
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				subjectProps.set(overrides.get(key)!, value);
+			} else {
+				subjectProps.set(key, value);
+			}
+		});
+
+		return Object.fromEntries(subjectProps);
 	}
 }

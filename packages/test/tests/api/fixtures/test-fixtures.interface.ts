@@ -18,7 +18,11 @@ import type {
 } from '../../../types/api';
 
 export interface TestFixtures {
+	// auth
+	scopedRequest: PlaywrightTestArgs['request'];
+
 	org: OrganizationCreatedDto;
+	role: RoleDto;
 	tenant: TenantDto;
 	portfolio: PortfolioDto;
 	property: PropertyDto;
@@ -26,16 +30,18 @@ export interface TestFixtures {
 	lease: LeaseDto;
 	invoice: LeaseInvoiceDto;
 	expense: ExpenseDto;
-	file: string;
 	expenseCategory: ExpenseCategoryDto;
-	role: RoleDto;
+	file: string;
 }
 
 export interface TestOptions {
+	// auth
+	userRoleType: RoleDto['roleType'];
+	roleParams: RoleFactoryParams | undefined;
 	withRoleId: string | undefined;
+
 	invoiceParams: LeaseInvoiceFactoryParams | undefined;
 	expenseCategoryParams: ExpenseCategoryFactoryParams | undefined;
-	roleParams: RoleFactoryParams | undefined;
 }
 
 export type AllFixtures = Fixtures<

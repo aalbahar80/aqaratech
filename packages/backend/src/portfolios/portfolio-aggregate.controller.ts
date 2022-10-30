@@ -19,6 +19,9 @@ export class PortfolioAggregateController {
 		action: Action.Read,
 		subject: 'Portfolio',
 		useParams: true,
+		overrideParams: {
+			portfolioId: 'id',
+		},
 	})
 	// Will NOT return a 404 if all the following is true:
 	// 1. the portfolio does not exist

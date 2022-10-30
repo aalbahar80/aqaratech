@@ -15,6 +15,7 @@ import type {
 	OrganizationCreatedDto,
 	PortfolioDto,
 	PropertyDto,
+	RoleDto,
 	TenantDto,
 	UnitDto,
 } from '../../types/api';
@@ -26,10 +27,57 @@ import type {
 	TestFixtures,
 	TestOptions,
 } from './fixtures/test-fixtures.interface';
+import { testUsers } from './fixtures/users/test-users';
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
 export const test = base.extend<TestFixtures & TestOptions>({
+	// Determines the cookies that are sent with the request.
+	userRoleType: ['ORGADMIN', { option: true }],
+
+	scopedRequest: async ({ userRoleType, browser, portfolio, request }, use) => {
+		if (userRoleType === 'PORTFOLIO') {
+			// add user to fresh portfolio
+
+			const url = `${apiURL}/organizations/${portfolio.organizationId}/portfolios/${portfolio.id}/roles`;
+
+			const res = await request.post(url, {
+				data: { email: testUsers.portfolio.email },
+			});
+
+			const body = (await res.json()) as RoleDto;
+
+			if (!res.ok) {
+				throw new Error('Failed to add user to portfolio');
+			}
+
+			// set role cookie
+
+			const context = await browser.newContext({
+				storageState: testUsers.portfolio.storageStatePath,
+			});
+
+			await context.addCookies([
+				{
+					name: 'role',
+					value: body.id,
+					domain: 'localhost',
+					path: '/',
+					expires: -1,
+					httpOnly: true,
+					secure: false,
+					sameSite: 'Lax',
+				},
+			]);
+
+			const scopedRequest = context.request;
+
+			await use(scopedRequest);
+
+			await scopedRequest.dispose();
+		}
+	},
+
 	// Dependency map: org -> request
 	// 1. A new org is created
 	// 3. The `request` fixture is overriden with the new page.request, which has the new role cookie set

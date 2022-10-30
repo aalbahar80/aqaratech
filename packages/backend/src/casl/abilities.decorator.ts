@@ -12,6 +12,11 @@ export interface RequiredRule {
 	 * Useful for guarding POST requests.
 	 */
 	useParams?: boolean;
+
+	/**
+	 * URL param key overrides
+	 */
+	overrideParams?: Record<string, string>;
 }
 export const CHECK_ABILITY = 'check_ability';
 
