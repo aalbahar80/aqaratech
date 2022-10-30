@@ -66,7 +66,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	],
 	projects: [
 		{
-			name: 'chromium',
+			name: 'site',
 			testIgnore: [API_FILES, ...FILE_TESTS],
 			use: {
 				...devices['Desktop Chrome'],
