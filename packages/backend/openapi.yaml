@@ -1249,7 +1249,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
+                  $ref: '#/components/schemas/GroupByMonthDto'
       tags:
         - portfolios
       security:
@@ -3436,6 +3436,16 @@ components:
         - leaseInvoices
         - payouts
         - total
+    GroupByMonthDto:
+      type: object
+      properties:
+        date:
+          type: string
+        amount:
+          type: number
+      required:
+        - date
+        - amount
     UpdatePropertyDto:
       type: object
       properties:

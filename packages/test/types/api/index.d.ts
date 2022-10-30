@@ -1033,6 +1033,25 @@ export type FileRelationKeyEnum =
 /**
  *
  * @export
+ * @interface GroupByMonthDto
+ */
+export interface GroupByMonthDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof GroupByMonthDto
+	 */
+	date: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof GroupByMonthDto
+	 */
+	amount: number;
+}
+/**
+ *
+ * @export
  * @interface HitDto
  */
 export interface HitDto {

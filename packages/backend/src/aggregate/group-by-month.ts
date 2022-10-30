@@ -1,3 +1,4 @@
+import { GroupedByMonth } from 'src/aggregate/dto/grouped-by-month.dto';
 import { monthsInRange } from 'src/utils/months-in-range';
 
 export const groupByMonth = (
@@ -71,11 +72,6 @@ export const addEmptyMonths = (
 interface Records {
 	amount: number;
 	postAt: Date;
-}
-
-export interface GroupedByMonth {
-	date: string;
-	amount: number;
 }
 
 type GroupByMonthOptions =

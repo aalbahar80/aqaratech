@@ -3,6 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { AggregateService } from 'src/aggregate/aggregate.service';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { aggregateOptionsSchema } from 'src/aggregate/dto/aggregate-options.schema';
+import { GroupByMonthDto } from 'src/aggregate/dto/grouped-by-month.dto';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
@@ -30,7 +31,7 @@ export class PortfolioAggregateController {
 		@Param('portfolioId') portfolioId: string,
 		@Query(new ZodValidationPipe(aggregateOptionsSchema))
 		queryOptions: AggregateOptionsDto,
-	) {
+	): Promise<GroupByMonthDto[]> {
 		return this.aggregateService.portfolioIncomeByMonth({
 			portfolioId,
 			options: queryOptions,
