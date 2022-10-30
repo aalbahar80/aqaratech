@@ -17,7 +17,7 @@ export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
 	} else if (role.roleType === 'PORTFOLIO') {
 		return {
 			roleLabel: entitiesMap.portfolio.singularCap,
-			home: `/portfolios/${role.portfolioId}/dashboard`,
+			home: `/portfolios/${role.portfolioId}/financials/summary`,
 			navLinks: [
 				{ label: 'Properties', href: '/properties' },
 				{ label: 'Leases', href: '/leases' },
