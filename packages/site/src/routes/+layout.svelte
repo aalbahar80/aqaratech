@@ -4,6 +4,8 @@
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
+	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
+	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import { environment } from '$lib/environment';
 	import { sentryConfig } from '$lib/environment/sentry.config';
@@ -78,9 +80,19 @@
 		<slot />
 		<VersionFooter />
 	{:else}
-		<div class="mx-auto flex max-w-7xl flex-col space-y-6 p-4 sm:p-6 lg:p-8">
-			<slot />
-			<VersionFooter />
+		<div class="grid grid-cols-12">
+			<div class="col-span-2">
+				<Sidebar navigationTree={getNavigationTree(data.user)} />
+			</div>
+
+			<div class="col-span-10">
+				<div
+					class="mx-auto flex max-w-7xl flex-col space-y-6 p-4 sm:p-6 lg:p-8"
+				>
+					<slot />
+					<VersionFooter />
+				</div>
+			</div>
 		</div>
 	{/if}
 </div>
