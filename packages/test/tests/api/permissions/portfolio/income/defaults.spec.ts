@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
 import { getUrl } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
-import { apiURL } from '../../../fixtures/api-url';
 
 test('aggregate income returns array of date & amount', async ({
 	request,
