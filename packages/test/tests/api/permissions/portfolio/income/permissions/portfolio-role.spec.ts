@@ -4,7 +4,6 @@ import { randomUUID } from 'crypto';
 import { getUrl } from '../../../../../../utils/post-url';
 import { test } from '../../../../api-fixtures';
 
-test.setTimeout(0);
 test.use({
 	userRoleType: 'PORTFOLIO',
 });
