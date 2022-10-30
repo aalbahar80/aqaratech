@@ -9,6 +9,7 @@
 			net: data.net,
 			income: data.income,
 			expenses: data.expenses,
+			properties: data.properties,
 		},
 		null,
 		2,
