@@ -1,5 +1,6 @@
 import { createApi } from '$api';
 import type { PageLoad } from './$types';
+import { calculateNet } from './calculate-net';
 
 export const load: PageLoad = async ({ fetch, params }) => {
 	const api = createApi(fetch);
@@ -19,6 +20,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 	]);
 
 	return {
+		net: calculateNet(income, expenses),
 		properties,
 		income,
 		expenses,
