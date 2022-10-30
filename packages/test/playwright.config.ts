@@ -24,7 +24,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	retries: 2,
 	timeout: process.env.CI ? 30 * 1000 : 10 * 1000,
 	maxFailures: 20,
-	grepInvert: [/smoke/],
+	grepInvert: [/smoke/, /preselected/],
 	use: {
 		storageState: 'storage-state/org-admin.json',
 		headless: true,

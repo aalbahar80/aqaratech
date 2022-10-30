@@ -50,37 +50,36 @@ test('unitType is preselected', async ({ page, unit }) => {
 	await expect(el).toHaveValue(unit.type);
 });
 
-test('create first unit button has predefined params', async ({
-	page,
-	property,
-}) => {
-	await page.goto(`/properties/${property.id}`);
+test.fixme(
+	'create first unit button has predefined params',
+	async ({ page, property }) => {
+		await page.goto(`/properties/${property.id}`);
 
-	const url = withQuery(`/units/new`, {
-		portfolioId: property.portfolioId,
-		propertyId: property.id,
-	});
+		const url = withQuery(`/units/new`, {
+			portfolioId: property.portfolioId,
+			propertyId: property.id,
+		});
 
-	const el = page.getByRole('link', { name: 'New unit' });
+		const el = page.getByRole('link', { name: 'New unit' });
 
-	await expect(el).toHaveAttribute('href', url);
-});
+		await expect(el).toHaveAttribute('href', url);
+	},
+);
 
-test('create unit button has predefined params', async ({
-	page,
-	property,
-	unit,
-}) => {
-	unit; // declared for playwright fixture setup
+test.fixme(
+	'create unit button has predefined params',
+	async ({ page, property, unit }) => {
+		unit; // declared for playwright fixture setup
 
-	await page.goto(`/properties/${property.id}`);
+		await page.goto(`/properties/${property.id}`);
 
-	const url = withQuery(`/units/new`, {
-		portfolioId: property.portfolioId,
-		propertyId: property.id,
-	});
+		const url = withQuery(`/units/new`, {
+			portfolioId: property.portfolioId,
+			propertyId: property.id,
+		});
 
-	const el = page.getByRole('link', { name: 'Create new unit' });
+		const el = page.getByRole('link', { name: 'Create new unit' });
 
-	await expect(el).toHaveAttribute('href', url);
-});
+		await expect(el).toHaveAttribute('href', url);
+	},
+);
