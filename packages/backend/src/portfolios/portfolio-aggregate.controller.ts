@@ -8,15 +8,21 @@ import { Action } from 'src/casl/action.enum';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 
-@Controller('portfolios/:portfolioId/aggregate')
+@Controller('organizations/:organizationId/portfolios/:portfolioId/aggregate')
 @ApiTags('portfolios')
 @SwaggerAuth()
-// TODO check abilities.useParams
-@CheckAbilities({ action: Action.Read, subject: 'Portfolio', useParams: true })
 export class PortfolioAggregateController {
 	constructor(private readonly aggregateService: AggregateService) {}
 
 	@Get('/income')
+	@CheckAbilities({
+		action: Action.Read,
+		subject: 'Portfolio',
+		useParams: true,
+	})
+	// Will NOT return a 404 if all the following is true:
+	// 1. the portfolio does not exist
+	// 2. user.role is ORGADMIN & has access to organizationId in params
 	getIncomeByMonth(
 		@Param('portfolioId') portfolioId: string,
 		@Query(new ZodValidationPipe(aggregateOptionsSchema))

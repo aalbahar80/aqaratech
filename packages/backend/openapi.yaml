@@ -1210,7 +1210,7 @@ paths:
                 $ref: '#/components/schemas/BalanceDto'
       tags: *ref_7
       security: *ref_8
-  /portfolios/{portfolioId}/aggregate/income:
+  /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/income:
     get:
       operationId: PortfolioAggregateController_getIncomeByMonth
       summary: ''
