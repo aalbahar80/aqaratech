@@ -6,7 +6,6 @@ export const monthsInRange = (start: string, end: string) => {
 	const moment = extendMoment(Moment);
 
 	const range = moment.range(moment(start), moment(end));
-	console.log({ range });
 
 	const months = Array.from(range.by('month')).map((m) => m.format('YYYY-MM'));
 
