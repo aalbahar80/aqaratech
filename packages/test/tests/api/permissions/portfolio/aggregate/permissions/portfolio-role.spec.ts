@@ -3,49 +3,52 @@ import { sample } from '@self/seed';
 import { randomUUID } from 'crypto';
 import { getUrl } from '../../../../../../utils/post-url';
 import { test } from '../../../../api-fixtures';
+import { aggregateTypes } from '../aggregate-types';
 
 test.use({
 	userRoleType: 'PORTFOLIO',
 });
 
-test('can get income by month for own portfolio', async ({
-	scopedRequest,
-	portfolio,
-}) => {
-	const url = getUrl({
-		organizationId: portfolio.organizationId,
-		portfolioId: portfolio.id,
-	}).incomeAggregate;
+for (const agg of aggregateTypes) {
+	test(`can get ${agg} for own portfolio`, async ({
+		scopedRequest,
+		portfolio,
+	}) => {
+		const url = getUrl({
+			organizationId: portfolio.organizationId,
+			portfolioId: portfolio.id,
+		})[agg];
 
-	const res = await scopedRequest.get(url);
+		const res = await scopedRequest.get(url);
 
-	expect(res.status()).toBe(200);
-});
+		expect(res.status()).toBe(200);
+	});
 
-test('cannot get income by month for other portfolio', async ({
-	scopedRequest,
-	portfolio,
-}) => {
-	const url = getUrl({
-		organizationId: portfolio.organizationId,
-		portfolioId: sample.portfolios[0]!.id,
-	}).incomeAggregate;
+	test(`cannot get ${agg} for other portfolio`, async ({
+		scopedRequest,
+		portfolio,
+	}) => {
+		const url = getUrl({
+			organizationId: portfolio.organizationId,
+			portfolioId: sample.portfolios[0]!.id,
+		})[agg];
 
-	const res = await scopedRequest.get(url);
+		const res = await scopedRequest.get(url);
 
-	expect(res.status()).toBe(403);
-});
+		expect(res.status()).toBe(403);
+	});
 
-test('cannot get income by month for non-existing portfolio', async ({
-	org,
-	scopedRequest,
-}) => {
-	const url = getUrl({
-		organizationId: org.organization.id,
-		portfolioId: randomUUID(),
-	}).incomeAggregate;
+	test(`cannot get ${agg} for non-existing portfolio`, async ({
+		org,
+		scopedRequest,
+	}) => {
+		const url = getUrl({
+			organizationId: org.organization.id,
+			portfolioId: randomUUID(),
+		})[agg];
 
-	const res = await scopedRequest.get(url);
+		const res = await scopedRequest.get(url);
 
-	expect(res.status()).toBe(403);
-});
+		expect(res.status()).toBe(403);
+	});
+}
