@@ -1,8 +1,9 @@
 import { expect } from '@playwright/test';
 import { leaseInvoiceFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { ByMonthDto } from '../../../types/api';
+import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
+import { aggregateBodyToArray } from '../permissions/portfolio/aggregate/aggregate-types';
 
 test.use({
 	// create 2 leaseInvoices for each month of 2021
@@ -43,17 +44,25 @@ test.use({
 	},
 });
 
-test('return 12 data points for a year', async ({ request, lease }) => {
-	const res = await request.get('/aggregate/incomeByMonth', {
+test('return 12 data points for a year', async ({ request, portfolio }) => {
+	const url = getUrl({
+		organizationId: portfolio.organizationId,
+		portfolioId: portfolio.id,
+	}).incomeAggregate;
+
+	const res = await request.get(url, {
 		params: {
-			portfolioId: lease.portfolioId,
 			start: '2021-01-01',
-			end: '2022-01-01',
-			// end: '2021-12-31', // TODO: test this too
+			end: '2021-12-31',
+			// end: '2022-01-01', // TODO: test this too
 		},
 	});
 
-	const invoices = (await res.json()) as ByMonthDto[];
+	const body: unknown = await res.json();
 
-	expect(invoices.length).toBe(12);
+	const data = aggregateBodyToArray(body, 'incomeAggregate');
+
+	for (const item of data) {
+		expect(item).toHaveLength(12);
+	}
 });

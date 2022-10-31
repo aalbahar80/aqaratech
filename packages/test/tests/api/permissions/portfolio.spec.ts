@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
 
 test.use({
@@ -41,4 +42,19 @@ test('can get files from "/files"', async ({ portfolio, scopedRequest }) => {
 		},
 	});
 	await expect(res).toBeOK();
+});
+
+test('can get data from /aggregate', async ({ portfolio, scopedRequest }) => {
+	const base = getUrl({
+		organizationId: portfolio.organizationId,
+		portfolioId: portfolio.id,
+	});
+
+	const urls = [base.incomeAggregate, base.expensesAggregate];
+
+	for (const url of urls) {
+		const res = await scopedRequest.get(url);
+
+		await expect(res).toBeOK();
+	}
 });

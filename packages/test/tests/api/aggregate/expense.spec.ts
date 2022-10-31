@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
 import type { ByMonthDto } from '../../../types/api';
+import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
 
 test.use({
@@ -36,12 +37,16 @@ test.use({
 });
 
 test('return 12 data points for a year', async ({ request, portfolio }) => {
-	const res = await request.get('/aggregate/expensesByMonth', {
+	const url = getUrl({
+		organizationId: portfolio.organizationId,
+		portfolioId: portfolio.id,
+	}).expensesAggregate;
+
+	const res = await request.get(url, {
 		params: {
-			portfolioId: portfolio.id,
 			start: '2021-01-01',
-			end: '2022-01-01',
-			// end: '2021-12-31', // TODO: test this too
+			end: '2021-12-31',
+			// end: '2022-01-01', // TODO: test this too
 		},
 	});
 

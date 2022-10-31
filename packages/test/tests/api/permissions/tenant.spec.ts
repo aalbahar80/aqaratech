@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import type { PaginatedTenantDto } from '../../../types/api';
+import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
 
 test.use({
@@ -39,6 +40,26 @@ test('can only get self from /tenants', async ({ scopedRequest }) => {
 	const body = (await res.json()) as PaginatedTenantDto;
 
 	expect(body.results.length).toBe(1);
+});
+
+test('cannot get data from /aggregate', async ({
+	portfolio,
+	scopedRequest,
+}) => {
+	const base = getUrl({
+		organizationId: portfolio.organizationId,
+		portfolioId: portfolio.id,
+	});
+
+	const urls = [base.incomeAggregate, base.expensesAggregate];
+
+	for (const url of urls) {
+		const res = await scopedRequest.get(url);
+
+		await expect.soft(res).not.toBeOK();
+
+		expect(res.status()).toBe(403);
+	}
 });
 
 // test('cannot get files from "/files"', async ({ tenant, scopedRequest }) => {
