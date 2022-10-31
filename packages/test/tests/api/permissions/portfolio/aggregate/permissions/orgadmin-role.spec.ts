@@ -3,7 +3,7 @@ import { sample } from '@self/seed';
 import { randomUUID } from 'crypto';
 import { getUrl } from '../../../../../../utils/post-url';
 import { test } from '../../../../api-fixtures';
-import { aggregateTypes } from '../aggregate-types';
+import { aggregateBodyToArray, aggregateTypes } from '../aggregate-types';
 
 for (const agg of aggregateTypes) {
 	test(`can get ${agg} for portfolio in own org`, async ({
@@ -49,9 +49,13 @@ for (const agg of aggregateTypes) {
 
 		const body: unknown = await res.json();
 
-		expect.soft(body).toContainEqual({
-			amount: 0, // should return "blank" data points
-			date: expect.any(String),
-		});
+		const data = aggregateBodyToArray(body, agg);
+
+		for (const item of data) {
+			expect.soft(item).toContainEqual({
+				amount: 0, // should return "blank" data points
+				date: expect.any(String),
+			});
+		}
 	});
 }

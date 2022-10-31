@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { getUrl } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
-import { aggregateTypes } from './aggregate-types';
+import { aggregateBodyToArray, aggregateTypes } from './aggregate-types';
 
 for (const agg of aggregateTypes) {
 	test(`${agg} returns array of date & amount`, async ({
@@ -19,14 +19,7 @@ for (const agg of aggregateTypes) {
 
 		const body: unknown = await res.json();
 
-		let data: unknown[];
-
-		if (agg === 'incomeAggregate') {
-			// @ts-expect-error test
-			data = [body.total, body.paid, body.unpaid];
-		} else {
-			data = [body];
-		}
+		const data = aggregateBodyToArray(body, agg);
 
 		for (const item of data) {
 			expect.soft(item).toHaveLength(2);
@@ -76,14 +69,7 @@ for (const agg of aggregateTypes) {
 
 			const body: unknown = await res.json();
 
-			let data: unknown[];
-
-			if (agg === 'incomeAggregate') {
-				// @ts-expect-error test
-				data = [body.total, body.paid, body.unpaid];
-			} else {
-				data = [body];
-			}
+			const data = aggregateBodyToArray(body, agg);
 
 			for (const item of data) {
 				expect(item).toHaveLength(expected);
@@ -106,14 +92,7 @@ for (const agg of aggregateTypes) {
 
 		const body: unknown = await res.json();
 
-		let data: unknown[];
-
-		if (agg === 'incomeAggregate') {
-			// @ts-expect-error test
-			data = [body.total, body.paid, body.unpaid];
-		} else {
-			data = [body];
-		}
+		const data = aggregateBodyToArray(body, agg);
 
 		for (const item of data) {
 			expect.soft(item).toHaveLength(2);
