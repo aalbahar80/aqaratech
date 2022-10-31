@@ -4,7 +4,7 @@ import { createSeed, insertSeed, preprocessSeed } from '@self/seed';
 const prisma = new PrismaClient();
 
 const raw = createSeed({
-	print: true,
+	print: false,
 	count: {
 		leases: 100,
 		expenses: 1000,
