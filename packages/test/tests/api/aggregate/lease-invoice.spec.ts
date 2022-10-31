@@ -3,7 +3,10 @@ import { leaseInvoiceFactory } from '@self/seed';
 import * as R from 'remeda';
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
-import { aggregateBodyToArray } from '../permissions/portfolio/aggregate/aggregate-types';
+import {
+	aggregateBodyToArray,
+	AggregateType,
+} from '../permissions/portfolio/aggregate/aggregate-types';
 
 test.use({
 	// create 2 leaseInvoices for each month of 2021
@@ -60,7 +63,7 @@ test('return 12 data points for a year', async ({ request, portfolio }) => {
 
 	const body: unknown = await res.json();
 
-	const data = aggregateBodyToArray(body, 'incomeAggregate');
+	const data = aggregateBodyToArray(body, AggregateType.Income);
 
 	for (const item of data) {
 		expect(item).toHaveLength(12);
