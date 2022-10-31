@@ -1,3 +1,4 @@
+export { createSeed } from './create-seed.js';
 export * from './factory';
 export {
 	fakeEmail,
@@ -22,6 +23,8 @@ export {
 	testTenantRoleId,
 	timespan,
 } from './generators.js';
+export { insertSeed } from './insert-seed.js';
+export { preprocessSeed } from './preprocess-seed.js';
 export { sample } from './sample-data';
 export { seed } from './seed.js';
 export * from './utils';
