@@ -1,12 +1,6 @@
-import { Page, test as base } from '@playwright/test';
+import { test as base } from '@playwright/test';
 
-type MyFixtures = {
-	page: Page;
-	token: string;
-	apiBaseURL: string;
-};
-
-export const test = base.extend<MyFixtures>({
+export const test = base.extend({
 	page: async ({ page }, use) => {
 		// TODO replace with page.goto(url, { waitUntil: "networkidle" })
 		// eslint-disable-next-line @typescript-eslint/unbound-method
@@ -18,10 +12,5 @@ export const test = base.extend<MyFixtures>({
 			return res;
 		};
 		await use(page);
-	},
-
-	apiBaseURL: async ({}, use) => {
-		const apiBaseUrl = process.env.PUBLIC_API_URL;
-		await use(apiBaseUrl);
 	},
 });
