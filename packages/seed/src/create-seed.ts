@@ -57,25 +57,6 @@ export const createSeed = (options?: SeedOptions) => {
 
 	const organizations = [org1];
 
-	// Roles
-	const roles = [
-		roleFactory.build({
-			roleType: 'ORGADMIN',
-			organizationId: org1.id,
-			userId: userAdmin.id,
-		}),
-		roleFactory.build({
-			roleType: 'PORTFOLIO',
-			organizationId: org1.id,
-			userId: userPortfolio.id,
-		}),
-		roleFactory.build({
-			roleType: 'TENANT',
-			organizationId: org1.id,
-			userId: userTenant.id,
-		}),
-	];
-
 	// Tenants
 	const tenants = Array.from({ length: count.tenants }, () =>
 		tenantFactory.build({ organizationId: org1.id }),
@@ -85,6 +66,44 @@ export const createSeed = (options?: SeedOptions) => {
 	const portfolios = Array.from({ length: count.portfolios }, () =>
 		portfolioFactory.build({ organizationId: org1.id }),
 	);
+
+	// Roles
+	const roles = [
+		// Main user
+		roleFactory.build({
+			roleType: 'ORGADMIN',
+			organizationId: org1.id,
+			userId: userAdmin.id,
+		}),
+
+		roleFactory.build({
+			roleType: 'PORTFOLIO',
+			organizationId: org1.id,
+			portfolioId: random(portfolios).id,
+			userId: userAdmin.id,
+		}),
+
+		roleFactory.build({
+			roleType: 'TENANT',
+			organizationId: org1.id,
+			tenantId: random(tenants).id,
+			userId: userAdmin.id,
+		}),
+
+		// Portfolio user
+		roleFactory.build({
+			roleType: 'PORTFOLIO',
+			organizationId: org1.id,
+			userId: userPortfolio.id,
+		}),
+
+		// Tenant user
+		roleFactory.build({
+			roleType: 'TENANT',
+			organizationId: org1.id,
+			userId: userTenant.id,
+		}),
+	];
 
 	// Properties
 	const properties = Array.from({ length: count.properties }, () =>

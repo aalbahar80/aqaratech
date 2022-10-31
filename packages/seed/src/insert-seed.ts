@@ -20,11 +20,11 @@ export const insertSeed = async (fake: PreprocessedSeed) => {
 
 	await prisma.organization.createMany({ data: organizations });
 
-	await prisma.role.createMany({ data: roles });
-
 	await prisma.tenant.createMany({ data: tenants });
 
 	await prisma.portfolio.createMany({ data: portfolios });
+
+	await prisma.role.createMany({ data: roles });
 
 	await prisma.property.createMany({ data: properties });
 
