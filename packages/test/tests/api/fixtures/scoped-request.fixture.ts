@@ -7,46 +7,67 @@ export const scopedRequestFixtures: AllFixtures = {
 	// Determines the cookies that are sent with the request.
 	userRoleType: ['ORGADMIN', { option: true }],
 
-	scopedRequest: async ({ userRoleType, browser, portfolio, request }, use) => {
+	scopedRequest: async (
+		{ userRoleType, browser, portfolio, tenant, request },
+		use,
+	) => {
+		let url: string;
+		let email: string;
+		let storageStatePath: string;
+
 		if (userRoleType === 'PORTFOLIO') {
-			// add user to fresh portfolio
+			url = `${apiURL}/organizations/${portfolio.organizationId}/portfolios/${portfolio.id}/roles`;
 
-			const url = `${apiURL}/organizations/${portfolio.organizationId}/portfolios/${portfolio.id}/roles`;
+			email = testUsers.portfolio.email;
 
-			const res = await request.post(url, {
-				data: { email: testUsers.portfolio.email },
-			});
+			storageStatePath = testUsers.portfolio.storageStatePath;
+		} else if (userRoleType === 'TENANT') {
+			url = `${apiURL}/organizations/${portfolio.organizationId}/tenants/${tenant.id}/roles`;
 
-			const body = (await res.json()) as RoleDto;
+			email = testUsers.tenant.email;
 
-			if (!res.ok) {
-				throw new Error('Failed to add user to portfolio');
-			}
+			storageStatePath = testUsers.tenant.storageStatePath;
 
-			// set role cookie
-
-			const context = await browser.newContext({
-				storageState: testUsers.portfolio.storageStatePath,
-			});
-
-			await context.addCookies([
-				{
-					name: 'role',
-					value: body.id,
-					domain: 'localhost',
-					path: '/',
-					expires: -1,
-					httpOnly: true,
-					secure: false,
-					sameSite: 'Lax',
-				},
-			]);
-
-			const scopedRequest = context.request;
-
-			await use(scopedRequest);
-
-			await scopedRequest.dispose();
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+		} else if (userRoleType === 'ORGADMIN') {
+			throw new Error(
+				"Don't use ORGADMIN for scopedRequest. Use normal request instead.",
+			);
+		} else {
+			throw new Error('Invalid userRoleType');
 		}
+
+		const res = await request.post(url, { data: { email } });
+
+		const body = (await res.json()) as RoleDto;
+
+		if (!res.ok) {
+			throw new Error('Failed to add role');
+		}
+
+		// set role cookie
+
+		const context = await browser.newContext({
+			storageState: storageStatePath,
+		});
+
+		await context.addCookies([
+			{
+				name: 'role',
+				value: body.id,
+				domain: 'localhost',
+				path: '/',
+				expires: -1,
+				httpOnly: true,
+				secure: false,
+				sameSite: 'Lax',
+			},
+		]);
+
+		const scopedRequest = context.request;
+
+		await use(scopedRequest);
+
+		await scopedRequest.dispose();
 	},
 };
