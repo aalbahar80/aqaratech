@@ -19,24 +19,35 @@ for (const agg of aggregateTypes) {
 
 		const body: unknown = await res.json();
 
-		expect.soft(body).toHaveLength(2);
+		let data: unknown[];
 
-		expect.soft(body).toContainEqual({
-			date: expect.any(String),
-			amount: expect.any(Number),
-		});
-
-		if (!Array.isArray(body)) {
-			throw new Error('body is not an array');
+		if (agg === 'incomeAggregate') {
+			// @ts-expect-error test
+			data = [body.total, body.paid, body.unpaid];
+		} else {
+			data = [body];
 		}
 
-		// test each item in the array
-		body.forEach((item) => {
-			expect.soft(item).toMatchObject({
+		for (const item of data) {
+			expect.soft(item).toHaveLength(2);
+
+			expect.soft(item).toContainEqual({
 				date: expect.any(String),
 				amount: expect.any(Number),
 			});
-		});
+
+			if (!Array.isArray(item)) {
+				throw new Error('item is not an array');
+			}
+
+			// test each item in the array
+			item.forEach((datapoint) => {
+				expect.soft(datapoint).toMatchObject({
+					date: expect.any(String),
+					amount: expect.any(Number),
+				});
+			});
+		}
 	});
 
 	const inputs = [
@@ -65,7 +76,18 @@ for (const agg of aggregateTypes) {
 
 			const body: unknown = await res.json();
 
-			expect(body).toHaveLength(expected);
+			let data: unknown[];
+
+			if (agg === 'incomeAggregate') {
+				// @ts-expect-error test
+				data = [body.total, body.paid, body.unpaid];
+			} else {
+				data = [body];
+			}
+
+			for (const item of data) {
+				expect(item).toHaveLength(expected);
+			}
 		});
 	}
 
@@ -84,27 +106,38 @@ for (const agg of aggregateTypes) {
 
 		const body: unknown = await res.json();
 
-		expect.soft(body).toHaveLength(2);
+		let data: unknown[];
 
-		// last month in YYYY-MM format
-		const lastMonth = new Date();
-		lastMonth.setMonth(lastMonth.getMonth() - 1);
-		const lastMonthString = lastMonth.toISOString().slice(0, 7);
+		if (agg === 'incomeAggregate') {
+			// @ts-expect-error test
+			data = [body.total, body.paid, body.unpaid];
+		} else {
+			data = [body];
+		}
 
-		// this month in YYYY-MM format
-		const thisMonth = new Date();
-		const thisMonthString = thisMonth.toISOString().slice(0, 7);
+		for (const item of data) {
+			expect.soft(item).toHaveLength(2);
 
-		expect.soft(body).toHaveLength(2);
+			// last month in YYYY-MM format
+			const lastMonth = new Date();
+			lastMonth.setMonth(lastMonth.getMonth() - 1);
+			const lastMonthString = lastMonth.toISOString().slice(0, 7);
 
-		expect.soft(body).toContainEqual({
-			date: expect.stringMatching(lastMonthString),
-			amount: expect.any(Number),
-		});
+			// this month in YYYY-MM format
+			const thisMonth = new Date();
+			const thisMonthString = thisMonth.toISOString().slice(0, 7);
 
-		expect.soft(body).toContainEqual({
-			date: expect.stringMatching(thisMonthString),
-			amount: expect.any(Number),
-		});
+			expect.soft(item).toHaveLength(2);
+
+			expect.soft(item).toContainEqual({
+				date: expect.stringMatching(lastMonthString),
+				amount: expect.any(Number),
+			});
+
+			expect.soft(item).toContainEqual({
+				date: expect.stringMatching(thisMonthString),
+				amount: expect.any(Number),
+			});
+		}
 	});
 }
