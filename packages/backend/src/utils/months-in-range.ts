@@ -11,3 +11,14 @@ export const monthsInRange = (start: string, end: string) => {
 
 	return months;
 };
+
+export const isoToYearMonth = (iso: string) => {
+	// // @ts-expect-error fix moment type
+	// const moment = extendMoment(Moment);
+
+	// const date = moment(iso);
+
+	// return date.format('YYYY-MM');
+
+	return iso.slice(0, 7);
+};

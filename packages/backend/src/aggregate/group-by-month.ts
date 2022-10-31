@@ -1,51 +1,41 @@
+import * as R from 'remeda';
+import { ByMonthDto } from 'src/aggregate/dto/aggregate.dto';
 import { GroupedByMonth } from 'src/aggregate/dto/grouped-by-month.dto';
-import { monthsInRange } from 'src/utils/months-in-range';
+import { isoToYearMonth, monthsInRange } from 'src/utils/months-in-range';
 
 export const groupByMonth = (
 	records: Records[],
-	options?: GroupByMonthOptions,
+	options: GroupByMonthOptions,
 ): GroupedByMonth[] => {
-	const byMonth = records.reduce<Record<string, number>>((acc, record) => {
-		const date = record.postAt.toISOString().split('T')[0];
-		const month = date.split('-')[1];
-		const year = date.split('-')[0];
-		const monthYear = `${month}-${year}`;
-		if (acc[monthYear]) {
-			acc[monthYear] += record.amount;
-		} else {
-			acc[monthYear] = record.amount;
-		}
-		return acc;
-	}, {});
+	// group by year-month
+	const grouped = R.groupBy(records, (record) =>
+		isoToYearMonth(record.postAt.toISOString()),
+	);
 
-	// return dates as ISO strings
-	const byMonthArray = Object.keys(byMonth).map((monthYear) => {
-		return {
-			date: `${monthYear.split('-')[1]}-${
-				monthYear.split('-')[0]
-			}-01T00:00:00.000Z`,
-			amount: byMonth[monthYear],
-		};
-	});
+	// sum up the amounts
+	const summed = R.mapValues(grouped, (records) =>
+		records.reduce((sum, record) => sum + record.amount, 0),
+	);
 
-	// sort by date
-	byMonthArray.sort((a, b) => {
-		const aDate = new Date(a.date);
-		const bDate = new Date(b.date);
-		return bDate.getTime() - aDate.getTime();
-	});
+	let months: string[];
 
-	// fill in missing months
-	if (options?.includeEmptyMonths) {
-		const withEmptyMonths = addEmptyMonths(byMonthArray, {
-			start: options.start,
-			end: options.end,
-		});
-
-		return withEmptyMonths;
+	if (options.includeEmptyMonths) {
+		months = monthsInRange(options.start, options.end);
 	} else {
-		return byMonthArray;
+		months = Object.keys(summed);
 	}
+
+	// sort by date - newest first
+	months.sort((a, b) => b.localeCompare(a));
+
+	// convert to array of objects
+	const array: ByMonthDto[] = [];
+
+	months.forEach((month) => {
+		array.push({ date: month, amount: summed[month] ?? 0 });
+	});
+
+	return array;
 };
 
 export const addEmptyMonths = (
@@ -74,12 +64,8 @@ interface Records {
 	postAt: Date;
 }
 
-type GroupByMonthOptions =
-	| {
-			includeEmptyMonths: false;
-	  }
-	| {
-			includeEmptyMonths: true;
-			start: string;
-			end: string;
-	  };
+interface GroupByMonthOptions {
+	includeEmptyMonths: boolean;
+	start: string;
+	end: string;
+}
