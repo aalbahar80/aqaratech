@@ -32,7 +32,8 @@
 		const created = await createApi().leases.createInvoices({
 			id: lease.id,
 			createManyLeaseInvoicesDto: schedule.map((invoice) => ({
-				...invoice,
+				// don't spread invoice to avoid sending tempid field
+				amount: invoice.amount,
 				postAt: `${invoice.postAt}T00:00:00.000Z`,
 				organizationId: lease.organizationId,
 				portfolioId: lease.portfolioId,
