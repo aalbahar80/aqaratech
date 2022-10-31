@@ -42,7 +42,6 @@ export interface TestOptions {
 	// auth
 	userRoleType: RoleDto['roleType'];
 	roleParams: RoleFactoryParams | undefined;
-	withRoleId: string | undefined;
 
 	invoiceParams: LeaseInvoiceFactoryParams | undefined;
 	expenseCategoryParams: ExpenseCategoryFactoryParams | undefined;

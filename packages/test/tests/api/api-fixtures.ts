@@ -57,17 +57,8 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(created);
 	},
 
-	// Takes a role ID and returns a new request with the role cookie set.
-	withRoleId: [undefined, { option: true }],
-
-	request: async ({ org, context, withRoleId }, use) => {
-		let setRoleCookieAs = undefined;
-
-		if (withRoleId) {
-			setRoleCookieAs = withRoleId;
-		} else {
-			setRoleCookieAs = org.roleId;
-		}
+	request: async ({ org, context }, use) => {
+		const setRoleCookieAs = org.roleId;
 
 		const roleCookie = (await context.cookies()).find(
 			(cookie) => cookie.name === 'role',

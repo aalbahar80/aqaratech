@@ -1,12 +1,11 @@
 import { expect, Page } from '@playwright/test';
-import { sample } from '@self/seed';
-import { test as base } from '../../config';
-
-const org = sample.organizations[0];
+import { test as base } from '../api/api-fixtures';
 
 const test = base.extend<MyFixtures>({
-	page: async ({ page }, use) => {
-		await page.goto(`/organizations/${org.id}/settings/organization`);
+	page: async ({ page, org }, use) => {
+		await page.goto(
+			`/organizations/${org.organization.id}/settings/organization`,
+		);
 		await page.locator(`data-testid=more-actions-button`).click();
 		await page.locator('button:has-text("Delete")').click();
 		await use(page);
