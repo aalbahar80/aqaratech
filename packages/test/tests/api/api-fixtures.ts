@@ -85,9 +85,21 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	page: async ({ context, roleCookie }, use) => {
 		await context.addCookies([roleCookie]);
 
-		const newPage = await context.newPage();
+		const page = await context.newPage();
 
-		await use(newPage);
+		// eslint-disable-next-line @typescript-eslint/unbound-method
+		const goto = page.goto;
+
+		page.goto = async function (url, opts) {
+			const res = await goto.call(page, url, opts);
+
+			// https://github.com/sveltejs/kit/pull/6484
+			await page.waitForSelector('body.started', { timeout: 5000 });
+
+			return res;
+		};
+
+		await use(page);
 	},
 
 	tenant: async ({ org, request }, use) => {
