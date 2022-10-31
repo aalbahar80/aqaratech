@@ -1,9 +1,8 @@
 import { expect } from '@playwright/test';
-import { testPortfolioId, testPortfolioRoleId } from '@self/seed';
 import { test } from '../api-fixtures';
 
 test.use({
-	withRoleId: testPortfolioRoleId,
+	userRoleType: 'PORTFOLIO',
 });
 
 const notAccessible: string[] = [];
@@ -15,32 +14,30 @@ const accessible = [
 	'/leases',
 	'/leaseInvoices',
 	'/expenses',
-	'/aggregate/incomeByMonth',
-	'/aggregate/expensesByMonth',
 	// "/search",
 ];
 
 // check all accessible routes
 for (const route of accessible) {
-	test(`should be able to get ${route}`, async ({ request }) => {
-		const res = await request.get(route);
+	test(`should be able to get ${route}`, async ({ scopedRequest }) => {
+		const res = await scopedRequest.get(route);
 		await expect(res).toBeOK();
 	});
 }
 
 // check all not accessible routes
 for (const route of notAccessible) {
-	test(`should not be able to get ${route}`, async ({ request }) => {
-		const res = await request.get(route, {});
+	test(`should not be able to get ${route}`, async ({ scopedRequest }) => {
+		const res = await scopedRequest.get(route, {});
 		expect(res.status()).toBe(403);
 	});
 }
 
-test('can get files from "/files"', async ({ request }) => {
-	const res = await request.get('/files', {
+test('can get files from "/files"', async ({ portfolio, scopedRequest }) => {
+	const res = await scopedRequest.get('/files', {
 		params: {
 			relationKey: 'portfolio',
-			relationValue: testPortfolioId,
+			relationValue: portfolio.id,
 		},
 	});
 	await expect(res).toBeOK();

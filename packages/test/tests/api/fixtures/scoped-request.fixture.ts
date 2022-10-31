@@ -22,7 +22,7 @@ export const scopedRequestFixtures: AllFixtures = {
 
 			storageStatePath = testUsers.portfolio.storageStatePath;
 		} else if (userRoleType === 'TENANT') {
-			url = `${apiURL}/organizations/${portfolio.organizationId}/tenants/${tenant.id}/roles`;
+			url = `${apiURL}/organizations/${tenant.organizationId}/tenants/${tenant.id}/roles`;
 
 			email = testUsers.tenant.email;
 
