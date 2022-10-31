@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 const raw = createSeed({
 	print: true,
 	count: {
+		leases: 100,
 		expenses: 1000,
 		leaseInvoices: 1000,
 		payouts: 1000,
