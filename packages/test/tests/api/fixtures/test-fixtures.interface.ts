@@ -1,4 +1,8 @@
-import type { Fixtures, PlaywrightTestArgs } from '@playwright/test';
+import type {
+	Fixtures,
+	PlaywrightTestArgs,
+	PlaywrightWorkerArgs,
+} from '@playwright/test';
 import type {
 	ExpenseCategoryFactoryParams,
 	LeaseInvoiceFactoryParams,
@@ -48,7 +52,8 @@ export type AllFixtures = Fixtures<
 	TestFixtures & TestOptions,
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	{},
-	PlaywrightTestArgs
+	PlaywrightTestArgs,
+	PlaywrightWorkerArgs
 >;
 
 // `AllFixtures` type taken from TestType.extend.params[0]
