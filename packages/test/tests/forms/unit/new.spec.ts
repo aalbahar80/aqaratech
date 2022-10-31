@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { sample } from '@self/seed';
-import { test } from '../../../config';
+import { test } from '../../api/api-fixtures';
 
 test('smoke', async ({ page }, info) => {
 	await page.goto('/units/new');

@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { sample } from '@self/seed';
-import { test } from '../../config';
+import { test } from '../api/api-fixtures';
 
 test('can be searched', async ({ page }) => {
 	await page.goto(`/tenants/${sample.tenants[0].id}/edit`);

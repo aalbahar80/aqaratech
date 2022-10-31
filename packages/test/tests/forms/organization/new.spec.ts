@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../../../config';
+import { test } from '../../api/api-fixtures';
 
 test('existing user can create new org', async ({ page, isMobile }) => {
 	await page.goto('/');
