@@ -1,11 +1,14 @@
 import { expect } from '@playwright/test';
-import { sample } from '@self/seed';
 import { test } from '../api/api-fixtures';
 
-test('can be searched', async ({ page }) => {
-	await page.goto(`/tenants/${sample.tenants[0].id}/edit`);
+test('can be searched', async ({ page, tenant }) => {
+	await page.goto(`/tenants/${tenant.id}/edit`);
+
 	const input = page.locator('input[id="nationality"]');
+
 	await input.fill('Kuwa');
+
 	await page.locator(`data-testid=KWT`).click();
+
 	await expect(input).toHaveValue('Kuwait');
 });
