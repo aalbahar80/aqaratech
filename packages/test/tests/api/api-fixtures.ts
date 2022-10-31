@@ -27,6 +27,7 @@ import type {
 	TestFixtures,
 	TestOptions,
 } from './fixtures/test-fixtures.interface';
+import { testUsers } from './fixtures/users/test-users';
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
@@ -57,6 +58,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(created);
 	},
 
+	// adds the new org's roleID to context's cookies
 	request: async ({ org, context }, use) => {
 		const setRoleCookieAs = org.roleId;
 
@@ -74,6 +76,28 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await context.addCookies([newRoleCookie]);
 
 		await use(context.request);
+	},
+
+	// adds the new org's roleID to context's cookies
+	page: async ({ org, context }, use) => {
+		const setRoleCookieAs = org.roleId;
+
+		const roleCookie = (await context.cookies()).find(
+			(cookie) => cookie.name === 'role',
+		);
+
+		if (!roleCookie) throw new Error('role cookie is not set');
+
+		const newRoleCookie = {
+			...roleCookie,
+			value: setRoleCookieAs,
+		};
+
+		await context.addCookies([newRoleCookie]);
+
+		const page = await context.newPage();
+
+		await use(page);
 	},
 
 	tenant: async ({ org, request }, use) => {
