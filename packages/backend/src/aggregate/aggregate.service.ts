@@ -9,7 +9,6 @@ import { Action } from 'src/casl/action.enum';
 import { parseLocationFilter } from 'src/common/parse-location-filter';
 import { PaidStatus } from 'src/constants/paid-status.enum';
 import { IUser } from 'src/interfaces/user.interface';
-import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -20,24 +19,21 @@ export class AggregateService {
 		private leaseInvoicesService: LeaseInvoicesService,
 	) {}
 
-	async incomeByMonth({
-		pageOptionsDto,
-		user,
-	}: {
-		pageOptionsDto: LeaseInvoiceOptionsDto;
-		user: IUser;
-	}) {
-		const leaseInvoices = await this.prisma.leaseInvoice.findMany({
-			where: {
-				AND: [
-					accessibleBy(user.ability, Action.Read).LeaseInvoice,
-					...this.leaseInvoicesService.parseFilter({ pageOptionsDto }),
-				],
-			},
-			select: { amount: true, postAt: true },
-		});
+	// eslint-disable-next-line @typescript-eslint/require-await
+	async incomeByMonth() {
+		throw new Error('Deprecated');
 
-		return groupByMonth(leaseInvoices);
+		// const leaseInvoices = await this.prisma.leaseInvoice.findMany({
+		// 	where: {
+		// 		AND: [
+		// 			accessibleBy(user.ability, Action.Read).LeaseInvoice,
+		// 			...this.leaseInvoicesService.parseFilter({ pageOptionsDto }),
+		// 		],
+		// 	},
+		// 	select: { amount: true, postAt: true },
+		// });
+
+		// return groupByMonth(leaseInvoices);
 	}
 
 	async portfolioIncomeByMonth({
@@ -105,25 +101,21 @@ export class AggregateService {
 		return grouped;
 	}
 
-	async expensesByMonth({
-		filter,
-		user,
-	}: {
-		filter?: DashboardFilterDto;
-		user: IUser;
-	}) {
-		const expenses = await this.prisma.expense.findMany({
-			where: {
-				AND: [
-					accessibleBy(user.ability, Action.Read).Expense,
-					parseLocationFilter({ filter, entity: 'Expense' }),
-					{ postAt: { gte: filter?.start, lte: filter?.end } },
-				],
-			},
-			select: { amount: true, postAt: true },
-		});
+	// eslint-disable-next-line @typescript-eslint/require-await
+	async expensesByMonth() {
+		throw new Error('Deprecated');
+		// const expenses = await this.prisma.expense.findMany({
+		// 	where: {
+		// 		AND: [
+		// 			accessibleBy(user.ability, Action.Read).Expense,
+		// 			parseLocationFilter({ filter, entity: 'Expense' }),
+		// 			{ postAt: { gte: filter?.start, lte: filter?.end } },
+		// 		],
+		// 	},
+		// 	select: { amount: true, postAt: true },
+		// });
 
-		return groupByMonth(expenses);
+		// return groupByMonth(expenses);
 	}
 
 	async getOccupancy({

@@ -1738,66 +1738,7 @@ paths:
       operationId: AggregateController_getIncomeByMonth
       summary: ''
       description: ''
-      parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: start
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: end
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: paidStatus
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/PaidStatusEnum'
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: portfolioId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
+      parameters: []
       responses:
         '200':
           description: ''
@@ -1814,32 +1755,7 @@ paths:
       operationId: AggregateController_getExpensesByMonth
       summary: ''
       description: ''
-      parameters:
-        - name: start
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: end
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: portfolioId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
+      parameters: []
       responses:
         '200':
           description: ''

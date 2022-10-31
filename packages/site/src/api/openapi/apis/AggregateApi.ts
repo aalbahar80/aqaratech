@@ -13,34 +13,7 @@
  */
 
 import * as runtime from '../runtime';
-import type {
-	ByMonthDto,
-	Occupancy,
-	PaidStatusEnum,
-	SortOrderEnum,
-} from '../models';
-
-export interface AggregateApiGetExpensesByMonthRequest {
-	start?: string;
-	end?: string;
-	portfolioId?: string;
-	propertyId?: string;
-	unitId?: string;
-}
-
-export interface AggregateApiGetIncomeByMonthRequest {
-	page?: number;
-	take?: number;
-	sortOrder?: SortOrderEnum;
-	filter?: object;
-	start?: string;
-	end?: string;
-	paidStatus?: PaidStatusEnum;
-	orderBy?: string;
-	portfolioId?: string;
-	propertyId?: string;
-	unitId?: string;
-}
+import type { ByMonthDto, Occupancy } from '../models';
 
 export interface AggregateApiGetOccupancyRequest {
 	start?: string;
@@ -64,7 +37,6 @@ export interface AggregateApiInterface {
 	 * @memberof AggregateApiInterface
 	 */
 	getExpensesByMonthRaw(
-		requestParameters: AggregateApiGetExpensesByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ByMonthDto>>>;
 
@@ -73,7 +45,6 @@ export interface AggregateApiInterface {
 	 *
 	 */
 	getExpensesByMonth(
-		requestParameters: AggregateApiGetExpensesByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<ByMonthDto>>;
 
@@ -84,7 +55,6 @@ export interface AggregateApiInterface {
 	 * @memberof AggregateApiInterface
 	 */
 	getIncomeByMonthRaw(
-		requestParameters: AggregateApiGetIncomeByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ByMonthDto>>>;
 
@@ -93,7 +63,6 @@ export interface AggregateApiInterface {
 	 *
 	 */
 	getIncomeByMonth(
-		requestParameters: AggregateApiGetIncomeByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<ByMonthDto>>;
 
@@ -130,30 +99,9 @@ export class AggregateApi
 	 *
 	 */
 	async getExpensesByMonthRaw(
-		requestParameters: AggregateApiGetExpensesByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ByMonthDto>>> {
 		const queryParameters: any = {};
-
-		if (requestParameters.start !== undefined) {
-			queryParameters['start'] = requestParameters.start;
-		}
-
-		if (requestParameters.end !== undefined) {
-			queryParameters['end'] = requestParameters.end;
-		}
-
-		if (requestParameters.portfolioId !== undefined) {
-			queryParameters['portfolioId'] = requestParameters.portfolioId;
-		}
-
-		if (requestParameters.propertyId !== undefined) {
-			queryParameters['propertyId'] = requestParameters.propertyId;
-		}
-
-		if (requestParameters.unitId !== undefined) {
-			queryParameters['unitId'] = requestParameters.unitId;
-		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
@@ -175,13 +123,9 @@ export class AggregateApi
 	 *
 	 */
 	async getExpensesByMonth(
-		requestParameters: AggregateApiGetExpensesByMonthRequest = {},
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<ByMonthDto>> {
-		const response = await this.getExpensesByMonthRaw(
-			requestParameters,
-			initOverrides,
-		);
+		const response = await this.getExpensesByMonthRaw(initOverrides);
 		return await response.value();
 	}
 
@@ -190,54 +134,9 @@ export class AggregateApi
 	 *
 	 */
 	async getIncomeByMonthRaw(
-		requestParameters: AggregateApiGetIncomeByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<ByMonthDto>>> {
 		const queryParameters: any = {};
-
-		if (requestParameters.page !== undefined) {
-			queryParameters['page'] = requestParameters.page;
-		}
-
-		if (requestParameters.take !== undefined) {
-			queryParameters['take'] = requestParameters.take;
-		}
-
-		if (requestParameters.sortOrder !== undefined) {
-			queryParameters['sortOrder'] = requestParameters.sortOrder;
-		}
-
-		if (requestParameters.filter !== undefined) {
-			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		if (requestParameters.start !== undefined) {
-			queryParameters['start'] = requestParameters.start;
-		}
-
-		if (requestParameters.end !== undefined) {
-			queryParameters['end'] = requestParameters.end;
-		}
-
-		if (requestParameters.paidStatus !== undefined) {
-			queryParameters['paidStatus'] = requestParameters.paidStatus;
-		}
-
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
-		if (requestParameters.portfolioId !== undefined) {
-			queryParameters['portfolioId'] = requestParameters.portfolioId;
-		}
-
-		if (requestParameters.propertyId !== undefined) {
-			queryParameters['propertyId'] = requestParameters.propertyId;
-		}
-
-		if (requestParameters.unitId !== undefined) {
-			queryParameters['unitId'] = requestParameters.unitId;
-		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
@@ -259,13 +158,9 @@ export class AggregateApi
 	 *
 	 */
 	async getIncomeByMonth(
-		requestParameters: AggregateApiGetIncomeByMonthRequest = {},
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<ByMonthDto>> {
-		const response = await this.getIncomeByMonthRaw(
-			requestParameters,
-			initOverrides,
-		);
+		const response = await this.getIncomeByMonthRaw(initOverrides);
 		return await response.value();
 	}
 
