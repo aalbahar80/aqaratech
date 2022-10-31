@@ -1,4 +1,5 @@
 import type {
+	BrowserContext,
 	Fixtures,
 	PlaywrightTestArgs,
 	PlaywrightWorkerArgs,
@@ -24,6 +25,7 @@ import type {
 export interface TestFixtures {
 	// auth
 	scopedRequest: PlaywrightTestArgs['request'];
+	roleCookie: Parameters<BrowserContext['addCookies']>[0][0];
 
 	org: OrganizationCreatedDto;
 	role: RoleDto;
