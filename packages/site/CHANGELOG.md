@@ -1,5 +1,11 @@
 # @self/site
 
+## 1.7.4
+
+### Patch Changes
+
+- 2f439c79a: (fix) avoid sending tempid field in invoice-create-many
+
 ## 1.7.3
 
 ### Patch Changes
