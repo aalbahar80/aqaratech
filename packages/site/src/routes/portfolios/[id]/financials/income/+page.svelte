@@ -22,12 +22,12 @@
 	const tabs = [
 		{
 			label: 'Table',
-			href: `/portfolios/${$page.params.id}/financials/income/table`,
+			href: `/portfolios/${$page.params.id ?? ''}/financials/income/table`,
 			icon: HeroiconsTableCells,
 		},
 		{
 			label: 'Chart',
-			href: `/portfolios/${$page.params.id}/financials/income`,
+			href: `/portfolios/${$page.params.id ?? ''}/financials/income`,
 			icon: HeroiconsPresentationChartBar,
 		},
 	];
