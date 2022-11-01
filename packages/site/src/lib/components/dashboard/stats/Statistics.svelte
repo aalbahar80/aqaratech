@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { GroupByMonthDto } from '$api/openapi';
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
+	import StatisticsPane from '$lib/components/dashboard/stats/StatsticsPane.svelte';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
-	import TotalPaneItem from './TotalPaneItem.svelte';
 
 	interface Datapoint extends GroupByMonthDto {
 		change?: number;
@@ -24,7 +24,9 @@
 
 	const colors: Record<string, string> = {
 		Net: 'text-gray-900',
+		Uncollected: 'text-gray-900',
 		Income: 'text-green-600',
+		Collected: 'text-green-600',
 		Expenses: 'text-red-600',
 	};
 </script>
@@ -47,7 +49,7 @@
 	>
 		{#each data.slice(0, 3) as { amount, date, change }, i}
 			{@const primaryText = primary[i] ?? monthFromShort(date)}
-			<TotalPaneItem
+			<StatisticsPane
 				{primaryText}
 				secondaryText={primary[i] ? monthFromShort(date) : ''}
 				primaryValue={kwdFormat(amount)}
