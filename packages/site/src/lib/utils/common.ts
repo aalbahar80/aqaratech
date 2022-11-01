@@ -47,3 +47,14 @@ export const toDateInput = (date: any) => {
 	}
 	return date;
 };
+
+/**
+ * Returns name of month from a 'yyyy-mm' string.
+ */
+export const monthFromShort = (yearMonth: string) => {
+	const month = yearMonth.split('-')[1];
+
+	return new Date(0, parseInt(month) - 1).toLocaleString('default', {
+		month: 'long',
+	});
+};

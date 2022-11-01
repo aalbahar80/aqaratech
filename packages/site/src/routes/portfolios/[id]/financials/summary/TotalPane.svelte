@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { GroupByMonthDto } from '$api/openapi';
+	import { monthFromShort } from '$lib/utils/common';
 	import TotalPaneItem from './TotalPaneItem.svelte';
 
 	export let title: string;
@@ -12,7 +13,7 @@
 		class="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x"
 	>
 		<TotalPaneItem
-			primaryText="Avg. Open Rate"
+			primaryText={monthFromShort(data[0].date)}
 			secondaryText="from 56.14%"
 			primaryValue="56.14%"
 			color="green"
@@ -20,16 +21,16 @@
 		/>
 
 		<TotalPaneItem
-			primaryText="Avg. Click Rate"
-			secondaryText="from 24.57%"
+			primaryText={monthFromShort(data[1].date)}
+			secondaryText="from 56.14%"
 			primaryValue="24.57%"
 			color="green"
 			chipText="4.31%"
 		/>
 
 		<TotalPaneItem
-			primaryText="Avg. Click Rate"
-			secondaryText="from 24.57%"
+			primaryText={monthFromShort(data[2].date)}
+			secondaryText="from 56.14%"
 			primaryValue="24.57%"
 			color="red"
 			chipText="4.31%"
