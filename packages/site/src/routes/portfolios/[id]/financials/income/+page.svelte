@@ -2,8 +2,8 @@
 	import RangeSelect from '$lib/components/dashboard/RangeSelect.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
-	import TabAnchorItem from '$lib/components/Tabs/TabAnchorItem.svelte';
-	import TabsAnchor from '$lib/components/Tabs/TabsAnchor.svelte';
+	import TabBar from '$lib/components/Tabs/TabBar.svelte';
+	import TabItem from '$lib/components/Tabs/TabItem.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import { ChartBar, Database } from '@steeze-ui/heroicons';
 	import * as R from 'remeda';
@@ -51,15 +51,15 @@
 	</svelte:fragment>
 </Stats>
 
-<TabsAnchor>
+<TabBar>
 	{#each tabs as tab}
 		<a href={tab.href}>
-			<TabAnchorItem icon={tab.icon} current={false}>
+			<TabItem icon={tab.icon} current={false}>
 				{tab.label}
-			</TabAnchorItem>
+			</TabItem>
 		</a>
 	{/each}
-</TabsAnchor>
+</TabBar>
 
 <PieChart income={data.income} />
 
