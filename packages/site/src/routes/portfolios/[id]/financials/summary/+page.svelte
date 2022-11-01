@@ -16,9 +16,10 @@
 <PropertySelect properties={data.properties.results} />
 
 <!-- TotalPanes -->
+<div class="flex flex-col gap-y-12">
+	<TotalPane title="Net" data={data.net} />
 
-<TotalPane title="Net" data={data.net} />
+	<TotalPane title="Income" data={data.income.paid} />
 
-<TotalPane title="Income" data={data.income.paid} />
-
-<TotalPane title="Expenses" data={data.expenses} />
+	<TotalPane title="Expenses" data={data.expenses} />
+</div>
