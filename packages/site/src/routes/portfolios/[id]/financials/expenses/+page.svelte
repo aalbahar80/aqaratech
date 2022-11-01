@@ -8,6 +8,4 @@
 
 <RangeSelect />
 
-<a href="expenses/table">Table</a>
-
 <BarChart expenses={data.expenses} />
