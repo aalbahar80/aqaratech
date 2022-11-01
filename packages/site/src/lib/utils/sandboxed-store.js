@@ -1,5 +1,5 @@
-// sandboxedStore.js
-//
+// From: https://github.com/sveltejs/kit/discussions/4339#discussioncomment-3258927
+
 import { browser } from '$app/environment';
 import { getStores } from '$app/stores';
 import { get, writable as svelteWritable } from 'svelte/store';
@@ -7,7 +7,7 @@ import { get, writable as svelteWritable } from 'svelte/store';
 const storesKey = `sandbox_${crypto.randomUUID()}`;
 
 /**
- * Creates a façade for a writable store that is a sandboxed store that may be used as a
+ * Creates a facade for a writable store that is a sandboxed store that may be used as a
  * global variable. It must be initialized during component initialization.
  *
  * This store is contextual since it is added to the context of the root component. This means that
