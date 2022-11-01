@@ -3,7 +3,7 @@ import type { GroupByMonthDto } from '$api/openapi';
 export const calculateNet = (
 	income: GroupByMonthDto[],
 	expenses: GroupByMonthDto[],
-): GroupByMonthDto[] => {
+) => {
 	if (income.length !== expenses.length) {
 		throw new Error('Income and expenses must have the same length');
 	}
@@ -16,5 +16,20 @@ export const calculateNet = (
 		};
 	});
 
-	return net;
+	const withPct = addPctChange(net);
+
+	return withPct;
+};
+
+const addPctChange = (data: GroupByMonthDto[]) => {
+	const result = data.map((d, i) => {
+		const prev = data[i - 1];
+		const pctChange = prev ? (d.amount - prev.amount) / prev.amount : 0;
+		return {
+			...d,
+			change: pctChange,
+		};
+	});
+
+	return result;
 };
