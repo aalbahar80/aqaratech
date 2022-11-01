@@ -1,22 +1,41 @@
 import { defaultRange } from '$lib/components/charts/utils/date-range';
 import { endOfMonthN, startOfMonthN } from '@self/utils';
-import { derived, writable, type Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
+import { z } from 'zod';
 
-export const range = writable<SimpleRange>(defaultRange);
-
-export const rangeCustom = derived<Writable<SimpleRange>, CustomRange>(
-	range,
-	($range) => {
-		return {
-			start: startOfMonthN($range),
-			end: endOfMonthN(0),
-		};
-	},
-);
-
-type SimpleRange = number;
-
-interface CustomRange {
+interface Range {
 	start: string;
 	end: string;
+	months: number;
 }
+
+export function createRange() {
+	const { subscribe, set, update } = writable<Range>({
+		months: defaultRange,
+		start: startOfMonthN(defaultRange),
+		end: endOfMonthN(0),
+	});
+
+	return {
+		subscribe,
+
+		// set,
+
+		// update,
+
+		setMonthCount: (input: number | null) => {
+			const count = z.number().min(0).parse(input);
+			set({
+				months: count,
+				start: startOfMonthN(count),
+				end: endOfMonthN(0),
+			});
+		},
+
+		setCustomRange: (input: Range) => {
+			set(input);
+		},
+	};
+}
+
+export const range = createRange();

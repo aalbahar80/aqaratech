@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import Select from '$lib/components/form/inputs/Select.svelte';
-	import { range, rangeCustom } from '$lib/stores/range';
+	import { range } from '$lib/stores/range';
 
 	const rangeOptions = [
 		{ value: 0, label: 'Month to date' },
@@ -12,12 +12,12 @@
 </script>
 
 <Select
-	current={$range}
+	current={$range.months}
 	options={rangeOptions}
 	on:select={(e) => {
 		const value = e.detail.value;
-		value && range.set(value);
+		value && range.setMonthCount(value);
 	}}
 />
 
-<pre>{JSON.stringify($rangeCustom, null, 2)}</pre>
+<pre>{JSON.stringify($range, null, 2)}</pre>
