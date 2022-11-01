@@ -2,6 +2,7 @@
 	import type { IncomeByMonthDto } from '$api/openapi';
 	import Chart from '$lib/components/charts/Chart.svelte';
 	import { revenuePie } from '$lib/components/charts/revenue-pie';
+	import { getColor } from '$lib/utils/colors';
 
 	export let income: IncomeByMonthDto;
 
@@ -12,7 +13,7 @@
 		{
 			label: 'Payment Status',
 			data: [paid, unpaid],
-			backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
+			backgroundColor: [getColor(0, 2), getColor(1, 2)],
 		},
 	];
 </script>
