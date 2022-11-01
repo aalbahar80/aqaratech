@@ -33,8 +33,6 @@
 	];
 </script>
 
-<a href="income/table">Table</a>
-
 <div class="inline-flex justify-end">
 	<div class="w-72">
 		<RangeSelect />
