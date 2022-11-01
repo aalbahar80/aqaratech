@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { GroupByMonthDto } from '$api/openapi';
+	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
 	import TotalPaneItem from './TotalPaneItem.svelte';
 
@@ -15,10 +16,26 @@
 		1: 'Last month',
 		2: undefined,
 	};
+
+	const links: Record<string, string> = {
+		Income: 'income',
+		Expenses: 'expenses',
+	};
 </script>
 
 <div>
-	<h3 class="text-lg font-medium leading-6 text-gray-900">{title}</h3>
+	<div class="flex justify-between">
+		<h3 class="text-lg font-medium leading-6 text-gray-900">{title}</h3>
+		{#if links[title]}
+			<a href={links[title]}>
+				<TextButton
+					>Details
+					<!-- arrow-right -->
+					&nbsp;&rarr;
+				</TextButton>
+			</a>
+		{/if}
+	</div>
 	<dl
 		class="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x"
 	>
