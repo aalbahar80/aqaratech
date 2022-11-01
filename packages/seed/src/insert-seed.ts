@@ -2,6 +2,8 @@ import type { PreprocessedSeed } from './preprocess-seed';
 import prisma from './prisma';
 
 export const insertSeed = async (fake: PreprocessedSeed) => {
+	logCounts(fake);
+
 	const {
 		users,
 		organizations,
@@ -37,4 +39,10 @@ export const insertSeed = async (fake: PreprocessedSeed) => {
 	await prisma.expense.createMany({ data: expenses });
 
 	await prisma.payout.createMany({ data: payouts });
+};
+
+const logCounts = (fake: PreprocessedSeed) => {
+	for (const [key, value] of Object.entries(fake)) {
+		console.log(`${key}: ${value.length}`);
+	}
 };

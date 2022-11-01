@@ -131,7 +131,6 @@ export const createSeed = (options?: SeedOptions) => {
 		const unit = units.find((u) => u.propertyId === property.id);
 
 		if (!unit) {
-			console.log('No unit found for property. Skipping lease.');
 			return undefined;
 		}
 
