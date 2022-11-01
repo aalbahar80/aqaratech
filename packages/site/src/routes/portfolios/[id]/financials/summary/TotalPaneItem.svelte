@@ -9,6 +9,7 @@
 
 	// Values
 	export let primaryValue: number | string;
+	export let textColor = 'text-indigo-600';
 	export let valueText = '';
 
 	// Chips
@@ -22,13 +23,12 @@
 		<span class="px-2 text-xs font-normal text-gray-500">{secondaryText}</span>
 	</dt>
 	<dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
-		<div class="flex items-baseline text-2xl font-semibold text-indigo-600">
+		<div class={`flex items-baseline text-2xl font-semibold ${textColor}`}>
 			{primaryValue}
 			<span class="ml-2 text-sm font-medium text-gray-500">{valueText}</span>
 		</div>
 
 		{#if chipText}
-			<!-- content here -->
 			<div
 				class={clsx(
 					'inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0',

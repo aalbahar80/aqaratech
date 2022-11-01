@@ -21,6 +21,12 @@
 		Income: 'income',
 		Expenses: 'expenses',
 	};
+
+	const colors: Record<string, string> = {
+		Net: 'text-gray-900',
+		Income: 'text-green-600',
+		Expenses: 'text-red-600',
+	};
 </script>
 
 <div>
@@ -45,6 +51,7 @@
 				{primaryText}
 				secondaryText={primary[i] ? monthFromShort(date) : undefined}
 				primaryValue={kwdFormat(amount)}
+				textColor={colors[title]}
 				chipText={change ? change.toFixed(2) : ''}
 				color={change && change > 0 ? 'green' : 'red'}
 			/>
