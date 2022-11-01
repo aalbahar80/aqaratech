@@ -1,3 +1,3 @@
-import { sandboxedWritable } from '$lib/utils/sandboxed-store';
+import { writable } from '$lib/utils/sandboxed';
 
-export const property = sandboxedWritable(undefined);
+export const property = writable<string | undefined>(undefined);
