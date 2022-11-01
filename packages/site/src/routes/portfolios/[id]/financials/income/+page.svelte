@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import RangeSelect from '$lib/components/dashboard/RangeSelect.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
@@ -18,8 +19,16 @@
 	$: sumUnpaid = R.sumBy(data.income.unpaid, (x) => x.amount);
 
 	const tabs = [
-		{ label: 'Bar', href: 'table', icon: ChartBar },
-		{ label: 'Pie', href: 'chart', icon: Database },
+		{
+			label: 'Bar',
+			href: `/portfolios/${$page.params.id}/financials/income`,
+			icon: ChartBar,
+		},
+		{
+			label: 'Pie',
+			href: `/portfolios/${$page.params.id}/financials/income/table`,
+			icon: Database,
+		},
 	];
 </script>
 
@@ -52,10 +61,10 @@
 </Stats>
 
 <TabBar>
-	{#each tabs as tab}
-		<a href={tab.href}>
-			<TabItem icon={tab.icon} current={false}>
-				{tab.label}
+	{#each tabs as { href, icon, label }}
+		<a {href}>
+			<TabItem {icon} current={$page.url.pathname === href}>
+				{label}
 			</TabItem>
 		</a>
 	{/each}
