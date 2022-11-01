@@ -2,7 +2,10 @@
 	import RangeSelect from '$lib/components/dashboard/RangeSelect.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
+	import TabAnchorItem from '$lib/components/Tabs/TabAnchorItem.svelte';
+	import TabsAnchor from '$lib/components/Tabs/TabsAnchor.svelte';
 	import { kwdFormat } from '$lib/utils/common';
+	import { ChartBar, Database } from '@steeze-ui/heroicons';
 	import * as R from 'remeda';
 	import type { PageData } from './$types';
 	import BarChart from './BarChart.svelte';
@@ -13,6 +16,11 @@
 	$: sumTotal = R.sumBy(data.income.total, (x) => x.amount);
 	$: sumPaid = R.sumBy(data.income.paid, (x) => x.amount);
 	$: sumUnpaid = R.sumBy(data.income.unpaid, (x) => x.amount);
+
+	const tabs = [
+		{ label: 'Bar', href: 'table', icon: ChartBar },
+		{ label: 'Pie', href: 'chart', icon: Database },
+	];
 </script>
 
 <a href="income/table">Table</a>
@@ -42,6 +50,16 @@
 		/>
 	</svelte:fragment>
 </Stats>
+
+<TabsAnchor>
+	{#each tabs as tab}
+		<a href={tab.href}>
+			<TabAnchorItem icon={tab.icon} current={false}>
+				{tab.label}
+			</TabAnchorItem>
+		</a>
+	{/each}
+</TabsAnchor>
 
 <PieChart income={data.income} />
 
