@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { classes } from '$lib/utils/classes';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { IconSource } from '@steeze-ui/svelte-icon/types';
+	import type { SvelteComponentTyped } from 'svelte';
 
-	export let icon: IconSource;
+	export let icon: typeof SvelteComponentTyped<
+		svelte.JSX.IntrinsicElements['svg']
+	>;
 	export let current: boolean;
 </script>
 
@@ -16,9 +17,8 @@
 	)}
 	aria-current={current ? 'page' : undefined}
 >
-	<Icon
-		src={icon}
-		theme="solid"
+	<svelte:component
+		this={icon}
 		class={classes(
 			current ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500',
 			'-ml-0.5 mr-2 h-5 w-5',

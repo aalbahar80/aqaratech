@@ -6,8 +6,9 @@
 	import TabBar from '$lib/components/Tabs/TabBar.svelte';
 	import TabItem from '$lib/components/Tabs/TabItem.svelte';
 	import { kwdFormat } from '$lib/utils/common';
-	import { ChartBar, Database } from '@steeze-ui/heroicons';
 	import * as R from 'remeda';
+	import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
+	import HeroiconsTableCells from '~icons/heroicons/table-cells';
 	import type { PageData } from './$types';
 	import BarChart from './BarChart.svelte';
 	import PieChart from './PieChart.svelte';
@@ -20,14 +21,14 @@
 
 	const tabs = [
 		{
-			label: 'Bar',
-			href: `/portfolios/${$page.params.id}/financials/income`,
-			icon: ChartBar,
+			label: 'Table',
+			href: `/portfolios/${$page.params.id}/financials/income/table`,
+			icon: HeroiconsTableCells,
 		},
 		{
-			label: 'Pie',
-			href: `/portfolios/${$page.params.id}/financials/income/table`,
-			icon: Database,
+			label: 'Chart',
+			href: `/portfolios/${$page.params.id}/financials/income`,
+			icon: HeroiconsPresentationChartBar,
 		},
 	];
 </script>
