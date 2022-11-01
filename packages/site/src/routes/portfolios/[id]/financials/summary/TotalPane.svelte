@@ -49,7 +49,7 @@
 			{@const primaryText = primary[i] ?? monthFromShort(date)}
 			<TotalPaneItem
 				{primaryText}
-				secondaryText={primary[i] ? monthFromShort(date) : undefined}
+				secondaryText={primary[i] ? monthFromShort(date) : ''}
 				primaryValue={kwdFormat(amount)}
 				textColor={colors[title]}
 				chipText={change ? change.toFixed(2) : ''}
