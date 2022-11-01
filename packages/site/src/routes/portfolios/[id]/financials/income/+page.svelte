@@ -7,13 +7,13 @@
 
 	export let data: PageData;
 
+	$: paid = data.income.paid.reduce((acc, i) => acc + i.amount, 0);
+	$: unpaid = data.income.unpaid.reduce((acc, i) => acc + i.amount, 0);
+
 	$: pieDatasets = [
 		{
 			label: 'Payment Status',
-			data: [
-				data.income.paid.reduce((acc, i) => acc + i.amount, 0),
-				data.income.unpaid.reduce((acc, i) => acc + i.amount, 0),
-			],
+			data: [paid, unpaid],
 			backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)'],
 		},
 	];
@@ -47,8 +47,8 @@
 <a href="income/table">Table</a>
 
 <Chart let:height let:width>
-	{#if pieDatasets[0]?.data[0] > 0 || pieDatasets[0]?.data[1] > 0}
-		<canvas {height} {width} use:revenuePie={{ datasesets: pieDatasets }} />
+	{#if paid > 0 || unpaid > 0}
+		<canvas {height} {width} use:revenuePie={pieDatasets} />
 	{:else}
 		<div
 			class="w-full overflow-hidden rounded-lg bg-white  shadow"
@@ -62,5 +62,5 @@
 </Chart>
 
 <Chart let:height let:width>
-	<canvas {height} {width} use:revenueChart={{ datasets: barDatasets }} />
+	<canvas {height} {width} use:revenueChart={barDatasets} />
 </Chart>
