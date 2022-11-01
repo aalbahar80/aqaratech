@@ -18,13 +18,23 @@ export const calculateNet = (
 
 	const withPct = addPctChange(net);
 
-	return withPct;
+	// sort from newest to oldest
+	const sorted = withPct.sort((a, b) => b.date.localeCompare(a.date));
+
+	return sorted;
 };
 
 const addPctChange = (data: GroupByMonthDto[]) => {
-	const result = data.map((d, i) => {
-		const prev = data[i - 1];
-		const pctChange = prev ? (d.amount - prev.amount) / prev.amount : 0;
+	// sort from oldest to newest
+	const sorted = data.sort((a, b) => a.date.localeCompare(b.date));
+
+	const result = sorted.map((d, i) => {
+		const prev = sorted[i - 1];
+
+		const pctChange = prev
+			? ((d.amount - prev.amount) / Math.abs(prev.amount)) * 100
+			: 0;
+
 		return {
 			...d,
 			change: pctChange,
