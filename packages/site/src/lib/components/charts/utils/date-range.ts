@@ -1,4 +1,4 @@
-export const defaultRange = 3;
+export const defaultRange = 12;
 
 // start of next month
 export const defaultRangeEnd = () => {
