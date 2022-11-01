@@ -1,3 +1,4 @@
+import { invalidate } from '$app/navigation';
 import { defaultRange } from '$lib/components/charts/utils/date-range';
 import { endOfMonthN, startOfMonthN } from '@self/utils';
 import { writable } from 'svelte/store';
@@ -21,15 +22,18 @@ export function createRange() {
 
 		// set,
 
-		// update,
+		update,
 
-		setMonthCount: (input: number | null) => {
+		setMonthCount: async (input: number | null) => {
 			const count = z.number().min(0).parse(input);
+
 			set({
 				months: count,
 				start: startOfMonthN(count).split('T')[0],
 				end: endOfMonthN(0).split('T')[0],
 			});
+
+			await invalidate('range');
 		},
 
 		setCustomRange: (input: Range) => {
