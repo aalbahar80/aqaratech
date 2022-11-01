@@ -33,13 +33,35 @@
 			// type hack
 			throw new Error('No organizationId found in session');
 		}
-		return createApi().roles.create({
-			createRoleDto: {
-				roleType: predefined.roleType,
+
+		const api = createApi().roles;
+
+		if (predefined.entity === 'portfolio') {
+			return api.createPortfolioRole({
 				organizationId,
-				...values,
-			},
-		});
+				portfolioId: predefined.entityId,
+				createRoleDto: {
+					email: values.email,
+				},
+			});
+		} else if (predefined.entity === 'tenant') {
+			return api.createTenantRole({
+				organizationId,
+				tenantId: predefined.entityId,
+				createRoleDto: {
+					email: values.email,
+				},
+			});
+		} else if (predefined.entity === 'organization') {
+			return api.createOrgAdminRole({
+				organizationId,
+				createRoleDto: {
+					email: values.email,
+				},
+			});
+		} else {
+			throw new Error(`Unknown entity: ${predefined.entity}`);
+		}
 	}}
 	onSuccess={() => {
 		addSuccessToast(
