@@ -12,8 +12,8 @@ interface Range {
 export function createRange() {
 	const { subscribe, set, update } = writable<Range>({
 		months: defaultRange,
-		start: startOfMonthN(defaultRange),
-		end: endOfMonthN(0),
+		start: startOfMonthN(defaultRange).split('T')[0],
+		end: endOfMonthN(0).split('T')[0],
 	});
 
 	return {
@@ -27,8 +27,8 @@ export function createRange() {
 			const count = z.number().min(0).parse(input);
 			set({
 				months: count,
-				start: startOfMonthN(count),
-				end: endOfMonthN(0),
+				start: startOfMonthN(count).split('T')[0],
+				end: endOfMonthN(0).split('T')[0],
 			});
 		},
 
