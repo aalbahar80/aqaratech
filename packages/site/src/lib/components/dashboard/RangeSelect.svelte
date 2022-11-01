@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import Select from '$lib/components/form/inputs/Select.svelte';
-	import { range } from '$lib/stores/range';
+	import { range } from '$lib/stores/filter/range';
 
 	const rangeOptions = [
 		{ value: 0, label: 'Month to date' },

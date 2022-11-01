@@ -1,6 +1,6 @@
 import { createApi } from '$api';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
-import { range } from '$lib/stores/range';
+import { range } from '$lib/stores/filter/range';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
