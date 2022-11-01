@@ -14,7 +14,7 @@
 
 	// Chips
 	export let color: 'green' | 'red' | undefined = undefined;
-	export let chipText: string;
+	export let chipText = '';
 </script>
 
 <div class="px-4 py-5 sm:p-6">

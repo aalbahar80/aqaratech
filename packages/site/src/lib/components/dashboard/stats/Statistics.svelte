@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { GroupByMonthDto } from '$api/openapi';
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
-	import StatisticsPane from '$lib/components/dashboard/stats/StatsticsPane.svelte';
+	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
 
 	interface Datapoint extends GroupByMonthDto {
