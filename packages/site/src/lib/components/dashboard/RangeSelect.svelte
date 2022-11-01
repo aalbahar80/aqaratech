@@ -14,9 +14,12 @@
 <Select
 	current={$range.months}
 	options={rangeOptions}
-	on:select={(e) => {
+	on:select={async (e) => {
 		const value = e.detail.value;
-		value && range.setMonthCount(value);
+
+		if (value) {
+			await range.setMonths(value);
+		}
 	}}
 />
 
