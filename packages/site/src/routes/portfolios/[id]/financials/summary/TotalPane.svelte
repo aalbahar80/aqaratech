@@ -28,7 +28,7 @@
 				{primaryText}
 				secondaryText={primary[i] ? monthFromShort(date) : undefined}
 				primaryValue={kwdFormat(amount)}
-				chipText={change?.toFixed(2) ?? ''}
+				chipText={change ? change.toFixed(2) : ''}
 				color={change && change > 0 ? 'green' : 'red'}
 			/>
 		{/each}

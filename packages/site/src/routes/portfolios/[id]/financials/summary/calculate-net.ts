@@ -31,9 +31,10 @@ const addPctChange = (data: GroupByMonthDto[]) => {
 	const result = sorted.map((d, i) => {
 		const prev = sorted[i - 1];
 
-		const pctChange = prev
-			? ((d.amount - prev.amount) / Math.abs(prev.amount)) * 100
-			: 0;
+		const pctChange =
+			prev && prev.amount !== 0
+				? ((d.amount - prev.amount) / Math.abs(prev.amount)) * 100
+				: 0;
 
 		return {
 			...d,
