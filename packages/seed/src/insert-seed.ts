@@ -7,6 +7,7 @@ export const insertSeed = async (fake: PreprocessedSeed) => {
 	const {
 		users,
 		organizations,
+		organizationSettings,
 		roles,
 		tenants,
 		portfolios,
@@ -21,6 +22,9 @@ export const insertSeed = async (fake: PreprocessedSeed) => {
 	await prisma.user.createMany({ data: users });
 
 	await prisma.organization.createMany({ data: organizations });
+
+	// @ts-expect-error
+	await prisma.organizationSettings.createMany({ data: organizationSettings });
 
 	await prisma.tenant.createMany({ data: tenants });
 

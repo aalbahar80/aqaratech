@@ -3,6 +3,7 @@ export * from './expense-category';
 export * from './lease';
 export * from './lease-invoice';
 export * from './organization';
+export * from './organization-settings';
 export * from './payout';
 export * from './portfolio';
 export * from './property';

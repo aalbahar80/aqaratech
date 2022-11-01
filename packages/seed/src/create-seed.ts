@@ -3,6 +3,7 @@ import { expenseFactory } from './factory/expense';
 import { leaseFactory } from './factory/lease';
 import { leaseInvoiceFactory } from './factory/lease-invoice';
 import { organizationFactory } from './factory/organization';
+import { organizationSettingsFactory } from './factory/organization-settings';
 import { payoutFactory } from './factory/payout';
 import { portfolioFactory } from './factory/portfolio';
 import { propertyFactory } from './factory/property';
@@ -56,6 +57,13 @@ export const createSeed = (options?: SeedOptions) => {
 	const org1 = organizationFactory.build();
 
 	const organizations = [org1];
+
+	// Organization Settings
+	const organizationSettings = organizations.map((o) =>
+		organizationSettingsFactory.build({
+			organizationId: o.id,
+		}),
+	);
 
 	// Tenants
 	const tenants = Array.from({ length: count.tenants }, () =>
@@ -181,6 +189,7 @@ export const createSeed = (options?: SeedOptions) => {
 	const data = {
 		users,
 		organizations,
+		organizationSettings,
 		roles,
 		tenants,
 		portfolios,
