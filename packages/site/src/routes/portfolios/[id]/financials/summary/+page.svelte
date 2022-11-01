@@ -1,7 +1,7 @@
 <script lang="ts">
 	import PropertySelect from '$lib/components/dashboard/PropertySelect.svelte';
-	import Statistics from '$lib/components/dashboard/stats/Statistics.svelte';
 	import type { PageData } from './$types';
+	import SummaryStats from './SummaryStats.svelte';
 
 	export let data: PageData;
 </script>
@@ -18,9 +18,9 @@
 
 <!-- TotalPanes -->
 <div class="flex flex-col gap-y-12">
-	<Statistics title="Net" data={data.net} />
+	<SummaryStats title="Net" data={data.net} />
 
-	<Statistics title="Income" data={data.income.paid} />
+	<SummaryStats title="Income" data={data.income.paid} />
 
-	<Statistics title="Expenses" data={data.expenses} />
+	<SummaryStats title="Expenses" data={data.expenses} />
 </div>
