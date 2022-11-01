@@ -81,11 +81,11 @@
 		<VersionFooter />
 	{:else}
 		<div class="grid grid-cols-12">
-			<div class="col-span-2">
+			<div class="hidden lg:col-span-3 lg:block">
 				<Sidebar navigationTree={getNavigationTree(data.user)} />
 			</div>
 
-			<div class="col-span-10">
+			<div class="col-span-12 lg:col-span-9">
 				<div
 					class="mx-auto flex max-w-7xl flex-col space-y-6 p-4 sm:p-6 lg:p-8"
 				>
