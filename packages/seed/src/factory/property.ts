@@ -16,19 +16,38 @@ export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 	area: Factory.each(
 		() => areas[Math.floor(Math.random() * areas.length)]?.[1] || null,
 	),
+
 	label: null,
+
 	cost: null, // rm?
 
 	// address
-	block: faker.datatype.number({ min: 1, max: 13 }).toString(),
+	block: Factory.each(() =>
+		faker.datatype.number({ min: 1, max: 13 }).toString(),
+	),
+
 	street: `شارع ${faker.helpers.arrayElement([
 		faker.name.lastName(),
 		faker.datatype.number({ min: 1, max: 500 }).toString(),
 	])}`,
-	avenue: faker.datatype.number({ min: 1, max: 100 }).toString(),
-	number: faker.datatype.number({ min: 1, max: 100 }).toString(),
-	lat: +faker.address.latitude(),
-	long: +faker.address.longitude(),
-	paci: faker.datatype.number({ min: 10000000, max: 19999999 }).toString(),
-	parcel: faker.datatype.number({ min: 100, max: 999999 }).toString(),
+
+	avenue: Factory.each(() =>
+		faker.datatype.number({ min: 1, max: 100 }).toString(),
+	),
+
+	number: Factory.each(() =>
+		faker.datatype.number({ min: 1, max: 100 }).toString(),
+	),
+
+	lat: Factory.each(() => +faker.address.latitude()),
+
+	long: Factory.each(() => +faker.address.longitude()),
+
+	paci: Factory.each(() =>
+		faker.datatype.number({ min: 10000000, max: 19999999 }).toString(),
+	),
+
+	parcel: Factory.each(() =>
+		faker.datatype.number({ min: 100, max: 999999 }).toString(),
+	),
 });

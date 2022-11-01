@@ -13,11 +13,15 @@ export const portfolioFactory = Factory.Sync.makeFactoryWithRequired<
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
-	fullName: faker.name.fullName(),
+	fullName: Factory.each(() => faker.name.fullName()),
+
 	label: null,
-	civilid: faker.datatype
-		.number({ min: 200000000000, max: 399999999999 })
-		.toString(),
+
+	civilid: Factory.each(() =>
+		faker.datatype.number({ min: 200000000000, max: 399999999999 }).toString(),
+	),
+
 	dob: Factory.each(() => fakeDate()),
-	phone: faker.phone.number('9#######'),
+
+	phone: Factory.each(() => faker.phone.number('9#######')),
 });

@@ -15,12 +15,21 @@ export const expenseFactory = Factory.Sync.makeFactoryWithRequired<
 	updatedAt: Factory.each(() => updatedAt()),
 
 	amount: Factory.each(() => +faker.finance.amount(10, 250, 0)),
-	categoryId: faker.helpers.arrayElement(
-		generateExpenseCategoryTree().filter((c) => !c.isGroup),
-	).id,
+
+	categoryId: Factory.each(
+		() =>
+			faker.helpers.arrayElement(
+				generateExpenseCategoryTree().filter((c) => !c.isGroup),
+			).id,
+	),
+
 	memo: Factory.each(() => faker.lorem.sentence()),
+
 	postAt: Factory.each(() => fakeDate()),
+
 	maintenanceOrderId: null,
+
 	propertyId: null,
+
 	unitId: null,
 });

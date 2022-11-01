@@ -18,16 +18,24 @@ export const unitFactory = Factory.Sync.makeFactoryWithRequired<
 	updatedAt: Factory.each(() => updatedAt()),
 
 	floor: Factory.each(() => faker.datatype.number({ min: -2, max: 10 })),
+
 	size: Factory.each(() => faker.datatype.number({ min: 1, max: 2000 })),
+
 	bed: Factory.each(() => faker.datatype.number({ min: 1, max: 10 })),
+
 	bath: Factory.each(() => faker.datatype.number({ min: 1, max: 10 })),
+
 	marketRent: Factory.each(() =>
 		faker.datatype.number({ min: 100, max: 3000 }),
 	),
+
 	unitNumber: Factory.each(() =>
 		faker.datatype.number({ min: 1, max: 100 }).toString(),
 	),
+
 	type: Factory.each(() => faker.helpers.arrayElement(unitTypeValues)),
+
 	usage: Factory.each(() => null),
+
 	label: Factory.each(() => null),
 });

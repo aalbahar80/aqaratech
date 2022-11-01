@@ -13,14 +13,19 @@ const base = Factory.Sync.makeFactoryWithRequired<
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
+	// Dates
 	start: Factory.each(() => fakeDate()),
+
 	end: Factory.each(() => fakeDate()),
 
 	license: Factory.each(() => faker.company.bs()),
+
 	monthlyRent: Factory.each(() => +faker.finance.amount(1500, 3000, 0)),
+
 	deposit: Factory.each(() => +faker.finance.amount(100, 3000, 0)),
 
 	canPay: Factory.each(() => faker.datatype.boolean()),
+
 	notify: Factory.each(() => faker.datatype.boolean()),
 });
 

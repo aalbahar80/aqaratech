@@ -14,12 +14,18 @@ const base = Factory.Sync.makeFactoryWithRequired<
 	updatedAt: Factory.each(() => updatedAt()),
 
 	amount: Factory.each(() => +faker.finance.amount(10, 250, 0)),
+
 	memo: Factory.each(() => faker.lorem.sentence()),
-	postAt: Factory.each(() => fakeDate()),
+
 	isPaid: Factory.each(() => faker.datatype.boolean()),
 
 	mfPaymentId: Factory.each(() => randomUUID()),
+
+	// Dates
+	postAt: Factory.each(() => fakeDate()),
+
 	dueAt: Factory.each(() => fakeDate()),
+
 	paidAt: Factory.each(() => fakeDate()),
 });
 

@@ -13,12 +13,19 @@ export const roleFactory = Factory.Sync.makeFactoryWithRequired<
 	updatedAt: Factory.each(() => updatedAt()),
 
 	userId: Factory.each(() => randomUUID()), // Should always be passed in?
+
 	roleType: Factory.each(() => 'ORGADMIN'),
+
 	portfolioId: Factory.each(() => null),
+
 	tenantId: Factory.each(() => null),
+
 	isAccepted: Factory.each(() => faker.datatype.boolean()),
+
 	isDefault: Factory.each(() => faker.datatype.boolean()),
+
 	permissions: Factory.each(() => null),
+
 	email: Factory.each(() => faker.internet.email()),
 });
 

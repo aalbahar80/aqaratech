@@ -14,6 +14,8 @@ export const payoutFactory = Factory.Sync.makeFactoryWithRequired<
 	updatedAt: Factory.each(() => updatedAt()),
 
 	amount: Factory.each(() => +faker.finance.amount(10, 250, 0)),
+
 	memo: Factory.each(() => faker.lorem.sentence()),
+
 	postAt: Factory.each(() => fakeDate()),
 });

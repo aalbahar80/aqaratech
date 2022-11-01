@@ -13,19 +13,27 @@ export const tenantFactory = Factory.Sync.makeFactoryWithRequired<
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
-	fullName: faker.name.fullName(),
+	fullName: Factory.each(() => faker.name.fullName()),
+
 	label: null,
-	civilid: faker.datatype
-		.number({ min: 200000000000, max: 399999999999 })
-		.toString(),
+
+	civilid: Factory.each(() =>
+		faker.datatype.number({ min: 200000000000, max: 399999999999 }).toString(),
+	),
+
 	dob: Factory.each(() => fakeDate()),
-	phone: faker.phone.number('9#######'),
-	passportNum: faker.datatype
-		.number({ min: 100000000, max: 999999999 })
-		.toString(),
-	nationality: faker.address.countryCode('alpha-3'),
-	residencyNum: faker.datatype
-		.number({ min: 100000000, max: 999999999 })
-		.toString(),
-	residencyEnd: faker.date.future(2),
+
+	phone: Factory.each(() => faker.phone.number('9#######')),
+
+	passportNum: Factory.each(() =>
+		faker.datatype.number({ min: 100000000, max: 999999999 }).toString(),
+	),
+
+	nationality: Factory.each(() => faker.address.countryCode('alpha-3')),
+
+	residencyNum: Factory.each(() =>
+		faker.datatype.number({ min: 100000000, max: 999999999 }).toString(),
+	),
+
+	residencyEnd: Factory.each(() => faker.date.future(2)),
 });
