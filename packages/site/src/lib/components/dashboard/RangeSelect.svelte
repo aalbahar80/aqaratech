@@ -22,5 +22,3 @@
 		}
 	}}
 />
-
-<pre>{JSON.stringify($range, null, 2)}</pre>
