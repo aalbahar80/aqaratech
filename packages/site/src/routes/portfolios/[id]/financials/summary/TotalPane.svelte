@@ -15,7 +15,7 @@
 		<TotalPaneItem
 			primaryText="This month"
 			secondaryText={monthFromShort(data[2].date)}
-			primaryValue="56.14%"
+			primaryValue={data[2].amount}
 			color="green"
 			chipText="2.02%"
 		/>
@@ -23,14 +23,14 @@
 		<TotalPaneItem
 			primaryText="Last month"
 			secondaryText={monthFromShort(data[1].date)}
-			primaryValue="24.57%"
+			primaryValue={data[1].amount}
 			color="green"
 			chipText="4.31%"
 		/>
 
 		<TotalPaneItem
 			primaryText={monthFromShort(data[0].date)}
-			primaryValue="24.57%"
+			primaryValue={data[0].amount}
 			color="red"
 			chipText="4.31%"
 		/>
