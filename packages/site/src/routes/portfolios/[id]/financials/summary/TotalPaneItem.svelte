@@ -5,10 +5,11 @@
 
 	// Text
 	export let primaryText: string;
-	export let secondaryText: string;
+	export let secondaryText = '';
 
 	// Values
 	export let primaryValue: number | string;
+	export let valueText = '';
 
 	// Chips
 	export let color: 'green' | 'red' = 'green';
@@ -16,12 +17,14 @@
 </script>
 
 <div class="px-4 py-5 sm:p-6">
-	<dt class="text-base font-normal text-gray-900">{primaryText}</dt>
+	<dt class="text-base font-normal text-gray-900">
+		{primaryText}
+		<span class="px-2 text-xs font-normal text-gray-500">{secondaryText}</span>
+	</dt>
 	<dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
 		<div class="flex items-baseline text-2xl font-semibold text-indigo-600">
 			{primaryValue}
-			<span class="ml-2 text-sm font-medium text-gray-500">{secondaryText}</span
-			>
+			<span class="ml-2 text-sm font-medium text-gray-500">{valueText}</span>
 		</div>
 
 		<div

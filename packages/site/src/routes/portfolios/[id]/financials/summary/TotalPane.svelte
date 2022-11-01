@@ -13,16 +13,18 @@
 		class="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x"
 	>
 		<TotalPaneItem
-			primaryText={monthFromShort(data[0].date)}
-			secondaryText="from 56.14%"
+			primaryText="This month"
+			secondaryText={monthFromShort(data[0].date)}
+			valueText="from 56.14%"
 			primaryValue="56.14%"
 			color="green"
 			chipText="2.02%"
 		/>
 
 		<TotalPaneItem
-			primaryText={monthFromShort(data[1].date)}
-			secondaryText="from 56.14%"
+			primaryText="Last month"
+			secondaryText={monthFromShort(data[1].date)}
+			valueText="from 56.14%"
 			primaryValue="24.57%"
 			color="green"
 			chipText="4.31%"
@@ -30,7 +32,7 @@
 
 		<TotalPaneItem
 			primaryText={monthFromShort(data[2].date)}
-			secondaryText="from 56.14%"
+			valueText="from 56.14%"
 			primaryValue="24.57%"
 			color="red"
 			chipText="4.31%"
