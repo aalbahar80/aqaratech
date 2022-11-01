@@ -1,11 +1,18 @@
 <script lang="ts">
 	import RangeSelect from '$lib/components/dashboard/RangeSelect.svelte';
-	import Statistics from '$lib/components/dashboard/stats/Statistics.svelte';
+	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
+	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
+	import { kwdFormat } from '$lib/utils/common';
+	import * as R from 'remeda';
 	import type { PageData } from './$types';
 	import BarChart from './BarChart.svelte';
 	import PieChart from './PieChart.svelte';
 
 	export let data: PageData;
+
+	$: sumTotal = R.sumBy(data.income.total, (x) => x.amount);
+	$: sumPaid = R.sumBy(data.income.paid, (x) => x.amount);
+	$: sumUnpaid = R.sumBy(data.income.unpaid, (x) => x.amount);
 </script>
 
 <a href="income/table">Table</a>
@@ -16,12 +23,25 @@
 	</div>
 </div>
 
-<!-- TotalPanes -->
-<div class="flex flex-col gap-y-12">
-	<Statistics title="Collected" data={data.income.paid} />
-
-	<Statistics title="Uncollected" data={data.income.unpaid} />
-</div>
+<Stats title="Income">
+	<svelte:fragment slot="panes">
+		<StatisticsPane
+			primaryText="Total"
+			secondaryText="for period"
+			primaryValue={kwdFormat(sumTotal)}
+		/>
+		<StatisticsPane
+			primaryText="Collected"
+			secondaryText="for period"
+			primaryValue={kwdFormat(sumPaid)}
+		/>
+		<StatisticsPane
+			primaryText="Uncollected"
+			secondaryText="for period"
+			primaryValue={kwdFormat(sumUnpaid)}
+		/>
+	</svelte:fragment>
+</Stats>
 
 <PieChart income={data.income} />
 
