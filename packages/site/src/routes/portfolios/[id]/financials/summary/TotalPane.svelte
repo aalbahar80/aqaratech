@@ -25,7 +25,7 @@
 
 <div>
 	<div class="flex justify-between">
-		<h3 class="text-lg font-medium leading-6 text-gray-900">{title}</h3>
+		<h3 class="text-2xl font-medium leading-6 text-gray-900">{title}</h3>
 		{#if links[title]}
 			<a href={links[title]}>
 				<TextButton
