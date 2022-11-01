@@ -2,6 +2,7 @@
 	import type { GroupByMonthDto } from '$api/openapi';
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
+	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
 
 	interface Datapoint extends GroupByMonthDto {
@@ -31,22 +32,20 @@
 	};
 </script>
 
-<div>
-	<div class="flex justify-between">
-		<h3 class="text-2xl font-medium leading-6 text-gray-900">{title}</h3>
+<Stats {title}>
+	<div slot="details">
 		{#if links[title]}
 			<a href={links[title]}>
 				<TextButton
 					>Details
-					<!-- arrow-right -->
+					<!-- arrow-right  -->
 					&nbsp;&rarr;
 				</TextButton>
 			</a>
 		{/if}
 	</div>
-	<dl
-		class="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x"
-	>
+
+	<svelte:fragment slot="panes">
 		{#each data.slice(0, 3) as { amount, date, change }, i}
 			{@const primaryText = primary[i] ?? monthFromShort(date)}
 			<StatisticsPane
@@ -58,5 +57,5 @@
 				color={change && change > 0 ? 'green' : 'red'}
 			/>
 		{/each}
-	</dl>
-</div>
+	</svelte:fragment>
+</Stats>
