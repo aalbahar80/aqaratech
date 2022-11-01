@@ -13,6 +13,8 @@ export class DateRange {
 	// });
 
 	static createFromMonths(months: number) {
+		console.log('creating range from months', months); // TODO: rm
+
 		return new DateRange(
 			isoToDate(startOfMonthN(months)),
 			isoToDate(endOfMonthN(0)),
