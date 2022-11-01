@@ -1,10 +1,6 @@
 <script lang="ts">
+	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import Fa6SolidFileCsv from '~icons/fa6-solid/file-csv';
 </script>
 
-<div
-	class="inline-flex justify-end gap-x-2 text-indigo-600 hover:text-indigo-900"
->
-	<Fa6SolidFileCsv class="h-4 w-4 flex-shrink-0" />
-	Export All
-</div>
+<TextButton icon={Fa6SolidFileCsv}>Export All</TextButton>
