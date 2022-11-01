@@ -6,11 +6,15 @@
 	export let data: PageData;
 </script>
 
-<h1>Summary</h1>
+<h1 class="text-3xl font-bold text-gray-900">Summary</h1>
 
 <!-- Filters -->
 
-<PropertySelect properties={data.properties.results} />
+<div class="inline-flex justify-end">
+	<div class="w-72">
+		<PropertySelect properties={data.properties.results} />
+	</div>
+</div>
 
 <!-- TotalPanes -->
 <div class="flex flex-col gap-y-12">
