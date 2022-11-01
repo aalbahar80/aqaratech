@@ -24,7 +24,7 @@
 		"@types/node": "18.11.8",
 		"eslint-config-custom": "workspace:1.1.0",
 		"prisma": "4.5.0",
-		"tsx": "3.10.3",
+		"tsx": "3.11.0",
 		"typescript": "4.9.1-beta"
 	}
 }

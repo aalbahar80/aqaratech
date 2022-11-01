@@ -15,21 +15,21 @@
 	},
 	"dependencies": {
 		"date-fns": "2.29.3",
-		"remeda": "1.1.0",
+		"remeda": "1.2.0",
 		"ts-toolbelt": "9.6.0",
 		"zod": "3.19.0"
 	},
 	"devDependencies": {
 		"@babel/preset-typescript": "7.18.6",
 		"@logtail/types": "0.1.12",
-		"@sentry/types": "7.15.0",
+		"@sentry/types": "7.17.3",
 		"@tsconfig/esm": "1.0.2",
 		"@tsconfig/node18-strictest-esm": "1.0.1",
 		"@types/node": "18.11.8",
-		"@vitest/ui": "0.24.3",
+		"@vitest/ui": "0.24.4",
 		"eslint-config-custom": "workspace:1.1.0",
 		"tsup": "6.3.0",
 		"typescript": "4.9.1-beta",
-		"vitest": "0.24.3"
+		"vitest": "0.24.4"
 	}
 }
