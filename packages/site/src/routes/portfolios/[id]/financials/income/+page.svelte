@@ -8,13 +8,20 @@
 	export let data: PageData;
 </script>
 
-<RangeSelect />
-
 <a href="income/table">Table</a>
 
-<Statistics title="Collected" data={data.income.paid} />
+<div class="inline-flex justify-end">
+	<div class="w-72">
+		<RangeSelect />
+	</div>
+</div>
 
-<Statistics title="Uncollected" data={data.income.unpaid} />
+<!-- TotalPanes -->
+<div class="flex flex-col gap-y-12">
+	<Statistics title="Collected" data={data.income.paid} />
+
+	<Statistics title="Uncollected" data={data.income.unpaid} />
+</div>
 
 <PieChart income={data.income} />
 
