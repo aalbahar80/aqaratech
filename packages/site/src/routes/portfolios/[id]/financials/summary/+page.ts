@@ -1,4 +1,5 @@
 import { createApi } from '$api';
+import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { property } from '$lib/stores/filter/property';
 import { range } from '$lib/stores/range';
 import { get } from 'svelte/store';
@@ -9,7 +10,7 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 	// Filter options
 	const { start, end } = get(range);
 	const propertyId = get(property);
-	depends('range', 'property');
+	depends(FilterEnum.Range, FilterEnum.Property);
 
 	const api = createApi(fetch);
 

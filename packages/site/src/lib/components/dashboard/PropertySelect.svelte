@@ -2,6 +2,7 @@
 	import type { PropertyDto } from '$api/openapi';
 	import { invalidate } from '$app/navigation';
 	import Select from '$lib/components/form/inputs/Select.svelte';
+	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 	import { property } from '$lib/stores/filter/property';
 
 	export let properties: PropertyDto[];
@@ -23,6 +24,6 @@
 	bind:current={$property}
 	{options}
 	on:select={async () => {
-		await invalidate('property');
+		await invalidate(FilterEnum.Property);
 	}}
 />
