@@ -8,7 +8,7 @@
 </script>
 
 <div>
-	<h3 class="text-lg font-medium leading-6 text-gray-900">Last 30 days</h3>
+	<h3 class="text-lg font-medium leading-6 text-gray-900">{title}</h3>
 	<dl
 		class="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x"
 	>
@@ -45,8 +45,6 @@
 				<div
 					class="inline-flex items-baseline rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 md:mt-2 lg:mt-0"
 				>
-					<!-- Heroicon name: mini/arrow-up -->
-
 					<HeroiconsArrowUp20Solid
 						class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
 					/>
