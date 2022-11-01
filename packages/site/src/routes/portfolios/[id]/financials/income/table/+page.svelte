@@ -1,6 +1,6 @@
 <script lang="ts">
-	import IncomeTable from 'src/routes/portfolios/[id]/financials/income/table/IncomeTable.svelte';
 	import type { PageData } from './$types';
+	import IncomeTable from './IncomeTable.svelte';
 
 	export let data: PageData;
 </script>
