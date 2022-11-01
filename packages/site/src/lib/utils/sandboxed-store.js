@@ -1,11 +1,10 @@
 // sandboxedStore.js
 //
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 import { getStores } from '$app/stores';
-import { v4 as uuidv4 } from 'uuid';
 import { get, writable as svelteWritable } from 'svelte/store';
 
-const storesKey = `sandbox_${uuidv4()}`;
+const storesKey = `sandbox_${crypto.randomUUID()}`;
 
 /**
  * Creates a façade for a writable store that is a sandboxed store that may be used as a
@@ -26,7 +25,7 @@ const storesKey = `sandbox_${uuidv4()}`;
  * @param {string} [key] An optional key name for the store
  */
 export function writable(initialValue, key) {
-	key = key ? `${key}_${uuidv4()}` : uuidv4();
+	key = key ? `${key}_${crypto.randomUUID()}` : crypto.randomUUID();
 
 	function setStore(value) {
 		try {
