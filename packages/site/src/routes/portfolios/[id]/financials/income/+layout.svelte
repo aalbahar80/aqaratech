@@ -34,7 +34,7 @@
 
 <TabBar>
 	{#each tabs as { href, icon, label }}
-		<a {href}>
+		<a {href} data-sveltekit-noscroll>
 			<TabItem {icon} current={$page.url.pathname === href}>
 				{label}
 			</TabItem>
