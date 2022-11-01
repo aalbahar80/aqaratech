@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { GroupByMonthDto } from '$api/openapi';
-	import { monthFromShort } from '$lib/utils/common';
+	import { kwdFormat, monthFromShort } from '$lib/utils/common';
 	import TotalPaneItem from './TotalPaneItem.svelte';
 
 	export let title: string;
@@ -15,7 +15,7 @@
 		<TotalPaneItem
 			primaryText="This month"
 			secondaryText={monthFromShort(data[2].date)}
-			primaryValue={data[2].amount}
+			primaryValue={kwdFormat(data[2].amount)}
 			color="green"
 			chipText="2.02%"
 		/>
@@ -23,14 +23,14 @@
 		<TotalPaneItem
 			primaryText="Last month"
 			secondaryText={monthFromShort(data[1].date)}
-			primaryValue={data[1].amount}
+			primaryValue={kwdFormat(data[1].amount)}
 			color="green"
 			chipText="4.31%"
 		/>
 
 		<TotalPaneItem
 			primaryText={monthFromShort(data[0].date)}
-			primaryValue={data[0].amount}
+			primaryValue={kwdFormat(data[0].amount)}
 			color="red"
 			chipText="4.31%"
 		/>
