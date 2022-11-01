@@ -2,6 +2,7 @@
 	import Chart from '$lib/components/charts/Chart.svelte';
 	import { revenueChart } from '$lib/components/charts/revenue';
 	import { revenuePie } from '$lib/components/charts/revenue-pie';
+	import RangeSelect from '$lib/components/dashboard/RangeSelect.svelte';
 	import { getColor } from '$lib/utils/colors';
 	import type { PageData } from './$types';
 
@@ -43,6 +44,8 @@
 		},
 	];
 </script>
+
+<RangeSelect />
 
 <a href="income/table">Table</a>
 
