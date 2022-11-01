@@ -1,6 +1,5 @@
 <script lang="ts">
 	import PropertySelect from '$lib/components/dashboard/PropertySelect.svelte';
-	import RangeSelect from '$lib/components/dashboard/RangeSelect.svelte';
 	import type { PageData } from './$types';
 	import TotalPane from './TotalPane.svelte';
 
@@ -10,8 +9,6 @@
 <h1>Summary</h1>
 
 <!-- Filters -->
-
-<RangeSelect />
 
 <PropertySelect properties={data.properties.results} />
 
