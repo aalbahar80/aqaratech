@@ -8,14 +8,6 @@
 
 <RangeSelect />
 
-<BarChart expenses={data.expenses} />
-
 <a href="expenses/table">Table</a>
 
-<pre>{JSON.stringify(
-		{
-			income: data.expenses,
-		},
-		null,
-		2,
-	)}</pre>
+<BarChart expenses={data.expenses} />
