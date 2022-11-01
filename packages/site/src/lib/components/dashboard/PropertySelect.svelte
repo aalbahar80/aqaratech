@@ -1,11 +1,13 @@
 <script lang="ts">
 	import type { PropertyDto } from '$api/openapi';
+	import { invalidate } from '$app/navigation';
 	import Select from '$lib/components/form/inputs/Select.svelte';
+	import { property } from '$lib/stores/filter/property';
 
 	export let properties: PropertyDto[];
 
 	const allPropertiesOption = {
-		value: null,
+		value: undefined,
 		label: 'All properties',
 	};
 
@@ -18,9 +20,9 @@
 </script>
 
 <Select
-	current={null}
+	bind:current={$property}
 	{options}
-	on:select={() => {
-		// const value = e.detail.value;
+	on:select={async () => {
+		await invalidate('property');
 	}}
 />

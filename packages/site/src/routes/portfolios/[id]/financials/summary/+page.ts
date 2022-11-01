@@ -1,14 +1,17 @@
 import { createApi } from '$api';
+import { property } from '$lib/stores/filter/property';
 import { range } from '$lib/stores/range';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 import { calculateNet } from './calculate-net';
 
 export const load: PageLoad = async ({ fetch, params, depends }) => {
-	const api = createApi(fetch);
-
+	// Filter options
 	const { start, end } = get(range);
-	depends('range');
+	const propertyId = get(property);
+	depends('range', 'property');
+
+	const api = createApi(fetch);
 
 	const [properties, income, expenses] = await Promise.all([
 		api.portfolios.findProperties({
@@ -17,12 +20,14 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 
 		api.portfolios.getIncomeByMonth({
 			portfolioId: params.id,
+			propertyId,
 			start,
 			end,
 		}),
 
 		api.portfolios.getExpensesByMonth({
 			portfolioId: params.id,
+			propertyId,
 			start,
 			end,
 		}),
