@@ -3,7 +3,7 @@ import {
 	createParamDecorator,
 	ExecutionContext,
 } from '@nestjs/common';
-import { ApiQuery, getSchemaPath } from '@nestjs/swagger';
+import { ApiExtraModels, ApiQuery, getSchemaPath } from '@nestjs/swagger';
 import {
 	RequestParserService,
 	RequestQueryOptions,
@@ -40,6 +40,7 @@ export const QueryParser = createParamDecorator(
  */
 export function ApiQueryOptions() {
 	return applyDecorators(
+		ApiExtraModels(QueryOptionsRequestDto),
 		ApiQuery({
 			name: 'options',
 			required: false,

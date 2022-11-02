@@ -2408,6 +2408,37 @@ export interface PropertyDto {
 /**
  *
  * @export
+ * @interface QueryOptionsRequestDto
+ */
+export interface QueryOptionsRequestDto {
+	/**
+	 *
+	 * @type {number}
+	 * @memberof QueryOptionsRequestDto
+	 */
+	page?: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof QueryOptionsRequestDto
+	 */
+	skip?: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof QueryOptionsRequestDto
+	 */
+	take?: number;
+	/**
+	 *
+	 * @type {Array<string>}
+	 * @memberof QueryOptionsRequestDto
+	 */
+	sort?: Array<string>;
+}
+/**
+ *
+ * @export
  * @interface RoleDto
  */
 export interface RoleDto {

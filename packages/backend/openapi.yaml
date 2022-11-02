@@ -2612,6 +2612,19 @@ components:
         - isPaid
         - memo
         - mfPaymentId
+    QueryOptionsRequestDto:
+      type: object
+      properties:
+        page:
+          type: number
+        skip:
+          type: number
+        take:
+          type: number
+        sort:
+          type: array
+          items:
+            type: string
     RoleTypeEnum:
       type: string
       enum:
