@@ -5,4 +5,4 @@
 	export let data: PageData;
 </script>
 
-<UnitForm data={data.unit} formType="update" />
+<UnitForm data={data.unit} />

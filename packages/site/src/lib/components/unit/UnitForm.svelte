@@ -1,76 +1,14 @@
 <script lang="ts">
 	import { createApi } from '$api';
-	import type {
-		PaginatedPortfolioDto,
-		PaginatedPropertyDto,
-		UnitDto,
-	} from '$api/openapi';
+	import type { UnitDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
-	import {
-		portfoliosToOptions,
-		propertiesToOptions,
-	} from '$lib/components/form/inputs/to-options';
 	import { labelHint } from '$lib/constants/form-hints';
 	import { unitTypeOptions } from '$lib/constants/unit-options';
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
-	import type { RelOption } from '$lib/models/interfaces/option.interface';
-	import type { PredefinedUnit } from '$lib/models/interfaces/predefined.interface';
 	import { unitCreateSchema, unitUpdateSchema } from '@self/utils';
 
-	type TPredefinedUnit = $$Generic<PredefinedUnit | undefined>;
-	type TPortfolios = $$Generic<PaginatedPortfolioDto | undefined>;
-	type TProperties = $$Generic<PaginatedPropertyDto | undefined>;
-
-	type TUnitDto = $$Generic<
-		TPortfolios extends undefined ? UnitDto : undefined
-	>;
-
-	interface Props {
-		formType: 'create' | 'update';
-	}
-
-	interface UpdateForm extends Props {
-		formType: 'update';
-		data: TUnitDto;
-	}
-
-	interface CreateForm extends Props {
-		formType: 'create';
-		predefined: TPredefinedUnit;
-		portfolios: TPortfolios;
-		properties: TProperties;
-	}
-
-	type $$Props = CreateForm | UpdateForm;
-
-	export let formType: $$Props['formType'];
-	export let data: TUnitDto = undefined as TUnitDto;
-	export let predefined: TPredefinedUnit = undefined as TPredefinedUnit;
-	export let portfolios: TPortfolios = undefined as TPortfolios;
-	export let properties: TProperties = undefined as TProperties;
-
-	const relationalFields: SelectField<RelOption>[] =
-		formType === 'create' && portfolios
-			? [
-					new SelectField('portfolioId', {
-						label: 'Portfolio',
-						required: true,
-						value: predefined?.portfolioId,
-						combobox: true,
-						autoInit: true,
-						options: portfoliosToOptions(portfolios),
-					}),
-					new SelectField('propertyId', {
-						label: 'Property',
-						required: true,
-						value: predefined?.propertyId,
-						combobox: true,
-						autoInit: true,
-						options: properties ? propertiesToOptions(properties) : undefined,
-					}),
-			  ]
-			: [];
+	export let data: UnitDto | undefined = undefined;
 
 	const basicFields = [
 		new SelectField('type', {
@@ -92,11 +30,11 @@
 	];
 </script>
 
-{#if formType === 'update'}
+{#if data}
 	<Form
 		schema={unitUpdateSchema}
 		entity="unit"
-		{formType}
+		formType="update"
 		{basicFields}
 		onSubmit={(values) =>
 			createApi().units.update({
@@ -106,15 +44,18 @@
 	/>
 {:else}
 	<Form
-		schema={unitCreateSchema}
+		schema={unitCreateSchema.omit({ portfolioId: true, propertyId: true })}
 		entity="unit"
-		{formType}
+		formType="create"
 		{basicFields}
-		{relationalFields}
 		onSubmit={(values) =>
 			createApi().organizations.createUnit({
-				createUnitDto: values,
-				organizationId: $page.data.user?.role?.organizationId,
+				createUnitDto: {
+					...values,
+					propertyId: $page.params.propertyId,
+					portfolioId: $page.params.portfolioId,
+				},
+				organizationId: $page.params.organizationId,
 			})}
 	/>
 {/if}
