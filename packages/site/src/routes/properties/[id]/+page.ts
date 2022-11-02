@@ -1,42 +1,36 @@
 import { createApi } from '$api';
-import { TAKE_MAX } from '$lib/constants/pagination-keys';
-import { parseParams } from '$lib/utils/parse-params';
 import { startOfMonthN } from '@self/utils';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({
-	fetch,
-	params,
-	url: { searchParams },
-	parent,
-}) => {
+export const load: PageLoad = async ({ fetch, params, parent }) => {
 	const propertyId = params.id;
-	// TODO handle pagination defaults
-	const sParams = parseParams(searchParams);
+
+	const role = (await parent()).user!.role!;
+
+	const { organizationId, portfolioId } = role;
 
 	const api = createApi(fetch);
-
-	const organizationId = (await parent()).user?.role?.organizationId;
 
 	const [property, units, occupancy, futureOccupancy] = await Promise.all([
 		api.properties.findOne({ id: propertyId }),
 
 		api.properties.findUnits({
 			id: propertyId,
-			...sParams,
-			take: TAKE_MAX,
+			take: 100,
 		}),
 
 		api.portfolios.getOccupancy({
 			organizationId,
-			portfolioId: propertyId,
+			portfolioId,
+			propertyId,
 			start: startOfMonthN(12).split('T')[0],
 			end: new Date().toISOString().split('T')[0],
 		}),
 
 		api.portfolios.getOccupancy({
 			organizationId,
-			portfolioId: propertyId,
+			portfolioId,
+			propertyId,
 			start: new Date().toISOString().split('T')[0],
 			end: startOfMonthN(-12).split('T')[0],
 		}),

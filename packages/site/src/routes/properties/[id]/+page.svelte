@@ -1,6 +1,5 @@
 <script lang="ts">
 	import OccupancyCard from '$lib/components/dashboard/cards/OccupancyCard.svelte';
-	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
 	import UnitsList from '$lib/components/unit/UnitsList.svelte';
@@ -27,13 +26,10 @@
 </script>
 
 <PropertyPage property={data.property} />
+
 <DetailsPane {details} />
+
 <UnitsList units={data.units} />
-<DashboardFilter
-	properties={[data.property]}
-	units={data.units.results}
-	disabledPropertySelector
-/>
 
 <OccupancyCard
 	occupancy={data.occupancy}
