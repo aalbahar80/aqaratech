@@ -5,7 +5,6 @@ import '@sentry/tracing';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { MyValidationPipe } from 'src/pipes/my-validation.pipe';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
 import { version } from '../package.json';
@@ -37,18 +36,6 @@ async function bootstrap() {
 
 	app.use(helmet()); // before other middleware
 	app.use(cookieParser());
-
-	app.useGlobalPipes(
-		new MyValidationPipe({
-			transform: true,
-			forbidUnknownValues: true,
-			forbidNonWhitelisted: true,
-			whitelist: true,
-			validateCustomDecorators: false,
-			enableDebugMessages: process.env.PUBLIC_AQ_DEBUG_NEST == '1',
-			disableErrorMessages: false,
-		}),
-	);
 
 	// https://docs.nestjs.com/recipes/prisma#issues-with-enableshutdownhooks
 	const prismaService = app.get(PrismaService);
