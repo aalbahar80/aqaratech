@@ -38,3 +38,20 @@ export const inferRoute = (pathname: string) => {
 		throw new Error(`Could not infer route from pathname: ${pathname}`);
 	}
 };
+
+type RouteArgs =
+	| { organizationId: string; portfolioId: string }
+	| { params: Record<string, string> };
+
+export const portfolioRoute = (routeArgs: RouteArgs) => {
+	let organizationId: string;
+	let portfolioId: string;
+	if ('organizationId' in routeArgs) {
+		organizationId = routeArgs.organizationId;
+		portfolioId = routeArgs.portfolioId;
+	} else {
+		organizationId = routeArgs.params.organizationId!;
+		portfolioId = routeArgs.params.portfolioId!;
+	}
+	return `/organizations/${organizationId}/portfolios/${portfolioId}`;
+};

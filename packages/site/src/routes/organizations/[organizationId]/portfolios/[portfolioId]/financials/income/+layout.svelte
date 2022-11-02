@@ -3,6 +3,7 @@
 	import RangeSelect from '$lib/components/dashboard/RangeSelect.svelte';
 	import TabBar from '$lib/components/Tabs/TabBar.svelte';
 	import TabItem from '$lib/components/Tabs/TabItem.svelte';
+	import { portfolioRoute } from '$lib/utils/route-helpers';
 	import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 	import HeroiconsTableCells from '~icons/heroicons/table-cells';
 	import type { PageData } from './$types';
@@ -13,14 +14,14 @@
 	const tabs = [
 		{
 			label: 'Table',
-			href: `/organizations/${$page.params.organizationId!}/portfolios/${$page
-				.params.portfolioId!}/financials/income/table`,
+			href: `${portfolioRoute({
+				params: $page.params,
+			})}/financials/income/table`,
 			icon: HeroiconsTableCells,
 		},
 		{
 			label: 'Chart',
-			href: `/organizations/${$page.params.organizationId!}/portfolios/${$page
-				.params.portfolioId!}/financials/income`,
+			href: `${portfolioRoute({ params: $page.params })}/financials/income`,
 			icon: HeroiconsPresentationChartBar,
 		},
 	];
