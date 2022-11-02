@@ -114,11 +114,11 @@ export class PortfoliosController {
 	@ApiPaginatedResponse(PropertyDto)
 	findProperties(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 		@Param('id') id: string,
 	): Promise<WithCount<PropertyDto>> {
 		const where: Prisma.PropertyWhereInput = { portfolioId: { equals: id } };
-		return this.propertiesService.findAll({ user, pageOptionsDto, where });
+		return this.propertiesService.findAll({ user, queryOptions, where });
 	}
 
 	@Get(':id/units')

@@ -6,6 +6,7 @@ import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import {
 	RemoveDocumentsEvent,
 	UpdateIndexEvent,
@@ -54,15 +55,15 @@ export class PropertiesService {
 	}
 
 	async findAll({
-		pageOptionsDto,
+		queryOptions,
 		user,
 		where,
 	}: {
-		pageOptionsDto: PageOptionsDto;
+		queryOptions: QueryOptionsDto;
 		user: IUser;
 		where?: Prisma.PropertyWhereInput;
 	}): Promise<WithCount<PropertyDto>> {
-		const { page, take } = pageOptionsDto;
+		const { take, skip } = queryOptions;
 
 		const filter: Prisma.PropertyWhereInput = {
 			AND: [
@@ -74,7 +75,7 @@ export class PropertiesService {
 		const [results, total] = await Promise.all([
 			this.prisma.property.findMany({
 				take,
-				skip: (page - 1) * take,
+				skip,
 				orderBy: { createdAt: 'desc' },
 				where: filter,
 				include: { portfolio: crumbs.portfolio },
