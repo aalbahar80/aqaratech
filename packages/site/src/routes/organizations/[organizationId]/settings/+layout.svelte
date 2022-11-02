@@ -5,7 +5,7 @@
 	import BxsBusiness from '~icons/bxs/business';
 	import Fa6SolidNetworkWired from '~icons/fa6-solid/network-wired';
 
-	$: subroutes = settings($page.params.id as string);
+	$: subroutes = settings($page.params.organizationId!);
 	$: subNavigation = [
 		{
 			name: 'Organization',

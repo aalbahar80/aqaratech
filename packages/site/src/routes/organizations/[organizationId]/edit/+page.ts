@@ -5,7 +5,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const api = createApi(fetch);
 
 	const organization = await api.organizations.findOne({
-		id: params.id,
+		id: params.organizationId,
 	});
 
 	return { organization };

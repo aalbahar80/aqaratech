@@ -5,7 +5,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 	const api = createApi(fetch);
 
 	const categories = await api.expenseCategories.findAll({
-		organizationId: params.id,
+		organizationId: params.organizationId,
 	});
 
 	return { categories };
