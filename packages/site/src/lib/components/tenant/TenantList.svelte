@@ -1,10 +1,10 @@
 <script lang="ts">
+	import type { PaginatedTenantDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import TenantCard from '$lib/components/tenant/TenantCard.svelte';
-	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedTenantDto } from '$api/openapi';
+	import { orgRoute } from '$lib/utils/route-helpers';
 
 	export let tenants: PaginatedTenantDto;
 </script>
@@ -12,12 +12,7 @@
 <StackedList
 	entity="tenant"
 	count={tenants.results.length}
-	formUrl={create({
-		entity: 'tenant',
-		predefined:
-			$page.url.pathname.startsWith('/properties') &&
-			new Map([['propertyId', $page.url.pathname.split('/').pop()]]),
-	})}
+	formUrl={`${orgRoute($page.params)}/tenants/new`}
 >
 	{#each tenants.results as tenant (tenant.id)}
 		<li>

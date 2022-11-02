@@ -54,6 +54,9 @@ type Output =
 			entity: Entity;
 	  };
 
+export const orgRoute = (params: Record<string, string>) =>
+	`/organizations/${params.organizationId}`;
+
 export const portfolioRoute = (routeArgs: RouteArgs): string => {
 	let organizationId: string;
 	let portfolioId: string;

@@ -37,11 +37,20 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 	];
 
 	if (user.role?.roleType === 'ORGADMIN') {
-		tree.splice(0, 0, {
-			name: 'Portfolios',
-			href: `${organizationRoute}/portfolios`,
-			icon: HeroiconsOutlineDocumentReport,
-		});
+		tree.splice(
+			0,
+			0,
+			{
+				name: 'Portfolios',
+				href: `${organizationRoute}/portfolios`,
+				icon: HeroiconsOutlineDocumentReport,
+			},
+			{
+				name: 'Tenants',
+				href: `${organizationRoute}/tenants`,
+				icon: HeroiconsOutlineDocumentReport,
+			},
+		);
 
 		tree.splice(-1, 0, {
 			name: 'Settings',

@@ -1,12 +1,17 @@
 <script lang="ts">
 	import type { TenantDto } from '$api/openapi';
+	import { page } from '$app/stores';
+	import { orgRoute } from '$lib/utils/route-helpers';
 	import { Phone, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let tenant: TenantDto;
 </script>
 
-<a href={`/tenants/${tenant.id}`} class="block hover:bg-gray-50">
+<a
+	href={`${orgRoute($page.params)}/tenants/${tenant.id}`}
+	class="block hover:bg-gray-50"
+>
 	<div class="px-4 py-4 sm:px-6">
 		<!-- <div class="flex items-center justify-between">
 			<p class="truncate text-sm font-medium text-indigo-600">

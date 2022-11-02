@@ -5,4 +5,4 @@
 	export let data: PageData;
 </script>
 
-<TenantForm formType="update" data={data.tenant} />
+<TenantForm data={data.tenant} />

@@ -8,28 +8,7 @@
 	import { Field, SelectField } from '$lib/models/classes/Field.class';
 	import { tenantCreateSchema as schema } from '@self/utils';
 
-	type TTenantDto = $$Generic<
-		// eslint-disable-next-line no-undef
-		TPortfolios extends undefined ? TenantDto : undefined
-	>;
-
-	interface Props {
-		formType: 'create' | 'update';
-	}
-
-	interface UpdateForm extends Props {
-		formType: 'update';
-		data: TTenantDto;
-	}
-
-	interface CreateForm extends Props {
-		formType: 'create';
-	}
-
-	type $$Props = CreateForm | UpdateForm;
-
-	export let formType: $$Props['formType'];
-	export let data: TTenantDto = undefined as TTenantDto;
+	export let data: TenantDto | undefined = undefined;
 
 	const basicFields = [
 		new Field('fullName', {
@@ -78,11 +57,11 @@
 	];
 </script>
 
-{#if formType === 'update'}
+{#if data}
 	<Form
 		{schema}
 		entity="tenant"
-		{formType}
+		formType="update"
 		{basicFields}
 		onSubmit={(values) =>
 			createApi().tenants.update({
@@ -94,12 +73,12 @@
 	<Form
 		{schema}
 		entity="tenant"
-		{formType}
+		formType="create"
 		{basicFields}
 		onSubmit={(values) => {
 			return createApi().organizations.createTenant({
 				createTenantDto: values,
-				organizationId: $page.data.user?.role?.organizationId ?? '', // type hack
+				organizationId: $page.params.organizationId,
 			});
 		}}
 	/>

@@ -10,7 +10,8 @@ export const load: PageLoad = async ({
 	const api = createApi(fetch);
 	// TODO handle pagination defaults
 	const sParams = parseParams(searchParams);
-	const tenantId = params.id;
+
+	const { tenantId } = params;
 
 	const [tenant, leases, invoices, roles] = await Promise.all([
 		api.tenants.findOne({ id: tenantId }),
