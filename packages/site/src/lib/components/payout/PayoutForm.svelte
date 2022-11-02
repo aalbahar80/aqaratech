@@ -3,18 +3,15 @@
 	import { page } from '$app/stores';
 	import Form from '$lib/components/form/Form.svelte';
 	import { Field } from '$lib/models/classes/Field.class';
-	import type { PredefinedPayout } from '$lib/models/interfaces/predefined.interface';
 	import {
 		OrganizationIdField,
 		PortfolioIdField,
 	} from '$lib/utils/form/common-fields';
 	import { payoutCreateSchema } from '@self/utils';
 
-	export let predefined: PredefinedPayout;
-
 	const basicFields = [
 		OrganizationIdField($page.data.user?.role?.organizationId),
-		PortfolioIdField(predefined.portfolioId),
+		PortfolioIdField($page.params.portfolioId),
 		new Field('amount', {
 			required: true,
 			type: 'number',

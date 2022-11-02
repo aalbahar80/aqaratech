@@ -14,9 +14,7 @@
 	count={payouts.results.length}
 	formUrl={create({
 		entity: 'payout',
-		predefined:
-			$page.url.pathname.startsWith('/portfolios') &&
-			new Map([['portfolioId', $page.url.pathname.split('/').pop()]]),
+		predefined: new Map([['portfolioId', $page.params.portfolioId]]),
 	})}
 >
 	{#each payouts.results as payout, idx (payout.id)}

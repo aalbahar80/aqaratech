@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PayoutDto } from '$api/openapi';
-	import { entitiesMap } from '@self/utils';
+	import { page } from '$app/stores';
+	import { getRoute } from '$lib/utils/route-helpers';
 	import { LocationMarker } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -9,7 +10,10 @@
 </script>
 
 <a
-	href={`/${entitiesMap.payout.urlName}/${payout.id}`}
+	href={getRoute(
+		{ params: $page.params },
+		{ entity: 'payout', id: payout.id, page: 'id' },
+	)}
 	class="block hover:bg-gray-50"
 >
 	<div class="px-4 py-4 sm:px-6">
