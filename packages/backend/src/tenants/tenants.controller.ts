@@ -108,7 +108,10 @@ export class TenantsController {
 	findInvoices(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@QueryParser() queryOptions: QueryOptionsDto,
+		@QueryParser({
+			orderDefaultValue: 'postAt',
+		})
+		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {
 		const where: Prisma.LeaseInvoiceWhereInput = {
 			lease: { tenantId: { equals: id } },

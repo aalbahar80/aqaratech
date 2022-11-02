@@ -37,7 +37,10 @@ export class ExpensesController {
 	@ApiPaginatedResponse(ExpenseDto)
 	findAll(
 		@User() user: IUser,
-		@QueryParser() queryOptions: QueryOptionsDto,
+		@QueryParser({
+			orderDefaultValue: 'postAt',
+		})
+		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<ExpenseDto>> {
 		return this.expensesService.findAll({ queryOptions, user });
 	}

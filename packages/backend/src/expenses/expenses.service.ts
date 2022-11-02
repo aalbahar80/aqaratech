@@ -63,14 +63,11 @@ export class ExpensesService {
 			],
 		};
 
-		// Default sort
-		const orderBy = sort.length ? sort : ({ postAt: 'desc' } as const);
-
 		const [data, total, settings] = await Promise.all([
 			this.prisma.expense.findMany({
 				take,
 				skip,
-				orderBy,
+				orderBy: sort,
 				where: filter,
 				include: {
 					portfolio: crumbs.portfolio,

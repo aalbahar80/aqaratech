@@ -67,14 +67,11 @@ export class LeaseInvoicesService {
 			],
 		};
 
-		// Default sort
-		const orderBy = sort.length ? sort : ({ postAt: 'desc' } as const);
-
 		const [data, total] = await Promise.all([
 			this.prisma.leaseInvoice.findMany({
 				take,
 				skip,
-				orderBy,
+				orderBy: sort,
 				where: filter,
 				include: { lease: crumbs.lease },
 			}),

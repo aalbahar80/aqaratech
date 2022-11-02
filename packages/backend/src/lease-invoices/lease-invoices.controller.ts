@@ -44,7 +44,10 @@ export class LeaseInvoicesController {
 	@ApiPaginatedResponse(LeaseInvoiceDto)
 	findAll(
 		@User() user: IUser,
-		@QueryParser() queryOptions: QueryOptionsDto,
+		@QueryParser({
+			orderDefaultValue: 'postAt',
+		})
+		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {
 		return this.leaseInvoicesService.findAll({ queryOptions, user });
 	}
