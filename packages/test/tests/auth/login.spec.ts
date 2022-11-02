@@ -1,12 +1,13 @@
-import { expect, Page, test as base } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { testOrgEmail, testPassword } from '@self/seed';
 import { Cookie } from '@self/utils';
+import { test as base } from '../api/api-fixtures';
 
 const user = {
 	role: 'orgadmin',
 	email: testOrgEmail,
 	password: testPassword,
-	destination: '/',
+	destination: () => '/',
 };
 
 // const users = [
@@ -15,8 +16,7 @@ const user = {
 // 		id: testPortfolioId,
 // 		email: testPortfolioEmail,
 // 		password: testPassword,
-// 		// destination: /^http:\/\/localhost:3000\/portfolios\/.+\/dashboard$/,
-// 		destination: `/portfolios/${testPortfolioId}/dashboard`,
+// 	destination: (id: string) => `/portfolios/${id}/financials/summary`,
 // 	},
 // 	{
 // 		role: "tenant",
@@ -27,11 +27,7 @@ const user = {
 // 	},
 // ] as const;
 
-type MyFixtures = {
-	page: Page;
-};
-
-const test = base.extend<MyFixtures>({
+const test = base.extend({
 	page: async ({ browser }, use) => {
 		// Create a new incognito browser context.
 		const context = await browser.newContext();
@@ -61,7 +57,13 @@ test('login', async ({ page, baseURL }) => {
 	const cookies = await page.context().cookies();
 	const accessToken = cookies.find((c) => c.name === Cookie.accessToken);
 
-	await expect.soft(page).toHaveURL(user.destination);
+	const selectRolePage =
+		/^users\/[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\/roles$/;
+
+	const possibleDestinations = ['/', selectRolePage, user.destination()];
+
+	// check that url is one of the possible destinations
+	await expect(page).toHaveURL(RegExp(possibleDestinations.join('|')));
 
 	const token = {
 		value: expect.stringMatching(
