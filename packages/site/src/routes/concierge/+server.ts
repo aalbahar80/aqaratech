@@ -12,9 +12,6 @@ export const GET: RequestHandler = ({ locals }) => {
 	if (!locals.user?.roles.length) {
 		// if user has no roles yet, redirect to /welcome
 		location = '/welcome';
-	} else if (locals.user.roles.length > 1) {
-		// if user has multiple roles, redirect to select-role page
-		location = `/users/${locals.user.id}/roles`;
 	} else if (locals.user?.role?.meta.home) {
 		// if user has a role, redirect to their home page
 		location = locals.user.role.meta.home;
