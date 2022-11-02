@@ -23,7 +23,6 @@ import type {
 	PaginatedRoleDto,
 	PaginatedUnitDto,
 	PortfolioDto,
-	QueryOptionsRequestDto,
 	SortOrderEnum,
 	UpdatePortfolioDto,
 } from '../models';
@@ -51,7 +50,10 @@ export interface PortfoliosApiFindPayoutsRequest {
 
 export interface PortfoliosApiFindPropertiesRequest {
 	id: string;
-	options?: QueryOptionsRequestDto;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface PortfoliosApiFindRolesRequest {
@@ -65,7 +67,10 @@ export interface PortfoliosApiFindRolesRequest {
 
 export interface PortfoliosApiFindUnitsRequest {
 	id: string;
-	options?: QueryOptionsRequestDto;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface PortfoliosApiGetBalanceRequest {
@@ -523,8 +528,20 @@ export class PortfoliosApi
 
 		const queryParameters: any = {};
 
-		if (requestParameters.options !== undefined) {
-			queryParameters['options'] = requestParameters.options;
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -644,8 +661,20 @@ export class PortfoliosApi
 
 		const queryParameters: any = {};
 
-		if (requestParameters.options !== undefined) {
-			queryParameters['options'] = requestParameters.options;
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

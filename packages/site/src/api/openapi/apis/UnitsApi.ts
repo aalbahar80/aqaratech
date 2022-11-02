@@ -17,14 +17,16 @@ import type {
 	PaginatedLeaseDto,
 	PaginatedUnitDto,
 	PartialUnitDto,
-	QueryOptionsRequestDto,
 	SortOrderEnum,
 	UnitDto,
 	UpdateUnitDto,
 } from '../models';
 
 export interface UnitsApiFindAllRequest {
-	options?: QueryOptionsRequestDto;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface UnitsApiFindLeasesRequest {
@@ -171,8 +173,20 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 	): Promise<runtime.ApiResponse<PaginatedUnitDto>> {
 		const queryParameters: any = {};
 
-		if (requestParameters.options !== undefined) {
-			queryParameters['options'] = requestParameters.options;
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

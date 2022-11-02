@@ -17,12 +17,14 @@ import type {
 	ExpenseDto,
 	PaginatedExpenseDto,
 	PartialExpenseDto,
-	QueryOptionsRequestDto,
 	UpdateExpenseDto,
 } from '../models';
 
 export interface ExpensesApiFindAllRequest {
-	options?: QueryOptionsRequestDto;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface ExpensesApiFindOneRequest {
@@ -143,8 +145,20 @@ export class ExpensesApi
 	): Promise<runtime.ApiResponse<PaginatedExpenseDto>> {
 		const queryParameters: any = {};
 
-		if (requestParameters.options !== undefined) {
-			queryParameters['options'] = requestParameters.options;
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

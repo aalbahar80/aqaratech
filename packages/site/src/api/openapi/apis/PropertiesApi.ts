@@ -17,12 +17,14 @@ import type {
 	PaginatedPropertyDto,
 	PaginatedUnitDto,
 	PropertyDto,
-	QueryOptionsRequestDto,
 	UpdatePropertyDto,
 } from '../models';
 
 export interface PropertiesApiFindAllRequest {
-	options?: QueryOptionsRequestDto;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface PropertiesApiFindOneRequest {
@@ -31,7 +33,10 @@ export interface PropertiesApiFindOneRequest {
 
 export interface PropertiesApiFindUnitsRequest {
 	id: string;
-	options?: QueryOptionsRequestDto;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface PropertiesApiRemoveRequest {
@@ -168,8 +173,20 @@ export class PropertiesApi
 	): Promise<runtime.ApiResponse<PaginatedPropertyDto>> {
 		const queryParameters: any = {};
 
-		if (requestParameters.options !== undefined) {
-			queryParameters['options'] = requestParameters.options;
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -263,8 +280,20 @@ export class PropertiesApi
 
 		const queryParameters: any = {};
 
-		if (requestParameters.options !== undefined) {
-			queryParameters['options'] = requestParameters.options;
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

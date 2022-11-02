@@ -17,12 +17,14 @@ import type {
 	LeaseInvoiceDto,
 	PaginatedLeaseInvoiceDto,
 	PartialLeaseInvoiceDto,
-	QueryOptionsRequestDto,
 	UpdateLeaseInvoiceDto,
 } from '../models';
 
 export interface LeaseInvoicesApiFindAllRequest {
-	options?: QueryOptionsRequestDto;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface LeaseInvoicesApiFindOneRequest {
@@ -167,8 +169,20 @@ export class LeaseInvoicesApi
 	): Promise<runtime.ApiResponse<PaginatedLeaseInvoiceDto>> {
 		const queryParameters: any = {};
 
-		if (requestParameters.options !== undefined) {
-			queryParameters['options'] = requestParameters.options;
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

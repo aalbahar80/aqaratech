@@ -18,7 +18,6 @@ import type {
 	PaginatedLeaseDto,
 	PaginatedLeaseInvoiceDto,
 	PartialLeaseDto,
-	QueryOptionsRequestDto,
 	SortOrderEnum,
 	UpdateLeaseDto,
 } from '../models';
@@ -33,7 +32,10 @@ export interface LeasesApiFindAllRequest {
 
 export interface LeasesApiFindInvoicesRequest {
 	id: string;
-	options?: QueryOptionsRequestDto;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface LeasesApiFindOneRequest {
@@ -235,8 +237,20 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 
 		const queryParameters: any = {};
 
-		if (requestParameters.options !== undefined) {
-			queryParameters['options'] = requestParameters.options;
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

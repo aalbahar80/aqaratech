@@ -18,7 +18,6 @@ import type {
 	PaginatedLeaseInvoiceDto,
 	PaginatedRoleDto,
 	PaginatedTenantDto,
-	QueryOptionsRequestDto,
 	SortOrderEnum,
 	TenantDto,
 	UpdateTenantDto,
@@ -34,7 +33,10 @@ export interface TenantsApiFindAllRequest {
 
 export interface TenantsApiFindInvoicesRequest {
 	id: string;
-	options?: QueryOptionsRequestDto;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface TenantsApiFindLeasesRequest {
@@ -294,8 +296,20 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 
 		const queryParameters: any = {};
 
-		if (requestParameters.options !== undefined) {
-			queryParameters['options'] = requestParameters.options;
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
