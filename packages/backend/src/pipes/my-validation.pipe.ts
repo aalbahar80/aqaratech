@@ -46,10 +46,10 @@ export class MyValidationPipe extends ValidationPipe {
 		}
 
 		if (skip) {
-			console.log('skipping default validation for: ', name);
 			return value;
+		} else {
+			console.log('not skipping validation for: ', name);
+			return super.transform(value, metadata);
 		}
-
-		return super.transform(value, metadata);
 	}
 }
