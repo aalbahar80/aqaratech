@@ -19,11 +19,6 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 
 	const tree: NavigationItem[] = [
 		{
-			name: 'Properties',
-			href: `${organizationRoute}/properties`,
-			icon: HeroiconsOutlineHome,
-		},
-		{
 			name: 'Leases',
 			href: `${organizationRoute}/leases`,
 			icon: HeroiconsOutlineDocumentText,
@@ -59,29 +54,39 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 	if (user.role?.roleType === 'PORTFOLIO' && user.role.portfolioId) {
 		const portfolioRoute = `${organizationRoute}/portfolios/${user.role.portfolioId}`;
 
-		tree.splice(0, 0, {
-			name: 'Financials',
-			href: `${portfolioRoute}/financials/summary/`,
-			icon: HeroiconsOutlineDocumentReport,
-			children: [
-				{
-					name: 'Summary',
-					href: `${portfolioRoute}/financials/summary/`,
-				},
-				{
-					name: 'Income',
-					href: `${portfolioRoute}/financials/income/`,
-				},
-				{
-					name: 'Expenses',
-					href: `${portfolioRoute}/financials/expenses/`,
-				},
-				{
-					name: 'Payouts',
-					href: `${portfolioRoute}/financials/payouts/table/`,
-				},
-			],
-		});
+		tree.splice(
+			0,
+			0,
+			{
+				name: 'Financials',
+				href: `${portfolioRoute}/financials/summary/`,
+				icon: HeroiconsOutlineDocumentReport,
+				children: [
+					{
+						name: 'Summary',
+						href: `${portfolioRoute}/financials/summary/`,
+					},
+					{
+						name: 'Income',
+						href: `${portfolioRoute}/financials/income/`,
+					},
+					{
+						name: 'Expenses',
+						href: `${portfolioRoute}/financials/expenses/`,
+					},
+					{
+						name: 'Payouts',
+						href: `${portfolioRoute}/financials/payouts/table/`,
+					},
+				],
+			},
+
+			{
+				name: 'Properties',
+				href: `${portfolioRoute}/properties`,
+				icon: HeroiconsOutlineHome,
+			},
+		);
 	}
 
 	return tree;
