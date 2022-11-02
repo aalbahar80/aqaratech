@@ -17,6 +17,7 @@ import type {
 	BalanceDto,
 	GroupByMonthDto,
 	IncomeByMonthDto,
+	PaginatedLeaseInvoiceDto,
 	PaginatedPayoutDto,
 	PaginatedPortfolioDto,
 	PaginatedPropertyDto,
@@ -33,6 +34,14 @@ export interface PortfoliosApiFindAllRequest {
 	sortOrder?: SortOrderEnum;
 	filter?: object;
 	orderBy?: string;
+}
+
+export interface PortfoliosApiFindAllLeaseInvoicesRequest {
+	id: string;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
 }
 
 export interface PortfoliosApiFindOneRequest {
@@ -130,6 +139,26 @@ export interface PortfoliosApiInterface {
 		requestParameters: PortfoliosApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PaginatedPortfolioDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof PortfoliosApiInterface
+	 */
+	findAllLeaseInvoicesRaw(
+		requestParameters: PortfoliosApiFindAllLeaseInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PaginatedLeaseInvoiceDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	findAllLeaseInvoices(
+		requestParameters: PortfoliosApiFindAllLeaseInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PaginatedLeaseInvoiceDto>;
 
 	/**
 	 *
@@ -393,6 +422,72 @@ export class PortfoliosApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PaginatedPortfolioDto> {
 		const response = await this.findAllRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findAllLeaseInvoicesRaw(
+		requestParameters: PortfoliosApiFindAllLeaseInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PaginatedLeaseInvoiceDto>> {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling findAllLeaseInvoices.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/portfolios/{id}/lease-invoices`.replace(
+					`{${'id'}}`,
+					encodeURIComponent(String(requestParameters.id)),
+				),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findAllLeaseInvoices(
+		requestParameters: PortfoliosApiFindAllLeaseInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PaginatedLeaseInvoiceDto> {
+		const response = await this.findAllLeaseInvoicesRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

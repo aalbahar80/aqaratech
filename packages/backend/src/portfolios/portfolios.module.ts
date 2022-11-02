@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AggregateModule } from 'src/aggregate/aggregate.module';
+import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { PayoutsModule } from 'src/payouts/payouts.module';
 import { PortfolioAggregateController } from 'src/portfolios/portfolio-aggregate.controller';
 import { PropertiesModule } from 'src/properties/properties.module';
@@ -18,6 +19,7 @@ import { PortfoliosService } from './portfolios.service';
 		UnitsModule,
 		PayoutsModule,
 		AggregateModule,
+		LeaseInvoicesModule,
 	],
 })
 export class PortfoliosModule {}

@@ -26,6 +26,8 @@ import {
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
+import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { PayoutDto } from 'src/payouts/dto/payout.dto';
 import { PayoutsService } from 'src/payouts/payouts.service';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
@@ -50,7 +52,8 @@ export class PortfoliosController {
 		private readonly propertiesService: PropertiesService,
 		private readonly payoutsService: PayoutsService,
 		private readonly aggregateService: AggregateService,
-		private unitsService: UnitsService,
+		private readonly leaseInvoicesService: LeaseInvoicesService,
+		private readonly unitsService: UnitsService,
 	) {}
 
 	@Get()
@@ -168,5 +171,29 @@ export class PortfoliosController {
 		@Param('id') id: string,
 	): Promise<BalanceDto> {
 		return this.aggregateService.getBalance({ portfolioId: id, user });
+	}
+
+	@Get(':id/lease-invoices')
+	@CheckAbilities({
+		action: Action.Read,
+		subject: SubjectType,
+		useParams: true,
+		overrideParams: { portfolioId: 'id' },
+	})
+	@ApiQueryOptions()
+	@ApiPaginatedResponse(LeaseInvoiceDto)
+	findAllLeaseInvoices(
+		@User() user: IUser,
+		@Param('id') portfolioId: string,
+		@QueryParser({
+			parserOptions: { orderDefaultValue: 'postAt' },
+		})
+		queryOptions: QueryOptionsDto,
+	): Promise<WithCount<LeaseInvoiceDto>> {
+		return this.leaseInvoicesService.findAll({
+			queryOptions,
+			user,
+			where: { portfolioId },
+		});
 	}
 }

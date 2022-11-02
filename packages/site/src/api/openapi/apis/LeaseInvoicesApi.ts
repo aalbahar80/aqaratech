@@ -15,17 +15,9 @@
 import * as runtime from '../runtime';
 import type {
 	LeaseInvoiceDto,
-	PaginatedLeaseInvoiceDto,
 	PartialLeaseInvoiceDto,
 	UpdateLeaseInvoiceDto,
 } from '../models';
-
-export interface LeaseInvoicesApiFindAllRequest {
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-}
 
 export interface LeaseInvoicesApiFindOneRequest {
 	id: string;
@@ -51,26 +43,6 @@ export interface LeaseInvoicesApiUpdateRequest {
  * @interface LeaseInvoicesApiInterface
  */
 export interface LeaseInvoicesApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof LeaseInvoicesApiInterface
-	 */
-	findAllRaw(
-		requestParameters: LeaseInvoicesApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PaginatedLeaseInvoiceDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	findAll(
-		requestParameters: LeaseInvoicesApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PaginatedLeaseInvoiceDto>;
-
 	/**
 	 *
 	 * @summary
@@ -159,59 +131,6 @@ export class LeaseInvoicesApi
 	extends runtime.BaseAPI
 	implements LeaseInvoicesApiInterface
 {
-	/**
-	 *
-	 *
-	 */
-	async findAllRaw(
-		requestParameters: LeaseInvoicesApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PaginatedLeaseInvoiceDto>> {
-		const queryParameters: any = {};
-
-		if (requestParameters.page !== undefined) {
-			queryParameters['page'] = requestParameters.page;
-		}
-
-		if (requestParameters.skip !== undefined) {
-			queryParameters['skip'] = requestParameters.skip;
-		}
-
-		if (requestParameters.take !== undefined) {
-			queryParameters['take'] = requestParameters.take;
-		}
-
-		if (requestParameters.sort) {
-			queryParameters['sort'] = requestParameters.sort;
-		}
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		const response = await this.request(
-			{
-				path: `/leaseInvoices`,
-				method: 'GET',
-				headers: headerParameters,
-				query: queryParameters,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async findAll(
-		requestParameters: LeaseInvoicesApiFindAllRequest = {},
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PaginatedLeaseInvoiceDto> {
-		const response = await this.findAllRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *

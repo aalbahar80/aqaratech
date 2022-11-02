@@ -11,13 +11,6 @@ import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { leaseInvoiceUpdateSchema } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
-import { WithCount } from 'src/common/dto/paginated.dto';
-import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
-import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
-import {
-	ApiQueryOptions,
-	QueryParser,
-} from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
@@ -37,20 +30,6 @@ const SubjectType = 'LeaseInvoice';
 @SwaggerAuth()
 export class LeaseInvoicesController {
 	constructor(private readonly leaseInvoicesService: LeaseInvoicesService) {}
-
-	@Get()
-	@CheckAbilities({ action: Action.Read, subject: SubjectType })
-	@ApiQueryOptions()
-	@ApiPaginatedResponse(LeaseInvoiceDto)
-	findAll(
-		@User() user: IUser,
-		@QueryParser({
-			parserOptions: { orderDefaultValue: 'postAt' },
-		})
-		queryOptions: QueryOptionsDto,
-	): Promise<WithCount<LeaseInvoiceDto>> {
-		return this.leaseInvoicesService.findAll({ queryOptions, user });
-	}
 
 	@Get(':id')
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })

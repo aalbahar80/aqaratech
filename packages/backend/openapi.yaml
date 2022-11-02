@@ -410,55 +410,6 @@ paths:
         '201':
           description: ''
       tags: *ref_2
-  /leaseInvoices:
-    get:
-      operationId: LeaseInvoicesController_findAll
-      summary: ''
-      description: ''
-      parameters:
-        - required: false
-          name: page
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedLeaseInvoiceDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfLeaseInvoiceDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: &ref_3
-        - leaseInvoices
-      security: &ref_4
-        - accessToken: []
   /leaseInvoices/{id}:
     get:
       operationId: LeaseInvoicesController_findOne
@@ -477,8 +428,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_3
-      security: *ref_4
+      tags: &ref_3
+        - leaseInvoices
+      security: &ref_4
+        - accessToken: []
     patch:
       operationId: LeaseInvoicesController_update
       summary: ''
@@ -1090,6 +1043,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BalanceDto'
+      tags: *ref_7
+      security: *ref_8
+  /portfolios/{id}/lease-invoices:
+    get:
+      operationId: PortfoliosController_findAllLeaseInvoices
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedLeaseInvoiceDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfLeaseInvoiceDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceDto'
       tags: *ref_7
       security: *ref_8
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/income:
