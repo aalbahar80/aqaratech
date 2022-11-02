@@ -5,9 +5,4 @@
 	export let data: PageData;
 </script>
 
-<UnitForm
-	formType="create"
-	portfolios={data.portfolios}
-	properties={data.properties}
-	predefined={data.predefined}
-/>
+<UnitForm formType="create" />
