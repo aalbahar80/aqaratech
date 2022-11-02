@@ -6,7 +6,7 @@
 </script>
 
 <aside
-	class="flex h-screen w-64 flex-col border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900"
+	class="fixed flex h-screen w-64 flex-col border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900"
 >
 	<h2 class="text-3xl font-semibold text-gray-800 dark:text-white">
 		Aqaratech
