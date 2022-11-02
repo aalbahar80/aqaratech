@@ -9,13 +9,9 @@ export const load: PageLoad = async ({
 }) => {
 	const api = createApi(fetch);
 
-	const { page, take, sortOrder, orderBy } = parseParams(searchParams);
 	const payouts = await api.portfolios.findPayouts({
-		page,
-		take,
-		sortOrder,
-		orderBy,
 		id: params.id,
+		...parseParams(searchParams),
 	});
 
 	return { payouts };
