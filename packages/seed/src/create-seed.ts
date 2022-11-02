@@ -140,10 +140,27 @@ export const createSeed = (options?: SeedOptions) => {
 			throw new Error('Expense category tree not found');
 		}
 
+		// randomly assign to either propertyId or unitId or neither
+		let propertyId: string | null;
+		let unitId: string | null;
+
+		if (Math.random() < 0.5) {
+			propertyId = null;
+			unitId = null;
+		} else if (Math.random() < 0.5) {
+			propertyId = random(properties).id;
+			unitId = null;
+		} else {
+			propertyId = null;
+			unitId = random(units).id;
+		}
+
 		return expenseFactory.build({
 			organizationId,
 			portfolioId: portfolio.id,
 			categoryId: randomCategory(tree as any).id,
+			propertyId,
+			unitId,
 		});
 	});
 
