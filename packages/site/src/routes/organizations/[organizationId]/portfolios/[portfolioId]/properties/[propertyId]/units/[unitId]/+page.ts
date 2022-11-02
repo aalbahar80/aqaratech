@@ -2,14 +2,10 @@ import { createApi } from '$api';
 import { startOfMonthN } from '@self/utils';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ fetch, params, parent }) => {
-	const unitId = params.id;
-
+export const load: PageLoad = async ({ fetch, params }) => {
 	const api = createApi(fetch);
 
-	const role = (await parent()).user!.role!;
-
-	const { organizationId, portfolioId } = role;
+	const { organizationId, portfolioId, unitId } = params;
 
 	const [unit, leases, occupancy, futureOccupancy] = await Promise.all([
 		api.units.findOne({ id: unitId }),
