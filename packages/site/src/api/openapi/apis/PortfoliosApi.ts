@@ -78,6 +78,7 @@ export interface PortfoliosApiGetBalanceRequest {
 }
 
 export interface PortfoliosApiGetExpensesByMonthRequest {
+	organizationId: string;
 	portfolioId: string;
 	start?: string;
 	end?: string;
@@ -86,6 +87,7 @@ export interface PortfoliosApiGetExpensesByMonthRequest {
 }
 
 export interface PortfoliosApiGetIncomeByMonthRequest {
+	organizationId: string;
 	portfolioId: string;
 	start?: string;
 	end?: string;
@@ -763,6 +765,16 @@ export class PortfoliosApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<GroupByMonthDto>>> {
 		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling getExpensesByMonth.',
+			);
+		}
+
+		if (
 			requestParameters.portfolioId === null ||
 			requestParameters.portfolioId === undefined
 		) {
@@ -794,10 +806,15 @@ export class PortfoliosApi
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses`.replace(
-					`{${'portfolioId'}}`,
-					encodeURIComponent(String(requestParameters.portfolioId)),
-				),
+				path: `/organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses`
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					)
+					.replace(
+						`{${'portfolioId'}}`,
+						encodeURIComponent(String(requestParameters.portfolioId)),
+					),
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters,
@@ -832,6 +849,16 @@ export class PortfoliosApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<IncomeByMonthDto>> {
 		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling getIncomeByMonth.',
+			);
+		}
+
+		if (
 			requestParameters.portfolioId === null ||
 			requestParameters.portfolioId === undefined
 		) {
@@ -863,10 +890,15 @@ export class PortfoliosApi
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/portfolios/{portfolioId}/aggregate/income`.replace(
-					`{${'portfolioId'}}`,
-					encodeURIComponent(String(requestParameters.portfolioId)),
-				),
+				path: `/organizations/{organizationId}/portfolios/{portfolioId}/aggregate/income`
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					)
+					.replace(
+						`{${'portfolioId'}}`,
+						encodeURIComponent(String(requestParameters.portfolioId)),
+					),
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters,

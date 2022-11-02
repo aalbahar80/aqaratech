@@ -32,24 +32,28 @@ export class PortfolioAggregateController {
 	// 1. the portfolio does not exist
 	// 2. user.role is ORGADMIN & has access to organizationId in params
 	async getIncomeByMonth(
+		@Param('organizationId') organizationId: string,
 		@Param('portfolioId') portfolioId: string,
 		@Query(new ZodValidationPipe(aggregateOptionsSchema))
 		queryOptions: AggregateOptionsDto,
 	): Promise<IncomeByMonthDto> {
 		const [total, paid, unpaid] = await Promise.all([
 			this.aggregateService.portfolioIncomeByMonth({
+				organizationId,
 				portfolioId,
 				options: queryOptions,
 				paidStatus: PaidStatus.ALL,
 			}),
 
 			this.aggregateService.portfolioIncomeByMonth({
+				organizationId,
 				portfolioId,
 				options: queryOptions,
 				paidStatus: PaidStatus.PAID,
 			}),
 
 			this.aggregateService.portfolioIncomeByMonth({
+				organizationId,
 				portfolioId,
 				options: queryOptions,
 				paidStatus: PaidStatus.UNPAID,
@@ -72,11 +76,13 @@ export class PortfolioAggregateController {
 	// 1. the portfolio does not exist
 	// 2. user.role is ORGADMIN & has access to organizationId in params
 	getExpensesByMonth(
+		@Param('organizationId') organizationId: string,
 		@Param('portfolioId') portfolioId: string,
 		@Query(new ZodValidationPipe(aggregateOptionsSchema))
 		queryOptions: AggregateOptionsDto,
 	): Promise<GroupByMonthDto[]> {
 		return this.aggregateService.portfolioExpensesByMonth({
+			organizationId,
 			portfolioId,
 			options: queryOptions,
 		});

@@ -1098,6 +1098,11 @@ paths:
       summary: ''
       description: ''
       parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
         - name: portfolioId
           required: true
           in: path
@@ -1140,6 +1145,11 @@ paths:
       summary: ''
       description: ''
       parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
         - name: portfolioId
           required: true
           in: path

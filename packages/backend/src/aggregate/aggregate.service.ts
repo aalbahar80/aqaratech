@@ -37,10 +37,12 @@ export class AggregateService {
 	}
 
 	async portfolioIncomeByMonth({
+		organizationId,
 		portfolioId,
 		options,
 		paidStatus,
 	}: {
+		organizationId: string;
 		portfolioId: string;
 		options: AggregateOptionsDto;
 		paidStatus: PaidStatus;
@@ -48,7 +50,11 @@ export class AggregateService {
 		const leaseInvoices = await this.prisma.leaseInvoice.findMany({
 			where: {
 				AND: [
-					{ portfolioId, postAt: { gte: options.start, lte: options.end } },
+					{
+						organizationId,
+						portfolioId,
+						postAt: { gte: options.start, lte: options.end },
+					},
 					this.leaseInvoicesService.parseLocationFilter({
 						filter: {
 							portfolioId,
@@ -72,9 +78,11 @@ export class AggregateService {
 	}
 
 	async portfolioExpensesByMonth({
+		organizationId,
 		portfolioId,
 		options,
 	}: {
+		organizationId: string;
 		portfolioId: string;
 		options: AggregateOptionsDto;
 	}) {
@@ -82,6 +90,7 @@ export class AggregateService {
 			where: {
 				AND: [
 					{
+						organizationId,
 						portfolioId,
 						propertyId: options.propertyId,
 						unitId: options.unitId,
