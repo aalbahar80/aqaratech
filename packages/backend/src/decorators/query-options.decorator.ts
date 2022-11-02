@@ -12,16 +12,17 @@ import { queryOptionsParsedSchema } from '@self/utils';
 import { Request } from 'express';
 import { QueryOptionsRequestDto } from 'src/common/dto/query-options.dto';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
+import { z } from 'zod';
 
 export const QueryParser = createParamDecorator(
-	(options: Partial<RequestQueryOptions>, ctx: ExecutionContext) => {
+	(options: QueryOptionsDecoratorConfig, ctx: ExecutionContext) => {
 		const request = ctx.switchToHttp().getRequest<Request>();
 
 		// parse with prisma-utils
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { filter, ...parsed } = new RequestParserService().parseQuery(
 			request.query,
-			options,
+			options.parserOptions,
 		);
 
 		// validate output
@@ -47,4 +48,9 @@ export function ApiQueryOptions() {
 			},
 		}),
 	);
+}
+
+interface QueryOptionsDecoratorConfig {
+	parserOptions?: Partial<RequestQueryOptions>;
+	schema?: z.ZodTypeAny;
 }

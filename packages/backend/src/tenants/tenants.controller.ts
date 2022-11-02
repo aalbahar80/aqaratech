@@ -109,7 +109,7 @@ export class TenantsController {
 		@User() user: IUser,
 		@Param('id') id: string,
 		@QueryParser({
-			orderDefaultValue: 'postAt',
+			parserOptions: { orderDefaultValue: 'postAt' },
 		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {

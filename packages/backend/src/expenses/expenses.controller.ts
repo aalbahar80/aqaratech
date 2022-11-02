@@ -38,7 +38,7 @@ export class ExpensesController {
 	findAll(
 		@User() user: IUser,
 		@QueryParser({
-			orderDefaultValue: 'postAt',
+			parserOptions: { orderDefaultValue: 'postAt' },
 		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<ExpenseDto>> {

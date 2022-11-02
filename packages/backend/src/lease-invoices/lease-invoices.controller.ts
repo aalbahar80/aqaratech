@@ -45,7 +45,7 @@ export class LeaseInvoicesController {
 	findAll(
 		@User() user: IUser,
 		@QueryParser({
-			orderDefaultValue: 'postAt',
+			parserOptions: { orderDefaultValue: 'postAt' },
 		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {
