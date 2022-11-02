@@ -17,16 +17,14 @@ import type {
 	PaginatedLeaseDto,
 	PaginatedUnitDto,
 	PartialUnitDto,
+	QueryOptionsRequestDto,
 	SortOrderEnum,
 	UnitDto,
 	UpdateUnitDto,
 } from '../models';
 
 export interface UnitsApiFindAllRequest {
-	page: number;
-	skip: number;
-	take: number;
-	sort: Array<string>;
+	options?: QueryOptionsRequestDto;
 }
 
 export interface UnitsApiFindLeasesRequest {
@@ -171,62 +169,10 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 		requestParameters: UnitsApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<PaginatedUnitDto>> {
-		if (
-			requestParameters.page === null ||
-			requestParameters.page === undefined
-		) {
-			throw new runtime.RequiredError(
-				'page',
-				'Required parameter requestParameters.page was null or undefined when calling findAll.',
-			);
-		}
-
-		if (
-			requestParameters.skip === null ||
-			requestParameters.skip === undefined
-		) {
-			throw new runtime.RequiredError(
-				'skip',
-				'Required parameter requestParameters.skip was null or undefined when calling findAll.',
-			);
-		}
-
-		if (
-			requestParameters.take === null ||
-			requestParameters.take === undefined
-		) {
-			throw new runtime.RequiredError(
-				'take',
-				'Required parameter requestParameters.take was null or undefined when calling findAll.',
-			);
-		}
-
-		if (
-			requestParameters.sort === null ||
-			requestParameters.sort === undefined
-		) {
-			throw new runtime.RequiredError(
-				'sort',
-				'Required parameter requestParameters.sort was null or undefined when calling findAll.',
-			);
-		}
-
 		const queryParameters: any = {};
 
-		if (requestParameters.page !== undefined) {
-			queryParameters['page'] = requestParameters.page;
-		}
-
-		if (requestParameters.skip !== undefined) {
-			queryParameters['skip'] = requestParameters.skip;
-		}
-
-		if (requestParameters.take !== undefined) {
-			queryParameters['take'] = requestParameters.take;
-		}
-
-		if (requestParameters.sort) {
-			queryParameters['sort'] = requestParameters.sort;
+		if (requestParameters.options !== undefined) {
+			queryParameters['options'] = requestParameters.options;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -249,7 +195,7 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 	 *
 	 */
 	async findAll(
-		requestParameters: UnitsApiFindAllRequest,
+		requestParameters: UnitsApiFindAllRequest = {},
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PaginatedUnitDto> {
 		const response = await this.findAllRaw(requestParameters, initOverrides);

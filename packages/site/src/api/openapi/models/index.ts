@@ -1730,18 +1730,6 @@ export interface PaginatedUnitDto {
 	 */
 	results: Array<UnitDto>;
 }
-
-/**
- *
- * @export
- */
-export const PaidStatusEnum = {
-	All: 'all',
-	Paid: 'paid',
-	Unpaid: 'unpaid',
-} as const;
-export type PaidStatusEnum = typeof PaidStatusEnum[keyof typeof PaidStatusEnum];
-
 /**
  *
  * @export

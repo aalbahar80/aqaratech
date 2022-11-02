@@ -3,7 +3,7 @@ import {
 	createParamDecorator,
 	ExecutionContext,
 } from '@nestjs/common';
-import { ApiQuery } from '@nestjs/swagger';
+import { ApiQuery, getSchemaPath } from '@nestjs/swagger';
 import {
 	RequestParserService,
 	RequestQueryOptions,
@@ -38,5 +38,13 @@ export const QueryParser = createParamDecorator(
  * Decorator to add query options to the swagger spec.
  */
 export function ApiQueryOptions() {
-	return applyDecorators(ApiQuery({ type: QueryOptionsRequestDto }));
+	return applyDecorators(
+		ApiQuery({
+			name: 'options',
+			required: false,
+			schema: {
+				$ref: getSchemaPath(QueryOptionsRequestDto),
+			},
+		}),
+	);
 }

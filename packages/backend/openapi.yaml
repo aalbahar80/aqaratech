@@ -190,28 +190,11 @@ paths:
           in: path
           schema:
             type: string
-        - required: true
-          name: page
+        - name: options
+          required: false
           in: query
           schema:
-            type: number
-        - required: true
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
+            $ref: '#/components/schemas/QueryOptionsRequestDto'
       responses:
         '200':
           description: ''
@@ -416,28 +399,11 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - required: true
-          name: page
+        - name: options
+          required: false
           in: query
           schema:
-            type: number
-        - required: true
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
+            $ref: '#/components/schemas/QueryOptionsRequestDto'
       responses:
         '200':
           description: ''
@@ -689,28 +655,11 @@ paths:
           in: path
           schema:
             type: string
-        - required: true
-          name: page
+        - name: options
+          required: false
           in: query
           schema:
-            type: number
-        - required: true
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
+            $ref: '#/components/schemas/QueryOptionsRequestDto'
       responses:
         '200':
           description: ''
@@ -920,28 +869,11 @@ paths:
           in: path
           schema:
             type: string
-        - required: true
-          name: page
+        - name: options
+          required: false
           in: query
           schema:
-            type: number
-        - required: true
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
+            $ref: '#/components/schemas/QueryOptionsRequestDto'
       responses:
         '200':
           description: ''
@@ -972,28 +904,11 @@ paths:
           in: path
           schema:
             type: string
-        - required: true
-          name: page
+        - name: options
+          required: false
           in: query
           schema:
-            type: number
-        - required: true
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
+            $ref: '#/components/schemas/QueryOptionsRequestDto'
       responses:
         '200':
           description: ''
@@ -1182,28 +1097,11 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - required: true
-          name: page
+        - name: options
+          required: false
           in: query
           schema:
-            type: number
-        - required: true
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
+            $ref: '#/components/schemas/QueryOptionsRequestDto'
       responses:
         '200':
           description: ''
@@ -1300,28 +1198,11 @@ paths:
           in: path
           schema:
             type: string
-        - required: true
-          name: page
+        - name: options
+          required: false
           in: query
           schema:
-            type: number
-        - required: true
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
+            $ref: '#/components/schemas/QueryOptionsRequestDto'
       responses:
         '200':
           description: ''
@@ -1347,28 +1228,11 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - required: true
-          name: page
+        - name: options
+          required: false
           in: query
           schema:
-            type: number
-        - required: true
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: true
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
+            $ref: '#/components/schemas/QueryOptionsRequestDto'
       responses:
         '200':
           description: ''

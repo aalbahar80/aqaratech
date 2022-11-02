@@ -1729,16 +1729,6 @@ export interface PaginatedUnitDto {
 /**
  *
  * @export
- */
-export declare const PaidStatusEnum: {
-	readonly All: 'all';
-	readonly Paid: 'paid';
-	readonly Unpaid: 'unpaid';
-};
-export type PaidStatusEnum = typeof PaidStatusEnum[keyof typeof PaidStatusEnum];
-/**
- *
- * @export
  * @interface PartialExpenseDto
  */
 export interface PartialExpenseDto {

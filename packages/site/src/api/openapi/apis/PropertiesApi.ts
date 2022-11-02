@@ -17,16 +17,12 @@ import type {
 	PaginatedPropertyDto,
 	PaginatedUnitDto,
 	PropertyDto,
-	SortOrderEnum,
+	QueryOptionsRequestDto,
 	UpdatePropertyDto,
 } from '../models';
 
 export interface PropertiesApiFindAllRequest {
-	page?: number;
-	take?: number;
-	sortOrder?: SortOrderEnum;
-	filter?: object;
-	orderBy?: string;
+	options?: QueryOptionsRequestDto;
 }
 
 export interface PropertiesApiFindOneRequest {
@@ -35,10 +31,7 @@ export interface PropertiesApiFindOneRequest {
 
 export interface PropertiesApiFindUnitsRequest {
 	id: string;
-	page: number;
-	skip: number;
-	take: number;
-	sort: Array<string>;
+	options?: QueryOptionsRequestDto;
 }
 
 export interface PropertiesApiRemoveRequest {
@@ -175,24 +168,8 @@ export class PropertiesApi
 	): Promise<runtime.ApiResponse<PaginatedPropertyDto>> {
 		const queryParameters: any = {};
 
-		if (requestParameters.page !== undefined) {
-			queryParameters['page'] = requestParameters.page;
-		}
-
-		if (requestParameters.take !== undefined) {
-			queryParameters['take'] = requestParameters.take;
-		}
-
-		if (requestParameters.sortOrder !== undefined) {
-			queryParameters['sortOrder'] = requestParameters.sortOrder;
-		}
-
-		if (requestParameters.filter !== undefined) {
-			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
+		if (requestParameters.options !== undefined) {
+			queryParameters['options'] = requestParameters.options;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -284,62 +261,10 @@ export class PropertiesApi
 			);
 		}
 
-		if (
-			requestParameters.page === null ||
-			requestParameters.page === undefined
-		) {
-			throw new runtime.RequiredError(
-				'page',
-				'Required parameter requestParameters.page was null or undefined when calling findUnits.',
-			);
-		}
-
-		if (
-			requestParameters.skip === null ||
-			requestParameters.skip === undefined
-		) {
-			throw new runtime.RequiredError(
-				'skip',
-				'Required parameter requestParameters.skip was null or undefined when calling findUnits.',
-			);
-		}
-
-		if (
-			requestParameters.take === null ||
-			requestParameters.take === undefined
-		) {
-			throw new runtime.RequiredError(
-				'take',
-				'Required parameter requestParameters.take was null or undefined when calling findUnits.',
-			);
-		}
-
-		if (
-			requestParameters.sort === null ||
-			requestParameters.sort === undefined
-		) {
-			throw new runtime.RequiredError(
-				'sort',
-				'Required parameter requestParameters.sort was null or undefined when calling findUnits.',
-			);
-		}
-
 		const queryParameters: any = {};
 
-		if (requestParameters.page !== undefined) {
-			queryParameters['page'] = requestParameters.page;
-		}
-
-		if (requestParameters.skip !== undefined) {
-			queryParameters['skip'] = requestParameters.skip;
-		}
-
-		if (requestParameters.take !== undefined) {
-			queryParameters['take'] = requestParameters.take;
-		}
-
-		if (requestParameters.sort) {
-			queryParameters['sort'] = requestParameters.sort;
+		if (requestParameters.options !== undefined) {
+			queryParameters['options'] = requestParameters.options;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

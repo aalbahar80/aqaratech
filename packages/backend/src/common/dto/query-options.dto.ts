@@ -20,11 +20,11 @@ export class QueryOptionsDto implements Omit<ParsedQueryModel, 'filter'> {
  * Schema: https://github.com/prisma-utils/prisma-utils/tree/main/libs/request-parser#query-parameter-schema
  */
 export class QueryOptionsRequestDto
-	implements Omit<ParsedQueryModel, 'filter' | 'sort'>
+	implements Partial<Omit<ParsedQueryModel, 'filter' | 'sort'>>
 {
-	page: number;
-	skip: number;
-	take: number;
-	sort: string[];
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: string[];
 	// filter: object;
 }

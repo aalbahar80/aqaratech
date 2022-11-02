@@ -16,24 +16,13 @@ import * as runtime from '../runtime';
 import type {
 	LeaseInvoiceDto,
 	PaginatedLeaseInvoiceDto,
-	PaidStatusEnum,
 	PartialLeaseInvoiceDto,
-	SortOrderEnum,
+	QueryOptionsRequestDto,
 	UpdateLeaseInvoiceDto,
 } from '../models';
 
 export interface LeaseInvoicesApiFindAllRequest {
-	page?: number;
-	take?: number;
-	sortOrder?: SortOrderEnum;
-	filter?: object;
-	start?: string;
-	end?: string;
-	paidStatus?: PaidStatusEnum;
-	orderBy?: string;
-	portfolioId?: string;
-	propertyId?: string;
-	unitId?: string;
+	options?: QueryOptionsRequestDto;
 }
 
 export interface LeaseInvoicesApiFindOneRequest {
@@ -178,48 +167,8 @@ export class LeaseInvoicesApi
 	): Promise<runtime.ApiResponse<PaginatedLeaseInvoiceDto>> {
 		const queryParameters: any = {};
 
-		if (requestParameters.page !== undefined) {
-			queryParameters['page'] = requestParameters.page;
-		}
-
-		if (requestParameters.take !== undefined) {
-			queryParameters['take'] = requestParameters.take;
-		}
-
-		if (requestParameters.sortOrder !== undefined) {
-			queryParameters['sortOrder'] = requestParameters.sortOrder;
-		}
-
-		if (requestParameters.filter !== undefined) {
-			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		if (requestParameters.start !== undefined) {
-			queryParameters['start'] = requestParameters.start;
-		}
-
-		if (requestParameters.end !== undefined) {
-			queryParameters['end'] = requestParameters.end;
-		}
-
-		if (requestParameters.paidStatus !== undefined) {
-			queryParameters['paidStatus'] = requestParameters.paidStatus;
-		}
-
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
-		}
-
-		if (requestParameters.portfolioId !== undefined) {
-			queryParameters['portfolioId'] = requestParameters.portfolioId;
-		}
-
-		if (requestParameters.propertyId !== undefined) {
-			queryParameters['propertyId'] = requestParameters.propertyId;
-		}
-
-		if (requestParameters.unitId !== undefined) {
-			queryParameters['unitId'] = requestParameters.unitId;
+		if (requestParameters.options !== undefined) {
+			queryParameters['options'] = requestParameters.options;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
