@@ -74,7 +74,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 				},
 				{
 					name: 'Payouts',
-					href: `/portfolios/${user.role.portfolioId}/financials/payouts/`,
+					href: `/portfolios/${user.role.portfolioId}/financials/payouts/table/`,
 				},
 			],
 		});
