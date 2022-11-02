@@ -1,8 +1,8 @@
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
-import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 
 interface IPageMetaDtoParameters {
-	pageOptionsDto: QueryOptionsDto;
+	page: number;
+	take: number;
 	itemCount: number;
 	pageSize: number;
 }
@@ -37,10 +37,10 @@ export class PaginatedDto {
 
 	// TODO fix pagination meta when no results
 	// handle when requesting page 5 but there are only 2 pages
-	constructor({ pageOptionsDto, itemCount, pageSize }: IPageMetaDtoParameters) {
-		const offset = (pageOptionsDto.page - 1) * pageOptionsDto.take;
-		this.page = pageOptionsDto.page;
-		this.take = pageOptionsDto.take;
+	constructor({ page, take, itemCount, pageSize }: IPageMetaDtoParameters) {
+		const offset = (page - 1) * take;
+		this.page = page;
+		this.take = take;
 		this.itemCount = itemCount;
 		this.pageCount = Math.ceil(this.itemCount / this.take);
 		this.hasPreviousPage = this.page > 1;

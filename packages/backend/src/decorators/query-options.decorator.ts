@@ -11,6 +11,12 @@ import {
 import { queryOptionsParsedSchema } from '@self/utils';
 import { Request } from 'express';
 import { QueryOptionsRequestDto } from 'src/common/dto/query-options.dto';
+import {
+	PAGE_PARAM,
+	PAGE_PARAM_DEFAULT,
+	TAKE_PARAM,
+	TAKE_PARAM_DEFAULT,
+} from 'src/constants/pagination.constant';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { z } from 'zod';
 
@@ -20,7 +26,12 @@ export const QueryParser = createParamDecorator(
 
 		// Parse with prisma-utils
 		const parsed = new RequestParserService().parseQuery(request.query, {
-			limitParamName: 'take',
+			pageParamName: PAGE_PARAM,
+			pageDefaultValue: PAGE_PARAM_DEFAULT,
+
+			limitDefaultValue: TAKE_PARAM_DEFAULT,
+			limitParamName: TAKE_PARAM,
+
 			...options?.parserOptions,
 		});
 

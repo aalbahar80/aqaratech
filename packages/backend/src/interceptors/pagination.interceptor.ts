@@ -13,7 +13,12 @@ import {
 	PaginatedMetaDto,
 	WithCount,
 } from 'src/common/dto/paginated.dto';
-import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import {
+	PAGE_PARAM,
+	PAGE_PARAM_DEFAULT,
+	TAKE_PARAM,
+	TAKE_PARAM_DEFAULT,
+} from 'src/constants/pagination.constant';
 
 /**
  * DRY approach to pagination.
@@ -29,7 +34,7 @@ export class PaginationInterceptor<T>
 		next: CallHandler,
 	): Observable<PaginatedMetaDto<T>> {
 		const request = context.switchToHttp().getRequest<Request>();
-		const query = request.query as unknown as QueryOptionsDto;
+		const query = request.query;
 
 		return next.handle().pipe(
 			map((data: WithCount<T>) => {
@@ -39,12 +44,12 @@ export class PaginationInterceptor<T>
 					);
 				}
 				const itemCount = data.total;
-
 				const pageSize = data.results.length;
 				const pagination = new PaginatedDto({
 					itemCount,
-					pageOptionsDto: query,
 					pageSize,
+					page: queryToInt(query[PAGE_PARAM]) ?? PAGE_PARAM_DEFAULT,
+					take: queryToInt(query[TAKE_PARAM]) ?? TAKE_PARAM_DEFAULT,
 				});
 
 				return { pagination, results: data.results };
@@ -52,3 +57,13 @@ export class PaginationInterceptor<T>
 		);
 	}
 }
+
+const queryToInt = (q: unknown) => {
+	if (typeof q === 'string') {
+		return parseInt(q);
+	} else if (typeof q === 'number') {
+		return q;
+	} else {
+		return undefined;
+	}
+};
