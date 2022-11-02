@@ -5,9 +5,9 @@ import { expenseCategorySchema } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { parseLocationFilter } from 'src/common/parse-location-filter';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
-import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 import {
 	CreateExpenseDto,
 	ExpenseDto,
@@ -45,31 +45,32 @@ export class ExpensesService {
 	}
 
 	async findAll({
-		pageOptionsDto,
+		queryOptions,
 		user,
 	}: {
-		pageOptionsDto: ExpensePageOptionsDto;
+		queryOptions: QueryOptionsDto;
 		user: IUser;
 	}): Promise<WithCount<ExpenseDto>> {
-		const { page, take, start, end, sortOrder, orderBy } = pageOptionsDto;
+		const { take, skip, sort } = queryOptions;
 
 		const filter: Prisma.ExpenseWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Expense,
+				// @ts-expect-error temp
 				parseLocationFilter({ filter: pageOptionsDto, entity: 'Expense' }),
+				// @ts-expect-error temp
 				{ postAt: { gte: start, lte: end } },
 			],
 		};
 
-		const sort = orderBy
-			? { [orderBy]: sortOrder }
-			: { postAt: 'desc' as Prisma.SortOrder };
+		// Default sort
+		const orderBy = sort.length ? sort : ({ postAt: 'desc' } as const);
 
 		const [data, total, settings] = await Promise.all([
 			this.prisma.expense.findMany({
 				take,
-				skip: (page - 1) * take,
-				orderBy: sort,
+				skip,
+				orderBy,
 				where: filter,
 				include: {
 					portfolio: crumbs.portfolio,

@@ -1,22 +1,18 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Patch,
-	Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { expenseUpdateSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import {
+	ApiQueryOptions,
+	QueryParser,
+} from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-import { ExpensePageOptionsDto } from 'src/expenses/dto/expense-page-options.dto';
 
 import {
 	ExpenseDto,
@@ -37,12 +33,13 @@ export class ExpensesController {
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(ExpenseDto)
 	findAll(
 		@User() user: IUser,
-		@Query() pageOptionsDto: ExpensePageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<ExpenseDto>> {
-		return this.expensesService.findAll({ pageOptionsDto, user });
+		return this.expensesService.findAll({ queryOptions, user });
 	}
 
 	@Get(':id')
