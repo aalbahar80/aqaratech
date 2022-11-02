@@ -4,18 +4,17 @@ import { range } from '$lib/stores/filter/range';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ fetch, params, depends, parent }) => {
+export const load: PageLoad = async ({ fetch, params, depends }) => {
 	const api = createApi(fetch);
 
 	const { start, end } = get(range);
 	depends(FilterEnum.Range);
 
-	const organizationId = (await parent()).user?.role?.organizationId;
+	const { organizationId, portfolioId } = params;
 
 	const [expenses, categories] = await Promise.all([
 		api.portfolios.findAllExpenses({
-			organizationId,
-			id: params.id,
+			id: portfolioId,
 			start,
 			end,
 		}),

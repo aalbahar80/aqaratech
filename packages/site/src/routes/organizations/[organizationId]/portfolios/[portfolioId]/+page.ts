@@ -10,7 +10,7 @@ export const load: PageLoad = async ({
 	const api = createApi(fetch);
 
 	const sParams = parseParams(searchParams);
-	const id = params.id;
+	const id = params.portfolioId;
 
 	const [portfolio, properties, roles, balance] = await Promise.all([
 		api.portfolios.findOne({ id }),

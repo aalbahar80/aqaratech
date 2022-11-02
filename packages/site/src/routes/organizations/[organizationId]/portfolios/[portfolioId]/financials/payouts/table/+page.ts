@@ -10,7 +10,7 @@ export const load: PageLoad = async ({
 	const api = createApi(fetch);
 
 	const payouts = await api.portfolios.findPayouts({
-		id: params.id,
+		id: params.portfolioId,
 		...parseParams(searchParams),
 	});
 

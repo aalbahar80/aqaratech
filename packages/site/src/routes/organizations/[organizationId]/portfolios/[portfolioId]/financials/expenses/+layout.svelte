@@ -13,12 +13,14 @@
 	const tabs = [
 		{
 			label: 'Table',
-			href: `/portfolios/${$page.params.id ?? ''}/financials/expenses/table`,
+			href: `/portfolios/${
+				$page.params.portfolioId ?? ''
+			}/financials/expenses/table`,
 			icon: HeroiconsTableCells,
 		},
 		{
 			label: 'Chart',
-			href: `/portfolios/${$page.params.id ?? ''}/financials/expenses`,
+			href: `/portfolios/${$page.params.portfolioId ?? ''}/financials/expenses`,
 			icon: HeroiconsPresentationChartBar,
 		},
 	];

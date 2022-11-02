@@ -10,7 +10,7 @@ export const load: PageLoad = async ({
 	const api = createApi(fetch);
 
 	const expenses = await api.portfolios.findAllExpenses({
-		id: params.id,
+		id: params.portfolioId,
 		...parseParams(searchParams),
 	});
 

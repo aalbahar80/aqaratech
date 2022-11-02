@@ -15,7 +15,7 @@ export const load: PageLoad = async ({
 		take,
 		sortOrder,
 		orderBy,
-		portfolioId: params.id,
+		portfolioId: params.portfolioId,
 	});
 
 	return { invoices };

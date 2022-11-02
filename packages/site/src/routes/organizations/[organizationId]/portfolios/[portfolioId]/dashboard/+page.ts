@@ -7,11 +7,8 @@ export const load: PageLoad = async ({
 	fetch,
 	params,
 	url: { searchParams },
-	parent,
 }) => {
-	const portfolioId = params.id;
-
-	const organizationId = (await parent()).user?.role?.organizationId;
+	const { organizationId, portfolioId } = params;
 
 	const api = createApi(fetch);
 

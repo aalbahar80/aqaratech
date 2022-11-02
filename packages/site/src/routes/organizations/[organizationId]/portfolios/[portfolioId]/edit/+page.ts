@@ -5,7 +5,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 	const api = createApi(fetch);
 
 	const portfolio = await api.portfolios.findOne({
-		id: params.id,
+		id: params.portfolioId,
 	});
 
 	return { portfolio };

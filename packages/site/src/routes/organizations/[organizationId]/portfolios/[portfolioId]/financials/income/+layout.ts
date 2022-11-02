@@ -4,17 +4,17 @@ import { range } from '$lib/stores/filter/range';
 import { get } from 'svelte/store';
 import type { LayoutLoad } from './$types';
 
-export const load: LayoutLoad = async ({ fetch, params, depends, parent }) => {
+export const load: LayoutLoad = async ({ fetch, params, depends }) => {
 	const api = createApi(fetch);
 
 	const { start, end } = get(range);
 	depends(FilterEnum.Range);
 
-	const organizationId = (await parent()).user?.role?.organizationId;
+	const { organizationId, portfolioId } = params;
 
 	const income = await api.portfolios.getIncomeByMonth({
 		organizationId,
-		portfolioId: params.id,
+		portfolioId,
 		start,
 		end,
 	});

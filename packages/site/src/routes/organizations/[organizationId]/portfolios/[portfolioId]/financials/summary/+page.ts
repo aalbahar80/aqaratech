@@ -6,7 +6,7 @@ import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 import { calculateNet } from './calculate-net';
 
-export const load: PageLoad = async ({ fetch, params, depends, parent }) => {
+export const load: PageLoad = async ({ fetch, params, depends }) => {
 	// Filter options
 	const { start, end } = get(range);
 	const propertyId = get(property);
@@ -14,16 +14,16 @@ export const load: PageLoad = async ({ fetch, params, depends, parent }) => {
 
 	const api = createApi(fetch);
 
-	const organizationId = (await parent()).user?.role?.organizationId;
+	const { organizationId, portfolioId } = params;
 
 	const [properties, income, expenses] = await Promise.all([
 		api.portfolios.findProperties({
-			id: params.id,
+			id: portfolioId,
 		}),
 
 		api.portfolios.getIncomeByMonth({
 			organizationId,
-			portfolioId: params.id,
+			portfolioId,
 			propertyId,
 			start,
 			end,
@@ -31,7 +31,7 @@ export const load: PageLoad = async ({ fetch, params, depends, parent }) => {
 
 		api.portfolios.getExpensesByMonth({
 			organizationId,
-			portfolioId: params.id,
+			portfolioId,
 			propertyId,
 			start,
 			end,
