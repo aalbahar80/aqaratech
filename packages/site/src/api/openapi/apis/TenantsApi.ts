@@ -320,7 +320,7 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 
 		const response = await this.request(
 			{
-				path: `/tenants/{id}/invoices`.replace(
+				path: `/tenants/{id}/leaseInvoices`.replace(
 					`{${'id'}}`,
 					encodeURIComponent(String(requestParameters.id)),
 				),

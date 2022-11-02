@@ -175,7 +175,7 @@ paths:
                           $ref: '#/components/schemas/LeaseDto'
       tags: *ref_0
       security: *ref_1
-  /tenants/{id}/invoices:
+  /tenants/{id}/leaseInvoices:
     get:
       operationId: TenantsController_findInvoices
       summary: ''
@@ -613,7 +613,7 @@ paths:
                 type: string
       tags: *ref_5
       security: *ref_6
-  /leases/{id}/invoices:
+  /leases/{id}/leaseInvoices:
     get:
       operationId: LeasesController_findInvoices
       summary: ''
@@ -1036,7 +1036,7 @@ paths:
                 $ref: '#/components/schemas/BalanceDto'
       tags: *ref_7
       security: *ref_8
-  /portfolios/{id}/lease-invoices:
+  /portfolios/{id}/leaseInvoices:
     get:
       operationId: PortfoliosController_findAllLeaseInvoices
       summary: ''

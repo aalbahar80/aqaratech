@@ -261,7 +261,7 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 
 		const response = await this.request(
 			{
-				path: `/leases/{id}/invoices`.replace(
+				path: `/leases/{id}/leaseInvoices`.replace(
 					`{${'id'}}`,
 					encodeURIComponent(String(requestParameters.id)),
 				),

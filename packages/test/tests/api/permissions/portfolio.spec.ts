@@ -13,8 +13,6 @@ const accessible = [
 	'/properties',
 	'/units',
 	'/leases',
-	'/leaseInvoices',
-	'/expenses',
 	// "/search",
 ];
 
@@ -34,15 +32,19 @@ for (const route of notAccessible) {
 	});
 }
 
-test('can get files from "/files"', async ({ portfolio, scopedRequest }) => {
-	const res = await scopedRequest.get('/files', {
-		params: {
-			relationKey: 'portfolio',
-			relationValue: portfolio.id,
-		},
+const scoped = ['/leaseInvoices', '/expenses', '/files'];
+
+for (const route of scoped) {
+	test(`can get ${route} `, async ({ portfolio, scopedRequest }) => {
+		const res = await scopedRequest.get('/files', {
+			params: {
+				relationKey: 'portfolio',
+				relationValue: portfolio.id,
+			},
+		});
+		await expect(res).toBeOK();
 	});
-	await expect(res).toBeOK();
-});
+}
 
 test('can get data from /aggregate', async ({ portfolio, scopedRequest }) => {
 	const base = getUrl({

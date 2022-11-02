@@ -1,5 +1,7 @@
 import { Controller, Delete, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { CheckAbilities } from 'src/casl/abilities.decorator';
+import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
@@ -19,6 +21,7 @@ export class FilesController {
 	constructor(private readonly filesService: FilesService) {}
 
 	@Get()
+	@CheckAbilities({ action: Action.Read, subject: 'File' })
 	@ApiPaginatedResponse(FileDto)
 	findAll(
 		@User() user: IUser,

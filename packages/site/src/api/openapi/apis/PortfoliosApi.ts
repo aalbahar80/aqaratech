@@ -568,7 +568,7 @@ export class PortfoliosApi
 
 		const response = await this.request(
 			{
-				path: `/portfolios/{id}/lease-invoices`.replace(
+				path: `/portfolios/{id}/leaseInvoices`.replace(
 					`{${'id'}}`,
 					encodeURIComponent(String(requestParameters.id)),
 				),

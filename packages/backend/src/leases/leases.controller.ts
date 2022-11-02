@@ -74,7 +74,7 @@ export class LeasesController {
 		return this.leasesService.remove({ id });
 	}
 
-	@Get('/:id/invoices')
+	@Get(':id/leaseInvoices')
 	@CheckAbilities(
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'LeaseInvoice' },

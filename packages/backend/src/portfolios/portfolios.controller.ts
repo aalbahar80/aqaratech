@@ -170,7 +170,7 @@ export class PortfoliosController {
 		return this.aggregateService.getBalance({ portfolioId: id, user });
 	}
 
-	@Get(':id/lease-invoices')
+	@Get(':id/leaseInvoices')
 	@CheckAbilities({
 		action: Action.Read,
 		subject: SubjectType,

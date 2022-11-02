@@ -91,7 +91,7 @@ export class TenantsController {
 		return this.leasesService.findAll({ user, queryOptions, where });
 	}
 
-	@Get(':id/invoices')
+	@Get(':id/leaseInvoices')
 	@CheckAbilities(
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'LeaseInvoice' },
