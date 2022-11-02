@@ -15,14 +15,6 @@
 import * as runtime from '../runtime';
 import type { ByMonthDto, Occupancy } from '../models';
 
-export interface AggregateApiGetOccupancyRequest {
-	start?: string;
-	end?: string;
-	portfolioId?: string;
-	propertyId?: string;
-	unitId?: string;
-}
-
 /**
  * AggregateApi - interface
  *
@@ -73,7 +65,6 @@ export interface AggregateApiInterface {
 	 * @memberof AggregateApiInterface
 	 */
 	getOccupancyRaw(
-		requestParameters: AggregateApiGetOccupancyRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<Occupancy>>>;
 
@@ -82,7 +73,6 @@ export interface AggregateApiInterface {
 	 *
 	 */
 	getOccupancy(
-		requestParameters: AggregateApiGetOccupancyRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<Occupancy>>;
 }
@@ -169,30 +159,9 @@ export class AggregateApi
 	 *
 	 */
 	async getOccupancyRaw(
-		requestParameters: AggregateApiGetOccupancyRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<Occupancy>>> {
 		const queryParameters: any = {};
-
-		if (requestParameters.start !== undefined) {
-			queryParameters['start'] = requestParameters.start;
-		}
-
-		if (requestParameters.end !== undefined) {
-			queryParameters['end'] = requestParameters.end;
-		}
-
-		if (requestParameters.portfolioId !== undefined) {
-			queryParameters['portfolioId'] = requestParameters.portfolioId;
-		}
-
-		if (requestParameters.propertyId !== undefined) {
-			queryParameters['propertyId'] = requestParameters.propertyId;
-		}
-
-		if (requestParameters.unitId !== undefined) {
-			queryParameters['unitId'] = requestParameters.unitId;
-		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
@@ -214,13 +183,9 @@ export class AggregateApi
 	 *
 	 */
 	async getOccupancy(
-		requestParameters: AggregateApiGetOccupancyRequest = {},
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<Occupancy>> {
-		const response = await this.getOccupancyRaw(
-			requestParameters,
-			initOverrides,
-		);
+		const response = await this.getOccupancyRaw(initOverrides);
 		return await response.value();
 	}
 }

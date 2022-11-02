@@ -17,6 +17,7 @@ import type {
 	BalanceDto,
 	GroupByMonthDto,
 	IncomeByMonthDto,
+	Occupancy,
 	PaginatedExpenseDto,
 	PaginatedLeaseInvoiceDto,
 	PaginatedPayoutDto,
@@ -108,6 +109,15 @@ export interface PortfoliosApiGetExpensesByMonthRequest {
 }
 
 export interface PortfoliosApiGetIncomeByMonthRequest {
+	organizationId: string;
+	portfolioId: string;
+	start?: string;
+	end?: string;
+	propertyId?: string;
+	unitId?: string;
+}
+
+export interface PortfoliosApiGetOccupancyRequest {
 	organizationId: string;
 	portfolioId: string;
 	start?: string;
@@ -351,6 +361,26 @@ export interface PortfoliosApiInterface {
 		requestParameters: PortfoliosApiGetIncomeByMonthRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<IncomeByMonthDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof PortfoliosApiInterface
+	 */
+	getOccupancyRaw(
+		requestParameters: PortfoliosApiGetOccupancyRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<Array<Occupancy>>>;
+
+	/**
+	 *
+	 *
+	 */
+	getOccupancy(
+		requestParameters: PortfoliosApiGetOccupancyRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<Array<Occupancy>>;
 
 	/**
 	 *
@@ -1127,6 +1157,90 @@ export class PortfoliosApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<IncomeByMonthDto> {
 		const response = await this.getIncomeByMonthRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async getOccupancyRaw(
+		requestParameters: PortfoliosApiGetOccupancyRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<Array<Occupancy>>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling getOccupancy.',
+			);
+		}
+
+		if (
+			requestParameters.portfolioId === null ||
+			requestParameters.portfolioId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'portfolioId',
+				'Required parameter requestParameters.portfolioId was null or undefined when calling getOccupancy.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		if (requestParameters.start !== undefined) {
+			queryParameters['start'] = requestParameters.start;
+		}
+
+		if (requestParameters.end !== undefined) {
+			queryParameters['end'] = requestParameters.end;
+		}
+
+		if (requestParameters.propertyId !== undefined) {
+			queryParameters['propertyId'] = requestParameters.propertyId;
+		}
+
+		if (requestParameters.unitId !== undefined) {
+			queryParameters['unitId'] = requestParameters.unitId;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/portfolios/{portfolioId}/aggregate/occupancy`
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					)
+					.replace(
+						`{${'portfolioId'}}`,
+						encodeURIComponent(String(requestParameters.portfolioId)),
+					),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async getOccupancy(
+		requestParameters: PortfoliosApiGetOccupancyRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<Array<Occupancy>> {
+		const response = await this.getOccupancyRaw(
 			requestParameters,
 			initOverrides,
 		);

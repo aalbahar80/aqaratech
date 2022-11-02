@@ -1,20 +1,14 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import {
-	ByMonthDto,
-	DashboardFilterDto,
-} from 'src/aggregate/dto/aggregate.dto';
+import { ByMonthDto } from 'src/aggregate/dto/aggregate.dto';
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
-import { User } from 'src/decorators/user.decorator';
-import { IUser } from 'src/interfaces/user.interface';
-import { AggregateService } from './aggregate.service';
 
 @ApiTags('aggregate')
 @Controller('aggregate')
 export class AggregateController {
-	constructor(private readonly aggregateService: AggregateService) {}
+	constructor() {}
 
 	@Get('/incomeByMonth')
 	@CheckAbilities(
@@ -49,10 +43,7 @@ export class AggregateController {
 		{ action: Action.Read, subject: 'Lease' },
 	)
 	@ApiOkResponse({ type: Occupancy, isArray: true })
-	getOccupancy(
-		@User() user: IUser,
-		@Query() filter: DashboardFilterDto,
-	): Promise<Occupancy[]> {
-		return this.aggregateService.getOccupancy({ filter, user });
+	getOccupancy(): Promise<Occupancy[]> {
+		throw new Error('Deprecated');
 	}
 }

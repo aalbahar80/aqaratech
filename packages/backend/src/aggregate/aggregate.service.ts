@@ -1,12 +1,9 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
-import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { groupByMonth } from 'src/aggregate/group-by-month';
 import { Action } from 'src/casl/action.enum';
-import { parseLocationFilter } from 'src/common/parse-location-filter';
 import { PaidStatus } from 'src/constants/paid-status.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -128,18 +125,20 @@ export class AggregateService {
 	}
 
 	async getOccupancy({
-		filter,
-		user,
+		organizationId,
+		portfolioId,
+		options,
 	}: {
-		filter: DashboardFilterDto;
-		user: IUser;
+		organizationId: string;
+		portfolioId: string;
+		options: AggregateOptionsDto;
 	}) {
 		const units = await this.prisma.unit.findMany({
 			where: {
-				AND: [
-					accessibleBy(user.ability, Action.Read).Unit,
-					parseLocationFilter({ filter, entity: 'Unit' }),
-				],
+				organizationId,
+				portfolioId,
+				propertyId: options.propertyId,
+				id: options.unitId,
 			},
 			select: {
 				id: true,
@@ -147,8 +146,8 @@ export class AggregateService {
 				leases: {
 					where: {
 						// TODO check if this is correct
-						start: { lte: filter.end },
-						end: { gte: filter.start },
+						start: { lte: options.end },
+						end: { gte: options.start },
 					},
 					select: {
 						start: true,
@@ -172,11 +171,13 @@ export class AggregateService {
 		const firstUnitCreatedAt = units[0].createdAt;
 		const start =
 			/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-			filter.start! > firstUnitCreatedAt ? filter.start! : firstUnitCreatedAt;
+			new Date(options.start) > firstUnitCreatedAt
+				? new Date(options.start)
+				: firstUnitCreatedAt;
 
 		// fallback to getting data for next two years max
 		const oneYear = 1000 * 60 * 60 * 24 * 365;
-		const end = filter.end ?? new Date(Date.now() + oneYear * 2);
+		const end = new Date(options.end) ?? new Date(Date.now() + oneYear * 2);
 
 		// loop through each day in the range
 		for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {

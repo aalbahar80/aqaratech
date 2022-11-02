@@ -1,7 +1,7 @@
 import { createApi } from '$api';
-import { getDashboardData } from '$lib/components/charts/get-dashboard-data';
 import { TAKE_MAX } from '$lib/constants/pagination-keys';
 import { parseParams } from '$lib/utils/parse-params';
+import { startOfMonthN } from '@self/utils';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({
@@ -10,52 +10,42 @@ export const load: PageLoad = async ({
 	url: { searchParams },
 	parent,
 }) => {
-	const organizationId = (await parent()).user?.role?.organizationId;
-
 	const propertyId = params.id;
 	// TODO handle pagination defaults
 	const sParams = parseParams(searchParams);
 
 	const api = createApi(fetch);
 
-	const [
-		property,
-		units,
-		invoicesGrouped,
-		expensesGrouped,
-		invoices,
-		expenses,
-		invoicesGroupedPaid,
-		invoicesGroupedUnpaid,
-		occupancy,
-		futureOccupancy,
-		categories,
-	] = await Promise.all([
+	const organizationId = (await parent()).user?.role?.organizationId;
+
+	const [property, units, occupancy, futureOccupancy] = await Promise.all([
 		api.properties.findOne({ id: propertyId }),
+
 		api.properties.findUnits({
 			id: propertyId,
 			...sParams,
 			take: TAKE_MAX,
 		}),
-		...getDashboardData({
-			api: api,
-			searchParams,
-			propertyId,
+
+		api.portfolios.getOccupancy({
 			organizationId,
+			portfolioId: propertyId,
+			start: startOfMonthN(12).split('T')[0],
+			end: new Date().toISOString().split('T')[0],
+		}),
+
+		api.portfolios.getOccupancy({
+			organizationId,
+			portfolioId: propertyId,
+			start: new Date().toISOString().split('T')[0],
+			end: startOfMonthN(-12).split('T')[0],
 		}),
 	]);
 
 	return {
 		property,
 		units,
-		invoicesGrouped,
-		expensesGrouped,
-		invoices,
-		expenses,
-		invoicesGroupedPaid,
-		invoicesGroupedUnpaid,
 		occupancy,
 		futureOccupancy,
-		categories,
 	};
 };

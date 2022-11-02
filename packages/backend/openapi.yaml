@@ -1254,6 +1254,53 @@ paths:
                   $ref: '#/components/schemas/GroupByMonthDto'
       tags: *ref_9
       security: *ref_10
+  /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/occupancy:
+    get:
+      operationId: PortfolioAggregateController_getOccupancy
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: portfolioId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Occupancy'
+      tags: *ref_9
+      security: *ref_10
   /properties:
     get:
       operationId: PropertiesController_findAll
@@ -1735,32 +1782,7 @@ paths:
       operationId: AggregateController_getOccupancy
       summary: ''
       description: ''
-      parameters:
-        - name: start
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: end
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: portfolioId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
+      parameters: []
       responses:
         '200':
           description: ''
@@ -3389,6 +3411,16 @@ components:
         - total
         - paid
         - unpaid
+    Occupancy:
+      type: object
+      properties:
+        date:
+          type: number
+        occupiedPct:
+          type: number
+      required:
+        - date
+        - occupiedPct
     UpdatePropertyDto:
       type: object
       properties:
@@ -3507,16 +3539,6 @@ components:
       required:
         - amount
         - date
-    Occupancy:
-      type: object
-      properties:
-        date:
-          type: number
-        occupiedPct:
-          type: number
-      required:
-        - date
-        - occupiedPct
     UpdateExpenseDto:
       type: object
       properties:

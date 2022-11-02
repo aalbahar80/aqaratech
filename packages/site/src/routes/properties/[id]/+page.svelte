@@ -1,8 +1,5 @@
 <script lang="ts">
-	import ExpensesCard from '$lib/components/dashboard/cards/ExpensesCard.svelte';
-	import NetIncomeCard from '$lib/components/dashboard/cards/NetIncomeCard.svelte';
 	import OccupancyCard from '$lib/components/dashboard/cards/OccupancyCard.svelte';
-	import RevenueCard from '$lib/components/dashboard/cards/RevenueCard.svelte';
 	import DashboardFilter from '$lib/components/dashboard/DashboardFilter.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
@@ -37,19 +34,6 @@
 	units={data.units.results}
 	disabledPropertySelector
 />
-<NetIncomeCard
-	invoicesGrouped={data.invoicesGrouped}
-	invoicesGroupedPaid={data.invoicesGroupedPaid}
-	invoicesGroupedUnpaid={data.invoicesGroupedUnpaid}
-	expensesGrouped={data.expensesGrouped}
-/>
-<RevenueCard
-	invoices={data.invoices}
-	invoicesGroupedPaid={data.invoicesGroupedPaid}
-	invoicesGroupedUnpaid={data.invoicesGroupedUnpaid}
-	disabledPropertyBreakdown
-/>
-<ExpensesCard expenses={data.expenses} categories={data.categories} />
 
 <OccupancyCard
 	occupancy={data.occupancy}
