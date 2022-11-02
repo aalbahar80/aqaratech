@@ -5,24 +5,25 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async ({
 	url: { searchParams },
 	fetch,
-	parent,
+	params,
 }) => {
-	const organizationId = (await parent()).user?.role?.organizationId;
-
 	const api = createApi(fetch);
 
+	const { organizationId, portfolioId } = params;
+
 	const predefined: PredefinedExpense = {
-		portfolioId: searchParams.get('portfolioId'),
 		propertyId: searchParams.get('propertyId'),
 		unitId: searchParams.get('unitId'),
 	};
+
+	// TODO: allow only one predefined. Fetch it here.
 
 	const [portfolios, properties, units, expenseTypes] = await Promise.all([
 		api.portfolios.findAll({ take: 1000 }),
 
 		predefined.portfolioId
 			? api.portfolios.findProperties({
-					id: predefined.portfolioId,
+					id: portfolioId,
 					take: 1000,
 			  })
 			: undefined,

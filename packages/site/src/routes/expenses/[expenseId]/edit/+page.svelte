@@ -5,8 +5,4 @@
 	export let data: PageData;
 </script>
 
-<ExpenseForm
-	formType="update"
-	data={data.expense}
-	expenseTypes={data.expenseTypes}
-/>
+<ExpenseForm data={data.expense} expenseTypes={data.expenseTypes} />
