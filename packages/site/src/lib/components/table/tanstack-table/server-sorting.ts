@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable @typescript-eslint/no-unnecessary-boolean-literal-compare */
 import { goto } from '$app/navigation';
-import { ORDER_BY, SORT_ORDER } from '$lib/constants/pagination-keys';
+import { SORT } from '$lib/constants/pagination-keys';
 import type { SortingState } from '@tanstack/svelte-table';
 
 /**
@@ -13,14 +15,12 @@ export const handleServerSorting = async (
 	const key = sorting[0]?.id;
 	const desc = sorting[0]?.desc;
 
-	key ? url.searchParams.set(ORDER_BY, key) : url.searchParams.delete(ORDER_BY);
-
-	if (desc === undefined) {
-		url.searchParams.delete(SORT_ORDER);
+	if (key === undefined || desc === undefined) {
+		url.searchParams.delete(SORT);
 	} else if (desc === true) {
-		url.searchParams.set(SORT_ORDER, 'desc');
+		url.searchParams.set(SORT, key);
 	} else if (desc === false) {
-		url.searchParams.set(SORT_ORDER, 'asc');
+		url.searchParams.set(SORT, `-${key}`);
 	}
 
 	await goto(url, { noscroll: true, keepfocus: true });

@@ -22,7 +22,10 @@ export const QueryParser = createParamDecorator(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const { filter, ...parsed } = new RequestParserService().parseQuery(
 			request.query,
-			options.parserOptions,
+			{
+				limitParamName: 'take',
+				...options.parserOptions,
+			},
 		);
 
 		// validate output

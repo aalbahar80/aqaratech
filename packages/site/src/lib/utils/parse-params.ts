@@ -1,18 +1,9 @@
-import type { SortOrderEnum } from '$api/openapi';
-import {
-	DEFAULT_PAGINATION_KEY,
-	ORDER_BY,
-	PAGE_SIZE,
-	SORT_ORDER,
-} from '$lib/constants/pagination-keys';
-
 export const parseParams = (searchParams: URLSearchParams) => {
-	return {
-		page: +(searchParams.get(DEFAULT_PAGINATION_KEY) || 1),
-		take: +(searchParams.get(PAGE_SIZE) || 20),
-		sortOrder: (searchParams.get(SORT_ORDER) ?? 'desc') as SortOrderEnum,
-		// TODO fix types vs manual type-cast
-		orderBy: searchParams.get(ORDER_BY) ?? undefined,
-		filter: (searchParams.get('filter') as unknown as object) ?? undefined,
-	};
+	const obj = {};
+
+	for (const prop of searchParams.entries()) {
+		obj[prop[0]] = prop[1];
+	}
+
+	return obj;
 };
