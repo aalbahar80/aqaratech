@@ -1,3 +1,5 @@
+import type { generateExpenseCategoryTree } from '../constants';
+
 /**
  * Return a random element from an array.
  */
@@ -33,4 +35,23 @@ export const findOrFail = <T>(
 	}
 
 	return element;
+};
+
+type Tree = ReturnType<typeof generateExpenseCategoryTree>;
+
+export const randomCategory = (tree: Tree): Tree[number] => {
+	const maxAttempts = 10;
+	let attempts = 0;
+
+	while (attempts < maxAttempts) {
+		const category = random(tree);
+
+		if (!category.isGroup) {
+			return category;
+		}
+
+		attempts++;
+	}
+
+	throw new Error('Unable to find random category');
 };

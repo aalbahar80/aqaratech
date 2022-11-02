@@ -17,7 +17,7 @@ import {
 	testTenantEmail,
 } from './generators';
 import { isDefined } from './utils/is-defined';
-import { random } from './utils/random';
+import { random, randomCategory } from './utils/random';
 
 // TODO use satisfies SeedCount
 const defaultSeedCount = {
@@ -131,10 +131,19 @@ export const createSeed = (options?: SeedOptions) => {
 	// Expenses
 	const expenses = Array.from({ length: count.expenses }, () => {
 		const portfolio = random(portfolios);
+		const organizationId = org1.id;
+		const tree = organizationSettings.find(
+			(s) => s.organizationId === organizationId,
+		)?.expenseCategoryTree;
+
+		if (!tree) {
+			throw new Error('Expense category tree not found');
+		}
 
 		return expenseFactory.build({
-			organizationId: org1.id,
+			organizationId,
 			portfolioId: portfolio.id,
+			categoryId: randomCategory(tree as any).id,
 		});
 	});
 
