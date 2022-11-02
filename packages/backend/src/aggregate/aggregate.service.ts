@@ -1,5 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, LoggerService } from '@nestjs/common';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { groupByMonth } from 'src/aggregate/group-by-month';
@@ -12,6 +13,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class AggregateService {
 	constructor(
+		@Inject(WINSTON_MODULE_NEST_PROVIDER)
+		private readonly logger: LoggerService,
 		private readonly prisma: PrismaService,
 		private leaseInvoicesService: LeaseInvoicesService,
 	) {}
@@ -164,6 +167,10 @@ export class AggregateService {
 		const days: Occupancy[] = [];
 
 		if (!units.length) {
+			this.logger.verbose?.(
+				'No units found - getOccupancy',
+				AggregateService.name,
+			);
 			return days;
 		}
 
