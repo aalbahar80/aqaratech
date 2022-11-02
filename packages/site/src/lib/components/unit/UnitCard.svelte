@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { UnitDto } from '$api/openapi';
+	import { page } from '$app/stores';
+	import { getRoute } from '$lib/utils/route-helpers';
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import FaSolidBath from '~icons/fa-solid/bath';
@@ -36,7 +38,15 @@
 	];
 </script>
 
-<a href={`/units/${unit.id}`} class="block hover:bg-gray-50">
+<a
+	href={getRoute(
+		{
+			params: $page.params,
+		},
+		{ entity: 'property', page: 'id', id: unit.propertyId },
+	) + `/units/${unit.id}`}
+	class="block hover:bg-gray-50"
+>
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex items-center justify-between">
 			<p class="truncate text-sm font-medium text-indigo-600">

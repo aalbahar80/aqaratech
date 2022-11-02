@@ -5,7 +5,7 @@
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import UnitCard from '$lib/components/unit/UnitCard.svelte';
-	import { create } from '$lib/utils/route-helpers';
+	import { getRoute } from '$lib/utils/route-helpers';
 	import { flip } from 'svelte/animate';
 	import { writable } from 'svelte/store';
 
@@ -38,21 +38,18 @@
 			results: sorted,
 		};
 	}
+
+	$: baseFormUrl = getRoute(
+		{
+			params: $page.params,
+		},
+		{ entity: 'property', page: 'id', id: $page.params.propertyId! },
+	);
+
+	$: formUrl = `${baseFormUrl}/units/new`;
 </script>
 
-<StackedList
-	entity="unit"
-	count={units.results.length}
-	formUrl={create({
-		entity: 'unit',
-		predefined:
-			$page.url.pathname.startsWith('/properties') &&
-			new Map([
-				['portfolioId', $page.data.property.breadcrumbs.portfolio.id], // typecheck
-				['propertyId', $page.url.pathname.split('/').pop()],
-			]),
-	})}
->
+<StackedList entity="unit" count={units.results.length} {formUrl}>
 	<div slot="secondary">
 		<RadioButtons {options} bind:selected={$sortBy} />
 	</div>
