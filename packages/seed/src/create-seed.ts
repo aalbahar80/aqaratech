@@ -23,7 +23,7 @@ import { random } from './utils/random';
 const defaultSeedCount = {
 	portfolios: 10,
 	properties: 10,
-	units: 10,
+	units: 30,
 	tenants: 10,
 	leases: 10,
 	leaseInvoices: 10,
@@ -74,44 +74,6 @@ export const createSeed = (options?: SeedOptions) => {
 	const portfolios = Array.from({ length: count.portfolios }, () =>
 		portfolioFactory.build({ organizationId: org1.id }),
 	);
-
-	// Roles
-	const roles = [
-		// Main user
-		roleFactory.build({
-			roleType: 'ORGADMIN',
-			organizationId: org1.id,
-			userId: userAdmin.id,
-		}),
-
-		roleFactory.build({
-			roleType: 'PORTFOLIO',
-			organizationId: org1.id,
-			portfolioId: random(portfolios).id,
-			userId: userAdmin.id,
-		}),
-
-		roleFactory.build({
-			roleType: 'TENANT',
-			organizationId: org1.id,
-			tenantId: random(tenants).id,
-			userId: userAdmin.id,
-		}),
-
-		// Portfolio user
-		roleFactory.build({
-			roleType: 'PORTFOLIO',
-			organizationId: org1.id,
-			userId: userPortfolio.id,
-		}),
-
-		// Tenant user
-		roleFactory.build({
-			roleType: 'TENANT',
-			organizationId: org1.id,
-			userId: userTenant.id,
-		}),
-	];
 
 	// Properties
 	const properties = Array.from({ length: count.properties }, () =>
@@ -185,6 +147,44 @@ export const createSeed = (options?: SeedOptions) => {
 			portfolioId: portfolio.id,
 		});
 	});
+
+	// Roles
+	const roles = [
+		// Main user
+		roleFactory.build({
+			roleType: 'ORGADMIN',
+			organizationId: org1.id,
+			userId: userAdmin.id,
+		}),
+
+		roleFactory.build({
+			roleType: 'PORTFOLIO',
+			organizationId: org1.id,
+			portfolioId: random(properties).portfolioId, // ensures data
+			userId: userAdmin.id,
+		}),
+
+		roleFactory.build({
+			roleType: 'TENANT',
+			organizationId: org1.id,
+			tenantId: random(leases).tenantId, // ensures data
+			userId: userAdmin.id,
+		}),
+
+		// Portfolio user
+		roleFactory.build({
+			roleType: 'PORTFOLIO',
+			organizationId: org1.id,
+			userId: userPortfolio.id,
+		}),
+
+		// Tenant user
+		roleFactory.build({
+			roleType: 'TENANT',
+			organizationId: org1.id,
+			userId: userTenant.id,
+		}),
+	];
 
 	const data = {
 		users,
