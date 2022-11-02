@@ -18,16 +18,15 @@ import type {
 	PaginatedLeaseDto,
 	PaginatedLeaseInvoiceDto,
 	PartialLeaseDto,
-	SortOrderEnum,
 	UpdateLeaseDto,
 } from '../models';
 
 export interface LeasesApiFindAllRequest {
 	page?: number;
+	skip?: number;
 	take?: number;
-	sortOrder?: SortOrderEnum;
+	sort?: Array<string>;
 	filter?: object;
-	orderBy?: FindAllOrderByEnum;
 }
 
 export interface LeasesApiFindInvoicesRequest {
@@ -178,20 +177,20 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 			queryParameters['page'] = requestParameters.page;
 		}
 
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
 		if (requestParameters.take !== undefined) {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.sortOrder !== undefined) {
-			queryParameters['sortOrder'] = requestParameters.sortOrder;
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -445,25 +444,3 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 		return await response.value();
 	}
 }
-
-/**
- * @export
- */
-export const FindAllOrderByEnum = {
-	Id: 'id',
-	TenantId: 'tenantId',
-	UnitId: 'unitId',
-	CreatedAt: 'createdAt',
-	UpdatedAt: 'updatedAt',
-	Start: 'start',
-	End: 'end',
-	MonthlyRent: 'monthlyRent',
-	Deposit: 'deposit',
-	CanPay: 'canPay',
-	Notify: 'notify',
-	License: 'license',
-	OrganizationId: 'organizationId',
-	PortfolioId: 'portfolioId',
-} as const;
-export type FindAllOrderByEnum =
-	typeof FindAllOrderByEnum[keyof typeof FindAllOrderByEnum];

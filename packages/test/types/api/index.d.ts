@@ -2512,15 +2512,6 @@ export interface SearchDto {
 /**
  *
  * @export
- */
-export declare const SortOrderEnum: {
-	readonly Asc: 'asc';
-	readonly Desc: 'desc';
-};
-export type SortOrderEnum = typeof SortOrderEnum[keyof typeof SortOrderEnum];
-/**
- *
- * @export
  * @interface TenantDto
  */
 export interface TenantDto {

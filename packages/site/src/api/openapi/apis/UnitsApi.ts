@@ -17,7 +17,6 @@ import type {
 	PaginatedLeaseDto,
 	PaginatedUnitDto,
 	PartialUnitDto,
-	SortOrderEnum,
 	UnitDto,
 	UpdateUnitDto,
 } from '../models';
@@ -33,10 +32,10 @@ export interface UnitsApiFindAllRequest {
 export interface UnitsApiFindLeasesRequest {
 	id: string;
 	page?: number;
+	skip?: number;
 	take?: number;
-	sortOrder?: SortOrderEnum;
+	sort?: Array<string>;
 	filter?: object;
-	orderBy?: string;
 }
 
 export interface UnitsApiFindOneRequest {
@@ -242,20 +241,20 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 			queryParameters['page'] = requestParameters.page;
 		}
 
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
 		if (requestParameters.take !== undefined) {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.sortOrder !== undefined) {
-			queryParameters['sortOrder'] = requestParameters.sortOrder;
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

@@ -2515,17 +2515,6 @@ export interface SearchDto {
 	 */
 	estimatedTotalHits: number;
 }
-
-/**
- *
- * @export
- */
-export const SortOrderEnum = {
-	Asc: 'asc',
-	Desc: 'desc',
-} as const;
-export type SortOrderEnum = typeof SortOrderEnum[keyof typeof SortOrderEnum];
-
 /**
  *
  * @export

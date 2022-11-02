@@ -25,16 +25,15 @@ import type {
 	PaginatedRoleDto,
 	PaginatedUnitDto,
 	PortfolioDto,
-	SortOrderEnum,
 	UpdatePortfolioDto,
 } from '../models';
 
 export interface PortfoliosApiFindAllRequest {
 	page?: number;
+	skip?: number;
 	take?: number;
-	sortOrder?: SortOrderEnum;
+	sort?: Array<string>;
 	filter?: object;
-	orderBy?: string;
 }
 
 export interface PortfoliosApiFindAllExpensesRequest {
@@ -62,10 +61,10 @@ export interface PortfoliosApiFindOneRequest {
 export interface PortfoliosApiFindPayoutsRequest {
 	id: string;
 	page?: number;
+	skip?: number;
 	take?: number;
-	sortOrder?: SortOrderEnum;
+	sort?: Array<string>;
 	filter?: object;
-	orderBy?: string;
 }
 
 export interface PortfoliosApiFindPropertiesRequest {
@@ -80,10 +79,10 @@ export interface PortfoliosApiFindPropertiesRequest {
 export interface PortfoliosApiFindRolesRequest {
 	id: string;
 	page?: number;
+	skip?: number;
 	take?: number;
-	sortOrder?: SortOrderEnum;
+	sort?: Array<string>;
 	filter?: object;
-	orderBy?: string;
 }
 
 export interface PortfoliosApiFindUnitsRequest {
@@ -415,20 +414,20 @@ export class PortfoliosApi
 			queryParameters['page'] = requestParameters.page;
 		}
 
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
 		if (requestParameters.take !== undefined) {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.sortOrder !== undefined) {
-			queryParameters['sortOrder'] = requestParameters.sortOrder;
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -666,20 +665,20 @@ export class PortfoliosApi
 			queryParameters['page'] = requestParameters.page;
 		}
 
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
 		if (requestParameters.take !== undefined) {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.sortOrder !== undefined) {
-			queryParameters['sortOrder'] = requestParameters.sortOrder;
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -806,20 +805,20 @@ export class PortfoliosApi
 			queryParameters['page'] = requestParameters.page;
 		}
 
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
 		if (requestParameters.take !== undefined) {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.sortOrder !== undefined) {
-			queryParameters['sortOrder'] = requestParameters.sortOrder;
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

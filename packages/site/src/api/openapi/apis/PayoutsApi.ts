@@ -13,14 +13,14 @@
  */
 
 import * as runtime from '../runtime';
-import type { PaginatedPayoutDto, PayoutDto, SortOrderEnum } from '../models';
+import type { PaginatedPayoutDto, PayoutDto } from '../models';
 
 export interface PayoutsApiFindAllRequest {
 	page?: number;
+	skip?: number;
 	take?: number;
-	sortOrder?: SortOrderEnum;
+	sort?: Array<string>;
 	filter?: object;
-	orderBy?: string;
 }
 
 export interface PayoutsApiFindOneRequest {
@@ -117,20 +117,20 @@ export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
 			queryParameters['page'] = requestParameters.page;
 		}
 
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
 		if (requestParameters.take !== undefined) {
 			queryParameters['take'] = requestParameters.take;
 		}
 
-		if (requestParameters.sortOrder !== undefined) {
-			queryParameters['sortOrder'] = requestParameters.sortOrder;
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
 		}
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		if (requestParameters.orderBy !== undefined) {
-			queryParameters['orderBy'] = requestParameters.orderBy;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
