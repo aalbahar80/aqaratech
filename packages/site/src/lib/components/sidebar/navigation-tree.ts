@@ -15,7 +15,7 @@ import { LOGOUT } from '$lib/constants/routes';
 import { settings } from '$lib/utils/route-helpers';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
-	const organizationRoute = `organizations/${user.role.organizationId}`;
+	const organizationRoute = `/organizations/${user.role.organizationId}`;
 
 	const tree: NavigationItem[] = [
 		{
@@ -61,24 +61,24 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 
 		tree.splice(0, 0, {
 			name: 'Financials',
-			href: `/${portfolioRoute}/${user.role.portfolioId}/financials/summary/`,
+			href: `${portfolioRoute}/financials/summary/`,
 			icon: HeroiconsOutlineDocumentReport,
 			children: [
 				{
 					name: 'Summary',
-					href: `${portfolioRoute}/${user.role.portfolioId}/financials/summary/`,
+					href: `${portfolioRoute}/financials/summary/`,
 				},
 				{
 					name: 'Income',
-					href: `/${portfolioRoute}/${user.role.portfolioId}/financials/income/`,
+					href: `${portfolioRoute}/financials/income/`,
 				},
 				{
 					name: 'Expenses',
-					href: `/${portfolioRoute}/${user.role.portfolioId}/financials/expenses/`,
+					href: `${portfolioRoute}/financials/expenses/`,
 				},
 				{
 					name: 'Payouts',
-					href: `/${portfolioRoute}/${user.role.portfolioId}/financials/payouts/table/`,
+					href: `${portfolioRoute}/financials/payouts/table/`,
 				},
 			],
 		});
