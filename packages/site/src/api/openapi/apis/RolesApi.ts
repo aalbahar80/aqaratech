@@ -34,10 +34,12 @@ export interface RolesApiCreateTenantRoleRequest {
 
 export interface RolesApiRemoveRequest {
 	roleId: string;
+	organizationId: string;
 }
 
 export interface RolesApiSendInviteRequest {
 	roleId: string;
+	organizationId: string;
 }
 
 /**
@@ -398,16 +400,31 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 			);
 		}
 
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling remove.',
+			);
+		}
+
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/roles/{roleId}`.replace(
-					`{${'roleId'}}`,
-					encodeURIComponent(String(requestParameters.roleId)),
-				),
+				path: `/organizations/{organizationId}/roles/{roleId}`
+					.replace(
+						`{${'roleId'}}`,
+						encodeURIComponent(String(requestParameters.roleId)),
+					)
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					),
 				method: 'DELETE',
 				headers: headerParameters,
 				query: queryParameters,
@@ -448,16 +465,31 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 			);
 		}
 
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling sendInvite.',
+			);
+		}
+
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/roles/{roleId}/send-invite`.replace(
-					`{${'roleId'}}`,
-					encodeURIComponent(String(requestParameters.roleId)),
-				),
+				path: `/organizations/{organizationId}/roles/{roleId}/send-invite`
+					.replace(
+						`{${'roleId'}}`,
+						encodeURIComponent(String(requestParameters.roleId)),
+					)
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					),
 				method: 'POST',
 				headers: headerParameters,
 				query: queryParameters,

@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { roleCreateSchema } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -76,12 +76,14 @@ export class RolesController {
 	}
 
 	@CheckAbilities({ action: Action.Delete, subject: 'Role', useParams: true })
+	@ApiParam({ name: 'organizationId', required: true, type: String })
 	@Delete('roles/:roleId')
 	remove(@Param('roleId') id: string): Promise<string> {
 		return this.rolesService.remove(id);
 	}
 
 	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
+	@ApiParam({ name: 'organizationId', required: true, type: String })
 	@Post('roles/:roleId/send-invite')
 	sendInvite(@User() user: IUser, @Param('roleId') id: string) {
 		this.eventEmitter.emit(
