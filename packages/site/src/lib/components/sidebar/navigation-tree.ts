@@ -15,15 +15,17 @@ import { LOGOUT } from '$lib/constants/routes';
 import { settings } from '$lib/utils/route-helpers';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
+	const organizationRoute = `organizations/${user.role.organizationId}`;
+
 	const tree: NavigationItem[] = [
 		{
 			name: 'Properties',
-			href: '/properties/',
+			href: `${organizationRoute}/properties`,
 			icon: HeroiconsOutlineHome,
 		},
 		{
 			name: 'Leases',
-			href: '/leases/',
+			href: `${organizationRoute}/leases`,
 			icon: HeroiconsOutlineDocumentText,
 		},
 		{
@@ -42,7 +44,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 	if (user.role?.roleType === 'ORGADMIN') {
 		tree.splice(0, 0, {
 			name: 'Portfolios',
-			href: `/portfolios`,
+			href: `${organizationRoute}/portfolios`,
 			icon: HeroiconsOutlineDocumentReport,
 		});
 
@@ -55,26 +57,28 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 	}
 
 	if (user.role?.roleType === 'PORTFOLIO' && user.role.portfolioId) {
+		const portfolioRoute = `${organizationRoute}/portfolios/${user.role.portfolioId}`;
+
 		tree.splice(0, 0, {
 			name: 'Financials',
-			href: `/portfolios/${user.role.portfolioId}/financials/summary/`,
+			href: `/${portfolioRoute}/${user.role.portfolioId}/financials/summary/`,
 			icon: HeroiconsOutlineDocumentReport,
 			children: [
 				{
 					name: 'Summary',
-					href: `/portfolios/${user.role.portfolioId}/financials/summary/`,
+					href: `${portfolioRoute}/${user.role.portfolioId}/financials/summary/`,
 				},
 				{
 					name: 'Income',
-					href: `/portfolios/${user.role.portfolioId}/financials/income/`,
+					href: `/${portfolioRoute}/${user.role.portfolioId}/financials/income/`,
 				},
 				{
 					name: 'Expenses',
-					href: `/portfolios/${user.role.portfolioId}/financials/expenses/`,
+					href: `/${portfolioRoute}/${user.role.portfolioId}/financials/expenses/`,
 				},
 				{
 					name: 'Payouts',
-					href: `/portfolios/${user.role.portfolioId}/financials/payouts/table/`,
+					href: `/${portfolioRoute}/${user.role.portfolioId}/financials/payouts/table/`,
 				},
 			],
 		});
