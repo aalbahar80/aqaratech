@@ -185,70 +185,33 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: start
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: end
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: paidStatus
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/PaidStatusEnum'
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: portfolioId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
           schema:
             type: string
+        - required: true
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: ''
@@ -453,65 +416,28 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
+        - required: true
+          name: page
           in: query
           schema:
-            minimum: 1
-            default: 1
             type: number
-        - name: take
-          required: false
+        - required: true
+          name: skip
           in: query
           schema:
-            minimum: 1
-            default: 20
             type: number
-        - name: sortOrder
-          required: false
+        - required: true
+          name: take
           in: query
           schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
+            type: number
+        - required: true
+          name: sort
           in: query
           schema:
-            type: object
-        - name: start
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: end
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: paidStatus
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/PaidStatusEnum'
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: portfolioId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: ''
@@ -763,65 +689,28 @@ paths:
           in: path
           schema:
             type: string
-        - name: page
-          required: false
+        - required: true
+          name: page
           in: query
           schema:
-            minimum: 1
-            default: 1
             type: number
-        - name: take
-          required: false
+        - required: true
+          name: skip
           in: query
           schema:
-            minimum: 1
-            default: 20
             type: number
-        - name: sortOrder
-          required: false
+        - required: true
+          name: take
           in: query
           schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
+            type: number
+        - required: true
+          name: sort
           in: query
           schema:
-            type: object
-        - name: start
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: end
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: paidStatus
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/PaidStatusEnum'
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: portfolioId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: ''
@@ -1026,40 +915,33 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
           schema:
             type: string
+        - required: true
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: true
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: ''
@@ -1300,35 +1182,28 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
+        - required: true
+          name: page
           in: query
           schema:
-            minimum: 1
-            default: 1
             type: number
-        - name: take
-          required: false
+        - required: true
+          name: skip
           in: query
           schema:
-            minimum: 1
-            default: 20
             type: number
-        - name: sortOrder
-          required: false
+        - required: true
+          name: take
           in: query
           schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
+            type: number
+        - required: true
+          name: sort
           in: query
           schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: ''
@@ -2922,12 +2797,6 @@ components:
         - isPaid
         - memo
         - mfPaymentId
-    PaidStatusEnum:
-      type: string
-      enum:
-        - all
-        - paid
-        - unpaid
     RoleTypeEnum:
       type: string
       enum:

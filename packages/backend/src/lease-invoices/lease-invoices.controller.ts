@@ -14,7 +14,10 @@ import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
-import { QueryParser } from 'src/decorators/query-options.decorator';
+import {
+	ApiQueryOptions,
+	QueryParser,
+} from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
@@ -37,6 +40,7 @@ export class LeaseInvoicesController {
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(LeaseInvoiceDto)
 	findAll(
 		@User() user: IUser,

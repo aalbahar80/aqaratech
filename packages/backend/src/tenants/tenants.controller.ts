@@ -17,7 +17,10 @@ import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
-import { QueryParser } from 'src/decorators/query-options.decorator';
+import {
+	ApiQueryOptions,
+	QueryParser,
+} from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
@@ -100,6 +103,7 @@ export class TenantsController {
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'LeaseInvoice' },
 	)
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(LeaseInvoiceDto)
 	findInvoices(
 		@User() user: IUser,

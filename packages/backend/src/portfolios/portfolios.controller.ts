@@ -111,6 +111,7 @@ export class PortfoliosController {
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'Property' },
 	)
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(PropertyDto)
 	findProperties(
 		@User() user: IUser,

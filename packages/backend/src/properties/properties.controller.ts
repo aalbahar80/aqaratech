@@ -47,6 +47,7 @@ export class PropertiesController {
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(PropertyDto)
 	findAll(
 		@User() user: IUser,
