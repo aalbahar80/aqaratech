@@ -2,12 +2,8 @@ import { createApi } from '$api';
 import { startOfMonthN } from '@self/utils';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ fetch, params, parent }) => {
-	const propertyId = params.id;
-
-	const role = (await parent()).user!.role!;
-
-	const { organizationId, portfolioId } = role;
+export const load: PageLoad = async ({ fetch, params }) => {
+	const { organizationId, portfolioId, propertyId } = params;
 
 	const api = createApi(fetch);
 
