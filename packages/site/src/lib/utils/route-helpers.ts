@@ -43,7 +43,18 @@ type RouteArgs =
 	| { organizationId: string; portfolioId: string }
 	| { params: Record<string, string> };
 
-export const portfolioRoute = (routeArgs: RouteArgs) => {
+type Output =
+	| {
+			page: 'id' | 'edit' | string;
+			entity: Entity;
+			id: string;
+	  }
+	| {
+			page: 'new';
+			entity: Entity;
+	  };
+
+export const portfolioRoute = (routeArgs: RouteArgs): string => {
 	let organizationId: string;
 	let portfolioId: string;
 	if ('organizationId' in routeArgs) {
@@ -54,4 +65,20 @@ export const portfolioRoute = (routeArgs: RouteArgs) => {
 		portfolioId = routeArgs.params.portfolioId!;
 	}
 	return `/organizations/${organizationId}/portfolios/${portfolioId}`;
+};
+
+export const getRoute = (routeArgs: RouteArgs, output: Output) => {
+	const portfolio = portfolioRoute(routeArgs);
+
+	const base = `${portfolio}/${entitiesMap[output.entity].urlName}`;
+
+	if (output.page === 'new') {
+		return base + `/new`;
+	} else if (output.page === 'id') {
+		return base + `/${output.id}`;
+	} else if (output.page === 'edit') {
+		return base + `/${output.id}`;
+	} else {
+		return base + `/${output.id}/${output.page}`;
+	}
 };

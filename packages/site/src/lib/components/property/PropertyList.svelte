@@ -4,7 +4,7 @@
 	import PropertyCard from '$components/property/PropertyCard.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { portfolioRoute } from '$lib/utils/route-helpers';
+	import { getRoute } from '$lib/utils/route-helpers';
 
 	export let properties: PaginatedPropertyDto;
 </script>
@@ -12,7 +12,10 @@
 <StackedList
 	entity="property"
 	count={properties.results.length}
-	formUrl={`${portfolioRoute({ params: $page.params })}/properties/new`}
+	formUrl={getRoute(
+		{ params: $page.params },
+		{ entity: 'portfolio', page: 'new', id: 'd' },
+	)}
 >
 	{#each properties.results as property, idx (property.id)}
 		<li>

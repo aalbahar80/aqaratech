@@ -2,6 +2,7 @@
 	import type { BreadcrumbsDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
+	import { getRoute } from '$lib/utils/route-helpers';
 	import { entitiesMap, isEntity } from '@self/utils';
 	import * as R from 'remeda';
 
@@ -31,7 +32,10 @@
 		<ol class="flex items-center space-x-4">
 			{#each truthyCrumbs as [title, crumb], idx}
 				{#if isEntity(title)}
-					{@const href = `/${entitiesMap[title].urlName}/${crumb.id}`}
+					{@const href = getRoute(
+						{ params: $page.params },
+						{ entity: title, id: crumb.id, page: 'id' },
+					)}
 					{@const currentPage = $page.url.pathname === href}
 					{#if crumb}
 						<li>

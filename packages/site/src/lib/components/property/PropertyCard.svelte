@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PropertyDto } from '$api/openapi';
 	import { page } from '$app/stores';
-	import { portfolioRoute } from '$lib/utils/route-helpers';
+	import { getRoute } from '$lib/utils/route-helpers';
 	import { LocationMarker } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -10,7 +10,10 @@
 </script>
 
 <a
-	href={`${portfolioRoute({ params: $page.params })}/properties/${property.id}`}
+	href={getRoute(
+		{ params: $page.params },
+		{ entity: 'property', page: 'id', id: property.id },
+	)}
 	class="block hover:bg-gray-50"
 >
 	<div class="px-4 py-4 sm:px-6">
