@@ -12,7 +12,7 @@
 	"scripts": {
 		"build": "rimraf dist && nest build",
 		"start": "nest start",
-		"dev": "nest start --watch --debug",
+		"dev": "nest start --watch --debug --preserveWatchOutput",
 		"seed": "./seed/create-test-db.sh",
 		"start:debug": "nest start --debug --watch",
 		"start:dev": "nest start --watch",
