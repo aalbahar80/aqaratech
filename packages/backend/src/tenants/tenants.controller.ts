@@ -15,12 +15,13 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import { QueryParser } from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 
 import { IUser } from 'src/interfaces/user.interface';
-import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
@@ -102,13 +103,13 @@ export class TenantsController {
 	@ApiPaginatedResponse(LeaseInvoiceDto)
 	findInvoices(
 		@User() user: IUser,
-		@Query() pageOptionsDto: LeaseInvoiceOptionsDto,
 		@Param('id') id: string,
+		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {
 		const where: Prisma.LeaseInvoiceWhereInput = {
 			lease: { tenantId: { equals: id } },
 		};
-		return this.leaseInvoicesService.findAll({ user, pageOptionsDto, where });
+		return this.leaseInvoicesService.findAll({ user, queryOptions, where });
 	}
 
 	@Get(':id/roles')

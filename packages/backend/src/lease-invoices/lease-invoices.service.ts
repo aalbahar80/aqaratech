@@ -8,11 +8,11 @@ import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
 import { InvoiceSendEvent } from 'src/events/invoice-send.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
-import { LeaseInvoiceOptionsDto } from 'src/lease-invoices/dto/lease-invoice-options.dto';
 import {
 	CreateLeaseInvoiceDto,
 	LeaseInvoiceDto,
@@ -50,33 +50,31 @@ export class LeaseInvoicesService {
 	}
 
 	async findAll({
-		pageOptionsDto,
 		user,
+		queryOptions,
 		where,
 	}: {
-		pageOptionsDto: LeaseInvoiceOptionsDto;
 		user: IUser;
+		queryOptions: QueryOptionsDto;
 		where?: Prisma.LeaseInvoiceWhereInput;
 	}): Promise<WithCount<LeaseInvoiceDto>> {
-		const { page, take, sortOrder, orderBy } = pageOptionsDto;
+		const { take, skip, sort } = queryOptions;
 
 		const filter: Prisma.LeaseInvoiceWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).LeaseInvoice,
-				...this.parseFilter({ pageOptionsDto }),
 				...(where ? [where] : []), // combine with other filters/remove?
 			],
 		};
 
-		const sort = orderBy
-			? { [orderBy]: sortOrder }
-			: { postAt: 'desc' as Prisma.SortOrder };
+		// Default sort
+		const orderBy = sort.length ? sort : ({ postAt: 'desc' } as const);
 
 		const [data, total] = await Promise.all([
 			this.prisma.leaseInvoice.findMany({
 				take,
-				skip: (page - 1) * take,
-				orderBy: sort,
+				skip,
+				orderBy,
 				where: filter,
 				include: { lease: crumbs.lease },
 			}),
@@ -196,21 +194,6 @@ export class LeaseInvoicesService {
 
 	// ::: HELPERS :::
 
-	parseFilter({
-		pageOptionsDto,
-	}: {
-		pageOptionsDto: LeaseInvoiceOptionsDto;
-	}): Prisma.LeaseInvoiceWhereInput[] {
-		const { start, end, paidStatus } = pageOptionsDto;
-		return [
-			this.parseLocationFilter({ filter: pageOptionsDto }),
-			{
-				postAt: { gte: start, lte: end },
-				...this.parseIsPaidFilter({ paidStatus }),
-			},
-		];
-	}
-
 	parseLocationFilter({
 		filter,
 	}: {
@@ -232,7 +215,7 @@ export class LeaseInvoicesService {
 	parseIsPaidFilter({
 		paidStatus,
 	}: {
-		paidStatus: LeaseInvoiceOptionsDto['paidStatus'];
+		paidStatus: PaidStatus;
 	}): Prisma.LeaseInvoiceWhereInput {
 		if (paidStatus === PaidStatus.PAID) {
 			return { isPaid: true };
