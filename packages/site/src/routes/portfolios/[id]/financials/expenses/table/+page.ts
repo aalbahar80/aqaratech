@@ -9,13 +9,9 @@ export const load: PageLoad = async ({
 }) => {
 	const api = createApi(fetch);
 
-	const { page, take, sortOrder, orderBy } = parseParams(searchParams);
-	const expenses = await api.expenses.findAll({
-		page,
-		take,
-		sortOrder,
-		orderBy,
-		portfolioId: params.id,
+	const expenses = await api.portfolios.findAllExpenses({
+		id: params.id,
+		...parseParams(searchParams),
 	});
 
 	return { expenses };
