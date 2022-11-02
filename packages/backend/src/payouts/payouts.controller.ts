@@ -1,10 +1,14 @@
-import { Controller, Delete, Get, Param, Query } from '@nestjs/common';
+import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import {
+	ApiQueryOptions,
+	QueryParser,
+} from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
@@ -21,12 +25,13 @@ export class PayoutsController {
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(PayoutDto)
 	findAll(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<PayoutDto>> {
-		return this.payoutsService.findAll({ pageOptionsDto, user });
+		return this.payoutsService.findAll({ queryOptions, user });
 	}
 
 	@Get(':id')

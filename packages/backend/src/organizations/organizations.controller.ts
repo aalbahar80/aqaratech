@@ -16,9 +16,13 @@ import { SkipAbilityCheck, SkipRoleGuard } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import {
+	ApiQueryOptions,
+	QueryParser,
+} from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
@@ -123,17 +127,18 @@ export class OrganizationsController {
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'Role' },
 	)
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(RoleDto)
 	findRoles(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 		@Param('id') id: string,
 	): Promise<WithCount<RoleDto>> {
 		const where: Prisma.RoleWhereInput = {
 			organizationId: id,
 			roleType: 'ORGADMIN',
 		};
-		return this.rolesService.findAll({ user, pageOptionsDto, where });
+		return this.rolesService.findAll({ user, queryOptions, where });
 	}
 
 	@Get(':organizationId/search')

@@ -2,8 +2,8 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Action } from 'src/casl/action.enum';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import {
 	RemoveDocumentsEvent,
 	UpdateIndexEvent,
@@ -50,19 +50,19 @@ export class PortfoliosService {
 	}
 
 	async findAll({
-		pageOptionsDto,
+		queryOptions,
 		user,
 	}: {
-		pageOptionsDto: PageOptionsDto;
+		queryOptions: QueryOptionsDto;
 		user: IUser;
 	}): Promise<WithCount<PortfolioDto>> {
-		const { page, take } = pageOptionsDto;
+		const { skip, take, sort } = queryOptions;
 
 		const [results, total] = await Promise.all([
 			this.prisma.portfolio.findMany({
 				take,
-				skip: (page - 1) * take,
-				orderBy: { createdAt: 'desc' },
+				skip,
+				orderBy: sort,
 				where: accessibleBy(user.ability, Action.Read).Portfolio,
 			}),
 			this.prisma.portfolio.count({

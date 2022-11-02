@@ -1,19 +1,10 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Patch,
-	Query,
-} from '@nestjs/common';
-import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { leaseUpdateSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -49,16 +40,12 @@ export class LeasesController {
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
 	@ApiPaginatedResponse(LeaseDto)
-	@ApiQuery({
-		name: 'orderBy',
-		enum: Prisma.LeaseScalarFieldEnum,
-		required: false,
-	})
+	@ApiQueryOptions()
 	findAll(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseDto>> {
-		return this.leasesService.findAll({ pageOptionsDto, user });
+		return this.leasesService.findAll({ queryOptions, user });
 	}
 
 	@Get(':id')

@@ -6,35 +6,33 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
+        - required: false
+          name: page
           in: query
           schema:
-            minimum: 1
-            default: 1
             type: number
-        - name: take
-          required: false
+        - required: false
+          name: skip
           in: query
           schema:
-            minimum: 1
-            default: 20
             type: number
-        - name: sortOrder
-          required: false
+        - required: false
+          name: take
           in: query
           schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
           in: query
           schema:
             type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
       responses:
         '200':
           description: ''
@@ -126,40 +124,38 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
           schema:
             type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -242,40 +238,38 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
           schema:
             type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -507,50 +501,33 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
+        - required: false
+          name: page
           in: query
           schema:
-            minimum: 1
-            default: 1
             type: number
-        - name: take
-          required: false
+        - required: false
+          name: skip
           in: query
           schema:
-            minimum: 1
-            default: 20
             type: number
-        - name: sortOrder
-          required: false
+        - required: false
+          name: take
           in: query
           schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
           in: query
           schema:
             type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            enum:
-              - id
-              - tenantId
-              - unitId
-              - createdAt
-              - updatedAt
-              - start
-              - end
-              - monthlyRent
-              - deposit
-              - canPay
-              - notify
-              - license
-              - organizationId
-              - portfolioId
-            type: string
       responses:
         '200':
           description: ''
@@ -699,35 +676,33 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
+        - required: false
+          name: page
           in: query
           schema:
-            minimum: 1
-            default: 1
             type: number
-        - name: take
-          required: false
+        - required: false
+          name: skip
           in: query
           schema:
-            minimum: 1
-            default: 20
             type: number
-        - name: sortOrder
-          required: false
+        - required: false
+          name: take
           in: query
           schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
           in: query
           schema:
             type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
       responses:
         '200':
           description: ''
@@ -819,40 +794,38 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
           schema:
             type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -992,40 +965,38 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
           schema:
             type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1572,40 +1543,38 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
           schema:
             type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1631,35 +1600,33 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
+        - required: false
+          name: page
           in: query
           schema:
-            minimum: 1
-            default: 1
             type: number
-        - name: take
-          required: false
+        - required: false
+          name: skip
           in: query
           schema:
-            minimum: 1
-            default: 20
             type: number
-        - name: sortOrder
-          required: false
+        - required: false
+          name: take
           in: query
           schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
           in: query
           schema:
             type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
       responses:
         '200':
           description: ''
@@ -2022,40 +1989,38 @@ paths:
       summary: ''
       description: ''
       parameters:
-        - name: page
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 1
-            type: number
-        - name: take
-          required: false
-          in: query
-          schema:
-            minimum: 1
-            default: 20
-            type: number
-        - name: sortOrder
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/SortOrderEnum'
-        - name: filter
-          required: false
-          in: query
-          schema:
-            type: object
-        - name: orderBy
-          required: false
-          in: query
-          schema:
-            type: string
         - name: id
           required: true
           in: path
           schema:
             type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -2629,11 +2594,6 @@ components:
         - passportNum
         - nationality
         - residencyNum
-    SortOrderEnum:
-      type: string
-      enum:
-        - asc
-        - desc
     UpdateTenantDto:
       type: object
       properties:

@@ -3,8 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { CreateManyLeaseInvoicesDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import {
@@ -36,31 +36,30 @@ export class LeasesService {
 	}
 
 	async findAll({
-		pageOptionsDto,
+		queryOptions,
 		user,
 		where,
 	}: {
-		pageOptionsDto: PageOptionsDto;
+		queryOptions: QueryOptionsDto;
 		user: IUser;
 		where?: Prisma.LeaseWhereInput;
 	}): Promise<WithCount<LeaseDto>> {
-		const { page, take, filter: qfilter } = pageOptionsDto;
+		const { page, take, sort } = queryOptions;
 
 		const filter: Prisma.LeaseWhereInput = {
-			AND: [accessibleBy(user.ability).Lease, ...(where ? [where] : [])],
-			...qfilter,
+			AND: [
+				accessibleBy(user.ability).Lease,
+				...(where ? [where] : []),
+				queryOptions.filter,
+			],
 		};
-
-		const orderBy = pageOptionsDto.orderBy
-			? { [pageOptionsDto.orderBy]: pageOptionsDto.sortOrder }
-			: { createdAt: 'desc' as Prisma.SortOrder };
 
 		const [data, total] = await Promise.all([
 			this.prisma.lease.findMany({
 				take,
 				skip: (page - 1) * take,
 				where: filter,
-				orderBy,
+				orderBy: sort,
 				include: {
 					tenant: crumbs.tenant,
 					unit: crumbs.unit,

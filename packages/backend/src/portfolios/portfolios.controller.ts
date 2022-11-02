@@ -1,12 +1,4 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Patch,
-	Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { portfolioUpdateSchema } from '@self/utils';
@@ -15,7 +7,6 @@ import { BalanceDto } from 'src/aggregate/dto/balance.dto';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -61,12 +52,13 @@ export class PortfoliosController {
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(PortfolioDto)
 	findAll(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<PortfolioDto>> {
-		return this.portfoliosService.findAll({ pageOptionsDto, user });
+		return this.portfoliosService.findAll({ queryOptions, user });
 	}
 
 	@Get(':id')
@@ -99,17 +91,18 @@ export class PortfoliosController {
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'Role' },
 	)
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(RoleDto)
 	findRoles(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 		@Param('id') id: string,
 	): Promise<WithCount<RoleDto>> {
 		const where: Prisma.RoleWhereInput = {
 			portfolioId: id,
 			roleType: 'PORTFOLIO',
 		};
-		return this.rolesService.findAll({ user, pageOptionsDto, where });
+		return this.rolesService.findAll({ user, queryOptions, where });
 	}
 
 	@Get(':id/properties')
@@ -151,14 +144,15 @@ export class PortfoliosController {
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'Payout' },
 	)
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(PayoutDto)
 	findPayouts(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 		@Param('id') id: string,
 	): Promise<WithCount<PayoutDto>> {
 		const where: Prisma.PayoutWhereInput = { portfolioId: { equals: id } };
-		return this.payoutsService.findAll({ user, pageOptionsDto, where });
+		return this.payoutsService.findAll({ user, queryOptions, where });
 	}
 
 	@Get(':id/balance')

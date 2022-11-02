@@ -4,8 +4,8 @@ import { ConfigService } from '@nestjs/config';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma, Role } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
@@ -123,20 +123,21 @@ export class RolesService {
 	}
 
 	async findAll({
-		pageOptionsDto,
+		queryOptions,
 		user,
 		where,
 	}: {
-		pageOptionsDto: PageOptionsDto;
+		queryOptions: QueryOptionsDto;
 		user: IUser;
 		where?: Prisma.RoleWhereInput;
 	}): Promise<WithCount<RoleDto>> {
-		const { page, take } = pageOptionsDto;
+		const { skip, take, sort } = queryOptions;
 
 		const filter: Prisma.RoleWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Role,
 				...(where ? [where] : []),
+				queryOptions.filter,
 			],
 		};
 
@@ -144,8 +145,8 @@ export class RolesService {
 		const [data, total] = await Promise.all([
 			this.prisma.role.findMany({
 				take,
-				skip: (page - 1) * take,
-				orderBy: { createdAt: 'desc' },
+				skip,
+				orderBy: sort,
 				where: filter,
 				include: { user: { select: { email: true } } },
 			}),

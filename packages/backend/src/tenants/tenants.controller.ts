@@ -1,19 +1,10 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Patch,
-	Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { tenantUpdateSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
-import { PageOptionsDto } from 'src/common/dto/page-options.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -51,11 +42,12 @@ export class TenantsController {
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
 	@ApiPaginatedResponse(TenantDto)
+	@ApiQueryOptions()
 	findAll(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<TenantDto>> {
-		return this.tenantsService.findAll({ pageOptionsDto, user });
+		return this.tenantsService.findAll({ queryOptions, user });
 	}
 
 	@Get(':id')
@@ -88,14 +80,15 @@ export class TenantsController {
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'Lease' },
 	)
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(LeaseDto)
 	findLeases(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto, // TODO change to leasepageoptionsdto?
+		@QueryParser() queryOptions: QueryOptionsDto, // TODO change to leasequeryOptions?
 		@Param('id') id: string,
 	): Promise<WithCount<LeaseDto>> {
 		const where: Prisma.LeaseWhereInput = { tenantId: { equals: id } };
-		return this.leasesService.findAll({ user, pageOptionsDto, where });
+		return this.leasesService.findAll({ user, queryOptions, where });
 	}
 
 	@Get(':id/invoices')
@@ -124,13 +117,14 @@ export class TenantsController {
 		{ action: Action.Read, subject: SubjectType },
 		{ action: Action.Read, subject: 'Role' },
 	)
+	@ApiQueryOptions()
 	@ApiPaginatedResponse(RoleDto)
 	findRoles(
 		@User() user: IUser,
-		@Query() pageOptionsDto: PageOptionsDto,
+		@QueryParser() queryOptions: QueryOptionsDto,
 		@Param('id') id: string,
 	): Promise<WithCount<RoleDto>> {
 		const where: Prisma.RoleWhereInput = { tenantId: id, roleType: 'TENANT' };
-		return this.rolesService.findAll({ user, pageOptionsDto, where });
+		return this.rolesService.findAll({ user, queryOptions, where });
 	}
 }
