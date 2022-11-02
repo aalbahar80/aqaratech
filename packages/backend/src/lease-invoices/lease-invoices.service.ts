@@ -64,6 +64,7 @@ export class LeaseInvoicesService {
 			AND: [
 				accessibleBy(user.ability, Action.Read).LeaseInvoice,
 				...(where ? [where] : []), // combine with other filters/remove?
+				queryOptions.filter,
 			],
 		};
 

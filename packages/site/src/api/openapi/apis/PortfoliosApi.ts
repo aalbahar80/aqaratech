@@ -17,6 +17,7 @@ import type {
 	BalanceDto,
 	GroupByMonthDto,
 	IncomeByMonthDto,
+	PaginatedExpenseDto,
 	PaginatedLeaseInvoiceDto,
 	PaginatedPayoutDto,
 	PaginatedPortfolioDto,
@@ -36,12 +37,22 @@ export interface PortfoliosApiFindAllRequest {
 	orderBy?: string;
 }
 
+export interface PortfoliosApiFindAllExpensesRequest {
+	id: string;
+	page?: number;
+	skip?: number;
+	take?: number;
+	sort?: Array<string>;
+	filter?: object;
+}
+
 export interface PortfoliosApiFindAllLeaseInvoicesRequest {
 	id: string;
 	page?: number;
 	skip?: number;
 	take?: number;
 	sort?: Array<string>;
+	filter?: object;
 }
 
 export interface PortfoliosApiFindOneRequest {
@@ -63,6 +74,7 @@ export interface PortfoliosApiFindPropertiesRequest {
 	skip?: number;
 	take?: number;
 	sort?: Array<string>;
+	filter?: object;
 }
 
 export interface PortfoliosApiFindRolesRequest {
@@ -80,6 +92,7 @@ export interface PortfoliosApiFindUnitsRequest {
 	skip?: number;
 	take?: number;
 	sort?: Array<string>;
+	filter?: object;
 }
 
 export interface PortfoliosApiGetBalanceRequest {
@@ -139,6 +152,26 @@ export interface PortfoliosApiInterface {
 		requestParameters: PortfoliosApiFindAllRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PaginatedPortfolioDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof PortfoliosApiInterface
+	 */
+	findAllExpensesRaw(
+		requestParameters: PortfoliosApiFindAllExpensesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PaginatedExpenseDto>>;
+
+	/**
+	 *
+	 *
+	 */
+	findAllExpenses(
+		requestParameters: PortfoliosApiFindAllExpensesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PaginatedExpenseDto>;
 
 	/**
 	 *
@@ -429,6 +462,76 @@ export class PortfoliosApi
 	 *
 	 *
 	 */
+	async findAllExpensesRaw(
+		requestParameters: PortfoliosApiFindAllExpensesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PaginatedExpenseDto>> {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling findAllExpenses.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/portfolios/{id}/expenses`.replace(
+					`{${'id'}}`,
+					encodeURIComponent(String(requestParameters.id)),
+				),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findAllExpenses(
+		requestParameters: PortfoliosApiFindAllExpensesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PaginatedExpenseDto> {
+		const response = await this.findAllExpensesRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
 	async findAllLeaseInvoicesRaw(
 		requestParameters: PortfoliosApiFindAllLeaseInvoicesRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
@@ -456,6 +559,10 @@ export class PortfoliosApi
 
 		if (requestParameters.sort) {
 			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -641,6 +748,10 @@ export class PortfoliosApi
 			queryParameters['sort'] = requestParameters.sort;
 		}
 
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
+		}
+
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
@@ -772,6 +883,10 @@ export class PortfoliosApi
 
 		if (requestParameters.sort) {
 			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

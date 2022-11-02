@@ -36,6 +36,7 @@ export interface LeasesApiFindInvoicesRequest {
 	skip?: number;
 	take?: number;
 	sort?: Array<string>;
+	filter?: object;
 }
 
 export interface LeasesApiFindOneRequest {
@@ -251,6 +252,10 @@ export class LeasesApi extends runtime.BaseAPI implements LeasesApiInterface {
 
 		if (requestParameters.sort) {
 			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

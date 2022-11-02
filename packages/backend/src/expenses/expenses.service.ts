@@ -6,7 +6,6 @@ import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
-import { parseLocationFilter } from 'src/common/parse-location-filter';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import {
 	CreateExpenseDto,
@@ -45,9 +44,11 @@ export class ExpensesService {
 	}
 
 	async findAll({
+		portfolioId,
 		queryOptions,
 		user,
 	}: {
+		portfolioId: string;
 		queryOptions: QueryOptionsDto;
 		user: IUser;
 	}): Promise<WithCount<ExpenseDto>> {
@@ -55,11 +56,9 @@ export class ExpensesService {
 
 		const filter: Prisma.ExpenseWhereInput = {
 			AND: [
+				{ portfolioId },
 				accessibleBy(user.ability, Action.Read).Expense,
-				// @ts-expect-error temp
-				parseLocationFilter({ filter: pageOptionsDto, entity: 'Expense' }),
-				// @ts-expect-error temp
-				{ postAt: { gte: start, lte: end } },
+				queryOptions.filter,
 			],
 		};
 

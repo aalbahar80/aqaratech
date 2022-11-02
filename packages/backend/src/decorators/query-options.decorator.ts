@@ -18,21 +18,25 @@ export const QueryParser = createParamDecorator(
 	(options: QueryOptionsDecoratorConfig | undefined, ctx: ExecutionContext) => {
 		const request = ctx.switchToHttp().getRequest<Request>();
 
-		// parse with prisma-utils
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const { filter, ...parsed } = new RequestParserService().parseQuery(
-			request.query,
-			{
-				limitParamName: 'take',
-				...options?.parserOptions,
-			},
-		);
+		// Parse with prisma-utils
+		const parsed = new RequestParserService().parseQuery(request.query, {
+			limitParamName: 'take',
+			...options?.parserOptions,
+		});
 
-		// validate output
-		const output = new ZodValidationPipe(queryOptionsParsedSchema).transform(
-			parsed,
-			{ type: 'custom' },
-		);
+		// Validate output with zod
+
+		// Allow to filter by specific fields only
+		const keys = options?.filterOptions?.keys;
+		const filterKeySchema = keys ? z.enum(keys) : z.never();
+
+		const schema = queryOptionsParsedSchema.extend({
+			filter: z.record(filterKeySchema, z.any()),
+		});
+
+		const output = new ZodValidationPipe(schema).transform(parsed, {
+			type: 'custom',
+		});
 
 		return output;
 	},
@@ -51,5 +55,7 @@ export function ApiQueryOptions() {
 
 interface QueryOptionsDecoratorConfig {
 	parserOptions?: Partial<RequestQueryOptions>;
-	schema?: z.ZodTypeAny;
+	filterOptions?: {
+		keys?: [string, ...string[]];
+	};
 }

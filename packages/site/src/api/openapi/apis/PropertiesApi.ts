@@ -25,6 +25,7 @@ export interface PropertiesApiFindAllRequest {
 	skip?: number;
 	take?: number;
 	sort?: Array<string>;
+	filter?: object;
 }
 
 export interface PropertiesApiFindOneRequest {
@@ -37,6 +38,7 @@ export interface PropertiesApiFindUnitsRequest {
 	skip?: number;
 	take?: number;
 	sort?: Array<string>;
+	filter?: object;
 }
 
 export interface PropertiesApiRemoveRequest {
@@ -189,6 +191,10 @@ export class PropertiesApi
 			queryParameters['sort'] = requestParameters.sort;
 		}
 
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
+		}
+
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
@@ -294,6 +300,10 @@ export class PropertiesApi
 
 		if (requestParameters.sort) {
 			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

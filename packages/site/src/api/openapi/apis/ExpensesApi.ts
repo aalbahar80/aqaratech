@@ -15,17 +15,9 @@
 import * as runtime from '../runtime';
 import type {
 	ExpenseDto,
-	PaginatedExpenseDto,
 	PartialExpenseDto,
 	UpdateExpenseDto,
 } from '../models';
-
-export interface ExpensesApiFindAllRequest {
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-}
 
 export interface ExpensesApiFindOneRequest {
 	id: string;
@@ -47,26 +39,6 @@ export interface ExpensesApiUpdateRequest {
  * @interface ExpensesApiInterface
  */
 export interface ExpensesApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof ExpensesApiInterface
-	 */
-	findAllRaw(
-		requestParameters: ExpensesApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PaginatedExpenseDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	findAll(
-		requestParameters: ExpensesApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PaginatedExpenseDto>;
-
 	/**
 	 *
 	 * @summary
@@ -135,59 +107,6 @@ export class ExpensesApi
 	extends runtime.BaseAPI
 	implements ExpensesApiInterface
 {
-	/**
-	 *
-	 *
-	 */
-	async findAllRaw(
-		requestParameters: ExpensesApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PaginatedExpenseDto>> {
-		const queryParameters: any = {};
-
-		if (requestParameters.page !== undefined) {
-			queryParameters['page'] = requestParameters.page;
-		}
-
-		if (requestParameters.skip !== undefined) {
-			queryParameters['skip'] = requestParameters.skip;
-		}
-
-		if (requestParameters.take !== undefined) {
-			queryParameters['take'] = requestParameters.take;
-		}
-
-		if (requestParameters.sort) {
-			queryParameters['sort'] = requestParameters.sort;
-		}
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		const response = await this.request(
-			{
-				path: `/expenses`,
-				method: 'GET',
-				headers: headerParameters,
-				query: queryParameters,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async findAll(
-		requestParameters: ExpensesApiFindAllRequest = {},
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PaginatedExpenseDto> {
-		const response = await this.findAllRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *

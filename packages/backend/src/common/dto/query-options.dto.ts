@@ -11,7 +11,7 @@ export class QueryOptionsDto implements Omit<ParsedQueryModel, 'filter'> {
 	skip: number;
 	take: number;
 	sort: ParsedQuerySortModel[];
-	// filter: object;
+	filter: object;
 }
 
 /**
@@ -26,5 +26,5 @@ export class QueryOptionsRequestDto
 	skip?: number;
 	take?: number;
 	sort?: string[];
-	// filter: object;
+	filter?: object;
 }

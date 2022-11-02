@@ -37,6 +37,7 @@ export interface TenantsApiFindInvoicesRequest {
 	skip?: number;
 	take?: number;
 	sort?: Array<string>;
+	filter?: object;
 }
 
 export interface TenantsApiFindLeasesRequest {
@@ -310,6 +311,10 @@ export class TenantsApi extends runtime.BaseAPI implements TenantsApiInterface {
 
 		if (requestParameters.sort) {
 			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

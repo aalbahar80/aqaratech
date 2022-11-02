@@ -25,6 +25,8 @@ import {
 } from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
+import { ExpenseDto } from 'src/expenses/dto/expense.dto';
+import { ExpensesService } from 'src/expenses/expenses.service';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -54,6 +56,7 @@ export class PortfoliosController {
 		private readonly aggregateService: AggregateService,
 		private readonly leaseInvoicesService: LeaseInvoicesService,
 		private readonly unitsService: UnitsService,
+		private readonly expensesService: ExpensesService,
 	) {}
 
 	@Get()
@@ -187,6 +190,7 @@ export class PortfoliosController {
 		@Param('id') portfolioId: string,
 		@QueryParser({
 			parserOptions: { orderDefaultValue: 'postAt' },
+			filterOptions: { keys: ['postAt', 'propertyId', 'unitId'] },
 		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {
@@ -194,6 +198,31 @@ export class PortfoliosController {
 			queryOptions,
 			user,
 			where: { portfolioId },
+		});
+	}
+
+	@Get(':id/expenses')
+	@CheckAbilities({
+		action: Action.Read,
+		subject: SubjectType,
+		useParams: true,
+		overrideParams: { portfolioId: 'id' },
+	})
+	@ApiQueryOptions()
+	@ApiPaginatedResponse(ExpenseDto)
+	findAllExpenses(
+		@User() user: IUser,
+		@Param('id') portfolioId: string,
+		@QueryParser({
+			parserOptions: { orderDefaultValue: 'postAt' },
+			filterOptions: { keys: ['postAt', 'propertyId', 'unitId'] },
+		})
+		queryOptions: QueryOptionsDto,
+	): Promise<WithCount<ExpenseDto>> {
+		return this.expensesService.findAll({
+			queryOptions,
+			user,
+			portfolioId,
 		});
 	}
 }

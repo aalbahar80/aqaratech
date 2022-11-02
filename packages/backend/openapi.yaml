@@ -212,6 +212,11 @@ paths:
             type: array
             items:
               type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -664,6 +669,11 @@ paths:
             type: array
             items:
               type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -895,6 +905,11 @@ paths:
             type: array
             items:
               type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -947,6 +962,11 @@ paths:
             type: array
             items:
               type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1078,6 +1098,11 @@ paths:
             type: array
             items:
               type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1095,6 +1120,63 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
+      tags: *ref_7
+      security: *ref_8
+  /portfolios/{id}/expenses:
+    get:
+      operationId: PortfoliosController_findAllExpenses
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedExpenseDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfExpenseDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ExpenseDto'
       tags: *ref_7
       security: *ref_8
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/income:
@@ -1219,6 +1301,11 @@ paths:
             type: array
             items:
               type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1337,6 +1424,11 @@ paths:
             type: array
             items:
               type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1384,6 +1476,11 @@ paths:
             type: array
             items:
               type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1697,74 +1794,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/Occupancy'
       tags: *ref_17
-  /users/me:
-    get:
-      operationId: UsersController_findProfile
-      summary: ''
-      description: ''
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidatedUserDto'
-        '404':
-          description: ''
-      tags:
-        - users
-      security:
-        - accessToken: []
-  /expenses:
-    get:
-      operationId: ExpensesController_findAll
-      summary: ''
-      description: ''
-      parameters:
-        - required: false
-          name: page
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedExpenseDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfExpenseDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/ExpenseDto'
-      tags: &ref_18
-        - expenses
-      security: &ref_19
-        - accessToken: []
   /expenses/{id}:
     get:
       operationId: ExpensesController_findOne
@@ -1783,8 +1812,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_18
-      security: *ref_19
+      tags: &ref_18
+        - expenses
+      security: &ref_19
+        - accessToken: []
     patch:
       operationId: ExpensesController_update
       summary: ''
@@ -1829,6 +1860,25 @@ paths:
                 type: string
       tags: *ref_18
       security: *ref_19
+  /users/me:
+    get:
+      operationId: UsersController_findProfile
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatedUserDto'
+        '404':
+          description: ''
+      tags:
+        - users
+      security:
+        - accessToken: []
   /search:
     post:
       operationId: SearchController_reindexAll
@@ -3244,6 +3294,102 @@ components:
         - leaseInvoices
         - payouts
         - total
+    ExpenseBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
+    ExpenseCategoryDto:
+      type: object
+      properties:
+        id:
+          type: string
+        labelEn:
+          type: string
+        labelAr:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        parentId:
+          type: string
+          nullable: true
+        isGroup:
+          type: boolean
+      required:
+        - id
+        - labelEn
+        - isGroup
+    ExpenseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          type: string
+          readOnly: true
+        updatedAt:
+          type: string
+          readOnly: true
+        postAt:
+          type: string
+        breadcrumbs:
+          $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
+        expenseType:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ExpenseCategoryDto'
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+        amount:
+          type: number
+          minimum: 1
+        memo:
+          type: string
+          nullable: true
+        unitId:
+          type: string
+          nullable: true
+        propertyId:
+          type: string
+          nullable: true
+        maintenanceOrderId:
+          type: string
+          nullable: true
+        categoryId:
+          type: string
+          nullable: true
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - postAt
+        - breadcrumbs
+        - expenseType
+        - organizationId
+        - portfolioId
+        - amount
+        - memo
+        - unitId
+        - propertyId
+        - maintenanceOrderId
+        - categoryId
     GroupByMonthDto:
       type: object
       properties:
@@ -3401,147 +3547,6 @@ components:
       required:
         - date
         - occupiedPct
-    ValidatedUserDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
-        fullName:
-          type: string
-          nullable: true
-        roles:
-          type: array
-          items:
-            title: ValidatedRoleDto
-            allOf:
-              - $ref: '#/components/schemas/RoleDto'
-              - type: object
-                required:
-                  - organization
-                properties:
-                  organization:
-                    type: object
-                    required:
-                      - id
-                      - fullName
-                    properties:
-                      id:
-                        type: string
-                      fullName:
-                        type: string
-                      title:
-                        type: string
-        email:
-          type: string
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - roles
-        - email
-    ExpenseBreadcrumbsDto:
-      type: object
-      properties:
-        portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-      required:
-        - portfolio
-    ExpenseCategoryDto:
-      type: object
-      properties:
-        id:
-          type: string
-        labelEn:
-          type: string
-        labelAr:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        parentId:
-          type: string
-          nullable: true
-        isGroup:
-          type: boolean
-      required:
-        - id
-        - labelEn
-        - isGroup
-    ExpenseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
-        postAt:
-          type: string
-        breadcrumbs:
-          $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
-        expenseType:
-          nullable: true
-          allOf:
-            - $ref: '#/components/schemas/ExpenseCategoryDto'
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        amount:
-          type: number
-          minimum: 1
-        memo:
-          type: string
-          nullable: true
-        unitId:
-          type: string
-          nullable: true
-        propertyId:
-          type: string
-          nullable: true
-        maintenanceOrderId:
-          type: string
-          nullable: true
-        categoryId:
-          type: string
-          nullable: true
-      required:
-        - id
-        - createdAt
-        - updatedAt
-        - postAt
-        - breadcrumbs
-        - expenseType
-        - organizationId
-        - portfolioId
-        - amount
-        - memo
-        - unitId
-        - propertyId
-        - maintenanceOrderId
-        - categoryId
     UpdateExpenseDto:
       type: object
       properties:
@@ -3600,6 +3605,51 @@ components:
           nullable: true
           allOf:
             - $ref: '#/components/schemas/ExpenseCategoryDto'
+    ValidatedUserDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          type: string
+          readOnly: true
+        updatedAt:
+          type: string
+          readOnly: true
+        fullName:
+          type: string
+          nullable: true
+        roles:
+          type: array
+          items:
+            title: ValidatedRoleDto
+            allOf:
+              - $ref: '#/components/schemas/RoleDto'
+              - type: object
+                required:
+                  - organization
+                properties:
+                  organization:
+                    type: object
+                    required:
+                      - id
+                      - fullName
+                    properties:
+                      id:
+                        type: string
+                      fullName:
+                        type: string
+                      title:
+                        type: string
+        email:
+          type: string
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - roles
+        - email
     CreateOrganizationDto:
       type: object
       properties:

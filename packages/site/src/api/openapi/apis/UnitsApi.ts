@@ -27,6 +27,7 @@ export interface UnitsApiFindAllRequest {
 	skip?: number;
 	take?: number;
 	sort?: Array<string>;
+	filter?: object;
 }
 
 export interface UnitsApiFindLeasesRequest {
@@ -187,6 +188,10 @@ export class UnitsApi extends runtime.BaseAPI implements UnitsApiInterface {
 
 		if (requestParameters.sort) {
 			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
