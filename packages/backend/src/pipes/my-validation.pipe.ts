@@ -1,33 +1,5 @@
 import { ArgumentMetadata, Injectable, ValidationPipe } from '@nestjs/common';
 
-const shouldSkip = [
-	'CreateTenantDto',
-	'UpdateTenantDto',
-	'CreatePortfolioDto',
-	'UpdatePortfolioDto',
-	'CreatePropertyDto',
-	'UpdatePropertyDto',
-	'CreateUnitDto',
-	'UpdateUnitDto',
-	'CreateLeaseDto',
-	'UpdateLeaseDto',
-	'CreateExpenseDto',
-	'UpdateExpenseDto',
-	'CreateFileDto',
-	'CreateLeaseInvoiceDto',
-	'UpdateLeaseInvoiceDto',
-	'CreateManyLeaseInvoicesDto',
-	'CreateExpenseCategoryDto',
-	'UpdateExpenseCategoryDto',
-	'UpdateExpenseCategoryTreeDto',
-	'ExpenseCategoryDto',
-	'CreateRoleDto',
-	'CreatePayoutDto',
-	'CreateOrganizationDto',
-	'UpdateOrganizationDto',
-	'AggregateOptionsDto',
-];
-
 // Reference: https://github.com/nestjs/nest/issues/2390#issuecomment-517623971
 // More about DI in global pipes: https://docs.nestjs.com/guards#binding-guards
 /**
@@ -41,14 +13,15 @@ export class MyValidationPipe extends ValidationPipe {
 
 		const name = metadata.metatype?.name;
 
-		if (name && shouldSkip.includes(name)) {
+		if (metadata.type === 'query') {
+			console.log('skipping validation for [query]: ', name);
 			skip = true;
 		}
 
 		if (skip) {
 			return value;
 		} else {
-			console.log('not skipping validation for: ', name);
+			console.log('not skipping validation for: ', name, metadata.type);
 			return super.transform(value, metadata);
 		}
 	}

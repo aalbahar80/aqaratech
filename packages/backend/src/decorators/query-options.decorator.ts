@@ -15,7 +15,7 @@ import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { z } from 'zod';
 
 export const QueryParser = createParamDecorator(
-	(options: QueryOptionsDecoratorConfig, ctx: ExecutionContext) => {
+	(options: QueryOptionsDecoratorConfig | undefined, ctx: ExecutionContext) => {
 		const request = ctx.switchToHttp().getRequest<Request>();
 
 		// parse with prisma-utils
@@ -24,14 +24,14 @@ export const QueryParser = createParamDecorator(
 			request.query,
 			{
 				limitParamName: 'take',
-				...options.parserOptions,
+				...options?.parserOptions,
 			},
 		);
 
 		// validate output
 		const output = new ZodValidationPipe(queryOptionsParsedSchema).transform(
 			parsed,
-			{ type: 'query' },
+			{ type: 'custom' },
 		);
 
 		return output;

@@ -44,7 +44,7 @@ async function bootstrap() {
 			forbidUnknownValues: true,
 			forbidNonWhitelisted: true,
 			whitelist: true,
-			// validateCustomDecorators: true, // fails eveything?
+			validateCustomDecorators: false,
 			enableDebugMessages: process.env.PUBLIC_AQ_DEBUG_NEST == '1',
 			disableErrorMessages: false,
 		}),
