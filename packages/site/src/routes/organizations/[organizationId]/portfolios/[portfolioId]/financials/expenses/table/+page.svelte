@@ -1,66 +1,56 @@
 <script lang="ts">
+	import type { ExpenseDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import ExportButton from '$lib/components/buttons/ExportButton.svelte';
+	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
+	import { locationColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { ExpenseDto } from '$api/openapi';
-	import { entitiesMap } from '@self/utils';
-	import type { ColumnDef } from '@tanstack/svelte-table';
+	import { getRoute } from '$lib/utils/route-helpers/get-route';
+	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	const columns: ColumnDef<ExpenseDto>[] = [
-		{
+	const columnHelper = createColumnHelper<ExpenseDto>();
+
+	const columns = [
+		columnHelper.accessor('postAt', {
 			header: 'Post Date',
-			footer: 'Post Date',
-			id: 'postAt',
-			accessorFn: (row) => toUTCFormat(row.postAt),
-		},
-		{
-			header: 'Amount (KWD)',
-			footer: 'Amount (KWD)',
-			accessorKey: 'amount',
-			cell: (info) => {
-				return info.getValue<ExpenseDto['amount']>().toLocaleString();
-			},
-		},
-		{
+			cell: (info) => toUTCFormat(info.getValue().toLocaleString()),
+		}),
+
+		columnHelper.accessor('expenseType', {
 			header: 'Type',
-			footer: 'Type',
-			accessorFn: (row) => row.expenseType?.labelEn || '',
-			cell: (info) => info.getValue(),
-			enableSorting: false,
-		},
-		{
-			header: 'Location',
-			footer: 'Location',
-			columns: [
-				{
-					accessorFn: (row) => row.breadcrumbs.property?.label || '',
-					id: 'propertyId',
-					// cell: (info) => info.getValue(),
-					header: 'Property',
-					footer: 'Property',
-					enableSorting: false,
-				},
-				{
-					accessorFn: (row) => row.breadcrumbs.unit?.label || '',
-					id: 'unitId',
-					// cell: (info) => info.getValue(),
-					header: 'Unit',
-					footer: 'Unit',
-					enableSorting: false,
-				},
-			],
-		},
-		{
+			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+			cell: (info) => info.getValue()?.labelEn || '',
+		}),
+
+		columnHelper.accessor('amount', {
+			header: 'Amount (KWD)',
+			cell: (info) => info.getValue().toLocaleString(),
+		}),
+
+		locationColumnDef(columnHelper),
+
+		columnHelper.display({
+			id: 'view',
 			header: '',
 			footer: '',
-			id: 'view',
-			accessorFn: (row) => `/${entitiesMap.expense.urlName}/${row.id}`,
-			cell: (info) => info.getValue(),
-		},
+			cell: (props) => {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+				return renderComponent(ActionCell, {
+					value: 'view',
+					href: getRoute({
+						entity: 'expense',
+						id: props.row.original.id,
+						pageType: PageType.Id,
+						params: $page.params,
+					}),
+				});
+			},
+		}),
 	];
 </script>
 
