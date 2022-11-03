@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { LeaseInvoiceDto } from '$api/openapi';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
@@ -80,27 +79,9 @@
 	}}
 >
 	<div slot="filter" let:filters>
-		<FilterBar
-			responsive={filters}
-			persistent={[
-				{
-					id: 'options',
-					label: 'Options',
-					options: [
-						{
-							label: 'Export to CSV',
-							value: 'export-csv',
-							active: true,
-							action: () => {
-								void goto(`${$page.url.pathname}/csv`);
-							},
-						},
-					],
-				},
-			]}
-		>
+		<FilterBar responsive={filters}>
 			<div slot="custom">
-				<FilterRadio>
+				<FilterRadio label="Options">
 					<MenuItem as="div" let:active>
 						<a href={`${$page.url.pathname}/csv`} download="leaseInvoices.csv">
 							<MenuItemChild {active}>

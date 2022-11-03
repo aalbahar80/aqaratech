@@ -11,7 +11,8 @@
 	import { ChevronDown } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
-	export let filter: Filter;
+	export let label: string;
+	export let filter: Filter | undefined = undefined;
 	export let align = 'left';
 </script>
 
@@ -20,7 +21,7 @@
 		<MenuButton
 			class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
 		>
-			{filter.label}
+			{label}
 			<Icon
 				src={ChevronDown}
 				theme="solid"
@@ -47,7 +48,8 @@
 			)}
 		>
 			<div class="py-1">
-				<slot>
+				<slot />
+				{#if filter}
 					{#each filter.options as option (option.label)}
 						<MenuItem>
 							<label
@@ -67,7 +69,7 @@
 							</label>
 						</MenuItem>
 					{/each}
-				</slot>
+				{/if}
 			</div>
 		</MenuItems>
 	</Transition>
