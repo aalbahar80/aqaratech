@@ -65,7 +65,7 @@ const inputs: [GetRouteInput, string][] = [
 		{
 			entity: 'tenant',
 			pageType: PageType.Id,
-			params,
+			params: { organizationId: '1' },
 			id: '3',
 		},
 		'/organizations/1/tenants/3',
@@ -75,7 +75,7 @@ const inputs: [GetRouteInput, string][] = [
 		{
 			entity: 'tenant',
 			pageType: PageType.Edit,
-			params,
+			params: { organizationId: '1' },
 			id: '3',
 		},
 		'/organizations/1/tenants/3/edit',
@@ -85,7 +85,7 @@ const inputs: [GetRouteInput, string][] = [
 		{
 			entity: 'tenant',
 			pageType: PageType.New,
-			params,
+			params: { organizationId: '1' },
 		},
 		'/organizations/1/tenants/new',
 	],
@@ -93,7 +93,7 @@ const inputs: [GetRouteInput, string][] = [
 		{
 			entity: 'tenant',
 			pageType: PageType.New,
-			params,
+			params: { organizationId: '1' },
 			predefined: {
 				name: 'test',
 			},
@@ -104,10 +104,12 @@ const inputs: [GetRouteInput, string][] = [
 		{
 			entity: 'tenant',
 			pageType: PageType.List,
-			params,
+			params: { organizationId: '1' },
 		},
 		'/organizations/1/tenants',
 	],
+
+	// Portfolios
 ];
 
 test.each(inputs)('getRoute(%o) === %s', (input, expected) => {
