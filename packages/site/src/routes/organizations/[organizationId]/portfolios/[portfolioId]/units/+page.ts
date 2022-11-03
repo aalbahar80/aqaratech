@@ -4,9 +4,10 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ url: { searchParams }, fetch }) => {
 	const api = createApi(fetch);
-	const { page, take } = parseParams(searchParams);
 
-	const units = await api.units.findAll({ page, take });
+	const units = await api.units.findAll({
+		...parseParams(searchParams),
+	});
 
 	return { units };
 };

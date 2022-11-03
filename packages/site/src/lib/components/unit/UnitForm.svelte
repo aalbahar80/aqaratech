@@ -52,7 +52,7 @@
 			createApi().organizations.createUnit({
 				createUnitDto: {
 					...values,
-					propertyId: $page.params.propertyId,
+					propertyId: $page.url.searchParams.get('propertyId'),
 					portfolioId: $page.params.portfolioId,
 				},
 				organizationId: $page.params.organizationId,
