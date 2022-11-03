@@ -73,6 +73,13 @@ module.exports = {
 				// tslint comments in generated api files
 				'@typescript-eslint/ban-tslint-comment': 'off',
 
+				'svelte/valid-compile': [
+					'error',
+					{
+						// To ignore 'svelte(a11y-click-events-have-key-events)'
+						ignoreWarnings: true,
+					},
+				],
 				// TODO add rules from: https://ota-meshi.github.io/eslint-plugin-svelte/rules/
 			},
 		},
