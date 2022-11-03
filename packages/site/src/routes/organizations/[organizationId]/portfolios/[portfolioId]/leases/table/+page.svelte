@@ -90,19 +90,22 @@
 				}),
 			enableSorting: false,
 		}),
-		{
+		columnHelper.display({
+			id: 'view2', // TODO rename to view
 			header: '',
 			footer: '',
-			id: 'view',
-			accessorFn: (row) =>
-				getRoute({
-					entity: 'lease',
-					id: row.id,
-					pageType: PageType.Id,
-					params: $page.params,
-				}),
-			cell: (info) => info.getValue(),
-		},
+			cell: (props) => {
+				return renderComponent(ActionCell, {
+					value: 'view',
+					href: getRoute({
+						entity: 'lease',
+						id: props.row.original.id,
+						pageType: PageType.Id,
+						params: $page.params,
+					}),
+				});
+			},
+		}),
 	];
 </script>
 
