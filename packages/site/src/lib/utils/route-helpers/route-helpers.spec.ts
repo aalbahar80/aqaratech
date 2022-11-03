@@ -110,6 +110,53 @@ const inputs: [GetRouteInput, string][] = [
 	],
 
 	// Portfolios
+	[
+		{
+			entity: 'portfolio',
+			pageType: PageType.Id,
+			params: { organizationId: '1' },
+			id: '3',
+		},
+		'/organizations/1/portfolios/3',
+	],
+
+	[
+		{
+			entity: 'portfolio',
+			pageType: PageType.Edit,
+			params: { organizationId: '1' },
+			id: '3',
+		},
+		'/organizations/1/portfolios/3/edit',
+	],
+
+	[
+		{
+			entity: 'portfolio',
+			pageType: PageType.New,
+			params: { organizationId: '1' },
+		},
+		'/organizations/1/portfolios/new',
+	],
+	[
+		{
+			entity: 'portfolio',
+			pageType: PageType.New,
+			params: { organizationId: '1' },
+			predefined: {
+				name: 'test',
+			},
+		},
+		'/organizations/1/portfolios/new?name=test',
+	],
+	[
+		{
+			entity: 'portfolio',
+			pageType: PageType.List,
+			params: { organizationId: '1' },
+		},
+		'/organizations/1/portfolios',
+	],
 ];
 
 test.each(inputs)('getRoute(%o) === %s', (input, expected) => {
