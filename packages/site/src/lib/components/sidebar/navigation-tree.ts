@@ -121,11 +121,12 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 
 			{
 				name: 'Leases',
-				href: getRoute({
-					entity: 'lease',
-					pageType,
-					params: { organizationId, portfolioId },
-				}),
+				href:
+					getRoute({
+						entity: 'lease',
+						pageType,
+						params: { organizationId, portfolioId },
+					}) + '/table',
 				icon: HeroiconsOutlineDocumentText,
 			},
 		);

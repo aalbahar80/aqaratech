@@ -44,7 +44,7 @@ export class LeasesService {
 		user: IUser;
 		where?: Prisma.LeaseWhereInput;
 	}): Promise<WithCount<LeaseDto>> {
-		const { page, take, sort } = queryOptions;
+		const { skip, take, sort } = queryOptions;
 
 		const filter: Prisma.LeaseWhereInput = {
 			AND: [
@@ -57,7 +57,7 @@ export class LeasesService {
 		const [data, total] = await Promise.all([
 			this.prisma.lease.findMany({
 				take,
-				skip: (page - 1) * take,
+				skip,
 				where: filter,
 				orderBy: sort,
 				include: {
