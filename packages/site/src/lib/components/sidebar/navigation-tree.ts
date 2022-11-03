@@ -24,15 +24,6 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 
 	const tree: NavigationItem[] = [
 		{
-			name: 'Leases',
-			href: getRoute({
-				entity: 'lease',
-				pageType,
-				params: { organizationId },
-			}),
-			icon: HeroiconsOutlineDocumentText,
-		},
-		{
 			name: 'Account',
 			href: `/users/${user.id}/roles`,
 			icon: HeroiconsOutlineUser,
@@ -78,7 +69,8 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 	}
 
 	if (user.role?.roleType === 'PORTFOLIO' && user.role.portfolioId) {
-		const portfolioRoute = `/organizations/${user.role.organizationId}/portfolios/${user.role.portfolioId}`;
+		const portfolioId = user.role.portfolioId;
+		const portfolioRoute = `/organizations/${user.role.organizationId}/portfolios/${portfolioId}`;
 
 		tree.splice(
 			0,
@@ -109,8 +101,22 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 
 			{
 				name: 'Properties',
-				href: `${portfolioRoute}/properties`,
+				href: getRoute({
+					entity: 'property',
+					pageType,
+					params: { organizationId, portfolioId },
+				}),
 				icon: HeroiconsOutlineHome,
+			},
+
+			{
+				name: 'Leases',
+				href: getRoute({
+					entity: 'lease',
+					pageType,
+					params: { organizationId, portfolioId },
+				}),
+				icon: HeroiconsOutlineDocumentText,
 			},
 		);
 	}
