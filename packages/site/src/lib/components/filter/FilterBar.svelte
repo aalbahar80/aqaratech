@@ -3,6 +3,7 @@
 	import FilterRadio from '$lib/components/filter/FilterRadio.svelte';
 	import FilterSlideover from '$lib/components/filter/FilterSlideover.svelte';
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
+	import clsx from 'clsx';
 
 	export let persistent: Filter[] = [];
 	export let responsive: Filter[] = [];
@@ -22,7 +23,12 @@
 		>
 			<h2 id="filter-heading" class="sr-only">Filters</h2>
 
-			<div class="flex flex-row-reverse items-center justify-between">
+			<div
+				class={clsx(
+					'flex  items-center justify-between',
+					persistent.length ? '' : 'flex-row-reverse',
+				)}
+			>
 				{#each persistent as filter, idx (filter.id)}
 					<FilterRadio {filter} align={idx === 0 ? 'left' : 'right'} />
 				{/each}

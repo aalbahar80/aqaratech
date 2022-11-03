@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { LeaseInvoiceDto } from '$api/openapi';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import ExportButton from '$lib/components/buttons/ExportButton.svelte';
+	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import GenericCellSvelte from '$lib/components/table/lease-invoices/GenericCell.svelte';
 	import {
 		locationColumnDef,
@@ -73,9 +74,25 @@
 		paidAt: false,
 	}}
 >
-	<div slot="header-actions">
-		<a href={`${$page.url.pathname}/csv`} download="leaseInvoices.csv">
-			<ExportButton />
-		</a>
+	<div slot="filter" let:filters>
+		<FilterBar
+			responsive={filters}
+			persistent={[
+				{
+					id: 'options',
+					label: 'Options',
+					options: [
+						{
+							label: 'Export to CSV',
+							value: 'export-csv',
+							active: true,
+							action: () => {
+								void goto(`${$page.url.pathname}/csv`);
+							},
+						},
+					],
+				},
+			]}
+		/>
 	</div>
 </Table>
