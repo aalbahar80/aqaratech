@@ -37,7 +37,7 @@
 	export let pageCount: number | undefined = undefined; // TODO: differentiate between client v server pagination config using a type
 	export let paginationType: 'server' | 'client';
 
-	const setSorting: OnChangeFn<SortingState> = async (updater) => {
+	const setSorting: OnChangeFn<SortingState> = (updater) => {
 		// what is this doing?
 		if (updater instanceof Function) {
 			sorting = updater(sorting);
@@ -54,13 +54,13 @@
 		}));
 
 		if (paginationType === 'server') {
-			await handleServerSorting(sorting, $page.url);
+			void handleServerSorting(sorting, $page.url);
 		}
 
 		refreshData();
 	};
 
-	const setPagination: OnChangeFn<PaginationState> = async (updater) => {
+	const setPagination: OnChangeFn<PaginationState> = (updater) => {
 		// what is this doing?
 		if (updater instanceof Function) {
 			pagination = updater(pagination);
@@ -69,7 +69,7 @@
 		}
 
 		if (paginationType === 'server') {
-			await handleServerPagination(pagination, $page.url);
+			void handleServerPagination(pagination, $page.url);
 
 			options.update((old) => ({
 				...old,
