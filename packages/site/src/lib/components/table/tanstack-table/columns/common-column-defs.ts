@@ -1,5 +1,9 @@
 import type { BreadcrumbsDto } from '$api/openapi';
-import type { ColumnHelper } from '@tanstack/svelte-table';
+import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
+import { getRoute } from '$lib/utils/route-helpers/get-route';
+import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+import type { Entity } from '@self/utils';
+import { renderComponent, type ColumnHelper } from '@tanstack/svelte-table';
 
 export const locationColumnDef = <T extends Breadcrumbs>(
 	columnHelper: ColumnHelper<T>,
@@ -28,3 +32,26 @@ export const locationColumnDef = <T extends Breadcrumbs>(
 interface Breadcrumbs {
 	breadcrumbs: Partial<Pick<BreadcrumbsDto, 'property' | 'unit'>>;
 }
+
+export const viewColumnDef = <T extends { id: string }>(
+	columnHelper: ColumnHelper<T>,
+	entity: Entity,
+	params: Record<string, string>,
+) =>
+	columnHelper.display({
+		id: 'view',
+		header: '',
+		footer: '',
+		cell: (props) => {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+			return renderComponent(ActionCell, {
+				value: 'view',
+				href: getRoute({
+					entity,
+					id: props.row.original.id,
+					pageType: PageType.Id,
+					params,
+				}),
+			});
+		},
+	});

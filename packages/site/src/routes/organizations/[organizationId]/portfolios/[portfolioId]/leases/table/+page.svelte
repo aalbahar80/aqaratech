@@ -4,7 +4,10 @@
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
-	import { locationColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
+	import {
+		locationColumnDef,
+		viewColumnDef,
+	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { getRoute } from '$lib/utils/route-helpers/get-route';
@@ -56,23 +59,7 @@
 			enableSorting: false,
 		}),
 
-		columnHelper.display({
-			id: 'view',
-			header: '',
-			footer: '',
-			cell: (props) => {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-				return renderComponent(ActionCell, {
-					value: 'view',
-					href: getRoute({
-						entity: 'lease',
-						id: props.row.original.id,
-						pageType: PageType.Id,
-						params: $page.params,
-					}),
-				});
-			},
-		}),
+		viewColumnDef(columnHelper, 'lease', $page.params),
 	];
 </script>
 
