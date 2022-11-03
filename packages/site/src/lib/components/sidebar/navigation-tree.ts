@@ -19,12 +19,17 @@ import { getRoute } from '$lib/utils/route-helpers/get-route';
 import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
-	const organizationRoute = `/organizations/${user.role.organizationId}`;
+	const organizationId = user.role!.organizationId;
+	const pageType = PageType.List;
 
 	const tree: NavigationItem[] = [
 		{
 			name: 'Leases',
-			href: `${organizationRoute}/leases`,
+			href: getRoute({
+				entity: 'lease',
+				pageType,
+				params: { organizationId },
+			}),
 			icon: HeroiconsOutlineDocumentText,
 		},
 		{
@@ -46,17 +51,19 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			0,
 			{
 				name: 'Portfolios',
-				href: `${organizationRoute}/portfolios`,
+				href: getRoute({
+					entity: 'portfolio',
+					pageType,
+					params: { organizationId },
+				}),
 				icon: HeroiconsOutlineDocumentReport,
 			},
 			{
 				name: 'Tenants',
 				href: getRoute({
 					entity: 'tenant',
-					pageType: PageType.List,
-					params: {
-						organizationId: user.role.organizationId,
-					},
+					pageType,
+					params: { organizationId },
 				}),
 				icon: HeroiconsOutlineDocumentReport,
 			},
@@ -71,7 +78,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 	}
 
 	if (user.role?.roleType === 'PORTFOLIO' && user.role.portfolioId) {
-		const portfolioRoute = `${organizationRoute}/portfolios/${user.role.portfolioId}`;
+		const portfolioRoute = `/organizations/${user.role.organizationId}/portfolios/${user.role.portfolioId}`;
 
 		tree.splice(
 			0,
