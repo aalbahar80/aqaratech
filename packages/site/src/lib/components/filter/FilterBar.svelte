@@ -10,13 +10,13 @@
 	let slideover: FilterSlideover | undefined;
 </script>
 
-<div class="bg-gray-50">
+<div class="rounded-lg bg-gray-50 shadow">
 	<FilterSlideover bind:this={slideover} filters={responsive} />
 
 	<div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
 		<!-- <div class="py-24">
 			<h1 class="text-4xl font-extrabold tracking-tight text-gray-900">
-				New Arrivals
+				Invoices
 			</h1>
 			<p class="mx-auto mt-4 max-w-3xl text-base text-gray-500">
 				Thoughtfully designed objects for the workspace, home, and travel.

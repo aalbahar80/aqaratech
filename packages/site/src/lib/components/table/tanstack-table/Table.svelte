@@ -191,9 +191,10 @@
 	};
 </script>
 
-<ColumnToggle {table} />
-
 <div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
+	<div class="py-8">
+		<ColumnToggle {table} />
+	</div>
 	<div class="text-right">
 		<slot name="header-actions" />
 	</div>
