@@ -14,7 +14,7 @@ const inputs: [GetRouteInput, string][] = [
 	[
 		{
 			entity: 'tenant',
-			page: PageType.Id,
+			pageType: PageType.Id,
 			params,
 			id: '3',
 		},
@@ -24,7 +24,7 @@ const inputs: [GetRouteInput, string][] = [
 	[
 		{
 			entity: 'tenant',
-			page: PageType.Edit,
+			pageType: PageType.Edit,
 			params,
 			id: '3',
 		},
@@ -34,7 +34,7 @@ const inputs: [GetRouteInput, string][] = [
 	[
 		{
 			entity: 'tenant',
-			page: PageType.New,
+			pageType: PageType.New,
 			params,
 		},
 		'/organizations/1/portfolios/2/tenants/new',
@@ -42,13 +42,21 @@ const inputs: [GetRouteInput, string][] = [
 	[
 		{
 			entity: 'tenant',
-			page: PageType.New,
+			pageType: PageType.New,
 			params,
 			predefined: {
 				name: 'test',
 			},
 		},
 		'/organizations/1/portfolios/2/tenants/new?name=test',
+	],
+	[
+		{
+			entity: 'tenant',
+			pageType: PageType.List,
+			params,
+		},
+		'/organizations/1/portfolios/2/tenants',
 	],
 ];
 

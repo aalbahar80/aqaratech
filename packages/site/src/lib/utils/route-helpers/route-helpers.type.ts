@@ -4,11 +4,12 @@ export enum PageType {
 	Id = 'id',
 	Edit = 'edit',
 	New = 'new',
+	List = 'list',
 }
 
 type RouteParams =
 	| { organizationId: string; portfolioId: string }
-	| { params: Record<string, string> };
+	| Record<string, string>;
 
 interface BaseGetRouteInput {
 	entity: Entity;
@@ -16,12 +17,20 @@ interface BaseGetRouteInput {
 }
 
 export interface GetFormRouteInput extends BaseGetRouteInput {
+	pageType: PageType.New;
 	predefined?: Record<string, string>;
 }
 
 export interface GetIdRouteInput extends BaseGetRouteInput {
-	page: PageType;
+	pageType: PageType.Id | PageType.Edit;
 	id: string;
 }
 
-export type GetRouteInput = GetIdRouteInput | GetFormRouteInput;
+export interface GetListRouteInput extends BaseGetRouteInput {
+	pageType: PageType.List;
+}
+
+export type GetRouteInput =
+	| GetIdRouteInput
+	| GetFormRouteInput
+	| GetListRouteInput;

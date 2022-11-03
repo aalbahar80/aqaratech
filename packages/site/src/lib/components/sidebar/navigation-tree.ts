@@ -14,6 +14,10 @@ import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
 import { LOGOUT } from '$lib/constants/routes';
 import { settings } from '$lib/utils/route-helpers';
 
+// Utils
+import { getRoute } from '$lib/utils/route-helpers/get-route';
+import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+
 export const getNavigationTree = (user: User): NavigationItem[] => {
 	const organizationRoute = `/organizations/${user.role.organizationId}`;
 
@@ -47,7 +51,13 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			},
 			{
 				name: 'Tenants',
-				href: `${organizationRoute}/tenants`,
+				href: getRoute({
+					entity: 'tenant',
+					pageType: PageType.List,
+					params: {
+						organizationId: user.role.organizationId,
+					},
+				}),
 				icon: HeroiconsOutlineDocumentReport,
 			},
 		);

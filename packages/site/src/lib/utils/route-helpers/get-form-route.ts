@@ -1,9 +1,9 @@
-import { portfolioRoute } from '$lib/utils/route-helpers';
+import { getPortfolioRoute } from '$lib/utils/route-helpers/get-portfolio-route';
 import type { GetFormRouteInput } from '$lib/utils/route-helpers/route-helpers.type';
 import { entitiesMap } from '@self/utils';
 
 export const getFormRoute = (input: GetFormRouteInput) => {
-	const portfolio = portfolioRoute(input.params);
+	const portfolio = getPortfolioRoute(input.params);
 
 	const entity = entitiesMap[input.entity].urlName;
 

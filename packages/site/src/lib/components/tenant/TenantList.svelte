@@ -4,7 +4,8 @@
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import TenantCard from '$lib/components/tenant/TenantCard.svelte';
-	import { orgRoute } from '$lib/utils/route-helpers';
+	import { getRoute } from '$lib/utils/route-helpers/get-route';
+	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
 
 	export let tenants: PaginatedTenantDto;
 </script>
@@ -12,7 +13,11 @@
 <StackedList
 	entity="tenant"
 	count={tenants.results.length}
-	formUrl={`${orgRoute($page.params)}/tenants/new`}
+	formUrl={getRoute({
+		entity: 'tenant',
+		pageType: PageType.New,
+		params: $page.params,
+	})}
 >
 	{#each tenants.results as tenant (tenant.id)}
 		<li>
