@@ -4,6 +4,8 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ url: { searchParams }, fetch }) => {
 	const api = createApi(fetch);
+	// TODO: handle renewing by ingesting a leaseId
+	// Otherwise always expect a unitId
 	const predefined: PredefinedLease = {
 		portfolioId: searchParams.get('portfolioId'),
 		propertyId: searchParams.get('propertyId'),

@@ -1,8 +1,11 @@
 <script lang="ts">
+	import type { LeaseDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import Badge from '$components/Badge.svelte';
 	import { getProgress } from '$lib/utils/common';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
-	import type { LeaseDto } from '$api/openapi';
+	import { getRoute } from '$lib/utils/route-helpers/get-route';
+	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';
@@ -16,7 +19,15 @@
 	const progress = getProgress(lease.start, lease.end);
 </script>
 
-<a href={`/leases/${lease.id}`} class="block hover:bg-gray-50">
+<a
+	href={getRoute({
+		entity: 'lease',
+		id: lease.id,
+		pageType: PageType.Id,
+		params: $page.params,
+	})}
+	class="block hover:bg-gray-50"
+>
 	<div class="px-4 py-4 sm:px-6">
 		<div class="flex flex-row-reverse items-center justify-between">
 			<div class="ml-2 flex flex-shrink-0">

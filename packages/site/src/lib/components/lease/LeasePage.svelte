@@ -1,11 +1,13 @@
 <script lang="ts">
+	import type { LeaseDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import Button from '$components/buttons/Button.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
-	import { create } from '$lib/utils/route-helpers';
-	import type { LeaseDto } from '$api/openapi';
+	import { getRoute } from '$lib/utils/route-helpers/get-route';
+	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
@@ -35,16 +37,14 @@
 			icon={Refresh}
 			text="Renew"
 			as="a"
-			href={(function () {
-				const base = create({ entity: 'lease' });
-				const searchParams = new URLSearchParams({
-					tenantId: lease.breadcrumbs.tenant.id,
-					portfolioId: lease.breadcrumbs.portfolio.id,
-					propertyId: lease.breadcrumbs.property.id,
-					unitId: lease.breadcrumbs.unit.id,
-				});
-				return `${base}?${searchParams.toString()}`;
-			})()}
+			href={getRoute({
+				entity: 'lease',
+				pageType: PageType.New,
+				params: $page.params,
+				predefined: {
+					leaseId: lease.id,
+				},
+			})}
 			class="w-full sm:w-auto"
 			prefetch
 		/>
