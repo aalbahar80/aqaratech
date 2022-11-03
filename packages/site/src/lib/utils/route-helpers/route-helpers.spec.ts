@@ -59,6 +59,55 @@ const inputs: [GetRouteInput, string][] = [
 		},
 		'/organizations/1/portfolios/2/properties',
 	],
+
+	// Tenants
+	[
+		{
+			entity: 'tenant',
+			pageType: PageType.Id,
+			params,
+			id: '3',
+		},
+		'/organizations/1/tenants/3',
+	],
+
+	[
+		{
+			entity: 'tenant',
+			pageType: PageType.Edit,
+			params,
+			id: '3',
+		},
+		'/organizations/1/tenants/3/edit',
+	],
+
+	[
+		{
+			entity: 'tenant',
+			pageType: PageType.New,
+			params,
+		},
+		'/organizations/1/tenants/new',
+	],
+	[
+		{
+			entity: 'tenant',
+			pageType: PageType.New,
+			params,
+			predefined: {
+				name: 'test',
+			},
+		},
+		'/organizations/1/tenants/new?name=test',
+	],
+	[
+		{
+			entity: 'tenant',
+			pageType: PageType.List,
+			params,
+		},
+		'/organizations/1/tenants',
+	],
 ];
 
 test.each(inputs)('getRoute(%o) === %s', (input, expected) => {
