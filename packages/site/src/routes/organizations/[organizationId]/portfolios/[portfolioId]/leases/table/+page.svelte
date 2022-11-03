@@ -4,6 +4,7 @@
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
+	import { locationColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { getRoute } from '$lib/utils/route-helpers/get-route';
@@ -36,25 +37,7 @@
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
 
-		columnHelper.group({
-			header: 'Location',
-			footer: (props) => props.column.id,
-			columns: [
-				columnHelper.accessor('breadcrumbs.property.label', {
-					id: 'property',
-					header: 'Property',
-					cell: (info) => info.getValue<string>(),
-					enableSorting: false,
-				}),
-
-				columnHelper.accessor('breadcrumbs.unit.label', {
-					id: 'unit',
-					header: 'Unit',
-					cell: (info) => info.getValue<string>(),
-					enableSorting: false,
-				}),
-			],
-		}),
+		locationColumnDef(columnHelper),
 
 		columnHelper.accessor('breadcrumbs.tenant', {
 			id: 'tenant',
