@@ -29,7 +29,7 @@
 		>
 			<h2 id="filter-heading" class="sr-only">Filters</h2>
 
-			<div class="flex items-center justify-between">
+			<div class="flex flex-row-reverse items-center justify-between">
 				{#each persistent as filter, idx (filter.id)}
 					<FilterRadio {filter} align={idx === 0 ? 'left' : 'right'} />
 				{/each}
