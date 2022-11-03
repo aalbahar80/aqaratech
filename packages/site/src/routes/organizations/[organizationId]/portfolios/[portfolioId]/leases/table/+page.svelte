@@ -6,79 +6,59 @@
 	import { toUTCFormat } from '$lib/utils/common';
 	import { getRoute } from '$lib/utils/route-helpers/get-route';
 	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
-	import {
-		createColumnHelper,
-		renderComponent,
-		type ColumnDef,
-	} from '@tanstack/svelte-table';
+	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	const columnHelper = createColumnHelper<LeaseDto>();
 
-	const columns: ColumnDef<LeaseDto>[] = [
-		{
+	const columns = [
+		columnHelper.accessor('start', {
 			header: 'Start',
-			footer: 'Start',
-			id: 'start',
-			accessorFn: (row) => toUTCFormat(row.start),
-		},
-		{
+			cell: (info) => toUTCFormat(info.getValue()),
+		}),
+
+		columnHelper.accessor('end', {
 			header: 'End',
-			footer: 'Start',
-			id: 'end',
-			accessorFn: (row) => toUTCFormat(row.end),
-		},
-		{
+			cell: (info) => toUTCFormat(info.getValue()),
+		}),
+
+		columnHelper.accessor('monthlyRent', {
 			header: 'Monthly Rent (KWD)',
-			footer: 'Monthly Rent (KWD)',
-			accessorKey: 'monthlyRent',
-			cell: (info) => {
-				return info.getValue<LeaseDto['monthlyRent']>().toLocaleString();
-			},
-		},
-		{
+			cell: (info) => info.getValue().toLocaleString(),
+		}),
+
+		columnHelper.accessor('deposit', {
 			header: 'Deposit (KWD)',
-			footer: 'Deposit (KWD)',
-			accessorKey: 'deposit',
-			cell: (info) => {
-				return info.getValue<LeaseDto['deposit']>().toLocaleString();
-			},
-		},
-		// {
-		// 	header: 'Type',
-		// 	footer: 'Type',
-		// 	accessorFn: (row) => row.expenseType?.labelEn || '',
-		// 	cell: (info) => info.getValue(),
-		// 	enableSorting: false,
-		// },
-		{
+			cell: (info) => info.getValue().toLocaleString(),
+		}),
+		// Grouping Column
+		columnHelper.group({
 			header: 'Location',
-			footer: 'Location',
+			footer: (props) => props.column.id,
 			columns: [
-				{
-					accessorFn: (row) => row.breadcrumbs.property.label,
-					id: 'propertyId',
-					// cell: (info) => info.getValue(),
+				columnHelper.accessor((row) => row.breadcrumbs.property.label, {
+					id: 'property',
 					header: 'Property',
-					footer: 'Property',
+					cell: (info) => info.getValue<string>(),
 					enableSorting: false,
-				},
-				{
-					accessorFn: (row) => row.breadcrumbs.unit.label,
-					id: 'unitId',
-					// cell: (info) => info.getValue(),
+				}),
+
+				columnHelper.accessor((row) => row.breadcrumbs.unit.label, {
+					id: 'unit',
 					header: 'Unit',
-					footer: 'Unit',
+					cell: (info) => info.getValue<string>(),
 					enableSorting: false,
-				},
+				}),
 			],
-		},
+		}),
+
 		columnHelper.accessor((row) => row.breadcrumbs.tenant, {
+			id: 'tenant',
 			header: 'Tenant',
-			footer: 'Tenant',
 			cell: (info) =>
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				renderComponent(ActionCell, {
 					value: info.getValue().label,
 					href: getRoute({
@@ -90,11 +70,13 @@
 				}),
 			enableSorting: false,
 		}),
+
 		columnHelper.display({
 			id: 'view',
 			header: '',
 			footer: '',
 			cell: (props) => {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				return renderComponent(ActionCell, {
 					value: 'view',
 					href: getRoute({
