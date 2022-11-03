@@ -1,14 +1,21 @@
 <script lang="ts">
 	import type { LeaseDto } from '$api/openapi';
 	import { page } from '$app/stores';
+	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { getRoute } from '$lib/utils/route-helpers/get-route';
 	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
-	import type { ColumnDef } from '@tanstack/svelte-table';
+	import {
+		createColumnHelper,
+		renderComponent,
+		type ColumnDef,
+	} from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+
+	const columnHelper = createColumnHelper<LeaseDto>();
 
 	const columns: ColumnDef<LeaseDto>[] = [
 		{
@@ -68,14 +75,21 @@
 				},
 			],
 		},
-		{
+		columnHelper.accessor((row) => row.breadcrumbs.tenant, {
 			header: 'Tenant',
 			footer: 'Tenant',
-			id: 'tenant',
-			accessorFn: (row) => row.breadcrumbs.tenant.label,
+			cell: (info) =>
+				renderComponent(ActionCell, {
+					value: info.getValue().label,
+					href: getRoute({
+						entity: 'tenant',
+						pageType: PageType.Id,
+						params: $page.params,
+						id: info.getValue().id,
+					}),
+				}),
 			enableSorting: false,
-			// cell: (info) => info.getValue(),
-		},
+		}),
 		{
 			header: '',
 			footer: '',
