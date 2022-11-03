@@ -33,19 +33,19 @@
 			header: 'Deposit (KWD)',
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
-		// Grouping Column
+
 		columnHelper.group({
 			header: 'Location',
 			footer: (props) => props.column.id,
 			columns: [
-				columnHelper.accessor((row) => row.breadcrumbs.property.label, {
+				columnHelper.accessor('breadcrumbs.property.label', {
 					id: 'property',
 					header: 'Property',
 					cell: (info) => info.getValue<string>(),
 					enableSorting: false,
 				}),
 
-				columnHelper.accessor((row) => row.breadcrumbs.unit.label, {
+				columnHelper.accessor('breadcrumbs.unit.label', {
 					id: 'unit',
 					header: 'Unit',
 					cell: (info) => info.getValue<string>(),
@@ -54,7 +54,7 @@
 			],
 		}),
 
-		columnHelper.accessor((row) => row.breadcrumbs.tenant, {
+		columnHelper.accessor('breadcrumbs.tenant', {
 			id: 'tenant',
 			header: 'Tenant',
 			cell: (info) =>

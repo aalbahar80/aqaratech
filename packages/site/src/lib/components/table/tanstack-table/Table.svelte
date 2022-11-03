@@ -22,7 +22,7 @@
 
 	type T = $$Generic;
 	export let items: T[];
-	export let columns: ColumnDef<T>[];
+	export let columns: ColumnDef<T, any>[];
 	export let pagination: PaginationState;
 	/**
 	 * Allows setting the initial sorting state.
