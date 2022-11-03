@@ -47,25 +47,27 @@
 			)}
 		>
 			<div class="py-1">
-				{#each filter.options as option (option.label)}
-					<MenuItem>
-						<label
-							class={classes(
-								option.active ? 'bg-gray-100' : '',
-								'block px-4 py-2 text-sm font-medium text-gray-900',
-							)}
-						>
-							<input
-								type="radio"
-								name="sort"
-								value={option.value}
-								on:change={(e) => option.action(e)}
-								class="hidden"
-							/>
-							{option.label}
-						</label>
-					</MenuItem>
-				{/each}
+				<slot>
+					{#each filter.options as option (option.label)}
+						<MenuItem>
+							<label
+								class={classes(
+									option.active ? 'bg-gray-100' : '',
+									'block px-4 py-2 text-sm font-medium text-gray-900',
+								)}
+							>
+								<input
+									type="radio"
+									name="sort"
+									value={option.value}
+									on:change={(e) => option.action(e)}
+									class="hidden"
+								/>
+								{option.label}
+							</label>
+						</MenuItem>
+					{/each}
+				</slot>
 			</div>
 		</MenuItems>
 	</Transition>

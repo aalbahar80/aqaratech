@@ -2,7 +2,10 @@
 	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
+	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import FilterRadio from '$lib/components/filter/FilterRadio.svelte';
 	import GenericCellSvelte from '$lib/components/table/lease-invoices/GenericCell.svelte';
 	import {
 		locationColumnDef,
@@ -10,7 +13,9 @@
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
+	import Fa6SolidFileCsv from '~icons/fa6-solid/file-csv';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -93,6 +98,19 @@
 					],
 				},
 			]}
-		/>
+		>
+			<div slot="custom">
+				<FilterRadio>
+					<MenuItem as="div" let:active>
+						<a href={`${$page.url.pathname}/csv`} download="leaseInvoices.csv">
+							<MenuItemChild {active}>
+								<MenuItemIcon icon={Fa6SolidFileCsv} />
+								Export to CSV
+							</MenuItemChild>
+						</a>
+					</MenuItem>
+				</FilterRadio>
+			</div>
+		</FilterBar>
 	</div>
 </Table>

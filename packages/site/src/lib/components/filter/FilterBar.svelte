@@ -29,6 +29,8 @@
 					persistent.length ? '' : 'flex-row-reverse',
 				)}
 			>
+				<slot name="custom" />
+
 				{#each persistent as filter, idx (filter.id)}
 					<FilterRadio {filter} align={idx === 0 ? 'left' : 'right'} />
 				{/each}
