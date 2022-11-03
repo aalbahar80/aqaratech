@@ -1,8 +1,9 @@
 import type { Entity } from '@self/utils';
 
-export enum PageAddress {
+export enum PageType {
 	Id = 'id',
 	Edit = 'edit',
+	New = 'new',
 }
 
 type RouteParams =
@@ -15,12 +16,11 @@ interface BaseGetRouteInput {
 }
 
 export interface GetFormRouteInput extends BaseGetRouteInput {
-	new: Entity; // ex. lease
 	predefined?: Record<string, string>;
 }
 
 export interface GetIdRouteInput extends BaseGetRouteInput {
-	page: PageAddress;
+	page: PageType;
 	id: string;
 }
 
