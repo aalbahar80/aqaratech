@@ -91,7 +91,7 @@
 			enableSorting: false,
 		}),
 		columnHelper.display({
-			id: 'view2', // TODO rename to view
+			id: 'view',
 			header: '',
 			footer: '',
 			cell: (props) => {

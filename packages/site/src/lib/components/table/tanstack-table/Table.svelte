@@ -210,23 +210,12 @@
 										'slashed-zero tabular-nums': cellValueType === 'number',
 									})}
 								>
-									{#if cell.column.id === 'view'}
-										<!-- redundant const for typing purposes -->
-										{@const href = cell.getValue()}
-										<a
-											href={typeof href === 'string' ? href : undefined}
-											target="_blank"
-											rel="noreferrer"
-											class="text-indigo-600 hover:text-indigo-900">View</a
-										>
-									{:else}
-										<svelte:component
-											this={flexRender(
-												cell.column.columnDef.cell,
-												cell.getContext(),
-											)}
-										/>
-									{/if}
+									<svelte:component
+										this={flexRender(
+											cell.column.columnDef.cell,
+											cell.getContext(),
+										)}
+									/>
 								</td>
 							{/each}
 						</tr>
