@@ -1,12 +1,23 @@
 <script lang="ts">
 	import type { PortfolioDto } from '$api/openapi';
+	import { page } from '$app/stores';
+	import { getRoute } from '$lib/utils/route-helpers/get-route';
+	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
 	import { FolderOpen, Phone } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let portfolio: PortfolioDto;
 </script>
 
-<a href={`/portfolios/${portfolio.id}`} class="block hover:bg-gray-50">
+<a
+	href={getRoute({
+		entity: 'portfolio',
+		id: portfolio.id,
+		pageType: PageType.Id,
+		params: $page.params,
+	})}
+	class="block hover:bg-gray-50"
+>
 	<div class="px-4 py-4 sm:px-6">
 		<!-- <div class="flex items-center justify-between">
 			<p class="truncate text-sm font-medium text-indigo-600">
