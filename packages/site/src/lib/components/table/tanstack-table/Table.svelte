@@ -40,6 +40,14 @@
 	export let pageCount: number | undefined = undefined; // TODO: differentiate between client v server pagination config using a type
 	export let paginationType: 'server' | 'client';
 
+	type ColumnVisibility = {
+		[K in keyof T as K]?: boolean;
+	};
+	/**
+	 * Allows setting the initial visibility state.
+	 */
+	export let columnVisibility: ColumnVisibility = {};
+
 	// Sorting
 
 	const setSorting: OnChangeFn<SortingState> = (updater) => {
@@ -97,7 +105,6 @@
 	};
 
 	// Column visibility
-	let columnVisibility = {};
 
 	const setColumnVisibility: OnChangeFn<VisibilityState> = (updater) => {
 		if (updater instanceof Function) {

@@ -103,6 +103,9 @@
 		pageSize: data.leases.pagination.take,
 	}}
 	paginationType="server"
+	columnVisibility={{
+		deposit: false,
+	}}
 >
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
