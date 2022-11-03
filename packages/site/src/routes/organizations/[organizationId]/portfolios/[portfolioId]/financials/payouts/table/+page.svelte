@@ -1,38 +1,29 @@
 <script lang="ts">
+	import type { PayoutDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import ExportButton from '$lib/components/buttons/ExportButton.svelte';
-
+	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { PayoutDto } from '$api/openapi';
-	import { entitiesMap } from '@self/utils';
-	import type { ColumnDef } from '@tanstack/svelte-table';
+	import { createColumnHelper } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	const columns: ColumnDef<PayoutDto>[] = [
-		{
+	const columnHelper = createColumnHelper<PayoutDto>();
+
+	const columns = [
+		columnHelper.accessor('postAt', {
 			header: 'Post Date',
-			footer: 'Post Date',
-			id: 'postAt',
-			accessorFn: (row) => toUTCFormat(row.postAt),
-		},
-		{
+			cell: (info) => toUTCFormat(info.getValue().toLocaleString()),
+		}),
+
+		columnHelper.accessor('amount', {
 			header: 'Amount (KWD)',
-			footer: 'Amount (KWD)',
-			accessorKey: 'amount',
-			cell: (info) => {
-				return info.getValue<PayoutDto['amount']>().toLocaleString();
-			},
-		},
-		{
-			header: '',
-			footer: '',
-			id: 'view',
-			accessorFn: (row) => `/${entitiesMap.payout.urlName}/${row.id}`,
-			cell: (info) => info.getValue(),
-		},
+			cell: (info) => info.getValue().toLocaleString(),
+		}),
+
+		viewColumnDef(columnHelper, 'payout', $page.params),
 	];
 </script>
 
