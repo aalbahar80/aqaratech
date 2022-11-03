@@ -1,6 +1,5 @@
 <script lang="ts">
 	import FilterCheckbox from '$lib/components/filter/FilterCheckbox.svelte';
-	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import FilterRadio from '$lib/components/filter/FilterRadio.svelte';
 	import FilterSlideover from '$lib/components/filter/FilterSlideover.svelte';
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
@@ -15,9 +14,7 @@
 	<FilterSlideover bind:this={slideover} filters={responsive} />
 
 	<div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
-		<slot name="hero">
-			<FilterHero filters={persistent} />
-		</slot>
+		<slot name="hero" />
 
 		<section
 			aria-labelledby="filter-heading"

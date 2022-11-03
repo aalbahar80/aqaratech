@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { LeaseDto } from '$api/openapi';
 	import { page } from '$app/stores';
+	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
@@ -101,4 +103,12 @@
 		pageSize: data.leases.pagination.take,
 	}}
 	paginationType="server"
-/>
+>
+	<div slot="filter" let:filters>
+		<FilterBar responsive={filters}>
+			<div slot="hero">
+				<FilterHero title="Leases" subtitle="" />
+			</div>
+		</FilterBar>
+	</div>
+</Table>

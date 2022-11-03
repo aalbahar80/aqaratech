@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
-	import ColumnToggle from '$lib/components/table/tanstack-table/ColumnToggle.svelte';
+	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import { handleServerPagination } from '$lib/components/table/tanstack-table/server-pagination';
 	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
@@ -189,11 +190,17 @@
 		// asc: ' 🔼',
 		// desc: ' 🔽',
 	};
+
+	$: filters = [getColumnFilter($table)];
 </script>
 
 <div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
 	<div class="py-8">
-		<ColumnToggle {table} />
+		<!-- Use the named slot "filter" to customize ex. Hero. 
+			   Otherwise, a default FilterBar will be rendered. -->
+		<slot name="filter" {filters}>
+			<FilterBar responsive={filters} />
+		</slot>
 	</div>
 	<div class="text-right">
 		<slot name="header-actions" />
