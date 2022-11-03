@@ -59,7 +59,7 @@
 								type="radio"
 								name="sort"
 								value={option.value}
-								on:change={() => option.action()}
+								on:change={(e) => option.action(e)}
 								class="hidden"
 							/>
 							{option.label}

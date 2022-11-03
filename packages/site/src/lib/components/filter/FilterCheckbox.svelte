@@ -56,7 +56,7 @@
 								id={`filter-${filter.id}-${optionIdx}`}
 								name={`${filter.id}[]`}
 								checked={option.active}
-								on:change={() => option.action()}
+								on:change={(e) => option.action(e)}
 								type="checkbox"
 								class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 							/>

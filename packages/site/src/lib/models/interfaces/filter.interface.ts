@@ -8,5 +8,5 @@ interface FilterOption {
 	value: string;
 	label: string;
 	active: boolean;
-	action: () => void;
+	action: (event: unknown) => void;
 }
