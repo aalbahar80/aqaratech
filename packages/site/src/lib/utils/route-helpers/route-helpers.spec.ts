@@ -11,52 +11,53 @@ const params = {
 };
 
 const inputs: [GetRouteInput, string][] = [
+	// Properties
 	[
 		{
-			entity: 'tenant',
+			entity: 'property',
 			pageType: PageType.Id,
 			params,
 			id: '3',
 		},
-		'/organizations/1/portfolios/2/tenants/3',
+		'/organizations/1/portfolios/2/properties/3',
 	],
 
 	[
 		{
-			entity: 'tenant',
+			entity: 'property',
 			pageType: PageType.Edit,
 			params,
 			id: '3',
 		},
-		'/organizations/1/portfolios/2/tenants/3/edit',
+		'/organizations/1/portfolios/2/properties/3/edit',
 	],
 
 	[
 		{
-			entity: 'tenant',
+			entity: 'property',
 			pageType: PageType.New,
 			params,
 		},
-		'/organizations/1/portfolios/2/tenants/new',
+		'/organizations/1/portfolios/2/properties/new',
 	],
 	[
 		{
-			entity: 'tenant',
+			entity: 'property',
 			pageType: PageType.New,
 			params,
 			predefined: {
 				name: 'test',
 			},
 		},
-		'/organizations/1/portfolios/2/tenants/new?name=test',
+		'/organizations/1/portfolios/2/properties/new?name=test',
 	],
 	[
 		{
-			entity: 'tenant',
+			entity: 'property',
 			pageType: PageType.List,
 			params,
 		},
-		'/organizations/1/portfolios/2/tenants',
+		'/organizations/1/portfolios/2/properties',
 	],
 ];
 
