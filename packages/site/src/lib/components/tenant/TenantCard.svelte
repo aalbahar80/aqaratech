@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { TenantDto } from '$api/openapi';
 	import { page } from '$app/stores';
-	import { orgRoute } from '$lib/utils/route-helpers';
+	import { getRoute } from '$lib/utils/route-helpers/get-route';
+	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
 	import { Phone, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
@@ -9,7 +10,12 @@
 </script>
 
 <a
-	href={`${orgRoute($page.params)}/tenants/${tenant.id}`}
+	href={getRoute({
+		entity: 'tenant',
+		id: tenant.id,
+		params: $page.params,
+		pageType: PageType.Id,
+	})}
 	class="block hover:bg-gray-50"
 >
 	<div class="px-4 py-4 sm:px-6">
