@@ -10,7 +10,8 @@ export const load: PageLoad = async ({
 	const api = createApi(fetch);
 
 	const { page } = parseParams(searchParams);
-	const leaseId = params.id;
+
+	const { leaseId } = params;
 
 	const [lease, invoices] = await Promise.all([
 		api.leases.findOne({ id: leaseId }),
