@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
+	import ColumnToggle from '$lib/components/table/tanstack-table/ColumnToggle.svelte';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import { handleServerPagination } from '$lib/components/table/tanstack-table/server-pagination';
 	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
@@ -15,6 +16,7 @@
 		type PaginationState,
 		type SortingState,
 		type TableOptions,
+		type VisibilityState,
 	} from '@tanstack/svelte-table';
 	import { clsx } from 'clsx';
 	import { afterUpdate } from 'svelte';
@@ -36,6 +38,8 @@
 	 */
 	export let pageCount: number | undefined = undefined; // TODO: differentiate between client v server pagination config using a type
 	export let paginationType: 'server' | 'client';
+
+	// Sorting
 
 	const setSorting: OnChangeFn<SortingState> = (updater) => {
 		// what is this doing?
@@ -59,6 +63,8 @@
 
 		refreshData();
 	};
+
+	// Pagination
 
 	const setPagination: OnChangeFn<PaginationState> = (updater) => {
 		// what is this doing?
@@ -89,6 +95,24 @@
 		refreshData();
 	};
 
+	// Column visibility
+	let columnVisibility = {};
+
+	const setColumnVisibility: OnChangeFn<VisibilityState> = (updater) => {
+		if (updater instanceof Function) {
+			columnVisibility = updater(columnVisibility);
+		} else {
+			columnVisibility = updater;
+		}
+		options.update((old) => ({
+			...old,
+			state: {
+				...old.state,
+				columnVisibility,
+			},
+		}));
+	};
+
 	const clientPaginationOptions = {
 		manualPagination: false,
 		getPaginationRowModel: getPaginationRowModel<any>(),
@@ -114,6 +138,7 @@
 		state: {
 			sorting,
 			pagination,
+			columnVisibility,
 		},
 
 		getCoreRowModel: getCoreRowModel(),
@@ -131,6 +156,9 @@
 		...(paginationType === 'server'
 			? serverSortingOptions
 			: clientSortingOptions),
+
+		// Column visibility
+		onColumnVisibilityChange: setColumnVisibility,
 	});
 
 	const refreshData = () => {
@@ -162,6 +190,8 @@
 		// desc: ' 🔽',
 	};
 </script>
+
+<ColumnToggle {table} />
 
 <div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
 	<div class="text-right">
