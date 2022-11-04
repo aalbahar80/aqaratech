@@ -67,11 +67,11 @@
 				</svg>
 			</span>
 
-			<input
-				type="text"
-				class="w-full rounded-md border bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
-				placeholder="Search"
-			/>
+			<span
+				class="block w-full rounded-md border bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+			>
+				Search
+			</span>
 		</button>
 		<SearchPalette bind:open />
 	{/if}
