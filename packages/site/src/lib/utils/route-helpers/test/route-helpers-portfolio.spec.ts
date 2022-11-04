@@ -23,5 +23,6 @@ test.each(pageTypes)('getRoute(%o) === %s', (pageType, expected) => {
 
 	const url = `/organizations/1/portfolios/3/${expected}`;
 
+	// @ts-expect-error test
 	expect(getRoute(input)).toBe(url);
 });
