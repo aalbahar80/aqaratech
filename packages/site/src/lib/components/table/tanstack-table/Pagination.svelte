@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Select from '$lib/components/form/inputs/Select.svelte';
-	import { getButtons } from '$lib/components/table/pagination';
+	import { getButtons } from '$lib/components/pagination/get-buttons';
 	import { classes } from '$lib/utils/classes';
 	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';

@@ -1,10 +1,10 @@
 <script lang="ts">
+	import type { PaginatedDto } from '$api/openapi';
 	import { page } from '$app/stores';
-	import { getButtons } from '$lib/components/table/pagination';
+	import { getButtons } from '$lib/components/pagination/get-buttons';
 	import { DEFAULT_PAGINATION_KEY } from '$lib/constants/pagination-keys';
 	import { classes } from '$lib/utils/classes';
 	import { getQuery } from '$lib/utils/set-query';
-	import type { PaginatedDto } from '$api/openapi';
 	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 
