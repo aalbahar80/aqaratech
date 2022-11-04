@@ -5,7 +5,7 @@
 </script>
 
 <header
-	class="relative z-50 mx-auto flex max-w-7xl items-center justify-between gap-x-4 bg-white py-4 px-4 shadow-md print:hidden sm:px-6"
+	class="relative z-50 flex items-center gap-4 bg-white p-4 shadow-md print:hidden sm:p-6"
 	aria-label="Global"
 >
 	<div class="flex items-center gap-4">
