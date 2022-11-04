@@ -16,10 +16,18 @@ import { settings } from '$lib/utils/route-helpers';
 
 // Utils
 import { getRoute } from '$lib/utils/route-helpers/get-route';
-import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+import {
+	PageType,
+	PageTypePortfolio,
+} from '$lib/utils/route-helpers/route-helpers.type';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
-	const organizationId = user.role!.organizationId;
+	if (!user.role) {
+		// return empty array instead?
+		throw new Error('User role is not defined');
+	}
+
+	const organizationId = user.role.organizationId;
 	const pageType = PageType.List;
 
 	const tree: NavigationItem[] = [
@@ -36,7 +44,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 		},
 	];
 
-	if (user.role?.roleType === 'ORGADMIN') {
+	if (user.role.roleType === 'ORGADMIN') {
 		tree.splice(
 			0,
 			0,
@@ -68,33 +76,53 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 		});
 	}
 
-	if (user.role?.roleType === 'PORTFOLIO' && user.role.portfolioId) {
+	if (user.role.roleType === 'PORTFOLIO' && user.role.portfolioId) {
 		const portfolioId = user.role.portfolioId;
-		const portfolioRoute = `/organizations/${user.role.organizationId}/portfolios/${portfolioId}`;
+
+		const getRouteConfig = {
+			entity: 'portfolio',
+			id: portfolioId,
+			params: { organizationId, portfolioId },
+		} as const;
 
 		tree.splice(
 			0,
 			0,
 			{
 				name: 'Financials',
-				href: `${portfolioRoute}/financials/summary/`,
+				href: getRoute({
+					...getRouteConfig,
+					pageType: PageTypePortfolio.Summary,
+				}),
 				icon: HeroiconsOutlineDocumentReport,
 				children: [
 					{
 						name: 'Summary',
-						href: `${portfolioRoute}/financials/summary/`,
+						href: getRoute({
+							...getRouteConfig,
+							pageType: PageTypePortfolio.Summary,
+						}),
 					},
 					{
 						name: 'Income',
-						href: `${portfolioRoute}/financials/income/`,
+						href: getRoute({
+							...getRouteConfig,
+							pageType: PageTypePortfolio.Income,
+						}),
 					},
 					{
 						name: 'Expenses',
-						href: `${portfolioRoute}/financials/expenses/`,
+						href: getRoute({
+							...getRouteConfig,
+							pageType: PageTypePortfolio.Expenses,
+						}),
 					},
 					{
 						name: 'Payouts',
-						href: `${portfolioRoute}/financials/payouts/table/`,
+						href: getRoute({
+							...getRouteConfig,
+							pageType: PageTypePortfolio.Payouts,
+						}),
 					},
 				],
 			},
@@ -102,9 +130,9 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			{
 				name: 'Properties',
 				href: getRoute({
+					...getRouteConfig,
 					entity: 'property',
 					pageType,
-					params: { organizationId, portfolioId },
 				}),
 				icon: HeroiconsOutlineHome,
 			},
@@ -112,9 +140,9 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			{
 				name: 'Units',
 				href: getRoute({
+					...getRouteConfig,
 					entity: 'unit',
 					pageType,
-					params: { organizationId, portfolioId },
 				}),
 				icon: HeroiconsOutlineHome,
 			},
@@ -123,9 +151,9 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 				name: 'Leases',
 				href:
 					getRoute({
+						...getRouteConfig,
 						entity: 'lease',
 						pageType,
-						params: { organizationId, portfolioId },
 					}) + '/table',
 				icon: HeroiconsOutlineDocumentText,
 			},

@@ -10,7 +10,7 @@ const pageTypeToUrl = {
 	[PageTypePortfolio.Summary]: 'financials/summary',
 	[PageTypePortfolio.Income]: 'financials/income',
 	[PageTypePortfolio.Expenses]: 'financials/expenses',
-	[PageTypePortfolio.Payouts]: 'financials/payouts',
+	[PageTypePortfolio.Payouts]: 'financials/payouts/table',
 };
 
 export const getIdRoute = (input: GetIdRouteInput, base: string) => {
