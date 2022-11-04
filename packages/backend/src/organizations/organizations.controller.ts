@@ -146,6 +146,9 @@ export class OrganizationsController {
 		action: Action.Manage,
 		subject: SubjectType,
 		useParams: true,
+		overrideParams: {
+			organizationId: 'id',
+		},
 	})
 	@ApiOkResponse({ type: SearchDto, isArray: true })
 	search(

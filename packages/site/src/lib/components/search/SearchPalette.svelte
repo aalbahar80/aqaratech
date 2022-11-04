@@ -31,7 +31,7 @@
 		if (!q || !$page.data.user?.role?.organizationId) return;
 		try {
 			groups = await createApi().organizations.search({
-				id: $page.data.user?.role?.organizationId,
+				organizationId: $page.data.user.role.organizationId,
 				query: q,
 			});
 		} catch (e) {
