@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import TabBar from '$lib/components/Tabs/TabBar.svelte';
-	import TabItem from '$lib/components/Tabs/TabItem.svelte';
+	import TabBar from '$lib/components/tabs/TabBar.svelte';
+	import TabItem from '$lib/components/tabs/TabItem.svelte';
 	import { getRoute } from '$lib/utils/route-helpers/get-route';
 	import { PageTypePortfolio } from '$lib/utils/route-helpers/route-helpers.type';
 	import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';

@@ -4,8 +4,8 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import WideTabBar from '$lib/components/Tabs/WideTabBar.svelte';
-	import WideTabBarItem from '$lib/components/Tabs/WideTabBarItem.svelte';
+	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
+	import WideTabBarItem from '$lib/components/tabs/WideTabBarItem.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
