@@ -1,13 +1,40 @@
+<script lang="ts" context="module">
+	import { writable } from 'svelte/store';
+
+	const isOpen = writable(false);
+
+	export const toggleSidebar = () => {
+		isOpen.update((value) => {
+			console.log(`Sidebar was ${value ? 'open' : 'closed'}`);
+			return !value;
+		});
+	};
+
+	export const closeSidebar = () => {
+		console.log('Closing sidebar');
+		isOpen.set(false);
+	};
+</script>
+
 <script lang="ts">
 	import { page } from '$app/stores';
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
 	import type { NavigationItem } from '$lib/components/sidebar/types';
+	import { clickOutside } from '$lib/utils/click-outside';
+	import clsx from 'clsx';
+	import { fly } from 'svelte/transition';
 
 	export let navigationTree: NavigationItem[];
 </script>
 
 <aside
-	class="fixed flex h-screen w-64 flex-col border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900"
+	class={clsx(
+		'fixed z-40 h-screen w-64 flex-col border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900',
+		$isOpen ? 'flex' : 'hidden',
+	)}
+	in:fly={{ x: -100, duration: 150 }}
+	use:clickOutside
+	on:outclick={closeSidebar}
 >
 	<!-- Search -->
 	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
