@@ -7,6 +7,13 @@ export enum PageType {
 	List = 'list',
 }
 
+export enum PageTypePortfolio {
+	Summary = 'summary',
+	Income = 'income',
+	Expenses = 'expenses',
+	Payouts = 'payouts',
+}
+
 // Common
 
 type RouteParams =
@@ -20,19 +27,35 @@ interface BaseGetRouteInput {
 
 // Disambiguated
 
+// List Route
+
 export interface GetListRouteInput extends BaseGetRouteInput {
 	pageType: PageType.List;
 }
 
-export interface GetIdRouteInput extends BaseGetRouteInput {
-	pageType: PageType.Id | PageType.Edit;
-	id: string;
-}
+// Form Route
 
 export interface GetFormRouteInput extends BaseGetRouteInput {
 	pageType: PageType.New;
 	predefined?: Record<string, string>;
 }
+
+// ID Route
+
+export type GetIdRouteInput = GetIdRouteEntity | GetIdRoutePortfolio;
+
+export interface GetIdRouteEntity extends BaseGetRouteInput {
+	pageType: PageType.Id | PageType.Edit;
+	id: string;
+}
+
+export interface GetIdRoutePortfolio extends BaseGetRouteInput {
+	entity: Extract<Entity, 'portfolio'>;
+	pageType: PageTypePortfolio;
+	id: string;
+}
+
+// Combined
 
 export type GetRouteInput =
 	| GetIdRouteInput

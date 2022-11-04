@@ -10,13 +10,11 @@ import {
 export const getRoute = (input: GetRouteInput) => {
 	const base = getBaseRoute(input);
 
-	if (input.pageType === PageType.Id || input.pageType === PageType.Edit) {
-		return getIdRoute(input, base);
+	if (input.pageType === PageType.List) {
+		return getListRoute(input, base);
 	} else if (input.pageType === PageType.New) {
 		return getFormRoute(input, base);
-	} else if (input.pageType === PageType.List) {
-		return getListRoute(input, base);
 	} else {
-		throw new Error(`Invalid pageType`);
+		return getIdRoute(input, base);
 	}
 };
