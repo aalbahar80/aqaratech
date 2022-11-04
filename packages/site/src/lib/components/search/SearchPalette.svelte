@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { createApi } from '$api';
+	import type { SearchDto } from '$api/openapi';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { createApi } from '$api';
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
 	import {
 		Dialog,
@@ -11,11 +12,12 @@
 		TransitionChild,
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
-	import type { SearchDto } from '$api/openapi';
 	import { entitiesMap, isEntity } from '@self/utils';
 	import { EmojiSad, Globe, Search } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	// TODO optimize use lodash debounce?
+	import { getRoute } from '$lib/utils/route-helpers/get-route';
+	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
 	import debounce from 'debounce';
 	import { flip } from 'svelte/animate';
 	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';
@@ -85,7 +87,13 @@
 			>
 				<Listbox
 					on:change={(item) => {
-						goto(item.detail.url, { noscroll: true });
+						const url = getRoute({
+							entity: item.detail.entity,
+							id: item.detail.id,
+							pageType: PageType.Id,
+							params: $page.params,
+						});
+						void goto(url, { noscroll: true });
 						open = false;
 					}}
 				>
