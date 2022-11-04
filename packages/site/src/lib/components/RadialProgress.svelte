@@ -1,12 +1,22 @@
 <script lang="ts">
+	import { classes } from '$lib/utils/classes';
+
 	export let value: number;
+	export let size = 3;
+	export let thickness = 0.15;
+	export let extraClasses = '';
 </script>
 
 <!-- https://daisyui.com/components/radial-progress/ -->
 <!-- https://github.com/saadeghi/daisyui/blob/master/src/components/unstyled/radial-progress.css -->
 <!-- https://github.com/saadeghi/daisyui/blob/master/src/components/styled/radial-progress.css -->
 
-<div class="radial-progress" style={`--value:${value};`}>{value}%</div>
+<div
+	class={classes('radial-progress', extraClasses)}
+	style={`--value:${value}; --size:${size}rem; --thickness: ${thickness}rem`}
+>
+	{value}%
+</div>
 
 <style lang="postcss">
 	.radial-progress {
