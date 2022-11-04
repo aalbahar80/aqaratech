@@ -3,16 +3,14 @@
 
 	const isOpen = writable(false);
 
-	export const toggleSidebar = () => {
-		isOpen.update((value) => {
-			console.log(`Sidebar was ${value ? 'open' : 'closed'}`);
-			return !value;
-		});
+	export const closeSidebar = () => {
+		console.log('Closing sidebar'); // TODO rm
+		isOpen.set(false);
 	};
 
-	export const closeSidebar = () => {
-		console.log('Closing sidebar');
-		isOpen.set(false);
+	export const openSidebar = () => {
+		console.log('Opening sidebar'); // TODO rm
+		isOpen.set(true);
 	};
 </script>
 
