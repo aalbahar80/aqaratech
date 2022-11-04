@@ -15,6 +15,7 @@
 </script>
 
 <script lang="ts">
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
 	import type { NavigationItem } from '$lib/components/sidebar/types';
@@ -23,12 +24,17 @@
 	import { fly } from 'svelte/transition';
 
 	export let navigationTree: NavigationItem[];
+
+	// Close sidebar after navigation
+	afterNavigate(() => {
+		closeSidebar();
+	});
 </script>
 
 <aside
 	class={clsx(
 		'fixed z-40 h-screen w-64 flex-col border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900',
-		$isOpen ? 'flex' : 'hidden lg:flex',
+		$isOpen ? 'flex' : 'hidden lg:flex', // ignore $isOpen on lg breakpoint
 	)}
 	in:fly={{ x: -100, duration: 150 }}
 	use:clickOutside
