@@ -81,7 +81,7 @@
 		<VersionFooter />
 	{:else}
 		<div class="grid grid-cols-12">
-			<div class="hidden lg:col-span-3 lg:block xl:col-span-3 2xl:col-span-2">
+			<div class="lg:col-span-3 lg:block xl:col-span-3 2xl:col-span-2">
 				<Sidebar navigationTree={getNavigationTree(data.user)} />
 			</div>
 
