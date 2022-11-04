@@ -86,10 +86,10 @@
 				class="mx-auto max-w-xl transform overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
 			>
 				<Listbox
-					on:change={(item) => {
+					on:change={(e) => {
 						const url = getRoute({
-							entity: item.detail.entity,
-							id: item.detail.id,
+							entity: e.detail.entity,
+							id: e.detail.id,
 							pageType: PageType.Id,
 							params: $page.params,
 						});
