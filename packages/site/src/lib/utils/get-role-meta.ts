@@ -1,38 +1,40 @@
 import type { ValidatedRoleDto } from '$api/openapi';
 import type { UserMeta } from '$lib/models/types/auth.type';
 import { getRoute } from '$lib/utils/route-helpers/get-route';
-import { PageTypePortfolio } from '$lib/utils/route-helpers/route-helpers.type';
+import {
+	PageType,
+	PageTypePortfolio,
+} from '$lib/utils/route-helpers/route-helpers.type';
 import { entitiesMap } from '@self/utils';
 
 export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
+	const organizationId = role.organizationId;
+
 	if (role.roleType === 'ORGADMIN') {
 		return {
 			roleLabel: 'Organization',
-			home: '/',
-			navLinks: [
-				{ label: 'Portfolios', href: '/portfolios' },
-				{ label: 'Properties', href: '/properties' },
-				{ label: 'Leases', href: '/leases' },
-				{ label: 'Tenants', href: '/tenants' },
-			],
+			home: getRoute({
+				entity: 'portfolio',
+				pageType: PageType.List,
+				params: {
+					organizationId,
+				},
+			}),
 		};
 	} else if (role.roleType === 'PORTFOLIO' && role.portfolioId) {
+		const portfolioId = role.portfolioId;
+
 		return {
 			roleLabel: entitiesMap.portfolio.singularCap,
 			home: getRoute({
 				entity: 'portfolio',
 				pageType: PageTypePortfolio.Summary,
 				params: {
-					organizationId: role.organizationId,
-					portfolioId: role.portfolioId,
+					organizationId,
+					portfolioId,
 				},
-				id: role.portfolioId,
+				id: portfolioId,
 			}),
-
-			navLinks: [
-				{ label: 'Properties', href: '/properties' },
-				{ label: 'Leases', href: '/leases' },
-			],
 		};
 	} else if (role.roleType === 'TENANT' && role.tenantId) {
 		return {

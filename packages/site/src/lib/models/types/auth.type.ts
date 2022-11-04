@@ -19,15 +19,9 @@ export type AuthConfigType = {
 	JWKS: JSONWebKeySet;
 };
 
-export interface NavbarItem {
-	label: string;
-	href: string;
-}
-
 export interface UserMeta {
 	home: string;
 	roleLabel: string;
-	navLinks?: NavbarItem[];
 }
 
 export type RoleSK = ValidatedRoleDto & {
