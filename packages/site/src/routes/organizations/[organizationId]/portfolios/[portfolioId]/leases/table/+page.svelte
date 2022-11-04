@@ -3,13 +3,14 @@
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
+	import RadialProgress from '$lib/components/RadialProgress.svelte';
 	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 	import {
 		locationColumnDef,
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { toUTCFormat } from '$lib/utils/common';
+	import { getProgress, toUTCFormat } from '$lib/utils/common';
 	import { getRoute } from '$lib/utils/route-helpers/get-route';
 	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
@@ -28,6 +29,22 @@
 		columnHelper.accessor('end', {
 			header: 'End',
 			cell: (info) => toUTCFormat(info.getValue()),
+		}),
+
+		// Progress
+		columnHelper.display({
+			id: 'progress',
+			header: 'Progress',
+			cell: (props) => {
+				const progress = getProgress(
+					props.row.original.start,
+					props.row.original.end,
+				);
+
+				return renderComponent(RadialProgress, {
+					value: progress,
+				});
+			},
 		}),
 
 		columnHelper.accessor('monthlyRent', {
