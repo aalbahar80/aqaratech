@@ -4,8 +4,8 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import FullTabBar from '$lib/components/Tabs/FullTabBar.svelte';
-	import FullTabBarItem from '$lib/components/Tabs/FullTabBarItem.svelte';
+	import WideTabBar from '$lib/components/Tabs/WideTabBar.svelte';
+	import WideTabBarItem from '$lib/components/Tabs/WideTabBarItem.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
@@ -37,20 +37,20 @@
 	</svelte:fragment>
 </Heading>
 
-<FullTabBar>
-	<FullTabBarItem let:cn>
+<WideTabBar>
+	<WideTabBarItem let:cn>
 		<a href="#" class={cn}> Info </a>
-	</FullTabBarItem>
-	<FullTabBarItem active={true} let:cn>
+	</WideTabBarItem>
+	<WideTabBarItem active={true} let:cn>
 		<a href="#" class={cn}>Financials</a>
-	</FullTabBarItem>
-	<FullTabBarItem let:cn>
+	</WideTabBarItem>
+	<WideTabBarItem let:cn>
 		<a href="#" class={cn}>Occupancy</a>
-	</FullTabBarItem>
-	<FullTabBarItem let:cn>
+	</WideTabBarItem>
+	<WideTabBarItem let:cn>
 		<a href="#" class={cn}>Units</a>
-	</FullTabBarItem>
-	<FullTabBarItem let:cn>
+	</WideTabBarItem>
+	<WideTabBarItem let:cn>
 		<a href="#" class={cn}>Files</a>
-	</FullTabBarItem>
-</FullTabBar>
+	</WideTabBarItem>
+</WideTabBar>
