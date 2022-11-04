@@ -41,7 +41,6 @@ export const viewColumnDef = <T extends { id: string }>(
 	columnHelper.display({
 		id: 'view',
 		header: '',
-		footer: '',
 		cell: (props) => {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			return renderComponent(ActionCell, {
