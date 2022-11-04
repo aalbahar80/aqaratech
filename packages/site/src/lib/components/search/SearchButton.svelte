@@ -14,6 +14,7 @@
 		open = true;
 	}}
 >
+	<SearchPalette bind:open />
 	<svg
 		class="mr-3 h-5 w-5 flex-none text-gray-400"
 		viewBox="0 0 24 24"
@@ -33,4 +34,3 @@
 		<abbr title="Command" class="no-underline">⌘</abbr> K
 	</kbd>
 </button>
-<SearchPalette bind:open />
