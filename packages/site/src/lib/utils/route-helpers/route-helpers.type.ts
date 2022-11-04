@@ -7,6 +7,8 @@ export enum PageType {
 	List = 'list',
 }
 
+// Common
+
 type RouteParams =
 	| { organizationId: string; portfolioId: string }
 	| Record<string, string>;
@@ -16,9 +18,10 @@ interface BaseGetRouteInput {
 	params: RouteParams;
 }
 
-export interface GetFormRouteInput extends BaseGetRouteInput {
-	pageType: PageType.New;
-	predefined?: Record<string, string>;
+// Disambiguated
+
+export interface GetListRouteInput extends BaseGetRouteInput {
+	pageType: PageType.List;
 }
 
 export interface GetIdRouteInput extends BaseGetRouteInput {
@@ -26,8 +29,9 @@ export interface GetIdRouteInput extends BaseGetRouteInput {
 	id: string;
 }
 
-export interface GetListRouteInput extends BaseGetRouteInput {
-	pageType: PageType.List;
+export interface GetFormRouteInput extends BaseGetRouteInput {
+	pageType: PageType.New;
+	predefined?: Record<string, string>;
 }
 
 export type GetRouteInput =
