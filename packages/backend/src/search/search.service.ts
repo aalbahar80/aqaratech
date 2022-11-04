@@ -123,16 +123,16 @@ export class SearchService implements OnModuleInit {
 			filter,
 		});
 
-		const hitsWithUrl = data.hits.map((hit) => {
+		const hitsWithEntity = data.hits.map((hit) => {
 			return {
 				...hit,
-				url: `/${entitiesMap[indexName].urlName}/${hit.id}`,
+				entity: entitiesMap[indexName].title,
 			};
 		});
 
 		return {
 			...data,
-			hits: hitsWithUrl,
+			hits: hitsWithEntity,
 		};
 	}
 

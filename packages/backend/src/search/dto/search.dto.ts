@@ -10,11 +10,11 @@ export class SearchDto implements SearchResponse {
 		items: {
 			title: 'HitDto',
 			type: 'object',
-			required: ['id', 'url', '_formatted'],
+			required: ['id', 'entity', '_formatted'],
 			properties: {
 				id: { type: 'string' },
 				title: { type: 'string', nullable: true },
-				url: { type: 'string' },
+				entity: { type: 'string' },
 				_formatted: {
 					type: 'object',
 					properties: { title: { type: 'string', nullable: true } },
@@ -34,5 +34,5 @@ export class SearchDto implements SearchResponse {
 export interface HitAdditionalProps {
 	id: string;
 	title?: string | null;
-	url: string;
+	entity: string;
 }

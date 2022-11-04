@@ -1072,7 +1072,7 @@ export interface HitDto {
 	 * @type {string}
 	 * @memberof HitDto
 	 */
-	url: string;
+	entity: string;
 	/**
 	 *
 	 * @type {HitDtoFormatted}

@@ -3700,7 +3700,7 @@ components:
             type: object
             required:
               - id
-              - url
+              - entity
               - _formatted
             properties:
               id:
@@ -3708,7 +3708,7 @@ components:
               title:
                 type: string
                 nullable: true
-              url:
+              entity:
                 type: string
               _formatted:
                 type: object
