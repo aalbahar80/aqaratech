@@ -1,5 +1,5 @@
 import { createApi } from '$api';
-import { startOfMonthN } from '@self/utils';
+import { occupancyRange } from '$lib/components/charts/utils/occupancy-range';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch, params }) => {
@@ -19,16 +19,14 @@ export const load: PageLoad = async ({ fetch, params }) => {
 			organizationId,
 			portfolioId,
 			propertyId,
-			start: startOfMonthN(12).split('T')[0],
-			end: new Date().toISOString().split('T')[0],
+			...occupancyRange.previous,
 		}),
 
 		api.portfolios.getOccupancy({
 			organizationId,
 			portfolioId,
 			propertyId,
-			start: new Date().toISOString().split('T')[0],
-			end: startOfMonthN(-12).split('T')[0],
+			...occupancyRange.future,
 		}),
 	]);
 
