@@ -33,7 +33,7 @@
 
 <aside
 	class={clsx(
-		'fixed z-40 h-screen w-64 flex-col border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900',
+		'fixed z-40 h-screen w-64 flex-col gap-6 border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900',
 		$isOpen ? 'flex' : 'hidden lg:flex', // ignore $isOpen on lg breakpoint
 	)}
 	in:fly={{ x: -100, duration: 150 }}
@@ -64,7 +64,7 @@
 		</div>
 	{/if}
 
-	<div class="mt-6 flex flex-1 flex-col justify-between">
+	<div class="flex flex-1 flex-col justify-between">
 		<nav>
 			{#each navigationTree as item}
 				{#if item.divided}
