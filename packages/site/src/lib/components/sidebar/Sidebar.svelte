@@ -68,7 +68,7 @@
 			</span>
 
 			<span
-				class="block w-full rounded-md border bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+				class="block w-full rounded-md border bg-white py-2 pl-10 pr-4 text-gray-700 hover:border-blue-400 hover:outline-none hover:ring hover:ring-blue-300 hover:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-300"
 			>
 				Search
 			</span>
