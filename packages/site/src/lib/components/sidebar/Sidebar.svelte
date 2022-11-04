@@ -41,8 +41,6 @@
 	use:clickOutside
 	on:outclick={closeSidebar}
 >
-	<!-- Search -->
-	<!-- TODO extract to own component -->
 	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 		<SearchButton />
 	{/if}
