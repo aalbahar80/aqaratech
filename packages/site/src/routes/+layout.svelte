@@ -2,7 +2,6 @@
 	import { navigating, page } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
-	import Navbar from '$lib/components/navbar/Navbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
@@ -75,7 +74,6 @@
 		<Alert />
 	{/if}
 	<ToastParent />
-	<Navbar />
 	{#if $page.url.pathname === '/'}
 		<slot />
 		<VersionFooter />
