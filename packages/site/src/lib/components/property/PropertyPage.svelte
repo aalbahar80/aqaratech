@@ -1,11 +1,13 @@
 <script lang="ts">
+	import type { PropertyDto } from '$api/openapi';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import FullTabBar from '$lib/components/Tabs/FullTabBar.svelte';
+	import FullTabBarItem from '$lib/components/Tabs/FullTabBarItem.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import type { PropertyDto } from '$api/openapi';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let property: PropertyDto;
@@ -34,3 +36,21 @@
 		<BreadCrumb crumbs={property.breadcrumbs} />
 	</svelte:fragment>
 </Heading>
+
+<FullTabBar>
+	<FullTabBarItem let:cn>
+		<a href="#" class={cn}> Info </a>
+	</FullTabBarItem>
+	<FullTabBarItem active={true} let:cn>
+		<a href="#" class={cn}>Financials</a>
+	</FullTabBarItem>
+	<FullTabBarItem let:cn>
+		<a href="#" class={cn}>Occupancy</a>
+	</FullTabBarItem>
+	<FullTabBarItem let:cn>
+		<a href="#" class={cn}>Units</a>
+	</FullTabBarItem>
+	<FullTabBarItem let:cn>
+		<a href="#" class={cn}>Files</a>
+	</FullTabBarItem>
+</FullTabBar>
