@@ -17,11 +17,14 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
+	import SearchButton from '$lib/components/search/SearchButton.svelte';
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
 	import type { NavigationItem } from '$lib/components/sidebar/types';
 	import { clickOutside } from '$lib/utils/click-outside';
 	import clsx from 'clsx';
 	import { fly } from 'svelte/transition';
+	import SearchPalette from '$lib/components/search/SearchPalette.svelte';
+	import { shortcut } from '$lib/utils/shortcut';
 
 	export let navigationTree: NavigationItem[];
 
@@ -29,6 +32,8 @@
 	afterNavigate(() => {
 		closeSidebar();
 	});
+
+	let open = false;
 </script>
 
 <aside
@@ -41,9 +46,15 @@
 	on:outclick={closeSidebar}
 >
 	<!-- Search -->
+	<!-- TODO extract to own component -->
 	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
-		<!-- TODO extract to own component -->
-		<div class="relative mt-6">
+		<button
+			class="relative"
+			use:shortcut={{ control: true, code: 'KeyK' }}
+			on:click={() => {
+				open = true;
+			}}
+		>
 			<span class="absolute inset-y-0 left-0 flex items-center pl-3">
 				<svg class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none">
 					<path
@@ -61,7 +72,8 @@
 				class="w-full rounded-md border bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
 				placeholder="Search"
 			/>
-		</div>
+		</button>
+		<SearchPalette bind:open />
 	{/if}
 
 	<div class="flex flex-1 flex-col justify-between">
