@@ -3,31 +3,32 @@
 	import TabBar from '$lib/components/Tabs/TabBar.svelte';
 	import TabItem from '$lib/components/Tabs/TabItem.svelte';
 	import { getRoute } from '$lib/utils/route-helpers/get-route';
-	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+	import { PageTypePortfolio } from '$lib/utils/route-helpers/route-helpers.type';
 	import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 	import HeroiconsTableCells from '~icons/heroicons/table-cells';
 
-	export let dataType: 'expenses' | 'income';
+	export let dataType: 'Expenses' | 'Income';
 
 	const tabs = [
 		{
 			label: 'Table',
-			href: `${getRoute({
-				entity: 'portfolio',
-				params: $page.params,
-				id: $page.params.portfolioId,
-				pageType: PageType.Id,
-			})}/financials/${dataType}/table`,
+			href:
+				getRoute({
+					entity: 'portfolio',
+					params: $page.params,
+					id: $page.params.portfolioId!,
+					pageType: PageTypePortfolio[dataType],
+				}) + '/table',
 			icon: HeroiconsTableCells,
 		},
 		{
 			label: 'Chart',
-			href: `${getRoute({
+			href: getRoute({
 				entity: 'portfolio',
 				params: $page.params,
-				id: $page.params.portfolioId,
-				pageType: PageType.Id,
-			})}/financials/${dataType}`,
+				id: $page.params.portfolioId!,
+				pageType: PageTypePortfolio[dataType],
+			}),
 			icon: HeroiconsPresentationChartBar,
 		},
 	];

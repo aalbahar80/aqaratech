@@ -15,6 +15,6 @@
 
 <StatsExpenses {data} />
 
-<DataTabs dataType="expenses" />
+<DataTabs dataType="Expenses" />
 
 <slot />

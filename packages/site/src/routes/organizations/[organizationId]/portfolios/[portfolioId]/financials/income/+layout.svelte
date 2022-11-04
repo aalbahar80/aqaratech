@@ -15,6 +15,6 @@
 
 <StatsIncome {data} />
 
-<DataTabs dataType="income" />
+<DataTabs dataType="Income" />
 
 <slot />
