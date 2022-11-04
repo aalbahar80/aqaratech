@@ -1,0 +1,21 @@
+<script lang="ts">
+	import { page } from '$app/stores';
+	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
+	import HeroiconsBars3 from '~icons/heroicons/bars-3';
+</script>
+
+<header
+	class="relative z-50 mx-auto flex max-w-7xl items-center justify-between gap-x-4 bg-white py-4 px-4 shadow-md print:hidden sm:px-6"
+	aria-label="Global"
+>
+	<div class="flex items-center gap-4">
+		<HeroiconsBars3 class="h-8 w-8 lg:hidden" />
+		<h2 class="text-3xl font-semibold text-gray-800 dark:text-white">
+			Aqaratech
+		</h2>
+	</div>
+
+	{#if !$page.data.user}
+		<LoginButton />
+	{/if}
+</header>
