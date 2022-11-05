@@ -7,7 +7,7 @@
 </script>
 
 <header
-	class="fixed z-50 flex w-full items-center gap-4 bg-white p-4 shadow-md print:hidden sm:p-6"
+	class="sticky top-0 z-50 flex w-full items-center gap-4 bg-white p-4 shadow-md print:hidden sm:p-6"
 	aria-label="Global"
 >
 	<div class="flex items-center gap-4">
