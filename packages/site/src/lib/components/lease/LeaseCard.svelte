@@ -24,7 +24,10 @@
 		entity: 'lease',
 		id: lease.id,
 		pageType: PageType.Id,
-		params: $page.params,
+		params: {
+			...$page.params,
+			portfolioId: lease.portfolioId,
+		},
 	})}
 	class="block hover:bg-gray-50"
 >
