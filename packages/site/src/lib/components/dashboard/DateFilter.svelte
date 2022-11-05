@@ -1,16 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import {
-		defaultRange,
-		defaultRangeEnd,
-	} from '$lib/components/charts/utils/date-range';
+	import { defaultRange } from '$lib/components/charts/utils/date-range';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { toDateInput } from '$lib/utils/common';
 	import { startOfMonthN } from '@self/utils';
 
 	$: start = $page.url.searchParams.get('start') || startOfMonthN(defaultRange);
-	$: end = $page.url.searchParams.get('end') || defaultRangeEnd();
+	$: end =
+		$page.url.searchParams.get('end') || new Date().toISOString().slice(0, 10);
 
 	const rangeOptions = [
 		{ value: 0, label: 'Month to date' },
