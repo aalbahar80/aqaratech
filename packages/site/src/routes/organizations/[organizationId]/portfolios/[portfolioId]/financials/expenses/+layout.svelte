@@ -1,10 +1,10 @@
 <script lang="ts">
 	import RangeSelect from '$lib/components/dashboard/RangeSelect.svelte';
 	import DataTabs from '../DataTabs.svelte';
-	import type { PageData } from './$types';
+	import type { LayoutData } from './$types';
 	import StatsExpenses from './StatsExpenses.svelte';
 
-	export let data: PageData;
+	export let data: LayoutData;
 </script>
 
 <div class="inline-flex justify-end">
@@ -13,7 +13,7 @@
 	</div>
 </div>
 
-<StatsExpenses {data} />
+<StatsExpenses expenses={data.expenses} />
 
 <DataTabs dataType="Expenses" />
 
