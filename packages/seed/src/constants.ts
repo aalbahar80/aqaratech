@@ -315,6 +315,8 @@ export const coordinates: [number, number][] = [
 	[29.2, 48.09],
 ];
 
+export type Tree = ReturnType<typeof generateExpenseCategoryTree>;
+
 /**
  * Returns a default expense category tree with random ids.
  */

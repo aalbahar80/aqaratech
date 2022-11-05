@@ -1,4 +1,6 @@
+/* eslint-disable no-dupe-else-if */
 import { inspect } from 'node:util';
+import type { Tree } from './constants';
 import { expenseFactory } from './factory/expense';
 import { leaseFactory } from './factory/lease';
 import { leaseInvoiceFactory } from './factory/lease-invoice';
@@ -134,7 +136,7 @@ export const createSeed = (options?: SeedOptions) => {
 		const organizationId = org1.id;
 		const tree = organizationSettings.find(
 			(s) => s.organizationId === organizationId,
-		)?.expenseCategoryTree;
+		)?.expenseCategoryTree as Tree | undefined;
 
 		if (!tree) {
 			throw new Error('Expense category tree not found');
@@ -158,7 +160,7 @@ export const createSeed = (options?: SeedOptions) => {
 		return expenseFactory.build({
 			organizationId,
 			portfolioId: portfolio.id,
-			categoryId: randomCategory(tree as any).id,
+			categoryId: randomCategory(tree).id,
 			propertyId,
 			unitId,
 		});

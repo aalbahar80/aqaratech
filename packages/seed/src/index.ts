@@ -21,7 +21,6 @@ export {
 	testTenantEmail,
 	testTenantId,
 	testTenantRoleId,
-	timespan,
 } from './generators.js';
 export { insertSeed } from './insert-seed.js';
 export { preprocessSeed } from './preprocess-seed.js';

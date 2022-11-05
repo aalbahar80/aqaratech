@@ -1,4 +1,4 @@
-import type { generateExpenseCategoryTree } from '../constants';
+import type { Tree } from '../constants';
 
 /**
  * Return a random element from an array.
@@ -36,8 +36,6 @@ export const findOrFail = <T>(
 
 	return element;
 };
-
-type Tree = ReturnType<typeof generateExpenseCategoryTree>;
 
 export const randomCategory = (tree: Tree): Tree[number] => {
 	const maxAttempts = 10;
