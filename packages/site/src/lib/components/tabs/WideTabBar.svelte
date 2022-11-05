@@ -1,3 +1,12 @@
+<script lang="ts">
+	import WideTabBarItem from '$lib/components/tabs/WideTabBarItem.svelte';
+	import type { ComponentProps } from 'svelte';
+
+	type Tab = ComponentProps<WideTabBarItem>['tab'];
+
+	export let tabs: Tab[];
+</script>
+
 <div>
 	<div class="sm:hidden">
 		<label for="tabs" class="sr-only">Select a tab</label>
@@ -19,7 +28,9 @@
 	<div class="hidden sm:block">
 		<div class="border-b border-gray-200">
 			<nav class="-mb-px flex" aria-label="Tabs">
-				<slot />
+				{#each tabs as tab}
+					<WideTabBarItem {tab} />
+				{/each}
 			</nav>
 		</div>
 	</div>

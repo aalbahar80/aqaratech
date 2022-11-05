@@ -4,8 +4,7 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
-	import WideTabBarItem from '$lib/components/tabs/WideTabBarItem.svelte';
+	import PropertyTabs from '$lib/components/property/PropertyTabs.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
@@ -37,20 +36,4 @@
 	</svelte:fragment>
 </Heading>
 
-<WideTabBar>
-	<WideTabBarItem let:cn>
-		<a href="#" class={cn}> Info </a>
-	</WideTabBarItem>
-	<WideTabBarItem active={true} let:cn>
-		<a href="#" class={cn}>Financials</a>
-	</WideTabBarItem>
-	<WideTabBarItem let:cn>
-		<a href="#" class={cn}>Occupancy</a>
-	</WideTabBarItem>
-	<WideTabBarItem let:cn>
-		<a href="#" class={cn}>Units</a>
-	</WideTabBarItem>
-	<WideTabBarItem let:cn>
-		<a href="#" class={cn}>Files</a>
-	</WideTabBarItem>
-</WideTabBar>
+<PropertyTabs />
