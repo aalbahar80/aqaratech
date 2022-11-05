@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import WideTabBarItem from '$lib/components/tabs/WideTabBarItem.svelte';
 	import type { ComponentProps } from 'svelte';
 
@@ -15,14 +17,16 @@
 			id="tabs"
 			name="tabs"
 			class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+			on:change={(e) => {
+				const url = e.target?.value;
+				void goto(url);
+			}}
 		>
-			<option>My Account</option>
-
-			<option>Company</option>
-
-			<option selected>Team Members</option>
-
-			<option>Billing</option>
+			{#each tabs as tab}
+				<option selected={$page.url.pathname === tab.href} value={tab.href}
+					>{tab.label}</option
+				>
+			{/each}
 		</select>
 	</div>
 	<div class="hidden sm:block">
