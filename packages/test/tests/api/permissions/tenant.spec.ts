@@ -12,8 +12,6 @@ const notAccessible = [
 	'/portfolios',
 	'/properties',
 	'/units',
-	'/aggregate/incomeByMonth',
-	'/aggregate/expensesByMonth',
 	// "/search",
 ];
 

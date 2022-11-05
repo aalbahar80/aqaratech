@@ -231,25 +231,6 @@ export interface BreadcrumbsDto {
 /**
  *
  * @export
- * @interface ByMonthDto
- */
-export interface ByMonthDto {
-	/**
-	 *
-	 * @type {number}
-	 * @memberof ByMonthDto
-	 */
-	amount: number;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ByMonthDto
-	 */
-	date: string;
-}
-/**
- *
- * @export
  * @interface CreateExpenseCategoryDto
  */
 export interface CreateExpenseCategoryDto {

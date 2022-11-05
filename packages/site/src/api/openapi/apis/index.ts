@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export * from './AggregateApi';
 export * from './ExpenseCategoriesApi';
 export * from './ExpensesApi';
 export * from './FilesApi';

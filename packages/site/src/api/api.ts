@@ -4,7 +4,6 @@ import type { Breadcrumb } from '@sentry/svelte';
 import * as SentrySvelte from '@sentry/svelte?client';
 import type { LoadEvent } from '@sveltejs/kit';
 import {
-	AggregateApi,
 	Configuration,
 	ExpenseCategoriesApi,
 	ExpensesApi,
@@ -113,7 +112,6 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 		expenses: new ExpensesApi(config),
 		roles: new RolesApi(config),
 		search: new SearchApi(config),
-		aggregate: new AggregateApi(config),
 		organizations: new OrganizationsApi(config),
 		users: new UsersApi(config),
 		expenseCategories: new ExpenseCategoriesApi(config),
