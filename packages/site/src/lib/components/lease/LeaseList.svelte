@@ -20,6 +20,9 @@
 		entity: 'lease',
 		pageType: PageType.New,
 		params: $page.params,
+		predefined: {
+			unitId: $page.params.unitId,
+		},
 	})}
 >
 	{#each leases.results as lease, index (lease.id)}
