@@ -57,17 +57,17 @@ export type GetIdRouteInput =
 	| GetIdRouteInvoice;
 
 export interface GetIdRouteEntity extends BaseGetRouteInput {
-	pageType: PageType.Id | PageType.Edit;
 	id: string;
+	pageType: PageType.Id | PageType.Edit;
 	// PageTab?: never;
 }
 
 // ID Route - Entity
 
 interface GetIdRoutePortfolio extends BaseGetRouteInput {
+	id: string;
 	entity: Extract<Entity, 'portfolio'>;
 	pageType: PageTypePortfolio;
-	id: string;
 }
 
 interface GetIdRouteProperty extends BaseGetRouteInput {
