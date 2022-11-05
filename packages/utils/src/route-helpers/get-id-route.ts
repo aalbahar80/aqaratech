@@ -1,4 +1,4 @@
-import { entitiesMap } from 'src';
+import { entitiesMap } from 'src/entity/entity-map';
 import {
 	PageType,
 	PageTypePortfolio,

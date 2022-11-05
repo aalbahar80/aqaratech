@@ -19,6 +19,7 @@ export { isEntity, isEntityUrlName } from './entity/is-entity';
 export { addEnvLabel } from './logger/enrich-logs';
 export { formatRequestLog } from './logger/format-request-log';
 export { formatResponseLog } from './logger/format-response-log';
+export { getRoute } from './route-helpers/get-route';
 export { satisfies } from './satisfies';
 export {
 	expenseCategoryCreateSchema,
