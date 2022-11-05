@@ -15,7 +15,7 @@
 	{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
 		<Alert />
 	{/if}
-	<div class="flex items-center gap-4 p-4 sm:p-6">
+	<div class="flex items-center gap-6 py-8 px-4">
 		<button
 			on:click={async () => {
 				await tick(); // might not be necessary
