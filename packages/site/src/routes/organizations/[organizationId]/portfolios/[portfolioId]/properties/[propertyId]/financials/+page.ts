@@ -1,15 +1,9 @@
 import { createApi } from '$api';
 import { calculateNet } from '$lib/components/dashboard/stats/calculate-net';
-import { FilterEnum } from '$lib/stores/filter/Filter.enum';
-import { range } from '$lib/stores/filter/range';
-import { get } from 'svelte/store';
+import { rangeStart } from '$lib/components/dashboard/stats/range-start';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ fetch, params, depends }) => {
-	// Filter options
-	const { start, end } = get(range);
-	depends(FilterEnum.Range, FilterEnum.Property);
-
+export const load: PageLoad = async ({ fetch, params }) => {
 	const api = createApi(fetch);
 
 	const { organizationId, portfolioId, propertyId } = params;
@@ -19,16 +13,14 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 			organizationId,
 			portfolioId,
 			propertyId,
-			start,
-			end,
+			start: rangeStart,
 		}),
 
 		api.portfolios.getExpensesByMonth({
 			organizationId,
 			portfolioId,
 			propertyId,
-			start,
-			end,
+			start: rangeStart,
 		}),
 	]);
 
