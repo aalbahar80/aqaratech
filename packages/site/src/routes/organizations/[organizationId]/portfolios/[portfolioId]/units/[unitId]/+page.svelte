@@ -1,7 +1,6 @@
 <script lang="ts">
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import LeaseList from '$lib/components/lease/LeaseList.svelte';
-	import UnitPage from '$lib/components/unit/UnitPage.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import { create } from '$lib/utils/route-helpers';
 	import type { PageData } from './$types';
@@ -17,7 +16,6 @@
 	] as [string, string | null][];
 </script>
 
-<UnitPage unit={data.unit} />
 <DetailsPane {details} />
 <LeaseList
 	leases={data.leases}
