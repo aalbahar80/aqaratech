@@ -8,35 +8,14 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import DetailsPaneItem from '$lib/components/details-pane/DetailsPaneItem.svelte';
-	import {
-		addErrorToast,
-		addSuccessToast,
-		handleApiError,
-	} from '$lib/stores/toast';
-	import { hasFileSupport } from '$lib/utils/file';
-	import { inferRoute } from '$lib/utils/route-helpers';
+	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import { onMount } from 'svelte';
 	import { flip } from 'svelte/animate';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
-	let files: PaginatedFileDto | undefined = undefined;
-
-	onMount(async () => {
-		const route = inferRoute($page.url.pathname);
-		try {
-			if (hasFileSupport(route.entity.title))
-				files = await createApi().files.findAll({
-					relationKey: route.entity.title,
-					relationValue: route.id,
-				});
-		} catch (e) {
-			// TODO test if error logged by sentry
-			addErrorToast('Failed to load file list.');
-		}
-	});
+	export let files: PaginatedFileDto;
 
 	$: hideFileActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
 </script>
