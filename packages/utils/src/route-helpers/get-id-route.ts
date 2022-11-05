@@ -11,12 +11,12 @@ const pageTypeToUrl = {
 	[PageTypePortfolio.Expenses]: 'financials/expenses',
 	[PageTypePortfolio.Payouts]: 'financials/payouts/table',
 	[PageTab.Details]: '',
-	[PageTab.Files]: '/files',
-	[PageTab.Financials]: '/financials',
-	[PageTab.Occupancy]: '/occupancy',
-	[PageTab.Units]: '/units',
-	[PageTab.Leases]: '/leases',
-	[PageTab.Invoices]: '/invoices',
+	[PageTab.Files]: 'files',
+	[PageTab.Financials]: 'financials',
+	[PageTab.Occupancy]: 'occupancy',
+	[PageTab.Units]: 'units',
+	[PageTab.Leases]: 'leases',
+	[PageTab.Invoices]: 'invoices',
 };
 
 export const getIdRoute = (input: GetIdRouteInput, base: string) => {
