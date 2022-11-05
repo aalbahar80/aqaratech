@@ -8,6 +8,7 @@ import {
 	generateExpenseCategoryTree,
 	unitTypeOptions,
 } from './constants.js';
+import { timespan } from './utils/dates.js';
 
 // consistent id's for testing
 export const testPassword = 'cloud12';
@@ -21,7 +22,6 @@ export const testTenantEmail = 'tenant.dev@mailthink.net';
 export const testTenantId = 'e6258358-b4f6-4825-9245-0e21c54b557a';
 export const testTenantRoleId = '66e2b65c-21cf-4e6f-89c0-710b6766eb37';
 
-export const timespan = 2;
 export const createdAt = () => faker.date.past(timespan);
 export const updatedAt = () => faker.date.past(timespan);
 
