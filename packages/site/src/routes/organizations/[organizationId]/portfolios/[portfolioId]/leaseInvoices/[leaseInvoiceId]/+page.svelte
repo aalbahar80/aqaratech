@@ -70,7 +70,9 @@
 		/>
 	</svelte:fragment>
 </Heading>
+
 <Badge {label} {badgeColor} />
+
 <div class="grid gap-y-6">
 	<DetailsPane {details} />
 </div>

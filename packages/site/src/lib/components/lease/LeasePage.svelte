@@ -59,4 +59,5 @@
 		/>
 	</svelte:fragment>
 </Heading>
+
 <Badge label={badge.label} badgeColor={badge.color} />
