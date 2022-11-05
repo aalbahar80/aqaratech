@@ -1,8 +1,18 @@
 import { expect } from '@playwright/test';
+import { getRoute, PageType } from '@self/utils';
 import { test } from '../api/api-fixtures';
 
 test('can be searched', async ({ page, tenant }) => {
-	await page.goto(`/tenants/${tenant.id}/edit`);
+	const url = getRoute({
+		entity: 'tenant',
+		id: tenant.id,
+		pageType: PageType.Edit,
+		params: {
+			organizationId: tenant.organizationId,
+		},
+	});
+
+	await page.goto(url);
 
 	const input = page.locator('input[id="nationality"]');
 
