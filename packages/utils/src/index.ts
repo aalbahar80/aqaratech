@@ -20,6 +20,10 @@ export { addEnvLabel } from './logger/enrich-logs';
 export { formatRequestLog } from './logger/format-request-log';
 export { formatResponseLog } from './logger/format-response-log';
 export { getRoute } from './route-helpers/get-route';
+export {
+	PageType,
+	PageTypePortfolio,
+} from './route-helpers/route-helpers.type';
 export { satisfies } from './satisfies';
 export {
 	expenseCategoryCreateSchema,
