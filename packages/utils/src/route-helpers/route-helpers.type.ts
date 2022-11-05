@@ -9,7 +9,6 @@ export enum PageType {
 	Edit = 'edit',
 	New = 'new',
 	List = 'list',
-	Tab = 'tab',
 }
 
 export enum PageTypePortfolio {
@@ -70,15 +69,13 @@ export interface GetIdRoutePortfolio extends BaseGetRouteInput {
 export interface GetIdRouteProperty extends BaseGetRouteInput {
 	id: string;
 	entity: Extract<Entity, 'property'>;
-	pageType: PageType.Tab;
-	pageTab: PropertyPageTab;
+	pageType: PropertyPageTab;
 }
 
 export interface GetIdRouteUnit extends BaseGetRouteInput {
 	id: string;
 	entity: Extract<Entity, 'unit'>;
-	pageType: PageType.Tab;
-	pageTab: UnitPageTab;
+	pageType: UnitPageTab;
 }
 
 // Combined
