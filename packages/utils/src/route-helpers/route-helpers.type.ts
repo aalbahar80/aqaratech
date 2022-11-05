@@ -1,10 +1,15 @@
 import type { Entity } from 'src';
+import type {
+	PropertyPageTab,
+	UnitPageTab,
+} from 'src/route-helpers/page-tab.enum';
 
 export enum PageType {
 	Id = 'id',
 	Edit = 'edit',
 	New = 'new',
 	List = 'list',
+	Tab = 'tab',
 }
 
 export enum PageTypePortfolio {
@@ -40,19 +45,40 @@ export interface GetFormRouteInput extends BaseGetRouteInput {
 	predefined?: Record<string, string>;
 }
 
-// ID Route
+// ID Route - Common
 
-export type GetIdRouteInput = GetIdRouteEntity | GetIdRoutePortfolio;
+export type GetIdRouteInput =
+	| GetIdRouteEntity
+	| GetIdRoutePortfolio
+	| GetIdRouteProperty
+	| GetIdRouteUnit;
 
 export interface GetIdRouteEntity extends BaseGetRouteInput {
 	pageType: PageType.Id | PageType.Edit;
 	id: string;
+	// PageTab?: never;
 }
+
+// ID Route - Entity
 
 export interface GetIdRoutePortfolio extends BaseGetRouteInput {
 	entity: Extract<Entity, 'portfolio'>;
 	pageType: PageTypePortfolio;
 	id: string;
+}
+
+export interface GetIdRouteProperty extends BaseGetRouteInput {
+	id: string;
+	entity: Extract<Entity, 'property'>;
+	pageType: PageType.Tab;
+	pageTab: PropertyPageTab;
+}
+
+export interface GetIdRouteUnit extends BaseGetRouteInput {
+	id: string;
+	entity: Extract<Entity, 'unit'>;
+	pageType: PageType.Tab;
+	pageTab: UnitPageTab;
 }
 
 // Combined
