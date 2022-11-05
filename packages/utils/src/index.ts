@@ -23,7 +23,7 @@ export { getRoute } from './route-helpers/get-route';
 export {
 	PageType,
 	PageTypePortfolio,
-} from './route-helpers/route-helpers.type';
+} from './route-helpers/types/route-helpers.type';
 export { satisfies } from './satisfies';
 export {
 	expenseCategoryCreateSchema,
