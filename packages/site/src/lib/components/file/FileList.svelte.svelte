@@ -20,6 +20,8 @@
 	$: hideFileActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
 </script>
 
+<pre>{JSON.stringify(files, null, 2)}</pre>
+
 {#if files?.results.length}
 	<DetailsPaneItem key="Files" value={null}>
 		<ul class="divide-y divide-gray-200 rounded-md border border-gray-200">
