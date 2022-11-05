@@ -69,26 +69,24 @@
 	<PreloadingIndicator />
 {/if}
 
-<div>
-	<ToastParent />
-	<SecondaryNavbar />
-	{#if $page.url.pathname === '/'}
-		<slot />
-		<VersionFooter />
-	{:else}
-		<div class="grid grid-cols-12">
-			<div class="lg:col-span-3 lg:block xl:col-span-3 2xl:col-span-2">
-				<Sidebar navigationTree={getNavigationTree(data.user)} />
-			</div>
+<ToastParent />
+<SecondaryNavbar />
+{#if $page.url.pathname === '/'}
+	<slot />
+	<VersionFooter />
+{:else}
+	<div class="grid grid-cols-12">
+		<div class="lg:col-span-3 lg:block xl:col-span-3 2xl:col-span-2">
+			<Sidebar navigationTree={getNavigationTree(data.user)} />
+		</div>
 
-			<div class="col-span-12 pt-8 lg:col-span-9 xl:col-span-9 2xl:col-span-10">
-				<div
-					class="mx-auto flex max-w-7xl flex-col space-y-6 px-4 sm:px-6 lg:px-8"
-				>
-					<slot />
-					<VersionFooter />
-				</div>
+		<div class="col-span-12 pt-8 lg:col-span-9 xl:col-span-9 2xl:col-span-10">
+			<div
+				class="mx-auto flex max-w-7xl flex-col space-y-6 px-4 sm:px-6 lg:px-8"
+			>
+				<slot />
+				<VersionFooter />
 			</div>
 		</div>
-	{/if}
-</div>
+	</div>
+{/if}
