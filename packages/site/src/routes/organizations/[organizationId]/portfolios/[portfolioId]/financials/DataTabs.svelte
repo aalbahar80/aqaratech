@@ -2,8 +2,7 @@
 	import { page } from '$app/stores';
 	import TabBar from '$lib/components/tabs/TabBar.svelte';
 	import TabItem from '$lib/components/tabs/TabItem.svelte';
-	import { getRoute } from '$lib/utils/route-helpers/get-route';
-	import { PageTypePortfolio } from '$lib/utils/route-helpers/route-helpers.type';
+	import { getRoute, PageTypePortfolio } from '@self/utils';
 	import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 	import HeroiconsTableCells from '~icons/heroicons/table-cells';
 

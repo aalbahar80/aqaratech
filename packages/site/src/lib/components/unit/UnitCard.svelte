@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { UnitDto } from '$api/openapi';
 	import { page } from '$app/stores';
-	import { getRoute } from '$lib/utils/route-helpers/get-route';
-	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+	import { getRoute, PageType } from '@self/utils';
 	import { Calendar } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import FaSolidBath from '~icons/fa-solid/bath';

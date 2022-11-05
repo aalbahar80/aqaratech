@@ -1,8 +1,7 @@
 import type { BreadcrumbsDto } from '$api/openapi';
 import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
-import { getRoute } from '$lib/utils/route-helpers/get-route';
-import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
 import type { Entity } from '@self/utils';
+import { getRoute, PageType } from '@self/utils';
 import { renderComponent, type ColumnHelper } from '@tanstack/svelte-table';
 
 export const locationColumnDef = <T extends Breadcrumbs>(

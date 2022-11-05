@@ -4,8 +4,7 @@
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import PortfolioCard from '$lib/components/portfolio/PortfolioCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { getRoute } from '$lib/utils/route-helpers/get-route';
-	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+	import { getRoute, PageType } from '@self/utils';
 
 	export let portfolios: PaginatedPortfolioDto;
 </script>

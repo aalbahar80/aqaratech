@@ -6,8 +6,7 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
-	import { getRoute } from '$lib/utils/route-helpers/get-route';
-	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+	import { getRoute, PageType } from '@self/utils';
 	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';

@@ -2,9 +2,7 @@
 	import type { BreadcrumbsDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
-	import { getRoute } from '$lib/utils/route-helpers/get-route';
-	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
-	import { entitiesMap, isEntity } from '@self/utils';
+	import { entitiesMap, getRoute, isEntity, PageType } from '@self/utils';
 	import * as R from 'remeda';
 
 	export let crumbs: Partial<BreadcrumbsDto> | undefined;

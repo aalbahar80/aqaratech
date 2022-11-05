@@ -16,8 +16,7 @@
 	import { EmojiSad, Globe, Search } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	// TODO optimize use lodash debounce?
-	import { getRoute } from '$lib/utils/route-helpers/get-route';
-	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+	import { getRoute, PageType } from '@self/utils';
 	import debounce from 'debounce';
 	import { flip } from 'svelte/animate';
 	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';

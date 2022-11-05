@@ -4,8 +4,7 @@
 	import Badge from '$components/Badge.svelte';
 	import { getProgress } from '$lib/utils/common';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
-	import { getRoute } from '$lib/utils/route-helpers/get-route';
-	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+	import { getRoute, PageType } from '@self/utils';
 	import { Calendar, Home, User } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { formatDistance } from 'date-fns';

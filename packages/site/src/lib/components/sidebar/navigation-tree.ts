@@ -13,13 +13,7 @@ import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
 // Links
 import { LOGOUT } from '$lib/constants/routes';
 import { settings } from '$lib/utils/route-helpers';
-
-// Utils
-import { getRoute } from '$lib/utils/route-helpers/get-route';
-import {
-	PageType,
-	PageTypePortfolio,
-} from '$lib/utils/route-helpers/route-helpers.type';
+import { getRoute, PageType, PageTypePortfolio } from '@self/utils';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
 	if (!user.role) {

@@ -5,8 +5,7 @@
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import UnitCard from '$lib/components/unit/UnitCard.svelte';
-	import { getRoute } from '$lib/utils/route-helpers/get-route';
-	import { PageType } from '$lib/utils/route-helpers/route-helpers.type';
+	import { getRoute, PageType } from '@self/utils';
 	import { flip } from 'svelte/animate';
 	import { writable } from 'svelte/store';
 
