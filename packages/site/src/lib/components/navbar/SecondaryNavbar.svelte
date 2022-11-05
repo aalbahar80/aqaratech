@@ -1,16 +1,21 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import Alert from '$lib/components/navbar/Alert.svelte';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import { openSidebar } from '$lib/components/sidebar/Sidebar.svelte';
+	import { environment } from '$lib/environment';
 	import { tick } from 'svelte';
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>
 
 <header
-	class="sticky top-0 z-50 flex w-full items-center gap-4 bg-white p-4 shadow-md print:hidden sm:p-6"
+	class="sticky top-0 z-50 flex w-full flex-col bg-white shadow-md print:hidden"
 	aria-label="Global"
 >
-	<div class="flex items-center gap-4">
+	{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
+		<Alert />
+	{/if}
+	<div class="flex items-center gap-4 p-4 sm:p-6">
 		<button
 			on:click={async () => {
 				await tick(); // might not be necessary

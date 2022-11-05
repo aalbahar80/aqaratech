@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { navigating, page } from '$app/stores';
 	import ToastParent from '$components/toast/ToastParent.svelte';
-	import Alert from '$lib/components/navbar/Alert.svelte';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
@@ -71,9 +70,6 @@
 {/if}
 
 <div>
-	{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
-		<Alert />
-	{/if}
 	<ToastParent />
 	<SecondaryNavbar />
 	{#if $page.url.pathname === '/'}
