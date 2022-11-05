@@ -44,7 +44,7 @@ export const viewColumnDef = <T extends { id: string }>(
 		cell: (props) => {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 			return renderComponent(ActionCell, {
-				value: 'view',
+				value: 'View',
 				href: getRoute({
 					entity,
 					id: props.row.original.id,
