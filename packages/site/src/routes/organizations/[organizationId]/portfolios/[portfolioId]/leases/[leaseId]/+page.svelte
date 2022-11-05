@@ -16,4 +16,3 @@
 </script>
 
 <DetailsPane {details} />
-<!-- <LeaseInvoiceList leaseInvoices={data.invoices} leaseId={data.lease.id} /> -->
