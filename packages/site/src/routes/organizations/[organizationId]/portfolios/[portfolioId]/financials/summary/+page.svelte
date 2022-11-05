@@ -1,7 +1,7 @@
 <script lang="ts">
 	import PropertySelect from '$lib/components/dashboard/PropertySelect.svelte';
+	import SummaryStats from '$lib/components/dashboard/stats/SummaryStats.svelte';
 	import type { PageData } from './$types';
-	import SummaryStats from './SummaryStats.svelte';
 
 	export let data: PageData;
 </script>
