@@ -201,7 +201,7 @@
 	$: filters = [getColumnFilter($table)];
 </script>
 
-<div class="inline-block min-w-full py-6 align-middle md:px-6 lg:px-8">
+<div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
 	<div class="py-8">
 		<!-- Use the named slot "filter" to customize ex. Hero. 
 			   Otherwise, a default FilterBar will be rendered. -->

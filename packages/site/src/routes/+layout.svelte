@@ -81,9 +81,9 @@
 				<Sidebar navigationTree={getNavigationTree(data.user)} />
 			</div>
 
-			<div class="col-span-12 lg:col-span-9 xl:col-span-9 2xl:col-span-10">
+			<div class="col-span-12 pt-8 lg:col-span-9 xl:col-span-9 2xl:col-span-10">
 				<div
-					class="mx-auto flex max-w-7xl flex-col space-y-6 p-4 sm:p-6 lg:p-8"
+					class="mx-auto flex max-w-7xl flex-col space-y-6 px-4 sm:px-6 lg:px-8"
 				>
 					<slot />
 					<VersionFooter />
