@@ -20,6 +20,7 @@ export { addEnvLabel } from './logger/enrich-logs';
 export { formatRequestLog } from './logger/format-request-log';
 export { formatResponseLog } from './logger/format-response-log';
 export { PageTypePortfolio } from './route-helpers/enums/page-tab-portfolio.enum';
+export { PageTab } from './route-helpers/enums/page-tab.enum';
 export { PageType } from './route-helpers/enums/page-type.enum';
 export { getRoute } from './route-helpers/get-route';
 export { satisfies } from './satisfies';
