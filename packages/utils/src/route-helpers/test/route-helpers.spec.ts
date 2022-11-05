@@ -1,7 +1,7 @@
 import {
 	PageType,
 	type GetRouteInput,
-} from '$lib/utils/route-helpers/route-helpers.type';
+} from 'src/route-helpers/route-helpers.type';
 import { expect, test } from 'vitest';
 import { getRoute } from '../get-route';
 

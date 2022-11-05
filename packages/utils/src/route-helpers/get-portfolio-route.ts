@@ -1,4 +1,4 @@
-import type { GetRouteInput } from '$lib/utils/route-helpers/route-helpers.type';
+import type { GetRouteInput } from 'src/route-helpers/route-helpers.type';
 import { z } from 'zod';
 
 export const getOrganizationRoute = (

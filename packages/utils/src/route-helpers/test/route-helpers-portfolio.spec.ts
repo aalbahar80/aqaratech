@@ -1,9 +1,9 @@
+import { getRoute } from 'src/route-helpers/get-route';
 import {
 	PageType,
 	PageTypePortfolio,
-} from '$lib/utils/route-helpers/route-helpers.type';
+} from 'src/route-helpers/route-helpers.type';
 import { expect, test } from 'vitest';
-import { getRoute } from '../get-route';
 
 const pageTypes: [PageTypePortfolio | PageType, string][] = [
 	[PageType.Edit, 'edit'],

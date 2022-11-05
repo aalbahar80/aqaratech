@@ -1,5 +1,5 @@
-import type { GetFormRouteInput } from '$lib/utils/route-helpers/route-helpers.type';
-import { entitiesMap } from '@self/utils';
+import { entitiesMap } from 'src';
+import type { GetFormRouteInput } from 'src/route-helpers/route-helpers.type';
 
 export const getFormRoute = (input: GetFormRouteInput, base: string) => {
 	const entity = entitiesMap[input.entity].urlName;

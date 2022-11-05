@@ -1,11 +1,11 @@
-import { getBaseRoute } from '$lib/utils/route-helpers/get-base-route';
-import { getFormRoute } from '$lib/utils/route-helpers/get-form-route';
-import { getIdRoute } from '$lib/utils/route-helpers/get-id-route';
-import { getListRoute } from '$lib/utils/route-helpers/get-list-route';
+import { getBaseRoute } from 'src/route-helpers/get-base-route';
+import { getFormRoute } from 'src/route-helpers/get-form-route';
+import { getIdRoute } from 'src/route-helpers/get-id-route';
+import { getListRoute } from 'src/route-helpers/get-list-route';
 import {
 	PageType,
 	type GetRouteInput,
-} from '$lib/utils/route-helpers/route-helpers.type';
+} from 'src/route-helpers/route-helpers.type';
 
 export const getRoute = (input: GetRouteInput) => {
 	const base = getBaseRoute(input);

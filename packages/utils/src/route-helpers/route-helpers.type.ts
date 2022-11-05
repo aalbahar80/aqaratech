@@ -1,4 +1,4 @@
-import type { Entity } from '@self/utils';
+import type { Entity } from 'src';
 
 export enum PageType {
 	Id = 'id',

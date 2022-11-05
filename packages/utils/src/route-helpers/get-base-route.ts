@@ -1,8 +1,8 @@
 import {
 	getOrganizationRoute,
 	getPortfolioRoute,
-} from '$lib/utils/route-helpers/get-portfolio-route';
-import type { GetRouteInput } from '$lib/utils/route-helpers/route-helpers.type';
+} from 'src/route-helpers/get-portfolio-route';
+import type { GetRouteInput } from 'src/route-helpers/route-helpers.type';
 
 export const getBaseRoute = (
 	input: Pick<GetRouteInput, 'entity' | 'params'>,

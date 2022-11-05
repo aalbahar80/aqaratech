@@ -1,9 +1,9 @@
+import { entitiesMap } from 'src';
 import {
 	PageType,
 	PageTypePortfolio,
 	type GetIdRouteInput,
-} from '$lib/utils/route-helpers/route-helpers.type';
-import { entitiesMap } from '@self/utils';
+} from 'src/route-helpers/route-helpers.type';
 
 const pageTypeToUrl = {
 	[PageType.Edit]: 'edit',

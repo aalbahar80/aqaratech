@@ -9,8 +9,11 @@
 		"declarationDir": "./dist",
 		"sourceMap": true,
 		"resolveJsonModule": true,
-		"isolatedModules": true
-		// "rootDirs": ["src"]
+		"isolatedModules": true,
+		"baseUrl": "./",
+		"paths": {
+			"src": ["./src/"]
+		}
 	},
 	"exclude": ["dist"]
 }

@@ -1,5 +1,5 @@
-import type { GetListRouteInput } from '$lib/utils/route-helpers/route-helpers.type';
-import { entitiesMap } from '@self/utils';
+import { entitiesMap } from 'src';
+import type { GetListRouteInput } from 'src/route-helpers/route-helpers.type';
 
 export const getListRoute = (input: GetListRouteInput, base: string) => {
 	const entity = entitiesMap[input.entity].urlName;
