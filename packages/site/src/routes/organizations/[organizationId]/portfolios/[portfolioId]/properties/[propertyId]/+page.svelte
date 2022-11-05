@@ -6,6 +6,8 @@
 	import { setContext } from 'svelte';
 	import type { PageData } from './$types';
 
+	export let data: PageData;
+
 	$: details = [
 		...(data.property.label ? [['Label', data.property.label]] : []),
 		['Address', data.property.breadcrumbs.property.label],
@@ -17,21 +19,15 @@
 		['Parcel', data.property.parcel],
 		['Paci', data.property.paci],
 	] as [string, string | null][];
-
-	export let data: PageData;
-
-	setContext('portfolio', {
-		...data.property.breadcrumbs.portfolio,
-	});
 </script>
 
-<PropertyPage property={data.property} />
+<!-- <PropertyPage property={data.property} /> -->
 
 <DetailsPane {details} />
 
-<UnitsList units={data.units} />
+<!-- <UnitsList units={data.units} />
 
 <OccupancyCard
 	occupancy={data.occupancy}
 	futureOccupancy={data.futureOccupancy}
-/>
+/> -->
