@@ -9,7 +9,7 @@ import {
 	testTenantEmail,
 	testTenantId,
 	testTenantRoleId,
-} from './generators';
+} from './constant/ids.constant';
 
 const users = Prisma.validator<Prisma.UserCreateManyArgs['data']>()([
 	{

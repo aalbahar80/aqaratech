@@ -1,5 +1,10 @@
 /* eslint-disable no-dupe-else-if */
 import { inspect } from 'node:util';
+import {
+	testOrgEmail,
+	testPortfolioEmail,
+	testTenantEmail,
+} from './constant/ids.constant';
 import type { Tree } from './constants';
 import { expenseFactory } from './factory/expense';
 import { leaseFactory } from './factory/lease';
@@ -13,11 +18,6 @@ import { roleFactory } from './factory/role';
 import { tenantFactory } from './factory/tenant';
 import { unitFactory } from './factory/unit';
 import { userFactory } from './factory/user';
-import {
-	testOrgEmail,
-	testPortfolioEmail,
-	testTenantEmail,
-} from './generators';
 import { isDefined } from './utils/is-defined';
 import { random, randomCategory } from './utils/random';
 

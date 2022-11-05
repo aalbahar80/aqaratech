@@ -1,0 +1,10 @@
+export const testPassword = 'cloud12';
+export const testOrgEmail = 'org.demo@mailthink.net';
+export const testOrgId = 'f79a7bd6-698b-4b56-9e86-4338690a7929';
+export const testOrgRoleId = 'e82bdce2-03b6-40aa-9e00-0d95b55b772d';
+export const testPortfolioEmail = 'client.dev@mailthink.net';
+export const testPortfolioId = '62357de0-03c7-446c-a414-ac6de3ac9bbb';
+export const testPortfolioRoleId = '27e60270-172f-4ed2-af48-6d43cb8a526b';
+export const testTenantEmail = 'tenant.dev@mailthink.net';
+export const testTenantId = 'e6258358-b4f6-4825-9245-0e21c54b557a';
+export const testTenantRoleId = '66e2b65c-21cf-4e6f-89c0-710b6766eb37';
