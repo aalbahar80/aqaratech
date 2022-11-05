@@ -1,8 +1,6 @@
+import { PageTypePortfolio } from 'src/route-helpers/enums/page-tab-portfolio.enum';
+import { PageType } from 'src/route-helpers/enums/page-type.enum';
 import { getRoute } from 'src/route-helpers/get-route';
-import {
-	PageType,
-	PageTypePortfolio,
-} from 'src/route-helpers/types/route-helpers.type';
 import { expect, test } from 'vitest';
 
 const pageTypes: [PageTypePortfolio | PageType, string][] = [
