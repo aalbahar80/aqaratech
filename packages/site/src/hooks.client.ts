@@ -12,7 +12,7 @@ export const handleError: HandleClientError = ({ error, event }) => {
 				message: error.message,
 				tags: {
 					status: error.response.status,
-					routeId: event.routeId,
+					routeId: event.route.id,
 					pathname: event.url.pathname,
 				},
 				request: {
@@ -32,7 +32,7 @@ export const handleError: HandleClientError = ({ error, event }) => {
 	} else {
 		Sentry.captureException(error, {
 			tags: {
-				routeId: event.routeId,
+				routeId: event.route.id,
 				pathname: event.url.pathname,
 			},
 			extra: {

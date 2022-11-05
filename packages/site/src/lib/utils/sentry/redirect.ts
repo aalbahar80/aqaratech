@@ -13,5 +13,5 @@ export const isNotFoundError = (
 	event: RequestEvent,
 ): error is RedirectError => {
 	// https://kit.svelte.dev/docs/hooks#shared-hooks-handleerror
-	return !!error && event.routeId === null;
+	return !!error && event.route.id === null;
 };
