@@ -19,5 +19,5 @@ export const handleServerPagination = async (
 
 	url.searchParams.set(PAGE_SIZE, pagination.pageSize.toString());
 
-	await goto(url, { noscroll: true, keepfocus: true });
+	await goto(url, { noScroll: true, keepFocus: true });
 };

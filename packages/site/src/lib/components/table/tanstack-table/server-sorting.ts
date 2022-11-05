@@ -23,5 +23,5 @@ export const handleServerSorting = async (
 		url.searchParams.set(SORT, `-${key}`);
 	}
 
-	await goto(url, { noscroll: true, keepfocus: true });
+	await goto(url, { noScroll: true, keepFocus: true });
 };

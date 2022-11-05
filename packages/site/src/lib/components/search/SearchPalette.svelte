@@ -93,7 +93,7 @@
 							pageType: PageType.Id,
 							params: $page.params,
 						});
-						void goto(url, { noscroll: true });
+						void goto(url, { noScroll: true });
 						open = false;
 					}}
 				>

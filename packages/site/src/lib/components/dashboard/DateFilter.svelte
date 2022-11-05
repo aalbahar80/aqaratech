@@ -23,7 +23,7 @@
 	$: rangeValid = start && end && new Date(start) < new Date(end);
 
 	const handleRange = async (url: URL) => {
-		await goto(url, { noscroll: true, keepfocus: true });
+		await goto(url, { noScroll: true, keepFocus: true });
 	};
 
 	const isReasonable = (value: string) => {
@@ -51,7 +51,7 @@
 					const url = new URL($page.url);
 					url.searchParams.set('start', startOfMonthN(value));
 					url.searchParams.set('end', new Date().toISOString());
-					goto(url, { noscroll: true, keepfocus: true });
+					goto(url, { noScroll: true, keepFocus: true });
 				}
 			}}
 		/>

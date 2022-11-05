@@ -51,7 +51,7 @@
 					url.searchParams.delete('propertyId');
 				}
 
-				goto(url, { noscroll: true });
+				goto(url, { noScroll: true });
 			}}
 		/>
 	</div>
@@ -72,7 +72,7 @@
 					url.searchParams.delete('unitId');
 				}
 
-				await goto(url, { noscroll: true });
+				await goto(url, { noScroll: true });
 			}}
 		/>
 	</div>
