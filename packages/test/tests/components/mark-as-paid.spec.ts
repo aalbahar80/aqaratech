@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { getRoute, PageType } from '@self/utils';
 import { test } from '../api/api-fixtures';
 
 test.use({
@@ -7,8 +8,18 @@ test.use({
 	},
 });
 
-test('can toggle paid status', async ({ page, invoice }) => {
-	await page.goto(`leases/${invoice.leaseId}`);
+test('can toggle paid status', async ({ page, lease, invoice }) => {
+	const url = getRoute({
+		entity: 'lease',
+		id: lease.id,
+		pageType: PageType.Id,
+		params: {
+			organizationId: lease.organizationId,
+			portfolioId: lease.portfolioId,
+		},
+	});
+
+	await page.goto(url + '/invoices');
 
 	const card = page.locator(`data-testid=${invoice.id}`);
 
