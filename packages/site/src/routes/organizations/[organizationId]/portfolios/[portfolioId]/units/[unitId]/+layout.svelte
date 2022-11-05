@@ -3,6 +3,7 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
 	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import FaSolidBath from '~icons/fa-solid/bath';
@@ -65,5 +66,7 @@
 		<BreadCrumb crumbs={data.unit.breadcrumbs} />
 	</svelte:fragment>
 </Heading>
+
+<UnitTabs />
 
 <slot />
