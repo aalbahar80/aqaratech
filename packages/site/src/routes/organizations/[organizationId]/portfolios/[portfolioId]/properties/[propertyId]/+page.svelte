@@ -1,9 +1,5 @@
 <script lang="ts">
-	import OccupancyCard from '$lib/components/dashboard/cards/OccupancyCard.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
-	import PropertyPage from '$lib/components/property/PropertyPage.svelte';
-	import UnitsList from '$lib/components/unit/UnitsList.svelte';
-	import { setContext } from 'svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -21,13 +17,4 @@
 	] as [string, string | null][];
 </script>
 
-<!-- <PropertyPage property={data.property} /> -->
-
 <DetailsPane {details} />
-
-<!-- <UnitsList units={data.units} />
-
-<OccupancyCard
-	occupancy={data.occupancy}
-	futureOccupancy={data.futureOccupancy}
-/> -->
