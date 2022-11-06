@@ -2,7 +2,6 @@
 	import BalanceCard from '$lib/components/balance/BalanceCard.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import MemberList from '$lib/components/member/MemberList.svelte';
-	import PortfolioPage from '$lib/components/portfolio/PortfolioPage.svelte';
 	import PropertyList from '$lib/components/property/PropertyList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type { PageData } from './$types';
@@ -21,7 +20,6 @@
 	] as [string, string | null][];
 </script>
 
-<PortfolioPage portfolio={data.portfolio} />
 <DetailsPane {details} />
 <BalanceCard balance={data.balance} />
 <PropertyList properties={data.properties} />
