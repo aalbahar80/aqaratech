@@ -1,7 +1,11 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
+import {
+	AggregateOptionsDto,
+	AggregateOptionsExpensesDto,
+} from 'src/aggregate/dto/aggregate-options.dto';
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { groupByMonth } from 'src/aggregate/group-by-month';
 import { Action } from 'src/casl/action.enum';
@@ -67,7 +71,7 @@ export class AggregateService {
 	}: {
 		organizationId: string;
 		portfolioId: string;
-		options: AggregateOptionsDto;
+		options: AggregateOptionsExpensesDto;
 	}) {
 		const expenses = await this.prisma.expense.findMany({
 			where: {
@@ -75,8 +79,7 @@ export class AggregateService {
 					{
 						organizationId,
 						portfolioId,
-						propertyId: options.propertyId,
-						unitId: options.unitId,
+						...this.parseLocationFilter(options),
 						postAt: { gte: options.start, lte: options.end },
 					},
 				],
@@ -239,4 +242,40 @@ export class AggregateService {
 
 		return sum;
 	}
+
+	// TODO use satisfies type
+	parseLocationFilter = (
+		filter: Pick<AggregateOptionsExpensesDto, 'propertyId' | 'unitId'>,
+	): Prisma.ExpenseWhereInput => {
+		if (filter.unitId) {
+			return {
+				// Get expenses associated with the unit
+				unitId: filter.unitId,
+			};
+		} else if (typeof filter.propertyId === 'string') {
+			return {
+				OR: [
+					// Get expenses associated with the property directly
+					{ propertyId: filter.propertyId },
+
+					// OR
+
+					// Get expenses associated with the property's units
+					{
+						unit: {
+							propertyId: filter.propertyId,
+						},
+					},
+				],
+			};
+		} else if (filter.propertyId === null) {
+			// Get expenses which are not associated with any property
+			return {
+				propertyId: null,
+				unitId: null,
+			};
+		} else {
+			return {};
+		}
+	};
 }

@@ -12,12 +12,21 @@
 		label: 'All properties',
 	};
 
+	const unspecifedPropertyOption = {
+		value: null,
+		label: 'Unspecified',
+	};
+
 	$: propertyOptions = properties.map((property) => ({
 		value: property.id,
 		label: property.title,
 	}));
 
-	$: options = [allPropertiesOption, ...propertyOptions];
+	$: options = [
+		allPropertiesOption,
+		unspecifedPropertyOption,
+		...propertyOptions,
+	];
 </script>
 
 <Select

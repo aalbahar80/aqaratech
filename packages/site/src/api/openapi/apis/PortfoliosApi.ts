@@ -104,8 +104,8 @@ export interface PortfoliosApiGetExpensesByMonthRequest {
 	portfolioId: string;
 	start?: string;
 	end?: string;
-	propertyId?: string;
-	unitId?: string;
+	propertyId?: string | null;
+	unitId?: string | null;
 }
 
 export interface PortfoliosApiGetIncomeByMonthRequest {

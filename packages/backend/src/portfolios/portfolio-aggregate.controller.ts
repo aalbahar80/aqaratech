@@ -1,8 +1,14 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AggregateService } from 'src/aggregate/aggregate.service';
-import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
-import { aggregateOptionsSchema } from 'src/aggregate/dto/aggregate-options.schema';
+import {
+	AggregateOptionsDto,
+	AggregateOptionsExpensesDto,
+} from 'src/aggregate/dto/aggregate-options.dto';
+import {
+	aggregateOptionsExpensesSchema,
+	aggregateOptionsSchema,
+} from 'src/aggregate/dto/aggregate-options.schema';
 import {
 	GroupByMonthDto,
 	IncomeByMonthDto,
@@ -79,8 +85,8 @@ export class PortfolioAggregateController {
 	getExpensesByMonth(
 		@Param('organizationId') organizationId: string,
 		@Param('portfolioId') portfolioId: string,
-		@Query(new ZodValidationPipe(aggregateOptionsSchema))
-		queryOptions: AggregateOptionsDto,
+		@Query(new ZodValidationPipe(aggregateOptionsExpensesSchema))
+		queryOptions: AggregateOptionsExpensesDto,
 	): Promise<GroupByMonthDto[]> {
 		return this.aggregateService.portfolioExpensesByMonth({
 			organizationId,

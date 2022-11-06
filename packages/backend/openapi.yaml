@@ -1237,11 +1237,13 @@ paths:
           required: false
           in: query
           schema:
+            nullable: true
             type: string
         - name: unitId
           required: false
           in: query
           schema:
+            nullable: true
             type: string
       responses:
         '200':

@@ -24,7 +24,9 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 		api.portfolios.getIncomeByMonth({
 			organizationId,
 			portfolioId,
-			propertyId,
+			// When getting incomeByMonth, we don't want to differentiate between
+			// (a) `undefined` propertyId and (b) `null` propertyId
+			propertyId: propertyId === null ? undefined : propertyId,
 			start,
 			end,
 		}),
