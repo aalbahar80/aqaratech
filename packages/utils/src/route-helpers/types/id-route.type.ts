@@ -3,6 +3,7 @@ import type { PageTypePortfolio } from 'src/route-helpers/enums/page-tab-portfol
 import type {
 	InvoicePageTab,
 	LeasePageTab,
+	PortfolioPageTab,
 	PropertyPageTab,
 	UnitPageTab,
 } from 'src/route-helpers/enums/page-tab.enum';
@@ -21,7 +22,7 @@ export interface GetIdRouteEntity extends BaseGetRouteInput {
 interface GetIdRoutePortfolio extends BaseGetRouteInput {
 	id: string;
 	entity: Extract<Entity, 'portfolio'>;
-	pageType: PageTypePortfolio;
+	pageType: PageTypePortfolio | PortfolioPageTab;
 }
 
 interface GetIdRouteProperty extends BaseGetRouteInput {

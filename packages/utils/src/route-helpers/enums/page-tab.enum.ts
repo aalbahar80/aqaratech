@@ -9,6 +9,8 @@ export enum PageTab {
 	Leases = 'leases',
 }
 
+export type PortfolioPageTab = PageTab.Details | PageTab.Files;
+
 export type PropertyPageTab =
 	| PageTab.Details
 	| PageTab.Financials
