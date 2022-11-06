@@ -14,7 +14,7 @@
 
 	const unspecifedPropertyOption = {
 		value: null,
-		label: 'Unspecified',
+		label: 'Unspecified Property',
 	};
 
 	$: propertyOptions = properties.map((property) => ({
