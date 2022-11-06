@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { expenseFactory, sample } from '@self/seed';
 import { randomUUID } from 'crypto';
 import * as R from 'remeda';
-import { test } from '../../../api-fixtures';
+import { test } from '../../../../api-fixtures';
 
 const newExpense = R.pick(
 	expenseFactory.build({
