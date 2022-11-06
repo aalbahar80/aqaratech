@@ -62,7 +62,7 @@ test('cannot create expense in non-existing portfolio', async ({
 
 	await expect.soft(res).not.toBeOK();
 
-	expect(res.status()).toBe(404);
+	expect(res.status()).toBe(400);
 });
 
 test('cannot create expense in non-existing property', async ({
@@ -85,7 +85,7 @@ test('cannot create expense in non-existing property', async ({
 
 	await expect.soft(res).not.toBeOK();
 
-	expect(res.status()).toBe(404);
+	expect(res.status()).toBe(400);
 });
 
 test('cannot create expense in non-existing unit', async ({
@@ -108,5 +108,5 @@ test('cannot create expense in non-existing unit', async ({
 
 	await expect.soft(res).not.toBeOK();
 
-	expect(res.status()).toBe(404);
+	expect(res.status()).toBe(400);
 });
