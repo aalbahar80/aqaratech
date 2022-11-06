@@ -19,7 +19,7 @@ import { tenantFactory } from './factory/tenant';
 import { unitFactory } from './factory/unit';
 import { userFactory } from './factory/user';
 import { isDefined } from './utils/is-defined';
-import { random, randomCategory } from './utils/random';
+import { findOrFail, random, randomCategory } from './utils/random';
 
 // TODO use satisfies SeedCount
 const defaultSeedCount = {
@@ -132,7 +132,13 @@ export const createSeed = (options?: SeedOptions) => {
 
 	// Expenses
 	const expenses = Array.from({ length: count.expenses }, () => {
-		const portfolio = random(portfolios);
+		const unit = random(units);
+		const property = findOrFail(properties, (p) => p.id === unit.propertyId);
+		const portfolio = findOrFail(
+			portfolios,
+			(p) => p.id === property.portfolioId,
+		);
+
 		const organizationId = org1.id;
 		const tree = organizationSettings.find(
 			(s) => s.organizationId === organizationId,
@@ -150,11 +156,11 @@ export const createSeed = (options?: SeedOptions) => {
 			propertyId = null;
 			unitId = null;
 		} else if (Math.random() < 0.5) {
-			propertyId = random(properties).id;
+			propertyId = property.id;
 			unitId = null;
 		} else {
 			propertyId = null;
-			unitId = random(units).id;
+			unitId = unit.id;
 		}
 
 		return expenseFactory.build({

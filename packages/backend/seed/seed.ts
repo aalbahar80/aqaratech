@@ -1,5 +1,10 @@
 import { PrismaClient } from '@prisma/client';
-import { createSeed, insertSeed, preprocessSeed } from '@self/seed';
+import {
+	createSeed,
+	insertSeed,
+	preprocessSeed,
+	validateSeed,
+} from '@self/seed';
 
 const prisma = new PrismaClient();
 
@@ -14,6 +19,8 @@ const raw = createSeed({
 });
 
 const data = preprocessSeed(raw);
+
+validateSeed(data);
 
 insertSeed(data)
 	.catch((e) => {

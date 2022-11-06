@@ -16,3 +16,4 @@ export { insertSeed } from './insert-seed.js';
 export { preprocessSeed } from './preprocess-seed.js';
 export { sample } from './sample-data';
 export * from './utils';
+export { validateSeed } from './validate-seed.js';
