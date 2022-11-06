@@ -35,12 +35,51 @@ export class ExpensesService {
 			await this.validateCategoryId(createExpenseDto.categoryId, user);
 		}
 
-		return this.prisma.expense.create({
-			data: {
-				...createExpenseDto,
-				organizationId,
-			},
-		});
+		const { portfolioId, propertyId, unitId, ...data } = createExpenseDto;
+
+		if (propertyId) {
+			return this.prisma.expense.create({
+				data: {
+					...data,
+					property: {
+						connect: { id: propertyId, AND: [{ portfolioId }] },
+					},
+					portfolio: {
+						connect: { id: portfolioId },
+					},
+					organization: {
+						connect: { id: organizationId },
+					},
+				},
+			});
+		} else if (unitId) {
+			return this.prisma.expense.create({
+				data: {
+					...data,
+					unit: {
+						connect: { id: unitId, AND: [{ portfolioId }] },
+					},
+					portfolio: {
+						connect: { id: portfolioId },
+					},
+					organization: {
+						connect: { id: organizationId },
+					},
+				},
+			});
+		} else {
+			return this.prisma.expense.create({
+				data: {
+					...data,
+					portfolio: {
+						connect: { id: portfolioId },
+					},
+					organization: {
+						connect: { id: organizationId },
+					},
+				},
+			});
+		}
 	}
 
 	async findAll({
