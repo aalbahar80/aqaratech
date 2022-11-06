@@ -46,6 +46,7 @@ export interface TestOptions {
 	roleParams: RoleFactoryParams | undefined;
 
 	invoiceParams: LeaseInvoiceFactoryParams | undefined;
+	expenseParams: ExpenseCategoryFactoryParams | undefined;
 	expenseCategoryParams: ExpenseCategoryFactoryParams | undefined;
 }
 

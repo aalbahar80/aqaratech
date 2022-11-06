@@ -1,6 +1,5 @@
 import { test as base } from '@playwright/test';
 import {
-	expenseFactory,
 	leaseFactory,
 	organizationFactory,
 	portfolioFactory,
@@ -10,7 +9,6 @@ import {
 } from '@self/seed';
 import * as R from 'remeda';
 import type {
-	ExpenseDto,
 	LeaseDto,
 	OrganizationCreatedDto,
 	PortfolioDto,
@@ -20,6 +18,7 @@ import type {
 } from '../../types/api';
 import { apiURL } from './fixtures/api-url';
 import { expenseCategoryFixtures } from './fixtures/expense-category.fixture';
+import { expenseFixtures } from './fixtures/expense.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
 import { roleFixtures } from './fixtures/role.fixture';
 import { scopedRequestFixtures } from './fixtures/scoped-request.fixture';
@@ -213,29 +212,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(created);
 	},
 
-	expense: async ({ org, property, request }, use) => {
-		const expense = expenseFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: property.portfolioId,
-		});
-
-		const picked = R.pick(expense, [
-			'portfolioId',
-			'propertyId',
-			'unitId',
-			'amount',
-			'postAt',
-		]);
-
-		const url = `${apiURL}/organizations/${org.organization.id}/expenses`;
-
-		const res = await request.post(url, { data: picked });
-
-		const created = (await res.json()) as ExpenseDto;
-
-		await use(created);
-	},
-
 	// A fixture that returns a fresh file in a fresh portfolio.
 	file: async ({ portfolio, request }, use) => {
 		const fileName = 'test.txt';
@@ -263,6 +239,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 	...scopedRequestFixtures,
 	...invoiceFixtures,
+	...expenseFixtures,
 	...expenseCategoryFixtures,
 	...roleFixtures,
 });
