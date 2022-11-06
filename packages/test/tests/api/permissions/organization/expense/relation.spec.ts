@@ -1,10 +1,10 @@
 import { expect } from '@playwright/test';
-import { expenseFactory, portfolioFactory } from '@self/seed';
+import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
 import type { PortfolioDto } from '../../../../../types/api';
 import { test } from '../../../api-fixtures';
 
-test('expense.property.portfolioId matches expense.portfolioId', async ({
+test('expense.property belongs to expense.portfolio', async ({
 	portfolio,
 	property,
 	request,
@@ -14,12 +14,9 @@ test('expense.property.portfolioId matches expense.portfolioId', async ({
 		await request.post(
 			`/organizations/${portfolio.organizationId}/portfolios`,
 			{
-				data: R.pick(
-					portfolioFactory.build({
-						organizationId: portfolio.organizationId,
-					}),
-					['fullName'],
-				),
+				data: {
+					fullName: 'New Portfolio',
+				},
 			},
 		)
 	).json()) as PortfolioDto;
@@ -41,7 +38,7 @@ test('expense.property.portfolioId matches expense.portfolioId', async ({
 	expect(res.status()).toBe(400);
 });
 
-test('expense.unit.portfolioId matches expense.portfolioId', async ({
+test('expense.unit belongs to expense.portfolio', async ({
 	portfolio,
 	unit,
 	request,
@@ -51,12 +48,9 @@ test('expense.unit.portfolioId matches expense.portfolioId', async ({
 		await request.post(
 			`/organizations/${portfolio.organizationId}/portfolios`,
 			{
-				data: R.pick(
-					portfolioFactory.build({
-						organizationId: portfolio.organizationId,
-					}),
-					['fullName'],
-				),
+				data: {
+					fullName: 'New Portfolio',
+				},
 			},
 		)
 	).json()) as PortfolioDto;
