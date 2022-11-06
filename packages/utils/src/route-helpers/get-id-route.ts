@@ -24,10 +24,12 @@ export const getIdRoute = (input: GetIdRouteInput, base: string) => {
 
 	const entity = `${base}/${entityName}`;
 
+	const idRoute = `${entity}/${input.id}`;
+
 	if (input.pageType === PageType.Id) {
-		return `${entity}/${input.id}`;
+		return idRoute;
 	} else if (input.pageType in pageTypeToUrl) {
-		return `${entity}/${input.id}/${pageTypeToUrl[input.pageType]}`;
+		return `${idRoute}/${pageTypeToUrl[input.pageType]}`;
 	} else {
 		throw new Error(`Invalid page address`);
 	}
