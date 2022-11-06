@@ -6,6 +6,7 @@ import type {
 } from '@playwright/test';
 import type {
 	ExpenseCategoryFactoryParams,
+	ExpenseFactoryParams,
 	LeaseInvoiceFactoryParams,
 	RoleFactoryParams,
 } from '@self/seed';
@@ -36,6 +37,7 @@ export interface TestFixtures {
 	lease: LeaseDto;
 	invoice: LeaseInvoiceDto;
 	expense: ExpenseDto;
+	expenses: ExpenseDto[];
 	expenseCategory: ExpenseCategoryDto;
 	file: string;
 }
@@ -46,7 +48,12 @@ export interface TestOptions {
 	roleParams: RoleFactoryParams | undefined;
 
 	invoiceParams: LeaseInvoiceFactoryParams | undefined;
-	expenseParams: ExpenseCategoryFactoryParams | undefined;
+	expenseParams: ExpenseFactoryParams | undefined;
+	/**
+	 * Both propertyId and unitId are defined by default. If you want to override,
+	 * explicitly set the value to null.
+	 */
+	expensesParams: ExpenseFactoryParams[] | undefined;
 	expenseCategoryParams: ExpenseCategoryFactoryParams | undefined;
 }
 
