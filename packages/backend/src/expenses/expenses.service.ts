@@ -37,12 +37,12 @@ export class ExpensesService {
 
 		const { portfolioId, propertyId, unitId, ...data } = createExpenseDto;
 
-		if (propertyId) {
+		if (unitId) {
 			return this.prisma.expense.create({
 				data: {
 					...data,
-					property: {
-						connect: { id: propertyId, AND: [{ portfolioId }] },
+					unit: {
+						connect: { id: unitId, AND: [{ portfolioId }] },
 					},
 					portfolio: {
 						connect: { id: portfolioId },
@@ -52,12 +52,12 @@ export class ExpensesService {
 					},
 				},
 			});
-		} else if (unitId) {
+		} else if (propertyId) {
 			return this.prisma.expense.create({
 				data: {
 					...data,
-					unit: {
-						connect: { id: unitId, AND: [{ portfolioId }] },
+					property: {
+						connect: { id: propertyId, AND: [{ portfolioId }] },
 					},
 					portfolio: {
 						connect: { id: portfolioId },
