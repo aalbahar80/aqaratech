@@ -1,9 +1,19 @@
 import { expect } from '@playwright/test';
+import { getRoute, PageTab } from '@self/utils';
 import { getPresignedUrl } from '../../../utils/get-presigned-url';
 import { test } from '../../api/api-fixtures';
 
 test('file can be deleted', async ({ page, request, portfolio, file }) => {
-	await page.goto(`/portfolios/${portfolio.id}`);
+	const url = getRoute({
+		entity: 'portfolio',
+		id: portfolio.id,
+		pageType: PageTab.Files,
+		params: {
+			organizationId: portfolio.organizationId,
+		},
+	});
+
+	await page.goto(url);
 
 	const card = page.locator(`data-testid=${file}`);
 
@@ -12,7 +22,7 @@ test('file can be deleted', async ({ page, request, portfolio, file }) => {
 	await page.locator('button:has-text("Delete")').click();
 
 	// presigned url
-	//
+
 	const presignedUrl = await getPresignedUrl({
 		request,
 		key: file,
