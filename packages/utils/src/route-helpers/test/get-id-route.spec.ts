@@ -1,10 +1,8 @@
 import { PageTab } from 'src/route-helpers/enums/page-tab.enum';
-import { PageType } from 'src/route-helpers/enums/page-type.enum';
 import { getRoute } from 'src/route-helpers/get-route';
 import { describe, expect, test } from 'vitest';
 
 const pageTypes = [
-	[PageType.Edit, 'edit'],
 	[PageTab.Details, ''],
 	[PageTab.Files, 'files'],
 	[PageTab.Financials, 'financials'],
@@ -15,6 +13,16 @@ const pageTypes = [
 ] as const;
 
 const entityTypes = [
+	{
+		entity: 'portfolio',
+		url: (expected: string) =>
+			`/organizations/1/portfolios/2/details/${expected}`,
+		baseInput: {
+			entity: 'portfolio',
+			params: { organizationId: '1' },
+			id: '2',
+		},
+	},
 	{
 		entity: 'property',
 		url: (expected: string) =>
