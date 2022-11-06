@@ -1,21 +1,16 @@
-import { PageTypePortfolio } from 'src/route-helpers/enums/page-tab-portfolio.enum';
 import { PageTab } from 'src/route-helpers/enums/page-tab.enum';
 import { PageType } from 'src/route-helpers/enums/page-type.enum';
 import { getRoute } from 'src/route-helpers/get-route';
-import { expect, test } from 'vitest';
+import { expect, test, describe } from 'vitest';
 
 const baseInput = {
-	entity: 'portfolio',
-	params: { organizationId: '1' },
+	entity: 'property',
+	params: { organizationId: '1', portfolioId: '2' },
 	id: '3',
-};
+} as const;
 
-const pageTypes: [PageTypePortfolio | PageTab | PageType, string][] = [
+const pageTypes = [
 	[PageType.Edit, 'edit'],
-	[PageTypePortfolio.Summary, 'financials/summary'],
-	[PageTypePortfolio.Income, 'financials/income'],
-	[PageTypePortfolio.Expenses, 'financials/expenses'],
-	[PageTypePortfolio.Payouts, 'financials/payouts/table'],
 	[PageTab.Details, ''],
 	[PageTab.Files, 'files'],
 	[PageTab.Financials, 'financials'],
@@ -23,10 +18,10 @@ const pageTypes: [PageTypePortfolio | PageTab | PageType, string][] = [
 	[PageTab.Units, 'units'],
 	[PageTab.Leases, 'leases'],
 	[PageTab.Invoices, 'invoices'],
-];
+] as const;
 
 test.each(pageTypes)('getRoute(%o) === %s', (pageType, expected) => {
-	const url = `/organizations/1/portfolios/3/${expected}`;
+	const url = `/organizations/1/portfolios/2/properties/3/${expected}`;
 
 	const input = {
 		...baseInput,
@@ -34,7 +29,9 @@ test.each(pageTypes)('getRoute(%o) === %s', (pageType, expected) => {
 	};
 
 	// @ts-expect-error test
-	expect(getRoute(input)).toBe(url);
+	const result = getRoute(input);
+
+	expect(result).toBe(url);
 });
 
 test('errors on invalid page type', () => {

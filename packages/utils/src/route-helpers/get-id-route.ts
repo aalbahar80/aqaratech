@@ -29,8 +29,23 @@ export const getIdRoute = (input: GetIdRouteInput, base: string) => {
 	if (input.pageType === PageType.Id) {
 		return idRoute;
 	} else if (input.pageType in pageTypeToUrl) {
-		return `${idRoute}/${pageTypeToUrl[input.pageType]}`;
+		const prefix = getTabbedPrefix(input);
+		return `${idRoute}${prefix}/${pageTypeToUrl[input.pageType]}`;
 	} else {
 		throw new Error(`Invalid page address`);
+	}
+};
+
+/**
+ * Prefix all portfolio tabbed pages with /details
+ */
+export const getTabbedPrefix = (input: GetIdRouteInput) => {
+	if (
+		input.entity === 'portfolio' &&
+		Object.values(PageTab).includes(input.pageType)
+	) {
+		return '/details';
+	} else {
+		return '';
 	}
 };
