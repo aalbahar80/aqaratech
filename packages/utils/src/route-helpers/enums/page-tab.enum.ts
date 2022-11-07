@@ -4,12 +4,17 @@ export enum PageTab {
 	Financials = 'financials',
 	Occupancy = 'occupancy',
 
+	Properties = 'properties',
 	Units = 'units',
 	Invoices = 'invoices',
 	Leases = 'leases',
 }
 
-export type PortfolioPageTab = PageTab.Details | PageTab.Files;
+export type PortfolioPageTab =
+	| PageTab.Details
+	| PageTab.Properties
+	| PageTab.Occupancy
+	| PageTab.Files;
 
 export type PropertyPageTab =
 	| PageTab.Details

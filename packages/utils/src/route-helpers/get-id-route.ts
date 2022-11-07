@@ -14,6 +14,7 @@ const pageTypeToUrl = {
 	[PageTab.Files]: 'files',
 	[PageTab.Financials]: 'financials',
 	[PageTab.Occupancy]: 'occupancy',
+	[PageTab.Properties]: 'properties',
 	[PageTab.Units]: 'units',
 	[PageTab.Leases]: 'leases',
 	[PageTab.Invoices]: 'invoices',

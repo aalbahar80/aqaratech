@@ -3,16 +3,41 @@
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 	import { getRoute, PageTab } from '@self/utils';
 
-	$: baseRoute = getRoute({
+	$: baseRouteConfig = {
 		entity: 'portfolio',
 		id: $page.params.portfolioId!,
-		pageType: PageTab.Details,
 		params: $page.params,
-	});
+	} as const;
 
 	$: tabs = [
-		{ label: 'Info', href: baseRoute },
-		{ label: 'Files', href: `${baseRoute}/files` },
+		{
+			label: 'Info',
+			href: getRoute({
+				...baseRouteConfig,
+				pageType: PageTab.Details,
+			}),
+		},
+		{
+			label: 'Occupancy',
+			href: getRoute({
+				...baseRouteConfig,
+				pageType: PageTab.Occupancy,
+			}),
+		},
+		{
+			label: 'Properties',
+			href: getRoute({
+				...baseRouteConfig,
+				pageType: PageTab.Properties,
+			}),
+		},
+		{
+			label: 'Files',
+			href: getRoute({
+				...baseRouteConfig,
+				pageType: PageTab.Files,
+			}),
+		},
 	];
 </script>
 
