@@ -1,8 +1,5 @@
 <script lang="ts">
-	import BalanceCard from '$lib/components/balance/BalanceCard.svelte';
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
-	import MemberList from '$lib/components/member/MemberList.svelte';
-	import PropertyList from '$lib/components/property/PropertyList.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type { PageData } from './$types';
 
@@ -21,6 +18,3 @@
 </script>
 
 <DetailsPane {details} />
-<BalanceCard balance={data.balance} />
-<PropertyList properties={data.properties} />
-<MemberList roles={data.roles} />
