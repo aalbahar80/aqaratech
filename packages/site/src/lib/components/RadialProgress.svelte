@@ -3,7 +3,7 @@
 
 	export let value: number;
 	export let size = 3;
-	export let thickness = 0.15;
+	export let thickness = 0.22;
 	export let extraClasses = '';
 </script>
 
