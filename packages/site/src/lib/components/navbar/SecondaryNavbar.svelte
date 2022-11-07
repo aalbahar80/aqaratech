@@ -8,6 +8,7 @@
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>
 
+<!-- Vertical Navbar Flexbox -->
 <header
 	class="sticky top-0 z-50 flex w-full flex-col bg-white shadow-md print:hidden"
 	aria-label="Global"
@@ -15,21 +16,25 @@
 	{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
 		<Alert />
 	{/if}
-	<div class="flex items-center gap-6 py-8 px-4">
-		<button
-			on:click={async () => {
-				await tick(); // might not be necessary
-				openSidebar();
-			}}
-		>
-			<HeroiconsBars3 class="h-8 w-8 lg:hidden" />
-		</button>
-		<h2 class="text-3xl font-semibold text-gray-800 dark:text-white">
-			Aqaratech
-		</h2>
-	</div>
 
-	{#if !$page.data.user}
-		<LoginButton />
-	{/if}
+	<!-- Main horizontal navbar area -->
+	<div class="flex items-center justify-between py-8 px-4">
+		<!-- Logo and Hamburger Icon -->
+		<div class="flex items-center gap-6">
+			<button
+				on:click={async () => {
+					await tick(); // might not be necessary
+					openSidebar();
+				}}
+			>
+				<HeroiconsBars3 class="h-8 w-8 lg:hidden" />
+			</button>
+			<h2 class="text-3xl font-semibold text-gray-800 dark:text-white">
+				Aqaratech
+			</h2>
+		</div>
+		{#if $page.url.pathname === '/'}
+			<LoginButton />
+		{/if}
+	</div>
 </header>

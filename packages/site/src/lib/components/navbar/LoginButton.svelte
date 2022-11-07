@@ -1,11 +1,8 @@
 <script lang="ts">
+	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import { LOGIN } from '$lib/constants/routes';
 </script>
 
-<a
-	href={LOGIN}
-	rel="external"
-	class="inline-flex items-center rounded border border-transparent bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
->
-	Log in
-</a>
+<TextButton>
+	<a href={LOGIN} rel="external" sveltekit:reload> Log in </a>
+</TextButton>
