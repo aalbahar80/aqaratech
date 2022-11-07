@@ -18,6 +18,8 @@ const pageTypeToUrl = {
 	[PageTab.Units]: 'units',
 	[PageTab.Leases]: 'leases',
 	[PageTab.Invoices]: 'invoices',
+	[PageTab.Roles]: 'roles',
+	[PageTab.Balance]: 'balance',
 };
 
 export const getIdRoute = (input: GetIdRouteInput, base: string) => {

@@ -32,6 +32,20 @@
 			}),
 		},
 		{
+			label: 'Balance',
+			href: getRoute({
+				...baseRouteConfig,
+				pageType: PageTab.Balance,
+			}),
+		},
+		{
+			label: 'Users',
+			href: getRoute({
+				...baseRouteConfig,
+				pageType: PageTab.Roles,
+			}),
+		},
+		{
 			label: 'Files',
 			href: getRoute({
 				...baseRouteConfig,

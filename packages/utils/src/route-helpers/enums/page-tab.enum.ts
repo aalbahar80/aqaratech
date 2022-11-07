@@ -8,13 +8,20 @@ export enum PageTab {
 	Units = 'units',
 	Invoices = 'invoices',
 	Leases = 'leases',
+
+	// Admin
+	Roles = 'roles',
+	Balance = 'balance',
 }
 
 export type PortfolioPageTab =
 	| PageTab.Details
 	| PageTab.Properties
 	| PageTab.Occupancy
-	| PageTab.Files;
+	| PageTab.Files
+	// Admin
+	| PageTab.Roles
+	| PageTab.Balance;
 
 export type PropertyPageTab =
 	| PageTab.Details
