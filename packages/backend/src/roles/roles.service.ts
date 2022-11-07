@@ -57,8 +57,22 @@ export class RolesService {
 			data: {
 				roleType,
 				organization: { connect: { id: organizationId } },
-				portfolio: portfolioId ? { connect: { id: portfolioId } } : undefined,
-				tenant: tenantId ? { connect: { id: tenantId } } : undefined,
+				portfolio: portfolioId
+					? {
+							connect: {
+								id: portfolioId,
+								AND: [{ organizationId: organizationId }], // ensure portfolio belongs to organization
+							},
+					  }
+					: undefined,
+				tenant: tenantId
+					? {
+							connect: {
+								id: tenantId,
+								AND: [{ organizationId: organizationId }], // ensure tenant belongs to organization
+							},
+					  }
+					: undefined,
 				user: {
 					connectOrCreate: {
 						where: { email: createRoleDto.email },
