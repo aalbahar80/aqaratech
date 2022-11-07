@@ -15,6 +15,7 @@
 import * as runtime from '../runtime';
 import type {
 	BalanceDto,
+	GroupByCategoryDto,
 	GroupByMonthDto,
 	IncomeByMonthDto,
 	Occupancy,
@@ -340,7 +341,7 @@ export interface PortfoliosApiInterface {
 	getExpensesByCategoryRaw(
 		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<object>>;
+	): Promise<runtime.ApiResponse<Array<GroupByCategoryDto>>>;
 
 	/**
 	 *
@@ -349,7 +350,7 @@ export interface PortfoliosApiInterface {
 	getExpensesByCategory(
 		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<object>;
+	): Promise<Array<GroupByCategoryDto>>;
 
 	/**
 	 *
@@ -1031,7 +1032,7 @@ export class PortfoliosApi
 	async getExpensesByCategoryRaw(
 		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<object>> {
+	): Promise<runtime.ApiResponse<Array<GroupByCategoryDto>>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -1090,7 +1091,7 @@ export class PortfoliosApi
 			initOverrides,
 		);
 
-		return new runtime.JSONApiResponse<any>(response);
+		return new runtime.JSONApiResponse(response);
 	}
 
 	/**
@@ -1100,7 +1101,7 @@ export class PortfoliosApi
 	async getExpensesByCategory(
 		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<object> {
+	): Promise<Array<GroupByCategoryDto>> {
 		const response = await this.getExpensesByCategoryRaw(
 			requestParameters,
 			initOverrides,

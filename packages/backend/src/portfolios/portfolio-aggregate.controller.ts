@@ -10,6 +10,7 @@ import {
 	aggregateOptionsSchema,
 } from 'src/aggregate/dto/aggregate-options.schema';
 import {
+	GroupByCategoryDto,
 	GroupByMonthDto,
 	IncomeByMonthDto,
 } from 'src/aggregate/dto/grouped-by-month.dto';
@@ -112,7 +113,7 @@ export class PortfolioAggregateController {
 		@Param('portfolioId') portfolioId: string,
 		@Query(new ZodValidationPipe(aggregateOptionsExpensesSchema))
 		queryOptions: AggregateOptionsExpensesDto,
-	): Promise<Record<string, number>> {
+	): Promise<GroupByCategoryDto[]> {
 		return this.aggregateService.portfolioExpensesByCategory({
 			organizationId,
 			portfolioId,

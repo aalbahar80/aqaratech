@@ -1,10 +1,10 @@
 <script lang="ts">
+	import type { ExpenseCategoryDto, GroupByCategoryDto } from '$api/openapi';
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
 	import { ROOT_NODE } from '$lib/utils/expense-type-options';
-	import type { ExpenseCategoryDto, PaginatedExpenseDto } from '$api/openapi';
 	import * as d3 from 'd3';
 
-	export let expenses: PaginatedExpenseDto;
+	export let expenses: GroupByCategoryDto[];
 	export let categories: ExpenseCategoryDto[];
 
 	$: root = d3
@@ -18,13 +18,14 @@
 
 	$: root.sum((d) => {
 		// get sum of all expenses for this category
-		const sum = expenses.results.reduce((acc, cur) => {
-			if (cur.expenseType?.id === d.id) {
-				return acc + cur.amount;
-			}
-			return acc;
-		}, 0);
-		return sum;
+		const categorySummary = expenses.find((e) => e.categoryId === d.id);
+
+		if (!categorySummary) {
+			console.warn(`Category ${d.id} not found in grouped data`);
+			return 0;
+		} else {
+			return categorySummary.amount;
+		}
 	});
 
 	$: root.sort((a, b) => {

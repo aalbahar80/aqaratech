@@ -13,8 +13,9 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 	const { organizationId, portfolioId } = params;
 
 	const [expenses, categories] = await Promise.all([
-		api.portfolios.findAllExpenses({
-			id: portfolioId,
+		api.portfolios.getExpensesByCategory({
+			organizationId,
+			portfolioId,
 			start,
 			end,
 		}),

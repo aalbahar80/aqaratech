@@ -133,7 +133,6 @@ export class AggregateService {
 
 		const grouped = groupByCategory(expenses);
 
-		console.log({ grouped }, 'aggregate.service.ts ~ 136');
 		return grouped;
 	}
 

@@ -1,5 +1,6 @@
 import { Expense } from '@prisma/client';
 import * as R from 'remeda';
+import { GroupByCategoryDto } from 'src/aggregate/dto/grouped-by-month.dto';
 
 export const groupByCategory = (
 	expenses: Pick<Expense, 'categoryId' | 'amount'>[],
@@ -15,5 +16,11 @@ export const groupByCategory = (
 		R.sumBy(expenses, (expense) => expense.amount),
 	);
 
-	return summed;
+	const array: GroupByCategoryDto[] = [];
+
+	R.forEachObj.indexed(summed, (amount, categoryId) => {
+		array.push({ categoryId: categoryId as string, amount });
+	});
+
+	return array;
 };

@@ -1300,7 +1300,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupByCategoryDto'
       tags: *ref_9
       security: *ref_10
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/occupancy:
@@ -3411,6 +3413,16 @@ components:
         - total
         - paid
         - unpaid
+    GroupByCategoryDto:
+      type: object
+      properties:
+        categoryId:
+          type: string
+        amount:
+          type: number
+      required:
+        - categoryId
+        - amount
     Occupancy:
       type: object
       properties:

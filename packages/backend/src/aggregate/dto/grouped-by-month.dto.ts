@@ -13,3 +13,8 @@ export class IncomeByMonthDto {
 	paid: GroupByMonthDto[];
 	unpaid: GroupByMonthDto[];
 }
+
+export class GroupByCategoryDto {
+	categoryId: string;
+	amount: number;
+}
