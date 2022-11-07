@@ -32,18 +32,18 @@ test('portfolio is preselected', async ({ page, portfolio }) => {
 	await expect(el).toHaveAttribute('data-value', portfolio.id);
 });
 
-test('create property button has predefined params', async ({
-	page,
-	portfolio,
-}) => {
-	await page.goto(`/${entitiesMap.portfolio.urlName}/${portfolio.id}`);
+test.fixme(
+	'create property button has predefined params',
+	async ({ page, portfolio }) => {
+		await page.goto(`/${entitiesMap.portfolio.urlName}/${portfolio.id}`);
 
-	const el = page.locator('a', {
-		has: page.locator('text=New property'),
-	});
+		const el = page.locator('a', {
+			has: page.locator('text=New property'),
+		});
 
-	await expect(el).toHaveAttribute(
-		'href',
-		`/${entitiesMap.property.urlName}/new?portfolioId=${portfolio.id}`,
-	);
-});
+		await expect(el).toHaveAttribute(
+			'href',
+			`/${entitiesMap.property.urlName}/new?portfolioId=${portfolio.id}`,
+		);
+	},
+);
