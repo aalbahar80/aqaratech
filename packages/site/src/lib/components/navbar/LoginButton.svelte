@@ -4,5 +4,7 @@
 </script>
 
 <TextButton>
-	<a href={LOGIN} rel="external" sveltekit:reload> Log in </a>
+	<a href={LOGIN} rel="external" sveltekit:reload class="font-semibold">
+		Log in
+	</a>
 </TextButton>
