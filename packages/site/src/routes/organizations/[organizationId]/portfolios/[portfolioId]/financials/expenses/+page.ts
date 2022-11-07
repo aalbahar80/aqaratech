@@ -12,21 +12,30 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 
 	const { organizationId, portfolioId } = params;
 
-	const [expenses, categories] = await Promise.all([
-		api.portfolios.getExpensesByCategory({
-			organizationId,
-			portfolioId,
-			start,
-			end,
-		}),
+	const [expensesByCategory, expensesByLocation, categories] =
+		await Promise.all([
+			api.portfolios.getExpensesByCategory({
+				organizationId,
+				portfolioId,
+				start,
+				end,
+			}),
 
-		api.expenseCategories.findAll({
-			organizationId,
-		}),
-	]);
+			api.portfolios.getExpensesByLocation({
+				organizationId,
+				portfolioId,
+				start,
+				end,
+			}),
+
+			api.expenseCategories.findAll({
+				organizationId,
+			}),
+		]);
 
 	return {
-		expenses,
+		expensesByCategory,
+		expensesByLocation,
 		categories,
 	};
 };

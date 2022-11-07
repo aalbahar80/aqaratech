@@ -16,6 +16,7 @@ import * as runtime from '../runtime';
 import type {
 	BalanceDto,
 	GroupByCategoryDto,
+	GroupByLocationDto,
 	GroupByMonthDto,
 	IncomeByMonthDto,
 	Occupancy,
@@ -101,6 +102,15 @@ export interface PortfoliosApiGetBalanceRequest {
 }
 
 export interface PortfoliosApiGetExpensesByCategoryRequest {
+	organizationId: string;
+	portfolioId: string;
+	start?: string;
+	end?: string;
+	propertyId?: string | null;
+	unitId?: string | null;
+}
+
+export interface PortfoliosApiGetExpensesByLocationRequest {
 	organizationId: string;
 	portfolioId: string;
 	start?: string;
@@ -351,6 +361,26 @@ export interface PortfoliosApiInterface {
 		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<GroupByCategoryDto>>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof PortfoliosApiInterface
+	 */
+	getExpensesByLocationRaw(
+		requestParameters: PortfoliosApiGetExpensesByLocationRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<Array<GroupByLocationDto>>>;
+
+	/**
+	 *
+	 *
+	 */
+	getExpensesByLocation(
+		requestParameters: PortfoliosApiGetExpensesByLocationRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<Array<GroupByLocationDto>>;
 
 	/**
 	 *
@@ -1103,6 +1133,90 @@ export class PortfoliosApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<GroupByCategoryDto>> {
 		const response = await this.getExpensesByCategoryRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async getExpensesByLocationRaw(
+		requestParameters: PortfoliosApiGetExpensesByLocationRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<Array<GroupByLocationDto>>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling getExpensesByLocation.',
+			);
+		}
+
+		if (
+			requestParameters.portfolioId === null ||
+			requestParameters.portfolioId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'portfolioId',
+				'Required parameter requestParameters.portfolioId was null or undefined when calling getExpensesByLocation.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		if (requestParameters.start !== undefined) {
+			queryParameters['start'] = requestParameters.start;
+		}
+
+		if (requestParameters.end !== undefined) {
+			queryParameters['end'] = requestParameters.end;
+		}
+
+		if (requestParameters.propertyId !== undefined) {
+			queryParameters['propertyId'] = requestParameters.propertyId;
+		}
+
+		if (requestParameters.unitId !== undefined) {
+			queryParameters['unitId'] = requestParameters.unitId;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses-by-location`
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					)
+					.replace(
+						`{${'portfolioId'}}`,
+						encodeURIComponent(String(requestParameters.portfolioId)),
+					),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async getExpensesByLocation(
+		requestParameters: PortfoliosApiGetExpensesByLocationRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<Array<GroupByLocationDto>> {
+		const response = await this.getExpensesByLocationRaw(
 			requestParameters,
 			initOverrides,
 		);

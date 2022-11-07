@@ -1,9 +1,9 @@
 <script lang="ts">
+	import type { GroupByLocationDto } from '$api/openapi';
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
-	import type { PaginatedExpenseDto } from '$api/openapi';
 	import * as d3 from 'd3';
 
-	export let expenses: PaginatedExpenseDto;
+	export let expenses: GroupByLocationDto[];
 
 	interface NodeData {
 		id: string;
@@ -11,12 +11,13 @@
 	}
 
 	$: rollupData = d3.rollup(
-		expenses.results,
+		expenses,
 		// reduceFn,
 		(d) => d3.sum(d, (e) => e.amount),
 		// groupingFns,
-		(d) => d.breadcrumbs?.property?.label || 'Unspecified Property',
-		(d) => d.breadcrumbs?.unit?.label || 'Unspecified Unit',
+		(d) => d.propertyId ?? 'Unspecified Property',
+		(d) => d.unitId ?? 'Unspecified Unit',
+
 		(d) => {
 			// This object can be accessed at the other end at `node.data[0] `
 			const nodeData: NodeData = {

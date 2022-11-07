@@ -1033,6 +1033,37 @@ export interface GroupByCategoryDto {
 /**
  *
  * @export
+ * @interface GroupByLocationDto
+ */
+export interface GroupByLocationDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof GroupByLocationDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof GroupByLocationDto
+	 */
+	propertyId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof GroupByLocationDto
+	 */
+	unitId: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof GroupByLocationDto
+	 */
+	amount: number;
+}
+/**
+ *
+ * @export
  * @interface GroupByMonthDto
  */
 export interface GroupByMonthDto {

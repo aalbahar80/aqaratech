@@ -8,6 +8,7 @@ import {
 } from 'src/aggregate/dto/aggregate-options.dto';
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
 import { groupByCategory } from 'src/aggregate/group-by-category';
+import { groupByLocation } from 'src/aggregate/group-by-location';
 import { groupByMonth } from 'src/aggregate/group-by-month';
 import { Action } from 'src/casl/action.enum';
 import { PaidStatus } from 'src/constants/paid-status.enum';
@@ -86,7 +87,18 @@ export class AggregateService {
 				],
 			},
 			// TODO consider getting field names as a parameter to this function
-			select: { amount: true, postAt: true, categoryId: true },
+			select: {
+				amount: true,
+				postAt: true,
+
+				// Group by category
+				categoryId: true,
+
+				// Group by location
+				portfolioId: true,
+				propertyId: true,
+				unitId: true,
+			},
 		});
 
 		return expenses;
@@ -132,6 +144,26 @@ export class AggregateService {
 		});
 
 		const grouped = groupByCategory(expenses);
+
+		return grouped;
+	}
+
+	async portfolioExpensesByLocation({
+		organizationId,
+		portfolioId,
+		options,
+	}: {
+		organizationId: string;
+		portfolioId: string;
+		options: AggregateOptionsExpensesDto;
+	}) {
+		const expenses = await this.portfolioExpenses({
+			organizationId,
+			portfolioId,
+			options,
+		});
+
+		const grouped = groupByLocation(expenses);
 
 		return grouped;
 	}

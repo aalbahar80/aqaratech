@@ -11,6 +11,7 @@ import {
 } from 'src/aggregate/dto/aggregate-options.schema';
 import {
 	GroupByCategoryDto,
+	GroupByLocationDto,
 	GroupByMonthDto,
 	IncomeByMonthDto,
 } from 'src/aggregate/dto/grouped-by-month.dto';
@@ -115,6 +116,31 @@ export class PortfolioAggregateController {
 		queryOptions: AggregateOptionsExpensesDto,
 	): Promise<GroupByCategoryDto[]> {
 		return this.aggregateService.portfolioExpensesByCategory({
+			organizationId,
+			portfolioId,
+			options: queryOptions,
+		});
+	}
+
+	@Get('/expenses-by-location')
+	@CheckAbilities({
+		action: Action.Read,
+		subject: 'Portfolio',
+		useParams: true,
+		overrideParams: {
+			portfolioId: 'id',
+		},
+	})
+	// Will NOT return a 404 if all the following is true:
+	// 1. the portfolio does not exist
+	// 2. user.role is ORGADMIN & has access to organizationId in params
+	getExpensesByLocation(
+		@Param('organizationId') organizationId: string,
+		@Param('portfolioId') portfolioId: string,
+		@Query(new ZodValidationPipe(aggregateOptionsExpensesSchema))
+		queryOptions: AggregateOptionsExpensesDto,
+	): Promise<GroupByLocationDto[]> {
+		return this.aggregateService.portfolioExpensesByLocation({
 			organizationId,
 			portfolioId,
 			options: queryOptions,
