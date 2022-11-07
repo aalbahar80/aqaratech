@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
-	import { getRoute, PageType } from '@self/utils';
+	import { getRoute, PageTab } from '@self/utils';
 
 	$: baseRoute = getRoute({
 		entity: 'portfolio',
 		id: $page.params.portfolioId!,
-		pageType: PageType.Id,
+		pageType: PageTab.Details,
 		params: $page.params,
 	});
 
