@@ -25,3 +25,9 @@ export const unitUpdateSchema = unitCreateSchema
 		propertyId: true,
 	})
 	.partial();
+
+// Export types
+
+export type UnitCreateSchema = z.infer<typeof unitCreateSchema>;
+
+export type UnitUpdateSchema = z.infer<typeof unitUpdateSchema>;

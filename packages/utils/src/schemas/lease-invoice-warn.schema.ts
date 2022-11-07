@@ -29,3 +29,5 @@ export const leaseInvoiceWarnSchema = z
 			message: 'Payment date is before post date',
 		},
 	);
+
+export type LeaseInvoiceWarnSchema = z.infer<typeof leaseInvoiceWarnSchema>;

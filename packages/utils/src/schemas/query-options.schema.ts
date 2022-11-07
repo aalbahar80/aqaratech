@@ -9,3 +9,5 @@ export const queryOptionsParsedSchema = z
 		// filter: z.record(z.any()),
 	})
 	.strict();
+
+export type QueryOptionsParsedSchema = z.infer<typeof queryOptionsParsedSchema>;

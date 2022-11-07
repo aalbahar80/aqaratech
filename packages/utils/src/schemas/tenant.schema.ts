@@ -19,3 +19,9 @@ export const tenantCreateSchema = z
 	.strict();
 
 export const tenantUpdateSchema = tenantCreateSchema.partial();
+
+// Export types
+
+export type TenantCreateSchema = z.infer<typeof tenantCreateSchema>;
+
+export type TenantUpdateSchema = z.infer<typeof tenantUpdateSchema>;

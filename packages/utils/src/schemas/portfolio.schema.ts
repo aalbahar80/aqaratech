@@ -15,3 +15,9 @@ export const portfolioCreateSchema = z
 	.strict();
 
 export const portfolioUpdateSchema = portfolioCreateSchema.partial();
+
+// Export types
+
+export type PortfolioCreateSchema = z.infer<typeof portfolioCreateSchema>;
+
+export type PortfolioUpdateSchema = z.infer<typeof portfolioUpdateSchema>;

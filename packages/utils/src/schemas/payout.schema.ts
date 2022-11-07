@@ -11,3 +11,7 @@ export const payoutCreateSchema = z
 		memo: zodStringOptional,
 	})
 	.strict();
+
+// Export types
+
+export type PayoutCreateSchema = z.infer<typeof payoutCreateSchema>;

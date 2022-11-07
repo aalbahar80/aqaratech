@@ -44,6 +44,8 @@ function refineSchema<T extends z.ZodType<Base>>(schema: T) {
 		);
 }
 
+// Export types
+
 type Base = z.infer<typeof baseCreate | typeof baseUpdate>;
 
 /**

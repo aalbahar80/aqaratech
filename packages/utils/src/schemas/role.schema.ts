@@ -6,4 +6,6 @@ export const roleCreateSchema = z
 	})
 	.strict();
 
+// Export types
+
 export type RoleCreateSchema = z.infer<typeof roleCreateSchema>;

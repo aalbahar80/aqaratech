@@ -13,3 +13,6 @@ export const fileCreateSchema = z
 		relationValue: isID,
 	})
 	.strict();
+
+// Export types
+export type FileCreateSchema = z.infer<typeof fileCreateSchema>;

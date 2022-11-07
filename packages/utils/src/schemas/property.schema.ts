@@ -23,3 +23,8 @@ export const propertyUpdateSchema = propertyCreateSchema
 		portfolioId: true,
 	})
 	.partial();
+
+// Export types
+
+export type PropertyCreateSchema = z.infer<typeof propertyCreateSchema>;
+export type PropertyUpdateSchema = z.infer<typeof propertyUpdateSchema>;

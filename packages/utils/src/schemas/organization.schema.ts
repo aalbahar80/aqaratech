@@ -5,3 +5,7 @@ export const organizationSchema = z.object({
 	fullName: z.string().trim().min(3, { message: 'Required' }),
 	label: zodStringOptional,
 });
+
+// Export types
+
+export type OrganizationSchema = z.infer<typeof organizationSchema>;

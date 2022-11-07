@@ -23,3 +23,9 @@ export const expenseUpdateSchema = expenseCreateSchema
 		unitId: true,
 	})
 	.partial();
+
+// Export types
+
+export type ExpenseCreateSchema = z.infer<typeof expenseCreateSchema>;
+
+export type ExpenseUpdateSchema = z.infer<typeof expenseUpdateSchema>;

@@ -26,4 +26,17 @@ export const expenseCategoryTreeSchema = z.array(
 	expenseCategorySchema.omit({ isGroup: true }),
 );
 
+// Export types
 export type ExpenseCategory = z.infer<typeof expenseCategorySchema>;
+
+export type ExpenseCategoryCreateSchema = z.infer<
+	typeof expenseCategoryCreateSchema
+>;
+
+export type ExpenseCategoryUpdateSchema = z.infer<
+	typeof expenseCategoryUpdateSchema
+>;
+
+export type ExpenseCategoryTreeSchema = z.infer<
+	typeof expenseCategoryTreeSchema
+>;
