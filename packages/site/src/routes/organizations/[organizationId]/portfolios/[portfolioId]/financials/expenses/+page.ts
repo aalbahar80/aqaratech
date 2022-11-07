@@ -25,7 +25,7 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 	]);
 
 	return {
-		expenseEntries: expenses,
+		expenses,
 		categories,
 	};
 };

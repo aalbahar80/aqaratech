@@ -12,9 +12,6 @@
 
 <BarChart expenses={data.expensesByMonth} />
 
-<ExpenseTreemapProperty expenses={data.expenseEntries} />
+<ExpenseTreemapProperty expenses={data.expenses} />
 
-<ExpenseTreemapCategory
-	expenses={data.expenseEntries}
-	categories={data.categories}
-/>
+<ExpenseTreemapCategory expenses={data.expenses} categories={data.categories} />
