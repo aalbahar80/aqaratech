@@ -3483,12 +3483,20 @@ components:
         unitId:
           type: string
           nullable: true
+        propertyTitle:
+          type: string
+          nullable: true
+        unitTitle:
+          type: string
+          nullable: true
         amount:
           type: number
       required:
         - portfolioId
         - propertyId
         - unitId
+        - propertyTitle
+        - unitTitle
         - amount
     Occupancy:
       type: object

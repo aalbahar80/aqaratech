@@ -15,6 +15,8 @@ import { PaidStatus } from 'src/constants/paid-status.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { PropertyDto } from 'src/properties/dto/property.dto';
+import { getUnitLabel } from 'src/utils/address';
 
 @Injectable()
 export class AggregateService {
@@ -98,6 +100,11 @@ export class AggregateService {
 				portfolioId: true,
 				propertyId: true,
 				unitId: true,
+				unit: {
+					select: {
+						propertyId: true,
+					},
+				},
 			},
 		});
 
@@ -165,7 +172,54 @@ export class AggregateService {
 
 		const grouped = groupByLocation(expenses);
 
-		return grouped;
+		// Add property label or unit label to each location
+		const units = await this.prisma.unit.findMany({
+			where: {
+				organizationId,
+				portfolioId,
+				OR: [
+					{ propertyId: { in: grouped.map((g) => g.propertyId ?? '') } },
+					{ id: { in: grouped.map((g) => g.unitId ?? '') } },
+				],
+			},
+			include: { property: true },
+		});
+
+		const withLabels = grouped.map((g) => {
+			const unit = units.find((u) => u.id === g.unitId);
+			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+			const unitTitle = unit ? unit.label || getUnitLabel(unit) : null;
+
+			const property = units.find(
+				(u) => u.propertyId === g.propertyId,
+			)?.property;
+			const propertyTitle = property ? new PropertyDto(property).title : null;
+
+			if (g.unitId && unit && propertyTitle) {
+				// Add unitTitle to expenses where unitId is set
+				return {
+					...g,
+					unitTitle,
+					propertyTitle,
+				};
+			} else if (g.propertyId && propertyTitle) {
+				// Add propertyTitle to expenses where propertyId is set
+				return {
+					...g,
+					unitTitle: null,
+					propertyTitle,
+				};
+			} else {
+				// For expenses where neither unitId nor propertyId is set, set titles to null
+				return {
+					...g,
+					unitTitle: null,
+					propertyTitle: null,
+				};
+			}
+		});
+
+		return withLabels;
 	}
 
 	async getOccupancy({

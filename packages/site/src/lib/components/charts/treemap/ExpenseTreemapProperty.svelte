@@ -5,27 +5,13 @@
 
 	export let expenses: GroupByLocationDto[];
 
-	interface NodeData {
-		id: string;
-		labelEn: string;
-	}
-
 	$: rollupData = d3.rollup(
 		expenses,
 		// reduceFn,
 		(d) => d3.sum(d, (e) => e.amount),
 		// groupingFns,
-		(d) => d.propertyId ?? 'Unspecified Property',
-		(d) => d.unitId ?? 'Unspecified Unit',
-
-		(d) => {
-			// This object can be accessed at the other end at `node.data[0] `
-			const nodeData: NodeData = {
-				id: d.id,
-				labelEn: d.expenseType?.labelEn || '',
-			};
-			return nodeData;
-		},
+		(d) => d.propertyTitle ?? 'Unspecified Property',
+		(d) => d.unitTitle ?? 'Unspecified Unit',
 	);
 
 	// Type of each node is either null OR a nested maps up to 3 levels deep.
@@ -67,7 +53,7 @@
 	};
 
 	const getLink = (node: any) => {
-		const data = node.data[0] as NodeData;
+		const data = node.data[0];
 		return `/expenses/${data.id}`;
 	};
 </script>

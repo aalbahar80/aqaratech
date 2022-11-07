@@ -1060,6 +1060,18 @@ export interface GroupByLocationDto {
 	unitId: string | null;
 	/**
 	 *
+	 * @type {string}
+	 * @memberof GroupByLocationDto
+	 */
+	propertyTitle: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof GroupByLocationDto
+	 */
+	unitTitle: string | null;
+	/**
+	 *
 	 * @type {number}
 	 * @memberof GroupByLocationDto
 	 */

@@ -24,5 +24,8 @@ export class GroupByLocationDto {
 	propertyId: string | null;
 	unitId: string | null;
 
+	propertyTitle: string | null;
+	unitTitle: string | null;
+
 	amount: number;
 }

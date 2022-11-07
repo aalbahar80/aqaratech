@@ -12,8 +12,6 @@
 
 <BarChart expenses={data.expensesByMonth} />
 
-<!-- <ExpenseTreemapLocation expenses={data.expensesByLocation} /> -->
-
 <ExpenseTreemapProperty expenses={data.expensesByLocation} />
 
 <ExpenseTreemapCategory
