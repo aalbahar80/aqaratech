@@ -24,6 +24,7 @@ import {
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IsID } from 'src/decorators/field.decorators';
+import { Exactly } from 'src/types/exactly.type';
 import { z } from 'zod';
 
 class PropertyRequiredDto {
@@ -120,7 +121,11 @@ export class PropertyDto
 	}
 }
 
-export class CreatePropertyDto implements z.infer<typeof propertyCreateSchema> {
+type PropertyCreateSchema = z.infer<typeof propertyCreateSchema>;
+
+export class CreatePropertyDto
+	implements Exactly<PropertyCreateSchema, CreatePropertyDto>
+{
 	portfolioId: string;
 	number: string;
 	area: string;
@@ -132,6 +137,8 @@ export class CreatePropertyDto implements z.infer<typeof propertyCreateSchema> {
 	paci?: string | null;
 }
 
+type PropertyUpdateSchema = z.infer<typeof propertyUpdateSchema>;
+
 export class UpdatePropertyDto
 	extends PartialType(OmitType(CreatePropertyDto, ['portfolioId']))
-	implements z.infer<typeof propertyUpdateSchema> {}
+	implements Exactly<PropertyUpdateSchema, UpdatePropertyDto> {}
