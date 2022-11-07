@@ -2,12 +2,12 @@ import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { InternalServerErrorException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import {
-	fileCreateSchema,
+	FileCreateSchema,
 	FileRelationKey,
 	FileRelationKeyEnum,
 } from '@self/utils';
 import { IsNumber, IsString } from 'class-validator';
-import { z } from 'zod';
+import { Exactly } from 'src/types/exactly.type';
 
 export class FileDto {
 	constructor(obj: NonNullable<ListObjectsV2Output['Contents']>[0]) {
@@ -26,7 +26,7 @@ export class FileDto {
 	size: number;
 }
 
-export class CreateFileDto implements z.infer<typeof fileCreateSchema> {
+export class CreateFileDto implements Exactly<FileCreateSchema, CreateFileDto> {
 	organizationId: string; // TODO rm
 	fileName: string;
 	relationValue: string;

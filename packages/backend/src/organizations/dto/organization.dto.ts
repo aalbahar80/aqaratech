@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { organizationSchema } from '@self/utils';
+import { OrganizationSchema, organizationSchema } from '@self/utils';
 import { Expose } from 'class-transformer';
+import { Exactly } from 'src/types/exactly.type';
 import { z } from 'zod';
 
 export class OrganizationDto implements z.infer<typeof organizationSchema> {
@@ -21,7 +22,7 @@ export class OrganizationDto implements z.infer<typeof organizationSchema> {
 }
 
 export class CreateOrganizationDto
-	implements z.infer<typeof organizationSchema>
+	implements Exactly<OrganizationSchema, CreateOrganizationDto>
 {
 	fullName: string;
 

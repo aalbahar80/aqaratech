@@ -7,7 +7,7 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { Property } from '@prisma/client';
-import { propertyCreateSchema, propertyUpdateSchema } from '@self/utils';
+import { PropertyCreateSchema, PropertyUpdateSchema } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import {
 	IsLatitude,
@@ -25,7 +25,6 @@ import {
 import { Rel } from 'src/constants/rel.enum';
 import { IsID } from 'src/decorators/field.decorators';
 import { Exactly } from 'src/types/exactly.type';
-import { z } from 'zod';
 
 class PropertyRequiredDto {
 	@IsID()
@@ -121,8 +120,6 @@ export class PropertyDto
 	}
 }
 
-type PropertyCreateSchema = z.infer<typeof propertyCreateSchema>;
-
 export class CreatePropertyDto
 	implements Exactly<PropertyCreateSchema, CreatePropertyDto>
 {
@@ -136,8 +133,6 @@ export class CreatePropertyDto
 	parcel?: string | null;
 	paci?: string | null;
 }
-
-type PropertyUpdateSchema = z.infer<typeof propertyUpdateSchema>;
 
 export class UpdatePropertyDto
 	extends PartialType(OmitType(CreatePropertyDto, ['portfolioId']))

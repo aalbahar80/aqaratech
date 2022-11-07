@@ -7,7 +7,7 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
-import { unitCreateSchema, unitUpdateSchema } from '@self/utils';
+import { UnitCreateSchema, UnitUpdateSchema } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { formatDistance } from 'date-fns';
@@ -21,8 +21,8 @@ import { Rel } from 'src/constants/rel.enum';
 import { IsID } from 'src/decorators/field.decorators';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PropertyDto } from 'src/properties/dto/property.dto';
+import { Exactly } from 'src/types/exactly.type';
 import { getUnitLabel } from 'src/utils/address';
-import { z } from 'zod';
 
 class UnitRequiredDto {
 	@IsID()
@@ -153,7 +153,7 @@ export class UnitDto
 	}
 }
 
-export class CreateUnitDto implements z.infer<typeof unitCreateSchema> {
+export class CreateUnitDto implements Exactly<UnitCreateSchema, CreateUnitDto> {
 	portfolioId: string;
 	propertyId: string;
 	unitNumber: string;
@@ -169,6 +169,6 @@ export class CreateUnitDto implements z.infer<typeof unitCreateSchema> {
 
 export class UpdateUnitDto
 	extends PartialType(OmitType(CreateUnitDto, ['portfolioId', 'propertyId']))
-	implements z.infer<typeof unitUpdateSchema> {}
+	implements Exactly<UnitUpdateSchema, UpdateUnitDto> {}
 
 export class PartialUnitDto extends PartialType(UnitDto) {}

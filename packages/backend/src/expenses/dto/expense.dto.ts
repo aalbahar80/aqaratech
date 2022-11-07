@@ -9,8 +9,8 @@ import {
 import { Expense } from '@prisma/client';
 import {
 	expenseCategorySchema,
-	expenseCreateSchema,
-	expenseUpdateSchema,
+	ExpenseCreateSchema,
+	ExpenseUpdateSchema,
 } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsOptional, IsPositive, IsString } from 'class-validator';
@@ -24,7 +24,7 @@ import { Rel } from 'src/constants/rel.enum';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { IsID } from 'src/decorators/field.decorators';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
-import { z } from 'zod';
+import { Exactly } from 'src/types/exactly.type';
 
 class ExpenseRequiredDto {
 	@IsID()
@@ -131,7 +131,9 @@ export class ExpenseDto
 
 export class PartialExpenseDto extends PartialType(ExpenseDto) {}
 
-export class CreateExpenseDto implements z.infer<typeof expenseCreateSchema> {
+export class CreateExpenseDto
+	implements Exactly<ExpenseCreateSchema, CreateExpenseDto>
+{
 	portfolioId: string;
 	propertyId: string | null;
 	unitId: string | null;
@@ -146,4 +148,4 @@ export class UpdateExpenseDto
 	extends PartialType(
 		OmitType(CreateExpenseDto, ['portfolioId', 'propertyId', 'unitId']),
 	)
-	implements z.infer<typeof expenseUpdateSchema> {}
+	implements Exactly<ExpenseUpdateSchema, UpdateExpenseDto> {}

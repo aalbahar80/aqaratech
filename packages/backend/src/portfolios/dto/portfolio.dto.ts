@@ -1,12 +1,12 @@
 import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
 import { Portfolio } from '@prisma/client';
-import { portfolioCreateSchema, portfolioUpdateSchema } from '@self/utils';
+import { PortfolioCreateSchema, PortfolioUpdateSchema } from '@self/utils';
 import { Expose } from 'class-transformer';
 import { IsPhoneNumber, IsString, Length } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { IsID } from 'src/decorators/field.decorators';
-import { z } from 'zod';
+import { Exactly } from 'src/types/exactly.type';
 
 class PortfolioRequiredDto {
 	@IsID()
@@ -50,7 +50,7 @@ export class PortfolioDto
 }
 
 export class CreatePortfolioDto
-	implements z.infer<typeof portfolioCreateSchema>
+	implements Exactly<PortfolioCreateSchema, CreatePortfolioDto>
 {
 	fullName: string;
 	label?: string | null;
@@ -61,4 +61,4 @@ export class CreatePortfolioDto
 
 export class UpdatePortfolioDto
 	extends PartialType(CreatePortfolioDto)
-	implements z.infer<typeof portfolioUpdateSchema> {}
+	implements Exactly<PortfolioUpdateSchema, UpdatePortfolioDto> {}

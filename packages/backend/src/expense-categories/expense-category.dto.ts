@@ -1,15 +1,12 @@
 import { OmitType } from '@nestjs/swagger';
 import {
-	expenseCategoryCreateSchema,
-	expenseCategorySchema,
-	expenseCategoryTreeSchema,
-	expenseCategoryUpdateSchema,
+	ExpenseCategoryCreateSchema,
+	ExpenseCategoryTreeSchema,
+	ExpenseCategoryUpdateSchema,
 } from '@self/utils';
-import { z } from 'zod';
+import { Exactly } from 'src/types/exactly.type';
 
-export class ExpenseCategoryDto
-	implements z.infer<typeof expenseCategorySchema>
-{
+export class ExpenseCategoryDto implements ExpenseCategoryCreateSchema {
 	id: string;
 	labelEn: string;
 	labelAr?: string | null;
@@ -20,12 +17,13 @@ export class ExpenseCategoryDto
 
 export class CreateExpenseCategoryDto
 	extends OmitType(ExpenseCategoryDto, ['id'])
-	implements z.infer<typeof expenseCategoryCreateSchema> {}
+	implements Exactly<ExpenseCategoryCreateSchema, CreateExpenseCategoryDto> {}
 
 export class UpdateExpenseCategoryDto
 	extends OmitType(ExpenseCategoryDto, ['id', 'isGroup'])
-	implements z.infer<typeof expenseCategoryUpdateSchema> {}
+	implements Exactly<ExpenseCategoryUpdateSchema, UpdateExpenseCategoryDto> {}
 
 export class UpdateExpenseCategoryTreeDto
 	extends OmitType(ExpenseCategoryDto, ['isGroup'])
-	implements z.infer<typeof expenseCategoryTreeSchema['element']> {}
+	implements
+		Exactly<ExpenseCategoryTreeSchema[number], UpdateExpenseCategoryTreeDto> {}

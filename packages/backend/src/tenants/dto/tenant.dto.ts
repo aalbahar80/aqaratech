@@ -1,6 +1,6 @@
 import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
-import { tenantCreateSchema, tenantUpdateSchema } from '@self/utils';
+import { TenantCreateSchema, TenantUpdateSchema } from '@self/utils';
 import { Expose } from 'class-transformer';
 import {
 	IsISO31661Alpha3,
@@ -11,7 +11,7 @@ import {
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { IsID } from 'src/decorators/field.decorators';
-import { z } from 'zod';
+import { Exactly } from 'src/types/exactly.type';
 
 class TenantRequiredDto {
 	@IsID()
@@ -68,7 +68,9 @@ export class TenantDto
 
 // change z.input after creating validation pipe
 // Doesn't error if we add extra fields, is there a version of implement that does?
-export class CreateTenantDto implements z.infer<typeof tenantCreateSchema> {
+export class CreateTenantDto
+	implements Exactly<TenantCreateSchema, CreateTenantDto>
+{
 	fullName: string;
 	label?: string | null;
 	civilid?: string | null;
@@ -82,4 +84,4 @@ export class CreateTenantDto implements z.infer<typeof tenantCreateSchema> {
 
 export class UpdateTenantDto
 	extends PartialType(CreateTenantDto)
-	implements z.infer<typeof tenantUpdateSchema> {}
+	implements Exactly<TenantUpdateSchema, UpdateTenantDto> {}
