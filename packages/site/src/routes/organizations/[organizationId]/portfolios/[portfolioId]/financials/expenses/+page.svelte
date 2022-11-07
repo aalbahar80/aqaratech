@@ -10,7 +10,7 @@
 
 <RangeSelect />
 
-<BarChart expenses={data.expenses} />
+<BarChart expenses={data.expensesByMonth} />
 
 <ExpenseTreemapProperty expenses={data.expenseEntries} />
 

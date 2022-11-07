@@ -12,7 +12,7 @@ export const load: LayoutLoad = async ({ fetch, params, depends }) => {
 
 	const { organizationId } = params;
 
-	const expenses = await api.portfolios.getExpensesByMonth({
+	const expensesByMonth = await api.portfolios.getExpensesByMonth({
 		organizationId,
 		portfolioId: params.portfolioId,
 		start,
@@ -20,6 +20,6 @@ export const load: LayoutLoad = async ({ fetch, params, depends }) => {
 	});
 
 	return {
-		expenses,
+		expensesByMonth,
 	};
 };

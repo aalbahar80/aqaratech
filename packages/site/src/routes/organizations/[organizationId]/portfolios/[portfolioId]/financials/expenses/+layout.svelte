@@ -13,7 +13,7 @@
 	</div>
 </div>
 
-<StatsExpenses expenses={data.expenses} />
+<StatsExpenses expenses={data.expensesByMonth} />
 
 <DataTabs dataType="Expenses" />
 
