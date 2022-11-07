@@ -7,6 +7,7 @@ import {
 	AggregateOptionsExpensesDto,
 } from 'src/aggregate/dto/aggregate-options.dto';
 import { Occupancy } from 'src/aggregate/dto/occupancy.dto';
+import { groupByCategory } from 'src/aggregate/group-by-category';
 import { groupByMonth } from 'src/aggregate/group-by-month';
 import { Action } from 'src/casl/action.enum';
 import { PaidStatus } from 'src/constants/paid-status.enum';
@@ -64,7 +65,7 @@ export class AggregateService {
 		return grouped;
 	}
 
-	async portfolioExpensesByMonth({
+	async portfolioExpenses({
 		organizationId,
 		portfolioId,
 		options,
@@ -84,7 +85,26 @@ export class AggregateService {
 					},
 				],
 			},
-			select: { amount: true, postAt: true },
+			// TODO consider getting field names as a parameter to this function
+			select: { amount: true, postAt: true, categoryId: true },
+		});
+
+		return expenses;
+	}
+
+	async portfolioExpensesByMonth({
+		organizationId,
+		portfolioId,
+		options,
+	}: {
+		organizationId: string;
+		portfolioId: string;
+		options: AggregateOptionsExpensesDto;
+	}) {
+		const expenses = await this.portfolioExpenses({
+			organizationId,
+			portfolioId,
+			options,
 		});
 
 		const grouped = groupByMonth(expenses, {
@@ -93,6 +113,27 @@ export class AggregateService {
 			end: options.end,
 		});
 
+		return grouped;
+	}
+
+	async portfolioExpensesByCategory({
+		organizationId,
+		portfolioId,
+		options,
+	}: {
+		organizationId: string;
+		portfolioId: string;
+		options: AggregateOptionsExpensesDto;
+	}) {
+		const expenses = await this.portfolioExpenses({
+			organizationId,
+			portfolioId,
+			options,
+		});
+
+		const grouped = groupByCategory(expenses);
+
+		console.log({ grouped }, 'aggregate.service.ts ~ 136');
 		return grouped;
 	}
 

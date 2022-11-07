@@ -99,6 +99,15 @@ export interface PortfoliosApiGetBalanceRequest {
 	id: string;
 }
 
+export interface PortfoliosApiGetExpensesByCategoryRequest {
+	organizationId: string;
+	portfolioId: string;
+	start?: string;
+	end?: string;
+	propertyId?: string | null;
+	unitId?: string | null;
+}
+
 export interface PortfoliosApiGetExpensesByMonthRequest {
 	organizationId: string;
 	portfolioId: string;
@@ -321,6 +330,26 @@ export interface PortfoliosApiInterface {
 		requestParameters: PortfoliosApiGetBalanceRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<BalanceDto>;
+
+	/**
+	 *
+	 * @summary
+	 * @throws {RequiredError}
+	 * @memberof PortfoliosApiInterface
+	 */
+	getExpensesByCategoryRaw(
+		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<object>>;
+
+	/**
+	 *
+	 *
+	 */
+	getExpensesByCategory(
+		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<object>;
 
 	/**
 	 *
@@ -992,6 +1021,90 @@ export class PortfoliosApi
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<BalanceDto> {
 		const response = await this.getBalanceRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async getExpensesByCategoryRaw(
+		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<object>> {
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling getExpensesByCategory.',
+			);
+		}
+
+		if (
+			requestParameters.portfolioId === null ||
+			requestParameters.portfolioId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'portfolioId',
+				'Required parameter requestParameters.portfolioId was null or undefined when calling getExpensesByCategory.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		if (requestParameters.start !== undefined) {
+			queryParameters['start'] = requestParameters.start;
+		}
+
+		if (requestParameters.end !== undefined) {
+			queryParameters['end'] = requestParameters.end;
+		}
+
+		if (requestParameters.propertyId !== undefined) {
+			queryParameters['propertyId'] = requestParameters.propertyId;
+		}
+
+		if (requestParameters.unitId !== undefined) {
+			queryParameters['unitId'] = requestParameters.unitId;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses-by-category`
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					)
+					.replace(
+						`{${'portfolioId'}}`,
+						encodeURIComponent(String(requestParameters.portfolioId)),
+					),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse<any>(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async getExpensesByCategory(
+		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<object> {
+		const response = await this.getExpensesByCategoryRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

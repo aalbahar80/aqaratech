@@ -1256,6 +1256,53 @@ paths:
                   $ref: '#/components/schemas/GroupByMonthDto'
       tags: *ref_9
       security: *ref_10
+  /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses-by-category:
+    get:
+      operationId: PortfolioAggregateController_getExpensesByCategory
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: portfolioId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            nullable: true
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            nullable: true
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *ref_9
+      security: *ref_10
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/occupancy:
     get:
       operationId: PortfolioAggregateController_getOccupancy

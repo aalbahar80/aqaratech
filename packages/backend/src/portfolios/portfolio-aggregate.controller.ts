@@ -95,6 +95,31 @@ export class PortfolioAggregateController {
 		});
 	}
 
+	@Get('/expenses-by-category')
+	@CheckAbilities({
+		action: Action.Read,
+		subject: 'Portfolio',
+		useParams: true,
+		overrideParams: {
+			portfolioId: 'id',
+		},
+	})
+	// Will NOT return a 404 if all the following is true:
+	// 1. the portfolio does not exist
+	// 2. user.role is ORGADMIN & has access to organizationId in params
+	getExpensesByCategory(
+		@Param('organizationId') organizationId: string,
+		@Param('portfolioId') portfolioId: string,
+		@Query(new ZodValidationPipe(aggregateOptionsExpensesSchema))
+		queryOptions: AggregateOptionsExpensesDto,
+	): Promise<Record<string, number>> {
+		return this.aggregateService.portfolioExpensesByCategory({
+			organizationId,
+			portfolioId,
+			options: queryOptions,
+		});
+	}
+
 	@Get('/occupancy')
 	@CheckAbilities({
 		action: Action.Read,
