@@ -34,7 +34,7 @@
 				href={$page.data.user?.role?.meta.home ?? '/'}
 				class="text-3xl font-semibold text-gray-800 dark:text-white"
 			>
-				Aqaratech
+				<h1>Aqaratech</h1>
 			</a>
 		</div>
 		{#if $page.url.pathname === '/'}
