@@ -22,12 +22,13 @@
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
 			<button
+				class="lg:hidden"
 				on:click={async () => {
 					await tick(); // might not be necessary
 					openSidebar();
 				}}
 			>
-				<HeroiconsBars3 class="h-8 w-8 lg:hidden" />
+				<HeroiconsBars3 class="h-8 w-8" />
 			</button>
 			<h2 class="text-3xl font-semibold text-gray-800 dark:text-white">
 				Aqaratech
