@@ -29,3 +29,11 @@ export const aggregateOptionsExpensesSchema = z
 		unitId: zodNullishQueryParam,
 	})
 	.strict();
+
+// Export types
+
+export type AggregateOptionsSchema = z.infer<typeof aggregateOptionsSchema>;
+
+export type AggregateOptionsExpensesSchema = z.infer<
+	typeof aggregateOptionsExpensesSchema
+>;

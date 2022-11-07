@@ -1,12 +1,12 @@
 import { ApiPropertyOptional, OmitType } from '@nestjs/swagger';
 import {
-	aggregateOptionsExpensesSchema,
-	aggregateOptionsSchema,
+	AggregateOptionsExpensesSchema,
+	AggregateOptionsSchema,
 } from 'src/aggregate/dto/aggregate-options.schema';
-import { z } from 'zod';
+import { Exactly } from 'src/types/exactly.type';
 
 export class AggregateOptionsDto
-	implements z.infer<typeof aggregateOptionsSchema>
+	implements Exactly<AggregateOptionsSchema, AggregateOptionsDto>
 {
 	@ApiPropertyOptional() // optional because of default value
 	start: string;
@@ -35,7 +35,8 @@ export class AggregateOptionsDto
  */
 export class AggregateOptionsExpensesDto
 	extends OmitType(AggregateOptionsDto, ['propertyId', 'unitId'])
-	implements z.infer<typeof aggregateOptionsExpensesSchema>
+	implements
+		Exactly<AggregateOptionsExpensesSchema, AggregateOptionsExpensesDto>
 {
 	propertyId?: string | null;
 	unitId?: string | null;
