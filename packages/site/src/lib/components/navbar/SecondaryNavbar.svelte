@@ -30,9 +30,12 @@
 			>
 				<HeroiconsBars3 class="h-8 w-8" />
 			</button>
-			<h2 class="text-3xl font-semibold text-gray-800 dark:text-white">
+			<a
+				href={$page.data.user?.role?.meta.home ?? '/'}
+				class="text-3xl font-semibold text-gray-800 dark:text-white"
+			>
 				Aqaratech
-			</h2>
+			</a>
 		</div>
 		{#if $page.url.pathname === '/'}
 			<LoginButton />
