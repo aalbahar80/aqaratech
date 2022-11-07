@@ -6,8 +6,13 @@
 	export let data: LayoutData;
 </script>
 
-<PortfolioPage portfolio={data.portfolio} />
+<!-- Hide tabs if not orgadmin -->
+{#if data?.user?.role?.roleType === 'ORGADMIN'}
+	<PortfolioPage portfolio={data.portfolio} />
 
-<PortfolioTabs />
+	<PortfolioTabs />
 
-<slot />
+	<slot />
+{:else}
+	<slot />
+{/if}
