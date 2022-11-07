@@ -13,7 +13,7 @@ import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
 // Links
 import { LOGOUT } from '$lib/constants/routes';
 import { settings } from '$lib/utils/route-helpers';
-import { getRoute, PageType, PageTypePortfolio } from '@self/utils';
+import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
 	if (!user.role) {
@@ -125,12 +125,27 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 				name: 'Properties',
 				href: getRoute({
 					...getRouteConfig,
-					entity: 'property',
-					pageType,
+					pageType: PageTab.Properties,
 				}),
 				icon: HeroiconsOutlineHome,
+				children: [
+					{
+						name: 'List',
+						href: getRoute({
+							...getRouteConfig,
+							pageType: PageTab.Properties,
+						}),
+					},
+					{
+						name: 'Occupancy',
+						href: getRoute({
+							...getRouteConfig,
+							entity: 'portfolio',
+							pageType: PageTab.Occupancy,
+						}),
+					},
+				],
 			},
-
 			{
 				name: 'Units',
 				href: getRoute({

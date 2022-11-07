@@ -3,7 +3,6 @@ import { getRoute } from 'src/route-helpers/get-route';
 import { describe, expect, test } from 'vitest';
 
 const pageTypes = [
-	[PageTab.Details, ''],
 	[PageTab.Files, 'files'],
 	[PageTab.Financials, 'financials'],
 	[PageTab.Occupancy, 'occupancy'],
@@ -15,8 +14,7 @@ const pageTypes = [
 const entityTypes = [
 	{
 		entity: 'portfolio',
-		url: (expected: string) =>
-			`/organizations/1/portfolios/2/details/${expected}`,
+		url: (expected: string) => `/organizations/1/portfolios/2/${expected}`,
 		baseInput: {
 			entity: 'portfolio',
 			params: { organizationId: '1' },

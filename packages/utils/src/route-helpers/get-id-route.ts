@@ -10,7 +10,6 @@ const pageTypeToUrl = {
 	[PageTypePortfolio.Income]: 'financials/income',
 	[PageTypePortfolio.Expenses]: 'financials/expenses',
 	[PageTypePortfolio.Payouts]: 'financials/payouts/table',
-	[PageTab.Details]: '',
 	[PageTab.Files]: 'files',
 	[PageTab.Financials]: 'financials',
 	[PageTab.Occupancy]: 'occupancy',
@@ -32,23 +31,8 @@ export const getIdRoute = (input: GetIdRouteInput, base: string) => {
 	if (input.pageType === PageType.Id) {
 		return idRoute;
 	} else if (input.pageType in pageTypeToUrl) {
-		const prefix = getTabbedPrefix(input);
-		return `${idRoute}${prefix}/${pageTypeToUrl[input.pageType]}`;
+		return `${idRoute}/${pageTypeToUrl[input.pageType]}`;
 	} else {
 		throw new Error(`Invalid page address`);
-	}
-};
-
-/**
- * Prefix all portfolio tabbed pages with /details
- */
-export const getTabbedPrefix = (input: GetIdRouteInput) => {
-	if (
-		input.entity === 'portfolio' &&
-		Object.values(PageTab).includes(input.pageType)
-	) {
-		return '/details';
-	} else {
-		return '';
 	}
 };
