@@ -25,6 +25,7 @@
 				class="lg:hidden"
 				on:click={async () => {
 					await tick(); // might not be necessary
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 					openSidebar();
 				}}
 			>
