@@ -1,10 +1,11 @@
 <script lang="ts">
+	import type { PaginatedLeaseInvoiceDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import LeaseInvoiceCard from '$components/leaseInvoice/LeaseInvoiceCard.svelte';
 	import AddInvoiceButton from '$lib/components/leaseInvoice/AddInvoiceButton.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { create } from '$lib/utils/route-helpers';
-	import type { PaginatedLeaseInvoiceDto } from '$api/openapi';
+	import { getRoute, PageType } from '@self/utils';
 
 	export let leaseId: string | undefined = undefined;
 	export let leaseInvoices: PaginatedLeaseInvoiceDto;
@@ -14,10 +15,15 @@
 <StackedList
 	entity="leaseInvoice"
 	count={leaseInvoices.results.length}
-	formUrl={create({
+	formButtonProps={{
 		entity: 'leaseInvoice',
-		predefined: new Map([['leaseId', leaseId]]),
-	})}
+		formUrl: getRoute({
+			entity: 'leaseInvoice',
+			pageType: PageType.New,
+			params: $page.params,
+			predefined: { leaseId },
+		}),
+	}}
 >
 	<div slot="actions">
 		{#if leaseId}

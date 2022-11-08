@@ -12,11 +12,14 @@
 <StackedList
 	entity="portfolio"
 	count={portfolios.results.length}
-	formUrl={getRoute({
+	formButtonProps={{
 		entity: 'portfolio',
-		pageType: PageType.New,
-		params: $page.params,
-	})}
+		formUrl: getRoute({
+			entity: 'portfolio',
+			pageType: PageType.New,
+			params: $page.params,
+		}),
+	}}
 >
 	{#each portfolios.results as portfolio (portfolio.id)}
 		<li>

@@ -22,6 +22,7 @@ type PredefinedMap = {
 };
 
 const predefinedMap: PredefinedMap = {
+	payout: ['portfolioId'],
 	unit: ['propertyId'],
 	lease: ['unitId'],
 };
