@@ -6,7 +6,8 @@ import {
 	LoggerService,
 	NestInterceptor,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { isHealthCheck } from '@self/utils';
+import { Request, Response } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -22,9 +23,17 @@ export class ResponseInterceptor implements NestInterceptor {
 	) {}
 
 	intercept(
-		_context: ExecutionContext,
+		context: ExecutionContext,
 		next: CallHandler,
 	): Observable<Response> | Promise<Observable<Response>> {
+		// Skip health checks
+
+		const pathname = context.switchToHttp().getRequest<Request>().path;
+
+		if (isHealthCheck(pathname)) {
+			return next.handle();
+		}
+
 		return next.handle().pipe(
 			tap((data) => {
 				this.logger.debug?.(data, ResponseInterceptor.name);

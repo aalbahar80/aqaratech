@@ -3,6 +3,7 @@ import {
 	ClassSerializerInterceptor,
 	MiddlewareConsumer,
 	Module,
+	RequestMethod,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 
@@ -34,6 +35,7 @@ import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 
 // resources
+import { RouteInfo } from '@nestjs/common/interfaces';
 import { RoleGuard } from 'src/casl/role.guard';
 import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
 import { ResponseInterceptor } from 'src/http-logger/response.interceptor';
@@ -146,7 +148,12 @@ import { UsersModule } from './users/users.module';
 })
 export class AppModule {
 	configure(consumer: MiddlewareConsumer): void {
-		consumer.apply(LoggingMiddleware).forRoutes('*');
-		consumer.apply(TraceMiddleware).forRoutes('*');
+		const healthCheck: RouteInfo = {
+			path: 'health',
+			method: RequestMethod.GET,
+		};
+
+		consumer.apply(LoggingMiddleware).exclude(healthCheck).forRoutes('*');
+		consumer.apply(TraceMiddleware).exclude(healthCheck).forRoutes('*');
 	}
 }
