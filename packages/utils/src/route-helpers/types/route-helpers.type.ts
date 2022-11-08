@@ -4,9 +4,7 @@ import type { GetIdRouteInput } from 'src/route-helpers/types/id-route.type';
 
 // Common
 
-type RouteParams =
-	| { organizationId: string; portfolioId: string }
-	| Record<string, string>;
+type RouteParams = Record<string, string>;
 
 export interface BaseGetRouteInput {
 	entity: Entity;

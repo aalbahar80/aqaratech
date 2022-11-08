@@ -1,12 +1,10 @@
 <script lang="ts">
+	import type { PaginatedRoleDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import MemberCard from '$components/member/MemberCard.svelte';
-	import EmptyState from '$lib/components/EmptyState.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { create, inferRoute } from '$lib/utils/route-helpers';
-	import type { PaginatedRoleDto } from '$api/openapi';
-	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
@@ -22,7 +20,15 @@
 	});
 </script>
 
-<StackedList entity="member" count={roles.results.length} {formUrl}>
+<StackedList
+	entity="member"
+	count={roles.results.length}
+	formButtonProps={{
+		entity: 'member',
+		buttonText: 'Invite member',
+		formUrl,
+	}}
+>
 	{#each roles.results as role (role.id)}
 		{@const icons = [
 			{
@@ -45,13 +51,5 @@
 			/>
 		</li>
 	{/each}
-	<div slot="emptyState">
-		<EmptyState
-			entityMap={entitiesMap.member}
-			message="No members have been invited yet."
-			buttonText="Invite member"
-			{formUrl}
-		/>
-	</div>
 	<AnchorPagination pagination={roles.pagination} />
 </StackedList>

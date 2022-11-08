@@ -1,13 +1,17 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import EmptyState from '$lib/components/EmptyState.svelte';
-	import { entitiesMap, type Entity } from '@self/utils';
+	import FormButtonNew from '$lib/components/form/FormButtonNew.svelte';
+	import type { Entity } from '@self/utils';
+	import type { ComponentProps } from 'svelte';
 
 	export let count: number;
-	export let formUrl: string;
-	// TODO make type either nameMap or EntityTitle
-	export let entity: Entity | undefined = undefined;
-	export let entityMap = entity ? entitiesMap[entity] : undefined;
+	export let entity: Entity;
+
+	export let message: string | undefined = undefined;
+
+	export let formButtonProps: ComponentProps<FormButtonNew> | undefined =
+		undefined;
 
 	export let hideActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
 </script>
@@ -23,19 +27,15 @@
 			>
 				<div class="ml-4 mt-2">
 					<h3 class="text-2xl font-medium leading-6 text-gray-900">
-						{entityMap?.pluralCap}
+						<!-- {entitiesMap[entity].pluralCap} -->
+						{entity}
 					</h3>
 				</div>
 
 				{#if !hideActions}
 					<div class="ml-4 mt-2 flex-shrink-0">
 						<slot name="actions">
-							<a
-								href={formUrl}
-								class="relative inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-							>
-								Create new {entityMap?.singular}
-							</a>
+							<FormButtonNew {entity} {...formButtonProps} />
 						</slot>
 					</div>
 				{/if}
@@ -47,9 +47,7 @@
 			<slot />
 		</ul>
 	{:else}
-		<slot name="emptyState">
-			<EmptyState {entityMap} {formUrl} />
-		</slot>
+		<EmptyState {entity} {message} {formButtonProps} />
 	{/if}
 </section>
 

@@ -1,11 +1,9 @@
 <script lang="ts">
 	import type { PaginatedUnitDto, UnitDto } from '$api/openapi';
-	import { page } from '$app/stores';
 	import RadioButtons from '$lib/components/buttons/RadioButtons.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import UnitCard from '$lib/components/unit/UnitCard.svelte';
-	import { getRoute, PageType } from '@self/utils';
 	import { flip } from 'svelte/animate';
 	import { writable } from 'svelte/store';
 
@@ -40,19 +38,7 @@
 	}
 </script>
 
-<StackedList
-	entity="unit"
-	count={units.results.length}
-	formUrl={getRoute({
-		entity: 'unit',
-		pageType: PageType.New,
-		params: $page.params,
-		predefined: {
-			portfolioId: $page.params.portfolioId,
-			propertyId: $page.params.propertyId,
-		},
-	})}
->
+<StackedList entity="unit" count={units.results.length}>
 	<div slot="secondary">
 		<RadioButtons {options} bind:selected={$sortBy} />
 	</div>

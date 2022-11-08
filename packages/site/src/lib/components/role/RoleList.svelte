@@ -1,9 +1,7 @@
 <script lang="ts">
-	import EmptyState from '$lib/components/EmptyState.svelte';
+	import type { ValidatedRoleDto } from '$api/openapi';
 	import RoleCard from '$lib/components/role/RoleCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import type { ValidatedRoleDto } from '$api/openapi';
-	import { entitiesMap } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
@@ -13,9 +11,14 @@
 </script>
 
 <StackedList
-	entityMap={entitiesMap.role}
+	entity="role"
 	count={roles.length}
-	{formUrl}
+	message="No roles have been created yet."
+	formButtonProps={{
+		entity: 'role',
+		buttonText: 'Create new organization',
+		formUrl,
+	}}
 	hideActions={false}
 >
 	{#each roles as role (role.id)}
@@ -40,12 +43,4 @@
 			/>
 		</li>
 	{/each}
-	<div slot="emptyState">
-		<EmptyState
-			entityMap={entitiesMap.role}
-			message="No roles have been created yet."
-			buttonText="Create new organization"
-			{formUrl}
-		/>
-	</div>
 </StackedList>
