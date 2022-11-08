@@ -1,8 +1,9 @@
+// @ts-nocheck
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { format } from 'winston';
+import type { Printf } from './filter-logs/type';
 
 const colorHttpMessage = (message: Record<string, any>) => {
 	const firstdigit = message.status?.toString().charAt(0);
@@ -59,14 +60,38 @@ const httpResponseColorScheme: Record<string, (text: string) => string> = {
 	3: clc.magentaBright,
 };
 
-export const nestLikeConsoleFormat = (
+/**
+ * @example
+ *
+ * ```ts
+ * import { format } from 'winston';
+ *
+ * const { combine, timestamp, label } = format;
+ *
+ * const logger = createLogger({
+ * 	level: 'http',
+ * 	transports: [
+ * 		new transports.Console({
+ * 			level: 'http',
+ * 			format: combine(
+ * 				timestamp(),
+ * 				label({ label: 'site' }),
+ * 				httpLogFormat('site'),
+ * 			),
+ * 		}),
+ * 	],
+ * });
+ * ```
+ */
+export const httpLogFormat = (
+	printf: PrintF,
 	appName = 'NestWinston',
 	options = {
 		colors: true,
 		prettyPrint: true,
 	},
 ) =>
-	format.printf(({ context, level, timestamp, message, ms, ...meta }) => {
+	printf(({ context, level, timestamp, message, ms, ...meta }) => {
 		if ('undefined' !== typeof timestamp) {
 			// Only format the timestamp to a locale representation if it's ISO 8601 format. Any format
 			// that is not a valid date string will throw, just ignore it (it will be printed as-is).

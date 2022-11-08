@@ -16,9 +16,15 @@ export type {
 } from './entity/entity-map';
 export { fromUrl } from './entity/from-url';
 export { isEntity, isEntityUrlName } from './entity/is-entity';
-export { addEnvLabel } from './logger/enrich-logs';
-export { formatRequestLog } from './logger/format-request-log';
-export { formatResponseLog } from './logger/format-response-log';
+export {
+	addEnvLabel,
+	formatRequestLog,
+	formatResponseLog,
+	ignoreHttp,
+	isHttpLog,
+	httpLogFormat,
+	onlyHttp,
+} from './logger';
 export { PageTypePortfolio } from './route-helpers/enums/page-tab-portfolio.enum';
 export { PageTab } from './route-helpers/enums/page-tab.enum';
 export { PageType } from './route-helpers/enums/page-type.enum';
