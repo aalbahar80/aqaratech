@@ -28,7 +28,7 @@
 		"@changesets/cli": "2.25.0",
 		"@tsconfig/node18-strictest": "1.0.0",
 		"@types/node": "18.11.9",
-		"eslint": "8.26.0",
+		"eslint": "8.27.0",
 		"eslint-config-custom": "workspace:*",
 		"madge": "5.0.1",
 		"prettier": "2.7.1",
