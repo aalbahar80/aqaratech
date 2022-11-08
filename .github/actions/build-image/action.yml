@@ -50,5 +50,7 @@ runs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         # More info: https://docs.docker.com/build/ci/github-actions/examples/#cache
-        cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ inputs.package }}:buildcache
-        cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ inputs.package }}:buildcache
+        # cache-from: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ inputs.package }}:buildcache
+        # cache-to: type=registry,ref=registry.digitalocean.com/aqtech/aqaratech-${{ inputs.package }}:buildcache
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
