@@ -155,6 +155,22 @@ const inputs: [GetRouteInput, string][] = [
 		},
 		'/organizations/1/portfolios',
 	],
+	[
+		{
+			entity: 'unit',
+			pageType: PageType.New,
+			params: { organizationId: '1', portfolioId: '2', propertyId: '3' },
+		},
+		'/organizations/1/portfolios/2/units/new?propertyId=3',
+	],
+	[
+		{
+			entity: 'lease',
+			pageType: PageType.New,
+			params: { organizationId: '1', portfolioId: '2', unitId: '3' },
+		},
+		'/organizations/1/portfolios/2/leases/new?unitId=3',
+	],
 ];
 
 test.each(inputs)('getRoute(%o) === %s', (input, expected) => {
