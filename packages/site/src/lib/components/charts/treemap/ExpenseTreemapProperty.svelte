@@ -59,9 +59,7 @@
 	};
 
 	const getLink = (node: any) => {
-		console.log({ node }, 'ExpenseTreemapProperty.svelte ~ 60');
 		const id = node.data[0];
-		console.log(node.height, 'ExpenseTreemapProperty.svelte ~ 62');
 		if (node.height === 0 && id.length === 36) {
 			return getRoute({
 				id,

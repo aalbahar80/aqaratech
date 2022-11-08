@@ -120,7 +120,8 @@ Create a treemap from a d3-hierarchy.
 							class:text-md={area > 0.03 && area < 0.07}
 							class:text-xl={area > 0.07}
 						>
-							{#if getLink}
+							<!-- Consider passing in link in data structure if there is a need to optimize -->
+							{#if getLink && getLink(node)}
 								<a
 									class="align-middle text-lg text-indigo-600"
 									class:hidden={node.children}
