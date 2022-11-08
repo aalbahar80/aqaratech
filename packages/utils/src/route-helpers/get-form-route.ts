@@ -21,9 +21,15 @@ type PredefinedMap = {
 	[K in Entity]?: string[];
 };
 
+/**
+ * Predefined form fields for each entity.
+ *
+ * Note that organizationId and portfolioId are not included here
+ * because they are always present in the route.
+ */
 const predefinedMap: PredefinedMap = {
-	payout: ['portfolioId'],
-	property: ['portfolioId'],
+	// payout: ['portfolioId'],
+	// property: ['portfolioId'],
 	unit: ['propertyId'],
 	lease: ['unitId'],
 };
