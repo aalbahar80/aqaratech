@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { GroupByLocationDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
+	import { getRoute, PageType } from '@self/utils';
 	import * as d3 from 'd3';
 
 	export let expenses: GroupByLocationDto[];
@@ -57,8 +59,19 @@
 	};
 
 	const getLink = (node: any) => {
-		const data = node.data[0];
-		return `/expenses/${data.id}`;
+		console.log({ node }, 'ExpenseTreemapProperty.svelte ~ 60');
+		const id = node.data[0];
+		console.log(node.height, 'ExpenseTreemapProperty.svelte ~ 62');
+		if (node.height === 0 && id.length === 36) {
+			return getRoute({
+				id,
+				pageType: PageType.Id,
+				entity: 'unit',
+				params: $page.params,
+			});
+		} else {
+			return null;
+		}
 	};
 </script>
 
