@@ -10,8 +10,8 @@
 		// reduceFn,
 		(d) => d3.sum(d, (e) => e.amount),
 		// groupingFns,
-		(d) => d.propertyTitle ?? 'Unspecified Property',
-		(d) => d.unitTitle ?? 'Unspecified Unit',
+		(d) => d.propertyId ?? 'Unspecified Property',
+		(d) => d.unitId ?? 'Unspecified Unit',
 	);
 
 	// Type of each node is either null OR a nested maps up to 3 levels deep.
@@ -40,12 +40,16 @@
 		// 3. root node has data[1] as a Map (of children) from rollupData
 
 		const nonLeafLabel = node.data[0];
-		//@ts-ignore
-		const leafLabel = node.data[0]?.labelEn;
 		if (typeof nonLeafLabel === 'string') {
-			return nonLeafLabel;
-		} else if (typeof leafLabel === 'string') {
-			return leafLabel;
+			const propertyTitle = expenses.find(
+				(e) => e.propertyId === nonLeafLabel,
+			)?.propertyTitle;
+
+			const unitTitle = expenses.find(
+				(e) => e.unitId === nonLeafLabel,
+			)?.unitTitle;
+
+			return unitTitle ?? propertyTitle ?? nonLeafLabel;
 		} else {
 			// This handles the root node where data[0] is null and data[1] is a Map
 			return '';
