@@ -24,7 +24,7 @@ envs:
     value: ${backend.PRIVATE_URL}
   - key: PUBLIC_AQ_DEBUG_LEVEL
     scope: RUN_AND_BUILD_TIME
-    value: 'debug'
+    value: 'verbose'
   - key: PUBLIC_AQ_DEBUG_NEST
     scope: RUN_AND_BUILD_TIME
     value: '1'
