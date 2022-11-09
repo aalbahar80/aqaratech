@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation';
-import type { FormFields } from '$lib/components/form/form-field';
+import type { FormFields } from '$lib/components/form/form-field.interface';
 import { getRoute, PageType, type Entity } from '@self/utils';
 import * as R from 'remeda';
 import { writable } from 'svelte/store';

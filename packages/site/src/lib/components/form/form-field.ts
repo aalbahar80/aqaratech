@@ -1,30 +1,7 @@
-export interface FormField {
-	name: string;
-	type: string;
+import type { FormField } from '$lib/components/form/form-field.interface';
 
-	label: string;
-	description: string;
-	hint: string;
-	placeholder: string;
-
-	required: boolean;
-	disabled: boolean;
-
-	enabledInEditForm: boolean;
-	enabledInCreateForm: boolean;
-
-	// html attributes
-	hintId: string;
-}
-
-export type FormFields<T> = {
-	[K in keyof T]: FormField;
-};
-
-export const createFormField = (
-	name: string,
-	options?: Partial<FormField>,
-): FormField => {
+// TODO satisfies FormField
+export const createFormField = (name: string, options?: Partial<FormField>) => {
 	return {
 		name,
 		type: 'text',
