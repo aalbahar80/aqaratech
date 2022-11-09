@@ -12,17 +12,13 @@
 		};
 	}
 
-	type Concrete<Type> = {
-		[Property in keyof Type]-?: Type[Property];
-	};
+	type FormKeys = $$Generic;
+	type WithUnkownValues<T> = { [K in keyof T]: unknown };
 
-	// type K = $$Generic;
-	type FormValues = $$Generic<Record<string, unknown>>;
-	// type FormValues = $$Generic<undefined | (Record<keyof T, unknown> & FormErrors)>;
-
-	export let form: (FormValues & FormErrors) | undefined;
-	export let data: FormValues | undefined = undefined;
-	export let formModel: FormModel<FormValues>;
+	export let form: Partial<WithUnkownValues<FormKeys> & FormErrors> | undefined;
+	export let data: Omit<WithUnkownValues<FormKeys>, 'errors'> | undefined =
+		undefined;
+	export let formModel: FormModel<Omit<WithUnkownValues<FormKeys>, 'errors'>>;
 </script>
 
 <form
