@@ -13,10 +13,6 @@ export const actions: Actions = {
 		const parsed = tenantCreateSchema.safeParse(obj);
 
 		if (!parsed.success) {
-			console.log(parsed.error);
-			// TODO: format zod errors where key is the field name, and value is the error message(s)
-			// const errors = parsed.error.flatten().fieldErrors;
-
 			const errors = parsed.error.formErrors;
 			console.warn({ errors }, '+page.server.ts ~ 19');
 
