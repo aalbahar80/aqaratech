@@ -57,7 +57,6 @@ Sentry.init({
 	integrations: [
 		// enable HTTP calls tracing
 		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),
-		new Sentry.Integrations.Console(),
 	],
 });
 
