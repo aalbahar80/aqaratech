@@ -10,11 +10,11 @@
 	interface FormErrors {
 		errors?: {
 			formErrors: string[];
-			fieldErrors: Record<string, [string, ...string[]]>;
+			fieldErrors: Record<string, string[]>;
 		};
 	}
 
-	type Form = null | (Record<string, unknown> & FormErrors);
+	type Form = undefined | (Record<string, unknown> & FormErrors);
 
 	export let form: Form;
 	export let formModel: FormModel<T>;

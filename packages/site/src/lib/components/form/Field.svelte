@@ -3,7 +3,7 @@
 
 	export let formField: FormField;
 	export let value: unknown = undefined;
-	export let errors: [string, ...string[]] | undefined = undefined;
+	export let errors: string[] | undefined = undefined;
 </script>
 
 <div>
@@ -32,7 +32,7 @@
 {#if errors}
 	{#each errors as error}
 		<p class="mt-2 text-sm text-red-600">
-			{error ?? ''}
+			{error}
 		</p>
 	{/each}
 {/if}
