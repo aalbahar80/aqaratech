@@ -22,6 +22,29 @@
 	};
 </script>
 
+<!-- Input 1 -->
+<div>
+	<div class="flex justify-between">
+		<label for={formField.name} class="block text-sm font-medium text-gray-700"
+			>{formField.label}</label
+		>
+		<span class="text-sm text-gray-500" id={formField.hintId}
+			>{formField.hint}</span
+		>
+	</div>
+	<div class="mt-1">
+		<input
+			type={formField.type}
+			name={formField.name}
+			id={formField.name}
+			class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+			placeholder={formField.placeholder}
+			aria-describedby={formField.hintId}
+		/>
+	</div>
+</div>
+
+<!-- Input 2 -->
 <div class="relative mt-1 rounded-md">
 	<input
 		name={formField.name}
@@ -56,6 +79,7 @@
 		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
 		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
 	}
+
 	.invalid {
 		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
 	}
