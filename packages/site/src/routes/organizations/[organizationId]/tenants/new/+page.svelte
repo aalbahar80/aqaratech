@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Form2 from '$lib/components/form/Form2.svelte';
+	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
 	import { tenantFormModel } from '$lib/components/tenant/tenant-form-model';
 	import type { ActionData } from './$types';
 
@@ -8,4 +8,4 @@
 	const formModel = tenantFormModel();
 </script>
 
-<Form2 {formModel} {form} />
+<EnhancedForm {formModel} {form} />
