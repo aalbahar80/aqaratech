@@ -17,6 +17,7 @@
 	type Form = undefined | (Record<string, unknown> & FormErrors);
 
 	export let form: Form;
+	export let data: Record<string, unknown> | undefined = undefined;
 	export let formModel: FormModel<T>;
 </script>
 
@@ -27,9 +28,12 @@
 >
 	<Fields>
 		{#each objectValues(formModel.fields) as formField}
+			{@const valueFromForm = form?.[formField.name]}
+			{@const valueFromData = data?.[formField.name]}
+			<!-- valueFromForm is the value as it is being edited. Always prioritize it unless it's `undefined`. -->
 			<Field
 				{formField}
-				value={form?.[formField.name]}
+				value={valueFromForm === undefined ? valueFromData : valueFromForm}
 				errors={form?.errors?.fieldErrors[formField.name]}
 			/>
 		{/each}
