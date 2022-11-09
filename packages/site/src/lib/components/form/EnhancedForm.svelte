@@ -6,31 +6,11 @@
 	import { objectValues } from '$lib/utils/common';
 
 	type ActionDataKeys = $$Generic<string>;
+	// @ts-expect-error ts doesn't think this is used
 	type FormKeys = Exclude<ActionDataKeys, 'errors'>;
 
 	type ActionDataObj = $$Generic<{ [key in FormKeys] }>;
 	type FormModelObj = $$Generic<{ [key in FormKeys] }>;
-
-	// type Form = { [key in FormKeys]: FormKeys[key] };
-	// type ActionDataObj = Partial<FormKeys> & FormErrors<FormKeys>;
-
-	type Data =
-		| {
-				[key in FormKeys]: unknown;
-		  };
-
-	type WithUnkownValues<T extends string> = {
-		[K in T as ActionDataKeys]: unknown;
-	};
-
-	type FieldErrors<T extends string> = Record<T, string[]>;
-
-	interface FormErrors<T extends string> {
-		errors?: {
-			formErrors: string[];
-			fieldErrors: FieldErrors<T>;
-		};
-	}
 
 	export let form: ActionDataObj | undefined;
 
