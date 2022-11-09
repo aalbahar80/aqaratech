@@ -30,6 +30,8 @@
 				value = e.detail.value;
 			}}
 		/>
+		<!-- hidden input to make combox compatible with enhanced form -->
+		<input type="hidden" name={formField.name} {value} />
 	{:else}
 		<div class="mt-1">
 			<input
