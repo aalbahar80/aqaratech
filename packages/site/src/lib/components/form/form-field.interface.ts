@@ -1,7 +1,7 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
 
-export interface BaseFormField {
-	name: string;
+export interface BaseFormField<T> {
+	name: T;
 
 	label: string;
 	description: string;
@@ -20,7 +20,7 @@ export interface BaseFormField {
 
 // Input field
 
-export interface InputFormField extends BaseFormField {
+export interface InputFormField<T> extends BaseFormField<T> {
 	type: InputType;
 }
 
@@ -36,7 +36,7 @@ type InputType =
 
 // Select field
 
-export interface SelectFormField extends BaseFormField {
+export interface SelectFormField<T> extends BaseFormField<T> {
 	type: 'select';
 	options: Option[];
 	combobox: boolean;
@@ -44,8 +44,8 @@ export interface SelectFormField extends BaseFormField {
 
 // Combined
 
-export type FormField = InputFormField | SelectFormField;
+export type FormField<T> = InputFormField<T> | SelectFormField<T>;
 
 export type FormFields<T> = {
-	[K in keyof T]: FormField;
+	[K in keyof T]: FormField<keyof T>;
 };
