@@ -28,6 +28,8 @@ export const logger = createLogger({
 		new transports.Console({
 			format: format.combine(
 				format(ignoreHttp)(),
+				// TODO: disable prettyPrint in production
+				// https://github.com/winstonjs/logform#prettyprint
 				format.prettyPrint(),
 				format.colorize({ all: true }),
 			),
