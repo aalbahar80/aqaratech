@@ -6,12 +6,15 @@ import { createLogger, format, transports } from 'winston';
 
 export const logger = createLogger({
 	level: environment.PUBLIC_AQ_DEBUG_LEVEL || 'info',
+
+	// Common log formats for all transports
 	format: format.combine(
 		// https://github.com/winstonjs/logform#errors
 		format.errors({ stack: true }),
 		format.timestamp(),
 		format.label({ label: 'site' }),
 	),
+
 	transports: [
 		// Transport for HTTP logs
 		// TODO: disable in production
