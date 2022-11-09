@@ -46,6 +46,4 @@ export interface SelectFormField<T> extends BaseFormField<T> {
 
 export type FormField<T> = InputFormField<T> | SelectFormField<T>;
 
-export type FormFields<T> = {
-	[K in keyof T]: FormField<keyof T>;
-};
+export type FormFields<T> = Record<keyof T, FormField<keyof T>>;
