@@ -1,14 +1,13 @@
 import { environment } from '$aqenvironment';
 import { privateEnvironment } from '$lib/server/config/private-environment';
 import { Logtail } from '@logtail/node';
-import { addEnvLabel } from '@self/utils';
+import { addEnvLabel, liveEnvs } from '@self/utils';
 
 /**
  * Only enable logtail in production & staging.
  */
 const shouldEnableLogtail = () => {
-	const liveEnvs = ['production', 'staging'];
-
+	// @ts-expect-error until satisfies is supported
 	const result = liveEnvs.includes(environment.PUBLIC_AQARATECH_ENV);
 
 	console.log(

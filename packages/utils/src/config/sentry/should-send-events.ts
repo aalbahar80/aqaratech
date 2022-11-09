@@ -1,14 +1,6 @@
 import type { Options } from '@sentry/types';
-import type { AqaratechEnv } from '../../../../../types/environment';
+import { liveEnvs } from 'src/config/live-envs';
 import type { Config } from './types';
-
-/**
- * Environments where we should always send events to Sentry.
- */
-const liveEnvs: AqaratechEnv['PUBLIC_AQARATECH_ENV'][] = [
-	'production',
-	'staging',
-];
 
 // TODO: Use typescript `satisfies` directive for return type
 

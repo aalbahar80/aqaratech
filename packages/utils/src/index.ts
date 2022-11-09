@@ -1,6 +1,7 @@
 export { envCheck } from './config/env-check';
 export { getSentryConfig } from './config/get-sentry-config';
 export { isHealthCheck } from './config/is-health-check';
+export { liveEnvs } from './config/live-envs';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
 export { Cookie } from './constants/cookie';
 export { endOfMonthN } from './date/end-of-month-n';
@@ -20,9 +21,9 @@ export {
 	addEnvLabel,
 	formatRequestLog,
 	formatResponseLog,
+	httpLogFormat,
 	ignoreHttp,
 	isHttpLog,
-	httpLogFormat,
 	onlyHttp,
 } from './logger';
 export { PageTypePortfolio } from './route-helpers/enums/page-tab-portfolio.enum';

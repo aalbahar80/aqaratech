@@ -1,14 +1,12 @@
 import { Logtail } from '@logtail/node';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { addEnvLabel } from '@self/utils';
+import { addEnvLabel, liveEnvs } from '@self/utils';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()
 export class LogtailService {
 	constructor(readonly config: ConfigService<EnvironmentConfig, true>) {
-		const liveEnvs = ['production', 'staging'];
-
 		const env = config.get('PUBLIC_AQARATECH_ENV', { infer: true });
 
 		const token = config.get('LOGTAIL_TOKEN', { infer: true });
