@@ -2,16 +2,12 @@ import { createFormField } from '$lib/components/form/form-field';
 import { createFormModel } from '$lib/components/form/form-model';
 import { countries } from '$lib/constants/countries';
 import { labelHint } from '$lib/constants/form-hints';
-import type { TenantCreateSchema, TenantUpdateSchema } from '@self/utils';
-import type { z } from 'zod';
+import { tenantCreateSchema, tenantUpdateSchema } from '@self/utils';
 
-type TenantSchemas = TenantCreateSchema | TenantUpdateSchema;
-
-export const tenantFormModel = <S extends z.ZodType<TenantSchemas>>(
-	schema: S,
-) =>
-	createFormModel<TenantCreateSchema | TenantUpdateSchema>({
-		schema,
+export const tenantFormModel = () =>
+	createFormModel({
+		createSchema: tenantCreateSchema,
+		updateSchema: tenantUpdateSchema,
 		entity: 'tenant',
 		fields: {
 			fullName: createFormField('fullName', {
