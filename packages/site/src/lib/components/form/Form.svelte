@@ -2,13 +2,14 @@
 	import { ResponseError } from '$api/openapi';
 	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import SelectEntity from '$lib/components/form/inputs/SelectEntity.svelte';
 	import type { Field, SelectField } from '$lib/models/classes/Field.class';
 	import { addToast } from '$lib/stores/toast';
 	import { validator } from '@felte/validator-zod';
-	import { entitiesMap, type Entity } from '@self/utils';
+	import { entitiesMap, getRoute, PageType, type Entity } from '@self/utils';
 	import { createForm } from 'felte';
 	import type { z, ZodSchema } from 'zod';
 
@@ -29,7 +30,15 @@
 		} else if ('id' in value) {
 			id = value.id;
 		}
-		return goto(`/${entitiesMap[entity].urlName}/${id}`);
+
+		const url = getRoute({
+			entity,
+			id,
+			pageType: PageType.Id,
+			params: $page.params,
+		});
+
+		return goto(url);
 	};
 
 	// $: noErrorMsg = Object.values($errors).every((e) => e === null);
