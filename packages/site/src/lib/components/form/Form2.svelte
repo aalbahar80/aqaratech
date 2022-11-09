@@ -30,7 +30,7 @@
 			<Field
 				{formField}
 				value={form?.[formField.name]}
-				errors={form?.errors.fieldErrors[formField.name]}
+				errors={form?.errors?.fieldErrors[formField.name]}
 			/>
 		{/each}
 	</Fields>
