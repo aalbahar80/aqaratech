@@ -2,20 +2,20 @@ import type {
 	InputFormField,
 	SelectFormField,
 } from '$lib/components/form/form-field.interface';
-import type { Object } from 'ts-toolbelt';
+import type { Option } from '$lib/models/interfaces/option.interface';
 
-type WithOptions = Object.Required<Partial<SelectFormField>, 'options'> & {
+interface WithOptions {
 	type: 'select';
-};
+	options: Option[];
+	combobox?: boolean;
+}
+
+type WithoutOptions = Partial<InputFormField>;
 
 // TODO satisfies FormField
-export const createFormField = <
-	T extends Partial<InputFormField> | WithOptions,
->(
+export const createFormField = <T extends WithOptions | WithoutOptions>(
 	name: string,
-	options?: T extends { type: 'select' }
-		? WithOptions
-		: Partial<InputFormField>,
+	options?: T extends WithOptions ? WithOptions : WithoutOptions,
 ) => {
 	return {
 		name,
@@ -36,5 +36,5 @@ export const createFormField = <
 		hintId: `${name}-hint`,
 
 		...options,
-	} as T extends { type: 'select' } ? SelectFormField : InputFormField;
+	} as T extends WithOptions ? SelectFormField : InputFormField;
 };

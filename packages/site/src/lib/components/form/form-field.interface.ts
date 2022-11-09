@@ -39,6 +39,7 @@ type InputType =
 export interface SelectFormField extends BaseFormField {
 	type: 'select';
 	options: Option[];
+	combobox: boolean;
 }
 
 // Combined
