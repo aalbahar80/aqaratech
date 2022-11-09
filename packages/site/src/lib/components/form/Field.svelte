@@ -2,26 +2,13 @@
 	import type { FormField } from '$lib/components/form/form-field';
 	import { ExclamationCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import type { Writable } from 'svelte/store';
-	import type { ActionData } from './$types';
-
-	type Errors = NonNullable<ActionData>['errors'] | undefined;
 
 	export let formField: FormField;
 	export let value: unknown = undefined;
-	export let errors: Writable<Errors> | undefined;
-
-	const hasErrors = (name: string): name is keyof Writable<Errors> => {
-		return (
-			errors &&
-			$errors &&
-			formField.name in $errors &&
-			$errors[formField.name] &&
-			$errors[formField.name].length > 0
-		);
-	};
+	export let errors: string[] = [];
 </script>
 
+<pre>{JSON.stringify(errors, null, 2)}</pre>
 <!-- Input 1 -->
 <div>
 	<div class="flex justify-between">
@@ -51,12 +38,12 @@
 		type={formField.type}
 		value={value ?? ''}
 		class="form__input"
-		class:invalid={hasErrors(formField.name)}
+		class:invalid={errors.length > 0}
 	/>
 	<div
 		class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
 	>
-		{#if hasErrors(formField.name) && formField.type !== 'date'}
+		{#if errors.length && formField.type !== 'date'}
 			<Icon
 				src={ExclamationCircle}
 				class="h-5 w-5 text-red-500"
@@ -66,8 +53,8 @@
 	</div>
 </div>
 
-{#if hasErrors(formField.name)}
-	{#each $errors?.[formField.name] as error}
+{#if errors.length > 0}
+	{#each errors as error}
 		<p class="mt-2 text-sm text-red-600">
 			{error ?? ''}
 		</p>
