@@ -15,6 +15,7 @@ export const propertyFormModel = (pageType: FormTypeEnum) =>
 		updateSchema: propertyUpdateSchema,
 		fields: {
 			area: createFormField('area', {
+				type: 'select',
 				required: true,
 				combobox: true,
 				options: areas.map((area) => ({
