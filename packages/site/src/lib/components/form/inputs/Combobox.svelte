@@ -243,9 +243,8 @@
 		<ul
 			class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
 		>
-			<!--  Don't render entire filtered results array for perf  -->
-			<!-- TODO handle initialvalue not in slice -->
-			{#each filtered.slice(0, 100) as item (item.value)}
+			<!-- If further optimization is needed: https://tanstack.com/virtual/v3 -->
+			{#each filtered as item (item.value)}
 				{@const selected = selection?.value === item.value}
 				<Hoverable let:hovering>
 					<!-- TODO classes can be simplified. It'd be preferrable to not use BOTH `classes()` utility AND `style` tag -->
