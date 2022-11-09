@@ -1,15 +1,13 @@
 <script lang="ts">
 	import type { FormField } from '$lib/components/form/form-field';
-	import { ExclamationCircle } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 
 	export let formField: FormField;
 	export let value: unknown = undefined;
-	export let errors: string[] = [];
+	export let errors: [string, ...string[]] | undefined = undefined;
 </script>
 
 <pre>{JSON.stringify(errors, null, 2)}</pre>
-<!-- Input 1 -->
+
 <div>
 	<div class="flex justify-between">
 		<label for={formField.name} class="block text-sm font-medium text-gray-700"
@@ -24,36 +22,18 @@
 			type={formField.type}
 			name={formField.name}
 			id={formField.name}
+			value={value ?? ''}
 			class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 			placeholder={formField.placeholder}
 			aria-describedby={formField.hintId}
+			class:invalid={errors}
 		/>
+
+		<!-- class="form__input" -->
 	</div>
 </div>
 
-<!-- Input 2 -->
-<div class="relative mt-1 rounded-md">
-	<input
-		name={formField.name}
-		type={formField.type}
-		value={value ?? ''}
-		class="form__input"
-		class:invalid={errors.length > 0}
-	/>
-	<div
-		class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
-	>
-		{#if errors.length && formField.type !== 'date'}
-			<Icon
-				src={ExclamationCircle}
-				class="h-5 w-5 text-red-500"
-				aria-hidden="true"
-			/>
-		{/if}
-	</div>
-</div>
-
-{#if errors.length > 0}
+{#if errors}
 	{#each errors as error}
 		<p class="mt-2 text-sm text-red-600">
 			{error ?? ''}

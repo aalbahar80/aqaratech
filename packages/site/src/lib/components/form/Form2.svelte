@@ -8,7 +8,7 @@
 	type T = $$Generic;
 
 	interface FormErrors {
-		errors: {
+		errors?: {
 			formErrors: string[];
 			fieldErrors: Record<string, [string, ...string[]]>;
 		};
