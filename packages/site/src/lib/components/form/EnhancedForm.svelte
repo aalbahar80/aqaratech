@@ -5,14 +5,13 @@
 	import type { FormModel } from '$lib/components/form/form-model';
 	import { objectValues } from '$lib/utils/common';
 
-	type FormKeys = $$Generic<string>;
+	type ActionDataKeys = $$Generic<string>;
+	type FormKeys = Exclude<ActionDataKeys, 'errors'>;
 	type WithUnkownValues<T extends string> = {
-		[K in T as FormKeys]: unknown;
+		[K in T as ActionDataKeys]: unknown;
 	};
 
-	// type FieldErrors<T extends string> = { [K in T]?: string[] };
 	type FieldErrors<T extends string> = Record<T, string[]>;
-	type ActualFormKeys<T extends string> = Exclude<T, 'errors'>;
 
 	interface FormErrors<T extends string> {
 		errors?: {
@@ -22,23 +21,16 @@
 	}
 
 	export let form:
-		| Partial<
-				WithUnkownValues<ActualFormKeys<FormKeys>> &
-					FormErrors<ActualFormKeys<FormKeys>>
-		  >
+		| Partial<WithUnkownValues<FormKeys> & FormErrors<FormKeys>>
 		| undefined;
 
-	// export let data: WithUnkownValues<ActualFormKeys<FormKeys>> | undefined =
-	// 	undefined;
 	export let data:
 		| {
-				[K in ActualFormKeys<FormKeys>]: unknown;
+				[K in FormKeys]: unknown;
 		  }
 		| undefined = undefined;
 
-	export let formModel: FormModel<
-		Omit<WithUnkownValues<ActualFormKeys<FormKeys>>, 'errors'>
-	>;
+	export let formModel: FormModel<Omit<WithUnkownValues<FormKeys>, 'errors'>>;
 </script>
 
 <form
