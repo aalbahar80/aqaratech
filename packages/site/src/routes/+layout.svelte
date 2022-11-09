@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { navigating, page } from '$app/stores';
-	import ToastParent from '$components/toast/ToastParent.svelte';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
@@ -12,6 +11,7 @@
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
 	import { onMount } from 'svelte';
+	import { Toaster } from 'svelte-french-toast';
 	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
 	import type { LayoutData } from './$types';
@@ -68,8 +68,7 @@
 {#if $navigating && !$page.error}
 	<PreloadingIndicator />
 {/if}
-
-<ToastParent />
+<Toaster />
 <SecondaryNavbar />
 {#if $page.url.pathname === '/'}
 	<slot />

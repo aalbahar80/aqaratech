@@ -291,6 +291,7 @@ importers:
       svelte-check: 2.9.2
       svelte-dnd-action: 0.9.21
       svelte-frappe-charts: 1.9.2
+      svelte-french-toast: 1.0.3
       svelte-meta-tags: 2.6.3
       svelte-preprocess: 4.10.7
       tailwindcss: 3.2.2
@@ -363,6 +364,7 @@ importers:
       svelte-check: 2.9.2_vidagnlh55bt6yxji7dk5y5wla
       svelte-dnd-action: 0.9.21
       svelte-frappe-charts: 1.9.2_svelte@3.52.0
+      svelte-french-toast: 1.0.3_svelte@3.52.0
       svelte-meta-tags: 2.6.3_typescript@4.9.1-beta
       svelte-preprocess: 4.10.7_4gl6hpccqgk2uoshhox3ltccsu
       tailwindcss: 3.2.2_postcss@8.4.18
@@ -11365,6 +11367,14 @@ packages:
       svelte: 3.52.0
     dev: true
 
+  /svelte-french-toast/1.0.3_svelte@3.52.0:
+    resolution: {integrity: sha512-HBdutlqUx5FroucvcmMJstmTJDedXayiOSXubBYW6iL5x1PdHp+bOflGx5NxsOa6+EQckJnnVv1vJYgGsg7ngQ==}
+    dependencies:
+      svelte-writable-derived: 2.1.5_svelte@3.52.0
+    transitivePeerDependencies:
+      - svelte
+    dev: true
+
   /svelte-hmr/0.15.0_svelte@3.52.0:
     resolution: {integrity: sha512-Aw21SsyoohyVn4yiKXWPNCSW2DQNH/76kvUnE9kpt4h9hcg9tfyQc6xshx9hzgMfGF0kVx0EGD8oBMWSnATeOg==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
@@ -11484,6 +11494,14 @@ packages:
       strip-indent: 3.0.0
       svelte: 3.52.0
       typescript: 4.8.4
+    dev: true
+
+  /svelte-writable-derived/2.1.5_svelte@3.52.0:
+    resolution: {integrity: sha512-g26/W1iWj7FlLwaggNwXxHwMSf70/bHAYcpBT/EijijjakCSU9/PXmn31fL/kw2P1SzVEU6ayyCFuNYqTY3RUw==}
+    peerDependencies:
+      svelte: ^3.2.1
+    dependencies:
+      svelte: 3.52.0
     dev: true
 
   /svelte/3.52.0:

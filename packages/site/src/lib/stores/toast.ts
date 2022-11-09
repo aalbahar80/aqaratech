@@ -1,57 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { ResponseError } from '$api/openapi';
-import type { Writable } from 'svelte/store';
-import { writable } from 'svelte/store';
-
-interface ToastItem {
-	id: number;
-	duration?: number;
-	props: { title: string; subtitle?: string; kind: 'success' | 'error' };
-}
-
-export const toasts: Writable<ToastItem[]> = writable([]);
-
-export const dismissToast = (id: number) => {
-	toasts.update((all) => all.filter((t) => t.id !== id));
-};
-export const addToast = (toast: Omit<ToastItem, 'id'>) => {
-	// Create a unique ID so we can easily find/remove it
-	// if it is dismissible/has a timeout.
-	const id = Math.floor(Math.random() * 10000);
-
-	// Setup some sensible defaults for a toast.
-	const defaults = {
-		dismissible: true,
-		duration: 10 * 1000,
-	};
-
-	const newToast: ToastItem = { id, ...defaults, ...toast };
-
-	// Push the toast to the top of the list of toasts
-	// const t = { ...defaults, ...toast };
-	toasts.update((all) => [newToast, ...all]);
-
-	// If toast is dismissible, dismiss it after "timeout" amount of time.
-	if (newToast.duration) setTimeout(() => dismissToast(id), newToast.duration);
-};
+// eslint-disable-next-line import/no-named-as-default
+import toast from 'svelte-french-toast';
 
 export const addSuccessToast = (subtitle = '') => {
-	addToast({
-		props: {
-			kind: 'success',
-			title: 'Success',
-			subtitle,
-		},
-	});
+	toast.success(subtitle);
 };
 
 export const addErrorToast = (subtitle = '') => {
-	addToast({
-		props: {
-			kind: 'error',
-			title: 'Error',
-			subtitle,
-		},
-	});
+	toast.error(subtitle);
 };
 
 /**
@@ -65,11 +22,22 @@ export const handleApiError = async (error: any) => {
 		console.error(data);
 		message = data.message;
 	}
-	addToast({
-		props: {
-			kind: 'error',
-			title: 'Error',
-			subtitle: message,
-		},
-	});
+
+	toast.error(message);
 };
+
+export const addToast = (options: ToastItem) => {
+	// TODO: check all implementations to see
+	// if we can only keep one of title and subtitle
+	if (options.props.kind === 'error') {
+		toast.error(options.props.subtitle ?? '');
+	} else if (options.props.kind === 'success') {
+		toast.success(options.props.subtitle ?? '');
+	}
+};
+
+interface ToastItem {
+	id: number;
+	duration?: number;
+	props: { title: string; subtitle?: string; kind: 'success' | 'error' };
+}
