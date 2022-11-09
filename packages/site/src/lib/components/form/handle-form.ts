@@ -3,12 +3,23 @@ import { getRoute, PageType, type Entity } from '@self/utils';
 import { invalid, redirect, type RequestEvent } from '@sveltejs/kit';
 import type { z } from 'zod';
 
-export const handleForm = async <S extends z.ZodTypeAny>({
+export const handleForm = async <
+	S extends z.ZodTypeAny,
+	Event extends RequestEvent,
+>({
 	entity,
 	schema,
 	event,
 	onSubmit,
-}: Validate<S>) => {
+}: {
+	entity: Entity;
+	schema: S;
+	event: Event;
+	/**
+	 * `onSubmit` expects an id to be returned, which is used to redirect to the new page.
+	 */
+	onSubmit: (api: Api, data: z.infer<S>, event: Event) => Promise<string>;
+}) => {
 	const { request, fetch, params } = event;
 
 	const data = await request.formData();
@@ -36,13 +47,3 @@ export const handleForm = async <S extends z.ZodTypeAny>({
 
 	throw redirect(303, url);
 };
-
-interface Validate<S extends z.ZodTypeAny> {
-	entity: Entity;
-	schema: S;
-	event: RequestEvent;
-	/**
-	 * `onSubmit` expects an id to be returned, which is used to redirect to the new page.
-	 */
-	onSubmit: (api: Api, data: z.infer<S>, event) => Promise<string>;
-}
