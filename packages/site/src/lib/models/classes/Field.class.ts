@@ -1,6 +1,10 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
 import { startCase } from '$lib/utils/common.js';
 
+export type Fields<T> = {
+	[K in keyof T]: Field;
+};
+
 type FieldType =
 	| 'text'
 	| 'email'
