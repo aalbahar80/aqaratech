@@ -25,7 +25,6 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
 		const nestTransport = new transports.Console({
 			format: format.combine(
 				format(ignoreHttp)(),
-				format.timestamp(),
 				format.ms(),
 				nestWinstonModuleUtilities.format.nestLike('backend', {
 					prettyPrint: true, // explicitly setting this for pretty error logging
@@ -38,8 +37,6 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
 			level: 'http',
 			format: format.combine(
 				format(onlyHttp)(),
-				format.timestamp(),
-				format.label({ label: 'backend' }),
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 				httpLogFormat(format.printf, 'backend'),
 			),
@@ -47,6 +44,15 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
 
 		return {
 			// ...winstonConfig,
+
+			// Common log formats for all transports
+			format: format.combine(
+				// https://github.com/winstonjs/logform#errors
+				format.errors({ stack: true }),
+				format.timestamp(),
+				format.label({ label: 'backend' }),
+			),
+
 			level,
 			transports: [
 				transportForHttp,
