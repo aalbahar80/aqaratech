@@ -7,6 +7,15 @@
 
 	type ActionDataKeys = $$Generic<string>;
 	type FormKeys = Exclude<ActionDataKeys, 'errors'>;
+	// type Form = { [key in FormKeys]: FormKeys[key] };
+	type ActionDataObj =
+		| Partial<WithUnkownValues<FormKeys>> & FormErrors<FormKeys>;
+
+	type Data =
+		| {
+				[key in FormKeys]: unknown;
+		  };
+
 	type WithUnkownValues<T extends string> = {
 		[K in T as ActionDataKeys]: unknown;
 	};
@@ -20,17 +29,13 @@
 		};
 	}
 
-	export let form:
-		| Partial<WithUnkownValues<FormKeys> & FormErrors<FormKeys>>
-		| undefined;
+	export let form: ActionDataObj | undefined;
 
-	export let data:
-		| {
-				[K in FormKeys]: unknown;
-		  }
-		| undefined = undefined;
+	export let data: Data | undefined = undefined;
 
-	export let formModel: FormModel<Omit<WithUnkownValues<FormKeys>, 'errors'>>;
+	export let formModel: FormModel<{
+		[K in FormKeys]: unknown;
+	}>;
 </script>
 
 <form
