@@ -4,22 +4,20 @@ import { LogtailTransport } from '@logtail/winston';
 import { httpLogFormat, ignoreHttp, onlyHttp } from '@self/utils';
 import { createLogger, format, transports } from 'winston';
 
-const { combine, timestamp, label, printf } = format;
-
 export const logger = createLogger({
 	level: environment.PUBLIC_AQ_DEBUG_LEVEL || 'info',
-	format: combine(
+	format: format.combine(
 		// https://github.com/winstonjs/logform#errors
 		format.errors({ stack: true }),
-		timestamp(),
-		label({ label: 'site' }),
+		format.timestamp(),
+		format.label({ label: 'site' }),
 	),
 	transports: [
 		// Transport for HTTP logs
 		// TODO: disable in production
 		new transports.Console({
 			level: 'http',
-			format: combine(
+			format: format.combine(
 				format(onlyHttp)(),
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 				httpLogFormat(printf, 'site'),
@@ -28,7 +26,7 @@ export const logger = createLogger({
 
 		// Transport for all other logs
 		new transports.Console({
-			format: combine(
+			format: format.combine(
 				format(ignoreHttp)(),
 				format.prettyPrint(),
 				format.colorize({ all: true }),
