@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { getRoute, PageType } from '@self/utils';
 import { test } from '../../api/api-fixtures';
 
-test('screenshot smoke test', async ({ page, org, portfolio }, info) => {
+test('screenshot smoke test', async ({ page, org, portfolio }) => {
 	const url = getRoute({
 		entity: 'portfolio',
 		pageType: PageType.Id,
@@ -12,14 +12,7 @@ test('screenshot smoke test', async ({ page, org, portfolio }, info) => {
 
 	await page.goto(url);
 
-	// take screenshot
-	// info.snapshotDir;
-
-	await page.locator('#detailsPane').screenshot({
-		path:
-			info.snapshotDir +
-			`/portfolio-${info.snapshotSuffix}-${info.project.name}.png`,
-	});
+	const original = await page.locator('#detailsPane').screenshot();
 
 	await page.locator('text=Edit').click();
 
@@ -37,7 +30,7 @@ test('screenshot smoke test', async ({ page, org, portfolio }, info) => {
 	// ensure same entity
 	await expect(page).toHaveURL(url);
 
-	expect(await page.locator('#detailsPane').screenshot()).toMatchSnapshot({
-		name: 'portfolio.png',
-	});
+	const latest = await page.locator('#detailsPane').screenshot();
+
+	expect(original.toString()).toEqual(latest.toString());
 });
