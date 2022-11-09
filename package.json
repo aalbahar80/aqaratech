@@ -25,7 +25,7 @@
 	},
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.13",
-		"@changesets/cli": "2.25.0",
+		"@changesets/cli": "2.25.2",
 		"@tsconfig/node18-strictest": "1.0.0",
 		"@types/node": "18.11.9",
 		"eslint": "8.27.0",
