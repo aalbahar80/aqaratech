@@ -1,13 +1,17 @@
 import { createFormField } from '$lib/components/form/form-field';
-import { createFormModel } from '$lib/components/form/form-model';
+import {
+	createFormModel,
+	type FormTypeEnum,
+} from '$lib/components/form/form-model';
 import { labelHint } from '$lib/constants/form-hints';
 import { portfolioCreateSchema, portfolioUpdateSchema } from '@self/utils';
 
-export const portfolioFormModel = () =>
+export const portfolioFormModel = (pageType: FormTypeEnum) =>
 	createFormModel({
+		entity: 'portfolio',
+		pageType,
 		createSchema: portfolioCreateSchema,
 		updateSchema: portfolioUpdateSchema,
-		entity: 'portfolio',
 		fields: {
 			fullName: createFormField('fullName', {
 				required: true,

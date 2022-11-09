@@ -1,14 +1,18 @@
 import { createFormField } from '$lib/components/form/form-field';
-import { createFormModel } from '$lib/components/form/form-model';
+import {
+	createFormModel,
+	type FormTypeEnum,
+} from '$lib/components/form/form-model';
 import { countries } from '$lib/constants/countries';
 import { labelHint } from '$lib/constants/form-hints';
 import { tenantCreateSchema, tenantUpdateSchema } from '@self/utils';
 
-export const tenantFormModel = () =>
+export const tenantFormModel = (pageType: FormTypeEnum) =>
 	createFormModel({
+		entity: 'tenant',
+		pageType,
 		createSchema: tenantCreateSchema,
 		updateSchema: tenantUpdateSchema,
-		entity: 'tenant',
 		fields: {
 			fullName: createFormField('fullName', {
 				required: true,
