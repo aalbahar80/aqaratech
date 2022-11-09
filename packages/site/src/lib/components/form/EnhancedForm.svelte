@@ -5,26 +5,40 @@
 	import type { FormModel } from '$lib/components/form/form-model';
 	import { objectValues } from '$lib/utils/common';
 
-	interface FormErrors<Keys extends string> {
+	type FormKeys = $$Generic<string>;
+	type WithUnkownValues<T extends string> = {
+		[K in T as FormKeys]: unknown;
+	};
+
+	// type FieldErrors<T extends string> = { [K in T]?: string[] };
+	type FieldErrors<T extends string> = Record<T, string[]>;
+	type ActualFormKeys<T extends string> = Exclude<T, 'errors'>;
+
+	interface FormErrors<T extends string> {
 		errors?: {
 			formErrors: string[];
-			// fieldErrors: Record<Keys, string[]>;
-			fieldErrors: {
-				[K in Keys]?: string[];
-				// 	[K in keyof Keys]: string[];
-			};
+			fieldErrors: FieldErrors<T>;
 		};
 	}
 
-	type FormKeys = $$Generic;
-	type WithUnkownValues<T> = { [K in keyof T]: unknown };
-
 	export let form:
-		| Partial<WithUnkownValues<FormKeys> & FormErrors<FormKeys>>
+		| Partial<
+				WithUnkownValues<ActualFormKeys<FormKeys>> &
+					FormErrors<ActualFormKeys<FormKeys>>
+		  >
 		| undefined;
-	export let data: Omit<WithUnkownValues<FormKeys>, 'errors'> | undefined =
-		undefined;
-	export let formModel: FormModel<Omit<WithUnkownValues<FormKeys>, 'errors'>>;
+
+	// export let data: WithUnkownValues<ActualFormKeys<FormKeys>> | undefined =
+	// 	undefined;
+	export let data:
+		| {
+				[K in ActualFormKeys<FormKeys>]: unknown;
+		  }
+		| undefined = undefined;
+
+	export let formModel: FormModel<
+		Omit<WithUnkownValues<ActualFormKeys<FormKeys>>, 'errors'>
+	>;
 </script>
 
 <form
