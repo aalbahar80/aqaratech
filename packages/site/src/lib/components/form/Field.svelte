@@ -6,8 +6,6 @@
 	export let errors: [string, ...string[]] | undefined = undefined;
 </script>
 
-<pre>{JSON.stringify(errors, null, 2)}</pre>
-
 <div>
 	<div class="flex justify-between">
 		<label for={formField.name} class="block text-sm font-medium text-gray-700"
@@ -28,8 +26,6 @@
 			aria-describedby={formField.hintId}
 			class:invalid={errors}
 		/>
-
-		<!-- class="form__input" -->
 	</div>
 </div>
 
