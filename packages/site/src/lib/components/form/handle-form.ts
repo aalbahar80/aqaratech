@@ -45,7 +45,10 @@ export const handleForm = async <
 		return invalid(400, { ...obj, errors });
 	}
 
-	const id = await onSubmit(createApi(fetch), parsed.data as unknown, event);
+	// We pass the original object to onSubmit, not the parsed one
+	// This is to avoid transforming the data twice, which in the case of short dates (yyyy-mm-dd) will fail.
+
+	const id = await onSubmit(createApi(fetch), obj as unknown, event);
 
 	const url = getRoute({
 		entity: entity,

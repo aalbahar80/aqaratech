@@ -1,54 +1,38 @@
 import { expect } from '@playwright/test';
+import { portfolioFactory } from '@self/seed';
+import { getRoute, PageType } from '@self/utils';
+import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
 
-test('smoke', async ({ page }, info) => {
-	await page.goto('/portfolios/new', { waitUntil: 'networkidle' });
-
-	await page.locator('input[name="fullName"]').click();
-	await page.locator('input[name="fullName"]').fill('John Doe');
-
-	await page.locator('input[name="label"]').click();
-	await page.locator('input[name="label"]').fill('JD');
-
-	await page.locator('input[name="phone"]').click();
-	await page.locator('input[name="phone"]').fill('91234567');
-
-	await page.locator('input[name="civilid"]').click();
-	await page.locator('input[name="civilid"]').fill('123456789012');
-
-	await page.locator('input[name="dob"]').fill('2022-08-05');
-
-	await page.locator('text=Save').click();
-
-	const id = new RegExp(
-		`/portfolios/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
-	);
-	await expect(page).toHaveURL(id);
-	const url = page.url();
-
-	// take screenshot
-	info.snapshotDir;
-
-	expect(page.locator('text=Portfolio')).toBeTruthy();
-	await page.locator('#detailsPane').screenshot({
-		path:
-			info.snapshotDir +
-			`/portfolio-${info.snapshotSuffix}-${info.project.name}.png`,
+test.beforeEach(async ({ org, page }, info) => {
+	const portfolio = portfolioFactory.build({
+		organizationId: org.organization.id,
 	});
 
-	await page.locator('text=Edit').click();
-	const edit = new RegExp(
-		`/portfolios/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/edit`,
-	);
-	await expect(page).toHaveURL(edit);
-	await page.locator('text=Save').click();
-
-	// ensure same entity
-	await expect(page).toHaveURL(url);
-
-	// match screenshot
-	expect(page.locator('text=Portfolio')).toBeTruthy();
-	expect(await page.locator('#detailsPane').screenshot()).toMatchSnapshot({
-		name: 'portfolio.png',
+	const url = getRoute({
+		entity: 'portfolio',
+		pageType: PageType.New,
+		params: { organizationId: org.organization.id },
 	});
+
+	await page.goto(url);
+
+	await page.getByLabel('Portfolio Name (full)').fill(portfolio.fullName);
+	await page.getByLabel('label').fill(portfolio.label);
+	await page.getByLabel('phone').fill(portfolio.phone);
+	await page.getByLabel('Date of Birth').fill(portfolio.dob);
+	await page.getByLabel('Civil ID').fill(portfolio.civilid);
+
+	await page.getByRole('button', { name: 'Save' }).click();
+});
+
+test('can be submitted with minimal fields', async ({ org, page }, info) => {
+	const urlAfterSubmit = getRoute({
+		entity: 'portfolio',
+		pageType: PageType.Id,
+		id: ':uuid',
+		params: { organizationId: org.organization.id },
+	});
+
+	await expect(page).toHaveURL(uuid(urlAfterSubmit));
 });

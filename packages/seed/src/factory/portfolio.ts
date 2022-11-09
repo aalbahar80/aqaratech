@@ -15,7 +15,7 @@ export const portfolioFactory = Factory.Sync.makeFactoryWithRequired<
 
 	fullName: Factory.each(() => faker.name.fullName()),
 
-	label: null,
+	label: Factory.each(() => faker.name.jobTitle()),
 
 	civilid: Factory.each(() =>
 		faker.datatype.number({ min: 200000000000, max: 399999999999 }).toString(),
