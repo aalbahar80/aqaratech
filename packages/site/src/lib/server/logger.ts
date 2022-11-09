@@ -8,8 +8,14 @@ const { combine, timestamp, label, printf } = format;
 
 export const logger = createLogger({
 	level: environment.PUBLIC_AQ_DEBUG_LEVEL || 'info',
-	format: combine(timestamp(), label({ label: 'site' })),
+	format: combine(
+		// https://github.com/winstonjs/logform#errors
+		format.errors({ stack: true }),
+		timestamp(),
+		label({ label: 'site' }),
+	),
 	transports: [
+		// Transport for HTTP logs
 		// TODO: disable in production
 		new transports.Console({
 			level: 'http',
@@ -22,15 +28,16 @@ export const logger = createLogger({
 			),
 		}),
 
+		// Transport for all other logs
 		new transports.Console({
 			format: combine(
 				format(ignoreHttp)(),
-				format.json(),
 				format.prettyPrint(),
-				format.splat(),
 				format.colorize({ all: true }),
 			),
 		}),
+
+		// Transport for Logtail
 		...(logtail ? [new LogtailTransport(logtail)] : []),
 	],
 });
