@@ -5,8 +5,7 @@
 	import type { FormModel } from '$lib/components/form/form-model';
 	import { objectValues } from '$lib/utils/common';
 
-	type T = $$Generic;
-
+	// @ts-expect-error ts doesn't think this is being used
 	interface FormErrors {
 		errors?: {
 			formErrors: string[];
@@ -14,11 +13,16 @@
 		};
 	}
 
-	type Form = undefined | (Record<string, unknown> & FormErrors);
+	type FormValues<T> = {
+		[key in keyof T]: unknown;
+	};
 
-	export let form: Form;
-	export let data: Record<string, unknown> | undefined = undefined;
-	export let formModel: FormModel<T>;
+	type T = $$Generic<undefined | (Record<string, unknown> & FormErrors)>;
+	type K = $$Generic;
+
+	export let form: T;
+	export let data: Omit<FormValues<T>, 'errors'> | undefined = undefined;
+	export let formModel: FormModel<K>;
 </script>
 
 <form
