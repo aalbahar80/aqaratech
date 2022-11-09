@@ -10,12 +10,15 @@ interface WithOptions {
 	combobox?: boolean;
 }
 
-type WithoutOptions = Partial<InputFormField>;
+type WithoutOptions<Name> = Partial<InputFormField<Name>>;
 
 // TODO satisfies FormField
-export const createFormField = <T extends WithOptions | WithoutOptions>(
-	name: string,
-	options?: T extends WithOptions ? WithOptions : WithoutOptions,
+export const createFormField = <
+	Name extends string,
+	T extends WithOptions | WithoutOptions<Name>,
+>(
+	name: Name,
+	options?: T extends WithOptions ? WithOptions : WithoutOptions<Name>,
 ) => {
 	return {
 		name,
@@ -36,5 +39,5 @@ export const createFormField = <T extends WithOptions | WithoutOptions>(
 		hintId: `${name}-hint`,
 
 		...options,
-	} as T extends WithOptions ? SelectFormField : InputFormField;
+	} as SelectFormField<Name> | InputFormField<Name>;
 };
