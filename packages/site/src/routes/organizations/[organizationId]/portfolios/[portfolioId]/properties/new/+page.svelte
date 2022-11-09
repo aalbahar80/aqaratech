@@ -1,12 +1,15 @@
 <script lang="ts">
-	import PropertyForm from '$lib/components/property/PropertyForm.svelte';
-	import type { PageData } from './$types';
+	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
+	import { getEntityFormModel } from '$lib/components/form/get-entity-form-model';
+	import { PageType } from '@self/utils';
+	import type { ActionData } from './$types';
 
-	export let data: PageData;
+	export let form: ActionData;
+
+	const formModel = getEntityFormModel({
+		entity: 'property',
+		pageType: PageType.New,
+	});
 </script>
 
-<PropertyForm
-	formType="create"
-	portfolios={data.portfolios}
-	predefined={data.predefined}
-/>
+<EnhancedForm {formModel} {form} />

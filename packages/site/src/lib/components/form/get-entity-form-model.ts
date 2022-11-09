@@ -1,11 +1,12 @@
 import type { FormTypeEnum } from '$lib/components/form/form-model';
 import { portfolioFormModel } from '$lib/components/portfolio/portfolio-form-model';
+import { propertyFormModel } from '$lib/components/property/property-form-model';
 import { tenantFormModel } from '$lib/components/tenant/tenant-form-model';
 
-// TODO use satisfies Record<Entity, FormModel<any>>
 export const entityFormModeMap = {
 	tenant: tenantFormModel,
 	portfolio: portfolioFormModel,
+	property: propertyFormModel,
 } as const;
 
 export const getEntityFormModel = <T extends keyof typeof entityFormModeMap>({
