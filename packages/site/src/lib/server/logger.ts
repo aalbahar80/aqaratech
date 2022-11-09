@@ -1,8 +1,35 @@
 import { environment } from '$aqenvironment';
 import { logtail } from '$lib/server/utils/logtail';
 import { LogtailTransport } from '@logtail/winston';
-import { httpLogFormat, ignoreHttp, onlyHttp } from '@self/utils';
+import { httpLogFormat, ignoreHttp, liveEnvs, onlyHttp } from '@self/utils';
 import { createLogger, format, transports } from 'winston';
+
+/**
+ * Transport for HTTP logs
+ */
+const createTransportForHttp = () =>
+	new transports.Console({
+		level: 'http',
+		format: format.combine(
+			format(onlyHttp)(),
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+			httpLogFormat(format.printf, 'site'),
+		),
+	});
+
+/**
+ * Transport for all other logs
+ */
+const createSiteTransport = () =>
+	new transports.Console({
+		format: format.combine(
+			format(ignoreHttp)(),
+			// Note: prettyPrint should not be used in production
+			// More info: https://github.com/winstonjs/logform#prettyprint
+			format.prettyPrint(),
+			format.colorize({ all: true }),
+		),
+	});
 
 export const logger = createLogger({
 	level: environment.PUBLIC_AQ_DEBUG_LEVEL || 'info',
@@ -16,40 +43,14 @@ export const logger = createLogger({
 	),
 
 	transports: [
-		// Transport for HTTP logs
-		// TODO: disable in production
-		new transports.Console({
-			level: 'http',
-			format: format.combine(
-				format(onlyHttp)(),
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-				httpLogFormat(format.printf, 'site'),
-			),
-		}),
+		// In production, only use the Logtail transport.
 
-		// Transport for all other logs
-		new transports.Console({
-			format: format.combine(
-				format(ignoreHttp)(),
-				// TODO: disable prettyPrint in production
-				// https://github.com/winstonjs/logform#prettyprint
-				format.prettyPrint(),
-				format.colorize({ all: true }),
-			),
-		}),
+		// @ts-expect-error until satisfies is supported
+		...(liveEnvs.includes(environment.PUBLIC_AQARATECH_ENV)
+			? []
+			: [createTransportForHttp(), createSiteTransport()]),
 
 		// Transport for Logtail
 		...(logtail ? [new LogtailTransport(logtail)] : []),
 	],
 });
-
-// Default logging levels:
-// {
-//   error: 0,
-//   warn: 1,
-//   info: 2,
-//   http: 3,
-//   verbose: 4,
-//   debug: 5,
-//   silly: 6
-// }
