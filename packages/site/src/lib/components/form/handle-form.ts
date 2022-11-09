@@ -11,10 +11,12 @@ export const handleForm = async <
 	schema,
 	event,
 	onSubmit,
+	fromParams,
 }: {
 	entity: Entity;
 	schema: S;
 	event: Event;
+	fromParams?: string[];
 	/**
 	 * `onSubmit` expects an id to be returned, which is used to redirect to the new page.
 	 */
@@ -26,6 +28,13 @@ export const handleForm = async <
 
 	// convert data from FormData to object
 	const obj = Object.fromEntries(data.entries());
+
+	// add params to object
+	if (fromParams) {
+		for (const param of fromParams) {
+			obj[param] = params[param];
+		}
+	}
 
 	const parsed = schema.safeParse(obj);
 
