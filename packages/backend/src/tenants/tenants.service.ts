@@ -76,17 +76,8 @@ export class TenantsService {
 	async findOne({ id }: { id: string }) {
 		const data = await this.prisma.tenant.findUniqueOrThrow({
 			where: { id },
-			include: {
-				leases: {
-					select: {
-						id: true,
-						start: true,
-						end: true,
-						unit: { select: { id: true, unitNumber: true } },
-					},
-				},
-			},
 		});
+
 		return new TenantDto(data);
 	}
 
