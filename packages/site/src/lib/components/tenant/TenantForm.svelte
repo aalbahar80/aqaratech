@@ -5,7 +5,7 @@
 
 	export let data: TenantDto | undefined = undefined;
 
-	const form = tenantFormModel();
+	const formModel = tenantFormModel();
 </script>
 
-<Form2 {form} />
+<Form2 {formModel} />

@@ -6,7 +6,7 @@ import { tenantCreateSchema, type TenantCreateSchema } from '@self/utils';
 /**
  * Stateless model for a new tenant form.
  */
-export const tenantCreateFormModel = () =>
+export const tenantFormModel = () =>
 	createFormModel<TenantCreateSchema>({
 		schema: tenantCreateSchema,
 		entity: 'tenant',
