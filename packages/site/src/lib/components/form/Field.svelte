@@ -1,7 +1,10 @@
 <script lang="ts">
-	import type { FormField } from '$lib/components/form/form-field';
+	import type { FormField } from '$lib/components/form/form-field.interface';
+	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
 
-	export let formField: FormField;
+	type Name = $$Generic<string>;
+
+	export let formField: FormField<Name>;
 	export let value: unknown = undefined;
 	export let errors: string[] | undefined = undefined;
 </script>
@@ -15,18 +18,32 @@
 			>{formField.hint}</span
 		>
 	</div>
-	<div class="mt-1">
-		<input
-			type={formField.type}
-			name={formField.name}
-			id={formField.name}
-			value={value ?? ''}
-			class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-			placeholder={formField.placeholder}
-			aria-describedby={formField.hintId}
-			class:invalid={errors}
+
+	{#if formField.type === 'select' && formField.combobox}
+		<Combobox
+			initialValue={formField.options.find((option) => option.value === value)
+				?.value}
+			inputId={formField.name}
+			options={formField.options}
+			invalid={!!errors}
+			on:select={(e) => {
+				value = e.detail.value;
+			}}
 		/>
-	</div>
+	{:else}
+		<div class="mt-1">
+			<input
+				type={formField.type}
+				name={formField.name}
+				id={formField.name}
+				value={value ?? ''}
+				class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+				placeholder={formField.placeholder}
+				aria-describedby={formField.hintId}
+				class:invalid={errors}
+			/>
+		</div>
+	{/if}
 </div>
 
 {#if errors}

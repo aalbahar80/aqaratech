@@ -26,6 +26,8 @@
 	export let formModel: FormModel<FormModelObj>;
 </script>
 
+<pre>{JSON.stringify(form, null, 2)}</pre>
+
 <form
 	method="POST"
 	use:enhance
