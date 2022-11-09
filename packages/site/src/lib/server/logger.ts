@@ -21,8 +21,6 @@ export const logger = createLogger({
 			level: 'http',
 			format: combine(
 				format(onlyHttp)(),
-				timestamp(),
-				label({ label: 'site' }),
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 				httpLogFormat(printf, 'site'),
 			),
