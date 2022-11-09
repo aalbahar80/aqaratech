@@ -1,8 +1,12 @@
 <script lang="ts">
-	import TenantForm from '$lib/components/tenant/TenantForm.svelte';
-	import type { PageData } from './$types';
+	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
+	import { tenantFormModel } from '$lib/components/tenant/tenant-form-model';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
+
+	const formModel = tenantFormModel();
 </script>
 
-<TenantForm data={data.tenant} />
+<EnhancedForm {form} {formModel} data={data.tenant} />
