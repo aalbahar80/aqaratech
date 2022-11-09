@@ -14,7 +14,7 @@
 	type FormModelObj = $$Generic<{ [key in FormKeys] }>;
 	type FormErrors = $$Generic<{
 		formErrors: string[];
-		fieldErrors: { [key in FormKeys]: string[] };
+		fieldErrors: { [key in FormKeys]?: string[] };
 	}>;
 
 	// Props
