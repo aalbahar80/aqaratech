@@ -20,7 +20,7 @@ export const logger = createLogger({
 			format: format.combine(
 				format(onlyHttp)(),
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-				httpLogFormat(printf, 'site'),
+				httpLogFormat(format.printf, 'site'),
 			),
 		}),
 
