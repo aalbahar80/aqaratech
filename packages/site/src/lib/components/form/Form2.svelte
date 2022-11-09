@@ -4,11 +4,19 @@
 	import Fields from '$lib/components/form/Fields.svelte';
 	import type { FormModel } from '$lib/components/form/form-model';
 	import { objectValues } from '$lib/utils/common';
-	import type { ActionData } from './$types';
 
 	type T = $$Generic;
 
-	export let form: ActionData;
+	interface FormErrors {
+		errors: {
+			formErrors: string[];
+			fieldErrors: Record<string, [string, ...string[]]>;
+		};
+	}
+
+	type Form = null | (Record<string, unknown> & FormErrors);
+
+	export let form: Form;
 	export let formModel: FormModel<T>;
 </script>
 
@@ -19,7 +27,11 @@
 >
 	<Fields>
 		{#each objectValues(formModel.fields) as formField}
-			<Field {formField} errors={form?.errors.fieldErrors[formField.name]} />
+			<Field
+				{formField}
+				value={form?.[formField.name]}
+				errors={form?.errors.fieldErrors[formField.name]}
+			/>
 		{/each}
 	</Fields>
 
