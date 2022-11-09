@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation';
-import type { Fields } from '$lib/models/classes/Field.class';
+import type { FormFields } from '$lib/components/form/form-field';
 import { getRoute, PageType, type Entity } from '@self/utils';
 import * as R from 'remeda';
 import { writable } from 'svelte/store';
@@ -8,7 +8,7 @@ import type { z } from 'zod';
 // export type FormModel<S extends z.ZodTypeAny, T = z.infer<S>> = {
 export interface FormModel<T> {
 	schema: z.ZodType<T>;
-	fields: T;
+	fields: FormFields<T>;
 	errors: Partial<T>;
 	submit: () => void;
 	getBlankForm: () => Partial<T>;
@@ -19,17 +19,16 @@ export function createFormModel<T>({
 	schema,
 	entity,
 	initialFields,
+	fields,
 }: {
 	schema: z.ZodType<T>;
 	entity: Entity;
 	initialFields?: Partial<T>;
-	fields: Fields<T>;
+	fields: FormFields<T>;
 }): FormModel<T> {
 	const getBlankForm = () => {
 		return initialFields ?? {};
 	};
-
-	const fields = writable(initialFields);
 
 	const errors = writable({} as Partial<T>);
 

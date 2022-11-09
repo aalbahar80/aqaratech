@@ -26,11 +26,16 @@ export const kwdFormat = (amount: number | null): string =>
 		minimumFractionDigits: 0,
 	}) ?? '-';
 
-// export const objectKeys = <Obj>(obj: Obj): (keyof Obj)[] =>
-// 	Object.keys(obj) as (keyof Obj)[];
+export const objectKeys = <Obj>(obj: Obj): (keyof Obj)[] => {
+	return Object.keys(obj) as (keyof Obj)[];
+};
 
-// export const objectEntries = <Obj>(obj: Obj): [keyof Obj, Obj[keyof Obj]][] =>
-// 	Object.entries(obj) as [keyof Obj, Obj[keyof Obj]][];
+export const objectValues = <Obj>(obj: Obj): Obj[keyof Obj][] => {
+	return Object.values(obj) as Obj[keyof Obj][];
+};
+
+export const objectEntries = <Obj>(obj: Obj): [keyof Obj, Obj[keyof Obj]][] =>
+	Object.entries(obj) as [keyof Obj, Obj[keyof Obj]][];
 
 // export const concatIfExists = (strings: (string | null | undefined)[]) => {
 // 	return strings.filter((str) => str).join(' ');
