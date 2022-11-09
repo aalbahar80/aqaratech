@@ -5,14 +5,21 @@
 	import type { FormModel } from '$lib/components/form/form-model';
 	import { objectValues } from '$lib/utils/common';
 
+	// Types
+
 	type ActionDataKeys = $$Generic<string>;
 	// @ts-expect-error ts doesn't think this is used
 	type FormKeys = Exclude<ActionDataKeys, 'errors'>;
-
 	type ActionDataObj = $$Generic<{ [key in FormKeys] }>;
 	type FormModelObj = $$Generic<{ [key in FormKeys] }>;
+	type FormErrors = $$Generic<{
+		formErrors: string[];
+		fieldErrors: { [key in FormKeys]: string[] };
+	}>;
 
-	export let form: ActionDataObj | undefined;
+	// Props
+
+	export let form: (ActionDataObj & { errors: FormErrors }) | undefined;
 
 	export let data: FormModelObj | undefined = undefined;
 
