@@ -1,8 +1,12 @@
 <script lang="ts">
-	import PortfolioForm from '$lib/components/portfolio/PortfolioForm.svelte';
-	import type { PageData } from './$types';
+	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
+	import { portfolioFormModel } from '$lib/components/portfolio/portfolio-form-model';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
+
+	const formModel = portfolioFormModel();
 </script>
 
-<PortfolioForm formType="update" data={data.portfolio} />
+<EnhancedForm {form} {formModel} data={data.portfolio} />
