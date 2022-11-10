@@ -14,26 +14,17 @@ test('can be submitted with minimal fields', async ({ org, page }) => {
 		R.pick(['fullName']),
 	);
 
-	const url = getRoute({
+	const formPage = new FormPage(page, {
 		entity: 'portfolio',
 		pageType: PageType.New,
-		params: { organizationId: org.organization.id },
+		org: { organization: { id: org.organization.id } },
 	});
 
-	await page.goto(url);
-
-	const formPage = new FormPage(page);
+	await formPage.goto();
 	await formPage.fillForm(portfolio);
 	await formPage.save();
 
-	const urlAfterSubmit = getRoute({
-		entity: 'portfolio',
-		pageType: PageType.Id,
-		id: ':uuid',
-		params: { organizationId: org.organization.id },
-	});
-
-	await expect(page).toHaveURL(uuid(urlAfterSubmit));
+	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
 test('can be submitted with all fields', async ({ org, page }) => {
