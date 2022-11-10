@@ -4,11 +4,15 @@ import { getRoute, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
+import { FormPage } from '../form-page-model';
 
-test.beforeEach(async ({ org, page }) => {
-	const portfolio = portfolioFactory.build({
-		organizationId: org.organization.id,
-	});
+test('can be submitted with minimal fields', async ({ org, page }) => {
+	const portfolio = R.pipe(
+		portfolioFactory.build({
+			organizationId: org.organization.id,
+		}),
+		R.pick(['fullName', 'label', 'phone', 'dob', 'civilid']),
+	);
 
 	const url = getRoute({
 		entity: 'portfolio',
@@ -18,18 +22,10 @@ test.beforeEach(async ({ org, page }) => {
 
 	await page.goto(url);
 
-	await page.getByLabel('Portfolio Name (full)').fill(portfolio.fullName);
-	await page.getByLabel('label').fill(portfolio.label ?? '');
-	await page.getByLabel('phone').fill(portfolio.phone ?? '');
+	const formPage = new FormPage(page);
+	await formPage.fillForm(portfolio);
+	await formPage.save();
 
-	const dob = R.isString(portfolio.dob) ? portfolio.dob : '';
-	await page.getByLabel('Date of Birth').fill(dob);
-	await page.getByLabel('Civil ID').fill(portfolio.civilid ?? '');
-
-	await page.getByRole('button', { name: 'Save' }).click();
-});
-
-test('can be submitted with minimal fields', async ({ org, page }) => {
 	const urlAfterSubmit = getRoute({
 		entity: 'portfolio',
 		pageType: PageType.Id,
