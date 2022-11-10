@@ -1,6 +1,6 @@
 import type { Entity } from 'src/entity/entity-definition';
 import type { PageType } from 'src/route-helpers/enums/page-type.enum';
-import type { GetIdRouteInput } from 'src/route-helpers/types/id-route.type';
+import type { GetIdRoute } from 'src/route-helpers/types/id-route.type';
 
 // Common
 
@@ -26,4 +26,4 @@ export interface GetFormRoute extends BaseGetRoute {
 
 // Combined
 
-export type GetRouteInput = GetIdRouteInput | GetFormRoute | GetListRoute;
+export type GetRouteInput = GetIdRoute | GetFormRoute | GetListRoute;

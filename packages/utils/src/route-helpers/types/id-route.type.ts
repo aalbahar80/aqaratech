@@ -49,7 +49,7 @@ interface GetIdRouteInvoice extends BaseGetRoute {
 	pageType: InvoicePageTab;
 }
 
-export type GetIdRouteInput =
+export type GetIdRoute =
 	| GetIdRouteEntity
 	| GetIdRoutePortfolio
 	| GetIdRouteProperty

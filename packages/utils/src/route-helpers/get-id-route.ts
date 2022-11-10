@@ -2,7 +2,7 @@ import { entitiesMap } from 'src/entity/entity-map';
 import { PageTypePortfolio } from 'src/route-helpers/enums/page-tab-portfolio.enum';
 import { PageTab } from 'src/route-helpers/enums/page-tab.enum';
 import { PageType } from 'src/route-helpers/enums/page-type.enum';
-import type { GetIdRouteInput } from 'src/route-helpers/types/id-route.type';
+import type { GetIdRoute } from 'src/route-helpers/types/id-route.type';
 
 const pageTypeToUrl = {
 	[PageType.Edit]: 'edit',
@@ -21,7 +21,7 @@ const pageTypeToUrl = {
 	[PageTab.Balance]: 'balance',
 };
 
-export const getIdRoute = (input: GetIdRouteInput, base: string) => {
+export const getIdRoute = (input: GetIdRoute, base: string) => {
 	const entityName = entitiesMap[input.entity].urlName;
 
 	const entity = `${base}/${entityName}`;
