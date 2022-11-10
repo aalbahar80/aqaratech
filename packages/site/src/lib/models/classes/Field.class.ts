@@ -1,5 +1,5 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
-import { startCase } from '$lib/utils/common.js';
+import { startCase } from '@self/utils';
 
 export type Fields<T> = {
 	[K in keyof T]: Field;

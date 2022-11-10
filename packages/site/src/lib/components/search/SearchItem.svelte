@@ -1,10 +1,10 @@
 <script lang="ts">
+	import type { HitDto } from '$api/openapi';
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
-	import { startCase } from '$lib/utils/common';
 	import type { Rename } from '$lib/utils/rename';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
-	import type { HitDto } from '$api/openapi';
+	import { startCase } from '@self/utils';
 	import * as R from 'remeda';
 	import type { SvelteComponentTyped } from 'svelte';
 
@@ -33,9 +33,9 @@
 	<ListboxOption value={item}>
 		<div
 			class={classes(
-				'cursor-default select-none px-4 py-2 [&_mark]:underline [&_mark]:underline-offset-2',
+				'[&_mark]:underline [&_mark]:underline-offset-2 cursor-default select-none px-4 py-2',
 				hovering
-					? 'bg-indigo-600 text-white [&_mark]:bg-inherit [&_mark]:text-white'
+					? '[&_mark]:bg-inherit [&_mark]:text-white bg-indigo-600 text-white'
 					: '[&_mark]:bg-inherit [&_mark]:text-indigo-600 [&_mark]:decoration-indigo-500 [&_mark]:decoration-2',
 			)}
 		>

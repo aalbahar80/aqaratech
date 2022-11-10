@@ -2,9 +2,6 @@ import { differenceInCalendarDays } from 'date-fns';
 //@ts-ignore
 import { formatInTimeZone } from 'date-fns-tz/esm';
 
-// // TODO remove once dependent import statements are updated
-export { startCase } from '@self/utils';
-
 export const getProgress = (start: string, end: string, ref?: Date): number => {
 	const total = differenceInCalendarDays(new Date(end), new Date(start));
 	const left = differenceInCalendarDays(new Date(end), ref ?? new Date());
