@@ -1,6 +1,6 @@
 <script lang="ts">
 	import DetailsPaneItem from '$lib/components/details-pane/DetailsPaneItem.svelte';
-	import { Union } from 'ts-toolbelt';
+	import type { Union } from 'ts-toolbelt';
 
 	type Details = $$Generic;
 	type Keys = $$Generic<keyof Details>;
