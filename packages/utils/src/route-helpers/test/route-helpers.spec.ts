@@ -161,7 +161,8 @@ const inputs: [GetRoute, string][] = [
 			pageType: PageType.New,
 			params: { organizationId: '1' },
 			predefined: {
-				name: 'test',
+				relationKey: 'portfolio',
+				relationValue: '2',
 			},
 		},
 		'/organizations/1/files/new?name=test',

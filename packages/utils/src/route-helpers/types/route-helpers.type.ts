@@ -19,10 +19,22 @@ export interface GetListRoute extends BaseGetRoute {
 
 // Form Route
 
-export interface GetFormRoute extends BaseGetRoute {
+export interface GetFormRouteBase extends BaseGetRoute {
+	entity: Exclude<Entity, 'file'>;
 	pageType: PageType.New;
 	predefined?: Record<string, string>;
 }
+
+export interface GetFormRouteFile extends BaseGetRoute {
+	entity: Extract<Entity, 'file'>;
+	pageType: PageType.New;
+	predefined: {
+		relationKey: Entity;
+		relationValue: string;
+	};
+}
+
+export type GetFormRoute = GetFormRouteBase | GetFormRouteFile;
 
 // Combined
 
