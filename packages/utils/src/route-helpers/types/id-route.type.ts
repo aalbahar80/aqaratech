@@ -8,7 +8,7 @@ import type {
 	UnitPageTab,
 } from 'src/route-helpers/enums/page-tab.enum';
 import type { PageType } from 'src/route-helpers/enums/page-type.enum';
-import type { BaseGetRoute } from 'src/route-helpers/types/route-helpers.type';
+import type { BaseGetRoute } from 'src/route-helpers/types/base-route.type';
 
 // ID Route - Common
 

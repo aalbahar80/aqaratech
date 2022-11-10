@@ -1,15 +1,7 @@
 import type { Entity } from 'src/entity/entity-definition';
 import type { PageType } from 'src/route-helpers/enums/page-type.enum';
+import type { BaseGetRoute } from 'src/route-helpers/types/base-route.type';
 import type { GetIdRoute } from 'src/route-helpers/types/id-route.type';
-
-// Common
-
-type RouteParams = Record<string, string>;
-
-export interface BaseGetRoute {
-	entity: Entity;
-	params: RouteParams;
-}
 
 // List Route
 
