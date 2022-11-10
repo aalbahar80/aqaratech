@@ -18,6 +18,8 @@ module.exports = {
 	},
 	ignorePatterns: [
 		'currency.ts',
+		'sandboxed.ts',
+		'shortcut.ts',
 		'FrappeChart.svelte',
 		'jspdf-invoice-template.js',
 		// Remove once a modular eslint config is implemented. Mainly, typescript-eslint shouldn't be applied for non ts/svelte files.
@@ -25,6 +27,10 @@ module.exports = {
 		'svelte.config.js',
 		'vite.config.js',
 	],
+	rules: {
+		// tslint comments in generated api files
+		'@typescript-eslint/ban-tslint-comment': 'off',
+	},
 	overrides: [
 		{
 			files: ['*.svelte'],
@@ -69,10 +75,6 @@ module.exports = {
 						allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
 					},
 				],
-
-				// tslint comments in generated api files
-				'@typescript-eslint/ban-tslint-comment': 'off',
-
 				'svelte/valid-compile': [
 					'error',
 					{

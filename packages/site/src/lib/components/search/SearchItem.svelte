@@ -50,6 +50,7 @@
 				/>
 				<div class="flex flex-col gap-y-1">
 					<p>
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 						{@html item._formatted?.title}
 					</p>
 					<div class="flex flex-col gap-y-1 text-xs font-light">
@@ -58,6 +59,7 @@
 								<span class="font-extralight">
 									{startCase(key)}:
 								</span>
+								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 								{@html val}
 							</p>
 						{/each}

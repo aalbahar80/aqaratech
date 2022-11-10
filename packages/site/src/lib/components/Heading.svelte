@@ -10,12 +10,13 @@
 	import { getFormRouteWithRelation, hasFileSupport } from '$lib/utils/file';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { getRoute, PageType, type Entity } from '@self/utils';
+	import type { IconSource } from '@steeze-ui/svelte-icon/types';
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	interface IconTooltip {
 		label: string | number | null | undefined;
-		icon: any;
+		icon: IconSource;
 		tooltip: string;
 	}
 
