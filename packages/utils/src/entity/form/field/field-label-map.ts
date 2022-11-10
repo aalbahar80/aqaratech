@@ -1,16 +1,10 @@
+import type { UnionToIntersection } from 'src/union-to-intersection';
 import type { z } from 'zod';
 
 type SomeRecord = Record<string, unknown>;
 type WithShape = z.ZodType<SomeRecord> & {
 	shape: SomeRecord;
 };
-
-// Source: https://fettblog.eu/typescript-union-to-intersection/
-type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (
-	x: infer R,
-) => any
-	? R
-	: never;
 
 /**
  * Resolves field labels for use in forms.
