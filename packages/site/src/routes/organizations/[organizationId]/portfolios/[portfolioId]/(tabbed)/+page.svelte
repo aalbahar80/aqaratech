@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DetailsPane from '$lib/components/DetailsPane.svelte';
+	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
 	import type { PageData } from './$types';
 
@@ -17,4 +17,4 @@
 	] as [string, string | null][];
 </script>
 
-<DetailsPane {details} />
+<AutoDetailsPane details={data.portfolio} keys={['d']} />
