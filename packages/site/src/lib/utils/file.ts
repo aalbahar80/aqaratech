@@ -4,16 +4,18 @@ import {
 	inferUrlRelation,
 	PageType,
 	type FileRelationKey,
+	type GetFormRouteWithRelation,
 } from '@self/utils';
 
-export const createFileHref = (
+export const getFormRouteWithRelation = (
+	entity: GetFormRouteWithRelation['entity'],
 	pathname: string,
 	params: Record<string, string>,
 ): string => {
 	const relation = inferUrlRelation(pathname);
 
 	const url = getRoute({
-		entity: 'file',
+		entity,
 		params,
 		pageType: PageType.New,
 		predefined: {

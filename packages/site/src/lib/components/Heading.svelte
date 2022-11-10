@@ -7,7 +7,7 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { classes } from '$lib/utils/classes';
-	import { createFileHref, hasFileSupport } from '$lib/utils/file';
+	import { getFormRouteWithRelation, hasFileSupport } from '$lib/utils/file';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { getRoute, PageType, type Entity } from '@self/utils';
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
@@ -82,7 +82,13 @@
 						<slot name="menu-items" />
 						{#if hasFileSupport(entity)}
 							<MenuItem as="div" let:active>
-								<a href={createFileHref($page.url.pathname, $page.params)}>
+								<a
+									href={getFormRouteWithRelation(
+										'file',
+										$page.url.pathname,
+										$page.params,
+									)}
+								>
 									<MenuItemChild {active}>
 										<MenuItemIcon icon={Fa6SolidPaperclip} />
 										Attach files

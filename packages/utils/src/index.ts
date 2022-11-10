@@ -36,6 +36,7 @@ export { PageTab } from './route-helpers/enums/page-tab.enum';
 export { PageType } from './route-helpers/enums/page-type.enum';
 export { getRoute } from './route-helpers/get-route';
 export { inferUrlRelation } from './route-helpers/infer-url-relation';
+export type { GetFormRouteWithRelation } from './route-helpers/types/route-helpers.type';
 export { satisfies } from './satisfies';
 export {
 	expenseCategoryCreateSchema,

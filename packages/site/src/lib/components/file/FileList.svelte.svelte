@@ -9,7 +9,7 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
-	import { createFileHref } from '$lib/utils/file';
+	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { PaperClip } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
@@ -106,7 +106,11 @@
 	<EmptyState
 		entity="file"
 		formButtonProps={{
-			formUrl: createFileHref($page.url.pathname, $page.params),
+			formUrl: getFormRouteWithRelation(
+				'file',
+				$page.url.pathname,
+				$page.params,
+			),
 		}}
 	/>
 {/if}
