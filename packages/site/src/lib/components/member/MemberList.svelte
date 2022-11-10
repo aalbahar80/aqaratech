@@ -1,14 +1,14 @@
 <script lang="ts">
 	import type { PaginatedRoleDto } from '$api/openapi';
-	import { page } from '$app/stores';
 	import MemberCard from '$components/member/MemberCard.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
 	export let roles: PaginatedRoleDto;
+	export let formUrl: string;
+	undefined;
 </script>
 
 <StackedList
@@ -17,11 +17,7 @@
 	formButtonProps={{
 		entity: 'member',
 		buttonText: 'Invite member',
-		formUrl: getFormRouteWithRelation(
-			'member',
-			$page.url.pathname,
-			$page.params,
-		),
+		formUrl,
 	}}
 >
 	{#each roles.results as role (role.id)}
