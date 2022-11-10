@@ -13,6 +13,7 @@
 	$: tabs = [
 		{ label: 'Info', href: baseRoute },
 		{ label: 'Leases', href: `${baseRoute}/leases` },
+		{ label: 'Users', href: `${baseRoute}/roles` },
 		{ label: 'Files', href: `${baseRoute}/files` },
 	];
 </script>
