@@ -13,7 +13,7 @@ export interface BaseGetRouteInput {
 
 // List Route
 
-export interface GetListRouteInput extends BaseGetRouteInput {
+export interface GetListRoute extends BaseGetRouteInput {
 	pageType: PageType.List;
 }
 
@@ -26,4 +26,4 @@ export interface GetFormRoute extends BaseGetRouteInput {
 
 // Combined
 
-export type GetRouteInput = GetIdRouteInput | GetFormRoute | GetListRouteInput;
+export type GetRouteInput = GetIdRouteInput | GetFormRoute | GetListRoute;
