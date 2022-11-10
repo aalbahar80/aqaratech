@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { toUTCFormat } from '$lib/utils/common';
-	import { isDatetime } from '@self/utils';
+	import { getLabel, isDatetime } from '@self/utils';
 
 	export let key: string;
 	export let value: unknown;
 </script>
 
 <div class="row">
-	<dt class="label">{key}</dt>
+	<dt class="label">{getLabel(key)}</dt>
 	<dd class="definition">
 		<slot>
 			{#if typeof value === 'string' && isDatetime(value)}
