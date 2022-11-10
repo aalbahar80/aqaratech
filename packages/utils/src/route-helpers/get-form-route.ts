@@ -1,8 +1,8 @@
 import type { Entity } from 'src/entity/entity-definition';
 import { entitiesMap } from 'src/entity/entity-map';
-import type { GetFormRouteInput } from 'src/route-helpers/types/route-helpers.type';
+import type { GetFormRoute } from 'src/route-helpers/types/route-helpers.type';
 
-export const getFormRoute = (input: GetFormRouteInput, base: string) => {
+export const getFormRoute = (input: GetFormRoute, base: string) => {
 	const entity = entitiesMap[input.entity].urlName;
 
 	const predefined = input.predefined ?? getPredefined(input);
@@ -34,7 +34,7 @@ const predefinedMap: PredefinedMap = {
 	lease: ['unitId'],
 };
 
-const getPredefined = (input: GetFormRouteInput) => {
+const getPredefined = (input: GetFormRoute) => {
 	const keys = predefinedMap[input.entity];
 
 	return keys?.reduce<Record<string, string>>((acc, key) => {
