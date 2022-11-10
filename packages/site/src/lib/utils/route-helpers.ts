@@ -1,9 +1,4 @@
-import {
-	entitiesMap,
-	fromUrl,
-	isEntityUrlName,
-	type Entity,
-} from '@self/utils';
+import { entitiesMap, type Entity } from '@self/utils';
 
 type Predefined = Map<string, any> | false | undefined;
 
