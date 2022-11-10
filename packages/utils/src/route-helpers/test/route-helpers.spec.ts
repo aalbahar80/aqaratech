@@ -1,5 +1,5 @@
 import { PageType } from 'src/route-helpers/enums/page-type.enum';
-import type { GetRouteInput } from 'src/route-helpers/types/route-helpers.type';
+import type { GetRoute } from 'src/route-helpers/types/route-helpers.type';
 import { expect, test } from 'vitest';
 import { getRoute } from '../get-route';
 
@@ -8,7 +8,7 @@ const params = {
 	portfolioId: '2',
 };
 
-const inputs: [GetRouteInput, string][] = [
+const inputs: [GetRoute, string][] = [
 	// Properties
 	[
 		{

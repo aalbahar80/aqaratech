@@ -1,9 +1,7 @@
-import type { GetRouteInput } from 'src/route-helpers/types/route-helpers.type';
+import type { GetRoute } from 'src/route-helpers/types/route-helpers.type';
 import { z } from 'zod';
 
-export const getOrganizationRoute = (
-	params: GetRouteInput['params'],
-): string => {
+export const getOrganizationRoute = (params: GetRoute['params']): string => {
 	const { organizationId } = schema
 		.pick({ organizationId: true })
 		.parse(params);
@@ -11,7 +9,7 @@ export const getOrganizationRoute = (
 	return `/organizations/${organizationId}`;
 };
 
-export const getPortfolioRoute = (params: GetRouteInput['params']): string => {
+export const getPortfolioRoute = (params: GetRoute['params']): string => {
 	const organization = getOrganizationRoute(params);
 
 	const { portfolioId } = schema.parse(params);

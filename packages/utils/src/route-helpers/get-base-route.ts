@@ -2,11 +2,9 @@ import {
 	getOrganizationRoute,
 	getPortfolioRoute,
 } from 'src/route-helpers/get-portfolio-route';
-import type { GetRouteInput } from 'src/route-helpers/types/route-helpers.type';
+import type { GetRoute } from 'src/route-helpers/types/route-helpers.type';
 
-export const getBaseRoute = (
-	input: Pick<GetRouteInput, 'entity' | 'params'>,
-) => {
+export const getBaseRoute = (input: Pick<GetRoute, 'entity' | 'params'>) => {
 	if (
 		input.entity === 'tenant' ||
 		input.entity === 'portfolio' ||

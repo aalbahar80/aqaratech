@@ -26,4 +26,4 @@ export interface GetFormRoute extends BaseGetRoute {
 
 // Combined
 
-export type GetRouteInput = GetIdRoute | GetFormRoute | GetListRoute;
+export type GetRoute = GetIdRoute | GetFormRoute | GetListRoute;
