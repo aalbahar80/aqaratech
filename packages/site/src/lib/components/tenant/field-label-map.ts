@@ -1,12 +1,17 @@
-import { tenantCreateSchema } from '@self/utils';
 import type { z } from 'zod';
+
+type SomeRecord = Record<string, unknown>;
+type WithShape = z.ZodType<SomeRecord> & {
+	shape: SomeRecord;
+};
+type GetShape<T extends WithShape> = T['shape'];
 
 /**
  * Resolves field labels for use in forms.
  */
-export const getFieldLabelMap = <T extends z.AnyZodObject>(
+export const getFieldLabelMap = <T extends WithShape>(
 	schema: T,
-	labels?: Partial<Record<KeysOfSchema<T>, string>>,
+	labels?: Partial<Record<keyof GetShape<T>, string>>,
 ) => {
 	// Extract field names from schema
 
@@ -25,11 +30,3 @@ export const getFieldLabelMap = <T extends z.AnyZodObject>(
 
 	return labelMap;
 };
-
-const tenantFieldLabelMap = getFieldLabelMap(tenantCreateSchema, {
-	phone: 'Phone Number',
-});
-
-console.log({ tenantFieldLabelMap }, 'field-label-map.ts ~ 41');
-
-type KeysOfSchema<T extends z.AnyZodObject> = keyof T['shape'];
