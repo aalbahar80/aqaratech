@@ -15,6 +15,7 @@ export type {
 	EntityNames,
 	NonDBEntitiesMap,
 } from './entity/entity-map';
+export { getFieldLabelMap } from './entity/form/field';
 export { fromUrl } from './entity/from-url';
 export { isEntity, isEntityUrlName } from './entity/is-entity';
 export {
