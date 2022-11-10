@@ -8,42 +8,42 @@ import type {
 	UnitPageTab,
 } from 'src/route-helpers/enums/page-tab.enum';
 import type { PageType } from 'src/route-helpers/enums/page-type.enum';
-import type { BaseGetRouteInput } from 'src/route-helpers/types/route-helpers.type';
+import type { BaseGetRoute } from 'src/route-helpers/types/route-helpers.type';
 
 // ID Route - Common
 
-export interface GetIdRouteEntity extends BaseGetRouteInput {
+export interface GetIdRouteEntity extends BaseGetRoute {
 	id: string;
 	pageType: PageType.Id | PageType.Edit;
 }
 
 // ID Route - Entity
 
-interface GetIdRoutePortfolio extends BaseGetRouteInput {
+interface GetIdRoutePortfolio extends BaseGetRoute {
 	id: string;
 	entity: Extract<Entity, 'portfolio'>;
 	pageType: PageTypePortfolio | PortfolioPageTab;
 }
 
-interface GetIdRouteProperty extends BaseGetRouteInput {
+interface GetIdRouteProperty extends BaseGetRoute {
 	id: string;
 	entity: Extract<Entity, 'property'>;
 	pageType: PropertyPageTab;
 }
 
-interface GetIdRouteUnit extends BaseGetRouteInput {
+interface GetIdRouteUnit extends BaseGetRoute {
 	id: string;
 	entity: Extract<Entity, 'unit'>;
 	pageType: UnitPageTab;
 }
 
-interface GetIdRouteLease extends BaseGetRouteInput {
+interface GetIdRouteLease extends BaseGetRoute {
 	id: string;
 	entity: Extract<Entity, 'lease'>;
 	pageType: LeasePageTab;
 }
 
-interface GetIdRouteInvoice extends BaseGetRouteInput {
+interface GetIdRouteInvoice extends BaseGetRoute {
 	id: string;
 	entity: Extract<Entity, 'leaseInvoice'>;
 	pageType: InvoicePageTab;

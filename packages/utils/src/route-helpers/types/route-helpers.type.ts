@@ -6,20 +6,20 @@ import type { GetIdRouteInput } from 'src/route-helpers/types/id-route.type';
 
 type RouteParams = Record<string, string>;
 
-export interface BaseGetRouteInput {
+export interface BaseGetRoute {
 	entity: Entity;
 	params: RouteParams;
 }
 
 // List Route
 
-export interface GetListRoute extends BaseGetRouteInput {
+export interface GetListRoute extends BaseGetRoute {
 	pageType: PageType.List;
 }
 
 // Form Route
 
-export interface GetFormRoute extends BaseGetRouteInput {
+export interface GetFormRoute extends BaseGetRoute {
 	pageType: PageType.New;
 	predefined?: Record<string, string>;
 }
