@@ -1,16 +1,28 @@
-import { create, inferRoute } from '$lib/utils/route-helpers';
-import { FileRelationKeyEnum, type FileRelationKey } from '@self/utils';
+import {
+	FileRelationKeyEnum,
+	getRoute,
+	inferUrlRelation,
+	PageType,
+	type FileRelationKey,
+} from '@self/utils';
 
-export const createFileHref = (pathname: string) => {
-	const current = inferRoute(pathname);
-	const href = create({
+export const createFileHref = (
+	pathname: string,
+	params: Record<string, string>,
+): string => {
+	const relation = inferUrlRelation(pathname);
+
+	const url = getRoute({
 		entity: 'file',
-		predefined: new Map([
-			['relationKey', current.entity.title],
-			['relationValue', current.id],
-		]),
+		params,
+		pageType: PageType.New,
+		predefined: {
+			relationKey: relation.entity,
+			relationValue: relation.id,
+		},
 	});
-	return href;
+
+	return url;
 };
 
 export const hasFileSupport = (

@@ -82,7 +82,7 @@
 						<slot name="menu-items" />
 						{#if hasFileSupport(entity)}
 							<MenuItem as="div" let:active>
-								<a href={createFileHref($page.url.pathname)}>
+								<a href={createFileHref($page.url.pathname, $page.params)}>
 									<MenuItemChild {active}>
 										<MenuItemIcon icon={Fa6SolidPaperclip} />
 										Attach files

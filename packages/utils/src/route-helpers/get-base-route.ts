@@ -7,7 +7,11 @@ import type { GetRouteInput } from 'src/route-helpers/types/route-helpers.type';
 export const getBaseRoute = (
 	input: Pick<GetRouteInput, 'entity' | 'params'>,
 ) => {
-	if (input.entity === 'tenant' || input.entity === 'portfolio') {
+	if (
+		input.entity === 'tenant' ||
+		input.entity === 'portfolio' ||
+		input.entity === 'file'
+	) {
 		// base is always organization
 		const organization = getOrganizationRoute(input.params);
 
