@@ -14,13 +14,21 @@ export const addErrorToast = (subtitle = '') => {
 /**
  * Attempts to parse a `ResponseError` into a toast message.
  */
-export const handleApiError = async (error: any) => {
+export const handleApiError = async (error: unknown) => {
 	let message = '';
 	console.error(error);
 	if (error instanceof ResponseError) {
-		const data = await error.response.json();
+		const data: unknown = await error.response.json();
 		console.error(data);
-		message = data.message;
+		if (
+			data &&
+			typeof data === 'object' &&
+			'message' in data &&
+			typeof data.message === 'string'
+		) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+			message = data.message;
+		}
 	}
 
 	toast.error(message);
