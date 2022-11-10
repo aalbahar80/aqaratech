@@ -16,7 +16,6 @@ export const tenantFormModel = (pageType: FormTypeEnum) =>
 		fields: {
 			fullName: createFormField('fullName', {
 				required: true,
-				label: 'Tenant Name (full)',
 			}),
 
 			label: createFormField('label', {
@@ -27,16 +26,11 @@ export const tenantFormModel = (pageType: FormTypeEnum) =>
 
 			dob: createFormField('dob', {
 				type: 'date',
-				label: 'Date of Birth',
 			}),
 
-			civilid: createFormField('civilid', {
-				label: 'Civil ID',
-			}),
+			civilid: createFormField('civilid'),
 
-			passportNum: createFormField('passportNum', {
-				label: 'Passport Number',
-			}),
+			passportNum: createFormField('passportNum'),
 
 			nationality: createFormField('nationality', {
 				type: 'select',
@@ -50,11 +44,8 @@ export const tenantFormModel = (pageType: FormTypeEnum) =>
 
 			residencyEnd: createFormField('residencyEnd', {
 				type: 'date',
-				label: 'Residency Expiration',
 			}),
 
-			residencyNum: createFormField('residencyNum', {
-				label: 'Residency Number',
-			}),
+			residencyNum: createFormField('residencyNum'),
 		},
 	});

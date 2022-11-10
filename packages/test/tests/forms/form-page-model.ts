@@ -1,4 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
+import { getLabel } from '@self/utils';
+import * as R from 'remeda';
 
 export class FormPage {
 	readonly page: Page;
@@ -14,7 +16,9 @@ export class FormPage {
 	}
 
 	fillForm = async (fields: Record<string, unknown>) => {
-		for (const [key, value] of Object.entries(fields)) {
+		const labeled = R.mapKeys(fields, (key) => getLabel(key));
+
+		for (const [key, value] of Object.entries(labeled)) {
 			let valueString: string;
 
 			if (typeof value === 'string') {
@@ -28,7 +32,7 @@ export class FormPage {
 				throw new Error(`Unsupported value type: ${typeof value}`);
 			}
 
-			await this.page.locator(`input[name="${key}"]`).fill(valueString);
+			await this.page.getByLabel(key).fill(valueString);
 		}
 	};
 }

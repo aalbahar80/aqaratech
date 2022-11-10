@@ -2,6 +2,9 @@ import { differenceInCalendarDays } from 'date-fns';
 //@ts-ignore
 import { formatInTimeZone } from 'date-fns-tz/esm';
 
+// // TODO remove once dependent import statements are updated
+export { startCase } from '@self/utils';
+
 export const getProgress = (start: string, end: string, ref?: Date): number => {
 	const total = differenceInCalendarDays(new Date(end), new Date(start));
 	const left = differenceInCalendarDays(new Date(end), ref ?? new Date());
@@ -40,11 +43,6 @@ export const objectEntries = <Obj>(obj: Obj): [keyof Obj, Obj[keyof Obj]][] =>
 // export const concatIfExists = (strings: (string | null | undefined)[]) => {
 // 	return strings.filter((str) => str).join(' ');
 // };
-
-export const startCase = (str: string): string =>
-	str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
-		return str.toUpperCase();
-	});
 
 export const toDateInput = (date: any) => {
 	if (date instanceof Date) {

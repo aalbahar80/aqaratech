@@ -3,6 +3,7 @@ import type {
 	SelectFormField,
 } from '$lib/components/form/form-field.interface';
 import type { Option } from '$lib/models/interfaces/option.interface';
+import { getLabel } from '@self/utils';
 
 type WithOptions<Name> = {
 	type: 'select';
@@ -25,7 +26,7 @@ export const createFormField = <
 		name,
 		type: 'text',
 
-		label: name,
+		label: getLabel(name),
 		description: '',
 		hint: '',
 		placeholder: '',

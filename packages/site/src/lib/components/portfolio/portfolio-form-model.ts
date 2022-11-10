@@ -15,7 +15,6 @@ export const portfolioFormModel = (pageType: FormTypeEnum) =>
 		fields: {
 			fullName: createFormField('fullName', {
 				required: true,
-				label: 'Portfolio Name (full)',
 			}),
 
 			label: createFormField('label', {
@@ -26,11 +25,8 @@ export const portfolioFormModel = (pageType: FormTypeEnum) =>
 
 			dob: createFormField('dob', {
 				type: 'date',
-				label: 'Date of Birth',
 			}),
 
-			civilid: createFormField('civilid', {
-				label: 'Civil ID',
-			}),
+			civilid: createFormField('civilid'),
 		},
 	});

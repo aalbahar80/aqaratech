@@ -15,7 +15,11 @@ export type {
 	EntityNames,
 	NonDBEntitiesMap,
 } from './entity/entity-map';
-export { entityFieldLabels, getFieldLabelMap } from './entity/form/field';
+export {
+	entityFieldLabels,
+	getFieldLabelMap,
+	getLabel,
+} from './entity/form/field';
 export { fromUrl } from './entity/from-url';
 export { isEntity, isEntityUrlName } from './entity/is-entity';
 export {
@@ -92,3 +96,4 @@ export type {
 	UnitCreateSchema,
 	UnitUpdateSchema,
 } from './schemas';
+export { startCase } from './start-case';
