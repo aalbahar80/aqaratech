@@ -1,10 +1,8 @@
 <script lang="ts">
 	import DetailsPaneItem from '$lib/components/details-pane/DetailsPaneItem.svelte';
 
-	// type Keys = $$Generic<keyof typeof details>;
-	// type Details = $$Generic<Record<string, unknown>>;
-	type Keys = $$Generic<string>;
-	type Details = $$Generic<{ [key in Keys] }>;
+	type Details = $$Generic<Record<unknown, unknown>>;
+	type Keys = $$Generic<keyof Details>;
 
 	export let details: Details;
 	export let keys: Keys[];

@@ -17,4 +17,4 @@
 	] as [string, string | null][];
 </script>
 
-<AutoDetailsPane details={data.portfolio} keys={['d']} />
+<AutoDetailsPane details={data.portfolio} keys={['fullName']} />
