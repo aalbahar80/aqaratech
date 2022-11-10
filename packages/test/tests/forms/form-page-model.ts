@@ -21,8 +21,10 @@ export class FormPage {
 				valueString = value;
 			} else if (typeof value === 'number') {
 				valueString = value.toString();
+			} else if (value === null) {
+				valueString = '';
 			} else {
-				// TODO: Handle other types
+				// TODO: Handle other types as needed
 				throw new Error(`Unsupported value type: ${typeof value}`);
 			}
 
