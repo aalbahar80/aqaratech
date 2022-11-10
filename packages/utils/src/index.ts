@@ -96,4 +96,5 @@ export type {
 	UnitCreateSchema,
 	UnitUpdateSchema,
 } from './schemas';
+export { isDatetime } from './schemas/utils/date/is-date-time';
 export { startCase } from './start-case';
