@@ -1,5 +1,3 @@
-// a map for resolving field db names to field labels for use in forms
-
 import { tenantCreateSchema } from '@self/utils';
 import { z } from 'zod';
 
@@ -11,6 +9,9 @@ import { z } from 'zod';
 
 // Note: there is no need to alias fields in the map, since the map is only used to resolve the label from the schema, and the schema is already aliased.
 
+/**
+ * Resolves field db names to field labels for use in forms.
+ */
 export const getFieldLabelMap = <T extends z.AnyZodObject>(
 	schema: T,
 	labels?: Record<string, string>,
@@ -36,4 +37,8 @@ export const getFieldLabelMap = <T extends z.AnyZodObject>(
 	return labelMap;
 };
 
-const tenantFieldLabelMap = getFieldLabelMap(tenantCreateSchema);
+const tenantFieldLabelMap = getFieldLabelMap(tenantCreateSchema, {
+	phone: 'Phone Number',
+	a: 'b',
+});
+console.log({ tenantFieldLabelMap }, 'field-label-map.ts ~ 41');
