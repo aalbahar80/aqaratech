@@ -19,7 +19,7 @@ test('can be submitted with minimal fields', async ({ org, page }) => {
 	const formPage = new FormPage(page, {
 		entity,
 		pageType,
-		org: { organization: { id: org.organization.id } },
+		fixtures: { org },
 	});
 
 	await formPage.goto();
@@ -40,7 +40,7 @@ test('can be submitted with all fields', async ({ org, page }) => {
 	const formPage = new FormPage(page, {
 		entity,
 		pageType,
-		org: { organization: { id: org.organization.id } },
+		fixtures: { org },
 	});
 
 	await formPage.goto();

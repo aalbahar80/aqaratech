@@ -10,8 +10,8 @@ export class FormPage {
 
 	constructor(page: Page, options?: FormPageOptions) {
 		this.page = page;
-		this.options = options;
 		this.saveButton = page.getByRole('button', { name: 'Save' });
+		this.options = options;
 	}
 
 	async save() {
@@ -54,17 +54,13 @@ export class FormPage {
 				id: this.options.id,
 				entity: this.options.entity,
 				pageType: this.options.pageType,
-				params: {
-					organizationId: this.options.org.organization.id,
-				},
+				params: this.toParams(this.options.fixtures),
 			});
 		} else {
 			return getRoute({
 				entity: this.options.entity,
 				pageType: this.options.pageType,
-				params: {
-					organizationId: this.options.org.organization.id,
-				},
+				params: this.toParams(this.options.fixtures),
 			});
 		}
 	};
@@ -78,11 +74,29 @@ export class FormPage {
 			id: this.options.id ?? ':uuid',
 			entity: this.options.entity,
 			pageType: PageType.Id,
-			params: { organizationId: this.options.org.organization.id },
+			params: this.toParams(this.options.fixtures),
 		});
 
 		return this.options.id ? successUrl : uuid(successUrl);
 	};
+
+	toParams({
+		org,
+		portfolio,
+	}: {
+		org: { organization: { id: string } };
+		portfolio?: { id: string };
+	}) {
+		const params: Record<string, string> = {
+			organizationId: org.organization.id,
+		};
+
+		if (portfolio) {
+			params['portfolioId'] = portfolio.id;
+		}
+
+		return params;
+	}
 }
 
 // Types
@@ -90,23 +104,20 @@ export class FormPage {
 interface BaseFormPageOptions {
 	entity: Entity;
 	pageType: PageType.New | PageType.Edit;
-	org: {
-		organization: {
-			id: string;
-		};
+	fixtures: {
+		org: { organization: { id: string } };
+		portfolio?: { id: string };
 	};
 }
 
 interface FormPageEditOptions extends BaseFormPageOptions {
 	pageType: PageType.Edit;
-	org: { organization: { id: string } };
 	id: string;
 }
 
 interface FormPageNewOptions extends BaseFormPageOptions {
 	id?: never;
 	pageType: PageType.New;
-	org: { organization: { id: string } };
 }
 
 type FormPageOptions = FormPageEditOptions | FormPageNewOptions;

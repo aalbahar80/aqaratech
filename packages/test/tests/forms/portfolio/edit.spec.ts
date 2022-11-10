@@ -24,7 +24,7 @@ test('can be submitted with minimal fields', async ({
 		entity,
 		pageType,
 		id: portfolio.id,
-		org: { organization: { id: org.organization.id } },
+		fixtures: { org, portfolio },
 	});
 
 	await formPage.goto();
@@ -46,7 +46,7 @@ test('can be submitted with all fields', async ({ org, portfolio, page }) => {
 		entity,
 		pageType,
 		id: portfolio.id,
-		org: { organization: { id: org.organization.id } },
+		fixtures: { org, portfolio },
 	});
 	await formPage.goto();
 	await formPage.fillForm(fields);
