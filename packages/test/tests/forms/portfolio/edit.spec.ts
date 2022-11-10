@@ -1,12 +1,18 @@
 import { expect } from '@playwright/test';
 import { portfolioFactory } from '@self/seed';
-import { getRoute, PageType } from '@self/utils';
+import { PageType } from '@self/utils';
 import * as R from 'remeda';
-import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';
 
-test('can be submitted with minimal fields', async ({ portfolio, page }) => {
+const entity = 'portfolio';
+const pageType = PageType.Edit;
+
+test('can be submitted with minimal fields', async ({
+	org,
+	portfolio,
+	page,
+}) => {
 	const fields = R.pipe(
 		portfolioFactory.build({
 			organizationId: portfolio.id,
@@ -14,30 +20,21 @@ test('can be submitted with minimal fields', async ({ portfolio, page }) => {
 		R.pick(['fullName']),
 	);
 
-	const url = getRoute({
-		entity: 'portfolio',
-		pageType: PageType.Edit,
+	const formPage = new FormPage(page, {
+		entity,
+		pageType,
 		id: portfolio.id,
-		params: { organizationId: portfolio.organizationId },
+		org: { organization: { id: org.organization.id } },
 	});
 
-	await page.goto(url);
-
-	const formPage = new FormPage(page);
+	await formPage.goto();
 	await formPage.fillForm(fields);
 	await formPage.save();
 
-	const urlAfterSubmit = getRoute({
-		entity: 'portfolio',
-		pageType: PageType.Id,
-		id: portfolio.id,
-		params: { organizationId: portfolio.organizationId },
-	});
-
-	await expect(page).toHaveURL(uuid(urlAfterSubmit));
+	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
-test('can be submitted with all fields', async ({ portfolio, page }) => {
+test('can be submitted with all fields', async ({ org, portfolio, page }) => {
 	const fields = R.pipe(
 		portfolioFactory.build({
 			organizationId: portfolio.id,
@@ -45,25 +42,15 @@ test('can be submitted with all fields', async ({ portfolio, page }) => {
 		R.pick(['fullName', 'label', 'phone', 'dob', 'civilid']),
 	);
 
-	const url = getRoute({
-		entity: 'portfolio',
-		pageType: PageType.Edit,
+	const formPage = new FormPage(page, {
+		entity,
+		pageType,
 		id: portfolio.id,
-		params: { organizationId: portfolio.organizationId },
+		org: { organization: { id: org.organization.id } },
 	});
-
-	await page.goto(url);
-
-	const formPage = new FormPage(page);
+	await formPage.goto();
 	await formPage.fillForm(fields);
 	await formPage.save();
 
-	const urlAfterSubmit = getRoute({
-		entity: 'portfolio',
-		pageType: PageType.Id,
-		id: portfolio.id,
-		params: { organizationId: portfolio.organizationId },
-	});
-
-	await expect(page).toHaveURL(uuid(urlAfterSubmit));
+	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
