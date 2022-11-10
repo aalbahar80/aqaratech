@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
-import { entitiesMap } from '@self/utils';
+import { entitiesMap, getRoute, PageType } from '@self/utils';
 import { promises } from 'node:fs';
-import { withQuery } from 'ufo';
 import { getPresignedUrl } from '../../../utils/get-presigned-url';
 import { test } from '../../api/api-fixtures';
 
@@ -12,9 +11,17 @@ test('file can be uploaded', async ({ page, request, portfolio }) => {
 	// TODO add random characters to file name for cleaner testing
 
 	// upload file
-	const form = withQuery('/files/new', {
-		relationKey: 'portfolio',
-		relationValue: portfolio.id,
+	const form = getRoute({
+		entity: 'file',
+		pageType: PageType.New,
+		params: {
+			organizationId: portfolio.organizationId,
+			portfolioId: portfolio.id,
+		},
+		predefined: {
+			relationKey: 'portfolio',
+			relationValue: portfolio.id,
+		},
 	});
 
 	await page.goto(form);
