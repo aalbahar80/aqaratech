@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { PortfolioDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import { entitiesMap } from '@self/utils';
+	import { entitiesMap, getRoute, PageType } from '@self/utils';
 	import Fa6SolidMoneyBillTransfer from '~icons/fa6-solid/money-bill-transfer';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
@@ -20,9 +20,10 @@
 	<div slot="menu-items">
 		<MenuItem as="div" let:active>
 			<a
-				href={create({
+				href={getRoute({
 					entity: 'payout',
-					predefined: new Map([[entitiesMap.portfolio.idField, portfolio.id]]),
+					params: $page.params,
+					pageType: PageType.New,
 				})}
 			>
 				<MenuItemChild {active}>
@@ -33,9 +34,13 @@
 		</MenuItem>
 		<MenuItem as="div" let:active>
 			<a
-				href={create({
+				href={getRoute({
 					entity: 'expense',
-					predefined: new Map([['portfolioId', portfolio.id]]),
+					params: $page.params,
+					pageType: PageType.New,
+					predefined: {
+						portfolioId: portfolio.id,
+					},
 				})}
 			>
 				<MenuItemChild {active}>

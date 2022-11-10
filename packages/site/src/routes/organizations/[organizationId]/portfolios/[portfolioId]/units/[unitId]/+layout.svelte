@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
-	import { create } from '$lib/utils/route-helpers';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+	import { getRoute, PageType } from '@self/utils';
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidStairs from '~icons/fa6-solid/stairs';
@@ -29,7 +30,7 @@
 		{
 			label:
 				typeof data.unit.size === 'number'
-					? `${data.unit.size?.toLocaleString()} m²`
+					? `${data.unit.size.toLocaleString()} m²`
 					: data.unit.size,
 			tooltip: 'Size',
 			icon: GisMeasure,
@@ -46,13 +47,14 @@
 	<div slot="menu-items">
 		<MenuItem as="div" let:active>
 			<a
-				href={create({
+				href={getRoute({
 					entity: 'expense',
-					predefined: new Map([
-						['portfolioId', data.unit.breadcrumbs.portfolio.id],
-						['propertyId', data.unit.propertyId],
-						['unitId', data.unit.id],
-					]),
+					params: $page.params,
+					pageType: PageType.New,
+					predefined: {
+						// @ts-expect-error non-null-assertion
+						unitId: $page.params.unitId,
+					},
 				})}
 			>
 				<MenuItemChild {active}>
