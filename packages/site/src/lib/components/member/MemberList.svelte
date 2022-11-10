@@ -4,17 +4,18 @@
 	import MemberCard from '$components/member/MemberCard.svelte';
 	import AnchorPagination from '$lib/components/pagination/AnchorPagination.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { create, inferRoute } from '$lib/utils/route-helpers';
+	import { create } from '$lib/utils/route-helpers';
+	import { inferUrlRelation } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
 	export let roles: PaginatedRoleDto;
 
-	$: route = inferRoute($page.url.pathname);
+	$: route = inferUrlRelation($page.url.pathname);
 	$: formUrl = create({
 		entity: 'role',
 		predefined: new Map<string, any>([
-			['entity', route.entity.title],
+			['entity', route.entity],
 			['entityId', route.id],
 		]),
 	});
