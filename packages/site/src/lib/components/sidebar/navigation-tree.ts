@@ -146,15 +146,6 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 					},
 				],
 			},
-			{
-				name: 'Units',
-				href: getRoute({
-					...getRouteConfig,
-					entity: 'unit',
-					pageType,
-				}),
-				icon: HeroiconsOutlineHome,
-			},
 
 			{
 				name: 'Leases',
