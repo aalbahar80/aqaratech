@@ -1,5 +1,5 @@
-<script>
-	let hovering;
+<script lang="ts">
+	let hovering: boolean;
 
 	function enter() {
 		hovering = true;
