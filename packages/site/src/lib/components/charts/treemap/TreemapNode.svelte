@@ -1,4 +1,5 @@
 <script>
+	// @ts-nocheck
 	import * as Pancake from '@sveltejs/pancake';
 
 	export let node;

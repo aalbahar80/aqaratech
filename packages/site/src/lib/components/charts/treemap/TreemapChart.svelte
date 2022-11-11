@@ -1,4 +1,5 @@
 <script>
+	// @ts-nocheck
 	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
 	import { classes } from '$lib/utils/classes';
 	import { kwdFormat } from '$lib/utils/common';
