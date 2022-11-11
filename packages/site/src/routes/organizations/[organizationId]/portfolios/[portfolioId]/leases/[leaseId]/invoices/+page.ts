@@ -6,9 +6,9 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
 	const { leaseId } = params;
 
-	const leaseInvoices = await api.leases.findInvoices({
+	const invoices = await api.leases.findInvoices({
 		id: leaseId,
 	});
 
-	return { leaseInvoices };
+	return { invoices };
 };

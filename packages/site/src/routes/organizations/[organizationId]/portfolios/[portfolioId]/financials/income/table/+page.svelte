@@ -5,4 +5,4 @@
 	export let data: PageData;
 </script>
 
-<LeaseInvoiceTable {data} />
+<LeaseInvoiceTable data={data.invoices} />

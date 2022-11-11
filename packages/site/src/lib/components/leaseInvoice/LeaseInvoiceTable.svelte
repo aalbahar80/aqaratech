@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LeaseInvoiceDto } from '$api/openapi';
+	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
@@ -16,9 +16,8 @@
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 	import Fa6SolidFileCsv from '~icons/fa6-solid/file-csv';
-	import type { PageData } from './$types';
 
-	export let data: PageData;
+	export let data: PaginatedLeaseInvoiceDto;
 
 	const columnHelper = createColumnHelper<LeaseInvoiceDto>();
 
@@ -75,12 +74,12 @@
 
 <Table
 	{columns}
-	items={data.invoices.results}
-	itemCount={data.invoices.pagination.itemCount}
-	pageCount={data.invoices.pagination.pageCount}
+	items={data.results}
+	itemCount={data.pagination.itemCount}
+	pageCount={data.pagination.pageCount}
 	pagination={{
-		pageIndex: data.invoices.pagination.page - 1,
-		pageSize: data.invoices.pagination.take,
+		pageIndex: data.pagination.page - 1,
+		pageSize: data.pagination.take,
 	}}
 	paginationType="server"
 	columnVisibility={{
