@@ -17,7 +17,6 @@
 		type PaginationState,
 		type SortingState,
 		type TableOptions,
-		type VisibilityState,
 	} from '@tanstack/svelte-table';
 	import { clsx } from 'clsx';
 	import { afterUpdate } from 'svelte';
@@ -40,9 +39,9 @@
 	export let pageCount: number | undefined = undefined; // TODO: differentiate between client v server pagination config using a type
 	export let paginationType: 'server' | 'client';
 
-	type ColumnVisibility = {
-		[K in keyof T as K]?: boolean;
-	};
+	type ColumnVisibility = Partial<{
+		[K in keyof T as K]: boolean;
+	}>;
 	/**
 	 * Allows setting the initial visibility state.
 	 */
@@ -106,7 +105,7 @@
 
 	// Column visibility
 
-	const setColumnVisibility: OnChangeFn<VisibilityState> = (updater) => {
+	const setColumnVisibility: OnChangeFn<ColumnVisibility> = (updater) => {
 		if (updater instanceof Function) {
 			columnVisibility = updater(columnVisibility);
 		} else {
