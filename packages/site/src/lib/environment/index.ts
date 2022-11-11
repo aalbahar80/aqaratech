@@ -1,4 +1,3 @@
-import { prerendering } from '$app/environment';
 import { env } from '$env/dynamic/public';
 import { z } from 'zod';
 
@@ -13,10 +12,10 @@ const envSchema = z.object({
 	PUBLIC_SITE_URL: z.string().url(),
 	PUBLIC_API_URL: z.string().url(),
 	PUBLIC_API_URL_LOCAL: z.string().url(),
-	PUBLIC_AQ_ENABLE_SENTRY: z.string().optional(),
-	PUBLIC_AQ_DEBUG_SENTRY: z.string().optional(),
-	PUBLIC_TRACE_RATE: z.string(),
-	PUBLIC_AQ_DEBUG_SITE: z.string().optional(),
+	PUBLIC_AQ_ENABLE_SENTRY: z.string().default('0'),
+	PUBLIC_AQ_DEBUG_SENTRY: z.string().default('0'),
+	PUBLIC_TRACE_RATE: z.string().default('0'),
+	PUBLIC_AQ_DEBUG_SITE: z.string().default('0'),
 	PUBLIC_COMMIT_SHA: z.string().optional(),
 
 	// validate debug level, if validation fails, set it to verbose
@@ -35,24 +34,6 @@ const envSchema = z.object({
 		}),
 });
 
-// TODO: use new typescript `satisfies` directive for return type
-const environmentInput = {
-	PUBLIC_AQARATECH_ENV: env.PUBLIC_AQARATECH_ENV,
-	PUBLIC_SITE_URL: env.PUBLIC_SITE_URL,
-	PUBLIC_API_URL: env.PUBLIC_API_URL,
-	PUBLIC_API_URL_LOCAL: env.PUBLIC_API_URL_LOCAL,
-	PUBLIC_AQ_ENABLE_SENTRY: env.PUBLIC_AQ_ENABLE_SENTRY,
-	PUBLIC_AQ_DEBUG_SENTRY: env.PUBLIC_AQ_DEBUG_SENTRY,
-	PUBLIC_TRACE_RATE: env.PUBLIC_TRACE_RATE,
-	PUBLIC_AQ_DEBUG_LEVEL: env.PUBLIC_AQ_DEBUG_LEVEL,
-	PUBLIC_AQ_DEBUG_SITE: env.PUBLIC_AQ_DEBUG_SITE,
-	PUBLIC_COMMIT_SHA: env.PUBLIC_COMMIT_SHA,
-};
-
-// Validate environment variables using zod
-// Skip validation when building for production
-// TODO satisfies
-export const environment = prerendering
-	? environmentInput
-	: envSchema.parse(environmentInput);
-// : envSchema.parse(environmentInput) satisfies AqaratechEnv;
+// TODO use satisfies AqaratechEnv
+export const environment = envSchema.parse(env);
+console.log({ environment });

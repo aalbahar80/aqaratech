@@ -17,7 +17,6 @@ import {
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
 import {
 	Cookie,
-	envCheck,
 	formatRequestLog,
 	formatResponseLog,
 	isHealthCheck,
@@ -40,8 +39,6 @@ logger.log({
 		...env,
 	}),
 });
-
-envCheck();
 
 logger.log({
 	level: 'info',
