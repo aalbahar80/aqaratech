@@ -4,6 +4,10 @@
 module.exports = {
 	root: true,
 	extends: ['custom'],
+	ignorePatterns: [
+		// Ignore generated types
+		'types/api/index.d.ts',
+	],
 	rules: {
 		'no-empty-pattern': 'off',
 
