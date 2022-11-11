@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DetailsPane from '$lib/components/DetailsPane.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
-	import type { PageData } from './types';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 

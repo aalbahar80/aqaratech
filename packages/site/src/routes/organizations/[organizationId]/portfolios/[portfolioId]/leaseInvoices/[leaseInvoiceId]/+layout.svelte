@@ -9,7 +9,7 @@
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import { DocumentText, Mail } from '@steeze-ui/heroicons';
-	import type { LayoutData } from './types';
+	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SummaryStats from '$lib/components/dashboard/stats/SummaryStats.svelte';
-	import type { PageData } from './types';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
