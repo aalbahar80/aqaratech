@@ -6,7 +6,6 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterRadio from '$lib/components/filter/FilterRadio.svelte';
-	import GenericCellSvelte from '$lib/components/table/lease-invoices/GenericCell.svelte';
 	import {
 		locationColumnDef,
 		viewColumnDef,
@@ -47,16 +46,6 @@
 
 		columnHelper.accessor('isPaid', {
 			header: 'Paid',
-			cell: (info) =>
-				renderComponent(GenericCellSvelte, {
-					value: info.getValue() ? 'Paid' : 'Unpaid',
-					classes: info.getValue() ? 'text-green-600' : 'text-red-600',
-				}),
-		}),
-
-		columnHelper.display({
-			id: 'badge',
-			header: 'Status',
 			cell: (props) => {
 				const invoice = props.row.original;
 
@@ -97,7 +86,6 @@
 	columnVisibility={{
 		dueAt: false,
 		paidAt: false,
-		isPaid: false,
 	}}
 >
 	<div slot="filter" let:filters>
