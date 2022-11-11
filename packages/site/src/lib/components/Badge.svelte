@@ -1,24 +1,19 @@
 <script lang="ts">
-	import { scale } from 'svelte/transition';
-
 	export let label: string;
 	export let badgeColor: string;
 </script>
 
-{#key label}
-	<div
-		id="badge"
-		class="rounded-md px-2.5 py-0.5 text-center text-lg font-medium"
-		class:green={badgeColor === 'green'}
-		class:red={badgeColor === 'red'}
-		class:indigo={badgeColor === 'indigo'}
-		class:yellow={badgeColor === 'yellow'}
-		in:scale
-	>
-		<slot />
-		{label}
-	</div>
-{/key}
+<div
+	id="badge"
+	class="rounded-md px-2.5 py-0.5 text-center text-lg font-medium"
+	class:green={badgeColor === 'green'}
+	class:red={badgeColor === 'red'}
+	class:indigo={badgeColor === 'indigo'}
+	class:yellow={badgeColor === 'yellow'}
+>
+	<slot />
+	{label}
+</div>
 
 <style lang="postcss">
 	.green {
