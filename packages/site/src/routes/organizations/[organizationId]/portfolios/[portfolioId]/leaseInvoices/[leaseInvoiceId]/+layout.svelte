@@ -8,7 +8,8 @@
 	import LeaseInvoiceTabs from '$lib/components/leaseInvoice/LeaseInvoiceTabs.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import { DocumentText, Mail } from '@steeze-ui/heroicons';
+	import HeroiconsDocumentText from '~icons/heroicons/document-text';
+	import HeroiconsEnvelope from '~icons/heroicons/envelope';
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
@@ -31,7 +32,7 @@
 			solid
 		/> -->
 		<Button
-			icon={DocumentText}
+			icon={HeroiconsDocumentText}
 			text="Print"
 			as="button"
 			on:click={() =>
@@ -40,7 +41,7 @@
 			prefetch
 		/>
 		<Button
-			icon={Mail}
+			icon={HeroiconsEnvelope}
 			text={'Send email reminder'}
 			solid
 			disabled={data.leaseInvoice.isPaid}

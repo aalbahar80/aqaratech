@@ -7,9 +7,10 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
 	import { getRoute, PageType } from '@self/utils';
-	import { DocumentText, Refresh } from '@steeze-ui/heroicons';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
+	import HeroiconsArrowPath from '~icons/heroicons/arrow-path';
+	import HeroiconsDocumentText from '~icons/heroicons/document-text';
 
 	export let lease: LeaseDto;
 
@@ -33,7 +34,7 @@
 
 	<svelte:fragment slot="actions">
 		<Button
-			icon={Refresh}
+			icon={HeroiconsArrowPath}
 			text="Renew"
 			as="a"
 			href={getRoute({
@@ -49,7 +50,7 @@
 		/>
 
 		<Button
-			icon={DocumentText}
+			icon={HeroiconsDocumentText}
 			text="Contract"
 			as="a"
 			href={`/leases/${lease.id}/contract`}

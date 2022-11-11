@@ -10,12 +10,12 @@
 		type ExpenseNode,
 	} from '$lib/utils/expense-type-options';
 	import { preventTabClose } from '$lib/utils/prevent-tab-close';
-	import { Check } from '@steeze-ui/heroicons';
 	import { diff } from 'just-diff';
 	import { cloneDeep } from 'lodash-es';
 	import * as R from 'remeda';
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 	import Fa6SolidPlus from '~icons/fa6-solid/plus';
+	import HeroiconsCheck from '~icons/heroicons/check';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -44,7 +44,7 @@
 		class="sticky top-0 flex w-2/6 flex-initial flex-col self-start p-2"
 	>
 		<Button
-			icon={Check}
+			icon={HeroiconsCheck}
 			text={difference.length ? `Save changes` : 'No pending changes'}
 			disabled={difference.length === 0}
 			as="button"

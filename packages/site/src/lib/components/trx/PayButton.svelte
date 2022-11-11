@@ -1,9 +1,9 @@
 <script lang="ts">
+	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { addToast } from '$lib/stores/toast';
-	import type { LeaseInvoiceDto } from '$api/openapi';
-	import { Cash } from '@steeze-ui/heroicons';
+	import HeroiconsOutlineCash from '~icons/heroicons-outline/cash';
 
 	export let invoice: LeaseInvoiceDto;
 
@@ -45,7 +45,7 @@
 	--min-width="6rem"
 	--min-height="4rem"
 	text="Pay"
-	icon={Cash}
+	icon={HeroiconsOutlineCash}
 	disabled={new Date(invoice.postAt) > new Date()}
 	{loading}
 	on:click={handlePayment}

@@ -1,16 +1,15 @@
 <script lang="ts">
 	import Spinner from '$components/Spinner.svelte';
-	import type { IconSource } from '@steeze-ui/heroicons/types';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import type { SvelteComponentTyped } from 'svelte';
 
 	export let loading = false;
 	export let disabled = false;
 	export let text = '';
-	export let icon: IconSource | undefined = undefined;
-	export let solid = false;
+	export let icon:
+		| typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>
+		| undefined = undefined;
 	export let as: 'button' | 'a' | 'div' = 'button';
 	export let href = '';
-	export let prefetch: true | undefined = undefined;
 </script>
 
 <!-- TODO add back prefetch attribute after optimization -->
@@ -27,11 +26,7 @@
 		<Spinner {loading} />
 		<slot>
 			{#if icon && !loading}
-				<Icon
-					src={icon}
-					theme={solid ? 'solid' : 'default'}
-					aria-hidden="true"
-				/>
+				<svelte:component this={icon} aria-hidden="true" />
 			{/if}
 		</slot>
 	</div>
