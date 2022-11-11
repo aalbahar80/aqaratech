@@ -18,6 +18,7 @@
 	import Fa6SolidFileCsv from '~icons/fa6-solid/file-csv';
 
 	export let data: PaginatedLeaseInvoiceDto;
+	export let showOptions = false;
 
 	const columnHelper = createColumnHelper<LeaseInvoiceDto>();
 
@@ -90,16 +91,21 @@
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
 			<div slot="custom">
-				<FilterRadio label="Options">
-					<MenuItem as="div" let:active>
-						<a href={`${$page.url.pathname}/csv`} download="leaseInvoices.csv">
-							<MenuItemChild {active}>
-								<MenuItemIcon icon={Fa6SolidFileCsv} />
-								Export to CSV
-							</MenuItemChild>
-						</a>
-					</MenuItem>
-				</FilterRadio>
+				{#if showOptions}
+					<FilterRadio label="Options">
+						<MenuItem as="div" let:active>
+							<a
+								href={`${$page.url.pathname}/csv`}
+								download="leaseInvoices.csv"
+							>
+								<MenuItemChild {active}>
+									<MenuItemIcon icon={Fa6SolidFileCsv} />
+									Export to CSV
+								</MenuItemChild>
+							</a>
+						</MenuItem>
+					</FilterRadio>
+				{/if}
 			</div>
 		</FilterBar>
 	</div>
