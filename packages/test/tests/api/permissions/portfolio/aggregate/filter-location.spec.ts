@@ -39,7 +39,7 @@ test('portfolio grouping is correct', async ({
 	org,
 	portfolio,
 	request,
-	expenses,
+	expenses: _expenses,
 }) => {
 	const url = getUrl({
 		organizationId: org.organization.id,
@@ -59,7 +59,7 @@ test("property grouping includes own units' expenses when setting propertyId", a
 	org,
 	portfolio,
 	property,
-	expenses,
+	expenses: _expenses,
 	request,
 }) => {
 	const url = getUrl({
@@ -82,8 +82,8 @@ test("property grouping includes own units' expenses when setting propertyId", a
 test('property grouping does NOT include any unit-specific expenses when setting propertyId to null', async ({
 	org,
 	portfolio,
-	property,
-	expenses,
+	property: _property,
+	expenses: _expenses,
 	request,
 }) => {
 	const url = getUrl({
@@ -107,7 +107,7 @@ test('unit grouping is correct', async ({
 	portfolio,
 	unit,
 	request,
-	expenses,
+	expenses: _expenses,
 }) => {
 	const url = getUrl({
 		organizationId: org.organization.id,

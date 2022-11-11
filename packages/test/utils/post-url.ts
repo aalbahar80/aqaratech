@@ -34,7 +34,7 @@ export const PostUrlRole = ({
 export const getUrl = ({
 	organizationId,
 	portfolioId,
-	tenantId,
+	tenantId: _tenantId,
 }: {
 	organizationId?: string;
 	portfolioId?: string | null;

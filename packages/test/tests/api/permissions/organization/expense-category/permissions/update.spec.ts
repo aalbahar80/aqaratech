@@ -57,7 +57,10 @@ test('cannot update expenseCategory in non-existing org', async ({
 	expect(res.status()).toBe(403);
 });
 
-test('cannot update non-existing expenseCategory', async ({ request, org }) => {
+test('cannot update non-existing expenseCategory', async ({
+	request,
+	org: _org,
+}) => {
 	const url = PostUrl(sample.organizations[0].id).expenseCategory;
 
 	const res = await request.patch(`${url}/${randomUUID()}`, {

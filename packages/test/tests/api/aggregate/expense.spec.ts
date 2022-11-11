@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { ByMonthDto } from '../../../types/api';
+import type { GroupByMonthDto } from '../../../types/api';
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
 
@@ -50,7 +50,7 @@ test('return 12 data points for a year', async ({ request, portfolio }) => {
 		},
 	});
 
-	const body = (await res.json()) as ByMonthDto[];
+	const body = (await res.json()) as GroupByMonthDto[];
 
 	expect(body.length).toBe(12);
 });
