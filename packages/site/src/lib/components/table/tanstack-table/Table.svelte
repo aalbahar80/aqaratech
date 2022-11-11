@@ -256,12 +256,16 @@
 										'slashed-zero tabular-nums': cellValueType === 'number',
 									})}
 								>
-									<svelte:component
-										this={flexRender(
-											cell.column.columnDef.cell,
-											cell.getContext(),
-										)}
-									/>
+									<!-- Rendering null cells throws. This might only be an issue
+									when the entire column is null on a given page. -->
+									{#if cell.getValue() !== null}
+										<svelte:component
+											this={flexRender(
+												cell.column.columnDef.cell,
+												cell.getContext(),
+											)}
+										/>
+									{/if}
 								</td>
 							{/each}
 						</tr>
