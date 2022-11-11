@@ -40,6 +40,8 @@ export class UnitsService {
 		user: IUser;
 		where?: Prisma.UnitWhereInput;
 	}): Promise<WithCount<UnitDto>> {
+		const { take, skip, sort } = queryOptions;
+
 		const filter: Prisma.UnitWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
@@ -49,9 +51,9 @@ export class UnitsService {
 
 		const [data, total] = await Promise.all([
 			this.prisma.unit.findMany({
-				take: queryOptions.take,
-				skip: queryOptions.skip,
-				orderBy: { unitNumber: 'asc' },
+				take,
+				skip,
+				orderBy: sort,
 				where: filter,
 				include: {
 					// TODO Add sorted index?
