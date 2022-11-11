@@ -1,11 +1,12 @@
 import { Cookie } from '@self/utils';
+import { siteURL } from '../../api/fixtures/site-url';
 import { expect, test } from '../auth-fixtures';
 
 // Consider using test.use() to skip global setup login?
 // test.use({ token: { name: Cookie.idToken, value: '123' } });
 
-test.fixme('redirect to login form', async ({ page, baseURL }) => {
-	await page.goto(baseURL);
+test.fixme('redirect to login form', async ({ page }) => {
+	await page.goto(siteURL);
 	// expect to be redirected to login page
 	const emailInput = page.locator('input[name="username"]');
 	const passwordInput = page.locator('input[name="password"]');
@@ -13,8 +14,8 @@ test.fixme('redirect to login form', async ({ page, baseURL }) => {
 	await expect(passwordInput).toBeVisible();
 });
 
-test('cookies are cleared', async ({ page, baseURL }) => {
-	await page.goto(baseURL);
+test('cookies are cleared', async ({ page }) => {
+	await page.goto(siteURL);
 	// expect idToken and accessToken to be cleared
 	const cookies = await page.context().cookies();
 
