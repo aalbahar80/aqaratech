@@ -45,7 +45,6 @@ export const addToast = (options: ToastItem) => {
 };
 
 interface ToastItem {
-	id: number;
 	duration?: number;
 	props: { title: string; subtitle?: string; kind: 'success' | 'error' };
 }
