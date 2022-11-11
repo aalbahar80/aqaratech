@@ -24,7 +24,7 @@ test('cannot update property in another org', async ({
 	request,
 	org: _org,
 }) => {
-	const res = await request.patch(`/properties/${sample.properties[0]!.id}`, {
+	const res = await request.patch(`/properties/${sample.properties[0].id}`, {
 		data: newProperty,
 	});
 

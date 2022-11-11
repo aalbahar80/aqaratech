@@ -22,7 +22,7 @@ test('can update expense in own org', async ({ request, expense }) => {
 });
 
 test('cannot update expense in another org', async ({ request, org: _org }) => {
-	const res = await request.patch(`/expenses/${sample.expenses[0]!.id}`, {
+	const res = await request.patch(`/expenses/${sample.expenses[0].id}`, {
 		data: newExpense,
 	});
 

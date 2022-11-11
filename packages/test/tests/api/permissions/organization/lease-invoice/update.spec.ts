@@ -26,7 +26,7 @@ test('cannot update leaseInvoice in another org', async ({
 	org: _org,
 }) => {
 	const res = await request.patch(
-		`/leaseInvoices/${sample.leaseInvoices[0]!.id}`,
+		`/leaseInvoices/${sample.leaseInvoices[0].id}`,
 		{
 			data: newLeaseInvoice,
 		},

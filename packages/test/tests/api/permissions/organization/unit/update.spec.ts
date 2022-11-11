@@ -22,7 +22,7 @@ test('can update unit in own org', async ({ request, unit }) => {
 });
 
 test('cannot update unit in another org', async ({ request, org: _org }) => {
-	const res = await request.patch(`/units/${sample.units[0]!.id}`, {
+	const res = await request.patch(`/units/${sample.units[0].id}`, {
 		data: newUnit,
 	});
 

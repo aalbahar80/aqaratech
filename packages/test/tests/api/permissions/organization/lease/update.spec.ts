@@ -23,7 +23,7 @@ test('can update lease in own org', async ({ request, lease }) => {
 });
 
 test('cannot update lease in another org', async ({ request, org: _org }) => {
-	const res = await request.patch(`/leases/${sample.leases[0]!.id}`, {
+	const res = await request.patch(`/leases/${sample.leases[0].id}`, {
 		data: newLease,
 	});
 

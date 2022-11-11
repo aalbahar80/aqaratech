@@ -20,7 +20,7 @@ test('can update tenant in own org', async ({ request, tenant }) => {
 });
 
 test('cannot update tenant in another org', async ({ request, org: _org }) => {
-	const res = await request.patch(`/tenants/${sample.tenants[0]!.id}`, {
+	const res = await request.patch(`/tenants/${sample.tenants[0].id}`, {
 		data: newTenant,
 	});
 
