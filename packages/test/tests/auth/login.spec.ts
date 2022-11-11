@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { testOrgEmail, testPassword } from '@self/seed';
 import { Cookie } from '@self/utils';
 import { test as base } from '../api/api-fixtures';
+import { siteURL } from '../api/fixtures/site-url';
 
 const user = {
 	role: 'orgadmin',
@@ -51,8 +52,8 @@ const test = base.extend({
 	},
 });
 
-test('login', async ({ page, baseURL }) => {
-	const domain = new URL(baseURL).hostname;
+test('login', async ({ page }) => {
+	const domain = new URL(siteURL).hostname;
 
 	const cookies = await page.context().cookies();
 	const accessToken = cookies.find((c) => c.name === Cookie.accessToken);
