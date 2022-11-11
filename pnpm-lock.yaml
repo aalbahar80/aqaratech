@@ -17,7 +17,7 @@ importers:
       ts-morph: 16.0.0
       tsx: 3.12.0
       turbo: 1.6.3
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       zx: 7.1.1
     devDependencies:
       '@changesets/changelog-git': 0.1.13
@@ -33,7 +33,7 @@ importers:
       ts-morph: 16.0.0
       tsx: 3.12.0
       turbo: 1.6.3
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       zx: 7.1.1
 
   packages/backend:
@@ -106,7 +106,7 @@ importers:
       ts-loader: 9.4.1
       tsconfig-paths: 4.1.0
       tsx: 3.12.0
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       winston: 3.8.2
       zod: 3.19.0
     dependencies:
@@ -157,7 +157,7 @@ importers:
     devDependencies:
       '@logtail/types': 0.1.12
       '@nestjs/cli': 9.1.5
-      '@nestjs/schematics': 9.0.3_typescript@4.9.1-beta
+      '@nestjs/schematics': 9.0.3_typescript@4.9.2-rc
       '@nestjs/testing': 9.2.0_3jiwpo56qab566j5kwfezyelg4
       '@openapitools/openapi-generator-cli': 2.5.2_dzog2dval2tpec2x7zysd5dipy
       '@self/seed': link:../seed
@@ -177,11 +177,11 @@ importers:
       js-yaml: 4.1.0
       source-map-support: 0.5.21
       supertest: 6.3.0
-      ts-jest: 29.0.3_yi4n4oekopnlvkchjdf4bix3xq
-      ts-loader: 9.4.1_6zq3alby5zpzgjgpbxy7fwtg4e
+      ts-jest: 29.0.3_bzgxk5o5bgsfi5dqudd26hwuoq
+      ts-loader: 9.4.1_3lykpcvsiqg5hhpd57sn2tflwa
       tsconfig-paths: 4.1.0
       tsx: 3.12.0
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
 
   packages/eslint-config-custom:
     specifiers:
@@ -214,7 +214,7 @@ importers:
       factory.ts: 1.3.0
       prisma: 4.6.1
       tsx: 3.12.0
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
     dependencies:
       '@faker-js/faker': 7.6.0
       '@prisma/client': 4.6.1_prisma@4.6.1
@@ -230,7 +230,7 @@ importers:
       eslint-config-custom: link:../eslint-config-custom
       prisma: 4.6.1
       tsx: 3.12.0
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
 
   packages/site:
     specifiers:
@@ -298,7 +298,7 @@ importers:
       tippy.js: 6.3.7
       ts-toolbelt: 9.6.0
       tslib: 2.4.1
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       unplugin-icons: 0.14.13
       vite: 3.2.3
       vite-plugin-iso-import: 0.1.3
@@ -366,13 +366,13 @@ importers:
       svelte-dnd-action: 0.9.21
       svelte-frappe-charts: 1.9.2_svelte@3.53.1
       svelte-french-toast: 1.0.3_svelte@3.53.1
-      svelte-meta-tags: 2.6.3_typescript@4.9.1-beta
-      svelte-preprocess: 4.10.7_nwjgyvp6nrqpy7c54vemdkaolu
+      svelte-meta-tags: 2.6.3_typescript@4.9.2-rc
+      svelte-preprocess: 4.10.7_tv5suhvqapwisnifxmz7njwt24
       tailwindcss: 3.2.3_postcss@8.4.19
       tippy.js: 6.3.7
       ts-toolbelt: 9.6.0
       tslib: 2.4.1
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       unplugin-icons: 0.14.13
       vite: 3.2.3
       vite-plugin-iso-import: 0.1.3
@@ -392,7 +392,7 @@ importers:
       eslint-config-custom: workspace:1.1.0
       jose: 4.11.0
       remeda: 1.2.0
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       ufo: 0.8.6
     devDependencies:
       '@faker-js/faker': 7.6.0
@@ -406,7 +406,7 @@ importers:
       eslint-config-custom: link:../eslint-config-custom
       jose: 4.11.0
       remeda: 1.2.0
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       ufo: 0.8.6
 
   packages/utils:
@@ -423,7 +423,7 @@ importers:
       remeda: 1.2.0
       ts-toolbelt: 9.6.0
       tsup: 6.4.0
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       vitest: 0.25.1
       winston: 3.8.2
       zod: 3.19.0
@@ -442,8 +442,8 @@ importers:
       '@types/node': 18.11.9
       '@vitest/ui': 0.25.1
       eslint-config-custom: link:../eslint-config-custom
-      tsup: 6.4.0_typescript@4.9.1-beta
-      typescript: 4.9.1-beta
+      tsup: 6.4.0_typescript@4.9.2-rc
+      typescript: 4.9.2-rc
       vitest: 0.25.1_@vitest+ui@0.25.1
 
 packages:
@@ -3328,7 +3328,7 @@ packages:
       - chokidar
     dev: true
 
-  /@nestjs/schematics/9.0.3_typescript@4.9.1-beta:
+  /@nestjs/schematics/9.0.3_typescript@4.9.2-rc:
     resolution: {integrity: sha512-kZrU/lrpVd2cnK8I3ibDb3Wi1ppl3wX3U3lVWoL+DzRRoezWKkh8upEL4q0koKmuXnsmLiu3UPxFeMOrJV7TSA==}
     peerDependencies:
       typescript: ^4.3.5
@@ -3338,7 +3338,7 @@ packages:
       fs-extra: 10.1.0
       jsonc-parser: 3.2.0
       pluralize: 8.0.0
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
     transitivePeerDependencies:
       - chokidar
     dev: true
@@ -10815,12 +10815,12 @@ packages:
       xmlchars: 2.2.0
     dev: true
 
-  /schema-dts/1.1.0_typescript@4.9.1-beta:
+  /schema-dts/1.1.0_typescript@4.9.2-rc:
     resolution: {integrity: sha512-vdmbs/5ycj4zyKpZIDqTcy+IZi4s7c38RVAYuDmRi7zgxUT8wRWPMLzg0jr7FjdVunYu9yZ00F3+XcZTTFcTOQ==}
     peerDependencies:
       typescript: '>=4.1.0'
     dependencies:
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
     dev: true
 
   /schema-utils/3.1.1:
@@ -11408,10 +11408,10 @@ packages:
       svelte: 3.53.1
     dev: true
 
-  /svelte-meta-tags/2.6.3_typescript@4.9.1-beta:
+  /svelte-meta-tags/2.6.3_typescript@4.9.2-rc:
     resolution: {integrity: sha512-VEc6t8ka6t4ntnfDhkdKR+/Gj/51aeRXsFOJG/0xPXCUqhtY4Px93VqKp5vMNzNzVsKZIacX8maT2AbpjZX1BQ==}
     dependencies:
-      schema-dts: 1.1.0_typescript@4.9.1-beta
+      schema-dts: 1.1.0_typescript@4.9.2-rc
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -11468,7 +11468,7 @@ packages:
       typescript: 4.8.4
     dev: true
 
-  /svelte-preprocess/4.10.7_nwjgyvp6nrqpy7c54vemdkaolu:
+  /svelte-preprocess/4.10.7_tv5suhvqapwisnifxmz7njwt24:
     resolution: {integrity: sha512-sNPBnqYD6FnmdBrUmBCaqS00RyCsCpj2BG58A1JBswNF7b0OKviwxqVrOL/CKyJrLSClrSeqQv5BXNg2RUbPOw==}
     engines: {node: '>= 9.11.2'}
     requiresBuild: true
@@ -11517,7 +11517,7 @@ packages:
       sorcery: 0.10.0
       strip-indent: 3.0.0
       svelte: 3.53.1
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
     dev: true
 
   /svelte-writable-derived/2.1.5_svelte@3.53.1:
@@ -11828,7 +11828,7 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /ts-jest/29.0.3_yi4n4oekopnlvkchjdf4bix3xq:
+  /ts-jest/29.0.3_bzgxk5o5bgsfi5dqudd26hwuoq:
     resolution: {integrity: sha512-Ibygvmuyq1qp/z3yTh9QTwVVAbFdDy/+4BtIQR2sp6baF2SJU/8CKK/hhnGIDY2L90Az2jIqTwZPnN2p+BweiQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -11858,11 +11858,11 @@ packages:
       lodash.memoize: 4.1.2
       make-error: 1.3.6
       semver: 7.3.7
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       yargs-parser: 21.1.1
     dev: true
 
-  /ts-loader/9.4.1_6zq3alby5zpzgjgpbxy7fwtg4e:
+  /ts-loader/9.4.1_3lykpcvsiqg5hhpd57sn2tflwa:
     resolution: {integrity: sha512-384TYAqGs70rn9F0VBnh6BPTfhga7yFNdC5gXbQpDrBj9/KsT4iRkGqKXhziofHOlE2j6YEaiTYVGKKvPhGWvw==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -11873,7 +11873,7 @@ packages:
       enhanced-resolve: 5.10.0
       micromatch: 4.0.5
       semver: 7.3.7
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
       webpack: 5.75.0
     dev: true
 
@@ -11928,7 +11928,7 @@ packages:
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
 
-  /tsup/6.4.0_typescript@4.9.1-beta:
+  /tsup/6.4.0_typescript@4.9.2-rc:
     resolution: {integrity: sha512-4OlbqIK/SF+cJp0mMqPM2pKULvgj/1S2Gm3I1aFoFGIryUOyIqPZBoqKkqVQT6uFtWJ5AHftIv0riXKfHox1zQ==}
     engines: {node: '>=14'}
     hasBin: true
@@ -11958,7 +11958,7 @@ packages:
       source-map: 0.8.0-beta.0
       sucrase: 3.28.0
       tree-kill: 1.2.2
-      typescript: 4.9.1-beta
+      typescript: 4.9.2-rc
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -12143,8 +12143,8 @@ packages:
     hasBin: true
     dev: true
 
-  /typescript/4.9.1-beta:
-    resolution: {integrity: sha512-D4c0t1+sMOS5Hy8DQsGFfEYUuKzolXhf+7e/N0Td5etBPflEYzVwWLBrbVgHpLpLC53OJQCtxk31+NWO2SBPaA==}
+  /typescript/4.9.2-rc:
+    resolution: {integrity: sha512-Ly9UUxJBfiiFjfegI1gsW9FI8Xhw1cuwRMBJ4wdYg+UXZR4VnZvD1OnBDj/iQ2U+tWbWEjYqJ5xx1Cwr4Vsa4w==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
