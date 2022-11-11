@@ -9,7 +9,6 @@
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	export let data: PaginatedUnitDto;
-	console.log({ data }, 'UnitTable.svelte ~ 11');
 
 	const columnHelper = createColumnHelper<UnitDto>();
 
