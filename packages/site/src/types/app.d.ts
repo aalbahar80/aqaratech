@@ -55,7 +55,7 @@ declare namespace svelte.JSX {
 // vite-plugin-iso-import intellisense workaround (needed for .svelte files & svelte-check)
 // https://github.com/bluwy/vite-plugin-iso-import#using-client-and-server-loses-intellisense
 declare module '@sentry/svelte?client' {
-	import all from '@sentry/svelte';
+	import * as all from '@sentry/svelte';
 	export = all;
 }
 
@@ -72,3 +72,8 @@ declare module '@sentry/node?server' {
 // fallback - disabled for now
 // declare module '*?client'
 // declare module '*?server'
+
+declare module 'date-fns-tz/esm' {
+	import * as all from 'date-fns-tz';
+	export = all;
+}
