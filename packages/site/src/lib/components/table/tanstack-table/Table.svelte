@@ -21,6 +21,7 @@
 	import { clsx } from 'clsx';
 	import { afterUpdate } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { fade } from 'svelte/transition';
 
 	type T = $$Generic;
 	export let items: T[];
@@ -245,11 +246,12 @@
 					{/each}
 				</thead>
 				<tbody>
-					{#each $table.getRowModel().rows as row}
+					{#each $table.getRowModel().rows as row (row.original.id)}
 						<tr class="odd:bg-white even:bg-gray-50">
 							{#each row.getVisibleCells() as cell}
 								{@const cellValueType = typeof cell.getValue()}
 								<td
+									in:fade={{ duration: 200 }}
 									class={clsx('py-4 px-2 text-sm text-gray-600', {
 										'slashed-zero tabular-nums': cellValueType === 'number',
 									})}
