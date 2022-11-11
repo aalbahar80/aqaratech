@@ -10,6 +10,7 @@ import {
 	testTenantId,
 	testTenantRoleId,
 } from './constant/ids.constant';
+import { organizationFactory, portfolioFactory } from './factory';
 
 const users = Prisma.validator<Prisma.UserCreateManyArgs['data']>()([
 	{
@@ -49,31 +50,27 @@ const roles = Prisma.validator<Prisma.RoleCreateManyArgs['data']>()([
 	},
 ]);
 
-const organizations = Prisma.validator<
-	Prisma.OrganizationCreateManyArgs['data']
->()([
-	{
-		id: testOrgId,
-		fullName: 'Organization One',
-		label: 'Org 1',
-		isActive: true,
-	},
-]);
+const organizations = organizationFactory.build({
+	id: testOrgId,
+	fullName: 'Organization One',
+	label: 'Org 1',
+	isActive: true,
+});
 
-const portfolios = Prisma.validator<Prisma.PortfolioCreateManyArgs['data']>()([
-	{
+const portfolios = [
+	portfolioFactory.build({
 		id: testPortfolioId,
 		organizationId: testOrgId,
 		fullName: 'Portfolio One',
 		label: 'Port 1',
-	},
-	{
+	}),
+	portfolioFactory.build({
 		id: '23f5fb25-875b-492d-b3f2-a57db2d4bc44',
 		organizationId: testOrgId,
 		fullName: 'Portfolio updateable',
 		label: 'Port 2',
-	},
-]);
+	}),
+] as const;
 
 const tenants = Prisma.validator<Prisma.TenantCreateManyArgs['data']>()([
 	{

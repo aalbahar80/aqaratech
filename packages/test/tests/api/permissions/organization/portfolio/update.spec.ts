@@ -23,7 +23,7 @@ test('cannot update portfolio in another org', async ({
 	request,
 	org: _org,
 }) => {
-	const res = await request.patch(`/portfolios/${sample.portfolios[0]!.id}`, {
+	const res = await request.patch(`/portfolios/${sample.portfolios[0].id}`, {
 		data: newPortfolio,
 	});
 

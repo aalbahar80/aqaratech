@@ -30,7 +30,7 @@ for (const agg of aggregateTypes) {
 	}) => {
 		const url = getUrl({
 			organizationId: portfolio.organizationId,
-			portfolioId: sample.portfolios[0]!.id,
+			portfolioId: sample.portfolios[0].id,
 		})[agg];
 
 		const res = await scopedRequest.get(url);
