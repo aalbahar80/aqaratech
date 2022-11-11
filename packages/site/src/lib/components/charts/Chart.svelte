@@ -12,8 +12,6 @@
 		LineElement,
 		PieController,
 		PointElement,
-		PolarAreaController,
-		RadialLinearScale,
 		TimeScale,
 		Tooltip,
 		type ActiveElement,
@@ -48,8 +46,6 @@
 		LineController,
 		PieController,
 		ArcElement,
-		PolarAreaController,
-		RadialLinearScale,
 		legendMargin,
 	);
 
