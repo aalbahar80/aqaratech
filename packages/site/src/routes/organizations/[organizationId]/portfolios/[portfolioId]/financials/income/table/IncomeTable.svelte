@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { page } from '$app/stores';
+	import Badge from '$lib/components/Badge.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
@@ -12,6 +13,7 @@
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
+	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 	import Fa6SolidFileCsv from '~icons/fa6-solid/file-csv';
@@ -52,6 +54,25 @@
 				}),
 		}),
 
+		columnHelper.display({
+			id: 'badge',
+			header: 'Status',
+			cell: (props) => {
+				const invoice = props.row.original;
+
+				const badge = getInvoiceBadge({
+					dueAt: invoice.dueAt,
+					isPaid: invoice.isPaid,
+					postAt: invoice.postAt,
+				});
+
+				return renderComponent(Badge, {
+					label: badge.label,
+					badgeColor: badge.color,
+				});
+			},
+		}),
+
 		columnHelper.accessor('amount', {
 			header: 'Amount (KWD)',
 			cell: (info) => info.getValue().toLocaleString(),
@@ -76,6 +97,7 @@
 	columnVisibility={{
 		dueAt: false,
 		paidAt: false,
+		isPaid: false,
 	}}
 >
 	<div slot="filter" let:filters>

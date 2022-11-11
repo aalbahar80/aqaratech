@@ -252,7 +252,7 @@
 								{@const cellValueType = typeof cell.getValue()}
 								<td
 									in:fade={{ duration: 200 }}
-									class={clsx('py-4 px-2 text-sm text-gray-600', {
+									class={clsx('py-4 px-2 text-lg text-gray-600', {
 										'slashed-zero tabular-nums': cellValueType === 'number',
 									})}
 								>
