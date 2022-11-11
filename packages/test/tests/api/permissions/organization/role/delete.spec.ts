@@ -13,9 +13,7 @@ test('can delete role in own org', async ({ request, org, role }) => {
 
 test('cannot delete role in another org', async ({ request, org: _org }) => {
 	const res = await request.delete(
-		`/organizations/${sample.organizations[0]!.id}/roles/${
-			sample.roles[0]!.id
-		}`,
+		`/organizations/${sample.organizations[0].id}/roles/${sample.roles[0]!.id}`,
 	);
 
 	await expect.soft(res).not.toBeOK();

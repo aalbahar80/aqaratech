@@ -50,12 +50,14 @@ const roles = Prisma.validator<Prisma.RoleCreateManyArgs['data']>()([
 	},
 ]);
 
-const organizations = organizationFactory.build({
-	id: testOrgId,
-	fullName: 'Organization One',
-	label: 'Org 1',
-	isActive: true,
-});
+const organizations = [
+	organizationFactory.build({
+		id: testOrgId,
+		fullName: 'Organization One',
+		label: 'Org 1',
+		isActive: true,
+	}),
+] as const;
 
 const portfolios = [
 	portfolioFactory.build({

@@ -27,7 +27,7 @@ test('cannot create portfolio in another org', async ({ request, org }) => {
 		['fullName'],
 	);
 	const res = await request.post(
-		`/organizations/${sample.organizations[0]!.id}/portfolios`,
+		`/organizations/${sample.organizations[0].id}/portfolios`,
 		{ data: portfolio },
 	);
 

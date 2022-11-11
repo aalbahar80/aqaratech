@@ -13,7 +13,7 @@ test('can invite role in own org', async ({ request, org, role }) => {
 
 test('cannot invite role in another org', async ({ request, org: _org }) => {
 	const res = await request.post(
-		`/organizations/${sample.organizations[0]!.id}/roles/${
+		`/organizations/${sample.organizations[0].id}/roles/${
 			sample.roles[0]!.id
 		}/send-invite`,
 	);

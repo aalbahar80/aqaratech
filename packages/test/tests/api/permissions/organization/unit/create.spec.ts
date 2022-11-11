@@ -35,7 +35,7 @@ test('cannot create unit in another org', async ({
 		['portfolioId', 'propertyId', 'type', 'unitNumber'],
 	);
 
-	const url = `/organizations/${sample.organizations[0]!.id}/units`;
+	const url = `/organizations/${sample.organizations[0].id}/units`;
 
 	const res = await request.post(url, { data: unit });
 

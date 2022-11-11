@@ -47,7 +47,7 @@ test('cannot create leaseInvoice in another org', async ({
 		keys,
 	);
 
-	const res = await request.post(PostUrl(sample.organizations[0]!.id).invoice, {
+	const res = await request.post(PostUrl(sample.organizations[0].id).invoice, {
 		data: leaseInvoice,
 	});
 

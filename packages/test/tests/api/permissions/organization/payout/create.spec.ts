@@ -34,7 +34,7 @@ test('cannot create payout in another org', async ({
 		['portfolioId', 'amount', 'postAt'],
 	);
 
-	const url = PostUrl(sample.organizations[0]!.id).payout;
+	const url = PostUrl(sample.organizations[0].id).payout;
 
 	const res = await request.post(url, { data: payout });
 

@@ -33,7 +33,7 @@ test('cannot create property in another org', async ({
 		['portfolioId', 'area', 'block', 'street', 'number'],
 	);
 
-	const url = `/organizations/${sample.organizations[0]!.id}/properties`;
+	const url = `/organizations/${sample.organizations[0].id}/properties`;
 
 	const res = await request.post(url, { data: property });
 

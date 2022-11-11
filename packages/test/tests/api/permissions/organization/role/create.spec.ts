@@ -36,7 +36,7 @@ for (const roleType of roleTypes) {
 		const email = faker.internet.email();
 
 		const url = PostUrlRole({
-			organizationId: sample.organizations[0]!.id,
+			organizationId: sample.organizations[0].id,
 			portfolioId: portfolio.id,
 			tenantId: tenant.id,
 		})[roleType];

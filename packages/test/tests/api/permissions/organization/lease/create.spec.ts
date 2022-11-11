@@ -63,7 +63,7 @@ test('cannot create lease in another org', async ({
 		],
 	);
 
-	const url = `/organizations/${sample.organizations[0]!.id}/leases`;
+	const url = `/organizations/${sample.organizations[0].id}/leases`;
 
 	const res = await request.post(url, { data: lease });
 

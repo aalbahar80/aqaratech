@@ -25,7 +25,7 @@ for (const agg of aggregateTypes) {
 		org: _org,
 	}) => {
 		const url = getUrl({
-			organizationId: sample.organizations[0]!.id,
+			organizationId: sample.organizations[0].id,
 			portfolioId: sample.portfolios[0].id,
 		})[agg];
 

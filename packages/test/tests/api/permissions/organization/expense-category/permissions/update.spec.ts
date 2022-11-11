@@ -30,7 +30,7 @@ test('cannot update expenseCategory in another org', async ({
 	org: _org,
 	expenseCategory,
 }) => {
-	const url = PostUrl(sample.organizations[0]!.id).expenseCategory;
+	const url = PostUrl(sample.organizations[0].id).expenseCategory;
 
 	const res = await request.patch(`${url}/${expenseCategory.id}`, {
 		data: updated,
@@ -58,7 +58,7 @@ test('cannot update expenseCategory in non-existing org', async ({
 });
 
 test('cannot update non-existing expenseCategory', async ({ request, org }) => {
-	const url = PostUrl(sample.organizations[0]!.id).expenseCategory;
+	const url = PostUrl(sample.organizations[0].id).expenseCategory;
 
 	const res = await request.patch(`${url}/${randomUUID()}`, {
 		data: updated,

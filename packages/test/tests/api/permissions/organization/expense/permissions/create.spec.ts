@@ -35,7 +35,7 @@ test('cannot create expense in another org', async ({
 		['portfolioId', 'propertyId', 'unitId', 'amount', 'postAt'],
 	);
 
-	const url = `/organizations/${sample.organizations[0]!.id}/expenses`;
+	const url = `/organizations/${sample.organizations[0].id}/expenses`;
 
 	const res = await request.post(url, { data: expense });
 

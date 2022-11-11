@@ -19,7 +19,7 @@ test('cannot create expenseCategory in another org', async ({
 	request,
 	org: _org,
 }) => {
-	const url = PostUrl(sample.organizations[0]!.id).expenseCategory;
+	const url = PostUrl(sample.organizations[0].id).expenseCategory;
 
 	const res = await request.post(url, { data: expenseCategory });
 

@@ -27,7 +27,7 @@ test('cannot create tenant in another org', async ({ request, org }) => {
 		['fullName'],
 	);
 	const res = await request.post(
-		`/organizations/${sample.organizations[0]!.id}/tenants`,
+		`/organizations/${sample.organizations[0].id}/tenants`,
 		{ data: tenant },
 	);
 
