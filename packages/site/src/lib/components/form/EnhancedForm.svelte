@@ -8,10 +8,7 @@
 	// Types
 
 	type FormKeys = $$Generic<string>;
-	// type FormKeys = Exclude<ActionDataKeys, 'errors'>;
-	// type FormKeys = $$Generic<Exclude<ActionDataKeys, 'errors'>>;
-	// type FormKeys = Object.Omit<ActionDataKeys, 'errors'>;
-	type ActionDataObj = $$Generic<
+	type GForm = $$Generic<
 		| ({
 				[key in FormKeys as string];
 		  } & {
@@ -19,7 +16,6 @@
 		  })
 		| undefined
 	>;
-	// type FormModelObj = $$Generic<{ fields: FormFields<{ [key in FormKeys] }> }>;
 	type FormErrors = $$Generic<{
 		formErrors?: string[];
 		fieldErrors?: { [key in FormKeys as string]?: string[] };
@@ -33,8 +29,7 @@
 
 	// Props
 
-	// export let form: (ActionDataObj & { errors: FormErrors }) | undefined;
-	export let form: ActionDataObj;
+	export let form: GForm;
 
 	export let data: GData = undefined as GData;
 
