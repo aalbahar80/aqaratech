@@ -3,11 +3,13 @@ import { portfolioFormModel } from '$lib/components/form/model/portfolio';
 import { propertyFormModel } from '$lib/components/form/model/property';
 import { roleFormModel } from '$lib/components/form/model/role';
 import { tenantFormModel } from '$lib/components/form/model/tenant';
+import { unitFormModel } from '$lib/components/form/model/unit';
 
 export const entityFormModeMap = {
 	tenant: tenantFormModel,
 	portfolio: portfolioFormModel,
 	property: propertyFormModel,
+	unit: unitFormModel,
 	role: roleFormModel,
 } as const;
 
