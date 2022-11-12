@@ -72,8 +72,3 @@ declare module '@sentry/node?server' {
 // fallback - disabled for now
 // declare module '*?client'
 // declare module '*?server'
-
-declare module 'date-fns-tz/esm' {
-	import * as all from 'date-fns-tz';
-	export = all;
-}

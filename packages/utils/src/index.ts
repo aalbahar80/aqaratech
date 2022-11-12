@@ -19,6 +19,7 @@ export {
 	entityFieldLabels,
 	getFieldLabelMap,
 	getLabel,
+	toUTCFormat,
 } from './entity/form/field';
 export { fromUrl } from './entity/from-url';
 export { isEntity, isEntityUrlName } from './entity/is-entity';

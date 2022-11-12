@@ -1,5 +1,5 @@
 import { differenceInCalendarDays } from 'date-fns';
-import { formatInTimeZone } from 'date-fns-tz/esm';
+export { toUTCFormat } from '@self/utils';
 
 export const getProgress = (start: string, end: string, ref?: Date): number => {
 	const total = differenceInCalendarDays(new Date(end), new Date(start));
@@ -8,14 +8,6 @@ export const getProgress = (start: string, end: string, ref?: Date): number => {
 	const rounded = Math.max(0, Math.round(result));
 	return rounded;
 };
-
-/**
- * Format a date in UTC timezone.
- */
-export const toUTCFormat = (
-	date: Date | string,
-	format = 'MMM dd, yy',
-): string => formatInTimeZone(date, 'UTC', format);
 
 export const kwdFormat = (amount: number | null): string =>
 	amount?.toLocaleString('en-KW', {
