@@ -23,7 +23,7 @@
 	import { writable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 
-	type T = $$Generic;
+	type T = $$Generic<{ id: string }>;
 	export let items: T[];
 	export let columns: ColumnDef<T, any>[];
 	export let pagination: PaginationState;
@@ -247,7 +247,10 @@
 				</thead>
 				<tbody>
 					{#each $table.getRowModel().rows as row (row.original.id)}
-						<tr class="odd:bg-white even:bg-gray-50">
+						<tr
+							class="odd:bg-white even:bg-gray-50"
+							data-testid={row.original.id}
+						>
 							{#each row.getVisibleCells() as cell}
 								{@const cellValueType = typeof cell.getValue()}
 								<td
