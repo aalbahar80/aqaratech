@@ -2,28 +2,43 @@
 	import { enhance } from '$app/forms';
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
-	import type { FormModel } from '$lib/components/form/form-model';
+	import type { FormFields } from '$lib/components/form/form-field.interface';
 	import { objectValues } from '$lib/utils/common';
 
 	// Types
 
-	type ActionDataKeys = $$Generic<string>;
-	// @ts-expect-error ts doesn't think this is used
-	type FormKeys = Exclude<ActionDataKeys, 'errors'>;
-	type ActionDataObj = $$Generic<{ [key in FormKeys] }>;
-	type FormModelObj = $$Generic<{ [key in FormKeys] }>;
+	type FormKeys = $$Generic<string>;
+	// type FormKeys = Exclude<ActionDataKeys, 'errors'>;
+	// type FormKeys = $$Generic<Exclude<ActionDataKeys, 'errors'>>;
+	// type FormKeys = Object.Omit<ActionDataKeys, 'errors'>;
+	type ActionDataObj = $$Generic<
+		| ({
+				[key in FormKeys as string];
+		  } & {
+				errors: FormErrors;
+		  })
+		| undefined
+	>;
+	// type FormModelObj = $$Generic<{ fields: FormFields<{ [key in FormKeys] }> }>;
 	type FormErrors = $$Generic<{
 		formErrors?: string[];
-		fieldErrors?: { [key in FormKeys]?: string[] };
+		fieldErrors?: { [key in FormKeys as string]?: string[] };
+	}>;
+
+	type GData = $$Generic<{ [key in FormKeys as string]: unknown } | undefined>;
+
+	type GFormModel = $$Generic<{
+		fields: FormFields<{ [key in FormKeys as string] }>;
 	}>;
 
 	// Props
 
-	export let form: (ActionDataObj & { errors: FormErrors }) | undefined;
+	// export let form: (ActionDataObj & { errors: FormErrors }) | undefined;
+	export let form: ActionDataObj;
 
-	export let data: FormModelObj | undefined = undefined;
+	export let data: GData = undefined as GData;
 
-	export let formModel: FormModel<FormModelObj>;
+	export let formModel: GFormModel;
 </script>
 
 <pre>{JSON.stringify(form, null, 2)}</pre>
