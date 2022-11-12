@@ -1,0 +1,46 @@
+diff --git a/build/types/index.d.ts b/build/types/index.d.ts
+index 50fdbdce58212c7ec233f88bd0fddcd5bc3377e1..91e89efab17abe327327e4e02b80b4b7b0001dd7 100644
+--- a/build/types/index.d.ts
++++ b/build/types/index.d.ts
+@@ -8,16 +8,34 @@
+  *
+  * @license MIT
+  */
+-import * as _tanstack_table_core from '@tanstack/table-core';
+-import { RowData, TableOptions } from '@tanstack/table-core';
+-export * from '@tanstack/table-core';
+-import { Readable } from 'svelte/store';
++import * as _tanstack_table_core from "@tanstack/table-core";
++import { RowData, TableOptions } from "@tanstack/table-core";
++export * from "@tanstack/table-core";
++import { Readable } from "svelte/store";
++import type {
++	ComponentProps,
++	ComponentType,
++	SvelteComponentTyped,
++} from "svelte";
+ 
+-declare function renderClient(Comp: any, props: any): any;
++declare function renderClient<Component extends SvelteComponentTyped>(
++	Comp: ComponentType<Component>,
++	...props: Record<string, unknown> extends ComponentProps<Component>
++		? []
++		: [ComponentProps<Component>]
++): ComponentType<Component>;
+ declare const renderComponent: typeof renderClient;
+ 
+-declare function flexRender(component: any, props: any): any;
++declare function flexRender<Component extends SvelteComponentTyped>(
++	component: ComponentType<Component>,
++	...props: Record<string, unknown> extends ComponentProps<Component>
++		? []
++		: [ComponentProps<Component>]
++): ComponentType<Component>;
++
+ declare type ReadableOrVal<T> = T | Readable<T>;
+-declare function createSvelteTable<TData extends RowData>(options: ReadableOrVal<TableOptions<TData>>): Readable<_tanstack_table_core.Table<TData>>;
++declare function createSvelteTable<TData extends RowData>(
++	options: ReadableOrVal<TableOptions<TData>>
++): Readable<_tanstack_table_core.Table<TData>>;
+ 
+ export { createSvelteTable, flexRender, renderComponent };
