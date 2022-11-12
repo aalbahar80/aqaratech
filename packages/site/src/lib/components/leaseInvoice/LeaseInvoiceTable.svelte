@@ -72,7 +72,10 @@
 		}),
 
 		locationColumnDef(columnHelper),
+		viewColumnDef(columnHelper, 'leaseInvoice', $page.params),
+	];
 
+	const adminColumns = [
 		columnHelper.display({
 			id: 'markAsPaid',
 			header: '',
@@ -106,13 +109,13 @@
 				});
 			},
 		}),
-
-		viewColumnDef(columnHelper, 'leaseInvoice', $page.params),
 	];
 </script>
 
 <Table
-	{columns}
+	columns={$page.data.user?.role?.roleType === 'ORGADMIN'
+		? [...columns, ...adminColumns]
+		: columns}
 	items={data.results}
 	itemCount={data.pagination.itemCount}
 	pageCount={data.pagination.pageCount}
