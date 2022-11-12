@@ -41,16 +41,6 @@ const role = satisfies<EntityNames>()({
 	idField: null,
 });
 
-const member = satisfies<EntityNames>()({
-	title: 'member',
-	urlName: 'roles',
-	singular: 'member',
-	singularCap: 'Member',
-	plural: 'members',
-	pluralCap: 'Members',
-	idField: null,
-});
-
 const tenant = satisfies<EntityNames>()({
 	title: 'tenant',
 	urlName: 'tenants',
@@ -182,7 +172,6 @@ export const entitiesMap = satisfies<EntityMap>()({
 	maintenanceOrder,
 	organization,
 	role,
-	member,
 	expenseCategory,
 	file,
 });

@@ -12,7 +12,7 @@ export const dbEntity = [
 	'maintenanceOrder',
 ] as const;
 
-export const nonDbEntity = ['member', 'expenseCategory', 'file'] as const;
+export const nonDbEntity = ['expenseCategory', 'file'] as const;
 
 export type DBEntity = typeof dbEntity[number];
 export type NonDBEntity = typeof nonDbEntity[number];

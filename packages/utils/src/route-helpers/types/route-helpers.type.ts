@@ -12,13 +12,13 @@ export interface GetListRoute extends BaseGetRoute {
 // Form Route
 
 export interface GetFormRouteBase extends BaseGetRoute {
-	entity: Exclude<Entity, 'file' | 'member'>;
+	entity: Exclude<Entity, 'file' | 'role'>;
 	pageType: PageType.New;
 	predefined?: Record<string, string>;
 }
 
 export interface GetFormRouteWithRelation extends BaseGetRoute {
-	entity: Extract<Entity, 'file' | 'member'>;
+	entity: Extract<Entity, 'file' | 'role'>;
 	pageType: PageType.New;
 	predefined: {
 		relationKey: Entity;

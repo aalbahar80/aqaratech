@@ -103,7 +103,7 @@ export class FormPage {
 
 interface BaseFormPageOptions {
 	// File and member forms not yet supported. They require predefined values.
-	entity: Exclude<Entity, 'file' | 'member'>;
+	entity: Exclude<Entity, 'file' | 'role'>;
 	pageType: PageType.New | PageType.Edit;
 	fixtures: {
 		org: { organization: { id: string } };

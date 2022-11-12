@@ -17,7 +17,7 @@
 	<a
 		class="relative left-0 float-right  w-24"
 		href={getRoute({
-			entity: 'member',
+			entity: 'role',
 			pageType: PageType.New,
 			params: $page.params,
 			predefined,
