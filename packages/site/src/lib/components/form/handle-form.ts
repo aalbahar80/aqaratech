@@ -46,10 +46,13 @@ export const handleForm = async <
 	const parsed = schema.safeParse(obj);
 
 	if (!parsed.success) {
-		const errors = parsed.error.formErrors;
+		// cast type to populate ActionData type
+		const errors = parsed.error.formErrors as z.typeToFlattenedError<
+			z.infer<S>
+		>;
 		console.warn({ errors }, '+page.server.ts ~ 19');
 
-		return invalid(400, { ...obj, errors });
+		return invalid(400, { ...(obj as z.infer<S>), errors });
 	}
 
 	let id: string;
@@ -66,8 +69,8 @@ export const handleForm = async <
 			const data = await parseApiError(error);
 
 			return invalid(400, {
-				...obj,
-				errors: { formErrors: [data.message] },
+				...(obj as z.infer<S>),
+				errors: toFormErrors([data.message]),
 			});
 		}
 	}
@@ -81,4 +84,13 @@ export const handleForm = async <
 			params,
 		});
 	throw redirect(303, url);
+};
+
+const toFormErrors = <Schema extends z.ZodTypeAny>(
+	formErrors: string[],
+): z.typeToFlattenedError<z.infer<Schema>> => {
+	return {
+		formErrors,
+		fieldErrors: {},
+	};
 };
