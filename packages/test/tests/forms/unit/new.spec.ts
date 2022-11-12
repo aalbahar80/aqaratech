@@ -43,7 +43,7 @@ test('can be submitted with minimal fields', async ({
 
 	const successUrl = getRoute({
 		entity,
-		id: 'uuid',
+		id: ':uuid',
 		pageType: PageType.Id,
 		params: {
 			organizationId: org.organization.id,
