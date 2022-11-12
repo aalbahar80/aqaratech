@@ -171,6 +171,42 @@ const inputs: [GetRoute, string][] = [
 		},
 		'/organizations/1/portfolios/2/leases/new?unitId=3',
 	],
+	[
+		{
+			entity: 'role',
+			pageType: PageType.New,
+			params: { organizationId: '1', portfolioId: '2' },
+			predefined: {
+				relationKey: 'portfolio',
+				relationValue: '2',
+			},
+		},
+		'/organizations/1/roles/new?relationKey=portfolio&relationValue=2',
+	],
+	[
+		{
+			entity: 'role',
+			pageType: PageType.New,
+			params: { organizationId: '1', tenantId: '2' },
+			predefined: {
+				relationKey: 'tenant',
+				relationValue: '2',
+			},
+		},
+		'/organizations/1/roles/new?relationKey=tenant&relationValue=2',
+	],
+	[
+		{
+			entity: 'role',
+			pageType: PageType.New,
+			params: { organizationId: '1' },
+			predefined: {
+				relationKey: 'organization',
+				relationValue: '1',
+			},
+		},
+		'/organizations/1/roles/new?relationKey=organization&relationValue=1',
+	],
 ];
 
 test.each(inputs)('getRoute(%o) === %s', (input, expected) => {

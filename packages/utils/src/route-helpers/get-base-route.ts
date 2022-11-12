@@ -8,6 +8,7 @@ export const getBaseRoute = (input: Pick<GetRoute, 'entity' | 'params'>) => {
 	if (
 		input.entity === 'tenant' ||
 		input.entity === 'portfolio' ||
+		input.entity === 'role' ||
 		input.entity === 'file'
 	) {
 		// base is always organization
