@@ -1,21 +1,14 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import MemberList from '$lib/components/member/MemberList.svelte';
-	import { getRoute, PageType } from '@self/utils';
+	import MemberTab from '$lib/components/member/MemberTab.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
 
-<MemberList
-	roles={data.roles}
-	formUrl={getRoute({
-		entity: 'member',
-		pageType: PageType.New,
-		params: $page.params,
-		predefined: {
-			relationKey: 'portfolio',
-			relationValue: data.portfolio.id,
-		},
-	})}
+<MemberTab
+	data={data.roles}
+	predefined={{
+		relationKey: 'portfolio',
+		relationValue: data.portfolio.id,
+	}}
 />
