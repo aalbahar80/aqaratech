@@ -13,8 +13,8 @@
 	type ActionDataObj = $$Generic<{ [key in FormKeys] }>;
 	type FormModelObj = $$Generic<{ [key in FormKeys] }>;
 	type FormErrors = $$Generic<{
-		formErrors: string[];
-		fieldErrors: { [key in FormKeys]?: string[] };
+		formErrors?: string[];
+		fieldErrors?: { [key in FormKeys]?: string[] };
 	}>;
 
 	// Props
@@ -41,7 +41,7 @@
 			<Field
 				{formField}
 				value={valueFromForm === undefined ? valueFromData : valueFromForm}
-				errors={form?.errors?.fieldErrors[formField.name]}
+				errors={form?.errors?.fieldErrors?.[formField.name]}
 			/>
 		{/each}
 	</Fields>
