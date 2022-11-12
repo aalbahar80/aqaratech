@@ -1,48 +1,78 @@
 import { expect } from '@playwright/test';
-import { sample } from '@self/seed';
+import { unitFactory } from '@self/seed';
+import { getRoute, PageType } from '@self/utils';
+import * as R from 'remeda';
+import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
+import { FormPage } from '../form-page-model';
 
-test('smoke', async ({ page }, info) => {
-	await page.goto('/units/new');
+const entity = 'unit';
+const pageType = PageType.New;
 
-	await page.locator('#portfolioId').click();
-	await page.locator(`text=${sample.portfolios[0].label}`).click();
-
-	await page.locator('#propertyId').click();
-	await page.locator(`data-testid=${sample.properties[0].id}`).click();
-
-	await page.locator('#unitNumber').fill('5');
-	await page.selectOption('#type', { label: 'مخزن' });
-
-	await page.locator('text=Save').click();
-
-	const id = new RegExp(
-		`/units/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
+test('can be submitted with minimal fields', async ({
+	org,
+	portfolio,
+	property,
+	page,
+}) => {
+	const unit = R.pipe(
+		unitFactory.build({
+			organizationId: '',
+			portfolioId: '',
+			propertyId: '',
+		}),
+		R.pick(['unitNumber']),
 	);
-	await expect(page).toHaveURL(id);
-	const url = page.url();
 
-	// take screenshot
-	expect(page.locator('text=unit')).toBeTruthy();
-	await page.locator('#detailsPane').screenshot({
-		path:
-			info.snapshotDir +
-			`/unit-${info.snapshotSuffix}-${info.project.name}.png`,
+	const url = getRoute({
+		entity,
+		pageType,
+		predefined: { propertyId: property.id },
+		params: {
+			portfolioId: portfolio.id,
+			organizationId: org.organization.id,
+		},
 	});
 
-	await page.locator('text=Edit').click();
-	const edit = new RegExp(
-		`/units/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/edit`,
-	);
-	await expect(page).toHaveURL(edit);
-	await page.locator('text=Save').click();
+	await page.goto(url);
 
-	// ensure same entity
-	await expect(page).toHaveURL(url);
+	const formPage = new FormPage(page);
 
-	// match screenshot
-	expect(page.locator('text=unit')).toBeTruthy();
-	expect(await page.locator('#detailsPane').screenshot()).toMatchSnapshot({
-		name: 'unit.png',
+	await formPage.fillForm(unit);
+	await formPage.save();
+
+	const successUrl = getRoute({
+		entity,
+		id: 'uuid',
+		pageType: PageType.Id,
+		params: {
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+		},
 	});
+
+	await expect(page).toHaveURL(uuid(successUrl));
 });
+
+// test('can be submitted with all fields', async ({ org, page }) => {
+// 	const unit = R.pipe(
+// 		unitFactory.build({
+// 			organizationId: '',
+// 			portfolioId: '',
+// 			propertyId: '',
+// 		}),
+// 		R.pick(['unitNumber']),
+// 	);
+
+// 	const formPage = new FormPage(page, {
+// 		entity,
+// 		pageType,
+// 		fixtures: { org },
+// 	});
+
+// 	await formPage.goto();
+// 	await formPage.fillForm(unit);
+// 	await formPage.save();
+
+// 	await expect(page).toHaveURL(formPage.getSuccessUrl());
+// });

@@ -14,12 +14,14 @@ export const handleForm = async <
 	event,
 	onSubmit,
 	fromParams,
+	fromQuery,
 	redirectTo,
 }: {
 	entity: Entity;
 	schema: S;
 	event: Event;
 	fromParams?: string[];
+	fromQuery?: string[];
 	/**
 	 * Override the default redirect behavior.
 	 */
@@ -40,6 +42,13 @@ export const handleForm = async <
 	if (fromParams) {
 		for (const param of fromParams) {
 			obj[param] = params[param];
+		}
+	}
+
+	// add query to object
+	if (fromQuery) {
+		for (const query of fromQuery) {
+			obj[query] = event.url.searchParams.get(query);
 		}
 	}
 

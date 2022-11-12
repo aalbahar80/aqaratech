@@ -16,6 +16,9 @@ export const actions: Actions = {
 
 				return submitted.id;
 			},
+
+			fromParams: ['portfolioId'],
+			fromQuery: ['propertyId'],
 		});
 	},
 };
