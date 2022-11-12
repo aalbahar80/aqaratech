@@ -64,5 +64,5 @@ test('cannot create unit in non-existing property', async ({
 
 	await expect.soft(res).not.toBeOK();
 
-	expect(res.status()).toBe(404);
+	expect(res.status()).toBe(400);
 });
