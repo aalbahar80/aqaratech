@@ -54,25 +54,57 @@ test('can be submitted with minimal fields', async ({
 	await expect(page).toHaveURL(uuid(successUrl));
 });
 
-// test('can be submitted with all fields', async ({ org, page }) => {
-// 	const unit = R.pipe(
-// 		unitFactory.build({
-// 			organizationId: '',
-// 			portfolioId: '',
-// 			propertyId: '',
-// 		}),
-// 		R.pick(['unitNumber']),
-// 	);
+test('can be submitted with all fields', async ({
+	org,
+	portfolio,
+	property,
+	page,
+}) => {
+	const unit = R.pick(
+		unitFactory.build({
+			organizationId: '',
+			portfolioId: '',
+			propertyId: '',
+		}),
+		[
+			'unitNumber',
+			'bed',
+			'bath',
+			'size',
+			'marketRent',
+			'floor',
+			'label',
+			'type',
+			'usage',
+		],
+	);
 
-// 	const formPage = new FormPage(page, {
-// 		entity,
-// 		pageType,
-// 		fixtures: { org },
-// 	});
+	const url = getRoute({
+		entity,
+		pageType,
+		predefined: { propertyId: property.id },
+		params: {
+			portfolioId: portfolio.id,
+			organizationId: org.organization.id,
+		},
+	});
 
-// 	await formPage.goto();
-// 	await formPage.fillForm(unit);
-// 	await formPage.save();
+	await page.goto(url);
 
-// 	await expect(page).toHaveURL(formPage.getSuccessUrl());
-// });
+	const formPage = new FormPage(page);
+
+	await formPage.fillForm(unit);
+	await formPage.save();
+
+	const successUrl = getRoute({
+		entity,
+		id: ':uuid',
+		pageType: PageType.Id,
+		params: {
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+		},
+	});
+
+	await expect(page).toHaveURL(uuid(successUrl));
+});
