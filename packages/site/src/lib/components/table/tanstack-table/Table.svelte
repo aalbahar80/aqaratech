@@ -1,7 +1,9 @@
 <script lang="ts">
+	import type { PaginatedDto } from '$api/openapi';
 	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
 	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import { handleServerPagination } from '$lib/components/table/tanstack-table/server-pagination';
@@ -24,20 +26,21 @@
 	import { fade } from 'svelte/transition';
 
 	type T = $$Generic<{ id: string }>;
+
 	export let items: T[];
+	export let paginationDto: PaginatedDto;
+
 	export let columns: ColumnDef<T, any>[];
-	export let pagination: PaginationState;
+
 	/**
 	 * Allows setting the initial sorting state.
 	 *
 	 * Ideally, _initial_ sorting state should be inferred from the URL when possible when using server-side sorting.
 	 */
 	export let sorting: SortingState = [];
-	export let itemCount: number;
 	/**
 	 * Page count should be defined when using server-side pagination
 	 */
-	export let pageCount: number | undefined = undefined; // TODO: differentiate between client v server pagination config using a type
 	export let paginationType: 'server' | 'client';
 
 	type ColumnVisibility = Partial<{
@@ -74,6 +77,11 @@
 	};
 
 	// Pagination
+
+	// Initiate pagination state
+
+	let { pagination, itemCount, pageCount } =
+		createTablePaginationModel(paginationDto);
 
 	const setPagination: OnChangeFn<PaginationState> = (updater) => {
 		// what is this doing?

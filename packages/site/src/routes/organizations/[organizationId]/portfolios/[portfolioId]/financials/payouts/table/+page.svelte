@@ -28,14 +28,9 @@
 </script>
 
 <Table
-	{columns}
 	items={data.payouts.results}
-	itemCount={data.payouts.pagination.itemCount}
-	pageCount={data.payouts.pagination.pageCount}
-	pagination={{
-		pageIndex: data.payouts.pagination.page - 1,
-		pageSize: data.payouts.pagination.take,
-	}}
+	paginationDto={data.pagination}
+	{columns}
 	paginationType="server"
 >
 	<div slot="header-actions">

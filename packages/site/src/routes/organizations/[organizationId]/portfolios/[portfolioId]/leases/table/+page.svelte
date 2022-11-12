@@ -80,14 +80,9 @@
 </script>
 
 <Table
-	{columns}
 	items={data.leases.results}
-	itemCount={data.leases.pagination.itemCount}
-	pageCount={data.leases.pagination.pageCount}
-	pagination={{
-		pageIndex: data.leases.pagination.page - 1,
-		pageSize: data.leases.pagination.take,
-	}}
+	paginationDto={data.leases.pagination}
+	{columns}
 	paginationType="server"
 	columnVisibility={{
 		deposit: false,

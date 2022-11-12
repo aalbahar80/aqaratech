@@ -39,14 +39,9 @@
 </script>
 
 <Table
-	{columns}
 	items={data.expenses.results}
-	itemCount={data.expenses.pagination.itemCount}
-	pageCount={data.expenses.pagination.pageCount}
-	pagination={{
-		pageIndex: data.expenses.pagination.page - 1,
-		pageSize: data.expenses.pagination.take,
-	}}
+	paginationDto={data.expenses.pagination}
+	{columns}
 	paginationType="server"
 >
 	<div slot="header-actions">

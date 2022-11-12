@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Badge from '$lib/components/Badge.svelte';
 	import type { PaginatedUnitDto, UnitDto } from '$api/openapi';
 	import { page } from '$app/stores';
+	import Badge from '$lib/components/Badge.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
@@ -52,14 +52,9 @@
 </script>
 
 <Table
-	{columns}
 	items={data.results}
-	itemCount={data.pagination.itemCount}
-	pageCount={data.pagination.pageCount}
-	pagination={{
-		pageIndex: data.pagination.page - 1,
-		pageSize: data.pagination.take,
-	}}
+	paginationDto={data.pagination}
+	{columns}
 	paginationType="server"
 	columnVisibility={{
 		floor: false,

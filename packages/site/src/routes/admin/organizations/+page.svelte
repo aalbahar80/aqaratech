@@ -1,7 +1,7 @@
 <script lang="ts">
+	import type { OrganizationDto } from '$api/openapi';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
-	import type { OrganizationDto } from '$api/openapi';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
@@ -48,13 +48,8 @@
 </script>
 
 <Table
-	{columns}
 	items={data.organizations.results}
-	itemCount={data.organizations.pagination.itemCount}
-	pageCount={data.organizations.pagination.pageCount}
-	pagination={{
-		pageIndex: data.organizations.pagination.page - 1,
-		pageSize: data.organizations.pagination.take,
-	}}
+	paginationDto={data.pagination}
+	{columns}
 	paginationType="server"
 />

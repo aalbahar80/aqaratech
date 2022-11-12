@@ -113,16 +113,11 @@
 </script>
 
 <Table
+	items={data.results}
+	paginationDto={data.pagination}
 	columns={$page.data.user?.role?.roleType === 'ORGADMIN'
 		? [...columns, ...adminColumns]
 		: columns}
-	items={data.results}
-	itemCount={data.pagination.itemCount}
-	pageCount={data.pagination.pageCount}
-	pagination={{
-		pageIndex: data.pagination.page - 1,
-		pageSize: data.pagination.take,
-	}}
 	paginationType="server"
 	columnVisibility={{
 		dueAt: false,
