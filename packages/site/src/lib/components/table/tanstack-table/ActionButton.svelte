@@ -2,7 +2,7 @@
 	interface ActionButtonProps {
 		label: string;
 		onClick: () => void;
-		disabled: boolean;
+		disabled?: boolean;
 	}
 
 	export let options: ActionButtonProps;
