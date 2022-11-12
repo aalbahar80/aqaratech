@@ -49,7 +49,7 @@
 
 <Table
 	items={data.organizations.results}
-	paginationDto={data.pagination}
+	paginationDto={data.organizations.pagination}
 	{columns}
 	paginationType="server"
 />

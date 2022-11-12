@@ -29,7 +29,7 @@
 
 <Table
 	items={data.payouts.results}
-	paginationDto={data.pagination}
+	paginationDto={data.payouts.pagination}
 	{columns}
 	paginationType="server"
 >
