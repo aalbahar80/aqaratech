@@ -1,4 +1,6 @@
 import { createApi, type Api } from '$api';
+import { ResponseError } from '$api/openapi';
+import { parseApiError } from '$api/parse-api-error';
 import { getRoute, PageType, type Entity } from '@self/utils';
 import { invalid, redirect, type RequestEvent } from '@sveltejs/kit';
 import type { z } from 'zod';
@@ -45,10 +47,25 @@ export const handleForm = async <
 		return invalid(400, { ...obj, errors });
 	}
 
-	// We pass the original object to onSubmit, not the parsed one
-	// This is to avoid transforming the data twice, which in the case of short dates (yyyy-mm-dd) will fail.
+	let id: string;
 
-	const id = await onSubmit(createApi(fetch), obj as unknown, event);
+	try {
+		// We pass the original object to onSubmit, not the parsed one
+		// This is to avoid transforming the data twice, which in the case of short dates (yyyy-mm-dd) will fail.
+		id = await onSubmit(createApi(fetch), obj as unknown, event);
+	} catch (error) {
+		console.error(error);
+
+		if (error instanceof ResponseError) {
+			// Handle API errors and return the message to the user
+			const data = await parseApiError(error);
+
+			return invalid(400, {
+				...obj,
+				errors: { formErrors: [data.message] },
+			});
+		}
+	}
 
 	const url = getRoute({
 		entity: entity,
