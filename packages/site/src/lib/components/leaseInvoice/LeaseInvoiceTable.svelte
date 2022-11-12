@@ -82,7 +82,6 @@
 			cell: (props) => {
 				const invoice = props.row.original;
 
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				return renderComponent(ActionButton, {
 					options: {
 						label: 'Mark as Paid',
