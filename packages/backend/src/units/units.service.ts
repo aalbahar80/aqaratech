@@ -21,10 +21,24 @@ export class UnitsService {
 		createUnitDto: CreateUnitDto;
 		organizationId: string;
 	}) {
+		const { portfolioId, propertyId, ...rest } = createUnitDto;
+
 		const created = await this.prisma.unit.create({
 			data: {
-				...createUnitDto,
-				organizationId,
+				...rest,
+				property: {
+					connect: {
+						id: propertyId,
+						AND: [{ portfolioId }], // ensure property belongs to portfolio
+					},
+				},
+				portfolio: {
+					connect: {
+						id: portfolioId,
+						AND: [{ organizationId: organizationId }], // ensure portfolio belongs to organization
+					},
+				},
+				organization: { connect: { id: organizationId } },
 			},
 		});
 
