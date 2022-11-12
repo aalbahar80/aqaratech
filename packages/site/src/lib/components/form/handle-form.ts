@@ -14,11 +14,16 @@ export const handleForm = async <
 	event,
 	onSubmit,
 	fromParams,
+	redirectTo,
 }: {
 	entity: Entity;
 	schema: S;
 	event: Event;
 	fromParams?: string[];
+	/**
+	 * Override the default redirect behavior.
+	 */
+	redirectTo?: string;
 	/**
 	 * `onSubmit` expects an id to be returned, which is used to redirect to the new page.
 	 */
@@ -67,12 +72,13 @@ export const handleForm = async <
 		}
 	}
 
-	const url = getRoute({
-		entity: entity,
-		id,
-		pageType: PageType.Id,
-		params,
-	});
-
+	const url =
+		redirectTo ??
+		getRoute({
+			entity: entity,
+			id,
+			pageType: PageType.Id,
+			params,
+		});
 	throw redirect(303, url);
 };

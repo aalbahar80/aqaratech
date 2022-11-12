@@ -1,5 +1,5 @@
 import { handleForm } from '$lib/components/form/handle-form';
-import { roleCreateSchema } from '@self/utils';
+import { getRoute, PageTab, roleCreateSchema } from '@self/utils';
 import { z } from 'zod';
 import type { Actions } from './$types';
 
@@ -49,6 +49,13 @@ export const actions: Actions = {
 
 				return submitted.id;
 			},
+
+			redirectTo: getRoute({
+				entity: relationKey,
+				id: relationValue,
+				pageType: PageTab.Roles,
+				params: event.params,
+			}),
 		});
 	},
 };

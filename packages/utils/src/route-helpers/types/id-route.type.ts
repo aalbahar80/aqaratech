@@ -3,8 +3,10 @@ import type { PageTypePortfolio } from 'src/route-helpers/enums/page-tab-portfol
 import type {
 	InvoicePageTab,
 	LeasePageTab,
+	OrganizationPageTab,
 	PortfolioPageTab,
 	PropertyPageTab,
+	TenantPageTab,
 	UnitPageTab,
 } from 'src/route-helpers/enums/page-tab.enum';
 import type { PageType } from 'src/route-helpers/enums/page-type.enum';
@@ -19,10 +21,22 @@ export interface GetIdRouteEntity extends BaseGetRoute {
 
 // ID Route - Entity
 
+interface GetIdRouteOrganization extends BaseGetRoute {
+	id: string;
+	entity: Extract<Entity, 'organization'>;
+	pageType: OrganizationPageTab;
+}
+
 interface GetIdRoutePortfolio extends BaseGetRoute {
 	id: string;
 	entity: Extract<Entity, 'portfolio'>;
 	pageType: PageTypePortfolio | PortfolioPageTab;
+}
+
+interface GetIdRouteTenant extends BaseGetRoute {
+	id: string;
+	entity: Extract<Entity, 'tenant'>;
+	pageType: TenantPageTab;
 }
 
 interface GetIdRouteProperty extends BaseGetRoute {
@@ -51,6 +65,8 @@ interface GetIdRouteInvoice extends BaseGetRoute {
 
 export type GetIdRoute =
 	| GetIdRouteEntity
+	| GetIdRouteOrganization
+	| GetIdRouteTenant
 	| GetIdRoutePortfolio
 	| GetIdRouteProperty
 	| GetIdRouteUnit

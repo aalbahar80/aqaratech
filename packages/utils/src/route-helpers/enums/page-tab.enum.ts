@@ -13,6 +13,10 @@ export enum PageTab {
 	Balance = 'balance',
 }
 
+export type OrganizationPageTab = PageTab.Roles;
+
+export type TenantPageTab = PageTab.Leases | PageTab.Roles | PageTab.Files;
+
 export type PortfolioPageTab =
 	| PageTab.Properties
 	| PageTab.Occupancy
@@ -34,6 +38,8 @@ export type LeasePageTab = PageTab.Invoices | PageTab.Files;
 export type InvoicePageTab = PageTab.Files;
 
 export type PageTabType =
+	| OrganizationPageTab
+	| TenantPageTab
 	| PropertyPageTab
 	| UnitPageTab
 	| LeasePageTab
