@@ -14,6 +14,7 @@
 		getCoreRowModel,
 		getPaginationRowModel,
 		getSortedRowModel,
+		type VisibilityState,
 		type ColumnDef,
 		type OnChangeFn,
 		type PaginationState,
@@ -43,13 +44,13 @@
 	 */
 	export let paginationType: 'server' | 'client';
 
-	type ColumnVisibility = Partial<{
-		[K in keyof T as K]: boolean;
-	}>;
+	type TableColumnVisibility = $$Generic<VisibilityState | undefined>;
+
 	/**
 	 * Allows setting the initial visibility state.
 	 */
-	export let columnVisibility: ColumnVisibility = {};
+	export let columnVisibility: TableColumnVisibility =
+		undefined as TableColumnVisibility;
 
 	// Sorting
 
@@ -114,8 +115,9 @@
 
 	// Column visibility
 
-	const setColumnVisibility: OnChangeFn<ColumnVisibility> = (updater) => {
+	const setColumnVisibility: OnChangeFn<TableColumnVisibility> = (updater) => {
 		if (updater instanceof Function) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			columnVisibility = updater(columnVisibility);
 		} else {
 			columnVisibility = updater;
