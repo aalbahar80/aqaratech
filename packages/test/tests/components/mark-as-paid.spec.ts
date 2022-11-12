@@ -28,10 +28,9 @@ test('can toggle paid status', async ({ page, lease, invoice }) => {
 	const btn = page.getByRole('button', { name: 'Mark as Paid' });
 	await btn.click();
 
-	// Paid badge exists
-	await expect
-		.soft(page.getByTestId('badge').locator('text=Paid'))
-		.toBeVisible();
+	// Payment status badge is updated
+	const badge = page.getByTestId(invoice.id).getByTestId('badge');
+	await expect(badge).toContainText('Paid');
 
 	// expect button to be disabled
 	await expect(btn).toBeDisabled();
