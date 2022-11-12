@@ -1,7 +1,7 @@
 import type {
 	InputFormField,
 	SelectFormField,
-} from '$lib/components/form/form-field.interface';
+} from '$lib/components/form/model/form-field.interface';
 import type { Option } from '$lib/models/interfaces/option.interface';
 import { getLabel } from '@self/utils';
 

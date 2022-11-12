@@ -1,8 +1,8 @@
-import { createFormField } from '$lib/components/form/form-field';
+import { createFormField } from '$lib/components/form/model/form-field';
 import {
 	createFormModel,
 	type FormTypeEnum,
-} from '$lib/components/form/form-model';
+} from '$lib/components/form/model/form-model';
 import { roleCreateSchema } from '@self/utils';
 
 export const roleFormModel = (pageType: FormTypeEnum) =>

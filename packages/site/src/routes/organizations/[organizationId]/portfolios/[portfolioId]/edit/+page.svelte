@@ -1,6 +1,6 @@
 <script lang="ts">
 	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
-	import { getEntityFormModel } from '$lib/components/form/get-entity-form-model';
+	import { getEntityFormModel } from '$lib/components/form/model/get-entity-form-model';
 	import { PageType } from '@self/utils';
 	import type { ActionData, PageData } from './$types';
 

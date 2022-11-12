@@ -1,8 +1,8 @@
-import { createFormField } from '$lib/components/form/form-field';
+import { createFormField } from '$lib/components/form/model/form-field';
 import {
 	createFormModel,
 	type FormTypeEnum,
-} from '$lib/components/form/form-model';
+} from '$lib/components/form/model/form-model';
 import { areas } from '$lib/constants/areas-kwt';
 import { labelHint } from '$lib/constants/form-hints';
 import { propertyCreateSchema, propertyUpdateSchema } from '@self/utils';

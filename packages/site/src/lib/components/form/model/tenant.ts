@@ -1,8 +1,8 @@
-import { createFormField } from '$lib/components/form/form-field';
+import { createFormField } from '$lib/components/form/model/form-field';
 import {
 	createFormModel,
 	type FormTypeEnum,
-} from '$lib/components/form/form-model';
+} from '$lib/components/form/model/form-model';
 import { countries } from '$lib/constants/countries';
 import { labelHint } from '$lib/constants/form-hints';
 import { tenantCreateSchema, tenantUpdateSchema } from '@self/utils';

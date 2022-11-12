@@ -1,4 +1,4 @@
-import type { FormFields } from '$lib/components/form/form-field.interface';
+import type { FormFields } from '$lib/components/form/model/form-field.interface';
 import type { Entity, PageType } from '@self/utils';
 import type { z } from 'zod';
 

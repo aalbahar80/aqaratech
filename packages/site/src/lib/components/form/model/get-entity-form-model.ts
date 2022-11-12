@@ -1,8 +1,8 @@
-import type { FormTypeEnum } from '$lib/components/form/form-model';
-import { portfolioFormModel } from '$lib/components/portfolio/portfolio-form-model';
-import { propertyFormModel } from '$lib/components/property/property-form-model';
-import { roleFormModel } from '$lib/components/role/role-form-model';
-import { tenantFormModel } from '$lib/components/tenant/tenant-form-model';
+import type { FormTypeEnum } from '$lib/components/form/model/form-model';
+import { portfolioFormModel } from '$lib/components/form/model/portfolio';
+import { propertyFormModel } from '$lib/components/form/model/property';
+import { roleFormModel } from '$lib/components/form/model/role';
+import { tenantFormModel } from '$lib/components/form/model/tenant';
 
 export const entityFormModeMap = {
 	tenant: tenantFormModel,

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { FormField } from '$lib/components/form/form-field.interface';
 	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
+	import type { FormField } from '$lib/components/form/model/form-field.interface';
 
 	type Name = $$Generic<string>;
 

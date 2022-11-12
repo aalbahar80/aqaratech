@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
-	import type { FormFields } from '$lib/components/form/form-field.interface';
+	import type { FormFields } from '$lib/components/form/model/form-field.interface';
 	import { objectValues } from '$lib/utils/common';
 
 	// Types
