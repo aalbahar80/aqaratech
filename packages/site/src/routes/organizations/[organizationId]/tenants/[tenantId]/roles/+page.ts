@@ -1,12 +1,18 @@
 import { createApi } from '$api';
+import { parseParams } from '$lib/utils/parse-params';
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ params, fetch }) => {
+export const load: PageLoad = async ({
+	params,
+	fetch,
+	url: { searchParams },
+}) => {
 	const api = createApi(fetch);
 
-	// TODO handle pagination
-
-	const roles = await api.tenants.findRoles({ id: params.tenantId });
+	const roles = await api.tenants.findRoles({
+		id: params.tenantId,
+		...parseParams(searchParams),
+	});
 
 	return { roles };
 };
