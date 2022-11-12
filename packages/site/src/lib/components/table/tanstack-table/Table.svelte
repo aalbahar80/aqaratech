@@ -31,7 +31,8 @@
 	export let items: T[];
 	export let paginationDto: PaginatedDto;
 
-	export let columns: ColumnDef<T>[];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	export let columns: ColumnDef<T, any>[];
 
 	/**
 	 * Allows setting the initial sorting state.
