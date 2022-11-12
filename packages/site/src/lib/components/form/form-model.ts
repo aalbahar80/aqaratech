@@ -12,7 +12,7 @@ export interface FormModel<
 > {
 	entity: Entity;
 	createSchema: CreateSchema;
-	updateSchema: UpdateSchema;
+	updateSchema?: UpdateSchema;
 	fields: FormFields<Required<Schema>>;
 	pageType: FormType;
 	getBlankForm: () => Partial<Schema>;
@@ -32,7 +32,7 @@ export function createFormModel<
 	pageType,
 }: {
 	createSchema: CreateSchema;
-	updateSchema: UpdateSchema;
+	updateSchema?: UpdateSchema;
 	entity: Entity;
 	initialFields?: Partial<CombinedSchemas>;
 	// fields: FormFields<z.infer<CreateSchema>> & FormFields<z.infer<UpdateSchema>>;
