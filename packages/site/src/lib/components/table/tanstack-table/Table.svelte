@@ -14,12 +14,12 @@
 		getCoreRowModel,
 		getPaginationRowModel,
 		getSortedRowModel,
-		type VisibilityState,
 		type ColumnDef,
 		type OnChangeFn,
 		type PaginationState,
 		type SortingState,
 		type TableOptions,
+		type VisibilityState,
 	} from '@tanstack/svelte-table';
 	import { clsx } from 'clsx';
 	import { afterUpdate } from 'svelte';
@@ -31,7 +31,7 @@
 	export let items: T[];
 	export let paginationDto: PaginatedDto;
 
-	export let columns: ColumnDef<T, any>[];
+	export let columns: ColumnDef<T>[];
 
 	/**
 	 * Allows setting the initial sorting state.
@@ -44,13 +44,13 @@
 	 */
 	export let paginationType: 'server' | 'client';
 
-	type TableColumnVisibility = $$Generic<VisibilityState | undefined>;
+	type TableColumnVisibility = $$Generic<VisibilityState>;
 
 	/**
 	 * Allows setting the initial visibility state.
 	 */
 	export let columnVisibility: TableColumnVisibility =
-		undefined as TableColumnVisibility;
+		{} as TableColumnVisibility;
 
 	// Sorting
 
@@ -133,7 +133,7 @@
 
 	const clientPaginationOptions = {
 		manualPagination: false,
-		getPaginationRowModel: getPaginationRowModel<any>(),
+		getPaginationRowModel: getPaginationRowModel<T>(),
 	};
 
 	const serverPaginationOptions = {
@@ -176,6 +176,7 @@
 			: clientSortingOptions),
 
 		// Column visibility
+		// @ts-expect-error until better typing
 		onColumnVisibilityChange: setColumnVisibility,
 	});
 
@@ -194,14 +195,14 @@
 	// 	}));
 	// };
 
-	const table = createSvelteTable(options);
+	const table = createSvelteTable<T>(options);
 
 	afterUpdate(() => {
 		// to refresh data when browser back button is pressed
 		refreshData();
 	});
 
-	const sortIcons: Record<string, any> = {
+	const sortIcons: Record<string, string> = {
 		asc: '↑',
 		desc: '↓',
 		// asc: ' 🔼',
@@ -242,6 +243,7 @@
 											<svelte:component
 												this={flexRender(
 													header.column.columnDef.header,
+													// @ts-expect-error until better typing
 													header.getContext(),
 												)}
 											/>
@@ -275,6 +277,7 @@
 										<svelte:component
 											this={flexRender(
 												cell.column.columnDef.cell,
+												// @ts-expect-error until better typing
 												cell.getContext(),
 											)}
 										/>
@@ -296,6 +299,7 @@
 										<svelte:component
 											this={flexRender(
 												header.column.columnDef.footer,
+												// @ts-expect-error until better typing
 												header.getContext(),
 											)}
 										/>
