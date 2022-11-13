@@ -244,7 +244,6 @@
 											<svelte:component
 												this={flexRender(
 													header.column.columnDef.header,
-													// @ts-expect-error until better typing
 													header.getContext(),
 												)}
 											/>
@@ -278,7 +277,6 @@
 										<svelte:component
 											this={flexRender(
 												cell.column.columnDef.cell,
-												// @ts-expect-error until better typing
 												cell.getContext(),
 											)}
 										/>
@@ -300,7 +298,6 @@
 										<svelte:component
 											this={flexRender(
 												header.column.columnDef.footer,
-												// @ts-expect-error until better typing
 												header.getContext(),
 											)}
 										/>
