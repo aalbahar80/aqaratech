@@ -40,7 +40,7 @@ export class FormPage {
 				throw new Error(`Unsupported value type: ${typeof value}`);
 			}
 
-			await this.page.getByLabel(key).fill(valueString);
+			await this.page.getByLabel(key, { exact: true }).fill(valueString);
 		}
 	};
 

@@ -1,53 +1,109 @@
-// import { expect } from '@playwright/test';
-// import { sample } from '@self/seed';
-// import { test } from '../../api/api-fixtures';
+import { expect } from '@playwright/test';
+import { leaseFactory } from '@self/seed';
+import { getRoute, PageType } from '@self/utils';
+import * as R from 'remeda';
+import { uuid } from '../../../utils/uuid';
+import { test } from '../../api/api-fixtures';
+import { FormPage } from '../form-page-model';
 
-// test('smoke', async ({ page }, info) => {
-// 	await page.goto('/leases/new', { waitUntil: 'networkidle' });
+const entity = 'lease';
+const pageType = PageType.New;
 
-// 	await page.locator('#tenantId').click();
-// 	await page.locator(`text=${sample.tenants[0].label}`).click();
+test('can be submitted with minimal fields', async ({
+	org,
+	portfolio,
+	property,
+	page,
+}) => {
+	const lease = R.pick(
+		leaseFactory.build({
+			organizationId: '',
+			portfolioId: '',
+			tenantId: '',
+			unitId: '',
+		}),
+		['start', 'end'],
+	);
 
-// 	await page.locator('#portfolioId').click();
-// 	await page.locator(`text=${sample.portfolios[0].label}`).click();
+	const url = getRoute({
+		entity,
+		pageType,
+		predefined: { propertyId: property.id },
+		params: {
+			portfolioId: portfolio.id,
+			organizationId: org.organization.id,
+		},
+	});
 
-// 	await page.locator('#propertyId').click();
-// 	await page.locator(`data-testid=${sample.properties[0].id}`).click();
+	await page.goto(url);
 
-// 	await page.locator('#unitId').click();
-// 	await page.locator(`data-testid=${sample.units[0].id}`).click();
+	const formPage = new FormPage(page);
 
-// 	await page.locator('#monthlyRent').fill('100');
-// 	await page.fill('input[name="start"]', '2022-01-01');
-// 	await page.fill('input[name="end"]', '2022-12-31');
+	await formPage.fillForm(lease);
+	await formPage.save();
 
-// 	await page.locator('text=Save').click();
+	const successUrl = getRoute({
+		entity,
+		id: ':uuid',
+		pageType: PageType.Id,
+		params: {
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+		},
+	});
 
-// 	const id = new RegExp(
-// 		`/leases/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
-// 	);
-// 	await expect(page).toHaveURL(id);
-// 	const url = page.url();
+	await expect(page).toHaveURL(uuid(successUrl));
+});
 
-// 	// take screenshot
-// 	expect(page.locator('text=lease')).toBeTruthy();
-// 	await page.locator('#detailsPane').screenshot({
-// 		path: info.snapshotDir + `/lease-${info.snapshotSuffix}.png`,
-// 	});
+test.fixme(
+	'can be submitted with all fields',
+	async ({ org, portfolio, property, page }) => {
+		const lease = R.pick(
+			leaseFactory.build({
+				organizationId: '',
+				portfolioId: '',
+				propertyId: '',
+			}),
+			[
+				'leaseNumber',
+				'bed',
+				'bath',
+				'size',
+				'marketRent',
+				'floor',
+				'label',
+				'type',
+				'usage',
+			],
+		);
 
-// 	await page.locator('text=Edit').click();
-// 	const edit = new RegExp(
-// 		`/leases/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/edit`,
-// 	);
-// 	await expect(page).toHaveURL(edit);
-// 	await page.locator('text=Save').click();
+		const url = getRoute({
+			entity,
+			pageType,
+			predefined: { propertyId: property.id },
+			params: {
+				portfolioId: portfolio.id,
+				organizationId: org.organization.id,
+			},
+		});
 
-// 	// ensure same entity
-// 	await expect(page).toHaveURL(url);
+		await page.goto(url);
 
-// 	// match screenshot
-// 	expect(page.locator('text=lease')).toBeTruthy();
-// 	expect(await page.locator('#detailsPane').screenshot()).toMatchSnapshot({
-// 		name: 'lease.png',
-// 	});
-// });
+		const formPage = new FormPage(page);
+
+		await formPage.fillForm(lease);
+		await formPage.save();
+
+		const successUrl = getRoute({
+			entity,
+			id: ':uuid',
+			pageType: PageType.Id,
+			params: {
+				organizationId: org.organization.id,
+				portfolioId: portfolio.id,
+			},
+		});
+
+		await expect(page).toHaveURL(uuid(successUrl));
+	},
+);
