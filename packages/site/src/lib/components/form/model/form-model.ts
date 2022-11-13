@@ -15,7 +15,6 @@ export interface FormModel<
 	updateSchema?: UpdateSchema;
 	fields: FormFields<Required<Schema>>;
 	pageType: FormType;
-	getBlankForm: () => Partial<Schema>;
 }
 
 export function createFormModel<
@@ -27,30 +26,23 @@ export function createFormModel<
 	entity,
 	createSchema,
 	updateSchema,
-	initialFields,
 	fields,
 	pageType,
 }: {
 	createSchema: CreateSchema;
 	updateSchema?: UpdateSchema;
 	entity: Entity;
-	initialFields?: Partial<CombinedSchemas>;
 	// fields: FormFields<z.infer<CreateSchema>> & FormFields<z.infer<UpdateSchema>>;
 	fields: FormType extends PageType.New
 		? FormFields<z.infer<CreateSchema>>
 		: FormFields<z.infer<UpdateSchema>>;
 	pageType: FormType;
 }): FormModel<FormType, CreateSchema, UpdateSchema> {
-	const getBlankForm = () => {
-		return initialFields ?? {};
-	};
-
 	return {
 		pageType,
 		entity,
 		createSchema,
 		updateSchema,
 		fields,
-		getBlankForm,
 	};
 }
