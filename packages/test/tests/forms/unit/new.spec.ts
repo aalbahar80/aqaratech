@@ -15,13 +15,13 @@ test('can be submitted with minimal fields', async ({
 	property,
 	page,
 }) => {
-	const unit = R.pipe(
+	const unit = R.pick(
 		unitFactory.build({
 			organizationId: '',
 			portfolioId: '',
 			propertyId: '',
 		}),
-		R.pick(['unitNumber']),
+		['unitNumber'],
 	);
 
 	const url = getRoute({
