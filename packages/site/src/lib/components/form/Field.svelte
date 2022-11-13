@@ -2,9 +2,10 @@
 	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
 
-	type Name = $$Generic<string>;
+	type Name = $$Generic;
+	type GFormField = $$Generic<FormField<Name>>;
 
-	export let formField: FormField<Name>;
+	export let formField: GFormField;
 	export let value: unknown = undefined;
 	export let errors: string[] | undefined = undefined;
 </script>

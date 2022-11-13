@@ -2,38 +2,18 @@
 	import { enhance } from '$app/forms';
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
-	import type { FormFields } from '$lib/components/form/model/form-field.interface';
+	import type { FormPageModel } from '$lib/components/form/model/form-field.interface';
 	import { objectValues } from '$lib/utils/common';
 
 	// Types
 
-	type FormKeys = $$Generic<string>;
-	type GForm = $$Generic<
-		| ({
-				[key in FormKeys as string];
-		  } & {
-				errors: FormErrors;
-		  })
-		| undefined
-	>;
-	type FormErrors = $$Generic<{
-		formErrors?: string[];
-		fieldErrors?: { [key in FormKeys as string]?: string[] };
-	}>;
+	type T = $$Generic;
+	type FPM = $$Generic<FormPageModel<T>>;
 
-	type GData = $$Generic<{ [key in FormKeys as string]: unknown } | undefined>;
-
-	type GFormModel = $$Generic<{
-		fields: FormFields<{ [key in FormKeys as string] }>;
-	}>;
-
-	// Props
-
-	export let form: GForm;
-
-	export let data: GData = undefined as GData;
-
-	export let formModel: GFormModel;
+	export let data: FPM['data'];
+	// export let data: T;
+	export let form: FPM['actionData'];
+	export let fields: FPM['fields'];
 </script>
 
 <pre>{JSON.stringify(form, null, 2)}</pre>
@@ -44,7 +24,7 @@
 	class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
 >
 	<Fields>
-		{#each objectValues(formModel.fields) as formField}
+		{#each objectValues(fields) as formField}
 			{@const valueFromForm = form?.[formField.name]}
 			{@const valueFromData = data?.[formField.name]}
 			<!-- valueFromForm is the value as it is being edited. Always prioritize it unless it's `undefined`. -->

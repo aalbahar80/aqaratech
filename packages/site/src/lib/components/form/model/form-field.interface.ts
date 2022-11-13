@@ -1,7 +1,7 @@
 import type { Option } from '$lib/models/interfaces/option.interface';
 
-export interface BaseFormField<T extends string> {
-	name: T;
+export interface BaseFormField<T> {
+	name: T & string;
 
 	label: string;
 	description: string;
@@ -20,7 +20,7 @@ export interface BaseFormField<T extends string> {
 
 // Input field
 
-export interface InputFormField<T extends string> extends BaseFormField<T> {
+export interface InputFormField<T> extends BaseFormField<T> {
 	type: InputType;
 }
 
@@ -36,7 +36,7 @@ type InputType =
 
 // Select field
 
-export interface SelectFormField<T extends string> extends BaseFormField<T> {
+export interface SelectFormField<T> extends BaseFormField<T> {
 	type: 'select';
 	options: Option[];
 	combobox: boolean;
@@ -44,10 +44,19 @@ export interface SelectFormField<T extends string> extends BaseFormField<T> {
 
 // Combined
 
-export type FormField<T extends string> =
-	| InputFormField<T>
-	| SelectFormField<T>;
+export type FormField<T> = InputFormField<T> | SelectFormField<T>;
 
-export type FormFields<T> = {
-	[K in keyof T]: K extends string ? FormField<K> : never;
-};
+export type FormFields<T> = Record<keyof T, FormField<keyof T>>;
+
+export interface FormPageModel<FieldEntries> {
+	data: FieldEntries;
+	fields: FormFields<FieldEntries>;
+	actionData:
+		| (Record<keyof FieldEntries, unknown> & {
+				errors: {
+					formErrors?: string[];
+					fieldErrors?: Partial<Record<keyof FieldEntries, string[]>>;
+				};
+		  })
+		| undefined;
+}

@@ -13,13 +13,17 @@ export const entityFormModeMap = {
 	role: roleFormModel,
 } as const;
 
-export const getEntityFormModel = <T extends keyof typeof entityFormModeMap>({
+export const getEntityFormModel = <
+	T extends keyof typeof entityFormModeMap,
+	Factory extends typeof entityFormModeMap[T] = typeof entityFormModeMap[T],
+>({
 	entity,
 	pageType,
 }: {
+	// entity: keyof typeof entityFormModeMap extends infer E ? T & E : never;
 	entity: T;
 	pageType: FormTypeEnum;
-}) => {
+}): ReturnType<Factory> => {
 	if (entity in entityFormModeMap) {
 		const factory = entityFormModeMap[entity];
 
