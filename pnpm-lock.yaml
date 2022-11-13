@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 patchedDependencies:
   '@tanstack/svelte-table@8.5.22':
-    hash: nuxrcjug3ogtffqy6lnuqzollq
+    hash: tq2mgj2qyh5cnfcmeomwcp2jca
     path: patches/@tanstack__svelte-table@8.5.22.patch
 
 importers:
