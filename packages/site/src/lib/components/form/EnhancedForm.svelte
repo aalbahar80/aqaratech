@@ -10,10 +10,9 @@
 	type T = $$Generic;
 	type FPM = $$Generic<FormPageModel<T>>;
 
-	export let data: FPM['data'];
-	// export let data: T;
 	export let form: FPM['actionData'];
 	export let fields: FPM['fields'];
+	export let data: FPM['data'] = undefined;
 </script>
 
 <pre>{JSON.stringify(form, null, 2)}</pre>

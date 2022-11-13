@@ -49,7 +49,7 @@ export type FormField<T> = InputFormField<T> | SelectFormField<T>;
 export type FormFields<T> = Record<keyof T, FormField<keyof T>>;
 
 export interface FormPageModel<FieldEntries> {
-	data: FieldEntries;
+	data: FieldEntries | undefined;
 	fields: FormFields<FieldEntries>;
 	actionData:
 		| (Record<keyof FieldEntries, unknown> & {
