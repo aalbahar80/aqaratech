@@ -11,7 +11,9 @@
 	type FPM = $$Generic<FormPageModel<T>>;
 
 	export let form: FPM['actionData'];
-	export let fields: FPM['fields'];
+	export let formModel: {
+		fields: FPM['fields'];
+	};
 	export let data: FPM['data'] = undefined;
 </script>
 
@@ -23,7 +25,7 @@
 	class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
 >
 	<Fields>
-		{#each objectValues(fields) as formField}
+		{#each objectValues(formModel.fields) as formField}
 			{@const valueFromForm = form?.[formField.name]}
 			{@const valueFromData = data?.[formField.name]}
 			<!-- valueFromForm is the value as it is being edited. Always prioritize it unless it's `undefined`. -->
