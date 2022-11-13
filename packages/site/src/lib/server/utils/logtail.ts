@@ -7,7 +7,6 @@ import { addEnvLabel, liveEnvs } from '@self/utils';
  * Only enable logtail in production & staging.
  */
 const shouldEnableLogtail = () => {
-	// @ts-expect-error until satisfies is supported
 	const result = liveEnvs.includes(environment.PUBLIC_AQARATECH_ENV);
 
 	console.log(

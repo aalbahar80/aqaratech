@@ -45,7 +45,6 @@ export const logger = createLogger({
 	transports: [
 		// In production, only use the Logtail transport.
 
-		// @ts-expect-error until satisfies is supported
 		...(liveEnvs.includes(environment.PUBLIC_AQARATECH_ENV)
 			? []
 			: [createTransportForHttp(), createSiteTransport()]),
