@@ -6,17 +6,18 @@ import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';
 
 const entity = 'property';
-const pageType = PageType.New;
+const pageType = PageType.Edit;
 
 test('can be submitted with minimal fields', async ({
 	org,
-	page,
 	portfolio,
+	property,
+	page,
 }) => {
-	const property = R.pick(
+	const fields = R.pick(
 		propertyFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: portfolio.id,
+			organizationId: property.organizationId,
+			portfolioId: property.portfolioId,
 		}),
 		['area', 'block', 'number', 'street'],
 	);
@@ -24,21 +25,27 @@ test('can be submitted with minimal fields', async ({
 	const formPage = new FormPage(page, {
 		entity,
 		pageType,
+		id: property.id,
 		fixtures: { org, portfolio },
 	});
 
 	await formPage.goto();
-	await formPage.fillForm(property);
+	await formPage.fillForm(fields);
 	await formPage.save();
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
-test('can be submitted with all fields', async ({ org, page, portfolio }) => {
-	const property = R.pick(
+test('can be submitted with all fields', async ({
+	org,
+	portfolio,
+	property,
+	page,
+}) => {
+	const fields = R.pick(
 		propertyFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: portfolio.id,
+			organizationId: property.organizationId,
+			portfolioId: property.portfolioId,
 		}),
 		['area', 'block', 'number', 'street', 'label', 'avenue', 'parcel', 'paci'],
 	);
@@ -46,11 +53,11 @@ test('can be submitted with all fields', async ({ org, page, portfolio }) => {
 	const formPage = new FormPage(page, {
 		entity,
 		pageType,
+		id: property.id,
 		fixtures: { org, portfolio },
 	});
-
 	await formPage.goto();
-	await formPage.fillForm(property);
+	await formPage.fillForm(fields);
 	await formPage.save();
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
