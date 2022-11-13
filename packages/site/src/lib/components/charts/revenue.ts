@@ -1,8 +1,8 @@
-import type { ByMonthDto } from '$api/openapi';
+import type { GroupByMonthDto } from '$api/openapi';
 import { Chart } from 'chart.js';
 import { currencyTooltip } from './utils/currency';
 
-type DataSets = Chart<'bar', ByMonthDto[]>['data']['datasets'];
+type DataSets = Chart<'bar', GroupByMonthDto[]>['data']['datasets'];
 
 export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
 	const chart = new Chart(node, {

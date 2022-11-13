@@ -5,12 +5,12 @@ import type {
 import type { Option } from '$lib/models/interfaces/option.interface';
 import { getLabel } from '@self/utils';
 
-type WithOptions<Name> = {
+type WithOptions<Name extends string> = {
 	type: 'select';
 	options: Option[];
 } & Partial<SelectFormField<Name>>;
 
-type WithoutOptions<Name> = Partial<InputFormField<Name>>;
+type WithoutOptions<Name extends string> = Partial<InputFormField<Name>>;
 
 // TODO satisfies FormField
 export const createFormField = <
