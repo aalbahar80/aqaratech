@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ComboboxField from '$lib/components/form/enhanced/fields/ComboboxField.svelte';
+	import FieldError from '$lib/components/form/enhanced/fields/FieldError.svelte';
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
 
 	type Name = $$Generic;
@@ -38,13 +39,7 @@
 	{/if}
 </div>
 
-{#if errors}
-	{#each errors as error}
-		<p class="mt-2 text-sm text-red-600">
-			{error}
-		</p>
-	{/each}
-{/if}
+<FieldError {errors} />
 
 <style lang="postcss">
 	input {
