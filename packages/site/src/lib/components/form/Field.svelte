@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ComboboxField from '$lib/components/form/enhanced/fields/ComboboxField.svelte';
 	import FieldError from '$lib/components/form/enhanced/fields/FieldError.svelte';
+	import Input from '$lib/components/form/enhanced/fields/Input.svelte';
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
 
 	type Name = $$Generic;
@@ -24,30 +25,8 @@
 	{#if formField.type === 'select' && formField.combobox}
 		<ComboboxField {formField} {value} {errors} />
 	{:else}
-		<div class="mt-1">
-			<input
-				type={formField.type}
-				name={formField.name}
-				id={formField.name}
-				value={value ?? ''}
-				class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-				placeholder={formField.placeholder}
-				aria-describedby={formField.hintId}
-				class:invalid={errors}
-			/>
-		</div>
+		<Input {formField} {value} {errors} />
 	{/if}
 </div>
 
 <FieldError {errors} />
-
-<style lang="postcss">
-	input {
-		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
-		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
-	}
-
-	.invalid {
-		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
-	}
-</style>
