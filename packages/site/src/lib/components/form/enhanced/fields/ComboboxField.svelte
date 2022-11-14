@@ -1,4 +1,5 @@
 <script lang="ts">
+	import FieldLabel from '$lib/components/form/enhanced/fields/FieldLabel.svelte';
 	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
 	import type { SelectFormField } from '$lib/components/form/model/form-field.interface';
 
@@ -9,6 +10,8 @@
 	export let value: unknown = undefined;
 	export let errors: string[] | undefined = undefined;
 </script>
+
+<FieldLabel {formField} />
 
 <Combobox
 	initialValue={formField.options.find((option) => option.value === value)

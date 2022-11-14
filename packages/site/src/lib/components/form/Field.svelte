@@ -13,15 +13,6 @@
 </script>
 
 <div>
-	<div class="flex justify-between">
-		<label for={formField.name} class="block text-sm font-medium text-gray-700"
-			>{formField.label}</label
-		>
-		<span class="text-sm text-gray-500" id={formField.hintId}
-			>{formField.hint}</span
-		>
-	</div>
-
 	{#if formField.type === 'select' && formField.combobox}
 		<ComboboxField {formField} {value} {errors} />
 	{:else}

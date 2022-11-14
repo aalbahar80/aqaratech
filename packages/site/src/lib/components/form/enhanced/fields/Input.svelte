@@ -1,4 +1,5 @@
 <script lang="ts">
+	import FieldLabel from '$lib/components/form/enhanced/fields/FieldLabel.svelte';
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
 
 	type Name = $$Generic;
@@ -8,6 +9,8 @@
 	export let value: unknown = undefined;
 	export let errors: string[] | undefined = undefined;
 </script>
+
+<FieldLabel {formField} />
 
 <div class="mt-1">
 	<input
