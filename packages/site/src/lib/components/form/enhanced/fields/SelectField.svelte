@@ -13,14 +13,4 @@
 
 <FieldLabel {formField} />
 
-<Select
-	id={formField.name}
-	options={formField.options}
-	current={value}
-	on:select={(e) => {
-		value = e.detail.value;
-	}}
-/>
-
-<!-- hidden input to make select compatible with enhanced form -->
-<input type="hidden" name={formField.name} {value} />
+<Select id={formField.name} options={formField.options} current={value} />
