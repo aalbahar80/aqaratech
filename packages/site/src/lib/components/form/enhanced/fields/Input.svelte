@@ -8,6 +8,15 @@
 	export let formField: GFormField;
 	export let value: unknown = undefined;
 	export let errors: string[] | undefined = undefined;
+
+	const parse = (value: unknown) => {
+		if (formField.type === 'date' && typeof value === 'string') {
+			// format ISO date string to short format YYYY-MM-DD
+			return value.substring(0, 10);
+		} else {
+			return value ?? '';
+		}
+	};
 </script>
 
 <FieldLabel {formField} />
@@ -17,7 +26,7 @@
 		type={formField.type}
 		name={formField.name}
 		id={formField.name}
-		value={value ?? ''}
+		value={parse(value)}
 		class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 		placeholder={formField.placeholder}
 		aria-describedby={formField.hintId}
