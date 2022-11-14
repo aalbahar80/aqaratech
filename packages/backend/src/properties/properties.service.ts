@@ -62,7 +62,7 @@ export class PropertiesService {
 		user: IUser;
 		where?: Prisma.PropertyWhereInput;
 	}): Promise<WithCount<PropertyDto>> {
-		const { take, skip } = queryOptions;
+		const { take, skip, sort } = queryOptions;
 
 		const filter: Prisma.PropertyWhereInput = {
 			AND: [
@@ -75,7 +75,7 @@ export class PropertiesService {
 			this.prisma.property.findMany({
 				take,
 				skip,
-				orderBy: { createdAt: 'desc' },
+				orderBy: sort,
 				where: filter,
 				include: { portfolio: crumbs.portfolio },
 			}),
