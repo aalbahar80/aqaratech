@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import DebugPane from '$lib/components/form/DebugPane.svelte';
 	import FormError from '$lib/components/form/enhanced/fields/FormError.svelte';
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
@@ -30,8 +31,6 @@
 	});
 </script>
 
-<pre>{JSON.stringify(form, null, 2)}</pre>
-
 <form
 	method="POST"
 	use:enhance
@@ -58,3 +57,5 @@
 		<button>Save</button>
 	</div>
 </form>
+
+<DebugPane data={form} />
