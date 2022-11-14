@@ -24,6 +24,10 @@ export const leaseFormModel = (pageType: FormTypeEnum) =>
 				type: 'number',
 			}),
 
+			deposit: createFormField('deposit', {
+				type: 'number',
+			}),
+
 			canPay: createFormField('canPay', {
 				type: 'checkbox',
 			}),

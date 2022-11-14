@@ -1,5 +1,6 @@
 import type { FormFields } from '$lib/components/form/model/form-field.interface';
 import type { Entity, PageType } from '@self/utils';
+import type { Object } from 'ts-toolbelt';
 import type { z } from 'zod';
 
 export type FormTypeEnum = PageType.Edit | PageType.New;
@@ -18,9 +19,10 @@ export function createFormModel<
 	createSchema: CreateSchema;
 	updateSchema?: UpdateSchema;
 	entity: Entity;
-	fields: FormType extends PageType.New
-		? FormFields<z.infer<CreateSchema>>
-		: FormFields<z.infer<UpdateSchema>>;
+	fields: Object.Merge<
+		FormFields<z.infer<CreateSchema>>,
+		FormFields<z.infer<UpdateSchema>>
+	>;
 	pageType: FormType;
 }) {
 	return {

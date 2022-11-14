@@ -358,6 +358,12 @@ export interface CreateLeaseDto {
 	monthlyRent: number;
 	/**
 	 *
+	 * @type {number}
+	 * @memberof CreateLeaseDto
+	 */
+	deposit: number;
+	/**
+	 *
 	 * @type {string}
 	 * @memberof CreateLeaseDto
 	 */
@@ -2931,6 +2937,12 @@ export interface UpdateLeaseDto {
 	 * @memberof UpdateLeaseDto
 	 */
 	monthlyRent?: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof UpdateLeaseDto
+	 */
+	deposit?: number;
 	/**
 	 *
 	 * @type {string}

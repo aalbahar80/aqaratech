@@ -22,7 +22,12 @@ test('can be submitted with minimal fields', async ({
 	unit,
 	page,
 }) => {
-	const lease = R.pick(leasePartialFactory(), ['start', 'end', 'monthlyRent']);
+	const lease = R.pick(leasePartialFactory(), [
+		'start',
+		'end',
+		'monthlyRent',
+		'deposit',
+	]);
 
 	const url = getRoute({
 		entity,
@@ -72,7 +77,7 @@ test('can be submitted with all fields', async ({
 		'start',
 		'end',
 		'monthlyRent',
-		// 'deposit',
+		'deposit',
 		'notify',
 		'canPay',
 		// 'license',

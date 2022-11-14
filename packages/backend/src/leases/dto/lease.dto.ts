@@ -109,6 +109,7 @@ export class CreateLeaseDto implements LeaseCreateSchema {
 	tenantId: string;
 	start: string;
 	monthlyRent: number;
+	deposit: number;
 	end: string;
 	notify: boolean;
 	canPay: boolean;

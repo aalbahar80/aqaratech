@@ -7,6 +7,7 @@ import { isID } from './utils/id.schema';
 const base = z
 	.object({
 		monthlyRent: zodNumber,
+		deposit: zodNumber,
 		start: zodDateOnly,
 		end: zodDateOnly,
 		notify: zodCheckbox,

@@ -2974,6 +2974,8 @@ components:
           type: string
         monthlyRent:
           type: number
+        deposit:
+          type: number
         end:
           type: string
         notify:
@@ -3944,6 +3946,8 @@ components:
           type: string
         monthlyRent:
           type: number
+        deposit:
+          type: number
         end:
           type: string
         notify:
@@ -3956,6 +3960,7 @@ components:
         - tenantId
         - start
         - monthlyRent
+        - deposit
         - end
         - notify
         - canPay
