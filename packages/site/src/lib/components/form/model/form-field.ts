@@ -34,8 +34,8 @@ export const createFormField = <
 		required: false,
 		disabled: false,
 
-		enabledInCreateForm: true,
-		enabledInEditForm: true,
+		hideWhenCreate: false,
+		hideWhenEdit: false,
 
 		// html attributes
 		hintId: `${name}-hint`,

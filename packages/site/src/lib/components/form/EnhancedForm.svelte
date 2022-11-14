@@ -4,6 +4,7 @@
 	import Fields from '$lib/components/form/Fields.svelte';
 	import type { FormPageModel } from '$lib/components/form/model/form-field.interface';
 	import { objectValues } from '$lib/utils/common';
+	import * as R from 'remeda';
 
 	// Types
 
@@ -15,6 +16,17 @@
 		fields: FPM['fields'];
 	};
 	export let data: FPM['data'] = undefined;
+
+	$: formType = data === undefined ? 'create' : 'edit';
+	$: fields = R.omitBy(formModel.fields, (field) => {
+		// omit fields based on formType
+		const hide =
+			(formType === 'edit' && field.hideWhenEdit) ||
+			(formType === 'create' && field.hideWhenCreate);
+
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		return hide;
+	});
 </script>
 
 <pre>{JSON.stringify(form, null, 2)}</pre>
@@ -25,15 +37,18 @@
 	class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
 >
 	<Fields>
-		{#each objectValues(formModel.fields) as formField}
-			{@const valueFromForm = form?.[formField.name]}
-			{@const valueFromData = data?.[formField.name]}
-			<!-- valueFromForm is the value as it is being edited. Always prioritize it unless it's `undefined`. -->
-			<Field
-				{formField}
-				value={valueFromForm === undefined ? valueFromData : valueFromForm}
-				errors={form?.errors?.fieldErrors?.[formField.name]}
-			/>
+		{#each objectValues(fields) as formField}
+			<!-- If check here is only for typing purposes -->
+			{#if formField}
+				{@const valueFromForm = form?.[formField.name]}
+				{@const valueFromData = data?.[formField.name]}
+				<!-- valueFromForm is the value as it is being edited. Always prioritize it unless it's `undefined`. -->
+				<Field
+					{formField}
+					value={valueFromForm === undefined ? valueFromData : valueFromForm}
+					errors={form?.errors?.fieldErrors?.[formField.name]}
+				/>
+			{/if}
 		{/each}
 	</Fields>
 

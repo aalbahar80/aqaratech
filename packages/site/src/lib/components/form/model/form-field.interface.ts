@@ -11,8 +11,8 @@ export interface BaseFormField<T> {
 	required: boolean;
 	disabled: boolean;
 
-	enabledInEditForm: boolean;
-	enabledInCreateForm: boolean;
+	hideWhenCreate: boolean;
+	hideWhenEdit: boolean;
 
 	// html attributes
 	hintId: string;

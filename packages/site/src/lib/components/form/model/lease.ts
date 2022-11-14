@@ -38,6 +38,7 @@ export const leaseFormModel = (pageType: FormTypeEnum) =>
 				type: 'select',
 				combobox: true,
 				options: [],
+				hideWhenEdit: true,
 			}),
 		},
 	});

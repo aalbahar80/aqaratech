@@ -1,8 +1,16 @@
 <script lang="ts">
-	import LeaseForm from '$lib/components/lease/LeaseForm.svelte';
-	import type { PageData } from './$types';
+	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
+	import { getEntityFormModel } from '$lib/components/form/model/get-entity-form-model';
+	import { PageType } from '@self/utils';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
+
+	const formModel = getEntityFormModel({
+		entity: 'lease',
+		pageType: PageType.Edit,
+	});
 </script>
 
-<LeaseForm formType="update" data={data.lease} />
+<EnhancedForm {form} {formModel} data={data.lease} />
