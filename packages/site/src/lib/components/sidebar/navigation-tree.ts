@@ -4,11 +4,13 @@ import type { User } from '$lib/models/types/auth.type';
 
 // Icons
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
+import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
 import HeroiconsOutlineDocumentReport from '~icons/heroicons-outline/document-report';
 import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text';
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
 import HeroiconsOutlineLogout from '~icons/heroicons-outline/logout';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
+import HeroiconsUserGroup from '~icons/heroicons/user-group';
 
 // Links
 import { LOGOUT } from '$lib/constants/routes';
@@ -49,7 +51,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 					pageType,
 					params: { organizationId },
 				}),
-				icon: HeroiconsOutlineDocumentReport,
+				icon: HeroiconsOutlineCollection,
 			},
 			{
 				name: 'Tenants',
@@ -58,7 +60,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 					pageType,
 					params: { organizationId },
 				}),
-				icon: HeroiconsOutlineDocumentReport,
+				icon: HeroiconsUserGroup,
 			},
 		);
 
