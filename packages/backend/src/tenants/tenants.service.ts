@@ -1,6 +1,7 @@
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { Prisma } from '@prisma/client';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
@@ -56,17 +57,21 @@ export class TenantsService {
 		queryOptions: QueryOptionsDto;
 		user: IUser;
 	}): Promise<WithCount<TenantDto>> {
-		const { skip, take, sort } = queryOptions;
+		const { skip, take, sort, filter } = queryOptions;
+
+		const where: Prisma.TenantWhereInput = {
+			AND: [accessibleBy(user.ability, Action.Read).Tenant, filter],
+		};
 
 		const [results, total] = await Promise.all([
 			this.prisma.tenant.findMany({
 				take,
 				skip,
 				orderBy: sort,
-				where: accessibleBy(user.ability).Tenant,
+				where,
 			}),
 			this.prisma.tenant.count({
-				where: accessibleBy(user.ability).Tenant,
+				where,
 			}),
 		]);
 

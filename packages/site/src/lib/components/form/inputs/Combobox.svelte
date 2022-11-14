@@ -52,6 +52,8 @@
 	$: filtered = options;
 
 	const handleFilter = debounce((q: string) => {
+		dispatch('filter', q);
+
 		// fuse instance needs to be recreated in case `options` array is changed by a parent component.
 		// if this is problematic, we can explore using `fuse.setCollection()` instead.
 		const fuse = new Fuse<Option>(options, config);
@@ -68,6 +70,7 @@
 	// EVENTS
 	const dispatch = createEventDispatcher<{
 		select: { value: Option['value'] };
+		filter: string;
 	}>();
 
 	/** Clear input/selection then dispatch `select` event. */

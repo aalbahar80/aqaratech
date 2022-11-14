@@ -45,7 +45,8 @@ export class TenantsController {
 	@ApiQueryOptions()
 	findAll(
 		@User() user: IUser,
-		@QueryParser() queryOptions: QueryOptionsDto,
+		@QueryParser({ filterOptions: { keys: ['fullName'] } })
+		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<TenantDto>> {
 		return this.tenantsService.findAll({ queryOptions, user });
 	}

@@ -23,7 +23,6 @@ import { z } from 'zod';
 export const QueryParser = createParamDecorator(
 	(options: QueryOptionsDecoratorConfig | undefined, ctx: ExecutionContext) => {
 		const request = ctx.switchToHttp().getRequest<Request>();
-
 		// Parse with prisma-utils
 		const parsed = new RequestParserService().parseQuery(request.query, {
 			pageParamName: PAGE_PARAM,
@@ -31,6 +30,9 @@ export const QueryParser = createParamDecorator(
 
 			limitDefaultValue: TAKE_PARAM_DEFAULT,
 			limitParamName: TAKE_PARAM,
+
+			// don't use `prisma-utils` to parse the filter, we do it ourselves using zod
+			filterParamName: 'NEVER',
 
 			...options?.parserOptions,
 		});
@@ -45,9 +47,15 @@ export const QueryParser = createParamDecorator(
 			filter: z.record(filterKeySchema, z.any()),
 		});
 
-		const output = new ZodValidationPipe(schema).transform(parsed, {
-			type: 'custom',
-		});
+		const output = new ZodValidationPipe(schema).transform(
+			{
+				...parsed,
+				filter: request.query.filter ?? {},
+			},
+			{
+				type: 'custom',
+			},
+		);
 
 		return output;
 	},

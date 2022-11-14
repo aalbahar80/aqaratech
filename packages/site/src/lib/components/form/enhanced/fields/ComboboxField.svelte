@@ -22,6 +22,7 @@
 	on:select={(e) => {
 		value = e.detail.value;
 	}}
+	on:filter
 />
 
 <!-- hidden input to make combox compatible with enhanced form -->

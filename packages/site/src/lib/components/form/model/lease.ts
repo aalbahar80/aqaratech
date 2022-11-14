@@ -34,9 +34,10 @@ export const leaseFormModel = (pageType: FormTypeEnum) =>
 				label: 'Send payment reminders',
 			}),
 
-			// tenantId: createFormField('tenantId', {
-			// 	type: 'select',
-			// 	options: tenantsToOptions(tenants),
-			// }),
+			tenantId: createFormField('tenantId', {
+				type: 'select',
+				combobox: true,
+				options: [],
+			}),
 		},
 	});
