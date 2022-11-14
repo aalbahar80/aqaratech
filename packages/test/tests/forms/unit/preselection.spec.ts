@@ -1,11 +1,22 @@
 import { expect } from '@playwright/test';
+import { getLabel, getRoute, PageType } from '@self/utils';
 import { withQuery } from 'ufo';
 import { test } from '../../api/api-fixtures';
 
 test('unitType is preselected', async ({ page, unit }) => {
-	await page.goto(`/units/${unit.id}/edit`);
+	const url = getRoute({
+		entity: 'unit',
+		pageType: PageType.Edit,
+		id: unit.id,
+		params: {
+			organizationId: unit.organizationId,
+			portfolioId: unit.portfolioId,
+		},
+	});
 
-	const el = page.locator('#type');
+	await page.goto(url);
+
+	const el = page.getByLabel(getLabel('type'));
 
 	if (!unit.type) {
 		throw new Error('unit.type is not defined');
