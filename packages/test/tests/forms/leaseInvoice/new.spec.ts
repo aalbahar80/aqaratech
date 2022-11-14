@@ -3,7 +3,7 @@ import { sample } from '@self/seed';
 import { test } from '../../api/api-fixtures';
 
 const lease = sample.leases[0];
-test('smoke', async ({ page }, info) => {
+test.fixme('smoke', async ({ page }, info) => {
 	await page.goto(`/leaseInvoices/new?leaseId=${lease.id}`);
 
 	await page.locator('#amount').fill('500');
