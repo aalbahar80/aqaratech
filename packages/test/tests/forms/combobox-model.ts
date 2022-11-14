@@ -23,7 +23,9 @@ export class Combobox {
 	}
 
 	async fill(option: ComboboxOption) {
-		const input = this.page.getByLabel(this.key);
+		const input = this.page.getByLabel(this.key, {
+			exact: true,
+		});
 
 		await input.fill(option.label);
 

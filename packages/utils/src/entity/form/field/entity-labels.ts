@@ -21,6 +21,7 @@ export const entityFieldLabels = {
 
 	notify: 'Send payment reminders',
 	canPay: 'Allow tenant to pay invoices online',
+	tenantId: 'Tenant',
 };
 
 type Schemas =

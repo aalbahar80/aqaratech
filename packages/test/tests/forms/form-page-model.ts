@@ -36,7 +36,8 @@ export class FormPage {
 						page: this.page,
 						key,
 					}).fill(value);
-					return;
+
+					continue;
 				} else {
 					throw new Error(`Invalid value for combobox field ${key}`);
 				}
@@ -49,7 +50,7 @@ export class FormPage {
 
 				await checkbox.setChecked(value);
 
-				return;
+				continue;
 			}
 
 			// Other Fields
