@@ -49,21 +49,6 @@ test('cannot create expenseCategory without labelEn', async ({
 	expect(res.status()).toBe(400);
 });
 
-test('cannot create expenseCategory without isGroup', async ({
-	request,
-	org,
-}) => {
-	const url = PostUrl(org.organization.id).expenseCategory;
-
-	const res = await request.post(url, {
-		data: R.pick(expenseCategory, ['labelEn']),
-	});
-
-	await expect.soft(res).not.toBeOK();
-
-	expect(res.status()).toBe(400);
-});
-
 test('cannot create expenseCategory with invalid isGroup', async ({
 	request,
 	org,
@@ -180,7 +165,7 @@ for (const [index, labelAr] of invalidLabelAr.entries()) {
 
 // isGroup
 
-const invalidIsGroup = [null, undefined, 1, [], {}, '', 'invalid'];
+const invalidIsGroup = [null, 1, [], {}, '', 'invalid'];
 
 for (const [index, isGroup] of invalidIsGroup.entries()) {
 	// eslint-disable-next-line @typescript-eslint/restrict-template-expressions

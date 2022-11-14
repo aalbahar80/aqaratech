@@ -32,6 +32,7 @@ test('lease start date cannot be after end date', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -83,6 +84,7 @@ test('start needs to be a properly formatted date', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -127,6 +129,7 @@ test('start needs to be a valid datestring', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -169,6 +172,7 @@ test('start can be a date only', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -208,6 +212,7 @@ test.skip('rejects date range validation if one date is invalid ', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -259,6 +264,7 @@ test('end can be a date only', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -298,6 +304,7 @@ test('start can be an ISO date', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -337,6 +344,7 @@ test.skip('end can be an ISO date', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 

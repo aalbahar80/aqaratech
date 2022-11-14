@@ -27,6 +27,7 @@ test('can create lease in own org', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -60,6 +61,7 @@ test('cannot create lease in another org', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -94,6 +96,7 @@ test('cannot create lease in non-existing unit', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
@@ -128,6 +131,7 @@ test('cannot create lease in non-existing tenant', async ({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
 		],
 	);
 
