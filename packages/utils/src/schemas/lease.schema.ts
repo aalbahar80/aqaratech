@@ -1,3 +1,4 @@
+import { zodCheckbox } from 'src/schemas/utils/zod-boolean';
 import { z } from 'zod';
 import { zodDateOnly } from './utils/date/zod-date-only';
 import { isID } from './utils/id.schema';
@@ -7,8 +8,8 @@ const base = z
 		monthlyRent: z.number().min(1),
 		start: zodDateOnly,
 		end: zodDateOnly,
-		notify: z.boolean(),
-		canPay: z.boolean(),
+		notify: zodCheckbox,
+		canPay: zodCheckbox,
 	})
 	.strict();
 

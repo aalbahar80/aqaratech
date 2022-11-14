@@ -1,3 +1,4 @@
+import { zodCheckbox } from 'src/schemas/utils/zod-boolean';
 import { z } from 'zod';
 import { zodDateOnly, zodDateOnlyOptional } from './utils/date/zod-date-only';
 import { isID } from './utils/id.schema';
@@ -8,7 +9,7 @@ const base = z
 		dueAt: zodDateOnlyOptional,
 		postAt: zodDateOnly,
 		paidAt: zodDateOnlyOptional,
-		isPaid: z.boolean(),
+		isPaid: zodCheckbox,
 		amount: z.number().gt(0),
 		memo: zodStringOptional,
 	})

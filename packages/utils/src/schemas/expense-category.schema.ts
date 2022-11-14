@@ -1,3 +1,4 @@
+import { zodCheckbox } from 'src/schemas/utils/zod-boolean';
 import { z } from 'zod';
 import { isID } from './utils/id.schema';
 import { zodString, zodStringOptional } from './utils/zod-string';
@@ -9,7 +10,7 @@ export const expenseCategorySchema = z
 		labelAr: zodStringOptional,
 		description: zodStringOptional,
 		parentId: zodStringOptional,
-		isGroup: z.boolean(),
+		isGroup: zodCheckbox,
 	})
 	.strict();
 
