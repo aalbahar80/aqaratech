@@ -2,6 +2,7 @@
 	import type { PaginatedPropertyDto, PropertyDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import FilterButtonForm from '$lib/components/filter/FilterButtonForm.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getLabel } from '@self/utils';
@@ -44,6 +45,14 @@
 	}}
 >
 	<div slot="filter" let:filters>
-		<FilterBar responsive={filters} />
+		<FilterBar responsive={filters}>
+			<div slot="custom">
+				<FilterButtonForm
+					getRouteOptions={{
+						entity: 'property',
+					}}
+				/>
+			</div>
+		</FilterBar>
 	</div>
 </Table>
