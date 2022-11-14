@@ -36,6 +36,7 @@ export const leaseFormModel = (pageType: FormTypeEnum) =>
 				type: 'checkbox',
 			}),
 
+			// @ts-expect-error schema.refine() limits zod's type inference
 			tenantId: createFormField('tenantId', {
 				type: 'select',
 				combobox: true,
