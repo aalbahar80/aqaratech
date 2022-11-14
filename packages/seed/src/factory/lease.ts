@@ -34,3 +34,11 @@ export const leaseFactory = base.withDerivation('end', (lease) => {
 	end.setFullYear(end.getFullYear() + 1);
 	return end.toISOString().slice(0, 10);
 });
+
+export const leasePartialFactory = () =>
+	leaseFactory.build({
+		organizationId: '',
+		portfolioId: '',
+		tenantId: '',
+		unitId: '',
+	});
