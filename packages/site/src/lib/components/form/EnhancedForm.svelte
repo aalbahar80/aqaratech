@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import FormError from '$lib/components/form/enhanced/fields/FormError.svelte';
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
 	import type { FormPageModel } from '$lib/components/form/model/form-field.interface';
@@ -36,6 +37,7 @@
 	use:enhance
 	class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
 >
+	<FormError errors={form?.errors.formErrors} />
 	<Fields>
 		{#each objectValues(fields) as formField}
 			<!-- If check here is only for typing purposes -->
