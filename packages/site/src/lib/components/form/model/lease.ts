@@ -26,12 +26,10 @@ export const leaseFormModel = (pageType: FormTypeEnum) =>
 
 			canPay: createFormField('canPay', {
 				type: 'checkbox',
-				label: 'Allow tenant to pay invoices online',
 			}),
 
 			notify: createFormField('notify', {
 				type: 'checkbox',
-				label: 'Send payment reminders',
 			}),
 
 			tenantId: createFormField('tenantId', {

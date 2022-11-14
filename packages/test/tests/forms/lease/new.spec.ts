@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { expect } from '@playwright/test';
-import { leaseFactory } from '@self/seed';
+import { leasePartialFactory } from '@self/seed';
 import { getRoute, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { uuid } from '../../../utils/uuid';
@@ -21,15 +22,7 @@ test('can be submitted with minimal fields', async ({
 	unit,
 	page,
 }) => {
-	const lease = R.pick(
-		leaseFactory.build({
-			organizationId: '',
-			portfolioId: '',
-			tenantId: tenants[0].id,
-			unitId: '',
-		}),
-		['start', 'end', 'monthlyRent'],
-	);
+	const lease = R.pick(leasePartialFactory(), ['start', 'end', 'monthlyRent']);
 
 	const url = getRoute({
 		entity,
@@ -48,8 +41,8 @@ test('can be submitted with minimal fields', async ({
 	await formPage.fillForm({
 		...lease,
 		tenantId: new ComboboxOption({
-			label: tenants[0].fullName,
-			value: tenants[0].id,
+			label: tenants[5]!.fullName,
+			value: tenants[5]!.id,
 		}),
 	});
 
@@ -68,55 +61,56 @@ test('can be submitted with minimal fields', async ({
 	await expect(page).toHaveURL(uuid(successUrl));
 });
 
-test.fixme(
-	'can be submitted with all fields',
-	async ({ org, portfolio, property, page }) => {
-		const lease = R.pick(
-			leaseFactory.build({
-				organizationId: '',
-				portfolioId: '',
-				propertyId: '',
-			}),
-			[
-				'leaseNumber',
-				'bed',
-				'bath',
-				'size',
-				'marketRent',
-				'floor',
-				'label',
-				'type',
-				'usage',
-			],
-		);
+test('can be submitted with all fields', async ({
+	org,
+	portfolio,
+	unit,
+	tenants,
+	page,
+}) => {
+	const lease = R.pick(leasePartialFactory(), [
+		'start',
+		'end',
+		'monthlyRent',
+		// 'deposit',
+		'notify',
+		'canPay',
+		// 'license',
+	]);
 
-		const url = getRoute({
-			entity,
-			pageType,
-			predefined: { propertyId: property.id },
-			params: {
-				portfolioId: portfolio.id,
-				organizationId: org.organization.id,
-			},
-		});
+	const url = getRoute({
+		entity,
+		pageType,
+		predefined: { unitId: unit.id },
+		params: {
+			portfolioId: portfolio.id,
+			organizationId: org.organization.id,
+		},
+	});
 
-		await page.goto(url);
+	await page.goto(url);
 
-		const formPage = new FormPage(page);
+	const formPage = new FormPage(page);
 
-		await formPage.fillForm(lease);
-		await formPage.save();
+	await formPage.fillForm({
+		...lease,
+		tenantId: new ComboboxOption({
+			label: tenants[5]!.fullName,
+			value: tenants[5]!.id,
+		}),
+	});
 
-		const successUrl = getRoute({
-			entity,
-			id: ':uuid',
-			pageType: PageType.Id,
-			params: {
-				organizationId: org.organization.id,
-				portfolioId: portfolio.id,
-			},
-		});
+	await formPage.save();
 
-		await expect(page).toHaveURL(uuid(successUrl));
-	},
-);
+	const successUrl = getRoute({
+		entity,
+		id: ':uuid',
+		pageType: PageType.Id,
+		params: {
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+		},
+	});
+
+	await expect(page).toHaveURL(uuid(successUrl));
+});

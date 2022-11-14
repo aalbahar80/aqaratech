@@ -18,6 +18,9 @@ export const entityFieldLabels = {
 	passportNum: 'Passport Number',
 	residencyNum: 'Residency Number',
 	residencyEnd: 'Residency Expiration',
+
+	notify: 'Send payment reminders',
+	canPay: 'Allow tenant to pay invoices online',
 };
 
 type Schemas =

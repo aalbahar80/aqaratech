@@ -42,6 +42,16 @@ export class FormPage {
 				}
 			}
 
+			// Checkbox Fields
+
+			if (value === true || value === false) {
+				const checkbox = this.page.getByLabel(key);
+
+				await checkbox.setChecked(value);
+
+				return;
+			}
+
 			// Other Fields
 
 			let valueString: string;
