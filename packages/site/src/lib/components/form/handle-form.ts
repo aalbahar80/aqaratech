@@ -59,7 +59,11 @@ export const handleForm = async <
 		const errors = parsed.error.formErrors as z.typeToFlattenedError<
 			z.infer<S>
 		>;
-		console.warn({ errors }, '+page.server.ts ~ 19');
+
+		console.dir(
+			{ location: 'handle-form', obj, errors },
+			{ depth: null, colors: true },
+		);
 
 		return invalid(400, { ...(obj as z.infer<S>), errors });
 	}
