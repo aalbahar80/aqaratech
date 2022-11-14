@@ -35,7 +35,7 @@ test('can be submitted with all fields', async ({ org, tenant, page }) => {
 		tenantFactory.build({
 			organizationId: tenant.id,
 		}),
-		R.pick(['fullName', 'label', 'phone', 'dob', 'civilid']),
+		R.pick(['fullName', 'label', 'phone', 'dob', 'civilid', 'nationality']),
 	);
 
 	const formPage = new FormPage(page, {

@@ -14,11 +14,11 @@ test('can be searched', async ({ page, tenant }) => {
 
 	await page.goto(url);
 
-	const input = page.locator('input[id="nationality"]');
+	const input = page.getByLabel('Nationality');
 
 	await input.fill('Kuwa');
 
-	await page.locator(`data-testid=KWT`).click();
+	await page.getByTestId('KWT').click();
 
 	await expect(input).toHaveValue('Kuwait');
 });

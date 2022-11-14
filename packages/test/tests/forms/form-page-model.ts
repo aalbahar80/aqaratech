@@ -2,6 +2,7 @@ import type { Locator, Page } from '@playwright/test';
 import { Entity, getLabel, getRoute, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { uuid } from '../../utils/uuid';
+import { Combobox } from './combobox-model';
 
 export class FormPage {
 	readonly page: Page;
@@ -40,7 +41,11 @@ export class FormPage {
 				throw new Error(`Unsupported value type: ${typeof value}`);
 			}
 
-			await this.page.getByLabel(key, { exact: true }).fill(valueString);
+			if (Combobox.keys.includes(key)) {
+				await new Combobox(this.page).fill(key, valueString);
+			} else {
+				await this.page.getByLabel(key, { exact: true }).fill(valueString);
+			}
 		}
 	};
 
