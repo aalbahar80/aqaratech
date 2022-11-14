@@ -3,9 +3,8 @@ import {
 	createFormModel,
 	type FormTypeEnum,
 } from '$lib/components/form/model/form-model';
-import { countries } from '$lib/constants/countries';
 import { labelHint } from '$lib/constants/form-hints';
-import { tenantCreateSchema, tenantUpdateSchema } from '@self/utils';
+import { countries, tenantCreateSchema, tenantUpdateSchema } from '@self/utils';
 
 export const tenantFormModel = (pageType: FormTypeEnum) =>
 	createFormModel({

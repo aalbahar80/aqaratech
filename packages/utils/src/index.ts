@@ -4,6 +4,7 @@ export { isHealthCheck } from './config/is-health-check';
 export { liveEnvs } from './config/live-envs';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
 export { Cookie } from './constants/cookie';
+export { countries } from './constants/countries';
 export { endOfMonthN } from './date/end-of-month-n';
 export { startOfMonthN } from './date/start-of-month-n';
 export { dbEntity, nonDbEntity } from './entity/entity-definition';

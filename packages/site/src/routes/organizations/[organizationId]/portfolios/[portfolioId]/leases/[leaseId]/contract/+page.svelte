@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import ContractHeading from '$lib/components/lease/ContractHeading.svelte';
-	import { countries } from '$lib/constants/countries';
 	import { inWords } from '$lib/utils/currency';
+	import { countries } from '@self/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

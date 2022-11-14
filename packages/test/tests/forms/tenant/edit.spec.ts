@@ -1,8 +1,9 @@
 import { expect } from '@playwright/test';
 import { tenantFactory } from '@self/seed';
-import { PageType } from '@self/utils';
+import { countries, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { test } from '../../api/api-fixtures';
+import { ComboboxOption } from '../combobox-model';
 import { FormPage } from '../form-page-model';
 
 const entity = 'tenant';
@@ -44,8 +45,19 @@ test('can be submitted with all fields', async ({ org, tenant, page }) => {
 		id: tenant.id,
 		fixtures: { org },
 	});
+
 	await formPage.goto();
-	await formPage.fillForm(fields);
+	console.log({ tenant }, 'edit.spec.ts ~ 49');
+
+	await formPage.fillForm({
+		...fields,
+		nationality: new ComboboxOption({
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			label: countries.find((c) => c.alpha3Code === fields.nationality)!.name,
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			value: fields.nationality!,
+		}),
+	});
 	await formPage.save();
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
