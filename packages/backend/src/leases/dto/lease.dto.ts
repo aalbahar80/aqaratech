@@ -113,6 +113,7 @@ export class CreateLeaseDto implements LeaseCreateSchema {
 	end: string;
 	notify: boolean;
 	canPay: boolean;
+	license?: string | null;
 }
 
 export class UpdateLeaseDto

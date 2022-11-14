@@ -42,5 +42,7 @@ export const leaseFormModel = (pageType: FormTypeEnum) =>
 				options: [],
 				hideWhenEdit: true,
 			}),
+
+			license: createFormField('license'),
 		},
 	});

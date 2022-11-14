@@ -382,6 +382,12 @@ export interface CreateLeaseDto {
 	 * @memberof CreateLeaseDto
 	 */
 	canPay: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateLeaseDto
+	 */
+	license?: string | null;
 }
 /**
  *
@@ -2967,6 +2973,12 @@ export interface UpdateLeaseDto {
 	 * @memberof UpdateLeaseDto
 	 */
 	canPay?: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateLeaseDto
+	 */
+	license?: string | null;
 }
 /**
  *

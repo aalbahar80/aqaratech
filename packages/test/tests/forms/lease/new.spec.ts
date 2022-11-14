@@ -80,7 +80,7 @@ test('can be submitted with all fields', async ({
 		'deposit',
 		'notify',
 		'canPay',
-		// 'license',
+		'license',
 	]);
 
 	const url = getRoute({
