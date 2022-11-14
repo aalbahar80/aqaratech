@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Checkbox from '$lib/components/form/enhanced/fields/Checkbox.svelte';
+	// import Checkbox from '$lib/components/form/enhanced/fields/Checkbox.svelte';
+	import CheckboxNative from '$lib/components/form/enhanced/fields/CheckboxNative.svelte';
 	import ComboboxField from '$lib/components/form/enhanced/fields/ComboboxField.svelte';
 	import FieldError from '$lib/components/form/enhanced/fields/FieldError.svelte';
 	import Input from '$lib/components/form/enhanced/fields/Input.svelte';
@@ -17,7 +18,8 @@
 	{#if formField.type === 'select' && formField.combobox}
 		<ComboboxField {formField} {value} {errors} />
 	{:else if formField.type === 'checkbox'}
-		<Checkbox {formField} {value} />
+		<!-- <Checkbox {formField} {value} /> -->
+		<CheckboxNative {formField} {value} />
 	{:else}
 		<Input {formField} {value} {errors} />
 	{/if}
