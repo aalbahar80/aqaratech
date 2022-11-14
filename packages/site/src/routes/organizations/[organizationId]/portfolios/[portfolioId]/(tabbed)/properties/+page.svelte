@@ -1,8 +1,8 @@
 <script lang="ts">
-	import PropertyList from '$lib/components/property/PropertyList.svelte';
+	import PropertyTable from '$lib/components/property/PropertyTable.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
 
-<PropertyList properties={data.properties} />
+<PropertyTable data={data.properties} />
