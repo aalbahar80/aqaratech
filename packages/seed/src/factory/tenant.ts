@@ -37,3 +37,7 @@ export const tenantFactory = Factory.Sync.makeFactoryWithRequired<
 
 	residencyEnd: Factory.each(() => faker.date.future(2)),
 });
+
+export type TenantFactoryParams = Partial<
+	Parameters<typeof tenantFactory.build>[0]
+>;

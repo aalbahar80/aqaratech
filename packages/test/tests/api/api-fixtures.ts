@@ -4,7 +4,6 @@ import {
 	organizationFactory,
 	portfolioFactory,
 	propertyFactory,
-	tenantFactory,
 	unitFactory,
 } from '@self/seed';
 import * as R from 'remeda';
@@ -13,7 +12,6 @@ import type {
 	OrganizationCreatedDto,
 	PortfolioDto,
 	PropertyDto,
-	TenantDto,
 	UnitDto,
 } from '../../types/api';
 import { apiURL } from './fixtures/api-url';
@@ -22,6 +20,7 @@ import { expenseFixtures } from './fixtures/expense.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
 import { roleFixtures } from './fixtures/role.fixture';
 import { scopedRequestFixtures } from './fixtures/scoped-request.fixture';
+import { tenantFixtures } from './fixtures/tenant.fixture';
 import type {
 	TestFixtures,
 	TestOptions,
@@ -99,22 +98,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		};
 
 		await use(page);
-	},
-
-	tenant: async ({ org, request }, use) => {
-		// create fresh tenant
-		const tenant = tenantFactory.build({
-			organizationId: org.organization.id,
-		});
-
-		const picked = R.pick(tenant, ['fullName']);
-
-		const url = `${apiURL}/organizations/${org.organization.id}/tenants`;
-		const res = await request.post(url, { data: picked });
-
-		const created = (await res.json()) as TenantDto;
-
-		await use(created);
 	},
 
 	// A fixture that returns a fresh portfolio in a fresh organization.
@@ -238,6 +221,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	},
 
 	...scopedRequestFixtures,
+	...tenantFixtures,
 	...invoiceFixtures,
 	...expenseFixtures,
 	...expenseCategoryFixtures,
