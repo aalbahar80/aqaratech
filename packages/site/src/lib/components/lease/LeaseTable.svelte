@@ -2,6 +2,7 @@
 	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import RadialProgress from '$lib/components/RadialProgress.svelte';
 	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
@@ -91,6 +92,16 @@
 		<FilterBar responsive={filters}>
 			<div slot="hero">
 				<FilterHero title="Leases" subtitle="" />
+			</div>
+			<div slot="custom">
+				<!-- Only show button if we're on the unit page -->
+				{#if 'unitId' in $page.params}
+					<FilterBarButtonForm
+						getRouteOptions={{
+							entity: 'unit',
+						}}
+					/>
+				{/if}
 			</div>
 		</FilterBar>
 	</div>
