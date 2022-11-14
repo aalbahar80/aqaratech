@@ -8,7 +8,8 @@
 	import { clickOutside } from '$lib/utils/click-outside';
 	import { Check, Selector, XCircle } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
-	import debounce from 'debounce'; // TODO optimize use lodash debounce?
+	// TODO optimize use lodash debounce?
+	import debounce from 'debounce';
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher, tick } from 'svelte';
 
@@ -253,7 +254,6 @@
 					<!-- TODO classes can be simplified. It'd be preferrable to not use BOTH `classes()` utility AND `style` tag -->
 					<!-- Don't confuse `disabled` (entire component) with `item.disabled` (single option) -->
 					<li
-						data-testid={item.value}
 						value={item}
 						class={classes(
 							'relative cursor-default select-none py-2 pl-3 pr-9',
@@ -274,6 +274,7 @@
 						}}
 					>
 						<span
+							data-testid={item.value}
 							class={classes('block truncate', selected ? 'font-semibold' : '')}
 							>{item.label}</span
 						>

@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { getLabel } from '@self/utils';
 
 const keyLabels = ['nationality', 'tenantId', 'type'];
@@ -27,8 +27,11 @@ export class Combobox {
 
 		await input.fill(option.label);
 
-		// TODO getByRole/text instead of data-testid
-		await this.page.getByTestId(option.value).click();
+		const target = this.page.getByText(option.label);
+
+		await expect(target).toHaveAttribute('data-testid', option.value);
+
+		await target.click();
 	}
 }
 
