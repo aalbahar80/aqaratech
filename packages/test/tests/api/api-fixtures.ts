@@ -14,6 +14,7 @@ import type {
 	PropertyDto,
 	UnitDto,
 } from '../../types/api';
+import { resCheck } from '../../utils/res-check';
 import { apiURL } from './fixtures/api-url';
 import { expenseCategoryFixtures } from './fixtures/expense-category.fixture';
 import { expenseFixtures } from './fixtures/expense.fixture';
@@ -49,6 +50,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		const res = await context.request.post(`${apiURL}/organizations`, {
 			data: organization,
 		});
+		resCheck(res);
 
 		const created = (await res.json()) as OrganizationCreatedDto;
 
@@ -113,6 +115,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		const url = `${apiURL}/organizations/${org.organization.id}/portfolios`;
 
 		const res = await request.post(url, { data: picked });
+		resCheck(res);
 
 		const created = (await res.json()) as PortfolioDto;
 
@@ -138,6 +141,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		const url = `${apiURL}/organizations/${portfolio.organizationId}/properties`;
 
 		const res = await request.post(url, { data: picked });
+		resCheck(res);
 
 		const created = (await res.json()) as PropertyDto;
 
@@ -161,6 +165,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		const url = `${apiURL}/organizations/${org.organization.id}/units`;
 
 		const res = await request.post(url, { data: picked });
+		resCheck(res);
 
 		const created = (await res.json()) as UnitDto;
 
@@ -184,11 +189,14 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			'monthlyRent',
 			'notify',
 			'canPay',
+			'deposit',
+			'license',
 		]);
 
 		const url = `${apiURL}/organizations/${org.organization.id}/leases`;
 
 		const res = await request.post(url, { data: picked });
+		resCheck(res);
 
 		const created = (await res.json()) as LeaseDto;
 
@@ -213,6 +221,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 				},
 			},
 		});
+		resCheck(res);
 
 		const name = await res.text();
 		const key = `portfolio/${portfolio.id}/${name}`;

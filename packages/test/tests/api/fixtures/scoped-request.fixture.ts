@@ -1,4 +1,5 @@
 import type { RoleDto } from '../../../types/api';
+import { resCheck } from '../../../utils/res-check';
 import { testUsers } from '../fixtures/users/test-users';
 import { apiURL } from './api-url';
 import type { AllFixtures } from './test-fixtures.interface';
@@ -38,12 +39,9 @@ export const scopedRequestFixtures: AllFixtures = {
 		}
 
 		const res = await request.post(url, { data: { email } });
+		resCheck(res);
 
 		const body = (await res.json()) as RoleDto;
-
-		if (!res.ok) {
-			throw new Error('Failed to add role');
-		}
 
 		// set role cookie
 

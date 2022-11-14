@@ -2,6 +2,7 @@ import { roleFactory } from '@self/seed';
 import * as R from 'remeda';
 import type { RoleDto } from '../../../types/api';
 import { PostUrlRole } from '../../../utils/post-url';
+import { resCheck } from '../../../utils/res-check';
 import { apiURL } from './api-url';
 import type { AllFixtures } from './test-fixtures.interface';
 
@@ -25,6 +26,7 @@ export const roleFixtures: AllFixtures = {
 		const res = await request.post(`${apiURL}${url}`, {
 			data: R.pick(role, ['email']),
 		});
+		resCheck(res);
 
 		const created = (await res.json()) as RoleDto;
 

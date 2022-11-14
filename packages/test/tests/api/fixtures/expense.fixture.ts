@@ -1,6 +1,7 @@
 import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
 import type { ExpenseDto } from '../../../types/api';
+import { resCheck } from '../../../utils/res-check';
 import { apiURL } from './api-url';
 import type { AllFixtures } from './test-fixtures.interface';
 
@@ -26,6 +27,7 @@ export const expenseFixtures: AllFixtures = {
 		const url = `${apiURL}/organizations/${org.organization.id}/expenses`;
 
 		const res = await request.post(url, { data: picked });
+		resCheck(res);
 
 		const created = (await res.json()) as ExpenseDto;
 
