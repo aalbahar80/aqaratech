@@ -16,31 +16,28 @@ export class Combobox {
 	 * The field label.
 	 */
 	readonly key: string;
-	readonly option: Option;
 
-	constructor({
-		page,
-		key,
-		option,
-	}: {
-		page: Page;
-		option: Option;
-		key: string;
-	}) {
+	constructor({ page, key }: { page: Page; key: string }) {
 		this.page = page;
 		this.key = getLabel(key);
-		this.option = {
-			label: option.label,
-			value: option.value,
-		};
 	}
 
-	async fill(key: string, value: string) {
-		const input = this.page.getByLabel(key);
+	async fill(option: ComboboxOption) {
+		const input = this.page.getByLabel(this.key);
 
-		await input.fill(value);
+		await input.fill(option.label);
 
 		// TODO getByRole/text instead of data-testid
-		await this.page.getByTestId(value).click();
+		await this.page.getByTestId(option.value).click();
+	}
+}
+
+export class ComboboxOption {
+	readonly label: string;
+	readonly value: string;
+
+	constructor({ label, value }: Option) {
+		this.label = label;
+		this.value = value;
 	}
 }

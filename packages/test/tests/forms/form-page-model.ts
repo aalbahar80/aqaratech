@@ -2,7 +2,7 @@ import type { Locator, Page } from '@playwright/test';
 import { Entity, getLabel, getRoute, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { uuid } from '../../utils/uuid';
-import { Combobox } from './combobox-model';
+import { Combobox, ComboboxOption } from './combobox-model';
 
 export class FormPage {
 	readonly page: Page;
@@ -28,6 +28,22 @@ export class FormPage {
 		const labeled = R.mapKeys(fields, (key) => getLabel(key));
 
 		for (const [key, value] of Object.entries(labeled)) {
+			// Combobox Fields
+
+			if (Combobox.keys.includes(key)) {
+				if (value instanceof ComboboxOption) {
+					await new Combobox({
+						page: this.page,
+						key,
+					}).fill(value);
+					return;
+				} else {
+					throw new Error(`Invalid value for combobox field ${key}`);
+				}
+			}
+
+			// Other Fields
+
 			let valueString: string;
 
 			if (typeof value === 'string') {
@@ -41,11 +57,7 @@ export class FormPage {
 				throw new Error(`Unsupported value type: ${typeof value}`);
 			}
 
-			if (Combobox.keys.includes(key)) {
-				await new Combobox(this.page).fill(key, valueString);
-			} else {
-				await this.page.getByLabel(key, { exact: true }).fill(valueString);
-			}
+			await this.page.getByLabel(key, { exact: true }).fill(valueString);
 		}
 	};
 

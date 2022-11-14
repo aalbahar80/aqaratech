@@ -4,31 +4,37 @@ import { getRoute, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
+import { ComboboxOption } from '../combobox-model';
 import { FormPage } from '../form-page-model';
 
 const entity = 'lease';
 const pageType = PageType.New;
 
+test.use({
+	tenantsParams: R.times(10, () => ({})),
+});
+
 test('can be submitted with minimal fields', async ({
 	org,
 	portfolio,
-	property,
+	tenants,
+	unit,
 	page,
 }) => {
 	const lease = R.pick(
 		leaseFactory.build({
 			organizationId: '',
 			portfolioId: '',
-			tenantId: '',
+			tenantId: tenants[0].id,
 			unitId: '',
 		}),
-		['start', 'end'],
+		['start', 'end', 'monthlyRent'],
 	);
 
 	const url = getRoute({
 		entity,
 		pageType,
-		predefined: { propertyId: property.id },
+		predefined: { unitId: unit.id },
 		params: {
 			portfolioId: portfolio.id,
 			organizationId: org.organization.id,
@@ -39,7 +45,14 @@ test('can be submitted with minimal fields', async ({
 
 	const formPage = new FormPage(page);
 
-	await formPage.fillForm(lease);
+	await formPage.fillForm({
+		...lease,
+		tenantId: new ComboboxOption({
+			label: tenants[0].fullName,
+			value: tenants[0].id,
+		}),
+	});
+
 	await formPage.save();
 
 	const successUrl = getRoute({
