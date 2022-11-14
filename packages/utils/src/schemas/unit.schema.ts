@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { isID } from './utils/id.schema';
-import { zodNumberOptional } from './utils/string-to-number';
+import { zodNumberOptional } from './utils/zod-number';
 import { zodString, zodStringOptional } from './utils/zod-string';
 
 export const unitCreateSchema = z
