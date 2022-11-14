@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
+	import ComboboxField from '$lib/components/form/enhanced/fields/ComboboxField.svelte';
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
 
 	type Name = $$Generic;
@@ -21,18 +21,7 @@
 	</div>
 
 	{#if formField.type === 'select' && formField.combobox}
-		<Combobox
-			initialValue={formField.options.find((option) => option.value === value)
-				?.value}
-			inputId={formField.name}
-			options={formField.options}
-			invalid={!!errors}
-			on:select={(e) => {
-				value = e.detail.value;
-			}}
-		/>
-		<!-- hidden input to make combox compatible with enhanced form -->
-		<input type="hidden" name={formField.name} {value} />
+		<ComboboxField {formField} {value} {errors} />
 	{:else}
 		<div class="mt-1">
 			<input
