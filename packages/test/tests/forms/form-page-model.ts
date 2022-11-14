@@ -53,6 +53,18 @@ export class FormPage {
 				continue;
 			}
 
+			// Select Fields
+
+			const SELECT_KEYS = ['type'].map((key) => getLabel(key));
+
+			if (SELECT_KEYS.includes(key)) {
+				const select = this.page.getByLabel(key);
+
+				await select.selectOption({ label: value });
+
+				continue;
+			}
+
 			// Other Fields
 
 			let valueString: string;

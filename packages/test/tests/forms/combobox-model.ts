@@ -1,7 +1,7 @@
 import { expect, Page } from '@playwright/test';
 import { getLabel } from '@self/utils';
 
-const keyLabels = ['nationality', 'tenantId', 'type'];
+const keyLabels = ['nationality', 'tenantId'];
 
 interface Option {
 	label: string;
