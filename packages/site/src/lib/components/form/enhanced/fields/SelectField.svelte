@@ -14,6 +14,7 @@
 <FieldLabel {formField} />
 
 <Select
+	id={formField.name}
 	options={formField.options}
 	current={value}
 	on:select={(e) => {
