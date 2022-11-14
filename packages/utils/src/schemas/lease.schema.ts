@@ -1,3 +1,4 @@
+import { zodNumber } from 'src/schemas/utils/string-to-number';
 import { zodCheckbox } from 'src/schemas/utils/zod-checkbox';
 import { z } from 'zod';
 import { zodDateOnly } from './utils/date/zod-date-only';
@@ -5,7 +6,7 @@ import { isID } from './utils/id.schema';
 
 const base = z
 	.object({
-		monthlyRent: z.number().min(1),
+		monthlyRent: zodNumber,
 		start: zodDateOnly,
 		end: zodDateOnly,
 		notify: zodCheckbox,

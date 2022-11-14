@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { isID } from './utils/id.schema';
-import { stringToNumber } from './utils/string-to-number';
+import { zodNumberOptional } from './utils/string-to-number';
 import { zodString, zodStringOptional } from './utils/zod-string';
 
 export const unitCreateSchema = z
@@ -9,11 +9,11 @@ export const unitCreateSchema = z
 		propertyId: isID,
 		label: zodStringOptional,
 		unitNumber: zodString,
-		bed: z.union([stringToNumber, z.number()]).nullish(),
-		bath: z.union([stringToNumber, z.number()]).nullish(),
-		size: z.union([stringToNumber, z.number()]).nullish(),
-		floor: z.union([stringToNumber, z.number()]).nullish(),
-		marketRent: z.union([stringToNumber, z.number()]).nullish(),
+		bed: zodNumberOptional,
+		bath: zodNumberOptional,
+		size: zodNumberOptional,
+		floor: zodNumberOptional,
+		marketRent: zodNumberOptional,
 		usage: zodStringOptional,
 		type: zodStringOptional,
 	})

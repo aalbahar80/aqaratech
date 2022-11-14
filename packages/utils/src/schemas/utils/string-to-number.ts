@@ -1,8 +1,29 @@
 import { z } from 'zod';
 
-export const stringToNumber = z.string().transform((val) => {
-	const num = parseInt(val);
+const tryParseToNumber = (val: unknown) => {
+	if (typeof val === 'string') {
+		const num = parseInt(val);
 
-	// don't return NaN, prism will throw an error
-	return isNaN(num) ? null : num;
-});
+		// return num; // this could be NaN
+		return isNaN(num) ? null : num;
+	} else {
+		return val;
+	}
+};
+
+/**
+ * Preprocess string values to numbers before parsing.
+ *
+ * `Nan` values are converted to `null`, _not_ 0.
+ */
+export const zodNumber = z.preprocess(tryParseToNumber, z.number());
+
+/**
+ * Preprocess string values to numbers before parsing.
+ *
+ * `Nan` values are converted to `null`, _not_ 0.
+ */
+export const zodNumberOptional = z.preprocess(
+	tryParseToNumber,
+	z.number().nullish(),
+);
