@@ -9,7 +9,6 @@ export const locationColumnDef = <T extends Breadcrumbs>(
 ) =>
 	columnHelper.group({
 		header: 'Location',
-		footer: (props) => props.column.id,
 		columns: [
 			columnHelper.accessor((a) => a.breadcrumbs.property, {
 				id: 'property',
