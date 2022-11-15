@@ -1,26 +1,10 @@
 <script lang="ts">
-	import Tabs from '$lib/components/Tabs.svelte';
-	import { ChartBar, Database } from '@steeze-ui/heroicons';
-	import { fade } from 'svelte/transition';
-
 	export let title: string;
 	export let subtitle = '';
 	export let empty = false;
-	export let tabbed = true;
-
-	const tabs = [
-		{ name: 'Chart', icon: ChartBar },
-		{ name: 'Data', icon: Database },
-	] as const;
-
-	type TabName = typeof tabs[number]['name'];
-	let tab: TabName = 'Chart';
 </script>
 
-<div
-	class="flex flex-col gap-y-4 rounded-lg bg-white p-6 shadow-xl"
-	data-test-id="dashcard"
->
+<div class="flex flex-col gap-y-4 rounded-lg bg-white p-6 shadow-xl">
 	<div class="prose prose-base">
 		<h3>{title}</h3>
 		<p>{subtitle}</p>
@@ -37,20 +21,9 @@
 			</div>
 		</div>
 	{:else}
-		{#if tabbed}
-			<Tabs {tabs} bind:tab />
-		{/if}
-		{#if tab === 'Chart'}
-			<div class="pt-4">
-				<slot name="groupBy" />
-			</div>
-			<slot name="chart" />
-		{:else}
-			<div>
-				<div in:fade class="overflow-x-auto overflow-y-hidden">
-					<slot name="data" />
-				</div>
-			</div>
-		{/if}
+		<div class="pt-4">
+			<slot name="groupBy" />
+		</div>
+		<slot />
 	{/if}
 </div>
