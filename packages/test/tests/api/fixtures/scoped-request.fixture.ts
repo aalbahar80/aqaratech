@@ -77,10 +77,22 @@ export const scopedRequestFixtures: AllFixtures = {
 	},
 
 	scopedPage: async ({ scopedContext }, use) => {
-		const scopedPage = await scopedContext.newPage();
+		const page = await scopedContext.newPage();
 
-		await use(scopedPage);
+		// eslint-disable-next-line @typescript-eslint/unbound-method
+		const goto = page.goto;
 
-		await scopedPage.close();
+		page.goto = async function (url, opts) {
+			const res = await goto.call(page, url, opts);
+
+			// https://github.com/sveltejs/kit/pull/6484
+			await page.waitForSelector('body.started', { timeout: 5000 });
+
+			return res;
+		};
+
+		await use(page);
+
+		await page.close();
 	},
 };
