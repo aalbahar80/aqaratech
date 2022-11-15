@@ -5,6 +5,7 @@
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
+	import IconButton from '$lib/components/buttons/IconButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import EmptyState from '$lib/components/EmptyState.svelte';
@@ -12,6 +13,7 @@
 	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { flip } from 'svelte/animate';
+	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 	import HeroiconsOutlinePaperClip from '~icons/heroicons-outline/paper-clip';
 
@@ -19,6 +21,18 @@
 
 	$: hideFileActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
 </script>
+
+<div class="flex justify-end">
+	<a href={getFormRouteWithRelation('file', $page.url.pathname, $page.params)}>
+		<IconButton>
+			<div slot="icon">
+				<Fa6SolidPaperclip />
+			</div>
+
+			Attach files
+		</IconButton>
+	</a>
+</div>
 
 {#if files?.results.length}
 	<ul

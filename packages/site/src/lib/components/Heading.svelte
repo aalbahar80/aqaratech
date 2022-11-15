@@ -7,11 +7,9 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { classes } from '$lib/utils/classes';
-	import { getFormRouteWithRelation, hasFileSupport } from '$lib/utils/file';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { getRoute, PageType, type Entity } from '@self/utils';
 	import type { SvelteComponentTyped } from 'svelte';
-	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	interface IconTooltip {
@@ -81,22 +79,6 @@
 				<div slot="menu">
 					<DropdownMenu>
 						<slot name="menu-items" />
-						{#if hasFileSupport(entity)}
-							<MenuItem as="div" let:active>
-								<a
-									href={getFormRouteWithRelation(
-										'file',
-										$page.url.pathname,
-										$page.params,
-									)}
-								>
-									<MenuItemChild {active}>
-										<MenuItemIcon icon={Fa6SolidPaperclip} />
-										Attach files
-									</MenuItemChild>
-								</a>
-							</MenuItem>
-						{/if}
 						<MenuItem as="div" let:active>
 							<button on:click={openModal} class="w-full">
 								<MenuItemChild {active}>
