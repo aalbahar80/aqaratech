@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { getRoute, PageTypePortfolio } from '@self/utils';
 import fs from 'node:fs';
 import * as R from 'remeda';
-import { test } from '../api/api-fixtures';
+import { test } from '../../api/api-fixtures';
 const SAVE_PATH = './downloads/expenses.csv';
 
 test.use({
@@ -18,8 +18,6 @@ test('can export csv from expenses table', async ({
 	portfolio,
 	expenses,
 }) => {
-	console.log(await page.context().cookies());
-
 	const url = getRoute({
 		entity: 'portfolio',
 		id: portfolio.id,
