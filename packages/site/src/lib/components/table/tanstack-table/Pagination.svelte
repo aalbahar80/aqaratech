@@ -2,9 +2,9 @@
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { getButtons } from '$lib/components/pagination/get-buttons';
 	import { classes } from '$lib/utils/classes';
-	import { ChevronLeft, ChevronRight } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { Table } from '@tanstack/svelte-table';
+	import HeroiconsChevronLeft20Solid from '~icons/heroicons/chevron-left-20-solid';
+	import HeroiconsChevronRight20Solid from '~icons/heroicons/chevron-right-20-solid';
 
 	export let table: Table<any>;
 	export let itemCount: number;
@@ -87,7 +87,7 @@
 					disabled={!table.getCanPreviousPage()}
 				>
 					<span class="sr-only">Previous</span>
-					<Icon src={ChevronLeft} class="h-5 w-5" aria-hidden="true" />
+					<HeroiconsChevronLeft20Solid class="h-5 w-5" aria-hidden="true" />
 				</button>
 				{#each getButtons(pageIdx, table.getPageCount()) as button}
 					{#if button}
@@ -118,7 +118,7 @@
 					disabled={!table.getCanNextPage()}
 				>
 					<span class="sr-only">Next</span>
-					<Icon src={ChevronRight} class="h-5 w-5" aria-hidden="true" />
+					<HeroiconsChevronRight20Solid class="h-5 w-5" aria-hidden="true" />
 				</button>
 			</nav>
 		</div>

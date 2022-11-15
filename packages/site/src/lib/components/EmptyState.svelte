@@ -2,9 +2,8 @@
 	import { page } from '$app/stores';
 	import FormButtonNew from '$lib/components/form/FormButtonNew.svelte';
 	import type { Entity } from '@self/utils';
-	import { FolderAdd } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { ComponentProps } from 'svelte';
+	import HeroiconsFolderPlus from '~icons/heroicons/folder-plus';
 
 	const hideActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
 	export let entity: Entity;
@@ -15,8 +14,7 @@
 </script>
 
 <div class="py-8 text-center sm:py-16">
-	<Icon
-		src={FolderAdd}
+	<HeroiconsFolderPlus
 		class="mx-auto h-12 w-12 text-gray-400"
 		aria-hidden="true"
 	/>
