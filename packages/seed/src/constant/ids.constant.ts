@@ -8,3 +8,6 @@ export const testPortfolioRoleId = '27e60270-172f-4ed2-af48-6d43cb8a526b';
 export const testTenantEmail = 'tenant.dev@mailthink.net';
 export const testTenantId = 'e6258358-b4f6-4825-9245-0e21c54b557a';
 export const testTenantRoleId = '66e2b65c-21cf-4e6f-89c0-710b6766eb37';
+export const testOrgUserId = 'cb23d83d-869b-4b02-83e5-55997e3818b0';
+export const testPortfolioUserId = '9794384b-dc9e-4917-81cf-ef261c6d11eb';
+export const testTenantUserId = '89d7ff2a-b807-4041-ab7e-9afc7e27022f';

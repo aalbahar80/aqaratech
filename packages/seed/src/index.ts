@@ -2,13 +2,16 @@ export {
 	testOrgEmail,
 	testOrgId,
 	testOrgRoleId,
+	testOrgUserId,
 	testPassword,
 	testPortfolioEmail,
 	testPortfolioId,
 	testPortfolioRoleId,
+	testPortfolioUserId,
 	testTenantEmail,
 	testTenantId,
 	testTenantRoleId,
+	testTenantUserId,
 } from './constant/ids.constant';
 export { createSeed } from './create-seed.js';
 export * from './factory';

@@ -2,12 +2,15 @@ import {
 	testOrgEmail,
 	testOrgId,
 	testOrgRoleId,
+	testOrgUserId,
 	testPortfolioEmail,
 	testPortfolioId,
 	testPortfolioRoleId,
+	testPortfolioUserId,
 	testTenantEmail,
 	testTenantId,
 	testTenantRoleId,
+	testTenantUserId,
 } from './constant/ids.constant';
 import {
 	expenseFactory,
@@ -25,15 +28,15 @@ import { userFactory } from './factory/user';
 
 const users = [
 	userFactory.build({
-		id: 'cb23d83d-869b-4b02-83e5-55997e3818b0',
+		id: testOrgUserId,
 		email: testOrgEmail,
 	}),
 	userFactory.build({
-		id: '9794384b-dc9e-4917-81cf-ef261c6d11eb',
+		id: testPortfolioUserId,
 		email: testPortfolioEmail,
 	}),
 	userFactory.build({
-		id: '89d7ff2a-b807-4041-ab7e-9afc7e27022f',
+		id: testTenantUserId,
 		email: testTenantEmail,
 	}),
 ] as const;
