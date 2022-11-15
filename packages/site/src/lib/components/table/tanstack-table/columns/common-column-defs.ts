@@ -31,7 +31,9 @@ interface Breadcrumbs {
 	breadcrumbs: Partial<Pick<BreadcrumbsDto, 'property' | 'unit'>>;
 }
 
-export const viewColumnDef = <T extends { id: string }>(
+export const viewColumnDef = <
+	T extends { id: string } | { id: string; portfolioId: string },
+>(
 	columnHelper: ColumnHelper<T>,
 	entity: Entity,
 	params: Record<string, string>,
@@ -47,7 +49,14 @@ export const viewColumnDef = <T extends { id: string }>(
 					entity,
 					id: props.row.original.id,
 					pageType: PageType.Id,
-					params,
+					// Add portfolioId to params from table row. Required for organizations/leases page.
+					params:
+						'portfolioId' in props.row.original
+							? {
+									portfolioId: props.row.original.portfolioId,
+									...params,
+							  }
+							: params,
 				}),
 			});
 		},
