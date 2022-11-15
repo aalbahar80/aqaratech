@@ -11,10 +11,9 @@
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import { PaperClip } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { flip } from 'svelte/animate';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
+	import HeroiconsOutlinePaperClip from '~icons/heroicons-outline/paper-clip';
 
 	export let files: PaginatedFileDto;
 
@@ -32,8 +31,7 @@
 				data-testid={file.key}
 			>
 				<div class="flex w-0 flex-1 items-center">
-					<Icon
-						src={PaperClip}
+					<HeroiconsOutlinePaperClip
 						class="h-5 w-5 flex-shrink-0 text-gray-400"
 						aria-hidden="true"
 					/>

@@ -6,8 +6,10 @@
 	} from '$lib/models/interfaces/option.interface';
 	import { classes } from '$lib/utils/classes';
 	import { clickOutside } from '$lib/utils/click-outside';
-	import { Check, Selector, XCircle } from '@steeze-ui/heroicons';
+	import { Check } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import HeroiconsOutlineSelector from '~icons/heroicons-outline/selector';
+	import HeroiconsOutlineXCircle from '~icons/heroicons-outline/x-circle';
 	// TODO optimize use lodash debounce?
 	import debounce from 'debounce';
 	import Fuse from 'fuse.js';
@@ -222,9 +224,7 @@
 				clear();
 			}}
 		>
-			<Icon
-				src={XCircle}
-				theme="solid"
+			<HeroiconsOutlineXCircle
 				class="h-5 w-5 text-gray-400"
 				aria-hidden="true"
 			/>
@@ -235,9 +235,7 @@
 				forceOpen = !forceOpen;
 			}}
 		>
-			<Icon
-				src={Selector}
-				theme="solid"
+			<HeroiconsOutlineSelector
 				class="h-5 w-5 text-gray-400"
 				aria-hidden="true"
 			/>

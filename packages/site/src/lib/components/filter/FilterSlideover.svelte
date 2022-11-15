@@ -10,9 +10,8 @@
 		TransitionChild,
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
-	import { X } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import HeroiconsChevronDown20Solid from '~icons/heroicons/chevron-down-20-solid';
+	import HeroiconsXMark20Solid from '~icons/heroicons/x-mark-20-solid';
 
 	export let filters: Filter[];
 
@@ -61,7 +60,7 @@
 						on:click={close}
 					>
 						<span class="sr-only">Close menu</span>
-						<Icon src={X} class="h-6 w-6" aria-hidden="true" />
+						<HeroiconsXMark20Solid class="h-5 w-5" aria-hidden="true" />
 					</button>
 				</div>
 

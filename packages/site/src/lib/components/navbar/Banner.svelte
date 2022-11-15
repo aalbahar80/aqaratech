@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { X } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { slide } from 'svelte/transition';
+	import HeroiconsXMark20Solid from '~icons/heroicons/x-mark-20-solid';
 
 	let visible = true;
 </script>
@@ -32,7 +31,10 @@
 					on:click={() => (visible = false)}
 				>
 					<span class="sr-only">Dismiss</span>
-					<Icon src={X} class="h-6 w-6 text-white" aria-hidden="true" />
+					<HeroiconsXMark20Solid
+						class="h-6 w-6 text-white"
+						aria-hidden="true"
+					/>
 				</button>
 			</div>
 		</div>
