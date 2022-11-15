@@ -1,3 +1,4 @@
+import { Cookie } from '@self/utils';
 import type { RoleDto } from '../../../types/api';
 import { resCheck } from '../../../utils/res-check';
 import { testUsers } from '../fixtures/users/test-users';
@@ -8,7 +9,7 @@ export const scopedRequestFixtures: AllFixtures = {
 	// Determines the cookies that are sent with the request.
 	userRoleType: ['ORGADMIN', { option: true }],
 
-	scopedRequest: async (
+	scopedContext: async (
 		{ userRoleType, browser, portfolio, tenant, request },
 		use,
 	) => {
@@ -51,7 +52,7 @@ export const scopedRequestFixtures: AllFixtures = {
 
 		await context.addCookies([
 			{
-				name: 'role',
+				name: Cookie.role,
 				value: body.id,
 				domain: 'localhost',
 				path: '/',
@@ -62,10 +63,24 @@ export const scopedRequestFixtures: AllFixtures = {
 			},
 		]);
 
-		const scopedRequest = context.request;
+		await use(context);
+
+		await context.close();
+	},
+
+	scopedRequest: async ({ scopedContext }, use) => {
+		const scopedRequest = scopedContext.request;
 
 		await use(scopedRequest);
 
 		await scopedRequest.dispose();
+	},
+
+	scopedPage: async ({ scopedContext }, use) => {
+		const scopedPage = await scopedContext.newPage();
+
+		await use(scopedPage);
+
+		await scopedPage.close();
 	},
 };
