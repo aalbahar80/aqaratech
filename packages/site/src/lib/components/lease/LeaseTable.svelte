@@ -105,7 +105,7 @@
 				{#if 'unitId' in $page.params}
 					<FilterBarButtonForm
 						getRouteOptions={{
-							entity: 'unit',
+							entity: 'lease',
 						}}
 					/>
 				{/if}
