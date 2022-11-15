@@ -1,3 +1,4 @@
+import { expenseFormModel } from '$lib/components/form/model/expense';
 import type { FormTypeEnum } from '$lib/components/form/model/form-model';
 import { leaseFormModel } from '$lib/components/form/model/lease';
 import { portfolioFormModel } from '$lib/components/form/model/portfolio';
@@ -13,6 +14,7 @@ export const entityFormModeMap = {
 	unit: unitFormModel,
 	lease: leaseFormModel,
 	role: roleFormModel,
+	expense: expenseFormModel,
 } as const;
 
 export const getEntityFormModel = <
