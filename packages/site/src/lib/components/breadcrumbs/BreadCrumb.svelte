@@ -1,35 +1,21 @@
 <script lang="ts">
-	import type { BreadcrumbsDto } from '$api/openapi';
 	import { page } from '$app/stores';
+	import {
+		handleCrumbs,
+		type Crumbs,
+	} from '$lib/components/breadcrumbs/crumbs-by-role';
 	import { classes } from '$lib/utils/classes';
 	import { entitiesMap, getRoute, isEntity, PageType } from '@self/utils';
-	import * as R from 'remeda';
 
-	export let crumbs: Partial<BreadcrumbsDto> | undefined;
+	export let crumbs: Crumbs;
 
-	const tenantCrumbs = ['lease', 'invoice'];
-
-	// api client fills undefined crumbs (expenses)
-	$: truthyCrumbs = crumbs
-		? R.pipe(
-				R.toPairs(crumbs),
-				R.filter((c) => {
-					if ($page.data.user?.role?.roleType === 'TENANT') {
-						return tenantCrumbs.includes(c[0]);
-					}
-					return !R.isNil(c[1]);
-				}),
-				(c) => {
-					return c;
-				},
-		  )
-		: [];
+	$: parsedCrumbs = handleCrumbs(crumbs, $page.data.user?.role?.roleType);
 </script>
 
 {#if crumbs}
 	<nav class="flex" aria-label="Breadcrumb">
 		<ol class="flex items-center space-x-4">
-			{#each truthyCrumbs as [title, crumb], idx}
+			{#each parsedCrumbs as [title, crumb], idx}
 				{#if isEntity(title)}
 					{@const href = getRoute({
 						entity: title,
