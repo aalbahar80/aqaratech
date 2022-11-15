@@ -34,6 +34,13 @@ export const expenseFactory = Factory.Sync.makeFactoryWithRequired<
 	unitId: null,
 });
 
+export const expensePartialFactory = () =>
+	expenseFactory.build({
+		organizationId: '',
+		portfolioId: '',
+		unitId: '',
+	});
+
 export type ExpenseFactoryParams = Partial<
 	Parameters<typeof expenseFactory.build>[0]
 >;
