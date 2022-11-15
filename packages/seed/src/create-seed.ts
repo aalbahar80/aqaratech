@@ -209,6 +209,7 @@ export const createSeed = (options?: SeedOptions) => {
 		roleFactory.build({
 			roleType: 'PORTFOLIO',
 			organizationId: org1.id,
+			portfolioId: random(properties).portfolioId, // ensures data
 			userId: userPortfolio.id,
 		}),
 
@@ -216,6 +217,7 @@ export const createSeed = (options?: SeedOptions) => {
 		roleFactory.build({
 			roleType: 'TENANT',
 			organizationId: org1.id,
+			tenantId: random(leases).tenantId, // ensures data
 			userId: userTenant.id,
 		}),
 	];
