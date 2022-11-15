@@ -26,7 +26,9 @@ import type {
 
 export interface TestFixtures {
 	// auth
+	scopedContext: PlaywrightTestArgs['context'];
 	scopedRequest: PlaywrightTestArgs['request'];
+	scopedPage: PlaywrightTestArgs['page'];
 	roleCookie: Parameters<BrowserContext['addCookies']>[0][0];
 
 	org: OrganizationCreatedDto;
