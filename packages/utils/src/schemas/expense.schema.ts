@@ -1,3 +1,4 @@
+import { zodNumber } from 'src/schemas/utils/zod-number';
 import { z } from 'zod';
 import { zodDateOnly } from './utils/date/zod-date-only';
 import { isID } from './utils/id.schema';
@@ -8,7 +9,7 @@ export const expenseCreateSchema = z
 		portfolioId: isID,
 		propertyId: isID.nullish(),
 		unitId: isID.nullish(),
-		amount: z.number().gt(0),
+		amount: zodNumber,
 		categoryId: zodStringOptional,
 		postAt: zodDateOnly,
 		label: zodStringOptional,
