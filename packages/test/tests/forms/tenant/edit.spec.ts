@@ -47,7 +47,6 @@ test('can be submitted with all fields', async ({ org, tenant, page }) => {
 	});
 
 	await formPage.goto();
-	console.log({ tenant }, 'edit.spec.ts ~ 49');
 
 	await formPage.fillForm({
 		...fields,

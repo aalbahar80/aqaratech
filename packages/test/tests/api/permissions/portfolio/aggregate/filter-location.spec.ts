@@ -50,8 +50,6 @@ test('portfolio grouping is correct', async ({
 
 	const data = (await res.json()) as GroupByMonthDto[];
 
-	console.log({ data }, 'filter-location.spec.ts ~ 45');
-
 	expect(sum(data)).toBe(15);
 });
 
