@@ -3,9 +3,11 @@ import { getRoute, PageTab } from '@self/utils';
 import { test } from '../api/api-fixtures';
 
 test.use({
-	invoiceParams: {
-		isPaid: false,
-	},
+	invoicesParams: [
+		{
+			isPaid: false,
+		},
+	],
 });
 
 test('can toggle paid status', async ({ page, lease, invoice }) => {

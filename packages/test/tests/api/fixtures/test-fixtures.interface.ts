@@ -40,6 +40,7 @@ export interface TestFixtures {
 	unit: UnitDto;
 	lease: LeaseDto;
 	invoice: LeaseInvoiceDto;
+	invoices: [LeaseInvoiceDto, ...LeaseInvoiceDto[]];
 	expense: ExpenseDto;
 	expenses: ExpenseDto[];
 	expenseCategory: ExpenseCategoryDto;
@@ -52,7 +53,10 @@ export interface TestOptions {
 	roleParams: RoleFactoryParams | undefined;
 
 	tenantsParams: [TenantFactoryParams, ...TenantFactoryParams[]] | undefined;
-	invoiceParams: LeaseInvoiceFactoryParams | undefined;
+	invoicesParams:
+		| [LeaseInvoiceFactoryParams, ...LeaseInvoiceFactoryParams[]]
+		| undefined;
+
 	expenseParams: ExpenseFactoryParams | undefined;
 	/**
 	 * Both propertyId and unitId are defined by default. If you want to override,

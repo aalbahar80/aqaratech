@@ -6,35 +6,48 @@ import { apiURL } from './api-url';
 import type { AllFixtures } from './test-fixtures.interface';
 
 export const invoiceFixtures: AllFixtures = {
-	invoiceParams: [undefined, { option: true }],
+	invoicesParams: [undefined, { option: true }],
 
-	invoice: async ({ org, portfolio, lease, request, invoiceParams }, use) => {
-		const invoice = R.pick(
+	invoices: async ({ org, portfolio, lease, request, invoicesParams }, use) => {
+		const params = invoicesParams ?? [{}];
+
+		const leaseInvoices = R.times(params.length, (n) =>
 			leaseInvoiceFactory.build({
 				organizationId: org.organization.id,
 				portfolioId: portfolio.id,
 				leaseId: lease.id,
-				...invoiceParams,
+				...params[n],
 			}),
-			[
-				'portfolioId',
-				'leaseId',
-				'amount',
-				'isPaid',
-				'memo',
-				'postAt',
-				'paidAt',
-				'dueAt',
-			],
 		);
+
+		// Insert leaseInvoices
 
 		const url = `${apiURL}/organizations/${org.organization.id}/leaseInvoices`;
 
-		const res = await request.post(url, { data: invoice });
-		resCheck(res);
+		const created = (await Promise.all(
+			leaseInvoices.map(async (leaseInvoice) => {
+				const picked = R.pick(leaseInvoice, [
+					'portfolioId',
+					'leaseId',
+					'amount',
+					'isPaid',
+					'memo',
+					'postAt',
+					'paidAt',
+					'dueAt',
+				]);
 
-		const created = (await res.json()) as LeaseInvoiceDto;
+				const res = await request.post(url, { data: picked });
+				resCheck(res);
+
+				return (await res.json()) as LeaseInvoiceDto;
+			}),
+		)) as [LeaseInvoiceDto, ...LeaseInvoiceDto[]];
 
 		await use(created);
+	},
+
+	invoice: async ({ invoices }, use) => {
+		await use(invoices[0]);
 	},
 };
