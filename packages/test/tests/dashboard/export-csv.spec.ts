@@ -1,67 +1,52 @@
-import { Cookie, getRoute, PageTypePortfolio } from '@self/utils';
+import { expect } from '@playwright/test';
+import { getRoute, PageTypePortfolio } from '@self/utils';
+import fs from 'node:fs';
+import * as R from 'remeda';
 import { test } from '../api/api-fixtures';
+const SAVE_PATH = './downloads/expenses.csv';
 
 test.use({
-	roleParams: {
-		roleType: 'PORTFOLIO',
-	},
-
-	// A page with a role cookie of a portfolio user
-	page: async ({ browser, context, role }, use) => {
-		const portfolioContext = await browser.newContext();
-
-		const staleRoleCookie = (await context.cookies()).find(
-			(cookie) =>
-				cookie.name === Cookie.role ||
-				cookie.name === Cookie.accessToken ||
-				cookie.name === Cookie.idToken,
-		);
-
-		if (!staleRoleCookie) throw new Error('role cookie is not set');
-
-		const cookie = {
-			...staleRoleCookie,
-			value: role.id,
-			name: Cookie.role,
-		};
-
-		await portfolioContext.addCookies([cookie]);
-
-		const portfolioPage = await portfolioContext.newPage();
-
-		await use(portfolioPage);
-
-		await portfolioPage.close();
-	},
+	userRoleType: 'PORTFOLIO',
+	expensesParams: R.times(100, () => ({
+		amount: 100,
+	})),
 });
 
 test('can export csv from expenses table', async ({
-	page: portfolioPage,
+	scopedPage: page,
 	org,
 	portfolio,
+	expenses,
 }) => {
+	console.log(await page.context().cookies());
+
 	const url = getRoute({
 		entity: 'portfolio',
 		id: portfolio.id,
-		pageType: PageTypePortfolio.Summary,
+		pageType: PageTypePortfolio.Expenses,
 		params: { organizationId: org.organization.id, portfolioId: portfolio.id },
 	});
 
-	await portfolioPage.goto(url);
+	await page.goto(url);
 
-	await portfolioPage.getByRole('link', { name: 'Income' }).click();
-	// await page.getByRole('link', { name: 'Expenses' }).click();
+	await page.getByRole('link', { name: 'Table' }).click();
 
-	await portfolioPage.getByRole('link', { name: 'Table' }).click();
-
-	await portfolioPage.getByRole('button', { name: 'Options' }).click();
+	await page.getByRole('button', { name: 'Options' }).click();
 
 	const [download] = await Promise.all([
-		portfolioPage.waitForEvent('download'),
-		portfolioPage.getByRole('link', { name: 'Export to CSV' }).click(),
+		page.waitForEvent('download'),
+		page.getByRole('link', { name: 'Export to CSV' }).click(),
 	]);
 
-	const csv = await download.saveAs('expenses.csv');
+	await download.saveAs(SAVE_PATH);
+	const csv = fs.readFileSync(SAVE_PATH, 'utf8');
 
-	// console.log(csv);
+	expect.soft(csv).not.toBe('');
+
+	expect(csv).toContain(
+		'id,unitId,createdAt,updatedAt,amount,postAt,organizationId,portfolioId',
+	);
+
+	expect(csv).toContain(expenses[0].id);
+	expect(csv).toContain(expenses[99].id);
 });
