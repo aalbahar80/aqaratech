@@ -13,9 +13,14 @@
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getProgress, toUTCFormat } from '$lib/utils/common';
 	import { getRoute, PageType } from '@self/utils';
-	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
+	import {
+		createColumnHelper,
+		renderComponent,
+		type ColumnDef,
+	} from '@tanstack/svelte-table';
 
 	export let data: PaginatedLeaseDto;
+	export let extraColumns: ColumnDef<LeaseDto, string>[] = [];
 
 	const columnHelper = createColumnHelper<LeaseDto>();
 
@@ -55,6 +60,8 @@
 			header: 'Deposit (KWD)',
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
+
+		...extraColumns,
 
 		locationColumnDef(columnHelper),
 
