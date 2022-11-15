@@ -10,8 +10,9 @@
 		TransitionChild,
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
-	import { ChevronDown, X } from '@steeze-ui/heroicons';
+	import { X } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
+	import HeroiconsChevronDown20Solid from '~icons/heroicons/chevron-down-20-solid';
 
 	export let filters: Filter[];
 
@@ -78,9 +79,7 @@
 								>
 									<span class="font-medium text-gray-900">{filter.label}</span>
 									<span class="ml-6 flex items-center">
-										<Icon
-											src={ChevronDown}
-											theme="solid"
+										<HeroiconsChevronDown20Solid
 											class={classes(
 												open ? '-rotate-180' : 'rotate-0',
 												'h-5 w-5 transform',

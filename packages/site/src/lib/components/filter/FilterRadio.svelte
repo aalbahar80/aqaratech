@@ -8,8 +8,7 @@
 		MenuItems,
 		Transition,
 	} from '@rgossiaux/svelte-headlessui';
-	import { ChevronDown } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import HeroiconsChevronDown20Solid from '~icons/heroicons/chevron-down-20-solid';
 
 	export let label: string;
 	export let filter: Filter | undefined = undefined;
@@ -22,9 +21,7 @@
 			class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
 		>
 			{label}
-			<Icon
-				src={ChevronDown}
-				theme="solid"
+			<HeroiconsChevronDown20Solid
 				class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
 				aria-hidden="true"
 			/>

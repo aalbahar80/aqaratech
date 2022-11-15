@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { ChevronDown } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import HeroiconsChevronDown20Solid from '~icons/heroicons/chevron-down-20-solid';
 </script>
 
 <span class="relative inline-flex rounded-md shadow-sm">
@@ -9,6 +8,6 @@
 		data-testid="more-actions-button"
 	>
 		<span class="sr-only">Open options</span>
-		<Icon src={ChevronDown} class="h-5 w-5" aria-hidden="true" theme="solid" />
+		<HeroiconsChevronDown20Solid class="h-5 w-5" aria-hidden="true" />
 	</div>
 </span>

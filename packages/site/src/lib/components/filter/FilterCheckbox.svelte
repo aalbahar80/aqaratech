@@ -7,8 +7,7 @@
 		PopoverPanel,
 		Transition,
 	} from '@rgossiaux/svelte-headlessui';
-	import { ChevronDown } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import HeroiconsChevronDown20Solid from '~icons/heroicons/chevron-down-20-solid';
 
 	export let filter: Filter;
 	export let showCount = false;
@@ -29,9 +28,7 @@
 					</span>
 				{/if}
 
-				<Icon
-					src={ChevronDown}
-					theme="solid"
+				<HeroiconsChevronDown20Solid
 					class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
 					aria-hidden="true"
 				/>
