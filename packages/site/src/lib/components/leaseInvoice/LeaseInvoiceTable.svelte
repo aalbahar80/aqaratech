@@ -4,10 +4,9 @@
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
-	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
-	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
-	import FilterRadio from '$lib/components/filter/FilterRadio.svelte';
+	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
+	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 	import {
 		locationColumnDef,
@@ -17,9 +16,7 @@
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
-	import Fa6SolidFileCsv from '~icons/fa6-solid/file-csv';
 
 	export let data: PaginatedLeaseInvoiceDto;
 	export let showOptions = false;
@@ -127,19 +124,9 @@
 		<FilterBar responsive={filters}>
 			<div slot="custom">
 				{#if showOptions}
-					<FilterRadio label="Options">
-						<MenuItem as="div" let:active>
-							<a
-								href={`${$page.url.pathname}/csv`}
-								download="leaseInvoices.csv"
-							>
-								<MenuItemChild {active}>
-									<MenuItemIcon icon={Fa6SolidFileCsv} />
-									Export to CSV
-								</MenuItemChild>
-							</a>
-						</MenuItem>
-					</FilterRadio>
+					<FilterBarActions>
+						<FilterBarActionsExport />
+					</FilterBarActions>
 				{/if}
 			</div>
 		</FilterBar>

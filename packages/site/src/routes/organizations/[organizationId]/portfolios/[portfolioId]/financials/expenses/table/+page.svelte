@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { ExpenseDto } from '$api/openapi';
 	import { page } from '$app/stores';
-	import ExportButton from '$lib/components/buttons/ExportButton.svelte';
+	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
+	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import {
 		locationColumnDef,
 		viewColumnDef,
@@ -44,9 +46,13 @@
 	{columns}
 	paginationType="server"
 >
-	<div slot="header-actions">
-		<a href={`${$page.url.pathname}/csv`} download="expenses.csv">
-			<ExportButton />
-		</a>
+	<div slot="filter" let:filters>
+		<FilterBar responsive={filters}>
+			<div slot="custom">
+				<FilterBarActions>
+					<FilterBarActionsExport />
+				</FilterBarActions>
+			</div>
+		</FilterBar>
 	</div>
 </Table>
