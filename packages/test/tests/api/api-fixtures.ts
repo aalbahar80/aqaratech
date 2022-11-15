@@ -6,6 +6,7 @@ import {
 	propertyFactory,
 	unitFactory,
 } from '@self/seed';
+import { Cookie } from '@self/utils';
 import * as R from 'remeda';
 import type {
 	LeaseDto,
@@ -59,7 +60,10 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 	roleCookie: async ({ org, context }, use) => {
 		const staleRoleCookie = (await context.cookies()).find(
-			(cookie) => cookie.name === 'role',
+			(cookie) =>
+				cookie.name === Cookie.role ||
+				cookie.name === Cookie.accessToken ||
+				cookie.name === Cookie.idToken,
 		);
 
 		if (!staleRoleCookie) throw new Error('role cookie is not set');
@@ -67,6 +71,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		const cookie = {
 			...staleRoleCookie,
 			value: org.roleId,
+			name: Cookie.role,
 		};
 
 		await context.addCookies([cookie]);
