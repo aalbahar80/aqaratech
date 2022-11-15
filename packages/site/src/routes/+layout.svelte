@@ -5,7 +5,6 @@
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
-	import { environment } from '$lib/environment';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 	import * as Sentry from '@sentry/svelte?client';
@@ -18,7 +17,7 @@
 
 	export let data: LayoutData;
 
-	onMount(async () => {
+	onMount(() => {
 		// communicate that the app is ready - used for testing
 		document.body.classList.add('started');
 
@@ -36,25 +35,25 @@
 				scope.setUser(getSentryUser(data.user));
 			});
 
-			if (
-				environment.PUBLIC_AQARATECH_ENV === 'production' ||
-				environment.PUBLIC_AQARATECH_ENV === 'staging'
-			) {
-				const LogRocket = (await import('logrocket')).default;
-				LogRocket.init('n4p0hb/aqaratech');
-				if ($page.data.user) {
-					LogRocket.identify($page.data.user.id || '', {
-						email: $page.data.user.email,
-						roleId: $page.data.user.role?.id || '',
-						name: $page.data.user.fullName || '',
-					});
-				}
-				LogRocket.getSessionURL((sessionURL) => {
-					Sentry.configureScope((scope) => {
-						scope.setExtra('sessionURL', sessionURL);
-					});
-				});
-			}
+			// if (
+			// 	environment.PUBLIC_AQARATECH_ENV === 'production' ||
+			// 	environment.PUBLIC_AQARATECH_ENV === 'staging'
+			// ) {
+			// 	const LogRocket = (await import('logrocket')).default;
+			// 	LogRocket.init('n4p0hb/aqaratech');
+			// 	if ($page.data.user) {
+			// 		LogRocket.identify($page.data.user.id || '', {
+			// 			email: $page.data.user.email,
+			// 			roleId: $page.data.user.role?.id || '',
+			// 			name: $page.data.user.fullName || '',
+			// 		});
+			// 	}
+			// 	LogRocket.getSessionURL((sessionURL) => {
+			// 		Sentry.configureScope((scope) => {
+			// 			scope.setExtra('sessionURL', sessionURL);
+			// 		});
+			// 	});
+			// }
 		}
 	});
 </script>
