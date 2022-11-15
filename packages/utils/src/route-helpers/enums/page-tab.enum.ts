@@ -2,6 +2,7 @@ export enum PageTab {
 	Files = 'files',
 	Financials = 'financials',
 	Occupancy = 'occupancy',
+	Expenses = 'expenses',
 
 	Properties = 'properties',
 	Units = 'units',
@@ -23,15 +24,21 @@ export type PortfolioPageTab =
 	| PageTab.Files
 	// Admin
 	| PageTab.Roles
-	| PageTab.Balance;
+	| PageTab.Balance
+	| PageTab.Expenses;
 
 export type PropertyPageTab =
 	| PageTab.Financials
+	// | PageTab.Expenses
 	| PageTab.Occupancy
 	| PageTab.Units
 	| PageTab.Files;
 
-export type UnitPageTab = PageTab.Financials | PageTab.Leases | PageTab.Files;
+export type UnitPageTab =
+	| PageTab.Financials
+	// | PageTab.Expenses
+	| PageTab.Leases
+	| PageTab.Files;
 
 export type LeasePageTab = PageTab.Invoices | PageTab.Files;
 

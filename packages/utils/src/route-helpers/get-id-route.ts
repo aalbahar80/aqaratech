@@ -19,6 +19,7 @@ const pageTypeToUrl = {
 	[PageTab.Invoices]: 'invoices',
 	[PageTab.Roles]: 'roles',
 	[PageTab.Balance]: 'balance',
+	[PageTab.Expenses]: 'expenses',
 };
 
 export const getIdRoute = (input: GetIdRoute, base: string) => {

@@ -1,6 +1,6 @@
 export enum PageTypePortfolio {
-	Summary = 'summary',
-	Income = 'income',
-	Expenses = 'expenses',
-	Payouts = 'payouts',
+	Summary = 'summary-dashboard',
+	Income = 'income-dashboard',
+	Expenses = 'expenses-dashboard',
+	Payouts = 'payouts-dashboard',
 }
