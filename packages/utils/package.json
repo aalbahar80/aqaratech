@@ -27,10 +27,10 @@
 		"@tsconfig/esm": "1.0.2",
 		"@tsconfig/node18-strictest-esm": "1.0.1",
 		"@types/node": "18.11.9",
-		"@vitest/ui": "0.25.1",
+		"@vitest/ui": "0.25.2",
 		"eslint-config-custom": "workspace:1.1.0",
-		"tsup": "6.4.0",
+		"tsup": "6.5.0",
 		"typescript": "4.9.2-rc",
-		"vitest": "0.25.1"
+		"vitest": "0.25.2"
 	}
 }
