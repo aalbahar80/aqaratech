@@ -66,6 +66,7 @@ module.exports = {
 
 				// not consistent in svelte files (try again after update)
 				'@typescript-eslint/no-unsafe-argument': 'off',
+				'@typescript-eslint/no-unsafe-call': 'off',
 
 				// https://ota-meshi.github.io/eslint-plugin-svelte/rules/@typescript-eslint/no-unnecessary-condition/
 				'@typescript-eslint/no-unnecessary-condition': 'off',

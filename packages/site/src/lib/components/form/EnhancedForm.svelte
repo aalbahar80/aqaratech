@@ -5,6 +5,7 @@
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
 	import type { FormPageModel } from '$lib/components/form/model/form-field.interface';
+	import { addErrorToast, addSuccessToast } from '$lib/stores/toast';
 	import { objectValues } from '$lib/utils/common';
 	import * as R from 'remeda';
 
@@ -33,8 +34,18 @@
 
 <form
 	method="POST"
-	use:enhance
 	class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
+	use:enhance={() => {
+		return ({ result, update }) => {
+			if (result.type === 'invalid') {
+				addErrorToast('Invalid form');
+			} else if (result.type === 'success' || result.type === 'redirect') {
+				addSuccessToast('Success');
+			}
+
+			update();
+		};
+	}}
 >
 	<FormError errors={form?.errors.formErrors} />
 	<Fields>
