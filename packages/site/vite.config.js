@@ -11,8 +11,8 @@ export default defineConfig(() => {
 		plugins: [sveltekit(), icons({ compiler: 'svelte' }), isoImport()],
 		clearScreen: false,
 		ssr: {
-			// set chart.js as `noExternal` to avoid issues in SSR (when running `vite preview`)
-			noExternal: ['chart.js'],
+			// set chart.js && papaparse as `noExternal` to avoid issues in SSR (when running `vite preview`)
+			noExternal: ['chart.js', 'papaparse'],
 		},
 		build: {
 			// Generate sourcemaps for all builds. In production, remove them before building Docker image.
