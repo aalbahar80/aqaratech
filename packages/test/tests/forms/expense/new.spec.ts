@@ -40,13 +40,7 @@ test('can be submitted with minimal fields', async ({
 
 	const formPage = new FormPage(page);
 
-	await formPage.fillForm({
-		...expense,
-		categoryId: new ComboboxOption({
-			label: expenseCategory.labelEn,
-			value: expenseCategory.id,
-		}),
-	});
+	await formPage.fillForm(expense);
 
 	await formPage.save();
 
