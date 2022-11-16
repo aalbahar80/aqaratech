@@ -35,7 +35,5 @@ export const expenseFormModel = (pageType: FormTypeEnum) =>
 			}),
 
 			memo: createFormField('memo'),
-
-			label: createFormField('label'),
 		},
 	});
