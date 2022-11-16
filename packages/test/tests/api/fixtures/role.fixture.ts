@@ -3,7 +3,6 @@ import * as R from 'remeda';
 import type { RoleDto } from '../../../types/api';
 import { PostUrlRole } from '../../../utils/post-url';
 import { resCheck } from '../../../utils/res-check';
-import { apiURL } from './api-url';
 import type { AllFixtures } from './test-fixtures.interface';
 
 export const roleFixtures: AllFixtures = {
@@ -23,7 +22,7 @@ export const roleFixtures: AllFixtures = {
 			tenantId: role.tenantId,
 		})[role.roleType];
 
-		const res = await request.post(`${apiURL}${url}`, {
+		const res = await request.post(`${url}`, {
 			data: R.pick(role, ['email']),
 		});
 		resCheck(res);
