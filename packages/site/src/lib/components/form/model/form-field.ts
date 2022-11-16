@@ -7,7 +7,8 @@ import { getLabel } from '@self/utils';
 
 type WithOptions<Name extends string> = {
 	type: 'select';
-	options: Option[];
+	options?: Option[];
+	getOptions?: () => Option[];
 } & Partial<SelectFormField<Name>>;
 
 type WithoutOptions<Name extends string> = Partial<InputFormField<Name>>;
