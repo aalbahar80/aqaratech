@@ -52,8 +52,7 @@
 					params: $page.params,
 					pageType: PageType.New,
 					predefined: {
-						// @ts-expect-error non-null-assertion
-						unitId: $page.params.unitId,
+						unitId: data.unit.id,
 					},
 				})}
 			>

@@ -22,7 +22,6 @@
 					pageType: PageType.New,
 					params: $page.params,
 					predefined: {
-						portfolioid: data.property.portfolioId,
 						propertyId: data.property.id,
 					},
 				})}
