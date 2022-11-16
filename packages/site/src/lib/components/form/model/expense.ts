@@ -19,10 +19,12 @@ export const expenseFormModel = (pageType: FormTypeEnum) =>
 		fields: {
 			postAt: createFormField('postAt', {
 				type: 'date',
+				required: true,
 			}),
 
 			amount: createFormField('amount', {
 				type: 'number',
+				required: true,
 			}),
 
 			categoryId: createFormField('categoryId', {
