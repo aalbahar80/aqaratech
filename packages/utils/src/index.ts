@@ -10,6 +10,7 @@ export { startOfMonthN } from './date/start-of-month-n';
 export { dbEntity, nonDbEntity } from './entity/entity-definition';
 export type { DBEntity, Entity, NonDBEntity } from './entity/entity-definition';
 export { entitiesMap } from './entity/entity-map';
+export { FIELDS } from './constants/fields';
 export type {
 	DBEntitiesMap,
 	EntitiesMap,

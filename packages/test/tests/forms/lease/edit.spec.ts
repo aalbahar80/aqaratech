@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
-import { leaseFactory } from '@self/seed';
-import { PageType } from '@self/utils';
+import { leasePartialFactory } from '@self/seed';
+import { FIELDS, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';
@@ -14,15 +14,7 @@ test('can be submitted with minimal fields', async ({
 	lease,
 	page,
 }) => {
-	const fields = R.pick(
-		leaseFactory.build({
-			organizationId: '',
-			portfolioId: '',
-			tenantId: '',
-			unitId: '',
-		}),
-		['start', 'end', 'monthlyRent'],
-	);
+	const fields = R.pick(leasePartialFactory(), FIELDS.lease.required);
 
 	const formPage = new FormPage(page, {
 		entity,
@@ -41,24 +33,7 @@ test('can be submitted with minimal fields', async ({
 test.fixme(
 	'can be submitted with all fields',
 	async ({ org, portfolio, lease, page }) => {
-		const fields = R.pick(
-			leaseFactory.build({
-				organizationId: '',
-				portfolioId: '',
-				propertyId: '',
-			}),
-			[
-				'leaseNumber',
-				'bed',
-				'bath',
-				'size',
-				'marketRent',
-				'floor',
-				'label',
-				'type',
-				'usage',
-			],
-		);
+		const fields = R.pick(leasePartialFactory(), FIELDS.lease.all);
 
 		const formPage = new FormPage(page, {
 			entity,

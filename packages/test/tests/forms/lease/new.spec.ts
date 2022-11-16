@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { expect } from '@playwright/test';
 import { leasePartialFactory } from '@self/seed';
-import { getRoute, PageType } from '@self/utils';
+import { getRoute, PageType, FIELDS } from '@self/utils';
 import * as R from 'remeda';
 import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
@@ -22,12 +22,7 @@ test('can be submitted with minimal fields', async ({
 	unit,
 	page,
 }) => {
-	const lease = R.pick(leasePartialFactory(), [
-		'start',
-		'end',
-		'monthlyRent',
-		'deposit',
-	]);
+	const lease = R.pick(leasePartialFactory(), FIELDS.lease.required);
 
 	const url = getRoute({
 		entity,
@@ -73,15 +68,7 @@ test('can be submitted with all fields', async ({
 	tenants,
 	page,
 }) => {
-	const lease = R.pick(leasePartialFactory(), [
-		'start',
-		'end',
-		'monthlyRent',
-		'deposit',
-		'notify',
-		'canPay',
-		'license',
-	]);
+	const lease = R.pick(leasePartialFactory(), FIELDS.lease.all);
 
 	const url = getRoute({
 		entity,
