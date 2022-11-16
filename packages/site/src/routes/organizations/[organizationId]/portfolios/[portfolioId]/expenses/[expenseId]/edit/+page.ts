@@ -6,10 +6,10 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
 	const { organizationId, expenseId } = params;
 
-	const [expense, expenseTypes] = await Promise.all([
+	const [expense, categories] = await Promise.all([
 		api.expenses.findOne({ id: expenseId }),
 		api.expenseCategories.findAll({ organizationId }),
 	]);
 
-	return { expense, expenseTypes };
+	return { expense, categories };
 };
