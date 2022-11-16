@@ -35,7 +35,6 @@ export class FormPage {
 
 			if (Combobox.keys.includes(key)) {
 				if (value instanceof ComboboxOption) {
-					console.log({ key }, 'form-page-model.ts ~ 39');
 					await new Combobox({
 						page: this.page,
 						key,
