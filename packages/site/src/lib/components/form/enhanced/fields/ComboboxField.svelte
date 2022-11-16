@@ -17,7 +17,7 @@
 <FieldLabel {formField} />
 
 <Combobox
-	initialValue={options.find((option) => option.value === value)?.value}
+	initialValue={value}
 	inputId={formField.name}
 	{options}
 	invalid={!!errors}
@@ -28,4 +28,9 @@
 />
 
 <!-- hidden input to make combox compatible with enhanced form -->
-<input type="hidden" name={formField.name} {value} />
+<!-- `undefined` may be sent as a string "undefined". So we replace it with `null` here -->
+<input
+	type="hidden"
+	name={formField.name}
+	value={value === undefined ? null : value}
+/>
