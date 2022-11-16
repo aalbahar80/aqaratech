@@ -36,11 +36,20 @@ type InputType =
 
 // Select field
 
-export interface SelectFormField<T> extends BaseFormField<T> {
+interface BaseSelectFormField<T> extends BaseFormField<T> {
 	type: 'select';
-	options: Option[];
 	combobox: boolean;
 }
+
+type FieldOptions =
+	| {
+			options: Option[];
+	  }
+	| {
+			getOptions: () => Option[];
+	  };
+
+export type SelectFormField<T> = BaseSelectFormField<T> & FieldOptions;
 
 // Combined
 

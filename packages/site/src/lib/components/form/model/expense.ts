@@ -3,7 +3,12 @@ import {
 	createFormModel,
 	type FormTypeEnum,
 } from '$lib/components/form/model/form-model';
+import {
+	key,
+	type ExpenseCategoryContext,
+} from '$lib/components/organization/expense-category-context';
 import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
+import { getContext } from 'svelte';
 
 export const expenseFormModel = (pageType: FormTypeEnum) =>
 	createFormModel({
@@ -23,7 +28,10 @@ export const expenseFormModel = (pageType: FormTypeEnum) =>
 			categoryId: createFormField('categoryId', {
 				type: 'select',
 				combobox: true,
-				options: [],
+				getOptions: () => {
+					const context = getContext<ExpenseCategoryContext>(key);
+					return context.data;
+				},
 			}),
 
 			memo: createFormField('memo'),
