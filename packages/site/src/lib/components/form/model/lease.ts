@@ -14,14 +14,17 @@ export const leaseFormModel = (pageType: FormTypeEnum) =>
 		fields: {
 			start: createFormField('start', {
 				type: 'date',
+				required: true,
 			}),
 
 			end: createFormField('end', {
 				type: 'date',
+				required: true,
 			}),
 
 			monthlyRent: createFormField('monthlyRent', {
 				type: 'number',
+				required: true,
 			}),
 
 			deposit: createFormField('deposit', {
@@ -42,6 +45,7 @@ export const leaseFormModel = (pageType: FormTypeEnum) =>
 				combobox: true,
 				options: [],
 				hideWhenEdit: true,
+				required: true,
 			}),
 
 			license: createFormField('license'),
