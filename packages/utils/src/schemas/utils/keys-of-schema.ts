@@ -9,5 +9,6 @@ export type KeysOfSchema<T extends z.AnyZodObject> = ReturnType<
 	T['keyof']
 >['options'];
 
-export const keysOfSchema = <T extends z.AnyZodObject>(schema: T) =>
-	schema.keyof().options;
+export const keysOfSchema = <T extends z.AnyZodObject>(
+	schema: T,
+): KeysOfSchema<T> => schema.keyof().options;
