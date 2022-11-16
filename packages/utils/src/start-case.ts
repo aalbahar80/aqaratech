@@ -1,4 +1,9 @@
 export const startCase = (str: string): string =>
-	str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
-		return str.toUpperCase();
-	});
+	str
+		.split(/[\s_-]|(?=[A-Z])/)
+		.map((word) =>
+			typeof word[0] === 'string'
+				? word[0].toUpperCase() + word.slice(1).toLowerCase()
+				: '',
+		)
+		.join(' ');

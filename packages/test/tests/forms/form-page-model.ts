@@ -28,10 +28,14 @@ export class FormPage {
 		const labeled = R.mapKeys(fields, (key) => getLabel(key));
 
 		for (const [key, value] of Object.entries(labeled)) {
+			// The key may be followed by an asterisk.
+			const keyRegex = new RegExp(`${key}|${key} \\*`);
+
 			// Combobox Fields
 
 			if (Combobox.keys.includes(key)) {
 				if (value instanceof ComboboxOption) {
+					console.log({ key }, 'form-page-model.ts ~ 39');
 					await new Combobox({
 						page: this.page,
 						key,
@@ -46,7 +50,7 @@ export class FormPage {
 			// Checkbox Fields
 
 			if (value === true || value === false) {
-				const checkbox = this.page.getByLabel(key);
+				const checkbox = this.page.getByLabel(keyRegex);
 
 				await checkbox.setChecked(value);
 
@@ -58,7 +62,7 @@ export class FormPage {
 			const SELECT_KEYS = ['type'].map((key) => getLabel(key));
 
 			if (SELECT_KEYS.includes(key)) {
-				const select = this.page.getByLabel(key);
+				const select = this.page.getByLabel(keyRegex);
 
 				await select.selectOption({ label: value });
 
@@ -80,7 +84,7 @@ export class FormPage {
 				throw new Error(`Unsupported value type: ${typeof value}`);
 			}
 
-			await this.page.getByLabel(key, { exact: true }).fill(valueString);
+			await this.page.getByLabel(keyRegex).fill(valueString);
 		}
 	};
 

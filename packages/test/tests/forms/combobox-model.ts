@@ -1,7 +1,7 @@
 import { expect, Page } from '@playwright/test';
 import { getLabel } from '@self/utils';
 
-const keyLabels = ['nationality', 'tenantId'];
+const keyLabels = ['nationality', 'tenantId', 'categoryId'];
 
 interface Option {
 	label: string;
@@ -23,9 +23,10 @@ export class Combobox {
 	}
 
 	async fill(option: ComboboxOption) {
-		const input = this.page.getByLabel(this.key, {
-			exact: true,
-		});
+		// The key may be followed by an asterisk.
+		const keyRegex = new RegExp(`${this.key}|${this.key} \\*`);
+
+		const input = this.page.getByLabel(keyRegex);
 
 		await input.fill(option.label);
 

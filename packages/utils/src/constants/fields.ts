@@ -47,7 +47,7 @@ export const lease = {
 export const expense = {
 	required: ['postAt', 'amount'],
 	all: ['postAt', 'amount', 'categoryId', 'memo'],
-};
+} as const;
 
 /**
  * The form fields for each entity.
