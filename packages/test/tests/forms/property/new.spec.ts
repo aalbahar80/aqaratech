@@ -1,8 +1,9 @@
 import { expect } from '@playwright/test';
-import { propertyFactory } from '@self/seed';
-import { PageType } from '@self/utils';
+import { propertyPartialFactory } from '@self/seed';
+import { FIELDS, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { test } from '../../api/api-fixtures';
+import { ComboboxOption } from '../combobox-model';
 import { FormPage } from '../form-page-model';
 
 const entity = 'property';
@@ -13,13 +14,7 @@ test('can be submitted with minimal fields', async ({
 	page,
 	portfolio,
 }) => {
-	const property = R.pick(
-		propertyFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: portfolio.id,
-		}),
-		['area', 'block', 'number', 'street'],
-	);
+	const property = R.pick(propertyPartialFactory(), FIELDS.property.required);
 
 	const formPage = new FormPage(page, {
 		entity,
@@ -28,20 +23,22 @@ test('can be submitted with minimal fields', async ({
 	});
 
 	await formPage.goto();
-	await formPage.fillForm(property);
+
+	await formPage.fillForm({
+		...property,
+		area: new ComboboxOption({
+			label: property.area,
+			value: property.area,
+		}),
+	});
+
 	await formPage.save();
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
 test('can be submitted with all fields', async ({ org, page, portfolio }) => {
-	const property = R.pick(
-		propertyFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: portfolio.id,
-		}),
-		['area', 'block', 'number', 'street', 'label', 'avenue', 'parcel', 'paci'],
-	);
+	const property = R.pick(propertyPartialFactory(), FIELDS.property.all);
 
 	const formPage = new FormPage(page, {
 		entity,
@@ -50,7 +47,14 @@ test('can be submitted with all fields', async ({ org, page, portfolio }) => {
 	});
 
 	await formPage.goto();
-	await formPage.fillForm(property);
+	// TODO: this might be flaky because of strict mode on label
+	await formPage.fillForm({
+		...property,
+		area: new ComboboxOption({
+			label: property.area,
+			value: property.area,
+		}),
+	});
 	await formPage.save();
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());

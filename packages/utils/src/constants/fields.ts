@@ -1,4 +1,4 @@
-export const PROPERTY = {
+export const property = {
 	required: ['area', 'block', 'number', 'street'],
 
 	all: [
@@ -53,6 +53,7 @@ export const expense = {
  * The form fields for each entity.
  */
 export const FIELDS = {
+	property,
 	unit,
 	lease,
 	expense,

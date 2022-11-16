@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
-import type { Property } from '../utils/date-or-string';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
 import { areas } from '../constants';
+import type { Property } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
 
 export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
@@ -51,3 +51,9 @@ export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 		faker.datatype.number({ min: 100, max: 999999 }).toString(),
 	),
 });
+
+export const propertyPartialFactory = () =>
+	propertyFactory.build({
+		organizationId: '',
+		portfolioId: '',
+	});

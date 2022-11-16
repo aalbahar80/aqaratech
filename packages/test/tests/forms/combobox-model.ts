@@ -1,7 +1,7 @@
 import { expect, Page } from '@playwright/test';
 import { getLabel } from '@self/utils';
 
-const keyLabels = ['nationality', 'tenantId', 'categoryId'];
+const keyLabels = ['nationality', 'tenantId', 'categoryId', 'area'];
 
 interface Option {
 	label: string;
@@ -30,9 +30,11 @@ export class Combobox {
 
 		await input.fill(option.label);
 
-		const target = this.page.getByText(option.label);
+		// Options with similar labels may exist. So we need to get by data-testid then
+		// test the label.
+		const target = this.page.getByTestId(option.value);
 
-		await expect(target).toHaveAttribute('data-testid', option.value);
+		await expect(target).toHaveText(new RegExp(`${option.label}`));
 
 		await target.click();
 	}

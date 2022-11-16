@@ -1,8 +1,9 @@
 import { expect } from '@playwright/test';
-import { propertyFactory } from '@self/seed';
-import { PageType } from '@self/utils';
+import { propertyPartialFactory } from '@self/seed';
+import { FIELDS, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { test } from '../../api/api-fixtures';
+import { ComboboxOption } from '../combobox-model';
 import { FormPage } from '../form-page-model';
 
 const entity = 'property';
@@ -14,13 +15,7 @@ test('can be submitted with minimal fields', async ({
 	property,
 	page,
 }) => {
-	const fields = R.pick(
-		propertyFactory.build({
-			organizationId: property.organizationId,
-			portfolioId: property.portfolioId,
-		}),
-		['area', 'block', 'number', 'street'],
-	);
+	const fields = R.pick(propertyPartialFactory(), FIELDS.property.required);
 
 	const formPage = new FormPage(page, {
 		entity,
@@ -30,7 +25,13 @@ test('can be submitted with minimal fields', async ({
 	});
 
 	await formPage.goto();
-	await formPage.fillForm(fields);
+	await formPage.fillForm({
+		...fields,
+		area: new ComboboxOption({
+			label: property.area,
+			value: property.area,
+		}),
+	});
 	await formPage.save();
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
@@ -42,13 +43,7 @@ test('can be submitted with all fields', async ({
 	property,
 	page,
 }) => {
-	const fields = R.pick(
-		propertyFactory.build({
-			organizationId: property.organizationId,
-			portfolioId: property.portfolioId,
-		}),
-		['area', 'block', 'number', 'street', 'label', 'avenue', 'parcel', 'paci'],
-	);
+	const fields = R.pick(propertyPartialFactory(), FIELDS.property.all);
 
 	const formPage = new FormPage(page, {
 		entity,
@@ -57,7 +52,13 @@ test('can be submitted with all fields', async ({
 		fixtures: { org, portfolio },
 	});
 	await formPage.goto();
-	await formPage.fillForm(fields);
+	await formPage.fillForm({
+		...fields,
+		area: new ComboboxOption({
+			label: property.area,
+			value: property.area,
+		}),
+	});
 	await formPage.save();
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());

@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
-import type { Unit } from '../utils/date-or-string';
 import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
 import { unitTypeOptions } from '../constants';
+import type { Unit } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
 
 const unitTypeValues = unitTypeOptions
@@ -39,3 +39,10 @@ export const unitFactory = Factory.Sync.makeFactoryWithRequired<
 
 	label: Factory.each(() => null),
 });
+
+export const unitPartialFactory = () =>
+	unitFactory.build({
+		organizationId: '',
+		portfolioId: '',
+		propertyId: '',
+	});
