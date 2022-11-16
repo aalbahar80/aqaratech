@@ -1,53 +1,110 @@
-// import { expect } from '@playwright/test';
-// import { sample } from '@self/seed';
-// import { test } from '../../api/api-fixtures';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { expect } from '@playwright/test';
+import { expensePartialFactory } from '@self/seed';
+import { FIELDS, getRoute, PageType } from '@self/utils';
+import * as R from 'remeda';
+import { uuid } from '../../../utils/uuid';
+import { test } from '../../api/api-fixtures';
+import { ComboboxOption } from '../combobox-model';
+import { FormPage } from '../form-page-model';
 
-// test('smoke', async ({ page }, info) => {
-// 	const portfolio = sample.portfolios[0];
-// 	const property = sample.properties[0];
-// 	const unit = sample.units[0];
+const entity = 'expense';
+const pageType = PageType.New;
 
-// 	await page.goto(`/expenses/new`);
+test.use({
+	expenseCategoryParams: {
+		isGroup: false,
+	},
+});
 
-// 	await page.locator('#portfolioId').click();
-// 	await page.locator(`text=${portfolio.label}`).click();
+test('can be submitted with minimal fields', async ({
+	org,
+	portfolio,
+	unit,
+	page,
+	expenseCategory,
+}) => {
+	const expense = R.pick(expensePartialFactory(), FIELDS.expense.required);
 
-// 	await page.locator('#propertyId').click();
-// 	await page.locator(`data-testid=${property.id}`).click();
+	const url = getRoute({
+		entity,
+		pageType,
+		predefined: { unitId: unit.id },
+		params: {
+			portfolioId: portfolio.id,
+			organizationId: org.organization.id,
+		},
+	});
 
-// 	await page.locator('#unitId').click();
-// 	await page.locator(`data-testid=${unit.id}`).click();
+	await page.goto(url);
 
-// 	await page.locator('input[name="amount"]').fill('500');
-// 	await page.fill('input[name="postAt"]', '2022-01-01');
+	const formPage = new FormPage(page);
 
-// 	await page.locator('text=Save').click();
+	await formPage.fillForm({
+		...expense,
+		categoryId: new ComboboxOption({
+			label: expenseCategory.labelEn,
+			value: expenseCategory.id,
+		}),
+	});
 
-// 	const id = new RegExp(
-// 		`/expenses/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`,
-// 	);
-// 	await expect(page).toHaveURL(id);
-// 	const url = page.url();
+	await formPage.save();
 
-// 	// take screenshot
-// 	expect(page.locator('text=expense')).toBeTruthy();
-// 	await page.locator('#detailsPane').screenshot({
-// 		path: info.snapshotDir + `/expense-${info.snapshotSuffix}.png`,
-// 	});
+	const successUrl = getRoute({
+		entity,
+		id: ':uuid',
+		pageType: PageType.Id,
+		params: {
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+		},
+	});
 
-// 	await page.locator('text=Edit').click();
-// 	const edit = new RegExp(
-// 		`/expenses/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/edit`,
-// 	);
-// 	await expect(page).toHaveURL(edit);
-// 	await page.locator('text=Save').click();
+	await expect(page).toHaveURL(uuid(successUrl));
+});
 
-// 	// ensure same entity
-// 	await expect(page).toHaveURL(url);
+test('can be submitted with all fields', async ({
+	org,
+	portfolio,
+	unit,
+	expenseCategory,
+	page,
+}) => {
+	const expense = R.pick(expensePartialFactory(), FIELDS.expense.all);
 
-// 	// match screenshot
-// 	expect(page.locator('text=expense')).toBeTruthy();
-// 	expect(await page.locator('#detailsPane').screenshot()).toMatchSnapshot({
-// 		name: 'expense.png',
-// 	});
-// });
+	const url = getRoute({
+		entity,
+		pageType,
+		predefined: { unitId: unit.id },
+		params: {
+			portfolioId: portfolio.id,
+			organizationId: org.organization.id,
+		},
+	});
+
+	await page.goto(url);
+
+	const formPage = new FormPage(page);
+
+	await formPage.fillForm({
+		...expense,
+		categoryId: new ComboboxOption({
+			label: expenseCategory.labelEn,
+			value: expenseCategory.id,
+		}),
+	});
+
+	await formPage.save();
+
+	const successUrl = getRoute({
+		entity,
+		id: ':uuid',
+		pageType: PageType.Id,
+		params: {
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+		},
+	});
+
+	await expect(page).toHaveURL(uuid(successUrl));
+});
