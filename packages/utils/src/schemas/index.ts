@@ -14,4 +14,5 @@ export * from './role.schema';
 export * from './tenant.schema';
 export * from './unit.schema';
 export * from './utils/date/zod-date-only';
+export * from './utils/keys-of-schema';
 export * from './utils/zod-string';
