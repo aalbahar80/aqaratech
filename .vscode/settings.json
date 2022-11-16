@@ -17,5 +17,7 @@
 		// "changeProcessCWD": true,
 		// 	"directory": "packages/site"
 		// },
-	]
+	],
+	"workbench.editor.labelFormat": "short",
+	"explorer.sortOrder": "filesFirst"
 }
