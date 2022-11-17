@@ -1,18 +1,16 @@
 <script lang="ts">
-	import DetailsPane from '$lib/components/DetailsPane.svelte';
-	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
+	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
+	import * as R from 'remeda';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	$: details = [
-		['Tenant', data.lease.breadcrumbs.tenant.label],
-		['Start Date', toUTCFormat(data.lease.start)],
-		['End Date', toUTCFormat(data.lease.end)],
-		['Monthly Rent', kwdFormat(data.lease.monthlyRent)],
-		['Deposit', kwdFormat(data.lease.deposit)],
-		['License', data.lease.license || '-'],
-	] as [string, string | null][];
+	$: obj = R.merge(data.lease, {
+		tenant: data.lease.breadcrumbs.tenant.label,
+	});
 </script>
 
-<DetailsPane {details} />
+<AutoDetailsPane
+	details={obj}
+	keys={['tenant', 'start', 'end', 'monthlyRent', 'deposit', 'license']}
+/>
