@@ -246,8 +246,6 @@ importers:
       '@sentry/node': 7.19.0
       '@sentry/svelte': 7.19.0
       '@sentry/tracing': 7.19.0
-      '@steeze-ui/heroicons': 1.1.1
-      '@steeze-ui/svelte-icon': 1.3.2
       '@sveltejs/adapter-node': 1.0.0-next.100
       '@sveltejs/kit': 1.0.0-next.551
       '@sveltejs/pancake': 0.0.18
@@ -319,8 +317,6 @@ importers:
       '@self/utils': link:../utils
       '@sentry/svelte': 7.19.0_svelte@3.53.1
       '@sentry/tracing': 7.19.0
-      '@steeze-ui/heroicons': 1.1.1
-      '@steeze-ui/svelte-icon': 1.3.2
       '@sveltejs/adapter-node': 1.0.0-next.100
       '@sveltejs/kit': 1.0.0-next.551_svelte@3.53.1+vite@3.2.4
       '@sveltejs/pancake': 0.0.18
@@ -3888,14 +3884,6 @@ packages:
     resolution: {integrity: sha512-BPS4ynJW/o92PUR4wgriz2Ud5gpST5vz6GQfMixEDK0Z8ZCUv2M7SkBLykH56T++Xs+8ln9zTGbOvNGIe02/jw==}
     dependencies:
       '@sinonjs/commons': 1.8.3
-    dev: true
-
-  /@steeze-ui/heroicons/1.1.1:
-    resolution: {integrity: sha512-d38HRg0xHEwj3KfAxDraZHr1RG6/wC1nYMlX2LnBYt3ESvGYxdRP0KW/wqmNxN6bhwlsGsx60joYBsVCJ9w1OA==}
-    dev: true
-
-  /@steeze-ui/svelte-icon/1.3.2:
-    resolution: {integrity: sha512-Y7tH9UKeDYLfBicWLw4n4mhgfuSwgEdtq9wog7H+DjvfpTvea5SEqjHI8onoKZonJqAaUBGVjH02LAiqRWu+cw==}
     dev: true
 
   /@sveltejs/adapter-node/1.0.0-next.100:
