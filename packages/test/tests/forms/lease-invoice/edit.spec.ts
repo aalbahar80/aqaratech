@@ -14,10 +14,11 @@ test('can be submitted with minimal fields', async ({
 	invoice,
 	page,
 }) => {
-	const fields = R.pick(
-		leaseInvoicePartialFactory(),
-		FIELDS.leaseInvoice.required,
-	);
+	// insert both dates to ensure dueAt is not before postAt
+	const fields = R.pick(leaseInvoicePartialFactory(), [
+		...FIELDS.leaseInvoice.required,
+		'dueAt',
+	]);
 
 	const formPage = new FormPage(page, {
 		entity,
@@ -39,7 +40,11 @@ test('can be submitted with all fields', async ({
 	invoice,
 	page,
 }) => {
-	const fields = R.pick(leaseInvoicePartialFactory(), FIELDS.leaseInvoice.all);
+	// insert both dates to ensure dueAt is not before postAt
+	const fields = R.pick(leaseInvoicePartialFactory(), [
+		...FIELDS.leaseInvoice.required,
+		'dueAt',
+	]);
 
 	const formPage = new FormPage(page, {
 		entity,
