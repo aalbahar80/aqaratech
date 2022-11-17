@@ -44,6 +44,12 @@ export const lease = {
 	],
 } as const;
 
+export const leaseInvoice = {
+	required: ['amount', 'postAt'],
+
+	all: ['amount', 'isPaid', 'postAt', 'dueAt', 'paidAt', 'memo'],
+} as const;
+
 export const expense = {
 	required: ['postAt', 'amount'],
 	all: ['postAt', 'amount', 'categoryId', 'memo'],
@@ -56,5 +62,6 @@ export const FIELDS = {
 	property,
 	unit,
 	lease,
+	leaseInvoice,
 	expense,
 } as const;
