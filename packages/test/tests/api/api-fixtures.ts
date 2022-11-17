@@ -1,6 +1,5 @@
 import { test as base } from '@playwright/test';
 import {
-	leaseFactory,
 	organizationFactory,
 	portfolioFactory,
 	propertyFactory,
@@ -9,7 +8,6 @@ import {
 import { Cookie } from '@self/utils';
 import * as R from 'remeda';
 import type {
-	LeaseDto,
 	OrganizationCreatedDto,
 	PortfolioDto,
 	PropertyDto,
@@ -20,6 +18,7 @@ import { apiURL } from './fixtures/api-url';
 import { expenseCategoryFixtures } from './fixtures/expense-category.fixture';
 import { expenseFixtures } from './fixtures/expense.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
+import { leaseFixtures } from './fixtures/lease.fixture';
 import { payoutFixtures } from './fixtures/payout.fixture';
 import { roleFixtures } from './fixtures/role.fixture';
 import { scopedRequestFixtures } from './fixtures/scoped-request.fixture';
@@ -178,37 +177,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(created);
 	},
 
-	lease: async ({ org, unit, tenant, request }, use) => {
-		const lease = leaseFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: unit.portfolioId,
-			unitId: unit.id,
-			tenantId: tenant.id,
-		});
-
-		const picked = R.pick(lease, [
-			'portfolioId',
-			'unitId',
-			'tenantId',
-			'start',
-			'end',
-			'monthlyRent',
-			'notify',
-			'canPay',
-			'deposit',
-			'license',
-		]);
-
-		const url = `${apiURL}/organizations/${org.organization.id}/leases`;
-
-		const res = await request.post(url, { data: picked });
-		resCheck(res);
-
-		const created = (await res.json()) as LeaseDto;
-
-		await use(created);
-	},
-
 	// A fixture that returns a fresh file in a fresh portfolio.
 	file: async ({ portfolio, request }, use) => {
 		const fileName = 'test.txt';
@@ -237,6 +205,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 	...scopedRequestFixtures,
 	...tenantFixtures,
+	...leaseFixtures,
 	...invoiceFixtures,
 	...expenseFixtures,
 	...expenseCategoryFixtures,

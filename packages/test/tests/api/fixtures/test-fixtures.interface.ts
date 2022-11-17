@@ -7,6 +7,7 @@ import type {
 import type {
 	ExpenseCategoryFactoryParams,
 	ExpenseFactoryParams,
+	LeaseFactoryParams,
 	LeaseInvoiceFactoryParams,
 	PayoutFactoryParams,
 	RoleFactoryParams,
@@ -41,6 +42,7 @@ export interface TestFixtures {
 	property: PropertyDto;
 	unit: UnitDto;
 	lease: LeaseDto;
+	leases: [LeaseDto, ...LeaseDto[]];
 	invoice: LeaseInvoiceDto;
 	invoices: [LeaseInvoiceDto, ...LeaseInvoiceDto[]];
 	expense: ExpenseDto;
@@ -57,6 +59,7 @@ export interface TestOptions {
 	roleParams: RoleFactoryParams | undefined;
 
 	tenantsParams: [TenantFactoryParams, ...TenantFactoryParams[]] | undefined;
+	leasesParams: LeaseFactoryParams[] | undefined;
 	payoutsParams: PayoutFactoryParams[] | undefined;
 	invoicesParams:
 		| [LeaseInvoiceFactoryParams, ...LeaseInvoiceFactoryParams[]]

@@ -42,3 +42,7 @@ export const leasePartialFactory = () =>
 		tenantId: '',
 		unitId: '',
 	});
+
+export type LeaseFactoryParams = Partial<
+	Parameters<typeof leaseFactory.build>[0]
+>;
