@@ -39,6 +39,8 @@ test('can be submitted with minimal fields', async ({
 
 	await formPage.save();
 
+	await formPage.verifyDetails(leaseInvoice);
+
 	const successUrl = getRoute({
 		entity,
 		id: ':uuid',
@@ -80,6 +82,8 @@ test('can be submitted with all fields', async ({
 	await formPage.fillForm(leaseInvoice);
 
 	await formPage.save();
+
+	await formPage.verifyDetails(leaseInvoice);
 
 	const successUrl = getRoute({
 		entity,

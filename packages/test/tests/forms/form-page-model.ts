@@ -109,7 +109,9 @@ export class FormPage {
 			await expect.soft(dt).toHaveText(getLabel(key));
 
 			const dd = row.getByRole('definition');
-			await expect.soft(dd).toHaveText(formatValue(value));
+			const formattedValue = formatValue(value);
+			console.log({ formattedValue }, 'form-page-model.ts ~ 113');
+			await expect.soft(dd).toHaveText(formattedValue);
 
 			await expect
 				.soft(dd)
@@ -128,7 +130,7 @@ export class FormPage {
 			return value;
 		} else if (typeof value === 'number') {
 			return value.toString();
-		} else if (!value) {
+		} else if (value === undefined || value === null) {
 			return '';
 		} else {
 			return JSON.stringify(value);

@@ -44,6 +44,8 @@ test('can be submitted with minimal fields', async ({
 
 	await formPage.save();
 
+	await formPage.verifyDetails(expense);
+
 	const successUrl = getRoute({
 		entity,
 		id: ':uuid',
@@ -89,6 +91,11 @@ test('can be submitted with all fields', async ({
 	});
 
 	await formPage.save();
+
+	await formPage.verifyDetails({
+		...R.omit(expense, ['categoryId']),
+		category: expenseCategory.labelEn,
+	});
 
 	const successUrl = getRoute({
 		entity,

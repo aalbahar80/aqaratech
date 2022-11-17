@@ -27,6 +27,8 @@ test('can be submitted with minimal fields', async ({
 	await formPage.fillForm(fields);
 	await formPage.save();
 
+	await formPage.verifyDetails(fields);
+
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
@@ -41,9 +43,12 @@ test.fixme(
 			id: lease.id,
 			fixtures: { org, portfolio },
 		});
+
 		await formPage.goto();
 		await formPage.fillForm(fields);
 		await formPage.save();
+
+		await formPage.verifyDetails(fields);
 
 		await expect(page).toHaveURL(formPage.getSuccessUrl());
 	},

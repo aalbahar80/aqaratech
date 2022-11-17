@@ -17,6 +17,7 @@
 	keys={[
 		'amount',
 		'memo',
+		'isPaid',
 		'postAt',
 		'dueAt',
 		'paidAt',
