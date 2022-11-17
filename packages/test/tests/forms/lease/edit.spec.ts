@@ -32,24 +32,31 @@ test('can be submitted with minimal fields', async ({
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
-test.fixme(
-	'can be submitted with all fields',
-	async ({ org, portfolio, lease, page }) => {
-		const fields = R.pick(leasePartialFactory(), FIELDS.lease.all);
+test('can be submitted with all fields', async ({
+	org,
+	portfolio,
+	lease,
+	page,
+}) => {
+	const fields = R.pick(
+		leasePartialFactory(),
+		FIELDS.lease.all.filter(
+			(f): f is Exclude<typeof f, 'tenantId'> => f !== 'tenantId',
+		),
+	);
 
-		const formPage = new FormPage(page, {
-			entity,
-			pageType,
-			id: lease.id,
-			fixtures: { org, portfolio },
-		});
+	const formPage = new FormPage(page, {
+		entity,
+		pageType,
+		id: lease.id,
+		fixtures: { org, portfolio },
+	});
 
-		await formPage.goto();
-		await formPage.fillForm(fields);
-		await formPage.save();
+	await formPage.goto();
+	await formPage.fillForm(fields);
+	await formPage.save();
 
-		await formPage.verifyDetails(fields);
+	await formPage.verifyDetails(fields);
 
-		await expect(page).toHaveURL(formPage.getSuccessUrl());
-	},
-);
+	await expect(page).toHaveURL(formPage.getSuccessUrl());
+});
