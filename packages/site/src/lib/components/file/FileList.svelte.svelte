@@ -114,7 +114,6 @@
 		{/each}
 	</ul>
 {:else}
-	<pre>{JSON.stringify(files, null, 2)}</pre>
 	<EmptyState
 		entity="file"
 		formButtonProps={{
