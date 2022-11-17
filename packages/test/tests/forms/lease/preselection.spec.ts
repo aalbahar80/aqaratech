@@ -12,6 +12,67 @@ test.fixme('renew lease button has predefined params', async ({ page }) => {
 	);
 });
 
+test('create invoices-multiple button predefined params', async ({
+	page,
+	lease,
+}) => {
+	const url = getRoute({
+		entity: 'leaseInvoice',
+		pageType: PageType.New,
+		predefined: { leaseId: lease.id },
+		params: {
+			organizationId: lease.organizationId,
+			portfolioId: lease.portfolioId,
+		},
+	});
+
+	await page.goto(url);
+
+	const btn = page.getByRole('link', { name: 'Add multiple invoices →' });
+
+	await expect(btn).toHaveAttribute(
+		'href',
+		resolveURL(
+			'/organizations',
+			lease.organizationId,
+			'portfolios',
+			lease.portfolioId,
+			'leaseInvoices',
+			'new-multiple',
+			`?leaseId=${lease.id}`,
+		),
+	);
+});
+
+test('create invoice button predefined params', async ({ page, lease }) => {
+	const url = getRoute({
+		entity: 'lease',
+		id: lease.id,
+		pageType: PageTab.Invoices,
+		params: {
+			organizationId: lease.organizationId,
+			portfolioId: lease.portfolioId,
+		},
+	});
+
+	await page.goto(url);
+
+	const btn = page.getByRole('link', { name: '+ New' });
+
+	await expect(btn).toHaveAttribute(
+		'href',
+		resolveURL(
+			'/organizations',
+			lease.organizationId,
+			'portfolios',
+			lease.portfolioId,
+			'leaseInvoices',
+			'new',
+			`?leaseId=${lease.id}`,
+		),
+	);
+});
+
 test('create lease button predefined params', async ({ page, unit }) => {
 	const url = getRoute({
 		entity: 'unit',
