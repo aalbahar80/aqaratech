@@ -27,6 +27,8 @@ test('can be submitted with minimal fields', async ({ org, page }) => {
 	await formPage.fillForm(tenant);
 	await formPage.save();
 
+	await formPage.verifyDetails(tenant);
+
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
@@ -55,6 +57,8 @@ test('can be submitted with all fields', async ({ org, page }) => {
 		}),
 	});
 	await formPage.save();
+
+	await formPage.verifyDetails(tenant);
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
