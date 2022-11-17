@@ -1,10 +1,9 @@
 <script lang="ts">
-	import InvoiceCard from '$lib/components/trx/TrxCard.svelte';
 	import type { LeaseInvoiceDto } from '$api/openapi';
-	import { FolderAdd } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import InvoiceCard from '$lib/components/trx/TrxCard.svelte';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
+	import HeroiconsFolderPlus from '~icons/heroicons/folder-plus';
 
 	export let invoices: LeaseInvoiceDto[];
 </script>
@@ -42,8 +41,7 @@
 	{:else}
 		<!-- Empty State -->
 		<div class="py-8 text-center sm:py-16">
-			<Icon
-				src={FolderAdd}
+			<HeroiconsFolderPlus
 				class="mx-auto h-12 w-12 text-gray-400"
 				aria-hidden="true"
 			/>

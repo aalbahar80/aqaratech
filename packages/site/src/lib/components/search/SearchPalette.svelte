@@ -13,8 +13,9 @@
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
 	import { entitiesMap, isEntity } from '@self/utils';
-	import { EmojiSad, Globe, Search } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import HeroiconsOutlineEmojiSad from '~icons/heroicons-outline/emoji-sad';
+	import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
+	import HeroiconsMagnifyingGlass from '~icons/heroicons/magnifying-glass';
 	// TODO optimize use lodash debounce?
 	import { getRoute, PageType } from '@self/utils';
 	import debounce from 'debounce';
@@ -97,11 +98,9 @@
 					}}
 				>
 					<div class="relative">
-						<Icon
-							src={Search}
+						<HeroiconsMagnifyingGlass
 							class="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
 							aria-hidden="true"
-							theme="solid"
 						/>
 						<input
 							class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
@@ -117,11 +116,9 @@
 						<div
 							class="border-t border-gray-100 py-14 px-6 text-center text-sm sm:px-14"
 						>
-							<Icon
-								src={Globe}
+							<HeroiconsGlobeAlt
 								class="mx-auto h-6 w-6 text-gray-400"
 								aria-hidden="true"
-								theme="outline"
 							/>
 							<p class="mt-4 font-semibold text-gray-900">
 								Search for tenants, portfolios, or properties.
@@ -163,11 +160,9 @@
 						<div
 							class="border-t border-gray-100 py-14 px-6 text-center text-sm sm:px-14"
 						>
-							<Icon
-								src={EmojiSad}
+							<HeroiconsOutlineEmojiSad
 								class="mx-auto h-6 w-6 text-gray-400"
 								aria-hidden="true"
-								theme="outline"
 							/>
 							<p class="mt-4 font-semibold text-gray-900">No results found</p>
 							<p class="mt-2 text-gray-500">

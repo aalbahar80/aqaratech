@@ -1,14 +1,11 @@
 <script lang="ts">
-	import { Exclamation } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import HeroiconsExclamationTriangle from '~icons/heroicons/exclamation-triangle';
 </script>
 
 <div class="border-l-4 border-yellow-400 bg-yellow-50 p-4 print:hidden">
 	<div class="flex justify-center">
 		<div class="flex-shrink-0">
-			<Icon
-				src={Exclamation}
-				theme="solid"
+			<HeroiconsExclamationTriangle
 				class="h-5 w-5 text-yellow-400"
 				aria-hidden="true"
 			/>

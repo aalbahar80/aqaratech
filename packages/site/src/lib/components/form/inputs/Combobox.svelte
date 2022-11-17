@@ -6,10 +6,9 @@
 	} from '$lib/models/interfaces/option.interface';
 	import { classes } from '$lib/utils/classes';
 	import { clickOutside } from '$lib/utils/click-outside';
-	import { Check } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import HeroiconsOutlineSelector from '~icons/heroicons-outline/selector';
 	import HeroiconsOutlineXCircle from '~icons/heroicons-outline/x-circle';
+	import HeroiconsCheck from '~icons/heroicons/check';
 	// TODO optimize use lodash debounce?
 	import debounce from 'debounce';
 	import Fuse from 'fuse.js';
@@ -284,12 +283,7 @@
 									hovering ? 'text-white' : 'text-indigo-600',
 								)}
 							>
-								<Icon
-									src={Check}
-									theme="solid"
-									class="h-5 w-5"
-									aria-hidden="true"
-								/>
+								<HeroiconsCheck class="h-5 w-5" aria-hidden="true" />
 							</span>
 						{/if}
 					</li>

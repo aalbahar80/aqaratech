@@ -6,10 +6,9 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
 	import { entitiesMap } from '@self/utils';
-	import { Trash } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
+	import HeroiconsTrash from '~icons/heroicons/trash';
 
 	export let lease: LeaseDto;
 
@@ -126,8 +125,7 @@
 											schedule = schedule.filter((_, i) => i !== idx);
 										}}
 									>
-										<Icon
-											src={Trash}
+										<HeroiconsTrash
 											class="mr-1.5 h-5 w-5 flex-shrink-0 text-red-300"
 											aria-hidden="true"
 										/>

@@ -10,10 +10,9 @@
 		SwitchGroup,
 		SwitchLabel,
 	} from '@rgossiaux/svelte-headlessui';
-	import { ExclamationCircle } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import { getValue } from 'felte';
 	import { createEventDispatcher } from 'svelte';
+	import HeroiconsExclamationCircle from '~icons/heroicons/exclamation-circle';
 
 	export let field: Field | SelectField;
 	export let errors: Record<string, any>;
@@ -119,15 +118,13 @@
 				class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
 			>
 				{#if !field.valid && field.type !== 'date'}
-					<Icon
-						src={ExclamationCircle}
+					<HeroiconsExclamationCircle
 						class="h-5 w-5 text-red-500"
 						aria-hidden="true"
 					/>
 				{/if}
 				{#if field.warnMessage && field.type !== 'date'}
-					<Icon
-						src={ExclamationCircle}
+					<HeroiconsExclamationCircle
 						class="h-5 w-5 text-yellow-500"
 						aria-hidden="true"
 					/>

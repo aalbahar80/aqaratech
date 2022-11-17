@@ -1,12 +1,12 @@
 <script lang="ts">
+	import type { LeaseInvoiceDto } from '$api/openapi';
 	import Badge from '$components/Badge.svelte';
 	import PayButton from '$lib/components/trx/PayButton.svelte';
 	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import type { LeaseInvoiceDto } from '$api/openapi';
 	import { entitiesMap } from '@self/utils';
-	import { Calendar, Cash } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import HeroiconsBanknotes from '~icons/heroicons/banknotes';
+	import HeroiconsCalendarDays from '~icons/heroicons/calendar-days';
 
 	export let invoice: LeaseInvoiceDto;
 
@@ -25,18 +25,14 @@
 			<div class="flex items-center justify-between py-4">
 				<div class="flex flex-col gap-4 text-gray-700">
 					<p class="text flex items-center">
-						<Icon
-							src={Cash}
-							theme="solid"
+						<HeroiconsBanknotes
 							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 							aria-hidden="true"
 						/>
 						{kwdFormat(invoice.amount)}
 					</p>
 					<p class="text flex items-center">
-						<Icon
-							src={Calendar}
-							theme="solid"
+						<HeroiconsCalendarDays
 							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 							aria-hidden="true"
 						/>

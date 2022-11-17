@@ -8,8 +8,7 @@
 		Transition,
 		TransitionChild,
 	} from '@rgossiaux/svelte-headlessui';
-	import { Exclamation } from '@steeze-ui/heroicons';
-	import { Icon } from '@steeze-ui/svelte-icon';
+	import HeroiconsExclamationTriangle from '~icons/heroicons/exclamation-triangle';
 
 	export let isOpen: boolean;
 	export let isLoading: boolean;
@@ -65,8 +64,7 @@
 							<div
 								class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
 							>
-								<Icon
-									src={Exclamation}
+								<HeroiconsExclamationTriangle
 									class="h-6 w-6 text-red-600"
 									aria-hidden="true"
 								/>
