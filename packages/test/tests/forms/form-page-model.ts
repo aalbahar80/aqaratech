@@ -92,7 +92,7 @@ export class FormPage {
 	 */
 	verifyDetails = async (fields: Record<string, unknown>) => {
 		for (const [key, value] of Object.entries(fields)) {
-			const pane = this.page.locator('#detailsPane');
+			const pane = this.page.getByTestId('details-pane');
 			await expect(pane).toBeVisible();
 
 			const row = pane.getByTestId(key);
@@ -103,6 +103,7 @@ export class FormPage {
 
 			const dd = row.getByRole('definition');
 			await expect.soft(dd).toHaveText(formatValue(value));
+			await expect.soft(dd).toHaveAttribute('data-testid', value);
 		}
 	};
 

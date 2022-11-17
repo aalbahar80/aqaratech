@@ -5,9 +5,9 @@
 	export let value: unknown;
 </script>
 
-<div class="row" data-testId={key}>
+<div class="row" data-testid={key}>
 	<dt class="label">{getLabel(key)}</dt>
-	<dd class="definition">
+	<dd class="definition" data-testid={value}>
 		<slot>
 			{formatValue(value)}
 		</slot>

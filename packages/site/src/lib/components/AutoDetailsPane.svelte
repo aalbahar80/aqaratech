@@ -9,7 +9,7 @@
 	export let keys: Union.Exclude<Keys, number | symbol>[];
 </script>
 
-<div id="detailsPane">
+<div data-testid="details-pane">
 	<dl class="rounded-lg shadow">
 		{#each keys as key}
 			<DetailsPaneItem {key} value={details[key]} />
