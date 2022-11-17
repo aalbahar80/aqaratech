@@ -1,11 +1,12 @@
 import { expect } from '@playwright/test';
 import { getRoute, PageTypePortfolio } from '@self/utils';
 import fs from 'node:fs';
+import path from 'node:path';
 import * as R from 'remeda';
 import { test } from '../../api/api-fixtures';
 
-// const SAVE_PATH = path.resolve(__dirname, '../../../downloads/income.csv');
-const SAVE_PATH = './downloads/income.csv';
+// const SAVE_PATH = './downloads/income.csv';
+const SAVE_PATH = path.resolve(__dirname, '../../../downloads/income.csv');
 
 test.use({
 	userRoleType: 'PORTFOLIO',
@@ -43,12 +44,15 @@ test('can export csv from income table', async ({
 
 	expect.soft(csv).not.toBe('');
 
-	expect.soft(csv).toContain(invoices[0].id);
-	expect.soft(csv).toContain(invoices[99].id);
-
 	expect.soft(csv).toContain(
 		// Sometimes paidAt column is missing from the csv file
 		// 'id,createdAt,updatedAt,dueAt,postAt,paidAt,isPaid,amount,memo,leaseId,organizationId,portfolioId',
 		'id,createdAt,updatedAt,dueAt,postAt',
 	);
+
+	const ids = invoices.map((invoice) => invoice.id);
+
+	for (const id of ids) {
+		expect.soft(csv).toContain(id);
+	}
 });

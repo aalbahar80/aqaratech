@@ -1,9 +1,12 @@
 import { expect } from '@playwright/test';
 import { getRoute, PageTypePortfolio } from '@self/utils';
 import fs from 'node:fs';
+import path from 'node:path';
 import * as R from 'remeda';
 import { test } from '../../api/api-fixtures';
-const SAVE_PATH = './downloads/expenses.csv';
+
+// const SAVE_PATH = './downloads/expenses.csv';
+const SAVE_PATH = path.resolve(__dirname, '../../../downloads/expenses.csv');
 
 test.use({
 	userRoleType: 'PORTFOLIO',
@@ -45,6 +48,9 @@ test('can export csv from expenses table', async ({
 		'id,unitId,createdAt,updatedAt,amount,postAt,organizationId,portfolioId',
 	);
 
-	expect(csv).toContain(expenses[0].id);
-	expect(csv).toContain(expenses[99].id);
+	const ids = expenses.map((expense) => expense.id);
+
+	for (const id of ids) {
+		expect(csv).toContain(id);
+	}
 });
