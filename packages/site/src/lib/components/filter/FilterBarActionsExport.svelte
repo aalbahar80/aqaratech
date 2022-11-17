@@ -7,7 +7,7 @@
 </script>
 
 <MenuItem as="div" let:active>
-	<a href={`${$page.url.pathname}/csv`} download="leaseInvoices.csv">
+	<a href={`${$page.url.pathname}/csv`} download="data.csv">
 		<MenuItemChild {active}>
 			<MenuItemIcon icon={Fa6SolidFileCsv} />
 			Export to CSV
