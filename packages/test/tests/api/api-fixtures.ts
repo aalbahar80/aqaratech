@@ -20,6 +20,7 @@ import { apiURL } from './fixtures/api-url';
 import { expenseCategoryFixtures } from './fixtures/expense-category.fixture';
 import { expenseFixtures } from './fixtures/expense.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
+import { payoutFixtures } from './fixtures/payout.fixture';
 import { roleFixtures } from './fixtures/role.fixture';
 import { scopedRequestFixtures } from './fixtures/scoped-request.fixture';
 import { tenantFixtures } from './fixtures/tenant.fixture';
@@ -239,5 +240,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	...invoiceFixtures,
 	...expenseFixtures,
 	...expenseCategoryFixtures,
+	...payoutFixtures,
 	...roleFixtures,
 });

@@ -8,6 +8,7 @@ import type {
 	ExpenseCategoryFactoryParams,
 	ExpenseFactoryParams,
 	LeaseInvoiceFactoryParams,
+	PayoutFactoryParams,
 	RoleFactoryParams,
 	TenantFactoryParams,
 } from '@self/seed';
@@ -17,6 +18,7 @@ import type {
 	LeaseDto,
 	LeaseInvoiceDto,
 	OrganizationCreatedDto,
+	PayoutDto,
 	PortfolioDto,
 	PropertyDto,
 	RoleDto,
@@ -43,6 +45,8 @@ export interface TestFixtures {
 	invoices: [LeaseInvoiceDto, ...LeaseInvoiceDto[]];
 	expense: ExpenseDto;
 	expenses: ExpenseDto[];
+	payout: PayoutDto;
+	payouts: [PayoutDto, ...PayoutDto[]];
 	expenseCategory: ExpenseCategoryDto;
 	file: string;
 }
@@ -53,6 +57,7 @@ export interface TestOptions {
 	roleParams: RoleFactoryParams | undefined;
 
 	tenantsParams: [TenantFactoryParams, ...TenantFactoryParams[]] | undefined;
+	payoutsParams: PayoutFactoryParams[] | undefined;
 	invoicesParams:
 		| [LeaseInvoiceFactoryParams, ...LeaseInvoiceFactoryParams[]]
 		| undefined;

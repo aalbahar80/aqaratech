@@ -19,3 +19,13 @@ export const payoutFactory = Factory.Sync.makeFactoryWithRequired<
 
 	postAt: Factory.each(() => fakeDate()),
 });
+
+export const payoutPartialFactory = () =>
+	payoutFactory.build({
+		organizationId: '',
+		portfolioId: '',
+	});
+
+export type PayoutFactoryParams = Partial<
+	Parameters<typeof payoutFactory.build>[0]
+>;
