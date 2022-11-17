@@ -52,3 +52,10 @@ export const leaseInvoiceFactory = addDueDate.withDerivation(
 export type LeaseInvoiceFactoryParams = Partial<
 	Parameters<typeof leaseInvoiceFactory.build>[0]
 >;
+
+export const leaseInvoicePartialFactory = () =>
+	leaseInvoiceFactory.build({
+		organizationId: '',
+		portfolioId: '',
+		leaseId: '',
+	});
