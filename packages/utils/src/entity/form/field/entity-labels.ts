@@ -43,6 +43,11 @@ export const getLabel = (key: string) =>
 	(entityFieldLabels as Record<string, string>)[key] ?? startCase(key);
 
 /**
+ * Displayed when a value is null or undefined.
+ */
+export const EMPTY_VALUE = '-';
+
+/**
  * Convenience function to format a field's value.
  */
 export const formatValue = (value: unknown): string => {
@@ -53,7 +58,7 @@ export const formatValue = (value: unknown): string => {
 	} else if (typeof value === 'number') {
 		return value.toLocaleString();
 	} else if (value === null || value === undefined) {
-		return '-';
+		return EMPTY_VALUE;
 	} else {
 		return JSON.stringify(value);
 	}

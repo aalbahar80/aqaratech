@@ -18,6 +18,7 @@ export type {
 	NonDBEntitiesMap,
 } from './entity/entity-map';
 export {
+	EMPTY_VALUE,
 	entityFieldLabels,
 	formatValue,
 	getFieldLabelMap,
