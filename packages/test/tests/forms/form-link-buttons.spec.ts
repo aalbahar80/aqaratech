@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { entitiesMap, getRoute, PageTab, PageType } from '@self/utils';
 import { resolveURL } from 'ufo';
-import { test } from '../../api/api-fixtures';
+import { test } from '../api/api-fixtures';
 
 test.fixme('renew lease button has predefined params', async ({ page }) => {
 	await page.goto(`/${entitiesMap.lease.urlName}/${lease.id}`);
