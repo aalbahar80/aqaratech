@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
 	import DebugPane from '$lib/components/form/DebugPane.svelte';
 	import FormError from '$lib/components/form/enhanced/fields/FormError.svelte';
 	import Field from '$lib/components/form/Field.svelte';
@@ -20,7 +21,9 @@
 	};
 	export let data: FPM['data'] = undefined;
 
-	$: formType = data === undefined ? 'create' : 'edit';
+	$: formType =
+		$page.url.pathname.split('/').slice(-1)[0] === 'edit' ? 'edit' : 'new';
+
 	$: fields = R.omitBy(formModel.fields, (field) => {
 		// omit fields based on formType
 		const hide =
