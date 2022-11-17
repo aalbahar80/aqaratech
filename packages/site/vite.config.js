@@ -12,7 +12,7 @@ export default defineConfig(() => {
 		clearScreen: false,
 		ssr: {
 			// set chart.js && papaparse as `noExternal` to avoid issues in SSR (when running `vite preview`)
-			noExternal: ['chart.js', 'papaparse'],
+			noExternal: ['chart.js', 'chartjs-adapter-date-fns', 'papaparse'],
 		},
 		build: {
 			// Generate sourcemaps for all builds. In production, remove them before building Docker image.
