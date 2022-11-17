@@ -39,10 +39,5 @@
 		"turbo": "1.6.3",
 		"typescript": "4.9.3",
 		"zx": "7.1.1"
-	},
-	"pnpm": {
-		"patchedDependencies": {
-			"@tanstack/svelte-table@8.5.22": "patches/@tanstack__svelte-table@8.5.22.patch"
-		}
 	}
 }
