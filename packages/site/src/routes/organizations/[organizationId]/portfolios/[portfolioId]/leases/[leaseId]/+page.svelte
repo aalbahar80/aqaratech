@@ -12,5 +12,14 @@
 
 <AutoDetailsPane
 	details={obj}
-	keys={['tenant', 'start', 'end', 'monthlyRent', 'deposit', 'license']}
+	keys={[
+		'tenant',
+		'start',
+		'end',
+		'monthlyRent',
+		'deposit',
+		'license',
+		'notify',
+		'canPay',
+	]}
 />

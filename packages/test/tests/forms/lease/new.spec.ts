@@ -48,6 +48,11 @@ test('can be submitted with minimal fields', async ({
 
 	await formPage.save();
 
+	await formPage.verifyDetails({
+		...lease,
+		tenant: tenants[5]!.fullName,
+	});
+
 	const successUrl = getRoute({
 		entity,
 		id: ':uuid',
@@ -93,6 +98,11 @@ test('can be submitted with all fields', async ({
 	});
 
 	await formPage.save();
+
+	await formPage.verifyDetails({
+		...R.omit(lease, ['tenantId']),
+		tenant: tenants[5]!.fullName,
+	});
 
 	const successUrl = getRoute({
 		entity,
