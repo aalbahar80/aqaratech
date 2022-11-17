@@ -8,6 +8,7 @@ export const actions: Actions = {
 			entity: 'lease',
 			schema: leaseUpdateSchema,
 			event,
+			checkboxKeys: ['canPay', 'notify'],
 			onSubmit: async (api, data, event) => {
 				const submitted = await api.leases.update({
 					id: event.params.leaseId,
