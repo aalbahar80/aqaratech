@@ -7,7 +7,7 @@
 
 <div class="row" data-testid={key}>
 	<dt class="label">{getLabel(key)}</dt>
-	<dd class="definition" data-testid={value}>
+	<dd class="definition" data-testid={value ?? ''}>
 		<slot>
 			{formatValue(value)}
 		</slot>

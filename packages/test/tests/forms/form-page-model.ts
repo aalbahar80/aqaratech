@@ -110,23 +110,25 @@ export class FormPage {
 
 			const dd = row.getByRole('definition');
 			const formattedValue = formatValue(value);
-			console.log({ formattedValue }, 'form-page-model.ts ~ 113');
 			await expect.soft(dd).toHaveText(formattedValue);
+
+			// date-only fields are always parsed to ISO 8601 format in db
+			const testValue =
+				typeof value === 'string' && isDateOnly(value)
+					? new Date(value).toISOString()
+					: value;
 
 			await expect
 				.soft(dd)
-				.toHaveAttribute('data-testid', this.getTestValue(value));
+				.toHaveAttribute('data-testid', this.toTestId(testValue));
 		}
 	};
 
 	/**
 	 * Return a stringified version of the value for use in test ids
 	 */
-	private getTestValue = (value: unknown) => {
-		if (typeof value === 'string' && isDateOnly(value)) {
-			// date-only fields are always parsed to ISO 8601 format in db
-			return new Date(value).toISOString();
-		} else if (typeof value === 'string') {
+	private toTestId = (value: unknown) => {
+		if (typeof value === 'string') {
 			return value;
 		} else if (typeof value === 'number') {
 			return value.toString();

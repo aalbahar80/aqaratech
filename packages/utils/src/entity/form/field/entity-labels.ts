@@ -45,12 +45,16 @@ export const getLabel = (key: string) =>
 /**
  * Convenience function to format a field's value.
  */
-export const formatValue = (value: unknown) => {
+export const formatValue = (value: unknown): string => {
 	if (typeof value === 'string' && (isDatetime(value) || isDateOnly(value))) {
 		return toUTCFormat(value);
+	} else if (typeof value === 'string') {
+		return value;
 	} else if (typeof value === 'number') {
 		return value.toLocaleString();
+	} else if (value === null || value === undefined) {
+		return '-';
 	} else {
-		return value ?? '-';
+		return JSON.stringify(value);
 	}
 };
