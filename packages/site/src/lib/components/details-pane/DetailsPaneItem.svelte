@@ -5,7 +5,7 @@
 	export let value: unknown;
 </script>
 
-<div class="row">
+<div class="row" data-testId={key}>
 	<dt class="label">{getLabel(key)}</dt>
 	<dd class="definition">
 		<slot>

@@ -1,5 +1,5 @@
-import type { Locator, Page } from '@playwright/test';
-import { Entity, getLabel, getRoute, PageType } from '@self/utils';
+import { expect, Locator, Page } from '@playwright/test';
+import { Entity, formatValue, getLabel, getRoute, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { uuid } from '../../utils/uuid';
 import { Combobox, ComboboxOption } from './combobox-model';
@@ -84,6 +84,25 @@ export class FormPage {
 			}
 
 			await this.page.getByLabel(keyRegex).fill(valueString);
+		}
+	};
+
+	/**
+	 * Verify that all the field properties are present as dt/dd pairs.
+	 */
+	verifyDetails = async (fields: Record<string, unknown>) => {
+		for (const [key, value] of Object.entries(fields)) {
+			const pane = this.page.locator('#detailsPane');
+			await expect(pane).toBeVisible();
+
+			const row = pane.getByTestId(key);
+			await expect(row).toBeVisible();
+
+			const dt = row.getByRole('term');
+			await expect.soft(dt).toHaveText(getLabel(key));
+
+			const dd = row.getByRole('definition');
+			await expect.soft(dd).toHaveText(formatValue(value));
 		}
 	};
 
