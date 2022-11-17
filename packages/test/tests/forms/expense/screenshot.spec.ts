@@ -14,7 +14,7 @@ test('screenshot smoke test', async ({ page, org, portfolio, expense }) => {
 
 	const original = await page.locator('#detailsPane').screenshot();
 
-	await page.locator('text=Edit').click();
+	await page.getByRole('link', { name: 'Edit' }).click();
 
 	const edit = getRoute({
 		entity: 'expense',
