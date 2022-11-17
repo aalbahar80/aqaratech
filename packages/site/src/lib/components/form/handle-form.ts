@@ -1,6 +1,7 @@
 import { createApi, type Api } from '$api';
 import { ResponseError } from '$api/openapi';
 import { parseApiError } from '$api/parse-api-error';
+import { handleCheckboxes } from '$lib/components/form/handle-checkbox';
 import { getRoute, PageType, type Entity } from '@self/utils';
 import { invalid, redirect, type RequestEvent } from '@sveltejs/kit';
 import type { z } from 'zod';
@@ -16,6 +17,7 @@ export const handleForm = async <
 	fromParams,
 	fromQuery,
 	redirectTo,
+	checkboxKeys,
 }: {
 	entity: Entity;
 	schema: S;
@@ -30,6 +32,10 @@ export const handleForm = async <
 	 * `onSubmit` expects an id to be returned, which is used to redirect to the new page.
 	 */
 	onSubmit: (api: Api, data: z.infer<S>, event: Event) => Promise<string>;
+	/**
+	 * Checkboxes are handled weirdly by HTML forms, so we convert them to booleans.
+	 */
+	checkboxKeys?: string[];
 }) => {
 	const { request, fetch, params } = event;
 
@@ -37,6 +43,10 @@ export const handleForm = async <
 
 	// convert data from FormData to object
 	const obj = Object.fromEntries(data.entries());
+
+	if (checkboxKeys) {
+		handleCheckboxes(obj, checkboxKeys);
+	}
 
 	// add params to object
 	if (fromParams) {
