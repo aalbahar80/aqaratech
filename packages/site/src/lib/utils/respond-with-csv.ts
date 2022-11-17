@@ -8,7 +8,11 @@ import papaparse from 'papaparse';
 /**
  * Nested objects are flattened to dot-notation.
  */
-export const respondWithCsv = (data: any[], filename: string) => {
+// @ts-expect-error missing index signature for type string
+export const respondWithCsv = <T extends Record<unknown, unknown>[]>(
+	data: T,
+	filename: string,
+) => {
 	const flat = data.map((e) => flatten(e));
 	const csv = papaparse.unparse(flat);
 
