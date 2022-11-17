@@ -1,5 +1,15 @@
 <script lang="ts">
-	import PayoutForm from '$lib/components/payout/PayoutForm.svelte';
+	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
+	import { getEntityFormModel } from '$lib/components/form/model/get-entity-form-model';
+	import { PageType } from '@self/utils';
+	import type { ActionData } from './$types';
+
+	export let form: ActionData;
+
+	const formModel = getEntityFormModel({
+		entity: 'payout',
+		pageType: PageType.New,
+	});
 </script>
 
-<PayoutForm />
+<EnhancedForm {formModel} {form} />
