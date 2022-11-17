@@ -1,16 +1,7 @@
 import { expect } from '@playwright/test';
-import { entitiesMap, getRoute, PageTab, PageType } from '@self/utils';
+import { getRoute, PageTab, PageType } from '@self/utils';
 import { resolveURL } from 'ufo';
 import { test } from '../api/api-fixtures';
-
-test.fixme('renew lease button has predefined params', async ({ page }) => {
-	await page.goto(`/${entitiesMap.lease.urlName}/${lease.id}`);
-	const el = page.locator('text=Renew');
-	await expect(el).toHaveAttribute(
-		'href',
-		`/${entitiesMap.lease.urlName}/new?tenantId=${lease.tenantId}&portfolioId=${lease.portfolioId}&propertyId=${unit.propertyId}&unitId=${lease.unitId}`,
-	);
-});
 
 test('create invoices-multiple button predefined params', async ({
 	page,
@@ -69,6 +60,35 @@ test('create invoice button predefined params', async ({ page, lease }) => {
 			'leaseInvoices',
 			'new',
 			`?leaseId=${lease.id}`,
+		),
+	);
+});
+
+test('renew lease button predefined params', async ({ page, lease }) => {
+	const url = getRoute({
+		entity: 'lease',
+		id: lease.id,
+		pageType: PageType.Id,
+		params: {
+			organizationId: lease.organizationId,
+			portfolioId: lease.portfolioId,
+		},
+	});
+
+	await page.goto(url);
+
+	const btn = page.getByRole('link', { name: 'Renew' });
+
+	await expect(btn).toHaveAttribute(
+		'href',
+		resolveURL(
+			'/organizations',
+			lease.organizationId,
+			'portfolios',
+			lease.portfolioId,
+			'leases',
+			'new',
+			`?unitId=${lease.unitId}&leaseId=${lease.id}`,
 		),
 	);
 });
