@@ -42,6 +42,7 @@
 				pageType: PageType.New,
 				params: $page.params,
 				predefined: {
+					unitId: lease.unitId,
 					leaseId: lease.id,
 				},
 			})}

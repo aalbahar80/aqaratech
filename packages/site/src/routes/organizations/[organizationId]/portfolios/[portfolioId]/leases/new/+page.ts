@@ -1,11 +1,11 @@
 import { createApi } from '$api';
-import { redirect } from '@sveltejs/kit';
+import * as R from 'remeda';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ url, fetch }) => {
 	const api = createApi(fetch);
 
-	// Renewal: Consume the leaseId and replace it with the lease's unitId
+	// Renewal
 
 	const leaseId = url.searchParams.get('leaseId');
 
@@ -20,11 +20,17 @@ export const load: PageLoad = async ({ url, fetch }) => {
 		// remove the leaseId
 		newUrl.searchParams.delete('leaseId');
 
-		// add the unitId
-		newUrl.searchParams.set('unitId', lease.unitId);
+		const predefined = R.pick(lease, [
+			'monthlyRent',
+			'deposit',
+			'notify',
+			'canPay',
+			'license',
+			// We can't pass tenantId field since the combobox label field will be
+			// empty when page is loaded.
+		]);
 
-		// redirect to the new url
-		throw redirect(302, newUrl.toString());
+		return { predefined };
 	} else {
 		return;
 	}
