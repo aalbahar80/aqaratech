@@ -55,6 +55,11 @@ export const expense = {
 	all: ['postAt', 'amount', 'categoryId', 'memo'],
 } as const;
 
+export const payout = {
+	required: ['amount', 'postAt'],
+	all: ['amount', 'postAt', 'memo'],
+} as const;
+
 /**
  * The form fields for each entity.
  */
@@ -64,4 +69,5 @@ export const FIELDS = {
 	lease,
 	leaseInvoice,
 	expense,
+	payout,
 } as const;
