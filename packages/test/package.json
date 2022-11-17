@@ -15,7 +15,7 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@faker-js/faker": "7.6.0",
-		"@playwright/test": "1.27.1",
+		"@playwright/test": "1.28.0",
 		"@self/seed": "workspace:1.2.0",
 		"@self/utils": "workspace:2.1.0",
 		"@tsconfig/node18": "1.0.1",
