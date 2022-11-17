@@ -3,9 +3,10 @@
 	import type { LeaseDto } from '$api/openapi';
 	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
-	import { entitiesMap } from '@self/utils';
+	import { getRoute, PageTab } from '@self/utils';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 	import HeroiconsTrash from '~icons/heroicons/trash';
@@ -28,19 +29,27 @@
 	);
 
 	const onSubmit = async () => {
-		const created = await createApi().leases.createInvoices({
+		const created = await createApi().organizations.createInvoices({
+			organizationId: lease.organizationId,
 			id: lease.id,
 			createManyLeaseInvoicesDto: schedule.map((invoice) => ({
 				// don't spread invoice to avoid sending tempid field
 				amount: invoice.amount,
-				postAt: `${invoice.postAt}T00:00:00.000Z`,
-				organizationId: lease.organizationId,
+				postAt: invoice.postAt,
 				portfolioId: lease.portfolioId,
+				isPaid: false,
 			})),
 		});
 		console.debug(created);
 
-		goto(`/${entitiesMap.lease.urlName}/${lease.id}`);
+		const url = getRoute({
+			entity: 'lease',
+			pageType: PageTab.Invoices,
+			id: lease.id,
+			params: $page.params,
+		});
+
+		void goto(url);
 	};
 </script>
 
