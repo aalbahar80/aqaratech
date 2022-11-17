@@ -12,6 +12,8 @@
 		<slot>
 			{#if typeof value === 'string' && isDatetime(value)}
 				{toUTCFormat(value)}
+			{:else if typeof value === 'number'}
+				{value.toLocaleString()}
 			{:else}
 				{value ?? '-'}
 			{/if}
