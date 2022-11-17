@@ -8,31 +8,36 @@
 	import IconButton from '$lib/components/buttons/IconButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import EmptyState from '$lib/components/EmptyState.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
+	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { flip } from 'svelte/animate';
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 	import HeroiconsOutlinePaperClip from '~icons/heroicons-outline/paper-clip';
+	import HeroiconsFolderOpen from '~icons/heroicons/folder-open';
 
 	export let files: PaginatedFileDto;
 
 	$: hideFileActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
 </script>
 
-<div class="flex justify-end">
-	<a href={getFormRouteWithRelation('file', $page.url.pathname, $page.params)}>
-		<IconButton>
-			<div slot="icon">
-				<Fa6SolidPaperclip />
-			</div>
+<RoleGuard roles={['ORGADMIN']}>
+	<div class="flex justify-end">
+		<a
+			href={getFormRouteWithRelation('file', $page.url.pathname, $page.params)}
+		>
+			<IconButton>
+				<div slot="icon">
+					<Fa6SolidPaperclip />
+				</div>
 
-			Attach files
-		</IconButton>
-	</a>
-</div>
+				Attach files
+			</IconButton>
+		</a>
+	</div>
+</RoleGuard>
 
 {#if files?.results.length}
 	<ul
@@ -114,14 +119,15 @@
 		{/each}
 	</ul>
 {:else}
-	<EmptyState
-		entity="file"
-		formButtonProps={{
-			formUrl: getFormRouteWithRelation(
-				'file',
-				$page.url.pathname,
-				$page.params,
-			),
-		}}
-	/>
+	<div
+		class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+	>
+		<HeroiconsFolderOpen
+			class="mx-auto h-12 w-12 text-gray-400"
+			aria-hidden="true"
+		/>
+		<span class="mt-2 block text-sm font-medium text-gray-900">
+			Nothing here yet
+		</span>
+	</div>
 {/if}
