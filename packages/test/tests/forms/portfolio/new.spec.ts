@@ -48,5 +48,6 @@ test('can be submitted with all fields', async ({ org, page }) => {
 	await formPage.fillForm(portfolio);
 	await formPage.save();
 
+	await formPage.verifyDetails(portfolio);
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });

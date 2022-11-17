@@ -1,5 +1,12 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { Entity, formatValue, getLabel, getRoute, PageType } from '@self/utils';
+import {
+	Entity,
+	formatValue,
+	getLabel,
+	getRoute,
+	isDateOnly,
+	PageType,
+} from '@self/utils';
 import * as R from 'remeda';
 import { uuid } from '../../utils/uuid';
 import { Combobox, ComboboxOption } from './combobox-model';
@@ -103,7 +110,13 @@ export class FormPage {
 
 			const dd = row.getByRole('definition');
 			await expect.soft(dd).toHaveText(formatValue(value));
-			await expect.soft(dd).toHaveAttribute('data-testid', value);
+
+			// date-only fields are always parsed to ISO 8601 format in db
+			const testValue = isDateOnly(value)
+				? new Date(value).toISOString()
+				: value;
+
+			await expect.soft(dd).toHaveAttribute('data-testid', testValue);
 		}
 	};
 

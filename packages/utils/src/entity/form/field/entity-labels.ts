@@ -5,6 +5,7 @@ import type {
 	tenantCreateSchema,
 	tenantUpdateSchema,
 } from 'src/schemas';
+import { isDateOnly } from 'src/schemas/utils/date/is-date-only';
 import { isDatetime } from 'src/schemas/utils/date/is-date-time';
 import { startCase } from 'src/start-case';
 import type { UnionToIntersection } from 'src/union-to-intersection';
@@ -45,7 +46,7 @@ export const getLabel = (key: string) =>
  * Convenience function to format a field's value.
  */
 export const formatValue = (value: unknown) => {
-	if (typeof value === 'string' && isDatetime(value)) {
+	if (typeof value === 'string' && (isDatetime(value) || isDateOnly(value))) {
 		return toUTCFormat(value);
 	} else if (typeof value === 'number') {
 		return value.toLocaleString();
