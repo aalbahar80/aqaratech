@@ -1,9 +1,6 @@
 <script lang="ts">
-	import type { IconSource } from '@steeze-ui/svelte-icon/types';
-
 	interface MenuOption {
 		label: string;
-		icon?: IconSource;
 	}
 
 	export let option: MenuOption;
