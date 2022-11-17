@@ -58,12 +58,10 @@ export interface TestOptions {
 	userRoleType: RoleDto['roleType'];
 	roleParams: RoleFactoryParams | undefined;
 
-	tenantsParams: [TenantFactoryParams, ...TenantFactoryParams[]] | undefined;
+	tenantsParams: TenantFactoryParams[] | undefined;
 	leasesParams: LeaseFactoryParams[] | undefined;
 	payoutsParams: PayoutFactoryParams[] | undefined;
-	invoicesParams:
-		| [LeaseInvoiceFactoryParams, ...LeaseInvoiceFactoryParams[]]
-		| undefined;
+	invoicesParams: LeaseInvoiceFactoryParams[] | undefined;
 
 	expenseParams: ExpenseFactoryParams | undefined;
 	/**
