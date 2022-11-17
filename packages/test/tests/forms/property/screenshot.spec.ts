@@ -15,7 +15,7 @@ test('screenshot smoke test', async ({ page, org, property }) => {
 
 	await page.goto(url);
 
-	const original = await page.locator('#detailsPane').screenshot();
+	const original = await page.getByTestId('details-pane').screenshot();
 
 	await page.getByRole('link', { name: 'Edit' }).click();
 
@@ -36,7 +36,7 @@ test('screenshot smoke test', async ({ page, org, property }) => {
 	// ensure same entity
 	await expect(page).toHaveURL(url);
 
-	const latest = await page.locator('#detailsPane').screenshot();
+	const latest = await page.getByTestId('details-pane').screenshot();
 
 	expect(original.toString()).toEqual(latest.toString());
 });
