@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { PayoutDto } from '$api/openapi';
 	import { page } from '$app/stores';
-	import ExportButton from '$lib/components/buttons/ExportButton.svelte';
+	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
+	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '$lib/utils/common';
@@ -33,9 +35,13 @@
 	{columns}
 	paginationType="server"
 >
-	<div slot="header-actions">
-		<a href={`${$page.url.pathname}/csv`} download="payouts.csv">
-			<ExportButton />
-		</a>
+	<div slot="filter" let:filters>
+		<FilterBar responsive={filters}>
+			<div slot="custom">
+				<FilterBarActions>
+					<FilterBarActionsExport />
+				</FilterBarActions>
+			</div>
+		</FilterBar>
 	</div>
 </Table>
