@@ -13,7 +13,7 @@
 <div class="rounded-lg bg-gray-50 shadow">
 	<FilterSlideover bind:this={slideover} filters={responsive} />
 
-	<div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
+	<div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-full lg:px-8">
 		<slot name="hero" />
 
 		<section
