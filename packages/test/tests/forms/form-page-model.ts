@@ -70,6 +70,11 @@ export class FormPage {
 			if (SELECT_KEYS.includes(key)) {
 				const select = this.page.getByLabel(keyRegex);
 
+				if (typeof value !== 'string') {
+					console.log(value);
+					throw new Error(`Invalid value for select field ${key}`);
+				}
+
 				await select.selectOption({ label: value });
 
 				continue;

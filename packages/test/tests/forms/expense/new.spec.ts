@@ -22,7 +22,7 @@ test('can be submitted with minimal fields', async ({
 	portfolio,
 	unit,
 	page,
-	expenseCategory,
+	expenseCategory: _expenseCategory,
 }) => {
 	const expense = R.pick(expensePartialFactory(), FIELDS.expense.required);
 

@@ -17,6 +17,10 @@ test('can be submitted with minimal fields', async ({
 }) => {
 	const fields = R.pick(propertyPartialFactory(), FIELDS.property.required);
 
+	if (!fields.area) {
+		throw new Error('area is required');
+	}
+
 	const formPage = new FormPage(page, {
 		entity,
 		pageType,
@@ -46,6 +50,10 @@ test('can be submitted with all fields', async ({
 	page,
 }) => {
 	const fields = R.pick(propertyPartialFactory(), FIELDS.property.all);
+
+	if (!fields.area) {
+		throw new Error('area is required');
+	}
 
 	const formPage = new FormPage(page, {
 		entity,
