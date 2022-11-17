@@ -34,6 +34,8 @@ test('can be submitted with minimal fields', async ({
 	await formPage.fillForm(fields);
 	await formPage.save();
 
+	await formPage.verifyDetails(fields);
+
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
@@ -64,6 +66,11 @@ test('can be submitted with all fields', async ({
 	});
 
 	await formPage.save();
+
+	await formPage.verifyDetails({
+		...R.omit(fields, ['categoryId']),
+		category: expenseCategory.labelEn,
+	});
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
