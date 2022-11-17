@@ -34,6 +34,8 @@ test('can be submitted with minimal fields', async ({
 
 	await formPage.save();
 
+	await formPage.verifyDetails(property);
+
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
@@ -56,6 +58,8 @@ test('can be submitted with all fields', async ({ org, page, portfolio }) => {
 		}),
 	});
 	await formPage.save();
+
+	await formPage.verifyDetails(property);
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });

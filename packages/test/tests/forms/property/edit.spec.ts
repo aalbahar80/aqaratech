@@ -28,11 +28,13 @@ test('can be submitted with minimal fields', async ({
 	await formPage.fillForm({
 		...fields,
 		area: new ComboboxOption({
-			label: property.area,
-			value: property.area,
+			label: fields.area,
+			value: fields.area,
 		}),
 	});
 	await formPage.save();
+
+	await formPage.verifyDetails(fields);
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
@@ -55,11 +57,13 @@ test('can be submitted with all fields', async ({
 	await formPage.fillForm({
 		...fields,
 		area: new ComboboxOption({
-			label: property.area,
-			value: property.area,
+			label: fields.area,
+			value: fields.area,
 		}),
 	});
 	await formPage.save();
+
+	await formPage.verifyDetails(fields);
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
