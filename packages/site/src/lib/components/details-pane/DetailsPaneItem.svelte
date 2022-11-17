@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { toUTCFormat } from '$lib/utils/common';
-	import { getLabel, isDatetime } from '@self/utils';
+	import { formatValue, getLabel } from '@self/utils';
 
 	export let key: string;
 	export let value: unknown;
@@ -10,13 +9,7 @@
 	<dt class="label">{getLabel(key)}</dt>
 	<dd class="definition">
 		<slot>
-			{#if typeof value === 'string' && isDatetime(value)}
-				{toUTCFormat(value)}
-			{:else if typeof value === 'number'}
-				{value.toLocaleString()}
-			{:else}
-				{value ?? '-'}
-			{/if}
+			{formatValue(value)}
 		</slot>
 	</dd>
 </div>

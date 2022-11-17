@@ -47,7 +47,9 @@ export const getLabel = (key: string) =>
 export const formatValue = (value: unknown) => {
 	if (typeof value === 'string' && isDatetime(value)) {
 		return toUTCFormat(value);
+	} else if (typeof value === 'number') {
+		return value.toLocaleString();
 	} else {
-		return value ?? '';
+		return value ?? '-';
 	}
 };
