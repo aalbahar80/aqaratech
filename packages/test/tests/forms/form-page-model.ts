@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
 import {
-	EMPTY_VALUE,
 	Entity,
 	formatValue,
 	getLabel,
@@ -134,7 +133,7 @@ export class FormPage {
 		} else if (typeof value === 'number') {
 			return value.toString();
 		} else if (value === undefined || value === null) {
-			return EMPTY_VALUE;
+			return '';
 		} else {
 			return JSON.stringify(value);
 		}
