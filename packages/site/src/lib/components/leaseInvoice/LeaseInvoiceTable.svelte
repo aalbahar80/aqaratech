@@ -1,4 +1,5 @@
 <script lang="ts">
+	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import { createApi } from '$api';
 	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import { invalidateAll } from '$app/navigation';
@@ -127,6 +128,16 @@
 					<FilterBarActions>
 						<FilterBarActionsExport />
 					</FilterBarActions>
+				{/if}
+				{#if $page.params.leaseId}
+					<FilterBarButtonForm
+						getRouteOptions={{
+							entity: 'leaseInvoice',
+							predefined: {
+								leaseId: $page.params.leaseId,
+							},
+						}}
+					/>
 				{/if}
 			</div>
 		</FilterBar>
