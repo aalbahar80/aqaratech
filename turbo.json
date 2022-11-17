@@ -30,7 +30,7 @@
 			"outputs": []
 		},
 		"test": {
-			"inputs": ["tests/**", "../*/src/**", "playwright.config.ts"],
+			"inputs": ["tests/**/*.ts", "../*/src/**", "playwright.config.ts"],
 			"outputs": ["playwright-report/**", "test-results/**"]
 		},
 		"//#api:generate": {
