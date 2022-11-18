@@ -2,14 +2,34 @@ import { createApi, type Api } from '$api';
 import { ResponseError } from '$api/openapi';
 import { parseApiError } from '$api/parse-api-error';
 import { handleCheckboxes } from '$lib/components/form/handle-checkbox';
-import { getRoute, PageType, type Entity } from '@self/utils';
+import {
+	getRoute,
+	PageType,
+	type Entity,
+	type KeysOfSchema,
+} from '@self/utils';
 import { invalid, redirect, type RequestEvent } from '@sveltejs/kit';
 import type { z } from 'zod';
+
+type MergeKeys<
+	TParams extends string,
+	TQuery extends string,
+	TSchema extends string,
+> = {
+	[K in TParams]: string | null;
+} & {
+	[K in TQuery]: string | null;
+} & {
+	[K in TSchema]: string | null;
+};
 
 export const handleForm = async <
 	S extends z.ZodTypeAny,
 	Event extends RequestEvent,
 	Submitted,
+	FromParams extends string,
+	FromQuery extends string,
+	TFormData = MergeKeys<FromParams, FromQuery, KeysOfSchema<S>[number]>,
 >({
 	entity,
 	schema,
@@ -23,8 +43,8 @@ export const handleForm = async <
 	entity: Entity;
 	schema: S;
 	event: Event;
-	fromParams?: string[];
-	fromQuery?: string[];
+	fromParams?: FromParams[];
+	fromQuery?: FromQuery[];
 	/**
 	 * Override the default redirect behavior.
 	 */
@@ -32,7 +52,7 @@ export const handleForm = async <
 	/**
 	 * `onSubmit` expects an id to be returned, which is used to redirect to the new page.
 	 */
-	onSubmit: (api: Api, data: z.infer<S>, event: Event) => Promise<Submitted>;
+	onSubmit: (api: Api, data: TFormData, event: Event) => Promise<Submitted>;
 	/**
 	 * Checkboxes are handled weirdly by HTML forms, so we convert them to booleans.
 	 */
