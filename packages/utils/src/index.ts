@@ -92,6 +92,7 @@ export type {
 	ExpenseUpdateSchema,
 	FileCreateSchema,
 	FileRelationKey,
+	KeyOfMultipleSchemas,
 	KeyOfSchema,
 	KeyOfSchemaIntersection,
 	LeaseCreateSchema,
