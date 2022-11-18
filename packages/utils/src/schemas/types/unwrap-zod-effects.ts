@@ -26,10 +26,12 @@ type UnwrappedInfer2 = UnwrapZodEffects2<UnwrappedInfer>;
 type Keys = KeysOfSchema<UnwrappedInfer2>;
 
 type UnwrapTwice<T extends z.ZodTypeAny> = T extends z.ZodEffects<infer O>
-	? O extends z.ZodEffects<infer P>
-		? P
+	? O extends z.ZodEffects
+		? ReturnType<O['innerType']>
 		: never
 	: never;
 
 type L2 = UnwrapTwice<L>;
 // type UnwrapKeys<T> = K
+
+type E = UnwrappedInfer extends z.ZodEffects<z.ZodType<infer O>> ? O : never;
