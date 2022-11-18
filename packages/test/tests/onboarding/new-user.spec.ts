@@ -5,7 +5,7 @@ test.use({
 	storageState: testUsers.freshUser.storageStatePath,
 });
 
-test('new users are routes to /welcome', async ({ page }) => {
+test('new users are redirected to /welcome', async ({ page }) => {
 	await page.goto('/');
 	await page.getByRole('link', { name: 'Log in' }).click();
 	await expect(page).toHaveURL('/welcome');
