@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { PageType } from '@self/utils';
+import { getLabel, PageType } from '@self/utils';
 import { test } from '../../../api/api-fixtures';
 import { FormPage } from '../../form-page-model';
 
@@ -29,6 +29,10 @@ test('can set to false', async ({ org, portfolio, lease, page }) => {
 	};
 
 	await formPage.goto();
+
+	await expect(page.getByLabel(getLabel('canPay'))).toBeChecked();
+	await expect(page.getByLabel(getLabel('notify'))).toBeChecked();
+
 	await formPage.fillForm(fields);
 	await formPage.save();
 
