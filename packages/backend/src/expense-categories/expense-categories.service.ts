@@ -117,18 +117,20 @@ export class ExpenseCategoriesService {
 
 		const categories = await this.fetchJsonCategories({ organizationId });
 
-		categories.forEach((c) => {
+		const modified = categories.map((c) => {
 			if (c.id === expenseCategoryId) {
-				this.applyChanges({
+				return this.applyChanges({
 					original: c,
 					submitted: updateExpenseCategoryDto,
 				});
+			} else {
+				return c;
 			}
 		});
 
 		const settings = await this.prisma.organizationSettings.update({
 			where: { organizationId },
-			data: { expenseCategoryTree: categories },
+			data: { expenseCategoryTree: modified },
 		});
 
 		const tree = expenseCategorySchema
