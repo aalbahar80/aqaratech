@@ -27,7 +27,7 @@ export const handleForm = async <
 	/**
 	 * Override the default redirect behavior.
 	 */
-	redirectTo?: string;
+	redirectTo?: (data: string) => string;
 	/**
 	 * `onSubmit` expects an id to be returned, which is used to redirect to the new page.
 	 */
@@ -98,14 +98,15 @@ export const handleForm = async <
 		}
 	}
 
-	const url =
-		redirectTo ??
-		getRoute({
-			entity: entity,
-			id,
-			pageType: PageType.Id,
-			params,
-		});
+	const url = redirectTo
+		? redirectTo(id)
+		: getRoute({
+				entity: entity,
+				id,
+				pageType: PageType.Id,
+				params,
+		  });
+
 	throw redirect(303, url);
 };
 
