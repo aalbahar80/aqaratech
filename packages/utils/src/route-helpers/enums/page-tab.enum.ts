@@ -17,10 +17,7 @@ export enum PageTab {
 	ExpenseCategories = 'expense-categories',
 }
 
-export type OrganizationPageTab =
-	| PageTab.Roles
-	| PageTab.Settings
-	| PageTab.ExpenseCategories;
+export type OrganizationPageTab = PageTab.Roles | PageTab.ExpenseCategories;
 
 export type TenantPageTab = PageTab.Leases | PageTab.Roles | PageTab.Files;
 

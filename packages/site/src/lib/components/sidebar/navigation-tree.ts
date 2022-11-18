@@ -83,7 +83,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 					name: 'Organization',
 					href: getRoute({
 						entity: 'organization',
-						pageType: PageTab.Settings,
+						pageType: PageType.Id,
 						id: organizationId,
 						params: {},
 					}),

@@ -14,7 +14,7 @@
 			label: 'Info',
 			href: getRoute({
 				...baseRouteConfig,
-				pageType: PageTab.Settings,
+				pageType: PageType.Id,
 			}),
 		},
 		{
