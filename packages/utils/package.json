@@ -11,6 +11,9 @@
 	},
 	"main": "./dist/index.cjs",
 	"types": "./dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsup --onSuccess \"tsc --emitDeclarationOnly --declaration\"",
 		"lint": "eslint --ignore-path ../../.gitignore .",
