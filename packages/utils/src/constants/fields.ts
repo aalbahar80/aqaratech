@@ -1,3 +1,9 @@
+export const organization = {
+	required: ['fullName'],
+
+	all: ['fullName', 'label'],
+} as const;
+
 export const property = {
 	required: ['area', 'block', 'number', 'street'],
 
@@ -69,6 +75,7 @@ export const expenseCategory = {
  * The form fields for each entity.
  */
 export const FIELDS = {
+	organization,
 	property,
 	unit,
 	lease,

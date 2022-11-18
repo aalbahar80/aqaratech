@@ -1,8 +1,16 @@
 <script lang="ts">
-	import OrganizationForm from '$lib/components/organization/OrganizationForm.svelte';
-	import type { PageData } from './$types';
+	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
+	import { getEntityFormModel } from '$lib/components/form/model/get-entity-form-model';
+	import { PageType } from '@self/utils';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
+
+	const formModel = getEntityFormModel({
+		entity: 'organization',
+		pageType: PageType.Edit,
+	});
 </script>
 
-<OrganizationForm formType="update" data={data.organization} />
+<EnhancedForm {form} {formModel} data={data.organization} />
