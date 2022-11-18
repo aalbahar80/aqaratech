@@ -3,6 +3,7 @@ import { testOrgEmail, testPassword } from '@self/seed';
 import { Cookie } from '@self/utils';
 import { test as base } from '../api/api-fixtures';
 import { siteURL } from '../api/fixtures/site-url';
+import { LoginPage } from './login-page';
 
 const user = {
 	role: 'orgadmin',
@@ -37,12 +38,11 @@ const test = base.extend({
 		const page = await context.newPage();
 
 		// Login
-		await page.goto('/');
-		await page.locator('text=Log In >> visible=true').click();
+		const { email, password } = user;
 
-		await page.fill('input[name="username"]', user.email);
-		await page.fill('input[name="password"]', user.password);
-		await page.locator('button[name="action"]').click();
+		const loginPage = new LoginPage(page);
+		await loginPage.goto();
+		await loginPage.fill({ email, password });
 
 		// Use fixture
 		await use(page);

@@ -1,10 +1,9 @@
 import { expect, test } from '@playwright/test';
 import { testUsers } from '../api/fixtures/users/test-users';
+import { LoginPage } from '../auth/login-page';
 
 const email = 'dev.tester.1@mailthink.net';
 const password = 'cloud12';
-
-const user = { email, password };
 
 // Setting storageState should be enough to re-use auth state. However, this is
 // not working at the moment. So we manually login again for now.
@@ -19,12 +18,9 @@ test.use({
 		const page = await context.newPage();
 
 		// Login
-		await page.goto('/');
-		await page.locator('text=Log In >> visible=true').click();
-
-		await page.fill('input[name="username"]', user.email);
-		await page.fill('input[name="password"]', user.password);
-		await page.locator('button[name="action"]').click();
+		const loginPage = new LoginPage(page);
+		await loginPage.goto();
+		await loginPage.fill({ email, password });
 
 		// Use fixture
 		await use(page);

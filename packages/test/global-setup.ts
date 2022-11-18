@@ -1,6 +1,7 @@
 import { chromium, type FullConfig } from '@playwright/test';
 import { Cookie } from '@self/utils';
 import { testUsers } from './tests/api/fixtures/users/test-users';
+import { LoginPage } from './tests/auth/login-page';
 import { getToken } from './utils/get-token';
 
 async function globalSetup(config: FullConfig) {
@@ -61,14 +62,10 @@ async function globalSetup(config: FullConfig) {
 
 		const page = await browser.newPage({ ignoreHTTPSErrors });
 
-		await page.goto(baseURL);
+		const loginPage = new LoginPage(page);
 
-		await page.getByRole('link', { name: 'Log in' }).click();
-
-		// Login
-		await page.getByLabel('Email address').fill(email);
-		await page.getByLabel('Password').fill(password);
-		await page.getByRole('button', { name: 'Continue' }).click();
+		await loginPage.goto();
+		await loginPage.fill({ email, password });
 
 		// Save cookies
 		await page.context().storageState({ path: storageStatePath });
