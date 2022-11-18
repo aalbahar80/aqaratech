@@ -13,6 +13,8 @@ be sent to server as either a. string "on" or b. nothing at all
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/checkbox#attr-value
 -->
 
+<!-- eslint-disable @typescript-eslint/restrict-template-expressions -->
+
 <div class="relative flex items-start">
 	<div class="flex h-5 items-center">
 		<input
