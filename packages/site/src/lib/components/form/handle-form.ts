@@ -9,6 +9,7 @@ import type { z } from 'zod';
 export const handleForm = async <
 	S extends z.ZodTypeAny,
 	Event extends RequestEvent,
+	Submitted,
 >({
 	entity,
 	schema,
@@ -27,11 +28,11 @@ export const handleForm = async <
 	/**
 	 * Override the default redirect behavior.
 	 */
-	redirectTo?: (data: string) => string;
+	redirectTo?: (data: Submitted) => string;
 	/**
 	 * `onSubmit` expects an id to be returned, which is used to redirect to the new page.
 	 */
-	onSubmit: (api: Api, data: z.infer<S>, event: Event) => Promise<string>;
+	onSubmit: (api: Api, data: z.infer<S>, event: Event) => Promise<Submitted>;
 	/**
 	 * Checkboxes are handled weirdly by HTML forms, so we convert them to booleans.
 	 */

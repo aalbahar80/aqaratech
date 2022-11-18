@@ -1,5 +1,5 @@
 import { handleForm } from '$lib/components/form/handle-form';
-import { organizationSchema } from '@self/utils';
+import { getRoute, organizationSchema, PageType } from '@self/utils';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
@@ -13,10 +13,20 @@ export const actions: Actions = {
 					createOrganizationDto: data,
 				});
 
-				return submitted.roleId;
+				return submitted;
 			},
 
-			redirectTo: (roleId) => `/auth/roles/${roleId}`,
+			redirectTo: (submitted) => {
+				const orgInfoPage = getRoute({
+					entity: 'organization',
+					id: submitted.organization.id,
+					pageType: PageType.Id,
+					params: {},
+				});
+
+				// Switch cookies to new organization/role and redirect to the new org's info page
+				return `/auth/roles/${submitted.roleId}?redirectTo=${orgInfoPage}`;
+			},
 		});
 	},
 };
