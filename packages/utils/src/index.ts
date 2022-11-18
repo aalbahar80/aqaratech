@@ -82,6 +82,7 @@ export {
 	zodStringOptional,
 } from './schemas';
 export type {
+	EditableSchemaKeys,
 	ExpenseCategory,
 	ExpenseCategoryCreateSchema,
 	ExpenseCategoryTreeSchema,

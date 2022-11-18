@@ -5,22 +5,26 @@ import { handleCheckboxes } from '$lib/components/form/handle-checkbox';
 import {
 	getRoute,
 	PageType,
+	type EditableSchemaKeys,
 	type Entity,
 	type KeysOfSchema,
 } from '@self/utils';
 import { invalid, redirect, type RequestEvent } from '@sveltejs/kit';
 import type { z } from 'zod';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type FormKeyValue = any;
+
 type MergeKeys<
 	TParams extends string,
 	TQuery extends string,
 	TSchema extends string,
 > = {
-	[K in TParams]: string | null;
+	[K in TParams]: FormKeyValue;
 } & {
-	[K in TQuery]: string | null;
+	[K in TQuery]: FormKeyValue;
 } & {
-	[K in TSchema]: string | null;
+	[K in EditableSchemaKeys<TSchema>]: FormKeyValue;
 };
 
 export const handleForm = async <
