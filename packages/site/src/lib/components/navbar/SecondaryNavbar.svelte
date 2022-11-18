@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Alert from '$lib/components/navbar/Alert.svelte';
-	import { isSidebarAvailable } from '$lib/components/navbar/is-sidebar-available';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
+	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { openSidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import { environment } from '$lib/environment';
 	import { tick } from 'svelte';

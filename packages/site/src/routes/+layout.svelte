@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { navigating, page } from '$app/stores';
-	import { isSidebarAvailable } from '$lib/components/navbar/is-sidebar-available';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
+	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
