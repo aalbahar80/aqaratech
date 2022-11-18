@@ -1,5 +1,5 @@
 import { handleForm } from '$lib/components/form/handle-form';
-import { expenseCategoryCreateSchema, getRoute, PageTab } from '@self/utils';
+import { expenseCategoryCreateSchema } from '@self/utils';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
@@ -16,13 +16,6 @@ export const actions: Actions = {
 
 				return submitted.id;
 			},
-
-			redirectTo: getRoute({
-				entity: 'organization',
-				id: event.params.organizationId,
-				pageType: PageTab.ExpenseCategories,
-				params: {},
-			}),
 		});
 	},
 };
