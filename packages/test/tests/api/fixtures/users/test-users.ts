@@ -29,8 +29,17 @@ const tenant = {
 	storageStateFilename: 'tenant.json',
 } as const;
 
+const freshUser = {
+	roleType: 'FRESH',
+	email: 'dev.tester.1@mailthink.net',
+	password: 'cloud12',
+	storageStatePath: 'storage-state/fresh-user.json',
+	storageStateFilename: 'fresh-user.json',
+} as const;
+
 export const testUsers = {
 	orgAdmin,
 	portfolio,
 	tenant,
+	freshUser,
 } as const;
