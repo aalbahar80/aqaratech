@@ -9,16 +9,18 @@ export const GET: RequestHandler = ({ locals }) => {
 
 	let location: string;
 
-	if (!locals.user?.roles.length) {
+	if (!locals.user) {
+		// This should never happen, but just in case...
+		throw new Error('User not found in locals');
+	} else if (!locals.user.roles.length) {
 		// if user has no roles yet, redirect to /welcome
 		location = '/welcome';
-	} else if (locals.user?.role?.meta.home) {
+	} else if (locals.user.role?.meta.home) {
 		// if user has a role, redirect to their home page
 		location = locals.user.role.meta.home;
 	} else {
-		// fallback to home page
-		// TODO: monitor. this should never happen.
-		location = '/';
+		// This should never happen, but just in case...
+		throw new Error('User has no home page');
 	}
 
 	return new Response(undefined, {

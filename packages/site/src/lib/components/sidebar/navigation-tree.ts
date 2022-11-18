@@ -10,6 +10,7 @@ import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
 import HeroiconsOutlineLogout from '~icons/heroicons-outline/logout';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
+import HeroiconsPlus from '~icons/heroicons/plus';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
 
 // Links
@@ -18,15 +19,17 @@ import { settings } from '$lib/utils/route-helpers';
 import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
-	if (!user.role) {
-		// return empty array instead?
-		throw new Error('User role is not defined');
-	}
-
-	const organizationId = user.role.organizationId;
-	const pageType = PageType.List;
-
 	const tree: NavigationItem[] = [
+		{
+			name: 'Create new organization',
+			href: getRoute({
+				entity: 'organization',
+				pageType: PageType.New,
+				params: {},
+			}),
+			icon: HeroiconsPlus,
+			divided: true,
+		},
 		{
 			name: 'Account',
 			href: `/users/${user.id}/roles`,
@@ -39,6 +42,14 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			icon: HeroiconsOutlineLogout,
 		},
 	];
+
+	if (!user.role) {
+		// New users have no role yet. Render basic nav links.
+		return tree;
+	}
+
+	const organizationId = user.role.organizationId;
+	const pageType = PageType.List;
 
 	if (user.role.roleType === 'ORGADMIN') {
 		tree.splice(
