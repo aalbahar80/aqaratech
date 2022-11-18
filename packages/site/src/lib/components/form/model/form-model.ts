@@ -2,7 +2,7 @@ import type { FormField } from '$lib/components/form/model/form-field.interface'
 import type {
 	EditableSchemaKeys,
 	Entity,
-	KeysOfSchema,
+	KeyOfSchema,
 	PageType,
 } from '@self/utils';
 import type { z } from 'zod';
@@ -24,7 +24,7 @@ export function createFormModel<
 	updateSchema?: UpdateSchema;
 	entity: Entity;
 	fields: {
-		[K in EditableSchemaKeys<KeysOfSchema<CreateSchema>[number]>]: FormField<K>;
+		[K in EditableSchemaKeys<KeyOfSchema<CreateSchema>>]: FormField<K>;
 	};
 	pageType: FormType;
 }) {
