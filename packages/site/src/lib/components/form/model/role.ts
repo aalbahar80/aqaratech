@@ -11,7 +11,7 @@ export const roleFormModel = (pageType: FormTypeEnum) =>
 		pageType,
 		createSchema: roleCreateSchema,
 		fields: {
-			fullName: createFormField('email', {
+			email: createFormField('email', {
 				required: true,
 			}),
 		},
