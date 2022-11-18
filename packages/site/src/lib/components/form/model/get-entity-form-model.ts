@@ -3,6 +3,7 @@ import { expenseCategoryFormModel } from '$lib/components/form/model/expense-cat
 import type { FormTypeEnum } from '$lib/components/form/model/form-model';
 import { leaseFormModel } from '$lib/components/form/model/lease';
 import { leaseInvoiceFormModel } from '$lib/components/form/model/lease-invoice';
+import { organizationFormModel } from '$lib/components/form/model/organization';
 import { payoutFormModel } from '$lib/components/form/model/payout';
 import { portfolioFormModel } from '$lib/components/form/model/portfolio';
 import { propertyFormModel } from '$lib/components/form/model/property';
@@ -11,6 +12,7 @@ import { tenantFormModel } from '$lib/components/form/model/tenant';
 import { unitFormModel } from '$lib/components/form/model/unit';
 
 export const entityFormModeMap = {
+	organization: organizationFormModel,
 	tenant: tenantFormModel,
 	portfolio: portfolioFormModel,
 	property: propertyFormModel,
