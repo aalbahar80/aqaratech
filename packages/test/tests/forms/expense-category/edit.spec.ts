@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { expenseCategoryFactory } from '@self/seed';
-import { FIELDS, PageType } from '@self/utils';
+import { FIELDS, getLabel, PageType } from '@self/utils';
 import * as R from 'remeda';
 import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';
@@ -58,4 +58,19 @@ test('can be submitted with all fields', async ({
 	await formPage.verifyDetails(fields);
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
+});
+
+test('cannot update isGroup', async ({ org, expenseCategory, page }) => {
+	const formPage = new FormPage(page, {
+		entity,
+		pageType,
+		id: expenseCategory.id,
+		fixtures: { org },
+	});
+
+	await formPage.goto();
+
+	const isGroup = page.getByLabel(getLabel('isGroup'));
+
+	await expect(isGroup).not.toBeVisible();
 });
