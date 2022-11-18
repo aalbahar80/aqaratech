@@ -1,11 +1,17 @@
 import { expect } from '@playwright/test';
+import { getRoute, PageType } from '@self/utils';
 import { test as base } from '../api/api-fixtures';
 
 const test = base.extend({
 	page: async ({ page, org }, use) => {
-		await page.goto(
-			`/organizations/${org.organization.id}/settings/organization`,
-		);
+		const url = getRoute({
+			entity: 'organization',
+			id: org.organization.id,
+			pageType: PageType.Id,
+			params: {},
+		});
+
+		await page.goto(url);
 
 		await page.locator(`data-testid=more-actions-button`).click();
 
