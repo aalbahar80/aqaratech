@@ -3,16 +3,17 @@ import type { z } from 'zod';
 
 /**
  * Extracts keys from a Zod schema.
- *
- * Uses `schema.keyof().options` to get the keys.
  */
-export type KeysOfSchema<T extends z.ZodTypeAny> = T extends z.ZodType<infer O>
+export type KeyOfSchema<T extends z.ZodTypeAny> = T extends z.ZodType<infer O>
 	? KeysOfUnion<O>
 	: never;
 
-export type KeysOfSchemaIntersection<T extends z.ZodTypeAny> =
+/**
+ * Extracts keys from a Zod schema.
+ */
+export type KeyOfSchemaIntersection<T extends z.ZodTypeAny> =
 	T extends z.ZodType<infer O> ? keyof O : never;
 
 export const keysOfSchema = <T extends z.AnyZodObject>(
 	schema: T,
-): KeysOfSchema<T> => schema.keyof().options;
+): KeyOfSchema<T> => schema.keyof().options;
