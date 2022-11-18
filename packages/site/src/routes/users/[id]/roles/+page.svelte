@@ -3,8 +3,6 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-
-	// TODO use user provided by layout?
 </script>
 
-<RoleList roles={data.user?.roles || []} />
+<RoleList roles={data.user.roles} />
