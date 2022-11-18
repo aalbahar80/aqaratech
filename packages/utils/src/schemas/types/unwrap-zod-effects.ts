@@ -35,5 +35,9 @@ type L2 = UnwrapTwice<L>;
 // type UnwrapKeys<T> = K
 
 type E0 = L extends z.ZodType<infer O> ? O : never;
+type EK = keyof E0;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+type EKU = KeysOfUnion<E0>;
 type E1 = L extends z.ZodEffects<z.ZodType<infer O>> ? O : never;
 type E2 = UnwrappedInfer extends z.ZodEffects<z.ZodType<infer O>> ? O : never;
