@@ -1,47 +1,49 @@
 import { expect } from '@playwright/test';
+import { organizationFactory } from '@self/seed';
+import { FIELDS, PageType } from '@self/utils';
+import * as R from 'remeda';
 import { test } from '../../api/api-fixtures';
+import { FormPage } from '../form-page-model';
 
-test.fixme('existing user can create new org', async ({ page, isMobile }) => {
-	await page.goto('/');
+const entity = 'organization';
+const pageType = PageType.New;
 
-	// wait a bit for dropdown to load
-	// await page.waitForLoadState('networkidle'); // otherwise flaky/no hydration
-	if (isMobile) {
-		await page.locator('button:has-text("Open main menu")').click();
-	} else {
-		await page.locator('data-testid=dropdown-menu').click();
-	}
+test('can be submitted with minimal fields', async ({ org, page }) => {
+	const organization = R.pick(
+		organizationFactory.build(),
+		FIELDS.organization.required,
+	);
 
-	await page.locator('text=Switch Role').click();
-	await page.locator('text=Create new Organization').click();
-	await expect(page).toHaveURL('/organizations/new');
-	await page.waitForLoadState('networkidle'); // otherwise flaky/no hydration
+	const formPage = new FormPage(page, {
+		entity,
+		pageType,
+		fixtures: { org },
+	});
 
-	const { name, label } = getName();
-	await page.locator('input[name="fullName"]').fill(name);
-	await page.locator('input[name="label"]').fill(label);
-	await page.locator('text=Save').click();
+	await formPage.goto();
+	await formPage.fillForm(organization);
+	await formPage.save();
 
-	const locator = page.locator(`text=${label}`);
-	await expect(locator).toBeVisible();
+	await formPage.verifyDetails(organization);
+	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
 
-test('can be submitted', async ({ page }) => {
-	await page.goto('/organizations/new');
+test('can be submitted with all fields', async ({ org, page }) => {
+	const organization = R.pick(
+		organizationFactory.build(),
+		FIELDS.organization.all,
+	);
 
-	const { name, label } = getName();
-	await page.locator('input[name="fullName"]').fill(name);
-	await page.locator('input[name="label"]').fill(label);
-	await page.locator('text=Save').click();
+	const formPage = new FormPage(page, {
+		entity,
+		pageType,
+		fixtures: { org },
+	});
 
-	const locator = page.locator(`text=${label}`);
-	await expect(locator).toBeVisible();
+	await formPage.goto();
+	await formPage.fillForm(organization);
+	await formPage.save();
+
+	await formPage.verifyDetails(organization);
+	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
-
-const getName = () => {
-	const random = Math.random().toString(36).substring(7);
-	return {
-		name: `Test Organization ${random}`,
-		label: `test-org-${random}`,
-	};
-};
