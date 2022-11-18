@@ -26,6 +26,7 @@ export const expenseCategoryFormModel = (pageType: FormTypeEnum) =>
 			isGroup: createFormField('isGroup', {
 				type: 'checkbox',
 				hint: 'You can either create an expense group OR an expense category. \n\n Expense Group: Can contain multiple expense categories. Example: "Utilities" expense group can have two expense categories called "Water" and "Electricity". Groups can be deeply nested. \n\n Expense Category: Holds expense entries.',
+				hideWhenEdit: true,
 			}),
 		},
 	});
