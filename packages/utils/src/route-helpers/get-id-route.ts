@@ -20,6 +20,8 @@ const pageTypeToUrl = {
 	[PageTab.Roles]: 'roles',
 	[PageTab.Balance]: 'balance',
 	[PageTab.Expenses]: 'expenses',
+	[PageTab.Settings]: 'settings/organization',
+	[PageTab.ExpenseCategories]: 'settings/expense-tree',
 };
 
 export const getIdRoute = (input: GetIdRoute, base: string) => {
