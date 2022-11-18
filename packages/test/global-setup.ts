@@ -60,11 +60,17 @@ async function globalSetup(config: FullConfig) {
 		}
 
 		const page = await browser.newPage({ ignoreHTTPSErrors });
+
 		await page.goto(baseURL);
-		await page.locator('text=Log In >> visible=true').click();
-		await page.fill('input[name="username"]', email);
-		await page.fill('input[name="password"]', password);
-		await page.click('button[name="action"]');
+
+		await page.getByRole('link', { name: 'Log in' }).click();
+
+		// Login
+		await page.getByLabel('Email address').fill(email);
+		await page.getByLabel('Password').fill(password);
+		await page.getByRole('button', { name: 'Continue' }).click();
+
+		// Save cookies
 		await page.context().storageState({ path: storageStatePath });
 	}
 
