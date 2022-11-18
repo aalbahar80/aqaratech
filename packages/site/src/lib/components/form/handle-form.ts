@@ -7,7 +7,7 @@ import {
 	PageType,
 	type EditableSchemaKeys,
 	type Entity,
-	type KeysOfSchema,
+	type KeyOfSchema,
 } from '@self/utils';
 import { invalid, redirect, type RequestEvent } from '@sveltejs/kit';
 import type { z } from 'zod';
@@ -33,7 +33,7 @@ export const handleForm = async <
 	Submitted,
 	FromParams extends string,
 	FromQuery extends string,
-	TFormData = MergeKeys<FromParams, FromQuery, KeysOfSchema<S>[number]>,
+	TFormData = MergeKeys<FromParams, FromQuery, KeyOfSchema<S>>,
 >({
 	entity,
 	schema,
