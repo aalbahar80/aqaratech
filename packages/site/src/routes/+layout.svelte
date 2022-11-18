@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { navigating, page } from '$app/stores';
+	import { isSidebarAvailable } from '$lib/components/navbar/is-sidebar-available';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
@@ -74,9 +75,11 @@
 	<VersionFooter />
 {:else}
 	<div class="grid grid-cols-12">
-		<div class="lg:col-span-3 lg:block xl:col-span-3 2xl:col-span-2">
-			<Sidebar navigationTree={getNavigationTree(data.user)} />
-		</div>
+		{#if isSidebarAvailable($page.url.pathname)}
+			<div class="lg:col-span-3 lg:block xl:col-span-3 2xl:col-span-2">
+				<Sidebar navigationTree={getNavigationTree(data.user)} />
+			</div>
+		{/if}
 
 		<div class="col-span-12 pt-8 lg:col-span-9 xl:col-span-9 2xl:col-span-10">
 			<div class="mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8">

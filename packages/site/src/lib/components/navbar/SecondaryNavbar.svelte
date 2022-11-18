@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Alert from '$lib/components/navbar/Alert.svelte';
+	import { isSidebarAvailable } from '$lib/components/navbar/is-sidebar-available';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import { openSidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import { environment } from '$lib/environment';
@@ -21,16 +22,18 @@
 	<div class="flex items-center justify-between py-8 px-4">
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
-			<button
-				class="lg:hidden"
-				on:click={async () => {
-					await tick(); // might not be necessary
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-					openSidebar();
-				}}
-			>
-				<HeroiconsBars3 class="h-8 w-8" />
-			</button>
+			{#if isSidebarAvailable($page.url.pathname)}
+				<button
+					class="lg:hidden"
+					on:click={async () => {
+						await tick(); // might not be necessary
+						// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+						openSidebar();
+					}}
+				>
+					<HeroiconsBars3 class="h-8 w-8" />
+				</button>
+			{/if}
 			<a
 				href={$page.data.user?.role?.meta.home ?? '/'}
 				class="text-3xl font-semibold text-gray-800 dark:text-white"
