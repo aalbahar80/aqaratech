@@ -6,6 +6,8 @@ test.use({
 	invoicesParams: [
 		{
 			isPaid: false,
+			postAt: '2020-01-01',
+			dueAt: '2020-01-31',
 		},
 	],
 });
