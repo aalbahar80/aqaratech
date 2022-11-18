@@ -21,16 +21,6 @@ import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 export const getNavigationTree = (user: User): NavigationItem[] => {
 	const tree: NavigationItem[] = [
 		{
-			name: 'Create new organization',
-			href: getRoute({
-				entity: 'organization',
-				pageType: PageType.New,
-				params: {},
-			}),
-			icon: HeroiconsPlus,
-			divided: true,
-		},
-		{
 			name: 'Account',
 			href: `/users/${user.id}/roles`,
 			icon: HeroiconsOutlineUser,
@@ -45,6 +35,16 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 
 	if (!user.role) {
 		// New users have no role yet. Render basic nav links.
+		tree.splice(0, 0, {
+			name: 'Create new organization',
+			href: getRoute({
+				entity: 'organization',
+				pageType: PageType.New,
+				params: {},
+			}),
+			icon: HeroiconsPlus,
+			divided: true,
+		});
 		return tree;
 	}
 
