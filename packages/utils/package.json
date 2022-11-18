@@ -1,12 +1,18 @@
 {
 	"name": "@self/utils",
 	"version": "2.1.0",
-	"main": "dist/index.cjs",
-	"module": "dist/index.js",
-	"types": "dist/index.d.ts",
 	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"main": "./dist/index.cjs",
+	"types": "./dist/index.d.ts",
 	"scripts": {
-		"build": "tsup",
+		"build": "tsup --onSuccess \"tsc --emitDeclarationOnly --declaration\"",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit",

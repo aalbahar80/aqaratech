@@ -22,6 +22,7 @@ const valid = [
 
 test.each(valid)(
 	'zodNumberOptional.parse(%s) should return %s',
+	// @ts-expect-error fix this
 	(arg, expected) => {
 		expect(zodNumberOptional.parse(arg)).toBe(expected);
 	},
