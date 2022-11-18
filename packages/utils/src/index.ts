@@ -93,6 +93,7 @@ export type {
 	FileCreateSchema,
 	FileRelationKey,
 	KeysOfSchema,
+	KeysOfSchemaIntersection,
 	LeaseCreateSchema,
 	LeaseInvoiceCreateManySchema,
 	LeaseInvoiceCreateSchema,
