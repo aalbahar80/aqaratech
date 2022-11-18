@@ -14,8 +14,6 @@
 {#if roles.length > 0}
 	<StackedList
 		entity="role"
-		count={roles.length}
-		message="No roles have been created yet."
 		formButtonProps={{
 			entity: 'role',
 			buttonText: 'Create new organization',
