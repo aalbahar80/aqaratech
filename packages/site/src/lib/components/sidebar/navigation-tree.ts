@@ -78,6 +78,26 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			href: settings(user.role.organizationId).organization,
 			icon: HeroiconsOutlineCog8Tooth,
 			// path: '/settings/',
+			children: [
+				{
+					name: 'Organization',
+					href: getRoute({
+						entity: 'organization',
+						pageType: PageTab.Settings,
+						id: organizationId,
+						params: {},
+					}),
+				},
+				{
+					name: 'Expense Categories',
+					href: getRoute({
+						entity: 'organization',
+						pageType: PageTab.ExpenseCategories,
+						id: organizationId,
+						params: {},
+					}),
+				},
+			],
 		});
 	}
 
