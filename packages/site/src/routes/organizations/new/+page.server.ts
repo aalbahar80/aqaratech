@@ -13,8 +13,10 @@ export const actions: Actions = {
 					createOrganizationDto: data,
 				});
 
-				return submitted.organization.id;
+				return submitted.roleId;
 			},
+
+			redirectTo: (roleId) => `/auth/roles/${roleId}`,
 		});
 	},
 };

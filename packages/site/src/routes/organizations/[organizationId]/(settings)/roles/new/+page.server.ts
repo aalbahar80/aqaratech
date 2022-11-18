@@ -50,12 +50,13 @@ export const actions: Actions = {
 				return submitted.id;
 			},
 
-			redirectTo: getRoute({
-				entity: relationKey,
-				id: relationValue,
-				pageType: PageTab.Roles,
-				params: event.params,
-			}),
+			redirectTo: () =>
+				getRoute({
+					entity: relationKey,
+					id: relationValue,
+					pageType: PageTab.Roles,
+					params: event.params,
+				}),
 		});
 	},
 };
