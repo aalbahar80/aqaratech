@@ -10,6 +10,7 @@
 		type ExpenseNode,
 	} from '$lib/utils/expense-type-options';
 	import { preventTabClose } from '$lib/utils/prevent-tab-close';
+	import { getRoute, PageType } from '@self/utils';
 	import { diff } from 'just-diff';
 	import { cloneDeep } from 'lodash-es';
 	import * as R from 'remeda';
@@ -29,12 +30,17 @@
 </script>
 
 <a
-	href={`/organizations/${$page.data.user?.role?.organizationId}/expenseCategories/new`}
+	href={getRoute({
+		entity: 'expenseCategory',
+		pageType: PageType.New,
+		params: $page.params,
+	})}
 	class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 >
 	<Fa6SolidPlus class="-ml-1 mr-2 hidden h-5 w-5 sm:block" />
 	Create new category
 </a>
+
 <div class="flex flex-auto justify-between">
 	<div class="w-full">
 		<ExpenseTree node={root} bind:root />

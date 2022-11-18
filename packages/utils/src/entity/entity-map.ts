@@ -142,7 +142,7 @@ const maintenanceOrder = satisfies<EntityNames>()({
 
 const expenseCategory = satisfies<EntityNames>()({
 	title: 'expenseCategory',
-	urlName: 'expenseCategories',
+	urlName: 'expense-categories',
 	singular: 'expense category',
 	singularCap: 'Expense Category',
 	plural: 'expense categories',

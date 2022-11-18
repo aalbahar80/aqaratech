@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
 	import { ROOT_ID, type ExpenseNode } from '$lib/utils/expense-type-options';
+	import { getRoute, PageType } from '@self/utils';
 	import {
 		dndzone,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,
@@ -67,8 +68,13 @@
 		{`${node.data.labelEn}`}
 	</b>
 	<a
-		href={`/organizations/${$page.data.user?.role?.organizationId}/expenseCategories/${node.data.id}/edit`}
 		class="py-2 text-xs font-medium text-indigo-600"
+		href={getRoute({
+			entity: 'expenseCategory',
+			pageType: PageType.Edit,
+			params: $page.params,
+			id: node.data.id,
+		})}
 	>
 		Edit
 	</a>
