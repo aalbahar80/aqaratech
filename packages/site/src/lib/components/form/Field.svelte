@@ -1,5 +1,4 @@
 <script lang="ts">
-	// import Checkbox from '$lib/components/form/enhanced/fields/Checkbox.svelte';
 	import CheckboxNative from '$lib/components/form/enhanced/fields/CheckboxNative.svelte';
 	import ComboboxField from '$lib/components/form/enhanced/fields/ComboboxField.svelte';
 	import FieldError from '$lib/components/form/enhanced/fields/FieldError.svelte';
