@@ -29,6 +29,7 @@ export class FormPage {
 	async goto() {
 		const formUrl = this.getFormUrl();
 		await this.page.goto(formUrl);
+		await expect(this.page).toHaveURL(formUrl);
 	}
 
 	fillForm = async (fields: Record<string, unknown>) => {
