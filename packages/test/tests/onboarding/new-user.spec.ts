@@ -1,4 +1,3 @@
-// import { test } from '../api/api-fixtures';
 import { test as base, expect } from '@playwright/test';
 
 const email = 'dev.tester.1@mailthink.net';
