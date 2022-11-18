@@ -20,7 +20,7 @@ const pageTypeToUrl = {
 	[PageTab.Roles]: 'roles',
 	[PageTab.Balance]: 'balance',
 	[PageTab.Expenses]: 'expenses',
-	[PageTab.Settings]: 'settings/organization',
+	[PageTab.Settings]: 'settings',
 	[PageTab.ExpenseCategories]: 'settings/expense-tree',
 };
 
