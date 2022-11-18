@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
+	import Tooltip from '$lib/components/Tooltip.svelte';
 
 	type Name = $$Generic<string>;
 	type GFormField = $$Generic<FormField<Name>>;
@@ -27,9 +28,17 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/checkbox#attr-va
 		/>
 	</div>
 	<div class="ml-3 text-sm">
-		<label for={formField.name} class="font-medium text-gray-700">
-			{formField.label}
-		</label>
+		<div class="flex items-center gap-2">
+			<label for={formField.name} class="font-medium text-gray-700">
+				{formField.label}
+			</label>
+
+			{#if formField.description}
+				<div>
+					<Tooltip text={formField.description} />
+				</div>
+			{/if}
+		</div>
 		<p id={`${formField.name}-description`} class="text-gray-500">
 			{formField.hint}
 		</p>
