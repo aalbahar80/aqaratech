@@ -34,7 +34,6 @@ export interface RolesApiCreateTenantRoleRequest {
 
 export interface RolesApiRemoveRequest {
 	id: string;
-	organizationId: string;
 }
 
 export interface RolesApiSendInviteRequest {
@@ -397,31 +396,16 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 			);
 		}
 
-		if (
-			requestParameters.organizationId === null ||
-			requestParameters.organizationId === undefined
-		) {
-			throw new runtime.RequiredError(
-				'organizationId',
-				'Required parameter requestParameters.organizationId was null or undefined when calling remove.',
-			);
-		}
-
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/roles/{id}`
-					.replace(
-						`{${'id'}}`,
-						encodeURIComponent(String(requestParameters.id)),
-					)
-					.replace(
-						`{${'organizationId'}}`,
-						encodeURIComponent(String(requestParameters.organizationId)),
-					),
+				path: `/organizations/{organizationId}/roles/{id}`.replace(
+					`{${'id'}}`,
+					encodeURIComponent(String(requestParameters.id)),
+				),
 				method: 'DELETE',
 				headers: headerParameters,
 				query: queryParameters,
