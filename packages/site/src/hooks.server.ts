@@ -91,7 +91,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const idToken = event.cookies.get(Cookie.idToken);
 	const accessToken = event.cookies.get(Cookie.accessToken);
-	const currentRole = event.cookies.get(Cookie.role);
+	const selectedRoleId = event.cookies.get(Cookie.role);
 
 	// consume idToken and set user. Any redirects should be handled by layout/page load functions.
 	if (idToken && accessToken) {
@@ -109,13 +109,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 
 		// get the user
-		const user = await getUser({
-			event,
-			selectedRoleId: currentRole,
-		});
+		const user = await getUser({ event, selectedRoleId });
 
 		// set the role cookie if it's not yet set
-		if (!currentRole && user?.role) {
+		if (!selectedRoleId && user.role) {
 			event.cookies.set('role', user.role.id, {
 				path: '/',
 				maxAge: MAX_AGE,
