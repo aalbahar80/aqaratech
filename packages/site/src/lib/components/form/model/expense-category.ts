@@ -14,7 +14,7 @@ export const expenseCategoryFormModel = (pageType: FormTypeEnum) =>
 		pageType,
 		createSchema: expenseCategoryCreateSchema,
 		updateSchema: expenseCategoryUpdateSchema,
-		excludedFields: ['parentId', 'description'] as const,
+		excludedFields: ['parentId', 'description'],
 		fields: {
 			labelEn: createFormField('labelEn', {
 				required: true,

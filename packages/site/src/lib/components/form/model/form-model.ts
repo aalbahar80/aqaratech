@@ -13,7 +13,9 @@ export function createFormModel<
 	FormType extends PageType.New | PageType.Edit,
 	CreateSchema extends z.ZodTypeAny,
 	UpdateSchema extends z.ZodTypeAny,
-	ExcludedFields,
+	ExcludedFields extends
+		| KeyOfSchema<CreateSchema>[]
+		| KeyOfSchema<UpdateSchema>[] = [],
 >({
 	entity,
 	createSchema,
