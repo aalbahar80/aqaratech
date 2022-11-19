@@ -3,6 +3,7 @@ import { environment } from '$aqenvironment';
 import { logger } from '$lib/server/logger';
 import * as Sentry from '@sentry/node';
 import type { RequestEvent } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export const getProfile = async (event: RequestEvent) => {
 	// Sentry
@@ -39,18 +40,6 @@ export const getProfile = async (event: RequestEvent) => {
 	if (!res.ok) {
 		// It's important to check for res.ok because fetch will not throw an error.
 		// This means the backend is up. But there was an issue with the request.
-		// Most likely, user does not exist in our db yet.
-		logger.warn(
-			'[getProfile] Backend responded with an error when fetching user',
-			res,
-		);
-
-		logger.log({
-			level: 'warn',
-			message:
-				'Backend responded with an error when fetching user: ' +
-				res.status.toString(),
-		});
 
 		logger.log({
 			level: 'warn',
@@ -58,10 +47,13 @@ export const getProfile = async (event: RequestEvent) => {
 				status: res.status,
 				statusText: res.statusText,
 				url: res.url,
+				message: 'Backend responded with an error when fetching user',
 			}),
 		});
 
-		return undefined;
+		throw error(500, {
+			message: 'Service unavailable',
+		});
 	}
 
 	const data = (await res.json()) as ValidatedUserDto;
