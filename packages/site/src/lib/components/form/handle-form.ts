@@ -64,10 +64,10 @@ export const handleForm = async <
 }) => {
 	const { request, fetch, params } = event;
 
-	const data = await request.formData();
+	const formData = await request.formData();
 
 	// convert FormData to object
-	const obj: Record<string, unknown> = Object.fromEntries(data.entries());
+	const obj: Record<string, unknown> = Object.fromEntries(formData.entries());
 
 	if (checkboxKeys) {
 		handleCheckboxes(obj, checkboxKeys);
