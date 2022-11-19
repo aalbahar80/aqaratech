@@ -1,23 +1,10 @@
-import type { ValidatedRoleDto } from '$api/openapi';
 import type { RoleSK, User } from '$lib/models/types/auth.type';
 import { logger } from '$lib/server/logger';
+import { getDefaultRole } from '$lib/server/utils/get-default-role';
 import { getProfile } from '$lib/server/utils/get-profile';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
 import { Cookie } from '@self/utils';
 import type { RequestEvent } from '@sveltejs/kit';
-
-const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
-	const defaultRole = roles.find((role) => role.isDefault) || roles[0];
-
-	if (!defaultRole) {
-		return undefined;
-	} else {
-		return {
-			...defaultRole,
-			meta: getRoleMeta(defaultRole),
-		};
-	}
-};
 
 /**
  * Contact the backend to get the user's info.
