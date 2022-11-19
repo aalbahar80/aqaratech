@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { entitiesMap, getRoute, PageType } from '@self/utils';
+import { getRoute, PageTab } from '@self/utils';
 import { promises } from 'node:fs';
 import { getPresignedUrl } from '../../../utils/get-presigned-url';
 import { test } from '../../api/api-fixtures';
@@ -11,27 +11,25 @@ test('file can be uploaded', async ({ page, request, portfolio }) => {
 	// TODO add random characters to file name for cleaner testing
 
 	// upload file
-	const form = getRoute({
-		entity: 'file',
-		pageType: PageType.New,
+	const url = getRoute({
+		entity: 'portfolio',
+		pageType: PageTab.Files,
+		id: portfolio.id,
 		params: {
 			organizationId: portfolio.organizationId,
 			portfolioId: portfolio.id,
 		},
-		predefined: {
-			relationKey: 'portfolio',
-			relationValue: portfolio.id,
-		},
 	});
 
-	await page.goto(form);
-	await page.locator('input[name="fileName"]').fill(fileName);
-	await page.locator('input[name="file"]').setInputFiles(localFilePath);
-	await page.locator('text=Save').click();
+	await page.goto(url);
 
-	await expect(page).toHaveURL(
-		`/${entitiesMap.portfolio.urlName}/${portfolio.id}`,
-	);
+	await page.getByRole('link', { name: 'Attach files' }).click();
+
+	await page.getByLabel('File Name').fill(fileName);
+	await page.getByLabel('File *').setInputFiles(localFilePath);
+	await page.getByRole('button', { name: 'Save' }).click();
+
+	await expect(page).toHaveURL(url);
 
 	// grab uploaded file
 

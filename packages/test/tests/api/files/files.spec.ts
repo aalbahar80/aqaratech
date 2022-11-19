@@ -39,7 +39,6 @@ test('buckets are automatically created', async ({ request, portfolio }) => {
 			fileName: fileName,
 			relationKey: 'portfolio',
 			relationValue: portfolio.id,
-			organizationId: portfolio.organizationId,
 			file: {
 				name: fileName,
 				mimeType: 'text/plain',

@@ -187,7 +187,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 				fileName: fileName,
 				relationKey: 'portfolio',
 				relationValue: portfolio.id,
-				organizationId: portfolio.organizationId,
 				file: {
 					name: fileName,
 					mimeType: 'text/plain',
