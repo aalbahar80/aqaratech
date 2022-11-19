@@ -4,6 +4,7 @@ import type { z } from 'zod';
 /**
  * Extracts keys from a Zod schema.
  */
+// @ts-expect-error fix
 export type KeyOfSchema<T> = UnwrapSchema<InnerSchema<T>>;
 
 export type UnwrapSchema<T extends z.ZodTypeAny> = T extends z.ZodType<infer O>
@@ -11,7 +12,7 @@ export type UnwrapSchema<T extends z.ZodTypeAny> = T extends z.ZodType<infer O>
 	: never;
 
 export type InnerSchema<T> = T extends z.ZodEffects<any>
-	? ReturnType<T['innerType']>
+	? ReturnType<ReturnType<T['innerType']>['innerType']> // leaseCreateSchema needs to be unwrapped twice
 	: T;
 
 /**
