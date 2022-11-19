@@ -1,12 +1,6 @@
 import { handleForm } from '$lib/components/form/handle-form';
 import { environment } from '$lib/environment';
-import {
-	fileCreateSchema,
-	getRoute,
-	PageTab,
-	type Entity,
-	type FileRelationKey,
-} from '@self/utils';
+import { fileCreateSchema } from '@self/utils';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
@@ -16,7 +10,7 @@ export const actions: Actions = {
 			schema: fileCreateSchema,
 			event,
 			fromQuery: ['relationKey', 'relationValue'],
-			onSubmit: async (data, event) => {
+			onSubmit: async (_api, data, event) => {
 				// Avoid using FilesApi.createFile() because of a bug with uploading files.
 
 				const formData = new FormData();
@@ -27,7 +21,6 @@ export const actions: Actions = {
 
 				const url = `${environment.PUBLIC_API_URL}/organizations/${event.params.organizationId}/files`;
 
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 				await event.fetch(url, {
 					method: 'POST',
 					credentials: 'include',
@@ -37,17 +30,7 @@ export const actions: Actions = {
 				return data;
 			},
 
-			redirectTo: (data) => '/',
-			// getRoute({
-			// 	entity: data.relationKey as FileRelationKey,
-			// 	id: data.relationValue as string,
-			// 	pageType: PageTab.Files,
-			// 	params: {
-			// 		...event.params,
-			// 		// rm once moving endpoint to /portfolios/:portfolioId/files
-			// 		portfolioId: event.url.searchParams.get('portfolioId'),
-			// 	},
-			// }),
+			redirectTo: () => event.url.searchParams.get('redirectTo') ?? '/',
 		});
 	},
 };

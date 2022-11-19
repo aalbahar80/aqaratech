@@ -7,11 +7,17 @@ import {
 	type GetFormRouteWithRelation,
 } from '@self/utils';
 
-export const getFormRouteWithRelation = (
-	entity: GetFormRouteWithRelation['entity'],
-	pathname: string,
-	params: Record<string, string>,
-): string => {
+export const getFormRouteWithRelation = ({
+	entity,
+	pathname,
+	params,
+	redirectTo,
+}: {
+	entity: GetFormRouteWithRelation['entity'];
+	pathname: string;
+	params: Record<string, string>;
+	redirectTo: string;
+}): string => {
 	const relation = inferUrlRelation(pathname);
 
 	const url = getRoute({
@@ -21,6 +27,7 @@ export const getFormRouteWithRelation = (
 		predefined: {
 			relationKey: relation.entity,
 			relationValue: relation.id,
+			redirectTo,
 		},
 	});
 

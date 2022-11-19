@@ -26,7 +26,12 @@
 <RoleGuard roles={['ORGADMIN']}>
 	<div class="flex justify-end">
 		<a
-			href={getFormRouteWithRelation('file', $page.url.pathname, $page.params)}
+			href={getFormRouteWithRelation({
+				entity: 'file',
+				pathname: $page.url.pathname,
+				params: $page.params,
+				redirectTo: $page.url.pathname,
+			})}
 		>
 			<IconButton>
 				<div slot="icon">
