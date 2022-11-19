@@ -19,7 +19,7 @@ export const getUser = async ({
 }: {
 	selectedRoleId: string | undefined;
 	event: RequestEvent;
-}): Promise<User | undefined> => {
+}) => {
 	logger.debug('[getUser] Getting user');
 
 	const profile = await getProfile(event);
