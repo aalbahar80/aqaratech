@@ -139,9 +139,9 @@ export const handleForm = async <
 			throw error;
 		}
 
-		const data = await parseApiError(error);
+		const res = await parseApiError(error);
 
-		if (data.status !== 400) {
+		if (res.status !== 400) {
 			throw error;
 		}
 
@@ -149,7 +149,7 @@ export const handleForm = async <
 
 		return invalid(400, {
 			...(obj as z.infer<S>),
-			errors: toFormErrors([data.message]),
+			errors: toFormErrors([res.message]),
 		});
 	}
 };
