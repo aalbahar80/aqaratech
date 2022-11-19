@@ -21,7 +21,7 @@
 	{:else if formField.type === 'select' && formField.combobox}
 		<ComboboxField {formField} {value} {errors} />
 	{:else if formField.type === 'select'}
-		<SelectField {formField} {value} {errors} />
+		<SelectField {formField} {value} />
 	{:else if formField.type === 'checkbox'}
 		<!-- <Checkbox {formField} {value} /> -->
 		<CheckboxNative {formField} {value} />

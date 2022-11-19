@@ -8,7 +8,6 @@
 
 	export let formField: GFormField;
 	export let value: unknown = undefined;
-	export let errors: string[] | undefined = undefined;
 
 	$: options =
 		'getOptions' in formField ? formField.getOptions() : formField.options;
