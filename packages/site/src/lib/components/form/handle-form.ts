@@ -67,10 +67,10 @@ export const handleForm = async <
 	const formData = await request.formData();
 
 	// convert FormData to object
-	const obj: Record<string, unknown> = Object.fromEntries(formData.entries());
+	const data: Record<string, unknown> = Object.fromEntries(formData.entries());
 
 	if (checkboxKeys) {
-		handleCheckboxes(obj, checkboxKeys);
+		handleCheckboxes(data, checkboxKeys);
 	}
 
 	// add params to object
@@ -80,7 +80,7 @@ export const handleForm = async <
 			if (!value) {
 				throw new Error(`Missing param: ${param}`);
 			} else {
-				obj[param] = value;
+				data[param] = value;
 			}
 		}
 	}
@@ -89,11 +89,11 @@ export const handleForm = async <
 	if (fromQuery) {
 		for (const query of fromQuery) {
 			const value = event.url.searchParams.get(query);
-			obj[query] = value;
+			data[query] = value;
 		}
 	}
 
-	const parsed = schema.safeParse(obj);
+	const parsed = schema.safeParse(data);
 
 	if (!parsed.success) {
 		// cast type to populate ActionData type
@@ -102,17 +102,17 @@ export const handleForm = async <
 		>;
 
 		console.dir(
-			{ location: 'handle-form', obj, errors },
+			{ location: 'handle-form', obj: data, errors },
 			{ depth: null, colors: true },
 		);
 
-		return invalid(400, { ...(obj as z.infer<S>), errors });
+		return invalid(400, { ...(data as z.infer<S>), errors });
 	}
 
 	try {
 		// We pass the original object to onSubmit, not the parsed one
 		// This is to avoid transforming the data twice, which in the case of short dates (yyyy-mm-dd) will fail.
-		const submitted = await onSubmit(createApi(fetch), obj, event);
+		const submitted = await onSubmit(createApi(fetch), data, event);
 
 		let url: string;
 
@@ -148,7 +148,7 @@ export const handleForm = async <
 		// Handle API errors and return the message to the user
 
 		return invalid(400, {
-			...(obj as z.infer<S>),
+			...(data as z.infer<S>),
 			errors: toFormErrors([res.message]),
 		});
 	}
