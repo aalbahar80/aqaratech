@@ -1,6 +1,5 @@
 import type { RoleSK, User } from '$lib/models/types/auth.type';
 import { logger } from '$lib/server/logger';
-import { getDefaultRole } from '$lib/server/utils/get-default-role';
 import { getProfile } from '$lib/server/utils/get-profile';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
 import { Cookie } from '@self/utils';
@@ -26,19 +25,12 @@ export const getUser = async ({
 
 	logger.info('Got profile', {
 		message: JSON.stringify({
-			id: profile?.id,
-			email: profile?.email,
-			roleCount: profile?.roles?.length,
-			createDate: profile?.createdAt,
+			id: profile.id,
+			email: profile.email,
+			roleCount: profile.roles.length,
+			createDate: profile.createdAt,
 		}),
 	});
-
-	// User not in our db, nothing more to do.
-	// TODO: roles can be undefined
-	if (!profile || !profile.roles) {
-		// TODO: use zod to validate profile, roles at lease. This should never happen.
-		return undefined;
-	}
 
 	// augment each role with metadata
 	const roles = profile.roles.map((role) => ({
@@ -61,12 +53,9 @@ export const getUser = async ({
 		// clear the role cookie if it exists since it has failed to lead to a valid role
 		event.cookies.set(Cookie.role, '', { maxAge: 0, path: '/' });
 
-		logger.log({
-			level: 'warn',
-			message: 'Could not find selected role. Using default role',
-		});
+		console.log('Could not find selected role. Using default role');
 
-		role = getDefaultRole(roles);
+		role = roles[0];
 	}
 
 	const user: User = {
