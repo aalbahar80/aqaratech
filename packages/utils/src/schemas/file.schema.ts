@@ -5,7 +5,6 @@ import { isID } from './utils/id.schema';
 
 export const fileCreateSchema = z
 	.object({
-		organizationId: isID,
 		fileName: filenameSchema,
 		file: z.record(z.any()).transform((value) => value as File),
 

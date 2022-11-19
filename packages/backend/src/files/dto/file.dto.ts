@@ -27,7 +27,6 @@ export class FileDto {
 }
 
 export class CreateFileDto implements Exactly<FileCreateSchema, CreateFileDto> {
-	organizationId: string; // TODO rm
 	fileName: string;
 	relationValue: string;
 

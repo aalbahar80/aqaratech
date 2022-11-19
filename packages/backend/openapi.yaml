@@ -4088,8 +4088,6 @@ components:
         file:
           type: string
           format: binary
-        organizationId:
-          type: string
         fileName:
           type: string
         relationValue:
@@ -4097,7 +4095,6 @@ components:
       required:
         - relationKey
         - file
-        - organizationId
         - fileName
         - relationValue
     FileDto:

@@ -1,8 +1,15 @@
 <script lang="ts">
-	import FileForm from '$lib/components/file/FileForm.svelte';
-	import type { PageData } from './$types';
+	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
+	import { getEntityFormModel } from '$lib/components/form/model/get-entity-form-model';
+	import { PageType } from '@self/utils';
+	import type { ActionData } from './$types';
 
-	export let data: PageData;
+	export let form: ActionData;
+
+	const formModel = getEntityFormModel({
+		entity: 'file',
+		pageType: PageType.New,
+	});
 </script>
 
-<FileForm relationKey={data.relationKey} relationValue={data.relationValue} />
+<EnhancedForm {formModel} {form} />
