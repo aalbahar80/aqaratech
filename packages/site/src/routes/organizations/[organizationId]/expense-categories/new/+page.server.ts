@@ -7,7 +7,9 @@ export const actions: Actions = {
 		return handleForm({
 			entity: 'expenseCategory',
 			schema: expenseCategoryCreateSchema,
-			checkboxKeys: ['isGroup'],
+			checkboxKeys: {
+				isGroup: true,
+			},
 			event,
 			onSubmit: async (api, data, event) => {
 				const submitted = await api.expenseCategories.create({

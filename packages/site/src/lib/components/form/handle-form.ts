@@ -2,11 +2,14 @@ import { createApi, type Api } from '$api';
 import { ResponseError } from '$api/openapi';
 import { parseApiError } from '$api/parse-api-error';
 import { handleCheckboxes } from '$lib/components/form/handle-checkbox';
+import type { PickBooleans } from '$lib/components/form/only-booleans';
+import { objectKeys } from '$lib/utils/common';
 import {
 	getRoute,
 	PageType,
 	type EditableSchemaKeys,
 	type Entity,
+	type InnerSchema,
 	type KeyOfSchema,
 } from '@self/utils';
 import { invalid, redirect, type RequestEvent } from '@sveltejs/kit';
@@ -60,7 +63,7 @@ export const handleForm = async <
 	/**
 	 * Checkboxes are handled weirdly by HTML forms, so we convert them to booleans.
 	 */
-	checkboxKeys?: string[];
+	checkboxKeys?: PickBooleans<z.infer<InnerSchema<S>>>;
 }) => {
 	const { request, fetch, params } = event;
 
@@ -70,7 +73,7 @@ export const handleForm = async <
 	const data: Record<string, unknown> = Object.fromEntries(formData.entries());
 
 	if (checkboxKeys) {
-		handleCheckboxes(data, checkboxKeys);
+		handleCheckboxes(data, objectKeys(checkboxKeys));
 	}
 
 	// add params to object

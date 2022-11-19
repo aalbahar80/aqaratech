@@ -7,7 +7,9 @@ export const actions: Actions = {
 		return handleForm({
 			entity: 'leaseInvoice',
 			schema: leaseInvoiceUpdateSchema,
-			checkboxKeys: ['isPaid'],
+			checkboxKeys: {
+				isPaid: true,
+			},
 			event,
 			onSubmit: async (api, data, event) => {
 				const submitted = await api.leaseInvoices.update({

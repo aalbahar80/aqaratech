@@ -8,7 +8,10 @@ export const actions: Actions = {
 			entity: 'lease',
 			schema: leaseCreateSchema,
 			event,
-			checkboxKeys: ['canPay', 'notify'],
+			checkboxKeys: {
+				canPay: true,
+				notify: true,
+			},
 			onSubmit: async (api, data, event) => {
 				const submitted = await api.organizations.createLease({
 					organizationId: event.params.organizationId,

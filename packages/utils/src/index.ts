@@ -92,6 +92,7 @@ export type {
 	ExpenseUpdateSchema,
 	FileCreateSchema,
 	FileRelationKey,
+	InnerSchema,
 	KeyOfMultipleSchemas,
 	KeyOfSchema,
 	KeyOfSchemaIntersection,
@@ -113,6 +114,7 @@ export type {
 	TenantUpdateSchema,
 	UnitCreateSchema,
 	UnitUpdateSchema,
+	UnwrapSchema,
 } from './schemas';
 export { isDateOnly } from './schemas/utils/date/is-date-only';
 export { isDatetime } from './schemas/utils/date/is-date-time';
