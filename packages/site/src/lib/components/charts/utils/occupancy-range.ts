@@ -1,13 +1,13 @@
 import { startOfMonthN } from '@self/utils';
 
 const previous = {
-	start: startOfMonthN(12).split('T')[0],
-	end: new Date().toISOString().split('T')[0],
+	start: startOfMonthN(12).substring(0, 10),
+	end: new Date().toISOString().substring(0, 10),
 };
 
 const future = {
-	start: new Date().toISOString().split('T')[0],
-	end: startOfMonthN(-12).split('T')[0],
+	start: new Date().toISOString().substring(0, 10),
+	end: startOfMonthN(-12).substring(0, 10),
 };
 
 export const occupancyRange = {
