@@ -112,7 +112,11 @@ export const handleForm = async <
 	try {
 		// We pass the original object to onSubmit, not the parsed one
 		// This is to avoid transforming the data twice, which in the case of short dates (yyyy-mm-dd) will fail.
-		const submitted = await onSubmit(createApi(fetch), data, event);
+		const submitted = await onSubmit(
+			createApi(fetch),
+			data as TFormData,
+			event,
+		);
 
 		let url: string;
 
