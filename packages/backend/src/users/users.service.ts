@@ -5,7 +5,7 @@ import { TAppAbility } from 'src/casl/abilities/ability-types';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { OrganizationDto } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUserDto, ValidatedUserDto } from 'src/users/dto/user.dto';
+import { CreateUserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -21,7 +21,7 @@ export class UsersService {
 		return this.prisma.user.create({ data: createUserDto });
 	}
 
-	async findOneByEmail(email: string): Promise<ValidatedUserDto> {
+	async findOneByEmail(email: string) {
 		let user = await this.prisma.user.findUnique({
 			where: { email },
 			include: {
@@ -56,14 +56,15 @@ export class UsersService {
 			});
 		}
 
-		return {
+		const result = {
 			...user,
-			// @ts-expect-error test
 			roles: user.roles.map((role) => ({
 				...role,
 				organization: plainToInstance(OrganizationDto, role.organization),
 			})),
 		};
+
+		return result;
 	}
 
 	async getAbility(email: string, roleId: string) {
