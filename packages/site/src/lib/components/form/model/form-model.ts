@@ -13,7 +13,7 @@ export function createFormModel<
 	FormType extends PageType.New | PageType.Edit,
 	CreateSchema extends z.ZodTypeAny,
 	UpdateSchema extends z.ZodTypeAny,
-	ExcludedFields extends readonly string[],
+	ExcludedFields,
 >({
 	entity,
 	createSchema,
@@ -32,7 +32,7 @@ export function createFormModel<
 		{
 			[K in EditableSchemaKeys<KeyOfSchema<CreateSchema>>]: FormField<K>;
 		},
-		ExcludedFields[number] extends string ? ExcludedFields[number] : never
+		ExcludedFields[number]
 	>;
 	pageType: FormType;
 }) {
