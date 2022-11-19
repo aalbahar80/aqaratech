@@ -1,11 +1,9 @@
-import type { ValidatedRoleDto, ValidatedUserDto } from '$api/openapi';
-import { environment } from '$aqenvironment';
+import type { ValidatedRoleDto } from '$api/openapi';
 import type { RoleSK, User } from '$lib/models/types/auth.type';
 import { logger } from '$lib/server/logger';
+import { getProfile } from '$lib/server/utils/get-profile';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
 import { Cookie } from '@self/utils';
-import * as Sentry from '@sentry/node';
-import '@sentry/tracing'; // TODO: remove?
 import type { RequestEvent } from '@sveltejs/kit';
 
 const getDefaultRole = (roles: ValidatedRoleDto[]): User['role'] => {
@@ -32,7 +30,7 @@ export const getUser = async ({
 	selectedRoleId,
 	event,
 }: {
-	selectedRoleId?: string;
+	selectedRoleId: string | undefined;
 	event: RequestEvent;
 }): Promise<User | undefined> => {
 	logger.debug('[getUser] Getting user');
@@ -91,70 +89,4 @@ export const getUser = async ({
 	};
 
 	return user;
-};
-
-const getProfile = async (
-	event: RequestEvent,
-): Promise<ValidatedUserDto | undefined> => {
-	// Sentry
-	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();
-	const span = transaction?.startChild({
-		op: 'getProfile',
-	});
-
-	const headers: Record<string, string> = {
-		'Content-Type': 'application/json',
-	};
-
-	if (span) {
-		headers['sentry-trace'] = `${span.toTraceparent()}`;
-	} else {
-		logger.log({
-			level: 'debug',
-			message: 'Could not get span for getProfile',
-		});
-	}
-
-	// Either get the user or return undefined.
-	// construct url
-	const url = new URL(`${environment.PUBLIC_API_URL_LOCAL}/users/me`);
-
-	// fetch user
-	// sveltekit's `fetch` allows us to make a credentiale request server-side. The accessToken is stored in a cookie.
-	// try {
-	const res = await event.fetch(url.toString(), {
-		headers,
-		credentials: 'include',
-	});
-
-	if (!res.ok) {
-		// It's important to check for res.ok because fetch will not throw an error.
-		// This means the backend is up. But there was an issue with the request.
-		// Most likely, user does not exist in our db yet.
-		logger.warn(
-			'[getProfile] Backend responded with an error when fetching user',
-			res,
-		);
-
-		logger.log({
-			level: 'warn',
-			message:
-				'Backend responded with an error when fetching user: ' + res.status,
-		});
-
-		logger.log({
-			level: 'warn',
-			message: JSON.stringify({
-				status: res.status,
-				statusText: res.statusText,
-				url: res.url,
-			}),
-		});
-
-		return undefined;
-	}
-
-	const data = (await res.json()) as ValidatedUserDto;
-
-	return data;
 };
