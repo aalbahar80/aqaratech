@@ -60,6 +60,7 @@ export class UsersService {
 			...user,
 			roles: user.roles.map((role) => ({
 				...role,
+				email, // needed?
 				organization: plainToInstance(OrganizationDto, role.organization),
 			})),
 		};

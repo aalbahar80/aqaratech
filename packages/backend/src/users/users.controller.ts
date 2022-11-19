@@ -33,7 +33,6 @@ export class UsersController {
 	@ApiOkResponse({ type: ValidatedUserDto })
 	@ApiNotFoundResponse()
 	findProfile(@UserBasic() user: AuthenticatedUser): Promise<ValidatedUserDto> {
-		// @ts-expect-error is role.email needed?
 		return this.usersService.findOneByEmail(user.email);
 	}
 
