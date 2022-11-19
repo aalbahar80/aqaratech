@@ -4,9 +4,7 @@ import { logger } from '$lib/server/logger';
 import * as Sentry from '@sentry/node';
 import type { RequestEvent } from '@sveltejs/kit';
 
-export const getProfile = async (
-	event: RequestEvent,
-): Promise<ValidatedUserDto | undefined> => {
+export const getProfile = async (event: RequestEvent) => {
 	// Sentry
 	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();
 	const span = transaction?.startChild({
