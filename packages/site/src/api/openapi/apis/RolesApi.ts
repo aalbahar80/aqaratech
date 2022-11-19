@@ -33,7 +33,7 @@ export interface RolesApiCreateTenantRoleRequest {
 }
 
 export interface RolesApiRemoveRequest {
-	roleId: string;
+	id: string;
 	organizationId: string;
 }
 
@@ -390,13 +390,10 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 		requestParameters: RolesApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<string>> {
-		if (
-			requestParameters.roleId === null ||
-			requestParameters.roleId === undefined
-		) {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
-				'roleId',
-				'Required parameter requestParameters.roleId was null or undefined when calling remove.',
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling remove.',
 			);
 		}
 
@@ -416,10 +413,10 @@ export class RolesApi extends runtime.BaseAPI implements RolesApiInterface {
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/roles/{roleId}`
+				path: `/organizations/{organizationId}/roles/{id}`
 					.replace(
-						`{${'roleId'}}`,
-						encodeURIComponent(String(requestParameters.roleId)),
+						`{${'id'}}`,
+						encodeURIComponent(String(requestParameters.id)),
 					)
 					.replace(
 						`{${'organizationId'}}`,

@@ -95,7 +95,6 @@ export interface OrganizationsApiCreate0Request {
 	organizationId: string;
 	relationKey: FileRelationKeyEnum;
 	file: Blob;
-	organizationId2: string;
 	fileName: string;
 	relationValue: string;
 }
@@ -1172,16 +1171,6 @@ export class OrganizationsApi
 		}
 
 		if (
-			requestParameters.organizationId2 === null ||
-			requestParameters.organizationId2 === undefined
-		) {
-			throw new runtime.RequiredError(
-				'organizationId2',
-				'Required parameter requestParameters.organizationId2 was null or undefined when calling create_1.',
-			);
-		}
-
-		if (
 			requestParameters.fileName === null ||
 			requestParameters.fileName === undefined
 		) {
@@ -1232,13 +1221,6 @@ export class OrganizationsApi
 
 		if (requestParameters.file !== undefined) {
 			formParams.append('file', requestParameters.file as any);
-		}
-
-		if (requestParameters.organizationId2 !== undefined) {
-			formParams.append(
-				'organizationId',
-				requestParameters.organizationId2 as any,
-			);
 		}
 
 		if (requestParameters.fileName !== undefined) {

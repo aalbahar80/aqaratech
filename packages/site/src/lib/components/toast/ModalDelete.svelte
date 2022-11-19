@@ -20,7 +20,6 @@
 			if (
 				plural === 'maintenanceOrders' ||
 				plural === 'expense categories' ||
-				plural === 'members' ||
 				// file deletions are handled in `FileList.svelte`
 				plural === 'files'
 			) {

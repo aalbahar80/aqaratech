@@ -77,9 +77,9 @@ export class RolesController {
 
 	@CheckAbilities({ action: Action.Delete, subject: 'Role', useParams: true })
 	@ApiParam({ name: 'organizationId', required: true, type: String })
-	@Delete('roles/:roleId')
-	remove(@Param('roleId') id: string): Promise<string> {
-		return this.rolesService.remove(id);
+	@Delete('roles/:id')
+	remove(@User() user: IUser, @Param('id') id: string) {
+		return this.rolesService.remove({ id, user });
 	}
 
 	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })

@@ -175,7 +175,14 @@ export class RolesService {
 		return { total, results };
 	}
 
-	remove(id: string) {
-		return this.prisma.role.delete({ where: { id } }).then(() => id);
+	async remove({ id, user }: { id: string; user: IUser }) {
+		const role = await this.prisma.role.delete({
+			where: {
+				id,
+				AND: [accessibleBy(user.ability, Action.Delete).Role],
+			},
+		});
+
+		return role.id;
 	}
 }

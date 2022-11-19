@@ -375,13 +375,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/RoleDto'
       tags: *ref_2
-  /organizations/{organizationId}/roles/{roleId}:
+  /organizations/{organizationId}/roles/{id}:
     delete:
       operationId: RolesController_remove
       summary: ''
       description: ''
       parameters:
-        - name: roleId
+        - name: id
           required: true
           in: path
           schema:
