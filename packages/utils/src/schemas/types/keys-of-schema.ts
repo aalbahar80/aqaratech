@@ -1,12 +1,18 @@
 import type { KeysOfUnion } from 'src/keys-of-union';
 import type { z } from 'zod';
 
+export type UnwrapSchema<T> = KeyOfSchema<InnerSchema<T>>;
+
 /**
  * Extracts keys from a Zod schema.
  */
 export type KeyOfSchema<T extends z.ZodTypeAny> = T extends z.ZodType<infer O>
 	? KeysOfUnion<O>
 	: never;
+
+export type InnerSchema<T> = T extends z.ZodEffects<any>
+	? ReturnType<T['innerType']>
+	: T;
 
 /**
  * Extracts keys from a Zod schema.
