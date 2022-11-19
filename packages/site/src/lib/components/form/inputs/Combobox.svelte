@@ -17,7 +17,7 @@
 	// P.S. At time of writing, headlessui does not have a native combobox.
 
 	/** Value of the initial option. `options.find()` will be called to find & display the option's label. */
-	export let initialValue: Option['value'] = undefined;
+	export let initialValue: unknown = undefined;
 	export let options: Option[];
 	/**
 	 * Whether the entire combobox is disabled.
