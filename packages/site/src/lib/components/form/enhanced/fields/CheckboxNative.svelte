@@ -7,6 +7,8 @@
 
 	export let formField: GFormField;
 	export let value: unknown;
+
+	$: checked = typeof value === 'boolean' ? value : false; // Type hack
 </script>
 
 <!-- input type=checkbox is not consistent with other HTML inputs. Value will
@@ -23,7 +25,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/checkbox#attr-va
 			name={formField.name}
 			aria-describedby={`${formField.name}-description`}
 			type="checkbox"
-			bind:checked={value}
+			bind:checked
 			class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 		/>
 	</div>
