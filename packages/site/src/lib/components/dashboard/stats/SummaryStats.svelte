@@ -52,7 +52,7 @@
 				{primaryText}
 				secondaryText={primary[i] ? monthFromShort(date) : ''}
 				primaryValue={kwdFormat(amount)}
-				textColor={colors[title]}
+				textColor={colors[title] ?? ''}
 				chipText={change ? change.toFixed(2) : ''}
 				color={change && change > 0 ? 'green' : 'red'}
 			/>

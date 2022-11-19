@@ -1,5 +1,4 @@
 import type { LeaseInvoiceDto } from '$api/openapi';
-import { satisfies } from '@self/utils';
 import paidStamp from '../../../assets/paid-stamp.png';
 import type jsPDFInvoiceTemplate from '../../pdf/jspdf-invoice-template';
 
@@ -21,11 +20,13 @@ export const createPDF = async (options: PDFOptions) => {
  * jsPDFInvoiceTemplate(props); // create pdf
  */
 export const preparePDF = (options: PDFOptions) => {
+	// We might benefit from using https://github.com/unjs/defu here.
+
 	// clone defaultPdfOptions to ensure that the original is not mutated
 	const pdf = { ...defaultPdfOptions };
 
 	const { invoice } = options;
-	pdf.outputType = options.outputType as any;
+	pdf.outputType = options.outputType;
 	const total = invoice.amount.toLocaleString('en-KW', {
 		style: 'currency',
 		currency: 'KWD',
@@ -33,7 +34,7 @@ export const preparePDF = (options: PDFOptions) => {
 	pdf.returnJsPDFDocObject = true;
 
 	pdf.footer.text = invoice.id;
-	pdf.invoice.table = [['1', invoice.memo || '', total]];
+	pdf.invoice.table = [['1', invoice.memo ?? '', total]];
 	pdf.invoice.additionalRows[0].col2 = total;
 
 	// Tenant
@@ -46,17 +47,19 @@ export const preparePDF = (options: PDFOptions) => {
 	pdf.contact.phone = unit;
 
 	// Dates
-	const postAt = invoice.postAt.split('T')[0];
+	const postAt = invoice.postAt.substring(0, 10);
 	pdf.invoice.invGenDate = `Invoice date: ${postAt}`;
 	if (invoice.isPaid && invoice.paidAt) {
-		pdf.stamp = stamp as any;
-		const paidAt = invoice.paidAt.split('T')[0];
+		// @ts-expect-error until satisfied is supported
+		pdf.stamp = stamp;
+		const paidAt = invoice.paidAt.substring(0, 10);
 		pdf.invoice.invDate = `Payment date: ${paidAt}`;
 	}
 
 	return pdf;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type PdfProps = Parameters<typeof jsPDFInvoiceTemplate>[0];
 type OutputType =
 	| 'save'
@@ -74,7 +77,7 @@ interface PDFOptions {
 	outputType: OutputType;
 }
 
-const stamp = satisfies<PdfProps['stamp']>()({
+const stamp = {
 	inAllPages: true,
 	// src: 'https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg',
 	src: paidStamp,
@@ -82,13 +85,13 @@ const stamp = satisfies<PdfProps['stamp']>()({
 	width: 48,
 	height: 30,
 	margin: { top: -150, left: 130 },
-});
+} satisfies PdfProps['stamp'];
 
 /**
  * https://github.com/edisonneza/jspdf-invoice-template
  */
 
-const defaultPdfOptions = satisfies<PdfProps>()({
+const defaultPdfOptions = {
 	outputType: 'save',
 	returnJsPDFDocObject: true,
 	fileName: 'Invoice.pdf',
@@ -158,7 +161,6 @@ const defaultPdfOptions = satisfies<PdfProps>()({
 	footer: {
 		text: 'The invoice is created on a computer and is valid without the signature and stamp.',
 	},
-	stamp: undefined,
 	pageEnable: true,
 	pageLabel: 'Page ',
-});
+} satisfies PdfProps;

@@ -17,33 +17,36 @@ export const kwdFormat = (amount: number | null): string =>
 		minimumFractionDigits: 0,
 	}) ?? '-';
 
-export const objectKeys = <Obj>(obj: Obj): (keyof Obj)[] => {
+export const objectKeys = <Obj extends Record<string, unknown>>(
+	obj: Obj,
+): (keyof Obj)[] => {
 	return Object.keys(obj) as (keyof Obj)[];
 };
 
-export const objectValues = <Obj>(obj: Obj): Obj[keyof Obj][] => {
+export const objectValues = <Obj extends Record<string, unknown>>(
+	obj: Obj,
+): Obj[keyof Obj][] => {
 	return Object.values(obj) as Obj[keyof Obj][];
 };
 
-export const objectEntries = <Obj>(obj: Obj): [keyof Obj, Obj[keyof Obj]][] =>
+export const objectEntries = <Obj extends Record<string, unknown>>(
+	obj: Obj,
+): [keyof Obj, Obj[keyof Obj]][] =>
 	Object.entries(obj) as [keyof Obj, Obj[keyof Obj]][];
 
 // export const concatIfExists = (strings: (string | null | undefined)[]) => {
 // 	return strings.filter((str) => str).join(' ');
 // };
 
-export const toDateInput = (date: any) => {
-	if (date instanceof Date) {
-		return date.toISOString().split('T')[0];
-	}
-	return date;
-};
-
 /**
  * Returns name of month from a 'yyyy-mm' string.
  */
 export const monthFromShort = (yearMonth: string) => {
 	const month = yearMonth.split('-')[1];
+
+	if (!month) {
+		return '';
+	}
 
 	return new Date(0, parseInt(month) - 1).toLocaleString('default', {
 		month: 'long',

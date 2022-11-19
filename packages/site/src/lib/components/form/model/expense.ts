@@ -16,6 +16,7 @@ export const expenseFormModel = (pageType: FormTypeEnum) =>
 		pageType,
 		createSchema: expenseCreateSchema,
 		updateSchema: expenseUpdateSchema,
+		excludedFields: ['label'],
 		fields: {
 			postAt: createFormField('postAt', {
 				type: 'date',
