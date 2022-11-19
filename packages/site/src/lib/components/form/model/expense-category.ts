@@ -14,14 +14,13 @@ export const expenseCategoryFormModel = (pageType: FormTypeEnum) =>
 		pageType,
 		createSchema: expenseCategoryCreateSchema,
 		updateSchema: expenseCategoryUpdateSchema,
+		excludedFields: ['parentId', 'description'] as const,
 		fields: {
 			labelEn: createFormField('labelEn', {
 				required: true,
 			}),
 
 			labelAr: createFormField('labelAr'),
-
-			// description: createFormField('description'),
 
 			isGroup: createFormField('isGroup', {
 				type: 'checkbox',
