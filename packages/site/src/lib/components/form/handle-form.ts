@@ -109,36 +109,49 @@ export const handleForm = async <
 		return invalid(400, { ...(obj as z.infer<S>), errors });
 	}
 
-	let id: string;
-
 	try {
 		// We pass the original object to onSubmit, not the parsed one
 		// This is to avoid transforming the data twice, which in the case of short dates (yyyy-mm-dd) will fail.
-		id = await onSubmit(createApi(fetch), obj, event);
-	} catch (error) {
-		console.error(error);
+		const submitted = await onSubmit(createApi(fetch), obj, event);
 
-		if (error instanceof ResponseError) {
-			// Handle API errors and return the message to the user
-			const data = await parseApiError(error);
+		let url: string;
 
-			return invalid(400, {
-				...(obj as z.infer<S>),
-				errors: toFormErrors([data.message]),
-			});
-		}
-	}
-
-	const url = redirectTo
-		? redirectTo(id)
-		: getRoute({
+		if (redirectTo) {
+			url = redirectTo(submitted);
+		} else if (typeof submitted === 'string') {
+			url = getRoute({
 				entity: entity,
-				id,
+				id: submitted,
 				pageType: PageType.Id,
 				params,
-		  });
+			});
+		} else {
+			throw new Error(
+				'Either return a string in `onSubmit` or provide a `redirectTo` function that return a url.',
+			);
+		}
 
-	throw redirect(303, url);
+		throw redirect(303, url);
+	} catch (error) {
+		// Here, we are only interested in errors related to the form submission.
+		// Other errors are handled by hooks.handleError.
+		if (!(error instanceof ResponseError)) {
+			throw error;
+		}
+
+		const data = await parseApiError(error);
+
+		if (data.status !== 400) {
+			throw error;
+		}
+
+		// Handle API errors and return the message to the user
+
+		return invalid(400, {
+			...(obj as z.infer<S>),
+			errors: toFormErrors([data.message]),
+		});
+	}
 };
 
 const toFormErrors = <Schema extends z.ZodTypeAny>(
