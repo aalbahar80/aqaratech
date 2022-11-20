@@ -34,7 +34,7 @@ export const preparePDF = (options: PDFOptions) => {
 	});
 	pdf.returnJsPDFDocObject = true;
 
-	pdf.footer.text = invoice.id;
+	// pdf.footer.text = invoice.id;
 	pdf.invoice.table = [['1', invoice.memo ?? '', total]];
 	// @ts-expect-error satisfies
 	pdf.invoice.additionalRows[0].col2 = total;
@@ -162,9 +162,9 @@ const defaultPdfOptions = {
 		// 	invDesc:
 		// 		"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
 	},
-	footer: {
-		text: 'The invoice is created on a computer and is valid without the signature and stamp.',
-	},
+	// footer: {
+	// 	text: 'The invoice is created on a computer and is valid without the signature and stamp.',
+	// },
 	pageEnable: true,
 	pageLabel: 'Page ',
 };
