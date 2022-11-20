@@ -22,6 +22,7 @@ import type {
 	TestFixtures,
 	TestOptions,
 } from './fixtures/test-fixtures.interface';
+import { unitFixtures } from './fixtures/unit.fixture';
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
@@ -175,6 +176,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	...tenantFixtures,
 	...leaseFixtures,
 	...propertyFixtures,
+	...unitFixtures,
 	...invoiceFixtures,
 	...expenseFixtures,
 	...expenseCategoryFixtures,

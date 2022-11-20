@@ -13,6 +13,7 @@ import type {
 	PropertyFactoryParams,
 	RoleFactoryParams,
 	TenantFactoryParams,
+	UnitFactoryParams,
 } from '@self/seed';
 import type {
 	ExpenseCategoryDto,
@@ -43,6 +44,7 @@ export interface TestFixtures {
 	property: PropertyDto;
 	properties: [PropertyDto, ...PropertyDto[]];
 	unit: UnitDto;
+	units: [UnitDto, ...UnitDto[]];
 	lease: LeaseDto;
 	leases: [LeaseDto, ...LeaseDto[]];
 	invoice: LeaseInvoiceDto;
@@ -62,6 +64,7 @@ export interface TestOptions {
 
 	tenantsParams: TenantFactoryParams[] | undefined;
 	propertiesParams: PropertyFactoryParams[] | undefined;
+	unitsParams: UnitFactoryParams[] | undefined;
 	leasesParams: LeaseFactoryParams[] | undefined;
 	payoutsParams: PayoutFactoryParams[] | undefined;
 	invoicesParams: LeaseInvoiceFactoryParams[] | undefined;

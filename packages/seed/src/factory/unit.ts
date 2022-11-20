@@ -46,3 +46,7 @@ export const unitPartialFactory = () =>
 		portfolioId: '',
 		propertyId: '',
 	});
+
+export type UnitFactoryParams = Partial<
+	Parameters<typeof unitFactory.build>[0]
+>;
