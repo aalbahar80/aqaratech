@@ -38,6 +38,7 @@
 		"@types/node": "18.11.9",
 		"@vitest/ui": "0.25.2",
 		"eslint-config-custom": "workspace:1.1.0",
+		"tsconfig": "link:../tsconfig",
 		"tsup": "6.5.0",
 		"typescript": "4.9.3",
 		"vitest": "0.25.2"

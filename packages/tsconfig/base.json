@@ -1,0 +1,20 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
+	"display": "Default",
+	"compilerOptions": {
+		"composite": false,
+		"declaration": true,
+		"declarationMap": true,
+		"inlineSources": false,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"preserveWatchOutput": true,
+
+		"types": ["node"],
+		"lib": ["DOM"],
+
+		"sourceMap": true
+	},
+	"exclude": ["node_modules"]
+}
