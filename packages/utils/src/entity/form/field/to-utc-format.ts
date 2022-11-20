@@ -11,3 +11,13 @@ export const toUTCFormat = (date: string): string => {
 
 	return result;
 };
+
+export const toUTCFormatMonthYear = (date: string): string => {
+	const result = new Intl.DateTimeFormat('en-US', {
+		timeZone: 'UTC',
+		year: 'numeric',
+		month: 'short',
+	}).format(new Date(date));
+
+	return result;
+};

@@ -1,4 +1,4 @@
-import { toUTCFormat } from '$lib/utils/common.js';
+import { toUTCFormatMonthYear } from '@self/utils';
 
 export const generateSchedule = ({
 	count,
@@ -21,8 +21,10 @@ export const generateSchedule = ({
 			start.getUTCSeconds(),
 		);
 		console.log(new Date(postAtMS), 'postAt');
-		const postAt = new Date(postAtMS).toISOString().split('T')[0] as string;
-		const memo = `Rent for: ${toUTCFormat(new Date(postAtMS), 'MMMM yyyy')}`;
+		const postAt = new Date(postAtMS).toISOString().substring(0, 10);
+
+		const memo = `Rent for: ${toUTCFormatMonthYear(postAt)}`;
+
 		const id = Math.floor(1000 + Math.random() * 9000).toString();
 		newSchedule.push({
 			tempid: id,
