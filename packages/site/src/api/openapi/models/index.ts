@@ -2483,6 +2483,12 @@ export interface RoleDto {
 	 * @type {string}
 	 * @memberof RoleDto
 	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof RoleDto
+	 */
 	email: string;
 	/**
 	 *
@@ -3274,6 +3280,12 @@ export interface ValidatedRoleDto {
 	 * @memberof ValidatedRoleDto
 	 */
 	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDto
+	 */
+	createdAt: string;
 	/**
 	 *
 	 * @type {string}

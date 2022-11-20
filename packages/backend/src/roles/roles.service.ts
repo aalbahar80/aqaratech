@@ -89,6 +89,7 @@ export class RolesService {
 
 		return {
 			id: role.id,
+			createdAt: role.createdAt,
 			email: createRoleDto.email,
 			roleType: role.roleType,
 			organizationId: role.organizationId,

@@ -2881,6 +2881,9 @@ components:
           $ref: '#/components/schemas/RoleTypeEnum'
         id:
           type: string
+        createdAt:
+          format: date-time
+          type: string
         email:
           type: string
         organizationId:
@@ -2894,6 +2897,7 @@ components:
       required:
         - roleType
         - id
+        - createdAt
         - email
         - organizationId
         - portfolioId

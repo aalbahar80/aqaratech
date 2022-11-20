@@ -4,6 +4,7 @@ import { RoleCreateSchema } from '@self/utils';
 
 export class RoleDto implements Partial<Role> {
 	id: string;
+	createdAt: Date;
 	email: string;
 	@ApiProperty({ enum: RoleType, enumName: 'RoleTypeEnum' })
 	roleType: RoleType;
