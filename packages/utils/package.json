@@ -33,8 +33,6 @@
 		"@babel/preset-typescript": "7.18.6",
 		"@logtail/types": "0.1.12",
 		"@sentry/types": "7.20.0",
-		"@tsconfig/esm": "1.0.2",
-		"@tsconfig/node18-strictest-esm": "1.0.1",
 		"@types/node": "18.11.9",
 		"@vitest/ui": "0.25.2",
 		"eslint-config-custom": "workspace:1.1.0",
