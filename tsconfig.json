@@ -1,12 +1,10 @@
 {
-	"extends": "@tsconfig/node18-strictest/tsconfig.json",
+	"extends": "tsconfig/base.json",
 	"compilerOptions": {
-		"allowJs": true,
-		"checkJs": true,
-		"noEmit": true,
-		"resolveJsonModule": true,
 		"types": ["zx/globals"],
-		"module": "ESNext"
+		"module": "ESNext",
+		"allowJs": true,
+		"noEmit": true
 	},
 	"include": [
 		// use pnpm tsc --showConfig to diagnose
