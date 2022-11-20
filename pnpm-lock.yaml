@@ -379,7 +379,6 @@ importers:
       '@playwright/test': 1.28.0
       '@self/seed': workspace:1.2.0
       '@self/utils': workspace:2.1.0
-      '@tsconfig/node18': 1.0.1
       '@tsconfig/node18-strictest': 1.0.0
       '@types/node': 18.11.9
       dotenv: 16.0.3
@@ -393,7 +392,6 @@ importers:
       '@playwright/test': 1.28.0
       '@self/seed': link:../seed
       '@self/utils': link:../utils
-      '@tsconfig/node18': 1.0.1
       '@tsconfig/node18-strictest': 1.0.0
       '@types/node': 18.11.9
       dotenv: 16.0.3
@@ -4020,10 +4018,6 @@ packages:
 
   /@tsconfig/node18-strictest/1.0.0:
     resolution: {integrity: sha512-bOuNKwO4Fzbt+Su5wqI9zNHwx5C25gLnutwVQA1sBZk0cW8UjVPVcwzIUhJIIJDUx7zDEbAwdCD2HfvIsV8dYg==}
-    dev: true
-
-  /@tsconfig/node18/1.0.1:
-    resolution: {integrity: sha512-sNFeK6X2ATlhlvzyH4kKYQlfHXE2f2/wxtB9ClvYXevWpmwkUT7VaSrjIN9E76Qebz8qP5JOJJ9jD3QoD/Z9TA==}
     dev: true
 
   /@types/babel__core/7.1.19:
