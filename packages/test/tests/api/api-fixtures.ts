@@ -1,16 +1,10 @@
 import { test as base } from '@playwright/test';
-import {
-	organizationFactory,
-	portfolioFactory,
-	propertyFactory,
-	unitFactory,
-} from '@self/seed';
+import { organizationFactory, portfolioFactory, unitFactory } from '@self/seed';
 import { Cookie } from '@self/utils';
 import * as R from 'remeda';
 import type {
 	OrganizationCreatedDto,
 	PortfolioDto,
-	PropertyDto,
 	UnitDto,
 } from '../../types/api';
 import { resCheck } from '../../utils/res-check';
@@ -20,6 +14,7 @@ import { expenseFixtures } from './fixtures/expense.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
 import { leaseFixtures } from './fixtures/lease.fixture';
 import { payoutFixtures } from './fixtures/payout.fixture';
+import { propertyFixtures } from './fixtures/property.fixture';
 import { roleFixtures } from './fixtures/role.fixture';
 import { scopedRequestFixtures } from './fixtures/scoped-request.fixture';
 import { tenantFixtures } from './fixtures/tenant.fixture';
@@ -127,32 +122,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(created);
 	},
 
-	// A fixture that returns a fresh property in a fresh organization.
-	property: async ({ portfolio, request }, use) => {
-		// create fresh property
-		const property = propertyFactory.build({
-			organizationId: portfolio.organizationId,
-			portfolioId: portfolio.id,
-		});
-
-		const picked = R.pick(property, [
-			'portfolioId',
-			'area',
-			'block',
-			'street',
-			'number',
-		]);
-
-		const url = `${apiURL}/organizations/${portfolio.organizationId}/properties`;
-
-		const res = await request.post(url, { data: picked });
-		resCheck(res);
-
-		const created = (await res.json()) as PropertyDto;
-
-		await use(created);
-	},
-
 	unit: async ({ org, property, request }, use) => {
 		const unit = unitFactory.build({
 			organizationId: org.organization.id,
@@ -205,6 +174,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	...scopedRequestFixtures,
 	...tenantFixtures,
 	...leaseFixtures,
+	...propertyFixtures,
 	...invoiceFixtures,
 	...expenseFixtures,
 	...expenseCategoryFixtures,
