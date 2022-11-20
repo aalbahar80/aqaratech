@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import TreemapNode from './TreemapNode.svelte';
 
-	export let root;
+	export let root: unknown;
 </script>
 
 <pancake-treemap>

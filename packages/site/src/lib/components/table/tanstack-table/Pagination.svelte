@@ -100,7 +100,12 @@
 									: 'border-gray-300 bg-white text-gray-500 hover:bg-gray-50',
 								'relative inline-flex items-center border px-4 py-2 text-sm font-medium',
 							)}
-							on:click={() => table.setPageIndex(button - 1)}
+							on:click={() => {
+								// type workaround
+								if (button) {
+									table.setPageIndex(button - 1);
+								}
+							}}
 						>
 							{button}
 						</button>

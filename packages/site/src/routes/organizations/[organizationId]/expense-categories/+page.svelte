@@ -58,12 +58,20 @@
 			on:click={() => {
 				console.debug(difference);
 				console.debug(newList);
+
+				const organizationId = $page.params.organizationId;
+
+				// type workaround
+				if (!organizationId) {
+					throw new Error('Organization ID is required');
+				}
+
 				createApi()
 					.expenseCategories.updateAll({
 						updateExpenseCategoryTreeDto: newList.map((category) =>
 							R.omit(category, ['isGroup']),
 						),
-						organizationId: $page.params.organizationId,
+						organizationId,
 					})
 					.then((res) => {
 						addSuccessToast();

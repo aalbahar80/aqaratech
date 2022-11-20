@@ -63,7 +63,7 @@
 			? fuse.search(q).map((result) => ({
 					value: result.item.value,
 					label: result.item.label,
-					disabled: result.item.disabled,
+					disabled: result.item.disabled ?? false,
 			  }))
 			: options;
 	}, 100);

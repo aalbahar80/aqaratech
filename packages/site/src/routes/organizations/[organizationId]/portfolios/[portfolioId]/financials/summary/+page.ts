@@ -16,6 +16,13 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 
 	const { organizationId, portfolioId } = params;
 
+	const options =
+		propertyId === null || propertyId === undefined
+			? {}
+			: {
+					propertyId,
+			  };
+
 	const [properties, income, expenses] = await Promise.all([
 		api.portfolios.findProperties({
 			id: portfolioId,
@@ -24,19 +31,31 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 		api.portfolios.getIncomeByMonth({
 			organizationId,
 			portfolioId,
-			// When getting incomeByMonth, we don't want to differentiate between
-			// (a) `undefined` propertyId and (b) `null` propertyId
-			propertyId: propertyId === null ? undefined : propertyId,
 			start,
 			end,
+
+			// When getting incomeByMonth, we don't want to differentiate between
+			// (a) `undefined` propertyId and (b) `null` propertyId
+			// propertyId: propertyId === null ? undefined : propertyId,
+			...(propertyId === null || propertyId === undefined
+				? {}
+				: {
+						propertyId,
+				  }),
 		}),
 
 		api.portfolios.getExpensesByMonth({
 			organizationId,
 			portfolioId,
-			propertyId,
 			start,
 			end,
+
+			// omit propertyId if it's undefined because of `ExactOptionalPropertyTypes`
+			...(propertyId === undefined
+				? {}
+				: {
+						propertyId,
+				  }),
 		}),
 	]);
 

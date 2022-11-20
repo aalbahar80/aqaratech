@@ -1,19 +1,18 @@
 <script lang="ts">
 	import type { OrganizationDto } from '$api/openapi';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { toUTCFormat } from '$lib/utils/common';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	const columns: ColumnDef<OrganizationDto>[] = [
-		{
-			header: 'Created At',
-			footer: 'Created At',
-			id: 'createdAt',
-			accessorFn: (row) => toUTCFormat(row.createdAt),
-		},
+		// {
+		// 	header: 'Created At',
+		// 	footer: 'Created At',
+		// 	id: 'createdAt',
+		// 	accessorFn: (row) => toUTCFormat(row.createdAt),
+		// },
 		{
 			header: 'Full Name',
 			footer: 'Full Name',

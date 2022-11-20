@@ -25,7 +25,12 @@
 
 		options = tenantsToOptions(tenants);
 
-		formField.options = options;
+		if ('options' in formField) {
+			formField.options = options;
+		} else {
+			// formField.getOptions = () => options;
+			throw new Error('Not implemented');
+		}
 	};
 
 	onMount(async () => {
