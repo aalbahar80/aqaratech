@@ -24,22 +24,14 @@ const entityFormModeMap = {
 	expenseCategory: expenseCategoryFormModel,
 	file: fileFormModel,
 	payout: payoutFormModel,
-} as const;
+};
 
 export const getEntityFormModel = <
-	T extends keyof typeof entityFormModeMap,
-	Factory extends typeof entityFormModeMap[T] = typeof entityFormModeMap[T],
+	T extends keyof typeof entityFormModeMap = never,
 >({
 	entity,
 }: {
-	// entity: keyof typeof entityFormModeMap extends infer E ? T & E : never;
-	entity: T;
-}): ReturnType<Factory> => {
-	if (entity in entityFormModeMap) {
-		const factory = entityFormModeMap[entity];
-
-		return factory();
-	} else {
-		throw new Error(`No form model for entity ${entity}`);
-	}
+	entity: T extends keyof typeof entityFormModeMap ? T : never;
+}) => {
+	return entityFormModeMap[entity]() as ReturnType<typeof entityFormModeMap[T]>;
 };
