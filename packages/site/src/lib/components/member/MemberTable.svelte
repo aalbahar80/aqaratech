@@ -27,8 +27,7 @@
 						onClick: async () => {
 							try {
 								await createApi().roles.remove({
-									organizationId: role.organizationId,
-									roleId: role.id,
+									id: role.id,
 								});
 
 								addSuccessToast(`${role.email} has been removed`);

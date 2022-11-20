@@ -92,7 +92,7 @@
 										isPaid: !invoice.isPaid,
 										paidAt: invoice.isPaid
 											? null
-											: new Date().toISOString().split('T')[0],
+											: new Date().toISOString().substring(0, 10),
 									},
 								});
 								addSuccessToast('Invoice updated');

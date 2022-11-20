@@ -33,7 +33,9 @@ export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
 					grace: '20%',
 					grid: {
 						drawTicks: false,
-						drawBorder: false,
+					},
+					border: {
+						display: false,
 					},
 				},
 			},
