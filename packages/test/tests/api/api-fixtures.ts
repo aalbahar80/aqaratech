@@ -1,12 +1,8 @@
 import { test as base } from '@playwright/test';
-import { organizationFactory, portfolioFactory, unitFactory } from '@self/seed';
+import { organizationFactory, portfolioFactory } from '@self/seed';
 import { Cookie } from '@self/utils';
 import * as R from 'remeda';
-import type {
-	OrganizationCreatedDto,
-	PortfolioDto,
-	UnitDto,
-} from '../../types/api';
+import type { OrganizationCreatedDto, PortfolioDto } from '../../types/api';
 import { resCheck } from '../../utils/res-check';
 import { apiURL } from './fixtures/api-url';
 import { expenseCategoryFixtures } from './fixtures/expense-category.fixture';
@@ -119,30 +115,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		resCheck(res);
 
 		const created = (await res.json()) as PortfolioDto;
-
-		await use(created);
-	},
-
-	unit: async ({ org, property, request }, use) => {
-		const unit = unitFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: property.portfolioId,
-			propertyId: property.id,
-		});
-
-		const picked = R.pick(unit, [
-			'type',
-			'unitNumber',
-			'portfolioId',
-			'propertyId',
-		]);
-
-		const url = `${apiURL}/organizations/${org.organization.id}/units`;
-
-		const res = await request.post(url, { data: picked });
-		resCheck(res);
-
-		const created = (await res.json()) as UnitDto;
 
 		await use(created);
 	},
