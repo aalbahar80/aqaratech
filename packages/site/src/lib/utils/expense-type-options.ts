@@ -59,7 +59,7 @@ export const fromHeirarchy = ({
 		if (hasNewParent) {
 			updated.push({
 				...child,
-				parentId: newParentId,
+				parentId: newParentId === undefined ? null : newParentId,
 			});
 		}
 	});

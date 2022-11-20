@@ -16,13 +16,6 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 
 	const { organizationId, portfolioId } = params;
 
-	const options =
-		propertyId === null || propertyId === undefined
-			? {}
-			: {
-					propertyId,
-			  };
-
 	const [properties, income, expenses] = await Promise.all([
 		api.portfolios.findProperties({
 			id: portfolioId,

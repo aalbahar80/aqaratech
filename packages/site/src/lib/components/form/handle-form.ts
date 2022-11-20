@@ -131,6 +131,7 @@ export const handleForm = async <
 				entity: entity,
 				id: submitted,
 				pageType: PageType.Id,
+				// @ts-expect-error index signature
 				params,
 			});
 		} else {
