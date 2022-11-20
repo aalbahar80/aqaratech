@@ -3782,7 +3782,7 @@ components:
             required:
               - id
               - entity
-              - _formatted
+              - formatted
             properties:
               id:
                 type: string
@@ -3791,7 +3791,7 @@ components:
                 nullable: true
               entity:
                 type: string
-              _formatted:
+              formatted:
                 type: object
                 properties:
                   title:

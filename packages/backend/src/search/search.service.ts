@@ -7,6 +7,7 @@ import { instanceToPlain, plainToClass } from 'class-transformer';
 import { isUUID } from 'class-validator';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { Action } from 'src/casl/action.enum';
+import * as R from 'remeda';
 import {
 	RemoveDocumentsEvent,
 	TIndexName,
@@ -118,15 +119,20 @@ export class SearchService implements OnModuleInit {
 		>(query, {
 			highlightPreTag: '<mark>',
 			highlightPostTag: '</mark>',
+
 			attributesToHighlight: ['*'],
 			limit: 20,
 			filter,
 		});
 
 		const hitsWithEntity = data.hits.map((hit) => {
+			const { _formatted, ...rest } = hit;
 			return {
-				...hit,
+				...rest,
 				entity: entitiesMap[indexName].title,
+
+				// rename _formatted to formatted to avoid openapi sdk issues
+				formatted: _formatted,
 			};
 		});
 
