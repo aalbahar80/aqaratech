@@ -2,13 +2,19 @@
 	import { createApi } from '$api';
 	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
 	import { invalidateAll } from '$app/navigation';
+	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
-	import { getLabel } from '@self/utils';
+	import { getLabel, type Entity } from '@self/utils';
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	export let data: PaginatedRoleDto;
+	export let predefined: {
+		relationKey: Extract<Entity, 'organization' | 'portfolio' | 'tenant'>;
+		relationValue: string;
+	};
 
 	const columnHelper = createColumnHelper<RoleDto>();
 
@@ -81,4 +87,17 @@
 	paginationDto={data.pagination}
 	{columns}
 	paginationType="server"
-/>
+>
+	<div slot="filter">
+		<FilterBar>
+			<div slot="custom">
+				<FilterBarButtonForm
+					getRouteOptions={{
+						entity: 'role',
+						predefined,
+					}}
+				/>
+			</div>
+		</FilterBar>
+	</div>
+</Table>
