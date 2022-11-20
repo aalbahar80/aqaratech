@@ -70,7 +70,7 @@ test('invoice pdf', async ({ page, org, portfolio, invoice }) => {
 	await download.saveAs(PDF_PATH);
 
 	// open pdf in new tab
-	await page.goto(`file://${PDF_PATH}`);
+	// await page.goto(`file://${PDF_PATH}`);
 
 	const pdf = await fs.promises.readFile(PDF_PATH, {
 		encoding: 'utf-8',
