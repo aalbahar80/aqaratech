@@ -1,9 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
-	import { getRoute, PageType, type GetFormRoute } from '@self/utils';
+	import {
+		getRoute,
+		PageType,
+		type GetFormRouteWithoutRelation,
+		type GetFormRouteWithRelation,
+	} from '@self/utils';
 
-	export let getRouteOptions: Omit<GetFormRoute, 'params' | 'pageType'>;
+	type NoParams<T> = Omit<T, 'params' | 'pageType'>;
+
+	export let getRouteOptions:
+		| NoParams<GetFormRouteWithRelation>
+		| NoParams<GetFormRouteWithoutRelation>;
 </script>
 
 <RoleGuard roles={['ORGADMIN']}>
