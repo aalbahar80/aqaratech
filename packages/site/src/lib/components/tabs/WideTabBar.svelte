@@ -18,6 +18,7 @@
 			name="tabs"
 			class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
 			on:change={(e) => {
+				// @ts-expect-error it exists
 				const url = e.target?.value;
 				void goto(url);
 			}}

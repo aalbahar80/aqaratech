@@ -73,6 +73,7 @@ export const handleForm = async <
 	const data: Record<string, unknown> = Object.fromEntries(formData.entries());
 
 	if (checkboxKeys) {
+		// @ts-expect-error index signature
 		handleCheckboxes(data, objectKeys(checkboxKeys));
 	}
 
