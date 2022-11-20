@@ -61,23 +61,24 @@
 	<b
 		id={node.data.id}
 		class={classes(
-			'px-6 py-2 font-medium',
+			'flex items-center gap-6 px-6 py-2 font-medium',
 			node.data.isGroup ? 'text-gray-700' : 'font-semibold text-gray-600',
 		)}
 	>
 		{`${node.data.labelEn}`}
+
+		<a
+			class="text-xs font-medium text-indigo-600"
+			href={getRoute({
+				entity: 'expenseCategory',
+				pageType: PageType.Edit,
+				params: $page.params,
+				id: node.data.id,
+			})}
+		>
+			Edit
+		</a>
 	</b>
-	<a
-		class="py-2 text-xs font-medium text-indigo-600"
-		href={getRoute({
-			entity: 'expenseCategory',
-			pageType: PageType.Edit,
-			params: $page.params,
-			id: node.data.id,
-		})}
-	>
-		Edit
-	</a>
 {/if}
 {#if node.children || node.data.isGroup}
 	<!-- The section's y padding will determine how easy it is to make it swallow new children. -->
@@ -102,6 +103,7 @@
          Otherwise, a dropzone will disappear as soon as all the children have been dragged out. -->
 		{#each node.children?.filter((n) => n.id !== SHADOW_ITEM_MARKER_PROPERTY_NAME) || [] as currentNode (currentNode.id)}
 			<div
+				id={node.data.labelEn}
 				animate:flip={{ duration: flipDurationMs }}
 				class="my-6 mx-1 cursor-pointer rounded-lg border bg-white py-6 px-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
 			>
