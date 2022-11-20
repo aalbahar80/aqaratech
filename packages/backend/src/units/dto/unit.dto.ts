@@ -19,7 +19,6 @@ import {
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
 import { IsID } from 'src/decorators/field.decorators';
-import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 import { Exactly } from 'src/types/exactly.type';
 import { getUnitLabel } from 'src/utils/address';
@@ -92,7 +91,10 @@ export class UnitDto
 
 	@ApiHideProperty()
 	@Exclude()
-	leases: Pick<LeaseDto, 'start' | 'end'>[];
+	leases: {
+		start: Date;
+		end: Date;
+	}[];
 
 	@ApiHideProperty()
 	@Exclude()

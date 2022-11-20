@@ -54,14 +54,14 @@ jobs:
         run: cp ./.env.test ./.env
 
       # Move format/lint/check to a seperate job when removing `continue-on-error`
-      # - run: pnpm run format:all
-      #   continue-on-error: true
+      - run: pnpm run format:all
+        continue-on-error: true
 
       # - run: pnpm run lint:all
       #   continue-on-error: true
 
-      # - run: pnpm run check:all
-      #   continue-on-error: true
+      - run: pnpm run check:all
+        continue-on-error: true
 
       - run: pnpm run test -vvv
 

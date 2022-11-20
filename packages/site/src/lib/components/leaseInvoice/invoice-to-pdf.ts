@@ -9,6 +9,7 @@ export const createPDF = async (options: PDFOptions) => {
 	// use inline import because `jsPDFInvoiceTemplate` package only works in browser
 	const pdfPkg = await import('../../pdf/jspdf-invoice-template');
 	const props = preparePDF(options);
+	// @ts-expect-error satisfies
 	pdfPkg.default(props).jsPDFDocObject;
 };
 
@@ -35,6 +36,7 @@ export const preparePDF = (options: PDFOptions) => {
 
 	pdf.footer.text = invoice.id;
 	pdf.invoice.table = [['1', invoice.memo ?? '', total]];
+	// @ts-expect-error satisfies
 	pdf.invoice.additionalRows[0].col2 = total;
 
 	// Tenant
@@ -59,6 +61,7 @@ export const preparePDF = (options: PDFOptions) => {
 	return pdf;
 };
 
+// @ts-expect-error satisfies
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type PdfProps = Parameters<typeof jsPDFInvoiceTemplate>[0];
 type OutputType =
@@ -85,7 +88,8 @@ const stamp = {
 	width: 48,
 	height: 30,
 	margin: { top: -150, left: 130 },
-} satisfies PdfProps['stamp'];
+};
+// } satisfies PdfProps['stamp'];
 
 /**
  * https://github.com/edisonneza/jspdf-invoice-template
@@ -163,4 +167,5 @@ const defaultPdfOptions = {
 	},
 	pageEnable: true,
 	pageLabel: 'Page ',
-} satisfies PdfProps;
+};
+// } satisfies PdfProps;

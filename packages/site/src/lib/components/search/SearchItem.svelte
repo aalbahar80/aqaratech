@@ -4,6 +4,7 @@
 	import { classes } from '$lib/utils/classes';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
 	import { startCase } from '@self/utils';
+	import clsx from 'clsx';
 	import * as R from 'remeda';
 	import type { SvelteComponentTyped } from 'svelte';
 
@@ -31,10 +32,15 @@
 <Hoverable let:hovering>
 	<ListboxOption value={item}>
 		<div
-			class={classes(
-				'[&_mark]:underline [&_mark]:underline-offset-2 cursor-default select-none px-4 py-2',
+			class={clsx(
+				// split to avoid prettier conflict with vscode
+				'm-2 cursor-default select-none px-4 py-2',
+				'[&_mark]:underline [&_mark]:underline-offset-2',
 				hovering
-					? '[&_mark]:bg-inherit [&_mark]:text-white bg-indigo-600 text-white'
+					? [
+							'bg-indigo-600 text-white',
+							'[&_mark]:bg-inherit [&_mark]:text-white',
+					  ]
 					: '[&_mark]:bg-inherit [&_mark]:text-indigo-600 [&_mark]:decoration-indigo-500 [&_mark]:decoration-2',
 			)}
 		>
