@@ -9,7 +9,7 @@
 	export let entity: Entity;
 	export let isOpen: boolean;
 	export let onDelete: (() => void) | undefined = undefined;
-	export let deletePrompt: string | undefined = undefined;
+	export let deletePrompt = '';
 
 	let isLoading = false;
 

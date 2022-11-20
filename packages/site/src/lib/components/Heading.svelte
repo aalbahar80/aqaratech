@@ -23,7 +23,7 @@
 	export let entity: Entity;
 	export let icons: IconTooltip[] | undefined = undefined;
 	export let onDelete: (() => void) | undefined = undefined;
-	export let deletePrompt: string | undefined = undefined;
+	export let deletePrompt = '';
 	export let disallowEdit = false;
 
 	let isOpen = false;
