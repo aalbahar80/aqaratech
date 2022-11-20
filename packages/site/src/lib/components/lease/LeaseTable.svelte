@@ -11,8 +11,8 @@
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { getProgress, toUTCFormat } from '$lib/utils/common';
-	import { getRoute, PageType } from '@self/utils';
+	import { toUTCFormat } from '$lib/utils/common';
+	import { getProgress, getRoute, PageType } from '@self/utils';
 	import {
 		createColumnHelper,
 		renderComponent,

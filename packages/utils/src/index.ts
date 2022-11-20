@@ -7,6 +7,7 @@ export { Cookie } from './constants/cookie';
 export { countries } from './constants/countries';
 export { FIELDS } from './constants/fields';
 export { endOfMonthN } from './date/end-of-month-n';
+export { getProgress } from './date/progress';
 export { startOfMonthN } from './date/start-of-month-n';
 export { dbEntity, nonDbEntity } from './entity/entity-definition';
 export type { DBEntity, Entity, NonDBEntity } from './entity/entity-definition';
