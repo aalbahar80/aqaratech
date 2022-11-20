@@ -1,14 +1,11 @@
 import { createFormField } from '$lib/components/form/model/form-field';
-import {
-	createFormModel,
-	type FormTypeEnum,
-} from '$lib/components/form/model/form-model';
+import { createFormModel } from '$lib/components/form/model/form-model';
 import { payoutCreateSchema } from '@self/utils';
 
-export const payoutFormModel = (pageType: FormTypeEnum) =>
+export const payoutFormModel = () =>
 	createFormModel({
 		entity: 'payout',
-		pageType,
+
 		createSchema: payoutCreateSchema,
 		fields: {
 			amount: createFormField('amount', {

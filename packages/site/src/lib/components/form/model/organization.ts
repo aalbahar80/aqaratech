@@ -1,15 +1,12 @@
 import { createFormField } from '$lib/components/form/model/form-field';
-import {
-	createFormModel,
-	type FormTypeEnum,
-} from '$lib/components/form/model/form-model';
+import { createFormModel } from '$lib/components/form/model/form-model';
 import { labelHint } from '$lib/constants/form-hints';
 import { organizationSchema } from '@self/utils';
 
-export const organizationFormModel = (pageType: FormTypeEnum) =>
+export const organizationFormModel = () =>
 	createFormModel({
 		entity: 'organization',
-		pageType,
+
 		createSchema: organizationSchema,
 		updateSchema: organizationSchema,
 		fields: {

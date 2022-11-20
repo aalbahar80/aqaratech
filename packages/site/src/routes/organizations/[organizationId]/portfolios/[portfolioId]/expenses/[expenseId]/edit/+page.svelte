@@ -6,7 +6,7 @@
 		type ExpenseCategoryContext,
 	} from '$lib/components/organization/expense-category-context';
 	import { toOptions } from '$lib/utils/expense-type-options';
-	import { PageType } from '@self/utils';
+
 	import { setContext } from 'svelte';
 	import type { ActionData, PageData } from './$types';
 
@@ -19,7 +19,6 @@
 
 	const formModel = getEntityFormModel({
 		entity: 'expense',
-		pageType: PageType.Edit,
 	});
 </script>
 

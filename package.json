@@ -2,10 +2,10 @@
 	"name": "aqtech",
 	"version": "1.0.0",
 	"scripts": {
-		"build": "turbo run build",
-		"preview": "turbo run preview",
+		"build": "turbo run build -vvv",
+		"preview": "turbo run preview -vvv",
 		"dev": "turbo run dev",
-		"test": "turbo run test",
+		"test": "turbo run test -vvv",
 		"sentry:release": "turbo run sentry:release",
 		"format": "prettier --check --ignore-path .gitignore \"(**/*.{js,ts,css,md,svelte,yaml,yml,json}|!pnpm-lock.yaml)\"",
 		"format:all": "turbo run format",

@@ -1,16 +1,8 @@
 import type { FormField } from '$lib/components/form/model/form-field.interface';
-import type {
-	EditableSchemaKeys,
-	Entity,
-	KeyOfSchema,
-	PageType,
-} from '@self/utils';
+import type { EditableSchemaKeys, Entity, KeyOfSchema } from '@self/utils';
 import type { z } from 'zod';
 
-export type FormTypeEnum = PageType.Edit | PageType.New;
-
 export function createFormModel<
-	FormType extends PageType.New | PageType.Edit,
 	CreateSchema extends z.ZodTypeAny,
 	UpdateSchema extends z.ZodTypeAny,
 	ExcludedFields extends
@@ -21,7 +13,6 @@ export function createFormModel<
 	createSchema,
 	updateSchema,
 	fields,
-	pageType,
 }: {
 	createSchema: CreateSchema;
 	updateSchema?: UpdateSchema;
@@ -36,10 +27,8 @@ export function createFormModel<
 		},
 		ExcludedFields[number]
 	>;
-	pageType: FormType;
 }) {
 	return {
-		pageType,
 		entity,
 		createSchema,
 		updateSchema,

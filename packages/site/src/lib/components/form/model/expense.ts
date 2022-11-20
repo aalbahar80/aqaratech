@@ -1,8 +1,5 @@
 import { createFormField } from '$lib/components/form/model/form-field';
-import {
-	createFormModel,
-	type FormTypeEnum,
-} from '$lib/components/form/model/form-model';
+import { createFormModel } from '$lib/components/form/model/form-model';
 import {
 	key,
 	type ExpenseCategoryContext,
@@ -10,10 +7,10 @@ import {
 import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
 import { getContext } from 'svelte';
 
-export const expenseFormModel = (pageType: FormTypeEnum) =>
+export const expenseFormModel = () =>
 	createFormModel({
 		entity: 'expense',
-		pageType,
+
 		createSchema: expenseCreateSchema,
 		updateSchema: expenseUpdateSchema,
 		excludedFields: ['label'],

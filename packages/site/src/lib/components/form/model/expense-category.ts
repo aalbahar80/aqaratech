@@ -1,17 +1,14 @@
 import { createFormField } from '$lib/components/form/model/form-field';
-import {
-	createFormModel,
-	type FormTypeEnum,
-} from '$lib/components/form/model/form-model';
+import { createFormModel } from '$lib/components/form/model/form-model';
 import {
 	expenseCategoryCreateSchema,
 	expenseCategoryUpdateSchema,
 } from '@self/utils';
 
-export const expenseCategoryFormModel = (pageType: FormTypeEnum) =>
+export const expenseCategoryFormModel = () =>
 	createFormModel({
 		entity: 'expenseCategory',
-		pageType,
+
 		createSchema: expenseCategoryCreateSchema,
 		updateSchema: expenseCategoryUpdateSchema,
 		excludedFields: ['parentId', 'description'],

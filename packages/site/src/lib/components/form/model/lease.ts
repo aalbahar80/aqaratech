@@ -1,14 +1,11 @@
 import { createFormField } from '$lib/components/form/model/form-field';
-import {
-	createFormModel,
-	type FormTypeEnum,
-} from '$lib/components/form/model/form-model';
+import { createFormModel } from '$lib/components/form/model/form-model';
 import { leaseCreateSchema, leaseUpdateSchema } from '@self/utils';
 
-export const leaseFormModel = (pageType: FormTypeEnum) =>
+export const leaseFormModel = () =>
 	createFormModel({
 		entity: 'lease',
-		pageType,
+
 		createSchema: leaseCreateSchema,
 		updateSchema: leaseUpdateSchema,
 		fields: {
