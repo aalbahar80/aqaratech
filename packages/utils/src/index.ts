@@ -47,7 +47,6 @@ export type { GetIdRouteEntity } from './route-helpers/types/id-route.type';
 export type {
 	GetFormRoute,
 	GetFormRouteBase,
-	GetFormRouteWithoutRelation,
 	GetFormRouteWithRelation,
 } from './route-helpers/types/route-helpers.type';
 export { satisfies } from './satisfies';

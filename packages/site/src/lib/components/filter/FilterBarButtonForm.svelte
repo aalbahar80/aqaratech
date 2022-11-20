@@ -4,7 +4,7 @@
 	import {
 		getRoute,
 		PageType,
-		type GetFormRouteWithoutRelation,
+		type GetFormRouteBase,
 		type GetFormRouteWithRelation,
 	} from '@self/utils';
 
@@ -12,7 +12,7 @@
 
 	export let getRouteOptions:
 		| NoParams<GetFormRouteWithRelation>
-		| NoParams<GetFormRouteWithoutRelation>;
+		| NoParams<GetFormRouteBase>;
 </script>
 
 <RoleGuard roles={['ORGADMIN']}>

@@ -16,10 +16,6 @@ export interface GetFormRouteBase extends BaseGetRoute {
 	predefined?: Record<string, string>;
 }
 
-export interface GetFormRouteWithoutRelation extends GetFormRouteBase {
-	entity: Exclude<Entity, 'file' | 'role'>;
-}
-
 export interface GetFormRouteWithRelation extends GetFormRouteBase {
 	entity: Extract<Entity, 'file' | 'role'>;
 	predefined: {
@@ -28,9 +24,7 @@ export interface GetFormRouteWithRelation extends GetFormRouteBase {
 	};
 }
 
-export type GetFormRoute =
-	| GetFormRouteWithoutRelation
-	| GetFormRouteWithRelation;
+export type GetFormRoute = GetFormRouteBase | GetFormRouteWithRelation;
 
 // Combined
 
