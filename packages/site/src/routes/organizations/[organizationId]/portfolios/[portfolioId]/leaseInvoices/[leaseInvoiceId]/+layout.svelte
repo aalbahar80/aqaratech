@@ -48,8 +48,8 @@
 			on:click={() => {
 				createApi()
 					.leaseInvoices.sendEmail({ id: data.leaseInvoice.id })
-					.then((res) => {
-						addSuccessToast(res);
+					.then(() => {
+						addSuccessToast();
 					})
 					.catch(handleApiError);
 			}}

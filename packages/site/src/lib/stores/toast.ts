@@ -1,11 +1,11 @@
 export { handleApiError } from '$api/handle-api-error';
 import toast from 'svelte-french-toast';
 
-export const addSuccessToast = (subtitle = '') => {
+export const addSuccessToast = (subtitle = 'Success') => {
 	toast.success(subtitle);
 };
 
-export const addErrorToast = (subtitle = '') => {
+export const addErrorToast = (subtitle = 'Error') => {
 	toast.error(subtitle);
 };
 

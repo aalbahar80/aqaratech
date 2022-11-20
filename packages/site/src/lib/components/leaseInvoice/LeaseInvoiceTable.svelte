@@ -95,7 +95,7 @@
 											: new Date().toISOString().substring(0, 10),
 									},
 								});
-								addSuccessToast('Invoice updated');
+								addSuccessToast();
 								await invalidateAll();
 							} catch (e) {
 								console.error(e);

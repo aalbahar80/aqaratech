@@ -43,7 +43,7 @@
 			if (result.type === 'invalid') {
 				addErrorToast('Invalid form');
 			} else if (result.type === 'success' || result.type === 'redirect') {
-				addSuccessToast('Success');
+				addSuccessToast();
 			}
 
 			update();
