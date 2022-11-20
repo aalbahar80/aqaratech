@@ -1,15 +1,9 @@
 {
 	"$schema": "http://json.schemastore.org/tsconfig",
-	"extends": "@tsconfig/node18-strictest/tsconfig.json",
+	"extends": "tsconfig/commonjs.json",
 	"compilerOptions": {
-		"types": ["node"],
 		"outDir": "./dist",
-		"declaration": true,
-		"declarationDir": "./dist",
-		"sourceMap": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true
-		// "rootDirs": ["src"]
+		"declarationDir": "./dist"
 	},
 	"exclude": ["dist"]
 }
