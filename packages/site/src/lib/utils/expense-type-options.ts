@@ -1,8 +1,9 @@
-import type { Option } from '$lib/models/interfaces/option.interface';
 import type { ExpenseCategoryDto } from '$api/openapi';
-import * as d3 from 'd3';
+import type { Option } from '$lib/models/interfaces/option.interface';
+import type { HierarchyNode } from 'd3';
+import { stratify } from 'd3';
 
-export type ExpenseNode = d3.HierarchyNode<ExpenseCategoryDto>;
+export type ExpenseNode = HierarchyNode<ExpenseCategoryDto>;
 /**
  * A constant artifical id to use around the app, to avoid inconsistencies.
  */
@@ -17,15 +18,14 @@ export const ROOT_NODE: ExpenseCategoryDto = {
 };
 
 /**
- * Converts an array of ExpenseCategoryDto to d3.HierarchyNode
+ * Converts an array of ExpenseCategoryDto to HierarchyNode
  */
 export const toHeirarchy = (
 	categories: ExpenseCategoryDto[],
-): d3.HierarchyNode<ExpenseCategoryDto> => {
+): HierarchyNode<ExpenseCategoryDto> => {
 	const rootedCatogories = injectRoot(categories);
 
-	const root = d3
-		.stratify<ExpenseCategoryDto>()
+	const root = stratify<ExpenseCategoryDto>()
 		.id((d) => d.id)
 		.parentId((d) => d.parentId)(rootedCatogories)
 		.sort((a, b) => a.data.labelEn.localeCompare(b.data.labelEn));
@@ -33,13 +33,13 @@ export const toHeirarchy = (
 };
 
 /**
- * Converts a d3.HierarchyNode to an array of ExpenseCategoryDto
+ * Converts a HierarchyNode to an array of ExpenseCategoryDto
  */
 export const fromHeirarchy = ({
 	root,
 	original,
 }: {
-	root: d3.HierarchyNode<ExpenseCategoryDto>;
+	root: HierarchyNode<ExpenseCategoryDto>;
 	original: ExpenseCategoryDto[];
 }): ExpenseCategoryDto[] => {
 	const data: ExpenseCategoryDto[] = root.descendants().map((d) => d.data);

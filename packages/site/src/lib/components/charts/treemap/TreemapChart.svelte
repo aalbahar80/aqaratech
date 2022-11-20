@@ -4,20 +4,18 @@
 	import { classes } from '$lib/utils/classes';
 	import { kwdFormat } from '$lib/utils/common';
 	import * as Pancake from '@sveltejs/pancake';
-	import * as d3 from 'd3';
+	import { treemap } from 'd3';
 	import * as eases from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
 	import { fade } from 'svelte/transition';
 
-	// export let hierarchy: d3.HierarchyNode<any>;
-	// export let getLabel: (node: d3.HierarchyNode<any>) => string;
+	// export let hierarchy: HierarchyNode<any>;
+	// export let getLabel: (node: HierarchyNode<any>) => string;
 	export let hierarchy;
 	export let getLabel;
 	export let getLink = undefined;
 
-	const treemap = d3.treemap();
-
-	const root = treemap(hierarchy);
+	const root = treemap()(hierarchy);
 
 	let selected = root;
 

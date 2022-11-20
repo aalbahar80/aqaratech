@@ -2,13 +2,13 @@
 	import type { ExpenseCategoryDto, GroupByCategoryDto } from '$api/openapi';
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
 	import { ROOT_NODE } from '$lib/utils/expense-type-options';
-	import * as d3 from 'd3';
+	import type { HierarchyNode } from 'd3';
+	import { stratify } from 'd3';
 
 	export let expenses: GroupByCategoryDto[];
 	export let categories: ExpenseCategoryDto[];
 
-	$: root = d3
-		.stratify<ExpenseCategoryDto>()
+	$: root = stratify<ExpenseCategoryDto>()
 		.id((d) => d.id.toString())
 		.parentId((d) => {
 			if (d.id === ROOT_NODE.id) return null;
@@ -32,7 +32,7 @@
 		return (b.value || 0) - (a.value || 0);
 	});
 
-	const getLabel = (node: d3.HierarchyNode<ExpenseCategoryDto>) =>
+	const getLabel = (node: HierarchyNode<ExpenseCategoryDto>) =>
 		node.data.labelEn;
 </script>
 

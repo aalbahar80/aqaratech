@@ -3,14 +3,14 @@
 	import { page } from '$app/stores';
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
 	import { getRoute, PageType } from '@self/utils';
-	import * as d3 from 'd3';
+	import { hierarchy, rollup, sum } from 'd3';
 
 	export let expenses: GroupByLocationDto[];
 
-	$: rollupData = d3.rollup(
+	$: rollupData = rollup(
 		expenses,
 		// reduceFn,
-		(d) => d3.sum(d, (e) => e.amount),
+		(d) => sum(d, (e) => e.amount),
 		// groupingFns,
 		(d) => d.propertyId ?? 'Unspecified Property',
 		(d) => d.unitId ?? 'Unspecified Unit',
@@ -18,17 +18,16 @@
 
 	// Type of each node is either null OR a nested maps up to 3 levels deep.
 	// The three levels come from the rollup function.
-	$: hierarchyData = d3
-		.hierarchy(
-			[null, rollupData],
-			// childrenAccessorFn,
-			//@ts-ignore
-			([_key, value]) => {
-				// value.size checks if value is a Map, which is false for `non-leaf` rolledUp nodes.
-				const result = value?.size && Array.from(value);
-				return result;
-			},
-		)
+	$: hierarchyData = hierarchy(
+		[null, rollupData],
+		// childrenAccessorFn,
+		//@ts-ignore
+		([_key, value]) => {
+			// value.size checks if value is a Map, which is false for `non-leaf` rolledUp nodes.
+			const result = value?.size && Array.from(value);
+			return result;
+		},
+	)
 		//@ts-ignore
 		.sum(([_key, value]) => value)
 		.sort((a, b) => (b.value || 0) - (a.value || 0));
