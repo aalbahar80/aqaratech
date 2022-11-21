@@ -174,8 +174,9 @@ export class PortfoliosController {
 	@CheckAbilities({
 		action: Action.Read,
 		subject: SubjectType,
-		useParams: true,
-		overrideParams: { portfolioId: 'id' },
+		// Enabling useParams here would prevent orgadmin from passing this guard.
+		// If we really wanted to use useParams, we could have the guard grab the orgId from the db.
+		// Else, add orgId to the route params.
 	})
 	@ApiQueryOptions()
 	@ApiPaginatedResponse(LeaseInvoiceDto)
@@ -201,6 +202,7 @@ export class PortfoliosController {
 		subject: SubjectType,
 		// Enabling useParams here would prevent orgadmin from passing this guard.
 		// If we really wanted to use useParams, we could have the guard grab the orgId from the db.
+		// Else, add orgId to the route params.
 	})
 	@ApiQueryOptions()
 	@ApiPaginatedResponse(ExpenseDto)
