@@ -25,3 +25,9 @@
 		</td>
 	{/each}
 </tr>
+
+<style lang="postcss">
+	td {
+		@apply whitespace-nowrap first:pl-4 last:pr-4;
+	}
+</style>

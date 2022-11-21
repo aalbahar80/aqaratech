@@ -37,3 +37,9 @@
 		</th>
 	{/each}
 </tr>
+
+<style lang="postcss">
+	th {
+		@apply whitespace-nowrap first:pl-4 last:pr-4;
+	}
+</style>

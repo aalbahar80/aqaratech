@@ -242,10 +242,3 @@
 		</slot>
 	</div>
 </div>
-
-<style lang="postcss">
-	th,
-	td {
-		@apply whitespace-nowrap first:pl-4 last:pr-4;
-	}
-</style>
