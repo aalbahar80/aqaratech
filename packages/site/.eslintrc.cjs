@@ -91,6 +91,10 @@ module.exports = {
 						ignoreWarnings: true,
 					},
 				],
+
+				// necessary for svelte's $page.params['myParam']
+				'@typescript-eslint/no-non-null-assertion': 'off',
+
 				// TODO add rules from: https://ota-meshi.github.io/eslint-plugin-svelte/rules/
 			},
 		},
