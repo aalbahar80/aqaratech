@@ -176,10 +176,10 @@
 		}));
 	};
 
-	const refreshPageCount = () => {
+	const refreshPageCount = (n: number) => {
 		options.update((options) => ({
 			...options,
-			pageCount: paginationDto.pageCount,
+			pageCount: n,
 		}));
 	};
 
@@ -188,10 +188,13 @@
 	afterUpdate(() => {
 		// to refresh data when browser back button is pressed
 		refreshData();
-
-		// refresh pageCount when property filter changes
-		refreshPageCount();
 	});
+
+	$: {
+		// refresh pageCount when property filter changes
+		console.log('paginationDto updated');
+		refreshPageCount(paginationDto.itemCount);
+	}
 
 	$: filters = [getColumnFilter($table)];
 </script>
