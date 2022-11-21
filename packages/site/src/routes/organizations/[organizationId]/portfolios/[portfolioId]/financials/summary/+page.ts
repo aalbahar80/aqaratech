@@ -16,11 +16,7 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 
 	const { organizationId, portfolioId } = params;
 
-	const [properties, income, expenses] = await Promise.all([
-		api.portfolios.findProperties({
-			id: portfolioId,
-		}),
-
+	const [income, expenses] = await Promise.all([
 		api.portfolios.getIncomeByMonth({
 			organizationId,
 			portfolioId,
@@ -54,7 +50,6 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 
 	return {
 		net: calculateNet(income.paid, expenses),
-		properties,
 		income,
 		expenses,
 	};

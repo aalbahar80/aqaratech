@@ -1,5 +1,4 @@
 <script lang="ts">
-	import PropertySelect from '$lib/components/dashboard/PropertySelect.svelte';
 	import SummaryStats from '$lib/components/dashboard/stats/SummaryStats.svelte';
 	import type { PageData } from './$types';
 
@@ -7,14 +6,6 @@
 </script>
 
 <h1 class="text-3xl font-bold text-gray-900">Summary</h1>
-
-<!-- Filters -->
-
-<div class="inline-flex justify-end">
-	<div class="w-72">
-		<PropertySelect properties={data.properties.results} />
-	</div>
-</div>
 
 <!-- TotalPanes -->
 <div class="flex flex-col gap-y-12">
