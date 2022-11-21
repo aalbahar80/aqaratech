@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { flexRender, type HeaderGroup } from '@tanstack/svelte-table';
 
-	export let headerGroup: HeaderGroup<any>;
+	export let group: HeaderGroup<any>;
 
 	const sortIcons: Record<string, string> = {
 		asc: '↑',
@@ -12,7 +12,7 @@
 </script>
 
 <tr>
-	{#each headerGroup.headers as header}
+	{#each group.headers as header}
 		<th
 			colSpan={header.colSpan}
 			class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
