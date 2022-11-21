@@ -171,6 +171,13 @@
 		refreshPagination(createTablePaginationModel(paginationDto).pagination);
 	}
 
+	$: {
+		if (items.length === 0 && paginationDto.page > 1) {
+			// reset pagination when no items are available
+			$table.resetPageIndex();
+		}
+	}
+
 	$: filters = [getColumnFilter($table)];
 </script>
 
