@@ -22,7 +22,6 @@
 		type TableOptions,
 		type VisibilityState,
 	} from '@tanstack/svelte-table';
-	import { afterUpdate } from 'svelte';
 	import { writable } from 'svelte/store';
 
 	type T = $$Generic<{ id: string }>;
@@ -168,15 +167,16 @@
 		onColumnVisibilityChange: setColumnVisibility,
 	});
 
-	const refreshData = () => {
-		console.info('refresh');
+	const refreshData = (data: T[]) => {
+		console.info('refreshData');
 		options.update((prev) => ({
 			...prev,
-			data: items,
+			data: data,
 		}));
 	};
 
 	const refreshPageCount = (n: number) => {
+		console.info('refreshPageCount');
 		options.update((options) => ({
 			...options,
 			pageCount: n,
@@ -185,15 +185,14 @@
 
 	const table = createSvelteTable<T>(options);
 
-	afterUpdate(() => {
-		// to refresh data when browser back button is pressed
-		refreshData();
-	});
+	$: {
+		// refresh items
+		refreshData(items);
+	}
 
 	$: {
 		// refresh pageCount when property filter changes
-		console.log('paginationDto updated');
-		refreshPageCount(paginationDto.itemCount);
+		refreshPageCount(paginationDto.pageCount);
 	}
 
 	$: filters = [getColumnFilter($table)];
