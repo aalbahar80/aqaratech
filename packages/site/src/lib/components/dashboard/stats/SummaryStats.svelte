@@ -1,9 +1,11 @@
 <script lang="ts">
 	import type { GroupByMonthDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
+	import { getRoute, PageTypePortfolio } from '@self/utils';
 
 	interface Datapoint extends GroupByMonthDto {
 		change?: number;
@@ -19,8 +21,26 @@
 	};
 
 	const links: Record<string, string> = {
-		Income: 'income',
-		Expenses: 'expenses',
+		Income: getRoute({
+			entity: 'portfolio',
+			id: $page.params['portfolioId']!,
+			params: $page.params,
+			pageType: PageTypePortfolio.Income,
+			predefined: {
+				propertyId: $page.params['propertyId'],
+				unitId: $page.params['unitId'],
+			},
+		}),
+		Expenses: getRoute({
+			entity: 'portfolio',
+			id: $page.params['portfolioId']!,
+			params: $page.params,
+			pageType: PageTypePortfolio.Expenses,
+			predefined: {
+				propertyId: $page.params['propertyId'],
+				unitId: $page.params['unitId'],
+			},
+		}),
 	};
 
 	const colors: Record<string, string> = {
