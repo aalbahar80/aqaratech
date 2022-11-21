@@ -9,9 +9,13 @@ const SIZE = 20;
 
 test.use({
 	userRoleType: 'PORTFOLIO',
+
+	propertiesParams: R.times(3, () => ({})),
+
 	expensesParams: R.times(TOTAL, () => ({
 		amount: 30,
 	})),
+
 	page: async (
 		{ scopedPage: page, org, portfolio, expenses: _expenses },
 		use,
@@ -53,18 +57,30 @@ test('table pagination smoke test', async ({ page }) => {
 	await expect(table.size).toHaveValue('20');
 });
 
-	await next.click();
+test('pagination is updated when changing property filter', async ({
+	page,
+	org,
+	portfolio,
+	properties,
+	expenses: _expenses,
+}) => {
+	const table = new TablePage(page);
 
-	await expect(next).toBeDisabled();
-	await expect(prev).toBeEnabled();
+	await expect.soft(table.property).toHaveValue('undefined');
 
-	const info2 = page.getByText(
-		`Showing ${SIZE + 1} to ${TOTAL} of ${TOTAL} results`,
-	);
-	await expect.soft(info2).toBeVisible();
+	// Go to next page
+	await table.next.click();
+	await page.waitForNavigation();
 
-	const size = page.getByRole('combobox', { name: 'Page size' });
-	await expect(size).toHaveValue('20');
+	// Change property filter
+	await table.property.selectOption(properties[0].id);
+
+	// Expect pagination to be reset
+	await expect(table.next).toBeEnabled();
+
+	await expect(table.prev).toBeDisabled();
+
+	await expect(table.range(1)).toHaveAttribute('aria-current', 'page');
 });
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
