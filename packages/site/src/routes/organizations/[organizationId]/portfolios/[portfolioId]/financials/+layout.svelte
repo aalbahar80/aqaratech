@@ -7,6 +7,7 @@
 	export let data: LayoutData;
 
 	const hideRange = ['financials/summary', 'payouts/table'];
+	const hideProperty = ['payouts/table'];
 </script>
 
 {#if !hideRange.some((str) => $page.url.pathname.endsWith(str))}
@@ -17,10 +18,12 @@
 	</div>
 {/if}
 
-<div class="inline-flex justify-end">
-	<div class="w-72">
-		<PropertySelect properties={data.properties.results} />
+{#if !hideProperty.some((str) => $page.url.pathname.endsWith(str))}
+	<div class="inline-flex justify-end">
+		<div class="w-72">
+			<PropertySelect properties={data.properties.results} />
+		</div>
 	</div>
-</div>
+{/if}
 
 <slot />
