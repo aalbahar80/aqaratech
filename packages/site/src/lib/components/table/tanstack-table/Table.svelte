@@ -221,7 +221,11 @@
 	<div class="shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
 		<div class="overflow-x-auto">
 			<table class="min-w-full divide-y divide-gray-300">
-				<TableHeaderRow {table} />
+				<thead class="bg-gray-50">
+					{#each $table.getHeaderGroups() as headerGroup}
+						<TableHeaderRow {headerGroup} />
+					{/each}
+				</thead>
 				<tbody>
 					{#each $table.getRowModel().rows as row (row.original.id)}
 						<tr
