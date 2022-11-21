@@ -22,10 +22,9 @@
 			cell: (info) => toUTCFormat(info.getValue().toLocaleString()),
 		}),
 
-		columnHelper.accessor('expenseType', {
+		columnHelper.accessor('categoryId', {
 			header: 'Type',
-			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-			cell: (info) => info.getValue()?.labelEn || '',
+			cell: (info) => info.row.original.expenseType?.labelEn,
 		}),
 
 		columnHelper.accessor('amount', {
