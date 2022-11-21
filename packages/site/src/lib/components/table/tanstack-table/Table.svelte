@@ -3,13 +3,13 @@
 	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import { handlePagination } from '$lib/components/table/pagination/handle-pagination';
 	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
 	import TableBodyRow from '$lib/components/table/row/TableBodyRow.svelte';
 	import TableFooterRow from '$lib/components/table/row/TableFooterRow.svelte';
 	import TableHeaderRow from '$lib/components/table/row/TableHeaderRow.svelte';
 	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
-	import { handleServerPagination } from '$lib/components/table/tanstack-table/server-pagination';
 	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
 	import {
 		createSvelteTable,
@@ -73,18 +73,7 @@
 	// Initiate pagination state
 
 	export const setPagination: OnChangeFn<PaginationState> = (updater) => {
-		const currentPaginationState =
-			createTablePaginationModel(paginationDto).pagination;
-
-		let desiredPaginationState: PaginationState;
-
-		if (updater instanceof Function) {
-			desiredPaginationState = updater(currentPaginationState);
-		} else {
-			desiredPaginationState = updater;
-		}
-
-		void handleServerPagination(desiredPaginationState, $page.url);
+		handlePagination(updater, $page.url, paginationDto);
 	};
 
 	// Column visibility
