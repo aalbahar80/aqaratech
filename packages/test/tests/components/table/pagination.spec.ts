@@ -13,6 +13,7 @@ test.use({
 	propertiesParams: R.times(3, () => ({})),
 
 	expensesParams: R.times(TOTAL, () => ({
+		postAt: new Date().toISOString().slice(0, 10),
 		amount: 30,
 	})),
 
