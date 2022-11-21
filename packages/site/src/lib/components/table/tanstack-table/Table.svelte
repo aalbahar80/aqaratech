@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
+	import TableBodyRow from '$lib/components/table/row/TableBodyRow.svelte';
 	import TableFooterRow from '$lib/components/table/row/TableFooterRow.svelte';
 	import TableHeaderRow from '$lib/components/table/row/TableHeaderRow.svelte';
 	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
@@ -12,7 +13,6 @@
 	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
 	import {
 		createSvelteTable,
-		flexRender,
 		getCoreRowModel,
 		getPaginationRowModel,
 		getSortedRowModel,
@@ -23,10 +23,8 @@
 		type TableOptions,
 		type VisibilityState,
 	} from '@tanstack/svelte-table';
-	import { clsx } from 'clsx';
 	import { afterUpdate } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { fade } from 'svelte/transition';
 
 	type T = $$Generic<{ id: string }>;
 
@@ -229,31 +227,7 @@
 				</thead>
 				<tbody>
 					{#each $table.getRowModel().rows as row (row.original.id)}
-						<tr
-							class="odd:bg-white even:bg-gray-50"
-							data-testid={row.original.id}
-						>
-							{#each row.getVisibleCells() as cell}
-								{@const cellValueType = typeof cell.getValue()}
-								<td
-									in:fade={{ duration: 200 }}
-									class={clsx('py-4 px-2 text-lg text-gray-600', {
-										'slashed-zero tabular-nums': cellValueType === 'number',
-									})}
-								>
-									<!-- Rendering null cells throws. This might only be an issue
-									when the entire column is null on a given page. -->
-									{#if cell.getValue() !== null}
-										<svelte:component
-											this={flexRender(
-												cell.column.columnDef.cell,
-												cell.getContext(),
-											)}
-										/>
-									{/if}
-								</td>
-							{/each}
-						</tr>
+						<TableBodyRow {row} />
 					{/each}
 				</tbody>
 				<tfoot class="bg-gray-50">
