@@ -11,27 +11,28 @@ test.use({
 	expensesParams: R.times(TOTAL, () => ({
 		amount: 30,
 	})),
+	page: async (
+		{ scopedPage: page, org, portfolio, expenses: _expenses },
+		use,
+	) => {
+		const url =
+			getRoute({
+				entity: 'portfolio',
+				id: portfolio.id,
+				pageType: PageTypePortfolio.Expenses,
+				params: {
+					organizationId: org.organization.id,
+					portfolioId: portfolio.id,
+				},
+			}) + '/table';
+
+		await page.goto(url);
+
+		await use(page);
+	},
 });
 
-test('table pagination smoke test', async ({
-	scopedPage: page,
-	org,
-	portfolio,
-	expenses: _expenses,
-}) => {
-	const url =
-		getRoute({
-			entity: 'portfolio',
-			id: portfolio.id,
-			pageType: PageTypePortfolio.Expenses,
-			params: {
-				organizationId: org.organization.id,
-				portfolioId: portfolio.id,
-			},
-		}) + '/table';
-
-	await page.goto(url);
-
+test('table pagination smoke test', async ({ page }) => {
 	const info = page.getByText(`Showing 1 to ${SIZE} of ${TOTAL} results`);
 	await expect.soft(info).toBeVisible();
 
