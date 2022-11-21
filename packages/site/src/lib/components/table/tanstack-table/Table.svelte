@@ -73,7 +73,11 @@
 	// Initiate pagination state
 
 	export const setPagination: OnChangeFn<PaginationState> = (updater) => {
-		handlePagination(updater, $page.url, paginationDto);
+		handlePagination({
+			updater,
+			url: $page.url,
+			paginationDto,
+		});
 	};
 
 	// Column visibility

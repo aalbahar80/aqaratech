@@ -3,11 +3,15 @@ import { createTablePaginationModel } from '$lib/components/table/pagination/tab
 import { handleServerPagination } from '$lib/components/table/tanstack-table/server-pagination';
 import type { PaginationState, Updater } from '@tanstack/svelte-table';
 
-export const handlePagination = (
-	updater: Updater<PaginationState>,
-	url: URL,
-	paginationDto: PaginatedDto,
-) => {
+export const handlePagination = ({
+	updater,
+	url,
+	paginationDto,
+}: {
+	updater: Updater<PaginationState>;
+	url: URL;
+	paginationDto: PaginatedDto;
+}) => {
 	const currentPaginationState =
 		createTablePaginationModel(paginationDto).pagination;
 
