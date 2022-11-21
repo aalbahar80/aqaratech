@@ -1,12 +1,18 @@
 <script lang="ts">
+	import type { BalanceDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { kwdFormat } from '$lib/utils/common';
-	import type { BalanceDto } from '$api/openapi';
-	import { entitiesMap } from '@self/utils';
+	import { getRoute, PageTypePortfolio } from '@self/utils';
 
 	export let balance: BalanceDto;
+
+	$: baseRoute = {
+		entity: 'portfolio',
+		id: $page.params['portfolioId']!,
+		params: $page.params,
+	} as const;
 </script>
 
 <section class="overflow-clip rounded-md bg-white shadow">
@@ -18,7 +24,10 @@
 
 	<ul class="flex flex-col divide-y divide-gray-200 ">
 		<BalanceLineItem
-			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap.leaseInvoice.urlName}`}
+			href={getRoute({
+				...baseRoute,
+				pageType: PageTypePortfolio.Income,
+			})}
 		>
 			<svelte:fragment slot="label">
 				Lease Invoices
@@ -32,7 +41,10 @@
 		</BalanceLineItem>
 
 		<BalanceLineItem
-			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap.expense.urlName}`}
+			href={getRoute({
+				...baseRoute,
+				pageType: PageTypePortfolio.Expenses,
+			})}
 		>
 			<svelte:fragment slot="label">
 				Expenses
@@ -44,7 +56,10 @@
 		</BalanceLineItem>
 
 		<BalanceLineItem
-			href={`/${entitiesMap.portfolio.urlName}/${$page.params.id}/${entitiesMap.payout.urlName}`}
+			href={getRoute({
+				...baseRoute,
+				pageType: PageTypePortfolio.Payouts,
+			})}
 		>
 			<svelte:fragment slot="label">
 				Payouts
