@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
+	import TableFooterRow from '$lib/components/table/row/TableFooterRow.svelte';
 	import TableHeaderRow from '$lib/components/table/row/TableHeaderRow.svelte';
 	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
@@ -256,24 +257,8 @@
 					{/each}
 				</tbody>
 				<tfoot class="bg-gray-50">
-					{#each $table.getFooterGroups() as footerGroup}
-						<tr>
-							{#each footerGroup.headers as header}
-								<th
-									colSpan={header.colSpan}
-									class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
-								>
-									{#if !header.isPlaceholder}
-										<svelte:component
-											this={flexRender(
-												header.column.columnDef.footer,
-												header.getContext(),
-											)}
-										/>
-									{/if}
-								</th>
-							{/each}
-						</tr>
+					{#each $table.getFooterGroups() as group}
+						<TableFooterRow {group} />
 					{/each}
 				</tfoot>
 			</table>
