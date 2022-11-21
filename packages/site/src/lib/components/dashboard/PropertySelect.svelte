@@ -30,6 +30,7 @@
 </script>
 
 <Select
+	title="Property"
 	bind:current={$property}
 	{options}
 	on:select={async () => {

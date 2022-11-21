@@ -54,7 +54,7 @@
 	</div>
 	<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
 		<div class="hidden lg:block">
-			<p class="text-sm text-gray-700">
+			<p data-testid="pagination-info" class="text-sm text-gray-700">
 				Showing <span class="font-medium">{idxStart}</span> to
 				<span class="font-medium">{idxEnd}</span>
 				of{' '}

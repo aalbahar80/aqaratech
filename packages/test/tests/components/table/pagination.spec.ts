@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { getRoute, PageTypePortfolio } from '@self/utils';
 import * as R from 'remeda';
 import { test } from '../../api/api-fixtures';
+import { TablePage } from './TablePage';
 
 const TOTAL = 35;
 const SIZE = 20;
@@ -33,14 +34,24 @@ test.use({
 });
 
 test('table pagination smoke test', async ({ page }) => {
-	const info = page.getByText(`Showing 1 to ${SIZE} of ${TOTAL} results`);
-	await expect.soft(info).toBeVisible();
+	const table = new TablePage(page);
 
-	const next = page.getByRole('button', { name: 'Next' });
-	const prev = page.getByRole('button', { name: 'Previous' });
+	const info = `Showing 1 to ${SIZE} of ${TOTAL} results`;
+	await expect.soft(table.info).toHaveText(info);
 
-	await expect(next).toBeEnabled();
-	await expect(prev).toBeDisabled();
+	await expect(table.next).toBeEnabled();
+	await expect(table.prev).toBeDisabled();
+
+	await table.next.click();
+
+	await expect(table.next).toBeDisabled();
+	await expect(table.prev).toBeEnabled();
+
+	const info2 = `Showing ${SIZE + 1} to ${TOTAL} of ${TOTAL} results`;
+	await expect.soft(table.info).toHaveText(info2);
+
+	await expect(table.size).toHaveValue('20');
+});
 
 	await next.click();
 
