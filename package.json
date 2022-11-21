@@ -28,7 +28,7 @@
 		"@changesets/changelog-git": "0.1.13",
 		"@changesets/cli": "2.25.2",
 		"@types/node": "18.11.9",
-		"eslint": "8.27.0",
+		"eslint": "8.28.0",
 		"eslint-config-custom": "workspace:*",
 		"madge": "5.0.1",
 		"prettier": "2.7.1",

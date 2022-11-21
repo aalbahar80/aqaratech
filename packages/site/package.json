@@ -24,14 +24,14 @@
 		"@felte/reporter-svelte": "1.1.4",
 		"@felte/reporter-tippy": "1.1.4",
 		"@felte/validator-zod": "1.0.12",
-		"@iconify/json": "2.1.139",
+		"@iconify/json": "2.1.141",
 		"@logtail/types": "0.1.12",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:2.1.0",
-		"@sentry/svelte": "7.20.0",
-		"@sentry/tracing": "7.20.0",
-		"@sveltejs/adapter-node": "1.0.0-next.100",
-		"@sveltejs/kit": "1.0.0-next.551",
+		"@sentry/svelte": "7.20.1",
+		"@sentry/tracing": "7.20.1",
+		"@sveltejs/adapter-node": "1.0.0-next.101",
+		"@sveltejs/kit": "1.0.0-next.556",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/forms": "0.5.3",
@@ -90,7 +90,7 @@
 	"dependencies": {
 		"@logtail/node": "0.1.14",
 		"@logtail/winston": "0.1.14",
-		"@sentry/node": "7.20.0",
+		"@sentry/node": "7.20.1",
 		"winston": "3.8.2"
 	}
 }
