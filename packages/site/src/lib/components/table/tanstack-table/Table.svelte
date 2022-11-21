@@ -72,8 +72,6 @@
 		if (paginationType === 'server') {
 			void handleServerSorting(sorting, $page.url);
 		}
-
-		refreshData();
 	};
 
 	// Pagination
@@ -107,8 +105,6 @@
 				pagination,
 			},
 		}));
-
-		refreshData();
 	};
 
 	// Column visibility
