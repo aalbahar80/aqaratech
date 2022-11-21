@@ -72,17 +72,19 @@
 
 	// Initiate pagination state
 
-	let { pagination, pageCount } = createTablePaginationModel(paginationDto);
-
 	export const setPagination: OnChangeFn<PaginationState> = (updater) => {
-		// what is this doing?
+		const currentPaginationState =
+			createTablePaginationModel(paginationDto).pagination;
+
+		let desiredPaginationState: PaginationState;
+
 		if (updater instanceof Function) {
-			pagination = updater(pagination);
+			desiredPaginationState = updater(currentPaginationState);
 		} else {
-			pagination = updater;
+			desiredPaginationState = updater;
 		}
 
-		void handleServerPagination(pagination, $page.url);
+		void handleServerPagination(desiredPaginationState, $page.url);
 	};
 
 	// Column visibility
@@ -109,7 +111,7 @@
 
 		state: {
 			sorting,
-			pagination,
+			pagination: createTablePaginationModel(paginationDto).pagination,
 			columnVisibility,
 		},
 
@@ -118,7 +120,7 @@
 
 		// Pagination. Docs: https://tanstack.com/table/v8/docs/api/features/pagination
 		manualPagination: true, // use false for client-side pagination
-		pageCount,
+		pageCount: paginationDto.pageCount,
 		onPaginationChange: setPagination,
 
 		// Sorting. Docs: https://tanstack.com/table/v8/docs/api/features/sorting
