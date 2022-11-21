@@ -1,14 +1,32 @@
-import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Patch,
+	Query,
+} from '@nestjs/common';
+import {
+	ApiOkResponse,
+	ApiQuery,
+	ApiTags,
+	IntersectionType,
+	PickType,
+} from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { portfolioUpdateSchema } from '@self/utils';
 import { AggregateService } from 'src/aggregate/aggregate.service';
+import { AggregateOptionsExpensesDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { BalanceDto } from 'src/aggregate/dto/balance.dto';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
-import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import {
+	QueryOptionsDto,
+	QueryOptionsRequestDto,
+} from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
 import {
 	ApiQueryOptions,
@@ -204,21 +222,45 @@ export class PortfoliosController {
 		// If we really wanted to use useParams, we could have the guard grab the orgId from the db.
 		// Else, add orgId to the route params.
 	})
-	@ApiQueryOptions()
+	@ApiQuery({
+		type: IntersectionType(
+			QueryOptionsRequestDto,
+			PickType(AggregateOptionsExpensesDto, ['propertyId', 'unitId']),
+		),
+	})
 	@ApiPaginatedResponse(ExpenseDto)
 	findAllExpenses(
 		@User() user: IUser,
 		@Param('id') portfolioId: string,
+
 		@QueryParser({
 			parserOptions: { orderDefaultValue: 'postAt' },
 			filterOptions: { keys: ['postAt', 'propertyId', 'unitId'] },
 		})
 		queryOptions: QueryOptionsDto,
+
+		// Expose dedicated query params for propertyId and unitId. Process them
+		// with parseLocationFilter, then merge them with any existing
+		// queryOptions.filter.
+		@Query('propertyId') propertyId?: AggregateOptionsExpensesDto['propertyId'],
+		@Query('unitId') unitId?: AggregateOptionsExpensesDto['unitId'],
 	): Promise<WithCount<ExpenseDto>> {
+		const locationFilter = this.expensesService.parseLocationFilter({
+			propertyId,
+			unitId,
+		});
+
 		return this.expensesService.findAll({
-			queryOptions,
 			user,
 			portfolioId,
+			// merge locationFilter with any existing filters
+			queryOptions: {
+				...queryOptions,
+				filter: {
+					...queryOptions.filter,
+					...locationFilter,
+				},
+			},
 		});
 	}
 }

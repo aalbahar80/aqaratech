@@ -46,6 +46,8 @@ export interface PortfoliosApiFindAllExpensesRequest {
 	take?: number;
 	sort?: Array<string>;
 	filter?: object;
+	propertyId?: string | null;
+	unitId?: string | null;
 }
 
 export interface PortfoliosApiFindAllLeaseInvoicesRequest {
@@ -582,6 +584,14 @@ export class PortfoliosApi
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.propertyId !== undefined) {
+			queryParameters['propertyId'] = requestParameters.propertyId;
+		}
+
+		if (requestParameters.unitId !== undefined) {
+			queryParameters['unitId'] = requestParameters.unitId;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

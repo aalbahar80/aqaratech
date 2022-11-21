@@ -1136,6 +1136,18 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          name: propertyId
+          in: query
+          schema:
+            nullable: true
+            type: string
+        - required: false
+          name: unitId
+          in: query
+          schema:
+            nullable: true
+            type: string
       responses:
         '200':
           description: ''
