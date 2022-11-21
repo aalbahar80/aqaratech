@@ -50,5 +50,4 @@
 	items={data.organizations.results}
 	paginationDto={data.organizations.pagination}
 	{columns}
-	paginationType="server"
 />

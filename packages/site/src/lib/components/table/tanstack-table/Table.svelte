@@ -38,10 +38,6 @@
 	 * Ideally, _initial_ sorting state should be inferred from the URL when possible when using server-side sorting.
 	 */
 	export let sorting: SortingState = [];
-	/**
-	 * Page count should be defined when using server-side pagination
-	 */
-	export let paginationType: 'server' | 'client';
 
 	type TableColumnVisibility = $$Generic<VisibilityState>;
 
@@ -69,9 +65,7 @@
 			},
 		}));
 
-		if (paginationType === 'server') {
-			void handleServerSorting(sorting, $page.url);
-		}
+		void handleServerSorting(sorting, $page.url);
 	};
 
 	// Pagination
@@ -88,18 +82,12 @@
 			pagination = updater;
 		}
 
-		if (paginationType === 'server') {
-			void handleServerPagination(pagination, $page.url);
-
-			options.update((old) => ({
-				...old,
-				// update fresh pagecount from server
-				pageCount: pageCount,
-			}));
-		}
+		void handleServerPagination(pagination, $page.url);
 
 		options.update((old) => ({
 			...old,
+			// update fresh pagecount from server
+			pageCount: pageCount,
 			state: {
 				...old.state,
 				pagination,
@@ -125,14 +113,6 @@
 		}));
 	};
 
-	const clientSortingOptions = {
-		manualSorting: false,
-	};
-
-	const serverSortingOptions = {
-		manualSorting: true,
-	};
-
 	const options = writable<TableOptions<T>>({
 		data: items,
 		columns,
@@ -147,16 +127,14 @@
 		debugTable: dev,
 
 		// Pagination. Docs: https://tanstack.com/table/v8/docs/api/features/pagination
-		manualPagination: true,
+		manualPagination: true, // use false for client-side pagination
 		pageCount,
 		onPaginationChange: setPagination,
 
 		// Sorting. Docs: https://tanstack.com/table/v8/docs/api/features/sorting
+		manualSorting: true, // use false for client-side sorting
 		onSortingChange: setSorting,
 		getSortedRowModel: getSortedRowModel(),
-		...(paginationType === 'server'
-			? serverSortingOptions
-			: clientSortingOptions),
 
 		// Column visibility
 		// @ts-expect-error until better typing

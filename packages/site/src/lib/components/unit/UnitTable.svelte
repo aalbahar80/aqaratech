@@ -56,7 +56,6 @@
 	items={data.results}
 	paginationDto={data.pagination}
 	{columns}
-	paginationType="server"
 	columnVisibility={{
 		floor: false,
 		usage: false,

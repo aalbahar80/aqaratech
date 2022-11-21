@@ -115,7 +115,6 @@
 	columns={$page.data.user?.role?.roleType === 'ORGADMIN'
 		? [...columns, ...adminColumns]
 		: columns}
-	paginationType="server"
 	columnVisibility={{
 		dueAt: false,
 		paidAt: false,

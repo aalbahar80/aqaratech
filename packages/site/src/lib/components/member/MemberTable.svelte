@@ -82,12 +82,7 @@
 	];
 </script>
 
-<Table
-	items={data.results}
-	paginationDto={data.pagination}
-	{columns}
-	paginationType="server"
->
+<Table items={data.results} paginationDto={data.pagination} {columns}>
 	<div slot="filter">
 		<FilterBar>
 			<div slot="custom">

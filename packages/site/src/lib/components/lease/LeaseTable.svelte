@@ -90,7 +90,6 @@
 	items={data.results}
 	paginationDto={data.pagination}
 	{columns}
-	paginationType="server"
 	columnVisibility={{
 		deposit: false,
 	}}

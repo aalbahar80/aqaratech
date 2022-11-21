@@ -37,7 +37,6 @@
 	items={data.results}
 	paginationDto={data.pagination}
 	{columns}
-	paginationType="server"
 	columnVisibility={{
 		avenue: false,
 		paci: false,

@@ -33,7 +33,6 @@
 	items={data.payouts.results}
 	paginationDto={data.payouts.pagination}
 	{columns}
-	paginationType="server"
 >
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
