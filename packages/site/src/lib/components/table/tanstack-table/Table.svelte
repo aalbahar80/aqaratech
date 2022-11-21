@@ -14,7 +14,6 @@
 	import {
 		createSvelteTable,
 		getCoreRowModel,
-		getPaginationRowModel,
 		getSortedRowModel,
 		type ColumnDef,
 		type OnChangeFn,
@@ -131,16 +130,6 @@
 		}));
 	};
 
-	const clientPaginationOptions = {
-		manualPagination: false,
-		getPaginationRowModel: getPaginationRowModel<T>(),
-	};
-
-	const serverPaginationOptions = {
-		manualPagination: true,
-		pageCount,
-	};
-
 	const clientSortingOptions = {
 		manualSorting: false,
 	};
@@ -163,10 +152,9 @@
 		debugTable: dev,
 
 		// Pagination. Docs: https://tanstack.com/table/v8/docs/api/features/pagination
+		manualPagination: true,
+		pageCount,
 		onPaginationChange: setPagination,
-		...(paginationType === 'server'
-			? serverPaginationOptions
-			: clientPaginationOptions),
 
 		// Sorting. Docs: https://tanstack.com/table/v8/docs/api/features/sorting
 		onSortingChange: setSorting,
@@ -188,18 +176,21 @@
 		}));
 	};
 
-	// const rerender = () => {
-	// 	options.update((options) => ({
-	// 		...options,
-	// 		data: data.expenses.results,
-	// 	}));
-	// };
+	const refreshPageCount = () => {
+		options.update((options) => ({
+			...options,
+			pageCount: paginationDto.pageCount,
+		}));
+	};
 
 	const table = createSvelteTable<T>(options);
 
 	afterUpdate(() => {
 		// to refresh data when browser back button is pressed
 		refreshData();
+
+		// refresh pageCount when property filter changes
+		refreshPageCount();
 	});
 
 	$: filters = [getColumnFilter($table)];
