@@ -47,6 +47,7 @@ const config = {
 	// vitePlugin: {
 	// 	experimental: {
 	// 		// 	prebundleSvelteLibraries: true,
+	// 		/** shortcut: meta + shift */
 	// 		inspector: {
 	// 			showToggleButton: 'always',
 	// 		},
