@@ -31,6 +31,13 @@ module.exports = {
 	rules: {
 		// tslint comments in generated api files
 		'@typescript-eslint/ban-tslint-comment': 'off',
+
+		'@typescript-eslint/dot-notation': [
+			'error',
+			{
+				allowIndexSignaturePropertyAccess: true,
+			},
+		],
 	},
 	overrides: [
 		{
