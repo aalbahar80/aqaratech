@@ -83,16 +83,6 @@
 		}
 
 		void handleServerPagination(pagination, $page.url);
-
-		options.update((old) => ({
-			...old,
-			// update fresh pagecount from server
-			pageCount: pageCount,
-			state: {
-				...old.state,
-				pagination,
-			},
-		}));
 	};
 
 	// Column visibility
