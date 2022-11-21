@@ -73,6 +73,8 @@
 					on:select={(e) => {
 						table.setPageSize(e.detail.value);
 					}}
+					title="Page size"
+					hideLabel
 				/>
 			</div>
 		{/if}

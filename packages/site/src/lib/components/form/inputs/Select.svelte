@@ -1,4 +1,5 @@
 <script lang="ts">
+	import clsx from 'clsx';
 	import { createEventDispatcher } from 'svelte';
 
 	type T = $$Generic;
@@ -12,6 +13,7 @@
 	export let options: Option[];
 	export let current: T;
 	export let disabled = false;
+	export let hideLabel = false;
 
 	const dispatch = createEventDispatcher<{
 		select: { value: typeof current };
@@ -19,7 +21,13 @@
 </script>
 
 {#if title}
-	<label for={title} class="block text-sm font-medium text-gray-700">
+	<label
+		for={title}
+		class={clsx(
+			'block text-sm font-medium text-gray-700',
+			hideLabel && 'sr-only',
+		)}
+	>
 		{title}
 	</label>
 {/if}
