@@ -211,4 +211,41 @@ export class ExpensesService {
 			);
 		}
 	}
+
+	// TODO use satisfies type
+	parseLocationFilter = (filter: {
+		propertyId?: string | null;
+		unitId?: string | null;
+	}): Prisma.ExpenseWhereInput => {
+		if (filter.unitId) {
+			return {
+				// Get expenses associated with the unit
+				unitId: filter.unitId,
+			};
+		} else if (typeof filter.propertyId === 'string') {
+			return {
+				OR: [
+					// Get expenses associated with the property directly
+					{ propertyId: filter.propertyId },
+
+					// OR
+
+					// Get expenses associated with the property's units
+					{
+						unit: {
+							propertyId: filter.propertyId,
+						},
+					},
+				],
+			};
+		} else if (filter.propertyId === null) {
+			// Get expenses which are not associated with any property
+			return {
+				propertyId: null,
+				unitId: null,
+			};
+		} else {
+			return {};
+		}
+	};
 }

@@ -1,6 +1,5 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import {
 	AggregateOptionsDto,
@@ -12,6 +11,7 @@ import { groupByLocation } from 'src/aggregate/group-by-location';
 import { groupByMonth } from 'src/aggregate/group-by-month';
 import { Action } from 'src/casl/action.enum';
 import { PaidStatus } from 'src/constants/paid-status.enum';
+import { ExpensesService } from 'src/expenses/expenses.service';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -24,7 +24,8 @@ export class AggregateService {
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
 		private readonly prisma: PrismaService,
-		private leaseInvoicesService: LeaseInvoicesService,
+		private readonly leaseInvoicesService: LeaseInvoicesService,
+		private readonly expensesService: ExpensesService,
 	) {}
 
 	async portfolioIncomeByMonth({
@@ -83,7 +84,7 @@ export class AggregateService {
 					{
 						organizationId,
 						portfolioId,
-						...this.parseLocationFilter(options),
+						...this.expensesService.parseLocationFilter(options),
 						postAt: { gte: options.start, lte: options.end },
 					},
 				],
@@ -368,40 +369,4 @@ export class AggregateService {
 
 		return sum;
 	}
-
-	// TODO use satisfies type
-	parseLocationFilter = (
-		filter: Pick<AggregateOptionsExpensesDto, 'propertyId' | 'unitId'>,
-	): Prisma.ExpenseWhereInput => {
-		if (filter.unitId) {
-			return {
-				// Get expenses associated with the unit
-				unitId: filter.unitId,
-			};
-		} else if (typeof filter.propertyId === 'string') {
-			return {
-				OR: [
-					// Get expenses associated with the property directly
-					{ propertyId: filter.propertyId },
-
-					// OR
-
-					// Get expenses associated with the property's units
-					{
-						unit: {
-							propertyId: filter.propertyId,
-						},
-					},
-				],
-			};
-		} else if (filter.propertyId === null) {
-			// Get expenses which are not associated with any property
-			return {
-				propertyId: null,
-				unitId: null,
-			};
-		} else {
-			return {};
-		}
-	};
 }
