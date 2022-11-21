@@ -157,6 +157,18 @@
 		}));
 	};
 
+	const refreshPagination = (p: PaginationState) => {
+		console.info('refreshPagination');
+		// $table.setPagination(p);
+		options.update((options) => ({
+			...options,
+			state: {
+				...options.state,
+				pagination: p,
+			},
+		}));
+	};
+
 	const table = createSvelteTable<T>(options);
 
 	$: {
@@ -167,6 +179,11 @@
 	$: {
 		// refresh pageCount when property filter changes
 		refreshPageCount(paginationDto.pageCount);
+	}
+
+	$: {
+		// refresh pagination when pressing back/forward
+		refreshPagination(createTablePaginationModel(paginationDto).pagination);
 	}
 
 	$: filters = [getColumnFilter($table)];
