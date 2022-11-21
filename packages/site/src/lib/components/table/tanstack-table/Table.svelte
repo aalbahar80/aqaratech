@@ -82,10 +82,9 @@
 
 	// Initiate pagination state
 
-	let { pagination, itemCount, pageCount } =
-		createTablePaginationModel(paginationDto);
+	let { pagination, pageCount } = createTablePaginationModel(paginationDto);
 
-	const setPagination: OnChangeFn<PaginationState> = (updater) => {
+	export const setPagination: OnChangeFn<PaginationState> = (updater) => {
 		// what is this doing?
 		if (updater instanceof Function) {
 			pagination = updater(pagination);
@@ -238,7 +237,7 @@
 			</table>
 		</div>
 		<slot name="pagination" table={$table}>
-			<Pagination table={$table} {itemCount} />
+			<Pagination table={$table} itemCount={paginationDto.itemCount} />
 		</slot>
 	</div>
 </div>
