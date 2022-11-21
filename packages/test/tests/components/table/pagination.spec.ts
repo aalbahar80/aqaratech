@@ -73,11 +73,9 @@ test('pagination is updated when changing property filter', async ({
 	await page.waitForNavigation();
 
 	// Change property filter
-	await table.property.selectOption(properties[0].id);
+	await table.property.selectOption(properties[1].id);
 
 	// Expect pagination to be reset
-	await expect(table.next).toBeEnabled();
-
 	await expect(table.prev).toBeDisabled();
 
 	await expect(table.range(1)).toHaveAttribute('aria-current', 'page');
