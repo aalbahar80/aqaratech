@@ -15,7 +15,6 @@ import HeroiconsUserGroup from '~icons/heroicons/user-group';
 
 // Links
 import { LOGOUT } from '$lib/constants/routes';
-import { settings } from '$lib/utils/route-helpers';
 import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
@@ -84,20 +83,22 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			},
 		);
 
+		const settings = getRoute({
+			entity: 'organization',
+			pageType: PageType.Id,
+			id: organizationId,
+			params: {},
+		});
+
 		tree.splice(-1, 0, {
 			name: 'Settings',
-			href: settings(user.role.organizationId).organization,
+			href: settings,
 			icon: HeroiconsOutlineCog8Tooth,
 			// path: '/settings/',
 			children: [
 				{
 					name: 'Organization',
-					href: getRoute({
-						entity: 'organization',
-						pageType: PageType.Id,
-						id: organizationId,
-						params: {},
-					}),
+					href: settings,
 				},
 				{
 					name: 'Expense Categories',
