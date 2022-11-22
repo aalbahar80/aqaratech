@@ -22,13 +22,15 @@ const test = base.extend({
 });
 
 test('delete button is disabled by default', async ({ page }) => {
-	const btn = page.locator(`data-testid=confirm`);
+	const modal = page.getByTestId('modal');
+	const btn = modal.getByRole('button', { name: 'Delete' });
 
 	await expect(btn).toBeDisabled();
 });
 
 test('delete button is not responsive', async ({ page }) => {
-	const btn = page.locator(`data-testid=confirm`);
+	const modal = page.getByTestId('modal');
+	const btn = modal.getByRole('button', { name: 'Delete' });
 
 	await btn.click({ force: true });
 
@@ -36,7 +38,7 @@ test('delete button is not responsive', async ({ page }) => {
 	await page.waitForLoadState('networkidle', { timeout: 2000 });
 
 	// test that the modal is still open
-	await expect(page.locator(`data-testid=confirm`)).toBeDisabled();
+	await expect(btn).toBeDisabled();
 });
 
 test('filling prompt with incorrect text does not enable button', async ({
@@ -49,7 +51,8 @@ test('filling prompt with incorrect text does not enable button', async ({
 
 	await input.fill('wrong');
 
-	const btn = page.locator(`data-testid=confirm`);
+	const modal = page.getByTestId('modal');
+	const btn = modal.getByRole('button', { name: 'Delete' });
 
 	await expect(btn).toBeDisabled();
 });
@@ -64,7 +67,8 @@ test('filling prompt with correct text enables button', async ({
 
 	await input.fill(org.organization.fullName);
 
-	const btn = page.locator(`data-testid=confirm`);
+	const modal = page.getByTestId('modal');
+	const btn = modal.getByRole('button', { name: 'Delete' });
 
 	await expect(btn).toBeEnabled();
 });
