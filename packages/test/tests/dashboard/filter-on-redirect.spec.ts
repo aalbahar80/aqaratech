@@ -49,7 +49,8 @@ test('filter is prepopulated on redirect - property TO expenses', async ({
 
 	await expect(filter).toHaveValue(property.id);
 
-	const label = await selectedLabel(filter);
+	expect(await selectedLabel(filter)).toBe(property.address);
+});
 
 	expect(label).toBe(property.address);
 });
