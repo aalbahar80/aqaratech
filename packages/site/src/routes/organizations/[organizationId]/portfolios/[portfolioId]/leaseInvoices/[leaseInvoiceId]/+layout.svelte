@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createApi } from '$api';
+	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
@@ -8,6 +9,7 @@
 	import LeaseInvoiceTabs from '$lib/components/leaseInvoice/LeaseInvoiceTabs.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
+	import { getRoute, PageTab } from '@self/utils';
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';
 	import HeroiconsEnvelope from '~icons/heroicons/envelope';
 	import type { LayoutData } from './$types';
@@ -17,7 +19,23 @@
 	$: badge = getInvoiceBadge(data.leaseInvoice);
 </script>
 
-<Heading title="Invoice" id={data.leaseInvoice.id} entity="leaseInvoice">
+<Heading
+	title="Invoice"
+	id={data.leaseInvoice.id}
+	entity="leaseInvoice"
+	onDelete={async (api) => {
+		await api.leaseInvoices.remove({ id: data.leaseInvoice.id });
+
+		const url = getRoute({
+			entity: 'lease',
+			id: data.leaseInvoice.leaseId,
+			pageType: PageTab.Invoices,
+			params: $page.params,
+		});
+
+		return url;
+	}}
+>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={data.leaseInvoice.breadcrumbs} />
 	</svelte:fragment>

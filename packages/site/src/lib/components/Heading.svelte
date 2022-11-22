@@ -51,8 +51,6 @@
 	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
-			<!-- TODO delete -->
-			<!-- <ModalDelete {id} {entity} {onDelete} {deletePrompt} /> -->
 			<Dropdown>
 				<div slot="beforeButton">
 					<a

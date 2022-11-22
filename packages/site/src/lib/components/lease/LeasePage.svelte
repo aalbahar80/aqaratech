@@ -6,7 +6,7 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
-	import { getRoute, PageType } from '@self/utils';
+	import { getRoute, PageTab, PageType } from '@self/utils';
 	import { formatDistance } from 'date-fns';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 	import HeroiconsArrowPath from '~icons/heroicons/arrow-path';
@@ -27,7 +27,24 @@
 	const badge = getLeaseBadge(lease);
 </script>
 
-<Heading title="Lease" id={lease.id} entity="lease" {icons}>
+<Heading
+	title="Lease"
+	id={lease.id}
+	entity="lease"
+	{icons}
+	onDelete={async (api) => {
+		await api.leases.remove({ id: lease.id });
+
+		const url = getRoute({
+			entity: 'unit',
+			id: lease.unitId,
+			pageType: PageTab.Leases,
+			params: $page.params,
+		});
+
+		return url;
+	}}
+>
 	<svelte:fragment slot="breadcrumbs">
 		<BreadCrumb crumbs={lease.breadcrumbs} />
 	</svelte:fragment>
