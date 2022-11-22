@@ -53,7 +53,9 @@
 			<button
 				on:click={() => {
 					// Prepare the store with the correct propertyId, then navigate
-					property.set($page.params['propertyId']);
+					property.set(
+						$page.params['propertyId'] ?? $page.data['unit']['propertyId'],
+					);
 					unit.set($page.params['unitId']);
 					void goto(links[title]);
 				}}

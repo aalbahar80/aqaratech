@@ -48,12 +48,6 @@
 						label: 'No units',
 					},
 			  ];
-
-	// Reset unit when property changes
-	$: {
-		$property;
-		$unit = undefined;
-	}
 </script>
 
 <Select

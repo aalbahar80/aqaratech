@@ -5,6 +5,7 @@
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 	import { property } from '$lib/stores/filter/property';
+	import { unit } from '$lib/stores/filter/unit';
 
 	export let items: PropertyDto[];
 
@@ -43,6 +44,13 @@
 	bind:current={$property}
 	{options}
 	on:select={async () => {
+		// Reset unit when switching properties
+		// We are specifically resetting the unit here, rather than resetting
+		// whenever $property changes, because the latter preserves the unit when
+		// redirecting from the unit.financials tab to the expenses page.
+
+		unit.set(undefined);
+
 		await invalidate(FilterEnum.Property);
 	}}
 />
