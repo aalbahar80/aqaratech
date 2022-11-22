@@ -38,11 +38,16 @@ export class RemoveModel {
 		const view = row.getByRole('link', { name: 'View' });
 		await view.click();
 
+		await this.page.waitForNavigation(); // Otherwise opening dropdown is flaky.
+
 		const menu = this.page.getByRole('button', { name: 'Open options' });
+		// avoid clicking before hydration
+		await expect(menu).toBeEnabled();
+
 		await menu.click();
 
 		const remove = this.page.getByRole('button', { name: 'Delete' });
-		await expect(remove).toBeVisible();
+		// await expect(remove).toBeVisible();
 		await remove.click();
 
 		const modal = this.page.getByTestId('modal');
