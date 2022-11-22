@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { createApi } from '$api';
+	import { handleApiError } from '$api/handle-api-error';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
-	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
+	import { addSuccessToast } from '$lib/stores/toast';
 	import {
 		fromHeirarchy,
 		toHeirarchy,

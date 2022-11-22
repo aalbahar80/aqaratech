@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createApi } from '$api';
+	import { handleApiError } from '$api/handle-api-error';
 	import type { PaginatedFileDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
@@ -8,7 +9,7 @@
 	import IconButton from '$lib/components/buttons/IconButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
+	import { addSuccessToast } from '$lib/stores/toast';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';

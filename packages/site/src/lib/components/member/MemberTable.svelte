@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createApi } from '$api';
+	import { handleApiError } from '$api/handle-api-error';
 	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -9,7 +10,7 @@
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { createModalDelete } from '$lib/components/toast/create-modal-delete';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
-	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
+	import { addSuccessToast } from '$lib/stores/toast';
 	import { getLabel, type Entity } from '@self/utils';
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
