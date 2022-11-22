@@ -33,80 +33,9 @@ export interface ExpensesApiUpdateRequest {
 }
 
 /**
- * ExpensesApi - interface
- *
- * @export
- * @interface ExpensesApiInterface
- */
-export interface ExpensesApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof ExpensesApiInterface
-	 */
-	findOneRaw(
-		requestParameters: ExpensesApiFindOneRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<ExpenseDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	findOne(
-		requestParameters: ExpensesApiFindOneRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<ExpenseDto>;
-
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof ExpensesApiInterface
-	 */
-	removeRaw(
-		requestParameters: ExpensesApiRemoveRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>>;
-
-	/**
-	 *
-	 *
-	 */
-	remove(
-		requestParameters: ExpensesApiRemoveRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string>;
-
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof ExpensesApiInterface
-	 */
-	updateRaw(
-		requestParameters: ExpensesApiUpdateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialExpenseDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	update(
-		requestParameters: ExpensesApiUpdateRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialExpenseDto>;
-}
-
-/**
  *
  */
-export class ExpensesApi
-	extends runtime.BaseAPI
-	implements ExpensesApiInterface
-{
+export class ExpensesApi extends runtime.BaseAPI {
 	/**
 	 *
 	 *

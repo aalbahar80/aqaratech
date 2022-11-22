@@ -15,53 +15,9 @@
 import * as runtime from '../runtime';
 
 /**
- * SearchApi - interface
- *
- * @export
- * @interface SearchApiInterface
- */
-export interface SearchApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof SearchApiInterface
-	 */
-	reindexAllRaw(
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<void>>;
-
-	/**
-	 *
-	 *
-	 */
-	reindexAll(
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<void>;
-
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof SearchApiInterface
-	 */
-	removeRaw(
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<Array<object>>>;
-
-	/**
-	 *
-	 *
-	 */
-	remove(
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<Array<object>>;
-}
-
-/**
  *
  */
-export class SearchApi extends runtime.BaseAPI implements SearchApiInterface {
+export class SearchApi extends runtime.BaseAPI {
 	/**
 	 *
 	 *

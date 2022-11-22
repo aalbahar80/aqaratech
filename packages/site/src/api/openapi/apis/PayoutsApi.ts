@@ -32,77 +32,9 @@ export interface PayoutsApiRemoveRequest {
 }
 
 /**
- * PayoutsApi - interface
- *
- * @export
- * @interface PayoutsApiInterface
- */
-export interface PayoutsApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof PayoutsApiInterface
-	 */
-	findAllRaw(
-		requestParameters: PayoutsApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PaginatedPayoutDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	findAll(
-		requestParameters: PayoutsApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PaginatedPayoutDto>;
-
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof PayoutsApiInterface
-	 */
-	findOneRaw(
-		requestParameters: PayoutsApiFindOneRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PayoutDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	findOne(
-		requestParameters: PayoutsApiFindOneRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PayoutDto>;
-
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof PayoutsApiInterface
-	 */
-	removeRaw(
-		requestParameters: PayoutsApiRemoveRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>>;
-
-	/**
-	 *
-	 *
-	 */
-	remove(
-		requestParameters: PayoutsApiRemoveRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string>;
-}
-
-/**
  *
  */
-export class PayoutsApi extends runtime.BaseAPI implements PayoutsApiInterface {
+export class PayoutsApi extends runtime.BaseAPI {
 	/**
 	 *
 	 *

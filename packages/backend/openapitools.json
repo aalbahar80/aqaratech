@@ -14,7 +14,6 @@
 				"additionalProperties": {
 					"supportsES6": true,
 					"nullSafeAdditionalProps": true,
-					"withInterfaces": true,
 					"prefixParameterInterfaces": true,
 					"disallowAdditionalPropertiesIfNotPresent": false,
 					"legacyDiscriminatorBehavior": false,

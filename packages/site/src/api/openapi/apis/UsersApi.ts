@@ -16,35 +16,9 @@ import * as runtime from '../runtime';
 import type { ValidatedUserDto } from '../models';
 
 /**
- * UsersApi - interface
- *
- * @export
- * @interface UsersApiInterface
- */
-export interface UsersApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof UsersApiInterface
-	 */
-	findProfileRaw(
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<ValidatedUserDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	findProfile(
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<ValidatedUserDto>;
-}
-
-/**
  *
  */
-export class UsersApi extends runtime.BaseAPI implements UsersApiInterface {
+export class UsersApi extends runtime.BaseAPI {
 	/**
 	 *
 	 *

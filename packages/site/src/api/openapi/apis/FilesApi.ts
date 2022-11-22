@@ -29,77 +29,9 @@ export interface FilesApiRemoveRequest {
 }
 
 /**
- * FilesApi - interface
- *
- * @export
- * @interface FilesApiInterface
- */
-export interface FilesApiInterface {
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof FilesApiInterface
-	 */
-	findAllRaw(
-		requestParameters: FilesApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PaginatedFileDto>>;
-
-	/**
-	 *
-	 *
-	 */
-	findAll(
-		requestParameters: FilesApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PaginatedFileDto>;
-
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof FilesApiInterface
-	 */
-	findOneRaw(
-		requestParameters: FilesApiFindOneRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>>;
-
-	/**
-	 *
-	 *
-	 */
-	findOne(
-		requestParameters: FilesApiFindOneRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string>;
-
-	/**
-	 *
-	 * @summary
-	 * @throws {RequiredError}
-	 * @memberof FilesApiInterface
-	 */
-	removeRaw(
-		requestParameters: FilesApiRemoveRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>>;
-
-	/**
-	 *
-	 *
-	 */
-	remove(
-		requestParameters: FilesApiRemoveRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string>;
-}
-
-/**
  *
  */
-export class FilesApi extends runtime.BaseAPI implements FilesApiInterface {
+export class FilesApi extends runtime.BaseAPI {
 	/**
 	 *
 	 *
