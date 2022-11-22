@@ -16,6 +16,17 @@
 	title={entitiesMap.portfolio.singularCap}
 	id={portfolio.id}
 	entity="portfolio"
+	onDelete={async (api) => {
+		await api.portfolios.remove({ id: portfolio.id });
+
+		const url = getRoute({
+			entity: 'portfolio',
+			pageType: PageType.List,
+			params: $page.params,
+		});
+
+		return url;
+	}}
 >
 	<div slot="menu-items">
 		<MenuItem as="div" let:active>

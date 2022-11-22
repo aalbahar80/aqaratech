@@ -6,14 +6,30 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyTabs from '$lib/components/property/PropertyTabs.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import { getRoute, PageType } from '@self/utils';
+	import { getRoute, PageTab, PageType } from '@self/utils';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
 </script>
 
-<Heading title="Property" id={data.property.id} entity="property">
+<Heading
+	title="Property"
+	id={data.property.id}
+	entity="property"
+	onDelete={async (api) => {
+		await api.properties.remove({ id: data.property.id });
+
+		const url = getRoute({
+			entity: 'portfolio',
+			id: data.property.portfolioId,
+			pageType: PageTab.Properties,
+			params: $page.params,
+		});
+
+		return url;
+	}}
+>
 	<div slot="menu-items">
 		<MenuItem as="div" let:active>
 			<a
