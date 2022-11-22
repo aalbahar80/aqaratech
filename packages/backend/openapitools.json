@@ -10,11 +10,9 @@
 				"inputSpec": "./openapi.yaml",
 				"output": "../site/src/api/openapi",
 				"removeOperationIdPrefix": true,
-				"skipValidateSpec": false,
 				"enablePostProcessFile": true,
 				"additionalProperties": {
 					"supportsES6": true,
-					"typescriptThreePlus": true,
 					"nullSafeAdditionalProps": true,
 					"withInterfaces": true,
 					"prefixParameterInterfaces": true,
