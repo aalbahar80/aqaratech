@@ -1,9 +1,8 @@
 import { expect } from '@playwright/test';
 import { computeLabelUnit, getRoute, PageTypePortfolio } from '@self/utils';
 import * as R from 'remeda';
-import { selectedLabel } from '../../utils/selected-label';
 import { test } from '../api/api-fixtures';
-import { Filter } from './filter-model';
+import { Filters } from './filter-model';
 
 test.use({
 	userRoleType: 'PORTFOLIO',
@@ -32,25 +31,25 @@ test('unit filter resets when updating property', async ({
 
 	await page.goto(url);
 
-	const filter = new Filter(page);
+	const filters = new Filters(page);
 
-	expect(await selectedLabel(filter.property)).toBe('All properties');
+	expect(await filters.property.label()).toBe('All properties');
 
 	// Select property
-	await filter.property.selectOption({ value: property.id });
+	await filters.property.el.selectOption({ value: property.id });
 
-	expect(await selectedLabel(filter.property)).toBe(property.address);
+	expect(await filters.property.label()).toBe(property.address);
 
 	// Select unit
-	await filter.unit.selectOption({ value: unit.id });
+	await filters.unit.el.selectOption({ value: unit.id });
 
-	expect(await selectedLabel(filter.unit)).toBe(computeLabelUnit(unit));
+	expect(await filters.unit.label()).toBe(computeLabelUnit(unit));
 
 	// Update property
-	await filter.property.selectOption({ value: properties[1]!.id });
+	await filters.property.el.selectOption({ value: properties[1]!.id });
 
-	expect(await selectedLabel(filter.property)).toBe(properties[1]!.address);
+	expect(await filters.property.label()).toBe(properties[1]!.address);
 
 	// Unit filter resets
-	expect(await selectedLabel(filter.unit)).toBe('All units');
+	expect(await filters.unit.label()).toBe('All units');
 });
