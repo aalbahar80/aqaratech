@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import type { PayoutDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import type { PayoutDto } from '$api/openapi';
-	import { entitiesMap } from '@self/utils';
+	import { getRoute, PageTypePortfolio } from '@self/utils';
 
 	export let payout: PayoutDto;
 </script>
@@ -13,8 +13,17 @@
 	id={payout.id}
 	entity="payout"
 	disallowEdit
-	onDelete={async () => {
-		await goto(`/${entitiesMap.portfolio.urlName}/${payout.portfolioId}`);
+	onDelete={async (api) => {
+		await api.payouts.remove({ id: payout.id });
+
+		const url = getRoute({
+			entity: 'portfolio',
+			id: payout.portfolioId,
+			pageType: PageTypePortfolio.Payouts,
+			params: $page.params,
+		});
+
+		return url;
 	}}
 >
 	<svelte:fragment slot="breadcrumbs">
