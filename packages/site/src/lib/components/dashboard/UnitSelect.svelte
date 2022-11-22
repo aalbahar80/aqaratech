@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
+	import { property } from '$lib/stores/filter/property';
 	import { unit } from '$lib/stores/filter/unit';
 
 	export let items: UnitDto[];
@@ -26,10 +27,12 @@
 		$page.url.pathname.includes(pathname),
 	);
 
-	$: unitOptions = items.map((unit) => ({
-		value: unit.id,
-		label: unit.title,
-	}));
+	$: unitOptions = items
+		.filter((unit) => unit.propertyId === $property)
+		.map((unit) => ({
+			value: unit.id,
+			label: unit.title,
+		}));
 
 	$: options = [
 		allUnitsOption,
