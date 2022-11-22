@@ -77,8 +77,9 @@
 				<div slot="menu">
 					<DropdownMenu>
 						<slot name="menu-items" />
-						<MenuItem as="div" let:active>
+						<MenuItem as="div" disabled={!onDelete} let:active let:disabled>
 							<button
+								{disabled}
 								on:click={() => {
 									openModal(
 										createModalDelete({
@@ -89,8 +90,8 @@
 								}}
 								class="w-full"
 							>
-								<MenuItemChild {active}>
-									<MenuItemIcon icon={Fa6SolidTrashCan} />
+								<MenuItemChild {active} {disabled}>
+									<MenuItemIcon icon={Fa6SolidTrashCan} {disabled} />
 									Delete
 								</MenuItemChild>
 							</button>
