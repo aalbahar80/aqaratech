@@ -28,7 +28,7 @@
 	export let icons: IconTooltip[] | undefined = undefined;
 	export let deletePrompt: string | undefined = undefined;
 	export let disallowEdit = false;
-	export let onDelete: OnDelete;
+	export let onDelete: OnDelete | undefined = undefined;
 </script>
 
 <div class="grid grid-cols-2 items-center justify-between gap-y-4">
@@ -81,6 +81,10 @@
 							<button
 								{disabled}
 								on:click={() => {
+									if (!onDelete) {
+										throw new Error('Delete not allowed');
+									}
+
 									openModal(
 										createModalDelete({
 											deletePrompt,
