@@ -6,7 +6,7 @@
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { toUTCFormat } from '$lib/utils/common';
+	import { toUTCFormat } from '@self/utils';
 	import { createColumnHelper } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 

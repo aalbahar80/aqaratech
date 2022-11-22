@@ -2,9 +2,9 @@
 	import type { LeaseInvoiceDto } from '$api/openapi';
 	import Badge from '$components/Badge.svelte';
 	import PayButton from '$lib/components/trx/PayButton.svelte';
-	import { kwdFormat, toUTCFormat } from '$lib/utils/common';
+	import { kwdFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import { entitiesMap } from '@self/utils';
+	import { entitiesMap, toUTCFormat } from '@self/utils';
 	import HeroiconsBanknotes from '~icons/heroicons/banknotes';
 	import HeroiconsCalendarDays from '~icons/heroicons/calendar-days';
 

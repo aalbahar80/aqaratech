@@ -16,8 +16,8 @@
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { addSuccessToast } from '$lib/stores/toast';
-	import { toUTCFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
+	import { toUTCFormat } from '@self/utils';
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	export let data: PaginatedLeaseInvoiceDto;

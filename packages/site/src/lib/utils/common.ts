@@ -1,5 +1,3 @@
-export { toUTCFormat } from '@self/utils';
-
 export const kwdFormat = (amount: number | null): string =>
 	amount?.toLocaleString('en-KW', {
 		style: 'currency',
