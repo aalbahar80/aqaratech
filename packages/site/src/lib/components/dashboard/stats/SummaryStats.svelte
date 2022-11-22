@@ -9,12 +9,13 @@
 	import { unit } from '$lib/stores/filter/unit';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
 	import { getRoute, PageTypePortfolio } from '@self/utils';
+	import * as R from 'remeda';
 
 	interface Datapoint extends GroupByMonthDto {
 		change?: number;
 	}
 
-	export let title: string;
+	export let title: 'Net' | 'Income' | 'Expenses';
 	export let data: Datapoint[];
 
 	const primary: Record<number, string | undefined> = {
@@ -23,7 +24,7 @@
 		2: undefined,
 	};
 
-	const links: Record<string, string> = {
+	const links = {
 		Income: getRoute({
 			entity: 'portfolio',
 			id: $page.params['portfolioId']!,
@@ -36,7 +37,7 @@
 			params: $page.params,
 			pageType: PageTypePortfolio.Expenses,
 		}),
-	};
+	} as const;
 
 	const colors: Record<string, string> = {
 		Net: 'text-gray-900',
@@ -49,14 +50,22 @@
 
 <Stats {title}>
 	<div slot="details">
-		{#if links[title]}
+		{#if title === 'Income' || title === 'Expenses'}
 			<button
 				on:click={() => {
+					// Redundant if condition for svelte only
+					if (title !== 'Income' && title !== 'Expenses') {
+						throw new Error('Unexpected title');
+					}
+
 					// Prepare the store with the correct propertyId, then navigate
 					property.set(
-						$page.params['propertyId'] ?? $page.data['unit']['propertyId'],
+						$page.params['propertyId'] ??
+							R.pathOr($page.data, ['unit', 'propertyId'], undefined),
 					);
+
 					unit.set($page.params['unitId']);
+
 					void goto(links[title]);
 				}}
 			>
