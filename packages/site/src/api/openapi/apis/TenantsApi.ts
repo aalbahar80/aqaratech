@@ -23,29 +23,29 @@ import type {
 } from '../models';
 
 export interface TenantsApiFindAllRequest {
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface TenantsApiFindInvoicesRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface TenantsApiFindLeasesRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface TenantsApiFindOneRequest {
@@ -54,11 +54,11 @@ export interface TenantsApiFindOneRequest {
 
 export interface TenantsApiFindRolesRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface TenantsApiRemoveRequest {

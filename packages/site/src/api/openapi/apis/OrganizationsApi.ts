@@ -105,11 +105,11 @@ export interface OrganizationsApiFindOneRequest {
 
 export interface OrganizationsApiFindRolesRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface OrganizationsApiRemoveRequest {

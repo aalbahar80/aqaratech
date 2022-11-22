@@ -16,11 +16,11 @@ import * as runtime from '../runtime';
 import type { PaginatedPayoutDto, PayoutDto } from '../models';
 
 export interface PayoutsApiFindAllRequest {
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface PayoutsApiFindOneRequest {

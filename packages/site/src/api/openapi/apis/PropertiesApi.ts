@@ -21,11 +21,11 @@ import type {
 } from '../models';
 
 export interface PropertiesApiFindAllRequest {
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface PropertiesApiFindOneRequest {
@@ -34,11 +34,11 @@ export interface PropertiesApiFindOneRequest {
 
 export interface PropertiesApiFindUnitsRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface PropertiesApiRemoveRequest {

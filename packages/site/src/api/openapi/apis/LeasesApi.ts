@@ -22,20 +22,20 @@ import type {
 } from '../models';
 
 export interface LeasesApiFindAllRequest {
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface LeasesApiFindInvoicesRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface LeasesApiFindOneRequest {

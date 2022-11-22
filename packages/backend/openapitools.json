@@ -6,6 +6,7 @@
 		"storageDir": ".",
 		"generators": {
 			"fetch-client": {
+				"templateDir": "./openapi-mustache",
 				"generatorName": "typescript-fetch",
 				"inputSpec": "./openapi.yaml",
 				"output": "../site/src/api/openapi",

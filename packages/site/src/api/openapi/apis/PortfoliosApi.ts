@@ -32,31 +32,31 @@ import type {
 } from '../models';
 
 export interface PortfoliosApiFindAllRequest {
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface PortfoliosApiFindAllExpensesRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
-	propertyId?: string | null;
-	unitId?: string | null;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
+	propertyId?: string | null | undefined;
+	unitId?: string | null | undefined;
 }
 
 export interface PortfoliosApiFindAllLeaseInvoicesRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface PortfoliosApiFindOneRequest {
@@ -65,38 +65,38 @@ export interface PortfoliosApiFindOneRequest {
 
 export interface PortfoliosApiFindPayoutsRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface PortfoliosApiFindPropertiesRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface PortfoliosApiFindRolesRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface PortfoliosApiFindUnitsRequest {
 	id: string;
-	page?: number;
-	skip?: number;
-	take?: number;
-	sort?: Array<string>;
-	filter?: object;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface PortfoliosApiGetBalanceRequest {
@@ -106,46 +106,46 @@ export interface PortfoliosApiGetBalanceRequest {
 export interface PortfoliosApiGetExpensesByCategoryRequest {
 	organizationId: string;
 	portfolioId: string;
-	start?: string;
-	end?: string;
-	propertyId?: string | null;
-	unitId?: string | null;
+	start?: string | undefined;
+	end?: string | undefined;
+	propertyId?: string | null | undefined;
+	unitId?: string | null | undefined;
 }
 
 export interface PortfoliosApiGetExpensesByLocationRequest {
 	organizationId: string;
 	portfolioId: string;
-	start?: string;
-	end?: string;
-	propertyId?: string | null;
-	unitId?: string | null;
+	start?: string | undefined;
+	end?: string | undefined;
+	propertyId?: string | null | undefined;
+	unitId?: string | null | undefined;
 }
 
 export interface PortfoliosApiGetExpensesByMonthRequest {
 	organizationId: string;
 	portfolioId: string;
-	start?: string;
-	end?: string;
-	propertyId?: string | null;
-	unitId?: string | null;
+	start?: string | undefined;
+	end?: string | undefined;
+	propertyId?: string | null | undefined;
+	unitId?: string | null | undefined;
 }
 
 export interface PortfoliosApiGetIncomeByMonthRequest {
 	organizationId: string;
 	portfolioId: string;
-	start?: string;
-	end?: string;
-	propertyId?: string;
-	unitId?: string;
+	start?: string | undefined;
+	end?: string | undefined;
+	propertyId?: string | undefined;
+	unitId?: string | undefined;
 }
 
 export interface PortfoliosApiGetOccupancyRequest {
 	organizationId: string;
 	portfolioId: string;
-	start?: string;
-	end?: string;
-	propertyId?: string;
-	unitId?: string;
+	start?: string | undefined;
+	end?: string | undefined;
+	propertyId?: string | undefined;
+	unitId?: string | undefined;
 }
 
 export interface PortfoliosApiRemoveRequest {
