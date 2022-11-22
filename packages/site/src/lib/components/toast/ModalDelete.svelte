@@ -15,17 +15,26 @@
 
 	const handleConfirm = async () => {
 		isLoading = true;
-		const plural = entitiesMap[entity].plural;
 		try {
 			if (
-				plural === 'maintenanceOrders' ||
-				plural === 'expense categories' ||
+				entity === 'maintenanceOrder' ||
+				entity === 'expenseCategory' ||
 				// file deletions are handled in `FileList.svelte`
-				plural === 'files'
+				entity === 'file'
 			) {
 				throw new Error(`Delete not supported for ${entity}`);
+			} else if (entity === 'role') {
+				const plural = entitiesMap[entity].plural;
+				const organizationId = $page.params.organizationId;
+				console.log({ organizationId }, 'ModalDelete.svelte ~ 30');
+				await createApi()[plural].remove({
+					id,
+					organizationId: $page.params['organizationId']!,
+				});
+			} else {
+				const plural = entitiesMap[entity].plural;
+				await createApi()[plural].remove({ id });
 			}
-			await createApi()[plural].remove({ id });
 			isLoading = false;
 			isOpen = false;
 			if (onDelete) {
