@@ -8,9 +8,16 @@ export const load: LayoutLoad = async ({ fetch, params }) => {
 
 	const properties = await api.portfolios.findProperties({
 		id: portfolioId,
+		take: 100,
+	});
+
+	const units = await api.portfolios.findUnits({
+		id: portfolioId,
+		take: 100,
 	});
 
 	return {
 		properties,
+		units,
 	};
 };
