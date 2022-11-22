@@ -1,9 +1,11 @@
 <script lang="ts">
 	import type { GroupByMonthDto } from '$api/openapi';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
+	import { property } from '$lib/stores/filter/property';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
 	import { getRoute, PageTypePortfolio } from '@self/utils';
 
@@ -26,20 +28,12 @@
 			id: $page.params['portfolioId']!,
 			params: $page.params,
 			pageType: PageTypePortfolio.Income,
-			predefined: {
-				propertyId: $page.params['propertyId'],
-				unitId: $page.params['unitId'],
-			},
 		}),
 		Expenses: getRoute({
 			entity: 'portfolio',
 			id: $page.params['portfolioId']!,
 			params: $page.params,
 			pageType: PageTypePortfolio.Expenses,
-			predefined: {
-				propertyId: $page.params['propertyId'],
-				unitId: $page.params['unitId'],
-			},
 		}),
 	};
 
@@ -55,13 +49,19 @@
 <Stats {title}>
 	<div slot="details">
 		{#if links[title]}
-			<a href={links[title]}>
+			<button
+				on:click={() => {
+					// Prepare the store with the correct propertyId, then navigate
+					property.set($page.params['propertyId']);
+					void goto(links[title]);
+				}}
+			>
 				<TextButton
 					>Details
 					<!-- arrow-right  -->
 					&nbsp;&rarr;
 				</TextButton>
-			</a>
+			</button>
 		{/if}
 	</div>
 
