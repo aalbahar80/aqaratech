@@ -2,6 +2,7 @@ import { createApi } from '$api';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { property } from '$lib/stores/filter/property';
 import { range } from '$lib/stores/filter/range';
+import { unit } from '$lib/stores/filter/unit';
 import { get } from 'svelte/store';
 import type { LayoutLoad } from './$types';
 
@@ -9,7 +10,8 @@ export const load: LayoutLoad = async ({ fetch, params, depends }) => {
 	// Filter options
 	const { start, end } = get(range);
 	const propertyId = get(property);
-	depends(FilterEnum.Range, FilterEnum.Property);
+	const unitId = get(unit);
+	depends(FilterEnum.Range, FilterEnum.Property, FilterEnum.Unit);
 
 	const { organizationId } = params;
 
@@ -19,6 +21,7 @@ export const load: LayoutLoad = async ({ fetch, params, depends }) => {
 		organizationId,
 		portfolioId: params.portfolioId,
 		propertyId,
+		unitId,
 		start,
 		end,
 	});

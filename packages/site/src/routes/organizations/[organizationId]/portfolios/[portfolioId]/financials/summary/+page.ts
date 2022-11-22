@@ -3,6 +3,7 @@ import { calculateNet } from '$lib/components/dashboard/stats/calculate-net';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { property } from '$lib/stores/filter/property';
 import { range } from '$lib/stores/filter/range';
+import { unit } from '$lib/stores/filter/unit';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
@@ -10,7 +11,8 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 	// Filter options
 	const { start, end } = get(range);
 	const propertyId = get(property);
-	depends(FilterEnum.Range, FilterEnum.Property);
+	const unitId = get(unit);
+	depends(FilterEnum.Range, FilterEnum.Property, FilterEnum.Unit);
 
 	const api = createApi(fetch);
 
@@ -22,29 +24,19 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 			portfolioId,
 			start,
 			end,
-
 			// When getting incomeByMonth, we don't want to differentiate between
 			// (a) `undefined` propertyId and (b) `null` propertyId
-			// propertyId: propertyId === null ? undefined : propertyId,
-			...(propertyId === null || propertyId === undefined
-				? {}
-				: {
-						propertyId,
-				  }),
+			propertyId: propertyId === null ? undefined : propertyId,
+			unitId: unitId === null ? undefined : unitId,
 		}),
 
 		api.portfolios.getExpensesByMonth({
 			organizationId,
 			portfolioId,
+			propertyId,
+			unitId,
 			start,
 			end,
-
-			// omit propertyId if it's undefined because of `ExactOptionalPropertyTypes`
-			...(propertyId === undefined
-				? {}
-				: {
-						propertyId,
-				  }),
 		}),
 	]);
 

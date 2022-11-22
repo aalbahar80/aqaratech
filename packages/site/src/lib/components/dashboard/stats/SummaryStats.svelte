@@ -6,6 +6,7 @@
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
 	import { property } from '$lib/stores/filter/property';
+	import { unit } from '$lib/stores/filter/unit';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
 	import { getRoute, PageTypePortfolio } from '@self/utils';
 
@@ -53,6 +54,7 @@
 				on:click={() => {
 					// Prepare the store with the correct propertyId, then navigate
 					property.set($page.params['propertyId']);
+					unit.set($page.params['unitId']);
 					void goto(links[title]);
 				}}
 			>
