@@ -7,12 +7,7 @@ test.use({
 	portfoliosParams: R.times(3, () => ({})),
 });
 
-test('unit filter resets when updating property', async ({
-	page,
-	org,
-	portfolio,
-	portfolios,
-}) => {
+test('delete portfolio', async ({ page, org, portfolio, portfolios }) => {
 	const params = {
 		organizationId: org.organization.id,
 	};
