@@ -5,9 +5,8 @@
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import ModalDelete, {
-		openModal,
-	} from '$lib/components/toast/ModalDelete.svelte';
+	import { openModal } from '$lib/components/toast/Modal.svelte';
+	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
 	import { classes } from '$lib/utils/classes';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { getRoute, PageType, type Entity } from '@self/utils';

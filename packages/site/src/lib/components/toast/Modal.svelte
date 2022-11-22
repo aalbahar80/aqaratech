@@ -1,3 +1,19 @@
+<script lang="ts" context="module">
+	import { writable } from 'svelte/store';
+
+	const isOpen = writable(false);
+
+	export const closeModal = () => {
+		console.log('Closing modal'); // TODO rm
+		isOpen.set(false);
+	};
+
+	export const openModal = () => {
+		console.log('Opening modal'); // TODO rm
+		isOpen.set(true);
+	};
+</script>
+
 <script lang="ts">
 	import Spinner from '$components/Spinner.svelte';
 	import {
@@ -10,7 +26,6 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import HeroiconsExclamationTriangle from '~icons/heroicons/exclamation-triangle';
 
-	export let isOpen: boolean;
 	export let isLoading: boolean;
 	export let handleConfirm: () => Promise<void>;
 	export let title: string;
@@ -18,14 +33,10 @@
 	export let deletePrompt = '';
 
 	let promptInput = '';
-
-	const handleClose = () => {
-		isOpen = false;
-	};
 </script>
 
-<Transition show={isOpen}>
-	<Dialog on:close={handleClose} class="fixed inset-0 z-10 overflow-y-auto">
+<Transition show={$isOpen}>
+	<Dialog on:close={closeModal} class="fixed inset-0 z-10 overflow-y-auto">
 		<div
 			class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0"
 		>
@@ -110,7 +121,7 @@
 						<button
 							type="button"
 							class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-							on:click={handleClose}
+							on:click={closeModal}
 						>
 							Cancel
 						</button>
