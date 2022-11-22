@@ -11,7 +11,7 @@ export const createModalDelete = ({
 	deletePrompt,
 	onDelete,
 }: {
-	deletePrompt?: string;
+	deletePrompt?: string | undefined;
 	onDelete: (api: Api) => Promise<string>;
 }): ModalContent => {
 	return {

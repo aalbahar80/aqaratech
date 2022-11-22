@@ -1,15 +1,13 @@
 <script lang="ts">
-	import { createApi, type Api } from '$api';
-	import { handleApiError } from '$api/handle-api-error';
-	import { goto } from '$app/navigation';
+	import type { Api } from '$api';
 	import { page } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
+	import { createModalDelete } from '$lib/components/toast/create-modal-delete';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
-	import { addSuccessToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils/classes';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { getRoute, PageType, type Entity } from '@self/utils';
@@ -87,21 +85,12 @@
 						<MenuItem as="div" let:active>
 							<button
 								on:click={() => {
-									openModal({
-										title: 'Delete',
-										description: 'Are you sure?',
-										deletePrompt: deletePrompt ?? '',
-										onConfirm: async () => {
-											try {
-												const url = await onDelete(createApi());
-												addSuccessToast();
-
-												void goto(url);
-											} catch (error) {
-												await handleApiError(error);
-											}
-										},
-									});
+									openModal(
+										createModalDelete({
+											deletePrompt,
+											onDelete,
+										}),
+									);
 								}}
 								class="w-full"
 							>
