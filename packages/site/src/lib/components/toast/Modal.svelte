@@ -27,6 +27,7 @@
 		DialogTitle,
 	} from '@rgossiaux/svelte-headlessui';
 	import HeroiconsExclamationTriangle from '~icons/heroicons/exclamation-triangle';
+	import { fade } from 'svelte/transition';
 
 	let promptInput = '';
 	let isLoading = false;
@@ -48,10 +49,11 @@
 		open
 		static
 		on:close={closeModal}
-		class="fixed inset-0 z-10 overflow-y-auto"
+		class="fixed inset-0 z-50 overflow-y-auto"
 	>
 		<div
 			class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0"
+			transition:fade={{ duration: 100 }}
 		>
 			<DialogOverlay
 				class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
