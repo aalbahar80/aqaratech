@@ -10,6 +10,7 @@ import type {
 	LeaseFactoryParams,
 	LeaseInvoiceFactoryParams,
 	PayoutFactoryParams,
+	PortfolioFactoryParams,
 	PropertyFactoryParams,
 	RoleFactoryParams,
 	TenantFactoryParams,
@@ -41,6 +42,7 @@ export interface TestFixtures {
 	tenant: TenantDto;
 	tenants: [TenantDto, ...TenantDto[]];
 	portfolio: PortfolioDto;
+	portfolios: [PortfolioDto, ...PortfolioDto[]];
 	property: PropertyDto;
 	properties: [PropertyDto, ...PropertyDto[]];
 	unit: UnitDto;
@@ -63,6 +65,7 @@ export interface TestOptions {
 	roleParams: RoleFactoryParams | undefined;
 
 	tenantsParams: TenantFactoryParams[] | undefined;
+	portfoliosParams: PortfolioFactoryParams[] | undefined;
 	propertiesParams: PropertyFactoryParams[] | undefined;
 	unitsParams: UnitFactoryParams[] | undefined;
 	leasesParams: LeaseFactoryParams[] | undefined;

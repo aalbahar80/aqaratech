@@ -10,6 +10,7 @@ import { expenseFixtures } from './fixtures/expense.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
 import { leaseFixtures } from './fixtures/lease.fixture';
 import { payoutFixtures } from './fixtures/payout.fixture';
+import { portfolioFixtures } from './fixtures/portfolio.fixture';
 import { propertyFixtures } from './fixtures/property.fixture';
 import { roleFixtures } from './fixtures/role.fixture';
 import { scopedRequestFixtures } from './fixtures/scoped-request.fixture';
@@ -146,6 +147,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 	...scopedRequestFixtures,
 	...tenantFixtures,
+	...portfolioFixtures,
 	...leaseFixtures,
 	...propertyFixtures,
 	...unitFixtures,

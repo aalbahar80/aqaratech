@@ -25,3 +25,12 @@ export const portfolioFactory = Factory.Sync.makeFactoryWithRequired<
 
 	phone: Factory.each(() => faker.phone.number('9#######')),
 });
+
+export const portfolioPartialFactory = () =>
+	portfolioFactory.build({
+		organizationId: '',
+	});
+
+export type PortfolioFactoryParams = Partial<
+	Parameters<typeof portfolioFactory.build>[0]
+>;
