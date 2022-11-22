@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { createApi, type Api } from '$api';
+	import { handleApiError } from '$api/handle-api-error';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
@@ -6,7 +9,7 @@
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
-	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
+	import { addSuccessToast } from '$lib/stores/toast';
 	import { classes } from '$lib/utils/classes';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { getRoute, PageType, type Entity } from '@self/utils';
@@ -23,9 +26,14 @@
 	export let id: string;
 	export let entity: Entity;
 	export let icons: IconTooltip[] | undefined = undefined;
-	export let onDelete: (() => void) | undefined = undefined;
 	export let deletePrompt: string | undefined = undefined;
 	export let disallowEdit = false;
+	/**
+	 * A function that is called when the delete button is clicked.
+	 *
+	 * It should return a string of the redirect URL.
+	 */
+	export let onDelete: (api: Api) => Promise<string>;
 </script>
 
 <div class="grid grid-cols-2 items-center justify-between gap-y-4">
@@ -48,7 +56,8 @@
 	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
-			<ModalDelete {id} {entity} {onDelete} {deletePrompt} />
+			<!-- TODO delete -->
+			<!-- <ModalDelete {id} {entity} {onDelete} {deletePrompt} /> -->
 			<Dropdown>
 				<div slot="beforeButton">
 					<a
@@ -83,8 +92,14 @@
 										description: 'Are you sure?',
 										deletePrompt: deletePrompt ?? '',
 										onConfirm: async () => {
-											console.log('delete');
-											// add from ModalDelete
+											try {
+												const url = await onDelete(createApi());
+												addSuccessToast();
+
+												void goto(url);
+											} catch (error) {
+												await handleApiError(error);
+											}
 										},
 									});
 								}}

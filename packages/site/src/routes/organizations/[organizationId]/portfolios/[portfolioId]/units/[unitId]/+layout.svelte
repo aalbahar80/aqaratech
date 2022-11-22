@@ -6,7 +6,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
-	import { getRoute, PageType } from '@self/utils';
+	import { getRoute, PageTab, PageType } from '@self/utils';
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidStairs from '~icons/fa6-solid/stairs';
@@ -43,7 +43,24 @@
 	];
 </script>
 
-<Heading title="Unit" id={data.unit.id} entity="unit" {icons}>
+<Heading
+	title="Unit"
+	id={data.unit.id}
+	entity="unit"
+	{icons}
+	onDelete={async (api) => {
+		await api.units.remove({ id: data.unit.id });
+
+		const url = getRoute({
+			entity: 'property',
+			id: data.unit.propertyId,
+			pageType: PageTab.Units,
+			params: $page.params,
+		});
+
+		return url;
+	}}
+>
 	<div slot="menu-items">
 		<MenuItem as="div" let:active>
 			<a
