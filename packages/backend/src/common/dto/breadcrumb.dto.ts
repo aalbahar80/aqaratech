@@ -1,5 +1,5 @@
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
-import { getAddress, computeLabelUnit } from '@self/utils';
+import { computeLabelProperty, computeLabelUnit } from '@self/utils';
 import { Rel } from 'src/constants/rel.enum';
 
 export interface IBreadcrumbs {
@@ -78,7 +78,7 @@ export class BreadcrumbDto {
 		} else if (rel === Rel.Portfolio) {
 			this.label = labelParams.label ?? labelParams.fullName;
 		} else if (rel === Rel.Property) {
-			this.label = labelParams.label ?? getAddress(labelParams);
+			this.label = labelParams.label ?? computeLabelProperty(labelParams);
 		} else if (rel === Rel.Unit) {
 			this.label = labelParams.label ?? computeLabelUnit(labelParams);
 		} else if (rel === Rel.Lease) {

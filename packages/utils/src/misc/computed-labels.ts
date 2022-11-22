@@ -1,4 +1,4 @@
-export const getAddress = (property: {
+export const computeLabelProperty = (property: {
 	area: string | null;
 	block: string | null;
 	number: string | null;

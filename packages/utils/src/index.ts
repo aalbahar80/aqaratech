@@ -39,7 +39,7 @@ export {
 	isHttpLog,
 	onlyHttp,
 } from './logger';
-export { getAddress, computeLabelUnit } from './misc/computed-labels';
+export { computeLabelProperty, computeLabelUnit } from './misc/computed-labels';
 export { PageTypePortfolio } from './route-helpers/enums/page-tab-portfolio.enum';
 export { PageTab } from './route-helpers/enums/page-tab.enum';
 export { PageType } from './route-helpers/enums/page-type.enum';
