@@ -13,6 +13,9 @@ module.exports = {
 
 		// Playwright fixtures can be unused
 		'@typescript-eslint/no-unused-vars': 'off',
+
+		// necessary for fixture arrays
+		'@typescript-eslint/no-non-null-assertion': 'off',
 	},
 	globals: {
 		$: 'readonly',

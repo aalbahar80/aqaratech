@@ -8,19 +8,20 @@ import type { AllFixtures } from './test-fixtures.interface';
 export const unitFixtures: AllFixtures = {
 	unitsParams: [undefined, { option: true }],
 
-	units: async ({ org, property, request, unitsParams }, use) => {
+	units: async ({ org, properties, request, unitsParams }, use) => {
 		const params = unitsParams ?? [{}];
 
 		// Merge any declared params with the default params
 
-		const units = R.times(params.length, (n) =>
-			unitFactory.build({
+		const units = R.times(params.length, (n) => {
+			const property = properties[n % properties.length]!;
+			return unitFactory.build({
 				organizationId: org.organization.id,
 				portfolioId: property.portfolioId,
 				propertyId: property.id,
 				...params[n],
-			}),
-		);
+			});
+		});
 
 		// Insert units
 
