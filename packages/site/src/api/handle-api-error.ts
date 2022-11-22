@@ -1,12 +1,12 @@
 import { ResponseError } from '$api/openapi';
 import { parseApiError } from '$api/parse-api-error';
-import toast from 'svelte-french-toast';
+import { addErrorToast } from '$lib/stores/toast';
 
 /**
  * Attempts to parse a `ResponseError` into a toast message.
  */
 export const handleApiError = async (error: unknown) => {
-	let message = '';
+	let message = undefined;
 
 	console.error(error);
 
@@ -18,5 +18,5 @@ export const handleApiError = async (error: unknown) => {
 		console.error(data);
 	}
 
-	toast.error(message);
+	addErrorToast(message);
 };

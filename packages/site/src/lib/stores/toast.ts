@@ -5,8 +5,8 @@ export const addSuccessToast = (subtitle = 'Success') => {
 	toast.success(subtitle);
 };
 
-export const addErrorToast = (subtitle = 'Error') => {
-	toast.error(subtitle);
+export const addErrorToast = (subtitle?: string | undefined) => {
+	toast.error(subtitle ?? 'Error');
 };
 
 export const addToast = (options: ToastItem) => {
