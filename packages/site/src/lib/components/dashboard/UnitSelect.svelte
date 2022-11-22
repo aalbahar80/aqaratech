@@ -44,6 +44,7 @@
 <Select
 	title="Unit"
 	bind:current={$unit}
+	disabled={!$property}
 	{options}
 	on:select={async () => {
 		await invalidate(FilterEnum.Unit);
