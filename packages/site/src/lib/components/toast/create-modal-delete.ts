@@ -12,7 +12,7 @@ export const createModalDelete = ({
 	onDelete,
 }: {
 	deletePrompt?: string | undefined;
-	onDelete: (api: Api) => Promise<string>;
+	onDelete: OnDelete;
 }): ModalContent => {
 	return {
 		title: 'Delete',
@@ -22,10 +22,19 @@ export const createModalDelete = ({
 			try {
 				const url = await onDelete(createApi());
 				addSuccessToast();
-				void goto(url);
+				if (url) {
+					void goto(url);
+				}
 			} catch (error) {
 				await handleApiError(error);
 			}
 		},
 	};
 };
+
+/**
+ * A function that is called when the delete button is clicked.
+ *
+ * It can return a URL to redirect to.
+ */
+export type OnDelete = (api: Api) => Promise<string> | Promise<void>;

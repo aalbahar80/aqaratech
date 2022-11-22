@@ -2,10 +2,13 @@
 	import { createApi } from '$api';
 	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
 	import { invalidateAll } from '$app/navigation';
+	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { createModalDelete } from '$lib/components/toast/create-modal-delete';
+	import { openModal } from '$lib/components/toast/Modal.svelte';
 	import { addSuccessToast, handleApiError } from '$lib/stores/toast';
 	import { getLabel, type Entity } from '@self/utils';
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
@@ -30,20 +33,19 @@
 				return renderComponent(ActionButton, {
 					options: {
 						label: 'Remove',
-						onClick: async () => {
-							try {
-								await createApi().roles.remove({
-									id: role.id,
-								});
+						onClick: () => {
+							openModal(
+								createModalDelete({
+									onDelete: async (api) => {
+										await api.roles.remove({
+											id: role.id,
+											organizationId: $page.params.organizationId!,
+										});
 
-								addSuccessToast(`${role.email} has been removed`);
-
-								await invalidateAll();
-							} catch (e) {
-								console.error(e);
-
-								await handleApiError(e);
-							}
+										return;
+									},
+								}),
+							);
 						},
 					},
 				});

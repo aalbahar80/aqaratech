@@ -1,12 +1,14 @@
 <script lang="ts">
-	import type { Api } from '$api';
 	import { page } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import { createModalDelete } from '$lib/components/toast/create-modal-delete';
+	import {
+		createModalDelete,
+		type OnDelete,
+	} from '$lib/components/toast/create-modal-delete';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
 	import { classes } from '$lib/utils/classes';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
@@ -26,12 +28,7 @@
 	export let icons: IconTooltip[] | undefined = undefined;
 	export let deletePrompt: string | undefined = undefined;
 	export let disallowEdit = false;
-	/**
-	 * A function that is called when the delete button is clicked.
-	 *
-	 * It should return a string of the redirect URL.
-	 */
-	export let onDelete: (api: Api) => Promise<string>;
+	export let onDelete: OnDelete;
 </script>
 
 <div class="grid grid-cols-2 items-center justify-between gap-y-4">
