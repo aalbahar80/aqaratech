@@ -30,7 +30,6 @@
 		"zod": "3.19.0"
 	},
 	"devDependencies": {
-		"@babel/preset-typescript": "7.18.6",
 		"@logtail/types": "0.1.12",
 		"@sentry/types": "7.20.1",
 		"@types/node": "18.11.9",
