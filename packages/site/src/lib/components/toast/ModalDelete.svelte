@@ -5,7 +5,6 @@
 	import { closeModal } from '$lib/components/toast/Modal.svelte';
 	import { addToast } from '$lib/stores/toast';
 	import { entitiesMap, type Entity } from '@self/utils';
-	import Modal from './Modal.svelte';
 
 	export let id: string;
 	export let entity: Entity;
@@ -64,11 +63,3 @@
 		}
 	};
 </script>
-
-<Modal
-	bind:isLoading
-	{handleConfirm}
-	title="Delete"
-	description="Are you sure?"
-	{deletePrompt}
-/>

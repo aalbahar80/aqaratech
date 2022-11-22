@@ -5,6 +5,7 @@
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
+	import Modal from '$lib/components/toast/Modal.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import { getSentryUser } from '$lib/utils/sentry/common';
@@ -69,6 +70,14 @@
 	<PreloadingIndicator />
 {/if}
 <Toaster />
+
+<Modal
+	handleConfirm={() => {}}
+	title="Delete"
+	description="Are you sure?"
+	deletePrompt={() => {}}
+/>
+
 <SecondaryNavbar />
 {#if $page.url.pathname === '/'}
 	<slot />
