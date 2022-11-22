@@ -24,7 +24,7 @@
 	export let entity: Entity;
 	export let icons: IconTooltip[] | undefined = undefined;
 	export let onDelete: (() => void) | undefined = undefined;
-	export let deletePrompt = '';
+	export let deletePrompt: string | undefined = undefined;
 	export let disallowEdit = false;
 </script>
 
@@ -76,7 +76,20 @@
 					<DropdownMenu>
 						<slot name="menu-items" />
 						<MenuItem as="div" let:active>
-							<button on:click={openModal} class="w-full">
+							<button
+								on:click={() => {
+									openModal({
+										title: 'Delete',
+										description: 'Are you sure?',
+										deletePrompt: deletePrompt ?? '',
+										onConfirm: async () => {
+											console.log('delete');
+											// add from ModalDelete
+										},
+									});
+								}}
+								class="w-full"
+							>
 								<MenuItemChild {active}>
 									<MenuItemIcon icon={Fa6SolidTrashCan} />
 									Delete

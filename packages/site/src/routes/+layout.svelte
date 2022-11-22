@@ -70,13 +70,7 @@
 	<PreloadingIndicator />
 {/if}
 <Toaster />
-
-<Modal
-	handleConfirm={() => {}}
-	title="Delete"
-	description="Are you sure?"
-	deletePrompt={() => {}}
-/>
+<Modal />
 
 <SecondaryNavbar />
 {#if $page.url.pathname === '/'}
