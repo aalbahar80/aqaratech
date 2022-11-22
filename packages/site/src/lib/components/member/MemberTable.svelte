@@ -42,6 +42,8 @@
 											organizationId: $page.params.organizationId!,
 										});
 
+										await invalidateAll();
+
 										return;
 									},
 								}),
