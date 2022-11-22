@@ -6,7 +6,7 @@
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 	import { property } from '$lib/stores/filter/property';
 
-	export let properties: PropertyDto[];
+	export let items: PropertyDto[];
 
 	const allPropertiesOption = {
 		value: undefined,
@@ -26,7 +26,7 @@
 		$page.url.pathname.includes(pathname),
 	);
 
-	$: propertyOptions = properties.map((property) => ({
+	$: propertyOptions = items.map((property) => ({
 		value: property.id,
 		label: property.title,
 	}));

@@ -6,7 +6,7 @@
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 	import { unit } from '$lib/stores/filter/unit';
 
-	export let units: UnitDto[];
+	export let items: UnitDto[];
 
 	const allUnitsOption = {
 		value: undefined,
@@ -26,7 +26,7 @@
 		$page.url.pathname.includes(pathname),
 	);
 
-	$: unitOptions = units.map((unit) => ({
+	$: unitOptions = items.map((unit) => ({
 		value: unit.id,
 		label: unit.title,
 	}));
