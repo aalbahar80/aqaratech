@@ -1,14 +1,8 @@
 <script lang="ts" context="module">
+	import type { ModalContent } from '$lib/components/toast/modal-content';
 	import { writable } from 'svelte/store';
 
 	// Example from: https://github.com/ivanhofer/sveltekit-typescript-showcase/blob/b334e865894ac9d7c3673168e0ee6d3f7f1806e3/src/01-props/09-svelte-component/Component.svelte#L26
-
-	interface ModalContent {
-		title: string;
-		description: string;
-		onConfirm: () => Promise<void>;
-		deletePrompt: string;
-	}
 
 	/**
 	 * A store that holds the content of the modal. Set the modal to `undefined` to close it.
