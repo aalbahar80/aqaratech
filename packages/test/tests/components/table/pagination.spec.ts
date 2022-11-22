@@ -62,8 +62,6 @@ test('table pagination smoke test', async ({ page }) => {
 
 test('pagination is updated when changing property filter', async ({
 	page,
-	org,
-	portfolio,
 	properties,
 	expenses: _expenses,
 }) => {
@@ -76,7 +74,7 @@ test('pagination is updated when changing property filter', async ({
 	await page.waitForNavigation();
 
 	// Change property filter
-	await table.property.selectOption(properties[1].id);
+	await table.property.selectOption(properties[1]!.id);
 
 	// Expect pagination to be reset
 	await expect(table.prev).toBeDisabled();
