@@ -34,11 +34,20 @@
 			label: unit.title,
 		}));
 
-	$: options = [
-		allUnitsOption,
-		...(showUnspecifiedUnitOption ? [unspecifedUnitOption] : []),
-		...unitOptions,
-	];
+	$: options =
+		unitOptions.length > 0
+			? [
+					allUnitsOption,
+					...(showUnspecifiedUnitOption ? [unspecifedUnitOption] : []),
+					...unitOptions,
+			  ]
+			: // If no units, display a single option 'No units'
+			  [
+					{
+						value: undefined,
+						label: 'No units',
+					},
+			  ];
 
 	// Reset unit when property changes
 	$: {
@@ -50,7 +59,7 @@
 <Select
 	title="Unit"
 	bind:current={$unit}
-	disabled={!$property}
+	disabled={!$property || options.length === 1}
 	{options}
 	on:select={async () => {
 		await invalidate(FilterEnum.Unit);
