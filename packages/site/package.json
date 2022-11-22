@@ -51,7 +51,7 @@
 		"d3": "7.6.1",
 		"date-fns": "2.29.3",
 		"debounce": "1.2.1",
-		"eslint-config-custom": "workspace:1.1.0",
+		"eslint-config-custom": "workspace:*",
 		"eslint-plugin-svelte": "2.13.0",
 		"felte": "1.2.6",
 		"frappe-charts": "1.6.2",

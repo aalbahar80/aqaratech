@@ -97,7 +97,7 @@
 		"@types/node": "18.11.9",
 		"@types/passport-jwt": "3.0.7",
 		"@types/supertest": "2.0.12",
-		"eslint-config-custom": "workspace:1.1.0",
+		"eslint-config-custom": "workspace:*",
 		"jest": "29.2.2",
 		"js-yaml": "4.1.0",
 		"source-map-support": "0.5.21",
