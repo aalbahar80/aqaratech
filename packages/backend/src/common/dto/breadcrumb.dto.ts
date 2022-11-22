@@ -1,6 +1,6 @@
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
+import { getAddress, getUnitLabel } from '@self/utils';
 import { Rel } from 'src/constants/rel.enum';
-import { getAddress, getUnitLabel } from 'src/utils/address';
 
 export interface IBreadcrumbs {
 	tenant: TenantLabelParams;

@@ -1,5 +1,10 @@
 import { expect } from '@playwright/test';
-import { getRoute, PageTab, PageTypePortfolio } from '@self/utils';
+import {
+	getRoute,
+	getUnitLabel,
+	PageTab,
+	PageTypePortfolio,
+} from '@self/utils';
 import * as R from 'remeda';
 import { selectedLabel } from '../../utils/selected-label';
 import { test } from '../api/api-fixtures';
@@ -132,7 +137,7 @@ test('filter is prepopulated on redirect - unit TO expenses', async ({
 
 	await expect(filter).toHaveValue(unit.id);
 
-	expect(await selectedLabel(filter)).toBe(unit.title);
+	expect(await selectedLabel(filter)).toBe(getUnitLabel(unit));
 });
 
 test('filter is prepopulated on redirect - unit TO income', async ({
@@ -174,5 +179,5 @@ test('filter is prepopulated on redirect - unit TO income', async ({
 
 	await expect(filter).toHaveValue(unit.id);
 
-	expect(await selectedLabel(filter)).toBe(unit.title);
+	expect(await selectedLabel(filter)).toBe(getUnitLabel(unit));
 });

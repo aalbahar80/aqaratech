@@ -7,7 +7,7 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
-import { UnitCreateSchema, UnitUpdateSchema } from '@self/utils';
+import { getUnitLabel, UnitCreateSchema, UnitUpdateSchema } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { formatDistance } from 'date-fns';
@@ -21,7 +21,6 @@ import { Rel } from 'src/constants/rel.enum';
 import { IsID } from 'src/decorators/field.decorators';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 import { Exactly } from 'src/types/exactly.type';
-import { getUnitLabel } from 'src/utils/address';
 
 class UnitRequiredDto {
 	@IsID()

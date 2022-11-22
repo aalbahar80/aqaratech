@@ -1,5 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
+import { getUnitLabel } from '@self/utils';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import {
 	AggregateOptionsDto,
@@ -16,7 +17,6 @@ import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PropertyDto } from 'src/properties/dto/property.dto';
-import { getUnitLabel } from 'src/utils/address';
 
 @Injectable()
 export class AggregateService {
