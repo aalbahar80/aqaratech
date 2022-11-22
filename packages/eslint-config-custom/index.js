@@ -112,6 +112,10 @@ module.exports = {
 				allowBoolean: true,
 			},
 		],
+
+		// Better stack traces (at the cost of a bit of performance)
+		'no-return-await': 'off',
+		'@typescript-eslint/return-await': 'warn',
 	},
 	ignorePatterns: ['.eslintrc.*', '*.sh'],
 };
