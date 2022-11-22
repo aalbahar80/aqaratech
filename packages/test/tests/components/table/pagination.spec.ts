@@ -1,6 +1,7 @@
 import { expect } from '@playwright/test';
 import { getRoute, PageTypePortfolio } from '@self/utils';
 import * as R from 'remeda';
+import { selectedLabel } from '../../../utils/selected-label';
 import { test } from '../../api/api-fixtures';
 import { TablePage } from './TablePage';
 
@@ -56,6 +57,7 @@ test('table pagination smoke test', async ({ page }) => {
 	await expect.soft(table.info).toHaveText(info2);
 
 	await expect(table.size).toHaveValue('20');
+	expect(await selectedLabel(table.size)).toBe('Show 20');
 });
 
 test('pagination is updated when changing property filter', async ({
