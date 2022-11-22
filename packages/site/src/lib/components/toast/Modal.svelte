@@ -46,7 +46,6 @@
 		isLoading = false;
 		closeModal();
 	};
-	$: console.log($isOpen, 'Modal.svelte ~ 30');
 </script>
 
 {#if $isOpen}
