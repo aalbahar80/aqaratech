@@ -5,7 +5,9 @@
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import ModalDelete from '$lib/components/toast/ModalDelete.svelte';
+	import ModalDelete, {
+		openModal,
+	} from '$lib/components/toast/ModalDelete.svelte';
 	import { classes } from '$lib/utils/classes';
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { getRoute, PageType, type Entity } from '@self/utils';
@@ -25,11 +27,6 @@
 	export let onDelete: (() => void) | undefined = undefined;
 	export let deletePrompt = '';
 	export let disallowEdit = false;
-
-	let isOpen = false;
-	const openModal = () => {
-		isOpen = true;
-	};
 </script>
 
 <div class="grid grid-cols-2 items-center justify-between gap-y-4">
@@ -52,7 +49,7 @@
 	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 		<!-- Edit/Delete button -->
 		<div class="flex justify-end">
-			<ModalDelete bind:isOpen {id} {entity} {onDelete} {deletePrompt} />
+			<ModalDelete {id} {entity} {onDelete} {deletePrompt} />
 			<Dropdown>
 				<div slot="beforeButton">
 					<a
