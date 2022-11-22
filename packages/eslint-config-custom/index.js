@@ -120,6 +120,8 @@ module.exports = {
 		// Better stack traces (at the cost of a bit of performance)
 		'no-return-await': 'off',
 		'@typescript-eslint/return-await': 'warn',
+
+		'@typescript-eslint/promise-function-async': 'warn',
 	},
 	ignorePatterns: ['.eslintrc.*', '*.sh'],
 };
