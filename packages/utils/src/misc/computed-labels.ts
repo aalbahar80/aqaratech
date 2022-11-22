@@ -8,7 +8,7 @@ export const getAddress = (property: {
 		.join(' ');
 };
 
-export const getUnitLabel = (unit: {
+export const computeLabelUnit = (unit: {
 	type: string | null;
 	unitNumber: string;
 }) => {

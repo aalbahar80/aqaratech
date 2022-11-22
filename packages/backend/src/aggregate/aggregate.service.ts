@@ -1,6 +1,6 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
-import { getUnitLabel } from '@self/utils';
+import { computeLabelUnit } from '@self/utils';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import {
 	AggregateOptionsDto,
@@ -189,7 +189,7 @@ export class AggregateService {
 		const withLabels = grouped.map((g) => {
 			const unit = units.find((u) => u.id === g.unitId);
 			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-			const unitTitle = unit ? unit.label || getUnitLabel(unit) : null;
+			const unitTitle = unit ? unit.label || computeLabelUnit(unit) : null;
 
 			const property = units.find(
 				(u) => u.propertyId === g.propertyId,

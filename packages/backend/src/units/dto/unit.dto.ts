@@ -7,7 +7,11 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
-import { getUnitLabel, UnitCreateSchema, UnitUpdateSchema } from '@self/utils';
+import {
+	computeLabelUnit,
+	UnitCreateSchema,
+	UnitUpdateSchema,
+} from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { formatDistance } from 'date-fns';
@@ -104,7 +108,7 @@ export class UnitDto
 	get title(): string {
 		return (
 			this.label ??
-			getUnitLabel({ type: this.type, unitNumber: this.unitNumber })
+			computeLabelUnit({ type: this.type, unitNumber: this.unitNumber })
 		);
 	}
 

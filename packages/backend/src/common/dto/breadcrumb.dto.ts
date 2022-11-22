@@ -1,5 +1,5 @@
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
-import { getAddress, getUnitLabel } from '@self/utils';
+import { getAddress, computeLabelUnit } from '@self/utils';
 import { Rel } from 'src/constants/rel.enum';
 
 export interface IBreadcrumbs {
@@ -80,7 +80,7 @@ export class BreadcrumbDto {
 		} else if (rel === Rel.Property) {
 			this.label = labelParams.label ?? getAddress(labelParams);
 		} else if (rel === Rel.Unit) {
-			this.label = labelParams.label ?? getUnitLabel(labelParams);
+			this.label = labelParams.label ?? computeLabelUnit(labelParams);
 		} else if (rel === Rel.Lease) {
 			this.label = labelParams.id;
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
