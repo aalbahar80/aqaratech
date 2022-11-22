@@ -1,7 +1,7 @@
 import { getRoute, PageType } from '@self/utils';
 import * as R from 'remeda';
-import { test } from '../../api/api-fixtures';
-import { RemoveModel } from '../remove-model';
+import { test } from '../api/api-fixtures';
+import { RemoveModel } from './remove-model';
 
 test.use({
 	portfoliosParams: R.times(3, () => ({})),
