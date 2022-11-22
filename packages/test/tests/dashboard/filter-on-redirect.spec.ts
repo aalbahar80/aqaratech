@@ -11,7 +11,7 @@ test.use({
 	})),
 });
 
-test('filter is prepopulated on redirect', async ({
+test('filter is prepopulated on redirect - property TO expenses', async ({
 	scopedPage: page,
 	org,
 	property,
