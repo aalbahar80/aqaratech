@@ -47,9 +47,7 @@ test('sidebar can be opened and closed', async ({ page }) => {
 test('clicking outside of sidebar closes it', async ({ page }) => {
 	const sidebar = new SidebarModel(page);
 
-	await sidebar.toggle.click();
-
-	await sidebar.assertOpen();
+	await sidebar.open();
 
 	// Click outside of sidebar
 	await page.click('body', { position: { x: 0, y: 0 } });
@@ -59,9 +57,8 @@ test('clicking outside of sidebar closes it', async ({ page }) => {
 
 test('navigating closes sidebar', async ({ page }) => {
 	const sidebar = new SidebarModel(page);
-	await sidebar.toggle.click();
 
-	await sidebar.assertOpen();
+	await sidebar.open();
 
 	await page.getByRole('link', { name: 'Account' }).click();
 
