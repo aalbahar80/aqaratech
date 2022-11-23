@@ -1,16 +1,16 @@
 import { expect } from '@playwright/test';
 import { test } from './tree.fixture';
 
-test('can drag and drop expense category', async ({ page }) => {
-	const category = 'Fire Fighting Contract';
-	const group = 'Other CapEx';
+const CATEGORY = 'Fire Fighting Contract';
+const GROUP = 'Other CapEx';
 
+test('can drag and drop expense category', async ({ page }) => {
 	const unchanged = page.getByRole('button', { name: 'No pending changes' });
 	await expect(unchanged).toBeDisabled();
 
-	const tile = page.getByText(category);
+	const tile = page.getByText(CATEGORY);
 
-	const newCategory = page.getByText(group);
+	const newCategory = page.getByText(GROUP);
 
 	// hover tile
 	await tile.hover();
@@ -31,7 +31,7 @@ test('can drag and drop expense category', async ({ page }) => {
 	const save = page.getByRole('button', { name: 'Save changes' });
 	await expect(save).toBeEnabled();
 
-	const pending = page.getByText(`${group} → ${category}`);
+	const pending = page.getByText(`${GROUP} → ${CATEGORY}`);
 
 	await expect(pending).toBeVisible();
 
