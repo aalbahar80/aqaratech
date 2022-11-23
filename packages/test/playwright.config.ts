@@ -102,8 +102,10 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 				'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix
 			],
 			use: devices['Desktop Safari'],
-			// Webkit is slow when calling form.verifyDetails(), but only in headless mode.
+			// Webkit Issues:
+			// - slow when calling form.verifyDetails(), but only in headless mode.
 			// https://github.com/microsoft/playwright/issues/14479#issuecomment-1141928860
+			// Webkit might be struggling when setting `waitUntil` when calling page.goto() or waiting for body.started
 			timeout: BASE_TIMEOUT * 2,
 		},
 		{
@@ -111,7 +113,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			testIgnore: [
 				...NON_SITE_TESTS,
 				...DESKTOP_ONLY_TESTS,
-				'**/tests/components/table/pagination.spec.ts', // TODO: fix
+				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
 			],
 			grepInvert: [
 				/screenshot/g, // causes terminal encoding issues
@@ -121,8 +123,21 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		// {
 		// 	name: 'site - safari - mobile',
-		// 	testIgnore: [...NON_SITE_TESTS, ...DESKTOP_ONLY_TESTS],
-		// 	use: devices['iPhone 12'],
+		// 	use: devices['iPhone 13 Mini'],
+		// 	testIgnore: [
+		// 		...NON_SITE_TESTS,
+		// 		...DESKTOP_ONLY_TESTS,
+		// 		'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
+		// 		'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix
+		// 		'**/tests/forms/lease-invoice/**/*.spec.ts', // fails in headless mode. viewport shakes
+		// 		'**/tests/dashboard/csv/**/*.spec.ts', // TODO: fix
+		// 		'**/tests/onboarding/new-user.spec.ts', // TODO: fix
+		// 		'**/test/tests/dashboard/filter-reset.spec.ts', // issues waiting for body.started (uses scopedPage)
+		// 	],
+		// 	grepInvert: [
+		// 		/screenshot/g, // causes terminal encoding issues
+		// 		/delete/g, // causes terminal encoding issues
+		// 	],
 		// },
 		{
 			name: 'api',
