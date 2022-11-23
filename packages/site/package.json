@@ -73,6 +73,7 @@
 		"svelte-dnd-action": "0.9.22",
 		"svelte-frappe-charts": "1.9.2",
 		"svelte-french-toast": "1.0.3",
+		"svelte-headlessui": "0.0.5",
 		"svelte-meta-tags": "2.6.4",
 		"svelte-preprocess": "4.10.7",
 		"tailwindcss": "3.2.4",

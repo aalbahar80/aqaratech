@@ -3,9 +3,8 @@
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
-	import { openSidebar } from '$lib/components/sidebar/Sidebar.svelte';
+	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import { environment } from '$lib/environment';
-	import { tick } from 'svelte';
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>
 
@@ -23,14 +22,7 @@
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
 			{#if isSidebarAvailable($page.url.pathname)}
-				<button
-					class="lg:hidden"
-					on:click={async () => {
-						await tick(); // might not be necessary
-						// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-						openSidebar();
-					}}
-				>
+				<button class="lg:hidden" use:sidebar.button>
 					<span class="sr-only">Toggle sidebar</span>
 					<HeroiconsBars3 class="h-8 w-8" />
 				</button>

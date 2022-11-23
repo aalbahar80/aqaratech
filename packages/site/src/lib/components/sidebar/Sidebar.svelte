@@ -1,18 +1,10 @@
 <script lang="ts" context="module">
-	import { writable } from 'svelte/store';
+	import { createDisclosure } from 'svelte-headlessui';
 
-	// Alternative approach: https://captaincodeman.github.io/svelte-headlessui/disclosure/
-	const isOpen = writable(false);
-
-	export const closeSidebar = () => {
-		console.log('Closing sidebar'); // TODO rm
-		isOpen.set(false);
-	};
-
-	export const openSidebar = () => {
-		console.log('Opening sidebar'); // TODO rm
-		isOpen.set(true);
-	};
+	export const sidebar = createDisclosure({
+		label: 'Sidebar',
+		expanded: false,
+	});
 </script>
 
 <script lang="ts">
@@ -29,18 +21,19 @@
 
 	// Close sidebar after navigation
 	afterNavigate(() => {
-		closeSidebar();
+		sidebar.close();
 	});
 </script>
 
 <aside
 	class={clsx(
 		'fixed z-40 h-[calc(100%-152px)] w-64 flex-col gap-6 border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900',
-		$isOpen ? 'flex' : 'hidden lg:flex', // ignore $isOpen on lg breakpoint
+		$sidebar.expanded ? 'flex' : 'hidden lg:flex', // ignore $isOpen on lg breakpoint
 	)}
 	in:fly={{ x: -100, duration: 150 }}
+	use:sidebar.panel
 	use:clickOutside
-	on:outclick={closeSidebar}
+	on:outclick={sidebar.close}
 >
 	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 		<SearchButton />
