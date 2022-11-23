@@ -45,9 +45,7 @@
 		<SearchButton />
 	{/if}
 
-	<nav
-		class="flex flex-1 flex-col justify-between overflow-y-auto overscroll-y-contain"
-	>
+	<nav class="flex flex-1 flex-col overflow-y-auto overscroll-y-contain">
 		{#each navigationTree as item}
 			{#if item.divided}
 				<hr class="my-6 border-gray-200 dark:border-gray-600" />
