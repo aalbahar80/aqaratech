@@ -9,7 +9,6 @@ test('can drag and drop expense category', async ({ page }) => {
 	await expect(unchanged).toBeDisabled();
 
 	const tile = page.getByText(category);
-	// const tile = page.getByText('Other CapEx');
 
 	const newCategory = page.getByText(group);
 
