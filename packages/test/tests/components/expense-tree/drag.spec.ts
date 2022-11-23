@@ -8,20 +8,20 @@ test('can drag and drop expense category', async ({ page }) => {
 	const unchanged = page.getByRole('button', { name: 'No pending changes' });
 	await expect(unchanged).toBeDisabled();
 
-	const tile = page.getByText(CATEGORY);
+	const category = page.getByText(CATEGORY);
 
-	const newCategory = page.getByText(GROUP);
+	const group = page.getByText(GROUP);
 
 	// hover tile
-	await tile.hover();
+	await category.hover();
 
 	// hold left mouse button
 	await page.mouse.down();
 
 	// move mouse to new category
 	// Hover twice on purpose: https://playwright.dev/docs/next/input#dragging-manually
-	await newCategory.hover();
-	await newCategory.hover();
+	await group.hover();
+	await group.hover();
 
 	await page.waitForTimeout(1000); // necessary
 
