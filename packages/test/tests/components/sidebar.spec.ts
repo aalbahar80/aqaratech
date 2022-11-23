@@ -65,11 +65,8 @@ test('navigating closes sidebar', async ({ page }) => {
 	await sidebar.assertClosed();
 });
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.fixme('sidebar is hidden on mobile', async ({}) => {});
+test('sidebar is hidden on mobile by default', async ({ page }) => {
+	const sidebar = new SidebarModel(page);
 
-test.fixme('sidebar is hidden by default - homepage', async ({ page }) => {
-	await page.goto('/');
-
-	// Check that the sidebar is hidden
+	await sidebar.assertClosed();
 });
