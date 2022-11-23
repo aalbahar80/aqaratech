@@ -23,13 +23,15 @@ const DESKTOP_ONLY_TESTS: string[] = [
 	// '**/tests/components/expense-tree/drag.spec.ts',
 ];
 
+const BASE_TIMEOUT = 10 * 1000;
+
 const config: PlaywrightTestConfig<TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),
 	globalTeardown: require.resolve('./global-teardown'),
 	// showing the reporter prevents turbo from caching the test results (on flakey tests)
 	reporter: [['list'], ['html', { open: process.env.CI ? 'never' : 'never' }]],
 	retries: 2,
-	timeout: process.env.CI ? 30 * 1000 : 10 * 1000,
+	timeout: process.env.CI ? 30 * 1000 : BASE_TIMEOUT,
 	maxFailures: 40,
 	use: {
 		storageState: 'storage-state/org-admin.json',
@@ -93,8 +95,16 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		{
 			name: 'site - webkit',
-			testIgnore: [...NON_SITE_TESTS, ...MOBILE_ONLY_TESTS],
+			testIgnore: [
+				...NON_SITE_TESTS,
+				...MOBILE_ONLY_TESTS,
+				'**/tests/onboarding/new-user.spec.ts', // TODO: fix
+				'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix
+			],
 			use: devices['Desktop Safari'],
+			// Webkit is slow when calling form.verifyDetails(), but only in headless mode.
+			// https://github.com/microsoft/playwright/issues/14479#issuecomment-1141928860
+			timeout: BASE_TIMEOUT * 2,
 		},
 		{
 			name: 'site - chrome - mobile',
