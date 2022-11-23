@@ -1,4 +1,4 @@
-import { expect, devices } from '@playwright/test';
+import { devices, expect } from '@playwright/test';
 import { getRoute, PageTypePortfolio } from '@self/utils';
 import { test } from '../api/api-fixtures';
 import { SidebarModel } from './sidebar/sidebar-model';
@@ -28,17 +28,44 @@ test.use({
 test('sidebar can be opened and closed', async ({ page }) => {
 	const sidebar = new SidebarModel(page);
 
+	const closed = page.getByRole('button', { name: 'Sidebar', expanded: false });
+	await expect(closed).toBeVisible();
+
 	await sidebar.toggle.click();
 
-	const nav = page.getByRole('navigation', { expanded: true });
+	await sidebar.assertOpen();
 
-	await expect(nav).toBeVisible();
+	const logout = page.getByRole('link', { name: 'Logout' });
+	await expect(logout).toBeVisible();
 
-	// expect(await sidebar.isOpen()).toBe(true);
+	// Close sidebar
+	await sidebar.toggle.click();
 
-	// await sidebar.toggle.click();
+	await sidebar.assertClosed();
+});
 
-	// expect(await sidebar.isOpen()).toBe(false);
+test('clicking outside of sidebar closes it', async ({ page }) => {
+	const sidebar = new SidebarModel(page);
+
+	await sidebar.toggle.click();
+
+	await sidebar.assertOpen();
+
+	// Click outside of sidebar
+	await page.click('body', { position: { x: 0, y: 0 } });
+
+	await sidebar.assertClosed();
+});
+
+test('navigating closes sidebar', async ({ page }) => {
+	const sidebar = new SidebarModel(page);
+	await sidebar.toggle.click();
+
+	await sidebar.assertOpen();
+
+	await page.getByRole('link', { name: 'Account' }).click();
+
+	await sidebar.assertClosed();
 });
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
