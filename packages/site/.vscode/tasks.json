@@ -26,13 +26,6 @@
 					}
 				]
 			}
-		},
-		{
-			"label": "Playwright: Custom Debug - clipboard",
-			"type": "shell",
-			// "command": "/bin/zsh -c \"echo 'pnpm -F @self/test exec playwright test ${file}' | xclip -i -selection clipboard\"",
-			"command": "echo \"pnpm -F @self/test exec playwright test ${file}\" | xclip -i -selection clipboard",
-			"problemMatcher": []
 		}
 	]
 }
