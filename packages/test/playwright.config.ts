@@ -108,7 +108,15 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		{
 			name: 'site - chrome - mobile',
-			testIgnore: [...NON_SITE_TESTS, ...DESKTOP_ONLY_TESTS],
+			testIgnore: [
+				...NON_SITE_TESTS,
+				...DESKTOP_ONLY_TESTS,
+				'**/tests/components/table/pagination.spec.ts', // TODO: fix
+			],
+			grepInvert: [
+				/screenshot/g, // causes terminal encoding issues
+				/delete/g,
+			],
 			use: devices['Pixel 5'],
 		},
 		// {
