@@ -83,7 +83,11 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		{
 			name: 'site - firefox',
-			testIgnore: [...NON_SITE_TESTS, ...MOBILE_ONLY_TESTS],
+			testIgnore: [
+				...NON_SITE_TESTS,
+				...MOBILE_ONLY_TESTS,
+				'**/tests/components/expense-tree/drag.spec.ts',
+			],
 			use: devices['Desktop Firefox'],
 		},
 		{
