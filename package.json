@@ -21,7 +21,6 @@
 		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate && sed -i '1 s/^/\\/\\/ @ts-nocheck\\\n/' packages/site/src/api/openapi/runtime.ts && tsx ./scripts/rm-unused-jsdoc.ts && pnpm prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'",
 		"api:generate:all": "turbo run api:generate",
 		"seed": "pnpm -F @self/backend exec prisma migrate reset --force",
-		"test-report": "pnpm -F @self/test exec playwright show-report",
 		"precompute": "pnpm format:all && pnpm check:all && pnpm build && pnpm test"
 	},
 	"devDependencies": {
