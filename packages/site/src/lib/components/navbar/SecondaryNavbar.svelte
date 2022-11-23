@@ -31,6 +31,7 @@
 						openSidebar();
 					}}
 				>
+					<span class="sr-only">Toggle sidebar</span>
 					<HeroiconsBars3 class="h-8 w-8" />
 				</button>
 			{/if}
