@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
 	import { writable } from 'svelte/store';
 
+	// Alternative approach: https://captaincodeman.github.io/svelte-headlessui/disclosure/
 	const isOpen = writable(false);
 
 	export const closeSidebar = () => {
