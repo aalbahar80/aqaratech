@@ -1,5 +1,6 @@
 import { devices, type PlaywrightTestConfig } from '@playwright/test';
 import { config as dotenv } from 'dotenv';
+import { TESTS } from './config/test-groups';
 import {
 	EXPIRED_ACCESS_TOKEN,
 	EXPIRED_ID_TOKEN,
@@ -9,19 +10,6 @@ import type { TokenTestOptions } from './tests/auth/auth-fixtures';
 dotenv({
 	path: '../../.env',
 });
-
-const API_FILES = '**/tests/api/**/*.spec.ts';
-const FILE_TESTS = [
-	'**/tests/forms/file/**/*.spec.ts',
-	'**/tests/api/files/**/*.spec.ts',
-];
-
-const NON_SITE_TESTS = [API_FILES, ...FILE_TESTS];
-
-const MOBILE_ONLY_TESTS = ['**/tests/components/sidebar.spec.ts'];
-const DESKTOP_ONLY_TESTS: string[] = [
-	// '**/tests/components/expense-tree/drag.spec.ts',
-];
 
 const BASE_TIMEOUT = 10 * 1000;
 
@@ -75,7 +63,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	projects: [
 		{
 			name: 'site - chromium',
-			testIgnore: [...NON_SITE_TESTS, ...MOBILE_ONLY_TESTS],
+			testIgnore: [...TESTS.NON_SITE, ...TESTS.MOBILE_ONLY],
 			use: {
 				...devices['Desktop Chrome'],
 				launchOptions: {
@@ -86,8 +74,8 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			name: 'site - firefox',
 			testIgnore: [
-				...NON_SITE_TESTS,
-				...MOBILE_ONLY_TESTS,
+				...TESTS.NON_SITE,
+				...TESTS.MOBILE_ONLY,
 				'**/tests/components/expense-tree/drag.spec.ts',
 				'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix this test
 			],
@@ -96,8 +84,8 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			name: 'site - webkit',
 			testIgnore: [
-				...NON_SITE_TESTS,
-				...MOBILE_ONLY_TESTS,
+				...TESTS.NON_SITE,
+				...TESTS.MOBILE_ONLY,
 				'**/tests/onboarding/new-user.spec.ts', // TODO: fix
 				'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix
 			],
@@ -111,8 +99,8 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			name: 'site - chrome - mobile',
 			testIgnore: [
-				...NON_SITE_TESTS,
-				...DESKTOP_ONLY_TESTS,
+				...TESTS.NON_SITE,
+				...TESTS.DESKTOP_ONLY,
 				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
 			],
 			grepInvert: [
@@ -125,8 +113,8 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		// 	name: 'site - safari - mobile',
 		// 	use: devices['iPhone 13 Mini'],
 		// 	testIgnore: [
-		// 		...NON_SITE_TESTS,
-		// 		...DESKTOP_ONLY_TESTS,
+		// 		...TESTS.NON_SITE,
+		//		...TESTS.DESKTOP_ONLY,
 		// 		'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
 		// 		'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix
 		// 		'**/tests/forms/lease-invoice/**/*.spec.ts', // fails in headless mode. viewport shakes
@@ -141,15 +129,15 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		// },
 		{
 			name: 'api',
-			testMatch: [API_FILES],
-			testIgnore: [...FILE_TESTS],
+			testMatch: [TESTS.API],
+			testIgnore: [...TESTS.FILE],
 			use: {
 				baseURL: process.env.PUBLIC_API_URL,
 			},
 		},
 		{
 			name: 'files',
-			testMatch: [...FILE_TESTS],
+			testMatch: [...TESTS.FILE],
 		},
 		{
 			name: 'idToken',
