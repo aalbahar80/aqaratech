@@ -1,13 +1,11 @@
-import { devices, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { getRoute, PageTypePortfolio } from '@self/utils';
 import { test } from '../api/api-fixtures';
 import { SidebarModel } from './sidebar/sidebar-model';
 
 test.use({
-	...devices['iPhone 13 Mini'],
-	// Avoid using webkit if cookies are involved
 	// https://github.com/microsoft/playwright/blob/31d45ad4dc87604bcd5cd3e3d6c0b9c23bbdab60/packages/playwright-core/src/server/deviceDescriptorsSource.json#L786
-	defaultBrowserType: 'chromium',
+	defaultBrowserType: 'chromium', // Firefox and Webkit do not respect the viewport size. Force chromium until they do.
 	page: async ({ page, org, portfolio }, use) => {
 		const url = getRoute({
 			entity: 'portfolio',

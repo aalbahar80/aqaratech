@@ -16,6 +16,13 @@ const FILE_TESTS = [
 	'**/tests/api/files/**/*.spec.ts',
 ];
 
+const NON_SITE_TESTS = [API_FILES, ...FILE_TESTS];
+
+const MOBILE_ONLY_TESTS = ['**/tests/components/sidebar.spec.ts'];
+const DESKTOP_ONLY_TESTS: string[] = [
+	// '**/tests/components/expense-tree/drag.spec.ts',
+];
+
 const config: PlaywrightTestConfig<TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),
 	globalTeardown: require.resolve('./global-teardown'),
@@ -23,7 +30,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	reporter: [['list'], ['html', { open: process.env.CI ? 'never' : 'never' }]],
 	retries: 2,
 	timeout: process.env.CI ? 30 * 1000 : 10 * 1000,
-	maxFailures: 20,
+	maxFailures: 40,
 	use: {
 		storageState: 'storage-state/org-admin.json',
 		headless: true,
@@ -65,8 +72,8 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	],
 	projects: [
 		{
-			name: 'site',
-			testIgnore: [API_FILES, ...FILE_TESTS],
+			name: 'site - chromium',
+			testIgnore: [...NON_SITE_TESTS, ...MOBILE_ONLY_TESTS],
 			use: {
 				...devices['Desktop Chrome'],
 				launchOptions: {
@@ -74,6 +81,26 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 				},
 			},
 		},
+		{
+			name: 'site - firefox',
+			testIgnore: [...NON_SITE_TESTS, ...MOBILE_ONLY_TESTS],
+			use: devices['Desktop Firefox'],
+		},
+		{
+			name: 'site - webkit',
+			testIgnore: [...NON_SITE_TESTS, ...MOBILE_ONLY_TESTS],
+			use: devices['Desktop Safari'],
+		},
+		{
+			name: 'site - chrome - mobile',
+			testIgnore: [...NON_SITE_TESTS, ...DESKTOP_ONLY_TESTS],
+			use: devices['Pixel 5'],
+		},
+		// {
+		// 	name: 'site - safari - mobile',
+		// 	testIgnore: [...NON_SITE_TESTS, ...DESKTOP_ONLY_TESTS],
+		// 	use: devices['iPhone 12'],
+		// },
 		{
 			name: 'api',
 			testMatch: [API_FILES],
@@ -96,35 +123,6 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			testMatch: '**/token/**/*.spec.ts',
 			use: { token: EXPIRED_ACCESS_TOKEN },
 		},
-		// {
-		// add browser to ci.yml if enabling, consider installing default browsers if github actions properly caches them
-		// 	name: "firefox",
-		// 	use: { ...devices["Desktop Firefox"] },
-		// 	testIgnore: ["**/api/**"],
-		// },
-		// {
-		// 	name: "pixel5",
-		// 	use: { ...devices["Pixel 5"], isMobile: true },
-		// 	testIgnore: ["**/api/**"],
-		// },
-		// {
-		// 	// requires https
-		// 	name: "iphone",
-		// 	use: {
-		// 		...devices["iPhone 8"],
-		// 		isMobile: true,
-		// 	},
-		// 	testIgnore: ["**/api/**"],
-		// },
-		// {
-		// 	// requires https, run with npx vite dev --https, and use basicSslplugin, set .env vars to https.
-		// 	// STATUS: blocked by cors (backend is http while site is https)
-		// 	// https://vitejs.dev/guide/migration.html#automatic-https-certificate-generation
-		// 	name: "safari",
-		// 	use: { ...devices["Desktop Safari"] },
-		// 	testIgnore: ["**/api/**"],
-		// 	timeout: 30 * 1000,
-		// },
 	],
 };
 export default config;
