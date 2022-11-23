@@ -34,7 +34,7 @@
 
 <aside
 	class={clsx(
-		'fixed z-40 h-screen w-64 flex-col gap-6 border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900',
+		'fixed z-40 h-[calc(100%-152px)] w-64 flex-col gap-6 border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900',
 		$isOpen ? 'flex' : 'hidden lg:flex', // ignore $isOpen on lg breakpoint
 	)}
 	in:fly={{ x: -100, duration: 150 }}
@@ -45,15 +45,15 @@
 		<SearchButton />
 	{/if}
 
-	<div class="flex flex-1 flex-col justify-between">
-		<nav>
-			{#each navigationTree as item}
-				{#if item.divided}
-					<hr class="my-6 border-gray-200 dark:border-gray-600" />
-				{/if}
+	<nav
+		class="flex flex-1 flex-col justify-between overflow-y-auto overscroll-y-contain"
+	>
+		{#each navigationTree as item}
+			{#if item.divided}
+				<hr class="my-6 border-gray-200 dark:border-gray-600" />
+			{/if}
 
-				<SidebarItem {item} />
-			{/each}
-		</nav>
-	</div>
+			<SidebarItem {item} />
+		{/each}
+	</nav>
 </aside>
