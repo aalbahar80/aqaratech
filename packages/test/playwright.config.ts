@@ -5,6 +5,7 @@ import {
 	EXPIRED_ACCESS_TOKEN,
 	EXPIRED_ID_TOKEN,
 } from './constants/expired-id-token';
+import { testUsers } from './tests/api/fixtures/users/test-users';
 import type { TokenTestOptions } from './tests/auth/auth-fixtures';
 
 dotenv({
@@ -22,7 +23,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	timeout: process.env.CI ? 30 * 1000 : BASE_TIMEOUT,
 	maxFailures: 40,
 	use: {
-		storageState: 'storage-state/org-admin.json',
+		storageState: testUsers.orgAdmin.storageStatePath,
 		headless: true,
 		ignoreHTTPSErrors: true,
 		bypassCSP: true,
