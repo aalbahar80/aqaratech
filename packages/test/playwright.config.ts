@@ -62,7 +62,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	],
 	projects: [
 		{
-			name: 'site - chromium',
+			name: 'site:chrome',
 			testIgnore: [...TESTS.NON_SITE, ...TESTS.MOBILE_ONLY],
 			use: {
 				...devices['Desktop Chrome'],
@@ -72,7 +72,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			},
 		},
 		{
-			name: 'site - firefox',
+			name: 'site:firefox',
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
@@ -82,7 +82,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			use: devices['Desktop Firefox'],
 		},
 		{
-			name: 'site - webkit',
+			name: 'site:webkit',
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
@@ -97,7 +97,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			timeout: BASE_TIMEOUT * 2,
 		},
 		{
-			name: 'site - chrome - mobile',
+			name: 'site:chrome:mobile',
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.DESKTOP_ONLY,
@@ -110,7 +110,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			use: devices['Pixel 5'],
 		},
 		// {
-		// 	name: 'site - safari - mobile',
+		// 	name: 'site:webkit:mobile',
 		// 	use: devices['iPhone 13 Mini'],
 		// 	testIgnore: [
 		// 		...TESTS.NON_SITE,
