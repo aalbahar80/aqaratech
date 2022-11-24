@@ -1,8 +1,11 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { visualizer } from 'rollup-plugin-visualizer';
 import icons from 'unplugin-icons/vite';
 import { defineConfig } from 'vite';
 import { isoImport } from 'vite-plugin-iso-import';
 import { version } from './package.json';
+
+const ANALYZE_BUNDLE = process.env.ANALYZE_BUNDLE === '1';
 
 export default defineConfig(() => {
 	/** @type {import('vite').UserConfig} */
@@ -11,7 +14,16 @@ export default defineConfig(() => {
 			__AQARATECH_APP_VERSION__: JSON.stringify(version),
 			__SENTRY_DEBUG__: false,
 		},
-		plugins: [sveltekit(), icons({ compiler: 'svelte' }), isoImport()],
+		plugins: [
+			sveltekit(),
+			icons({ compiler: 'svelte' }),
+			isoImport(),
+			ANALYZE_BUNDLE &&
+				visualizer({
+					emitFile: true,
+					file: 'stats.html',
+				}),
+		],
 		clearScreen: false,
 		ssr: {
 			// set chart.js && papaparse as `noExternal` to avoid issues in SSR (when running `vite preview`)
