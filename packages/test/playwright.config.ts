@@ -28,9 +28,9 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		bypassCSP: true,
 		baseURL: process.env.PUBLIC_SITE_URL,
 		// viewport: { width: 1920, height: 1080 },
-		video: 'retain-on-failure',
+		video: 'on-first-retry',
 		trace: {
-			mode: 'retain-on-failure',
+			mode: 'on-first-retry',
 			screenshots: true,
 			snapshots: true,
 			sources: true,
