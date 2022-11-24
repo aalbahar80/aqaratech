@@ -7,7 +7,10 @@ import { version } from './package.json';
 export default defineConfig(() => {
 	/** @type {import('vite').UserConfig} */
 	const config = {
-		define: getDefine(process.env.PUBLIC_AQARATECH_ENV),
+		define: {
+			__AQARATECH_APP_VERSION__: JSON.stringify(version),
+			__SENTRY_DEBUG__: false,
+		},
 		plugins: [sveltekit(), icons({ compiler: 'svelte' }), isoImport()],
 		clearScreen: false,
 		ssr: {
@@ -40,20 +43,3 @@ export default defineConfig(() => {
 
 	return config;
 });
-
-const getDefine = (PUBLIC_AQARATECH_ENV) => {
-	const common = {
-		__AQARATECH_APP_VERSION__: JSON.stringify(version),
-	};
-
-	if (PUBLIC_AQARATECH_ENV === 'production') {
-		console.log('Building for production.');
-		return {
-			...common,
-			__SENTRY_DEBUG__: false,
-		};
-	} else {
-		console.log('Not building for production.');
-		return common;
-	}
-};
