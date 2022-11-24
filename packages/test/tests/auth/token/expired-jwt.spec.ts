@@ -1,4 +1,4 @@
-import { Cookie } from '@self/utils';
+import { Cookie, getRoute } from '@self/utils';
 import { siteURL } from '../../api/fixtures/site-url';
 import { expect, test } from '../auth-fixtures';
 
@@ -15,7 +15,7 @@ test.fixme('redirect to login form', async ({ page }) => {
 });
 
 test('cookies are cleared', async ({ page }) => {
-	await page.goto(siteURL);
+	await page.goto(`${siteURL}/concierge`);
 	// expect idToken and accessToken to be cleared
 	const cookies = await page.context().cookies();
 

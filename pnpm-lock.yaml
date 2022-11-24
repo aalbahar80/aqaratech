@@ -63,15 +63,15 @@ importers:
       '@prisma/client': 4.6.1
       '@self/seed': workspace:1.2.0
       '@self/utils': workspace:2.1.0
-      '@sentry/node': 7.21.0
-      '@sentry/tracing': 7.21.0
+      '@sentry/node': 7.21.1
+      '@sentry/tracing': 7.21.1
       '@tsconfig/node18-strictest': 1.0.0
       '@types/cache-manager': 4.0.2
       '@types/cookie-parser': 1.4.3
       '@types/express': 4.17.14
       '@types/jest': 29.2.2
       '@types/js-yaml': 4.0.5
-      '@types/lodash': 4.14.189
+      '@types/lodash': 4.14.190
       '@types/multer': 1.4.7
       '@types/node': 18.11.9
       '@types/passport-jwt': 3.0.7
@@ -124,12 +124,12 @@ importers:
       '@nestjs/platform-express': 9.2.0_pf2fb646rsvo5szivgkaevcpvi
       '@nestjs/swagger': 6.1.3_n5tlzb6gajrp65xewlgrtvzeqy
       '@nestjs/terminus': 9.1.2_fptmb26m37y4cwlu6vktl6lm6y
-      '@ntegral/nestjs-sentry': 4.0.0_ny5h7pwf36ucu62zvfuj4me7eu
+      '@ntegral/nestjs-sentry': 4.0.0_onhpsxc5cf2xzmoe4t4zyqbetm
       '@prisma-utils/nestjs-request-parser': 1.2.0_mpbqhbv3qeq77ujihdpg6d4hsy
       '@prisma/client': 4.6.1_prisma@4.6.1
       '@self/utils': link:../utils
-      '@sentry/node': 7.21.0
-      '@sentry/tracing': 7.21.0
+      '@sentry/node': 7.21.1
+      '@sentry/tracing': 7.21.1
       cache-manager: 4.1.0
       class-transformer: 0.5.1
       class-validator: 0.13.2
@@ -165,7 +165,7 @@ importers:
       '@types/express': 4.17.14
       '@types/jest': 29.2.2
       '@types/js-yaml': 4.0.5
-      '@types/lodash': 4.14.189
+      '@types/lodash': 4.14.190
       '@types/multer': 1.4.7
       '@types/node': 18.11.9
       '@types/passport-jwt': 3.0.7
@@ -241,11 +241,11 @@ importers:
       '@logtail/winston': 0.1.14
       '@rgossiaux/svelte-headlessui': 1.0.2
       '@self/utils': workspace:2.1.0
-      '@sentry/node': 7.21.0
-      '@sentry/svelte': 7.21.0
-      '@sentry/tracing': 7.21.0
+      '@sentry/node': 7.21.1
+      '@sentry/svelte': 7.21.1
+      '@sentry/tracing': 7.21.1
       '@sveltejs/adapter-node': 1.0.0-next.101
-      '@sveltejs/kit': 1.0.0-next.559
+      '@sveltejs/kit': 1.0.0-next.560
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2
       '@tailwindcss/forms': 0.5.3
@@ -304,7 +304,7 @@ importers:
     dependencies:
       '@logtail/node': 0.1.14
       '@logtail/winston': 0.1.14_tpu5bjgf7n7duz4rf6zubrj4ti
-      '@sentry/node': 7.21.0
+      '@sentry/node': 7.21.1
       winston: 3.8.2
     devDependencies:
       '@felte/reporter-svelte': 1.1.4_svelte@3.53.1
@@ -314,10 +314,10 @@ importers:
       '@logtail/types': 0.1.12
       '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.53.1
       '@self/utils': link:../utils
-      '@sentry/svelte': 7.21.0_svelte@3.53.1
-      '@sentry/tracing': 7.21.0
+      '@sentry/svelte': 7.21.1_svelte@3.53.1
+      '@sentry/tracing': 7.21.1
       '@sveltejs/adapter-node': 1.0.0-next.101
-      '@sveltejs/kit': 1.0.0-next.559_svelte@3.53.1+vite@3.2.4
+      '@sveltejs/kit': 1.0.0-next.560_svelte@3.53.1+vite@3.2.4
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.4
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.4
@@ -376,7 +376,7 @@ importers:
   packages/test:
     specifiers:
       '@faker-js/faker': 7.6.0
-      '@playwright/test': 1.28.0
+      '@playwright/test': 1.28.1
       '@self/seed': workspace:1.2.0
       '@self/utils': workspace:2.1.0
       '@types/node': 18.11.9
@@ -390,7 +390,7 @@ importers:
       ufo: 1.0.0
     devDependencies:
       '@faker-js/faker': 7.6.0
-      '@playwright/test': 1.28.0
+      '@playwright/test': 1.28.1
       '@self/seed': link:../seed
       '@self/utils': link:../utils
       '@types/node': 18.11.9
@@ -412,7 +412,7 @@ importers:
   packages/utils:
     specifiers:
       '@logtail/types': 0.1.12
-      '@sentry/types': 7.21.0
+      '@sentry/types': 7.21.1
       '@types/node': 18.11.9
       '@vitest/ui': 0.25.3
       date-fns: 2.29.3
@@ -433,7 +433,7 @@ importers:
       zod: 3.19.0
     devDependencies:
       '@logtail/types': 0.1.12
-      '@sentry/types': 7.21.0
+      '@sentry/types': 7.21.1
       '@types/node': 18.11.9
       '@vitest/ui': 0.25.3
       eslint-config-custom: link:../eslint-config-custom
@@ -3444,7 +3444,7 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
 
-  /@ntegral/nestjs-sentry/4.0.0_ny5h7pwf36ucu62zvfuj4me7eu:
+  /@ntegral/nestjs-sentry/4.0.0_onhpsxc5cf2xzmoe4t4zyqbetm:
     resolution: {integrity: sha512-6WHZcK7NLeg7ue1y3Z61msEBzCGZeXQ0hWhliH1ddQH0kPbZ6lXLxduGMWYb0N/fPjXAX1Astz8urqnoTOZBQw==}
     peerDependencies:
       '@nestjs/common': ^9.0.4
@@ -3457,8 +3457,8 @@ packages:
     dependencies:
       '@nestjs/common': 9.2.0_mpbqhbv3qeq77ujihdpg6d4hsy
       '@nestjs/core': 9.2.0_jfowmhmgk7kwjudosrpv7e7liy
-      '@sentry/hub': 7.21.0
-      '@sentry/node': 7.21.0
+      '@sentry/hub': 7.21.1
+      '@sentry/node': 7.21.1
       reflect-metadata: 0.1.13
       rimraf: 3.0.2
       rxjs: 7.5.7
@@ -3529,13 +3529,13 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /@playwright/test/1.28.0:
-    resolution: {integrity: sha512-vrHs5DFTPwYox5SGKq/7TDn/S4q6RA1zArd7uhO6EyP9hj3XgZBBM12ktMbnDQNxh/fL1IUKsTNLxihmsU38lQ==}
+  /@playwright/test/1.28.1:
+    resolution: {integrity: sha512-xN6spdqrNlwSn9KabIhqfZR7IWjPpFK1835tFNgjrlysaSezuX8PYUwaz38V/yI8TJLG9PkAMEXoHRXYXlpTPQ==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.11.9
-      playwright-core: 1.28.0
+      playwright-core: 1.28.1
     dev: true
 
   /@polka/url/1.0.0-next.21:
@@ -3780,41 +3780,41 @@ packages:
       rollup: 2.79.1
     dev: true
 
-  /@sentry/browser/7.21.0:
-    resolution: {integrity: sha512-ZSI83tkBLmnqGSM8A9qsFOlzu0HjNTpe2QnQwlrnCxokNZIU4zFOGLujXSxKx1rpb8+TRMOyDG979kGNWFzbww==}
+  /@sentry/browser/7.21.1:
+    resolution: {integrity: sha512-cS2Jz2+fs9+4pJqLJPtYqGyY97ywJDWAWIR1Yla3hs1QQuH6m0Nz3ojZD1gE2eKH9mHwkGbnNAh+hHcrYrfGzw==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.21.0
-      '@sentry/types': 7.21.0
-      '@sentry/utils': 7.21.0
+      '@sentry/core': 7.21.1
+      '@sentry/types': 7.21.1
+      '@sentry/utils': 7.21.1
       tslib: 1.14.1
     dev: true
 
-  /@sentry/core/7.21.0:
-    resolution: {integrity: sha512-5ZHwfHPm4svny7iXsNmlnRg0q1jw/N5/ugzAku+g98R769RCv2aSBaK9BIYlJmJ1SWwR7nQuR/GOCOdv5mA8jw==}
+  /@sentry/core/7.21.1:
+    resolution: {integrity: sha512-Og5wEEsy24fNvT/T7IKjcV4EvVK5ryY2kxbJzKY6GU2eX+i+aBl+n/vp7U0Es351C/AlTkS+0NOUsp2TQQFxZA==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.21.0
-      '@sentry/utils': 7.21.0
+      '@sentry/types': 7.21.1
+      '@sentry/utils': 7.21.1
       tslib: 1.14.1
 
-  /@sentry/hub/7.21.0:
-    resolution: {integrity: sha512-mPnH5JA5w3IpK4KZYOZ65tHO+xbUNrMURRKtQQ4INhRWyZpidQ4jwgkOFxM3M6BYZITKcKWFRu0NS34inKbkbg==}
+  /@sentry/hub/7.21.1:
+    resolution: {integrity: sha512-WXQJ5z5iUZO6sOq3f7A3eIwvb/GoVJ3q5DQDTNF7HB/qcm11u5QPlAHTFBCsKJdT39NaE78JcMluiHZUWT+C5A==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.21.0
-      '@sentry/types': 7.21.0
-      '@sentry/utils': 7.21.0
+      '@sentry/core': 7.21.1
+      '@sentry/types': 7.21.1
+      '@sentry/utils': 7.21.1
       tslib: 1.14.1
     dev: false
 
-  /@sentry/node/7.21.0:
-    resolution: {integrity: sha512-jRwsX1tqA9R1VFcnHs3vkbNKCWCBb/eakqLQa1keEc+QxTDLAOqB/Z+z8kwEe8LC/Sj3RZIVw3VbvjrOENLEvg==}
+  /@sentry/node/7.21.1:
+    resolution: {integrity: sha512-B+p1nQHaFWdCCRVmvqlr/+vdQCI3mGLObucNfK2YC22IQZg7+3u6tEbxJ7umITIjeSSKgf7ZoZwCxL9VfkrNXg==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.21.0
-      '@sentry/types': 7.21.0
-      '@sentry/utils': 7.21.0
+      '@sentry/core': 7.21.1
+      '@sentry/types': 7.21.1
+      '@sentry/utils': 7.21.1
       cookie: 0.4.2
       https-proxy-agent: 5.0.1
       lru_map: 0.3.3
@@ -3823,38 +3823,38 @@ packages:
       - supports-color
     dev: false
 
-  /@sentry/svelte/7.21.0_svelte@3.53.1:
-    resolution: {integrity: sha512-xsMKCEgRkOJBVrZWWBaZeSbsdPV+8dvqntnmZtB97u30p3ItT+8zxSSXmRrqMDt/q23pHu1OLcyh8I+fbo5jnA==}
+  /@sentry/svelte/7.21.1_svelte@3.53.1:
+    resolution: {integrity: sha512-WDb95bToY0k3rtYd0a0J5RXpj/l4X+qZfT35/fv2DF8LsvGV8w037CR3dR9O7NNRMfW5M2KZ1y4SCHJ4kXxoZA==}
     engines: {node: '>=8'}
     peerDependencies:
       svelte: 3.x
     dependencies:
-      '@sentry/browser': 7.21.0
-      '@sentry/types': 7.21.0
-      '@sentry/utils': 7.21.0
+      '@sentry/browser': 7.21.1
+      '@sentry/types': 7.21.1
+      '@sentry/utils': 7.21.1
       magic-string: 0.26.7
       svelte: 3.53.1
       tslib: 1.14.1
     dev: true
 
-  /@sentry/tracing/7.21.0:
-    resolution: {integrity: sha512-wTnXBV1e23Ou7aPFJCoX4VlrfsiYWDmGTLwx0ObI5y3BDSzV696BFICYpeqTk8lS5J5PQII12WRWfRbmyUwIAg==}
+  /@sentry/tracing/7.21.1:
+    resolution: {integrity: sha512-b1BTPsRaNQpohzegoz59KGuBl+To651vEq0vMS4tCzSyIdxkYso3JCrjDdEqW/2MliQYANNVrUai2bmwmU9h1g==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.21.0
-      '@sentry/types': 7.21.0
-      '@sentry/utils': 7.21.0
+      '@sentry/core': 7.21.1
+      '@sentry/types': 7.21.1
+      '@sentry/utils': 7.21.1
       tslib: 1.14.1
 
-  /@sentry/types/7.21.0:
-    resolution: {integrity: sha512-DqQi0HLp17x0++zCjI9jVST0cuszsQtrVIMQRQXpy8J/ay3IGxwFoX1qMrwFP2tmVQDsy8YKIz50J5e6caXwSw==}
+  /@sentry/types/7.21.1:
+    resolution: {integrity: sha512-3/IKnd52Ol21amQvI+kz+WB76s8/LR5YvFJzMgIoI2S8d82smIr253zGijRXxHPEif8kMLX4Yt+36VzrLxg6+A==}
     engines: {node: '>=8'}
 
-  /@sentry/utils/7.21.0:
-    resolution: {integrity: sha512-Dn9zsPOfz1kbBua8KSYUPrka31Lh+am9BVJWnzqzGbALthf134oUTbp2vcwpMyEW7NxX+4Qd+36BvTzapfRINQ==}
+  /@sentry/utils/7.21.1:
+    resolution: {integrity: sha512-F0W0AAi8tgtTx6ApZRI2S9HbXEA9ENX1phTZgdNNWcMFm1BNbc21XEwLqwXBNjub5nlA6CE8xnjXRgdZKx4kzQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.21.0
+      '@sentry/types': 7.21.1
       tslib: 1.14.1
 
   /@sinclair/typebox/0.24.44:
@@ -3882,8 +3882,8 @@ packages:
       rollup: 2.79.1
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.559_svelte@3.53.1+vite@3.2.4:
-    resolution: {integrity: sha512-8Dx5w7O5LGbzzCQ0SG/1FI7cKtfsA1y0qr+mIfFHxb78oUW3P1h88Xs4nlrO7nJslaZ/BuBcj4yblMv1C5+rpQ==}
+  /@sveltejs/kit/1.0.0-next.560_svelte@3.53.1+vite@3.2.4:
+    resolution: {integrity: sha512-ldZJyd+jfQWVkOkRHq25cXMffhL5MgB1Uzhhw1ngF8ezB38P/g4T+5ohP8wuk2lxPJIjbY3S6BeXN5mod9XOhA==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -3891,7 +3891,7 @@ packages:
       svelte: ^3.44.0
       vite: ^3.2.0
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 1.3.0_svelte@3.53.1+vite@3.2.4
+      '@sveltejs/vite-plugin-svelte': 1.3.1_svelte@3.53.1+vite@3.2.4
       '@types/cookie': 0.5.1
       cookie: 0.5.0
       devalue: 4.2.0
@@ -3916,8 +3916,8 @@ packages:
       yootils: 0.0.16
     dev: true
 
-  /@sveltejs/vite-plugin-svelte/1.3.0_svelte@3.53.1+vite@3.2.4:
-    resolution: {integrity: sha512-DZtl1qFT+re4HwEP8PjVZNIP7NO3Ua/akYpPteTXOT57PQNTXBK8pIAv4WwhQXMWIa8JcMNOnML95FR/Mhb3gw==}
+  /@sveltejs/vite-plugin-svelte/1.3.1_svelte@3.53.1+vite@3.2.4:
+    resolution: {integrity: sha512-2Uu2sDdIR+XQWF7QWOVSF2jR9EU6Ciw1yWfYnfLYj8HIgnNxkh/8g22Fw2pBUI8QNyW/KxtqJUWBI+8ypamSrQ==}
     engines: {node: ^14.18.0 || >= 16}
     peerDependencies:
       diff-match-patch: ^1.0.5
@@ -4368,11 +4368,11 @@ packages:
   /@types/lodash-es/4.17.6:
     resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
     dependencies:
-      '@types/lodash': 4.14.189
+      '@types/lodash': 4.14.190
     dev: true
 
-  /@types/lodash/4.14.189:
-    resolution: {integrity: sha512-kb9/98N6X8gyME9Cf7YaqIMvYGnBSWqEci6tiettE6iJWH1XdJz/PO8LB0GtLCG7x8dU3KWhZT+lA1a35127tA==}
+  /@types/lodash/4.14.190:
+    resolution: {integrity: sha512-5iJ3FBJBvQHQ8sFhEhJfjUP+G+LalhavTkYyrAYqz5MEJG+erSv0k9KJLb6q7++17Lafk1scaTIFXcMJlwK8Mw==}
     dev: true
 
   /@types/mime/3.0.1:
@@ -6558,8 +6558,8 @@ packages:
       tapable: 2.2.1
     dev: true
 
-  /enhanced-resolve/5.11.0:
-    resolution: {integrity: sha512-0Gcraf7gAJSQoPg+bTSXNhuzAYtXqLc4C011vb8S3B8XUSEkGYNBk20c68X9291VF4vvsCD8SPkr6Mza+DwU+g==}
+  /enhanced-resolve/5.12.0:
+    resolution: {integrity: sha512-QHTXI/sZQmko1cbDoNAa3mJ5qhWUUNAq3vR0/YiD379fWQrcfuoX1+HW2S0MTt7XmoPLapdaDKUtelUSPic7hQ==}
     engines: {node: '>=10.13.0'}
     dependencies:
       graceful-fs: 4.2.10
@@ -10360,8 +10360,8 @@ packages:
       find-up: 4.1.0
     dev: true
 
-  /playwright-core/1.28.0:
-    resolution: {integrity: sha512-nJLknd28kPBiCNTbqpu6Wmkrh63OEqJSFw9xOfL9qxfNwody7h6/L3O2dZoWQ6Oxcm0VOHjWmGiCUGkc0X3VZA==}
+  /playwright-core/1.28.1:
+    resolution: {integrity: sha512-3PixLnGPno0E8rSBJjtwqTwJe3Yw72QwBBBxNoukIj3lEeBNXwbNiKrNuB1oyQgTBw5QHUhNO3SteEtHaMK6ag==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -12774,7 +12774,7 @@ packages:
       acorn-import-assertions: 1.8.0_acorn@8.8.1
       browserslist: 4.21.4
       chrome-trace-event: 1.0.3
-      enhanced-resolve: 5.11.0
+      enhanced-resolve: 5.12.0
       es-module-lexer: 0.9.3
       eslint-scope: 5.1.1
       events: 3.3.0

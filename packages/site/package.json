@@ -28,10 +28,10 @@
 		"@logtail/types": "0.1.12",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:2.1.0",
-		"@sentry/svelte": "7.21.0",
-		"@sentry/tracing": "7.21.0",
+		"@sentry/svelte": "7.21.1",
+		"@sentry/tracing": "7.21.1",
 		"@sveltejs/adapter-node": "1.0.0-next.101",
-		"@sveltejs/kit": "1.0.0-next.559",
+		"@sveltejs/kit": "1.0.0-next.560",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/forms": "0.5.3",
@@ -91,7 +91,7 @@
 	"dependencies": {
 		"@logtail/node": "0.1.14",
 		"@logtail/winston": "0.1.14",
-		"@sentry/node": "7.21.0",
+		"@sentry/node": "7.21.1",
 		"winston": "3.8.2"
 	}
 }
