@@ -8,7 +8,8 @@
 		{
 			"files": "*.svelte",
 			"options": {
-				"parser": "svelte"
+				"parser": "svelte",
+				"plugins": ["prettier-plugin-tailwindcss"]
 			}
 		}
 	]
