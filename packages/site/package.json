@@ -21,9 +21,6 @@
 		"test:ui": "vitest --ui"
 	},
 	"devDependencies": {
-		"@felte/reporter-svelte": "1.1.4",
-		"@felte/reporter-tippy": "1.1.4",
-		"@felte/validator-zod": "1.0.12",
 		"@iconify/json": "2.1.144",
 		"@logtail/types": "0.1.12",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -53,11 +50,9 @@
 		"debounce": "1.2.1",
 		"eslint-config-custom": "workspace:*",
 		"eslint-plugin-svelte": "2.13.1",
-		"felte": "1.2.6",
 		"frappe-charts": "1.6.2",
 		"fuse.js": "6.6.2",
 		"jose": "4.11.1",
-		"jsdom": "20.0.1",
 		"jsonwebtoken": "8.5.1",
 		"jspdf": "2.5.1",
 		"just-diff": "5.1.1",
