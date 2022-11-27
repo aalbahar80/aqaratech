@@ -82,6 +82,7 @@
 		"ts-toolbelt": "9.6.0",
 		"tslib": "2.4.1",
 		"typescript": "4.9.3",
+		"typescript-svelte-plugin": "0.3.10",
 		"unplugin-icons": "0.14.14",
 		"vite": "3.2.4",
 		"vite-plugin-iso-import": "0.1.3",

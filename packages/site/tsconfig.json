@@ -26,6 +26,9 @@
 		"noUnusedParameters": true,
 		"checkJs": true,
 
-		"plugins": [{ "name": "vite-plugin-iso-import" }]
+		"plugins": [
+			{ "name": "typescript-svelte-plugin" },
+			{ "name": "vite-plugin-iso-import" }
+		]
 	}
 }
