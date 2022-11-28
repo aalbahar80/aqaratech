@@ -22,13 +22,14 @@ test('filter is prepopulated on redirect - property TO expenses', async ({
 	org,
 	property,
 	expenses: _expenses,
+	isMobile,
 }) => {
 	const params = {
 		organizationId: org.organization.id,
 		portfolioId: property.portfolioId,
 	};
 
-	// Go to financials tab
+	// Go to property page
 	const url = getRoute({
 		entity: 'property',
 		id: property.id,
@@ -38,11 +39,17 @@ test('filter is prepopulated on redirect - property TO expenses', async ({
 
 	await page.goto(url);
 
-	// Click Expenses details
-	await page
-		.getByRole('navigation', { name: 'Tabs' })
-		.getByRole('link', { name: 'Financials' })
-		.click();
+	if (isMobile) {
+		// Select tab
+		const select = page.getByRole('combobox', { name: 'Select a tab' });
+		await select.selectOption({ label: 'Financials' });
+	} else {
+		// Click tab
+		await page
+			.getByRole('navigation', { name: 'Tabs' })
+			.getByRole('link', { name: 'Financials' })
+			.click();
+	}
 
 	await expect(page).toHaveURL(
 		getRoute({
