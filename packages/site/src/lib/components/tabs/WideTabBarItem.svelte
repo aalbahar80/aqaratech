@@ -7,7 +7,6 @@
 		label: string;
 		href: string;
 		isExternal?: boolean;
-		action?: () => void;
 	};
 
 	$: active = $page.url.pathname === tab.href;

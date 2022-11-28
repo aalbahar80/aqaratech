@@ -10,20 +10,24 @@
 		params: $page.params,
 	});
 
+	$: financialsBaseRoute = getRoute({
+		entity: 'portfolio',
+		id: $page.params.portfolioId!,
+		pageType: PageTypePortfolio.Summary,
+		params: $page.params,
+	});
+
 	$: tabs = [
 		{ label: 'Info', href: baseRoute },
 		{
 			label: 'Financials',
 			isExternal: true,
-			href: getRoute({
-				entity: 'portfolio',
-				id: $page.params.portfolioId!,
-				pageType: PageTypePortfolio.Summary,
-				params: $page.params,
-				predefined: {
+			href:
+				financialsBaseRoute +
+				'?' +
+				new URLSearchParams({
 					propertyId: $page.params.propertyId!,
-				},
-			}),
+				}).toString(),
 		},
 		{ label: 'Occupancy', href: `${baseRoute}/occupancy` },
 		{ label: 'Units', href: `${baseRoute}/units` },

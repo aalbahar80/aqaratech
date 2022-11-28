@@ -10,21 +10,25 @@
 		params: $page.params,
 	});
 
+	$: financialsBaseRoute = getRoute({
+		entity: 'portfolio',
+		id: $page.params.portfolioId!,
+		pageType: PageTypePortfolio.Summary,
+		params: $page.params,
+	});
+
 	$: tabs = [
 		{ label: 'Info', href: baseRoute },
 		{
 			label: 'Financials',
 			isExternal: true,
-			href: getRoute({
-				entity: 'portfolio',
-				id: $page.params.portfolioId!,
-				pageType: PageTypePortfolio.Summary,
-				params: $page.params,
-				predefined: {
-					propertyId: $page.params.propertyId!,
+			href:
+				financialsBaseRoute +
+				'?' +
+				new URLSearchParams({
+					propertyId: $page.data.unit.propertyId,
 					unitId: $page.params.unitId!,
-				},
-			}),
+				}).toString(),
 		},
 		{ label: 'Leases', href: `${baseRoute}/leases` },
 		{ label: 'Files', href: `${baseRoute}/files` },
