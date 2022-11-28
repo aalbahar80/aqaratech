@@ -4,6 +4,7 @@ import {
 	computeLabelUnit,
 	PageTab,
 	PageTypePortfolio,
+	PageType,
 } from '@self/utils';
 import * as R from 'remeda';
 import { selectedLabel } from '../../utils/selected-label';
@@ -31,20 +32,23 @@ test('filter is prepopulated on redirect - property TO expenses', async ({
 	const url = getRoute({
 		entity: 'property',
 		id: property.id,
-		pageType: PageTab.Financials,
+		pageType: PageType.Id,
 		params,
 	});
 
 	await page.goto(url);
 
 	// Click Expenses details
-	await page.getByRole('button', { name: 'Details' }).nth(1).click();
+	await page
+		.getByRole('navigation', { name: 'Tabs' })
+		.getByRole('link', { name: 'Financials' })
+		.click();
 
 	await expect(page).toHaveURL(
 		getRoute({
 			entity: 'portfolio',
 			id: property.portfolioId,
-			pageType: PageTypePortfolio.Expenses,
+			pageType: PageTypePortfolio.Summary,
 			params,
 		}),
 	);
