@@ -1,4 +1,5 @@
 import { createApi } from '$api';
+import { FilterInitial } from '$lib/stores/filter/Filter.enum';
 import { property } from '$lib/stores/filter/property';
 import { unit } from '$lib/stores/filter/unit';
 import type { LayoutLoad } from './$types';
@@ -13,13 +14,13 @@ export const load: LayoutLoad = async ({
 	// URL.
 
 	// Property filter
-	const propertyId = searchParams.get('propertyId');
+	const propertyId = searchParams.get(FilterInitial.Property);
 	if (propertyId) {
 		property.set(propertyId);
 	}
 
 	// Unit filter
-	const unitId = searchParams.get('unitId');
+	const unitId = searchParams.get(FilterInitial.Unit);
 	if (unitId) {
 		unit.set(unitId);
 	}
