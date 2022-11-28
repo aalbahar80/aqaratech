@@ -13,7 +13,6 @@
 	import { BrowserTracing } from '@sentry/tracing?client';
 	import { onMount } from 'svelte';
 	import { Toaster } from 'svelte-french-toast';
-	import { MetaTags } from 'svelte-meta-tags';
 	import '../styles/tailwind.css';
 	import type { LayoutData } from './$types';
 
@@ -60,11 +59,10 @@
 	});
 </script>
 
-<MetaTags
-	title="Aqaratech"
-	description="Your property at a glance."
-	canonical="https://www.aqaratech.com/"
-/>
+<svelte:head>
+	<title>Aqaratech</title>
+	<meta name="description" content="Aqaratech Property Management" />
+</svelte:head>
 
 {#if $navigating && !$page.error}
 	<PreloadingIndicator />
