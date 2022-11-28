@@ -1,8 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { classes } from '$lib/utils/classes';
+	import HeroiconsArrowTopRightOnSquareSolid from '~icons/heroicons/arrow-top-right-on-square-solid';
 
-	export let tab: { label: string; href: string };
+	export let tab: {
+		label: string;
+		href: string;
+		isExternal?: boolean;
+		action?: () => void;
+	};
 
 	$: active = $page.url.pathname === tab.href;
 </script>
@@ -10,11 +16,16 @@
 <a
 	href={tab.href}
 	class={classes(
-		'w-full border-b-2 py-4 px-1 text-center text-sm font-medium',
+		'w-full border-b-2 py-4 px-1 text-center text-sm font-medium flex',
 		active
 			? 'border-indigo-500 text-indigo-600'
 			: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
 	)}
 >
-	{tab.label}
+	<div class="grow">
+		{tab.label}
+	</div>
+	{#if tab.isExternal}
+		<HeroiconsArrowTopRightOnSquareSolid class="h-5 w-5" />
+	{/if}
 </a>
