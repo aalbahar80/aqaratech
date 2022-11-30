@@ -66,6 +66,15 @@ test('filter is prepopulated on redirect - property TO financials', async ({
 	await expect(filter).toHaveValue(property.id);
 
 	expect(await selectedLabel(filter)).toBe(property.address);
+
+	// Filter persists
+	await page.getByRole('link', { name: 'Income' }).click();
+
+	await expect(filter, 'Filter should persist').toHaveValue(property.id);
+
+	expect(await selectedLabel(filter), 'Filter should persist').toBe(
+		property.address,
+	);
 });
 
 test('filter is prepopulated on redirect - unit TO financials', async ({
@@ -128,24 +137,21 @@ test('filter is prepopulated on redirect - unit TO financials', async ({
 
 	expect(await selectedLabel(filterUnit)).toBe(computeLabelUnit(unit));
 
-	//
-	//
-	// Click Expenses details
-	// await page.getByRole('button', { name: 'Details' }).nth(0).click();
-	//
-	// await expect(page).toHaveURL(
-	// 	getRoute({
-	// 		entity: 'portfolio',
-	// 		id: property.portfolioId,
-	// 		pageType: PageTypePortfolio.Income,
-	// 		params,
-	// 	}),
-	// );
-	//
-	// // Filter is prepopulated
-	// const filter = page.getByRole('combobox', { name: 'Unit' });
-	//
-	// await expect(filter).toHaveValue(unit.id);
-	//
-	// expect(await selectedLabel(filter)).toBe(computeLabelUnit(unit));
+	// Filter persists
+	await page.getByRole('link', { name: 'Income' }).click();
+
+	await expect(filterProperty, 'Filter:property should persist').toHaveValue(
+		property.id,
+	);
+
+	expect(
+		await selectedLabel(filterProperty),
+		'Filter:property should persist',
+	).toBe(computeLabelProperty(property));
+
+	await expect(filterUnit, 'Filter:unit should persist').toHaveValue(unit.id);
+
+	expect(await selectedLabel(filterUnit), 'Filter:unit should persist').toBe(
+		computeLabelUnit(unit),
+	);
 });
