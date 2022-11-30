@@ -1,21 +1,17 @@
 <script lang="ts">
 	import type { GroupByMonthDto } from '$api/openapi';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
-	import { property } from '$lib/stores/filter/property';
-	import { unit } from '$lib/stores/filter/unit';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
 	import { getRoute, PageTypePortfolio } from '@self/utils';
-	import * as R from 'remeda';
 
 	interface Datapoint extends GroupByMonthDto {
 		change?: number;
 	}
 
-	export let title: 'Net' | 'Income' | 'Expenses';
+	export let title: string;
 	export let data: Datapoint[];
 
 	const primary: Record<number, string | undefined> = {
@@ -24,7 +20,7 @@
 		2: undefined,
 	};
 
-	const links = {
+	const links: Record<string, string> = {
 		Income: getRoute({
 			entity: 'portfolio',
 			id: $page.params['portfolioId']!,
@@ -37,7 +33,7 @@
 			params: $page.params,
 			pageType: PageTypePortfolio.Expenses,
 		}),
-	} as const;
+	};
 
 	const colors: Record<string, string> = {
 		Net: 'text-gray-900',
@@ -50,31 +46,17 @@
 
 <Stats {title}>
 	<div slot="details">
-		{#if title === 'Income' || title === 'Expenses'}
-			<button
-				on:click={() => {
-					// Redundant if condition for svelte only
-					if (title !== 'Income' && title !== 'Expenses') {
-						throw new Error('Unexpected title');
-					}
-
-					// Prepare the store with the correct propertyId, then navigate
-					property.set(
-						$page.params['propertyId'] ??
-							R.pathOr($page.data, ['unit', 'propertyId'], undefined),
-					);
-
-					unit.set($page.params['unitId']);
-
-					void goto(links[title]);
-				}}
-			>
+		{#if links[title]}
+			<a href={links[title]}>
+				<div class="sr-only">
+					{title}
+				</div>
 				<TextButton
 					>Details
 					<!-- arrow-right  -->
 					&nbsp;&rarr;
 				</TextButton>
-			</button>
+			</a>
 		{/if}
 	</div>
 
