@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+	import DateInput from '$lib/components/dashboard/filter/DateInput.svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { range } from '$lib/stores/filter/range';
 
@@ -25,8 +26,7 @@
 	}}
 />
 
-<input
-	type="date"
+<DateInput
 	value={$range.start}
 	on:change={(e) => {
 		const value = e.currentTarget.value;
@@ -35,8 +35,7 @@
 	}}
 />
 
-<input
-	type="date"
+<DateInput
 	value={$range.end}
 	on:change={(e) => {
 		const value = e.currentTarget.value;
