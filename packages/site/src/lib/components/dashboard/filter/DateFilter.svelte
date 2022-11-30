@@ -13,6 +13,7 @@
 		<DateInput
 			value={$range.start}
 			on:change={(e) => {
+				// @ts-expect-error until forwareded events are typed
 				const value = e.currentTarget.value;
 
 				void range.setDates(value, $range.end);
@@ -22,6 +23,7 @@
 		<DateInput
 			value={$range.end}
 			on:change={(e) => {
+				// @ts-expect-error until forwareded events are typed
 				const value = e.currentTarget.value;
 
 				void range.setDates($range.start, value);
