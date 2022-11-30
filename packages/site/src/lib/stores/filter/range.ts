@@ -16,7 +16,6 @@ export function createRange() {
 		setMonths: async (months: number) => {
 			set(DateRange.createFromMonths(months));
 
-			console.log('invalidating...'); // TODO: rm
 			await invalidate(FilterEnum.Range);
 		},
 
