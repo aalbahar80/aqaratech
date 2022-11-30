@@ -4,22 +4,28 @@
 	import { range } from '$lib/stores/filter/range';
 </script>
 
-<RangeSelect />
+<div class="flex flex-col gap-1 md:flex-row">
+	<div class="md:w-1/2">
+		<RangeSelect />
+	</div>
 
-<DateInput
-	value={$range.start}
-	on:change={(e) => {
-		const value = e.currentTarget.value;
+	<div class="flex gap-1 md:w-1/2">
+		<DateInput
+			value={$range.start}
+			on:change={(e) => {
+				const value = e.currentTarget.value;
 
-		void range.setDates(value, $range.end);
-	}}
-/>
+				void range.setDates(value, $range.end);
+			}}
+		/>
 
-<DateInput
-	value={$range.end}
-	on:change={(e) => {
-		const value = e.currentTarget.value;
+		<DateInput
+			value={$range.end}
+			on:change={(e) => {
+				const value = e.currentTarget.value;
 
-		void range.setDates($range.start, value);
-	}}
-/>
+				void range.setDates($range.start, value);
+			}}
+		/>
+	</div>
+</div>

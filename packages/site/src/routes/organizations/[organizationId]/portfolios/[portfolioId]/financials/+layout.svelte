@@ -40,25 +40,23 @@
 	const hideProperty = ['payouts/table'];
 </script>
 
-{#if !hideRange.some((str) => $page.url.pathname.endsWith(str))}
-	<div class="inline-flex justify-end">
-		<div class="w-72">
+<!-- Dashboard Filter -->
+<div class="grid grid-cols-2 ">
+	{#if !hideRange.some((str) => $page.url.pathname.endsWith(str))}
+		<div class="col-span-full">
 			<DateFilter />
 		</div>
-	</div>
-{/if}
+	{/if}
 
-{#if !hideProperty.some((str) => $page.url.pathname.endsWith(str))}
-	<div class="inline-flex justify-end">
-		<div class="w-72">
+	{#if !hideProperty.some((str) => $page.url.pathname.endsWith(str))}
+		<div>
 			<PropertySelect items={data.properties.results} />
 		</div>
-	</div>
-	<div class="inline-flex justify-end">
-		<div class="w-72">
+
+		<div>
 			<UnitSelect items={data.units.results} />
 		</div>
-	</div>
-{/if}
+	{/if}
+</div>
 
 <slot />
