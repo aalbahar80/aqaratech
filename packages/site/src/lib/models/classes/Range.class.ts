@@ -1,16 +1,19 @@
-import { endOfMonthN, startOfMonthN } from '@self/utils';
+import { endOfMonthN, startOfMonthN, zodDateOnly } from '@self/utils';
+import { z } from 'zod';
 
 export class DateRange {
 	constructor(
 		public start: string,
 		public end: string,
-		public months: number,
+		public months: number | null,
 	) {}
 
-	// static schema = z.object({
-	// 	start: zodDateOnly,
-	// 	end: zodDateOnly,
-	// });
+	static schema = z
+		.object({
+			start: zodDateOnly,
+			end: zodDateOnly,
+		})
+		.refine((data) => new Date(data.start) <= new Date(data.end));
 
 	static createFromMonths(months: number) {
 		console.log('creating range from months', months); // TODO: rm
@@ -22,10 +25,9 @@ export class DateRange {
 		);
 	}
 
-	set setMonthCount(count: number) {
-		this.start = isoToDate(startOfMonthN(count));
-		this.end = isoToDate(endOfMonthN(0));
-		this.months = count;
+	static createFromDates(start: string, end: string) {
+		DateRange.schema.parse({ start, end });
+		return new DateRange(start, end, null);
 	}
 }
 

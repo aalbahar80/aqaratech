@@ -18,6 +18,26 @@ export function createRange() {
 			console.log('invalidating...'); // TODO: rm
 			await invalidate(FilterEnum.Range);
 		},
+
+		/**
+		 * Attempt to set a new range.
+		 *
+		 * If the range is valid, we call invalidate() to trigger a new fetch.
+		 * If the range is invalid, we do nothing.
+		 */
+		setDates: async (start: string, end: string) => {
+			try {
+				const updated = DateRange.createFromDates(start, end);
+				console.debug('updating range'); // TODO: rm
+
+				set(updated);
+
+				await invalidate(FilterEnum.Range);
+			} catch (e) {
+				console.debug('invalid date range'); // TODO: rm
+				return;
+			}
+		},
 	};
 }
 
