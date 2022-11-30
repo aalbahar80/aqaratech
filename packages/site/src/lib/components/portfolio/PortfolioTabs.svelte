@@ -39,13 +39,6 @@
 			}),
 		},
 		{
-			label: 'Expenses',
-			href: getRoute({
-				...baseRouteConfig,
-				pageType: PageTab.Expenses,
-			}),
-		},
-		{
 			label: 'Users',
 			href: getRoute({
 				...baseRouteConfig,
