@@ -26,6 +26,6 @@
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"typescript": "4.9.3",
-		"ufo": "1.0.0"
+		"ufo": "1.0.1"
 	}
 }

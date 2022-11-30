@@ -1,11 +1,10 @@
 import { expect } from '@playwright/test';
 import {
-	getRoute,
-	computeLabelUnit,
-	PageTab,
-	PageTypePortfolio,
-	PageType,
 	computeLabelProperty,
+	computeLabelUnit,
+	getRoute,
+	PageType,
+	PageTypePortfolio,
 } from '@self/utils';
 import * as R from 'remeda';
 import { selectedLabel } from '../../utils/selected-label';

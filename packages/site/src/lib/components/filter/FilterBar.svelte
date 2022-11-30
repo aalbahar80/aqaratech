@@ -38,7 +38,11 @@
 					<button
 						type="button"
 						class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden"
-						on:click={() => slideover?.open()}
+						on:click={() => {
+							if (slideover?.open) {
+								slideover.open();
+							}
+						}}
 					>
 						Filters
 					</button>

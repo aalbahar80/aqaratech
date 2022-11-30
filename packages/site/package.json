@@ -21,14 +21,14 @@
 		"test:ui": "vitest --ui"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.1.144",
+		"@iconify/json": "2.1.146",
 		"@logtail/types": "0.1.12",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:2.1.0",
-		"@sentry/svelte": "7.21.1",
-		"@sentry/tracing": "7.21.1",
+		"@sentry/svelte": "7.22.0",
+		"@sentry/tracing": "7.22.0",
 		"@sveltejs/adapter-node": "1.0.0-next.101",
-		"@sveltejs/kit": "1.0.0-next.562",
+		"@sveltejs/kit": "1.0.0-next.567",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/forms": "0.5.3",
@@ -62,7 +62,7 @@
 		"sorcery": "0.10.0",
 		"source-map-support": "0.5.21",
 		"svelte": "3.53.1",
-		"svelte-check": "2.9.2",
+		"svelte-check": "2.10.0",
 		"svelte-dnd-action": "0.9.22",
 		"svelte-frappe-charts": "1.9.2",
 		"svelte-french-toast": "1.0.3",
@@ -73,7 +73,7 @@
 		"ts-toolbelt": "9.6.0",
 		"tslib": "2.4.1",
 		"typescript": "4.9.3",
-		"typescript-svelte-plugin": "0.3.10",
+		"typescript-svelte-plugin": "0.3.11",
 		"unplugin-icons": "0.14.14",
 		"vite": "3.2.4",
 		"vite-plugin-iso-import": "0.1.3",
@@ -84,7 +84,7 @@
 	"dependencies": {
 		"@logtail/node": "0.1.14",
 		"@logtail/winston": "0.1.14",
-		"@sentry/node": "7.21.1",
+		"@sentry/node": "7.22.0",
 		"winston": "3.8.2"
 	}
 }
