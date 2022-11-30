@@ -4,6 +4,10 @@ import { property } from '$lib/stores/filter/property';
 import { unit } from '$lib/stores/filter/unit';
 import type { LayoutLoad } from './$types';
 
+// This load function gets called on every request because it depends on
+// url.searchParams. Ideally, we'd only call it if the query string changed,or
+// if there is any searchParams at all.
+
 export const load: LayoutLoad = async ({
 	fetch,
 	params,
