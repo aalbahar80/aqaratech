@@ -15,11 +15,12 @@
 <Select
 	current={$range.months}
 	options={rangeOptions}
-	on:select={async (e) => {
+	on:select={(e) => {
 		const value = e.detail.value;
 
-		if (value) {
-			await range.setMonths(value);
+		// only check for null value. 0 is a valid value.
+		if (value !== null) {
+			void range.setMonths(value);
 		}
 	}}
 />
