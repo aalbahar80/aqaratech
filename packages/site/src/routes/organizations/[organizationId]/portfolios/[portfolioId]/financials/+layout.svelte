@@ -41,7 +41,7 @@
 </script>
 
 <!-- Dashboard Filter -->
-<div class="grid grid-cols-2 ">
+<div class="grid grid-cols-2 gap-8 gap-x-2 md:gap-8">
 	{#if !hideRange.some((str) => $page.url.pathname.endsWith(str))}
 		<div class="col-span-full">
 			<DateFilter />

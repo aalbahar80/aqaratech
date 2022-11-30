@@ -24,7 +24,7 @@
 	<label
 		for={title}
 		class={clsx(
-			'block text-sm font-medium text-gray-700',
+			'block pb-2 text-sm font-medium text-gray-700',
 			hideLabel && 'sr-only',
 		)}
 	>

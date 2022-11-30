@@ -4,12 +4,12 @@
 	import { range } from '$lib/stores/filter/range';
 </script>
 
-<div class="flex flex-col gap-1 md:flex-row">
+<div class="flex flex-col gap-2 md:flex-row md:gap-8">
 	<div class="md:w-1/2">
 		<RangeSelect />
 	</div>
 
-	<div class="flex gap-1 md:w-1/2">
+	<div class="flex gap-2 md:w-1/2 md:gap-8">
 		<DateInput
 			value={$range.start}
 			on:change={(e) => {
