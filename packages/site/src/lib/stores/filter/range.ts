@@ -3,6 +3,7 @@ import { defaultRange } from '$lib/components/charts/utils/date-range';
 import { DateRange } from '$lib/models/classes/Range.class';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { writable } from '$lib/utils/sandboxed';
+import debounce from 'debounce';
 
 export function createRange() {
 	const { subscribe, set } = writable<DateRange>(
@@ -25,7 +26,7 @@ export function createRange() {
 		 * If the range is valid, we call invalidate() to trigger a new fetch.
 		 * If the range is invalid, we do nothing.
 		 */
-		setDates: async (start: string, end: string) => {
+		setDates: debounce(async (start: string, end: string) => {
 			// always set the new range to keep in sync with the UI, even if date range is invalid
 			set(new DateRange(start, end, null));
 
@@ -35,7 +36,7 @@ export function createRange() {
 			if (parsed.success) {
 				await invalidate(FilterEnum.Range);
 			}
-		},
+		}, 300),
 	};
 }
 
