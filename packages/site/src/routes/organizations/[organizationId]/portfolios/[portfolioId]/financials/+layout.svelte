@@ -2,7 +2,7 @@
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import PropertySelect from '$lib/components/dashboard/PropertySelect.svelte';
-	import RangeSelect from '$lib/components/dashboard/RangeSelect.svelte';
+	import DateFilter from '$lib/components/dashboard/filter/DateFilter.svelte';
 	import UnitSelect from '$lib/components/dashboard/UnitSelect.svelte';
 	import { FilterInitial } from '$lib/stores/filter/Filter.enum';
 	import type { LayoutData } from './$types';
@@ -43,7 +43,7 @@
 {#if !hideRange.some((str) => $page.url.pathname.endsWith(str))}
 	<div class="inline-flex justify-end">
 		<div class="w-72">
-			<RangeSelect />
+			<DateFilter />
 		</div>
 	</div>
 {/if}
