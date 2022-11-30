@@ -26,18 +26,14 @@ export function createRange() {
 		 * If the range is invalid, we do nothing.
 		 */
 		setDates: async (start: string, end: string) => {
-			try {
-				const updated = DateRange.createFromDates(start, end);
-				console.debug('updating range'); // TODO: rm
+			// always set the new range to keep in sync with the UI, even if date range is invalid
+			set(new DateRange(start, end, null));
 
-				set(updated);
+			// check if the range is valid, and if so, invalidate
+			const parsed = DateRange.schema.safeParse({ start, end });
 
+			if (parsed.success) {
 				await invalidate(FilterEnum.Range);
-			} catch (e) {
-				console.debug('invalid date range'); // TODO: rm
-
-				// we still need to set the new range to keep in sync with the UI
-				set(new DateRange(start, end, null));
 			}
 		},
 	};

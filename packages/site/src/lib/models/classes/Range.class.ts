@@ -24,11 +24,6 @@ export class DateRange {
 			months,
 		);
 	}
-
-	static createFromDates(start: string, end: string) {
-		DateRange.schema.parse({ start, end });
-		return new DateRange(start, end, null);
-	}
 }
 
 const isoToDate = (iso: string) => {
