@@ -29,17 +29,24 @@ export const load: LayoutLoad = async ({
 
 	const api = createApi(fetch);
 
-	const properties = await api.portfolios.findProperties({
-		id: portfolioId,
-		take: 100,
-	});
+	const [portfolio, properties, units] = await Promise.all([
+		api.portfolios.findOne({
+			id: portfolioId,
+		}),
 
-	const units = await api.portfolios.findUnits({
-		id: portfolioId,
-		take: 100,
-	});
+		api.portfolios.findProperties({
+			id: portfolioId,
+			take: 100,
+		}),
+
+		api.portfolios.findUnits({
+			id: portfolioId,
+			take: 100,
+		}),
+	]);
 
 	return {
+		portfolio,
 		properties,
 		units,
 	};
