@@ -7,8 +7,8 @@ import {
 	PageTypePortfolio,
 } from '@self/utils';
 import * as R from 'remeda';
-import { selectedLabel } from '../../utils/selected-label';
 import { test } from '../api/api-fixtures';
+import { Filters } from './filter-model';
 
 test.use({
 	userRoleType: 'PORTFOLIO',
@@ -60,23 +60,18 @@ test('filter is prepopulated on redirect - property TO financials', async ({
 		}),
 	);
 
-	// Filter is prepopulated
-	const filter = page.getByRole('combobox', { name: 'Property' });
+	const filters = new Filters(page);
 
-	await expect(filter).toHaveValue(property.id);
+	// Filter:property is prepopulated
+	await expect(filters.property.el).toHaveValue(property.id);
+	expect(await filters.property.label()).toBe(computeLabelProperty(property));
 
-	expect(await selectedLabel(filter)).toBe(property.address);
-
-	await page.pause();
-
-	// Filter persists
+	// Navigate to income details
 	await page.getByRole('link', { name: 'Income Details →' }).click();
 
-	await expect(filter, 'Filter should persist').toHaveValue(property.id);
-
-	expect(await selectedLabel(filter), 'Filter should persist').toBe(
-		property.address,
-	);
+	// Filter:property persists
+	await expect(filters.property.el).toHaveValue(property.id);
+	expect(await filters.property.label()).toBe(computeLabelProperty(property));
 });
 
 test('filter is prepopulated on redirect - unit TO financials', async ({
@@ -123,37 +118,24 @@ test('filter is prepopulated on redirect - unit TO financials', async ({
 		}),
 	);
 
+	const filters = new Filters(page);
+
 	// Filter:property is prepopulated
-	const filterProperty = page.getByRole('combobox', { name: 'Property' });
-
-	await expect(filterProperty).toHaveValue(property.id);
-
-	expect(await selectedLabel(filterProperty)).toBe(
-		computeLabelProperty(property),
-	);
+	await expect(filters.property.el).toHaveValue(unit.propertyId);
+	expect(await filters.property.label()).toBe(computeLabelProperty(property));
 
 	// Filter:unit is prepopulated
-	const filterUnit = page.getByRole('combobox', { name: 'Unit' });
+	await expect(filters.unit.el).toHaveValue(unit.id);
+	expect(await filters.unit.label()).toBe(computeLabelUnit(unit));
 
-	await expect(filterUnit).toHaveValue(unit.id);
-
-	expect(await selectedLabel(filterUnit)).toBe(computeLabelUnit(unit));
-
-	// Filter persists
+	// Navigate to income details
 	await page.getByRole('link', { name: 'Income Details →' }).click();
 
-	await expect(filterProperty, 'Filter:property should persist').toHaveValue(
-		property.id,
-	);
+	// Filter:property persists
+	await expect(filters.property.el).toHaveValue(unit.propertyId);
+	expect(await filters.property.label()).toBe(computeLabelProperty(property));
 
-	expect(
-		await selectedLabel(filterProperty),
-		'Filter:property should persist',
-	).toBe(computeLabelProperty(property));
-
-	await expect(filterUnit, 'Filter:unit should persist').toHaveValue(unit.id);
-
-	expect(await selectedLabel(filterUnit), 'Filter:unit should persist').toBe(
-		computeLabelUnit(unit),
-	);
+	// Filter:unit persists
+	await expect(filters.unit.el).toHaveValue(unit.id);
+	expect(await filters.unit.label()).toBe(computeLabelUnit(unit));
 });
