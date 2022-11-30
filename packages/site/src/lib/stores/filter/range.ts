@@ -35,7 +35,9 @@ export function createRange() {
 				await invalidate(FilterEnum.Range);
 			} catch (e) {
 				console.debug('invalid date range'); // TODO: rm
-				return;
+
+				// we still need to set the new range to keep in sync with the UI
+				set(new DateRange(start, end, null));
 			}
 		},
 	};
