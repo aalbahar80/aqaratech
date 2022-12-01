@@ -27,10 +27,20 @@ interface GetIdRouteOrganization extends BaseGetRoute {
 	pageType: OrganizationPageTab;
 }
 
+export interface GetDashboardRoute extends BaseGetRoute {
+	id: string;
+	entity: Extract<Entity, 'portfolio'>;
+	pageType: PageTypePortfolio;
+	predefined?: {
+		propertyId: string;
+		unitId?: string;
+	};
+}
+
 interface GetIdRoutePortfolio extends BaseGetRoute {
 	id: string;
 	entity: Extract<Entity, 'portfolio'>;
-	pageType: PageTypePortfolio | PortfolioPageTab;
+	pageType: PortfolioPageTab;
 }
 
 interface GetIdRouteTenant extends BaseGetRoute {
@@ -67,6 +77,7 @@ export type GetIdRoute =
 	| GetIdRouteEntity
 	| GetIdRouteOrganization
 	| GetIdRouteTenant
+	| GetDashboardRoute
 	| GetIdRoutePortfolio
 	| GetIdRouteProperty
 	| GetIdRouteUnit

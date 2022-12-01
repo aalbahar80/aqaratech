@@ -14,8 +14,11 @@ const untabbed: [PageTypePortfolio | PageTab | PageType, string][] = [
 	[PageType.Edit, 'edit'],
 	[PageTypePortfolio.Summary, 'financials/summary'],
 	[PageTypePortfolio.Income, 'financials/income'],
+	[PageTypePortfolio.IncomeTable, 'financials/income/table'],
 	[PageTypePortfolio.Expenses, 'financials/expenses'],
+	[PageTypePortfolio.ExpensesTable, 'financials/expenses/table'],
 	[PageTypePortfolio.Payouts, 'financials/payouts/table'],
+	[PageTypePortfolio.PayoutsTable, 'financials/payouts/table'],
 ];
 
 test.each(untabbed)(
