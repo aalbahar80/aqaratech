@@ -25,11 +25,9 @@ export const getIdRoute = (input: GetIdRoute, base: string) => {
 
 	if (input.pageType === PageType.Id) {
 		return idRoute;
-	} else if (
-		input.pageType !== PageTab.Financials &&
-		input.pageType in pageTypeToUrl
-	) {
-		return `${idRoute}/${pageTypeToUrl[input.pageType]}`;
+	} else if (input.pageType in pageTypeToUrl) {
+		const title = pageTypeToUrl[input.pageType];
+		return `${idRoute}/${title}`;
 	} else {
 		console.error('Invalid pageType', input.pageType);
 		throw new Error(`Invalid page address`);
