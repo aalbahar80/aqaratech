@@ -6,7 +6,6 @@ import type { GetIdRoute } from 'src/route-helpers/types/id-route.type';
 const pageTypeToUrl = {
 	[PageType.Edit]: 'edit',
 	[PageTab.Files]: 'files',
-	[PageTab.Financials]: 'financials',
 	[PageTab.Occupancy]: 'occupancy',
 	[PageTab.Properties]: 'properties',
 	[PageTab.Units]: 'units',
@@ -26,7 +25,10 @@ export const getIdRoute = (input: GetIdRoute, base: string) => {
 
 	if (input.pageType === PageType.Id) {
 		return idRoute;
-	} else if (input.pageType in pageTypeToUrl) {
+	} else if (
+		input.pageType !== PageTab.Financials &&
+		input.pageType in pageTypeToUrl
+	) {
 		return `${idRoute}/${pageTypeToUrl[input.pageType]}`;
 	} else {
 		console.error('Invalid pageType', input.pageType);

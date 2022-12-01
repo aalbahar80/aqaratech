@@ -77,7 +77,6 @@ export type GetIdRoute =
 	| GetIdRouteEntity
 	| GetIdRouteOrganization
 	| GetIdRouteTenant
-	| GetDashboardRoute
 	| GetIdRoutePortfolio
 	| GetIdRouteProperty
 	| GetIdRouteUnit

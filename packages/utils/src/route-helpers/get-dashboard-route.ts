@@ -1,11 +1,18 @@
-import { PageTypePortfolio } from './enums/page-tab-portfolio.enum';
+import {
+	isPageTypePortfolio,
+	PageTypePortfolio,
+} from './enums/page-tab-portfolio.enum';
 import { entitiesMap } from 'src/entity/entity-map';
 import type { GetDashboardRoute } from './types/id-route.type';
+import type { GetRoute } from './types/route-helpers.type';
 
-const filterKeyMap = {
+/**
+ * Special keys to handle predefined routes.
+ */
+const filterKeyMap: Record<string, string> = {
 	propertyId: 'initialPropertyId',
 	unitId: 'initialUnitId',
-} as const;
+};
 
 const pageTypeToUrl = {
 	[PageTypePortfolio.Summary]: 'financials/summary',
@@ -15,7 +22,7 @@ const pageTypeToUrl = {
 	[PageTypePortfolio.ExpensesTable]: 'financials/expenses/table',
 	[PageTypePortfolio.Payouts]: 'financials/payouts/table',
 	[PageTypePortfolio.PayoutsTable]: 'financials/payouts/table',
-};
+} as const;
 
 export const getDashboardRoute = (input: GetDashboardRoute, base: string) => {
 	const entityName = entitiesMap.portfolio.urlName;
@@ -35,8 +42,10 @@ export const getDashboardRoute = (input: GetDashboardRoute, base: string) => {
 
 	// if predefined propertyId or unitId, add them	to the url search params
 	for (const [key, value] of Object.entries(input.predefined)) {
-		if (key in filterKeyMap) {
-			search.set(filterKeyMap[key], value);
+		const specialKey = filterKeyMap[key];
+
+		if (specialKey) {
+			search.set(specialKey, value);
 		} else {
 			search.set(key, value);
 		}
@@ -47,3 +56,6 @@ export const getDashboardRoute = (input: GetDashboardRoute, base: string) => {
 
 	return `${idRoute}/set-filter?${search.toString()}`;
 };
+
+export const isDashboardRoute = (input: GetRoute): input is GetDashboardRoute =>
+	isPageTypePortfolio(input.pageType);

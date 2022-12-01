@@ -4,7 +4,6 @@ import { describe, expect, test } from 'vitest';
 
 const pageTypes = [
 	[PageTab.Files, 'files'],
-	[PageTab.Financials, 'financials'],
 	[PageTab.Occupancy, 'occupancy'],
 	[PageTab.Units, 'units'],
 	[PageTab.Leases, 'leases'],
