@@ -11,6 +11,7 @@
 
 	<div class="flex gap-2 md:w-1/2 md:gap-8">
 		<DateInput
+			name="start"
 			value={$range.start}
 			on:change={(e) => {
 				// @ts-expect-error until forwareded events are typed
@@ -21,6 +22,7 @@
 		/>
 
 		<DateInput
+			name="end"
 			value={$range.end}
 			on:change={(e) => {
 				// @ts-expect-error until forwareded events are typed

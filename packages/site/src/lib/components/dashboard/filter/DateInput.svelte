@@ -1,8 +1,13 @@
 <script lang="ts">
 	export let value: any;
+	export let name: string;
 </script>
 
-<input class="date-input" type="date" {value} on:change />
+<label for={name} class="sr-only">
+	{name}
+</label>
+
+<input id={name} class="date-input" type="date" {value} on:change />
 
 <style lang="postcss">
 	.date-input {
