@@ -19,7 +19,6 @@ const pageTypeToUrl = {
 	[PageTab.Invoices]: 'invoices',
 	[PageTab.Roles]: 'roles',
 	[PageTab.Balance]: 'balance',
-	[PageTab.Expenses]: 'expenses',
 	[PageTab.ExpenseCategories]: 'expense-categories',
 };
 

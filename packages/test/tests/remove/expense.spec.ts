@@ -1,4 +1,4 @@
-import { getRoute, PageTab } from '@self/utils';
+import { getRoute, PageTypePortfolio } from '@self/utils';
 import * as R from 'remeda';
 import { test } from '../api/api-fixtures';
 import { RemoveModel } from './remove-model';
@@ -11,7 +11,7 @@ test.fixme('delete expense', async ({ page, org, expenses }) => {
 	// TODO: add /table routes to getRoute
 	const url = getRoute({
 		entity: 'portfolio',
-		pageType: PageTab.Expenses,
+		pageType: PageTypePortfolio.Expenses,
 		id: expenses[0]!.portfolioId,
 		params: {
 			organizationId: org.organization.id,
