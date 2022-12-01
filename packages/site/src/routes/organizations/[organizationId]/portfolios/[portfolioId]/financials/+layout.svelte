@@ -18,7 +18,9 @@
 	{data.portfolio.fullName}
 </h2>
 
-<PopoverDivider />
+<div class="py-4">
+	<PopoverDivider />
+</div>
 
 <!-- Dashboard Filter -->
 <div class="grid grid-cols-2 gap-8 gap-x-2 md:gap-8">
@@ -37,6 +39,10 @@
 			<UnitSelect items={data.units.results} />
 		</div>
 	{/if}
+</div>
+
+<div class="py-4">
+	<PopoverDivider />
 </div>
 
 <slot />
