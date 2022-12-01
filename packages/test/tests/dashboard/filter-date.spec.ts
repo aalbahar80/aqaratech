@@ -32,8 +32,6 @@ test('range filter changes to custom', async ({
 
 	await page.goto(url);
 
-	await page.pause();
-
 	const filters = new Filters(page);
 
 	await expect(filters.range.el).toHaveValue('12');
