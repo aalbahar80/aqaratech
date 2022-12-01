@@ -35,7 +35,7 @@ export function createRange() {
 			if (parsed.success) {
 				await invalidate(FilterEnum.Range);
 			}
-		}, 300),
+		}, 150),
 	};
 }
 
