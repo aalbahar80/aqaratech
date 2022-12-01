@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import HeroiconsChartPie from '~icons/heroicons/chart-pie';
+	import { CHART_HEIGHT } from '$lib/components/dashboard/cards/chart-height.const';
 
 	export let empty: boolean;
 
-	const height = 600; // TODO: make this dynamic
+	const height = CHART_HEIGHT;
 </script>
 
 {#if empty}
