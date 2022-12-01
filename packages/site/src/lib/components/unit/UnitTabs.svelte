@@ -16,7 +16,7 @@
 		pageType: PageTypePortfolio.Summary,
 		params: $page.params,
 		predefined: {
-			propertyId: $page.params.propertyId!,
+			propertyId: $page.data.unit.propertyId,
 			unitId: $page.params.unitId!,
 		},
 	});
