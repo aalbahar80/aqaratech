@@ -109,3 +109,31 @@ test('invalid date does not trigger http call - multiple', async ({
 		// filters.end.fill('2022-01-01'), // Why does this trigger a request?
 	]);
 });
+
+test('start date persists', async ({ page, filters }) => {
+	// set start date first, making range invalid
+	await filters.start.fill('2030-01-01');
+
+	const [request] = await Promise.all([
+		page.waitForRequest(/.*start=2030-01-01&end=20231-01-01.*/),
+
+		// set start to fix range
+		filters.end.fill('2031-01-01'),
+	]);
+
+	expect(request).toBeTruthy();
+});
+
+test('end date persists', async ({ page, filters }) => {
+	// set end date first, making range invalid
+	await filters.end.fill('2020-01-01');
+
+	const [request] = await Promise.all([
+		page.waitForRequest(/.*start=2019-01-01&end=2020-01-01.*/),
+
+		// set start to fix range
+		filters.start.fill('2019-01-01'),
+	]);
+
+	expect(request).toBeTruthy();
+});
