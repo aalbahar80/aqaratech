@@ -77,7 +77,7 @@ test('invalid date does not trigger http call', async ({ page, filters }) => {
 
 	// @ts-expect-error no use
 	const [request] = await Promise.all([
-		page.waitForRequest(/.*end=2025-01-01/, {
+		page.waitForRequest(/.*end/, {
 			timeout: 5000,
 		}),
 
