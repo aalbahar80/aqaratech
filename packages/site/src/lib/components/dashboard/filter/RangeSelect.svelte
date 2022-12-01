@@ -13,6 +13,7 @@
 </script>
 
 <Select
+	title="Range"
 	current={$range.months}
 	options={rangeOptions}
 	on:select={(e) => {
