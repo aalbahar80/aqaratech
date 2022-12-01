@@ -1,37 +1,33 @@
 import { expect } from '@playwright/test';
 import { getRoute, PageTypePortfolio } from '@self/utils';
-import * as R from 'remeda';
-import { test } from '../api/api-fixtures';
+import { test as base } from '../api/api-fixtures';
 import { Filters } from './filter-model';
 
-test.use({
+base.use({
 	userRoleType: 'PORTFOLIO',
-	propertiesParams: R.times(3, () => ({})),
-	unitsParams: R.times(10, () => ({})),
-	expensesParams: R.times(10, () => ({
-		amount: 100,
-	})),
 });
 
-test('range filter changes to custom', async ({
-	scopedPage: page,
-	org,
-	property,
-}) => {
-	const params = {
-		organizationId: org.organization.id,
-		portfolioId: property.portfolioId,
-	};
+const test = base.extend({
+	page: async ({ scopedPage: page, org, property }, use) => {
+		const params = {
+			organizationId: org.organization.id,
+			portfolioId: property.portfolioId,
+		};
 
-	const url = getRoute({
-		entity: 'portfolio',
-		id: property.portfolioId,
-		pageType: PageTypePortfolio.Expenses,
-		params,
-	});
+		const url = getRoute({
+			entity: 'portfolio',
+			id: property.portfolioId,
+			pageType: PageTypePortfolio.Expenses,
+			params,
+		});
 
-	await page.goto(url);
+		await page.goto(url);
 
+		await use(page);
+	},
+});
+
+test('range filter changes to custom', async ({ page }) => {
 	const filters = new Filters(page);
 
 	await expect(filters.range.el).toHaveValue('12');
