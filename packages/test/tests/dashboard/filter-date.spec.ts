@@ -59,3 +59,29 @@ test('range filter changes to custom when editing end date', async ({
 	await expect(filters.range.el).toHaveValue('null');
 	expect(await filters.range.label()).toBe('Custom');
 });
+
+test('updating date triggers http call', async ({ page, filters }) => {
+	const [request] = await Promise.all([
+		page.waitForRequest(/.*end=2025-01-01/),
+
+		// set invalid end	date
+		filters.end.fill('2025-01-01'),
+	]);
+
+	expect(request).toBeTruthy();
+});
+
+test('invalid date does not trigger http call', async ({ page, filters }) => {
+	// this test should fail to indicate that no http call is made
+	test.fail();
+
+	// @ts-expect-error no use
+	const [request] = await Promise.all([
+		page.waitForRequest(/.*end=2025-01-01/, {
+			timeout: 5000,
+		}),
+
+		// set invalid end	date
+		filters.end.fill('1990-01-01'),
+	]);
+});
