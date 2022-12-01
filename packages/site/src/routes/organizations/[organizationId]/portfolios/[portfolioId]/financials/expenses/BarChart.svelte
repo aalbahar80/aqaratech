@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { GroupByMonthDto } from '$api/openapi';
-	import Chart from '$lib/components/charts/Chart.svelte';
 	import { revenueChart } from '$lib/components/charts/revenue';
 	import { getColor } from '$lib/utils/colors';
+	import Chart from '$lib/components/charts/Chart.svelte';
+	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
 
 	export let expenses: GroupByMonthDto[];
 
@@ -21,6 +22,8 @@
 	];
 </script>
 
-<Chart let:height let:width>
-	<canvas {height} {width} use:revenueChart={barDatasets} />
-</Chart>
+<ChartWrapper empty={expenses.length < 2}>
+	<Chart let:height let:width>
+		<canvas {height} {width} use:revenueChart={barDatasets} />
+	</Chart>
+</ChartWrapper>

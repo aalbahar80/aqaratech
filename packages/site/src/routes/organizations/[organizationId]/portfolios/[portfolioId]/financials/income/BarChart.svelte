@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { IncomeByMonthDto } from '$api/openapi';
-	import Chart from '$lib/components/charts/Chart.svelte';
 	import { revenueChart } from '$lib/components/charts/revenue';
 	import { getColor } from '$lib/utils/colors';
+	import Chart from '$lib/components/charts/Chart.svelte';
+	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
 
 	export let income: IncomeByMonthDto;
 
@@ -32,6 +33,8 @@
 	];
 </script>
 
-<Chart let:height let:width>
-	<canvas {height} {width} use:revenueChart={barDatasets} />
-</Chart>
+<ChartWrapper empty={income.paid.length < 2 && income.unpaid.length < 2}>
+	<Chart let:height let:width>
+		<canvas {height} {width} use:revenueChart={barDatasets} />
+	</Chart>
+</ChartWrapper>
