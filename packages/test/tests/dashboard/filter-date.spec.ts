@@ -7,7 +7,9 @@ base.use({
 	userRoleType: 'PORTFOLIO',
 });
 
-const test = base.extend({
+const test = base.extend<{
+	filters: Filters;
+}>({
 	page: async ({ scopedPage: page, org, property }, use) => {
 		const params = {
 			organizationId: org.organization.id,
@@ -25,17 +27,37 @@ const test = base.extend({
 
 		await use(page);
 	},
+
+	filters: async ({ page }, use) => {
+		const filters = new Filters(page);
+
+		await expect(filters.range.el).toHaveValue('12');
+		expect(await filters.range.label()).toBe('Last 12 months');
+
+		await use(filters);
+	},
 });
 
-test('range filter changes to custom', async ({ page }) => {
-	const filters = new Filters(page);
-
-	await expect(filters.range.el).toHaveValue('12');
-	expect(await filters.range.label()).toBe('Last 12 months');
-
+test('range filter changes to custom when editing start date', async ({
+	page,
+	filters,
+}) => {
 	// Manually change start date
-	const start = page.getByLabel('start');
-	await start.fill('2021-01-01');
+	const input = page.getByLabel('start');
+	await input.fill('2021-01-01');
+
+	// Expect range to be custom
+	await expect(filters.range.el).toHaveValue('null');
+	expect(await filters.range.label()).toBe('Custom');
+});
+
+test('range filter changes to custom when editing end date', async ({
+	page,
+	filters,
+}) => {
+	// Manually change end date
+	const input = page.getByLabel('end');
+	await input.fill('2025-01-01');
 
 	// Expect range to be custom
 	await expect(filters.range.el).toHaveValue('null');
