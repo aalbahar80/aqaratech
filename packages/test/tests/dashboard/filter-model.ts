@@ -6,9 +6,13 @@ export class Filters {
 	readonly property: Filter;
 	readonly unit: Filter;
 	readonly range: Filter;
+	readonly start: Locator;
+	readonly end: Locator;
 
 	constructor(page: Page) {
 		this.page = page;
+		this.start = page.getByLabel('start');
+		this.end = page.getByLabel('end');
 		this.property = new Filter(
 			page.getByRole('combobox', { name: 'Property' }),
 		);

@@ -39,12 +39,10 @@ const test = base.extend<{
 });
 
 test('range filter changes to custom when editing start date', async ({
-	page,
 	filters,
 }) => {
 	// Manually change start date
-	const input = page.getByLabel('start');
-	await input.fill('2021-01-01');
+	await filters.start.fill('2021-01-01');
 
 	// Expect range to be custom
 	await expect(filters.range.el).toHaveValue('null');
@@ -52,12 +50,10 @@ test('range filter changes to custom when editing start date', async ({
 });
 
 test('range filter changes to custom when editing end date', async ({
-	page,
 	filters,
 }) => {
 	// Manually change end date
-	const input = page.getByLabel('end');
-	await input.fill('2025-01-01');
+	await filters.end.fill('2025-01-01');
 
 	// Expect range to be custom
 	await expect(filters.range.el).toHaveValue('null');
