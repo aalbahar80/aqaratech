@@ -11,13 +11,12 @@
 	const tabs = [
 		{
 			label: 'Table',
-			href:
-				getRoute({
-					entity: 'portfolio',
-					params: $page.params,
-					id: $page.params.portfolioId!,
-					pageType: PageTypePortfolio[dataType],
-				}) + '/table',
+			href: getRoute({
+				entity: 'portfolio',
+				params: $page.params,
+				id: $page.params.portfolioId!,
+				pageType: PageTypePortfolio[`${dataType}Table`],
+			}),
 			icon: HeroiconsTableCells,
 		},
 		{

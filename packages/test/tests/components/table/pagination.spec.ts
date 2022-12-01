@@ -22,16 +22,15 @@ test.use({
 		{ scopedPage: page, org, portfolio, expenses: _expenses },
 		use,
 	) => {
-		const url =
-			getRoute({
-				entity: 'portfolio',
-				id: portfolio.id,
-				pageType: PageTypePortfolio.Expenses,
-				params: {
-					organizationId: org.organization.id,
-					portfolioId: portfolio.id,
-				},
-			}) + '/table';
+		const url = getRoute({
+			entity: 'portfolio',
+			id: portfolio.id,
+			pageType: PageTypePortfolio.ExpensesTable,
+			params: {
+				organizationId: org.organization.id,
+				portfolioId: portfolio.id,
+			},
+		});
 
 		await page.goto(url);
 

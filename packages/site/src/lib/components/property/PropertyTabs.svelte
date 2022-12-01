@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
-	import { FilterInitial } from '$lib/stores/filter/Filter.enum';
 	import { getRoute, PageType, PageTypePortfolio } from '@self/utils';
 
 	$: baseRoute = getRoute({
@@ -11,11 +10,14 @@
 		params: $page.params,
 	});
 
-	$: financialsBaseRoute = getRoute({
+	$: financialsRoute = getRoute({
 		entity: 'portfolio',
 		id: $page.params.portfolioId!,
 		pageType: PageTypePortfolio.Summary,
 		params: $page.params,
+		predefined: {
+			propertyId: $page.params.propertyId!,
+		},
 	});
 
 	$: tabs = [
@@ -23,19 +25,7 @@
 		{
 			label: 'Financials',
 			isExternal: true,
-			href:
-				getRoute({
-					entity: 'portfolio',
-					id: $page.params.portfolioId!,
-					pageType: PageType.Id,
-					params: $page.params,
-				}) +
-				'/set-filter' +
-				'?' +
-				new URLSearchParams({
-					[FilterInitial.Property]: $page.params.propertyId!,
-					redirectTo: financialsBaseRoute,
-				}).toString(),
+			href: financialsRoute,
 		},
 		{ label: 'Occupancy', href: `${baseRoute}/occupancy` },
 		{ label: 'Units', href: `${baseRoute}/units` },
