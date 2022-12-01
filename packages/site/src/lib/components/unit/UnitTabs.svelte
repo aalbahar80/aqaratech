@@ -24,11 +24,18 @@
 			label: 'Financials',
 			isExternal: true,
 			href:
-				financialsBaseRoute +
+				getRoute({
+					entity: 'portfolio',
+					id: $page.params.portfolioId!,
+					pageType: PageType.Id,
+					params: $page.params,
+				}) +
+				'/set-filter' +
 				'?' +
 				new URLSearchParams({
 					[FilterInitial.Property]: $page.data.unit.propertyId,
 					[FilterInitial.Unit]: $page.params.unitId!,
+					redirectTo: financialsBaseRoute,
 				}).toString(),
 		},
 		{ label: 'Leases', href: `${baseRoute}/leases` },

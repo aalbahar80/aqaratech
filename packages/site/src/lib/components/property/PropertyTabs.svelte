@@ -24,10 +24,17 @@
 			label: 'Financials',
 			isExternal: true,
 			href:
-				financialsBaseRoute +
+				getRoute({
+					entity: 'portfolio',
+					id: $page.params.portfolioId!,
+					pageType: PageType.Id,
+					params: $page.params,
+				}) +
+				'/set-filter' +
 				'?' +
 				new URLSearchParams({
 					[FilterInitial.Property]: $page.params.propertyId!,
+					redirectTo: financialsBaseRoute,
 				}).toString(),
 		},
 		{ label: 'Occupancy', href: `${baseRoute}/occupancy` },
