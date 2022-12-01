@@ -1,4 +1,4 @@
-import { FilterInitial } from '$lib/stores/filter/Filter.enum';
+import { FilterInitial } from '@self/utils';
 import { property } from '$lib/stores/filter/property';
 import { unit } from '$lib/stores/filter/unit';
 import { redirect } from '@sveltejs/kit';

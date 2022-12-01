@@ -7,11 +7,21 @@ import type { GetDashboardRoute } from './types/id-route.type';
 import type { GetRoute } from './types/route-helpers.type';
 
 /**
+ * Key to use for storing any intial filter value in the URL. The value is used
+ * to initialize the filter store in set-filter/+page.ts. Then, the key-value pair is
+ * removed from the URL since the user is redirected.
+ */
+export const FilterInitial = {
+	Property: 'initialPropertyId',
+	Unit: 'initialUnitId',
+};
+
+/**
  * Special keys to handle predefined routes.
  */
 const filterKeyMap: Record<string, string> = {
-	propertyId: 'initialPropertyId',
-	unitId: 'initialUnitId',
+	propertyId: FilterInitial.Property,
+	unitId: FilterInitial.Unit,
 };
 
 const pageTypeToUrl = {
