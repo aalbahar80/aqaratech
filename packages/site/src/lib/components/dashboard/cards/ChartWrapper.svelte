@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import HeroiconsChartPie from '~icons/heroicons/chart-pie';
 
 	export let empty: boolean;
@@ -8,8 +9,9 @@
 
 {#if empty}
 	<div
-		class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
+		class="w-full overflow-hidden rounded-lg bg-white bg-opacity-50 p-8 shadow"
 		style="height: {height}px;"
+		in:fade
 	>
 		<div
 			class="flex h-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-center"
