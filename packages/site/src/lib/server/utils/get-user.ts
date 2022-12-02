@@ -53,7 +53,7 @@ export const getUser = async ({
 		// clear the role cookie if it exists since it has failed to lead to a valid role
 		event.cookies.set(Cookie.role, '', { maxAge: 0, path: '/' });
 
-		console.log('Could not find selected role. Using default role');
+		logger.debug('Could not find selected role. Using default role');
 
 		role = roles[0];
 	}
