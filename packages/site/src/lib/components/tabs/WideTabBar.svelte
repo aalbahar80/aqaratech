@@ -7,6 +7,15 @@
 	type Tab = ComponentProps<WideTabBarItem>['tab'];
 
 	export let tabs: Tab[];
+
+	$: authorizedTabs = tabs.filter((tab) => {
+		const isTenant = $page.data.user?.role?.roleType === 'TENANT';
+		if (isTenant) {
+			return tab.label !== 'Files';
+		} else {
+			return true;
+		}
+	});
 </script>
 
 <div>
@@ -23,7 +32,7 @@
 				void goto(url);
 			}}
 		>
-			{#each tabs as tab}
+			{#each authorizedTabs as tab}
 				<option selected={$page.url.pathname === tab.href} value={tab.href}
 					>{tab.label}</option
 				>
@@ -33,7 +42,7 @@
 	<div class="hidden sm:block">
 		<div class="border-b border-gray-200">
 			<nav class="-mb-px flex" aria-label="Tabs">
-				{#each tabs as tab}
+				{#each authorizedTabs as tab}
 					<WideTabBarItem {tab} />
 				{/each}
 			</nav>

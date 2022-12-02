@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { LeaseInvoiceDto } from '$api/openapi';
+	import { page } from '$app/stores';
 	import Badge from '$components/Badge.svelte';
 	import PayButton from '$lib/components/trx/PayButton.svelte';
 	import { kwdFormat } from '$lib/utils/common';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import { entitiesMap, toUTCFormat } from '@self/utils';
+	import { getRoute, PageType, toUTCFormat } from '@self/utils';
 	import HeroiconsBanknotes from '~icons/heroicons/banknotes';
 	import HeroiconsCalendarDays from '~icons/heroicons/calendar-days';
 
@@ -45,7 +46,15 @@
 				{#if invoice.isPaid}
 					<span class="mt-4 sm:mt-0">
 						<a
-							href={`/${entitiesMap.leaseInvoice.urlName}/${invoice.id}`}
+							href={getRoute({
+								entity: 'leaseInvoice',
+								pageType: PageType.Id,
+								id: invoice.id,
+								params: {
+									organizationId: invoice.organizationId,
+									portfolioId: invoice.portfolioId,
+								},
+							})}
 							class="font-medium text-indigo-600 hover:text-indigo-500"
 						>
 							Details <span aria-hidden="true"> &rarr;</span>
