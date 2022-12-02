@@ -1,6 +1,6 @@
 import { env as privateEnv } from '$env/dynamic/private';
-import { env as publicEnv } from '$env/dynamic/public';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
+import { environment } from '$lib/environment';
 import { isProd } from '$lib/server/config/is-production';
 
 /**
@@ -60,7 +60,7 @@ export const baseDev = {
 	AUTH0_CLIENT_ID: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
 	AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
 	AUTH0_DEFAULT_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
-	AUTH0_REDIRECT_URI: `${publicEnv.PUBLIC_SITE_URL}${AUTH_CALLBACK}`,
+	AUTH0_REDIRECT_URI: `${environment.PUBLIC_SITE_URL}${AUTH_CALLBACK}`,
 	AUTH0_API_NAMESPACE: 'https://letand.be',
 	AUTH0_API_AUDIENCE: 'letand.be/api',
 	JWKS: {

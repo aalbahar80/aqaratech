@@ -36,7 +36,11 @@ const envSchema = z.object({
 });
 
 // TODO use satisfies AqaratechEnv
+/**
+ * Validated public environment variables.
+ */
 export const environment = envSchema.parse(env);
+
 if (!browser) {
 	console.log({ environment });
 }

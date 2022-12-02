@@ -1,6 +1,5 @@
 import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
-import { env } from '$env/dynamic/public';
 import { MAX_AGE } from '$lib/constants/misc';
 import { sentryConfig } from '$lib/environment/sentry.config';
 import { logger } from '$lib/server/logger';
@@ -30,7 +29,7 @@ logger.log({
 	message: JSON.stringify({
 		name: 'AqaratechConfig',
 		AQARATECH_APP_VERSION: __AQARATECH_APP_VERSION__,
-		...env,
+		...environment,
 	}),
 });
 
