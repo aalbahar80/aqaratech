@@ -22,7 +22,7 @@ test('cannot create expense in leaf node category', async ({
 			propertyId: property.id,
 			categoryId: expenseCategory.id,
 		}),
-		['portfolioId', 'propertyId', 'unitId', 'amount', 'postAt'],
+		['portfolioId', 'propertyId', 'unitId', 'amount', 'postAt', 'categoryId'],
 	);
 
 	const url = `/organizations/${org.organization.id}/expenses`;
