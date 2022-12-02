@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LandingBanner from '$lib/components/LandingBanner.svelte';
+	import Hero from '$lib/components/landing/Hero.svelte';
 </script>
 
-<LandingBanner />
+<Hero />
