@@ -127,7 +127,6 @@
 	});
 
 	const refreshData = (data: T[]) => {
-		console.info('refreshData');
 		options.update((prev) => ({
 			...prev,
 			data: data,
@@ -135,7 +134,6 @@
 	};
 
 	const refreshPageCount = (n: number) => {
-		console.info('refreshPageCount');
 		options.update((options) => ({
 			...options,
 			pageCount: n,
@@ -143,7 +141,6 @@
 	};
 
 	const refreshPagination = (p: PaginationState) => {
-		console.info('refreshPagination');
 		// $table.setPagination(p);
 		options.update((options) => ({
 			...options,

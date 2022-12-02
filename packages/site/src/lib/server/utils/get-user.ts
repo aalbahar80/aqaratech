@@ -23,7 +23,7 @@ export const getUser = async ({
 
 	const profile = await getProfile(event);
 
-	logger.info('Got profile', {
+	logger.debug('Got profile', {
 		message: JSON.stringify({
 			id: profile.id,
 			email: profile.email,

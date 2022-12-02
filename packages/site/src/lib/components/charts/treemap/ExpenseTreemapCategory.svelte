@@ -21,7 +21,6 @@
 		const categorySummary = expenses.find((e) => e.categoryId === d.id);
 
 		if (!categorySummary) {
-			console.warn(`Category ${d.id} not found in grouped data`);
 			return 0;
 		} else {
 			return categorySummary.amount;

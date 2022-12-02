@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import { env } from '$env/dynamic/public';
 import { z } from 'zod';
 
@@ -36,4 +37,6 @@ const envSchema = z.object({
 
 // TODO use satisfies AqaratechEnv
 export const environment = envSchema.parse(env);
-console.log({ environment });
+if (!browser) {
+	console.log({ environment });
+}
