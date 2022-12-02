@@ -5,5 +5,4 @@
 	export let data: PageData;
 </script>
 
-<!-- <pre>{JSON.stringify(data.invoices, null, 2)}</pre> -->
-<!-- <LeaseInvoiceTable data={data.invoices} /> -->
+<LeaseInvoiceTable data={data.invoices} />

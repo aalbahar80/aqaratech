@@ -32,7 +32,9 @@ interface Breadcrumbs {
 }
 
 export const viewColumnDef = <
-	T extends { id: string } | { id: string; portfolioId: string },
+	T extends
+		| { id: string; organizationId: string }
+		| { id: string; portfolioId: string; organizationId: string },
 >(
 	columnHelper: ColumnHelper<T>,
 	entity: Entity,
@@ -42,7 +44,15 @@ export const viewColumnDef = <
 		id: 'view',
 		header: '',
 		cell: (props) => {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+			// for portal/tenant page, grab the organizationId from the row
+			const paramsWithOrgId =
+				'organizationId' in props.row.original
+					? {
+							...params,
+							organizationId: props.row.original.organizationId,
+					  }
+					: params;
+
 			return renderComponent(ActionCell, {
 				value: 'View',
 				href: getRoute({
@@ -54,9 +64,9 @@ export const viewColumnDef = <
 						'portfolioId' in props.row.original
 							? {
 									portfolioId: props.row.original.portfolioId,
-									...params,
+									...paramsWithOrgId,
 							  }
-							: params,
+							: paramsWithOrgId,
 				}),
 			});
 		},
