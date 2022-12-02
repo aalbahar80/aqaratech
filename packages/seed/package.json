@@ -20,7 +20,7 @@
 		"@babel/preset-typescript": "7.18.6",
 		"@preconstruct/cli": "2.2.2",
 		"@self/utils": "workspace:2.1.0",
-		"@types/node": "18.11.9",
+		"@types/node": "18.11.10",
 		"eslint-config-custom": "workspace:*",
 		"prisma": "4.7.0",
 		"tsconfig": "workspace:*",

@@ -1,13 +1,19 @@
 import { ForbiddenError, subject } from '@casl/ability';
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import {
+	Inject,
+	Injectable,
+	Logger,
+	LoggerService,
+	OnModuleInit,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
 import { entitiesMap } from '@self/utils';
 import { instanceToPlain, plainToClass } from 'class-transformer';
 import { isUUID } from 'class-validator';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Action } from 'src/casl/action.enum';
-import * as R from 'remeda';
 import {
 	RemoveDocumentsEvent,
 	TIndexName,
@@ -26,6 +32,8 @@ export class SearchService implements OnModuleInit {
 	constructor(
 		private readonly prisma: PrismaService,
 		readonly configService: ConfigService<EnvironmentConfig>,
+		@Inject(WINSTON_MODULE_NEST_PROVIDER)
+		private readonly logger: LoggerService,
 	) {
 		const host = configService.get('meiliSearchConfig.HOST', {
 			infer: true,
@@ -38,8 +46,6 @@ export class SearchService implements OnModuleInit {
 		}
 		this.client = new MeiliSearch({ host, apiKey });
 	}
-
-	private readonly logger = new Logger(SearchService.name);
 
 	async onModuleInit() {
 		// attempts to initialize every time nest starts
@@ -166,7 +172,11 @@ export class SearchService implements OnModuleInit {
 
 		const index = this.client.index(indexName);
 
-		await index.deleteDocuments(ids);
+		try {
+			await index.deleteDocuments(ids);
+		} catch (e) {
+			this.logger.error(e);
+		}
 	}
 
 	async remove() {
