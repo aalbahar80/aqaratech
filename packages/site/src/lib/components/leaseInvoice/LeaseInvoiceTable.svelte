@@ -22,6 +22,7 @@
 
 	export let data: PaginatedLeaseInvoiceDto;
 	export let showOptions = false;
+	export let extraColumns: any[] = [];
 
 	const columnHelper = createColumnHelper<LeaseInvoiceDto>();
 
@@ -71,6 +72,9 @@
 		}),
 
 		locationColumnDef(columnHelper),
+
+		...extraColumns,
+
 		viewColumnDef(columnHelper, 'leaseInvoice', $page.params),
 	];
 
