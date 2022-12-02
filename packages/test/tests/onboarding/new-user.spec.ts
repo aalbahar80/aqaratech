@@ -32,6 +32,19 @@ test.use({
 
 test('new users are redirected to /welcome', async ({ page }) => {
 	await page.goto('/');
-	await page.getByRole('link', { name: 'Log in' }).click();
+
+	await page
+		.getByRole('banner', { name: 'Global' })
+		.getByRole('link', { name: 'Log in' })
+		.click();
+
+	await expect(page).toHaveURL('/welcome');
+});
+
+test('new users are redirected to /welcome - hero', async ({ page }) => {
+	await page.goto('/');
+
+	await page.getByTestId('hero').getByRole('link', { name: 'Log in' }).click();
+
 	await expect(page).toHaveURL('/welcome');
 });

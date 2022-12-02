@@ -11,7 +11,10 @@ export class LoginPage {
 	async goto() {
 		await this.page.goto(siteURL);
 
-		await this.page.getByRole('link', { name: 'Log in' }).click();
+		await this.page
+			.getByRole('banner', { name: 'Global' })
+			.getByRole('link', { name: 'Log in' })
+			.click();
 	}
 
 	async fill({ email, password }: { email: string; password: string }) {
