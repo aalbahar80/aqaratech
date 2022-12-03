@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@faker-js/faker": "7.6.0",
-		"@prisma/client": "4.7.0",
+		"@prisma/client": "4.7.1",
 		"date-fns": "2.29.3",
 		"dotenv": "16.0.3",
 		"factory.ts": "1.3.0"
@@ -22,7 +22,7 @@
 		"@self/utils": "workspace:2.1.0",
 		"@types/node": "18.11.10",
 		"eslint-config-custom": "workspace:*",
-		"prisma": "4.7.0",
+		"prisma": "4.7.1",
 		"tsconfig": "workspace:*",
 		"tsx": "3.12.1",
 		"typescript": "4.9.3"
