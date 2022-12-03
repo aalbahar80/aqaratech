@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Alert from '$lib/components/navbar/Alert.svelte';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
-	import { environment } from '$lib/environment';
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>
 
@@ -13,10 +11,6 @@
 	class="sticky top-0 z-50 flex w-full flex-col bg-white shadow-md print:hidden"
 	aria-label="Global"
 >
-	{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
-		<Alert />
-	{/if}
-
 	<!-- Main horizontal navbar area -->
 	<div class="flex items-center justify-between py-8 px-4">
 		<!-- Logo and Hamburger Icon -->

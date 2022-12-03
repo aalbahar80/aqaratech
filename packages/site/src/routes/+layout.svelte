@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { navigating, page } from '$app/stores';
+	import Alert from '$lib/components/navbar/Alert.svelte';
+	import { environment } from '$lib/environment';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
@@ -84,6 +86,11 @@
 
 		<div class="col-span-12 pt-8 lg:col-span-9 xl:col-span-9 2xl:col-span-10">
 			<div class="mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8">
+				{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
+					<div class="md:px-6 lg:px-8">
+						<Alert />
+					</div>
+				{/if}
 				<slot />
 				<VersionFooter />
 			</div>

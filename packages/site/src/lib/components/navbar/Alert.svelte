@@ -2,7 +2,7 @@
 	import HeroiconsExclamationTriangle from '~icons/heroicons/exclamation-triangle';
 </script>
 
-<div class="border-l-4 border-yellow-400 bg-yellow-50 p-4 print:hidden">
+<div class="border-l-4 border-yellow-400 bg-yellow-50 py-4 print:hidden">
 	<div class="flex justify-center">
 		<div class="flex-shrink-0">
 			<HeroiconsExclamationTriangle
