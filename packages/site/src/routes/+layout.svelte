@@ -87,9 +87,7 @@
 		<div class="col-span-12 pt-8 lg:col-span-9 xl:col-span-9 2xl:col-span-10">
 			<div class="mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8">
 				{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
-					<div class="md:px-6 lg:px-8">
-						<Alert />
-					</div>
+					<Alert />
 				{/if}
 				<slot />
 				<VersionFooter />
