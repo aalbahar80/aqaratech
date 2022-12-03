@@ -23,9 +23,6 @@
 	afterNavigate(() => {
 		sidebar.close();
 	});
-
-	// TODO: remove once this issue is closed: https://github.com/ota-meshi/svelte-eslint-parser/issues/248
-	const panel = sidebar.panel;
 </script>
 
 <aside
@@ -34,7 +31,7 @@
 		$sidebar.expanded ? 'flex' : 'hidden lg:flex', // ignore $isOpen on lg breakpoint
 	)}
 	in:fly={{ x: -100, duration: 150 }}
-	use:panel
+	use:sidebar.panel
 	use:clickOutside
 	on:outclick={sidebar.close}
 >

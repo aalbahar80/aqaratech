@@ -6,9 +6,6 @@
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import { environment } from '$lib/environment';
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
-
-	// TODO: remove once this issue is closed: https://github.com/ota-meshi/svelte-eslint-parser/issues/248
-	const button = sidebar.button;
 </script>
 
 <!-- Vertical Navbar Flexbox -->
@@ -25,7 +22,7 @@
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
 			{#if isSidebarAvailable($page.url.pathname)}
-				<button class="lg:hidden" use:button>
+				<button class="lg:hidden" use:sidebar.button>
 					<span class="sr-only">Toggle sidebar</span>
 					<HeroiconsBars3 class="h-8 w-8" />
 				</button>
