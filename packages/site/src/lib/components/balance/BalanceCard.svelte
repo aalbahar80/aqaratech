@@ -58,7 +58,7 @@
 		<BalanceLineItem
 			href={getRoute({
 				...baseRoute,
-				pageType: PageTypePortfolio.Payouts,
+				pageType: PageTypePortfolio.PayoutsTable,
 			})}
 		>
 			<svelte:fragment slot="label">

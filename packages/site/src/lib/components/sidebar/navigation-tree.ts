@@ -158,7 +158,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 						name: 'Payouts',
 						href: getRoute({
 							...getRouteConfig,
-							pageType: PageTypePortfolio.Payouts,
+							pageType: PageTypePortfolio.PayoutsTable,
 						}),
 					},
 				],

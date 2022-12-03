@@ -19,7 +19,7 @@
 		const url = getRoute({
 			entity: 'portfolio',
 			id: payout.portfolioId,
-			pageType: PageTypePortfolio.Payouts,
+			pageType: PageTypePortfolio.PayoutsTable,
 			params: $page.params,
 		});
 
