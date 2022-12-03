@@ -95,6 +95,9 @@ module.exports = {
 		// complains about svelte's $app and $env
 		'import/no-unresolved': 'off',
 
+		// sort imports
+		// 'import/order': ['error'],
+
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': [
 			'error',
