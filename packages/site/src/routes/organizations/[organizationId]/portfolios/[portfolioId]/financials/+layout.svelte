@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import PropertySelect from '$lib/components/dashboard/filter/PropertySelect.svelte';
-	import DateFilter from '$lib/components/dashboard/filter/DateFilter.svelte';
-	import UnitSelect from '$lib/components/dashboard/filter/UnitSelect.svelte';
-	import type { LayoutData } from './$types';
+	import Filter from '$lib/components/dashboard/filter/Filter.svelte';
 	import PopoverDivider from '$lib/components/popover/PopoverDivider.svelte';
+	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
 
-	const hideRange = ['financials/summary', 'payouts/table'];
-	const hideProperty = ['payouts/table'];
+	const hideRangePaths = ['financials/summary', 'payouts/table'];
+	const hidePropertyPaths = ['payouts/table'];
 </script>
 
 <h2
@@ -23,26 +21,13 @@
 </div>
 
 <!-- Dashboard Filter -->
-<div class="grid grid-cols-2 gap-8 gap-x-2 md:gap-8">
-	{#if !hideRange.some((str) => $page.url.pathname.endsWith(str))}
-		<div class="col-span-full">
-			<DateFilter />
-		</div>
-	{/if}
-
-	{#if !hideProperty.some((str) => $page.url.pathname.endsWith(str))}
-		<div>
-			<PropertySelect items={data.properties.results} />
-		</div>
-
-		<div>
-			<UnitSelect items={data.units.results} />
-		</div>
-	{/if}
-</div>
-
-<div class="py-4">
-	<PopoverDivider />
-</div>
+<Filter
+	properties={data.properties}
+	units={data.units}
+	hideRange={hideRangePaths.some((str) => $page.url.pathname.endsWith(str))}
+	hideProperty={hidePropertyPaths.some((str) =>
+		$page.url.pathname.endsWith(str),
+	)}
+/>
 
 <slot />
