@@ -37,26 +37,6 @@
 				scope.setTag('roleType', data.user?.role?.roleType || '');
 				scope.setUser(getSentryUser(data.user));
 			});
-
-			// if (
-			// 	environment.PUBLIC_AQARATECH_ENV === 'production' ||
-			// 	environment.PUBLIC_AQARATECH_ENV === 'staging'
-			// ) {
-			// 	const LogRocket = (await import('logrocket')).default;
-			// 	LogRocket.init('n4p0hb/aqaratech');
-			// 	if ($page.data.user) {
-			// 		LogRocket.identify($page.data.user.id || '', {
-			// 			email: $page.data.user.email,
-			// 			roleId: $page.data.user.role?.id || '',
-			// 			name: $page.data.user.fullName || '',
-			// 		});
-			// 	}
-			// 	LogRocket.getSessionURL((sessionURL) => {
-			// 		Sentry.configureScope((scope) => {
-			// 			scope.setExtra('sessionURL', sessionURL);
-			// 		});
-			// 	});
-			// }
 		}
 	});
 </script>
