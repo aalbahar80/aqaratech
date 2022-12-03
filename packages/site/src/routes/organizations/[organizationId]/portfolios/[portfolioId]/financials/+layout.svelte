@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import PropertySelect from '$lib/components/dashboard/PropertySelect.svelte';
+	import PropertySelect from '$lib/components/dashboard/filter/PropertySelect.svelte';
 	import DateFilter from '$lib/components/dashboard/filter/DateFilter.svelte';
-	import UnitSelect from '$lib/components/dashboard/UnitSelect.svelte';
+	import UnitSelect from '$lib/components/dashboard/filter/UnitSelect.svelte';
 	import type { LayoutData } from './$types';
 	import PopoverDivider from '$lib/components/popover/PopoverDivider.svelte';
 
