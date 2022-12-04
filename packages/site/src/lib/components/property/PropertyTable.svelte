@@ -1,11 +1,12 @@
 <script lang="ts">
+	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import type { PaginatedPropertyDto, PropertyDto } from '$api/openapi';
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { getLabel } from '@self/utils';
+	import { getLabel, entity } from '@self/utils';
 	import { createColumnHelper } from '@tanstack/svelte-table';
 
 	export let data: PaginatedPropertyDto;
@@ -45,6 +46,12 @@
 >
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
+			<!-- Don't show hero if we're on the (tabbed) portfolio page -->
+			<div slot="hero">
+				{#if $page.data.user?.role?.roleType !== 'ORGADMIN'}
+					<FilterHero title={entity.property.pluralCap} />
+				{/if}
+			</div>
 			<div slot="custom">
 				<FilterBarButtonForm
 					getRouteOptions={{
