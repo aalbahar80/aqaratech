@@ -11,7 +11,7 @@ export { getProgress } from './date/progress';
 export { startOfMonthN } from './date/start-of-month-n';
 export { dbEntity, nonDbEntity } from './entity/entity-definition';
 export type { DBEntity, Entity, NonDBEntity } from './entity/entity-definition';
-export { entitiesMap } from './entity/entity-map';
+export { entitiesMap, entitiesMap as entity } from './entity/entity-map';
 export type {
 	DBEntitiesMap,
 	EntitiesMap,

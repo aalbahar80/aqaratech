@@ -56,9 +56,9 @@ const portfolio = satisfies<EntityNames>()({
 	title: 'portfolio',
 	urlName: 'portfolios',
 	caslName: 'Portfolio',
-	singular: 'portfolio',
+	singular: 'owner',
 	singularCap: 'Owner',
-	plural: 'portfolios',
+	plural: 'owners',
 	pluralCap: 'Owners',
 	idField: 'portfolioId',
 });
@@ -160,6 +160,7 @@ const file = satisfies<EntityNames>()({
 	idField: null,
 });
 
+// TODO satisfies
 export const entitiesMap = satisfies<EntityMap>()({
 	tenant,
 	portfolio,

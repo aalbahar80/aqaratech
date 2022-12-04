@@ -77,12 +77,10 @@ export class FilesService {
 			relationValue,
 		});
 
-		const entity = this.getFileEntity({ relationKey });
-
 		const entityId = directory.split('/')[1];
 
 		await this.canAccess({
-			entity,
+			entity: relationKey,
 			entityId,
 			user,
 			action: Action.Read,
@@ -252,15 +250,13 @@ export class FilesService {
 	getFileDetails({ directory }: { directory: string }) {
 		// TODO: rm
 		const relationKey = directory.split('/')[0] as FileRelationKey; // TODO don't cast?
-		// const relationKey = directory.split('/')[0];
-
-		// TODO: Don't use zod here. This should already be verified as a valid key
-
-		const entity = entitiesMap[relationKey].singular;
 
 		const entityId = directory.split('/')[1];
 
-		return { entity, entityId, relationKey };
+		return {
+			entity: relationKey,
+			entityId,
+		};
 	}
 
 	getFileBucket({ user }: { user: IUser }) {
@@ -268,12 +264,5 @@ export class FilesService {
 		const bucket = user.role.organizationId;
 
 		return bucket;
-	}
-
-	// TODO: validate relationKey upstream
-	getFileEntity({ relationKey }: { relationKey: FileRelationKey }) {
-		const entity = entitiesMap[relationKey].singular;
-
-		return entity;
 	}
 }
