@@ -61,7 +61,7 @@ export class UnitsService {
 	}): Promise<WithCount<UnitDto>> {
 		const { take, skip, sort } = queryOptions;
 
-		const filter: Prisma.UnitWhereInput = {
+		const where: Prisma.UnitWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
 				...(whereCustom ? [whereCustom] : []),
@@ -73,7 +73,7 @@ export class UnitsService {
 				take,
 				skip,
 				orderBy: sort,
-				where: filter,
+				where,
 				include: {
 					// TODO Add sorted index?
 					// TODO optimize it. set aq_prisma_debug = 1 and see the query. n+1?
@@ -84,7 +84,7 @@ export class UnitsService {
 					property: crumbs.property,
 				},
 			}),
-			this.prisma.unit.count({ where: filter }),
+			this.prisma.unit.count({ where }),
 		]);
 
 		return { total, results: data.map((u) => new UnitDto(u)) };
@@ -104,7 +104,7 @@ export class UnitsService {
 	}): Promise<WithCount<UnitMinimalDto>> {
 		const { take, skip, sort } = queryOptions;
 
-		const filter: Prisma.UnitWhereInput = {
+		const where: Prisma.UnitWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
 				...(whereCustom ? [whereCustom] : []),
@@ -116,7 +116,7 @@ export class UnitsService {
 				take,
 				skip,
 				orderBy: sort,
-				where: filter,
+				where,
 				select: {
 					id: true,
 					type: true,
@@ -124,7 +124,7 @@ export class UnitsService {
 					propertyId: true,
 				},
 			}),
-			this.prisma.unit.count({ where: filter }),
+			this.prisma.unit.count({ where }),
 		]);
 
 		return { total, results: data };
