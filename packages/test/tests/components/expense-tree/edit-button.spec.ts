@@ -3,6 +3,8 @@ import { getLabel } from '@self/utils';
 import { resolveURL } from 'ufo';
 import { test } from './tree.fixture';
 
+test.skip(({ isMobile }) => isMobile === true);
+
 test('expense tile links to edit form', async ({ page }) => {
 	const name = 'Fire Fighting Contract';
 
