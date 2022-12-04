@@ -244,7 +244,7 @@ importers:
       date-fns: 2.29.3
       debounce: 1.2.1
       eslint-config-custom: workspace:*
-      eslint-plugin-svelte: 2.13.1
+      eslint-plugin-svelte: 2.14.0
       frappe-charts: 1.6.2
       fuse.js: 6.6.2
       jose: 4.11.1
@@ -309,7 +309,7 @@ importers:
       date-fns: 2.29.3
       debounce: 1.2.1
       eslint-config-custom: link:../eslint-config-custom
-      eslint-plugin-svelte: 2.13.1_kzv3boqmfymw5ol254gxmp75rq
+      eslint-plugin-svelte: 2.14.0_kzv3boqmfymw5ol254gxmp75rq
       frappe-charts: 1.6.2
       fuse.js: 6.6.2
       jose: 4.11.1
@@ -6316,8 +6316,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-svelte/2.13.1_kzv3boqmfymw5ol254gxmp75rq:
-    resolution: {integrity: sha512-PZ0h8mm9vdVndLNoCUVujYFuWpp+AmCT5GnhjZ1q4dR3zLgQdL+V7Ce0KI1EQ8/4D6GExLMYcOd8vgGUdxxOxg==}
+  /eslint-plugin-svelte/2.14.0_kzv3boqmfymw5ol254gxmp75rq:
+    resolution: {integrity: sha512-TOlOk08vghQ97wAExxL785rrK65v7BwVbXY1UTY/TiWGpHh1Hn0IMfE4MUB+ij2Lv442GKw2873Gq4aUHqSgsA==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0-0
@@ -6336,7 +6336,7 @@ packages:
       postcss-safe-parser: 6.0.0_postcss@8.4.19
       sourcemap-codec: 1.4.8
       svelte: 3.53.1
-      svelte-eslint-parser: 0.22.0_svelte@3.53.1
+      svelte-eslint-parser: 0.22.1_svelte@3.53.1
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -9901,8 +9901,8 @@ packages:
       svelte: 3.53.1
     dev: true
 
-  /svelte-eslint-parser/0.22.0_svelte@3.53.1:
-    resolution: {integrity: sha512-KQut6bb5dPwQ1SYTN/m5rxCkEDWDXiZpOXl05afNKGnjCMC5ZpGVrJM7BtFGwV2kPFeIiwRW+ofY3GxfqFBNpw==}
+  /svelte-eslint-parser/0.22.1_svelte@3.53.1:
+    resolution: {integrity: sha512-tgPatTSXObmKA+BG8gXCbznyu12XpNmRl8sTVCBbRtRiqI5qMo58+NlCiRJczfgw5z33oRAys6SBVDnv11s1JQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       svelte: ^3.37.0
