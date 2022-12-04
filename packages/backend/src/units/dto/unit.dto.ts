@@ -177,3 +177,12 @@ export class UpdateUnitDto
 	implements Exactly<UnitUpdateSchema, UpdateUnitDto> {}
 
 export class PartialUnitDto extends PartialType(UnitDto) {}
+
+/**
+ * For use in dropdowns
+ */
+export class UnitMinimalDto extends PartialType(
+	PickType(CreateUnitDto, ['type', 'unitNumber', 'propertyId']),
+) {
+	id: string;
+}

@@ -7,7 +7,12 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
+import {
+	CreateUnitDto,
+	UnitDto,
+	UnitMinimalDto,
+	UpdateUnitDto,
+} from 'src/units/dto/unit.dto';
 
 @Injectable()
 export class UnitsService {
@@ -83,6 +88,46 @@ export class UnitsService {
 		]);
 
 		return { total, results: data.map((u) => new UnitDto(u)) };
+	}
+
+	/**
+	 * For use in dropdowns
+	 */
+	async findAllMinimal({
+		queryOptions,
+		user,
+		where,
+	}: {
+		queryOptions: QueryOptionsDto;
+		user: IUser;
+		where?: Prisma.UnitWhereInput;
+	}): Promise<WithCount<UnitMinimalDto>> {
+		const { take, skip, sort } = queryOptions;
+
+		const filter: Prisma.UnitWhereInput = {
+			AND: [
+				accessibleBy(user.ability, Action.Read).Unit,
+				...(where ? [where] : []),
+			],
+		};
+
+		const [data, total] = await Promise.all([
+			this.prisma.unit.findMany({
+				take,
+				skip,
+				orderBy: sort,
+				where: filter,
+				select: {
+					id: true,
+					type: true,
+					unitNumber: true,
+					propertyId: true,
+				},
+			}),
+			this.prisma.unit.count({ where: filter }),
+		]);
+
+		return { total, results: data };
 	}
 
 	async findOne({ id }: { id: string }): Promise<UnitDto> {

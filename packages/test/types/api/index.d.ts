@@ -144,6 +144,19 @@ export interface ArrayOfUnitDto {
 /**
  *
  * @export
+ * @interface ArrayOfUnitMinimalDto
+ */
+export interface ArrayOfUnitMinimalDto {
+	/**
+	 *
+	 * @type {Array<UnitMinimalDto>}
+	 * @memberof ArrayOfUnitMinimalDto
+	 */
+	results?: Array<UnitMinimalDto>;
+}
+/**
+ *
+ * @export
  * @interface BalanceDto
  */
 export interface BalanceDto {
@@ -1784,6 +1797,25 @@ export interface PaginatedUnitDto {
 /**
  *
  * @export
+ * @interface PaginatedUnitMinimalDto
+ */
+export interface PaginatedUnitMinimalDto {
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedUnitMinimalDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<UnitMinimalDto>}
+	 * @memberof PaginatedUnitMinimalDto
+	 */
+	results: Array<UnitMinimalDto>;
+}
+/**
+ *
+ * @export
  * @interface PartialExpenseDto
  */
 export interface PartialExpenseDto {
@@ -2800,6 +2832,37 @@ export interface UnitDto {
 	 * @memberof UnitDto
 	 */
 	label: string | null;
+}
+/**
+ *
+ * @export
+ * @interface UnitMinimalDto
+ */
+export interface UnitMinimalDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitMinimalDto
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitMinimalDto
+	 */
+	type?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitMinimalDto
+	 */
+	unitNumber?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitMinimalDto
+	 */
+	propertyId?: string;
 }
 /**
  *

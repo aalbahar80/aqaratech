@@ -17,7 +17,7 @@ export const load: LayoutLoad = async ({ fetch, params }) => {
 			take: MAX_PROPERTIES,
 		}),
 
-		api.portfolios.findUnits({
+		api.portfolios.findUnitsMinimal({
 			id: portfolioId,
 			take: MAX_UNITS,
 		}),

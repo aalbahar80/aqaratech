@@ -1,5 +1,8 @@
 <script lang="ts">
-	import type { PaginatedPropertyDto, PaginatedUnitDto } from '$api/openapi';
+	import type {
+		PaginatedPropertyDto,
+		PaginatedUnitMinimalDto,
+	} from '$api/openapi';
 	import DateFilter from '$lib/components/dashboard/filter/DateFilter.svelte';
 	import PropertySelect from '$lib/components/dashboard/filter/PropertySelect.svelte';
 	import UnitSelect from '$lib/components/dashboard/filter/UnitSelect.svelte';
@@ -8,7 +11,7 @@
 	export let hideRange = false;
 	export let hideProperty = false;
 	export let properties: PaginatedPropertyDto;
-	export let units: PaginatedUnitDto;
+	export let units: PaginatedUnitMinimalDto;
 </script>
 
 <div class="grid grid-cols-2 gap-8 gap-x-2 md:gap-8">

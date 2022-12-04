@@ -969,6 +969,63 @@ paths:
                           $ref: '#/components/schemas/UnitDto'
       tags: *ref_7
       security: *ref_8
+  /portfolios/{id}/units-minimal:
+    get:
+      operationId: PortfoliosController_findUnitsMinimal
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedUnitMinimalDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfUnitMinimalDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/UnitMinimalDto'
+      tags: *ref_7
+      security: *ref_8
   /portfolios/{id}/payouts:
     get:
       operationId: PortfoliosController_findPayouts
@@ -3298,6 +3355,20 @@ components:
         - type
         - usage
         - label
+    UnitMinimalDto:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          nullable: true
+        unitNumber:
+          type: string
+        propertyId:
+          type: string
+      required:
+        - id
     PayoutBreadcrumbsDto:
       type: object
       properties:

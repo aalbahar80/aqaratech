@@ -27,6 +27,7 @@ import type {
 	PaginatedPropertyDto,
 	PaginatedRoleDto,
 	PaginatedUnitDto,
+	PaginatedUnitMinimalDto,
 	PortfolioDto,
 	UpdatePortfolioDto,
 } from '../models';
@@ -91,6 +92,15 @@ export interface PortfoliosApiFindRolesRequest {
 }
 
 export interface PortfoliosApiFindUnitsRequest {
+	id: string;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
+}
+
+export interface PortfoliosApiFindUnitsMinimalRequest {
 	id: string;
 	page?: number | undefined;
 	skip?: number | undefined;
@@ -684,6 +694,76 @@ export class PortfoliosApi extends runtime.BaseAPI {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PaginatedUnitDto> {
 		const response = await this.findUnitsRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findUnitsMinimalRaw(
+		requestParameters: PortfoliosApiFindUnitsMinimalRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PaginatedUnitMinimalDto>> {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling findUnitsMinimal.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/portfolios/{id}/units-minimal`.replace(
+					`{${'id'}}`,
+					encodeURIComponent(String(requestParameters.id)),
+				),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findUnitsMinimal(
+		requestParameters: PortfoliosApiFindUnitsMinimalRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PaginatedUnitMinimalDto> {
+		const response = await this.findUnitsMinimalRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

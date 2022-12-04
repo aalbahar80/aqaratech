@@ -1,13 +1,14 @@
 <script lang="ts">
-	import type { UnitDto } from '$api/openapi';
+	import type { UnitMinimalDto } from '$api/openapi';
 	import { invalidate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 	import { property } from '$lib/stores/filter/property';
 	import { unit } from '$lib/stores/filter/unit';
+	import { computeLabelUnit } from '@self/utils';
 
-	export let items: UnitDto[];
+	export let items: UnitMinimalDto[];
 
 	const allUnitsOption = {
 		value: undefined,
@@ -31,7 +32,7 @@
 		.filter((unit) => unit.propertyId === $property)
 		.map((unit) => ({
 			value: unit.id,
-			label: unit.title,
+			label: computeLabelUnit(unit),
 		}));
 
 	$: options =

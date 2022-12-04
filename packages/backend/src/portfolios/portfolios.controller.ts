@@ -46,7 +46,7 @@ import { PropertyDto } from 'src/properties/dto/property.dto';
 import { PropertiesService } from 'src/properties/properties.service';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
-import { UnitDto } from 'src/units/dto/unit.dto';
+import { UnitDto, UnitMinimalDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from 'src/units/units.service';
 import { PortfolioDto, UpdatePortfolioDto } from './dto/portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
@@ -155,6 +155,34 @@ export class PortfoliosController {
 			property: { portfolioId: { equals: id } },
 		};
 		return this.unitsService.findAll({ user, queryOptions, where });
+	}
+
+	@Get(':id/units-minimal')
+	@CheckAbilities(
+		{ action: Action.Read, subject: SubjectType },
+		{ action: Action.Read, subject: 'Unit' },
+	)
+	@ApiQueryOptions()
+	@ApiPaginatedResponse(UnitMinimalDto)
+	findUnitsMinimal(
+		@User() user: IUser,
+		@Param('id') id: string,
+		@QueryParser({
+			parserOptions: {
+				maxLimit: 1000,
+			},
+		})
+		queryOptions: QueryOptionsDto,
+	): Promise<WithCount<UnitMinimalDto>> {
+		const where: Prisma.UnitWhereInput = {
+			property: { portfolioId: { equals: id } },
+		};
+
+		return this.unitsService.findAllMinimal({
+			user,
+			queryOptions,
+			where,
+		});
 	}
 
 	@Get(':id/payouts')
