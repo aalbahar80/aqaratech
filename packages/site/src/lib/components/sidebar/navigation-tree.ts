@@ -15,7 +15,13 @@ import HeroiconsUserGroup from '~icons/heroicons/user-group';
 
 // Links
 import { LOGOUT } from '$lib/constants/routes';
-import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
+import {
+	entity,
+	getRoute,
+	PageTab,
+	PageType,
+	PageTypePortfolio,
+} from '@self/utils';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
 	const tree: NavigationItem[] = [
@@ -55,7 +61,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			0,
 			0,
 			{
-				name: 'Portfolios',
+				name: entity.portfolio.pluralCap,
 				href: getRoute({
 					entity: 'portfolio',
 					pageType,
