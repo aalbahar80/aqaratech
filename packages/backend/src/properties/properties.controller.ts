@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { Prisma } from '@prisma/client';
 import { propertyUpdateSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
@@ -21,8 +20,6 @@ import {
 	PropertyDto,
 	UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
-import { UnitDto } from 'src/units/dto/unit.dto';
-import { UnitsService } from 'src/units/units.service';
 import { PropertiesService } from './properties.service';
 
 const SubjectType = 'Property';
@@ -31,10 +28,7 @@ const SubjectType = 'Property';
 @ApiTags('properties')
 @SwaggerAuth()
 export class PropertiesController {
-	constructor(
-		private readonly propertiesService: PropertiesService,
-		private unitsService: UnitsService,
-	) {}
+	constructor(private readonly propertiesService: PropertiesService) {}
 
 	@Get()
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
@@ -71,25 +65,5 @@ export class PropertiesController {
 	@ApiOkResponse({ type: String })
 	remove(@User() user: IUser, @Param('id') id: string): Promise<PropertyDto> {
 		return this.propertiesService.remove({ id, user });
-	}
-
-	@Get(':id/units')
-	@CheckAbilities(
-		{ action: Action.Read, subject: SubjectType },
-		{ action: Action.Read, subject: 'Unit' },
-	)
-	@ApiQueryOptions()
-	@ApiPaginatedResponse(UnitDto)
-	findUnits(
-		@User() user: IUser,
-		@Param('id') id: string,
-		@QueryParser() queryOptions: QueryOptionsDto,
-	): Promise<WithCount<UnitDto>> {
-		const where: Prisma.UnitWhereInput = { propertyId: { equals: id } };
-		return this.unitsService.findAll({
-			user,
-			queryOptions,
-			whereCustom: where,
-		});
 	}
 }

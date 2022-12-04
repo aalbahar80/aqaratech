@@ -1588,63 +1588,6 @@ paths:
                 type: string
       tags: *ref_11
       security: *ref_12
-  /properties/{id}/units:
-    get:
-      operationId: PropertiesController_findUnits
-      summary: ''
-      description: ''
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-        - required: false
-          name: page
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
-        - required: false
-          name: filter
-          in: query
-          schema:
-            type: object
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedUnitDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfUnitDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/UnitDto'
-      tags: *ref_11
-      security: *ref_12
   /units/{id}:
     get:
       operationId: UnitsController_findOne

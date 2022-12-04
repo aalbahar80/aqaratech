@@ -149,7 +149,8 @@ export class PortfoliosController {
 	findUnits(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@QueryParser() queryOptions: QueryOptionsDto,
+		@QueryParser({ filterOptions: { keys: ['propertyId'] } })
+		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<UnitDto>> {
 		const where = {
 			property: { portfolioId: { equals: id } },
@@ -173,6 +174,7 @@ export class PortfoliosController {
 		@User() user: IUser,
 		@Param('id') id: string,
 		@QueryParser({
+			filterOptions: { keys: ['propertyId'] },
 			parserOptions: {
 				maxLimit: 1000,
 			},

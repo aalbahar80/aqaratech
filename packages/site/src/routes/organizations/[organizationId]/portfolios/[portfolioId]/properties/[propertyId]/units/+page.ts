@@ -9,8 +9,11 @@ export const load: PageLoad = async ({
 }) => {
 	const api = createApi(fetch);
 
-	const units = await api.properties.findUnits({
-		id: params.propertyId,
+	const units = await api.portfolios.findUnits({
+		id: params.portfolioId,
+		filter: {
+			propertyId: { equals: params.propertyId },
+		},
 		...parseParams(searchParams),
 	});
 

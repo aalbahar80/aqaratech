@@ -15,7 +15,6 @@
 import * as runtime from '../runtime';
 import type {
 	PaginatedPropertyDto,
-	PaginatedUnitDto,
 	PropertyDto,
 	UpdatePropertyDto,
 } from '../models';
@@ -30,15 +29,6 @@ export interface PropertiesApiFindAllRequest {
 
 export interface PropertiesApiFindOneRequest {
 	id: string;
-}
-
-export interface PropertiesApiFindUnitsRequest {
-	id: string;
-	page?: number | undefined;
-	skip?: number | undefined;
-	take?: number | undefined;
-	sort?: Array<string> | undefined;
-	filter?: object | undefined;
 }
 
 export interface PropertiesApiRemoveRequest {
@@ -155,73 +145,6 @@ export class PropertiesApi extends runtime.BaseAPI {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PropertyDto> {
 		const response = await this.findOneRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async findUnitsRaw(
-		requestParameters: PropertiesApiFindUnitsRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PaginatedUnitDto>> {
-		if (requestParameters.id === null || requestParameters.id === undefined) {
-			throw new runtime.RequiredError(
-				'id',
-				'Required parameter requestParameters.id was null or undefined when calling findUnits.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		if (requestParameters.page !== undefined) {
-			queryParameters['page'] = requestParameters.page;
-		}
-
-		if (requestParameters.skip !== undefined) {
-			queryParameters['skip'] = requestParameters.skip;
-		}
-
-		if (requestParameters.take !== undefined) {
-			queryParameters['take'] = requestParameters.take;
-		}
-
-		if (requestParameters.sort) {
-			queryParameters['sort'] = requestParameters.sort;
-		}
-
-		if (requestParameters.filter !== undefined) {
-			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		const response = await this.request(
-			{
-				path: `/properties/{id}/units`.replace(
-					`{${'id'}}`,
-					encodeURIComponent(String(requestParameters.id)),
-				),
-				method: 'GET',
-				headers: headerParameters,
-				query: queryParameters,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async findUnits(
-		requestParameters: PropertiesApiFindUnitsRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PaginatedUnitDto> {
-		const response = await this.findUnitsRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
 
