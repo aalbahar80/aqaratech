@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.0.1
+
+### Patch Changes
+
+- 86dd7c641: don't parse env when building
+
 ## 2.0.0
 
 ### Major Changes
