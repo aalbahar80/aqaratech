@@ -151,9 +151,10 @@ export class PortfoliosController {
 		@Param('id') id: string,
 		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<UnitDto>> {
-		const where: Prisma.UnitWhereInput = {
+		const where = {
 			property: { portfolioId: { equals: id } },
-		};
+		} satisfies Prisma.UnitWhereInput;
+
 		return this.unitsService.findAll({ user, queryOptions, where });
 	}
 
