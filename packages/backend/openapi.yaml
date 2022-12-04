@@ -3360,15 +3360,18 @@ components:
       properties:
         id:
           type: string
-        type:
-          type: string
-          nullable: true
         unitNumber:
           type: string
         propertyId:
           type: string
+        type:
+          type: string
+          nullable: true
       required:
         - id
+        - unitNumber
+        - propertyId
+        - type
     PayoutBreadcrumbsDto:
       type: object
       properties:

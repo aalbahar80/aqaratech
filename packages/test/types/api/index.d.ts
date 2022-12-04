@@ -2850,19 +2850,19 @@ export interface UnitMinimalDto {
 	 * @type {string}
 	 * @memberof UnitMinimalDto
 	 */
-	type?: string | null;
+	unitNumber: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UnitMinimalDto
 	 */
-	unitNumber?: string;
+	propertyId: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UnitMinimalDto
 	 */
-	propertyId?: string;
+	type: string | null;
 }
 /**
  *

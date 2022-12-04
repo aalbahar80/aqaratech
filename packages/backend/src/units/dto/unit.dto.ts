@@ -181,8 +181,11 @@ export class PartialUnitDto extends PartialType(UnitDto) {}
 /**
  * For use in dropdowns
  */
-export class UnitMinimalDto extends PartialType(
-	PickType(CreateUnitDto, ['type', 'unitNumber', 'propertyId']),
-) {
+export class UnitMinimalDto {
 	id: string;
+	unitNumber: CreateUnitDto['unitNumber'];
+	propertyId: CreateUnitDto['propertyId'];
+
+	// type: CreateUnitDto['type']; // resolves to generic 'object' in swagger
+	type: string | null;
 }
