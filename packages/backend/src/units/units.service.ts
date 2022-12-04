@@ -59,12 +59,13 @@ export class UnitsService {
 		user: IUser;
 		whereCustom?: Prisma.UnitWhereInput;
 	}): Promise<WithCount<UnitDto>> {
-		const { take, skip, sort } = queryOptions;
+		const { take, skip, sort, filter } = queryOptions;
 
 		const where = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
 				...(whereCustom ? [whereCustom] : []),
+				filter,
 			],
 		} satisfies Prisma.UnitWhereInput;
 
@@ -102,12 +103,13 @@ export class UnitsService {
 		user: IUser;
 		whereCustom?: Prisma.UnitWhereInput;
 	}): Promise<WithCount<UnitMinimalDto>> {
-		const { take, skip, sort } = queryOptions;
+		const { take, skip, sort, filter } = queryOptions;
 
 		const where = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
 				...(whereCustom ? [whereCustom] : []),
+				filter,
 			],
 		} satisfies Prisma.UnitWhereInput;
 
