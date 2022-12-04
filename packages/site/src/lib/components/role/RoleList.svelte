@@ -7,20 +7,10 @@
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
 	export let roles: ValidatedRoleDto[];
-
-	const formUrl = '/organizations/new';
 </script>
 
 {#if roles.length > 0}
-	<StackedList
-		entity="role"
-		formButtonProps={{
-			entity: 'role',
-			buttonText: 'Create new organization',
-			formUrl,
-		}}
-		hideActions={false}
-	>
+	<StackedList title="Role">
 		{#each roles as role (role.id)}
 			{@const icons = [
 				{
@@ -47,3 +37,9 @@
 {:else}
 	<RoleEmptyState />
 {/if}
+
+<a
+	class="text-center text-base font-semibold text-indigo-600 hover:text-indigo-700"
+	href="/organizations/new"
+	>Create new organization<span aria-hidden="true">→</span></a
+>

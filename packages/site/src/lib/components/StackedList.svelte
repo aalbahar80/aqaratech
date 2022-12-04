@@ -1,14 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import FormButtonNew from '$lib/components/form/FormButtonNew.svelte';
-	import type { Entity } from '@self/utils';
-	import type { ComponentProps } from 'svelte';
-
-	export let entity: Entity;
-	export let formButtonProps: ComponentProps<FormButtonNew> | undefined =
-		undefined;
-
-	export let hideActions = $page.data.user?.role?.roleType !== 'ORGADMIN';
+	export let title: string;
 </script>
 
 <section class="rounded-md bg-white shadow">
@@ -21,19 +12,10 @@
 		>
 			<div class="ml-4 mt-2">
 				<h3 class="text-2xl font-medium leading-6 text-gray-900">
-					{entity}
+					{title}
 				</h3>
 			</div>
-
-			{#if !hideActions}
-				<div class="ml-4 mt-2 flex-shrink-0">
-					<slot name="actions">
-						<FormButtonNew {entity} {...formButtonProps} />
-					</slot>
-				</div>
-			{/if}
 		</div>
-		<slot name="secondary" />
 	</div>
 
 	<ul class="divide-y divide-gray-200">
