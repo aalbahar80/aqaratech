@@ -1,3 +1,4 @@
+import { building } from '$app/environment';
 import { env } from '$env/dynamic/private';
 import { isProd } from '$lib/server/config/is-production';
 import { z } from 'zod';
@@ -8,4 +9,4 @@ const schema = z.object({
 	ORIGIN: z.string().url(),
 });
 
-export const privateEnvironment = schema.parse(env);
+export const privateEnvironment = building ? env : schema.parse(env);
