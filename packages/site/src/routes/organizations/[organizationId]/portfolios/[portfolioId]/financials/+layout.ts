@@ -1,4 +1,5 @@
 import { createApi } from '$api';
+import { MAX_PROPERTIES, MAX_UNITS } from '$lib/constants/misc';
 import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ fetch, params }) => {
@@ -13,12 +14,12 @@ export const load: LayoutLoad = async ({ fetch, params }) => {
 
 		api.portfolios.findProperties({
 			id: portfolioId,
-			take: 100,
+			take: MAX_PROPERTIES,
 		}),
 
 		api.portfolios.findUnits({
 			id: portfolioId,
-			take: 100,
+			take: MAX_UNITS,
 		}),
 	]);
 
