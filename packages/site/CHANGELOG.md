@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.0.0
+
+### Major Changes
+
+- 67ab8a1ea: merged uxrefactor branch
+
 ## 1.7.4
 
 ### Patch Changes

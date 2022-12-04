@@ -1,5 +1,16 @@
 # @self/backend
 
+## 2.0.0
+
+### Major Changes
+
+- 67ab8a1ea: merged uxrefactor branch
+
+### Patch Changes
+
+- Updated dependencies [67ab8a1ea]
+  - @self/utils@3.0.0
+
 ## 1.6.3
 
 ### Patch Changes

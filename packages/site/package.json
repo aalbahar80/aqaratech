@@ -1,6 +1,6 @@
 {
 	"name": "@self/site",
-	"version": "1.7.4",
+	"version": "2.0.0",
 	"files": [
 		"build"
 	],
@@ -24,7 +24,7 @@
 		"@iconify/json": "2.1.147",
 		"@logtail/types": "0.1.12",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
-		"@self/utils": "workspace:2.1.0",
+		"@self/utils": "workspace:3.0.0",
 		"@sentry/svelte": "7.23.0",
 		"@sentry/tracing": "7.23.0",
 		"@sveltejs/adapter-node": "1.0.0-next.102",

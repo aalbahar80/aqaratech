@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.0.0
+
+### Major Changes
+
+- 67ab8a1ea: merged uxrefactor branch
+
 ## 2.1.0
 
 ### Minor Changes
