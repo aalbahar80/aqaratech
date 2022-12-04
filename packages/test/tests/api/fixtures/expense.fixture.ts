@@ -6,59 +6,31 @@ import { apiURL } from './api-url';
 import type { AllFixtures } from './test-fixtures.interface';
 
 export const expenseFixtures: AllFixtures = {
-	expenseParams: [undefined, { option: true }],
-
-	expense: async ({ org, property, request, expenseParams }, use) => {
-		const expense = expenseFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: property.portfolioId,
-			amount: 1,
-			...expenseParams,
-		});
-
-		const picked = R.pick(expense, [
-			'portfolioId',
-			'propertyId',
-			'unitId',
-			'amount',
-			'postAt',
-		]);
-
-		const url = `${apiURL}/organizations/${org.organization.id}/expenses`;
-
-		const res = await request.post(url, { data: picked });
-		resCheck(res);
-
-		const created = (await res.json()) as ExpenseDto;
-
-		await use(created);
-	},
-
 	expensesParams: [undefined, { option: true }],
 
-	expenses: async ({ org, property, unit, request, expensesParams }, use) => {
-		if (!expensesParams || expensesParams.length === 0) {
-			throw new Error('expensesParams must be an array with at least one item');
-		}
+	expenses: async ({ org, units, request, expensesParams }, use) => {
+		const params = expensesParams ?? [{}];
 
 		// Merge any declared params with the default params
 
-		const expenses = R.times(expensesParams.length, (n) =>
-			expenseFactory.build({
+		const expenses = R.times(params.length, (n) => {
+			const unit = units[n % units.length]!;
+
+			return expenseFactory.build({
 				organizationId: org.organization.id,
-				portfolioId: property.portfolioId,
-				propertyId: property.id,
+				portfolioId: unit.portfolioId,
+				propertyId: unit.propertyId,
 				amount: 1,
 				unitId: unit.id,
-				...expensesParams[n],
-			}),
-		);
+				...params[n],
+			});
+		});
 
 		// Insert expenses
 
 		const url = `${apiURL}/organizations/${org.organization.id}/expenses`;
 
-		const created = await Promise.all(
+		const created = (await Promise.all(
 			expenses.map(async (expense) => {
 				const picked = R.pick(expense, [
 					'portfolioId',
@@ -69,11 +41,16 @@ export const expenseFixtures: AllFixtures = {
 				]);
 
 				const res = await request.post(url, { data: picked });
+				resCheck(res);
 
 				return (await res.json()) as ExpenseDto;
 			}),
-		);
+		)) as [ExpenseDto, ...ExpenseDto[]];
 
 		await use(created);
+	},
+
+	expense: async ({ expenses }, use) => {
+		await use(expenses[0]);
 	},
 };

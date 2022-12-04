@@ -13,6 +13,8 @@ test.use({
 
 	propertiesParams: R.times(3, () => ({})),
 
+	// create multiple units to spread expenses across
+	unitsParams: R.times(10, () => ({})),
 	expensesParams: R.times(TOTAL, () => ({
 		postAt: new Date().toISOString().slice(0, 10),
 		amount: 30,
