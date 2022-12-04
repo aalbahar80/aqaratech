@@ -19,7 +19,11 @@
 	];
 </script>
 
-<ChartWrapper empty={paid === 0 && unpaid === 0}>
+<ChartWrapper
+	title="Income: by Payment Status"
+	subtitle="Total income by payment status for the selected period."
+	empty={paid === 0 && unpaid === 0}
+>
 	<Chart let:height let:width>
 		<canvas {height} {width} use:revenuePie={pieDatasets} />
 	</Chart>

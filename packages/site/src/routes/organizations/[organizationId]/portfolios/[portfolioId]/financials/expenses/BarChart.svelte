@@ -22,7 +22,11 @@
 	];
 </script>
 
-<ChartWrapper empty={expenses.length < 2}>
+<ChartWrapper
+	empty={expenses.length < 2}
+	title="Expenses: by Month"
+	subtitle="Total expenses by month for the selected period."
+>
 	<Chart let:height let:width>
 		<canvas {height} {width} use:revenueChart={barDatasets} />
 	</Chart>

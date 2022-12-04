@@ -33,7 +33,11 @@
 	];
 </script>
 
-<ChartWrapper empty={income.paid.length < 2 && income.unpaid.length < 2}>
+<ChartWrapper
+	title="Income: by Month"
+	subtitle="Total income by month for the selected period."
+	empty={income.paid.length < 2 && income.unpaid.length < 2}
+>
 	<Chart let:height let:width>
 		<canvas {height} {width} use:revenueChart={barDatasets} />
 	</Chart>

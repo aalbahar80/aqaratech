@@ -4,6 +4,9 @@
 	import { CHART_HEIGHT } from '$lib/components/dashboard/cards/chart-height.const';
 
 	export let empty: boolean;
+	export let title: string;
+	export let subtitle = '';
+	export let subtitle2 = '';
 
 	const height = CHART_HEIGHT;
 </script>
@@ -23,6 +26,11 @@
 	</div>
 {:else}
 	<div class="w-full overflow-hidden rounded-lg bg-white p-8 shadow" in:fade>
+		<div class="prose prose-base pb-10">
+			<h3>{title}</h3>
+			<p>{subtitle}</p>
+			<span class="italic text-gray-500">{subtitle2}</span>
+		</div>
 		<slot />
 	</div>
 {/if}
