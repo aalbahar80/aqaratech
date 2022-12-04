@@ -121,7 +121,7 @@
 								aria-hidden="true"
 							/>
 							<p class="mt-4 font-semibold text-gray-900">
-								Search for tenants, portfolios, or properties.
+								Search for tenants, owners, or properties.
 							</p>
 							<p class="mt-2 text-gray-500">Search by name, address, etc.</p>
 						</div>

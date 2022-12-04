@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { LeaseDto } from '$api/openapi';
 	import LeaseTable from '$lib/components/lease/LeaseTable.svelte';
+	import { entity } from '@self/utils';
 	import { createColumnHelper } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
@@ -13,7 +14,7 @@
 	data={data.leases}
 	extraColumns={[
 		columnHelper.accessor('portfolioId', {
-			header: 'Portfolio',
+			header: entity.portfolio.singularCap,
 			cell: (info) => info.row.original.breadcrumbs.portfolio.label,
 		}),
 	]}
