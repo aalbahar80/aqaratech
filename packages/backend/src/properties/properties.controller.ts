@@ -86,6 +86,10 @@ export class PropertiesController {
 		@QueryParser() queryOptions: QueryOptionsDto,
 	): Promise<WithCount<UnitDto>> {
 		const where: Prisma.UnitWhereInput = { propertyId: { equals: id } };
-		return this.unitsService.findAll({ user, queryOptions, where });
+		return this.unitsService.findAll({
+			user,
+			queryOptions,
+			whereCustom: where,
+		});
 	}
 }

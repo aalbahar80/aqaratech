@@ -53,18 +53,18 @@ export class UnitsService {
 	async findAll({
 		queryOptions,
 		user,
-		where,
+		whereCustom,
 	}: {
 		queryOptions: QueryOptionsDto;
 		user: IUser;
-		where?: Prisma.UnitWhereInput;
+		whereCustom?: Prisma.UnitWhereInput;
 	}): Promise<WithCount<UnitDto>> {
 		const { take, skip, sort } = queryOptions;
 
 		const filter: Prisma.UnitWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
-				...(where ? [where] : []),
+				...(whereCustom ? [whereCustom] : []),
 			],
 		};
 
@@ -96,18 +96,18 @@ export class UnitsService {
 	async findAllMinimal({
 		queryOptions,
 		user,
-		where,
+		whereCustom,
 	}: {
 		queryOptions: QueryOptionsDto;
 		user: IUser;
-		where?: Prisma.UnitWhereInput;
+		whereCustom?: Prisma.UnitWhereInput;
 	}): Promise<WithCount<UnitMinimalDto>> {
 		const { take, skip, sort } = queryOptions;
 
 		const filter: Prisma.UnitWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
-				...(where ? [where] : []),
+				...(whereCustom ? [whereCustom] : []),
 			],
 		};
 

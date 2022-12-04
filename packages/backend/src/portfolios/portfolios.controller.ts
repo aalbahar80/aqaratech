@@ -155,7 +155,11 @@ export class PortfoliosController {
 			property: { portfolioId: { equals: id } },
 		} satisfies Prisma.UnitWhereInput;
 
-		return this.unitsService.findAll({ user, queryOptions, where });
+		return this.unitsService.findAll({
+			user,
+			queryOptions,
+			whereCustom: where,
+		});
 	}
 
 	@Get(':id/units-minimal')
@@ -182,7 +186,7 @@ export class PortfoliosController {
 		return this.unitsService.findAllMinimal({
 			user,
 			queryOptions,
-			where,
+			whereCustom: where,
 		});
 	}
 
