@@ -38,7 +38,7 @@
 		inset-inline-start: 0;
 		inset-block-start: 0;
 		block-size: 100%;
-		background-color: red;
+		background-color: rgb(99 102 241);
 		transition: width 0.4s;
 	}
 	.fade {
