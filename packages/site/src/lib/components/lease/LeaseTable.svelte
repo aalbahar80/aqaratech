@@ -96,7 +96,10 @@
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
 			<div slot="hero">
-				<FilterHero title="Leases" subtitle="" />
+				<!-- Don't show hero if we're on the unit page -->
+				{#if !('unitId' in $page.params)}
+					<FilterHero title="Leases" />
+				{/if}
 			</div>
 			<div slot="custom">
 				<!-- Only show button if we're on the unit page -->

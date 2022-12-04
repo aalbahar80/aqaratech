@@ -3,9 +3,10 @@
 	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
+	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { getLabel } from '@self/utils';
+	import { getLabel, entity } from '@self/utils';
 	import { createColumnHelper } from '@tanstack/svelte-table';
 
 	export let data: PaginatedPortfolioDto;
@@ -41,6 +42,9 @@
 >
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
+			<div slot="hero">
+				<FilterHero title={entity.portfolio.pluralCap} />
+			</div>
 			<div slot="custom">
 				<FilterBarButtonForm
 					getRouteOptions={{

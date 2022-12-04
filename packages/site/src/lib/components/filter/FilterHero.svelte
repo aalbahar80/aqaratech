@@ -1,9 +1,9 @@
 <script lang="ts">
 	export let title: string;
-	export let subtitle: string;
+	export let subtitle = '';
 </script>
 
-<div class="py-24">
+<div class="pb-10 pt-20">
 	<h1 class="text-4xl font-extrabold tracking-tight text-gray-900">
 		<slot name="title">{title}</slot>
 	</h1>
