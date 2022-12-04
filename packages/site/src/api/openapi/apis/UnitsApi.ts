@@ -15,19 +15,10 @@
 import * as runtime from '../runtime';
 import type {
 	PaginatedLeaseDto,
-	PaginatedUnitDto,
 	PartialUnitDto,
 	UnitDto,
 	UpdateUnitDto,
 } from '../models';
-
-export interface UnitsApiFindAllRequest {
-	page?: number | undefined;
-	skip?: number | undefined;
-	take?: number | undefined;
-	sort?: Array<string> | undefined;
-	filter?: object | undefined;
-}
 
 export interface UnitsApiFindLeasesRequest {
 	id: string;
@@ -55,63 +46,6 @@ export interface UnitsApiUpdateRequest {
  *
  */
 export class UnitsApi extends runtime.BaseAPI {
-	/**
-	 *
-	 *
-	 */
-	async findAllRaw(
-		requestParameters: UnitsApiFindAllRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PaginatedUnitDto>> {
-		const queryParameters: any = {};
-
-		if (requestParameters.page !== undefined) {
-			queryParameters['page'] = requestParameters.page;
-		}
-
-		if (requestParameters.skip !== undefined) {
-			queryParameters['skip'] = requestParameters.skip;
-		}
-
-		if (requestParameters.take !== undefined) {
-			queryParameters['take'] = requestParameters.take;
-		}
-
-		if (requestParameters.sort) {
-			queryParameters['sort'] = requestParameters.sort;
-		}
-
-		if (requestParameters.filter !== undefined) {
-			queryParameters['filter'] = requestParameters.filter;
-		}
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		const response = await this.request(
-			{
-				path: `/units`,
-				method: 'GET',
-				headers: headerParameters,
-				query: queryParameters,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async findAll(
-		requestParameters: UnitsApiFindAllRequest = {},
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PaginatedUnitDto> {
-		const response = await this.findAllRaw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
 	/**
 	 *
 	 *

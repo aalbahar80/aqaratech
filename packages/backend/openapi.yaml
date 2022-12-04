@@ -1645,60 +1645,6 @@ paths:
                           $ref: '#/components/schemas/UnitDto'
       tags: *ref_11
       security: *ref_12
-  /units:
-    get:
-      operationId: UnitsController_findAll
-      summary: ''
-      description: ''
-      parameters:
-        - required: false
-          name: page
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
-        - required: false
-          name: filter
-          in: query
-          schema:
-            type: object
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedUnitDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfUnitDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/UnitDto'
-      tags: &ref_13
-        - units
-      security: &ref_14
-        - accessToken: []
   /units/{id}:
     get:
       operationId: UnitsController_findOne
@@ -1717,8 +1663,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: *ref_13
-      security: *ref_14
+      tags: &ref_13
+        - units
+      security: &ref_14
+        - accessToken: []
     patch:
       operationId: UnitsController_update
       summary: ''

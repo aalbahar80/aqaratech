@@ -33,20 +33,6 @@ export class UnitsController {
 		private leasesService: LeasesService,
 	) {}
 
-	@Get()
-	@CheckAbilities({ action: Action.Read, subject: SubjectType })
-	@ApiQueryOptions()
-	@ApiPaginatedResponse(UnitDto)
-	findAll(
-		@User() user: IUser,
-		@QueryParser() queryOptions: QueryOptionsDto,
-	): Promise<WithCount<UnitDto>> {
-		return this.unitsService.findAll({
-			user,
-			queryOptions,
-		});
-	}
-
 	@Get(':id')
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
 	@ApiOkResponse({ type: UnitDto })
