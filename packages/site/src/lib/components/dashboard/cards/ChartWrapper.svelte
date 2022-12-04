@@ -22,10 +22,7 @@
 		</div>
 	</div>
 {:else}
-	<div
-		class="w-full overflow-hidden rounded-lg bg-white bg-opacity-50 p-8 shadow"
-		in:fade
-	>
+	<div class="w-full overflow-hidden rounded-lg bg-white p-8 shadow" in:fade>
 		<slot />
 	</div>
 {/if}
