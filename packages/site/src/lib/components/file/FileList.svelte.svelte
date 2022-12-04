@@ -17,7 +17,7 @@
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 	import HeroiconsOutlinePaperClip from '~icons/heroicons-outline/paper-clip';
-	import HeroiconsFolderOpen from '~icons/heroicons/folder-open';
+	import TableEmptyState from '$lib/components/table/tanstack-table/TableEmptyState.svelte';
 
 	export let files: PaginatedFileDto;
 
@@ -125,15 +125,5 @@
 		{/each}
 	</ul>
 {:else}
-	<div
-		class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-	>
-		<HeroiconsFolderOpen
-			class="mx-auto h-12 w-12 text-gray-400"
-			aria-hidden="true"
-		/>
-		<span class="mt-2 block text-sm font-medium text-gray-900">
-			Nothing here yet
-		</span>
-	</div>
+	<TableEmptyState />
 {/if}

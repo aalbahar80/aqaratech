@@ -6,7 +6,7 @@
 	import { handlePagination } from '$lib/components/table/pagination/handle-pagination';
 	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
 	import TableBodyRow from '$lib/components/table/row/TableBodyRow.svelte';
-	import TableEmptyState from './TableEmptyState.svelte';
+	import TableEmptyState from '$lib/components/table/tanstack-table/TableEmptyState.svelte';
 	import TableFooterRow from '$lib/components/table/row/TableFooterRow.svelte';
 	import TableHeaderRow from '$lib/components/table/row/TableHeaderRow.svelte';
 	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
