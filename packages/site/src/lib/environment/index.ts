@@ -35,11 +35,15 @@ const envSchema = z.object({
 		}),
 });
 
+type EnvSchema = z.infer<typeof envSchema>;
+
 // TODO use satisfies AqaratechEnv
 /**
  * Validated public environment variables.
  */
-export const environment = building ? env : envSchema.parse(env);
+export const environment = building
+	? (env as unknown as EnvSchema)
+	: envSchema.parse(env);
 
 if (!browser) {
 	console.log({ environment });
