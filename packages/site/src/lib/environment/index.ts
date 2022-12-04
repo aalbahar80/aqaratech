@@ -1,4 +1,4 @@
-import { browser } from '$app/environment';
+import { browser, building } from '$app/environment';
 import { env } from '$env/dynamic/public';
 import { z } from 'zod';
 
@@ -39,7 +39,7 @@ const envSchema = z.object({
 /**
  * Validated public environment variables.
  */
-export const environment = envSchema.parse(env);
+export const environment = building ? env : envSchema.parse(env);
 
 if (!browser) {
 	console.log({ environment });
