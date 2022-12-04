@@ -61,12 +61,12 @@ export class UnitsService {
 	}): Promise<WithCount<UnitDto>> {
 		const { take, skip, sort } = queryOptions;
 
-		const where: Prisma.UnitWhereInput = {
+		const where = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
 				...(whereCustom ? [whereCustom] : []),
 			],
-		};
+		} satisfies Prisma.UnitWhereInput;
 
 		const [data, total] = await Promise.all([
 			this.prisma.unit.findMany({
@@ -104,12 +104,12 @@ export class UnitsService {
 	}): Promise<WithCount<UnitMinimalDto>> {
 		const { take, skip, sort } = queryOptions;
 
-		const where: Prisma.UnitWhereInput = {
+		const where = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Unit,
 				...(whereCustom ? [whereCustom] : []),
 			],
-		};
+		} satisfies Prisma.UnitWhereInput;
 
 		const [data, total] = await Promise.all([
 			this.prisma.unit.findMany({
