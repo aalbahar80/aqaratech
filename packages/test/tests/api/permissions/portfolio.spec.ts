@@ -11,7 +11,6 @@ const accessible = [
 	'/tenants',
 	'/portfolios',
 	'/properties',
-	'/units',
 	'/leases',
 	// "/search",
 ];
@@ -60,3 +59,15 @@ test('can get data from /aggregate', async ({ portfolio, scopedRequest }) => {
 		await expect(res).toBeOK();
 	}
 });
+
+const units = ['/units', '/units-minimal'];
+
+for (const route of units) {
+	test(`can get units: ${route}`, async ({ portfolio, scopedRequest }) => {
+		const url = `/portfolios/${portfolio.id}${route}`;
+
+		const res = await scopedRequest.get(url);
+
+		await expect(res).toBeOK();
+	});
+}
