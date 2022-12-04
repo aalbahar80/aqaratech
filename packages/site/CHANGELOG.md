@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.0.3
+
+### Patch Changes
+
+- 9039a5870: update terminology in lease table
+
 ## 2.0.2
 
 ### Patch Changes
