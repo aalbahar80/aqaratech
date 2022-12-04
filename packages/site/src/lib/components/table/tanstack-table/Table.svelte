@@ -6,6 +6,7 @@
 	import { handlePagination } from '$lib/components/table/pagination/handle-pagination';
 	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
 	import TableBodyRow from '$lib/components/table/row/TableBodyRow.svelte';
+	import TableEmptyState from './TableEmptyState.svelte';
 	import TableFooterRow from '$lib/components/table/row/TableFooterRow.svelte';
 	import TableHeaderRow from '$lib/components/table/row/TableHeaderRow.svelte';
 	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
@@ -189,28 +190,32 @@
 	<div class="text-right">
 		<slot name="header-actions" />
 	</div>
-	<div class="shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-		<div class="overflow-x-auto">
-			<table class="min-w-full divide-y divide-gray-300">
-				<thead class="bg-gray-50">
-					{#each $table.getHeaderGroups() as group}
-						<TableHeaderRow {group} />
-					{/each}
-				</thead>
-				<tbody>
-					{#each $table.getRowModel().rows as row (row.original.id)}
-						<TableBodyRow {row} />
-					{/each}
-				</tbody>
-				<tfoot class="bg-gray-50">
-					{#each $table.getFooterGroups() as group}
-						<TableFooterRow {group} />
-					{/each}
-				</tfoot>
-			</table>
+	{#if $table.getRowModel().rows.length > 0}
+		<div class="shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+			<div class="overflow-x-auto">
+				<table class="min-w-full divide-y divide-gray-300">
+					<thead class="bg-gray-50">
+						{#each $table.getHeaderGroups() as group}
+							<TableHeaderRow {group} />
+						{/each}
+					</thead>
+					<tbody>
+						{#each $table.getRowModel().rows as row (row.original.id)}
+							<TableBodyRow {row} />
+						{/each}
+					</tbody>
+					<tfoot class="bg-gray-50">
+						{#each $table.getFooterGroups() as group}
+							<TableFooterRow {group} />
+						{/each}
+					</tfoot>
+				</table>
+			</div>
+			<slot name="pagination" table={$table}>
+				<Pagination table={$table} itemCount={paginationDto.itemCount} />
+			</slot>
 		</div>
-		<slot name="pagination" table={$table}>
-			<Pagination table={$table} itemCount={paginationDto.itemCount} />
-		</slot>
-	</div>
+	{:else}
+		<TableEmptyState />
+	{/if}
 </div>
