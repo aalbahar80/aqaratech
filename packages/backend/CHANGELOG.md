@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.0.2
+
+### Patch Changes
+
+- a7b44f0df: skip parse private env when building
+
 ## 2.0.1
 
 ### Patch Changes
