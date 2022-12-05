@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.0.3
+
+### Patch Changes
+
+- d8a78a3cb: add seperate endpoint for units-minimal
+
 ## 2.0.2
 
 ### Patch Changes
