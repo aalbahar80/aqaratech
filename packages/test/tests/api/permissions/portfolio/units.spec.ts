@@ -35,7 +35,12 @@ for (const route of units) {
 		// check that the response is filtered by property
 		const body: unknown = await res.json();
 
-		if (!body || typeof body !== 'object' || !('results' in body)) {
+		if (
+			!body ||
+			typeof body !== 'object' ||
+			!('results' in body) ||
+			!Array.isArray(body.results)
+		) {
 			throw new Error('Response is not paginated');
 		}
 
@@ -49,7 +54,8 @@ for (const route of units) {
 
 		// check unit ids
 		for (const unit of body.results) {
-			expect(unitIds).toContain(unit.id);
+			const u = unit as { id: string };
+			expect(unitIds).toContain(u.id);
 		}
 	});
 }
