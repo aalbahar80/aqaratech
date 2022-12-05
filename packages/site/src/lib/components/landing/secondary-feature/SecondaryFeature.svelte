@@ -18,9 +18,7 @@
 	<div
 		class={clsx('w-9 rounded-lg', isActive ? 'bg-blue-600' : 'bg-slate-500')}
 	>
-		<svg aria-hidden="true" class="h-9 w-9" fill="none">
-			<feature.icon />
-		</svg>
+		<svelte:component this={feature.icon} class="h-9 w-9 text-white" />
 	</div>
 	<h3
 		class={clsx(
