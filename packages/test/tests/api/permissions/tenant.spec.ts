@@ -11,7 +11,7 @@ const accessible = ['/leases'];
 const notAccessible = [
 	'/portfolios',
 	'/properties',
-	'/units',
+	// '/units',
 	// "/search",
 ];
 
@@ -96,6 +96,19 @@ for (const route of scoped) {
 
 		await expect.soft(res).not.toBeOK();
 
+		expect(res.status()).toBe(403);
+	});
+}
+
+const units = ['/units', '/units-minimal'];
+
+for (const route of units) {
+	test(`can get units: ${route}`, async ({ portfolio, scopedRequest }) => {
+		const url = `/portfolios/${portfolio.id}${route}`;
+
+		const res = await scopedRequest.get(url);
+
+		await expect(res).not.toBeOK();
 		expect(res.status()).toBe(403);
 	});
 }
