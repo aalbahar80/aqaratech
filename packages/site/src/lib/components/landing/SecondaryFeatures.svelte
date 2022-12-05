@@ -1,0 +1,27 @@
+<script lang="ts">
+	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
+	import FeaturesDesktop from '$lib/components/landing/secondary-feature/FeaturesDesktop.svelte';
+	import FeaturesMobile from '$lib/components/landing/secondary-feature/FeaturesMobile.svelte';
+</script>
+
+<section
+	id="secondary-features"
+	aria-label="Features for simplifying everyday business tasks"
+	class="pt-20 pb-14 sm:pb-20 sm:pt-32 lg:pb-32"
+>
+	<Container>
+		<div class="mx-auto max-w-2xl md:text-center">
+			<h2
+				class="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl"
+			>
+				Simplify everyday business tasks.
+			</h2>
+			<p class="mt-4 text-lg tracking-tight text-slate-700">
+				Because you’d probably be a little confused if we suggested you
+				complicate your everyday business tasks instead.
+			</p>
+		</div>
+		<FeaturesMobile />
+		<FeaturesDesktop />
+	</Container>
+</section>
