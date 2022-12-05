@@ -11,6 +11,7 @@ test.use({
 		{
 			isPaid: false,
 			paidAt: null,
+			postAt: '2020-01-01',
 		},
 	],
 });
