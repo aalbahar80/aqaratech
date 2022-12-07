@@ -27,10 +27,10 @@
 	title="Expenses: by Category"
 	subtitle="Total expenses by category for the selected period."
 	subtitle2="Click on a tile to zoom in. Tile size is proportional."
+	{maxHeight}
 >
 	<ExpenseTreemapCategory
 		expenses={data.expensesByCategory}
 		categories={data.categories}
-		{maxHeight}
 	/>
 </ChartWrapper>
