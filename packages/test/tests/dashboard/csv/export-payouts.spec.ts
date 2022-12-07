@@ -24,7 +24,7 @@ test('can export csv from payout table', async ({
 	const url = getRoute({
 		entity: 'portfolio',
 		id: portfolio.id,
-		pageType: PageTypePortfolio.Payouts,
+		pageType: PageTypePortfolio.PayoutsTable,
 		params: { organizationId: org.organization.id, portfolioId: portfolio.id },
 	});
 

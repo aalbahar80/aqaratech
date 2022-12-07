@@ -24,13 +24,11 @@ test('can export csv from income table', async ({
 	const url = getRoute({
 		entity: 'portfolio',
 		id: portfolio.id,
-		pageType: PageTypePortfolio.Income,
+		pageType: PageTypePortfolio.IncomeTable,
 		params: { organizationId: org.organization.id, portfolioId: portfolio.id },
 	});
 
 	await page.goto(url);
-
-	await page.getByRole('link', { name: 'Table' }).click();
 
 	await page.getByRole('button', { name: 'Options' }).click();
 
