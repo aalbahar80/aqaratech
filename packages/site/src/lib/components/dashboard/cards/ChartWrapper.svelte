@@ -11,30 +11,22 @@
 	const height = CHART_HEIGHT;
 </script>
 
-{#if empty}
-	<div
-		class="w-full overflow-hidden rounded-lg bg-white bg-opacity-50 p-8 shadow"
-		style="height: {height}px;"
-		in:fade
-	>
-		<div
-			class="flex h-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-center"
-		>
-			<HeroiconsChartPie class="mx-auto h-20 w-20  text-gray-300" />
-			<span class="block pt-8 text-xl font-light text-gray-900">No data</span>
+<div class="w-full overflow-hidden rounded-lg bg-white p-8 shadow">
+	{#if empty}
+		<div class="bg-opacity-50" style="height: {height}px;" in:fade>
+			<div
+				class="flex h-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-center"
+			>
+				<HeroiconsChartPie class="mx-auto h-20 w-20  text-gray-300" />
+				<span class="block pt-8 text-xl font-light text-gray-900">No data</span>
+			</div>
 		</div>
-	</div>
-{:else}
-	<div
-		class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
-		style="max-height: 696px"
-		in:fade
-	>
-		<div class="prose prose-base pb-10">
+	{:else}
+		<div class="prose prose-base pb-10" in:fade>
 			<h3>{title}</h3>
 			<p>{subtitle}</p>
 			<span class="italic text-gray-500">{subtitle2}</span>
 		</div>
 		<slot />
-	</div>
-{/if}
+	{/if}
+</div>
