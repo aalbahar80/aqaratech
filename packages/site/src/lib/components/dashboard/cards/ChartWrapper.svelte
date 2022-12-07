@@ -19,7 +19,7 @@
 >
 	{#if empty}
 		<div
-			class="flex h-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-opacity-50 text-center"
+			class="flex h-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-center"
 			in:fade
 		>
 			<HeroiconsChartPie class="mx-auto h-20 w-20  text-gray-300" />
