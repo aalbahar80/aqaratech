@@ -14,17 +14,16 @@
 </script>
 
 <div
-	class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
-	style="max-height: {maxHeight}px"
+	class="h-full w-full overflow-hidden rounded-lg bg-white p-8 shadow"
+	style="height: {maxHeight}px"
 >
 	{#if empty}
-		<div class="bg-opacity-50" style="height: {maxHeight}px;" in:fade>
-			<div
-				class="flex h-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-center"
-			>
-				<HeroiconsChartPie class="mx-auto h-20 w-20  text-gray-300" />
-				<span class="block pt-8 text-xl font-light text-gray-900">No data</span>
-			</div>
+		<div
+			class="flex h-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-opacity-50 text-center"
+			in:fade
+		>
+			<HeroiconsChartPie class="mx-auto h-20 w-20  text-gray-300" />
+			<span class="block pt-8 text-xl font-light text-gray-900">No data</span>
 		</div>
 	{:else}
 		<div class="prose prose-base lg:pb-10" in:fade>
