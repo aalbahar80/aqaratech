@@ -6,8 +6,8 @@
 	export let data: LayoutData;
 </script>
 
-<StatsIncome {data} />
-
 <DataTabs dataType="Income" />
+
+<StatsIncome {data} />
 
 <slot />
