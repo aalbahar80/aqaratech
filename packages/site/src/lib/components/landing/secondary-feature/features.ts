@@ -8,6 +8,8 @@ import HeroiconsBuildingOffice2 from '~icons/heroicons/building-office-2';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
 import MdiAccountTie from '~icons/mdi/account-tie';
 
+import type { SvelteComponentTyped } from 'svelte';
+
 export const secondaryFeatures = [
 	{
 		name: 'For property managers',
@@ -34,4 +36,12 @@ export const secondaryFeatures = [
 		image: screenshotContacts,
 		icon: HeroiconsUserGroup,
 	},
-];
+] satisfies SecondaryFeature[];
+
+export interface SecondaryFeature {
+	name: string;
+	summary: string;
+	description: string;
+	image: unknown;
+	icon: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
+}

@@ -1,13 +1,6 @@
 <script lang="ts">
 	import clsx from 'clsx';
-
-	interface SecondaryFeature {
-		name: string;
-		summary: string;
-		description: string;
-		image: any;
-		icon?: any;
-	}
+	import type { SecondaryFeature } from '$lib/components/landing/secondary-feature/features';
 
 	export let cs: string;
 	export let isActive: boolean;
