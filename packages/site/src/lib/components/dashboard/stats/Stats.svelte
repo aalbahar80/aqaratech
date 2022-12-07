@@ -1,12 +1,14 @@
 <script lang="ts">
-	export let title: string;
+	export let title = '';
 </script>
 
 <div>
-	<div class="flex justify-between">
-		<h3 class="text-2xl font-medium leading-6 text-gray-900">{title}</h3>
-		<slot name="details" />
-	</div>
+	{#if title}
+		<div class="flex justify-between">
+			<h3 class="text-2xl font-medium leading-6 text-gray-900">{title}</h3>
+			<slot name="details" />
+		</div>
+	{/if}
 	<dl
 		class="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x"
 	>

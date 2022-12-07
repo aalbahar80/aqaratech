@@ -7,10 +7,10 @@
 	export let data: PageData;
 </script>
 
-<Stats title="Income">
+<Stats>
 	<svelte:fragment slot="panes">
 		<StatisticsPane
-			primaryText="Total"
+			primaryText="Total Income"
 			secondaryText="for period"
 			primaryValue={kwdFormat(data.sumIncome.total)}
 		/>

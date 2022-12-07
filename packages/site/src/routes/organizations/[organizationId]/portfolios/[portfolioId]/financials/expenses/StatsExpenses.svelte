@@ -10,10 +10,10 @@
 	$: sum = R.sumBy(expenses, (x) => x.amount);
 </script>
 
-<Stats title="Expenses">
+<Stats>
 	<svelte:fragment slot="panes">
 		<StatisticsPane
-			primaryText="Total"
+			primaryText="Total Expenses"
 			secondaryText="for period"
 			primaryValue={kwdFormat(sum)}
 		/>
