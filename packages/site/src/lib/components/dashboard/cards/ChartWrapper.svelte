@@ -14,7 +14,7 @@
 </script>
 
 <div
-	class="h-full w-full overflow-hidden rounded-lg bg-white p-8 shadow"
+	class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
 	style="height: {maxHeight}px"
 >
 	{#if empty}
