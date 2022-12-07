@@ -1,7 +1,7 @@
 // Screenshots
-import screenshotContacts from '../../../../assets/screenshots/contacts.png';
 import screenshotInventory from '../../../../assets/screenshots/inventory.png';
 import screenshotProfitLoss from '../../../../assets/screenshots/profit-loss.png';
+import screenshotInvoices from '../../../../assets/screenshots/invoices.png';
 
 // Icons
 import HeroiconsBuildingOffice2 from '~icons/heroicons/building-office-2';
@@ -33,7 +33,7 @@ export const secondaryFeatures = [
 		description:
 			'Aqaratech simplifies the rental process by allowing tenants to pay their rent at any time, from any device.',
 
-		image: screenshotContacts,
+		image: screenshotInvoices,
 		icon: HeroiconsUserGroup,
 	},
 ] satisfies SecondaryFeature[];
