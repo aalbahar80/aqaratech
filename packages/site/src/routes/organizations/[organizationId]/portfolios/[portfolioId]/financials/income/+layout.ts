@@ -4,6 +4,7 @@ import { property } from '$lib/stores/filter/property';
 import { range } from '$lib/stores/filter/range';
 import { unit } from '$lib/stores/filter/unit';
 import { get } from 'svelte/store';
+import * as R from 'remeda';
 import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ fetch, params, depends }) => {
@@ -26,7 +27,17 @@ export const load: LayoutLoad = async ({ fetch, params, depends }) => {
 		end,
 	});
 
+	/**
+	 * Summed income data, used by multiple components.
+	 */
+	const sumIncome = {
+		total: R.sumBy(income.total, (x) => x.amount),
+		paid: R.sumBy(income.paid, (x) => x.amount),
+		unpaid: R.sumBy(income.unpaid, (x) => x.amount),
+	};
+
 	return {
 		income,
+		sumIncome,
 	};
 };
