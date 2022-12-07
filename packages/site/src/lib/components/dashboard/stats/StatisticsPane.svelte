@@ -9,7 +9,7 @@
 
 	// Values
 	export let primaryValue: number | string;
-	export let textColor = 'text-indigo-600';
+	export let textColor = 'text-gray-900';
 	export let valueText = '';
 
 	// Chips

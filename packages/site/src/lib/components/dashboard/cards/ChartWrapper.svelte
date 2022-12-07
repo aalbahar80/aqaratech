@@ -25,7 +25,11 @@
 		</div>
 	</div>
 {:else}
-	<div class="w-full overflow-hidden rounded-lg bg-white p-8 shadow" in:fade>
+	<div
+		class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
+		style="max-height: 696px"
+		in:fade
+	>
 		<div class="prose prose-base pb-10">
 			<h3>{title}</h3>
 			<p>{subtitle}</p>

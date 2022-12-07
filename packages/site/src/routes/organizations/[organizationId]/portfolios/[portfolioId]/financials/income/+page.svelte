@@ -6,6 +6,10 @@
 	export let data: PageData;
 </script>
 
-<PieChart income={data.income} />
+<div class="grid grid-cols-1 gap-8 xl:grid-cols-3">
+	<PieChart income={data.income} />
 
-<BarChart income={data.income} />
+	<div class="xl:col-span-2">
+		<BarChart income={data.income} />
+	</div>
+</div>
