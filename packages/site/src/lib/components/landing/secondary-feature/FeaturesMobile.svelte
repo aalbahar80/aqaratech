@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { createTabs } from 'svelte-headlessui';
-	import clsx from 'clsx';
 	import SecondaryFeature from '$lib/components/landing/secondary-feature/SecondaryFeature.svelte';
-	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
 	import { secondaryFeatures } from '$lib/components/landing/secondary-feature/features';
 </script>
 
