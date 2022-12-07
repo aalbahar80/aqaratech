@@ -10,16 +10,13 @@
 	let slideover: FilterSlideover | undefined;
 </script>
 
-<div class="rounded-lg bg-gray-50 shadow">
+<div class="rounded-lg bg-white shadow">
 	<FilterSlideover bind:this={slideover} filters={responsive} />
 
 	<div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-full lg:px-8">
 		<slot name="hero" />
 
-		<section
-			aria-labelledby="filter-heading"
-			class="border-t border-gray-200 py-6"
-		>
+		<section aria-labelledby="filter-heading" class="py-6">
 			<h2 id="filter-heading" class="sr-only">Filters</h2>
 
 			<div class="flex  flex-row-reverse items-center justify-between">

@@ -3,7 +3,7 @@
 	export let subtitle = '';
 </script>
 
-<div class="pb-10 pt-20">
+<div class="border-b border-gray-200 pb-10 pt-20">
 	<h1 class="text-4xl font-extrabold tracking-tight text-gray-900">
 		<slot name="title">{title}</slot>
 	</h1>
