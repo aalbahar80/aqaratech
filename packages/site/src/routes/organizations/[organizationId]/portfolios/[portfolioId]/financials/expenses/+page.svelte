@@ -6,6 +6,8 @@
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
 
 	export let data: PageData;
+
+	const maxHeight = 872;
 </script>
 
 <BarChart expenses={data.expensesByMonth} />
@@ -15,6 +17,7 @@
 	title="Expenses: by Location"
 	subtitle="Total expenses by location for the selected period."
 	subtitle2="Click on a tile to zoom in. Tile size is proportional."
+	{maxHeight}
 >
 	<ExpenseTreemapProperty expenses={data.expensesByLocation} />
 </ChartWrapper>
@@ -28,5 +31,6 @@
 	<ExpenseTreemapCategory
 		expenses={data.expensesByCategory}
 		categories={data.categories}
+		{maxHeight}
 	/>
 </ChartWrapper>

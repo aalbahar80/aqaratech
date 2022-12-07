@@ -1,19 +1,24 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import HeroiconsChartPie from '~icons/heroicons/chart-pie';
-	import { CHART_HEIGHT } from '$lib/components/dashboard/cards/chart-height.const';
 
 	export let empty: boolean;
 	export let title: string;
 	export let subtitle = '';
 	export let subtitle2 = '';
-
-	const height = CHART_HEIGHT;
+	/**
+	 * Should be the same for all charts. Except treemaps, which have a larger height.
+	 * Make sure treemaps are not on the same row as other charts.
+	 */
+	export let maxHeight = 696;
 </script>
 
-<div class="w-full overflow-hidden rounded-lg bg-white p-8 shadow">
+<div
+	class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
+	style="max-height: {maxHeight}px"
+>
 	{#if empty}
-		<div class="bg-opacity-50" style="height: {height}px;" in:fade>
+		<div class="bg-opacity-50" style="height: {maxHeight}px;" in:fade>
 			<div
 				class="flex h-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-center"
 			>
@@ -22,7 +27,7 @@
 			</div>
 		</div>
 	{:else}
-		<div class="prose prose-base pb-10" in:fade>
+		<div class="prose prose-base lg:pb-10" in:fade>
 			<h3>{title}</h3>
 			<p>{subtitle}</p>
 			<span class="italic text-gray-500">{subtitle2}</span>
