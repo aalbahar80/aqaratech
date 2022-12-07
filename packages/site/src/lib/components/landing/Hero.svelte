@@ -17,7 +17,7 @@
 		</h1>
 
 		<p class="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
-			Powerful for property managers. Transparent for owners. Simple for
+			Powerful for property managers. Transparent for owners. Convenient for
 			tenants.
 		</p>
 		<div class="flex justify-center gap-8">

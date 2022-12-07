@@ -20,7 +20,7 @@ export const secondaryFeatures = [
 		icon: HeroiconsBuildingOffice2,
 	},
 	{
-		name: 'For landlords',
+		name: 'For owners',
 		summary: 'Complete visibility',
 		description:
 			'Use our dashboard to access and monitor all of your property information, granting you peace of mind helping you make informed decisions.',
