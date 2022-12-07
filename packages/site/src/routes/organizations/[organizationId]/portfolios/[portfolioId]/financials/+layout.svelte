@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Filter from '$lib/components/dashboard/filter/Filter.svelte';
+	import RoleGuard from '$lib/utils/RoleGuard.svelte';
+	import { getRoute, PageType } from '@self/utils';
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
@@ -13,7 +15,21 @@
 	<div
 		class="flex flex-col items-center justify-center rounded-lg bg-white p-8 shadow lg:items-start lg:justify-start"
 	>
-		<div class="block pb-2 text-sm font-medium text-gray-700">Name</div>
+		<div class="flex items-center justify-between self-stretch pb-4">
+			<div class="block text-sm font-medium text-gray-700">Name</div>
+
+			<RoleGuard roles={['ORGADMIN']}>
+				<a
+					class="text-xs font-semibold text-indigo-600 hover:text-indigo-700"
+					href={getRoute({
+						entity: 'portfolio',
+						id: data.portfolio.id,
+						pageType: PageType.Id,
+						params: $page.params,
+					})}>Details<span aria-hidden="true">→</span></a
+				>
+			</RoleGuard>
+		</div>
 		<h2 class="text-2xl font-bold leading-7 text-gray-900 sm:tracking-tight">
 			{data.portfolio.fullName}
 		</h2>
