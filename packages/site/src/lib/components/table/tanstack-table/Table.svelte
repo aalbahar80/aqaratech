@@ -24,6 +24,7 @@
 		type VisibilityState,
 	} from '@tanstack/svelte-table';
 	import { writable } from 'svelte/store';
+	import { fade } from 'svelte/transition';
 
 	type T = $$Generic<{ id: string }>;
 
@@ -180,7 +181,7 @@
 </script>
 
 <div class="inline-block min-w-full align-middle">
-	<div class="py-8">
+	<div class="pb-8" in:fade>
 		<!-- Use the named slot "filter" to customize ex. Hero. 
 			   Otherwise, a default FilterBar will be rendered. -->
 		<slot name="filter" {filters}>
@@ -193,6 +194,7 @@
 	{#if $table.getRowModel().rows.length > 0}
 		<div
 			class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
+			in:fade
 		>
 			<div class="overflow-x-auto">
 				<table class="min-w-full divide-y divide-gray-300">
