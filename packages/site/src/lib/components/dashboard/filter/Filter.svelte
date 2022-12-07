@@ -14,7 +14,7 @@
 	export let units: PaginatedUnitMinimalDto;
 </script>
 
-<div class="grid grid-cols-2 gap-8 gap-x-2 md:gap-8">
+<div class="grid grid-cols-2 gap-8 gap-x-2 md:gap-8 lg:max-w-2xl">
 	{#if !hideRange}
 		<div class="col-span-full">
 			<DateFilter />
