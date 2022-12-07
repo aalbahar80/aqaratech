@@ -14,11 +14,12 @@
 			<h2
 				class="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl"
 			>
-				Simplify everyday business tasks.
+				Simplify your property management.
 			</h2>
 			<p class="mt-4 text-lg tracking-tight text-slate-700">
-				Because you’d probably be a little confused if we suggested you
-				complicate your everyday business tasks instead.
+				Aqaratech provides a comprehensive, easy-to-use platform where you can
+				manage multiple properties, keep track of important tasks and deadlines,
+				and quickly access important information – all in one place.
 			</p>
 		</div>
 		<FeaturesMobile />
