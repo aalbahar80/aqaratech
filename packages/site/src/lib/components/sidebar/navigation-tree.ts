@@ -154,10 +154,24 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 						}),
 					},
 					{
+						name: 'Income - Details',
+						href: getRoute({
+							...getRouteConfig,
+							pageType: PageTypePortfolio.IncomeTable,
+						}),
+					},
+					{
 						name: 'Expenses',
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTypePortfolio.Expenses,
+						}),
+					},
+					{
+						name: 'Expenses - Details',
+						href: getRoute({
+							...getRouteConfig,
+							pageType: PageTypePortfolio.ExpensesTable,
 						}),
 					},
 					{
