@@ -17,17 +17,11 @@
 		>
 			<div class="relative">
 				<h3 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-					Transfer funds world-wide
+					{features[0].title}
 				</h3>
-				<p class="mt-3 text-lg text-gray-500">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-					minima sequi recusandae, porro maiores officia assumenda aliquam
-					laborum ab aliquid veritatis impedit odit adipisci optio iste
-					blanditiis facere. Totam, velit.
-				</p>
 
 				<dl class="mt-10 space-y-10">
-					{#each features as item (item.title)}
+					{#each features[0].bullets as item}
 						<FeatureBullet {item} />
 					{/each}
 				</dl>
