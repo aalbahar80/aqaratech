@@ -23,9 +23,9 @@
 
 <div
 	class={clsx(
-		'lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
+		'mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
 		isEven && 'lg:grid-flow-row-dense',
-		!isEven && 'relative mt-12 lg:mt-24 ',
+		!isEven && 'relative',
 	)}
 >
 	<div class={clsx(isEven && 'lg:col-start-2', !isEven && 'relative')}>
@@ -50,7 +50,7 @@
 
 		<img
 			class="relative mx-auto"
-			width={490}
+			width={290}
 			src={feature.image}
 			alt={`${feature.title} illustration`}
 		/>
