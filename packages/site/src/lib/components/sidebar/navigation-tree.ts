@@ -10,8 +10,13 @@ import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
 import HeroiconsOutlineLogout from '~icons/heroicons-outline/logout';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
+import HeroiconsBanknotes from '~icons/heroicons/banknotes';
+import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 import HeroiconsPlus from '~icons/heroicons/plus';
+import HeroiconsReceiptPercent from '~icons/heroicons/receipt-percent';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
+// import HeroiconsCalculator from '~icons/heroicons/calculator';
+// import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 
 // Links
 import { LOGOUT } from '$lib/constants/routes';
@@ -131,57 +136,74 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 		tree.splice(
 			0,
 			0,
+
 			{
+				// name: 'Summary',
 				name: 'Financials',
+				icon: HeroiconsOutlineDocumentReport,
 				href: getRoute({
 					...getRouteConfig,
 					pageType: PageTypePortfolio.Summary,
 				}),
-				icon: HeroiconsOutlineDocumentReport,
+			},
+
+			{
+				name: 'Income',
+				icon: HeroiconsReceiptPercent,
+				href: getRoute({
+					...getRouteConfig,
+					pageType: PageTypePortfolio.Income,
+				}),
 				children: [
 					{
-						name: 'Summary',
-						href: getRoute({
-							...getRouteConfig,
-							pageType: PageTypePortfolio.Summary,
-						}),
-					},
-					{
-						name: 'Income',
+						name: 'Charts',
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTypePortfolio.Income,
 						}),
 					},
 					{
-						name: 'Income - Details',
+						name: 'Data',
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTypePortfolio.IncomeTable,
 						}),
 					},
+				],
+			},
+
+			{
+				name: 'Expenses',
+				icon: HeroiconsCreditCard,
+				href: getRoute({
+					...getRouteConfig,
+					pageType: PageTypePortfolio.Expenses,
+				}),
+				children: [
 					{
-						name: 'Expenses',
+						name: 'Charts',
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTypePortfolio.Expenses,
 						}),
 					},
 					{
-						name: 'Expenses - Details',
+						name: 'Data',
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTypePortfolio.ExpensesTable,
 						}),
 					},
-					{
-						name: 'Payouts',
-						href: getRoute({
-							...getRouteConfig,
-							pageType: PageTypePortfolio.PayoutsTable,
-						}),
-					},
 				],
+			},
+
+			{
+				name: 'Payouts',
+				icon: HeroiconsBanknotes,
+				href: getRoute({
+					...getRouteConfig,
+					pageType: PageTypePortfolio.PayoutsTable,
+				}),
 			},
 
 			{
