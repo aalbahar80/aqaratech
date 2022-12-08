@@ -19,7 +19,7 @@
 
 <div
 	class={clsx(
-		'flex items-center rounded-md px-4 py-2',
+		'flex items-center rounded-md px-4',
 		isCurrent && !item.children?.length
 			? 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200'
 			: 'transform text-gray-600 transition-colors duration-100 hover:bg-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200',
@@ -27,7 +27,7 @@
 	)}
 >
 	<a
-		class="inline-flex grow"
+		class="inline-flex grow py-2"
 		href={item.href}
 		on:click={() => {
 			// always expand when clicking on a link
