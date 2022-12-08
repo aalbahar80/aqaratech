@@ -38,7 +38,7 @@ export interface IFeature {
 
 export const features = [
 	{
-		title: 'Data and Analytics.',
+		title: 'Data and Analytics',
 		image: UndrawBusinessAnalytics,
 		bullets: [
 			{
@@ -56,7 +56,7 @@ export const features = [
 		],
 	},
 	{
-		title: 'Advanced Filtering.',
+		title: 'Advanced Filtering',
 		image: UndrawDataPoints,
 		bullets: [
 			{
@@ -74,7 +74,7 @@ export const features = [
 		],
 	},
 	{
-		title: 'Rental Payment Tracking.',
+		title: 'Rental Payment Tracking',
 		image: UndrawOnlinePayments,
 		bullets: [
 			{
@@ -92,7 +92,7 @@ export const features = [
 		],
 	},
 	{
-		title: 'Expense Tracking and Visualization.',
+		title: 'Expense Tracking and Visualization',
 		image: UndrawVisualData,
 		bullets: [
 			{
@@ -114,7 +114,7 @@ export const features = [
 		],
 	},
 	{
-		title: 'Document Management.',
+		title: 'Document Management',
 		image: UndrawSecureFiles,
 		bullets: [
 			{
@@ -125,7 +125,7 @@ export const features = [
 	},
 
 	{
-		title: 'Smart Search.',
+		title: 'Smart Search',
 		image: UndrawHouseSearching,
 		bullets: [
 			{
