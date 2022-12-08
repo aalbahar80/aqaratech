@@ -1,0 +1,17 @@
+diff --git a/components/tabs/TabPanel.svelte.d.ts b/components/tabs/TabPanel.svelte.d.ts
+index 174728028126bbd57c858b914598b6c1bddf7afa..bad3f0af9eb8b0d804481278b8be7fe4791f62cc 100644
+--- a/components/tabs/TabPanel.svelte.d.ts
++++ b/components/tabs/TabPanel.svelte.d.ts
+@@ -5,6 +5,7 @@ declare class __sveltets_Render<TAsProp extends SupportedAs> {
+         selected: boolean;
+     }, TAsProp, "div">, import("../../types").TInternalProps | "as" | "static" | "unmount"> & {
+         as?: TAsProp | undefined;
++        static?: boolean | undefined;
+     };
+     events(): {} & {
+         [evt: string]: CustomEvent<any>;
+@@ -21,3 +22,4 @@ export declare type TabPanelSlots<TAsProp extends SupportedAs> = ReturnType<__sv
+ export default class TabPanel<TAsProp extends SupportedAs> extends SvelteComponentTyped<TabPanelProps<TAsProp>, TabPanelEvents<TAsProp>, TabPanelSlots<TAsProp>> {
+ }
+ export {};
++

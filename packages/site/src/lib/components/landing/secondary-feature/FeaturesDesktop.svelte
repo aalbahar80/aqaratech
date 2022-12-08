@@ -34,7 +34,6 @@
 			{#each secondaryFeatures as feature, featureIndex (feature.name)}
 				<TabPanel
 					static
-					key={feature.name}
 					class={clsx(
 						'px-5 transition duration-500 ease-in-out [&:not(:focus-visible)]:focus:outline-none',
 						featureIndex !== selectedIndex && 'opacity-60',
