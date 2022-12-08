@@ -29,65 +29,65 @@ export interface IFeature {
 
 export const features = [
 	{
-		title: 'Data and Analytics',
+		title: 'Data and Analytics.',
 		bullets: [
 			{
-				text: 'Comprehensive tracking of property-related data, including rental payments, expenses, and tenant communications',
+				text: 'Comprehensive tracking of property-related data, including rental payments, expenses, and tenant communications.',
 				icon: HeroiconsOutlineChartBar,
 			},
 			{
-				text: 'Interactive dashboards and reports, showing income, expenses, and profit/loss for each property',
+				text: 'Interactive dashboards and reports, showing income, expenses, and profit/loss for each property.',
 				icon: HeroiconsChartPie,
 			},
 			{
-				text: 'Advanced analytics and modeling tools, to help you make informed decisions about your properties and tenants',
+				text: 'Advanced analytics and modeling tools, to help you make informed decisions about your properties and tenants.',
 				icon: HeroiconsOutlinePresentationChartBar,
 			},
 		],
 	},
 	{
-		title: 'Advanced Filtering',
+		title: 'Advanced Filtering.',
 		bullets: [
 			{
-				text: 'Customizable filters, so you can focus on the information that is most relevant to you',
+				text: 'Customizable filters, so you can focus on the information that is most relevant to you.',
 				icon: HeroiconsOutlineFilter,
 			},
 			{
-				text: 'Filter your properties and tenant data by location, including specific properties or units within properties',
+				text: 'Filter your properties and tenant data by location, including specific properties or units within properties.',
 				icon: HeroiconsGlobeAlt,
 			},
 			{
-				text: 'Filter by time, including specific date ranges or time periods',
+				text: 'Filter by time, including specific date ranges or time periods.',
 				icon: HeroiconsClock,
 			},
 		],
 	},
 	{
-		title: 'Rental Payment Tracking',
+		title: 'Rental Payment Tracking.',
 		bullets: [
 			{
-				text: 'Easy tracking and management of rental payments and lease agreements',
+				text: 'Easy tracking and management of rental payments and lease agreements.',
 				icon: HeroiconsBanknotes,
 			},
 			{
-				text: 'Automated payment reminders',
+				text: 'Automated payment reminders.',
 				icon: HeroiconsBell,
 			},
 			{
-				text: 'Online KNET rent payments',
+				text: 'Online KNET rent payments.',
 				icon: HeroiconsCreditCard,
 			},
 		],
 	},
 	{
-		title: 'Expense Tracking and Visualization',
+		title: 'Expense Tracking and Visualization.',
 		bullets: [
 			{
-				text: 'Comprehensive tracking of property-related expenses, including utilities, repairs, and maintenance',
+				text: 'Comprehensive tracking of property-related expenses, including utilities, repairs, and maintenance.',
 				icon: HeroiconsCurrencyDollar,
 			},
 			{
-				text: 'Categorize expenses by hierarchical categories, to better understand your spending patterns',
+				text: 'Categorize expenses by hierarchical categories, to better understand your spending patterns.',
 				icon: HeroiconsOutlineRectangleGroup,
 			},
 			{
@@ -95,26 +95,26 @@ export const features = [
 				icon: HeroiconsArrowTrendingUp,
 			},
 			{
-				text: 'Monitor occupancy rates and trends, using heatmaps and other data visualizations',
+				text: 'Monitor occupancy rates and trends, using heatmaps and other data visualizations.',
 				icon: HeroiconsPresentationChartLine,
 			},
 		],
 	},
 	{
-		title: 'Document Management',
+		title: 'Document Management.',
 		bullets: [
 			{
-				text: 'Store and manage important documents related to your properties and tenants, including lease agreements, rental payment receipts, and maintenance records',
+				text: 'Store and manage important documents related to your properties and tenants, including lease agreements, rental payment receipts, and maintenance records.',
 				icon: HeroiconsClipboardDocumentList,
 			},
 		],
 	},
 
 	{
-		title: 'Smart Search',
+		title: 'Smart Search.',
 		bullets: [
 			{
-				text: 'Global search: Search through all of your data at the same time',
+				text: 'Global search: Search through all of your data at the same time.',
 				icon: HeroiconsDocumentMagnifyingGlass,
 			},
 			{
