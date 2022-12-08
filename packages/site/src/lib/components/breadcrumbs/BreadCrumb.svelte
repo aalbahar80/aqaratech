@@ -13,7 +13,7 @@
 </script>
 
 {#if crumbs}
-	<nav class="flex" aria-label="Breadcrumb">
+	<nav class="flex overflow-auto" aria-label="Breadcrumb">
 		<ol class="flex items-center space-x-4">
 			{#each parsedCrumbs as [title, crumb], idx}
 				{#if isEntity(title)}
