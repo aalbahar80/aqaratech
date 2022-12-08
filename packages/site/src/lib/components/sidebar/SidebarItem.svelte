@@ -8,6 +8,12 @@
 	export let expanded = false;
 	export let isChild = false;
 
+	// expand the sidebar item if the current page is a child of the item
+	// only runs once
+	if (item.children?.some((child) => child.href === $page.url.pathname)) {
+		expanded = true;
+	}
+
 	$: isCurrent = $page.url.pathname === item.href;
 </script>
 
