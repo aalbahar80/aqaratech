@@ -40,11 +40,10 @@
 				expanded = !expanded;
 			}}
 		>
-			<ArrowIcon />
+			<ArrowIcon {expanded} />
 		</button>
 	{/if}
-</a>
-
+</div>
 {#if item.children && expanded}
 	{#each item.children as child}
 		<svelte:self item={child} isChild />
