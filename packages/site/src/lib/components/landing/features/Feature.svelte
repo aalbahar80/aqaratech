@@ -24,7 +24,7 @@
 
 <div
 	class={clsx(
-		'mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
+		'mt-12 lg:mt-32 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
 		isEven && 'lg:grid-flow-row-dense',
 		!isEven && 'relative',
 	)}
