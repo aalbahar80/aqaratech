@@ -12,8 +12,9 @@
 </script>
 
 <!-- FIXME handle patternId -->
+<!-- patternId="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7" -->
 <DotPattern
-	patternId="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7"
+	patternId={`feature-lg-${id}`}
 	cs={clsx(
 		'hidden',
 		isEven && 'right-full translate-x-1/2 translate-y-12',
@@ -46,7 +47,7 @@
 		aria-hidden="true"
 	>
 		<!-- FIXME handle patternId -->
-		<DotPatternSm patternId="ca9667ae-9f92-4be7-abcb-9e3d727f2941" />
+		<DotPatternSm patternId={`feature-sm-${id}`} />
 
 		<img
 			class="relative mx-auto"
