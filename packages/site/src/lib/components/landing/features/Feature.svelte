@@ -51,8 +51,8 @@
 		<img
 			class="relative mx-auto"
 			width={490}
-			src="https://tailwindui.com/img/features/feature-example-1.png"
-			alt=""
+			src={feature.image}
+			alt={`${feature.title} illustration`}
 		/>
 	</div>
 </div>

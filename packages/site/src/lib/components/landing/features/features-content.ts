@@ -17,6 +17,14 @@ import HeroiconsDocumentMagnifyingGlass from '~icons/heroicons/document-magnifyi
 import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
 import HeroiconsPresentationChartLine from '~icons/heroicons/presentation-chart-line';
 
+// Illustrations
+import UndrawBusinessAnalytics from '../../../../assets/illustrations/undraw_business_analytics.svg';
+import UndrawDataPoints from '../../../../assets/illustrations/undraw_data_points.svg';
+import UndrawHouseSearching from '../../../../assets/illustrations/undraw_house_searching.svg';
+import UndrawOnlinePayments from '../../../../assets/illustrations/undraw_online_payments.svg';
+import UndrawSecureFiles from '../../../../assets/illustrations/undraw_secure_files.svg';
+import UndrawVisualData from '../../../../assets/illustrations/undraw_visual_data.svg';
+
 export interface FeatureBullet {
 	text: string;
 	icon: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
@@ -24,12 +32,14 @@ export interface FeatureBullet {
 
 export interface IFeature {
 	title: string;
+	image: string;
 	bullets: FeatureBullet[];
 }
 
 export const features = [
 	{
 		title: 'Data and Analytics.',
+		image: UndrawBusinessAnalytics,
 		bullets: [
 			{
 				text: 'Comprehensive tracking of property-related data, including rental payments, expenses, and tenant communications.',
@@ -47,6 +57,7 @@ export const features = [
 	},
 	{
 		title: 'Advanced Filtering.',
+		image: UndrawDataPoints,
 		bullets: [
 			{
 				text: 'Customizable filters, so you can focus on the information that is most relevant to you.',
@@ -64,6 +75,7 @@ export const features = [
 	},
 	{
 		title: 'Rental Payment Tracking.',
+		image: UndrawOnlinePayments,
 		bullets: [
 			{
 				text: 'Easy tracking and management of rental payments and lease agreements.',
@@ -81,6 +93,7 @@ export const features = [
 	},
 	{
 		title: 'Expense Tracking and Visualization.',
+		image: UndrawVisualData,
 		bullets: [
 			{
 				text: 'Comprehensive tracking of property-related expenses, including utilities, repairs, and maintenance.',
@@ -102,6 +115,7 @@ export const features = [
 	},
 	{
 		title: 'Document Management.',
+		image: UndrawSecureFiles,
 		bullets: [
 			{
 				text: 'Store and manage important documents related to your properties and tenants, including lease agreements, rental payment receipts, and maintenance records.',
@@ -112,6 +126,7 @@ export const features = [
 
 	{
 		title: 'Smart Search.',
+		image: UndrawHouseSearching,
 		bullets: [
 			{
 				text: 'Global search: Search through all of your data at the same time.',
