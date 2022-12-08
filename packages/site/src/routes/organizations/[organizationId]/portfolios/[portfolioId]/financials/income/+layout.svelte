@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LinkData from '$lib/components/dashboard/LinkData.svelte';
 	import StatsIncome from './StatsIncome.svelte';
 	import type { LayoutData } from './$types';
 
@@ -8,3 +9,5 @@
 <StatsIncome {data} />
 
 <slot />
+
+<LinkData dataType="Income" />
