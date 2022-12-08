@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { features } from '$lib/components/landing/features/features-content';
+	import Feature from '$lib/components/landing/features-2/Feature.svelte';
 	import FeatureBullet from '$lib/components/landing/features-2/FeatureBullet.svelte';
 	import DotPatternSm from './DotPatternSm.svelte';
 	import DotPattern from './DotPattern.svelte';
@@ -7,37 +8,41 @@
 
 <div class="overflow-hidden bg-gray-50 py-16 lg:py-24">
 	<div class="relative mx-auto max-w-xl px-6 lg:max-w-7xl lg:px-8">
-		<DotPattern
-			patternId="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7"
-			cs="left-full hidden -translate-x-1/2 -translate-y-1/4"
-		/>
+		<Feature id="1" />
+		<Feature id="2" />
+		<Feature id="3" />
 
-		<div
-			class="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8"
-		>
-			<div class="relative">
-				<h3 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-					{features[0].title}
-				</h3>
-
-				<dl class="mt-10 space-y-10">
-					{#each features[0].bullets as item}
-						<FeatureBullet {item} />
-					{/each}
-				</dl>
-			</div>
-
-			<div class="relative -mx-4 mt-10 lg:mt-0" aria-hidden="true">
-				<DotPatternSm patternId="ca9667ae-9f92-4be7-abcb-9e3d727f2941" />
-
-				<img
-					class="relative mx-auto"
-					width={490}
-					src="https://tailwindui.com/img/features/feature-example-1.png"
-					alt=""
-				/>
-			</div>
-		</div>
+		<!-- <DotPattern -->
+		<!-- 	patternId="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7" -->
+		<!-- 	cs="left-full hidden -translate-x-1/2 -translate-y-1/4" -->
+		<!-- /> -->
+		<!---->
+		<!-- <div -->
+		<!-- 	class="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8" -->
+		<!-- > -->
+		<!-- 	<div class="relative"> -->
+		<!-- 		<h3 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"> -->
+		<!-- 			{features[0].title} -->
+		<!-- 		</h3> -->
+		<!---->
+		<!-- 		<dl class="mt-10 space-y-10"> -->
+		<!-- 			{#each features[0].bullets as item} -->
+		<!-- 				<FeatureBullet {item} /> -->
+		<!-- 			{/each} -->
+		<!-- 		</dl> -->
+		<!-- 	</div> -->
+		<!---->
+		<!-- 	<div class="relative -mx-4 mt-10 lg:mt-0" aria-hidden="true"> -->
+		<!-- 		<DotPatternSm patternId="ca9667ae-9f92-4be7-abcb-9e3d727f2941" /> -->
+		<!---->
+		<!-- 		<img -->
+		<!-- 			class="relative mx-auto" -->
+		<!-- 			width={490} -->
+		<!-- 			src="https://tailwindui.com/img/features/feature-example-1.png" -->
+		<!-- 			alt="" -->
+		<!-- 		/> -->
+		<!-- 	</div> -->
+		<!-- </div> -->
 
 		<DotPattern
 			patternId="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d"
