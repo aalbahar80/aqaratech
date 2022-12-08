@@ -1,7 +1,7 @@
 // Screenshots
-import screenshotProfitLoss from '../../../../assets/screenshots/profit-loss.png';
+import screenshotDashboard from '../../../../assets/screenshots/dashboard-4.png';
 import screenshotInvoices from '../../../../assets/screenshots/invoices.png';
-import screenshotDashboard from '../../../../assets/screenshots/dashboard.png';
+import screenshotProfitLoss from '../../../../assets/screenshots/leases-2.png';
 
 // Icons
 import HeroiconsBuildingOffice2 from '~icons/heroicons/building-office-2';
