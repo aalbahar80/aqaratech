@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { features } from '$lib/components/landing/features/features-content';
+	import type { IFeature } from '$lib/components/landing/features-2/features-content';
 	import FeatureBullet from '$lib/components/landing/features-2/FeatureBullet.svelte';
 	import DotPatternSm from './DotPatternSm.svelte';
 	import DotPattern from './DotPattern.svelte';
 	import clsx from 'clsx';
 
 	export let id: number;
+	export let feature: IFeature;
 
 	const isEven = id % 2 === 0;
 </script>
@@ -29,11 +30,11 @@
 >
 	<div class={clsx(isEven && 'lg:col-start-2', !isEven && 'relative')}>
 		<h3 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-			{features[0].title}
+			{feature.title}
 		</h3>
 
 		<dl class="mt-10 space-y-10">
-			{#each features[0].bullets as item}
+			{#each feature.bullets as item}
 				<FeatureBullet {item} />
 			{/each}
 		</dl>
