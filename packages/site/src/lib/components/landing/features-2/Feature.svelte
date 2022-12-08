@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { IFeature } from '$lib/components/landing/features-2/features-content';
-	import FeatureBullet from '$lib/components/landing/features-2/FeatureBullet.svelte';
+	import type { IFeature } from '$lib/components/landing/features/features-content';
+	import FeatureBullet from '$lib/components/landing/features/FeatureBullet.svelte';
 	import DotPatternSm from './DotPatternSm.svelte';
 	import DotPattern from './DotPattern.svelte';
 	import clsx from 'clsx';

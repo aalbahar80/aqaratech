@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { features } from '$lib/components/landing/features-2/features-content';
-	import Feature from '$lib/components/landing/features-2/Feature.svelte';
+	import { features } from '$lib/components/landing/features/features-content';
+	import Feature from '$lib/components/landing/features/Feature.svelte';
 </script>
 
 <div class="overflow-hidden bg-gray-50 py-16 lg:py-24">
