@@ -5,6 +5,7 @@
 	import clsx from 'clsx';
 
 	export let item: NavigationItem;
+	export let expanded = false;
 	export let isChild = false;
 
 	$: isCurrent = $page.url.pathname === item.href;
@@ -19,6 +20,9 @@
 		isChild ? 'mt-2' : 'mt-5',
 	)}
 	href={item.href}
+	on:click={() => {
+		expanded = true;
+	}}
 >
 	{#if item.icon}
 		<svelte:component this={item.icon} class="h-5 w-5" />
@@ -30,11 +34,18 @@
 	<span class="mx-4 font-medium">{item.name}</span>
 
 	{#if item.children && item.children?.length > 0}
-		<ArrowIcon />
+		<button
+			class="ml-auto focus:outline-none"
+			on:click={() => {
+				expanded = !expanded;
+			}}
+		>
+			<ArrowIcon />
+		</button>
 	{/if}
 </a>
 
-{#if item.children && item.children?.length > 0}
+{#if item.children && expanded}
 	{#each item.children as child}
 		<svelte:self item={child} isChild />
 	{/each}
