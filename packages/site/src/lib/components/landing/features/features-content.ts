@@ -2,7 +2,6 @@ import type { SvelteComponentTyped } from 'svelte';
 
 // Icons
 import HeroiconsOutlineChartBar from '~icons/heroicons-outline/chart-bar';
-import HeroiconsOutlineFilter from '~icons/heroicons-outline/filter';
 import HeroiconsOutlinePresentationChartBar from '~icons/heroicons-outline/presentation-chart-bar';
 import HeroiconsOutlineRectangleGroup from '~icons/heroicons-outline/rectangle-group';
 import HeroiconsArrowTrendingUp from '~icons/heroicons/arrow-trending-up';
@@ -12,10 +11,15 @@ import HeroiconsChartPie from '~icons/heroicons/chart-pie';
 import HeroiconsClipboardDocumentList from '~icons/heroicons/clipboard-document-list';
 import HeroiconsClock from '~icons/heroicons/clock';
 import HeroiconsCreditCard from '~icons/heroicons/credit-card';
+import HeroiconsCubeTransparent from '~icons/heroicons/cube-transparent';
 import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 import HeroiconsDocumentMagnifyingGlass from '~icons/heroicons/document-magnifying-glass';
+import HeroiconsFunnel from '~icons/heroicons/funnel';
 import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
 import HeroiconsPresentationChartLine from '~icons/heroicons/presentation-chart-line';
+import HeroiconsAdjustmentsVertical from '~icons/heroicons/adjustments-vertical';
+import HeroiconsCalendarDays from '~icons/heroicons/calendar-days';
+import HeroiconsCloud from '~icons/heroicons/cloud';
 
 // Illustrations
 import UndrawBusinessAnalytics from '../../../../assets/illustrations/undraw_business_analytics.svg';
@@ -42,16 +46,21 @@ export const features = [
 		image: UndrawBusinessAnalytics,
 		bullets: [
 			{
-				text: 'Comprehensive tracking of property-related data, including rental payments, expenses, and tenant communications.',
+				text: 'Comprehensive tracking of property-related data, including units, leases, tenants, and more.',
 				icon: HeroiconsOutlineChartBar,
 			},
 			{
-				text: 'Interactive dashboards and reports, showing income, expenses, and profit/loss for each property.',
+				text: 'Interactive dashboards and reports, showing income, expenses, and profit/loss for each portfolio, property, and unit.',
 				icon: HeroiconsChartPie,
 			},
 			{
-				text: 'Advanced analytics and modeling tools, to help you make informed decisions about your properties and tenants.',
-				icon: HeroiconsOutlinePresentationChartBar,
+				text: "Visualize your properties' financial data and identify trends and patterns over time.",
+				icon: HeroiconsArrowTrendingUp,
+				// icon: HeroiconsOutlinePresentationChartBar,
+			},
+			{
+				text: "Monitor your properties' occupancy rates and vacancy periods using heatmaps.",
+				icon: HeroiconsCalendarDays,
 			},
 		],
 	},
@@ -61,11 +70,11 @@ export const features = [
 		bullets: [
 			{
 				text: 'Customizable filters, so you can focus on the information that is most relevant to you.',
-				icon: HeroiconsOutlineFilter,
+				icon: HeroiconsAdjustmentsVertical,
 			},
 			{
 				text: 'Filter your properties and tenant data by location, including specific properties or units within properties.',
-				icon: HeroiconsGlobeAlt,
+				icon: HeroiconsFunnel,
 			},
 			{
 				text: 'Filter by time, including specific date ranges or time periods.',
@@ -96,20 +105,16 @@ export const features = [
 		image: UndrawVisualData,
 		bullets: [
 			{
-				text: 'Comprehensive tracking of property-related expenses, including utilities, repairs, and maintenance.',
-				icon: HeroiconsCurrencyDollar,
+				text: 'Comprehensive expense tracking provides you with valuable granularity for expense analysis. Choose to attribute expenses to a portfolio, property, or even a single unit.',
+				icon: HeroiconsCubeTransparent,
 			},
 			{
-				text: 'Categorize expenses by hierarchical categories, to better understand your spending patterns.',
+				text: 'Categorize expenses using a hierarchical system to better understand your expense sources.',
 				icon: HeroiconsOutlineRectangleGroup,
 			},
 			{
-				text: "Visualize your properties' income and expenses, including trends and patterns over time",
+				text: 'Visualize expenses using interactive treemaps, which allow you to quickly identify your cost patterns.',
 				icon: HeroiconsArrowTrendingUp,
-			},
-			{
-				text: 'Monitor occupancy rates and trends, using heatmaps and other data visualizations.',
-				icon: HeroiconsPresentationChartLine,
 			},
 		],
 	},
@@ -121,6 +126,10 @@ export const features = [
 				text: 'Store and manage important documents related to your properties and tenants, including lease agreements, rental payment receipts, and maintenance records.',
 				icon: HeroiconsClipboardDocumentList,
 			},
+			{
+				text: 'Access your documents from anywhere, using any device.',
+				icon: HeroiconsCloud,
+			},
 		],
 	},
 
@@ -129,11 +138,11 @@ export const features = [
 		image: UndrawHouseSearching,
 		bullets: [
 			{
-				text: 'Global search: Search through all of your data at the same time.',
-				icon: HeroiconsDocumentMagnifyingGlass,
+				text: 'Global: Search through all of your data at the same time.',
+				icon: HeroiconsGlobeAlt,
 			},
 			{
-				text: "Fuzzy search: Find what you're looking for even if you make a	mistake or only type part of the word.",
+				text: "Fuzzy: Find what you're looking for without knowing the exact spelling.",
 				icon: HeroiconsDocumentMagnifyingGlass,
 			},
 		],
