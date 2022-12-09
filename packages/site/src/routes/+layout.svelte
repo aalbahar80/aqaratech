@@ -57,7 +57,7 @@
 	<slot />
 	<VersionFooter />
 {:else}
-	<div class="grid grid-cols-[minmax(0px,16rem)_repeat(1,minmax(0,_1fr))]">
+	<div class="my-grid">
 		{#if isSidebarAvailable($page.url.pathname) && data.user}
 			<Sidebar navigationTree={getNavigationTree(data.user)} />
 		{/if}
@@ -73,3 +73,10 @@
 		</main>
 	</div>
 {/if}
+
+<style>
+	.my-grid {
+		display: grid;
+		grid-template-columns: minmax(0px, 16rem) repeat(1, minmax(0, 1fr));
+	}
+</style>
