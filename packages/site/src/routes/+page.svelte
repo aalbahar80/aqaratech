@@ -11,6 +11,5 @@
 <PopoverDivider />
 <SecondaryFeatures />
 <CallToAction />
-<PopoverDivider />
 <Features />
 <Footer />
