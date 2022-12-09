@@ -20,7 +20,7 @@
 
 <div
 	class={clsx(
-		'mt-44 lg:mt-44 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
+		'mt-24 lg:mt-44 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
 		isEven && 'lg:grid-flow-row-dense',
 		!isEven && 'relative',
 	)}
@@ -38,7 +38,7 @@
 	</div>
 
 	<div
-		class="relative -mx-4 mt-20 lg:mt-0"
+		class="relative -mx-4 mt-10 lg:mt-0"
 		class:col-start-1={isEven}
 		aria-hidden="true"
 	>
