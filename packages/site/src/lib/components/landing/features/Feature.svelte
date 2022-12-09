@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { IFeature } from '$lib/components/landing/features/features-content';
 	import FeatureBullet from '$lib/components/landing/features/FeatureBullet.svelte';
-	import DotPatternSm from './DotPatternSm.svelte';
-	import DotPattern from './DotPattern.svelte';
 	import clsx from 'clsx';
 
 	export let id: number;
@@ -11,18 +9,18 @@
 	const isEven = id % 2 === 0;
 </script>
 
-<DotPattern
-	patternId={`feature-lg-${id}`}
-	cs={clsx(
-		'hidden',
-		isEven && 'right-full translate-x-1/2 translate-y-12',
-		!isEven && 'left-full -translate-x-1/2 -translate-y-1/4',
-	)}
-/>
+<!-- <DotPattern -->
+<!-- 	patternId={`feature-lg-${id}`} -->
+<!-- 	cs={clsx( -->
+<!-- 		'hidden', -->
+<!-- 		isEven && 'right-full translate-x-1/2 translate-y-12', -->
+<!-- 		!isEven && 'left-full -translate-x-1/2 -translate-y-1/4', -->
+<!-- 	)} -->
+<!-- /> -->
 
 <div
 	class={clsx(
-		'mt-24 lg:mt-32 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
+		'mt-44 lg:mt-44 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
 		isEven && 'lg:grid-flow-row-dense',
 		!isEven && 'relative',
 	)}
@@ -40,11 +38,11 @@
 	</div>
 
 	<div
-		class="relative -mx-4 mt-10 lg:mt-0"
+		class="relative -mx-4 mt-20 lg:mt-0"
 		class:col-start-1={isEven}
 		aria-hidden="true"
 	>
-		<DotPatternSm patternId={`feature-sm-${id}`} />
+		<!-- <DotPatternSm patternId={`feature-sm-${id}`} /> -->
 
 		<img
 			class="relative mx-auto"
