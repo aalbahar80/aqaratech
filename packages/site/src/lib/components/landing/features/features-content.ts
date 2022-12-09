@@ -126,7 +126,7 @@ export const features = [
 	},
 
 	{
-		title: 'Smart Search',
+		title: 'Powerful Search',
 		image: UndrawHouseSearching,
 		bullets: [
 			{
