@@ -12,7 +12,7 @@
 	<Container>
 		<div class="mx-auto max-w-2xl md:text-center">
 			<h2 class="text-3xl tracking-tight text-slate-900 sm:text-4xl">
-				Simplify your property management.
+				Property management simplified.
 			</h2>
 			<p class="mt-4 text-lg tracking-tight text-slate-700">
 				Aqaratech provides a comprehensive, easy-to-use platform where you can

@@ -9,7 +9,7 @@ import HeroiconsCalendarDays from '~icons/heroicons/calendar-days';
 import HeroiconsClipboardDocumentList from '~icons/heroicons/clipboard-document-list';
 import HeroiconsClock from '~icons/heroicons/clock';
 import HeroiconsCloud from '~icons/heroicons/cloud';
-import HeroiconsCreditCard from '~icons/heroicons/credit-card';
+// import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 import HeroiconsCubeTransparent from '~icons/heroicons/cube-transparent';
 import HeroiconsDocumentMagnifyingGlass from '~icons/heroicons/document-magnifying-glass';
 import HeroiconsFunnel from '~icons/heroicons/funnel';
@@ -68,10 +68,10 @@ export const features = [
 				text: 'Automated payment reminders.',
 				icon: HeroiconsBell,
 			},
-			{
-				text: 'Online KNET rent payments.',
-				icon: HeroiconsCreditCard,
-			},
+			// {
+			// 	text: 'Online KNET rent payments.',
+			// 	icon: HeroiconsCreditCard,
+			// },
 		],
 	},
 	{

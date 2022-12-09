@@ -31,8 +31,8 @@ export const secondaryFeatures = [
 		name: 'For tenants',
 		summary: 'Hassle-free rentals',
 		description:
-			'Aqaratech simplifies the rental process by allowing tenants to pay their rent at any time, from any device.',
-
+			'Aqaratech simplifies the rental process by allowing tenants to track their payments and leases.',
+		// 'Aqaratech simplifies the rental process by allowing tenants to pay their rent at any time, from any device.',
 		image: screenshotInvoices,
 		icon: HeroiconsUserGroup,
 	},
