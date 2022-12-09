@@ -38,7 +38,7 @@
 	</div>
 
 	<div
-		class="relative -mx-4 mt-10 lg:mt-0"
+		class="relative -mx-4 my-32 lg:my-0"
 		class:col-start-1={isEven}
 		aria-hidden="true"
 	>
