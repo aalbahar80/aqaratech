@@ -2,24 +2,22 @@ import type { SvelteComponentTyped } from 'svelte';
 
 // Icons
 import HeroiconsOutlineChartBar from '~icons/heroicons-outline/chart-bar';
-import HeroiconsOutlinePresentationChartBar from '~icons/heroicons-outline/presentation-chart-bar';
 import HeroiconsOutlineRectangleGroup from '~icons/heroicons-outline/rectangle-group';
-import HeroiconsArrowTrendingUp from '~icons/heroicons/arrow-trending-up';
+import HeroiconsAdjustmentsVertical from '~icons/heroicons/adjustments-vertical';
 import HeroiconsBanknotes from '~icons/heroicons/banknotes';
 import HeroiconsBell from '~icons/heroicons/bell';
+import HeroiconsCalendarDays from '~icons/heroicons/calendar-days';
 import HeroiconsChartPie from '~icons/heroicons/chart-pie';
 import HeroiconsClipboardDocumentList from '~icons/heroicons/clipboard-document-list';
 import HeroiconsClock from '~icons/heroicons/clock';
+import HeroiconsCloud from '~icons/heroicons/cloud';
 import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 import HeroiconsCubeTransparent from '~icons/heroicons/cube-transparent';
-import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 import HeroiconsDocumentMagnifyingGlass from '~icons/heroicons/document-magnifying-glass';
 import HeroiconsFunnel from '~icons/heroicons/funnel';
 import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
+import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 import HeroiconsPresentationChartLine from '~icons/heroicons/presentation-chart-line';
-import HeroiconsAdjustmentsVertical from '~icons/heroicons/adjustments-vertical';
-import HeroiconsCalendarDays from '~icons/heroicons/calendar-days';
-import HeroiconsCloud from '~icons/heroicons/cloud';
 
 // Illustrations
 import UndrawBusinessAnalytics from '../../../../assets/illustrations/undraw_business_analytics.svg';
@@ -55,8 +53,7 @@ export const features = [
 			},
 			{
 				text: "Visualize your properties' financial data and identify trends and patterns over time.",
-				icon: HeroiconsArrowTrendingUp,
-				// icon: HeroiconsOutlinePresentationChartBar,
+				icon: HeroiconsPresentationChartLine,
 			},
 			{
 				text: "Monitor your properties' occupancy rates and vacancy periods using heatmaps.",
@@ -114,7 +111,7 @@ export const features = [
 			},
 			{
 				text: 'Visualize expenses using interactive treemaps, which allow you to quickly identify your cost patterns.',
-				icon: HeroiconsArrowTrendingUp,
+				icon: HeroiconsPresentationChartBar,
 			},
 		],
 	},
@@ -138,11 +135,11 @@ export const features = [
 		image: UndrawHouseSearching,
 		bullets: [
 			{
-				text: 'Global: Search through all of your data at the same time.',
+				text: 'Search through all of your data at the same time.',
 				icon: HeroiconsGlobeAlt,
 			},
 			{
-				text: "Fuzzy: Find what you're looking for without knowing the exact spelling.",
+				text: "Find what you're looking for without knowing the exact spelling.",
 				icon: HeroiconsDocumentMagnifyingGlass,
 			},
 		],
