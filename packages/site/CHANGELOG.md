@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.1.0
+
+### Minor Changes
+
+- c39f88a75: add landing page features
+- 9477b853a: add landing page features
+
 ## 2.0.4
 
 ### Patch Changes
