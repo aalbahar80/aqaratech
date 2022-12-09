@@ -4,10 +4,8 @@ import type { SvelteComponentTyped } from 'svelte';
 import HeroiconsOutlineChartBar from '~icons/heroicons-outline/chart-bar';
 import HeroiconsOutlineRectangleGroup from '~icons/heroicons-outline/rectangle-group';
 import HeroiconsAdjustmentsVertical from '~icons/heroicons/adjustments-vertical';
-import HeroiconsBanknotes from '~icons/heroicons/banknotes';
 import HeroiconsBell from '~icons/heroicons/bell';
 import HeroiconsCalendarDays from '~icons/heroicons/calendar-days';
-import HeroiconsChartPie from '~icons/heroicons/chart-pie';
 import HeroiconsClipboardDocumentList from '~icons/heroicons/clipboard-document-list';
 import HeroiconsClock from '~icons/heroicons/clock';
 import HeroiconsCloud from '~icons/heroicons/cloud';
@@ -15,10 +13,10 @@ import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 import HeroiconsCubeTransparent from '~icons/heroicons/cube-transparent';
 import HeroiconsDocumentMagnifyingGlass from '~icons/heroicons/document-magnifying-glass';
 import HeroiconsFunnel from '~icons/heroicons/funnel';
-import TeenyiconsContractOutline from '~icons/teenyicons/contract-outline';
 import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
 import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 import HeroiconsPresentationChartLine from '~icons/heroicons/presentation-chart-line';
+import TeenyiconsContractOutline from '~icons/teenyicons/contract-outline';
 
 // Illustrations
 import UndrawBusinessAnalytics from '../../../../assets/illustrations/undraw_business_analytics.svg';
