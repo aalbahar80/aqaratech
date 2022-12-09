@@ -1,5 +1,5 @@
 // Screenshots
-import screenshotDashboard from '../../../../assets/screenshots/dashboard-4.png';
+import screenshotDashboard from '../../../../assets/screenshots/dashboard-6.png';
 import screenshotInvoices from '../../../../assets/screenshots/invoices.png';
 import screenshotProfitLoss from '../../../../assets/screenshots/leases-2.png';
 
