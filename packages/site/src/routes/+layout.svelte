@@ -57,14 +57,12 @@
 	<slot />
 	<VersionFooter />
 {:else}
-	<div class="grid grid-cols-12">
+	<div class="grid grid-cols-[minmax(0px,16rem)_repeat(1,minmax(0,_1fr))]">
 		{#if isSidebarAvailable($page.url.pathname) && data.user}
-			<div class="lg:col-span-3 lg:block xl:col-span-3 2xl:col-span-2">
-				<Sidebar navigationTree={getNavigationTree(data.user)} />
-			</div>
+			<Sidebar navigationTree={getNavigationTree(data.user)} />
 		{/if}
 
-		<div class="col-span-12 pt-8 lg:col-span-9 xl:col-span-9 2xl:col-span-10">
+		<div class="col-span-full pt-8 lg:col-start-2">
 			<div class="mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8">
 				{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
 					<Alert />
