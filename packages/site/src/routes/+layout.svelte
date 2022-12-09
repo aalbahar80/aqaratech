@@ -54,7 +54,9 @@
 
 <SecondaryNavbar />
 {#if $page.url.pathname === '/'}
-	<slot />
+	<main>
+		<slot />
+	</main>
 	<VersionFooter />
 {:else}
 	<div class="my-grid">
