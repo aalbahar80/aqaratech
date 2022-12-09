@@ -15,6 +15,7 @@ import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 import HeroiconsCubeTransparent from '~icons/heroicons/cube-transparent';
 import HeroiconsDocumentMagnifyingGlass from '~icons/heroicons/document-magnifying-glass';
 import HeroiconsFunnel from '~icons/heroicons/funnel';
+import TeenyiconsContractOutline from '~icons/teenyicons/contract-outline';
 import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
 import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 import HeroiconsPresentationChartLine from '~icons/heroicons/presentation-chart-line';
@@ -48,11 +49,7 @@ export const features = [
 				icon: HeroiconsOutlineChartBar,
 			},
 			{
-				text: 'Interactive dashboards and reports, showing income, expenses, and profit/loss for each portfolio, property, and unit.',
-				icon: HeroiconsChartPie,
-			},
-			{
-				text: "Visualize your properties' financial data and identify trends and patterns over time.",
+				text: "Visualize your properties' financial data to identify trends and patterns over time. Use our interactive dashboards to view income, expenses, and profit/loss for each portfolio, property, and unit.",
 				icon: HeroiconsPresentationChartLine,
 			},
 			{
@@ -85,7 +82,7 @@ export const features = [
 		bullets: [
 			{
 				text: 'Easy tracking and management of rental payments and lease agreements.',
-				icon: HeroiconsBanknotes,
+				icon: TeenyiconsContractOutline,
 			},
 			{
 				text: 'Automated payment reminders.',
