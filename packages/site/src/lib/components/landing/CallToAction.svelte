@@ -34,7 +34,7 @@
 					color: 'white',
 				})}
 			>
-				Creat Account
+				Create Account
 			</a>
 		</div>
 	</Container>
