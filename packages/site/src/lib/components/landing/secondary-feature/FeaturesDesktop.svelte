@@ -12,7 +12,12 @@
 </script>
 
 <!-- FeaturesDesktop -->
-<TabGroup as="div" class="hidden lg:mt-20 lg:block" let:selectedIndex>
+<TabGroup
+	as="div"
+	class="hidden lg:mt-20 lg:block"
+	let:selectedIndex
+	defaultIndex={1}
+>
 	<TabList class="grid grid-cols-3 gap-x-8">
 		{#each secondaryFeatures as feature, featureIndex (feature.name)}
 			<SecondaryFeature
