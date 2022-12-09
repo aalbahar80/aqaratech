@@ -59,24 +59,6 @@ export const features = [
 		],
 	},
 	{
-		title: 'Advanced Filtering',
-		image: UndrawDataPoints,
-		bullets: [
-			{
-				text: 'Customizable filters, so you can focus on the information that is most relevant to you.',
-				icon: HeroiconsAdjustmentsVertical,
-			},
-			{
-				text: 'Filter your properties and tenant data by location, including specific properties or units within properties.',
-				icon: HeroiconsFunnel,
-			},
-			{
-				text: 'Filter by time, including specific date ranges or time periods.',
-				icon: HeroiconsClock,
-			},
-		],
-	},
-	{
 		title: 'Rental Payment Tracking',
 		image: UndrawOnlinePayments,
 		bullets: [
@@ -109,6 +91,24 @@ export const features = [
 			{
 				text: 'Visualize expenses using interactive treemaps, which allow you to quickly identify your cost patterns.',
 				icon: HeroiconsPresentationChartBar,
+			},
+		],
+	},
+	{
+		title: 'Advanced Filtering',
+		image: UndrawDataPoints,
+		bullets: [
+			{
+				text: 'Customizable filters, so you can focus on the information that is most relevant to you.',
+				icon: HeroiconsAdjustmentsVertical,
+			},
+			{
+				text: 'Filter your properties and tenant data by location, including specific properties or units within properties.',
+				icon: HeroiconsFunnel,
+			},
+			{
+				text: 'Filter by time, including specific date ranges or time periods.',
+				icon: HeroiconsClock,
 			},
 		],
 	},
