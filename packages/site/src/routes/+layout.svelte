@@ -62,7 +62,7 @@
 			<Sidebar navigationTree={getNavigationTree(data.user)} />
 		{/if}
 
-		<div class="col-span-full pt-8 lg:col-start-2">
+		<main class="col-span-full pt-8 lg:col-start-2">
 			<div class="mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8">
 				{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
 					<Alert />
@@ -70,6 +70,6 @@
 				<slot />
 				<VersionFooter />
 			</div>
-		</div>
+		</main>
 	</div>
 {/if}
