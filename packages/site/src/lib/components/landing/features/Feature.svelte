@@ -11,8 +11,6 @@
 	const isEven = id % 2 === 0;
 </script>
 
-<!-- FIXME handle patternId -->
-<!-- patternId="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7" -->
 <DotPattern
 	patternId={`feature-lg-${id}`}
 	cs={clsx(
@@ -24,13 +22,13 @@
 
 <div
 	class={clsx(
-		'mt-12 lg:mt-32 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
+		'mt-24 lg:mt-32 lg:grid lg:grid-cols-2 lg:items-center lg:gap-8',
 		isEven && 'lg:grid-flow-row-dense',
 		!isEven && 'relative',
 	)}
 >
 	<div class={clsx(isEven && 'lg:col-start-2', !isEven && 'relative')}>
-		<h3 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+		<h3 class="text-3xl tracking-tight text-slate-900 sm:text-4xl">
 			{feature.title}
 		</h3>
 
@@ -46,7 +44,6 @@
 		class:col-start-1={isEven}
 		aria-hidden="true"
 	>
-		<!-- FIXME handle patternId -->
 		<DotPatternSm patternId={`feature-sm-${id}`} />
 
 		<img
