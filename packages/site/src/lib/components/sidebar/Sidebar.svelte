@@ -10,9 +10,9 @@
 <script lang="ts">
 	import clsx from 'clsx';
 
+	import { clickOutside } from '$lib/actions/click-outside';
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
-	import { clickOutside } from '$lib/utils/click-outside';
 
 	import type { NavigationItem } from '$lib/components/sidebar/types';
 

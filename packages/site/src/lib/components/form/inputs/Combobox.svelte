@@ -2,9 +2,9 @@
 	import debounce from 'debounce';
 	import Fuse from 'fuse.js';
 
+	import { clickOutside } from '$lib/actions/click-outside';
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
-	import { clickOutside } from '$lib/utils/click-outside';
 
 	import type {
 		Option,
