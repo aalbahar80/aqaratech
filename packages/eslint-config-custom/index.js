@@ -56,6 +56,7 @@ module.exports = {
 		'import/parsers': {
 			'@typescript-eslint/parser': ['.ts'],
 		},
+		'import/internal-regex': '^@self',
 	},
 	rules: {
 		// https://github.com/vercel/turborepo/blob/main/packages/eslint-plugin-turbo/docs/rules/no-undeclared-env-vars.md
@@ -96,7 +97,68 @@ module.exports = {
 		'import/no-unresolved': 'off',
 
 		// sort imports
-		// 'import/order': ['error'],
+		'import/order': [
+			'error',
+			{
+				// alphabetize
+				'newlines-between': 'always',
+				// alphabetize
+				alphabetize: {
+					order: 'asc',
+					caseInsensitive: false,
+				},
+				// pathGroupsExcludedImportTypes: ['builtin'],
+				// distinctGroup: true,
+				groups: [
+					'builtin',
+					'external',
+					'internal',
+					'parent',
+					'sibling',
+					'index',
+					'object',
+					'type',
+				],
+				// pathGroups: [
+				// 	{
+				// 		pattern: '@/**',
+				// 		group: 'internal',
+				// 		position: 'after',
+				// 	},
+				// 	{
+				// 		pattern: 'svelte/**',
+				// 		group: 'internal',
+				// 		position: 'after',
+				// 	},
+				// 	{
+				// 		pattern: 'svelte',
+				// 		group: 'internal',
+				// 		position: 'after',
+				// 	},
+				// 	{
+				// 		pattern: 'src/**',
+				// 		group: 'internal',
+				// 		position: 'after',
+				// 	},
+				// 	{
+				// 		pattern: 'src',
+				// 		group: 'internal',
+				// 		position: 'after',
+				// 	},
+				// 	{
+				// 		pattern: 'lib/**',
+				// 		group: 'internal',
+				// 		position: 'after',
+				// 	},
+				// 	{
+				// 		pattern: 'lib',
+				// 		group: 'internal',
+				// 		position: 'after',
+				// 	},
+				// ],
+			},
+		],
+		// 'sort-imports': ['error'],
 
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': [
