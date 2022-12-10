@@ -90,6 +90,7 @@
 		dispatch('select', { value: option.value });
 		selection = option;
 		query = '';
+		// eslint-disable-next-line svelte/@typescript-eslint/no-unnecessary-condition
 		inputValue = selection?.label.trim() || '';
 		forceOpen = false;
 		setActiveOption(undefined);

@@ -54,7 +54,7 @@
 			icon={HeroiconsDocumentText}
 			text="Print"
 			as="button"
-			on:click={() =>
+			on:click={async () =>
 				createPDF({ invoice: data.leaseInvoice, outputType: 'save' })}
 			class="w-full sm:w-auto"
 			prefetch
