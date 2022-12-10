@@ -1,14 +1,16 @@
 import { LogtailTransport } from '@logtail/winston';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { httpLogFormat, ignoreHttp, onlyHttp } from '@self/utils';
 import {
 	utilities as nestWinstonModuleUtilities,
 	WinstonModuleOptionsFactory,
 } from 'nest-winston';
+import { format, LoggerOptions, transports } from 'winston';
+
+import { httpLogFormat, ignoreHttp, onlyHttp } from '@self/utils';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { LogtailService } from 'src/logtail/logtail.service';
-import { format, LoggerOptions, transports } from 'winston';
+
 
 @Injectable()
 export class WinstonConfigService implements WinstonModuleOptionsFactory {

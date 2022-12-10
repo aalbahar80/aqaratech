@@ -8,11 +8,12 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
-import { entitiesMap } from '@self/utils';
 import { instanceToPlain, plainToClass } from 'class-transformer';
 import { isUUID } from 'class-validator';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+
+import { entitiesMap } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import {
 	RemoveDocumentsEvent,
@@ -181,7 +182,7 @@ export class SearchService implements OnModuleInit {
 
 	async remove() {
 		const indexes = await this.client.getIndexes();
-		return await Promise.all(
+		return Promise.all(
 			indexes.results.map((index) => {
 				return this.client.deleteIndex(index.uid);
 			}),
@@ -237,7 +238,7 @@ export class SearchService implements OnModuleInit {
 		]);
 
 		// add all documents to their respective indices
-		return await Promise.all([
+		return Promise.all([
 			this.initTenantDocuments(),
 			this.initPortfolioDocuments(),
 			this.initPropertyDocuments(),

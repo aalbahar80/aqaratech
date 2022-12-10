@@ -1,13 +1,18 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+
 import { envCheck } from '@self/utils';
+
 import '@sentry/tracing';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
+
 import { version } from '../package.json';
+
 import { AppModule } from './app.module';
 
 Logger.log(version, 'AqaratechConfig');

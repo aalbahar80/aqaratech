@@ -5,6 +5,7 @@ import {
 	Logger,
 } from '@nestjs/common';
 import { Request } from 'express';
+
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 
 @Injectable()

@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
+
 import { roleCreateSchema } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -9,6 +10,7 @@ import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
+
 import { RolesService } from './roles.service';
 
 @Controller('organizations/:organizationId')

@@ -8,10 +8,11 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { z } from 'zod';
+
 import { IS_PUBLIC_KEY, SKIP_ROLE_GUARD_KEY } from 'src/auth/public.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
-import { z } from 'zod';
 
 /**
  *

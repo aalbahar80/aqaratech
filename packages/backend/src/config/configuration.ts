@@ -2,6 +2,7 @@ import { schema } from 'src/config/config-schema';
 import { sentryConfig } from 'src/config/sentry.config';
 import { winstonConfig } from 'src/config/winston.config';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
+
 import { developmentEnvironment } from './configuration.dev';
 import { productionEnvironment } from './configuration.prod';
 

@@ -1,6 +1,7 @@
 import { AbilityBuilder, AbilityClass } from '@casl/ability';
 import { PrismaAbility } from '@casl/prisma';
 import { Injectable, Logger } from '@nestjs/common';
+
 import { TAppAbility } from 'src/casl/abilities/ability-types';
 import { defineOrgAdminAbility } from 'src/casl/abilities/org-admin-ability';
 import { definePortfolioAbility } from 'src/casl/abilities/portfolio-ability';

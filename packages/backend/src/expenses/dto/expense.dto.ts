@@ -7,13 +7,14 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { Expense } from '@prisma/client';
+import { Exclude, Expose } from 'class-transformer';
+import { IsOptional, IsPositive, IsString } from 'class-validator';
+
 import {
 	expenseCategorySchema,
 	ExpenseCreateSchema,
 	ExpenseUpdateSchema,
 } from '@self/utils';
-import { Exclude, Expose } from 'class-transformer';
-import { IsOptional, IsPositive, IsString } from 'class-validator';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
 	BreadcrumbDto,
@@ -103,7 +104,7 @@ export class ExpenseDto
 	@ApiProperty()
 	@Expose()
 	get breadcrumbs(): ExpenseBreadcrumbsDto {
-		// @ts-ignore
+		// @ts-expect-error
 		const crumbs: ExpenseBreadcrumbsDto = {
 			portfolio: new BreadcrumbDto({
 				rel: Rel.Portfolio,

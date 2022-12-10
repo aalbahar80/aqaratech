@@ -1,5 +1,6 @@
 import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -13,6 +14,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { PayoutDto } from 'src/payouts/dto/payout.dto';
+
 import { PayoutsService } from './payouts.service';
 
 const SubjectType = 'Payout';

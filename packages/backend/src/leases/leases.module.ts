@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
+
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
+
 import { LeasesController } from './leases.controller';
 import { LeasesService } from './leases.service';
 

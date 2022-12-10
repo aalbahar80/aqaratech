@@ -6,11 +6,12 @@ import {
 	LoggerService,
 	NestInterceptor,
 } from '@nestjs/common';
-import { isHealthCheck } from '@self/utils';
 import { Request, Response } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
+import { isHealthCheck } from '@self/utils';
 
 /**
  * An interceptor that logs the response body. Useful for debugging.

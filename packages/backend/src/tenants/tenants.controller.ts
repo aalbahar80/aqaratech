@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+
 import { tenantUpdateSchema } from '@self/utils';
 import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
@@ -14,7 +15,6 @@ import {
 } from 'src/decorators/query-options.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -24,6 +24,7 @@ import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { TenantDto, UpdateTenantDto } from 'src/tenants/dto/tenant.dto';
+
 import { TenantsService } from './tenants.service';
 
 const SubjectType = 'Tenant';

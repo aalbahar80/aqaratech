@@ -8,8 +8,10 @@ import {
 	RequestParserService,
 	RequestQueryOptions,
 } from '@prisma-utils/nestjs-request-parser';
-import { queryOptionsParsedSchema } from '@self/utils';
 import { Request } from 'express';
+import { z } from 'zod';
+
+import { queryOptionsParsedSchema } from '@self/utils';
 import { QueryOptionsRequestDto } from 'src/common/dto/query-options.dto';
 import {
 	PAGE_PARAM,
@@ -18,7 +20,7 @@ import {
 	TAKE_PARAM_DEFAULT,
 } from 'src/constants/pagination.constant';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
-import { z } from 'zod';
+
 
 export const QueryParser = createParamDecorator(
 	(options: QueryOptionsDecoratorConfig | undefined, ctx: ExecutionContext) => {

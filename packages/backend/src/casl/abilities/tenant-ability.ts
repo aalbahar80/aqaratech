@@ -1,4 +1,5 @@
 import { Role } from '@prisma/client';
+
 import { TCan } from 'src/casl/abilities/ability-types';
 import { Action } from 'src/casl/action.enum';
 

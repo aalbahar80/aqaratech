@@ -1,5 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
+
 import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
 
 @Injectable()

@@ -1,5 +1,6 @@
 import { User } from '@sentry/node';
 import { Request } from 'express';
+
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 
 export const getUserSentry = (request: Request) => {

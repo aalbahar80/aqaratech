@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { ExpenseCategoriesController } from './expense-categories.controller';
 import { ExpenseCategoriesService } from './expense-categories.service';
 

@@ -5,9 +5,10 @@ import {
 	Module,
 	RequestMethod,
 } from '@nestjs/common';
-import { AppService } from './app.service';
+
 
 // common
+import { RouteInfo } from '@nestjs/common/interfaces';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
@@ -15,17 +16,11 @@ import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 import { WinstonModule } from 'nest-winston';
+
 import { AppController } from 'src/app.controller';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
-import { WinstonConfigService } from 'src/config/winston-config.service';
-import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
-import { TimeoutInterceptor } from 'src/interceptors/timeout.interceptor';
-import { S3Service } from 'src/s3/s3.service';
-import { TraceMiddleware } from 'src/sentry/trace.middleware';
-import { AggregateModule } from './aggregate/aggregate.module';
-import { AuthModule } from './auth/auth.module';
-import { CaslModule } from './casl/casl.module';
+
 import configuration from './config/configuration';
 import { LogtailModule } from './logtail/logtail.module';
 import { PostmarkModule } from './postmark/postmark.module';
@@ -35,13 +30,22 @@ import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 
 // resources
-import { RouteInfo } from '@nestjs/common/interfaces';
 import { RoleGuard } from 'src/casl/role.guard';
+import { WinstonConfigService } from 'src/config/winston-config.service';
 import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
 import { ResponseInterceptor } from 'src/http-logger/response.interceptor';
+import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
+import { TimeoutInterceptor } from 'src/interceptors/timeout.interceptor';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { LoggingMiddleware } from 'src/middleware/logging.middleware';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { S3Service } from 'src/s3/s3.service';
+import { TraceMiddleware } from 'src/sentry/trace.middleware';
+import { AggregateModule } from './aggregate/aggregate.module';
+
+import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
+import { CaslModule } from './casl/casl.module';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { FilesModule } from './files/files.module';

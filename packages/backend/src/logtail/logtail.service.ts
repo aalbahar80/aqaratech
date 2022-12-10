@@ -1,6 +1,7 @@
 import { Logtail } from '@logtail/node';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import { addEnvLabel, liveEnvs } from '@self/utils';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 

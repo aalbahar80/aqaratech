@@ -13,6 +13,7 @@ import {
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import { S3_TTL } from 'src/constants/s3-ttl';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 

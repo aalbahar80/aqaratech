@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+
 import { DateType } from 'src/decorators/date-type.decorator';
 
 export class AbstractDto {

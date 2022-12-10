@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { FacetDistribution, Hits, SearchResponse } from 'meilisearch';
+
 import { TIndexName } from 'src/events/update-index.event';
 
 export class SearchDto implements SearchResponse {

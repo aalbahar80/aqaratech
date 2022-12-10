@@ -15,6 +15,7 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+
 import { portfolioUpdateSchema } from '@self/utils';
 import { AggregateService } from 'src/aggregate/aggregate.service';
 import { AggregateOptionsExpensesDto } from 'src/aggregate/dto/aggregate-options.dto';
@@ -48,6 +49,7 @@ import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { UnitDto, UnitMinimalDto } from 'src/units/dto/unit.dto';
 import { UnitsService } from 'src/units/units.service';
+
 import { PortfolioDto, UpdatePortfolioDto } from './dto/portfolio.dto';
 import { PortfoliosService } from './portfolios.service';
 

@@ -1,6 +1,9 @@
-import { Logger } from '@nestjs/common';
-import { getSentryConfig } from '@self/utils';
 import { execSync } from 'node:child_process';
+
+import { Logger } from '@nestjs/common';
+
+import { getSentryConfig } from '@self/utils';
+
 import { version } from '../../package.json';
 
 /**

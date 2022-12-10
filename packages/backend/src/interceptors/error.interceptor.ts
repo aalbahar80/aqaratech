@@ -15,6 +15,7 @@ import { Request } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 import { mapPrismaException } from 'src/prisma/prisma-exception-mapper';
 import { UserDto } from 'src/users/dto/user.dto';
 

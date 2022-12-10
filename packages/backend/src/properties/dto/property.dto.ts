@@ -7,7 +7,6 @@ import {
 	PickType,
 } from '@nestjs/swagger';
 import { Property } from '@prisma/client';
-import { PropertyCreateSchema, PropertyUpdateSchema } from '@self/utils';
 import { Exclude, Expose } from 'class-transformer';
 import {
 	IsLatitude,
@@ -16,6 +15,8 @@ import {
 	IsString,
 	Length,
 } from 'class-validator';
+
+import { PropertyCreateSchema, PropertyUpdateSchema } from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
 	BreadcrumbDto,

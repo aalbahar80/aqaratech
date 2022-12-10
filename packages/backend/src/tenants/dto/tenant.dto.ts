@@ -1,6 +1,5 @@
 import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
 import { Tenant } from '@prisma/client';
-import { TenantCreateSchema, TenantUpdateSchema } from '@self/utils';
 import { Expose } from 'class-transformer';
 import {
 	IsISO31661Alpha3,
@@ -8,6 +7,8 @@ import {
 	IsString,
 	Length,
 } from 'class-validator';
+
+import { TenantCreateSchema, TenantUpdateSchema } from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { DateType } from 'src/decorators/date-type.decorator';
 import { IsID } from 'src/decorators/field.decorators';

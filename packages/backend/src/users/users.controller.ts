@@ -1,10 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+
 import { SkipAbilityCheck, SkipRoleGuard } from 'src/auth/public.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { ValidatedUserDto } from 'src/users/dto/user.dto';
+
 import { UsersService } from './users.service';
 
 @Controller('users')

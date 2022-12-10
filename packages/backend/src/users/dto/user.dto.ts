@@ -7,6 +7,7 @@ import {
 } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 import { IsEmail, IsString } from 'class-validator';
+
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { RoleDto } from 'src/roles/dto/role.dto';
 

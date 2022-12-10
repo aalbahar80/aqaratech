@@ -1,7 +1,8 @@
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
-import { formatRequestLog, formatResponseLog } from '@self/utils';
 import { Request } from 'express';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+
+import { formatRequestLog, formatResponseLog } from '@self/utils';
 
 @Injectable()
 export class HttpLoggerService {

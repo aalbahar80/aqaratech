@@ -1,12 +1,13 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { InternalServerErrorException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNumber, IsString } from 'class-validator';
+
 import {
 	FileCreateSchema,
 	FileRelationKey,
 	FileRelationKeyEnum,
 } from '@self/utils';
-import { IsNumber, IsString } from 'class-validator';
 import { Exactly } from 'src/types/exactly.type';
 
 export class FileDto {

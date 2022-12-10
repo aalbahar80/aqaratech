@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { ServerClient, TemplatedMessage } from 'postmark';
 import { Callback, MessageSendingResponse } from 'postmark/dist/client/models';
+
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 
 @Injectable()

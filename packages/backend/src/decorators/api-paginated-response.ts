@@ -1,5 +1,6 @@
 import { applyDecorators, Type, UseInterceptors } from '@nestjs/common';
 import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
+
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { PaginationInterceptor } from 'src/interceptors/pagination.interceptor';
 

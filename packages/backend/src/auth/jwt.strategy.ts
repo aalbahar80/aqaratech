@@ -1,14 +1,16 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { AQARATECH_STAFF_ROLE, Cookie } from '@self/utils';
-import type { Request } from 'express';
 import { passportJwtSecret } from 'jwks-rsa';
 import { Strategy } from 'passport-jwt';
+import { z } from 'zod';
+
+import { AQARATECH_STAFF_ROLE, Cookie } from '@self/utils';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
-import { z } from 'zod';
+
+import type { Request } from 'express';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

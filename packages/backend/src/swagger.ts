@@ -1,4 +1,13 @@
+import { writeFileSync } from 'fs';
+
+import { INestApplication, Logger } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
+import { Cookie } from '@self/utils';
 import { AggregateModule } from 'src/aggregate/aggregate.module';
+import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
+import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
+import { ExpenseCategoriesModule } from 'src/expense-categories/expense-categories.module';
 import { ExpensesModule } from 'src/expenses/expenses.module';
 import { FilesModule } from 'src/files/files.module';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
@@ -13,13 +22,7 @@ import { TenantsModule } from 'src/tenants/tenants.module';
 import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
 
-import { INestApplication, Logger } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Cookie } from '@self/utils';
-import { writeFileSync } from 'fs';
-import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
-import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
-import { ExpenseCategoriesModule } from 'src/expense-categories/expense-categories.module';
+
 
 export const setupSwagger = async (app: INestApplication) => {
 	const config = new DocumentBuilder()
