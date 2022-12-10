@@ -5,6 +5,7 @@
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
+	import { preventTabClose } from '$lib/actions/prevent-tab-close';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
 	import { addSuccessToast } from '$lib/stores/toast';
@@ -13,7 +14,6 @@
 		toHeirarchy,
 		type ExpenseNode,
 	} from '$lib/utils/expense-type-options';
-	import { preventTabClose } from '$lib/utils/prevent-tab-close';
 	import { getRoute, PageType } from '@self/utils';
 
 	import type { PageData } from './$types';
