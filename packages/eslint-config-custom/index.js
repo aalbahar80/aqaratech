@@ -169,6 +169,8 @@ module.exports = {
 		'@typescript-eslint/return-await': 'warn',
 
 		'@typescript-eslint/promise-function-async': 'warn',
+
+		'@typescript-eslint/ban-ts-comment': 'warn',
 	},
 	ignorePatterns: ['.eslintrc.*', '*.sh'],
 };
