@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+
 import { zodString } from './zod-string';
 
 const valid = ['abc', '123', 'abc 123', ' abc 123 ', ' abc 123 ', ' abc 123 '];

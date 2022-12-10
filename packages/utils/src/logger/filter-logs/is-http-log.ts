@@ -1,4 +1,5 @@
 import * as R from 'remeda';
+
 import type { TransformableInfo } from './type';
 
 export const isHttpLog = (info: TransformableInfo) => {

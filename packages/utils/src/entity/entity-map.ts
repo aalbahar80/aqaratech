@@ -1,4 +1,5 @@
 import { satisfies } from '../satisfies';
+
 import type { DBEntity, Entity, NonDBEntity } from './entity-definition';
 
 export interface EntityNames {

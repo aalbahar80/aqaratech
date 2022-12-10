@@ -1,5 +1,6 @@
-import { zodCheckbox } from 'src/schemas/utils/zod-checkbox';
 import { expect, test } from 'vitest';
+
+import { zodCheckbox } from 'src/schemas/utils/zod-checkbox';
 
 const parsedToTrue = [true, 'on'];
 

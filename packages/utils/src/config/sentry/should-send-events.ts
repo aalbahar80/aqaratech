@@ -1,6 +1,7 @@
-import type { Options } from '@sentry/types';
 import { liveEnvs } from 'src/config/live-envs';
+
 import type { Config } from './types';
+import type { Options } from '@sentry/types';
 
 // TODO: Use typescript `satisfies` directive for return type
 

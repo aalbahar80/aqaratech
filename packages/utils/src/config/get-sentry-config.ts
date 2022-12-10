@@ -1,8 +1,9 @@
-import type { Options } from '@sentry/types';
 import { isHealthCheck } from './is-health-check';
 import { getReleaseName } from './sentry/release';
 import { getSendEventConfig } from './sentry/should-send-events';
+
 import type { Config } from './sentry/types';
+import type { Options } from '@sentry/types';
 
 // TODO: use new typescript `satisfies` directive for return type
 /**
@@ -29,7 +30,7 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 
 		// Don't spam sentry with health checks
 		tracesSampler(samplingContext) {
-			if (isHealthCheck(samplingContext.transactionContext?.name)) {
+			if (isHealthCheck(samplingContext.transactionContext.name)) {
 				return 0;
 			}
 			return sampleRate;

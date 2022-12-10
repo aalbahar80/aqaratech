@@ -1,5 +1,6 @@
-import type { GetRoute } from 'src/route-helpers/types/route-helpers.type';
 import { z } from 'zod';
+
+import type { GetRoute } from 'src/route-helpers/types/route-helpers.type';
 
 export const getOrganizationRoute = (params: GetRoute['params']): string => {
 	const { organizationId } = schema

@@ -1,5 +1,7 @@
-import { zodCheckbox } from 'src/schemas/utils/zod-checkbox';
 import { z } from 'zod';
+
+import { zodCheckbox } from 'src/schemas/utils/zod-checkbox';
+
 import { isID } from './utils/id.schema';
 import { zodString, zodStringOptional } from './utils/zod-string';
 

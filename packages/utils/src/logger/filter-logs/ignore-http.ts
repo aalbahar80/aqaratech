@@ -1,4 +1,5 @@
 import { isHttpLog } from 'src/logger/filter-logs/is-http-log';
+
 import type { TransformFunction } from './type';
 
 /**

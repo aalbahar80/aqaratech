@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { zodStringOptional } from './utils/zod-string';
 
 export const organizationSchema = z.object({

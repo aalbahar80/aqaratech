@@ -1,7 +1,10 @@
-import { PageType } from 'src/route-helpers/enums/page-type.enum';
-import type { GetRoute } from 'src/route-helpers/types/route-helpers.type';
 import { expect, test } from 'vitest';
+
+import { PageType } from 'src/route-helpers/enums/page-type.enum';
+
 import { getRoute } from '../get-route';
+
+import type { GetRoute } from 'src/route-helpers/types/route-helpers.type';
 
 const params = {
 	organizationId: '1',

@@ -1,8 +1,10 @@
+import { entitiesMap } from 'src/entity/entity-map';
+
 import {
 	isPageTypePortfolio,
 	PageTypePortfolio,
 } from './enums/page-tab-portfolio.enum';
-import { entitiesMap } from 'src/entity/entity-map';
+
 import type { GetDashboardRoute } from './types/id-route.type';
 import type { GetRoute } from './types/route-helpers.type';
 

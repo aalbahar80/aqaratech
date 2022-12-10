@@ -3,8 +3,10 @@ import { getBaseRoute } from 'src/route-helpers/get-base-route';
 import { getFormRoute } from 'src/route-helpers/get-form-route';
 import { getIdRoute } from 'src/route-helpers/get-id-route';
 import { getListRoute } from 'src/route-helpers/get-list-route';
-import type { GetRoute } from 'src/route-helpers/types/route-helpers.type';
+
 import { getDashboardRoute, isDashboardRoute } from './get-dashboard-route';
+
+import type { GetRoute } from 'src/route-helpers/types/route-helpers.type';
 
 export const getRoute = (input: GetRoute) => {
 	const base = getBaseRoute(input);

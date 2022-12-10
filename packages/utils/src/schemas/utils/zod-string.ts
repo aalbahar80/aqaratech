@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { nullifyEmptyString } from './zod-nullify-empty-string';
 
 /**

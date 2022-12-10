@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+
 import { civilidSchemaOptional } from './civilid.schema';
 import { phoneSchemaOptional } from './phone.schema';
 

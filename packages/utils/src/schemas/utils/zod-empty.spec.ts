@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+
 import { zodEmpty } from './zod-empty';
 
 const valid = ['', null, undefined];

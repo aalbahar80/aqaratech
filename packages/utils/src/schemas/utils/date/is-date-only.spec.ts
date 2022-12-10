@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+
 import { DATE_ONLY } from './dates.constants';
 import { isDateOnly } from './is-date-only';
 

@@ -1,6 +1,7 @@
+import { expect, test } from 'vitest';
+
 import { PageTypePortfolio } from 'src/route-helpers/enums/page-tab-portfolio.enum';
 import { getRoute } from 'src/route-helpers/get-route';
-import { expect, test } from 'vitest';
 
 const params = { organizationId: '1' };
 

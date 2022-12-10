@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+
 import { phoneSchemaOptional } from './phone.schema';
 
 const valid = ['12345678', '87654321'];

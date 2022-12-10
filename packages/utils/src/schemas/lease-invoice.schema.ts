@@ -1,6 +1,8 @@
+import { z } from 'zod';
+
 import { zodCheckbox } from 'src/schemas/utils/zod-checkbox';
 import { zodNumber } from 'src/schemas/utils/zod-number';
-import { z } from 'zod';
+
 import { zodDateOnly, zodDateOnlyOptional } from './utils/date/zod-date-only';
 import { isID } from './utils/id.schema';
 import { zodStringOptional } from './utils/zod-string';

@@ -1,6 +1,7 @@
 import { entitiesMap } from 'src/entity/entity-map';
 import { PageTab } from 'src/route-helpers/enums/page-tab.enum';
 import { PageType } from 'src/route-helpers/enums/page-type.enum';
+
 import type { GetIdRoute } from 'src/route-helpers/types/id-route.type';
 
 const pageTypeToUrl = {

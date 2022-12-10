@@ -1,5 +1,6 @@
-import { startCase } from 'src/start-case';
 import { expect, test } from 'vitest';
+
+import { startCase } from 'src/start-case';
 
 const testCases = [
 	['', ''],

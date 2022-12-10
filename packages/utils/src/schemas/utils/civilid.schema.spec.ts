@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+
 import { civilidSchemaOptional } from './civilid.schema';
 
 const valid = ['123456789012', '000000000000'];

@@ -1,5 +1,6 @@
-import { getProgress } from 'src/date/progress';
 import { expect, test } from 'vitest';
+
+import { getProgress } from 'src/date/progress';
 
 const inputs: [string, string, Date | undefined, number][] = [
 	// start, end, reference, percentageProgress
