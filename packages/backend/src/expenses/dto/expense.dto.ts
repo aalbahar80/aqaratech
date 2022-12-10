@@ -9,12 +9,6 @@ import {
 import { Expense } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
 import { IsOptional, IsPositive, IsString } from 'class-validator';
-
-import {
-	expenseCategorySchema,
-	ExpenseCreateSchema,
-	ExpenseUpdateSchema,
-} from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
 	BreadcrumbDto,
@@ -26,6 +20,12 @@ import { DateType } from 'src/decorators/date-type.decorator';
 import { IsID } from 'src/decorators/field.decorators';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { Exactly } from 'src/types/exactly.type';
+
+import {
+	expenseCategorySchema,
+	ExpenseCreateSchema,
+	ExpenseUpdateSchema,
+} from '@self/utils';
 
 class ExpenseRequiredDto {
 	@IsID()
@@ -104,7 +104,6 @@ export class ExpenseDto
 	@ApiProperty()
 	@Expose()
 	get breadcrumbs(): ExpenseBreadcrumbsDto {
-		// @ts-expect-error
 		const crumbs: ExpenseBreadcrumbsDto = {
 			portfolio: new BreadcrumbDto({
 				rel: Rel.Portfolio,
