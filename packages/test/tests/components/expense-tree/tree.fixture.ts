@@ -1,4 +1,5 @@
 import { getRoute, PageTab } from '@self/utils';
+
 import { test as base } from '../../api/api-fixtures';
 
 export const test = base.extend({

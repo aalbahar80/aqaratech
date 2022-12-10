@@ -1,6 +1,9 @@
 import { expect } from '@playwright/test';
+
 import { getRoute, PageTypePortfolio } from '@self/utils';
+
 import { test } from '../api/api-fixtures';
+
 import { SidebarModel } from './sidebar/sidebar-model';
 
 test.use({

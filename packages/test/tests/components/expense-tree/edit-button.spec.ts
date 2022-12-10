@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
-import { getLabel } from '@self/utils';
 import { resolveURL } from 'ufo';
+
+import { getLabel } from '@self/utils';
+
 import { test } from './tree.fixture';
 
 test.skip(({ isMobile }) => isMobile === true);

@@ -1,7 +1,10 @@
-import { expect } from '@playwright/test';
-import { getRoute, PageType } from '@self/utils';
-import path from 'node:path';
 import fs from 'node:fs';
+import path from 'node:path';
+
+import { expect } from '@playwright/test';
+
+import { getRoute, PageType } from '@self/utils';
+
 import { test } from '../../api/api-fixtures';
 
 const entity = 'leaseInvoice';

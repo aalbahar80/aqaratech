@@ -1,8 +1,12 @@
 import { expect } from '@playwright/test';
-import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { ExpenseDto } from '../../../types/api';
+
+import { expenseFactory } from '@self/seed';
+
 import { test } from '../api-fixtures';
+
+import type { ExpenseDto } from '../../../types/api';
+
 
 test('postAt defaults to midnight UTC', async ({ request, portfolio }) => {
 	const expense = expenseFactory.build({

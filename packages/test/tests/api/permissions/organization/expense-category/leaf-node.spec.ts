@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
-import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
+
+import { expenseFactory } from '@self/seed';
+
 import { test } from '../../../api-fixtures';
 
 test.use({

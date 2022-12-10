@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
-import type { PaginatedRoleDto } from '../../../types/api';
+
 import { test } from '../api-fixtures';
+
+import type { PaginatedRoleDto } from '../../../types/api';
 
 test.use({
 	roleParams: {

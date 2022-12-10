@@ -1,5 +1,7 @@
 import { expect } from '@playwright/test';
+
 import { getRoute, PageType } from '@self/utils';
+
 import { test as base } from '../api/api-fixtures';
 
 const test = base.extend({

@@ -1,8 +1,12 @@
 import { expect } from '@playwright/test';
-import { leaseFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { PartialLeaseDto } from '../../types/api';
+
+import { leaseFactory } from '@self/seed';
+
 import { test } from './api-fixtures';
+
+import type { PartialLeaseDto } from '../../types/api';
+
 
 const utc = (year: number, month: number, day: number) =>
 	new Date(Date.UTC(year, month, day)).toISOString();

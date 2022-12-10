@@ -1,5 +1,7 @@
 import { chromium, type FullConfig } from '@playwright/test';
+
 import { Cookie } from '@self/utils';
+
 import { testUsers } from './tests/api/fixtures/users/test-users';
 import { LoginPage } from './tests/auth/login-page';
 import { getToken } from './utils/get-token';

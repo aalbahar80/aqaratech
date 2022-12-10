@@ -1,4 +1,17 @@
 import type {
+	ExpenseCategoryDto,
+	ExpenseDto,
+	LeaseDto,
+	LeaseInvoiceDto,
+	OrganizationCreatedDto,
+	PayoutDto,
+	PortfolioDto,
+	PropertyDto,
+	RoleDto,
+	TenantDto,
+	UnitDto,
+} from '../../../types/api';
+import type {
 	BrowserContext,
 	Fixtures,
 	PlaywrightTestArgs,
@@ -16,19 +29,6 @@ import type {
 	TenantFactoryParams,
 	UnitFactoryParams,
 } from '@self/seed';
-import type {
-	ExpenseCategoryDto,
-	ExpenseDto,
-	LeaseDto,
-	LeaseInvoiceDto,
-	OrganizationCreatedDto,
-	PayoutDto,
-	PortfolioDto,
-	PropertyDto,
-	RoleDto,
-	TenantDto,
-	UnitDto,
-} from '../../../types/api';
 
 export interface TestFixtures {
 	// auth

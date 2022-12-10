@@ -1,7 +1,9 @@
 import { expect } from '@playwright/test';
+import * as R from 'remeda';
+
 import { unitFactory } from '@self/seed';
 import { getRoute, PageType } from '@self/utils';
-import * as R from 'remeda';
+
 import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';

@@ -1,7 +1,9 @@
 import { expect } from '@playwright/test';
+import * as R from 'remeda';
+
 import { organizationFactory } from '@self/seed';
 import { FIELDS, PageType } from '@self/utils';
-import * as R from 'remeda';
+
 import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';
 

@@ -1,7 +1,9 @@
 import { expect } from '@playwright/test';
+import * as R from 'remeda';
+
 import { tenantFactory } from '@self/seed';
 import { countries, PageType } from '@self/utils';
-import * as R from 'remeda';
+
 import { test } from '../../api/api-fixtures';
 import { ComboboxOption } from '../combobox-model';
 import { FormPage } from '../form-page-model';

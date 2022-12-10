@@ -1,8 +1,12 @@
 import { expect } from '@playwright/test';
-import { portfolioFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { PortfolioDto } from '../../types/api';
+
+import { portfolioFactory } from '@self/seed';
+
 import { test } from './api-fixtures';
+
+import type { PortfolioDto } from '../../types/api';
+
 
 test(`can't be created without fullName`, async ({ request, org }) => {
 	const portfolio = R.pick(

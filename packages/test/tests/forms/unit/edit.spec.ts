@@ -1,7 +1,9 @@
 import { expect } from '@playwright/test';
+import * as R from 'remeda';
+
 import { unitFactory } from '@self/seed';
 import { PageType } from '@self/utils';
-import * as R from 'remeda';
+
 import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';
 

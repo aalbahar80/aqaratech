@@ -1,4 +1,5 @@
 import { Cookie } from '@self/utils';
+
 import { siteURL } from '../../api/fixtures/site-url';
 import { expect, test } from '../auth-fixtures';
 

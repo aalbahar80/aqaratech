@@ -1,7 +1,10 @@
-import { expect } from '@playwright/test';
-import { leaseInvoiceFactory, sample } from '@self/seed';
 import { randomUUID } from 'crypto';
+
+import { expect } from '@playwright/test';
 import * as R from 'remeda';
+
+import { leaseInvoiceFactory, sample } from '@self/seed';
+
 import { test } from '../../../api-fixtures';
 
 const newLeaseInvoice = R.pick(

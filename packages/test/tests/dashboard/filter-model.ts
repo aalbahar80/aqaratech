@@ -1,5 +1,6 @@
-import type { Locator, Page } from '@playwright/test';
 import { selectedLabel } from '../../utils/selected-label';
+
+import type { Locator, Page } from '@playwright/test';
 
 export class Filters {
 	readonly page: Page;

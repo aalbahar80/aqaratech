@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
-import { leaseInvoiceFactory } from '@self/seed';
 import * as R from 'remeda';
+
+import { leaseInvoiceFactory } from '@self/seed';
+
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
 import {
@@ -36,7 +38,7 @@ test.use({
 
 		// send post request for each leaseInvoice
 		await Promise.all(
-			leaseInvoices.map((leaseInvoice) =>
+			leaseInvoices.map(async (leaseInvoice) =>
 				request.post(url, {
 					data: leaseInvoice,
 				}),

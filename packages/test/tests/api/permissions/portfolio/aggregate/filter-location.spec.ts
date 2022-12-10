@@ -1,8 +1,10 @@
 import { expect } from '@playwright/test';
 import * as R from 'remeda';
-import type { GroupByMonthDto } from '../../../../../types/api';
+
 import { getUrl } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
+
+import type { GroupByMonthDto } from '../../../../../types/api';
 
 const sum = (items: GroupByMonthDto[]) => R.sumBy(items, (item) => item.amount);
 

@@ -1,7 +1,10 @@
-import type { FullConfig } from '@playwright/test';
 import cp from 'node:child_process';
+
 import kill from 'tree-kill';
+
 import { wasProcessStartedByPlaywright } from './utils/check-port';
+
+import type { FullConfig } from '@playwright/test';
 
 function globalTeardown(config: FullConfig) {
 	// Kill any hanging servers

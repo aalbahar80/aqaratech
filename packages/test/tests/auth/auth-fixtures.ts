@@ -1,4 +1,5 @@
 import { test as base } from '@playwright/test';
+
 import { EXPIRED_ID_TOKEN } from '../../constants/expired-id-token';
 
 interface Token {

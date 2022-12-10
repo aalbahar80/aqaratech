@@ -1,7 +1,8 @@
 import { expect } from '@playwright/test';
-import * as R from 'remeda';
-import { test } from '../../api-fixtures';
 import qs from 'qs';
+import * as R from 'remeda';
+
+import { test } from '../../api-fixtures';
 
 test.use({
 	userRoleType: 'PORTFOLIO',

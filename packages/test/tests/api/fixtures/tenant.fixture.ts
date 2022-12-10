@@ -1,8 +1,13 @@
-import { tenantFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { TenantDto } from '../../../types/api';
+
+import { tenantFactory } from '@self/seed';
+
+
 import { resCheck } from '../../../utils/res-check';
+
 import { apiURL } from './api-url';
+
+import type { TenantDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
 
 export const tenantFixtures: AllFixtures = {

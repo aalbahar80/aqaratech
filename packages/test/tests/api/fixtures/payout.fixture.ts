@@ -1,8 +1,13 @@
-import { payoutFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { PayoutDto } from '../../../types/api';
+
+import { payoutFactory } from '@self/seed';
+
+
 import { resCheck } from '../../../utils/res-check';
+
 import { apiURL } from './api-url';
+
+import type { PayoutDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
 
 export const payoutFixtures: AllFixtures = {

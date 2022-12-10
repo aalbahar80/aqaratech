@@ -1,6 +1,9 @@
-import { expect } from '@playwright/test';
-import { sample } from '@self/seed';
 import { randomUUID } from 'crypto';
+
+import { expect } from '@playwright/test';
+
+import { sample } from '@self/seed';
+
 import { test } from '../../../api-fixtures';
 
 test('can delete role in own org', async ({ request, org, role }) => {

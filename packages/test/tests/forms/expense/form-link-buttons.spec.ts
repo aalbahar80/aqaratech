@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
-import { getRoute, PageType } from '@self/utils';
 import { resolveURL } from 'ufo';
+
+import { getRoute, PageType } from '@self/utils';
+
 import { test } from '../../api/api-fixtures';
 
 test('create expense for unit button predefined params', async ({

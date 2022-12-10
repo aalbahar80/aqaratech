@@ -1,7 +1,10 @@
 import { expect } from '@playwright/test';
+
 import { sample } from '@self/seed';
-import type { BalanceDto } from '../../types/api';
+
 import { test } from './api-fixtures';
+
+import type { BalanceDto } from '../../types/api';
 
 const portfolio = sample.portfolios[0];
 const leaseInvoices = sample.leaseInvoices;

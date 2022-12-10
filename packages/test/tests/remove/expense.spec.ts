@@ -1,6 +1,9 @@
-import { getRoute, PageTypePortfolio } from '@self/utils';
 import * as R from 'remeda';
+
+import { getRoute, PageTypePortfolio } from '@self/utils';
+
 import { test } from '../api/api-fixtures';
+
 import { RemoveModel } from './remove-model';
 
 test.use({

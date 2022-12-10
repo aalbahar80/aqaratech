@@ -1,7 +1,10 @@
-import { expect } from '@playwright/test';
-import { propertyFactory, sample } from '@self/seed';
 import { randomUUID } from 'crypto';
+
+import { expect } from '@playwright/test';
 import * as R from 'remeda';
+
+import { propertyFactory, sample } from '@self/seed';
+
 import { test } from '../../../api-fixtures';
 
 test('can create property in own org', async ({ request, org, portfolio }) => {

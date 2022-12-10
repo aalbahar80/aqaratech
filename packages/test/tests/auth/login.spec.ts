@@ -1,8 +1,11 @@
 import { expect } from '@playwright/test';
+
 import { testOrgEmail, testPassword } from '@self/seed';
 import { Cookie } from '@self/utils';
+
 import { test as base } from '../api/api-fixtures';
 import { siteURL } from '../api/fixtures/site-url';
+
 import { LoginPage } from './login-page';
 
 const user = {

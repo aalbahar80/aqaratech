@@ -1,7 +1,10 @@
-import { expect } from '@playwright/test';
-import { expenseCategoryFactory, sample } from '@self/seed';
 import { randomUUID } from 'crypto';
+
+import { expect } from '@playwright/test';
 import * as R from 'remeda';
+
+import { expenseCategoryFactory, sample } from '@self/seed';
+
 import { PostUrl } from '../../../../../../utils/post-url';
 import { test } from '../../../../api-fixtures';
 

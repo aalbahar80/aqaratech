@@ -1,9 +1,13 @@
 import { expect } from '@playwright/test';
-import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { GroupByMonthDto } from '../../../types/api';
+
+import { expenseFactory } from '@self/seed';
+
+
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
+
+import type { GroupByMonthDto } from '../../../types/api';
 
 test.use({
 	// create 2 expenses for each month of 2021
@@ -25,7 +29,7 @@ test.use({
 		const url = `/organizations/${portfolio.organizationId}/expenses`;
 
 		await Promise.all(
-			expenses.map((expense) =>
+			expenses.map(async (expense) =>
 				request.post(url, {
 					data: expense,
 				}),

@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
-import { leaseInvoiceFactory, tenantFactory } from '@self/seed';
 import * as R from 'remeda';
+
+import { leaseInvoiceFactory, tenantFactory } from '@self/seed';
+
 import { test } from '../api-fixtures';
 
 // test that tenant.dob can be undefined, or an ISO string with time, or an ISO string without time

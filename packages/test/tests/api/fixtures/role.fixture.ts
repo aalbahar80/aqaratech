@@ -1,8 +1,12 @@
-import { roleFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { RoleDto } from '../../../types/api';
+
+import { roleFactory } from '@self/seed';
+
+
 import { PostUrlRole } from '../../../utils/post-url';
 import { resCheck } from '../../../utils/res-check';
+
+import type { RoleDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
 
 export const roleFixtures: AllFixtures = {

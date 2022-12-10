@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
+
 import { getUrl } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
+
 import { aggregateBodyToArray, aggregateTypes } from './aggregate-types';
 
 for (const agg of aggregateTypes) {

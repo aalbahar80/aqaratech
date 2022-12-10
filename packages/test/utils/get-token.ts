@@ -1,5 +1,6 @@
-import type { Cookie } from '@self/utils';
 import { decodeJwt } from 'jose';
+
+import type { Cookie } from '@self/utils';
 
 interface TokenReq {
 	name: Cookie.idToken | Cookie.accessToken;
@@ -43,7 +44,7 @@ const hasExpired = (exp: number) => exp < Date.now() / 1000;
 
 const hasJWTExpired = (token: string) => {
 	const payload = decodeJwt(token);
-	return !payload.exp || hasExpired(payload?.exp);
+	return !payload.exp || hasExpired(payload.exp);
 };
 
 type Cookies = typeof import('../storage-state/org-admin.json')['cookies'];

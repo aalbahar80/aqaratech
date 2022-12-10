@@ -1,5 +1,7 @@
 import { expect } from '@playwright/test';
+
 import { getRoute, PageType } from '@self/utils';
+
 import { test } from '../../api/api-fixtures';
 
 test('screenshot smoke test', async ({ page, org, portfolio }) => {

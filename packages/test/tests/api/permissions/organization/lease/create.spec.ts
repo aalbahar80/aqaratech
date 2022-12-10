@@ -1,7 +1,10 @@
-import { expect } from '@playwright/test';
-import { leaseFactory, sample } from '@self/seed';
 import { randomUUID } from 'crypto';
+
+import { expect } from '@playwright/test';
 import * as R from 'remeda';
+
+import { leaseFactory, sample } from '@self/seed';
+
 import { test } from '../../../api-fixtures';
 
 test('can create lease in own org', async ({

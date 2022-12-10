@@ -1,8 +1,10 @@
 import { expect } from '@playwright/test';
 import * as R from 'remeda';
-import type { ExpenseCategoryDto } from '../../../../../../types/api';
+
 import { PostUrl } from '../../../../../../utils/post-url';
 import { test } from '../../../../api-fixtures';
+
+import type { ExpenseCategoryDto } from '../../../../../../types/api';
 
 test.use({
 	expenseCategoryParams: {

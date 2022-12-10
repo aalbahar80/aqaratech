@@ -1,4 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
+import * as R from 'remeda';
+
 import {
 	Entity,
 	formatValue,
@@ -7,8 +9,9 @@ import {
 	isDateOnly,
 	PageType,
 } from '@self/utils';
-import * as R from 'remeda';
+
 import { uuid } from '../../utils/uuid';
+
 import { Combobox, ComboboxOption } from './combobox-model';
 
 export class FormPage {

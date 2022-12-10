@@ -1,8 +1,11 @@
 import { Cookie } from '@self/utils';
-import type { RoleDto } from '../../../types/api';
+
 import { resCheck } from '../../../utils/res-check';
 import { testUsers } from '../fixtures/users/test-users';
+
 import { apiURL } from './api-url';
+
+import type { RoleDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
 
 export const scopedRequestFixtures: AllFixtures = {

@@ -1,8 +1,12 @@
 import { expect } from '@playwright/test';
-import { tenantFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { TenantDto } from '../../types/api';
+
+import { tenantFactory } from '@self/seed';
+
 import { test } from './api-fixtures';
+
+import type { TenantDto } from '../../types/api';
+
 
 test(`can't be created without fullName`, async ({ request, org }) => {
 	const tenant = R.pick(

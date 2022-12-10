@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
-import { organizationFactory } from '@self/seed';
 import * as R from 'remeda';
+
+import { organizationFactory } from '@self/seed';
+
 import { test } from './api-fixtures';
 
 test(`can create organization`, async ({ request }) => {

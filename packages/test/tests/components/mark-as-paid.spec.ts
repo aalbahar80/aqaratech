@@ -1,5 +1,7 @@
 import { expect } from '@playwright/test';
+
 import { getRoute, PageTab } from '@self/utils';
+
 import { test } from '../api/api-fixtures';
 
 test.use({

@@ -1,7 +1,9 @@
 import { expect } from '@playwright/test';
-import type { PaginatedTenantDto } from '../../../types/api';
+
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
+
+import type { PaginatedTenantDto } from '../../../types/api';
 
 test.use({
 	userRoleType: 'TENANT',

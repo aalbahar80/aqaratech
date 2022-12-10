@@ -1,6 +1,9 @@
 import { expect } from '@playwright/test';
+
 import { getRoute, PageTypePortfolio } from '@self/utils';
+
 import { test as base } from '../api/api-fixtures';
+
 import { Filters } from './filter-model';
 
 base.use({

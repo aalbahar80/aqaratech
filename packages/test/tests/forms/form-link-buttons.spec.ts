@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
-import { getRoute, PageTab, PageType } from '@self/utils';
 import { resolveURL } from 'ufo';
+
+import { getRoute, PageTab, PageType } from '@self/utils';
+
 import { test } from '../api/api-fixtures';
 
 test('create invoices-multiple button predefined params', async ({

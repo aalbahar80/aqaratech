@@ -1,5 +1,7 @@
 import { expect } from '@playwright/test';
+
 import { getLabel, getRoute, PageType } from '@self/utils';
+
 import { test } from '../../../api/api-fixtures';
 import { FormPage } from '../../form-page-model';
 

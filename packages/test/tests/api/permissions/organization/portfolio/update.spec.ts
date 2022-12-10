@@ -1,7 +1,10 @@
-import { expect } from '@playwright/test';
-import { portfolioFactory, sample } from '@self/seed';
 import { randomUUID } from 'crypto';
+
+import { expect } from '@playwright/test';
 import * as R from 'remeda';
+
+import { portfolioFactory, sample } from '@self/seed';
+
 import { test } from '../../../api-fixtures';
 
 const newPortfolio = R.pick(

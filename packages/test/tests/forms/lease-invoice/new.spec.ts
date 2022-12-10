@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { expect } from '@playwright/test';
+import * as R from 'remeda';
+
 import { leaseInvoicePartialFactory } from '@self/seed';
 import { FIELDS, getRoute, PageType } from '@self/utils';
-import * as R from 'remeda';
+
 import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';

@@ -1,8 +1,13 @@
-import { portfolioFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { PortfolioDto } from '../../../types/api';
+
+import { portfolioFactory } from '@self/seed';
+
+
 import { resCheck } from '../../../utils/res-check';
+
 import { apiURL } from './api-url';
+
+import type { PortfolioDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
 
 export const portfolioFixtures: AllFixtures = {

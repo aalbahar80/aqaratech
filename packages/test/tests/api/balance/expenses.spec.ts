@@ -1,8 +1,12 @@
 import { expect } from '@playwright/test';
-import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { BalanceDto } from '../../../types/api';
+
+import { expenseFactory } from '@self/seed';
+
 import { test } from '../api-fixtures';
+
+import type { BalanceDto } from '../../../types/api';
+
 
 test.use({
 	expenseCategoryParams: {
@@ -23,7 +27,7 @@ test(`expense amount`, async ({ request, portfolio, expenseCategory }) => {
 	const url = `/organizations/${portfolio.organizationId}/expenses`;
 
 	await Promise.all(
-		expenses.map((e) => {
+		expenses.map(async (e) => {
 			// only submit necessary fields
 			const expense = R.pick(e, [
 				'amount',

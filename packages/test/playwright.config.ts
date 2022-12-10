@@ -1,11 +1,13 @@
 import { devices, type PlaywrightTestConfig } from '@playwright/test';
 import { config as dotenv } from 'dotenv';
+
 import { TESTS } from './config/test-groups';
 import {
 	EXPIRED_ACCESS_TOKEN,
 	EXPIRED_ID_TOKEN,
 } from './constants/expired-id-token';
 import { testUsers } from './tests/api/fixtures/users/test-users';
+
 import type { TokenTestOptions } from './tests/auth/auth-fixtures';
 
 dotenv({

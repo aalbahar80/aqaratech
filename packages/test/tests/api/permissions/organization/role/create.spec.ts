@@ -1,7 +1,10 @@
+import { randomUUID } from 'crypto';
+
 import { faker } from '@faker-js/faker';
 import { expect } from '@playwright/test';
+
 import { sample } from '@self/seed';
-import { randomUUID } from 'crypto';
+
 import { PostUrlRole } from '../../../../../utils/post-url';
 import { test } from '../../../api-fixtures';
 

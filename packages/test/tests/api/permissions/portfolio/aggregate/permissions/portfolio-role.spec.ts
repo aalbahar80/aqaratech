@@ -1,6 +1,9 @@
-import { expect } from '@playwright/test';
-import { sample } from '@self/seed';
 import { randomUUID } from 'crypto';
+
+import { expect } from '@playwright/test';
+
+import { sample } from '@self/seed';
+
 import { getUrl } from '../../../../../../utils/post-url';
 import { test } from '../../../../api-fixtures';
 import { aggregateTypes } from '../aggregate-types';

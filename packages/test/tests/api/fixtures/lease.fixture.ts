@@ -1,9 +1,14 @@
+import * as R from 'remeda';
+
 import { leaseFactory } from '@self/seed';
 import { FIELDS } from '@self/utils';
-import * as R from 'remeda';
-import type { LeaseDto } from '../../../types/api';
+
+
 import { resCheck } from '../../../utils/res-check';
+
 import { apiURL } from './api-url';
+
+import type { LeaseDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
 
 export const leaseFixtures: AllFixtures = {

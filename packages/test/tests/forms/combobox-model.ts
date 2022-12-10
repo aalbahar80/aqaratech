@@ -1,4 +1,5 @@
 import { expect, Page } from '@playwright/test';
+
 import { getLabel } from '@self/utils';
 
 const keyLabels = ['nationality', 'tenantId', 'categoryId', 'area'];

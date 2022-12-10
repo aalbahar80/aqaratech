@@ -1,8 +1,12 @@
 import { expect } from '@playwright/test';
-import { expenseFactory } from '@self/seed';
 import * as R from 'remeda';
-import type { PortfolioDto } from '../../../../../types/api';
+
+import { expenseFactory } from '@self/seed';
+
 import { test } from '../../../api-fixtures';
+
+import type { PortfolioDto } from '../../../../../types/api';
+
 
 test('expense.property belongs to expense.portfolio', async ({
 	portfolio,

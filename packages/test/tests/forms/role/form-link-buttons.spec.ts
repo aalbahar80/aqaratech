@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
-import { getRoute, PageTab } from '@self/utils';
 import { resolveURL } from 'ufo';
+
+import { getRoute, PageTab } from '@self/utils';
+
 import { test } from '../../api/api-fixtures';
 
 const inputs = ['tenant', 'portfolio', 'organization'] as const;

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+
 import { Cookie } from '@self/utils';
 
 test('cookies are cleared', async ({ page }) => {

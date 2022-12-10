@@ -1,4 +1,6 @@
 import { expect } from '@playwright/test';
+import * as R from 'remeda';
+
 import {
 	computeLabelProperty,
 	computeLabelUnit,
@@ -6,8 +8,9 @@ import {
 	PageType,
 	PageTypePortfolio,
 } from '@self/utils';
-import * as R from 'remeda';
+
 import { test } from '../api/api-fixtures';
+
 import { Filters } from './filter-model';
 
 test.use({

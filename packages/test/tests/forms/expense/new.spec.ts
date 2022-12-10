@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { expect } from '@playwright/test';
+import * as R from 'remeda';
+
 import { expensePartialFactory } from '@self/seed';
 import { FIELDS, getRoute, PageType } from '@self/utils';
-import * as R from 'remeda';
+
 import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
 import { ComboboxOption } from '../combobox-model';

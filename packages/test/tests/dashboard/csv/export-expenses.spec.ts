@@ -1,8 +1,11 @@
-import { expect } from '@playwright/test';
-import { getRoute, PageTypePortfolio } from '@self/utils';
 import fs from 'node:fs';
 import path from 'node:path';
+
+import { expect } from '@playwright/test';
 import * as R from 'remeda';
+
+import { getRoute, PageTypePortfolio } from '@self/utils';
+
 import { test } from '../../api/api-fixtures';
 
 // const SAVE_PATH = './downloads/expenses.csv';
