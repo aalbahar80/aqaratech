@@ -105,7 +105,7 @@ module.exports = {
 				// alphabetize
 				alphabetize: {
 					order: 'asc',
-					caseInsensitive: false,
+					caseInsensitive: true, // in import paths
 				},
 				// pathGroupsExcludedImportTypes: ['builtin'],
 				// distinctGroup: true,
