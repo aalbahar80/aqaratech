@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
+
 	import HeroiconsChartPie from '~icons/heroicons/chart-pie';
 
 	export let empty: boolean;

@@ -7,7 +7,6 @@ import { createdAt, updatedAt } from '../utils/dates';
 
 import type { Role } from '../utils/date-or-string';
 
-
 export const roleFactory = Factory.Sync.makeFactoryWithRequired<
 	Role & { email: string },
 	'organizationId'

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { flexRender, type Row } from '@tanstack/svelte-table';
 	import clsx from 'clsx';
+
 	import { fade } from 'svelte/transition';
 
 	export let row: Row<any>;

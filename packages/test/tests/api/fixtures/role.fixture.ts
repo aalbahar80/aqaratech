@@ -2,7 +2,6 @@ import * as R from 'remeda';
 
 import { roleFactory } from '@self/seed';
 
-
 import { PostUrlRole } from '../../../utils/post-url';
 import { resCheck } from '../../../utils/res-check';
 

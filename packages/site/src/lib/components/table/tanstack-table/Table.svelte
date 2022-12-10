@@ -1,17 +1,4 @@
 <script lang="ts">
-	import type { PaginatedDto } from '$api/openapi';
-	import { dev } from '$app/environment';
-	import { page } from '$app/stores';
-	import FilterBar from '$lib/components/filter/FilterBar.svelte';
-	import { handlePagination } from '$lib/components/table/pagination/handle-pagination';
-	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
-	import TableBodyRow from '$lib/components/table/row/TableBodyRow.svelte';
-	import TableEmptyState from '$lib/components/table/tanstack-table/TableEmptyState.svelte';
-	import TableFooterRow from '$lib/components/table/row/TableFooterRow.svelte';
-	import TableHeaderRow from '$lib/components/table/row/TableHeaderRow.svelte';
-	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
-	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
-	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
 	import {
 		createSvelteTable,
 		getCoreRowModel,
@@ -23,6 +10,22 @@
 		type TableOptions,
 		type VisibilityState,
 	} from '@tanstack/svelte-table';
+
+	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import { handlePagination } from '$lib/components/table/pagination/handle-pagination';
+	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
+	import TableBodyRow from '$lib/components/table/row/TableBodyRow.svelte';
+	import TableFooterRow from '$lib/components/table/row/TableFooterRow.svelte';
+	import TableHeaderRow from '$lib/components/table/row/TableHeaderRow.svelte';
+	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
+	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
+	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
+	import TableEmptyState from '$lib/components/table/tanstack-table/TableEmptyState.svelte';
+
+	import type { PaginatedDto } from '$api/openapi';
+
+	import { dev } from '$app/environment';
+	import { page } from '$app/stores';
 	import { writable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 

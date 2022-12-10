@@ -1,8 +1,9 @@
 <script lang="ts">
-	import type { OrganizationDto } from '$api/openapi';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import type { ColumnDef } from '@tanstack/svelte-table';
+
+	import type { OrganizationDto } from '$api/openapi';
 	import type { PageData } from './$types';
+	import type { ColumnDef } from '@tanstack/svelte-table';
 
 	export let data: PageData;
 

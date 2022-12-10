@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import Filter from '$lib/components/dashboard/filter/Filter.svelte';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 	import { getRoute, PageType } from '@self/utils';
+
 	import type { LayoutData } from './$types';
+
+	import { page } from '$app/stores';
 
 	export let data: LayoutData;
 

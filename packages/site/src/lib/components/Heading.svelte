@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
@@ -11,9 +12,11 @@
 	} from '$lib/components/toast/create-modal-delete';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
 	import { classes } from '$lib/utils/classes';
-	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { getRoute, PageType, type Entity } from '@self/utils';
+
+	import { page } from '$app/stores';
 	import type { SvelteComponentTyped } from 'svelte';
+
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	interface IconTooltip {

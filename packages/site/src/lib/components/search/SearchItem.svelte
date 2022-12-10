@@ -1,11 +1,14 @@
 <script lang="ts">
-	import type { HitDto } from '$api/openapi';
-	import Hoverable from '$lib/components/Hoverable.svelte';
-	import { classes } from '$lib/utils/classes';
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
-	import { startCase } from '@self/utils';
 	import clsx from 'clsx';
 	import * as R from 'remeda';
+
+	import Hoverable from '$lib/components/Hoverable.svelte';
+	import { classes } from '$lib/utils/classes';
+	import { startCase } from '@self/utils';
+
+	import type { HitDto } from '$api/openapi';
+
 	import type { SvelteComponentTyped } from 'svelte';
 
 	export let item: HitDto;

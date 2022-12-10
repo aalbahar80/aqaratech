@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type { IncomeByMonthDto } from '$api/openapi';
-	import { revenueChart } from '$lib/components/charts/revenue';
-	import { getColor } from '$lib/utils/colors';
 	import Chart from '$lib/components/charts/Chart.svelte';
+	import { revenueChart } from '$lib/components/charts/revenue';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
+	import { getColor } from '$lib/utils/colors';
+
+	import type { IncomeByMonthDto } from '$api/openapi';
 
 	export let income: IncomeByMonthDto;
 	export let empty: boolean;

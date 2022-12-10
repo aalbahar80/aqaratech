@@ -8,13 +8,16 @@
 </script>
 
 <script lang="ts">
-	import { afterNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
+	import clsx from 'clsx';
+
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
-	import type { NavigationItem } from '$lib/components/sidebar/types';
 	import { clickOutside } from '$lib/utils/click-outside';
-	import clsx from 'clsx';
+
+	import type { NavigationItem } from '$lib/components/sidebar/types';
+
+	import { afterNavigate } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { fly } from 'svelte/transition';
 
 	export let navigationTree: NavigationItem[];

@@ -6,7 +6,6 @@ import {
 	RequestMethod,
 } from '@nestjs/common';
 
-
 // common
 import { RouteInfo } from '@nestjs/common/interfaces';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -20,7 +19,6 @@ import { WinstonModule } from 'nest-winston';
 import { AppController } from 'src/app.controller';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
-
 
 // resources
 import { RoleGuard } from 'src/casl/role.guard';

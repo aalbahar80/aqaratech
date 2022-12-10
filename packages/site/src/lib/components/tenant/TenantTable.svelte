@@ -1,13 +1,16 @@
 <script lang="ts">
-	import type { PaginatedTenantDto, TenantDto } from '$api/openapi';
-	import { page } from '$app/stores';
+	import { createColumnHelper } from '@tanstack/svelte-table';
+
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
-	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
+	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { entity, getLabel } from '@self/utils';
-	import { createColumnHelper } from '@tanstack/svelte-table';
+
+	import type { PaginatedTenantDto, TenantDto } from '$api/openapi';
+
+	import { page } from '$app/stores';
 
 	export let data: PaginatedTenantDto;
 

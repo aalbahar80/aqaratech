@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { classes } from '$lib/utils/classes';
+
 	import type { SvelteComponentTyped } from 'svelte';
 
 	export let icon: typeof SvelteComponentTyped<

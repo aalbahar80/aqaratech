@@ -1,7 +1,8 @@
 <script lang="ts">
-	import type { Occupancy } from '$api/openapi';
 	import OccupancyHeatmap from '$lib/components/charts/OccupancyHeatmap.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
+
+	import type { Occupancy } from '$api/openapi';
 
 	export let occupancy: Occupancy[];
 	export let futureOccupancy: Occupancy[];

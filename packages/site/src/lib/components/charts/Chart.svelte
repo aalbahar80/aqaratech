@@ -16,6 +16,7 @@
 		Tooltip,
 		type ActiveElement,
 	} from 'chart.js';
+
 	import { CHART_HEIGHT } from '$lib/components/dashboard/cards/chart-height.const';
 	import 'chartjs-adapter-date-fns';
 

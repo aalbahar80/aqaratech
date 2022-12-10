@@ -1,9 +1,8 @@
 <script lang="ts">
+	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
+
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
-	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
-	import { invalidateAll } from '$app/navigation';
-	import { page } from '$app/stores';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
@@ -12,7 +11,11 @@
 	import { openModal } from '$lib/components/toast/Modal.svelte';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getLabel, type Entity } from '@self/utils';
-	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
+
+	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
+
+	import { invalidateAll } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	export let data: PaginatedRoleDto;
 	export let predefined: {

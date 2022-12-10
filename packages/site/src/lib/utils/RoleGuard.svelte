@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { RoleTypeEnum } from '$api/openapi';
+
 	import { page } from '$app/stores';
 
 	export let roles: RoleTypeEnum[];

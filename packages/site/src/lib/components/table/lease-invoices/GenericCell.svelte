@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Tooltip from '$lib/components/Tooltip.svelte';
 	import clsx from 'clsx';
+
+	import Tooltip from '$lib/components/Tooltip.svelte';
 
 	export let value: unknown;
 	export let classes: string | undefined = undefined;

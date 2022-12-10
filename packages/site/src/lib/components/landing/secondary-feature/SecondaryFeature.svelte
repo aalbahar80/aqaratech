@@ -1,5 +1,6 @@
 <script lang="ts">
 	import clsx from 'clsx';
+
 	import type { SecondaryFeature } from '$lib/components/landing/secondary-feature/features';
 
 	export let cs: string;

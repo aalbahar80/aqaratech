@@ -1,11 +1,15 @@
 <script lang="ts">
-	import type { PortfolioDto } from '$api/openapi';
-	import { page } from '$app/stores';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { entitiesMap, getRoute, PageType } from '@self/utils';
+
+	import type { PortfolioDto } from '$api/openapi';
+
+	import { page } from '$app/stores';
+
 	import Fa6SolidMoneyBillTransfer from '~icons/fa6-solid/money-bill-transfer';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 

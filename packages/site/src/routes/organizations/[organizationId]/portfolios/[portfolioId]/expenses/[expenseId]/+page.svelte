@@ -1,7 +1,9 @@
 <script lang="ts">
+	import * as R from 'remeda';
+
 	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
 	import ExpensePage from '$lib/components/expense/ExpensePage.svelte';
-	import * as R from 'remeda';
+
 	import type { PageData } from './$types';
 
 	export let data: PageData;

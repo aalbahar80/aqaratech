@@ -1,9 +1,4 @@
 <script lang="ts">
-	import { createApi } from '$api';
-	import type { SearchDto } from '$api/openapi';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import SearchItem from '$lib/components/search/SearchItem.svelte';
 	import {
 		Dialog,
 		DialogOverlay,
@@ -12,17 +7,26 @@
 		TransitionChild,
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
-	import { entitiesMap, isEntity } from '@self/utils';
-	import HeroiconsOutlineEmojiSad from '~icons/heroicons-outline/emoji-sad';
-	import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
-	import HeroiconsMagnifyingGlass from '~icons/heroicons/magnifying-glass';
-	// TODO optimize use lodash debounce?
-	import { getRoute, PageType } from '@self/utils';
 	import debounce from 'debounce';
+
+	import { createApi } from '$api';
+	import SearchItem from '$lib/components/search/SearchItem.svelte';
+	import { entitiesMap, isEntity } from '@self/utils';
+	import { getRoute, PageType } from '@self/utils';
+
+	import type { SearchDto } from '$api/openapi';
+
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
+
+	import HeroiconsOutlineEmojiSad from '~icons/heroicons-outline/emoji-sad';
 	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';
 	import HeroiconsOutlineOfficeBuilding from '~icons/heroicons-outline/office-building';
 	import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
+	import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
+	import HeroiconsMagnifyingGlass from '~icons/heroicons/magnifying-glass';
+	// TODO optimize use lodash debounce?
 
 	let groups: SearchDto[] = [];
 

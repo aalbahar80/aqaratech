@@ -2,7 +2,6 @@ import * as R from 'remeda';
 
 import { payoutFactory } from '@self/seed';
 
-
 import { resCheck } from '../../../utils/res-check';
 
 import { apiURL } from './api-url';

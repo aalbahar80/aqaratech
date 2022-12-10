@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { SIGNUP } from '$lib/constants/routes';
-	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
 	import { buttonCn } from '$lib/components/landing/button-cn';
+	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
+	import { SIGNUP } from '$lib/constants/routes';
+
 	import backgroundImage from '../../../assets/background-call-to-action.jpg';
 </script>
 

@@ -1,9 +1,12 @@
 <script lang="ts">
-	import type { GroupByLocationDto } from '$api/openapi';
-	import { page } from '$app/stores';
+	import { hierarchy, rollup, sum } from 'd3';
+
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
 	import { getRoute, PageType } from '@self/utils';
-	import { hierarchy, rollup, sum } from 'd3';
+
+	import type { GroupByLocationDto } from '$api/openapi';
+
+	import { page } from '$app/stores';
 
 	export let expenses: GroupByLocationDto[];
 

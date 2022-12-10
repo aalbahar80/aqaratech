@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ExpenseDto, PaginatedExpenseDto } from '$api/openapi';
-	import { page } from '$app/stores';
+	import { createColumnHelper } from '@tanstack/svelte-table';
+
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
@@ -10,7 +10,10 @@
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { toUTCFormat } from '@self/utils';
-	import { createColumnHelper } from '@tanstack/svelte-table';
+
+	import type { ExpenseDto, PaginatedExpenseDto } from '$api/openapi';
+
+	import { page } from '$app/stores';
 
 	export let data: PaginatedExpenseDto;
 

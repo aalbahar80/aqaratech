@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SummaryStats from '$lib/components/dashboard/stats/SummaryStats.svelte';
 	import PopoverDivider from '$lib/components/popover/PopoverDivider.svelte';
+
 	import type { PageData } from './$types';
 
 	export let data: PageData;

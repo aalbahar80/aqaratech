@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Badge from '$lib/components/Badge.svelte';
 	import { getRoleMeta } from '$lib/utils/get-role-meta';
+
 	import type { ValidatedRoleDto } from '$api/openapi';
+
 	import BxsBusiness from '~icons/bxs/business';
 	import MdiAccount from '~icons/mdi/account';
 	import MdiAccountTie from '~icons/mdi/account-tie';

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Spinner from '$components/Spinner.svelte';
+
 	import type { SvelteComponentTyped } from 'svelte';
 
 	export let loading = false;

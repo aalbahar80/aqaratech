@@ -4,7 +4,6 @@ import * as R from 'remeda';
 import { organizationFactory, portfolioFactory } from '@self/seed';
 import { Cookie } from '@self/utils';
 
-
 import { resCheck } from '../../utils/res-check';
 
 import { apiURL } from './fixtures/api-url';

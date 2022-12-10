@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { OrganizationDto } from '$api/openapi';
 	import Heading from '$lib/components/Heading.svelte';
+
+	import type { OrganizationDto } from '$api/openapi';
 
 	export let organization: OrganizationDto;
 </script>

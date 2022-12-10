@@ -1,6 +1,6 @@
 <script lang="ts">
-	import SecondaryFeature from '$lib/components/landing/secondary-feature/SecondaryFeature.svelte';
 	import { secondaryFeatures } from '$lib/components/landing/secondary-feature/features';
+	import SecondaryFeature from '$lib/components/landing/secondary-feature/SecondaryFeature.svelte';
 </script>
 
 <!-- FeaturesMobile -->

@@ -1,9 +1,12 @@
 <script lang="ts">
-	import type { ValidatedRoleDto } from '$api/openapi';
+	import { formatDistance } from 'date-fns';
+
 	import RoleCard from '$lib/components/role/RoleCard.svelte';
 	import RoleEmptyState from '$lib/components/role/RoleEmptyState.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
-	import { formatDistance } from 'date-fns';
+
+	import type { ValidatedRoleDto } from '$api/openapi';
+
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
 	export let roles: ValidatedRoleDto[];

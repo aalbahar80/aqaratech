@@ -1,13 +1,17 @@
 <script lang="ts">
-	import type { LeaseDto } from '$api/openapi';
-	import { page } from '$app/stores';
+	import { formatDistance } from 'date-fns';
+
 	import Button from '$components/buttons/Button.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
 	import { getRoute, PageTab, PageType } from '@self/utils';
-	import { formatDistance } from 'date-fns';
+
+	import type { LeaseDto } from '$api/openapi';
+
+	import { page } from '$app/stores';
+
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 	import HeroiconsArrowPath from '~icons/heroicons/arrow-path';
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';

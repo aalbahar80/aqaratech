@@ -22,8 +22,6 @@ import { TenantsModule } from 'src/tenants/tenants.module';
 import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
 
-
-
 export const setupSwagger = async (app: INestApplication) => {
 	const config = new DocumentBuilder()
 		.setTitle('Aqaratech')

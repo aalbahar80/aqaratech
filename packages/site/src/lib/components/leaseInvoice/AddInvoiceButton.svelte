@@ -1,12 +1,15 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { entitiesMap, getRoute, PageType } from '@self/utils';
+
+	import { page } from '$app/stores';
+
 	import Fa6SolidLayerGroup from '~icons/fa6-solid/layer-group';
 
 	export let leaseId: string;

@@ -1,18 +1,22 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
-	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 	import { getRoute, PageTab, PageType } from '@self/utils';
+
+	import type { LayoutData } from './$types';
+
+	import { page } from '$app/stores';
+
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidStairs from '~icons/fa6-solid/stairs';
 	import GisMeasure from '~icons/gis/measure';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
-	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
 

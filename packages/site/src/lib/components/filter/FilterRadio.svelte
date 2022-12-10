@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { Filter } from '$lib/models/interfaces/filter.interface';
-	import { classes } from '$lib/utils/classes';
 	import {
 		Menu,
 		MenuButton,
@@ -8,6 +6,11 @@
 		MenuItems,
 		Transition,
 	} from '@rgossiaux/svelte-headlessui';
+
+	import { classes } from '$lib/utils/classes';
+
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
+
 	import HeroiconsChevronDown20Solid from '~icons/heroicons/chevron-down-20-solid';
 
 	export let label: string;

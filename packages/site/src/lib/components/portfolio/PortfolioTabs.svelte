@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 	import { getRoute, PageTab, PageType } from '@self/utils';
+
+	import { page } from '$app/stores';
 
 	$: baseRouteConfig = {
 		entity: 'portfolio',

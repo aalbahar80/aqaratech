@@ -7,7 +7,6 @@ import { test } from './api-fixtures';
 
 import type { PartialLeaseDto } from '../../types/api';
 
-
 const utc = (year: number, month: number, day: number) =>
 	new Date(Date.UTC(year, month, day)).toISOString();
 

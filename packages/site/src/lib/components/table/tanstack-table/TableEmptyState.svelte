@@ -1,6 +1,7 @@
 <script>
-	import HeroiconsTableCells from '~icons/heroicons/table-cells';
 	import { fade } from 'svelte/transition';
+
+	import HeroiconsTableCells from '~icons/heroicons/table-cells';
 </script>
 
 <div

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/buttons/Button.svelte';
+
 	import MaterialSymbolsAddBusinessRounded from '~icons/material-symbols/add-business-rounded';
 </script>
 

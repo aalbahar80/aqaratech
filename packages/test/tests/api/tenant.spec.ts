@@ -7,7 +7,6 @@ import { test } from './api-fixtures';
 
 import type { TenantDto } from '../../types/api';
 
-
 test(`can't be created without fullName`, async ({ request, org }) => {
 	const tenant = R.pick(
 		tenantFactory.build({

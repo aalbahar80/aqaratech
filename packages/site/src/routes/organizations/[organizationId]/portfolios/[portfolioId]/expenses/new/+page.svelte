@@ -7,8 +7,9 @@
 	} from '$lib/components/organization/expense-category-context';
 	import { toOptions } from '$lib/utils/expense-type-options';
 
-	import { setContext } from 'svelte';
 	import type { ActionData, PageData } from './$types';
+
+	import { setContext } from 'svelte';
 
 	export let data: PageData;
 

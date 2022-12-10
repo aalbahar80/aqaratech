@@ -2,7 +2,6 @@ import * as R from 'remeda';
 
 import { expenseCategoryFactory } from '@self/seed';
 
-
 import { PostUrl } from '../../../utils/post-url';
 import { resCheck } from '../../../utils/res-check';
 

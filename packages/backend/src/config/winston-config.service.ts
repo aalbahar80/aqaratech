@@ -11,7 +11,6 @@ import { httpLogFormat, ignoreHttp, onlyHttp } from '@self/utils';
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { LogtailService } from 'src/logtail/logtail.service';
 
-
 @Injectable()
 export class WinstonConfigService implements WinstonModuleOptionsFactory {
 	constructor(

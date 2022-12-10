@@ -7,7 +7,6 @@ import { test } from '../api-fixtures';
 
 import type { BalanceDto } from '../../../types/api';
 
-
 test.use({
 	expenseCategoryParams: {
 		isGroup: false,

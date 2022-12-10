@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { navigating, page } from '$app/stores';
+
+	import * as Sentry from '@sentry/svelte?client';
+	import { BrowserTracing } from '@sentry/tracing?client';
+	import { Toaster } from 'svelte-french-toast';
+
 	import Alert from '$lib/components/navbar/Alert.svelte';
-	import { environment } from '$lib/environment';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
@@ -9,14 +13,14 @@
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import Modal from '$lib/components/toast/Modal.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
+	import { environment } from '$lib/environment';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import { getSentryUser } from '$lib/utils/sentry/common';
-	import * as Sentry from '@sentry/svelte?client';
-	import { BrowserTracing } from '@sentry/tracing?client';
-	import { onMount } from 'svelte';
-	import { Toaster } from 'svelte-french-toast';
+
 	import '../styles/tailwind.css';
 	import type { LayoutData } from './$types';
+
+	import { onMount } from 'svelte';
 
 	export let data: LayoutData;
 

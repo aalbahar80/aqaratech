@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 	import {
 		getRoute,
@@ -7,6 +6,8 @@
 		type GetFormRouteBase,
 		type GetFormRouteWithRelation,
 	} from '@self/utils';
+
+	import { page } from '$app/stores';
 
 	type NoParams<T> = Omit<T, 'params' | 'pageType'>;
 

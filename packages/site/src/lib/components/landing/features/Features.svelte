@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { features } from '$lib/components/landing/features/features-content';
 	import Feature from '$lib/components/landing/features/Feature.svelte';
+	import { features } from '$lib/components/landing/features/features-content';
 </script>
 
 <!-- Use bottom padding to avoid clipping last icon if text is short enough. -->

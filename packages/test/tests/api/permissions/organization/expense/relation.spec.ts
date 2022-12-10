@@ -7,7 +7,6 @@ import { test } from '../../../api-fixtures';
 
 import type { PortfolioDto } from '../../../../../types/api';
 
-
 test('expense.property belongs to expense.portfolio', async ({
 	portfolio,
 	property,

@@ -1,14 +1,16 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { classes } from '$lib/utils/classes';
-	import { ROOT_ID, type ExpenseNode } from '$lib/utils/expense-type-options';
-	import { getRoute, PageType } from '@self/utils';
 	import {
 		dndzone,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,
 		SHADOW_PLACEHOLDER_ITEM_ID,
 		type DndEvent,
 	} from 'svelte-dnd-action';
+
+	import { classes } from '$lib/utils/classes';
+	import { ROOT_ID, type ExpenseNode } from '$lib/utils/expense-type-options';
+	import { getRoute, PageType } from '@self/utils';
+
+	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
 
 	export let root: ExpenseNode;

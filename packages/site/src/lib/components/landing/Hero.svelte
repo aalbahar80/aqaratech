@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { LOGIN } from '$lib/constants/routes';
 	import { buttonCn } from '$lib/components/landing/button-cn';
+	import { LOGIN } from '$lib/constants/routes';
+
 	import UnderlineDecoration from './UnderlineDecoration.svelte';
 </script>
 

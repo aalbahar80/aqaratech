@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getRoute, PageType } from '@self/utils';
+
 	import HeroiconsFolderPlus from '~icons/heroicons/folder-plus';
 	import HeroiconsPlusSmall from '~icons/heroicons/plus-small';
 </script>

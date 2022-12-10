@@ -2,7 +2,6 @@ import * as R from 'remeda';
 
 import { propertyFactory } from '@self/seed';
 
-
 import { resCheck } from '../../../utils/res-check';
 
 import { apiURL } from './api-url';

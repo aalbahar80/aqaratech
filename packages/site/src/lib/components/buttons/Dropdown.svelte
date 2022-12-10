@@ -1,6 +1,7 @@
 <script lang="ts">
-	import ThreeDotsButton from '$lib/components/buttons/ThreeDotsButton.svelte';
 	import { Menu, MenuButton } from '@rgossiaux/svelte-headlessui';
+
+	import ThreeDotsButton from '$lib/components/buttons/ThreeDotsButton.svelte';
 </script>
 
 <Menu as="div" class="relative inline-block text-left align-middle">

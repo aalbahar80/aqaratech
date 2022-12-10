@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { Filter } from '$lib/models/interfaces/filter.interface';
-	import { classes } from '$lib/utils/classes';
 	import {
 		Dialog,
 		DialogOverlay,
@@ -10,6 +8,11 @@
 		TransitionChild,
 		TransitionRoot,
 	} from '@rgossiaux/svelte-headlessui';
+
+	import { classes } from '$lib/utils/classes';
+
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
+
 	import HeroiconsChevronDown20Solid from '~icons/heroicons/chevron-down-20-solid';
 	import HeroiconsXMark20Solid from '~icons/heroicons/x-mark-20-solid';
 

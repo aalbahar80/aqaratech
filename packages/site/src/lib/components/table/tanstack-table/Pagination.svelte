@@ -2,7 +2,9 @@
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { getButtons } from '$lib/components/pagination/get-buttons';
 	import { classes } from '$lib/utils/classes';
+
 	import type { Table } from '@tanstack/svelte-table';
+
 	import HeroiconsChevronLeft20Solid from '~icons/heroicons/chevron-left-20-solid';
 	import HeroiconsChevronRight20Solid from '~icons/heroicons/chevron-right-20-solid';
 

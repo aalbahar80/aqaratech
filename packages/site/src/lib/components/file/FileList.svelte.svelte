@@ -1,23 +1,27 @@
 <script lang="ts">
+	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
-	import type { PaginatedFileDto } from '$api/openapi';
-	import { page } from '$app/stores';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
 	import IconButton from '$lib/components/buttons/IconButton.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
+	import TableEmptyState from '$lib/components/table/tanstack-table/TableEmptyState.svelte';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
-	import { MenuItem } from '@rgossiaux/svelte-headlessui';
+
+	import type { PaginatedFileDto } from '$api/openapi';
+
+	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
+
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 	import HeroiconsOutlinePaperClip from '~icons/heroicons-outline/paper-clip';
-	import TableEmptyState from '$lib/components/table/tanstack-table/TableEmptyState.svelte';
 
 	export let files: PaginatedFileDto;
 

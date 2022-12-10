@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { getRoute, PageTypePortfolio } from '@self/utils';
+
+	import { page } from '$app/stores';
+
 	import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 
 	export let dataType: 'Expenses' | 'Income';

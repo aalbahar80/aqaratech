@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type { GroupByMonthDto } from '$api/openapi';
-	import { revenueChart } from '$lib/components/charts/revenue';
-	import { getColor } from '$lib/utils/colors';
 	import Chart from '$lib/components/charts/Chart.svelte';
+	import { revenueChart } from '$lib/components/charts/revenue';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
+	import { getColor } from '$lib/utils/colors';
+
+	import type { GroupByMonthDto } from '$api/openapi';
 
 	export let expenses: GroupByMonthDto[];
 

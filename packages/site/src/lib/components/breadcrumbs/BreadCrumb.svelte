@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import {
 		handleCrumbs,
 		type Crumbs,
 	} from '$lib/components/breadcrumbs/crumbs-by-role';
 	import { classes } from '$lib/utils/classes';
 	import { entitiesMap, getRoute, isEntity, PageType } from '@self/utils';
+
+	import { page } from '$app/stores';
 
 	export let crumbs: Crumbs;
 

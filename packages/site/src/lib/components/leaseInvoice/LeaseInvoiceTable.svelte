@@ -1,9 +1,8 @@
 <script lang="ts">
+	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
+
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
-	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
-	import { invalidateAll } from '$app/navigation';
-	import { page } from '$app/stores';
 	import Badge from '$lib/components/Badge.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
@@ -18,7 +17,11 @@
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import { toUTCFormat } from '@self/utils';
-	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
+
+	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
+
+	import { invalidateAll } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	export let data: PaginatedLeaseInvoiceDto;
 	export let showOptions = false;

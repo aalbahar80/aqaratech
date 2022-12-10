@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import type { ModalContent } from '$lib/components/toast/modal-content';
+
 	import { writable } from 'svelte/store';
 
 	// Example from: https://github.com/ivanhofer/sveltekit-typescript-showcase/blob/b334e865894ac9d7c3673168e0ee6d3f7f1806e3/src/01-props/09-svelte-component/Component.svelte#L26
@@ -19,15 +20,18 @@
 </script>
 
 <script lang="ts">
-	import Spinner from '$components/Spinner.svelte';
 	import {
 		Dialog,
 		DialogDescription,
 		DialogOverlay,
 		DialogTitle,
 	} from '@rgossiaux/svelte-headlessui';
-	import HeroiconsExclamationTriangle from '~icons/heroicons/exclamation-triangle';
+
+	import Spinner from '$components/Spinner.svelte';
+
 	import { fade } from 'svelte/transition';
+
+	import HeroiconsExclamationTriangle from '~icons/heroicons/exclamation-triangle';
 
 	let promptInput = '';
 	let isLoading = false;

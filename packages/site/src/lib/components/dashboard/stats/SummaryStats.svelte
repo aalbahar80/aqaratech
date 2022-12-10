@@ -1,11 +1,13 @@
 <script lang="ts">
-	import type { GroupByMonthDto } from '$api/openapi';
-	import { page } from '$app/stores';
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
 	import { kwdFormat, monthFromShort } from '$lib/utils/common';
 	import { getRoute, PageTypePortfolio } from '@self/utils';
+
+	import type { GroupByMonthDto } from '$api/openapi';
+
+	import { page } from '$app/stores';
 
 	interface Datapoint extends GroupByMonthDto {
 		change?: number;

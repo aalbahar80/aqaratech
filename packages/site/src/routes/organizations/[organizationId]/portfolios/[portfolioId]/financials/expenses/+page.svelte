@@ -1,9 +1,11 @@
 <script lang="ts">
 	import ExpenseTreemapCategory from '$lib/components/charts/treemap/ExpenseTreemapCategory.svelte';
 	import ExpenseTreemapProperty from '$lib/components/charts/treemap/ExpenseTreemapProperty.svelte';
-	import type { PageData } from './$types';
-	import BarChart from './BarChart.svelte';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
+
+	import BarChart from './BarChart.svelte';
+
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 

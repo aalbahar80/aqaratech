@@ -21,7 +21,6 @@ import {
 } from 'src/constants/pagination.constant';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 
-
 export const QueryParser = createParamDecorator(
 	(options: QueryOptionsDecoratorConfig | undefined, ctx: ExecutionContext) => {
 		const request = ctx.switchToHttp().getRequest<Request>();

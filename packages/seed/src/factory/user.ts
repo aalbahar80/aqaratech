@@ -7,7 +7,6 @@ import { createdAt, updatedAt } from '../utils/dates';
 
 import type { User } from '../utils/date-or-string';
 
-
 export const userFactory = Factory.Sync.makeFactory<User>({
 	id: Factory.each(() => randomUUID()),
 	createdAt: Factory.each(() => createdAt()),

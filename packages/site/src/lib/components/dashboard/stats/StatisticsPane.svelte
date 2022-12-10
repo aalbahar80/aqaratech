@@ -1,5 +1,6 @@
 <script lang="ts">
 	import clsx from 'clsx';
+
 	import HeroiconsArrowDown20Solid from '~icons/heroicons/arrow-down-20-solid';
 	import HeroiconsArrowUp20Solid from '~icons/heroicons/arrow-up-20-solid';
 

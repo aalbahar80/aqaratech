@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { revenuePie } from '$lib/components/charts/revenue-pie';
-	import { getColor } from '$lib/utils/colors';
 	import Chart from '$lib/components/charts/Chart.svelte';
+	import { revenuePie } from '$lib/components/charts/revenue-pie';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
+	import { getColor } from '$lib/utils/colors';
 
 	export let paid: number;
 	export let unpaid: number;
