@@ -21,13 +21,6 @@ import { AppController } from 'src/app.controller';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
 
-import configuration from './config/configuration';
-import { LogtailModule } from './logtail/logtail.module';
-import { PostmarkModule } from './postmark/postmark.module';
-import { PostmarkService } from './postmark/postmark.service';
-import { PrismaModule } from './prisma/prisma.module';
-import { S3Module } from './s3/s3.module';
-import { SearchModule } from './search/search.module';
 
 // resources
 import { RoleGuard } from 'src/casl/role.guard';
@@ -41,21 +34,28 @@ import { LoggingMiddleware } from 'src/middleware/logging.middleware';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
 import { TraceMiddleware } from 'src/sentry/trace.middleware';
-import { AggregateModule } from './aggregate/aggregate.module';
 
+import { AggregateModule } from './aggregate/aggregate.module';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
+import configuration from './config/configuration';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { FilesModule } from './files/files.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
 import { LeasesModule } from './leases/leases.module';
+import { LogtailModule } from './logtail/logtail.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { PayoutsModule } from './payouts/payouts.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
+import { PostmarkModule } from './postmark/postmark.module';
+import { PostmarkService } from './postmark/postmark.service';
+import { PrismaModule } from './prisma/prisma.module';
 import { PropertiesModule } from './properties/properties.module';
 import { RolesModule } from './roles/roles.module';
+import { S3Module } from './s3/s3.module';
+import { SearchModule } from './search/search.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
