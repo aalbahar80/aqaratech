@@ -25,6 +25,7 @@
 					options: {
 						label: 'Pay now',
 						disabled: true, // TODO payment
+						// eslint-disable-next-line @typescript-eslint/no-empty-function
 						onClick: () => {},
 					},
 				});

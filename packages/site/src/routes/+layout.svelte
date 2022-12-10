@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { navigating, page } from '$app/stores';
-
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
 	import { Toaster } from 'svelte-french-toast';
@@ -20,6 +18,7 @@
 	import '../styles/tailwind.css';
 	import type { LayoutData } from './$types';
 
+	import { navigating, page } from '$app/stores';
 	import { onMount } from 'svelte';
 
 	export let data: LayoutData;

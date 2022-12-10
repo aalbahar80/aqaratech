@@ -17,7 +17,10 @@ export const actions: Actions = {
 				const formData = new FormData();
 
 				for (const key in data) {
-					formData.append(key, data[key]);
+					const value: unknown = data[key];
+					if (value instanceof Blob || typeof value === 'string') {
+						formData.append(key, value);
+					}
 				}
 
 				const url = `${environment.PUBLIC_API_URL}/organizations/${event.params.organizationId}/files`;
