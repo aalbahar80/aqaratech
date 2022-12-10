@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { tippyHint } from '$lib/utils/tippy';
+	import { tippyHint } from '$lib/actions/tippy';
 
 	import 'tippy.js/dist/tippy.css';
 	import Fa6SolidCircleInfo from '~icons/fa6-solid/circle-info';
