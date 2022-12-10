@@ -43,7 +43,7 @@
 	/**
 	 * Bound to the text input's value to communicate to the user what has been selected.
 	 */
-	let inputValue = selection?.label.trim() || '';
+	let inputValue = selection?.label.trim() ?? '';
 
 	// SEARCH
 	let query = '';
@@ -131,7 +131,7 @@
 		} else if (event.key === `Tab`) {
 			// TODO can be deduped with 'enter' key logic
 			if (activeOption) {
-				select(activeOption);
+				await select(activeOption);
 			} else {
 				forceOpen = false;
 			}
@@ -140,7 +140,7 @@
 			event.preventDefault(); // prevent enter key from triggering form submission
 
 			if (activeOption && forceOpen) {
-				select(activeOption);
+				await select(activeOption);
 			} else if (forceOpen) {
 				forceOpen = false;
 			} else {
@@ -176,6 +176,7 @@
 				// default case: select next/previous in item list
 				setActiveOption(filtered[newActiveIdx]);
 			}
+			// eslint-disable-next-line svelte/@typescript-eslint/no-unnecessary-condition
 			if (autoScroll) {
 				// `await tick` is needed to properly scroll element into view
 				// when wrapping around start/end of option list.
@@ -208,11 +209,11 @@
 		on:click={() => {
 			forceOpen = true;
 		}}
-		on:input={(event) => {
+		on:input={async (event) => {
 			// expense categories use leading spaces to indicate hierarchy
 			query = event.currentTarget?.value.trim();
 			if (!query) {
-				clear();
+				await clear();
 			}
 			forceOpen = true;
 		}}
@@ -225,7 +226,7 @@
 			hidden={!selection}
 			tabindex="-1"
 			on:mousedown={() => {
-				clear();
+				void clear();
 			}}
 		>
 			<HeroiconsOutlineXCircle
@@ -256,6 +257,7 @@
 				<Hoverable let:hovering>
 					<!-- TODO classes can be simplified. It'd be preferrable to not use BOTH `classes()` utility AND `style` tag -->
 					<!-- Don't confuse `disabled` (entire component) with `item.disabled` (single option) -->
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<li
 						value={item}
 						class={classes(
@@ -273,7 +275,7 @@
 						aria-selected={selected}
 						aria-disabled={item.disabled}
 						on:click={() => {
-							select(item);
+							void select(item);
 						}}
 					>
 						<span
