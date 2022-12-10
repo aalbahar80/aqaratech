@@ -6,7 +6,6 @@ import { inferUrlRelation } from 'src/route-helpers/infer-url-relation';
 
 import type { Entity } from 'src/entity/entity-definition';
 
-
 type Input = [string, { entity: Entity; id: string }, string];
 
 const inputs: Input[] = [
