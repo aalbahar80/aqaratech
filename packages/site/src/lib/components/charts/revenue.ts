@@ -1,6 +1,8 @@
-import type { GroupByMonthDto } from '$api/openapi';
 import { Chart } from 'chart.js';
+
 import { currencyTooltip } from './utils/currency';
+
+import type { GroupByMonthDto } from '$api/openapi';
 
 type DataSets = Chart<'bar', GroupByMonthDto[]>['data']['datasets'];
 

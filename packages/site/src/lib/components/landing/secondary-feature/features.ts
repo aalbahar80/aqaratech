@@ -4,11 +4,12 @@ import screenshotInvoices from '../../../../assets/screenshots/invoices.png';
 import screenshotProfitLoss from '../../../../assets/screenshots/leases-3.png';
 
 // Icons
+import type { SvelteComponentTyped } from 'svelte';
+
 import HeroiconsBuildingOffice2 from '~icons/heroicons/building-office-2';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
 import MdiAccountTie from '~icons/mdi/account-tie';
 
-import type { SvelteComponentTyped } from 'svelte';
 
 export const secondaryFeatures = [
 	{

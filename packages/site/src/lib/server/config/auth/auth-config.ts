@@ -1,7 +1,8 @@
-import { env as privateEnv } from '$env/dynamic/private';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
 import { environment } from '$lib/environment';
 import { isProd } from '$lib/server/config/is-production';
+
+import { env as privateEnv } from '$env/dynamic/private';
 
 /**
  * Get the auth config for the current environment.

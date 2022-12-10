@@ -1,7 +1,10 @@
-import { FilterInitial } from '@self/utils';
+import { redirect } from '@sveltejs/kit';
+
 import { property } from '$lib/stores/filter/property';
 import { unit } from '$lib/stores/filter/unit';
-import { redirect } from '@sveltejs/kit';
+import { FilterInitial } from '@self/utils';
+
+
 import type { PageLoad } from './$types';
 
 // eslint-disable-next-line @typescript-eslint/require-await

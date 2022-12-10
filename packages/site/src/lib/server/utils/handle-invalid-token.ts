@@ -1,5 +1,6 @@
 import { LOGIN } from '$lib/constants/routes';
 import { Cookie } from '@self/utils';
+
 import type { Handle } from '@sveltejs/kit';
 
 type SKEvent = Parameters<Handle>[0]['event'];

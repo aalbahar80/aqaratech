@@ -1,5 +1,6 @@
-import { flatten } from '$lib/utils/flatten';
 import papaparse from 'papaparse';
+
+import { flatten } from '$lib/utils/flatten';
 
 // Use the following papaparse import until issue is closed:
 // `import papaparse from 'papaparse';`

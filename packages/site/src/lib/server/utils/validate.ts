@@ -1,7 +1,8 @@
+import { createLocalJWKSet, jwtVerify } from 'jose';
+
 import { authConfig } from '$lib/server/config/auth';
 import { logger } from '$lib/server/logger';
 import { Cookie } from '@self/utils';
-import { createLocalJWKSet, jwtVerify } from 'jose';
 
 type TokenType = Cookie.idToken | Cookie.accessToken;
 /**

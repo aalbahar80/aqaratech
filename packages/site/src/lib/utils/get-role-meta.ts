@@ -1,11 +1,12 @@
-import type { ValidatedRoleDto } from '$api/openapi';
-import type { UserMeta } from '$lib/models/types/auth.type';
 import {
 	entitiesMap,
 	getRoute,
 	PageType,
 	PageTypePortfolio,
 } from '@self/utils';
+
+import type { ValidatedRoleDto } from '$api/openapi';
+import type { UserMeta } from '$lib/models/types/auth.type';
 
 export const getRoleMeta = (role: ValidatedRoleDto): UserMeta => {
 	const organizationId = role.organizationId;

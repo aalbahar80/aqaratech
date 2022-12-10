@@ -1,6 +1,8 @@
-import { browser, building } from '$app/environment';
-import { env } from '$env/dynamic/public';
 import { z } from 'zod';
+
+import { browser, building } from '$app/environment';
+
+import { env } from '$env/dynamic/public';
 
 const envSchema = z.object({
 	PUBLIC_AQARATECH_ENV: z.enum([

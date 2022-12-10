@@ -1,11 +1,14 @@
+import * as R from 'remeda';
+
 import { createApi } from '$api';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { property } from '$lib/stores/filter/property';
 import { range } from '$lib/stores/filter/range';
 import { unit } from '$lib/stores/filter/unit';
-import { get } from 'svelte/store';
-import * as R from 'remeda';
+
 import type { LayoutLoad } from './$types';
+
+import { get } from 'svelte/store';
 
 export const load: LayoutLoad = async ({ fetch, params, depends }) => {
 	// Filter options

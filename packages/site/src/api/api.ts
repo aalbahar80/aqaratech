@@ -1,8 +1,8 @@
-import { environment } from '$aqenvironment';
 import * as SentryNode from '@sentry/node?server';
-import type { Breadcrumb } from '@sentry/svelte';
 import * as SentrySvelte from '@sentry/svelte?client';
-import type { LoadEvent } from '@sveltejs/kit';
+
+import { environment } from '$aqenvironment';
+
 import {
 	Configuration,
 	ExpenseCategoriesApi,
@@ -20,6 +20,10 @@ import {
 	UnitsApi,
 	UsersApi,
 } from './openapi';
+
+import type { Breadcrumb } from '@sentry/svelte';
+import type { LoadEvent } from '@sveltejs/kit';
+
 
 export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 	const headers: Record<string, string> = {

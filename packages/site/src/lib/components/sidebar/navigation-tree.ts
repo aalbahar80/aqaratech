@@ -1,4 +1,13 @@
 // Types
+import { LOGOUT } from '$lib/constants/routes';
+import {
+	entity,
+	getRoute,
+	PageTab,
+	PageType,
+	PageTypePortfolio,
+} from '@self/utils';
+
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
 
@@ -19,14 +28,6 @@ import HeroiconsUserGroup from '~icons/heroicons/user-group';
 // import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 
 // Links
-import { LOGOUT } from '$lib/constants/routes';
-import {
-	entity,
-	getRoute,
-	PageTab,
-	PageType,
-	PageTypePortfolio,
-} from '@self/utils';
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
 	const tree: NavigationItem[] = [

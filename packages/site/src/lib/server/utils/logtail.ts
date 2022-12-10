@@ -1,6 +1,7 @@
+import { Logtail } from '@logtail/node';
+
 import { environment } from '$aqenvironment';
 import { privateEnvironment } from '$lib/server/config/private-environment';
-import { Logtail } from '@logtail/node';
 import { addEnvLabel, liveEnvs } from '@self/utils';
 
 /**

@@ -1,5 +1,6 @@
-import { endOfMonthN, startOfMonthN, zodDateOnly } from '@self/utils';
 import { z } from 'zod';
+
+import { endOfMonthN, startOfMonthN, zodDateOnly } from '@self/utils';
 
 export class DateRange {
 	constructor(

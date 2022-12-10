@@ -1,9 +1,10 @@
+import { getLabel } from '@self/utils';
+
 import type {
 	InputFormField,
 	SelectFormField,
 } from '$lib/components/form/model/form-field.interface';
 import type { Option } from '$lib/models/interfaces/option.interface';
-import { getLabel } from '@self/utils';
 
 type WithOptions<Name extends string> = {
 	type: 'select';

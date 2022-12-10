@@ -1,5 +1,6 @@
 import { createApi } from '$api';
 import { MAX_PROPERTIES, MAX_UNITS } from '$lib/constants/misc';
+
 import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ fetch, params }) => {

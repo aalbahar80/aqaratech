@@ -24,14 +24,14 @@
 	$: hierarchyData = hierarchy(
 		[null, rollupData],
 		// childrenAccessorFn,
-		//@ts-ignore
+		//@ts-expect-error
 		([_key, value]) => {
 			// value.size checks if value is a Map, which is false for `non-leaf` rolledUp nodes.
 			const result = value?.size && Array.from(value);
 			return result;
 		},
 	)
-		//@ts-ignore
+		//@ts-expect-error
 		.sum(([_key, value]) => value)
 		.sort((a, b) => (b.value || 0) - (a.value || 0));
 

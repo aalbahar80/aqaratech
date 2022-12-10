@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/node';
+
 import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { MAX_AGE } from '$lib/constants/misc';
@@ -19,7 +21,7 @@ import {
 	formatResponseLog,
 	isHealthCheck,
 } from '@self/utils';
-import * as Sentry from '@sentry/node';
+
 import '@sentry/tracing';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?

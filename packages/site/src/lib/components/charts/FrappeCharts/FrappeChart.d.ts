@@ -13,7 +13,7 @@ declare module 'frappe-charts' {
 	}
 }
 
-type ChartOptions = {
+interface ChartOptions {
 	data: Data;
 	title: string;
 	type: ChartType;
@@ -29,7 +29,7 @@ type ChartOptions = {
 	valuesOverPoints: boolean;
 	maxSlices: number;
 	countLabel: string;
-};
+}
 
 type ChartType =
 	| 'line'
@@ -39,34 +39,34 @@ type ChartType =
 	| 'percentage'
 	| 'heatmap';
 
-type AxisOptions = {
+interface AxisOptions {
 	xAxisMode?: AxisMode;
 	yAxisMode?: AxisMode;
 	xIsSeries?: boolean;
-};
+}
 
 type AxisMode = 'span' | 'tick';
 
-type TooltipOptions = {
+interface TooltipOptions {
 	formatTooltipX?: (d: string) => string;
 	formatTooltipY?: (d: number) => string;
-};
+}
 
-type BarOptions = {
+interface BarOptions {
 	spaceRatio?: number;
 	stacked?: boolean;
-};
+}
 
-type LineOptions = {
+interface LineOptions {
 	heatLine?: boolean;
 	hideLine?: boolean;
 	dotSize?: number;
 	hideDots?: boolean;
 	regionFill?: boolean;
 	spline?: boolean;
-};
+}
 
-type Data = {
+interface Data {
 	labels?: string[];
 	datasets?: Dataset[];
 	dataPoints?: HeatmapDatapoints;
@@ -75,11 +75,11 @@ type Data = {
 
 	yMarkers?: { label: string; value: number }[];
 	yRegions?: { label: string; start: number; end: number }[];
-};
+}
 
-type Dataset = {
+interface Dataset {
 	name?: string;
 	values: number[];
-};
+}
 
 type HeatmapDatapoints = Record<number, number>;

@@ -1,5 +1,6 @@
-import type { LeaseInvoiceDto } from '$api/openapi';
 import paidStamp from '../../../assets/paid-stamp.png';
+
+import type { LeaseInvoiceDto } from '$api/openapi';
 import type jsPDFInvoiceTemplate from '../../pdf/jspdf-invoice-template';
 
 /**

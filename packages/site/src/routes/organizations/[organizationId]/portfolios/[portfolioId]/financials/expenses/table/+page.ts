@@ -4,8 +4,10 @@ import { property } from '$lib/stores/filter/property';
 import { range } from '$lib/stores/filter/range';
 import { unit } from '$lib/stores/filter/unit';
 import { parseParams } from '$lib/utils/parse-params';
-import { get } from 'svelte/store';
+
 import type { PageLoad } from './$types';
+
+import { get } from 'svelte/store';
 
 export const load: PageLoad = async ({
 	params,

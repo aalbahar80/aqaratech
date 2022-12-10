@@ -4,11 +4,11 @@
 	import { createEventDispatcher } from 'svelte';
 
 	type T = $$Generic;
-	type Option = {
+	interface Option {
 		label: string;
 		value: T;
 		disabled?: boolean;
-	};
+	}
 	export let id: string | undefined = undefined;
 	export let title = '';
 	export let options: Option[];

@@ -1,8 +1,10 @@
+import { LogtailTransport } from '@logtail/winston';
+import { createLogger, format, transports } from 'winston';
+
 import { environment } from '$aqenvironment';
 import { logtail } from '$lib/server/utils/logtail';
-import { LogtailTransport } from '@logtail/winston';
 import { httpLogFormat, ignoreHttp, liveEnvs, onlyHttp } from '@self/utils';
-import { createLogger, format, transports } from 'winston';
+
 
 /**
  * Transport for HTTP logs

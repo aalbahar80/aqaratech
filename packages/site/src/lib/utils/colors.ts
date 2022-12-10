@@ -1,4 +1,4 @@
-export const palette: { [key: string]: string[] } = {
+export const palette: Record<string, string[]> = {
 	2: ['#003f5c', '#f95d6a'],
 	3: ['#003f5c', '#bc5090', '#ffa600'],
 	4: ['#003f5c', '#7a5195', '#ef5675', '#ffa600'],
