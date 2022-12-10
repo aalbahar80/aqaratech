@@ -7,7 +7,6 @@ import { writable } from '$lib/utils/sandboxed';
 
 import { invalidate } from '$app/navigation';
 
-
 export function createRange() {
 	const { subscribe, set } = writable<DateRange>(
 		DateRange.createFromMonths(defaultRange),

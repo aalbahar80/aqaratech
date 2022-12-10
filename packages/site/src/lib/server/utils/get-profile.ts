@@ -7,7 +7,6 @@ import { logger } from '$lib/server/logger';
 import type { ValidatedUserDto } from '$api/openapi';
 import type { RequestEvent } from '@sveltejs/kit';
 
-
 export const getProfile = async (event: RequestEvent) => {
 	// Sentry
 	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();

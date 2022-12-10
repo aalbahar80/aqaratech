@@ -10,7 +10,6 @@ import HeroiconsBuildingOffice2 from '~icons/heroicons/building-office-2';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
 import MdiAccountTie from '~icons/mdi/account-tie';
 
-
 export const secondaryFeatures = [
 	{
 		name: 'For property managers',

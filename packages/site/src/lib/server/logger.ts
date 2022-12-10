@@ -5,7 +5,6 @@ import { environment } from '$aqenvironment';
 import { logtail } from '$lib/server/utils/logtail';
 import { httpLogFormat, ignoreHttp, liveEnvs, onlyHttp } from '@self/utils';
 
-
 /**
  * Transport for HTTP logs
  */

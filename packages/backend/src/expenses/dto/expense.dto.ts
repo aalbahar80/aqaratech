@@ -27,7 +27,6 @@ import { IsID } from 'src/decorators/field.decorators';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { Exactly } from 'src/types/exactly.type';
 
-
 class ExpenseRequiredDto {
 	@IsID()
 	organizationId: string;

@@ -6,8 +6,6 @@ import { getRoute, PageType } from '@self/utils';
 import type { BreadcrumbsDto } from '$api/openapi';
 import type { Entity } from '@self/utils';
 
-
-
 export const locationColumnDef = <T extends Breadcrumbs>(
 	columnHelper: ColumnHelper<T>,
 ) =>

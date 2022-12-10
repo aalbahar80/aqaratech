@@ -24,7 +24,6 @@ import {
 import type { Breadcrumb } from '@sentry/svelte';
 import type { LoadEvent } from '@sveltejs/kit';
 
-
 export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 	const headers: Record<string, string> = {
 		// origin: PUBLIC_SITE_URL,
