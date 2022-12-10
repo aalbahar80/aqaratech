@@ -1,9 +1,7 @@
 <script lang="ts">
-	import type { SvelteComponentTyped } from 'svelte';
+	import type { Icon } from '$lib/models/types/icon.type';
 
-	export let icon:
-		| typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>
-		| undefined = undefined;
+	export let icon: Icon | undefined = undefined;
 </script>
 
 <div

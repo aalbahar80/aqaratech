@@ -1,10 +1,9 @@
-import type { SvelteComponentTyped } from 'svelte';
+import type { Icon } from '$lib/models/types/icon.type';
 
 export interface NavigationItem {
 	name: string;
 	href: string;
-	// TODO: change to icon type
-	icon?: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
+	icon?: Icon;
 	children?: {
 		name: string;
 		href: string;

@@ -8,13 +8,10 @@
 	import { startCase } from '@self/utils';
 
 	import type { HitDto } from '$api/openapi';
-
-	import type { SvelteComponentTyped } from 'svelte';
+	import type { Icon } from '$lib/models/types/icon.type';
 
 	export let item: HitDto;
-	export let icon: typeof SvelteComponentTyped<
-		svelte.JSX.IntrinsicElements['svg']
-	>;
+	export let icon: Icon;
 
 	const hiddenFields = ['title', 'id', 'organizationId'];
 

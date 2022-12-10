@@ -1,14 +1,12 @@
 <script lang="ts">
 	import Spinner from '$components/Spinner.svelte';
 
-	import type { SvelteComponentTyped } from 'svelte';
+	import type { Icon } from '$lib/models/types/icon.type';
 
 	export let loading = false;
 	export let disabled = false;
 	export let text = '';
-	export let icon:
-		| typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>
-		| undefined = undefined;
+	export let icon: Icon | undefined = undefined;
 	export let as: 'button' | 'a' | 'div' = 'button';
 	export let href = '';
 </script>

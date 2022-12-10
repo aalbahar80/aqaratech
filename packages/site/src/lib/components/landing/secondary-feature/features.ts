@@ -3,8 +3,7 @@ import screenshotDashboard from '../../../../assets/screenshots/dashboard-6.png'
 import screenshotInvoices from '../../../../assets/screenshots/invoices.png';
 import screenshotProfitLoss from '../../../../assets/screenshots/leases-3.png';
 
-// Icons
-import type { SvelteComponentTyped } from 'svelte';
+import type { Icon } from '$lib/models/types/icon.type';
 
 import HeroiconsBuildingOffice2 from '~icons/heroicons/building-office-2';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
@@ -43,5 +42,5 @@ export interface SecondaryFeature {
 	summary: string;
 	description: string;
 	image: unknown;
-	icon: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
+	icon: Icon;
 }

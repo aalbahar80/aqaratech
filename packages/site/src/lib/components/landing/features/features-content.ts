@@ -5,9 +5,8 @@ import UndrawOnlinePayments from '../../../../assets/illustrations/undraw_online
 import UndrawSecureFiles from '../../../../assets/illustrations/undraw_secure_files.svg';
 import UndrawVisualData from '../../../../assets/illustrations/undraw_visual_data.svg';
 
-import type { SvelteComponentTyped } from 'svelte';
+import type { Icon } from '$lib/models/types/icon.type';
 
-// Icons
 import HeroiconsOutlineChartBar from '~icons/heroicons-outline/chart-bar';
 import HeroiconsOutlineRectangleGroup from '~icons/heroicons-outline/rectangle-group';
 import HeroiconsAdjustmentsVertical from '~icons/heroicons/adjustments-vertical';
@@ -29,7 +28,7 @@ import TeenyiconsContractOutline from '~icons/teenyicons/contract-outline';
 
 export interface FeatureBullet {
 	text: string;
-	icon: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
+	icon: Icon;
 }
 
 export interface IFeature {

@@ -11,10 +11,10 @@
 
 	import { createApi } from '$api';
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
-	import { addErrorToast } from '$lib/stores/toast';
 	import { entitiesMap, getRoute, isEntity, PageType } from '@self/utils';
 
 	import type { SearchDto } from '$api/openapi';
+	import type { Icon } from '$lib/models/types/icon.type';
 
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -51,7 +51,7 @@
 		(groupHits) => groupHits.estimatedTotalHits > 0,
 	);
 
-	const icons: Record<string, any> = {
+	const icons: Record<string, Icon> = {
 		tenant: HeroiconsOutlineUser,
 		portfolio: HeroiconsOutlineFolder,
 		property: HeroiconsOutlineOfficeBuilding,
@@ -150,7 +150,11 @@
 											<ul class="mt-2 text-sm text-gray-800">
 												{#each group.hits as item (item.id)}
 													<div animate:flip={{ duration: 300 }}>
-														<SearchItem {item} icon={icons[entityTitle]} />
+														<SearchItem
+															{item}
+															icon={icons[entityTitle] ??
+																HeroiconsOutlineFolder}
+														/>
 													</div>
 												{/each}
 											</ul>

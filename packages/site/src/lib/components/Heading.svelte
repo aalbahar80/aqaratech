@@ -14,14 +14,15 @@
 	import { classes } from '$lib/utils/classes';
 	import { getRoute, PageType, type Entity } from '@self/utils';
 
+	import type { Icon } from '$lib/models/types/icon.type';
+
 	import { page } from '$app/stores';
-	import type { SvelteComponentTyped } from 'svelte';
 
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 
 	interface IconTooltip {
 		label: string | number | null | undefined;
-		icon: typeof SvelteComponentTyped<svelte.JSX.IntrinsicElements['svg']>;
+		icon: Icon;
 		tooltip: string;
 	}
 

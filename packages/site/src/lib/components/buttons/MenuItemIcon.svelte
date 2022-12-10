@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { classes } from '$lib/utils/classes';
 
-	import type { SvelteComponentTyped } from 'svelte';
+	import type { Icon } from '$lib/models/types/icon.type';
 
-	export let icon: typeof SvelteComponentTyped<
-		svelte.JSX.IntrinsicElements['svg']
-	>;
+	export let icon: Icon;
 	export let disabled = false;
 </script>
 
