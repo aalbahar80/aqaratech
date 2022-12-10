@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { shortcut } from '$lib/actions/shortcut';
 	import SearchPalette from '$lib/components/search/SearchPalette.svelte';
-	import { shortcut } from '$lib/utils/shortcut';
 
 	let open = false;
 </script>
