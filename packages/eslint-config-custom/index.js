@@ -107,7 +107,7 @@ module.exports = {
 					order: 'asc',
 					caseInsensitive: true, // in import paths
 				},
-				// pathGroupsExcludedImportTypes: ['builtin'],
+				pathGroupsExcludedImportTypes: ['svelte'], // allows pathGroups to work with svelte imports
 				// distinctGroup: true,
 				groups: [
 					'builtin',
@@ -119,43 +119,25 @@ module.exports = {
 					'object',
 					'type',
 				],
-				// pathGroups: [
-				// 	{
-				// 		pattern: '@/**',
-				// 		group: 'internal',
-				// 		position: 'after',
-				// 	},
-				// 	{
-				// 		pattern: 'svelte/**',
-				// 		group: 'internal',
-				// 		position: 'after',
-				// 	},
-				// 	{
-				// 		pattern: 'svelte',
-				// 		group: 'internal',
-				// 		position: 'after',
-				// 	},
-				// 	{
-				// 		pattern: 'src/**',
-				// 		group: 'internal',
-				// 		position: 'after',
-				// 	},
-				// 	{
-				// 		pattern: 'src',
-				// 		group: 'internal',
-				// 		position: 'after',
-				// 	},
-				// 	{
-				// 		pattern: 'lib/**',
-				// 		group: 'internal',
-				// 		position: 'after',
-				// 	},
-				// 	{
-				// 		pattern: 'lib',
-				// 		group: 'internal',
-				// 		position: 'after',
-				// 	},
-				// ],
+				pathGroups: [
+					// cheatsheet: https://globster.xyz/
+					{
+						// matches svelte, svelte/transition, etc
+						pattern: '+(svelte|\\$app){,*/**}',
+						group: 'type',
+						position: 'after',
+					},
+					{
+						pattern: 'src',
+						group: 'internal',
+						position: 'before',
+					},
+					{
+						pattern: '$lib',
+						group: 'internal',
+						position: 'before',
+					},
+				],
 			},
 		],
 		// 'sort-imports': ['error'],
