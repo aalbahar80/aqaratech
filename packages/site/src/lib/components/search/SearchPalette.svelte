@@ -11,8 +11,8 @@
 
 	import { createApi } from '$api';
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
-	import { entitiesMap, isEntity } from '@self/utils';
-	import { getRoute, PageType } from '@self/utils';
+	import { addErrorToast } from '$lib/stores/toast';
+	import { entitiesMap, getRoute, isEntity, PageType } from '@self/utils';
 
 	import type { SearchDto } from '$api/openapi';
 
@@ -26,7 +26,6 @@
 	import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
 	import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
 	import HeroiconsMagnifyingGlass from '~icons/heroicons/magnifying-glass';
-	// TODO optimize use lodash debounce?
 
 	let groups: SearchDto[] = [];
 
@@ -45,7 +44,9 @@
 		}
 	}, 300);
 
-	$: search(query);
+	$: {
+		void search(query);
+	}
 	$: hasHits = Object.values(groups).some(
 		(groupHits) => groupHits.estimatedTotalHits > 0,
 	);
