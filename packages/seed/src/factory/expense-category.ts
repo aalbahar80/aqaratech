@@ -1,7 +1,9 @@
-import { faker } from '@faker-js/faker';
-import type { ExpenseCategory } from '@self/utils';
-import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
+
+import { faker } from '@faker-js/faker';
+import * as Factory from 'factory.ts';
+
+import type { ExpenseCategory } from '@self/utils';
 
 export const expenseCategoryFactory = Factory.Sync.makeFactory<ExpenseCategory>(
 	{

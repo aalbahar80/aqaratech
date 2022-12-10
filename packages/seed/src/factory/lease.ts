@@ -1,9 +1,13 @@
+import { randomUUID } from 'node:crypto';
+
 import { faker } from '@faker-js/faker';
 import * as Factory from 'factory.ts';
-import { randomUUID } from 'node:crypto';
-import type { Lease } from '../utils/date-or-string';
+
+
 import { createdAt, updatedAt } from '../utils/dates';
 import { fakeDate } from '../utils/fake-date';
+
+import type { Lease } from '../utils/date-or-string';
 
 const base = Factory.Sync.makeFactoryWithRequired<
 	Lease,

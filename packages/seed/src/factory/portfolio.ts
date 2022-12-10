@@ -1,9 +1,13 @@
+import { randomUUID } from 'node:crypto';
+
 import { faker } from '@faker-js/faker';
 import * as Factory from 'factory.ts';
-import { randomUUID } from 'node:crypto';
-import type { Portfolio } from '../utils/date-or-string';
+
+
 import { createdAt, updatedAt } from '../utils/dates';
 import { fakeDate } from '../utils/fake-date';
+
+import type { Portfolio } from '../utils/date-or-string';
 
 export const portfolioFactory = Factory.Sync.makeFactoryWithRequired<
 	Portfolio,

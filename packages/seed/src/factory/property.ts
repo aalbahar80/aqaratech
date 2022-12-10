@@ -1,9 +1,12 @@
+import { randomUUID } from 'node:crypto';
+
 import { faker } from '@faker-js/faker';
 import * as Factory from 'factory.ts';
-import { randomUUID } from 'node:crypto';
+
 import { areas } from '../constants';
-import type { Property } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
+
+import type { Property } from '../utils/date-or-string';
 
 export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 	Property,

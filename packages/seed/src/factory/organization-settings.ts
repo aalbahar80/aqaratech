@@ -1,8 +1,11 @@
-import type { OrganizationSettings } from '@prisma/client';
-import * as Factory from 'factory.ts';
 import { randomUUID } from 'node:crypto';
+
+import * as Factory from 'factory.ts';
+
 import { generateExpenseCategoryTree } from '../constants';
 import { createdAt, updatedAt } from '../utils/dates';
+
+import type { OrganizationSettings } from '@prisma/client';
 
 export const organizationSettingsFactory = Factory.Sync.makeFactoryWithRequired<
 	OrganizationSettings,

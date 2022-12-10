@@ -1,9 +1,10 @@
-import type { Seed } from './create-seed';
 import {
 	changePermissionsToUndefined,
 	convertToDatetimeArray,
 	removeEmail,
 } from './sanitize';
+
+import type { Seed } from './create-seed';
 
 export const preprocessSeed = (seed: Seed) => {
 	const roles = changePermissionsToUndefined(removeEmail(seed.roles));

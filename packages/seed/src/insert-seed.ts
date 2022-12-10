@@ -1,5 +1,6 @@
-import type { PreprocessedSeed } from './preprocess-seed';
 import { prisma } from './prisma';
+
+import type { PreprocessedSeed } from './preprocess-seed';
 
 export const insertSeed = async (fake: PreprocessedSeed) => {
 	logCounts(fake);

@@ -1,9 +1,12 @@
+import { randomUUID } from 'node:crypto';
+
 import { faker } from '@faker-js/faker';
 import * as Factory from 'factory.ts';
-import { randomUUID } from 'node:crypto';
+
 import { unitTypeOptions } from '../constants';
-import type { Unit } from '../utils/date-or-string';
 import { createdAt, updatedAt } from '../utils/dates';
+
+import type { Unit } from '../utils/date-or-string';
 
 const unitTypeValues = unitTypeOptions
 	.filter((u) => u.value)

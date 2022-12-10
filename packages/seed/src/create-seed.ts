@@ -1,11 +1,11 @@
 /* eslint-disable no-dupe-else-if */
 import { inspect } from 'node:util';
+
 import {
 	testOrgEmail,
 	testPortfolioEmail,
 	testTenantEmail,
 } from './constant/ids.constant';
-import type { Tree } from './constants';
 import { expenseFactory } from './factory/expense';
 import { leaseFactory } from './factory/lease';
 import { leaseInvoiceFactory } from './factory/lease-invoice';
@@ -20,6 +20,8 @@ import { unitFactory } from './factory/unit';
 import { userFactory } from './factory/user';
 import { isDefined } from './utils/is-defined';
 import { findOrFail, random, randomCategory } from './utils/random';
+
+import type { Tree } from './constants';
 
 // TODO use satisfies SeedCount
 const defaultSeedCount = {
