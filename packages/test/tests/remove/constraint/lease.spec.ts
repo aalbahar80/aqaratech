@@ -33,7 +33,7 @@ test('delete lease w/invoice', async ({
 	await idPage.delete();
 
 	const text =
-		'Unable to delete lease. Please delete any leaseinvoice associated with this lease before attempting to delete the lease.';
+		'Unable to delete lease. Please delete any invoice associated with this lease before attempting to delete the lease.';
 
 	const toast = page.getByText(text);
 
