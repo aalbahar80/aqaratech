@@ -19,14 +19,14 @@ export class TimeoutInterceptor implements NestInterceptor {
 		private readonly logger: LoggerService,
 	) {}
 
-	intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+	intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
 		const controller = context.getClass().name;
 		const handler = context.getHandler().name;
 		const url = context.switchToHttp().getRequest<Request>().url;
 
 		return next.handle().pipe(
 			timeout(45000),
-			catchError((err) => {
+			catchError((err: unknown) => {
 				if (err instanceof TimeoutError) {
 					const details = {
 						level: 'warn',

@@ -2,7 +2,6 @@ import { ForbiddenError, subject } from '@casl/ability';
 import {
 	Inject,
 	Injectable,
-	Logger,
 	LoggerService,
 	OnModuleInit,
 } from '@nestjs/common';
@@ -155,7 +154,7 @@ export class SearchService implements OnModuleInit {
 		const index = this.client.index(indexName);
 
 		const documents = items.map((item) => {
-			const instance = plainToClass(classConstructor, item);
+			const instance: unknown = plainToClass(classConstructor, item);
 			const plain = instanceToPlain(instance); // to expose custom getters
 			return plain;
 		});

@@ -36,7 +36,7 @@ export class ErrorsInterceptor implements NestInterceptor {
 		private readonly logger: LoggerService,
 	) {}
 
-	intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+	intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
 		const request = context.switchToHttp().getRequest<Request>();
 		const user = request.user as UserDto;
 
@@ -51,7 +51,11 @@ export class ErrorsInterceptor implements NestInterceptor {
 					// TODO add err.message where appropriate
 					if (err instanceof ForbiddenError) {
 						this.logger.debug?.(
-							`User with id: ${user.id} email: ${user.email} - is forbidden to - ${err.action} - ${err.subjectType} - ${err.subject}`,
+							`User with id: ${user.id} email: ${
+								user.email
+							} - is forbidden to - ${err.action as string} - ${
+								err.subjectType
+							} - ${err.subject as string}`,
 						);
 
 						return new ForbiddenException();

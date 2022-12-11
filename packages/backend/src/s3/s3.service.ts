@@ -53,15 +53,31 @@ export class S3Service {
 				if (
 					typeof args.request === 'object' &&
 					args.request &&
-					'headers' in args.request
+					'headers' in args.request &&
+					'method' in args.request &&
+					'query' in args.request
 				) {
-					const request = args.request as any;
-					const isPutObject =
-						request.method === 'PUT' && request.query['x-id'] === 'PutObject';
-					if (isPutObject) {
+					const request = args.request;
+					let isPutObject = false;
+					if (
+						request.method === 'PUT' &&
+						request.query &&
+						typeof request.query === 'object' &&
+						'x-id' in request.query &&
+						request.query['x-id'] === 'PutObject'
+					) {
+						isPutObject = true;
+					}
+
+					if (
+						isPutObject &&
+						request.headers &&
+						typeof request.headers === 'object'
+					) {
+						const headers = request.headers as Record<string, unknown>;
 						// throws SignatureDoesNotMatch error if trying to get presigned URL.
 						// So only add this header if we are putting an object.
-						request.headers['cf-create-bucket-if-missing'] = 'true';
+						headers['cf-create-bucket-if-missing'] = 'true';
 					}
 				}
 				return next(args);
@@ -74,7 +90,7 @@ export class S3Service {
 	private readonly logger = new Logger(S3Service.name);
 
 	async putObject(params: PutObjectCommandInput) {
-		this.logger.debug(`Putting object in bucket ${params.Bucket}`);
+		this.logger.debug(`Putting object in bucket ${params.Bucket ?? ''}`);
 		const uploaded = await this._client.send(
 			new PutObjectCommand({
 				...params,
@@ -85,7 +101,7 @@ export class S3Service {
 	}
 
 	async listObjects(options: ListObjectsV2CommandInput) {
-		this.logger.debug(`Listing objects in bucket ${options.Bucket}`);
+		this.logger.debug(`Listing objects in bucket ${options.Bucket ?? ''}`);
 		try {
 			const objects = await this._client.send(
 				new ListObjectsV2Command(options),
@@ -93,7 +109,7 @@ export class S3Service {
 			return objects;
 		} catch (error) {
 			if (error instanceof NoSuchBucket) {
-				this.logger.debug(`No bucket found: ${options.Bucket}`);
+				this.logger.debug(`No bucket found: ${options.Bucket ?? ''}`);
 				return undefined;
 			} else {
 				this.logger.error(error);
@@ -103,14 +119,14 @@ export class S3Service {
 	}
 
 	async getObject(options: GetObjectCommandInput) {
-		this.logger.debug(`Getting object in bucket ${options.Bucket}`);
+		this.logger.debug(`Getting object in bucket ${options.Bucket ?? ''}`);
 		const command = new GetObjectCommand(options);
 
 		const url = await getSignedUrl(this._client, command, {
 			expiresIn: S3_TTL,
 		});
 		this.logger.debug(
-			`Returning signed url for Key: ${options.Key}: - URL: ${url}`,
+			`Returning signed url for Key: ${options.Key ?? ''}: - URL: ${url}`,
 		);
 		return url;
 	}
