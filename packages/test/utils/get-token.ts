@@ -26,7 +26,7 @@ export const getToken = async (
 
 	// check domain
 	if (!domain || token.domain !== new URL(domain).hostname) {
-		throw new Error(`Domain mismatch: ${token.domain} !== ${domain || ''}`);
+		throw new Error(`Domain mismatch: ${token.domain} !== ${domain ?? ''}`);
 	}
 
 	return token.value;

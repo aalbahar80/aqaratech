@@ -13,10 +13,6 @@ const payouts = sample.payouts;
 
 // TODO: other tests that add data will cause this test to fail
 test.skip(`balance`, async ({ request }) => {
-	if (!portfolio) {
-		throw new Error(`No portfolio found`);
-	}
-
 	const res = await request.get(`/portfolios/${portfolio.id}/balance`);
 
 	await expect(res).toBeOK();

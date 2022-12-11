@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-base-to-string */
 import { expect } from '@playwright/test';
 import * as R from 'remeda';
 
@@ -95,6 +96,7 @@ for (const [index, labelEn] of invalidLabelEn.entries()) {
 		expect(await res.json()).toHaveProperty('fieldErrors.labelEn');
 	});
 
+	// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 	test(`cannot update expenseCategory with invalid labelEn ${index}: ${labelEn}`, async ({
 		request,
 		org,
@@ -143,6 +145,7 @@ for (const [index, labelAr] of invalidLabelAr.entries()) {
 		expect(await res.json()).toHaveProperty('fieldErrors.labelAr');
 	});
 
+	// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 	test(`cannot update expenseCategory with invalid labelAr ${index}: ${labelAr}`, async ({
 		request,
 		org,
