@@ -48,7 +48,7 @@ export class RemoveModel {
 			throw new Error('Invalid number of items');
 		}
 
-		await this.page.goto(this.url, { waitUntil: 'load' });
+		await this.page.goto(this.url);
 
 		const row = this.page.getByTestId(this.items[0].id);
 		const view = row.getByRole('link', { name: 'View' });
