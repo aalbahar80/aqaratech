@@ -14,7 +14,7 @@ test('delete portfolio w/property', async ({
 	page,
 	org,
 	portfolio,
-	properties,
+	properties: _properties,
 }) => {
 	const url = getRoute({
 		entity: 'portfolio',
