@@ -28,6 +28,21 @@ export class RemoveModel {
 		this.url = url;
 	}
 
+	async delete() {
+		const menu = this.page.getByRole('button', { name: 'Open options' });
+		await menu.click();
+
+		const remove = this.page.getByRole('button', { name: 'Delete' });
+		await remove.click();
+
+		const modal = this.page.getByTestId('modal');
+		const confirm = modal.getByRole('button', { name: 'Delete' });
+		await confirm.click();
+
+		// check modal is closed
+		await expect(modal).not.toBeVisible();
+	}
+
 	async deleteAndVerify() {
 		if (!assertCount(this.items, 3)) {
 			throw new Error('Invalid number of items');
@@ -41,20 +56,9 @@ export class RemoveModel {
 
 		await this.page.waitForNavigation(); // Otherwise opening dropdown is flaky.
 
-		const menu = this.page.getByRole('button', { name: 'Open options' });
-		await menu.click();
-
-		const remove = this.page.getByRole('button', { name: 'Delete' });
-		await remove.click();
-
-		const modal = this.page.getByTestId('modal');
-		const confirm = modal.getByRole('button', { name: 'Delete' });
-		await confirm.click();
+		await this.delete();
 
 		await expect(this.page).toHaveURL(this.url);
-
-		// check modal is closed
-		await expect(modal).not.toBeVisible();
 
 		// check other rows are still there
 		await expect(this.page.getByTestId(this.items[1].id)).toBeVisible();
