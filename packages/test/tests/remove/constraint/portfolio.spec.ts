@@ -4,6 +4,7 @@ import * as R from 'remeda';
 import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../../api/api-fixtures';
+import { IdPage } from '../../models/id-page';
 
 test.use({
 	propertiesParams: R.times(1, () => ({})),
@@ -26,15 +27,8 @@ test('delete portfolio w/property', async ({
 
 	await page.goto(url);
 
-	const menu = page.getByRole('button', { name: 'Open options' });
-	await menu.click();
-
-	const remove = page.getByRole('button', { name: 'Delete' });
-	await remove.click();
-
-	const modal = page.getByTestId('modal');
-	const confirm = modal.getByRole('button', { name: 'Delete' });
-	await confirm.click();
+	const idPage = new IdPage({ page });
+	await idPage.delete();
 
 	const text =
 		'Unable to delete portfolio. Please delete any property associated with this portfolio before attempting to delete the portfolio.';
