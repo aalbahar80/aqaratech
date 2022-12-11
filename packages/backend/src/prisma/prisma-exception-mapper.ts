@@ -7,7 +7,8 @@ import {
 	NotFoundException,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Console } from 'node:console';
+
+import { getErrorMessage } from './get-error-message';
 
 // TODO: review error messages
 export const mapPrismaException = (
@@ -69,7 +70,7 @@ export const mapPrismaException = (
 		 */
 		const prismaMessage = exception.meta?.field_name; // Example: "Property_portfolioId_fkey (index)"
 		if (typeof prismaMessage === 'string') {
-			responseError = new BadRequestException(messageGenerator(prismaMessage));
+			responseError = new BadRequestException(getErrorMessage(prismaMessage));
 		} else {
 			responseError = new BadRequestException();
 		}
@@ -82,20 +83,4 @@ export const mapPrismaException = (
 	}
 
 	return responseError;
-};
-
-const messageGenerator = (rawFieldName: string) => {
-	// Example rawFieldName: "Property_portfolioId_fkey (index)"
-	// Example message: "Unable to delete portfolio. Please delete any property associated with this portfolio before attempting to delete the portfolio."
-
-	const main = rawFieldName.split('_')[1].replace('Id', '').toLowerCase();
-
-	let foreign = rawFieldName.split('_')[0];
-	if (foreign === 'LeaseInvoice') {
-		foreign = 'invoice';
-	} else {
-		foreign = foreign.toLowerCase();
-	}
-
-	return `Unable to delete ${main}. Please delete any ${foreign} associated with this ${main} before attempting to delete the ${main}.`;
 };
