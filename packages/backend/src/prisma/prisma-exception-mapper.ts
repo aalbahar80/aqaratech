@@ -13,6 +13,7 @@ import { getErrorMessage } from './get-error-message';
 // TODO: review error messages
 export const mapPrismaException = (
 	exception: Prisma.PrismaClientKnownRequestError | Prisma.NotFoundError,
+	method: string,
 ): HttpException => {
 	let responseError: HttpException;
 
@@ -69,10 +70,12 @@ export const mapPrismaException = (
 		 *
 		 */
 		const prismaMessage = exception.meta?.field_name; // Example: "Property_portfolioId_fkey (index)"
-		if (typeof prismaMessage === 'string') {
+
+		if (typeof prismaMessage === 'string' && method === 'DELETE') {
+			// When *deleting* a record that violates a FK constraint, we want to return a friendly error message.
 			responseError = new BadRequestException(getErrorMessage(prismaMessage));
 		} else {
-			responseError = new BadRequestException();
+			responseError = new NotFoundException();
 		}
 	} else {
 		// TODO return error message?

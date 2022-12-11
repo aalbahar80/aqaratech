@@ -59,7 +59,7 @@ export class ErrorsInterceptor implements NestInterceptor {
 						err instanceof Prisma.NotFoundError ||
 						err instanceof Prisma.PrismaClientKnownRequestError
 					) {
-						return mapPrismaException(err);
+						return mapPrismaException(err, request.method);
 					} else {
 						this.logger.verbose?.('Unknown error. Returning 500');
 						return new InternalServerErrorException();
