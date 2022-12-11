@@ -11,5 +11,7 @@ export const getErrorMessage = (rawFieldName: string) => {
 		foreign = foreign.toLowerCase();
 	}
 
-	return `Unable to delete ${main}. Please delete any ${foreign} associated with this ${main} before attempting to delete the ${main}.`;
+	const result = `Unable to delete ${main}. Please delete any ${foreign} associated with this ${main} before attempting to delete the ${main}.`;
+
+	return result;
 };
