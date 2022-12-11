@@ -8,6 +8,7 @@ export const handleError: HandleClientError = ({ error, event }) => {
 	console.log({ error });
 
 	if (error instanceof ResponseError) {
+		// eslint-disable-next-line import/namespace
 		Sentry.captureEvent(
 			{
 				level: 'error',
@@ -32,6 +33,7 @@ export const handleError: HandleClientError = ({ error, event }) => {
 			status: error.response.status,
 		};
 	} else {
+		// eslint-disable-next-line import/namespace
 		Sentry.captureException(error, {
 			tags: {
 				routeId: event.route.id,

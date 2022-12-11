@@ -3,7 +3,7 @@ import { z } from 'zod';
 import type { ResponseError } from '$api/openapi';
 
 export const parseApiError = async (error: ResponseError) => {
-	const res = await error.response.json();
+	const res: unknown = await error.response.json();
 
 	const parsed = errorSchema.safeParse(res);
 

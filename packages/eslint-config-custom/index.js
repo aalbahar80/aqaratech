@@ -57,6 +57,7 @@ module.exports = {
 			'@typescript-eslint/parser': ['.ts'],
 		},
 		'import/internal-regex': '^@self',
+		'import/ignore': ['fuse.js'],
 	},
 	rules: {
 		// https://github.com/vercel/turborepo/blob/main/packages/eslint-plugin-turbo/docs/rules/no-undeclared-env-vars.md

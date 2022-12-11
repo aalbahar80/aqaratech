@@ -23,12 +23,14 @@
 	// Adds padding to legend
 	const legendMargin = {
 		id: 'legendMargin',
+		// beforeInit(chart: InstanceType<typeof Chart>) {
 		beforeInit(chart: any) {
 			const fitValue = chart.legend.fit;
 
 			chart.legend.fit = function fit() {
 				fitValue.bind(chart.legend)();
 				// padding applied to bottom of legend
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				return (this.height += 100);
 			};
 		},

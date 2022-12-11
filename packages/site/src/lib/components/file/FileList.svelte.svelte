@@ -98,10 +98,6 @@
 									class="w-full"
 									on:click={async () => {
 										try {
-											if (!files) {
-												// redundant type check
-												return;
-											}
 											// encode file name to avoid special characters
 											await createApi().files.remove({
 												key: file.key,
@@ -112,7 +108,7 @@
 											addSuccessToast();
 										} catch (e) {
 											console.error(e);
-											handleApiError(e);
+											await handleApiError(e);
 										}
 									}}
 								>
