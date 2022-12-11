@@ -24,6 +24,7 @@ export class CaslAbilityFactory {
 		const now = Date.now();
 
 		const AppAbility = PrismaAbility as AbilityClass<TAppAbility>;
+		// eslint-disable-next-line @typescript-eslint/unbound-method
 		const { can, cannot, build } = new AbilityBuilder(AppAbility);
 
 		// We use email (NOT roleId) to find the user/role info.
