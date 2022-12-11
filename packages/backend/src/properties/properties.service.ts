@@ -128,12 +128,12 @@ export class PropertiesService {
 			},
 		});
 
+		const deleted = await this.prisma.property.delete({ where: { id } });
+
 		this.eventEmitter.emit(
 			'remove.documents',
 			new RemoveDocumentsEvent([id], this.IndexName),
 		);
-
-		const deleted = await this.prisma.property.delete({ where: { id } });
 
 		return new PropertyDto(deleted);
 	}

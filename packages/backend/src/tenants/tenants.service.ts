@@ -120,12 +120,12 @@ export class TenantsService {
 			},
 		});
 
+		const deleted = await this.prisma.tenant.delete({ where: { id } });
+
 		this.eventEmitter.emit(
 			'remove.documents',
 			new RemoveDocumentsEvent([id], this.IndexName),
 		);
-
-		const deleted = await this.prisma.tenant.delete({ where: { id } });
 
 		return new TenantDto(deleted);
 	}

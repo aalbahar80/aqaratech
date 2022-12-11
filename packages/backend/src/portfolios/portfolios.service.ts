@@ -112,12 +112,12 @@ export class PortfoliosService {
 			},
 		});
 
+		const portfolio = await this.prisma.portfolio.delete({ where: { id } });
+
 		this.eventEmitter.emit(
 			'remove.documents',
 			new RemoveDocumentsEvent([id], this.IndexName),
 		);
-
-		const portfolio = await this.prisma.portfolio.delete({ where: { id } });
 
 		return new PortfolioDto(portfolio);
 	}
