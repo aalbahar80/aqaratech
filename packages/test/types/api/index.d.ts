@@ -2631,25 +2631,7 @@ export interface TenantDto {
 	 * @type {string}
 	 * @memberof TenantDto
 	 */
-	dob: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof TenantDto
-	 */
-	residencyEnd: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof TenantDto
-	 */
 	title: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof TenantDto
-	 */
-	organizationId: string;
 	/**
 	 *
 	 * @type {string}
@@ -2679,7 +2661,7 @@ export interface TenantDto {
 	 * @type {string}
 	 * @memberof TenantDto
 	 */
-	passportNum: string | null;
+	dob: string | null;
 	/**
 	 *
 	 * @type {string}
@@ -2691,7 +2673,25 @@ export interface TenantDto {
 	 * @type {string}
 	 * @memberof TenantDto
 	 */
+	passportNum: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	residencyEnd: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
 	residencyNum: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	organizationId: string;
 }
 /**
  *

@@ -2590,20 +2590,10 @@ components:
         updatedAt:
           type: string
           readOnly: true
-        dob:
-          type: string
-          nullable: true
-        residencyEnd:
-          type: string
-          nullable: true
         title:
-          type: string
-        organizationId:
           type: string
         fullName:
           type: string
-          minLength: 1
-          maxLength: 255
         label:
           type: string
           nullable: true
@@ -2613,30 +2603,38 @@ components:
         phone:
           type: string
           nullable: true
-        passportNum:
+        dob:
           type: string
           nullable: true
         nationality:
           type: string
           nullable: true
+        passportNum:
+          type: string
+          nullable: true
+        residencyEnd:
+          type: string
+          nullable: true
         residencyNum:
           type: string
           nullable: true
+        organizationId:
+          type: string
       required:
         - id
         - createdAt
         - updatedAt
-        - dob
-        - residencyEnd
         - title
-        - organizationId
         - fullName
         - label
         - civilid
         - phone
-        - passportNum
+        - dob
         - nationality
+        - passportNum
+        - residencyEnd
         - residencyNum
+        - organizationId
     UpdateTenantDto:
       type: object
       properties:

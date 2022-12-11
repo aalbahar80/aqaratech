@@ -2,6 +2,7 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
+import { plainToInstance } from 'class-transformer';
 
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -48,7 +49,7 @@ export class TenantsService {
 			new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
 		);
 
-		return new TenantDto(tenant);
+		return plainToInstance(TenantDto, tenant);
 	}
 
 	async findAll({
@@ -76,7 +77,7 @@ export class TenantsService {
 			}),
 		]);
 
-		return { total, results: results.map((t) => new TenantDto(t)) };
+		return { total, results: plainToInstance(TenantDto, results) };
 	}
 
 	async findOne({ id }: { id: string }) {
@@ -84,7 +85,7 @@ export class TenantsService {
 			where: { id },
 		});
 
-		return new TenantDto(data);
+		return plainToInstance(TenantDto, data);
 	}
 
 	async update({
@@ -110,7 +111,7 @@ export class TenantsService {
 			new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
 		);
 
-		return new TenantDto(tenant);
+		return plainToInstance(TenantDto, tenant);
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
@@ -127,6 +128,6 @@ export class TenantsService {
 			new RemoveDocumentsEvent([id], this.IndexName),
 		);
 
-		return new TenantDto(deleted);
+		return plainToInstance(TenantDto, deleted);
 	}
 }
