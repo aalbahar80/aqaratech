@@ -101,15 +101,15 @@ module.exports = {
 		'import/order': [
 			'error',
 			{
-				// alphabetize
+				// Docs: https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md#importorder
 				'newlines-between': 'always',
-				// alphabetize
+				warnOnUnassignedImports: true,
 				alphabetize: {
 					order: 'asc',
 					caseInsensitive: true, // in import paths
 				},
 				pathGroupsExcludedImportTypes: ['svelte'], // allows pathGroups to work with svelte imports
-				// distinctGroup: true,
+				// distinctGroup: false, // not released yet
 				groups: [
 					'builtin',
 					'external',
@@ -122,16 +122,22 @@ module.exports = {
 				],
 				pathGroups: [
 					// cheatsheet: https://globster.xyz/
+					// Order in array matters.
 					{
 						// matches svelte, svelte/transition, etc
 						pattern: '+(svelte|\\$app){,*/**}',
-						group: 'external',
-						position: 'after',
+						position: 'before',
+						group: 'internal',
+					},
+					{
+						pattern: '+(@self){,*/**}',
+						position: 'before',
+						group: 'internal',
 					},
 					{
 						pattern: '+(src|$lib){,*/**}',
-						group: 'internal',
 						position: 'before',
+						group: 'internal',
 					},
 				],
 			},
