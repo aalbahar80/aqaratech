@@ -129,12 +129,7 @@ module.exports = {
 						position: 'after',
 					},
 					{
-						pattern: 'src',
-						group: 'internal',
-						position: 'before',
-					},
-					{
-						pattern: '$lib',
+						pattern: '+(src|$lib){,*/**}',
 						group: 'internal',
 						position: 'before',
 					},
