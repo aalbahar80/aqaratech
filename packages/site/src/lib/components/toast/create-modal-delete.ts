@@ -1,3 +1,5 @@
+import toast from 'svelte-french-toast';
+
 import { goto } from '$app/navigation';
 
 import type { ModalContent } from '$lib/components/toast/modal-content';
@@ -28,7 +30,13 @@ export const createModalDelete = ({
 					void goto(url);
 				}
 			} catch (error) {
-				await handleApiError(error);
+				const customToast = (message: string) => {
+					toast.error(message, {
+						duration: 15000,
+					});
+				};
+
+				await handleApiError(error, customToast);
 			}
 		},
 	};

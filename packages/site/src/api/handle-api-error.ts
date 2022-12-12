@@ -6,7 +6,10 @@ import { parseApiError } from '$api/parse-api-error';
 /**
  * Attempts to parse a `ResponseError` into a toast message.
  */
-export const handleApiError = async (error: unknown) => {
+export const handleApiError = async (
+	error: unknown,
+	onCustomToast?: (message: string) => void,
+) => {
 	let message = undefined;
 
 	console.error(error);
@@ -19,5 +22,9 @@ export const handleApiError = async (error: unknown) => {
 		console.error(data);
 	}
 
-	addErrorToast(message);
+	if (onCustomToast && message) {
+		onCustomToast(message);
+	} else {
+		addErrorToast(message);
+	}
 };
