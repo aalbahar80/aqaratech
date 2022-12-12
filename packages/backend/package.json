@@ -82,7 +82,7 @@
 		"@types/express": "4.17.14",
 		"@types/js-yaml": "4.0.5",
 		"@types/multer": "1.4.7",
-		"@types/node": "18.11.12",
+		"@types/node": "18.11.13",
 		"@types/passport-jwt": "3.0.7",
 		"eslint-config-custom": "workspace:*",
 		"js-yaml": "4.1.0",

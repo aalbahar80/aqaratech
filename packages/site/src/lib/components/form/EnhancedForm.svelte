@@ -43,7 +43,7 @@
 	class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
 	use:enhance={() => {
 		return ({ result, update }) => {
-			if (result.type === 'invalid') {
+			if (result.type === 'failure') {
 				addErrorToast('Invalid form');
 			} else if (result.type === 'success' || result.type === 'redirect') {
 				addSuccessToast();

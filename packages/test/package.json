@@ -18,7 +18,7 @@
 		"@playwright/test": "1.28.1",
 		"@self/seed": "workspace:2.0.0",
 		"@self/utils": "workspace:3.0.0",
-		"@types/node": "18.11.12",
+		"@types/node": "18.11.13",
 		"dotenv": "16.0.3",
 		"eslint-config-custom": "workspace:*",
 		"jose": "4.11.1",

@@ -32,12 +32,12 @@
 	"devDependencies": {
 		"@logtail/types": "0.1.12",
 		"@sentry/types": "7.24.2",
-		"@types/node": "18.11.12",
-		"@vitest/ui": "0.25.6",
+		"@types/node": "18.11.13",
+		"@vitest/ui": "0.25.7",
 		"eslint-config-custom": "workspace:*",
 		"tsconfig": "workspace:*",
 		"tsup": "6.5.0",
 		"typescript": "4.9.4",
-		"vitest": "0.25.6"
+		"vitest": "0.25.7"
 	}
 }

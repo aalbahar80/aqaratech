@@ -67,5 +67,6 @@ export interface FormPageModel<FieldEntries> {
 					fieldErrors?: Partial<Record<keyof FieldEntries, string[]>>;
 				};
 		  })
+		| null
 		| undefined;
 }

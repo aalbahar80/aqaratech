@@ -1,4 +1,4 @@
-import { invalid, redirect, type RequestEvent } from '@sveltejs/kit';
+import { fail, redirect, type RequestEvent } from '@sveltejs/kit';
 
 import { createApi, type Api } from '$api';
 import { ResponseError } from '$api/openapi';
@@ -112,7 +112,7 @@ export const handleForm = async <
 			{ depth: null, colors: true },
 		);
 
-		return invalid(400, { ...(data as z.infer<S>), errors });
+		return fail(400, { ...(data as z.infer<S>), errors });
 	}
 
 	try {
@@ -158,7 +158,7 @@ export const handleForm = async <
 
 		// Handle API errors and return the message to the user
 
-		return invalid(400, {
+		return fail(400, {
 			...(data as z.infer<S>),
 			errors: toFormErrors([res.message]),
 		});
