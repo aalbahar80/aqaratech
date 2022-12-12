@@ -5,7 +5,7 @@ import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 
 import { entitiesMap } from '@self/utils';
-import { DashboardFilterDto } from 'src/aggregate/dto/aggregate.dto';
+import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -22,7 +22,6 @@ import {
 import { PostmarkService } from 'src/postmark/postmark.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { kwdFormat } from 'src/utils/format';
-
 @Injectable()
 export class LeaseInvoicesService {
 	constructor(
@@ -196,16 +195,18 @@ export class LeaseInvoicesService {
 	parseLocationFilter({
 		filter,
 	}: {
-		filter?: DashboardFilterDto;
+		filter: Pick<AggregateOptionsDto, 'propertyId' | 'unitId'> & {
+			portfolioId: string;
+		};
 	}): Prisma.LeaseInvoiceWhereInput {
 		let locationFilter: Prisma.LeaseInvoiceWhereInput;
-		if (filter?.unitId) {
+		if (filter.unitId) {
 			locationFilter = { lease: { unitId: filter.unitId } };
-		} else if (filter?.propertyId) {
+		} else if (filter.propertyId) {
 			locationFilter = { lease: { unit: { propertyId: filter.propertyId } } };
 		} else {
 			locationFilter = {
-				portfolioId: filter?.portfolioId,
+				portfolioId: filter.portfolioId,
 			};
 		}
 		return locationFilter;
