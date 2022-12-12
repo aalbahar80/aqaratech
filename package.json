@@ -11,7 +11,7 @@
 		"format:all": "turbo run format",
 		"format:fix": "prettier --write --ignore-path .gitignore \"(**/*.{js,ts,css,md,svelte,yaml,yml,json}|!pnpm-lock.yaml)\"",
 		"lint": "eslint --ignore-path .gitignore ./scripts/*",
-		"lint:partial": "TIMING=1 turbo run lint --filter=@self/site --filter=@self/test --filter=@self/seed --continue",
+		"lint:partial": "TIMING=1 turbo run lint --filter=@self/site --filter=@self/test --filter=@self/seed --filter=@self/backend --continue",
 		"lint:all": "TIMING=1 turbo run lint --continue",
 		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
 		"check": "tsc --noEmit; pnpm run check:circular",

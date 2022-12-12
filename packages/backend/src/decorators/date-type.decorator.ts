@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { applyDecorators, BadRequestException, Logger } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
@@ -42,9 +43,11 @@ export function DateType(required = true, readOnly = false): PropertyDecorator {
 				}
 
 				if (isISO8601(p.value)) {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 					return new Date(p.value);
 				} else if (p.value === null || p.value === undefined) {
 					Logger.log('DateType: null or undefined');
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 					return p.value;
 				} else if (typeof p.value === 'string' && required) {
 					// client sends string, but it's not ISO8601. Reject it because it's required.
@@ -53,6 +56,7 @@ export function DateType(required = true, readOnly = false): PropertyDecorator {
 					// tranform it to null. Most commonly this will be an empty string.
 					return null;
 				} else {
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 					return p.value;
 				}
 			},
