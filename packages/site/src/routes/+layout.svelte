@@ -3,6 +3,9 @@
 	import { BrowserTracing } from '@sentry/tracing?client';
 	import { Toaster } from 'svelte-french-toast';
 
+	import { navigating, page } from '$app/stores';
+	import { onMount } from 'svelte';
+
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
@@ -17,9 +20,6 @@
 
 	import '../styles/tailwind.css';
 	import type { LayoutData } from './$types';
-
-	import { navigating, page } from '$app/stores';
-	import { onMount } from 'svelte';
 
 	export let data: LayoutData;
 

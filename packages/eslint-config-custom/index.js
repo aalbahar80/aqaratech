@@ -125,7 +125,7 @@ module.exports = {
 					{
 						// matches svelte, svelte/transition, etc
 						pattern: '+(svelte|\\$app){,*/**}',
-						group: 'type',
+						group: 'external',
 						position: 'after',
 					},
 					{
