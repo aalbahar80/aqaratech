@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 import { getLabel } from '@self/utils';
 
@@ -31,10 +31,18 @@ export class Combobox {
 
 		await input.fill(option.label);
 
-		const target = this.page.getByText(option.label);
+		let target: Locator;
 
 		if (option.value) {
-			await expect(target).toHaveAttribute('data-testid', option.value);
+			// In some cases we need to rely on the value attribute. Example: Area labels are bilangual.
+			// Therefore, we get by testid and then filter by label.
+			target = this.page.getByTestId(option.label).filter({
+				// has: this.page.getByTestId(option.value),
+				hasText: option.value,
+			});
+		} else {
+			// Where possible, we rely on the label attribute only for higher quality tests.
+			target = this.page.getByText(option.label);
 		}
 
 		await target.click();
