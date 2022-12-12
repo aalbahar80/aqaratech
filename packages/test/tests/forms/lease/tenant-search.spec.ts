@@ -58,17 +58,5 @@ for (const name of NAMES) {
 			...lease,
 			tenant: name,
 		});
-
-		const successUrl = getRoute({
-			entity,
-			id: ':uuid',
-			pageType: PageType.Id,
-			params: {
-				organizationId: org.organization.id,
-				portfolioId: portfolio.id,
-			},
-		});
-
-		await expect(page).toHaveURL(uuid(successUrl));
 	});
 }
