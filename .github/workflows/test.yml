@@ -2,7 +2,6 @@ name: Test
 
 on:
   workflow_dispatch:
-  # TODO ignore testing unchanged code by using turbo cache
   push:
 
 # cancel in-progress runs on new commits to same PR (gitub.event.number), fallback to ref
@@ -17,8 +16,26 @@ env:
   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
 jobs:
+  shouldTest:
+    # By the time we merge the release PR, we've already tested the packages.
+    name: Should Test
+    runs-on: ubuntu-latest
+    outputs:
+      shouldTest: ${{ steps.shouldTest.outputs.shouldTest }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      # Skip this workflow if the commit message starts with "Version Packages".
+      - name: Should Test
+        id: shouldTest
+        run: |
+          echo "::set-output name=shouldTest::${{ !startsWith(github.event.head_commit.message, 'Version Packages') }}"
+
   test:
     name: Build and Test
+    if: ${{ needs.shouldTest.outputs.shouldTest == 'true' }}
     timeout-minutes: 15
     # use env for auth0
     environment: dev
