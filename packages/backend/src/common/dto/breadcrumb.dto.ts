@@ -1,6 +1,7 @@
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 
 import { computeLabelProperty, computeLabelUnit } from '@self/utils';
+
 import { Rel } from 'src/constants/rel.enum';
 
 export interface IBreadcrumbs {

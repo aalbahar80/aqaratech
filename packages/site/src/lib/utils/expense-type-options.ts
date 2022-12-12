@@ -1,7 +1,8 @@
 import { stratify } from 'd3';
 
-import type { ExpenseCategoryDto } from '$api/openapi';
 import type { Option } from '$lib/models/interfaces/option.interface';
+
+import type { ExpenseCategoryDto } from '$api/openapi';
 import type { HierarchyNode } from 'd3';
 
 export type ExpenseNode = HierarchyNode<ExpenseCategoryDto>;

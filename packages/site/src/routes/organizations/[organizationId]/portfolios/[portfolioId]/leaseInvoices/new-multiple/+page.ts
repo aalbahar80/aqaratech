@@ -1,6 +1,7 @@
+import type { PredefinedInvoice } from '$lib/models/interfaces/predefined.interface';
+
 import { createApi } from '$api';
 
-import type { PredefinedInvoice } from '$lib/models/interfaces/predefined.interface';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ url: { searchParams }, fetch }) => {

@@ -1,9 +1,10 @@
-import { createFormField } from '$lib/components/form/model/form-field';
-import { createFormModel } from '$lib/components/form/model/form-model';
 import {
 	expenseCategoryCreateSchema,
 	expenseCategoryUpdateSchema,
 } from '@self/utils';
+
+import { createFormField } from '$lib/components/form/model/form-field';
+import { createFormModel } from '$lib/components/form/model/form-model';
 
 export const expenseCategoryFormModel = () =>
 	createFormModel({

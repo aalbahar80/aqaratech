@@ -1,4 +1,5 @@
 import type { User } from '$lib/models/types/auth.type';
+
 import type { Span } from '@sentry/tracing';
 import type { RequestEvent } from '@sveltejs/kit';
 

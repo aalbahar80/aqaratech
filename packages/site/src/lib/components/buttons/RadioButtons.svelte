@@ -5,12 +5,11 @@
 		RadioGroupOption,
 	} from '@rgossiaux/svelte-headlessui';
 
-	import { classes } from '$lib/utils/classes';
-
 	import type {
 		Option,
 		SelectedOption,
 	} from '$lib/models/interfaces/option.interface';
+	import { classes } from '$lib/utils/classes';
 
 	export let options: Option[];
 	export let selected: SelectedOption = undefined;

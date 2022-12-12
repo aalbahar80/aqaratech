@@ -1,16 +1,18 @@
 <script lang="ts">
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 
-	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
+	import { page } from '$app/stores';
+
+	import { getRoute, PageTab, PageType } from '@self/utils';
+
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
-	import { getRoute, PageTab, PageType } from '@self/utils';
+
+	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 
 	import type { LayoutData } from './$types';
-
-	import { page } from '$app/stores';
 
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';

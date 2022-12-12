@@ -1,16 +1,18 @@
 <script lang="ts">
-	import { createApi } from '$api';
-	import Button from '$lib/components/buttons/Button.svelte';
-	import { generateSchedule } from '$lib/utils/generate-schedule';
-	import { getRoute, PageTab } from '@self/utils';
-
-	import type { LeaseDto } from '$api/openapi';
-
 	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
+
+	import { getRoute, PageTab } from '@self/utils';
+
+	import Button from '$lib/components/buttons/Button.svelte';
+	import { generateSchedule } from '$lib/utils/generate-schedule';
+
+	import { createApi } from '$api';
+
+	import type { LeaseDto } from '$api/openapi';
 
 	import HeroiconsTrash from '~icons/heroicons/trash';
 

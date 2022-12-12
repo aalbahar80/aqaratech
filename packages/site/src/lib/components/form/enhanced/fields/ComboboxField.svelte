@@ -1,7 +1,6 @@
 <script lang="ts">
 	import FieldLabel from '$lib/components/form/enhanced/fields/FieldLabel.svelte';
 	import Combobox from '$lib/components/form/inputs/Combobox.svelte';
-
 	import type { SelectFormField } from '$lib/components/form/model/form-field.interface';
 
 	type Name = $$Generic;

@@ -9,6 +9,7 @@ import { Exclude, Expose } from 'class-transformer';
 import { IsOptional, IsPositive, IsString } from 'class-validator';
 
 import { PayoutCreateSchema } from '@self/utils';
+
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
 	BreadcrumbDto,

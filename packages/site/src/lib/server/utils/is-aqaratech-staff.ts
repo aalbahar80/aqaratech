@@ -1,5 +1,6 @@
-import { authConfig } from '$lib/server/config/auth';
 import { AQARATECH_STAFF_ROLE } from '@self/utils';
+
+import { authConfig } from '$lib/server/config/auth';
 
 export const isAqaratechStaff = (payload: Record<string, any>) => {
 	const auth0Roles = payload[

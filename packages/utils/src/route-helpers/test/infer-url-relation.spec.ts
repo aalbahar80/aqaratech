@@ -1,10 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
+import type { Entity } from 'src/entity/entity-definition';
 import { PageType } from 'src/route-helpers/enums/page-type.enum';
 import { getRoute } from 'src/route-helpers/get-route';
 import { inferUrlRelation } from 'src/route-helpers/infer-url-relation';
-
-import type { Entity } from 'src/entity/entity-definition';
 
 type Input = [string, { entity: Entity; id: string }, string];
 

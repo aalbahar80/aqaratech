@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 
-	import { createApi } from '$api';
-	import { handleApiError } from '$api/handle-api-error';
+	import { page } from '$app/stores';
+	import { flip } from 'svelte/animate';
+
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
@@ -14,10 +15,10 @@
 	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 
-	import type { PaginatedFileDto } from '$api/openapi';
+	import { createApi } from '$api';
+	import { handleApiError } from '$api/handle-api-error';
 
-	import { page } from '$app/stores';
-	import { flip } from 'svelte/animate';
+	import type { PaginatedFileDto } from '$api/openapi';
 
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';

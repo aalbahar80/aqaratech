@@ -11,6 +11,11 @@
 		type VisibilityState,
 	} from '@tanstack/svelte-table';
 
+	import { dev } from '$app/environment';
+	import { page } from '$app/stores';
+	import { writable } from 'svelte/store';
+	import { fade } from 'svelte/transition';
+
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import { handlePagination } from '$lib/components/table/pagination/handle-pagination';
 	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
@@ -23,11 +28,6 @@
 	import TableEmptyState from '$lib/components/table/tanstack-table/TableEmptyState.svelte';
 
 	import type { PaginatedDto } from '$api/openapi';
-
-	import { dev } from '$app/environment';
-	import { page } from '$app/stores';
-	import { writable } from 'svelte/store';
-	import { fade } from 'svelte/transition';
 
 	type T = $$Generic<{ id: string }>;
 

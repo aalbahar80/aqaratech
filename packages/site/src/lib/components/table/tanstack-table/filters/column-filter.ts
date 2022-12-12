@@ -1,4 +1,5 @@
 import type { Filter } from '$lib/models/interfaces/filter.interface';
+
 import type { Table } from '@tanstack/svelte-table';
 
 const getColumns = <T>(table: Table<T>): Filter['options'] =>

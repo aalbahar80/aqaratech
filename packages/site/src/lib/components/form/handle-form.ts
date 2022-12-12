@@ -1,10 +1,5 @@
 import { fail, redirect, type RequestEvent } from '@sveltejs/kit';
 
-import { createApi, type Api } from '$api';
-import { ResponseError } from '$api/openapi';
-import { parseApiError } from '$api/parse-api-error';
-import { handleCheckboxes } from '$lib/components/form/handle-checkbox';
-import { objectKeys } from '$lib/utils/common';
 import {
 	getRoute,
 	PageType,
@@ -14,7 +9,14 @@ import {
 	type KeyOfSchema,
 } from '@self/utils';
 
+import { handleCheckboxes } from '$lib/components/form/handle-checkbox';
 import type { PickBooleans } from '$lib/components/form/only-booleans';
+import { objectKeys } from '$lib/utils/common';
+
+import { createApi, type Api } from '$api';
+import { ResponseError } from '$api/openapi';
+import { parseApiError } from '$api/parse-api-error';
+
 import type { z } from 'zod';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

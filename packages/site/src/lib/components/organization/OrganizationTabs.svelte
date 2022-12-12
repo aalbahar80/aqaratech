@@ -1,8 +1,9 @@
 <script lang="ts">
-	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
+	import { page } from '$app/stores';
+
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
-	import { page } from '$app/stores';
+	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 
 	$: baseRouteConfig = {
 		entity: 'organization',

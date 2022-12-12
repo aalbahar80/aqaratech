@@ -1,9 +1,9 @@
 // Screenshots
+import type { Icon } from '$lib/models/types/icon.type';
+
 import screenshotDashboard from '../../../../assets/screenshots/dashboard-6.png';
 import screenshotInvoices from '../../../../assets/screenshots/invoices.png';
 import screenshotProfitLoss from '../../../../assets/screenshots/leases-3.png';
-
-import type { Icon } from '$lib/models/types/icon.type';
 
 import HeroiconsBuildingOffice2 from '~icons/heroicons/building-office-2';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';

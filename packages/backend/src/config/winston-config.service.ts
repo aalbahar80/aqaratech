@@ -8,6 +8,7 @@ import {
 import { format, LoggerOptions, transports } from 'winston';
 
 import { httpLogFormat, ignoreHttp, onlyHttp } from '@self/utils';
+
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { LogtailService } from 'src/logtail/logtail.service';
 

@@ -1,7 +1,8 @@
+import { portfolioCreateSchema, portfolioUpdateSchema } from '@self/utils';
+
 import { createFormField } from '$lib/components/form/model/form-field';
 import { createFormModel } from '$lib/components/form/model/form-model';
 import { labelHint } from '$lib/constants/form-hints';
-import { portfolioCreateSchema, portfolioUpdateSchema } from '@self/utils';
 
 export const portfolioFormModel = () =>
 	createFormModel({

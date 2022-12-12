@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
-
-	import { page } from '$app/stores';
 
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>

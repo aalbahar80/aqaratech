@@ -6,10 +6,9 @@
 		SwitchLabel,
 	} from '@rgossiaux/svelte-headlessui';
 
+	import type { FormField } from '$lib/components/form/model/form-field.interface';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { classes } from '$lib/utils/classes';
-
-	import type { FormField } from '$lib/components/form/model/form-field.interface';
 
 	type Name = $$Generic;
 	type GFormField = $$Generic<FormField<Name>>;

@@ -1,12 +1,13 @@
+import { getContext } from 'svelte';
+
+import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
+
 import { createFormField } from '$lib/components/form/model/form-field';
 import { createFormModel } from '$lib/components/form/model/form-model';
 import {
 	key,
 	type ExpenseCategoryContext,
 } from '$lib/components/organization/expense-category-context';
-import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
-
-import { getContext } from 'svelte';
 
 export const expenseFormModel = () =>
 	createFormModel({

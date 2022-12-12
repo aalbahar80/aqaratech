@@ -1,8 +1,9 @@
+import { propertyCreateSchema, propertyUpdateSchema } from '@self/utils';
+
 import { createFormField } from '$lib/components/form/model/form-field';
 import { createFormModel } from '$lib/components/form/model/form-model';
 import { areas } from '$lib/constants/areas-kwt';
 import { labelHint } from '$lib/constants/form-hints';
-import { propertyCreateSchema, propertyUpdateSchema } from '@self/utils';
 
 export const propertyFormModel = () =>
 	createFormModel({

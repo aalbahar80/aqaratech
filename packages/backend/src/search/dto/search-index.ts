@@ -1,4 +1,5 @@
 import { entitiesMap } from '@self/utils';
+
 import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-search-document';
 import { PropertySearchDocument } from 'src/properties/dto/property-search-document';
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';

@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { isProd } from '$lib/server/config/is-production';
-
 import { building } from '$app/environment';
+
+import { isProd } from '$lib/server/config/is-production';
 
 import { env } from '$env/dynamic/private';
 

@@ -1,10 +1,11 @@
 import { renderComponent, type ColumnHelper } from '@tanstack/svelte-table';
 
-import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 import { getRoute, PageType } from '@self/utils';
+import type { Entity } from '@self/utils';
+
+import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 
 import type { BreadcrumbsDto } from '$api/openapi';
-import type { Entity } from '@self/utils';
 
 export const locationColumnDef = <T extends Breadcrumbs>(
 	columnHelper: ColumnHelper<T>,

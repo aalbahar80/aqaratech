@@ -3,13 +3,13 @@
 	import * as Pancake from '@sveltejs/pancake';
 	import { treemap } from 'd3';
 
-	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
-	import { classes } from '$lib/utils/classes';
-	import { kwdFormat } from '$lib/utils/common';
-
 	import * as eases from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
 	import { fade } from 'svelte/transition';
+
+	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
+	import { classes } from '$lib/utils/classes';
+	import { kwdFormat } from '$lib/utils/common';
 
 	// export let hierarchy: HierarchyNode<any>;
 	// export let getLabel: (node: HierarchyNode<any>) => string;

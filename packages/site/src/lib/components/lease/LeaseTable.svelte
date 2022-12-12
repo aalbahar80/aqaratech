@@ -5,6 +5,10 @@
 		type ColumnDef,
 	} from '@tanstack/svelte-table';
 
+	import { page } from '$app/stores';
+
+	import { getProgress, getRoute, PageType, toUTCFormat } from '@self/utils';
+
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
@@ -15,11 +19,8 @@
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { getProgress, getRoute, PageType, toUTCFormat } from '@self/utils';
 
 	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
-
-	import { page } from '$app/stores';
 
 	export let data: PaginatedLeaseDto;
 	export let extraColumns: ColumnDef<LeaseDto, string>[] = [];

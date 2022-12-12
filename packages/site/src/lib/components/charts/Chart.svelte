@@ -16,9 +16,9 @@
 		Tooltip,
 		type ActiveElement,
 	} from 'chart.js';
+	import 'chartjs-adapter-date-fns';
 
 	import { CHART_HEIGHT } from '$lib/components/dashboard/cards/chart-height.const';
-	import 'chartjs-adapter-date-fns';
 
 	// Adds padding to legend
 	const legendMargin = {

@@ -19,6 +19,7 @@
 	import { getSentryUser } from '$lib/utils/sentry/common';
 
 	import '../styles/tailwind.css';
+
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;

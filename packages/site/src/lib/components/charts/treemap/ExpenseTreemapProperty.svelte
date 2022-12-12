@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { hierarchy, rollup, sum } from 'd3';
 
-	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
+	import { page } from '$app/stores';
+
 	import { getRoute, PageType } from '@self/utils';
 
-	import type { GroupByLocationDto } from '$api/openapi';
+	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
 
-	import { page } from '$app/stores';
+	import type { GroupByLocationDto } from '$api/openapi';
 
 	export let expenses: GroupByLocationDto[];
 

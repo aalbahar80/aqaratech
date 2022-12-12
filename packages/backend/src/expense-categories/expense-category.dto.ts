@@ -5,6 +5,7 @@ import {
 	ExpenseCategoryTreeSchema,
 	ExpenseCategoryUpdateSchema,
 } from '@self/utils';
+
 import { Exactly } from 'src/types/exactly.type';
 
 export class ExpenseCategoryDto implements ExpenseCategoryCreateSchema {

@@ -1,14 +1,15 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation';
+	import { page } from '$app/stores';
+
+	import { computeLabelUnit } from '@self/utils';
+
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 	import { property } from '$lib/stores/filter/property';
 	import { unit } from '$lib/stores/filter/unit';
-	import { computeLabelUnit } from '@self/utils';
 
 	import type { UnitMinimalDto } from '$api/openapi';
-
-	import { invalidate } from '$app/navigation';
-	import { page } from '$app/stores';
 
 	export let items: UnitMinimalDto[];
 

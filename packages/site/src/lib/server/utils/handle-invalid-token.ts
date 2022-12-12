@@ -1,5 +1,6 @@
-import { LOGIN } from '$lib/constants/routes';
 import { Cookie } from '@self/utils';
+
+import { LOGIN } from '$lib/constants/routes';
 
 import type { Handle } from '@sveltejs/kit';
 

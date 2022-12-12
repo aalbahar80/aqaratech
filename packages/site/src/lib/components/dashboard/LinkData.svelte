@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { getRoute, PageTypePortfolio } from '@self/utils';
-
 	import { page } from '$app/stores';
+
+	import { getRoute, PageTypePortfolio } from '@self/utils';
 
 	import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 

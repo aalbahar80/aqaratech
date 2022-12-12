@@ -1,7 +1,13 @@
 import * as Sentry from '@sentry/node';
+import '@sentry/tracing';
 
-import { ResponseError } from '$api/openapi';
-import { environment } from '$aqenvironment';
+import {
+	Cookie,
+	formatRequestLog,
+	formatResponseLog,
+	isHealthCheck,
+} from '@self/utils';
+
 import { MAX_AGE } from '$lib/constants/misc';
 import { sentryConfig } from '$lib/environment/sentry.config';
 import { logger } from '$lib/server/logger';
@@ -15,14 +21,10 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
-import {
-	Cookie,
-	formatRequestLog,
-	formatResponseLog,
-	isHealthCheck,
-} from '@self/utils';
 
-import '@sentry/tracing';
+import { ResponseError } from '$api/openapi';
+import { environment } from '$aqenvironment';
+
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 

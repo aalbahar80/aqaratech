@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
+	import { getRoute, PageTypePortfolio } from '@self/utils';
+
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { kwdFormat } from '$lib/utils/common';
-	import { getRoute, PageTypePortfolio } from '@self/utils';
 
 	import type { BalanceDto } from '$api/openapi';
-
-	import { page } from '$app/stores';
 
 	export let balance: BalanceDto;
 

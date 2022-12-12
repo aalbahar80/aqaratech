@@ -1,5 +1,4 @@
 // Types
-import { LOGOUT } from '$lib/constants/routes';
 import {
 	entity,
 	getRoute,
@@ -9,6 +8,7 @@ import {
 } from '@self/utils';
 
 import type { NavigationItem } from '$lib/components/sidebar/types';
+import { LOGOUT } from '$lib/constants/routes';
 import type { User } from '$lib/models/types/auth.type';
 
 // Icons

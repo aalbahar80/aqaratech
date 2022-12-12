@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { createApi } from '$api';
-	import { handleApiError } from '$api/handle-api-error';
+	import { page } from '$app/stores';
+
+	import { getRoute, PageTab } from '@self/utils';
+
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
@@ -9,11 +11,11 @@
 	import LeaseInvoiceTabs from '$lib/components/leaseInvoice/LeaseInvoiceTabs.svelte';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-	import { getRoute, PageTab } from '@self/utils';
+
+	import { createApi } from '$api';
+	import { handleApiError } from '$api/handle-api-error';
 
 	import type { LayoutData } from './$types';
-
-	import { page } from '$app/stores';
 
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';
 	import HeroiconsEnvelope from '~icons/heroicons/envelope';

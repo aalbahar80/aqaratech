@@ -1,8 +1,10 @@
 import { Logtail } from '@logtail/node';
 
-import { environment } from '$aqenvironment';
-import { privateEnvironment } from '$lib/server/config/private-environment';
 import { addEnvLabel, liveEnvs } from '@self/utils';
+
+import { privateEnvironment } from '$lib/server/config/private-environment';
+
+import { environment } from '$aqenvironment';
 
 /**
  * Only enable logtail in production & staging.

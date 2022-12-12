@@ -1,7 +1,8 @@
+import { Cookie } from '@self/utils';
+
 import { MAX_AGE } from '$lib/constants/misc';
 import { authConfig } from '$lib/server/config/auth';
 import { errorLogger } from '$lib/server/logger/error-logger';
-import { Cookie } from '@self/utils';
 
 import type { RequestHandler } from '@sveltejs/kit';
 

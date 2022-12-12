@@ -1,11 +1,10 @@
 <script lang="ts">
 	import clsx from 'clsx';
 
-	import ArrowIcon from '$lib/components/sidebar/ArrowIcon.svelte';
-
-	import type { NavigationItem } from '$lib/components/sidebar/types';
-
 	import { page } from '$app/stores';
+
+	import ArrowIcon from '$lib/components/sidebar/ArrowIcon.svelte';
+	import type { NavigationItem } from '$lib/components/sidebar/types';
 
 	export let item: NavigationItem;
 	export let expanded = false;

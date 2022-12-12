@@ -6,6 +6,7 @@ import { Strategy } from 'passport-jwt';
 import { z } from 'zod';
 
 import { AQARATECH_STAFF_ROLE, Cookie } from '@self/utils';
+
 import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';

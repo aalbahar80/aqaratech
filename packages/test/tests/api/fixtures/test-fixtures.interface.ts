@@ -1,4 +1,17 @@
 import type {
+	ExpenseCategoryFactoryParams,
+	ExpenseFactoryParams,
+	LeaseFactoryParams,
+	LeaseInvoiceFactoryParams,
+	PayoutFactoryParams,
+	PortfolioFactoryParams,
+	PropertyFactoryParams,
+	RoleFactoryParams,
+	TenantFactoryParams,
+	UnitFactoryParams,
+} from '@self/seed';
+
+import type {
 	ExpenseCategoryDto,
 	ExpenseDto,
 	LeaseDto,
@@ -17,18 +30,6 @@ import type {
 	PlaywrightTestArgs,
 	PlaywrightWorkerArgs,
 } from '@playwright/test';
-import type {
-	ExpenseCategoryFactoryParams,
-	ExpenseFactoryParams,
-	LeaseFactoryParams,
-	LeaseInvoiceFactoryParams,
-	PayoutFactoryParams,
-	PortfolioFactoryParams,
-	PropertyFactoryParams,
-	RoleFactoryParams,
-	TenantFactoryParams,
-	UnitFactoryParams,
-} from '@self/seed';
 
 export interface TestFixtures {
 	// auth

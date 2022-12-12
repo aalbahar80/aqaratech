@@ -1,8 +1,9 @@
 import { redirect } from '@sveltejs/kit';
 
+import { FilterInitial } from '@self/utils';
+
 import { property } from '$lib/stores/filter/property';
 import { unit } from '$lib/stores/filter/unit';
-import { FilterInitial } from '@self/utils';
 
 import type { PageLoad } from './$types';
 

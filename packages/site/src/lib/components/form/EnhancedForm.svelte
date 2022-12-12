@@ -1,17 +1,16 @@
 <script lang="ts">
 	import * as R from 'remeda';
 
+	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
+
 	import DebugPane from '$lib/components/form/DebugPane.svelte';
 	import FormError from '$lib/components/form/enhanced/fields/FormError.svelte';
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
+	import type { FormPageModel } from '$lib/components/form/model/form-field.interface';
 	import { addErrorToast, addSuccessToast } from '$lib/stores/toast';
 	import { objectValues } from '$lib/utils/common';
-
-	import type { FormPageModel } from '$lib/components/form/model/form-field.interface';
-
-	import { enhance } from '$app/forms';
-	import { page } from '$app/stores';
 
 	// Types
 

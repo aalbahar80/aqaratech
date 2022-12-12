@@ -1,9 +1,9 @@
 <script lang="ts">
-	import WideTabBarItem from '$lib/components/tabs/WideTabBarItem.svelte';
-
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import type { ComponentProps } from 'svelte';
+
+	import WideTabBarItem from '$lib/components/tabs/WideTabBarItem.svelte';
 
 	type Tab = ComponentProps<WideTabBarItem>['tab'];
 

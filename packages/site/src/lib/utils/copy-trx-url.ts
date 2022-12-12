@@ -1,5 +1,6 @@
-import { addToast } from '$lib/stores/toast';
 import { entitiesMap } from '@self/utils';
+
+import { addToast } from '$lib/stores/toast';
 
 export const copyTrxUrl = (id: string, origin: string) => {
 	navigator.clipboard

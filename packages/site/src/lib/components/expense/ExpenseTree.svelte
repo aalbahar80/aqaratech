@@ -6,12 +6,13 @@
 		type DndEvent,
 	} from 'svelte-dnd-action';
 
-	import { classes } from '$lib/utils/classes';
-	import { ROOT_ID, type ExpenseNode } from '$lib/utils/expense-type-options';
-	import { getRoute, PageType } from '@self/utils';
-
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
+
+	import { getRoute, PageType } from '@self/utils';
+
+	import { classes } from '$lib/utils/classes';
+	import { ROOT_ID, type ExpenseNode } from '$lib/utils/expense-type-options';
 
 	export let root: ExpenseNode;
 	export let node: ExpenseNode;

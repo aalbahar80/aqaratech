@@ -2,16 +2,15 @@
 	import debounce from 'debounce';
 	import Fuse from 'fuse.js';
 
+	import { createEventDispatcher, tick } from 'svelte';
+
 	import { clickOutside } from '$lib/actions/click-outside';
 	import Hoverable from '$lib/components/Hoverable.svelte';
-	import { classes } from '$lib/utils/classes';
-
 	import type {
 		Option,
 		SelectedOption,
 	} from '$lib/models/interfaces/option.interface';
-
-	import { createEventDispatcher, tick } from 'svelte';
+	import { classes } from '$lib/utils/classes';
 
 	import HeroiconsOutlineSelector from '~icons/heroicons-outline/selector';
 	import HeroiconsOutlineXCircle from '~icons/heroicons-outline/x-circle';

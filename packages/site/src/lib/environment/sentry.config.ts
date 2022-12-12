@@ -1,5 +1,6 @@
-import { environment } from '$lib/environment';
 import { getSentryConfig } from '@self/utils';
+
+import { environment } from '$lib/environment';
 
 export const sentryConfig = getSentryConfig({
 	PUBLIC_AQ_ENABLE_SENTRY: environment.PUBLIC_AQ_ENABLE_SENTRY,

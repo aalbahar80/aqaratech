@@ -1,5 +1,6 @@
-import { handleForm } from '$lib/components/form/handle-form';
 import { payoutCreateSchema } from '@self/utils';
+
+import { handleForm } from '$lib/components/form/handle-form';
 
 import type { Actions } from './$types';
 

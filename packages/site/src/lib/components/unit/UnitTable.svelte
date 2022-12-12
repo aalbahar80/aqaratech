@@ -1,16 +1,17 @@
 <script lang="ts">
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
+	import { page } from '$app/stores';
+
+	import { getLabel } from '@self/utils';
+
 	import Badge from '$lib/components/Badge.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { getLabel } from '@self/utils';
 
 	import type { PaginatedUnitDto, UnitDto } from '$api/openapi';
-
-	import { page } from '$app/stores';
 
 	export let data: PaginatedUnitDto;
 

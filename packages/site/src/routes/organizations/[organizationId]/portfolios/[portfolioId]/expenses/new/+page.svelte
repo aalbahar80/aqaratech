@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { setContext } from 'svelte';
+
 	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
 	import { getEntityFormModel } from '$lib/components/form/model/get-entity-form-model';
 	import {
@@ -8,8 +10,6 @@
 	import { toOptions } from '$lib/utils/expense-type-options';
 
 	import type { ActionData, PageData } from './$types';
-
-	import { setContext } from 'svelte';
 
 	export let data: PageData;
 

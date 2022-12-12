@@ -1,10 +1,9 @@
 import { expect, test } from 'vitest';
 
 import { PageTypePortfolio } from 'src/route-helpers/enums/page-tab-portfolio.enum';
+import type { PageTab } from 'src/route-helpers/enums/page-tab.enum';
 import { PageType } from 'src/route-helpers/enums/page-type.enum';
 import { getRoute } from 'src/route-helpers/get-route';
-
-import type { PageTab } from 'src/route-helpers/enums/page-tab.enum';
 
 const baseInput = {
 	entity: 'portfolio',

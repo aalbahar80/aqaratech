@@ -1,10 +1,11 @@
 <script lang="ts">
-	import Heading from '$lib/components/Heading.svelte';
+	import { page } from '$app/stores';
+
 	import { getRoute, PageType } from '@self/utils';
 
-	import type { TenantDto } from '$api/openapi';
+	import Heading from '$lib/components/Heading.svelte';
 
-	import { page } from '$app/stores';
+	import type { TenantDto } from '$api/openapi';
 
 	export let tenant: TenantDto;
 </script>

@@ -1,6 +1,7 @@
+import { fileCreateSchema } from '@self/utils';
+
 import { createFormField } from '$lib/components/form/model/form-field';
 import { createFormModel } from '$lib/components/form/model/form-model';
-import { fileCreateSchema } from '@self/utils';
 
 export const fileFormModel = () =>
 	createFormModel({

@@ -13,6 +13,7 @@ import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 import { entitiesMap } from '@self/utils';
+
 import { Action } from 'src/casl/action.enum';
 import {
 	RemoveDocumentsEvent,

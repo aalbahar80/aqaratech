@@ -1,16 +1,17 @@
 <script lang="ts">
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 
+	import { page } from '$app/stores';
+
+	import { getRoute, PageTab, PageType } from '@self/utils';
+
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyTabs from '$lib/components/property/PropertyTabs.svelte';
-	import { getRoute, PageTab, PageType } from '@self/utils';
 
 	import type { LayoutData } from './$types';
-
-	import { page } from '$app/stores';
 
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 

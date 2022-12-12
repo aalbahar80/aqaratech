@@ -3,12 +3,13 @@
 	import clsx from 'clsx';
 	import * as R from 'remeda';
 
-	import Hoverable from '$lib/components/Hoverable.svelte';
-	import { classes } from '$lib/utils/classes';
 	import { startCase } from '@self/utils';
 
-	import type { HitDto } from '$api/openapi';
+	import Hoverable from '$lib/components/Hoverable.svelte';
 	import type { Icon } from '$lib/models/types/icon.type';
+	import { classes } from '$lib/utils/classes';
+
+	import type { HitDto } from '$api/openapi';
 
 	export let item: HitDto;
 	export let icon: Icon;
