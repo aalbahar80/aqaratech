@@ -55,6 +55,12 @@
 	function handleDndFinalize(e: any) {
 		const updatedNodes = handleAction(e);
 		node.children = updatedNodes;
+
+		// Manually re-assign the root node to trigger a re-render.
+		// Needed after #7981 was merged into svelte 3.54.0
+		// Issue: https://github.com/sveltejs/svelte/pull/7981
+		// eslint-disable-next-line no-self-assign
+		root = root;
 	}
 </script>
 
