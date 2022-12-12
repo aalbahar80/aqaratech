@@ -21,7 +21,7 @@
 
 	const searchTenants = async (query: string) => {
 		const tenants = await api.tenants.findAll({
-			filter: { fullName: { contains: query } },
+			filter: { fullName: { contains: query, mode: 'insensitive' } },
 			take: 50,
 		});
 
