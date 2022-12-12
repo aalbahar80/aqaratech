@@ -24,7 +24,7 @@
 </script>
 
 <ChartWrapper
-	empty={expenses.length < 2}
+	empty={expenses.every((e) => e.amount === 0)}
 	title="Expenses: by Month"
 	subtitle="Total expenses by month for the selected period."
 >
