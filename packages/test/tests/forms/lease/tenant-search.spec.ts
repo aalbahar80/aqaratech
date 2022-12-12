@@ -1,10 +1,8 @@
-import { expect } from '@playwright/test';
 import * as R from 'remeda';
 
 import { leasePartialFactory } from '@self/seed';
 import { FIELDS, getLabel, getRoute, PageType } from '@self/utils';
 
-import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
 import { Combobox } from '../combobox-model';
 import { FormPage } from '../form-page-model';
