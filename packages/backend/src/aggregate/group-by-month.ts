@@ -1,6 +1,5 @@
 import * as R from 'remeda';
 
-import { ByMonthDto } from 'src/aggregate/dto/aggregate.dto';
 import { GroupedByMonth } from 'src/aggregate/dto/grouped-by-month.dto';
 import { isoToYearMonth, monthsInRange } from 'src/utils/months-in-range';
 
@@ -30,7 +29,7 @@ export const groupByMonth = (
 	months.sort((a, b) => b.localeCompare(a));
 
 	// convert to array of objects
-	const array: ByMonthDto[] = [];
+	const array: GroupedByMonth[] = [];
 
 	months.forEach((month) => {
 		array.push({ date: month, amount: summed[month] ?? 0 });
