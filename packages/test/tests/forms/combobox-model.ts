@@ -31,11 +31,11 @@ export class Combobox {
 
 		await input.fill(option.label);
 
-		// Options with similar labels may exist. So we need to get by data-testid then
-		// test the label.
-		const target = this.page.getByTestId(option.value);
+		const target = this.page.getByText(option.label);
 
-		await expect(target).toHaveText(new RegExp(`${option.label}`));
+		if (option.value) {
+			await expect(target).toHaveAttribute('data-testid', option.value);
+		}
 
 		await target.click();
 	}
@@ -43,7 +43,7 @@ export class Combobox {
 
 export class ComboboxOption {
 	readonly label: string;
-	readonly value: string;
+	readonly value?: string;
 
 	constructor({ label, value }: Option) {
 		this.label = label;
