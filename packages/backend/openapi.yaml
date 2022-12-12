@@ -2997,37 +2997,35 @@ components:
         updatedAt:
           type: string
           readOnly: true
-        dob:
-          type: string
-          nullable: true
         title:
-          type: string
-        organizationId:
           type: string
         fullName:
           type: string
-          minLength: 1
-          maxLength: 255
         label:
-          type: string
-          nullable: true
-        civilid:
           type: string
           nullable: true
         phone:
           type: string
           nullable: true
+        civilid:
+          type: string
+          nullable: true
+        dob:
+          type: string
+          nullable: true
+        organizationId:
+          type: string
       required:
         - id
         - createdAt
         - updatedAt
-        - dob
         - title
-        - organizationId
         - fullName
         - label
-        - civilid
         - phone
+        - civilid
+        - dob
+        - organizationId
     UpdatePortfolioDto:
       type: object
       properties:

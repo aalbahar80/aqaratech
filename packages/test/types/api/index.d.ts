@@ -2310,19 +2310,7 @@ export interface PortfolioDto {
 	 * @type {string}
 	 * @memberof PortfolioDto
 	 */
-	dob: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PortfolioDto
-	 */
 	title: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PortfolioDto
-	 */
-	organizationId: string;
 	/**
 	 *
 	 * @type {string}
@@ -2340,13 +2328,25 @@ export interface PortfolioDto {
 	 * @type {string}
 	 * @memberof PortfolioDto
 	 */
+	phone: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
 	civilid: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof PortfolioDto
 	 */
-	phone: string | null;
+	dob: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	organizationId: string;
 }
 /**
  *

@@ -1,51 +1,26 @@
-import { ApiProperty, IntersectionType, PartialType } from '@nestjs/swagger';
-import { Portfolio } from '@prisma/client';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
-import { IsPhoneNumber, IsString, Length } from 'class-validator';
 
 import { PortfolioCreateSchema, PortfolioUpdateSchema } from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
-import { DateType } from 'src/decorators/date-type.decorator';
-import { IsID } from 'src/decorators/field.decorators';
 import { Exactly } from 'src/types/exactly.type';
 
-class PortfolioRequiredDto {
-	@IsID()
-	organizationId: string;
-
-	@Length(1, 255)
-	fullName: string;
-}
-
-class PortfolioOptionalDto {
-	@IsString()
-	label: string | null;
-
-	@IsString()
-	civilid: string | null;
-
-	@IsPhoneNumber('KW')
-	phone: string | null;
-
-	@DateType(false)
-	dob: Date | null;
-}
-
 export class PortfolioDto
-	extends IntersectionType(
-		AbstractDto,
-		IntersectionType(PortfolioRequiredDto, PortfolioOptionalDto),
-	)
-	implements Portfolio
+	extends AbstractDto
+	implements Exactly<PortfolioCreateSchema, CreatePortfolioDto>
 {
-	constructor(partial: Partial<PortfolioDto>) {
-		super();
-		Object.assign(this, partial);
-	}
+	fullName: string;
+	label: string | null;
+	phone: string | null;
+	civilid: string | null;
+	dob: string | null;
+
+	organizationId: string;
 
 	@ApiProperty()
 	@Expose()
 	get title(): string {
+		// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 		return this.label || this.fullName;
 	}
 }

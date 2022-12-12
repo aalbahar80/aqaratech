@@ -1,6 +1,7 @@
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { plainToInstance } from 'class-transformer';
 
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -47,7 +48,7 @@ export class PortfoliosService {
 			new UpdateIndexEvent([portfolio], this.IndexName, this.IndexConstructor),
 		);
 
-		return new PortfolioDto(portfolio);
+		return plainToInstance(PortfolioDto, portfolio);
 	}
 
 	async findAll({
@@ -71,7 +72,7 @@ export class PortfoliosService {
 			}),
 		]);
 
-		return { total, results: results.map((r) => new PortfolioDto(r)) };
+		return { total, results: plainToInstance(PortfolioDto, results) };
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
@@ -80,7 +81,8 @@ export class PortfoliosService {
 				AND: [{ id }, accessibleBy(user.ability, Action.Read).Portfolio],
 			},
 		});
-		return new PortfolioDto(data);
+
+		return plainToInstance(PortfolioDto, data);
 	}
 
 	async update({
@@ -102,7 +104,7 @@ export class PortfoliosService {
 			new UpdateIndexEvent([portfolio], this.IndexName, this.IndexConstructor),
 		);
 
-		return new PortfolioDto(portfolio);
+		return plainToInstance(PortfolioDto, portfolio);
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
@@ -119,6 +121,6 @@ export class PortfoliosService {
 			new RemoveDocumentsEvent([id], this.IndexName),
 		);
 
-		return new PortfolioDto(portfolio);
+		return plainToInstance(PortfolioDto, portfolio);
 	}
 }
