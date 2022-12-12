@@ -1,5 +1,18 @@
 # @self/backend
 
+## 2.2.0
+
+### Minor Changes
+
+- 610ddbe59: update deps
+- 032978d05: update deps
+
+### Patch Changes
+
+- Updated dependencies [610ddbe59]
+- Updated dependencies [032978d05]
+  - @self/utils@3.1.0
+
 ## 2.1.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.2.0
+
+### Minor Changes
+
+- 610ddbe59: update deps
+- 032978d05: update deps
+
 ## 2.1.0
 
 ### Minor Changes

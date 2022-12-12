@@ -1,5 +1,12 @@
 # @self/utils
 
+## 3.1.0
+
+### Minor Changes
+
+- 610ddbe59: update deps
+- 032978d05: update deps
+
 ## 3.0.0
 
 ### Major Changes
