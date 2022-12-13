@@ -8,7 +8,11 @@ test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
 });
 
-test('search is enabled', async ({ page, org, portfolios: _portfolios }) => {
+test('search: portfolio is enabled', async ({
+	page,
+	org,
+	portfolios: _portfolios,
+}) => {
 	const url = getRoute({
 		entity: 'portfolio',
 		pageType: PageType.List,
