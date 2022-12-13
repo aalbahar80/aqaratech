@@ -1,10 +1,8 @@
-import { expect, request } from '@playwright/test';
+import { expect } from '@playwright/test';
 
 import { getRoute, PageType } from '@self/utils';
 
-import { resCheck } from '../../utils/res-check';
 import { test } from '../api/api-fixtures';
-import { apiURL } from '../api/fixtures/api-url';
 
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
@@ -15,6 +13,9 @@ test.use({
 		{
 			page,
 			org,
+			portfolio,
+			tenant,
+			property,
 			portfolios: _portfolios,
 			tenants: _tenants,
 			properties: _properties,
@@ -33,18 +34,6 @@ test.use({
 
 		await use(page);
 	},
-});
-
-test.beforeAll(async () => {
-	// reindex search
-	// use staff role to trigger search reindex
-	const storageState = await import('../../storage-state/aqaratech-staff.json');
-	const req = await request.newContext({
-		storageState: storageState,
-	});
-
-	const res = await req.post(`${apiURL}/search`);
-	resCheck(res);
 });
 
 const inputs = [
@@ -69,6 +58,26 @@ const inputs = [
 ] as const;
 
 for (const i of inputs) {
+	test.beforeEach(async ({ page, org, portfolio, tenant, property }) => {
+		const entities = { portfolio, tenant, property };
+		const entity = entities[i.type];
+
+		// trigger search reindex by updating entity through form
+		const edit = getRoute({
+			pageType: PageType.Edit,
+			entity: i.type,
+			id: entity.id,
+			params: {
+				organizationId: org.organization.id,
+				portfolioId: portfolio.id,
+			},
+		});
+
+		await page.goto(edit);
+
+		await page.getByRole('button', { name: 'Save' }).click();
+	});
+
 	test(`search - ${i.type}`, async ({ page, isMobile }) => {
 		const { searchText, resultText, keysToValidate } = i;
 
@@ -80,7 +89,7 @@ for (const i of inputs) {
 		await btn.click();
 
 		// search
-		const input = page.getByPlaceholder('Search...');
+		const input = page.getByPlaceholder('Search...').first();
 		await input.fill(searchText);
 
 		// check result
