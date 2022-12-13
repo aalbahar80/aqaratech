@@ -38,21 +38,24 @@ const inputs = [
 		searchText: 'Alex',
 		resultText: 'Alex Anderson',
 		keysToValidate: [['fullName', 'Alex Anderson']],
+		type: 'portfolio',
 	},
 	{
 		searchText: 'Bob',
 		resultText: 'Bob Brown',
 		keysToValidate: [['fullName', 'Bob Brown']],
+		type: 'tenant',
 	},
 	{
 		searchText: 'Main',
 		resultText: 'Main St',
 		keysToValidate: [['street', 'Main St']],
+		type: 'property',
 	},
 ] as const;
 
 for (const i of inputs) {
-	test(`search is enabled - ${i.resultText}`, async ({ page }) => {
+	test(`search - ${i.type}`, async ({ page }) => {
 		const { searchText, resultText, keysToValidate } = i;
 
 		const btn = page.getByRole('button', { name: 'Search' });
