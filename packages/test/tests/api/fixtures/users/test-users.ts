@@ -37,9 +37,18 @@ const freshUser = {
 	storageStateFilename: 'fresh-user.json',
 } as const;
 
+const aqaratechStaff = {
+	roleType: 'AQARATECH_STAFF',
+	email: 'staff.demo@mailthink.net',
+	password: testPassword,
+	storageStatePath: 'storage-state/aqaratech-staff.json',
+	storageStateFilename: 'aqaratech-staff.json',
+} as const;
+
 export const testUsers = {
 	orgAdmin,
 	portfolio,
 	tenant,
 	freshUser,
+	aqaratechStaff,
 } as const;

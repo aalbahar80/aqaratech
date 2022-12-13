@@ -1,7 +1,7 @@
 import { Controller, Delete, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { SkipAbilityCheck } from 'src/auth/public.decorator';
+import { SkipRoleGuard } from 'src/auth/public.decorator';
 import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
 import { SearchService } from 'src/search/search.service';
 
@@ -10,9 +10,8 @@ import { SearchService } from 'src/search/search.service';
 export class SearchController {
 	constructor(private readonly searchService: SearchService) {}
 
-	// TODO restrict to aqaratech-staff
 	@Post('/')
-	@SkipAbilityCheck()
+	@SkipRoleGuard()
 	@UseGuards(AqaratechStaffGuard)
 	async reindexAll() {
 		await this.searchService.remove();
@@ -21,7 +20,7 @@ export class SearchController {
 
 	// TODO remove once the onModuleInit is stable
 	@Delete('/')
-	@SkipAbilityCheck()
+	@SkipRoleGuard()
 	@UseGuards(AqaratechStaffGuard)
 	remove() {
 		return this.searchService.remove();

@@ -31,6 +31,7 @@ async function globalSetup(config: FullConfig) {
 		testUsers.portfolio,
 		testUsers.tenant,
 		testUsers.freshUser,
+		testUsers.aqaratechStaff,
 	]) {
 		console.log(`Checking auth cookies for user.roletype: ${roleType}...`);
 

@@ -1,8 +1,10 @@
-import { expect } from '@playwright/test';
+import { expect, request } from '@playwright/test';
 
 import { getRoute, PageType } from '@self/utils';
 
+import { resCheck } from '../../utils/res-check';
 import { test } from '../api/api-fixtures';
+import { apiURL } from '../api/fixtures/api-url';
 
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
@@ -31,6 +33,18 @@ test.use({
 
 		await use(page);
 	},
+});
+
+test.beforeAll(async () => {
+	// reindex search
+	// use staff role to trigger search reindex
+	const storageState = await import('../../storage-state/aqaratech-staff.json');
+	const req = await request.newContext({
+		storageState: storageState,
+	});
+
+	const res = await req.post(`${apiURL}/search`);
+	resCheck(res);
 });
 
 const inputs = [
