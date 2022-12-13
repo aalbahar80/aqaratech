@@ -7,9 +7,16 @@ import { test } from '../api/api-fixtures';
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
 	tenantsParams: [{ fullName: 'Bob Brown' }],
+	propertiesParams: [{ label: 'Property 1' }],
 
 	page: async (
-		{ page, org, portfolios: _portfolios, tenants: _tenants },
+		{
+			page,
+			org,
+			portfolios: _portfolios,
+			tenants: _tenants,
+			properties: _properties,
+		},
 		use,
 	) => {
 		const url = getRoute({
@@ -26,24 +33,46 @@ test.use({
 	},
 });
 
-test('search: portfolio is enabled', async ({ page }) => {
-	const btn = page.getByRole('button', { name: 'Search' });
-	await btn.click();
+const inputs = [
+	{
+		searchText: 'Alex',
+		resultText: 'Alex Anderson',
+		keysToValidate: [['fullName', 'Alex Anderson']],
+	},
+	{
+		searchText: 'Bob',
+		resultText: 'Bob Brown',
+		keysToValidate: [['fullName', 'Bob Brown']],
+	},
+	{
+		searchText: 'Property 1',
+		resultText: 'Property 1',
+		keysToValidate: [['label', 'Property 1']],
+	},
+] as const;
 
-	// search
-	const input = page.getByPlaceholder('Search...');
-	await input.fill('Alex');
+for (const i of inputs) {
+	test(`search is enabled - ${i.resultText}`, async ({ page }) => {
+		const { searchText, resultText, keysToValidate } = i;
 
-	// check result
-	const result = page.getByRole('option', { name: 'Alex Anderson' });
-	await expect(result).toBeVisible();
+		const btn = page.getByRole('button', { name: 'Search' });
+		await btn.click();
 
-	// navigate to result
-	await result.click();
-	const name = page
-		.getByTestId('details-pane')
-		.getByTestId('fullName')
-		.getByText('Alex Anderson');
+		// search
+		const input = page.getByPlaceholder('Search...');
+		await input.fill(searchText);
 
-	await expect(name).toBeVisible();
-});
+		// check result
+		const result = page.getByRole('option', { name: resultText });
+		await expect(result).toBeVisible();
+
+		// navigate to result
+		await result.click();
+		const key = page
+			.getByTestId('details-pane')
+			.getByTestId(keysToValidate[0][0])
+			.getByText(keysToValidate[0][1]);
+
+		await expect(key).toBeVisible();
+	});
+}
