@@ -55,8 +55,12 @@ const inputs = [
 ] as const;
 
 for (const i of inputs) {
-	test(`search - ${i.type}`, async ({ page }) => {
+	test(`search - ${i.type}`, async ({ page, isMobile }) => {
 		const { searchText, resultText, keysToValidate } = i;
+
+		if (isMobile) {
+			await page.getByRole('button', { name: 'Sidebar' }).click();
+		}
 
 		const btn = page.getByRole('button', { name: 'Search' });
 		await btn.click();
