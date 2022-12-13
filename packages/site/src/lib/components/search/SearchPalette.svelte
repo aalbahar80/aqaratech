@@ -98,7 +98,10 @@
 							entity: e.detail.entity,
 							id: e.detail.id,
 							pageType: PageType.Id,
-							params: $page.params,
+							params: {
+								organizationId: e.detail.organizationId,
+								portfolioId: e.detail.portfolioId,
+							},
 						});
 						void goto(url, { noScroll: true });
 						open = false;

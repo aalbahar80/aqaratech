@@ -235,6 +235,7 @@ export class SearchService implements OnModuleInit {
 			'paci',
 			'area',
 			'street',
+			'portfolioId',
 		]);
 
 		// add all documents to their respective indices
@@ -297,6 +298,7 @@ export class SearchService implements OnModuleInit {
 				parcel: true,
 				block: true,
 				number: true,
+				portfolioId: true,
 				organizationId: true,
 			},
 		});

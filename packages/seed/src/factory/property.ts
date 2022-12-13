@@ -20,7 +20,7 @@ export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 		() => areas[Math.floor(Math.random() * areas.length)]?.[1] || null,
 	),
 
-	label: null,
+	label: Factory.each(() => faker.address.streetAddress()),
 
 	cost: null, // rm?
 

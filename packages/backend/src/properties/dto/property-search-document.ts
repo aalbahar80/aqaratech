@@ -4,6 +4,7 @@ import { Expose } from 'class-transformer';
 export class PropertySearchDocument implements Partial<Property> {
 	id: string;
 	organizationId: string;
+	portfolioId: string;
 	label: string | null;
 	area: string;
 	block: string | null;

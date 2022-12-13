@@ -7,7 +7,7 @@ import { test } from '../api/api-fixtures';
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
 	tenantsParams: [{ fullName: 'Bob Brown' }],
-	propertiesParams: [{ label: 'Property 1' }],
+	propertiesParams: [{ street: 'Main St' }],
 
 	page: async (
 		{
@@ -45,9 +45,9 @@ const inputs = [
 		keysToValidate: [['fullName', 'Bob Brown']],
 	},
 	{
-		searchText: 'Property 1',
-		resultText: 'Property 1',
-		keysToValidate: [['label', 'Property 1']],
+		searchText: 'Main',
+		resultText: 'Main St',
+		keysToValidate: [['street', 'Main St']],
 	},
 ] as const;
 
