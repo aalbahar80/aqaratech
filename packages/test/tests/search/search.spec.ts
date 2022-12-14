@@ -4,6 +4,9 @@ import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
 
+// NOTE: This test becomes flaky when run in parallel with other tests.
+// It's probably due to multiple tests updating the same meilisearch index in parallel.
+
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
 	tenantsParams: [{ fullName: 'Bob Brown' }],
@@ -55,7 +58,7 @@ const inputs = [
 ] as const;
 
 for (const i of inputs) {
-	test(`search - ${i.type}`, async ({ page, isMobile }) => {
+	test(`search: ${i.type}`, async ({ page, isMobile }) => {
 		const { searchText, resultText, keysToValidate } = i;
 
 		if (isMobile) {
