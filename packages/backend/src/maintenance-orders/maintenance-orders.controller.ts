@@ -7,6 +7,7 @@ import {
 	Patch,
 	Post,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import {
 	maintenanceOrderCreateSchema,
@@ -24,6 +25,7 @@ import {
 import { MaintenanceOrdersService } from './maintenance-orders.service';
 
 @Controller()
+@ApiTags('maintenance-orders')
 export class MaintenanceOrdersController {
 	constructor(
 		private readonly maintenanceOrdersService: MaintenanceOrdersService,

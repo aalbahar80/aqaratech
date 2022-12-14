@@ -13,6 +13,7 @@ import { ExpensesModule } from 'src/expenses/expenses.module';
 import { FilesModule } from 'src/files/files.module';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
+import { MaintenanceOrdersModule } from 'src/maintenance-orders/maintenance-orders.module';
 import { OrganizationsModule } from 'src/organizations/organizations.module';
 import { PayoutsModule } from 'src/payouts/payouts.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
@@ -50,6 +51,7 @@ export const setupSwagger = async (app: INestApplication) => {
 			ExpenseCategoriesModule,
 			FilesModule,
 			PayoutsModule,
+			MaintenanceOrdersModule,
 		],
 		extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
 		ignoreGlobalPrefix: true,

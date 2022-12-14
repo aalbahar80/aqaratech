@@ -42,7 +42,7 @@ export class MaintenanceOrdersService {
 		const { portfolioId, propertyId, unitId, tenantId, ...data } =
 			createMaintenanceOrderDto;
 
-		return this.prisma.maintenanceOrder.create({
+		const mo = this.prisma.maintenanceOrder.create({
 			data: {
 				...data,
 				organization: { connect: { id: organizationId } },
@@ -52,6 +52,8 @@ export class MaintenanceOrdersService {
 				tenant: tenantId ? { connect: { id: tenantId } } : undefined,
 			},
 		});
+
+		return plainToInstance(MaintenanceOrderDto, mo);
 	}
 
 	async findAll({

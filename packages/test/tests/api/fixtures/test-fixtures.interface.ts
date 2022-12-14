@@ -3,6 +3,7 @@ import type {
 	ExpenseFactoryParams,
 	LeaseFactoryParams,
 	LeaseInvoiceFactoryParams,
+	MaintenanceOrderFactoryParams,
 	PayoutFactoryParams,
 	PortfolioFactoryParams,
 	PropertyFactoryParams,
@@ -16,6 +17,7 @@ import type {
 	ExpenseDto,
 	LeaseDto,
 	LeaseInvoiceDto,
+	MaintenanceOrderDto,
 	OrganizationCreatedDto,
 	PayoutDto,
 	PortfolioDto,
@@ -56,6 +58,8 @@ export interface TestFixtures {
 	expenses: [ExpenseDto, ...ExpenseDto[]];
 	payout: PayoutDto;
 	payouts: [PayoutDto, ...PayoutDto[]];
+	maintenanceOrder: MaintenanceOrderDto;
+	maintenanceOrders: [MaintenanceOrderDto, ...MaintenanceOrderDto[]];
 	expenseCategory: ExpenseCategoryDto;
 	file: string;
 }
@@ -78,6 +82,7 @@ export interface TestOptions {
 	 */
 	expensesParams: ExpenseFactoryParams[] | undefined;
 	expenseCategoryParams: ExpenseCategoryFactoryParams | undefined;
+	maintenanceOrdersParams: MaintenanceOrderFactoryParams[] | undefined;
 }
 
 export type AllFixtures = Fixtures<

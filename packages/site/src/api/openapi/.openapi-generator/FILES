@@ -4,6 +4,7 @@ apis/ExpensesApi.ts
 apis/FilesApi.ts
 apis/LeaseInvoicesApi.ts
 apis/LeasesApi.ts
+apis/MaintenanceOrdersApi.ts
 apis/OrganizationsApi.ts
 apis/PayoutsApi.ts
 apis/PortfoliosApi.ts

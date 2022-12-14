@@ -5,6 +5,7 @@ export * from './ExpensesApi';
 export * from './FilesApi';
 export * from './LeaseInvoicesApi';
 export * from './LeasesApi';
+export * from './MaintenanceOrdersApi';
 export * from './OrganizationsApi';
 export * from './PayoutsApi';
 export * from './PortfoliosApi';

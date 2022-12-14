@@ -2564,6 +2564,89 @@ paths:
                 $ref: '#/components/schemas/ExpenseCategoryDto'
       tags: *ref_26
       security: *ref_27
+  /organizations/{organizationId}/maintenance-orders:
+    post:
+      operationId: MaintenanceOrdersController_create
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMaintenanceOrderDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceOrderDto'
+      tags: &ref_28
+        - maintenance-orders
+  /{id}:
+    get:
+      operationId: MaintenanceOrdersController_findOne
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaintenanceOrderDto'
+      tags: *ref_28
+    patch:
+      operationId: MaintenanceOrdersController_update
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMaintenanceOrderDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *ref_28
+    delete:
+      operationId: MaintenanceOrdersController_remove
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_28
 info:
   title: Aqaratech
   description: Aqaratech API
@@ -4128,6 +4211,121 @@ components:
           nullable: true
       required:
         - labelEn
+    CreateMaintenanceOrderDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        propertyId:
+          type: string
+          nullable: true
+        unitId:
+          type: string
+          nullable: true
+        tenantId:
+          type: string
+          nullable: true
+        completedAt:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        status:
+          type: object
+      required:
+        - portfolioId
+        - propertyId
+        - unitId
+        - tenantId
+    MaintenanceOrderBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        tenant:
+          $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
+    MaintenanceOrderDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        createdAt:
+          type: string
+          readOnly: true
+        updatedAt:
+          type: string
+          readOnly: true
+        breadcrumbs:
+          $ref: '#/components/schemas/MaintenanceOrderBreadcrumbsDto'
+        portfolioId:
+          type: string
+        propertyId:
+          type: string
+          nullable: true
+        unitId:
+          type: string
+          nullable: true
+        tenantId:
+          type: string
+          nullable: true
+        completedAt:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        status:
+          type: object
+        organizationId:
+          type: string
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - breadcrumbs
+        - portfolioId
+        - propertyId
+        - unitId
+        - tenantId
+        - completedAt
+        - title
+        - description
+        - status
+        - organizationId
+    UpdateMaintenanceOrderDto:
+      type: object
+      properties:
+        completedAt:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        status:
+          type: object
     BreadcrumbsDto:
       type: object
       properties:

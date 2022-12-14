@@ -452,6 +452,61 @@ export interface CreateLeaseInvoiceDto {
 /**
  *
  * @export
+ * @interface CreateMaintenanceOrderDto
+ */
+export interface CreateMaintenanceOrderDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateMaintenanceOrderDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateMaintenanceOrderDto
+	 */
+	propertyId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateMaintenanceOrderDto
+	 */
+	unitId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateMaintenanceOrderDto
+	 */
+	tenantId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateMaintenanceOrderDto
+	 */
+	completedAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateMaintenanceOrderDto
+	 */
+	title?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateMaintenanceOrderDto
+	 */
+	description?: string | null;
+	/**
+	 *
+	 * @type {object}
+	 * @memberof CreateMaintenanceOrderDto
+	 */
+	status?: object;
+}
+/**
+ *
+ * @export
  * @interface CreateManyLeaseInvoicesDto
  */
 export interface CreateManyLeaseInvoicesDto {
@@ -1423,6 +1478,122 @@ export interface LeaseInvoiceDto {
 	 * @memberof LeaseInvoiceDto
 	 */
 	mfPaymentId: string | null;
+}
+/**
+ *
+ * @export
+ * @interface MaintenanceOrderBreadcrumbsDto
+ */
+export interface MaintenanceOrderBreadcrumbsDto {
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof MaintenanceOrderBreadcrumbsDto
+	 */
+	readonly portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof MaintenanceOrderBreadcrumbsDto
+	 */
+	readonly property?: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof MaintenanceOrderBreadcrumbsDto
+	 */
+	readonly unit?: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof MaintenanceOrderBreadcrumbsDto
+	 */
+	tenant?: BreadcrumbDto;
+}
+/**
+ *
+ * @export
+ * @interface MaintenanceOrderDto
+ */
+export interface MaintenanceOrderDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	readonly createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	readonly updatedAt: string;
+	/**
+	 *
+	 * @type {MaintenanceOrderBreadcrumbsDto}
+	 * @memberof MaintenanceOrderDto
+	 */
+	breadcrumbs: MaintenanceOrderBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	propertyId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	unitId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	tenantId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	completedAt: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	title: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	description: string | null;
+	/**
+	 *
+	 * @type {object}
+	 * @memberof MaintenanceOrderDto
+	 */
+	status: object;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	organizationId: string;
 }
 /**
  *
@@ -3055,6 +3226,37 @@ export interface UpdateLeaseInvoiceDto {
 	 * @memberof UpdateLeaseInvoiceDto
 	 */
 	memo?: string | null;
+}
+/**
+ *
+ * @export
+ * @interface UpdateMaintenanceOrderDto
+ */
+export interface UpdateMaintenanceOrderDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateMaintenanceOrderDto
+	 */
+	completedAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateMaintenanceOrderDto
+	 */
+	title?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdateMaintenanceOrderDto
+	 */
+	description?: string | null;
+	/**
+	 *
+	 * @type {object}
+	 * @memberof UpdateMaintenanceOrderDto
+	 */
+	status?: object;
 }
 /**
  *
