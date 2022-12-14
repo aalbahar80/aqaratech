@@ -50,7 +50,7 @@ export class MaintenanceOrdersController {
 		return this.maintenanceOrdersService.findOne({ id, user });
 	}
 
-	@Patch(':id')
+	@Patch('/maintenance-orders/:id')
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,

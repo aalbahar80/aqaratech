@@ -11,6 +11,7 @@ import { expenseCategoryFixtures } from './fixtures/expense-category.fixture';
 import { expenseFixtures } from './fixtures/expense.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
 import { leaseFixtures } from './fixtures/lease.fixture';
+import { maintenanceOrderFixtures } from './fixtures/maintenance-order.fixture';
 import { payoutFixtures } from './fixtures/payout.fixture';
 import { portfolioFixtures } from './fixtures/portfolio.fixture';
 import { propertyFixtures } from './fixtures/property.fixture';
@@ -160,4 +161,5 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	...expenseCategoryFixtures,
 	...payoutFixtures,
 	...roleFixtures,
+	...maintenanceOrderFixtures,
 });

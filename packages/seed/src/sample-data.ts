@@ -16,6 +16,7 @@ import {
 	expenseFactory,
 	leaseFactory,
 	leaseInvoiceFactory,
+	maintenanceOrderFactory,
 	organizationFactory,
 	payoutFactory,
 	portfolioFactory,
@@ -206,6 +207,14 @@ const payouts = [
 	}),
 ] as const;
 
+const maintenanceOrders = [
+	maintenanceOrderFactory.build({
+		id: '3a201a68-7576-4044-bbaa-8fba3a3dc897',
+		organizationId: testOrgId,
+		portfolioId: testPortfolioId,
+	}),
+] as const;
+
 export const sample = {
 	users,
 	roles,
@@ -218,4 +227,5 @@ export const sample = {
 	leaseInvoices,
 	expenses,
 	payouts,
+	maintenanceOrders,
 };

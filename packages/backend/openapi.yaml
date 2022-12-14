@@ -2609,6 +2609,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/MaintenanceOrderDto'
       tags: *ref_28
+    delete:
+      operationId: MaintenanceOrdersController_remove
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_28
+  /maintenance-orders/{id}:
     patch:
       operationId: MaintenanceOrdersController_update
       summary: ''
@@ -2632,20 +2647,6 @@ paths:
             application/json:
               schema:
                 type: object
-      tags: *ref_28
-    delete:
-      operationId: MaintenanceOrdersController_remove
-      summary: ''
-      description: ''
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
       tags: *ref_28
 info:
   title: Aqaratech
