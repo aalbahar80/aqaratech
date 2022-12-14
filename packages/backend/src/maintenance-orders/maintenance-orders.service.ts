@@ -30,20 +30,27 @@ export class MaintenanceOrdersService {
 		user: IUser;
 		organizationId: string;
 	}) {
-		const input = {
-			...createMaintenanceOrderDto,
-			organizationId,
-		} as const;
-
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Create,
 			// @ts-expect-error use DateAsString
-			subject('MaintenanceOrder', input),
+			subject('MaintenanceOrder', {
+				...createMaintenanceOrderDto,
+				organizationId,
+			}),
 		);
 
+		const { portfolioId, propertyId, unitId, tenantId, ...data } =
+			createMaintenanceOrderDto;
+
 		return this.prisma.maintenanceOrder.create({
-			// INVESTIGATE: Why no complain about date/string here?
-			data: input,
+			data: {
+				...data,
+				organization: { connect: { id: organizationId } },
+				portfolio: { connect: { id: portfolioId } },
+				property: propertyId ? { connect: { id: propertyId } } : undefined,
+				unit: unitId ? { connect: { id: unitId } } : undefined,
+				tenant: tenantId ? { connect: { id: tenantId } } : undefined,
+			},
 		});
 	}
 
