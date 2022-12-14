@@ -1,3 +1,4 @@
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -20,9 +21,23 @@ import {
 export class MaintenanceOrdersService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	create(createMaintenanceOrderDto: CreateMaintenanceOrderDto) {
-		console.log(createMaintenanceOrderDto);
-		return 'This action adds a new maintenanceOrder';
+	async create({
+		createMaintenanceOrderDto,
+		user,
+	}: {
+		createMaintenanceOrderDto: CreateMaintenanceOrderDto;
+		user: IUser;
+	}) {
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Create,
+			// @ts-expect-error use DateAsString
+			subject('MaintenanceOrder', createMaintenanceOrderDto),
+		);
+
+		return this.prisma.maintenanceOrder.create({
+			// @ts-expect-error use DateAsString
+			data: createMaintenanceOrderDto,
+		});
 	}
 
 	async findAll({

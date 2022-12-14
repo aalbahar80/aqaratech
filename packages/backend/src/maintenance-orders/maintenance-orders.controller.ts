@@ -27,8 +27,14 @@ export class MaintenanceOrdersController {
 	) {}
 
 	@Post()
-	create(@Body() createMaintenanceOrderDto: CreateMaintenanceOrderDto) {
-		return this.maintenanceOrdersService.create(createMaintenanceOrderDto);
+	create(
+		@User() user: IUser,
+		@Body() createMaintenanceOrderDto: CreateMaintenanceOrderDto,
+	) {
+		return this.maintenanceOrdersService.create({
+			createMaintenanceOrderDto,
+			user,
+		});
 	}
 
 	@Get(':id')
