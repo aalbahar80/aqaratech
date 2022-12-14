@@ -17,7 +17,7 @@ import {
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 
-import { populateExpenseType } from './dto/with-tree';
+import { populateExpenseType } from './dto/populate-expense-type';
 
 @Injectable()
 export class ExpensesService {
