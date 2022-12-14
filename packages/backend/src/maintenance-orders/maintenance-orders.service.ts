@@ -21,7 +21,7 @@ import {
 export class MaintenanceOrdersService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	async create({
+	create({
 		createMaintenanceOrderDto,
 		user,
 		organizationId,
