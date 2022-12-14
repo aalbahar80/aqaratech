@@ -2,6 +2,7 @@ export * from './expense';
 export * from './expense-category';
 export * from './lease';
 export * from './lease-invoice';
+export * from './maintenance-order';
 export * from './organization';
 export * from './organization-settings';
 export * from './payout';

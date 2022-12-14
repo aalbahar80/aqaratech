@@ -2,6 +2,7 @@ import type {
 	Expense as ExpenseBase,
 	Lease as LeaseBase,
 	LeaseInvoice as LeaseInvoiceBase,
+	MaintenanceOrder as MaintenanceOrderBase,
 	Organization as OrganizationBase,
 	Payout as PayoutBase,
 	Portfolio as PortfolioBase,
@@ -31,3 +32,4 @@ export type Lease = DateAsString<LeaseBase>;
 export type LeaseInvoice = DateAsString<LeaseInvoiceBase>;
 export type Expense = DateAsString<ExpenseBase>;
 export type Payout = DateAsString<PayoutBase>;
+export type MaintenanceOrder = DateAsString<MaintenanceOrderBase>;
