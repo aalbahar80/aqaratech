@@ -3,7 +3,6 @@ import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { propertyUpdateSchema } from '@self/utils';
 
-import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -52,7 +51,6 @@ export class PropertiesController {
 
 	@Patch(':id')
 	// @CheckAbilities({ action: Action.Update, subject: SubjectType })
-	@SkipAbilityCheck() // TODO rm
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,

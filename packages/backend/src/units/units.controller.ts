@@ -4,7 +4,6 @@ import { Prisma } from '@prisma/client';
 
 import { unitUpdateSchema } from '@self/utils';
 
-import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -43,7 +42,6 @@ export class UnitsController {
 	}
 
 	@Patch(':id')
-	@SkipAbilityCheck() // TODO rm
 	// TODO: review if PartialUnitDto needed
 	@ApiOkResponse({ type: PartialUnitDto })
 	update(

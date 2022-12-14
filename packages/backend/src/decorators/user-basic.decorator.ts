@@ -7,7 +7,7 @@ import { AuthenticatedUser } from 'src/interfaces/user.interface';
  *
  * TODO: Rename to AuthenticatedUser
  *
- * For use in routes marked with `@SkipAbilityCheck()` or `@SkipRoleGuard()`.
+ * For use in routes marked with `@SkipRoleGuard()`.
  *
  */
 export const UserBasic = createParamDecorator(

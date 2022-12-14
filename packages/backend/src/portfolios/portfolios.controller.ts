@@ -21,7 +21,6 @@ import { portfolioUpdateSchema } from '@self/utils';
 import { AggregateService } from 'src/aggregate/aggregate.service';
 import { AggregateOptionsExpensesDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { BalanceDto } from 'src/aggregate/dto/balance.dto';
-import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -90,7 +89,6 @@ export class PortfoliosController {
 	}
 
 	@Patch(':id')
-	@SkipAbilityCheck() // TODO rm
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,

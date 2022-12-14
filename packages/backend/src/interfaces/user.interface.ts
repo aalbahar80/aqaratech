@@ -8,7 +8,7 @@ import { ValidatedUserDto } from 'src/users/dto/user.dto';
  * User might not exist in our database at this point yet.
  * TODO: add isEmailVerified to this type.
  *
- * We should expect a user of this type if we use `@SkipAbilityCheck()` on a route handler.
+ * We should expect a user of this type if we use `@SkipRoleGuard()` on a route handler.
  */
 export interface AuthenticatedUser {
 	email: string;

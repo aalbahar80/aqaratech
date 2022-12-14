@@ -7,7 +7,6 @@ import { IUser } from 'src/interfaces/user.interface';
  * Should *not* be used with the following decorators:
  *
  * `@SkipRouteGuard()`
- * `@SkipAbilityCheck()`
  * `@Public()`.
  */
 export const User = createParamDecorator(

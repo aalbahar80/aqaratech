@@ -4,7 +4,6 @@ import { Prisma } from '@prisma/client';
 
 import { tenantUpdateSchema } from '@self/utils';
 
-import { SkipAbilityCheck } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -61,7 +60,6 @@ export class TenantsController {
 	}
 
 	@Patch(':id')
-	@SkipAbilityCheck() // TODO rm
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
