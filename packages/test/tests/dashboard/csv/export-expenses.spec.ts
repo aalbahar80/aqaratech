@@ -46,7 +46,7 @@ test('can export csv from expenses table', async ({
 	expect.soft(csv).not.toBe('');
 
 	expect(csv).toContain(
-		'id,unitId,createdAt,updatedAt,amount,postAt,organizationId,portfolioId',
+		'id,createdAt,updatedAt,portfolioId,unitId,amount,postAt,organizationId',
 	);
 
 	const ids = expenses.map((expense) => expense.id);

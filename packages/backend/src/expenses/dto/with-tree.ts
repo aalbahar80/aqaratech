@@ -1,12 +1,15 @@
-import { Expense } from '@prisma/client';
+import { Expense, Prisma } from '@prisma/client';
 import { z } from 'zod';
 
-import { expenseCategorySchema, expenseCategoryTreeSchema } from '@self/utils';
+import { expenseCategorySchema } from '@self/utils';
 
 export const populateExpenseType = (
 	expense: Expense,
-	tree: z.infer<typeof expenseCategoryTreeSchema>,
+	rawTree: Prisma.JsonValue,
 ) => {
+	// avoid expenseCategoryTreeSchema because it doesn't allow the isGroup key.
+	const tree = z.array(expenseCategorySchema).parse(rawTree);
+
 	const rawCategory = tree.find((c) => c.id === expense.categoryId);
 
 	if (rawCategory) {

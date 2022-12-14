@@ -3,7 +3,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Expense, Prisma } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 
-import { expenseCategorySchema, expenseCategoryTreeSchema } from '@self/utils';
+import { expenseCategorySchema } from '@self/utils';
 
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
@@ -130,11 +130,9 @@ export class ExpensesService {
 			}),
 		]);
 
-		const tree = expenseCategoryTreeSchema.parse(settings.expenseCategoryTree);
-
 		const results = plainToInstance(
 			ExpenseDto,
-			data.map((e) => populateExpenseType(e, tree)),
+			data.map((e) => populateExpenseType(e, settings.expenseCategoryTree)),
 		);
 
 		return { total, results: results };
@@ -160,9 +158,10 @@ export class ExpensesService {
 			}),
 		]);
 
-		const tree = expenseCategoryTreeSchema.parse(settings.expenseCategoryTree);
-
-		const result = plainToInstance(ExpenseDto, populateExpenseType(data, tree));
+		const result = plainToInstance(
+			ExpenseDto,
+			populateExpenseType(data, settings.expenseCategoryTree),
+		);
 
 		return plainToInstance(ExpenseDto, result);
 	}
