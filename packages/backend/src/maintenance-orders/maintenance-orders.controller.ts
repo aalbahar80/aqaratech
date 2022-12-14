@@ -1,14 +1,17 @@
 import {
-	Controller,
-	Get,
-	Post,
 	Body,
-	Patch,
-	Param,
+	Controller,
 	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
 } from '@nestjs/common';
 
-import { maintenanceOrderUpdateSchema } from '@self/utils';
+import {
+	maintenanceOrderCreateSchema,
+	maintenanceOrderUpdateSchema,
+} from '@self/utils';
 
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
@@ -20,19 +23,22 @@ import {
 } from './dto/maintenance-order.dto';
 import { MaintenanceOrdersService } from './maintenance-orders.service';
 
-@Controller('maintenance-orders')
+@Controller()
 export class MaintenanceOrdersController {
 	constructor(
 		private readonly maintenanceOrdersService: MaintenanceOrdersService,
 	) {}
 
-	@Post()
+	@Post('organizations/:organizationId/maintenance-orders')
 	create(
+		@Param('organizationId') organizationId: string,
 		@User() user: IUser,
-		@Body() createMaintenanceOrderDto: CreateMaintenanceOrderDto,
+		@Body(new ZodValidationPipe(maintenanceOrderCreateSchema))
+		createMaintenanceOrderDto: CreateMaintenanceOrderDto,
 	) {
 		return this.maintenanceOrdersService.create({
 			createMaintenanceOrderDto,
+			organizationId,
 			user,
 		});
 	}

@@ -21,7 +21,8 @@ export const defineTenantAbility = (role: Role, can: TCan) => {
 		lease: { tenantId: { equals: role.tenantId } },
 	});
 
-	can(Action.Read, ['MaintenanceOrder'], {
+	// TODO restrict fields
+	can([Action.Read, Action.Create, Action.Update], ['MaintenanceOrder'], {
 		tenantId: { equals: role.tenantId },
 	});
 };

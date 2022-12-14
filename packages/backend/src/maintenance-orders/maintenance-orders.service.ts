@@ -24,19 +24,26 @@ export class MaintenanceOrdersService {
 	async create({
 		createMaintenanceOrderDto,
 		user,
+		organizationId,
 	}: {
 		createMaintenanceOrderDto: CreateMaintenanceOrderDto;
 		user: IUser;
+		organizationId: string;
 	}) {
+		const input = {
+			...createMaintenanceOrderDto,
+			organizationId,
+		} as const;
+
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Create,
 			// @ts-expect-error use DateAsString
-			subject('MaintenanceOrder', createMaintenanceOrderDto),
+			subject('MaintenanceOrder', input),
 		);
 
 		return this.prisma.maintenanceOrder.create({
-			// @ts-expect-error use DateAsString
-			data: createMaintenanceOrderDto,
+			// INVESTIGATE: Why no complain about date/string here?
+			data: input,
 		});
 	}
 
