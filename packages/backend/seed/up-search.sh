@@ -1,13 +1,16 @@
 #!/bin/bash
 
-isRunning=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:7700/health)
+isRunning=$(docker inspect -f '{{.State.Running}}' meili)
 
 if [ "$isRunning" -eq 200 ]; then
 	echo "MeiliSearch is already running"
+
+	echo "Stopping MeiliSearch container"
+	docker stop meili
+	sleep 3
 else
 	echo "MeiliSearch is not running"
-
-	# start it
-	echo "Starting MeiliSearch"
-	docker run --rm -d -p 7700:7700 getmeili/meilisearch:v0.28.1
 fi
+
+echo "Starting MeiliSearch container"
+docker run --rm -d -p 7700:7700 --name=meili getmeili/meilisearch:v0.28.1

@@ -66,7 +66,7 @@ for (const i of inputs) {
 		await btn.click();
 
 		// search
-		const input = page.getByPlaceholder('Search...').first();
+		const input = page.getByPlaceholder('Search...');
 		await input.fill(searchText);
 
 		// check result
