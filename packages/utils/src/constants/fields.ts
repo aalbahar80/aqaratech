@@ -71,6 +71,11 @@ export const expenseCategory = {
 	all: ['labelEn', 'labelAr', 'isGroup'],
 } as const;
 
+export const maintenanceOrder = {
+	required: ['title'],
+	all: ['title', 'description', 'status', 'completedAt'],
+} as const;
+
 /**
  * The form fields for each entity.
  */
@@ -83,4 +88,5 @@ export const FIELDS = {
 	expense,
 	payout,
 	expenseCategory,
+	maintenanceOrder,
 } as const;
