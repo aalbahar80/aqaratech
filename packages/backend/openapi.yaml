@@ -3397,6 +3397,8 @@ components:
         label:
           type: string
           nullable: true
+        organizationId:
+          type: string
       required:
         - id
         - createdAt
@@ -3411,6 +3413,7 @@ components:
         - categoryId
         - memo
         - label
+        - organizationId
     GroupByMonthDto:
       type: object
       properties:
@@ -3649,6 +3652,8 @@ components:
         label:
           type: string
           nullable: true
+        organizationId:
+          type: string
     ValidatedUserDto:
       type: object
       properties:

@@ -38,6 +38,12 @@ export class ExpenseDto
 	memo: string | null;
 	label: string | null;
 
+	organizationId: string;
+
+	@ApiProperty()
+	@Expose()
+	expenseType: ExpenseCategoryDto | null;
+
 	@ApiHideProperty()
 	@Exclude()
 	portfolio: IBreadcrumbs['portfolio'];
@@ -49,10 +55,6 @@ export class ExpenseDto
 	@ApiHideProperty()
 	@Exclude()
 	unit: IBreadcrumbs['unit'] | null;
-
-	@ApiProperty()
-	@Expose()
-	expenseType: ExpenseCategoryDto | null;
 
 	@ApiProperty()
 	@Expose()

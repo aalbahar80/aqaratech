@@ -893,10 +893,10 @@ export interface ExpenseDto {
 	readonly updatedAt: string;
 	/**
 	 *
-	 * @type {string}
+	 * @type {ExpenseDtoExpenseType}
 	 * @memberof ExpenseDto
 	 */
-	postAt: string;
+	expenseType: ExpenseDtoExpenseType | null;
 	/**
 	 *
 	 * @type {ExpenseBreadcrumbsDto}
@@ -905,40 +905,10 @@ export interface ExpenseDto {
 	breadcrumbs: ExpenseBreadcrumbsDto;
 	/**
 	 *
-	 * @type {ExpenseDtoExpenseType}
-	 * @memberof ExpenseDto
-	 */
-	expenseType: ExpenseDtoExpenseType | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseDto
-	 */
-	organizationId: string;
-	/**
-	 *
 	 * @type {string}
 	 * @memberof ExpenseDto
 	 */
 	portfolioId: string;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof ExpenseDto
-	 */
-	amount: number;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseDto
-	 */
-	memo: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseDto
-	 */
-	unitId: string | null;
 	/**
 	 *
 	 * @type {string}
@@ -950,13 +920,43 @@ export interface ExpenseDto {
 	 * @type {string}
 	 * @memberof ExpenseDto
 	 */
-	maintenanceOrderId: string | null;
+	unitId: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof ExpenseDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	postAt: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof ExpenseDto
 	 */
 	categoryId: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	memo: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	label: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	organizationId: string;
 }
 /**
  *
@@ -1839,10 +1839,10 @@ export interface PartialExpenseDto {
 	readonly updatedAt?: string;
 	/**
 	 *
-	 * @type {string}
+	 * @type {ExpenseDtoExpenseType}
 	 * @memberof PartialExpenseDto
 	 */
-	postAt?: string;
+	expenseType?: ExpenseDtoExpenseType | null;
 	/**
 	 *
 	 * @type {ExpenseBreadcrumbsDto}
@@ -1854,31 +1854,7 @@ export interface PartialExpenseDto {
 	 * @type {string}
 	 * @memberof PartialExpenseDto
 	 */
-	organizationId?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDto
-	 */
 	portfolioId?: string;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof PartialExpenseDto
-	 */
-	amount?: number;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDto
-	 */
-	memo?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDto
-	 */
-	unitId?: string | null;
 	/**
 	 *
 	 * @type {string}
@@ -1890,7 +1866,19 @@ export interface PartialExpenseDto {
 	 * @type {string}
 	 * @memberof PartialExpenseDto
 	 */
-	maintenanceOrderId?: string | null;
+	unitId?: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PartialExpenseDto
+	 */
+	amount?: number;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	postAt?: string;
 	/**
 	 *
 	 * @type {string}
@@ -1899,10 +1887,22 @@ export interface PartialExpenseDto {
 	categoryId?: string | null;
 	/**
 	 *
-	 * @type {ExpenseDtoExpenseType}
+	 * @type {string}
 	 * @memberof PartialExpenseDto
 	 */
-	expenseType?: ExpenseDtoExpenseType | null;
+	memo?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	organizationId?: string;
 }
 /**
  *
