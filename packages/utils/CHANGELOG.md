@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.1.1
+
+### Patch Changes
+
+- c85617e42: no test on release
+
 ## 3.1.0
 
 ### Minor Changes

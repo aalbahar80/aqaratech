@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.1.1
+
+### Patch Changes
+
+- c85617e42: no test on release
+
 ## 2.1.0
 
 ### Minor Changes

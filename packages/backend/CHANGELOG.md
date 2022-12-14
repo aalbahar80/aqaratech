@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.2.1
+
+### Patch Changes
+
+- c85617e42: no test on release
+- Updated dependencies [c85617e42]
+  - @self/utils@3.1.1
+
 ## 2.2.0
 
 ### Minor Changes
