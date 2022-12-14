@@ -13,9 +13,6 @@ test.use({
 		{
 			page,
 			org,
-			portfolio,
-			tenant,
-			property,
 			portfolios: _portfolios,
 			tenants: _tenants,
 			properties: _properties,
@@ -76,6 +73,8 @@ for (const i of inputs) {
 		await page.goto(edit);
 
 		await page.getByRole('button', { name: 'Save' }).click();
+
+		await page.waitForNavigation(); // not waiting here makes webkit tests flaky
 	});
 
 	test(`search - ${i.type}`, async ({ page, isMobile }) => {
@@ -94,7 +93,9 @@ for (const i of inputs) {
 
 		// check result
 		const result = page.getByRole('option', { name: resultText });
-		await expect(result).toBeVisible();
+		await expect(result).toBeVisible({
+			timeout: 10000,
+		});
 
 		// navigate to result
 		await result.click();
