@@ -55,28 +55,6 @@ const inputs = [
 ] as const;
 
 for (const i of inputs) {
-	test.beforeEach(async ({ page, org, portfolio, tenant, property }) => {
-		const entities = { portfolio, tenant, property };
-		const entity = entities[i.type];
-
-		// trigger search reindex by updating entity through form
-		const edit = getRoute({
-			pageType: PageType.Edit,
-			entity: i.type,
-			id: entity.id,
-			params: {
-				organizationId: org.organization.id,
-				portfolioId: portfolio.id,
-			},
-		});
-
-		await page.goto(edit);
-
-		await page.getByRole('button', { name: 'Save' }).click();
-
-		await page.waitForNavigation(); // not waiting here makes webkit tests flaky
-	});
-
 	test(`search - ${i.type}`, async ({ page, isMobile }) => {
 		const { searchText, resultText, keysToValidate } = i;
 
