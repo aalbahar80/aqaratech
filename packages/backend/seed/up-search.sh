@@ -2,12 +2,11 @@
 
 isRunning=$(docker inspect -f '{{.State.Running}}' meili)
 
-if [ "$isRunning" -eq 200 ]; then
+if [ "$isRunning" = "true" ]; then
 	echo "MeiliSearch is already running"
 
 	echo "Stopping MeiliSearch container"
 	docker stop meili
-	sleep 3
 else
 	echo "MeiliSearch is not running"
 fi
