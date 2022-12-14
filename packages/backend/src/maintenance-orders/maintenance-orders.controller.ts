@@ -56,7 +56,7 @@ export class MaintenanceOrdersController {
 	}
 
 	@Delete(':id')
-	remove(@Param('id') id: string) {
-		return this.maintenanceOrdersService.remove(+id);
+	remove(@User() user: IUser, @Param('id') id: string) {
+		return this.maintenanceOrdersService.remove({ id, user });
 	}
 }

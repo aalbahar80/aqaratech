@@ -45,7 +45,12 @@ export class MaintenanceOrdersService {
 		});
 	}
 
-	remove(id: number) {
-		return `This action removes a #${id} maintenanceOrder`;
+	remove({ id, user }: { id: string; user: IUser }) {
+		return this.prisma.maintenanceOrder.delete({
+			where: {
+				id,
+				AND: accessibleBy(user.ability, Action.Delete).MaintenanceOrder,
+			},
+		});
 	}
 }
