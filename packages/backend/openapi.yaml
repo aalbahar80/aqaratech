@@ -3319,23 +3319,6 @@ components:
         - leaseInvoices
         - payouts
         - total
-    ExpenseBreadcrumbsDto:
-      type: object
-      properties:
-        portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-      required:
-        - portfolio
     ExpenseCategoryDto:
       type: object
       properties:
@@ -3358,6 +3341,23 @@ components:
         - id
         - labelEn
         - isGroup
+    ExpenseBreadcrumbsDto:
+      type: object
+      properties:
+        portfolio:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - portfolio
     ExpenseDto:
       type: object
       properties:
@@ -3370,6 +3370,10 @@ components:
         updatedAt:
           type: string
           readOnly: true
+        expenseType:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ExpenseCategoryDto'
         breadcrumbs:
           $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
         portfolioId:
@@ -3393,14 +3397,11 @@ components:
         label:
           type: string
           nullable: true
-        expenseType:
-          nullable: true
-          allOf:
-            - $ref: '#/components/schemas/ExpenseCategoryDto'
       required:
         - id
         - createdAt
         - updatedAt
+        - expenseType
         - breadcrumbs
         - portfolioId
         - propertyId
@@ -3410,7 +3411,6 @@ components:
         - categoryId
         - memo
         - label
-        - expenseType
     GroupByMonthDto:
       type: object
       properties:
@@ -3622,6 +3622,10 @@ components:
         updatedAt:
           type: string
           readOnly: true
+        expenseType:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ExpenseCategoryDto'
         breadcrumbs:
           $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
         portfolioId:
@@ -3645,10 +3649,6 @@ components:
         label:
           type: string
           nullable: true
-        expenseType:
-          nullable: true
-          allOf:
-            - $ref: '#/components/schemas/ExpenseCategoryDto'
     ValidatedUserDto:
       type: object
       properties:

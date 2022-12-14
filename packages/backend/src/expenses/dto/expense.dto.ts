@@ -38,23 +38,6 @@ export class ExpenseDto
 	memo: string | null;
 	label: string | null;
 
-	// @ApiHideProperty()
-	// tree: ExpenseCategoryDto[] | undefined;
-
-	// constructor(partial: Partial<ExpenseDto>, tree?: ExpenseCategoryDto[]) {
-	// 	super();
-	// 	Object.assign(this, partial);
-	//
-	// 	if (tree && Array.isArray(tree) && this.categoryId) {
-	// 		const rawCategory = tree.find((c) => c.id === this.categoryId);
-	// 		if (rawCategory) {
-	// 			this.expenseType = expenseCategorySchema.parse(rawCategory);
-	// 		}
-	// 	}
-	// }
-
-	expenseType: ExpenseCategoryDto | null;
-
 	@ApiHideProperty()
 	@Exclude()
 	portfolio: IBreadcrumbs['portfolio'];
@@ -66,6 +49,10 @@ export class ExpenseDto
 	@ApiHideProperty()
 	@Exclude()
 	unit: IBreadcrumbs['unit'] | null;
+
+	@ApiProperty()
+	@Expose()
+	expenseType: ExpenseCategoryDto | null;
 
 	@ApiProperty()
 	@Expose()

@@ -3,13 +3,12 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Expense, Prisma } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 
-import { expenseCategorySchema } from '@self/utils';
+import { expenseCategorySchema, expenseCategoryTreeSchema } from '@self/utils';
 
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
-import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import {
 	CreateExpenseDto,
 	ExpenseDto,
@@ -17,6 +16,8 @@ import {
 } from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
+
+import { populateExpenseType } from './dto/with-tree';
 
 @Injectable()
 export class ExpensesService {
@@ -129,13 +130,13 @@ export class ExpensesService {
 			}),
 		]);
 
-		//// @ts-expect-error will be used
-		const tree =
-			settings.expenseCategoryTree as unknown as ExpenseCategoryDto[];
+		const tree = expenseCategoryTreeSchema.parse(settings.expenseCategoryTree);
 
-		const results = plainToInstance(ExpenseDto, data);
+		const results = plainToInstance(
+			ExpenseDto,
+			data.map((e) => populateExpenseType(e, tree)),
+		);
 
-		// FIXME: compute expenseType
 		return { total, results: results };
 	}
 
@@ -159,12 +160,11 @@ export class ExpensesService {
 			}),
 		]);
 
-		//// @ts-expect-error will be used
-		const tree =
-			settings.expenseCategoryTree as unknown as ExpenseCategoryDto[];
+		const tree = expenseCategoryTreeSchema.parse(settings.expenseCategoryTree);
 
-		// FIXME: compute expenseType
-		return plainToInstance(ExpenseDto, data);
+		const result = plainToInstance(ExpenseDto, populateExpenseType(data, tree));
+
+		return plainToInstance(ExpenseDto, result);
 	}
 
 	async update({
