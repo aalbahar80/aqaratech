@@ -3370,51 +3370,47 @@ components:
         updatedAt:
           type: string
           readOnly: true
-        postAt:
-          type: string
         breadcrumbs:
           $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
-        expenseType:
-          nullable: true
-          allOf:
-            - $ref: '#/components/schemas/ExpenseCategoryDto'
-        organizationId:
-          type: string
         portfolioId:
           type: string
-        amount:
-          type: number
-          minimum: 1
-        memo:
+        propertyId:
           type: string
           nullable: true
         unitId:
           type: string
           nullable: true
-        propertyId:
+        amount:
+          type: number
+        postAt:
           type: string
-          nullable: true
-        maintenanceOrderId:
-          type: string
-          nullable: true
         categoryId:
           type: string
           nullable: true
+        memo:
+          type: string
+          nullable: true
+        label:
+          type: string
+          nullable: true
+        expenseType:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ExpenseCategoryDto'
       required:
         - id
         - createdAt
         - updatedAt
-        - postAt
         - breadcrumbs
-        - expenseType
-        - organizationId
         - portfolioId
-        - amount
-        - memo
-        - unitId
         - propertyId
-        - maintenanceOrderId
+        - unitId
+        - amount
+        - postAt
         - categoryId
+        - memo
+        - label
+        - expenseType
     GroupByMonthDto:
       type: object
       properties:
@@ -3626,30 +3622,27 @@ components:
         updatedAt:
           type: string
           readOnly: true
-        postAt:
-          type: string
         breadcrumbs:
           $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
-        organizationId:
-          type: string
         portfolioId:
           type: string
-        amount:
-          type: number
-          minimum: 1
-        memo:
+        propertyId:
           type: string
           nullable: true
         unitId:
           type: string
           nullable: true
-        propertyId:
+        amount:
+          type: number
+        postAt:
           type: string
-          nullable: true
-        maintenanceOrderId:
-          type: string
-          nullable: true
         categoryId:
+          type: string
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+        label:
           type: string
           nullable: true
         expenseType:

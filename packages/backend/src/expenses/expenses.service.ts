@@ -1,6 +1,7 @@
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Expense, Prisma } from '@prisma/client';
+import { plainToInstance } from 'class-transformer';
 
 import { expenseCategorySchema } from '@self/utils';
 
@@ -39,8 +40,10 @@ export class ExpensesService {
 
 		const { portfolioId, propertyId, unitId, ...data } = createExpenseDto;
 
+		let expense: Expense;
+
 		if (unitId) {
-			return this.prisma.expense.create({
+			expense = await this.prisma.expense.create({
 				data: {
 					...data,
 					unit: {
@@ -55,7 +58,7 @@ export class ExpensesService {
 				},
 			});
 		} else if (propertyId) {
-			return this.prisma.expense.create({
+			expense = await this.prisma.expense.create({
 				data: {
 					...data,
 					property: {
@@ -70,7 +73,7 @@ export class ExpensesService {
 				},
 			});
 		} else {
-			return this.prisma.expense.create({
+			expense = await this.prisma.expense.create({
 				data: {
 					...data,
 					portfolio: {
@@ -82,6 +85,8 @@ export class ExpensesService {
 				},
 			});
 		}
+
+		return plainToInstance(ExpenseDto, expense);
 	}
 
 	async findAll({
@@ -124,10 +129,14 @@ export class ExpensesService {
 			}),
 		]);
 
+		//// @ts-expect-error will be used
 		const tree =
 			settings.expenseCategoryTree as unknown as ExpenseCategoryDto[];
 
-		return { total, results: data.map((e) => new ExpenseDto(e, tree)) };
+		const results = plainToInstance(ExpenseDto, data);
+
+		// FIXME: compute expenseType
+		return { total, results: results };
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
@@ -150,10 +159,12 @@ export class ExpensesService {
 			}),
 		]);
 
+		//// @ts-expect-error will be used
 		const tree =
 			settings.expenseCategoryTree as unknown as ExpenseCategoryDto[];
 
-		return new ExpenseDto(data, tree);
+		// FIXME: compute expenseType
+		return plainToInstance(ExpenseDto, data);
 	}
 
 	async update({
@@ -170,10 +181,12 @@ export class ExpensesService {
 			await this.validateCategoryId(updateExpenseDto.categoryId, user);
 		}
 
-		return this.prisma.expense.update({
+		const expense = await this.prisma.expense.update({
 			where: { id, AND: accessibleBy(user.ability, Action.Update).Expense },
 			data: updateExpenseDto,
 		});
+
+		return plainToInstance(ExpenseDto, expense);
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
