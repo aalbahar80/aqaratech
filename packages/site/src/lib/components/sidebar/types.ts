@@ -1,4 +1,11 @@
+import type { HTMLAttributes } from 'svelte/elements';
+
 import type { Icon } from '$lib/models/types/icon.type';
+
+type LinkOptions = Pick<
+	HTMLAttributes<HTMLAnchorElement>,
+	'data-sveltekit-reload'
+>;
 
 export interface NavigationItem {
 	name: string;
@@ -10,4 +17,5 @@ export interface NavigationItem {
 	}[];
 	path?: string;
 	divided?: boolean;
+	linkOptions?: LinkOptions;
 }

@@ -36,11 +36,18 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			href: `/users/${user.id}/roles`,
 			icon: HeroiconsOutlineUser,
 			divided: true,
+			linkOptions: {
+				'data-sveltekit-reload': '',
+			},
 		},
 		{
 			name: 'Logout',
 			href: LOGOUT,
 			icon: HeroiconsOutlineLogout,
+			linkOptions: {
+				// Explicitly declare as external link to avoid a client-side error "Not Found".
+				'data-sveltekit-reload': '',
+			},
 		},
 	];
 

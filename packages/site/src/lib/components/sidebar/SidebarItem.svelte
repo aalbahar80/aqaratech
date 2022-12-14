@@ -35,6 +35,7 @@
 			// always expand when clicking on a link
 			expanded = true;
 		}}
+		{...item.linkOptions}
 	>
 		{#if item.icon}
 			<svelte:component this={item.icon} class="h-5 w-5" />
