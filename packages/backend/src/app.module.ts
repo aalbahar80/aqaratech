@@ -40,6 +40,7 @@ import { FilesModule } from './files/files.module';
 import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
 import { LeasesModule } from './leases/leases.module';
 import { LogtailModule } from './logtail/logtail.module';
+import { MaintenanceOrdersModule } from './maintenance-orders/maintenance-orders.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { PayoutsModule } from './payouts/payouts.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
@@ -115,6 +116,7 @@ import { UsersModule } from './users/users.module';
 		S3Module,
 		FilesModule,
 		PayoutsModule,
+		MaintenanceOrdersModule,
 	],
 	controllers: [AppController],
 	providers: [
