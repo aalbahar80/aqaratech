@@ -31,14 +31,9 @@ export class MaintenanceOrdersController {
 		return this.maintenanceOrdersService.create(createMaintenanceOrderDto);
 	}
 
-	@Get()
-	findAll() {
-		return this.maintenanceOrdersService.findAll();
-	}
-
 	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.maintenanceOrdersService.findOne(+id);
+	findOne(@User() user: IUser, @Param('id') id: string) {
+		return this.maintenanceOrdersService.findOne({ id, user });
 	}
 
 	@Patch(':id')
