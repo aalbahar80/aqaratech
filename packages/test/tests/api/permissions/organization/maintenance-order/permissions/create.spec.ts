@@ -18,6 +18,8 @@ const FIELDS = [
 	'completedAt',
 ] as const;
 
+const getUrl = (orgId: string) => `/organizations/${orgId}/maintenance-orders`;
+
 test('can create maintenanceOrder in own org', async ({
 	request,
 	org,
@@ -32,7 +34,7 @@ test('can create maintenanceOrder in own org', async ({
 		FIELDS,
 	);
 
-	const url = `/organizations/${org.organization.id}/maintenance-orders`;
+	const url = getUrl(org.organization.id);
 
 	const res = await request.post(url, { data: maintenanceOrder });
 
@@ -53,7 +55,7 @@ test('cannot create maintenanceOrder in another org', async ({
 		FIELDS,
 	);
 
-	const url = `/organizations/${sample.organizations[0].id}/maintenanceOrders`;
+	const url = getUrl(sample.organizations[0].id);
 
 	const res = await request.post(url, { data: maintenanceOrder });
 
@@ -74,7 +76,7 @@ test('cannot create maintenanceOrder in non-existing portfolio', async ({
 		FIELDS,
 	);
 
-	const url = `/organizations/${org.organization.id}/maintenanceOrders`;
+	const url = getUrl(org.organization.id);
 
 	const res = await request.post(url, { data: maintenanceOrder });
 
@@ -97,7 +99,7 @@ test('cannot create maintenanceOrder in non-existing property', async ({
 		FIELDS,
 	);
 
-	const url = `/organizations/${org.organization.id}/maintenanceOrders`;
+	const url = getUrl(org.organization.id);
 
 	const res = await request.post(url, { data: maintenanceOrder });
 
@@ -120,7 +122,7 @@ test('cannot create maintenanceOrder in non-existing unit', async ({
 		FIELDS,
 	);
 
-	const url = `/organizations/${org.organization.id}/maintenanceOrders`;
+	const url = getUrl(org.organization.id);
 
 	const res = await request.post(url, { data: maintenanceOrder });
 
