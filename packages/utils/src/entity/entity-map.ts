@@ -132,7 +132,7 @@ const payout = satisfies<EntityNames>()({
 
 const maintenanceOrder = satisfies<EntityNames>()({
 	title: 'maintenanceOrder',
-	urlName: 'maintenanceOrders',
+	urlName: 'maintenance-orders',
 	caslName: 'MaintenanceOrder',
 	singular: 'maintenanceOrder',
 	singularCap: 'Maintenance Order',

@@ -3,6 +3,7 @@ import { expenseCategoryFormModel } from '$lib/components/form/model/expense-cat
 import { fileFormModel } from '$lib/components/form/model/file';
 import { leaseFormModel } from '$lib/components/form/model/lease';
 import { leaseInvoiceFormModel } from '$lib/components/form/model/lease-invoice';
+import { maintenanceOrderFormModel } from '$lib/components/form/model/maintenance-order';
 import { organizationFormModel } from '$lib/components/form/model/organization';
 import { payoutFormModel } from '$lib/components/form/model/payout';
 import { portfolioFormModel } from '$lib/components/form/model/portfolio';
@@ -24,6 +25,7 @@ const entityFormModeMap = {
 	expenseCategory: expenseCategoryFormModel,
 	file: fileFormModel,
 	payout: payoutFormModel,
+	maintenanceOrder: maintenanceOrderFormModel,
 };
 
 export const getEntityFormModel = <

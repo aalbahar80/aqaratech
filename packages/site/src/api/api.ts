@@ -10,6 +10,7 @@ import {
 	FilesApi,
 	LeaseInvoicesApi,
 	LeasesApi,
+	MaintenanceOrdersApi,
 	OrganizationsApi,
 	PayoutsApi,
 	PortfoliosApi,
@@ -120,6 +121,7 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 		expenseCategories: new ExpenseCategoriesApi(config),
 		files: new FilesApi(config),
 		payouts: new PayoutsApi(config),
+		maintenanceOrders: new MaintenanceOrdersApi(config),
 	};
 };
 

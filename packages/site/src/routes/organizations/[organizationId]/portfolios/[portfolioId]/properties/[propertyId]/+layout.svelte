@@ -14,6 +14,7 @@
 	import type { LayoutData } from './$types';
 
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
+	import HeroiconsWrench from '~icons/heroicons/wrench';
 
 	export let data: LayoutData;
 </script>
@@ -50,6 +51,21 @@
 				<MenuItemChild {active}>
 					<MenuItemIcon icon={HeroiconsSolidCreditCard} />
 					Create expense
+				</MenuItemChild>
+			</a>
+			<a
+				href={getRoute({
+					entity: 'maintenanceOrder',
+					pageType: PageType.New,
+					params: $page.params,
+					predefined: {
+						propertyId: data.property.id,
+					},
+				})}
+			>
+				<MenuItemChild {active}>
+					<MenuItemIcon icon={HeroiconsWrench} />
+					Create maintenance order
 				</MenuItemChild>
 			</a>
 		</MenuItem>
