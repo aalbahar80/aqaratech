@@ -13,6 +13,7 @@
 		"check:watch": "svelte-check --use-new-transformation --tsconfig ./tsconfig.json --ignore tests --watch",
 		"check:old": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --ignore tests",
 		"custom-lint": "eslint . --ext .ts,.svelte",
+		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"(**/*.{js,ts,css,md,svelte,yaml,yml,json}|!pnpm-lock.yaml)\"",
 		"lint": "eslint --ignore-path ../../.gitignore .",
 		"lint:fix": "pnpm run lint --fix",
 		"flatten-sourcemaps": "../../scripts/flatten-sourcemaps.sh",

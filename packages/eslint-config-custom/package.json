@@ -10,5 +10,8 @@
 		"eslint-config-turbo": "0.0.7",
 		"eslint-import-resolver-typescript": "3.5.2",
 		"eslint-plugin-import": "2.26.0"
+	},
+	"scripts": {
+		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,ts,css,md,svelte,yaml,yml,json}\""
 	}
 }

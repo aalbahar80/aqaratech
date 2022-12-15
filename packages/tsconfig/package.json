@@ -2,5 +2,8 @@
 	"name": "tsconfig",
 	"devDependencies": {
 		"@tsconfig/node18-strictest-esm": "1.0.1"
+	},
+	"scripts": {
+		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,ts,css,md,svelte,yaml,yml,json}\""
 	}
 }

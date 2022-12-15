@@ -18,6 +18,7 @@
 		"start:dev": "nest start --watch",
 		"start:prod": "node dist/src/main.js",
 		"preview": "node dist/src/main.js",
+		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,ts,css,md,svelte,yaml,yml,json}\"",
 		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit",

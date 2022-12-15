@@ -13,14 +13,18 @@
 			"cache": false,
 			"dependsOn": ["build"]
 		},
+		"format": {
+			"outputs": []
+		},
 		"//#format": {
+			"inputs": ["**", "!packages/**"],
 			"outputs": []
 		},
 		"lint": {
 			"outputs": []
 		},
 		"//#lint": {
-			"inputs": ["scripts/**"],
+			"inputs": ["**", "!packages/**"],
 			"outputs": []
 		},
 		"check": {
