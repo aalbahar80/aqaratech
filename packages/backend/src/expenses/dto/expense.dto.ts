@@ -44,18 +44,6 @@ export class ExpenseDto
 	@Expose()
 	expenseType: ExpenseCategoryDto | null;
 
-	@ApiHideProperty()
-	@Exclude()
-	portfolio: IBreadcrumbs['portfolio'];
-
-	@ApiHideProperty()
-	@Exclude()
-	property: IBreadcrumbs['property'] | null;
-
-	@ApiHideProperty()
-	@Exclude()
-	unit: IBreadcrumbs['unit'] | null;
-
 	@ApiProperty()
 	@Expose()
 	get breadcrumbs(): ExpenseBreadcrumbsDto {
@@ -82,6 +70,18 @@ export class ExpenseDto
 
 		return crumbs;
 	}
+
+	@ApiHideProperty()
+	@Exclude({ toPlainOnly: true })
+	portfolio: IBreadcrumbs['portfolio'];
+
+	@ApiHideProperty()
+	@Exclude({ toPlainOnly: true })
+	property: IBreadcrumbs['property'] | null;
+
+	@ApiHideProperty()
+	@Exclude({ toPlainOnly: true })
+	unit: IBreadcrumbs['unit'] | null;
 }
 
 export class PartialExpenseDto extends PartialType(ExpenseDto) {}
