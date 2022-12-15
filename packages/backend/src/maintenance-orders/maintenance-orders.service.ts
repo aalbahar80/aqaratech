@@ -92,8 +92,8 @@ export class MaintenanceOrdersService {
 		return { total, results: plainToInstance(MaintenanceOrderDto, data) };
 	}
 
-	findOne({ id, user }: { id: string; user: IUser }) {
-		const data = this.prisma.maintenanceOrder.findUniqueOrThrow({
+	async findOne({ id, user }: { id: string; user: IUser }) {
+		const data = await this.prisma.maintenanceOrder.findUniqueOrThrow({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Read).MaintenanceOrder,
@@ -109,7 +109,7 @@ export class MaintenanceOrdersService {
 		return plainToInstance(MaintenanceOrderDto, data);
 	}
 
-	update({
+	async update({
 		id,
 		updateMaintenanceOrderDto,
 		user,
@@ -118,7 +118,7 @@ export class MaintenanceOrdersService {
 		updateMaintenanceOrderDto: UpdateMaintenanceOrderDto;
 		user: IUser;
 	}) {
-		const data = this.prisma.maintenanceOrder.update({
+		const data = await this.prisma.maintenanceOrder.update({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Update).MaintenanceOrder,
