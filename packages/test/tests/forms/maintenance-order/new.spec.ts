@@ -6,7 +6,6 @@ import { FIELDS, getRoute, PageType } from '@self/utils';
 
 import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
-import { ComboboxOption } from '../combobox-model';
 import { FormPage } from '../form-page-model';
 
 const entity = 'maintenanceOrder';
