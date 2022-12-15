@@ -66,7 +66,12 @@ export class MaintenanceOrdersController {
 	@ApiQueryOptions()
 	findAll(
 		@User() user: IUser,
-		@QueryParser() queryOptions: QueryOptionsDto,
+		@QueryParser({
+			filterOptions: {
+				keys: ['propertyId', 'unitId'],
+			},
+		})
+		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<MaintenanceOrderDto>> {
 		return this.maintenanceOrdersService.findAll({ queryOptions, user });
 	}

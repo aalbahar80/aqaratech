@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import { getRoute, PageType, PageTypePortfolio } from '@self/utils';
+	import { entity, getRoute, PageType, PageTypePortfolio } from '@self/utils';
 
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 
@@ -32,6 +32,10 @@
 		},
 		{ label: 'Leases', href: `${baseRoute}/leases` },
 		{ label: 'Files', href: `${baseRoute}/files` },
+		{
+			label: 'Maintenance',
+			href: `${baseRoute}/${entity.maintenanceOrder.urlName}`,
+		},
 	];
 </script>
 
