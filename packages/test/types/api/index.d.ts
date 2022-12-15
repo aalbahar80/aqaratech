@@ -53,6 +53,19 @@ export interface ArrayOfLeaseInvoiceDto {
 /**
  *
  * @export
+ * @interface ArrayOfMaintenanceOrderDto
+ */
+export interface ArrayOfMaintenanceOrderDto {
+	/**
+	 *
+	 * @type {Array<MaintenanceOrderDto>}
+	 * @memberof ArrayOfMaintenanceOrderDto
+	 */
+	results?: Array<MaintenanceOrderDto>;
+}
+/**
+ *
+ * @export
  * @interface ArrayOfOrganizationDto
  */
 export interface ArrayOfOrganizationDto {
@@ -1812,6 +1825,25 @@ export interface PaginatedLeaseInvoiceDto {
 	 * @memberof PaginatedLeaseInvoiceDto
 	 */
 	results: Array<LeaseInvoiceDto>;
+}
+/**
+ *
+ * @export
+ * @interface PaginatedMaintenanceOrderDto
+ */
+export interface PaginatedMaintenanceOrderDto {
+	/**
+	 *
+	 * @type {PaginatedDto}
+	 * @memberof PaginatedMaintenanceOrderDto
+	 */
+	pagination: PaginatedDto;
+	/**
+	 *
+	 * @type {Array<MaintenanceOrderDto>}
+	 * @memberof PaginatedMaintenanceOrderDto
+	 */
+	results: Array<MaintenanceOrderDto>;
 }
 /**
  *

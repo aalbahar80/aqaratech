@@ -16,12 +16,21 @@ import * as runtime from '../runtime';
 import type {
 	CreateMaintenanceOrderDto,
 	MaintenanceOrderDto,
+	PaginatedMaintenanceOrderDto,
 	UpdateMaintenanceOrderDto,
 } from '../models';
 
 export interface MaintenanceOrdersApiCreateRequest {
 	organizationId: string;
 	createMaintenanceOrderDto: CreateMaintenanceOrderDto;
+}
+
+export interface MaintenanceOrdersApiFindAllRequest {
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface MaintenanceOrdersApiFindOneRequest {
@@ -101,6 +110,63 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<MaintenanceOrderDto> {
 		const response = await this.createRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findAllRaw(
+		requestParameters: MaintenanceOrdersApiFindAllRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PaginatedMaintenanceOrderDto>> {
+		const queryParameters: any = {};
+
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/`,
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findAll(
+		requestParameters: MaintenanceOrdersApiFindAllRequest = {},
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PaginatedMaintenanceOrderDto> {
+		const response = await this.findAllRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
 

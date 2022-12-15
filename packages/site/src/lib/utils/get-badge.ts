@@ -1,3 +1,5 @@
+import type { MAINTENANCEORDERSTATUSENUM } from '$api/openapi';
+
 export const getInvoiceBadge = (trx: {
 	isPaid: boolean;
 	dueAt?: string | null | undefined;
@@ -45,4 +47,31 @@ export const getLeaseBadge = (dates: { start: string; end: string }) => {
 		label: 'Current',
 		color: 'green',
 	};
+};
+
+export const getMaintenanceOrderBadge = (
+	status: MAINTENANCEORDERSTATUSENUM,
+) => {
+	switch (status) {
+		case 'PENDING':
+			return {
+				label: 'In progress',
+				color: 'indigo',
+			};
+		case 'COMPLETED':
+			return {
+				label: 'Completed',
+				color: 'green',
+			};
+		case 'CANCELLED':
+			return {
+				label: 'Cancelled',
+				color: 'red',
+			};
+		default:
+			return {
+				label: 'Unknown',
+				color: 'gray',
+			};
+	}
 };

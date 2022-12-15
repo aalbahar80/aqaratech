@@ -1,3 +1,4 @@
+import { SubjectType } from '@casl/ability';
 import {
 	Body,
 	Controller,
@@ -14,15 +15,27 @@ import {
 	maintenanceOrderUpdateSchema,
 } from '@self/utils';
 
+import { CheckAbilities } from 'src/casl/abilities.decorator';
+import { Action } from 'src/casl/action.enum';
+import { WithCount } from 'src/common/dto/paginated.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import {
+	ApiQueryOptions,
+	QueryParser,
+} from 'src/decorators/query-options.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 
 import {
 	CreateMaintenanceOrderDto,
+	MaintenanceOrderDto,
 	UpdateMaintenanceOrderDto,
 } from './dto/maintenance-order.dto';
 import { MaintenanceOrdersService } from './maintenance-orders.service';
+
+const SubjectType = 'MaintenanceOrder';
 
 @Controller()
 @ApiTags('maintenance-orders')
@@ -43,6 +56,17 @@ export class MaintenanceOrdersController {
 			organizationId,
 			user,
 		});
+	}
+
+	@Get()
+	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiPaginatedResponse(MaintenanceOrderDto)
+	@ApiQueryOptions()
+	findAll(
+		@User() user: IUser,
+		@QueryParser() queryOptions: QueryOptionsDto,
+	): Promise<WithCount<MaintenanceOrderDto>> {
+		return this.maintenanceOrdersService.findAll({ queryOptions, user });
 	}
 
 	@Get(':id')

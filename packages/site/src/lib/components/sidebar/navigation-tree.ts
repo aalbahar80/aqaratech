@@ -1,4 +1,3 @@
-// Types
 import {
 	entity,
 	getRoute,
@@ -11,7 +10,6 @@ import type { NavigationItem } from '$lib/components/sidebar/types';
 import { LOGOUT } from '$lib/constants/routes';
 import type { User } from '$lib/models/types/auth.type';
 
-// Icons
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
 import HeroiconsOutlineDocumentReport from '~icons/heroicons-outline/document-report';
@@ -24,10 +22,9 @@ import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 import HeroiconsPlus from '~icons/heroicons/plus';
 import HeroiconsReceiptPercent from '~icons/heroicons/receipt-percent';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
+import HeroiconsWrench from '~icons/heroicons/wrench';
 // import HeroiconsCalculator from '~icons/heroicons/calculator';
 // import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
-
-// Links
 
 export const getNavigationTree = (user: User): NavigationItem[] => {
 	const tree: NavigationItem[] = [
@@ -99,6 +96,15 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 					params: { organizationId },
 				}),
 				icon: HeroiconsUserGroup,
+			},
+			{
+				name: 'Maintenance',
+				href: getRoute({
+					entity: 'maintenanceOrder',
+					pageType,
+					params: { organizationId },
+				}),
+				icon: HeroiconsWrench,
 			},
 		);
 

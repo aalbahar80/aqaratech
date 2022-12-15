@@ -2590,6 +2590,57 @@ paths:
                 $ref: '#/components/schemas/MaintenanceOrderDto'
       tags: &ref_28
         - maintenance-orders
+  /:
+    get:
+      operationId: MaintenanceOrdersController_findAll
+      summary: ''
+      description: ''
+      parameters:
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedMaintenanceOrderDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfMaintenanceOrderDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/MaintenanceOrderDto'
+      tags: *ref_28
   /{id}:
     get:
       operationId: MaintenanceOrdersController_findOne
