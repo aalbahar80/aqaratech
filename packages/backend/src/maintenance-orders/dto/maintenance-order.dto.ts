@@ -88,6 +88,12 @@ export class MaintenanceOrderDto
 			});
 		}
 
+		if (this.tenant) {
+			crumbs.tenant = new BreadcrumbDto({
+				rel: Rel.Tenant,
+				...this.tenant,
+			});
+		}
 		return crumbs;
 	}
 }
