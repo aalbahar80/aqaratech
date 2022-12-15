@@ -74,3 +74,29 @@ test('create maintenanceOrder for property button predefined params', async ({
 		),
 	);
 });
+
+test.fixme(
+	'create maintenanceOrder for tenant button predefined params',
+	async ({ page, property }) => {
+		const url = 'TODO: TENANT PORTAL URL';
+
+		await page.goto(url);
+
+		await page.getByRole('button', { name: 'Open options' }).click();
+
+		const btn = page.getByRole('link', { name: BUTTON_LABEL });
+
+		await expect(btn).toHaveAttribute(
+			'href',
+			resolveURL(
+				'/organizations',
+				property.organizationId,
+				'portfolios',
+				property.portfolioId,
+				'maintenance-orders',
+				'new',
+				`?propertyId=${property.id}`,
+			),
+		);
+	},
+);
