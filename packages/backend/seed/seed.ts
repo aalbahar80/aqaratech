@@ -17,6 +17,7 @@ const raw = createSeed({
 		expenses: 10000,
 		leaseInvoices: 10000,
 		payouts: 1000,
+		maintenanceOrders: 1000,
 	},
 });
 

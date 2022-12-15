@@ -17,6 +17,7 @@ export const insertSeed = async (fake: PreprocessedSeed) => {
 		leases,
 		leaseInvoices,
 		expenses,
+		maintenanceOrders,
 		payouts,
 	} = fake;
 
@@ -42,6 +43,8 @@ export const insertSeed = async (fake: PreprocessedSeed) => {
 	await prisma.leaseInvoice.createMany({ data: leaseInvoices });
 
 	await prisma.expense.createMany({ data: expenses });
+
+	await prisma.maintenanceOrder.createMany({ data: maintenanceOrders });
 
 	await prisma.payout.createMany({ data: payouts });
 };

@@ -8,6 +8,7 @@ import {
 	testPortfolioEmail,
 	testTenantEmail,
 } from './constant/ids.constant';
+import { maintenanceOrderFactory } from './factory';
 import { expenseFactory } from './factory/expense';
 import { leaseFactory } from './factory/lease';
 import { leaseInvoiceFactory } from './factory/lease-invoice';
@@ -32,6 +33,7 @@ const defaultSeedCount = {
 	leases: 10,
 	leaseInvoices: 10,
 	expenses: 10,
+	maintenanceOrders: 10,
 	payouts: 10,
 };
 
@@ -174,6 +176,43 @@ export const createSeed = (options?: SeedOptions) => {
 		});
 	});
 
+	// Maintenance Order
+	const maintenanceOrders = Array.from(
+		{ length: count.maintenanceOrders },
+		() => {
+			const unit = random(units);
+			const property = findOrFail(properties, (p) => p.id === unit.propertyId);
+			const portfolio = findOrFail(
+				portfolios,
+				(p) => p.id === property.portfolioId,
+			);
+
+			const organizationId = org1.id;
+
+			// randomly assign to either propertyId or unitId or neither
+			let propertyId: string | null;
+			let unitId: string | null;
+
+			if (Math.random() < 0.5) {
+				propertyId = null;
+				unitId = null;
+			} else if (Math.random() < 0.5) {
+				propertyId = property.id;
+				unitId = null;
+			} else {
+				propertyId = null;
+				unitId = unit.id;
+			}
+
+			return maintenanceOrderFactory.build({
+				organizationId,
+				portfolioId: portfolio.id,
+				propertyId,
+				unitId,
+			});
+		},
+	);
+
 	// Payouts
 	const payouts = Array.from({ length: count.payouts }, () => {
 		const portfolio = random(portfolios);
@@ -236,6 +275,7 @@ export const createSeed = (options?: SeedOptions) => {
 		leases,
 		leaseInvoices,
 		expenses,
+		maintenanceOrders,
 		payouts,
 	};
 
@@ -256,6 +296,7 @@ interface SeedCount {
 	leases?: number;
 	leaseInvoices?: number;
 	expenses?: number;
+	maintenanceOrders?: number;
 	payouts?: number;
 }
 

@@ -29,6 +29,10 @@ export const preprocessSeed = (seed: Seed) => {
 		convertToDatetimeArray(['postAt'], expense),
 	);
 
+	const maintenanceOrders = seed.maintenanceOrders.map((maintenanceOrder) =>
+		convertToDatetimeArray(['completedAt'], maintenanceOrder),
+	);
+
 	const payouts = seed.payouts.map((payout) =>
 		convertToDatetimeArray(['postAt'], payout),
 	);
@@ -41,6 +45,7 @@ export const preprocessSeed = (seed: Seed) => {
 		leases,
 		leaseInvoices,
 		expenses,
+		maintenanceOrders,
 		payouts,
 	};
 
@@ -48,3 +53,4 @@ export const preprocessSeed = (seed: Seed) => {
 };
 
 export type PreprocessedSeed = ReturnType<typeof preprocessSeed>;
+
