@@ -7,7 +7,7 @@ import {
 	PartialType,
 	PickType,
 } from '@nestjs/swagger';
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 
 import {
 	MaintenanceOrderCreateSchema,
@@ -49,15 +49,19 @@ export class MaintenanceOrderDto
 	organizationId: string;
 
 	@ApiHideProperty()
+	@Exclude({ toPlainOnly: true })
 	portfolio: IBreadcrumbs['portfolio'];
 
 	@ApiHideProperty()
+	@Exclude({ toPlainOnly: true })
 	property: IBreadcrumbs['property'] | null;
 
 	@ApiHideProperty()
+	@Exclude({ toPlainOnly: true })
 	unit: IBreadcrumbs['unit'] | null;
 
 	@ApiHideProperty()
+	@Exclude({ toPlainOnly: true })
 	tenant: IBreadcrumbs['tenant'] | null;
 
 	@ApiProperty()

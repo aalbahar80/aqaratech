@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 
+import { resCheck } from '../../../../../utils/res-check';
 import { test } from '../../../api-fixtures';
 
 import type { ExpenseDto } from '../../../../../types/api';
@@ -16,6 +17,8 @@ test.use({
 	 */
 	expense: async ({ request, expense }, use) => {
 		const res = await request.get(`/expenses/${expense.id}`);
+		resCheck(res);
+
 		const body = (await res.json()) as ExpenseDto;
 
 		await use(body);
