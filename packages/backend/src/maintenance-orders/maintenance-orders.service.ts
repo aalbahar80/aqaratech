@@ -109,7 +109,7 @@ export class MaintenanceOrdersService {
 		return plainToInstance(MaintenanceOrderDto, data);
 	}
 
-	async update({
+	update({
 		id,
 		updateMaintenanceOrderDto,
 		user,
@@ -118,13 +118,15 @@ export class MaintenanceOrdersService {
 		updateMaintenanceOrderDto: UpdateMaintenanceOrderDto;
 		user: IUser;
 	}) {
-		return this.prisma.maintenanceOrder.update({
+		const data = this.prisma.maintenanceOrder.update({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Update).MaintenanceOrder,
 			},
 			data: updateMaintenanceOrderDto,
 		});
+
+		return plainToInstance(MaintenanceOrderDto, data);
 	}
 
 	remove({ id, user }: { id: string; user: IUser }) {

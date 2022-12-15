@@ -204,7 +204,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	async updateRaw(
 		requestParameters: MaintenanceOrdersApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<object>> {
+	): Promise<runtime.ApiResponse<MaintenanceOrderDto>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -242,7 +242,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 			initOverrides,
 		);
 
-		return new runtime.JSONApiResponse<any>(response);
+		return new runtime.JSONApiResponse(response);
 	}
 
 	/**
@@ -252,7 +252,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	async update(
 		requestParameters: MaintenanceOrdersApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<object> {
+	): Promise<MaintenanceOrderDto> {
 		const response = await this.updateRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
