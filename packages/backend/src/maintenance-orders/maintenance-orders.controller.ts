@@ -11,6 +11,7 @@ import {
 import { ApiTags } from '@nestjs/swagger';
 
 import {
+	entity,
 	maintenanceOrderCreateSchema,
 	maintenanceOrderUpdateSchema,
 } from '@self/utils';
@@ -36,6 +37,7 @@ import {
 import { MaintenanceOrdersService } from './maintenance-orders.service';
 
 const SubjectType = 'MaintenanceOrder';
+const urlName = entity.maintenanceOrder.urlName;
 
 @Controller()
 @ApiTags('maintenance-orders')
@@ -44,7 +46,7 @@ export class MaintenanceOrdersController {
 		private readonly maintenanceOrdersService: MaintenanceOrdersService,
 	) {}
 
-	@Post('organizations/:organizationId/maintenance-orders')
+	@Post(`organizations/:organizationId/${urlName}`)
 	create(
 		@Param('organizationId') organizationId: string,
 		@User() user: IUser,
@@ -69,12 +71,12 @@ export class MaintenanceOrdersController {
 		return this.maintenanceOrdersService.findAll({ queryOptions, user });
 	}
 
-	@Get(':id')
+	@Get(`${urlName}/:id`)
 	findOne(@User() user: IUser, @Param('id') id: string) {
 		return this.maintenanceOrdersService.findOne({ id, user });
 	}
 
-	@Patch('/maintenance-orders/:id')
+	@Patch(`${urlName}/:id`)
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
@@ -88,7 +90,7 @@ export class MaintenanceOrdersController {
 		});
 	}
 
-	@Delete(':id')
+	@Delete(`${urlName}/:id`)
 	remove(@User() user: IUser, @Param('id') id: string) {
 		return this.maintenanceOrdersService.remove({ id, user });
 	}
