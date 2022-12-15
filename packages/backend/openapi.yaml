@@ -4237,6 +4237,7 @@ components:
           nullable: true
         status:
           type: object
+          nullable: true
       required:
         - portfolioId
         - propertyId
@@ -4297,6 +4298,7 @@ components:
           nullable: true
         status:
           type: object
+          nullable: true
         organizationId:
           type: string
       required:
@@ -4327,6 +4329,7 @@ components:
           nullable: true
         status:
           type: object
+          nullable: true
     BreadcrumbsDto:
       type: object
       properties:

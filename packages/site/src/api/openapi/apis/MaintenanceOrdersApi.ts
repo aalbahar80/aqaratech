@@ -230,7 +230,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 
 		const response = await this.request(
 			{
-				path: `/{id}`.replace(
+				path: `/maintenance-orders/{id}`.replace(
 					`{${'id'}}`,
 					encodeURIComponent(String(requestParameters.id)),
 				),

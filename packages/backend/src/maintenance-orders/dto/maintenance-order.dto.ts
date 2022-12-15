@@ -11,6 +11,7 @@ import { Exclude, Expose } from 'class-transformer';
 import {
 	MaintenanceOrderCreateSchema,
 	MaintenanceOrderUpdateSchema,
+	MAINTENANCE_ORDER_STATUS,
 } from '@self/utils';
 
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -38,7 +39,7 @@ export class MaintenanceOrderDto
 	completedAt: string | null;
 	title: string | null;
 	description: string | null;
-	status: 'PENDING' | 'COMPLETED' | 'CANCELLED' | '' | null;
+	status: typeof MAINTENANCE_ORDER_STATUS[number] | null;
 
 	organizationId: string;
 
@@ -96,7 +97,7 @@ export class CreateMaintenanceOrderDto
 	completedAt?: string | null;
 	title?: string | null;
 	description?: string | null;
-	status?: 'PENDING' | 'COMPLETED' | 'CANCELLED' | '' | null;
+	status?: typeof MAINTENANCE_ORDER_STATUS[number] | null;
 }
 
 export class UpdateMaintenanceOrderDto

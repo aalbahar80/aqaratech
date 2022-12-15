@@ -7,6 +7,7 @@ export { Cookie } from './constants/cookie';
 export { countries } from './constants/countries';
 export { generateExpenseCategoryTree } from './constants/default-expense-categories';
 export { FIELDS } from './constants/fields';
+export { MAINTENANCE_ORDER_STATUS } from './constants/maintenance-status';
 export { endOfMonthN } from './date/end-of-month-n';
 export { getProgress } from './date/progress';
 export { startOfMonthN } from './date/start-of-month-n';

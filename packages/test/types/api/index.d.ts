@@ -502,7 +502,7 @@ export interface CreateMaintenanceOrderDto {
 	 * @type {object}
 	 * @memberof CreateMaintenanceOrderDto
 	 */
-	status?: object;
+	status?: object | null;
 }
 /**
  *
@@ -1587,7 +1587,7 @@ export interface MaintenanceOrderDto {
 	 * @type {object}
 	 * @memberof MaintenanceOrderDto
 	 */
-	status: object;
+	status: object | null;
 	/**
 	 *
 	 * @type {string}
@@ -3256,7 +3256,7 @@ export interface UpdateMaintenanceOrderDto {
 	 * @type {object}
 	 * @memberof UpdateMaintenanceOrderDto
 	 */
-	status?: object;
+	status?: object | null;
 }
 /**
  *

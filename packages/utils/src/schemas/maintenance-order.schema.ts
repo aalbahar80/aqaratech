@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { MAINTENANCE_ORDER_STATUS } from '../constants/maintenance-status';
+
 import { zodDateOnlyOptional } from './utils/date/zod-date-only';
 import { isID } from './utils/id.schema';
 import { zodStringOptional } from './utils/zod-string';
@@ -14,7 +16,7 @@ export const maintenanceOrderCreateSchema = z
 		completedAt: zodDateOnlyOptional,
 		title: zodStringOptional,
 		description: zodStringOptional,
-		status: z.enum(['PENDING', 'COMPLETED', 'CANCELLED', '']).nullish(),
+		status: z.enum(MAINTENANCE_ORDER_STATUS).nullish(),
 	})
 	.strict();
 
