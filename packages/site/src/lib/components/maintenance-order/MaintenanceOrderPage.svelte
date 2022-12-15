@@ -1,8 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-
-	import { getRoute, PageTypePortfolio } from '@self/utils';
-
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 
