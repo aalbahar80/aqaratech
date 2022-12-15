@@ -4212,9 +4212,19 @@ components:
           nullable: true
       required:
         - labelEn
+    MAINTENANCE_ORDER_STATUS_ENUM:
+      type: string
+      enum:
+        - PENDING
+        - COMPLETED
+        - CANCELLED
+        - ''
     CreateMaintenanceOrderDto:
       type: object
       properties:
+        status:
+          nullable: true
+          $ref: '#/components/schemas/MAINTENANCE_ORDER_STATUS_ENUM'
         portfolioId:
           type: string
         propertyId:
@@ -4234,9 +4244,6 @@ components:
           nullable: true
         description:
           type: string
-          nullable: true
-        status:
-          type: object
           nullable: true
       required:
         - portfolioId
@@ -4274,6 +4281,9 @@ components:
         updatedAt:
           type: string
           readOnly: true
+        status:
+          nullable: true
+          $ref: '#/components/schemas/MAINTENANCE_ORDER_STATUS_ENUM'
         breadcrumbs:
           $ref: '#/components/schemas/MaintenanceOrderBreadcrumbsDto'
         portfolioId:
@@ -4296,15 +4306,13 @@ components:
         description:
           type: string
           nullable: true
-        status:
-          type: object
-          nullable: true
         organizationId:
           type: string
       required:
         - id
         - createdAt
         - updatedAt
+        - status
         - breadcrumbs
         - portfolioId
         - propertyId
@@ -4313,11 +4321,13 @@ components:
         - completedAt
         - title
         - description
-        - status
         - organizationId
     UpdateMaintenanceOrderDto:
       type: object
       properties:
+        status:
+          nullable: true
+          $ref: '#/components/schemas/MAINTENANCE_ORDER_STATUS_ENUM'
         completedAt:
           type: string
           nullable: true
@@ -4326,9 +4336,6 @@ components:
           nullable: true
         description:
           type: string
-          nullable: true
-        status:
-          type: object
           nullable: true
     BreadcrumbsDto:
       type: object

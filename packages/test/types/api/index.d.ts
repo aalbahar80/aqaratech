@@ -457,6 +457,12 @@ export interface CreateLeaseInvoiceDto {
 export interface CreateMaintenanceOrderDto {
 	/**
 	 *
+	 * @type {MAINTENANCEORDERSTATUSENUM}
+	 * @memberof CreateMaintenanceOrderDto
+	 */
+	status?: MAINTENANCEORDERSTATUSENUM;
+	/**
+	 *
 	 * @type {string}
 	 * @memberof CreateMaintenanceOrderDto
 	 */
@@ -497,12 +503,6 @@ export interface CreateMaintenanceOrderDto {
 	 * @memberof CreateMaintenanceOrderDto
 	 */
 	description?: string | null;
-	/**
-	 *
-	 * @type {object}
-	 * @memberof CreateMaintenanceOrderDto
-	 */
-	status?: object | null;
 }
 /**
  *
@@ -1482,6 +1482,18 @@ export interface LeaseInvoiceDto {
 /**
  *
  * @export
+ */
+export declare const MAINTENANCEORDERSTATUSENUM: {
+	readonly Pending: 'PENDING';
+	readonly Completed: 'COMPLETED';
+	readonly Cancelled: 'CANCELLED';
+	readonly Empty: '';
+};
+export type MAINTENANCEORDERSTATUSENUM =
+	typeof MAINTENANCEORDERSTATUSENUM[keyof typeof MAINTENANCEORDERSTATUSENUM];
+/**
+ *
+ * @export
  * @interface MaintenanceOrderBreadcrumbsDto
  */
 export interface MaintenanceOrderBreadcrumbsDto {
@@ -1536,6 +1548,12 @@ export interface MaintenanceOrderDto {
 	readonly updatedAt: string;
 	/**
 	 *
+	 * @type {MAINTENANCEORDERSTATUSENUM}
+	 * @memberof MaintenanceOrderDto
+	 */
+	status: MAINTENANCEORDERSTATUSENUM;
+	/**
+	 *
 	 * @type {MaintenanceOrderBreadcrumbsDto}
 	 * @memberof MaintenanceOrderDto
 	 */
@@ -1582,12 +1600,6 @@ export interface MaintenanceOrderDto {
 	 * @memberof MaintenanceOrderDto
 	 */
 	description: string | null;
-	/**
-	 *
-	 * @type {object}
-	 * @memberof MaintenanceOrderDto
-	 */
-	status: object | null;
 	/**
 	 *
 	 * @type {string}
@@ -3235,6 +3247,12 @@ export interface UpdateLeaseInvoiceDto {
 export interface UpdateMaintenanceOrderDto {
 	/**
 	 *
+	 * @type {MAINTENANCEORDERSTATUSENUM}
+	 * @memberof UpdateMaintenanceOrderDto
+	 */
+	status?: MAINTENANCEORDERSTATUSENUM;
+	/**
+	 *
 	 * @type {string}
 	 * @memberof UpdateMaintenanceOrderDto
 	 */
@@ -3251,12 +3269,6 @@ export interface UpdateMaintenanceOrderDto {
 	 * @memberof UpdateMaintenanceOrderDto
 	 */
 	description?: string | null;
-	/**
-	 *
-	 * @type {object}
-	 * @memberof UpdateMaintenanceOrderDto
-	 */
-	status?: object | null;
 }
 /**
  *

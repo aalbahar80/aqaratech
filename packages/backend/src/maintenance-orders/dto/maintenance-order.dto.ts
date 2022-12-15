@@ -1,6 +1,7 @@
 import {
 	ApiHideProperty,
 	ApiProperty,
+	ApiPropertyOptional,
 	IntersectionType,
 	OmitType,
 	PartialType,
@@ -39,6 +40,10 @@ export class MaintenanceOrderDto
 	completedAt: string | null;
 	title: string | null;
 	description: string | null;
+	@ApiProperty({
+		enum: MAINTENANCE_ORDER_STATUS,
+		enumName: 'MAINTENANCE_ORDER_STATUS_ENUM',
+	})
 	status: typeof MAINTENANCE_ORDER_STATUS[number] | null;
 
 	organizationId: string;
@@ -97,6 +102,11 @@ export class CreateMaintenanceOrderDto
 	completedAt?: string | null;
 	title?: string | null;
 	description?: string | null;
+	@ApiPropertyOptional({
+		enum: MAINTENANCE_ORDER_STATUS,
+		enumName: 'MAINTENANCE_ORDER_STATUS_ENUM',
+		nullable: true,
+	})
 	status?: typeof MAINTENANCE_ORDER_STATUS[number] | null;
 }
 
