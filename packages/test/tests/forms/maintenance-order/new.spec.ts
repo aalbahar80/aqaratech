@@ -81,20 +81,11 @@ test('can be submitted with all fields', async ({
 
 	const formPage = new FormPage(page);
 
-	await formPage.fillForm({
-		...maintenanceOrder,
-		categoryId: new ComboboxOption({
-			label: maintenanceOrderCategory.labelEn,
-			value: maintenanceOrderCategory.id,
-		}),
-	});
+	await formPage.fillForm(maintenanceOrder);
 
 	await formPage.save();
 
-	await formPage.verifyDetails({
-		...R.omit(maintenanceOrder, ['categoryId']),
-		category: maintenanceOrderCategory.labelEn,
-	});
+	await formPage.verifyDetails(maintenanceOrder);
 
 	const successUrl = getRoute({
 		entity,

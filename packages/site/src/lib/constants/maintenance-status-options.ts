@@ -3,7 +3,7 @@ export const maintenanceStatusOptions = [
 	// otherwise a string 'null' may be sent to the server
 	// https://stackoverflow.com/a/62303327/9689661
 	{ label: '', value: '' },
-	{ label: 'Pending', value: 'pending' },
-	{ label: 'Completed', value: 'completed' },
-	{ label: 'Cancelled', value: 'cancelled' },
+	{ label: 'PENDING', value: 'PENDING' },
+	{ label: 'COMPLETED', value: 'COMPLETED' },
+	{ label: 'CANCELLED', value: 'CANCELLED' },
 ];

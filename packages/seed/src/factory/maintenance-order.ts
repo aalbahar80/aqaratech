@@ -21,7 +21,7 @@ export const maintenanceOrderFactory = Factory.Sync.makeFactoryWithRequired<
 	description: Factory.each(() => faker.lorem.sentences(3)),
 
 	status: Factory.each(() =>
-		faker.helpers.arrayElement(['pending', 'completed', 'cancelled', '']),
+		faker.helpers.arrayElement(['PENDING', 'COMPLETED', 'CANCELLED', '']),
 	),
 
 	completedAt: Factory.each(() => fakeDate()),

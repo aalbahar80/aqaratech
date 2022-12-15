@@ -69,7 +69,7 @@ export class FormPage {
 
 			// Select Fields
 
-			const SELECT_KEYS = ['type'].map((key) => getLabel(key));
+			const SELECT_KEYS = ['type', 'status'].map((key) => getLabel(key));
 
 			if (SELECT_KEYS.includes(key)) {
 				const select = this.page.getByLabel(keyRegex);

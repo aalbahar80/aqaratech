@@ -38,7 +38,7 @@ export class MaintenanceOrderDto
 	completedAt: string | null;
 	title: string | null;
 	description: string | null;
-	status: 'pending' | 'completed' | 'cancelled' | '' | null;
+	status: 'PENDING' | 'COMPLETED' | 'CANCELLED' | '' | null;
 
 	organizationId: string;
 
@@ -96,7 +96,7 @@ export class CreateMaintenanceOrderDto
 	completedAt?: string | null;
 	title?: string | null;
 	description?: string | null;
-	status?: 'pending' | 'completed' | 'cancelled' | '' | null;
+	status?: 'PENDING' | 'COMPLETED' | 'CANCELLED' | '' | null;
 }
 
 export class UpdateMaintenanceOrderDto
