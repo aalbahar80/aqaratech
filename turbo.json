@@ -17,7 +17,7 @@
 			"outputs": []
 		},
 		"//#format": {
-			"inputs": ["**", "!packages/**"],
+			"inputs": ["*", "!packages/**/*", "!node_modules/**/*"],
 			"outputs": []
 		},
 		"lint": {

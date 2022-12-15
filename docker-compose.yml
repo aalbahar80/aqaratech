@@ -23,7 +23,7 @@ services:
   #     - MEILI_MASTER_KEY=MASTER_KEY
   #   networks:
   #     - aq-network
-  #     
+  #
 
   site:
     image: registry.digitalocean.com/aqtech/aqaratech-site:latest
@@ -65,7 +65,6 @@ volumes:
     # caddy_data:
     # caddy_config:
     # meili_data:
-
 
     # networks:
     #   aq-network:
