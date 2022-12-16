@@ -53,4 +53,3 @@ export const preprocessSeed = (seed: Seed) => {
 };
 
 export type PreprocessedSeed = ReturnType<typeof preprocessSeed>;
-
