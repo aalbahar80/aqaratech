@@ -1,5 +1,7 @@
 #!/usr/bin/env zx
 
+// ESLINT_IGNORE
+
 console.log({ argv });
 
 /**

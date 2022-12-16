@@ -1,5 +1,7 @@
 #!/usr/bin/env zx
 
+// ESLINT_IGNORE
+
 /**
  * Usage: zx rm-source-maps.mjs [path/to/dir]
  * Example: zx rm-source-maps.mjs build/client
