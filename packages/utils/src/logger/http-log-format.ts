@@ -1,8 +1,5 @@
 // @ts-nocheck
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+// File is ignored by eslint
 import type { Printf } from './filter-logs/type';
 
 const colorHttpMessage = (message: Record<string, any>) => {

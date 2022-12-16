@@ -22,7 +22,6 @@ export {
 	EMPTY_VALUE,
 	entityFieldLabels,
 	formatValue,
-	getFieldLabelMap,
 	getLabel,
 	toUTCFormat,
 	toUTCFormatMonthYear,
