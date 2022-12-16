@@ -24,7 +24,7 @@
 			"outputs": []
 		},
 		"//#lint": {
-			"inputs": ["**", "!packages/**"],
+			"inputs": ["*", "!packages/**/*"],
 			"outputs": []
 		},
 		"check": {
