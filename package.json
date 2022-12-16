@@ -11,7 +11,6 @@
 		"format:all": "turbo run format --continue -vvv",
 		"format:fix": "prettier --write --ignore-path .gitignore \"(**/*.{js,ts,css,md,svelte,yaml,yml,json}|!pnpm-lock.yaml)\"",
 		"lint": "eslint --ignore-path .gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
-		"lint:partial": "TIMING=1 turbo run lint --filter=@self/site --filter=@self/test --filter=@self/seed --filter=@self/backend --filter=@self/utils --continue",
 		"lint:all": "TIMING=1 turbo run lint --continue",
 		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
 		"check": "tsc --noEmit; pnpm run check:circular",
@@ -22,7 +21,7 @@
 		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate && sed -i '1 s/^/\\/\\/ @ts-nocheck\\\n/' packages/site/src/api/openapi/runtime.ts && tsx ./scripts/rm-unused-jsdoc.ts && pnpm prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'",
 		"api:generate:all": "turbo run api:generate",
 		"seed": "pnpm -F @self/backend exec prisma migrate reset --force",
-		"precompute": "pnpm format:all && pnpm check:all && pnpm lint:partial && pnpm build && pnpm test"
+		"precompute": "pnpm format:all && pnpm check:all && pnpm lint:all && pnpm build && pnpm test"
 	},
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.13",
