@@ -21,14 +21,16 @@
 			"outputs": []
 		},
 		"lint": {
-			"outputs": []
+			"outputs": [],
+			"dependsOn": ["^build"]
 		},
 		"//#lint": {
 			"inputs": ["*", "!packages/**/*"],
 			"outputs": []
 		},
 		"check": {
-			"outputs": []
+			"outputs": [],
+			"dependsOn": ["^build"]
 		},
 		"//#check": {
 			"outputs": []
