@@ -11,7 +11,6 @@ import type {
 import { isDateOnly } from 'src/schemas/utils/date/is-date-only';
 import { isDatetime } from 'src/schemas/utils/date/is-date-time';
 import { startCase } from 'src/start-case';
-import type { UnionToIntersection } from 'src/union-to-intersection';
 
 import type { Union } from 'ts-toolbelt';
 
@@ -39,7 +38,7 @@ type Schemas =
 	| InnerSchema<typeof leaseCreateSchema>
 	| typeof expenseCreateSchema;
 
-type Keys = keyof UnionToIntersection<Schemas['shape']>;
+type Keys = keyof Union.IntersectOf<Schemas['shape']>;
 
 export const getLabel = (key: string) =>
 	(entityFieldLabels as Record<string, string>)[key] ?? startCase(key);
