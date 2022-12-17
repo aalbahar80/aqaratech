@@ -197,6 +197,7 @@ importers:
       eslint-config-custom: workspace:*
       factory.ts: 1.3.0
       prisma: 4.7.1
+      ts-toolbelt: 9.6.0
       tsconfig: workspace:*
       tsx: 3.12.1
       typescript: 4.9.4
@@ -213,6 +214,7 @@ importers:
       '@types/node': 18.11.15
       eslint-config-custom: link:../eslint-config-custom
       prisma: 4.7.1
+      ts-toolbelt: 9.6.0
       tsconfig: link:../tsconfig
       tsx: 3.12.1
       typescript: 4.9.4

@@ -24,6 +24,7 @@
 		"@types/node": "18.11.15",
 		"eslint-config-custom": "workspace:*",
 		"prisma": "4.7.1",
+		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"tsx": "3.12.1",
 		"typescript": "4.9.4"

@@ -3,20 +3,24 @@ import { randomUUID } from 'node:crypto';
 import { faker } from '@faker-js/faker';
 import * as Factory from 'factory.ts';
 
+import { assertCount } from '../utils';
 import { createdAt, updatedAt } from '../utils/dates';
 import { fakeDate } from '../utils/fake-date';
 
 import type { Tenant } from '../utils/date-or-string';
 
-export const tenantFactory = Factory.Sync.makeFactoryWithRequired<
-	Tenant,
-	'organizationId'
->({
+const base = Factory.Sync.makeFactoryWithRequired<Tenant, 'organizationId'>({
 	id: Factory.each(() => randomUUID()),
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
-	fullName: Factory.each(() => faker.name.fullName()),
+	fullName: Factory.each(() =>
+		[
+			faker.name.firstName(),
+			faker.name.firstName(),
+			faker.name.lastName(),
+		].join(' '),
+	),
 
 	label: null,
 
@@ -39,6 +43,21 @@ export const tenantFactory = Factory.Sync.makeFactoryWithRequired<
 	),
 
 	residencyEnd: Factory.each(() => faker.date.future(2)),
+});
+
+export const tenantFactory = base.withDerivation('label', (tenant) => {
+	// derive label from fullName by excluding the middle name
+
+	// if fullName is less than 3 words, return null
+	const fullName = tenant.fullName.split(' ');
+
+	if (assertCount(fullName, 3)) {
+		// remove the middle name
+		const [firstName, lastName] = fullName;
+		return `${firstName} ${lastName}`;
+	} else {
+		return null;
+	}
 });
 
 export type TenantFactoryParams = Partial<
