@@ -1,5 +1,8 @@
 import { toUTCFormat } from 'src/entity/form/field/to-utc-format';
 import type {
+	expenseCreateSchema,
+	InnerSchema,
+	leaseCreateSchema,
 	portfolioCreateSchema,
 	portfolioUpdateSchema,
 	tenantCreateSchema,
@@ -10,7 +13,8 @@ import { isDatetime } from 'src/schemas/utils/date/is-date-time';
 import { startCase } from 'src/start-case';
 import type { UnionToIntersection } from 'src/union-to-intersection';
 
-// TODO satisfies Partial<Record<Keys, string>>
+import type { Union } from 'ts-toolbelt';
+
 export const entityFieldLabels = {
 	fullName: 'Full Name',
 	dob: 'Date of Birth',
@@ -25,21 +29,19 @@ export const entityFieldLabels = {
 	tenantId: 'Tenant',
 
 	categoryId: 'Category',
-};
+} satisfies Partial<Union.Strict<Record<Keys, string>>>;
 
 type Schemas =
 	| typeof portfolioCreateSchema
 	| typeof portfolioUpdateSchema
 	| typeof tenantCreateSchema
-	| typeof tenantUpdateSchema;
+	| typeof tenantUpdateSchema
+	| InnerSchema<typeof leaseCreateSchema>
+	| typeof expenseCreateSchema;
 
-// @ts-expect-error until satisfies
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Keys = keyof UnionToIntersection<Schemas['shape']>;
 
 export const getLabel = (key: string) =>
-	// TODO satisfies remove type-cast, don't add satisfies here
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	(entityFieldLabels as Record<string, string>)[key] ?? startCase(key);
 
 /**

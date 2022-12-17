@@ -17,13 +17,14 @@ export const getSentryConfig = (config: Config): AqaratechSentryConfig => {
 		PUBLIC_AQ_ENABLE_SENTRY,
 	} = config;
 
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	const sampleRate = +(PUBLIC_TRACE_RATE ?? 0);
 	const debug = PUBLIC_AQ_DEBUG_SENTRY === '1';
 
 	// TODO: use new typescript `satisfies` directive for type instead of casting
 	const sentryConfig: Options = {
 		enabled: PUBLIC_AQ_ENABLE_SENTRY === '0' ? false : true,
-		environment: PUBLIC_AQARATECH_ENV || 'unknown',
+		environment: PUBLIC_AQARATECH_ENV ?? 'unknown',
 		debug,
 		tracesSampleRate: sampleRate,
 		release: getReleaseName(config),
