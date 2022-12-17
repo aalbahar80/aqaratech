@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
@@ -94,7 +93,7 @@
 
 							<!-- Divider -->
 							<div aria-hidden="true" class="col-span-full">
-								<div class="py-5 ">
+								<div class="py-5">
 									<div class="border-t  border-gray-200" />
 								</div>
 							</div>
@@ -105,15 +104,17 @@
 									transition:fade|local={{ duration: 100 }}
 									class="col-span-full flex place-content-between items-center space-x-2"
 								>
-									<div class="hidden w-1/12 sm:block">
+									<!-- Number -->
+									<div class="hidden w-6 sm:block">
 										{idx + 1}
 									</div>
-									<div class="flex w-1/3 shadow-sm">
+
+									<!-- Amount -->
+									<div class="inline-flex shadow-sm">
 										<span
-											class="hidden items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:inline-flex sm:text-sm"
+											class="hidden items-center self-stretch rounded-md rounded-r-none border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500 sm:inline-flex"
+											>KWD</span
 										>
-											KWD
-										</span>
 										<label>
 											<span class="sr-only">{getLabel('amount')} {idx}</span>
 											<input
@@ -121,12 +122,14 @@
 												name="schedule-{idx}-amount"
 												bind:value={trx.amount}
 												type="number"
-												class="schedule block min-w-0 flex-1 px-3 py-2 sm:rounded-l-none"
+												class="rounded-md sm:rounded-l-none"
 												class:invalid={trx.amount < 1}
 											/>
 										</label>
 									</div>
-									<span class="w-1/3 flex-1 sm:flex-initial">
+
+									<!-- Date -->
+									<div class="">
 										<label>
 											<span class="sr-only">{getLabel('postAt')} {idx}</span>
 											<input
@@ -134,12 +137,15 @@
 												name="schedule-{idx}-postAt"
 												type="date"
 												bind:value={trx.postAt}
+												class="rounded-md shadow-sm"
 												class:invalid={new Date(trx.postAt) < startLimit}
 											/>
 										</label>
-									</span>
+									</div>
+
+									<!-- Delete -->
 									<button
-										class="w-1/12"
+										class=""
 										on:click|preventDefault={() => {
 											schedule = schedule.filter((_, i) => i !== idx);
 										}}
@@ -163,18 +169,11 @@
 	</div>
 </form>
 
-{#if dev}
-	<div class="prose py-6"><pre>{JSON.stringify(schedule, null, 2)}</pre></div>
-{/if}
-
+<!-- <DebugPane data={schedule} /> -->
 <style lang="postcss">
-	input:not(.schedule) {
-		@apply block w-full shadow-sm;
-		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
-	}
-
 	input {
-		@apply rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+		@apply w-full min-w-[90px] border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm lg:min-w-full;
+		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
 	}
 
 	input.invalid {
