@@ -21,7 +21,7 @@
 		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,ts,css,md,svelte,yaml,yml,json}\"",
 		"lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
 		"lint:fix": "pnpm run lint --fix",
-		"check": "tsc --noEmit",
+		"check": "tsc --noEmit --project tsconfig.build.json",
 		"postinstall": "prisma generate",
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
 		"api:generate": "./get-openapi.sh && rm -rf ../site/src/api/openapi && openapi-generator-cli generate",
