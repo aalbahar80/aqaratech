@@ -230,7 +230,7 @@ export class LeaseInvoicesService {
 		} else if (paidStatus === PaidStatus.UNPAID) {
 			return { isPaid: false };
 		} else {
-			return { isPaid: undefined };
+			return {};
 		}
 	}
 }
