@@ -74,9 +74,11 @@ export class RolesService {
 				// Conditionally connect tenant
 				...(tenantId
 					? {
-							connect: {
-								id: tenantId,
-								AND: [{ organizationId: organizationId }], // ensure tenant belongs to organization
+							tenant: {
+								connect: {
+									id: tenantId,
+									AND: [{ organizationId: organizationId }], // ensure tenant belongs to organization
+								},
 							},
 					  }
 					: {}),
