@@ -31,7 +31,13 @@ export const leaseCreateSchema = refineSchema(baseCreate);
 
 export const leaseUpdateSchema = refineSchema(baseUpdate);
 
-function refineSchema<T extends z.ZodType<Base>>(schema: T) {
+function refineSchema<
+	T extends z.ZodType<
+		z.TypeOf<typeof base | typeof baseUpdate>,
+		z.ZodTypeDef,
+		unknown
+	>,
+>(schema: T) {
 	return schema
 		.refine(
 			(val) =>
@@ -52,8 +58,6 @@ function refineSchema<T extends z.ZodType<Base>>(schema: T) {
 }
 
 // Export types
-
-type Base = z.infer<typeof baseCreate | typeof baseUpdate>;
 
 /**
  * Exported seperately to make it easy to implement in DTO

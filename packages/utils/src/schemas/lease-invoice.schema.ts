@@ -42,7 +42,13 @@ export const leaseInvoiceCreateManySchema2 = z.array(
 
 // Version 3.19.1 breaks this type. Wait for a fix before upgrading.
 // Issue: https://github.com/colinhacks/zod/issues/1473
-function refineSchema<T extends z.ZodType<Base>>(schema: T) {
+function refineSchema<
+	T extends z.ZodType<
+		z.TypeOf<typeof base | typeof baseUpdate>,
+		z.ZodTypeDef,
+		unknown
+	>,
+>(schema: T) {
 	return schema
 		.refine(
 			(val) => {
@@ -80,10 +86,6 @@ function refineSchema<T extends z.ZodType<Base>>(schema: T) {
 }
 
 // Export types
-
-type Base = z.infer<
-	typeof baseCreate | typeof baseUpdate | typeof baseCreateMany
->;
 
 /**
  * Exported seperately to make it easy to implement in DTO
