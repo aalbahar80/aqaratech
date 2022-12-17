@@ -1,9 +1,10 @@
 import { NoSuchBucket } from '@aws-sdk/client-s3';
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, LoggerService } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 import { Action } from 'src/casl/action.enum';
 import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
@@ -18,10 +19,13 @@ import { S3Service } from 'src/s3/s3.service';
 
 @Injectable()
 export class OrganizationsService {
-	constructor(private readonly prisma: PrismaService, private s3: S3Service) {}
+	constructor(
+		private readonly prisma: PrismaService,
+		private s3: S3Service,
+		@Inject(WINSTON_MODULE_NEST_PROVIDER)
+		private readonly logger: LoggerService,
+	) {}
 	SubjectType = 'Organization' as const;
-
-	private readonly logger = new Logger(OrganizationsService.name);
 
 	async create({
 		createOrganizationDto,
@@ -30,14 +34,15 @@ export class OrganizationsService {
 		createOrganizationDto: CreateOrganizationDto;
 		user: AuthenticatedUser;
 	}) {
-		this.logger.debug(
+		this.logger.log(
 			`${user.email} creating organization ${createOrganizationDto.fullName}`,
+			OrganizationsService.name,
 		);
 
 		const organization = await this.prisma.organization.create({
 			data: {
 				fullName: createOrganizationDto.fullName,
-				label: createOrganizationDto.label,
+				label: createOrganizationDto.label ?? null,
 				roles: {
 					create: [
 						{
@@ -60,6 +65,10 @@ export class OrganizationsService {
 			},
 			include: { roles: true }, // used to redirect user to switch roles in frontend
 		});
+
+		if (!organization.roles[0]) {
+			throw new Error('Organization created without a role');
+		}
 
 		return {
 			organization: plainToInstance(OrganizationDto, organization, {
@@ -97,7 +106,7 @@ export class OrganizationsService {
 			where: { id },
 			data: {
 				fullName: updateOrganizationDto.fullName,
-				label: updateOrganizationDto.label,
+				label: updateOrganizationDto.label ?? null,
 			},
 		});
 
@@ -134,11 +143,11 @@ export class OrganizationsService {
 				throw error;
 			}
 		}
-		this.logger.log(`Deleted bucket ${id}`);
+		this.logger.log(`Deleted bucket ${id}`, OrganizationsService.name);
 
 		// TODO ensure planInvoice stores a `snapshot` of the organization before it is deleted (json field)
 		const deleted = await this.prisma.organization.delete({ where: { id } });
-		this.logger.log(`Deleted organization ${id}`);
+		this.logger.log(`Deleted organization ${id}`, OrganizationsService.name);
 
 		return plainToInstance(OrganizationDto, deleted, {
 			excludeExtraneousValues: true,
