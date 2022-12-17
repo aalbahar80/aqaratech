@@ -5,7 +5,7 @@
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
-	import { getRoute, PageTab } from '@self/utils';
+	import { getLabel, getRoute, PageTab } from '@self/utils';
 
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
@@ -114,24 +114,29 @@
 										>
 											KWD
 										</span>
-										<input
-											id="schedule.{idx}.amount"
-											name="schedule.{idx}.amount"
-											bind:value={trx.amount}
-											type="number"
-											class="schedule block min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:rounded-l-none sm:text-sm"
-											class:invalid={trx.amount < 1}
-										/>
+										<label>
+											<span class="sr-only">{getLabel('amount')} {idx}</span>
+											<input
+												id="schedule-{idx}-amount"
+												name="schedule-{idx}-amount"
+												bind:value={trx.amount}
+												type="number"
+												class="schedule block min-w-0 flex-1 px-3 py-2 sm:rounded-l-none"
+												class:invalid={trx.amount < 1}
+											/>
+										</label>
 									</div>
 									<span class="w-1/3 flex-1 sm:flex-initial">
-										<!-- <pre>{JSON.stringify(trx.postAt, null, 2)}</pre> -->
-										<input
-											id="schedule.{idx}.postAt"
-											name="schedule.{idx}.postAt"
-											type="date"
-											bind:value={trx.postAt}
-											class:invalid={new Date(trx.postAt) < startLimit}
-										/>
+										<label>
+											<span class="sr-only">{getLabel('postAt')} {idx}</span>
+											<input
+												id="schedule-{idx}-postAt"
+												name="schedule-{idx}-postAt"
+												type="date"
+												bind:value={trx.postAt}
+												class:invalid={new Date(trx.postAt) < startLimit}
+											/>
+										</label>
 									</span>
 									<button
 										class="w-1/12"
@@ -164,22 +169,15 @@
 
 <style lang="postcss">
 	input:not(.schedule) {
-		@apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+		@apply block w-full shadow-sm;
 		@apply disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none;
 	}
-	input.invalid {
-		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+
+	input {
+		@apply rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
 	}
 
-	/* Remove arrow steppers */
-	/* Firefox */
-	input[type='number']:not([id='count']) {
-		-moz-appearance: textfield;
-	}
-	/* Chrome, Safari, Edge, Opera */
-	input:not([id='count'])::-webkit-outer-spin-button,
-	input:not([id='count'])::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
+	input.invalid {
+		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
 	}
 </style>
