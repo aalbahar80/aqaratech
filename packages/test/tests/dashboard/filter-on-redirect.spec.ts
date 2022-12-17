@@ -70,7 +70,7 @@ test('filter is prepopulated on redirect - property TO financials', async ({
 	expect(await filters.property.label()).toBe(computeLabelProperty(property));
 
 	// Navigate to income details
-	await page.getByRole('link', { name: 'Income Details →' }).click();
+	await page.getByRole('link', { name: 'Income Details' }).click();
 
 	// Filter:property persists
 	await expect(filters.property.el).toHaveValue(property.id);
@@ -132,7 +132,7 @@ test('filter is prepopulated on redirect - unit TO financials', async ({
 	expect(await filters.unit.label()).toBe(computeLabelUnit(unit));
 
 	// Navigate to income details
-	await page.getByRole('link', { name: 'Income Details →' }).click();
+	await page.getByRole('link', { name: 'Income Details' }).click();
 
 	// Filter:property persists
 	await expect(filters.property.el).toHaveValue(unit.propertyId);

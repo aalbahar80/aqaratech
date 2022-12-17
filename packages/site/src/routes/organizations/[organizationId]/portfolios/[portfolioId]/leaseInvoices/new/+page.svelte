@@ -18,7 +18,8 @@
 
 <TextButton>
 	<a href={getMultipleUrl($page.url).toString()}>
-		Add multiple invoices &rarr;
+		Add multiple invoices
+		<span aria-hidden="true">→</span>
 	</a>
 </TextButton>
 <EnhancedForm {formModel} {form} />

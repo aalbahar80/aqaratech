@@ -57,7 +57,7 @@
 				<TextButton
 					>Details
 					<!-- arrow-right  -->
-					&nbsp;&rarr;
+					<span aria-hidden="true"> &nbsp;&rarr; </span>
 				</TextButton>
 			</a>
 		{/if}

@@ -53,7 +53,7 @@ for (const PAGE_NAME of PAGES) {
 		await filters.unit.el.selectOption({ value: unit.id });
 
 		// Clink on details link
-		await page.getByRole('link', { name: `${PAGE_NAME} Details →` }).click();
+		await page.getByRole('link', { name: `${PAGE_NAME} Details` }).click();
 
 		// Filter persists
 		await expect(filters.property.el).toHaveValue(unit.propertyId);
