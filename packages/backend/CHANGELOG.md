@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.3.1
+
+### Patch Changes
+
+- b9265cf97: update zod, don't prerender homepage
+- Updated dependencies [b9265cf97]
+  - @self/utils@3.2.1
+
 ## 2.3.0
 
 ### Minor Changes

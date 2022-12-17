@@ -1,5 +1,13 @@
 # @self/site
 
+## 2.3.1
+
+### Patch Changes
+
+- 4154f7840: swap secondary feature title/subtitle
+- 83cf99c86: rm robots.txt
+- b9265cf97: update zod, don't prerender homepage
+
 ## 2.3.0
 
 ### Minor Changes

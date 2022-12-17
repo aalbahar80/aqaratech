@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.2.1
+
+### Patch Changes
+
+- b9265cf97: update zod, don't prerender homepage
+
 ## 3.2.0
 
 ### Minor Changes
