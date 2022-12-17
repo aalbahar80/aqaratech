@@ -1,9 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { FacetDistribution, Hits, SearchResponse } from 'meilisearch';
+import { Any, Object } from 'ts-toolbelt';
 
 import { TIndexName } from 'src/events/update-index.event';
 
-export class SearchDto implements SearchResponse {
+export class SearchDto
+	implements
+		Object.Update<SearchResponse, 'facetDistribution', Any.x | undefined>
+{
 	@ApiProperty({ type: String })
 	entityTitle: TIndexName;
 	@ApiProperty({

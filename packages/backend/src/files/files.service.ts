@@ -3,7 +3,12 @@ import { accessibleBy } from '@casl/prisma';
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
-import { DBEntity, entitiesMap, FileRelationKey } from '@self/utils';
+import {
+	DBEntity,
+	entitiesMap,
+	fileCreateSchema,
+	FileRelationKey,
+} from '@self/utils';
 
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -74,18 +79,16 @@ export class FilesService {
 	}): Promise<WithCount<FileDto>> {
 		const bucket = this.getFileBucket({ user });
 
+		await this.canAccess({
+			relationKey,
+			relationValue,
+			user,
+			action: Action.Read,
+		});
+
 		const directory = this.computeDirectoryKey({
 			relationKey,
 			relationValue,
-		});
-
-		const entityId = directory.split('/')[1];
-
-		await this.canAccess({
-			entity: relationKey,
-			entityId,
-			user,
-			action: Action.Read,
 		});
 
 		type s3Objects = ListObjectsV2CommandOutput | undefined;
@@ -124,11 +127,11 @@ export class FilesService {
 
 		const directory = this.getFileDirectory({ key });
 
-		const { entity, entityId } = this.getFileDetails({ directory });
+		const { relationKey, relationValue } = this.getFileDetails({ directory });
 
 		await this.canAccess({
-			entity,
-			entityId,
+			relationKey,
+			relationValue,
 			user,
 			action: Action.Read,
 		});
@@ -165,11 +168,11 @@ export class FilesService {
 
 		const directory = this.getFileDirectory({ key });
 
-		const { entity, entityId } = this.getFileDetails({ directory });
+		const { relationKey, relationValue } = this.getFileDetails({ directory });
 
 		await this.canAccess({
-			entity,
-			entityId,
+			relationKey,
+			relationValue,
 			user,
 			action: Action.Update,
 		});
@@ -186,22 +189,22 @@ export class FilesService {
 	}
 
 	async canAccess({
-		entity,
-		entityId,
+		relationKey,
+		relationValue,
 		user,
 		action,
 	}: {
-		entity: DBEntity;
-		entityId: string;
+		relationKey: DBEntity;
+		relationValue: string;
 		user: IUser;
 		action: Action;
 	}) {
-		const entityMap = entitiesMap[entity];
+		const entityMap = entitiesMap[relationKey];
 		// @ts-expect-error - uniontype not cutting it
-		await this.prisma[entity].findFirstOrThrow({
+		await this.prisma[relationKey].findFirstOrThrow({
 			where: {
 				AND: [
-					{ id: entityId },
+					{ id: relationValue },
 					accessibleBy(user.ability, action)[entityMap.caslName],
 				],
 			},
@@ -247,18 +250,17 @@ export class FilesService {
 		return directory;
 	}
 
-	// TODO: use directory type
 	// TODO: rename
 	getFileDetails({ directory }: { directory: string }) {
-		// TODO: rm
-		const relationKey = directory.split('/')[0] as FileRelationKey; // TODO don't cast?
+		const schema = fileCreateSchema.pick({
+			relationKey: true,
+			relationValue: true,
+		});
 
-		const entityId = directory.split('/')[1];
-
-		return {
-			entity: relationKey,
-			entityId,
-		};
+		return schema.parse({
+			relationKey: directory.split('/')[0],
+			relationValue: directory.split('/')[1],
+		});
 	}
 
 	getFileBucket({ user }: { user: IUser }) {

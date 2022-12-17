@@ -9,7 +9,7 @@ export const expenseCategorySchema = z
 	.object({
 		id: isID,
 		labelEn: zodString,
-		labelAr: zodStringOptional,
+		labelAr: zodStringOptional, // How does undefined this work with postgres json?
 		description: zodStringOptional,
 		parentId: zodStringOptional,
 		isGroup: zodCheckbox,

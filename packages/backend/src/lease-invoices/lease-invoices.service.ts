@@ -3,6 +3,7 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
+import { Any, Object } from 'ts-toolbelt';
 
 import { entitiesMap } from '@self/utils';
 
@@ -23,6 +24,7 @@ import {
 import { PostmarkService } from 'src/postmark/postmark.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { kwdFormat } from 'src/utils/format';
+
 @Injectable()
 export class LeaseInvoicesService {
 	constructor(
@@ -196,7 +198,12 @@ export class LeaseInvoicesService {
 	parseLocationFilter({
 		filter,
 	}: {
-		filter: Pick<AggregateOptionsDto, 'propertyId' | 'unitId'> & {
+		// Add undefined type to values
+		filter: Object.Update<
+			Pick<AggregateOptionsDto, 'propertyId' | 'unitId'>,
+			'propertyId' | 'unitId',
+			Any.x | undefined
+		> & {
 			portfolioId: string;
 		};
 	}): Prisma.LeaseInvoiceWhereInput {

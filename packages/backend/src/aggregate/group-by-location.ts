@@ -26,16 +26,20 @@ export const groupByLocation = (
 	>[] = [];
 
 	R.forEachObj.indexed(summed, (amount, locationId) => {
+		const group = grouped[locationId]?.[0];
+
+		if (!group) {
+			throw new Error('Group not found'); // Should never happen
+		}
+
 		array.push({
 			amount,
-			portfolioId: grouped[locationId][0].portfolioId,
+			portfolioId: group.portfolioId,
 
 			// Try to get the propertyId from the unit first, then from the expense
-			propertyId:
-				grouped[locationId][0].unit?.propertyId ??
-				grouped[locationId][0].propertyId,
+			propertyId: group.unit?.propertyId ?? group.propertyId,
 
-			unitId: grouped[locationId][0].unitId ?? null,
+			unitId: group.unitId ?? null,
 		});
 	});
 

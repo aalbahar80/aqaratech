@@ -226,10 +226,9 @@ export class ExpensesService {
 		}
 	}
 
-	// TODO use satisfies type
 	parseLocationFilter = (filter: {
-		propertyId?: string | null;
-		unitId?: string | null;
+		propertyId?: string | null | undefined;
+		unitId?: string | null | undefined;
 	}): Prisma.ExpenseWhereInput => {
 		if (filter.unitId) {
 			return {

@@ -58,22 +58,29 @@ export class RolesService {
 			data: {
 				roleType,
 				organization: { connect: { id: organizationId } },
-				portfolio: portfolioId
+
+				// Conditionally connect portfolio
+				...(portfolioId
 					? {
-							connect: {
-								id: portfolioId,
-								AND: [{ organizationId: organizationId }], // ensure portfolio belongs to organization
+							portfolio: {
+								connect: {
+									id: portfolioId,
+									AND: [{ organizationId: organizationId }], // ensure portfolio belongs to organization
+								},
 							},
 					  }
-					: undefined,
-				tenant: tenantId
+					: {}),
+
+				// Conditionally connect tenant
+				...(tenantId
 					? {
 							connect: {
 								id: tenantId,
 								AND: [{ organizationId: organizationId }], // ensure tenant belongs to organization
 							},
 					  }
-					: undefined,
+					: {}),
+
 				user: {
 					connectOrCreate: {
 						where: { email: createRoleDto.email },
@@ -119,19 +126,13 @@ export class RolesService {
 			},
 		});
 
-		const organizationName =
-			role.organization.fullName ||
-			role.portfolio?.organization.fullName ||
-			role.tenant?.organization.fullName ||
-			'';
-
 		await this.postmarkService.sendEmail({
 			From: 'Aqaratech <notifications@aqaratech.com>',
 			To: role.user.email,
 			TemplateAlias: 'user-invitation',
 			TemplateModel: {
 				invite_sender_email: payload.senderEmail,
-				invite_sender_organization_name: organizationName,
+				invite_sender_organization_name: role.organization.fullName,
 				// TODO replace with url to either (if user !exists) signup page with email prefilled, or (if user exists) portfolio/tenant portal page
 				action_url: origin ?? '',
 			},

@@ -95,6 +95,11 @@ export class SearchService implements OnModuleInit {
 		const results = await Promise.all(
 			indexes.map(async (index, n) => {
 				const indexName = this.indexNames[n];
+
+				if (!indexName) {
+					throw new Error('Invalid index name'); // should never happen
+				}
+
 				return {
 					entityTitle: indexName,
 					...(await this.searchIndex({
@@ -129,7 +134,7 @@ export class SearchService implements OnModuleInit {
 
 			attributesToHighlight: ['*'],
 			limit: 20,
-			filter,
+			...(filter ? { filter } : {}),
 		});
 
 		const hitsWithEntity = data.hits.map((hit) => {

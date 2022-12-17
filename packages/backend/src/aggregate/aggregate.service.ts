@@ -2,7 +2,7 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
-import { computeLabelUnit } from '@self/utils';
+import { computeLabelUnit, hasItems } from '@self/utils';
 
 import {
 	AggregateOptionsDto,
@@ -238,15 +238,15 @@ export class AggregateService {
 			where: {
 				organizationId,
 				portfolioId,
-				propertyId: options.propertyId,
-				id: options.unitId,
+				...(options.propertyId ? { propertyId: options.propertyId } : {}),
+				...(options.unitId ? { id: options.unitId } : {}), // Alternative?: id: options.unitId ?? {},
 			},
 			select: {
 				id: true,
 				createdAt: true,
 				leases: {
 					where: {
-						// TODO check if this is correct
+						// TODO test this
 						start: { lte: options.end },
 						end: { gte: options.start },
 					},
@@ -264,7 +264,7 @@ export class AggregateService {
 
 		const days: Occupancy[] = [];
 
-		if (!units.length) {
+		if (!hasItems(units)) {
 			this.logger.verbose?.(
 				'No units found - getOccupancy',
 				AggregateService.name,
@@ -275,14 +275,11 @@ export class AggregateService {
 		// avoid looping over dates where no units are created
 		const firstUnitCreatedAt = units[0].createdAt;
 		const start =
-			/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
 			new Date(options.start) > firstUnitCreatedAt
 				? new Date(options.start)
 				: firstUnitCreatedAt;
 
-		// fallback to getting data for next two years max
-		const oneYear = 1000 * 60 * 60 * 24 * 365;
-		const end = new Date(options.end) ?? new Date(Date.now() + oneYear * 2);
+		const end = new Date(options.end);
 
 		// loop through each day in the range
 		for (let date = start; date <= end; date.setDate(date.getDate() + 1)) {
