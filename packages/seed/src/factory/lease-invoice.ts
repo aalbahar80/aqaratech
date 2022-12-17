@@ -16,7 +16,9 @@ const base = Factory.Sync.makeFactoryWithRequired<
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
-	amount: Factory.each(() => +faker.finance.amount(10, 250, 0)),
+	amount: Factory.each(
+		() => Math.round(faker.datatype.number({ min: 500, max: 3000 }) / 50) * 50,
+	),
 
 	memo: Factory.each(() => faker.lorem.sentence()),
 
