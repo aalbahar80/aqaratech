@@ -27,7 +27,7 @@ export const mapPrismaException = (
 		 *
 		 */
 		// TODO: should be a 404 instead of a 400?
-		responseError = new BadRequestException(exception.meta?.cause);
+		responseError = new BadRequestException(exception.meta?.['cause']);
 	} else if (exception.code === 'P2014') {
 		/**
 		 * P2014
@@ -37,8 +37,8 @@ export const mapPrismaException = (
 		 */
 		// TODO should we add a fallback error message?
 		const meta = exception.meta;
-		const modela = meta?.model_a_name;
-		const modelb = meta?.model_b_name;
+		const modela = meta?.['model_a_name'];
+		const modelb = meta?.['model_b_name'];
 		let message = '';
 
 		if (typeof modela === 'string' && typeof modelb === 'string') {
@@ -69,7 +69,7 @@ export const mapPrismaException = (
 		 * Foreign key constraint failed on the field: {field_name}
 		 *
 		 */
-		const prismaMessage = exception.meta?.field_name; // Example: "Property_portfolioId_fkey (index)"
+		const prismaMessage = exception.meta?.['field_name']; // Example: "Property_portfolioId_fkey (index)"
 
 		if (typeof prismaMessage === 'string' && method === 'DELETE') {
 			// When *deleting* a record that violates a FK constraint, we want to return a friendly error message.

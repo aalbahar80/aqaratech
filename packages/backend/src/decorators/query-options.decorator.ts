@@ -52,7 +52,7 @@ export const QueryParser = createParamDecorator(
 		const output = new ZodValidationPipe(schema).transform(
 			{
 				...parsed,
-				filter: request.query.filter ?? {},
+				filter: request.query['filter'] ?? {},
 			},
 			{
 				type: 'custom',

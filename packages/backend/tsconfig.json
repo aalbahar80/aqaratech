@@ -20,9 +20,8 @@
 		"noUnusedLocals": false,
 		"strictPropertyInitialization": false,
 		"importsNotUsedAsValues": "remove",
-		"exactOptionalPropertyTypes": false,
-		"noUncheckedIndexedAccess": false,
-		"noPropertyAccessFromIndexSignature": false,
+		"exactOptionalPropertyTypes": false, // 23/17
+		"noUncheckedIndexedAccess": false, // 16/10
 		"paths": {
 			"src": ["./src/"]
 		}
