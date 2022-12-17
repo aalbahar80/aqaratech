@@ -42,7 +42,7 @@ test('can be submitted with minimal fields', async ({
 			.fill(new Date(invoice.postAt).toISOString().slice(0, 10));
 	}
 
-	await page.getByRole('button', { name: 'Create' }).click();
+	await page.getByRole('button', { name: 'Save' }).click();
 
 	const successUrl = getRoute({
 		entity: 'lease',

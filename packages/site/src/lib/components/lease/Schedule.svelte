@@ -165,7 +165,7 @@
 	</div>
 
 	<div class="flex flex-shrink-0 justify-end space-x-4 px-4 py-4">
-		<Button text={'Create'} />
+		<Button text={'Save'} />
 	</div>
 </form>
 
