@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.2.0
+
+### Minor Changes
+
+- 3db8de7c1: init maintenanceOrder
+
 ## 2.1.1
 
 ### Patch Changes

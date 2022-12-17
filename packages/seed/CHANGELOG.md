@@ -1,5 +1,15 @@
 # @self/seed
 
+## 2.2.0
+
+### Minor Changes
+
+- 3db8de7c1: init maintenanceOrder
+
+### Patch Changes
+
+- 9c51ed168: replace leases screenshot
+
 ## 2.1.1
 
 ### Patch Changes

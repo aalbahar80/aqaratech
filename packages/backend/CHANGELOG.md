@@ -1,5 +1,16 @@
 # @self/backend
 
+## 2.3.0
+
+### Minor Changes
+
+- 3db8de7c1: init maintenanceOrder
+
+### Patch Changes
+
+- Updated dependencies [3db8de7c1]
+  - @self/utils@3.2.0
+
 ## 2.2.1
 
 ### Patch Changes

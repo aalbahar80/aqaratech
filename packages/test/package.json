@@ -1,6 +1,6 @@
 {
 	"name": "@self/test",
-	"version": "3.1.1",
+	"version": "3.2.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -17,8 +17,8 @@
 	"devDependencies": {
 		"@faker-js/faker": "7.6.0",
 		"@playwright/test": "1.28.1",
-		"@self/seed": "workspace:2.1.1",
-		"@self/utils": "workspace:3.1.1",
+		"@self/seed": "workspace:2.2.0",
+		"@self/utils": "workspace:3.2.0",
 		"@types/node": "18.11.15",
 		"dotenv": "16.0.3",
 		"eslint-config-custom": "workspace:*",

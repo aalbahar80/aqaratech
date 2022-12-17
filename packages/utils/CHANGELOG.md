@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.2.0
+
+### Minor Changes
+
+- 3db8de7c1: init maintenanceOrder
+
 ## 3.1.1
 
 ### Patch Changes

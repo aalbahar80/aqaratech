@@ -65,8 +65,8 @@ importers:
       '@openapitools/openapi-generator-cli': 2.5.2
       '@prisma-utils/nestjs-request-parser': 1.2.0
       '@prisma/client': 4.7.1
-      '@self/seed': workspace:2.1.1
-      '@self/utils': workspace:3.1.1
+      '@self/seed': workspace:2.2.0
+      '@self/utils': workspace:3.2.0
       '@sentry/node': 7.26.0
       '@sentry/tracing': 7.26.0
       '@tsconfig/node18-strictest': 1.0.0
@@ -190,7 +190,7 @@ importers:
       '@faker-js/faker': 7.6.0
       '@preconstruct/cli': 2.2.2
       '@prisma/client': 4.7.1
-      '@self/utils': workspace:3.1.1
+      '@self/utils': workspace:3.2.0
       '@types/node': 18.11.15
       date-fns: 2.29.3
       dotenv: 16.0.3
@@ -226,7 +226,7 @@ importers:
       '@logtail/types': 0.1.12
       '@logtail/winston': 0.1.14
       '@rgossiaux/svelte-headlessui': 1.0.2
-      '@self/utils': workspace:3.1.1
+      '@self/utils': workspace:3.2.0
       '@sentry/node': 7.26.0
       '@sentry/svelte': 7.26.0
       '@sentry/tracing': 7.26.0
@@ -352,8 +352,8 @@ importers:
     specifiers:
       '@faker-js/faker': 7.6.0
       '@playwright/test': 1.28.1
-      '@self/seed': workspace:2.1.1
-      '@self/utils': workspace:3.1.1
+      '@self/seed': workspace:2.2.0
+      '@self/utils': workspace:3.2.0
       '@types/node': 18.11.15
       '@types/qs': 6.9.7
       dotenv: 16.0.3
