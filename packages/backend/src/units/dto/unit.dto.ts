@@ -13,6 +13,7 @@ import { formatDistance } from 'date-fns';
 
 import {
 	computeLabelUnit,
+	hasItems,
 	UnitCreateSchema,
 	UnitUpdateSchema,
 } from '@self/utils';
@@ -121,7 +122,7 @@ export class UnitDto
 			(l) => l.start <= new Date() && l.end >= new Date(),
 		);
 
-		if (!this.leases.length) {
+		if (!hasItems(this.leases)) {
 			return {
 				isVacant: true,
 				vacancyDate: this.createdAt,
