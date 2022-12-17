@@ -71,8 +71,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		});
 	}
 
-	private readonly logger = new Logger(JwtStrategy.name);
-
 	/**
 	 * Decorator that serves as an Authorization check only.
 	 * It verifies the jwt token, and if it's valid, injects user's email into request.user
