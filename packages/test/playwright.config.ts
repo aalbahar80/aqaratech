@@ -45,7 +45,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			cwd: '../../',
 			command:
-				'pnpm turbo run build --filter=@self/backend -vvv && pnpm -F @self/backend preview',
+				'pnpm turbo run build --filter=@self/backend && pnpm -F @self/backend preview',
 			port: 3002,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
@@ -55,7 +55,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			cwd: '../../',
 			command:
-				'pnpm turbo run build --filter=@self/site -vvv && pnpm -F @self/site preview',
+				'pnpm turbo run build --filter=@self/site && pnpm -F @self/site preview',
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
