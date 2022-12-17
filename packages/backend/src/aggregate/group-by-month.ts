@@ -6,7 +6,7 @@ import { isoToYearMonth, monthsInRange } from 'src/utils/months-in-range';
 export const groupByMonth = (
 	records: Records[],
 	options: GroupByMonthOptions,
-): GroupedByMonth[] => {
+) => {
 	// group by year-month
 	const grouped = R.groupBy(records, (record) =>
 		isoToYearMonth(record.postAt.toISOString()),
@@ -35,7 +35,7 @@ export const groupByMonth = (
 		array.push({ date: month, amount: summed[month] ?? 0 });
 	});
 
-	return array;
+	return array satisfies GroupedByMonth[];
 };
 
 export const addEmptyMonths = (
