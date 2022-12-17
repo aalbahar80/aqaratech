@@ -1,12 +1,12 @@
 export interface TransformableInfo {
 	level: string;
-	message: any;
-	[key: string]: any;
+	message: unknown;
+	[key: string]: unknown;
 }
 
 export type TransformFunction = (
 	info: TransformableInfo,
-	opts?: any,
+	opts?: unknown,
 ) => TransformableInfo | boolean;
 
 // export class Format {
