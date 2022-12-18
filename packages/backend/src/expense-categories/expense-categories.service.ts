@@ -2,7 +2,7 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { z } from 'zod';
 
-import { expenseCategorySchema } from '@self/utils';
+import { expenseCategorySchema, expenseCategoryTreeSchema } from '@self/utils';
 
 import { Action } from 'src/casl/action.enum';
 import {
@@ -42,7 +42,9 @@ export class ExpenseCategoriesService {
 			data: { expenseCategoryTree: categories },
 		});
 
-		return expenseCategorySchema.parse(newCategory);
+		return expenseCategorySchema.parse(
+			newCategory,
+		) satisfies ExpenseCategoryDto;
 	}
 
 	async findAll({ organizationId }: { organizationId: string }) {
@@ -159,7 +161,7 @@ export class ExpenseCategoriesService {
 
 		const categoriesJson = settings.expenseCategoryTree;
 
-		return expenseCategorySchema.array().parse(categoriesJson);
+		return expenseCategoryTreeSchema.parse(categoriesJson);
 	}
 
 	applyChanges({

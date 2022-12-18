@@ -3,7 +3,8 @@ import { ApiBody, ApiTags } from '@nestjs/swagger';
 
 import {
 	expenseCategoryCreateSchema,
-	expenseCategoryTreeSchema,
+	ExpenseCategoryTreeUpdateSchema,
+	expenseCategoryTreeUpdateSchema,
 	expenseCategoryUpdateSchema,
 } from '@self/utils';
 
@@ -64,8 +65,8 @@ export class ExpenseCategoriesController {
 	updateAll(
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
-		@Body(new ZodValidationPipe(expenseCategoryTreeSchema))
-		updateExpenseCategoryTreeDto: UpdateExpenseCategoryTreeDto[],
+		@Body(new ZodValidationPipe(expenseCategoryTreeUpdateSchema))
+		updateExpenseCategoryTreeDto: ExpenseCategoryTreeUpdateSchema,
 	): Promise<ExpenseCategoryDto[]> {
 		return this.expenseCategoriesService.updateAll({
 			organizationId,

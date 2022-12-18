@@ -1,36 +1,43 @@
-import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
+import { ExpenseCategoryCreateSchema } from '@self/utils';
+
 import { generateId } from 'src/utils/generate-id';
+
+/** Default expense categories. Have predefined ID's. */
+type ExpenseCategoryCreateWithId = ExpenseCategoryCreateSchema & {
+	id: string;
+};
 
 /**
  * Returns a default expense category tree with random ids.
  */
-export const generateExpenseCategoryTree = (): ExpenseCategoryDto[] => {
-	const mappedIds = new Map<string, string>();
+export const generateExpenseCategoryTree =
+	(): ExpenseCategoryCreateWithId[] => {
+		const mappedIds = new Map<string, string>();
 
-	defaultExpenseCategoryTree.forEach((category) => {
-		mappedIds.set(category.id, generateId());
-	});
+		defaultExpenseCategoryTree.forEach((category) => {
+			mappedIds.set(category.id, generateId());
+		});
 
-	const withRandomIds = defaultExpenseCategoryTree.map((category) => {
-		const newId = mappedIds.get(category.id);
-		const newParentId = category.parentId
-			? mappedIds.get(category.parentId)
-			: null;
-		return {
-			...category,
-			id: newId ?? generateId(),
-			parentId: newParentId ?? null,
-		};
-	});
+		const withRandomIds = defaultExpenseCategoryTree.map((category) => {
+			const newId = mappedIds.get(category.id);
+			const newParentId = category.parentId
+				? mappedIds.get(category.parentId)
+				: null;
+			return {
+				...category,
+				id: newId ?? generateId(),
+				parentId: newParentId ?? null,
+			};
+		});
 
-	return withRandomIds;
-};
+		return withRandomIds;
+	};
 
 /**
  * Generate a random id for both the `id` and `parentId` fields.
  */
 // prettier-ignore
-const defaultExpenseCategoryTree: ExpenseCategoryDto[] = [
+const defaultExpenseCategoryTree: ExpenseCategoryCreateWithId[] = [
   {"id":"1","labelAr":"المصاريف الرأسمالية","labelEn":"CapEx","parentId":null,"isGroup":true},
   {"id":"2","labelAr":"عقود الصيانة السنوية","labelEn":"Annual Contracts","parentId":"1","isGroup":true},
   {"id":"3","labelAr":"","labelEn":"AC Contract","parentId":"2","isGroup":false},
