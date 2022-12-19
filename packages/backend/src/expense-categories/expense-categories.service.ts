@@ -63,9 +63,9 @@ export class ExpenseCategoriesService {
 			where: { organizationId },
 		});
 
-		const categories = expenseCategorySchema
-			.array()
-			.parse(data.expenseCategoryTree);
+		const categories = expenseCategoryTreeSchema.parse(
+			data.expenseCategoryTree,
+		);
 
 		return categories;
 	}
@@ -148,9 +148,7 @@ export class ExpenseCategoriesService {
 			data: { expenseCategoryTree: modified },
 		});
 
-		const tree = expenseCategorySchema
-			.array()
-			.parse(settings.expenseCategoryTree);
+		const tree = expenseCategoryTreeSchema.parse(settings.expenseCategoryTree);
 
 		const updated = tree.find((c) => c.id === expenseCategoryId);
 

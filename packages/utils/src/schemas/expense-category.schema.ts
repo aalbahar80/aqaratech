@@ -7,7 +7,6 @@ import { zodString, zodStringOptional } from './utils/zod-string';
 
 // Represents an ExpenseCategory as returned from DB. Since we store ExpenseCategories in a postgres JSON field, we avoid `undefined` for all fields.
 export const expenseCategorySchema = z
-	// TODO: use native zod schemas
 	.object({
 		id: isID,
 		labelEn: zodString,
