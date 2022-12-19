@@ -10,8 +10,13 @@ export const expenseCategorySchema = z
 	.object({
 		id: isID,
 		labelEn: zodString,
-		labelAr: zodString.nullable(),
-		description: zodString.nullable(),
+
+		// Avoid helper zodString, which does not allow null even when using `.nullable()`.
+		// This is because we're using `z.preprocess()`.
+		// Instead, we use `z.string().nullable()` to allow null values coming from the db.
+		labelAr: z.string().nullable(),
+
+		description: z.string().nullable(),
 		parentId: zodString.nullable(), // TODO: use isID
 		isGroup: zodCheckbox,
 	})
