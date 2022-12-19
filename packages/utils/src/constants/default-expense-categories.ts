@@ -38,7 +38,6 @@ export const generateExpenseCategoryTree = () => {
 			parentId: newParentId ?? null,
 
 			labelAr: category.labelAr ?? null,
-			description: category.description ?? null, // Needed to pass validation
 		};
 	});
 

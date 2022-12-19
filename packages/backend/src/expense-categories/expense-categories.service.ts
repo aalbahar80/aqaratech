@@ -42,7 +42,6 @@ export class ExpenseCategoriesService {
 			// If we move this transformation to zod, we could use z.input/output instead of z.infer.
 			labelAr: createExpenseCategoryDto.labelAr ?? null,
 			parentId: createExpenseCategoryDto.parentId ?? null,
-			description: createExpenseCategoryDto.description ?? null,
 			id,
 		} satisfies Union.Strict<ExpenseCategoryDto>;
 

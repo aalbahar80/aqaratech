@@ -3329,9 +3329,6 @@ components:
         labelAr:
           type: string
           nullable: true
-        description:
-          type: string
-          nullable: true
         parentId:
           type: string
           nullable: true
@@ -3341,7 +3338,6 @@ components:
         - id
         - labelEn
         - labelAr
-        - description
         - parentId
         - isGroup
     ExpenseBreadcrumbsDto:
@@ -4093,9 +4089,6 @@ components:
         labelAr:
           type: string
           nullable: true
-        description:
-          type: string
-          nullable: true
         parentId:
           type: string
           nullable: true
@@ -4114,9 +4107,6 @@ components:
         labelAr:
           type: string
           nullable: true
-        description:
-          type: string
-          nullable: true
         parentId:
           type: string
           nullable: true
@@ -4124,7 +4114,6 @@ components:
         - id
         - labelEn
         - labelAr
-        - description
         - parentId
     UpdateExpenseCategoryDto:
       type: object
@@ -4132,9 +4121,6 @@ components:
         labelEn:
           type: string
         labelAr:
-          type: string
-          nullable: true
-        description:
           type: string
           nullable: true
         parentId:
