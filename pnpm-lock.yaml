@@ -206,13 +206,13 @@ importers:
     dependencies:
       '@faker-js/faker': 7.6.0
       '@prisma/client': 4.7.1_prisma@4.7.1
+      '@self/utils': link:../utils
       date-fns: 2.29.3
       dotenv: 16.0.3
       factory.ts: 1.3.0
     devDependencies:
       '@babel/preset-typescript': 7.18.6_@babel+core@7.20.5
       '@preconstruct/cli': 2.2.2
-      '@self/utils': link:../utils
       '@types/node': 18.11.16
       eslint-config-custom: link:../eslint-config-custom
       prisma: 4.7.1
