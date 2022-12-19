@@ -19,7 +19,7 @@ export class UpdateIndexEvent<T extends TIndexName = TIndexName> {
 			// portfolioId: string; // enable if search is enabled for portfolio users
 		})[],
 		public readonly indexName: T,
-		public readonly classConstructor: ClassConstructor<T>,
+		public readonly classConstructor: new () => ClassConstructor<T>,
 	) {}
 }
 
@@ -38,9 +38,9 @@ type Item<T extends TIndexName> = T extends 'tenant'
 
 // create a generic type that returns the class constructor type based on the index name
 type ClassConstructor<T extends TIndexName> = T extends 'tenant'
-	? new () => TenantSearchDocument
+	? TenantSearchDocument
 	: T extends 'portfolio'
-	? new () => PortfolioSearchDocument
+	? PortfolioSearchDocument
 	: T extends 'property'
-	? new () => PropertySearchDocument
+	? PropertySearchDocument
 	: never;
