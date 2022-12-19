@@ -4,7 +4,7 @@
 
 	import { fade } from 'svelte/transition';
 
-	export let row: Row<any>;
+	export let row: Row<{ id: string }>;
 </script>
 
 <tr class="odd:bg-white even:bg-gray-50" data-testid={row.original.id}>

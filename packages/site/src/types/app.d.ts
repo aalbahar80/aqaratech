@@ -48,7 +48,7 @@ declare namespace svelte.JSX {
 		/**
 		 * Frappe Charts event. Create a better type if using this.
 		 */
-		'ondata-select'?: any;
+		'ondata-select'?: unknown;
 	}
 }
 

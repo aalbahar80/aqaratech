@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { flexRender, type HeaderGroup } from '@tanstack/svelte-table';
 
-	export let group: HeaderGroup<any>;
+	type T = $$Generic;
+
+	export let group: HeaderGroup<T>;
 </script>
 
 <tr>

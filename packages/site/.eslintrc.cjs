@@ -38,6 +38,9 @@ module.exports = {
 				allowIndexSignaturePropertyAccess: true,
 			},
 		],
+
+		// not compatible with sveltekit's throw redirct/error
+		'@typescript-eslint/no-throw-literal': 'off',
 	},
 	overrides: [
 		{
