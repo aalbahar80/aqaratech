@@ -1,6 +1,15 @@
-import { ExpenseCategoryCreateSchema } from '@self/utils';
+import { z } from 'zod';
+
+import {
+	ExpenseCategoryCreateSchema,
+	expenseCategoryCreateSchema,
+} from '@self/utils';
 
 import { generateId } from 'src/utils/generate-id';
+
+const expenseCategoryCreateWithIdSchema = expenseCategoryCreateSchema.extend({
+	id: z.string(),
+});
 
 /** Default expense categories. Have predefined ID's. */
 type ExpenseCategoryCreateWithId = ExpenseCategoryCreateSchema & {
@@ -10,28 +19,37 @@ type ExpenseCategoryCreateWithId = ExpenseCategoryCreateSchema & {
 /**
  * Returns a default expense category tree with random ids.
  */
-export const generateExpenseCategoryTree =
-	(): ExpenseCategoryCreateWithId[] => {
-		const mappedIds = new Map<string, string>();
+export const generateExpenseCategoryTree = () => {
+	const mappedIds = new Map<string, string>();
 
-		defaultExpenseCategoryTree.forEach((category) => {
-			mappedIds.set(category.id, generateId());
-		});
+	defaultExpenseCategoryTree.forEach((category) => {
+		mappedIds.set(category.id, generateId());
+	});
 
-		const withRandomIds = defaultExpenseCategoryTree.map((category) => {
-			const newId = mappedIds.get(category.id);
-			const newParentId = category.parentId
-				? mappedIds.get(category.parentId)
-				: null;
-			return {
-				...category,
-				id: newId ?? generateId(),
-				parentId: newParentId ?? null,
-			};
-		});
+	const withRandomIds = defaultExpenseCategoryTree.map((category) => {
+		const newId = mappedIds.get(category.id);
 
-		return withRandomIds;
-	};
+		const newParentId = category.parentId
+			? mappedIds.get(category.parentId)
+			: null;
+
+		return {
+			...category,
+			id: newId ?? generateId(),
+			parentId: newParentId ?? null,
+
+			labelAr: category.labelAr ?? null,
+			description: category.description ?? null, // Needed to pass validation
+		};
+	});
+
+	// Parse schema before entering into db to nullify empty strings.
+	const tree = withRandomIds.map((category) =>
+		expenseCategoryCreateWithIdSchema.parse(category),
+	);
+
+	return tree;
+};
 
 /**
  * Generate a random id for both the `id` and `parentId` fields.

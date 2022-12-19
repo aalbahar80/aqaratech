@@ -15,7 +15,7 @@ export class ExpenseCategoryDto
 	id: string;
 	labelEn: string;
 	labelAr: string | null;
-	// description: string | null;
+	description: string | null;
 	parentId: string | null;
 	isGroup: boolean;
 }
@@ -25,7 +25,7 @@ export class CreateExpenseCategoryDto
 {
 	labelEn: string;
 	labelAr?: string | null;
-	// description?: string | null;
+	description?: string | null;
 	parentId?: string | null;
 	isGroup: boolean;
 }

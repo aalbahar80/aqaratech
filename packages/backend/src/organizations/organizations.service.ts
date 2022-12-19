@@ -2,7 +2,6 @@ import { NoSuchBucket } from '@aws-sdk/client-s3';
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
@@ -58,8 +57,7 @@ export class OrganizationsService {
 				},
 				organizationSettings: {
 					create: {
-						expenseCategoryTree:
-							generateExpenseCategoryTree() as unknown as Prisma.JsonArray,
+						expenseCategoryTree: generateExpenseCategoryTree(),
 					},
 				},
 			},

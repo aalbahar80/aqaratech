@@ -12,7 +12,7 @@ export const expenseCategorySchema = z
 		id: isID,
 		labelEn: zodString,
 		labelAr: zodString.nullable(),
-		// description: zodString.nullable(),
+		description: zodString.nullable(),
 		parentId: zodString.nullable(), // TODO: use isID
 		isGroup: zodCheckbox,
 	})
@@ -24,7 +24,7 @@ export const expenseCategoryCreateSchema = z
 	.object({
 		labelEn: zodString,
 		labelAr: zodStringOptional,
-		// description: zodStringOptional,
+		description: zodStringOptional,
 		parentId: zodStringOptional, // TODO: use isID
 		isGroup: zodCheckbox,
 	})

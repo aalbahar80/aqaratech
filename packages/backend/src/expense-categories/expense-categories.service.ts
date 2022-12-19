@@ -15,6 +15,8 @@ import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { generateId } from 'src/utils/generate-id';
 
+import type { Union } from 'ts-toolbelt';
+
 @Injectable()
 export class ExpenseCategoriesService {
 	constructor(private readonly prisma: PrismaService) {}
@@ -30,10 +32,16 @@ export class ExpenseCategoriesService {
 		const categories = await this.fetchJsonCategories({ organizationId });
 
 		const id = generateId();
+
 		const newCategory = {
 			...createExpenseCategoryDto,
+			// Don't allow undefined in the JSON tree.
+			// If we move this transformation to zod, we could use z.input/output instead of z.infer.
+			labelAr: createExpenseCategoryDto.labelAr ?? null,
+			parentId: createExpenseCategoryDto.parentId ?? null,
+			description: createExpenseCategoryDto.description ?? null,
 			id,
-		};
+		} satisfies Union.Strict<ExpenseCategoryDto>;
 
 		categories.push(newCategory);
 
