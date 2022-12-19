@@ -110,7 +110,7 @@ export class ExpenseCategoriesService {
 			data: { expenseCategoryTree: proposed },
 		});
 
-		return expenseCategorySchema.array().parse(settings.expenseCategoryTree);
+		return expenseCategoryTreeSchema.parse(settings.expenseCategoryTree);
 	}
 
 	async update({
