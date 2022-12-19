@@ -5,6 +5,7 @@ export { liveEnvs } from './config/live-envs';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
 export { Cookie } from './constants/cookie';
 export { countries } from './constants/countries';
+export { generateExpenseCategoryTree } from './constants/default-expense-categories';
 export { FIELDS } from './constants/fields';
 export { endOfMonthN } from './date/end-of-month-n';
 export { getProgress } from './date/progress';
@@ -39,6 +40,7 @@ export {
 	onlyHttp,
 } from './logger';
 export { computeLabelProperty, computeLabelUnit } from './misc/computed-labels';
+export { generateId } from './misc/generate-id';
 export { hasItems } from './non-empty-array';
 export { PageTypePortfolio } from './route-helpers/enums/page-tab-portfolio.enum';
 export { PageTab } from './route-helpers/enums/page-tab.enum';

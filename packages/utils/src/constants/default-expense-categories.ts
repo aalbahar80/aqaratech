@@ -1,11 +1,10 @@
 import { z } from 'zod';
 
+import { generateId } from 'src/misc/generate-id';
 import {
 	ExpenseCategoryCreateSchema,
 	expenseCategoryCreateSchema,
-} from '@self/utils';
-
-import { generateId } from 'src/utils/generate-id';
+} from 'src/schemas/expense-category.schema';
 
 const expenseCategoryCreateWithIdSchema = expenseCategoryCreateSchema.extend({
 	id: z.string(),

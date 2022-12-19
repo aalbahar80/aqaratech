@@ -5,8 +5,9 @@ import { Inject, Injectable, LoggerService } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
+import { generateExpenseCategoryTree } from '@self/utils';
+
 import { Action } from 'src/casl/action.enum';
-import { generateExpenseCategoryTree } from 'src/constants/default-expense-categories';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import {
 	CreateOrganizationDto,

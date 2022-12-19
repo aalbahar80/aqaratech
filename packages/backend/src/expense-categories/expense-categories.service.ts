@@ -2,7 +2,11 @@ import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { z } from 'zod';
 
-import { expenseCategorySchema, expenseCategoryTreeSchema } from '@self/utils';
+import {
+	expenseCategorySchema,
+	expenseCategoryTreeSchema,
+	generateId,
+} from '@self/utils';
 
 import { Action } from 'src/casl/action.enum';
 import {
@@ -13,7 +17,6 @@ import {
 } from 'src/expense-categories/expense-category.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { generateId } from 'src/utils/generate-id';
 
 import type { Union } from 'ts-toolbelt';
 

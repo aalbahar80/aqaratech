@@ -1,6 +1,8 @@
 /* eslint-disable no-dupe-else-if */
 import { inspect } from 'node:util';
 
+import type { ExpenseCategoryTree } from '@self/utils';
+
 import {
 	testOrgEmail,
 	testPortfolioEmail,
@@ -20,8 +22,6 @@ import { unitFactory } from './factory/unit';
 import { userFactory } from './factory/user';
 import { isDefined } from './utils/is-defined';
 import { findOrFail, random, randomCategory } from './utils/random';
-
-import type { Tree } from './constants';
 
 // TODO use satisfies SeedCount
 const defaultSeedCount = {
@@ -144,7 +144,7 @@ export const createSeed = (options?: SeedOptions) => {
 		const organizationId = org1.id;
 		const tree = organizationSettings.find(
 			(s) => s.organizationId === organizationId,
-		)?.expenseCategoryTree as Tree | undefined;
+		)?.expenseCategoryTree as ExpenseCategoryTree | undefined;
 
 		if (!tree) {
 			throw new Error('Expense category tree not found');

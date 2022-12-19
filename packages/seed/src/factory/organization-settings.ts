@@ -2,7 +2,8 @@ import { randomUUID } from 'node:crypto';
 
 import * as Factory from 'factory.ts';
 
-import { generateExpenseCategoryTree } from '../constants';
+import { generateExpenseCategoryTree } from '@self/utils';
+
 import { createdAt, updatedAt } from '../utils/dates';
 
 import type { OrganizationSettings } from '@prisma/client';
