@@ -3340,6 +3340,9 @@ components:
       required:
         - id
         - labelEn
+        - labelAr
+        - description
+        - parentId
         - isGroup
     ExpenseBreadcrumbsDto:
       type: object
@@ -4120,6 +4123,9 @@ components:
       required:
         - id
         - labelEn
+        - labelAr
+        - description
+        - parentId
     UpdateExpenseCategoryDto:
       type: object
       properties:

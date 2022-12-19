@@ -847,19 +847,19 @@ export interface ExpenseCategoryDto {
 	 * @type {string}
 	 * @memberof ExpenseCategoryDto
 	 */
-	labelAr?: string | null;
+	labelAr: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof ExpenseCategoryDto
 	 */
-	description?: string | null;
+	description: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof ExpenseCategoryDto
 	 */
-	parentId?: string | null;
+	parentId: string | null;
 	/**
 	 *
 	 * @type {boolean}
@@ -981,19 +981,19 @@ export interface ExpenseDtoExpenseType {
 	 * @type {string}
 	 * @memberof ExpenseDtoExpenseType
 	 */
-	labelAr?: string | null;
+	labelAr: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof ExpenseDtoExpenseType
 	 */
-	description?: string | null;
+	description: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof ExpenseDtoExpenseType
 	 */
-	parentId?: string | null;
+	parentId: string | null;
 	/**
 	 *
 	 * @type {boolean}
@@ -2943,19 +2943,19 @@ export interface UpdateExpenseCategoryTreeDto {
 	 * @type {string}
 	 * @memberof UpdateExpenseCategoryTreeDto
 	 */
-	labelAr?: string | null;
+	labelAr: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UpdateExpenseCategoryTreeDto
 	 */
-	description?: string | null;
+	description: string | null;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof UpdateExpenseCategoryTreeDto
 	 */
-	parentId?: string | null;
+	parentId: string | null;
 }
 /**
  *
