@@ -2,12 +2,12 @@ import {
 	CallHandler,
 	ExecutionContext,
 	Injectable,
-	Logger,
 	NestInterceptor,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { z } from 'zod';
 
 import {
 	PaginatedDto,
@@ -28,8 +28,6 @@ import {
 export class PaginationInterceptor<T>
 	implements NestInterceptor<T, PaginatedMetaDto<T>>
 {
-	private readonly logger = new Logger(PaginationInterceptor.name);
-
 	intercept(
 		context: ExecutionContext,
 		next: CallHandler,
@@ -38,12 +36,9 @@ export class PaginationInterceptor<T>
 		const query = request.query;
 
 		return next.handle().pipe(
-			map((data: WithCount<T>) => {
-				if (data.total === undefined) {
-					this.logger.error(
-						'No `total` found in response. Attempted to paginate a response that did not have a `total` property.',
-					);
-				}
+			map((rawData: unknown) => {
+				const data = withCountSchema.parse(rawData) as WithCount<T>;
+
 				const itemCount = data.total;
 				const pageSize = data.results.length;
 				const pagination = new PaginatedDto({
@@ -68,3 +63,9 @@ const queryToInt = (q: unknown) => {
 		return undefined;
 	}
 };
+
+// Zod schema to validate withCount
+const withCountSchema = z.object({
+	total: z.number().min(0),
+	results: z.array(z.unknown()),
+});

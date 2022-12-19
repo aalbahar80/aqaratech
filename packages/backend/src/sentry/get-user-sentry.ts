@@ -16,6 +16,7 @@ export const getUserSentry = (request: Request) => {
 			id: user.id,
 			email: user.email,
 			roleId: user.role.id,
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			username: user.fullName ?? undefined,
 			isAqaratechStaff: user.isAqaratechStaff,
 		};

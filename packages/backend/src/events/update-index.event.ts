@@ -11,6 +11,8 @@ type Item = {
 	id: string;
 	organizationId: string;
 	// portfolioId: string; // enable if search is enabled for portfolio users
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 } & Record<string, any>;
 
 export class UpdateIndexEvent {

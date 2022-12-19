@@ -1,7 +1,6 @@
 import {
 	ApiProperty,
 	ApiPropertyOptional,
-	IntersectionType,
 	OmitType,
 	PartialType,
 } from '@nestjs/swagger';
@@ -19,11 +18,7 @@ export class UserRequiredDto implements Partial<User> {
 	fullName: string;
 }
 
-export class UserOptionalDto implements Partial<User> {}
-
-export class CreateUserDto
-	extends IntersectionType(UserRequiredDto, PartialType(UserOptionalDto))
-	implements Partial<User> {}
+export class CreateUserDto extends UserRequiredDto implements Partial<User> {}
 
 export class UpdateUserDto extends PartialType(
 	OmitType(CreateUserDto, ['email']),
