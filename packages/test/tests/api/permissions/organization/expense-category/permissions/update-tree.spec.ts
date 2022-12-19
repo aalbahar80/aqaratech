@@ -30,7 +30,6 @@ test('can update tree in own org', async ({
 				labelEn: 'updated',
 				// labelAr: 'تحديث',
 				labelAr: null,
-				description: null,
 				parentId: expenseCategory.id,
 			};
 		}
