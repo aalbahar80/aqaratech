@@ -24,7 +24,7 @@ export const insertSeed = async (fake: PreprocessedSeed) => {
 
 	await prisma.organization.createMany({ data: organizations });
 
-	// @ts-expect-error
+	// @ts-expect-error JsonNull vs JsonValue
 	await prisma.organizationSettings.createMany({ data: organizationSettings });
 
 	await prisma.tenant.createMany({ data: tenants });

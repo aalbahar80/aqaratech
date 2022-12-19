@@ -17,7 +17,7 @@ export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 	updatedAt: Factory.each(() => updatedAt()),
 
 	area: Factory.each(
-		() => areas[Math.floor(Math.random() * areas.length)]?.[1] || null,
+		() => areas[Math.floor(Math.random() * areas.length)]?.[1] ?? null,
 	),
 
 	label: Factory.each(() => faker.address.streetAddress()),

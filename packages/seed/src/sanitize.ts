@@ -31,7 +31,7 @@ export const changePermissionsToUndefined = <
  */
 export const convertToDatetimeObj = <
 	K extends string,
-	T extends { [P in K as K]: string | Date | null } & Record<string, any>,
+	T extends { [P in K as K]: string | Date | null } & Record<string, unknown>,
 >(
 	key: K,
 	obj: T,
@@ -55,7 +55,7 @@ export const convertToDatetimeObj = <
  */
 export const convertToDatetimeArray = <
 	K extends string,
-	T extends { [P in K as K]: string | Date | null } & Record<string, any>,
+	T extends { [P in K as K]: string | Date | null } & Record<string, unknown>,
 >(
 	keys: K[],
 	obj: T,
