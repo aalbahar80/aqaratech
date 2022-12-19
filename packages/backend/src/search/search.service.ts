@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
-import { instanceToPlain, plainToClass } from 'class-transformer';
+import { instanceToPlain, plainToInstance } from 'class-transformer';
 import { isUUID } from 'class-validator';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
@@ -156,11 +156,11 @@ export class SearchService implements OnModuleInit {
 
 	@OnEvent('update.index')
 	async updateIndex(payload: UpdateIndexEvent) {
-		const { indexName, items, classConstructor } = payload;
-		const index = this.client.index(indexName);
+		// const { indexName, items, classConstructor } = payload;
+		const index = this.client.index(payload.indexName);
 
-		const documents = items.map((item) => {
-			const instance: unknown = plainToClass(classConstructor, item);
+		const documents = payload.items.map((item) => {
+			const instance = plainToInstance(payload.classConstructor, item);
 			const plain = instanceToPlain(instance); // to expose custom getters
 			return plain;
 		});

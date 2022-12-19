@@ -1,28 +1,8 @@
 import { EntityNames } from '@self/utils';
 
-type AnyClassConstructor = new (...args: any[]) => any;
-
-export type TIndexName = Extract<
-	EntityNames['title'],
-	'tenant' | 'portfolio' | 'property'
->;
-
-type Item = {
-	id: string;
-	organizationId: string;
-	// portfolioId: string; // enable if search is enabled for portfolio users
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-} & Record<string, any>;
-
-export class UpdateIndexEvent {
-	constructor(
-		// TODO add types
-		public readonly items: Item[],
-		public readonly indexName: TIndexName,
-		public readonly classConstructor: AnyClassConstructor,
-	) {}
-}
+import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-search-document';
+import { PropertySearchDocument } from 'src/properties/dto/property-search-document';
+import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 
 export class RemoveDocumentsEvent {
 	constructor(
@@ -30,3 +10,37 @@ export class RemoveDocumentsEvent {
 		public readonly indexName: TIndexName,
 	) {}
 }
+
+export class UpdateIndexEvent<T extends TIndexName = TIndexName> {
+	constructor(
+		public readonly items: (Item<T> & {
+			id: string;
+			organizationId: string;
+			// portfolioId: string; // enable if search is enabled for portfolio users
+		})[],
+		public readonly indexName: T,
+		public readonly classConstructor: ClassConstructor<T>,
+	) {}
+}
+
+export type TIndexName = Extract<
+	EntityNames['title'],
+	'tenant' | 'portfolio' | 'property'
+>;
+
+type Item<T extends TIndexName> = T extends 'tenant'
+	? Omit<TenantSearchDocument, 'title'>
+	: T extends 'portfolio'
+	? Omit<PortfolioSearchDocument, 'title'>
+	: T extends 'property'
+	? Omit<PropertySearchDocument, 'title' | 'address'>
+	: never;
+
+// create a generic type that returns the class constructor type based on the index name
+type ClassConstructor<T extends TIndexName> = T extends 'tenant'
+	? new () => TenantSearchDocument
+	: T extends 'portfolio'
+	? new () => PortfolioSearchDocument
+	: T extends 'property'
+	? new () => PropertySearchDocument
+	: never;

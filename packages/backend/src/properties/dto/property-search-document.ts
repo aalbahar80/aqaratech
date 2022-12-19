@@ -6,7 +6,7 @@ export class PropertySearchDocument implements Partial<Property> {
 	organizationId: string;
 	portfolioId: string;
 	label: string | null;
-	area: string;
+	area: string | null;
 	block: string | null;
 	street: string | null;
 	number: string | null;
