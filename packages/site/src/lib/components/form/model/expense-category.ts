@@ -12,7 +12,7 @@ export const expenseCategoryFormModel = () =>
 
 		createSchema: expenseCategoryCreateSchema,
 		updateSchema: expenseCategoryUpdateSchema,
-		excludedFields: ['parentId', 'description'],
+		excludedFields: ['parentId'],
 		fields: {
 			labelEn: createFormField('labelEn', {
 				required: true,

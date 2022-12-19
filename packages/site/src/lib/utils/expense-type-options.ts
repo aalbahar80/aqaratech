@@ -16,7 +16,6 @@ export const ROOT_NODE: ExpenseCategoryDto = {
 	isGroup: true,
 	labelEn: '',
 	labelAr: '',
-	description: '',
 };
 
 /**

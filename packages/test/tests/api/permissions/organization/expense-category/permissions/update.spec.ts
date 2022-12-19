@@ -8,11 +8,7 @@ import { expenseCategoryFactory, sample } from '@self/seed';
 import { PostUrl } from '../../../../../../utils/post-url';
 import { test } from '../../../../api-fixtures';
 
-const updated = R.pick(expenseCategoryFactory.build(), [
-	'labelEn',
-	'labelAr',
-	'description',
-]);
+const updated = R.pick(expenseCategoryFactory.build(), ['labelEn', 'labelAr']);
 
 test('can update expenseCategory in own org', async ({
 	request,

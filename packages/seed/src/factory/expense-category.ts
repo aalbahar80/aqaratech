@@ -13,8 +13,6 @@ export const expenseCategoryFactory = Factory.Sync.makeFactory<ExpenseCategory>(
 
 		labelAr: Factory.each(() => faker.finance.accountName()),
 
-		description: Factory.each(() => faker.lorem.sentence()),
-
 		isGroup: Factory.each(() => faker.datatype.boolean()),
 
 		parentId: null,
