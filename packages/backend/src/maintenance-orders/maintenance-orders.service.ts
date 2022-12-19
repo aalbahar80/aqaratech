@@ -47,9 +47,9 @@ export class MaintenanceOrdersService {
 				...data,
 				organization: { connect: { id: organizationId } },
 				portfolio: { connect: { id: portfolioId } },
-				property: propertyId ? { connect: { id: propertyId } } : undefined,
-				unit: unitId ? { connect: { id: unitId } } : undefined,
-				tenant: tenantId ? { connect: { id: tenantId } } : undefined,
+				...(propertyId ? { property: { connect: { id: propertyId } } } : {}),
+				...(unitId ? { unit: { connect: { id: unitId } } } : {}),
+				...(tenantId ? { tenant: { connect: { id: tenantId } } } : {}),
 			},
 		});
 
