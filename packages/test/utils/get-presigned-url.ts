@@ -1,4 +1,4 @@
-import { APIRequestContext, expect } from '@playwright/test';
+import { expect, type APIRequestContext } from '@playwright/test';
 import { withQuery } from 'ufo';
 
 import { apiURL } from '../tests/api/fixtures/api-url';

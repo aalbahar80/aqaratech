@@ -6,6 +6,7 @@ module.exports = {
 	extends: ['custom'],
 	rules: {
 		'@typescript-eslint/promise-function-async': 'off',
+		'@typescript-eslint/consistent-type-imports': 'off', // avoid stripping type imports for openapi
 	},
 	overrides: [
 		{

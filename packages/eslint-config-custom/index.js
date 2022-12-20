@@ -173,6 +173,14 @@ module.exports = {
 		'@typescript-eslint/promise-function-async': 'warn',
 
 		'@typescript-eslint/ban-ts-comment': 'warn',
+
+		'@typescript-eslint/consistent-type-exports': 'error',
+		'@typescript-eslint/consistent-type-imports': [
+			'error',
+			{
+				disallowTypeAnnotations: false, // we need this for the declaration files (*.d.ts)
+			},
+		],
 	},
 	ignorePatterns: ['.eslintrc.*', '*.sh'],
 };

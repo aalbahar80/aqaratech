@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 import { generateId } from 'src/misc/generate-id';
 import {
-	ExpenseCategoryCreateSchema,
 	expenseCategoryCreateSchema,
+	type ExpenseCategoryCreateSchema,
 } from 'src/schemas/expense-category.schema';
 
 const expenseCategoryCreateWithIdSchema = expenseCategoryCreateSchema.extend({

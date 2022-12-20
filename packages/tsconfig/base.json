@@ -10,6 +10,7 @@
 		"isolatedModules": true,
 		"resolveJsonModule": true,
 		"preserveWatchOutput": true,
+		"importsNotUsedAsValues": "error",
 
 		"types": ["node"],
 		"lib": ["DOM"],

@@ -1,13 +1,13 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
 import * as R from 'remeda';
 
 import {
-	Entity,
 	formatValue,
 	getLabel,
 	getRoute,
 	isDateOnly,
 	PageType,
+	type Entity,
 } from '@self/utils';
 
 import { uuid } from '../../utils/uuid';

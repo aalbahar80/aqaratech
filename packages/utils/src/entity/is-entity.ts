@@ -1,5 +1,5 @@
-import { dbEntity, Entity, nonDbEntity } from './entity-definition';
-import { entitiesMap, URLName } from './entity-map';
+import { dbEntity, nonDbEntity, type Entity } from './entity-definition';
+import { entitiesMap, type URLName } from './entity-map';
 
 export function isEntity(str: string): str is Entity {
 	const entities: string[] = [...dbEntity, ...nonDbEntity];
