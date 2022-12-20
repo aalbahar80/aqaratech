@@ -10,7 +10,7 @@
 		"format": "prettier --check --ignore-path .gitignore \"**/*.{js,ts,css,md,svelte,yaml,yml,json}\" \"!pnpm-lock.yaml\" \"!packages/**/*\"",
 		"format:all": "turbo run format --continue",
 		"format:fix": "prettier --write --ignore-path .gitignore \"(**/*.{js,ts,css,md,svelte,yaml,yml,json}|!pnpm-lock.yaml)\"",
-		"lint": "eslint --ignore-path .gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
+		"lint": "eslint --max-warnings 0 --ignore-path .gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
 		"lint:all": "TIMING=1 turbo run lint --continue",
 		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
 		"check": "tsc --noEmit; pnpm run check:circular",
