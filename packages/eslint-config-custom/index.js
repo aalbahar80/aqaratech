@@ -182,9 +182,10 @@ module.exports = {
 			},
 		],
 
-		'@typescript-eslint/prefer-readonly': 'error',
+		'@typescript-eslint/prefer-readonly': 'warn',
 		// '@typescript-eslint/prefer-readonly-parameter-types': 'error',
-		// '@typescript-eslint/member-ordering': 'error',
+		'@typescript-eslint/member-ordering': 'warn',
+		// "@typescript-eslint/require-array-sort-compare": "error",
 	},
 	ignorePatterns: ['.eslintrc.*', '*.sh'],
 };

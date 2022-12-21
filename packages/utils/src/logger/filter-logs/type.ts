@@ -1,7 +1,7 @@
 export interface TransformableInfo {
+	[key: string]: unknown;
 	level: string;
 	message: unknown;
-	[key: string]: unknown;
 }
 
 export type TransformFunction = (

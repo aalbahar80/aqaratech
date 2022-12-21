@@ -133,6 +133,39 @@ export class FormPage {
 		}
 	};
 
+	readonly getSuccessUrl = () => {
+		if (!this.options) {
+			throw new Error('Cannot get success URL without options');
+		}
+
+		const successUrl = getRoute({
+			id: this.options.id ?? ':uuid',
+			entity: this.options.entity,
+			pageType: PageType.Id,
+			params: this.toParams(this.options.fixtures),
+		});
+
+		return this.options.id ? successUrl : uuid(successUrl);
+	};
+
+	toParams({
+		org,
+		portfolio,
+	}: {
+		org: { organization: { id: string } };
+		portfolio?: { id: string };
+	}) {
+		const params: Record<string, string> = {
+			organizationId: org.organization.id,
+		};
+
+		if (portfolio) {
+			params['portfolioId'] = portfolio.id;
+		}
+
+		return params;
+	}
+
 	/**
 	 * Return a stringified version of the value for use in test ids
 	 */
@@ -168,39 +201,6 @@ export class FormPage {
 			});
 		}
 	};
-
-	readonly getSuccessUrl = () => {
-		if (!this.options) {
-			throw new Error('Cannot get success URL without options');
-		}
-
-		const successUrl = getRoute({
-			id: this.options.id ?? ':uuid',
-			entity: this.options.entity,
-			pageType: PageType.Id,
-			params: this.toParams(this.options.fixtures),
-		});
-
-		return this.options.id ? successUrl : uuid(successUrl);
-	};
-
-	toParams({
-		org,
-		portfolio,
-	}: {
-		org: { organization: { id: string } };
-		portfolio?: { id: string };
-	}) {
-		const params: Record<string, string> = {
-			organizationId: org.organization.id,
-		};
-
-		if (portfolio) {
-			params['portfolioId'] = portfolio.id;
-		}
-
-		return params;
-	}
 }
 
 // Types
