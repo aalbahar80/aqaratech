@@ -187,6 +187,8 @@ module.exports = {
 		'@typescript-eslint/member-ordering': 'warn',
 		'@typescript-eslint/require-array-sort-compare': 'warn',
 		'@typescript-eslint/prefer-regexp-exec': 'warn',
+		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
+		// '@typescript-eslint/strict-boolean-expressions': 'warn',
 	},
 	ignorePatterns: ['.eslintrc.*', '*.sh'],
 };
