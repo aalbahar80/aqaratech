@@ -98,7 +98,6 @@ module.exports = {
 				// necessary for svelte's $page.params['myParam']
 				'@typescript-eslint/no-non-null-assertion': 'off',
 
-				// TODO add rules from: https://ota-meshi.github.io/eslint-plugin-svelte/rules/
 				'svelte/no-dupe-use-directives': 'error',
 				'svelte/no-dom-manipulating': 'warn',
 				'svelte/no-export-load-in-svelte-module-in-kit-pages': 'error',
