@@ -1,8 +1,8 @@
-import type { PageLoad } from './$types';
-
 import { createApi } from '$api';
 
-export const load: PageLoad = async ({ fetch, params }) => {
+import type { LayoutLoad } from './$types';
+
+export const load: LayoutLoad = async ({ fetch, params }) => {
 	const api = createApi(fetch);
 
 	const maintenanceOrder = await api.maintenanceOrders.findOne({
