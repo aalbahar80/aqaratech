@@ -25,7 +25,7 @@
 			<a
 				href="https://ojab1kn3vda.typeform.com/to/eet5fojG"
 				target="_blank"
-				rel="noreferrer"
+				rel="noopener noreferrer"
 				data-sveltekit-reload
 				type="submit"
 				class={buttonCn({

@@ -66,7 +66,7 @@
 		/>
 		<Button
 			icon={HeroiconsEnvelope}
-			text={'Send email reminder'}
+			text="Send email reminder"
 			solid
 			disabled={data.leaseInvoice.isPaid}
 			on:click={() => {

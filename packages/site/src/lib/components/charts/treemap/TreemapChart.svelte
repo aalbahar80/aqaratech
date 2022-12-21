@@ -129,7 +129,7 @@ Create a treemap from a d3-hierarchy.
 									class:hidden={node.children}
 									href={getLink(node)}
 									target="_blank"
-									rel="noreferrer"
+									rel="noopener noreferrer"
 									data-sveltekit-reload
 								>
 									&#8599;

@@ -99,6 +99,21 @@ module.exports = {
 				'@typescript-eslint/no-non-null-assertion': 'off',
 
 				// TODO add rules from: https://ota-meshi.github.io/eslint-plugin-svelte/rules/
+				'svelte/no-dupe-use-directives': 'error',
+				'svelte/no-dom-manipulating': 'warn',
+				'svelte/no-export-load-in-svelte-module-in-kit-pages': 'error',
+				'svelte/no-store-async': 'error',
+				'svelte/require-store-callbacks-use-set-param': 'error',
+				// 'svelte/valid-prop-names-in-kit-pages': 'error',
+				'svelte/no-target-blank': 'error',
+				'svelte/no-reactive-functions': 'error',
+				'svelte/no-reactive-literals': 'error',
+				'svelte/no-useless-mustaches': 'error',
+				'svelte/require-optimized-style-attribute': 'error',
+				'svelte/require-stores-init': 'error',
+
+				'no-trailing-spaces': 'off', // superseded
+				'svelte/no-trailing-spaces': 'error',
 			},
 		},
 	],

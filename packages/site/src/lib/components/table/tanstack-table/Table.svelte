@@ -185,7 +185,7 @@
 
 <div class="inline-block min-w-full align-middle">
 	<div class="pb-8" in:fade>
-		<!-- Use the named slot "filter" to customize ex. Hero. 
+		<!-- Use the named slot "filter" to customize ex. Hero.
 			   Otherwise, a default FilterBar will be rendered. -->
 		<slot name="filter" {filters}>
 			<FilterBar responsive={filters} />
