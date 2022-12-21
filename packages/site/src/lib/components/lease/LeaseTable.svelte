@@ -1,9 +1,5 @@
 <script lang="ts">
-	import {
-		createColumnHelper,
-		renderComponent,
-		type ColumnDef,
-	} from '@tanstack/svelte-table';
+	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
 
@@ -13,6 +9,7 @@
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import RadialProgress from '$lib/components/RadialProgress.svelte';
+	import type { ColumnDto } from '$lib/components/table/column-type';
 	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 	import {
 		locationColumnDef,
@@ -23,7 +20,7 @@
 	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
 
 	export let data: PaginatedLeaseDto;
-	export let extraColumns: ColumnDef<LeaseDto, string>[] = [];
+	export let extraColumns: ColumnDto<LeaseDto>[] = [];
 
 	const columnHelper = createColumnHelper<LeaseDto>();
 

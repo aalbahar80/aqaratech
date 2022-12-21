@@ -1,9 +1,5 @@
 <script lang="ts">
-	import {
-		createColumnHelper,
-		renderComponent,
-		type ColumnHelper,
-	} from '@tanstack/svelte-table';
+	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -11,6 +7,7 @@
 	import { getLabel } from '@self/utils';
 
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
+	import type { ColumnDto } from '$lib/components/table/column-type';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { createModalDelete } from '$lib/components/toast/create-modal-delete';
@@ -22,7 +19,7 @@
 	import type { FileDto, PaginatedFileDto } from '$api/openapi';
 
 	export let data: PaginatedFileDto;
-	export let extraColumns: ColumnHelper<FileDto>[] = [];
+	export let extraColumns: ColumnDto<FileDto>[] = [];
 
 	const columnHelper = createColumnHelper<FileDto>();
 

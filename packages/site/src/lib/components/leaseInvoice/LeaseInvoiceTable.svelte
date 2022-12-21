@@ -11,6 +11,7 @@
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
+	import type { ColumnDto } from '$lib/components/table/column-type';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 	import {
 		locationColumnDef,
@@ -27,7 +28,7 @@
 
 	export let data: PaginatedLeaseInvoiceDto;
 	export let showOptions = false;
-	export let extraColumns: any[] = [];
+	export let extraColumns: ColumnDto<LeaseInvoiceDto>[] = [];
 
 	const columnHelper = createColumnHelper<LeaseInvoiceDto>();
 
