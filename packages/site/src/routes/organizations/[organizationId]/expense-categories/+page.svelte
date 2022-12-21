@@ -37,8 +37,8 @@
 
 	const isMobile =
 		typeof window !== 'undefined' &&
-		navigator.userAgent.match(
-			/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i,
+		/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.exec(
+			navigator.userAgent,
 		);
 </script>
 

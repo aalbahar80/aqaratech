@@ -185,7 +185,8 @@ module.exports = {
 		'@typescript-eslint/prefer-readonly': 'warn',
 		// '@typescript-eslint/prefer-readonly-parameter-types': 'error',
 		'@typescript-eslint/member-ordering': 'warn',
-		// "@typescript-eslint/require-array-sort-compare": "error",
+		'@typescript-eslint/require-array-sort-compare': 'warn',
+		'@typescript-eslint/prefer-regexp-exec': 'warn',
 	},
 	ignorePatterns: ['.eslintrc.*', '*.sh'],
 };
