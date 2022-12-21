@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
-	import FileList from '$lib/components/file/FileList.svelte.svelte';
+	import FileTable from '$lib/components/file/FileTable.svelte';
 
 	export let data: PageData;
 </script>
 
-<FileList files={data.files} />
+<FileTable data={data.files} />
