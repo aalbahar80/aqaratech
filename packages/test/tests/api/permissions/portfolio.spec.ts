@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
+import { apiURL } from '../fixtures/api-url';
 
 test.use({
 	userRoleType: 'PORTFOLIO',
@@ -32,16 +33,25 @@ for (const route of notAccessible) {
 	});
 }
 
-const scoped = ['/leaseInvoices', '/expenses', '/files'];
+test(`can get portfolio /files`, async ({ portfolio, scopedRequest }) => {
+	const res = await scopedRequest.get('/files', {
+		params: {
+			relationKey: 'portfolio',
+			relationValue: portfolio.id,
+		},
+	});
+
+	await expect(res).toBeOK();
+});
+
+const scoped = ['/leaseInvoices', '/expenses'];
 
 for (const route of scoped) {
-	test(`can get ${route} `, async ({ portfolio, scopedRequest }) => {
-		const res = await scopedRequest.get('/files', {
-			params: {
-				relationKey: 'portfolio',
-				relationValue: portfolio.id,
-			},
-		});
+	test(`can get portfolio ${route} `, async ({ scopedRequest, portfolio }) => {
+		const url = `${apiURL}/portfolios/${portfolio.id}${route}`;
+
+		const res = await scopedRequest.get(url);
+
 		await expect(res).toBeOK();
 	});
 }
