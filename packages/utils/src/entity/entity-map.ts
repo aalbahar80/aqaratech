@@ -1,10 +1,9 @@
-import { satisfies } from '../satisfies';
-
 import type { DBEntity, Entity, NonDBEntity } from './entity-definition';
 
 export interface EntityNames {
 	title: Entity;
 	urlName: string;
+	caslName?: string;
 	singular: string;
 	singularCap: string;
 	plural: string;
@@ -20,7 +19,7 @@ export type NonDBEntitiesMap = EntitiesMap<NonDBEntity>;
 export type UEntityMap = typeof entitiesMap[keyof typeof entitiesMap];
 export type URLName = UEntityMap['urlName'];
 
-const organization = satisfies<EntityNames>()({
+const organization = {
 	title: 'organization',
 	urlName: 'organizations',
 	caslName: 'Organization',
@@ -29,9 +28,9 @@ const organization = satisfies<EntityNames>()({
 	plural: 'organizations',
 	pluralCap: 'Organizations',
 	idField: 'organizationId',
-});
+} as const satisfies EntityNames;
 
-const role = satisfies<EntityNames>()({
+const role = {
 	title: 'role',
 	urlName: 'roles',
 	caslName: 'Role',
@@ -40,9 +39,9 @@ const role = satisfies<EntityNames>()({
 	singular: 'organization',
 	singularCap: 'Role',
 	idField: null,
-});
+} as const satisfies EntityNames;
 
-const tenant = satisfies<EntityNames>()({
+const tenant = {
 	title: 'tenant',
 	urlName: 'tenants',
 	caslName: 'Tenant',
@@ -51,9 +50,9 @@ const tenant = satisfies<EntityNames>()({
 	plural: 'tenants',
 	pluralCap: 'Tenants',
 	idField: 'tenantId',
-});
+} as const satisfies EntityNames;
 
-const portfolio = satisfies<EntityNames>()({
+const portfolio = {
 	title: 'portfolio',
 	urlName: 'portfolios',
 	caslName: 'Portfolio',
@@ -62,9 +61,9 @@ const portfolio = satisfies<EntityNames>()({
 	plural: 'owners',
 	pluralCap: 'Owners',
 	idField: 'portfolioId',
-});
+} as const satisfies EntityNames;
 
-const property = satisfies<EntityNames>()({
+const property = {
 	title: 'property',
 	urlName: 'properties',
 	caslName: 'Property',
@@ -73,9 +72,9 @@ const property = satisfies<EntityNames>()({
 	plural: 'properties',
 	pluralCap: 'Properties',
 	idField: 'propertyId',
-});
+} as const satisfies EntityNames;
 
-const unit = satisfies<EntityNames>()({
+const unit = {
 	title: 'unit',
 	urlName: 'units',
 	caslName: 'Unit',
@@ -84,9 +83,9 @@ const unit = satisfies<EntityNames>()({
 	plural: 'units',
 	pluralCap: 'Units',
 	idField: 'unitId',
-});
+} as const satisfies EntityNames;
 
-const lease = satisfies<EntityNames>()({
+const lease = {
 	title: 'lease',
 	urlName: 'leases',
 	caslName: 'Lease',
@@ -95,9 +94,9 @@ const lease = satisfies<EntityNames>()({
 	plural: 'leases',
 	pluralCap: 'Leases',
 	idField: 'leaseId',
-});
+} as const satisfies EntityNames;
 
-const leaseInvoice = satisfies<EntityNames>()({
+const leaseInvoice = {
 	title: 'leaseInvoice',
 	urlName: 'leaseInvoices',
 	caslName: 'LeaseInvoice',
@@ -106,9 +105,9 @@ const leaseInvoice = satisfies<EntityNames>()({
 	plural: 'leaseInvoices',
 	pluralCap: 'Lease Invoices',
 	idField: null,
-});
+} as const satisfies EntityNames;
 
-const expense = satisfies<EntityNames>()({
+const expense = {
 	title: 'expense',
 	urlName: 'expenses',
 	caslName: 'Expense',
@@ -117,9 +116,9 @@ const expense = satisfies<EntityNames>()({
 	plural: 'expenses',
 	pluralCap: 'Expenses',
 	idField: null,
-});
+} as const satisfies EntityNames;
 
-const payout = satisfies<EntityNames>()({
+const payout = {
 	title: 'payout',
 	urlName: 'payouts',
 	caslName: 'Payout',
@@ -128,9 +127,9 @@ const payout = satisfies<EntityNames>()({
 	plural: 'payouts',
 	pluralCap: 'Payouts',
 	idField: null,
-});
+} as const satisfies EntityNames;
 
-const maintenanceOrder = satisfies<EntityNames>()({
+const maintenanceOrder = {
 	title: 'maintenanceOrder',
 	urlName: 'maintenance-orders',
 	caslName: 'MaintenanceOrder',
@@ -139,9 +138,9 @@ const maintenanceOrder = satisfies<EntityNames>()({
 	plural: 'maintenanceOrders',
 	pluralCap: 'Maintenance Orders',
 	idField: null,
-});
+} as const satisfies EntityNames;
 
-const expenseCategory = satisfies<EntityNames>()({
+const expenseCategory = {
 	title: 'expenseCategory',
 	urlName: 'expense-categories',
 	singular: 'expense category',
@@ -149,9 +148,9 @@ const expenseCategory = satisfies<EntityNames>()({
 	plural: 'expense categories',
 	pluralCap: 'Expense Categories',
 	idField: null,
-});
+} as const satisfies EntityNames;
 
-const file = satisfies<EntityNames>()({
+const file = {
 	title: 'file',
 	urlName: 'files',
 	singular: 'file',
@@ -159,10 +158,9 @@ const file = satisfies<EntityNames>()({
 	plural: 'files',
 	pluralCap: 'Files',
 	idField: null,
-});
+} as const satisfies EntityNames;
 
-// TODO satisfies
-export const entitiesMap = satisfies<EntityMap>()({
+export const entitiesMap = {
 	tenant,
 	portfolio,
 	property,
@@ -176,4 +174,4 @@ export const entitiesMap = satisfies<EntityMap>()({
 	role,
 	expenseCategory,
 	file,
-});
+} as const satisfies EntityMap;

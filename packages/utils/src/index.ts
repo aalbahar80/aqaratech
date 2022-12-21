@@ -55,7 +55,6 @@ export type {
 	GetFormRouteBase,
 	GetFormRouteWithRelation,
 } from './route-helpers/types/route-helpers.type';
-export { satisfies } from './satisfies';
 export {
 	expenseCategoryCreateSchema,
 	expenseCategorySchema,
