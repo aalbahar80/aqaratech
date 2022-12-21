@@ -22,7 +22,8 @@
 <FieldLabel {formField} />
 
 <div class="mt-1">
-	<input
+	<svelte:element
+		this={formField.type === 'textarea' ? 'textarea' : 'input'}
 		type={formField.type}
 		name={formField.name}
 		id={formField.name}

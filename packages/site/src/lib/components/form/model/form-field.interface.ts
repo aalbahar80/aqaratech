@@ -26,6 +26,7 @@ export interface InputFormField<T> extends BaseFormField<T> {
 
 type InputType =
 	| 'text'
+	| 'textarea'
 	| 'email'
 	| 'number'
 	| 'date'

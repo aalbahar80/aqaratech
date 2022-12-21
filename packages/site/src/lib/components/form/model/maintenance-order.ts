@@ -15,6 +15,12 @@ export const maintenanceOrderFormModel = () =>
 		updateSchema: maintenanceOrderUpdateSchema,
 		excludedFields: ['tenantId'],
 		fields: {
+			title: createFormField('title'),
+
+			description: createFormField('description', {
+				type: 'textarea',
+			}),
+
 			status: createFormField('status', {
 				type: 'select',
 				options: maintenanceStatusOptions,
@@ -23,9 +29,5 @@ export const maintenanceOrderFormModel = () =>
 			completedAt: createFormField('completedAt', {
 				type: 'date',
 			}),
-
-			title: createFormField('title'),
-
-			description: createFormField('description'),
 		},
 	});
