@@ -36,8 +36,23 @@
 			"outputs": []
 		},
 		"test": {
-			"inputs": ["tests/**/*.ts", "../*/src/**", "playwright.config.ts"],
-			"outputs": ["playwright-report/**", "test-results/**"]
+			"outputs": []
+		},
+		"test:e2e": {
+			"inputs": [
+				"**/*.ts",
+				"../seed/src/**",
+				"../utils/src/**",
+				"../site/src/**",
+				"../backend/src/**",
+				"!node_modules/**/*"
+			],
+			"outputs": [
+				"playwright-report/**",
+				"test-results/**",
+				"storage-state/**",
+				"downloads/**"
+			]
 		},
 		"//#api:generate": {
 			"outputs": [
