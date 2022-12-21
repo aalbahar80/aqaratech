@@ -24,9 +24,9 @@
 		"precompute": "pnpm format:all && pnpm check:all && pnpm lint:all && pnpm build && pnpm test"
 	},
 	"devDependencies": {
-		"@changesets/changelog-git": "0.1.13",
-		"@changesets/cli": "2.25.2",
-		"@types/node": "18.11.16",
+		"@changesets/changelog-git": "0.1.14",
+		"@changesets/cli": "2.26.0",
+		"@types/node": "18.11.17",
 		"eslint": "8.30.0",
 		"eslint-config-custom": "workspace:*",
 		"madge": "5.0.1",
