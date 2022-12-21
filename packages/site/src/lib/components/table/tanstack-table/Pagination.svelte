@@ -59,7 +59,7 @@
 			<p data-testid="pagination-info" class="text-sm text-gray-700">
 				Showing <span class="font-medium">{idxStart}</span> to
 				<span class="font-medium">{idxEnd}</span>
-				of{' '}
+				of
 				<span class="font-medium">{itemCount}</span> results
 			</p>
 		</div>

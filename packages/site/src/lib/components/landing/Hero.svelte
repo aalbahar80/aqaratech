@@ -10,7 +10,7 @@
 		<h1
 			class="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl"
 		>
-			Manage your properties{' '}
+			Manage your properties
 			<span class="relative whitespace-nowrap text-blue-600">
 				<UnderlineDecoration />
 				<span class="relative">with ease.</span>
