@@ -70,8 +70,8 @@ export const getMaintenanceOrderBadge = (
 			};
 		default:
 			return {
-				label: 'Unknown',
-				color: 'gray',
+				label: '',
+				color: '',
 			};
 	}
 };

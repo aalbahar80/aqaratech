@@ -8,7 +8,7 @@
 </script>
 
 <Heading
-	title="MaintenanceOrder"
+	title="Maintenance Order"
 	id={maintenanceOrder.id}
 	entity="maintenanceOrder"
 	onDelete={async (api) => {
