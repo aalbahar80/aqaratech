@@ -4208,11 +4208,14 @@ components:
     FileDto:
       type: object
       properties:
+        id:
+          type: string
         key:
           type: string
         size:
           type: number
       required:
+        - id
         - key
         - size
     CreateExpenseCategoryDto:

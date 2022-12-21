@@ -17,10 +17,15 @@ export class FileDto {
 		if (!obj.Key) {
 			throw new InternalServerErrorException('Error in FileDto, invalid key');
 		}
+		this.id = obj.Key;
 		this.key = obj.Key;
 		this.size = obj.Size ?? 0;
 	}
 
+	@IsString()
+	id: string;
+
+	// TODO rm duplicate, use id instead
 	@IsString()
 	key: string;
 
