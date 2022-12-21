@@ -54,10 +54,12 @@ module.exports = {
 			// },
 		},
 		'import/parsers': {
-			'@typescript-eslint/parser': ['.ts'],
+			// https://github.com/ota-meshi/eslint-plugin-svelte/issues/312#issuecomment-1333345847
+			'@typescript-eslint/parser': ['.ts', '.tsx', '.cts', '.mts'],
+			// Avoids linting some js files with svelte-eslint-parser (when importing from *.svelte?)
+			'@babel/parser': ['.js', 'jsx', '.cjs', '.mjs'],
 		},
 		'import/internal-regex': '^@self',
-		'import/ignore': ['fuse.js', 'svelte-french-toast'],
 	},
 	rules: {
 		// https://github.com/vercel/turborepo/blob/main/packages/eslint-plugin-turbo/docs/rules/no-undeclared-env-vars.md
