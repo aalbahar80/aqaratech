@@ -2,7 +2,6 @@ import { expect } from '@playwright/test';
 
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
-import { apiURL } from '../fixtures/api-url';
 
 test.use({
 	userRoleType: 'PORTFOLIO',
@@ -48,7 +47,7 @@ const scoped = ['/leaseInvoices', '/expenses'];
 
 for (const route of scoped) {
 	test(`can get portfolio ${route} `, async ({ scopedRequest, portfolio }) => {
-		const url = `${apiURL}/portfolios/${portfolio.id}${route}`;
+		const url = `/portfolios/${portfolio.id}${route}`;
 
 		const res = await scopedRequest.get(url);
 

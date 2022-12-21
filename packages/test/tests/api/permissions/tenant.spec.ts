@@ -2,7 +2,6 @@ import { expect } from '@playwright/test';
 
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
-import { apiURL } from '../fixtures/api-url';
 
 import type { PaginatedTenantDto } from '../../../types/api';
 
@@ -90,7 +89,7 @@ const scoped = ['/leaseInvoices', '/expenses'];
 
 for (const route of scoped) {
 	test(`cannot get ${route} `, async ({ portfolio, scopedRequest }) => {
-		const url = `${apiURL}/portfolios/${portfolio.id}${route}`;
+		const url = `/portfolios/${portfolio.id}${route}`;
 
 		const res = await scopedRequest.get(url);
 
