@@ -12,7 +12,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PayoutsService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) {}
 	SubjectType = 'Payout' as const;
 
 	async create({

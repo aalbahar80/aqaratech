@@ -86,7 +86,7 @@ export class S3Service {
 		);
 	}
 
-	private _client: S3Client;
+	private readonly _client: S3Client;
 	private readonly logger = new Logger(S3Service.name);
 
 	async putObject(params: PutObjectCommandInput) {

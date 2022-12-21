@@ -21,7 +21,7 @@ import { S3Service } from 'src/s3/s3.service';
 export class OrganizationsService {
 	constructor(
 		private readonly prisma: PrismaService,
-		private s3: S3Service,
+		private readonly s3: S3Service,
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
 	) {}

@@ -11,7 +11,7 @@ import { z } from 'zod';
 export class ZodValidationPipe<S extends z.ZodTypeAny>
 	implements PipeTransform<unknown, z.infer<S>>
 {
-	constructor(private schema: S) {}
+	constructor(private readonly schema: S) {}
 
 	private readonly logger = new Logger(ZodValidationPipe.name);
 

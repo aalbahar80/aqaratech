@@ -25,7 +25,7 @@ import { UsersService } from 'src/users/users.service';
 @Injectable()
 export class RoleGuard implements CanActivate {
 	constructor(
-		private reflector: Reflector,
+		private readonly reflector: Reflector,
 		private readonly usersService: UsersService,
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,

@@ -20,7 +20,7 @@ import { IUser } from 'src/interfaces/user.interface';
 @Injectable()
 export class AbilitiesGuard implements CanActivate {
 	constructor(
-		private reflector: Reflector,
+		private readonly reflector: Reflector,
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
 	) {}

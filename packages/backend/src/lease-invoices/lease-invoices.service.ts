@@ -29,7 +29,7 @@ import { kwdFormat } from 'src/utils/format';
 export class LeaseInvoicesService {
 	constructor(
 		private readonly prisma: PrismaService,
-		private postmarkService: PostmarkService,
+		private readonly postmarkService: PostmarkService,
 		private readonly eventEmitter: EventEmitter2,
 		readonly configService: ConfigService<EnvironmentConfig>,
 	) {}

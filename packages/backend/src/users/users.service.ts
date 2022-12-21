@@ -13,7 +13,7 @@ export class UsersService {
 	constructor(
 		private readonly prisma: PrismaService,
 		private readonly caslAbilityFactory: CaslAbilityFactory,
-		@Inject(CACHE_MANAGER) private cacheManager: Cache,
+		@Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
 	) {}
 
 	private readonly logger = new Logger(UsersService.name);

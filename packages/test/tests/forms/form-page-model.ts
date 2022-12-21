@@ -136,7 +136,7 @@ export class FormPage {
 	/**
 	 * Return a stringified version of the value for use in test ids
 	 */
-	private toTestId = (value: unknown) => {
+	private readonly toTestId = (value: unknown) => {
 		if (typeof value === 'string') {
 			return value;
 		} else if (typeof value === 'number') {

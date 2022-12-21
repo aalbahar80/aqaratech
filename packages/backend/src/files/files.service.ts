@@ -21,8 +21,8 @@ import { S3Service } from 'src/s3/s3.service';
 @Injectable()
 export class FilesService {
 	constructor(
-		private s3: S3Service,
-		@Inject(CACHE_MANAGER) private cacheManager: Cache,
+		private readonly s3: S3Service,
+		@Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
 		private readonly prisma: PrismaService,
 	) {}
 

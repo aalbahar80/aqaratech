@@ -31,7 +31,7 @@ const SubjectType = 'Unit';
 export class UnitsController {
 	constructor(
 		private readonly unitsService: UnitsService,
-		private leasesService: LeasesService,
+		private readonly leasesService: LeasesService,
 	) {}
 
 	@Get(':id')

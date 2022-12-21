@@ -181,6 +181,10 @@ module.exports = {
 				disallowTypeAnnotations: false, // we need this for the declaration files (*.d.ts)
 			},
 		],
+
+		'@typescript-eslint/prefer-readonly': 'error',
+		// '@typescript-eslint/prefer-readonly-parameter-types': 'error',
+		// '@typescript-eslint/member-ordering': 'error',
 	},
 	ignorePatterns: ['.eslintrc.*', '*.sh'],
 };
