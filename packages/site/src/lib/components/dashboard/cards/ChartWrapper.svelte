@@ -16,7 +16,7 @@
 
 <div
 	class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
-	style="height: {maxHeight}px"
+	style:height="{maxHeight}px"
 >
 	{#if empty}
 		<div

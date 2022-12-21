@@ -46,9 +46,8 @@
 		}
 	}, 300);
 
-	$: {
-		void search(query);
-	}
+	$: void search(query);
+
 	$: hasHits = Object.values(groups).some(
 		(groupHits) => groupHits.estimatedTotalHits > 0,
 	);
@@ -141,7 +140,7 @@
 						<ListboxOptions static>
 							<div
 								class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
-								style="max-height: 70vh"
+								style:max-height="70vh"
 							>
 								{#each groups as group (group.entityTitle)}
 									{@const entityTitle = group.entityTitle}

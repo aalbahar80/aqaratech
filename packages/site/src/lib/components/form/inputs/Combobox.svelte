@@ -111,14 +111,12 @@
 	let activeOption: Option | undefined;
 	const autoScroll = true;
 
-	$: {
-		if (!forceOpen) {
-			// activeOption should be cleared when the combobox is closed.
-			// NOTE this case only handles `forceOpen`. There is a similar prop exposed by headlessui's `Listbox` called `open`.
-			setActiveOption(undefined);
-		} else if (query) {
-			setActiveOption(filtered[0]);
-		}
+	$: if (!forceOpen) {
+		// activeOption should be cleared when the combobox is closed.
+		// NOTE this case only handles `forceOpen`. There is a similar prop exposed by headlessui's `Listbox` called `open`.
+		setActiveOption(undefined);
+	} else if (query) {
+		setActiveOption(filtered[0]);
 	}
 
 	async function handleKeydown(event: KeyboardEvent) {

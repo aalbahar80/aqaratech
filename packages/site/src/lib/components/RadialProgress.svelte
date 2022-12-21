@@ -13,7 +13,9 @@
 
 <div
 	class={classes('radial-progress', extraClasses)}
-	style="--value: {value}; --size: {size}rem; --thickness:  {thickness}rem"
+	style:--value={value}
+	style:--size="{size}rem"
+	style:--thickness="{thickness}rem"
 >
 	{value}%
 </div>

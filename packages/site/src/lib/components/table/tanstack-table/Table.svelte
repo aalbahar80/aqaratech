@@ -158,26 +158,18 @@
 
 	const table = createSvelteTable<T>(options);
 
-	$: {
-		// refresh items
-		refreshData(items);
-	}
+	// refresh items
+	$: refreshData(items);
 
-	$: {
-		// refresh pageCount when property filter changes
-		refreshPageCount(paginationDto.pageCount);
-	}
+	// refresh pageCount when property filter changes
+	$: refreshPageCount(paginationDto.pageCount);
 
-	$: {
-		// refresh pagination when pressing back/forward
-		refreshPagination(createTablePaginationModel(paginationDto).pagination);
-	}
+	// refresh pagination when pressing back/forward
+	$: refreshPagination(createTablePaginationModel(paginationDto).pagination);
 
-	$: {
-		if (items.length === 0 && paginationDto.page > 1) {
-			// reset pagination when no items are available
-			$table.resetPageIndex();
-		}
+	$: if (items.length === 0 && paginationDto.page > 1) {
+		// reset pagination when no items are available
+		$table.resetPageIndex();
 	}
 
 	$: filters = [getColumnFilter($table)];

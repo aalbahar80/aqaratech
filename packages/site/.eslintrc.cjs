@@ -114,6 +114,22 @@ module.exports = {
 
 				'no-trailing-spaces': 'off', // superseded
 				'svelte/no-trailing-spaces': 'error',
+
+				// Stylistic
+				'svelte/derived-has-same-inputs-outputs': 'error',
+				// 'svelte/first-attribute-linebreak': 'error',
+				'svelte/html-closing-bracket-spacing': 'error',
+				'svelte/html-quotes': 'error',
+				// 'svelte/max-attributes-per-line': 'error',
+				'svelte/mustache-spacing': 'error',
+				'svelte/no-extra-reactive-curlies': 'error',
+				'svelte/no-spaces-around-equal-signs-in-attribute': 'error',
+				'svelte/prefer-class-directive': 'error',
+				'svelte/prefer-style-directive': 'error',
+				'svelte/shorthand-attribute': 'error',
+				'svelte/shorthand-directive': 'error',
+				// 'svelte/sort-attributes': 'error',
+				'svelte/spaced-html-comment': 'error',
 			},
 		},
 	],
