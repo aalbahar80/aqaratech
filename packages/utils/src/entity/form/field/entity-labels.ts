@@ -28,7 +28,11 @@ export const entityFieldLabels = {
 	tenantId: 'Tenant',
 
 	categoryId: 'Category',
-} satisfies Partial<Union.Strict<Record<Keys, string>>>;
+
+	key: 'Name',
+} satisfies Partial<Union.Strict<Record<Keys, string>>> & {
+	key: string; // FileDto
+};
 
 type Schemas =
 	| typeof portfolioCreateSchema
