@@ -51,6 +51,7 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 	}
 
 	if (!import.meta.env.SSR) {
+		// eslint-disable-next-line import/namespace
 		const transactionSvelte = SentrySvelte.getCurrentHub()
 			.getScope()
 			?.getTransaction();
@@ -60,6 +61,7 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 		} else {
 			// create a new transaction manually
 			// when running in load in the browser, the Sentry browser SDK does not create a transaction (yet)
+			// eslint-disable-next-line import/namespace
 			const transaction = SentrySvelte.startTransaction({
 				op: 'http.client',
 				name: 'api()',
@@ -99,6 +101,7 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 						SentryNode.addBreadcrumb(breadcrumb);
 						// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 					} else if (!import.meta.env.SSR && SentrySvelte) {
+						// eslint-disable-next-line import/namespace
 						SentrySvelte.addBreadcrumb(breadcrumb);
 					}
 				},
