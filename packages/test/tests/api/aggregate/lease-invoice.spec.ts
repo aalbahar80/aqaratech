@@ -38,10 +38,11 @@ test.use({
 
 		// send post request for each leaseInvoice
 		await Promise.all(
-			leaseInvoices.map(async (leaseInvoice) =>
-				request.post(url, {
-					data: leaseInvoice,
-				}),
+			leaseInvoices.map(
+				async (leaseInvoice) =>
+					await request.post(url, {
+						data: leaseInvoice,
+					}),
 			),
 		);
 

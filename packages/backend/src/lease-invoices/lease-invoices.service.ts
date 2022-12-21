@@ -44,7 +44,7 @@ export class LeaseInvoicesService {
 		createLeaseInvoiceDto: CreateLeaseInvoiceDto;
 		organizationId: string;
 	}) {
-		return this.prisma.leaseInvoice.create({
+		return await this.prisma.leaseInvoice.create({
 			data: {
 				...createLeaseInvoiceDto,
 				organizationId,
@@ -104,7 +104,7 @@ export class LeaseInvoicesService {
 		updateLeaseInvoiceDto: UpdateLeaseInvoiceDto;
 		user: IUser;
 	}) {
-		return this.prisma.leaseInvoice.update({
+		return await this.prisma.leaseInvoice.update({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Update).LeaseInvoice,
@@ -172,7 +172,7 @@ export class LeaseInvoicesService {
 			this.logger.warn('No site origin configured');
 		}
 
-		return this.postmarkService.sendEmail({
+		return await this.postmarkService.sendEmail({
 			From: 'Aqaratech <notifications@aqaratech.com>',
 			To: payload.email,
 			TemplateAlias: 'invoice',

@@ -36,7 +36,7 @@ test(`expense amount`, async ({ request, portfolio, expenseCategory }) => {
 				'postAt',
 			]);
 
-			return request.post(url, { data: expense });
+			return await request.post(url, { data: expense });
 		}),
 	);
 

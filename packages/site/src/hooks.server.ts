@@ -240,5 +240,5 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 		}
 	}
 
-	return fetch(request);
+	return await fetch(request);
 };

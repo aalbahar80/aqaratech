@@ -21,7 +21,7 @@ export const actions: Actions = {
 			relationValue: event.url.searchParams.get('relationValue'),
 		});
 
-		return handleForm({
+		return await handleForm({
 			entity: 'role',
 			schema: roleCreateSchema,
 			event,

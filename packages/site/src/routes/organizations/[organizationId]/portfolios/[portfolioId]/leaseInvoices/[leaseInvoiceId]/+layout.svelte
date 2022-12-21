@@ -60,7 +60,7 @@
 			text="Print"
 			as="button"
 			on:click={async () =>
-				createPDF({ invoice: data.leaseInvoice, outputType: 'save' })}
+				await createPDF({ invoice: data.leaseInvoice, outputType: 'save' })}
 			class="w-full sm:w-auto"
 			prefetch
 		/>

@@ -22,7 +22,8 @@ export class MyValidationPipe extends ValidationPipe {
 			return value;
 		} else {
 			console.log('not skipping validation for: ', name, metadata.type);
-			return super.transform(value, metadata);
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+			return await super.transform(value, metadata);
 		}
 	}
 }

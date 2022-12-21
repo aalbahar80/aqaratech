@@ -19,7 +19,7 @@ export class UsersService {
 	private readonly logger = new Logger(UsersService.name);
 
 	async create({ createUserDto }: { createUserDto: CreateUserDto }) {
-		return this.prisma.user.create({ data: createUserDto });
+		return await this.prisma.user.create({ data: createUserDto });
 	}
 
 	async findOneByEmail(email: string) {

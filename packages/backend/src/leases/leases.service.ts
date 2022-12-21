@@ -28,7 +28,7 @@ export class LeasesService {
 		organizationId: string;
 	}) {
 		// TODO: consider returning a lease dto class
-		return this.prisma.lease.create({
+		return await this.prisma.lease.create({
 			data: {
 				...createLeaseDto,
 				organizationId,
@@ -92,7 +92,7 @@ export class LeasesService {
 		updateLeaseDto: UpdateLeaseDto;
 		user: IUser;
 	}) {
-		return this.prisma.lease.update({
+		return await this.prisma.lease.update({
 			where: { id, AND: accessibleBy(user.ability, Action.Update).Lease },
 			data: updateLeaseDto,
 		});

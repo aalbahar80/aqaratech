@@ -132,7 +132,7 @@ export class S3Service {
 	}
 
 	async removeObject(options: GetObjectCommandInput) {
-		return this._client.send(new DeleteObjectCommand(options));
+		return await this._client.send(new DeleteObjectCommand(options));
 	}
 
 	async deleteBucket(bucketName: string) {

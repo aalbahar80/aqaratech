@@ -187,7 +187,7 @@ export class SearchService implements OnModuleInit {
 
 	async remove() {
 		const indexes = await this.client.getIndexes();
-		return Promise.all(
+		return await Promise.all(
 			indexes.results.map((index) => {
 				return this.client.deleteIndex(index.uid);
 			}),
@@ -244,7 +244,7 @@ export class SearchService implements OnModuleInit {
 		]);
 
 		// add all documents to their respective indices
-		return Promise.all([
+		return await Promise.all([
 			this.initTenantDocuments(),
 			this.initPortfolioDocuments(),
 			this.initPropertyDocuments(),

@@ -41,7 +41,7 @@ export class FilesController {
 	): Promise<string> {
 		const key = fileFindOneOptionsDto.key;
 
-		return this.filesService.findOne({ key, user });
+		return await this.filesService.findOne({ key, user });
 	}
 
 	@Delete()

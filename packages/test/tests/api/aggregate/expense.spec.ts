@@ -28,10 +28,11 @@ test.use({
 		const url = `/organizations/${portfolio.organizationId}/expenses`;
 
 		await Promise.all(
-			expenses.map(async (expense) =>
-				request.post(url, {
-					data: expense,
-				}),
+			expenses.map(
+				async (expense) =>
+					await request.post(url, {
+						data: expense,
+					}),
 			),
 		);
 

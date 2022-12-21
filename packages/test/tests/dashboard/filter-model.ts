@@ -28,6 +28,6 @@ export class Filter {
 
 	constructor(locator: Locator) {
 		this.el = locator;
-		this.label = async () => selectedLabel(locator);
+		this.label = async () => await selectedLabel(locator);
 	}
 }
