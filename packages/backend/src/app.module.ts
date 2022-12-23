@@ -34,6 +34,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import configuration from './config/configuration';
+import { EnvModule } from './env/env.module';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { FilesModule } from './files/files.module';
@@ -57,6 +58,7 @@ import { UsersModule } from './users/users.module';
 
 @Module({
 	imports: [
+		EnvModule,
 		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
 		ConfigModule.forRoot({ load: [configuration], isGlobal: true }), // can take validation schema
 

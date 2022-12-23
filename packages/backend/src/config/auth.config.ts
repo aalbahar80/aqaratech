@@ -1,6 +1,5 @@
-import { AuthConfigType } from 'src/types/auth.type';
-
-import { BackendEnvSchema } from './config-schema';
+import { BackendEnvSchema } from 'src/config/config-schema';
+import { AuthConfigType } from 'src/env/types/auth.type';
 
 export const authConfig = (environment: BackendEnvSchema) => {
 	if (environment.PUBLIC_AQARATECH_ENV === 'production') {
