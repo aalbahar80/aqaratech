@@ -35,10 +35,17 @@ export class SearchService implements OnModuleInit {
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
 	) {
-		this.client = new MeiliSearch({
-			host: this.env.e.MEILISEARCH_HOST,
-			apiKey: this.env.e.MEILISEARCH_API_KEY,
-		});
+		const host = this.env.e.MEILISEARCH_HOST;
+		const apiKey = this.env.e.MEILISEARCH_API_KEY;
+
+		if (!host || !apiKey) {
+			this.logger.warn('Meilisearch host or api key not set. Search disabled');
+		} else {
+			this.client = new MeiliSearch({
+				host,
+				apiKey,
+			});
+		}
 	}
 
 	async onModuleInit() {
@@ -51,7 +58,14 @@ export class SearchService implements OnModuleInit {
 		}
 	}
 
-	readonly client: MeiliSearch;
+	readonly client?: MeiliSearch;
+
+	assertClientExists(): asserts this is this & { client: MeiliSearch } {
+		if (!this.client) {
+			throw new Error('Meilisearch client not initialized');
+		}
+	}
+
 	indexNames: TIndexName[] = [
 		entitiesMap.portfolio.title,
 		entitiesMap.property.title,
@@ -67,6 +81,8 @@ export class SearchService implements OnModuleInit {
 		organizationId: string;
 		user: IUser;
 	}) {
+		this.assertClientExists();
+
 		// search is only allowed for admins
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Manage,
@@ -81,6 +97,8 @@ export class SearchService implements OnModuleInit {
 		// get indexes and search
 		const indexes = await Promise.all(
 			this.indexNames.map((indexName) => {
+				this.assertClientExists();
+
 				return this.client.getIndex(indexName);
 			}),
 		);
@@ -149,6 +167,8 @@ export class SearchService implements OnModuleInit {
 
 	@OnEvent('update.index')
 	async updateIndex(payload: UpdateIndexEvent) {
+		this.assertClientExists();
+
 		// const { indexName, items, classConstructor } = payload;
 		const index = this.client.index(payload.indexName);
 
@@ -167,6 +187,8 @@ export class SearchService implements OnModuleInit {
 
 	@OnEvent('remove.documents')
 	async removeDocuments(payload: RemoveDocumentsEvent) {
+		this.assertClientExists();
+
 		const { indexName, ids } = payload;
 
 		const index = this.client.index(indexName);
@@ -179,9 +201,13 @@ export class SearchService implements OnModuleInit {
 	}
 
 	async remove() {
+		this.assertClientExists();
+
 		const indexes = await this.client.getIndexes();
 		return await Promise.all(
 			indexes.results.map((index) => {
+				this.assertClientExists();
+
 				return this.client.deleteIndex(index.uid);
 			}),
 		);
@@ -193,6 +219,8 @@ export class SearchService implements OnModuleInit {
 	async initIndex<T extends InitIndexParams['indexName']>(
 		...arg: ExtractParams<T>
 	) {
+		this.assertClientExists();
+
 		await this.client.index(arg[0]).updateSettings({
 			filterableAttributes: ['organizationId'], // required for authz
 			// @ts-expect-error until better type inference is available

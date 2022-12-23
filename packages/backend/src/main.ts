@@ -14,6 +14,18 @@ import { AppModule } from './app.module';
 
 Logger.log(version, 'AqaratechConfig');
 
+process.on('unhandledRejection', (reason) => {
+	console.error('Unhandled Rejection caught. Avoiding crash.');
+	console.error(reason);
+
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	if (Logger) {
+		Logger.error(reason);
+	}
+
+	// process.exit(1);
+});
+
 async function bootstrap() {
 	Logger.log(`Version: ${version}`);
 
@@ -50,4 +62,5 @@ async function bootstrap() {
 
 	await app.listen(3002);
 }
+
 void bootstrap();
