@@ -93,7 +93,6 @@
 		dispatch('select', { value: option.value });
 		selection = option;
 		query = '';
-		// eslint-disable-next-line svelte/@typescript-eslint/no-unnecessary-condition
 		inputValue = selection?.label.trim() || '';
 		forceOpen = false;
 		setActiveOption(undefined);
@@ -173,7 +172,7 @@
 				// default case: select next/previous in item list
 				setActiveOption(filtered[newActiveIdx]);
 			}
-			// eslint-disable-next-line svelte/@typescript-eslint/no-unnecessary-condition
+
 			if (autoScroll) {
 				// `await tick` is needed to properly scroll element into view
 				// when wrapping around start/end of option list.

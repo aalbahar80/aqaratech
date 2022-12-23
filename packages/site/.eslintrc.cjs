@@ -63,13 +63,6 @@ module.exports = {
 
 				// https://ota-meshi.github.io/eslint-plugin-svelte/rules/@typescript-eslint/no-unnecessary-condition/
 				'@typescript-eslint/no-unnecessary-condition': 'off',
-				'svelte/@typescript-eslint/no-unnecessary-condition': [
-					'error',
-					{
-						allowConstantLoopConditions: false,
-						allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
-					},
-				],
 				'svelte/valid-compile': [
 					'error',
 					{
