@@ -25,16 +25,16 @@
 	$: hierarchyData = hierarchy(
 		[null, rollupData],
 		// childrenAccessorFn,
-		//@ts-expect-error
+		//@ts-expect-error - unknown type d3
 		([_key, value]) => {
 			// value.size checks if value is a Map, which is false for `non-leaf` rolledUp nodes.
 			const result = value?.size && Array.from(value);
 			return result;
 		},
 	)
-		//@ts-expect-error
+		//@ts-expect-error - unknown type d3
 		.sum(([_key, value]) => value)
-		.sort((a, b) => (b.value || 0) - (a.value || 0));
+		.sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
 
 	const getLabel = (node: typeof hierarchyData) => {
 		// 1. leaf nodes have data[0] as the last function in rollupData
@@ -61,9 +61,11 @@
 		}
 	};
 
-	const getLink = (node: any) => {
+	const getLink = (node: typeof hierarchyData) => {
 		const id = node.data[0];
-		if (node.height === 0 && id.length === 36) {
+
+		//@ts-expect-error - unknown type d3
+		if (node.height === 0 && typeof id === 'string' && id.length === 36) {
 			return getRoute({
 				id,
 				pageType: PageType.Id,

@@ -1,7 +1,11 @@
 <script lang="ts">
 	import TreemapNode from './TreemapNode.svelte';
 
-	export let root: unknown;
+	import type { HierarchyRectangularNode } from 'd3';
+
+	type T = $$Generic;
+
+	export let root: HierarchyRectangularNode<T>;
 </script>
 
 <pancake-treemap>
