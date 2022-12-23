@@ -13,6 +13,8 @@ module.exports = {
 
 		// Playwright fixtures can be unused
 		'@typescript-eslint/no-unused-vars': 'off',
+
+		'turbo/no-undeclared-env-vars': 'off',
 	},
 	globals: {
 		$: 'readonly',
