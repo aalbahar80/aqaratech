@@ -13,7 +13,8 @@ export const envSchema = z.object({
 	]),
 
 	// Sentry
-	PUBLIC_AQ_ENABLE_SENTRY: zodEnvBooleanSchema(),
+	// @ts-expect-error - zod wrongly infers the type
+	PUBLIC_AQ_ENABLE_SENTRY: zodEnvBooleanSchema().default(false),
 	PUBLIC_TRACE_RATE: z.coerce.number().min(0).max(1).default(0),
 	PUBLIC_COMMIT_SHA: z.string().optional(),
 
@@ -21,12 +22,15 @@ export const envSchema = z.object({
 	PUBLIC_AQ_DEBUG_LEVEL: z
 		.enum(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
 		.catch('info'),
-	PUBLIC_AQ_DEBUG_SITE: zodEnvBooleanSchema(),
-	PUBLIC_AQ_DEBUG_SENTRY: zodEnvBooleanSchema(),
-	PUBLIC_AQ_DEBUG_PRISMA: zodEnvBooleanSchema(),
+	// @ts-expect-error - zod wrongly infers the type
+	PUBLIC_AQ_DEBUG_SITE: zodEnvBooleanSchema().default(false),
+	// @ts-expect-error - zod wrongly infers the type
+	PUBLIC_AQ_DEBUG_SENTRY: zodEnvBooleanSchema().default(false),
+	// @ts-expect-error - zod wrongly infers the type
+	PUBLIC_AQ_DEBUG_PRISMA: zodEnvBooleanSchema().default(false),
 
 	// Logtail
-	LOGTAIL_TOKEN: z.string(),
+	LOGTAIL_TOKEN: z.string().optional(),
 
 	// Site specific
 	ORIGIN: z.string().url(),
