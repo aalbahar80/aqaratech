@@ -52,8 +52,17 @@ module.exports = {
 				tsconfigRootDir: __dirname,
 				project: './tsconfig.json',
 			},
+			settings: {
+				// https://ota-meshi.github.io/eslint-plugin-svelte/user-guide/#settings-svelte
+				svelte: {
+					ignoreWarnings: [
+						'@typescript-eslint/no-unsafe-assignment', // reduce false positives
+						'@typescript-eslint/no-unsafe-member-access', // reduce false positives
+					],
+				},
+			},
 			rules: {
-				// disable rules that don't work with svelte's generic props
+				// incompatible with svelte's generic props
 				'@typescript-eslint/no-unsafe-assignment': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 
