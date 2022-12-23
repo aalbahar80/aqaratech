@@ -3,7 +3,8 @@ export type {
 	UnverfiedAqaratechEnv,
 } from './config/env/aqaratech-env';
 export { envCheck } from './config/env/env-check';
-export { liveEnvs } from './config/env/live-envs';
+export { envSchema } from './config/env/env.schema';
+export { isLiveEnv } from './config/env/live-envs';
 export { getSentryConfig } from './config/get-sentry-config';
 export { isHealthCheck } from './config/is-health-check';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';

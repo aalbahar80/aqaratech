@@ -1,4 +1,4 @@
-import type { AqaratechEnv } from '../../types/environment';
+import type { AqaratechEnv } from '@self/utils';
 
 declare global {
 	namespace NodeJS {

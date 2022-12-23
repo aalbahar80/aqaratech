@@ -1,40 +1,32 @@
-import { z } from 'zod';
-
 import { browser, building } from '$app/environment';
+
+import { envSchema } from '@self/utils';
+
+import type { z } from 'zod';
 
 import { env } from '$env/dynamic/public';
 
-const envSchema = z.object({
-	PUBLIC_AQARATECH_ENV: z.enum([
-		'development',
-		'testing',
-		'staging',
-		'production',
-	]),
-
-	PUBLIC_SITE_URL: z.string().url(),
-	PUBLIC_API_URL: z.string().url(),
-	PUBLIC_API_URL_LOCAL: z.string().url(),
-	PUBLIC_AQ_ENABLE_SENTRY: z.string().default('0'),
-	PUBLIC_AQ_DEBUG_SENTRY: z.string().default('0'),
-	PUBLIC_TRACE_RATE: z.string().default('0'),
-	PUBLIC_AQ_DEBUG_SITE: z.string().default('0'),
-	PUBLIC_COMMIT_SHA: z.string().optional(),
-
-	PUBLIC_AQ_DEBUG_LEVEL: z
-		.enum(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
-		.catch('debug'),
+const siteEnvSchema = envSchema.pick({
+	PUBLIC_AQARATECH_ENV: true,
+	PUBLIC_SITE_URL: true,
+	PUBLIC_API_URL: true,
+	PUBLIC_API_URL_LOCAL: true,
+	PUBLIC_AQ_ENABLE_SENTRY: true,
+	PUBLIC_AQ_DEBUG_SENTRY: true,
+	PUBLIC_TRACE_RATE: true,
+	PUBLIC_AQ_DEBUG_SITE: true,
+	PUBLIC_COMMIT_SHA: true,
+	PUBLIC_AQ_DEBUG_LEVEL: true,
 });
 
-type EnvSchema = z.infer<typeof envSchema>;
+type SiteEnvSchema = z.infer<typeof siteEnvSchema>;
 
-// TODO use satisfies AqaratechEnv
 /**
  * Validated public environment variables.
  */
 export const environment = building
-	? (env as unknown as EnvSchema)
-	: envSchema.parse(env);
+	? (env as unknown as SiteEnvSchema)
+	: siteEnvSchema.parse(env);
 
 if (!browser) {
 	console.log({ environment });

@@ -1,6 +1,6 @@
 import { Logtail } from '@logtail/node';
 
-import { addEnvLabel, liveEnvs } from '@self/utils';
+import { addEnvLabel, isLiveEnv } from '@self/utils';
 
 import { privateEnvironment } from '$lib/server/config/private-environment';
 
@@ -10,7 +10,7 @@ import { environment } from '$aqenvironment';
  * Only enable logtail in production & staging.
  */
 const shouldEnableLogtail = () => {
-	const result = liveEnvs.includes(environment.PUBLIC_AQARATECH_ENV);
+	const result = isLiveEnv(environment.PUBLIC_AQARATECH_ENV);
 
 	console.log(
 		`Logtail enabled: ${result}, env: ${environment.PUBLIC_AQARATECH_ENV}`,

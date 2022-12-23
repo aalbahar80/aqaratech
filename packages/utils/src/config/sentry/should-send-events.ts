@@ -1,4 +1,4 @@
-import { liveEnvs } from 'src/config/env/live-envs';
+import { isLiveEnv } from 'src/config/env/live-envs';
 
 import type { Config } from './types';
 import type { Options } from '@sentry/types';
@@ -13,7 +13,7 @@ export const getSendEventConfig = (
 	config: Config,
 	helpers: { debug: boolean; sampleRate: number },
 ) => {
-	if (liveEnvs.includes(config.PUBLIC_AQARATECH_ENV)) {
+	if (isLiveEnv(config.PUBLIC_AQARATECH_ENV)) {
 		// TODO: don't log in production, until then disabling this:
 		// console.log('Sending all events to Sentry', config.PUBLIC_AQARATECH_ENV);
 		return {
