@@ -37,10 +37,10 @@ export const envSchema = z.object({
 	PUBLIC_SITE_URL: z.string().url(),
 	PUBLIC_API_URL: z.string().url(),
 	PUBLIC_API_URL_LOCAL: z.string().url(),
+	AUTH0_CLIENT_SECRET: z.string(),
 
 	// Backend specific
 	DATABASE_URL: z.string(),
-	AUTH0_CLIENT_SECRET: z.string(),
 
 	// R2
 	R2_ACCOUNT_ID: z.string(),

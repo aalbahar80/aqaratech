@@ -8,7 +8,6 @@ export const backendEnvSchema = envSchema.pick({
 	LOGTAIL_TOKEN: true,
 
 	DATABASE_URL: true,
-	AUTH0_CLIENT_SECRET: true,
 	PUBLIC_SITE_URL: true,
 
 	// R2
