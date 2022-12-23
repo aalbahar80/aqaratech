@@ -1,4 +1,4 @@
-import type { AqaratechEnv } from '../../../../../types/environment';
+import type { AqaratechEnv } from '../env/aqaratech-env';
 
 export type Config = Pick<
 	AqaratechEnv,
