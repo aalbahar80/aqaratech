@@ -88,16 +88,13 @@ module.exports = {
 				],
 			},
 		],
-		// 'import/no-cycle': 'error',
-		// 'import/no-cycle': [2, { maxDepth: 3 }],
 
 		// Detect circular dependencies.
 		// Be conservative with maxDepth, as it can be expensive.
 		'import/no-cycle': ['error', { maxDepth: 2 }],
 		'import/no-self-import': 'error',
 
-		// complains about svelte's $app and $env
-		'import/no-unresolved': 'off',
+		'import/no-unresolved': 'off', // superseded by typescript
 
 		// sort imports
 		'import/order': [
