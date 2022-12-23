@@ -8,7 +8,9 @@
 	import HeroiconsChevronLeft20Solid from '~icons/heroicons/chevron-left-20-solid';
 	import HeroiconsChevronRight20Solid from '~icons/heroicons/chevron-right-20-solid';
 
-	export let table: Table<any>;
+	type T = $$Generic;
+
+	export let table: Table<T>;
 	export let itemCount: number;
 	export let hidePageSizeOptions = false;
 

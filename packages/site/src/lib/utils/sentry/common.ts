@@ -4,10 +4,10 @@ import type { Span } from '@sentry/tracing';
 import type { RequestEvent } from '@sveltejs/kit';
 
 export const getSentryUser = (user: User | undefined) => ({
-	id: user?.id || '',
-	email: user?.email || '',
-	username: user?.fullName || '',
-	roleId: user?.role?.id || '',
+	id: user?.id ?? '',
+	email: user?.email ?? '',
+	username: user?.fullName ?? '',
+	roleId: user?.role?.id ?? '',
 });
 
 /**

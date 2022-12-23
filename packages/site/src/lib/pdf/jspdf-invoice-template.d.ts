@@ -148,7 +148,7 @@ declare function jsPDFInvoiceTemplate(props: {
 				width?: number;
 			};
 		}[];
-		table?: any;
+		table?: string[][];
 		invDescLabel?: string;
 		invDesc?: string;
 		additionalRows?: [

@@ -1,4 +1,5 @@
 <script>
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-nocheck
 	import * as Pancake from '@sveltejs/pancake';
 	import { treemap } from 'd3';
@@ -26,7 +27,7 @@
 			node = node.parent;
 		}
 
-		if (node && node.children) selected = node;
+		if (node?.children) selected = node;
 	};
 
 	const breadcrumbs = (node) => {
@@ -123,7 +124,7 @@ Create a treemap from a d3-hierarchy.
 							class:text-xl={area > 0.07}
 						>
 							<!-- Consider passing in link in data structure if there is a need to optimize -->
-							{#if getLink && getLink(node)}
+							{#if getLink?.(node)}
 								<a
 									class="align-middle text-lg text-indigo-600"
 									class:hidden={node.children}

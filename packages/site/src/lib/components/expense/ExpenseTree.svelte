@@ -17,7 +17,9 @@
 	export let root: ExpenseNode;
 	export let node: ExpenseNode;
 
-	const handleAction = (e: any) => {
+	type NodeEvent = CustomEvent<DndEvent<ExpenseNode>>;
+
+	const handleAction = (e: NodeEvent) => {
 		const detail: DndEvent<ExpenseNode> = e.detail;
 
 		// filter existing children, then add the new one
@@ -48,12 +50,12 @@
 	};
 
 	const flipDurationMs = 300;
-	function handleDndConsider(e: any) {
+	function handleDndConsider(e: NodeEvent) {
 		const updatedNodes = handleAction(e);
 		node.children = updatedNodes;
 	}
 
-	function handleDndFinalize(e: any) {
+	function handleDndFinalize(e: NodeEvent) {
 		const updatedNodes = handleAction(e);
 		node.children = updatedNodes;
 

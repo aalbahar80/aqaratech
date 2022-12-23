@@ -106,7 +106,7 @@
 					typeof change.path[0] === 'number' ? newList[change.path[0]] : null}
 				<div class="flex items-center justify-between py-2 text-sm font-medium">
 					<span class="w-5/12">
-						{newParentNode?.labelEn || ''}
+						{newParentNode?.labelEn ?? ''}
 					</span>
 					<span aria-hidden="true"> &rarr; </span>
 					<span class="w-5/12 text-indigo-600">

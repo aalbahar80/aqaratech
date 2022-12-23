@@ -9,7 +9,7 @@
 	<div class="mx-auto max-w-max">
 		<main class="sm:flex">
 			<p class="text-4xl font-extrabold text-indigo-600 sm:text-5xl">
-				{$page.error?.status || 500}
+				{$page.error?.status ?? 500}
 			</p>
 			<div class="sm:ml-6">
 				<div class="sm:border-l sm:border-gray-200 sm:pl-6">

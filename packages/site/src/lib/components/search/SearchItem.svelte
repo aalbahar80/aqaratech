@@ -24,7 +24,7 @@
 				val.includes('<mark>') &&
 				!hiddenFields.includes(key) &&
 				key in item &&
-				// @ts-expect-error
+				// @ts-expect-error overcome strict interface index signature
 				item[key] !== item.title && // hide any field if it matches title
 				(key !== 'label' || !item.formatted?.title?.includes('<mark>')), // hide label if title is already highlighted
 		) ?? {};

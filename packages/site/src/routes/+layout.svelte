@@ -38,7 +38,7 @@
 			});
 
 			Sentry.configureScope((scope) => {
-				scope.setTag('roleType', data.user?.role?.roleType || '');
+				scope.setTag('roleType', data.user?.role?.roleType ?? '');
 				scope.setUser(getSentryUser(data.user));
 			});
 		}

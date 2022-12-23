@@ -23,16 +23,17 @@ declare namespace App {
 	// interface Platform {}
 }
 
-// Update here: https://github.com/isaacHagoel/svelte-dnd-action/pull/401
-declare type DndEvent = import('svelte-dnd-action').DndEvent;
+declare type Item = import('svelte-dnd-action').Item;
+declare type DndEvent<ItemType = Item> =
+	import('svelte-dnd-action').DndEvent<ItemType>;
 declare namespace svelte.JSX {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	interface HTMLAttributes<T> {
 		onconsider?: (
-			event: CustomEvent<DndEvent> & { target: EventTarget & T },
+			event: CustomEvent<DndEvent<ItemType>> & { target: EventTarget & T },
 		) => void;
 		onfinalize?: (
-			event: CustomEvent<DndEvent> & { target: EventTarget & T },
+			event: CustomEvent<DndEvent<ItemType>> & { target: EventTarget & T },
 		) => void;
 	}
 }
