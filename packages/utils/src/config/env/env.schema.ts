@@ -1,5 +1,7 @@
 import { z, type ZodTypeDef } from 'zod';
 
+import { zodEnvBooleanSchema } from './zod-env-boolean.schema';
+
 import type { AqaratechEnv } from './aqaratech-env';
 
 export const envSchema = z.object({
@@ -11,7 +13,7 @@ export const envSchema = z.object({
 	]),
 
 	// Sentry
-	PUBLIC_AQ_ENABLE_SENTRY: z.coerce.boolean(),
+	PUBLIC_AQ_ENABLE_SENTRY: zodEnvBooleanSchema(),
 	PUBLIC_TRACE_RATE: z.coerce.number().min(0).max(1).default(0),
 	PUBLIC_COMMIT_SHA: z.string().optional(),
 
@@ -19,9 +21,9 @@ export const envSchema = z.object({
 	PUBLIC_AQ_DEBUG_LEVEL: z
 		.enum(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
 		.catch('info'),
-	PUBLIC_AQ_DEBUG_SITE: z.coerce.boolean(),
-	PUBLIC_AQ_DEBUG_SENTRY: z.coerce.boolean(),
-	PUBLIC_AQ_DEBUG_PRISMA: z.coerce.boolean(),
+	PUBLIC_AQ_DEBUG_SITE: zodEnvBooleanSchema(),
+	PUBLIC_AQ_DEBUG_SENTRY: zodEnvBooleanSchema(),
+	PUBLIC_AQ_DEBUG_PRISMA: zodEnvBooleanSchema(),
 
 	// Logtail
 	LOGTAIL_TOKEN: z.string(),
@@ -49,5 +51,5 @@ export const envSchema = z.object({
 	POSTMARK_TOKEN: z.string().optional(),
 
 	// External
-	CI: z.coerce.boolean().optional(),
+	CI: zodEnvBooleanSchema().optional(),
 }) satisfies z.ZodType<AqaratechEnv, ZodTypeDef, unknown>;
