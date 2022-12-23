@@ -14,6 +14,7 @@ import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { entitiesMap } from '@self/utils';
 
 import { Action } from 'src/casl/action.enum';
+import { SearchError } from 'src/common/search-error';
 import { EnvService } from 'src/env/env.service';
 import {
 	RemoveDocumentsEvent,
@@ -62,7 +63,7 @@ export class SearchService implements OnModuleInit {
 
 	assertClientExists(): asserts this is this & { client: MeiliSearch } {
 		if (!this.client) {
-			throw new Error('Meilisearch client not initialized');
+			throw new SearchError('Meilisearch client not initialized');
 		}
 	}
 

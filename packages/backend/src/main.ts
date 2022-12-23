@@ -11,20 +11,9 @@ import { setupSwagger } from 'src/swagger';
 import { version } from '../package.json';
 
 import { AppModule } from './app.module';
+import { SearchError } from './common/search-error';
 
 Logger.log(version, 'AqaratechConfig');
-
-process.on('unhandledRejection', (reason) => {
-	console.error('Unhandled Rejection caught. Avoiding crash.');
-	console.error(reason);
-
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-	if (Logger) {
-		Logger.error(reason);
-	}
-
-	// process.exit(1);
-});
 
 async function bootstrap() {
 	Logger.log(`Version: ${version}`);
@@ -64,3 +53,22 @@ async function bootstrap() {
 }
 
 void bootstrap();
+
+process.on('unhandledRejection', (error) => {
+	// By default, Nestjs will crash and exit if an error is thrown during an
+	// event handler (when not in dev)
+	if (error instanceof SearchError) {
+		console.log('SearchError caught. Avoiding exit.');
+		return;
+	}
+
+	console.error('Unhandled Rejection caught. Logging and exiting.');
+	console.error(error);
+
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	if (Logger) {
+		Logger.error(error); // pretty print stack trace
+	}
+
+	process.exit(1);
+});
