@@ -32,13 +32,6 @@ module.exports = {
 		// tslint comments in generated api files
 		'@typescript-eslint/ban-tslint-comment': 'off',
 
-		'@typescript-eslint/dot-notation': [
-			'error',
-			{
-				allowIndexSignaturePropertyAccess: true,
-			},
-		],
-
 		// not compatible with sveltekit's throw redirct/error
 		'@typescript-eslint/no-throw-literal': 'off',
 	},
