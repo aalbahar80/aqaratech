@@ -74,5 +74,5 @@ test('cannot update isGroup', async ({ org, expenseCategory, page }) => {
 
 	const isGroup = page.getByLabel(getLabel('isGroup'));
 
-	await expect(isGroup).not.toBeVisible();
+	await expect(isGroup).toBeHidden();
 });

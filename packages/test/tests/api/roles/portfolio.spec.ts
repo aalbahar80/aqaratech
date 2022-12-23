@@ -17,7 +17,7 @@ test('porfolio role', async ({ request, org, portfolio, role: _role }) => {
 
 	const body = (await res.json()) as PaginatedRoleDto;
 
-	expect.soft(body.results.length).toBe(1);
+	expect.soft(body.results).toHaveLength(1);
 
 	body.results.forEach((role) => {
 		expect.soft(role).toMatchObject({

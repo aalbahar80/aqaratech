@@ -52,7 +52,7 @@ test('can only get self from /tenants', async ({ scopedRequest }) => {
 
 	const body = (await res.json()) as PaginatedTenantDto;
 
-	expect(body.results.length).toBe(1);
+	expect(body.results).toHaveLength(1);
 });
 
 test('cannot get data from /aggregate', async ({

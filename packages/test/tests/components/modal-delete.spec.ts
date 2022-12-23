@@ -34,6 +34,7 @@ test('delete button is not responsive', async ({ page }) => {
 	const modal = page.getByTestId('modal');
 	const btn = modal.getByRole('button', { name: 'Delete' });
 
+	// eslint-disable-next-line playwright/no-force-option
 	await btn.click({ force: true });
 
 	// wait 2 seconds

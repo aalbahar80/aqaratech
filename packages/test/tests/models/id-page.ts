@@ -22,6 +22,6 @@ export class IdPage {
 		await confirm.click();
 
 		// check modal is closed
-		await expect(modal).not.toBeVisible();
+		await expect(modal).toBeHidden();
 	}
 }

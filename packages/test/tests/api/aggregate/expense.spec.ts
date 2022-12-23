@@ -56,7 +56,7 @@ test('return 12 data points for a year', async ({ request, portfolio }) => {
 
 	const body = (await res.json()) as GroupByMonthDto[];
 
-	expect(body.length).toBe(12);
+	expect(body).toHaveLength(12);
 });
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function

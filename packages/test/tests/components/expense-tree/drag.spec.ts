@@ -41,5 +41,5 @@ test('can drag and drop expense category', async ({ page }) => {
 	await save.click();
 
 	await expect(unchanged).toBeDisabled();
-	await expect(pending).not.toBeVisible();
+	await expect(pending).toBeHidden();
 });

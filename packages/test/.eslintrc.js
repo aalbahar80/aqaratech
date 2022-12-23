@@ -3,7 +3,7 @@
  */
 module.exports = {
 	root: true,
-	extends: ['custom'],
+	extends: ['custom', 'plugin:playwright/playwright-test'],
 	ignorePatterns: [
 		// Ignore generated types
 		'types/api/index.d.ts',
@@ -15,6 +15,15 @@ module.exports = {
 		'@typescript-eslint/no-unused-vars': 'off',
 
 		'turbo/no-undeclared-env-vars': 'off',
+
+		// Playwright
+		'playwright/prefer-to-have-length': 'error',
+		// 'playwright/prefer-to-be': 'error', // TODO: Enable
+		// 'playwright/prefer-strict-equal': 'error', // TODO: Enable
+
+		'playwright/no-conditional-in-test': 'off',
+		'playwright/no-skipped-test': 'off',
+		'playwright/no-wait-for-timeout': 'off',
 	},
 	globals: {
 		$: 'readonly',

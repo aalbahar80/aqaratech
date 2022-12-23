@@ -17,7 +17,7 @@ test('orgadmin role', async ({ request, org, role: _role }) => {
 
 	const body = (await res.json()) as PaginatedRoleDto;
 
-	expect.soft(body.results.length).toBe(2); // 2 because the org creator is created by default
+	expect.soft(body.results).toHaveLength(2); // 2 because the org creator is created by default
 
 	body.results.forEach((role) => {
 		expect.soft(role).toMatchObject({

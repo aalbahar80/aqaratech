@@ -52,5 +52,5 @@ test('file can be uploaded', async ({ page, request, portfolio }) => {
 
 	// file size matches
 
-	expect(uploadedFile.length).toEqual(localFile.length);
+	expect(uploadedFile).toHaveLength(localFile.length);
 });
