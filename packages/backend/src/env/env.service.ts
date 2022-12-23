@@ -4,16 +4,23 @@ import * as R from 'remeda';
 import { authConfig } from 'src/config/auth.config';
 import { sentryConfig } from 'src/config/sentry.config';
 import { winstonConfig } from 'src/config/winston.config';
-import { backendEnvSchema } from 'src/env/env.schema';
+import { BackendEnvSchema, backendEnvSchema } from 'src/env/env.schema';
 
 @Injectable()
 export class EnvService {
-	readonly e = backendEnvSchema.parse(process.env);
-	readonly auth = authConfig(backendEnvSchema.parse(process.env)); // TODO: dedupe schema parse
-	readonly sentry = sentryConfig;
-	readonly winston = winstonConfig;
+	readonly e: BackendEnvSchema;
+	readonly auth: ReturnType<typeof authConfig>;
+	readonly sentry: typeof sentryConfig;
+	readonly winston: typeof winstonConfig;
 
 	constructor() {
+		const parsed = backendEnvSchema.parse(process.env);
+
+		this.e = parsed;
+		this.auth = authConfig(parsed);
+		this.sentry = sentryConfig;
+		this.winston = winstonConfig;
+
 		console.log(
 			'EnvService',
 			R.pick(this.e, [
