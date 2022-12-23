@@ -1,4 +1,4 @@
-import type { Any, Object } from 'ts-toolbelt';
+import type { Object } from 'ts-toolbelt';
 
 export interface AqaratechEnv {
 	readonly PUBLIC_AQARATECH_ENV:

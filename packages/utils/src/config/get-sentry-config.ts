@@ -16,13 +16,12 @@ export const getSentryConfig = (config: Config) => {
 		PUBLIC_AQ_ENABLE_SENTRY,
 	} = config;
 
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-	const sampleRate = +(PUBLIC_TRACE_RATE ?? 0);
-	const debug = PUBLIC_AQ_DEBUG_SENTRY === '1';
+	const sampleRate = PUBLIC_TRACE_RATE;
+	const debug = PUBLIC_AQ_DEBUG_SENTRY;
 
 	const sentryConfig = {
-		enabled: PUBLIC_AQ_ENABLE_SENTRY === '0' ? false : true,
-		environment: PUBLIC_AQARATECH_ENV ?? 'unknown',
+		enabled: PUBLIC_AQ_ENABLE_SENTRY,
+		environment: PUBLIC_AQARATECH_ENV,
 		debug,
 		tracesSampleRate: sampleRate,
 		release: getReleaseName(config),
@@ -40,7 +39,7 @@ export const getSentryConfig = (config: Config) => {
 	const sendEventConfig = getSendEventConfig(config, { debug, sampleRate });
 
 	if (!sendEventConfig.shouldAlwaysSend) {
-		sentryConfig.beforeSend = sendEventConfig.beforeSend;
+		(sentryConfig as Options).beforeSend = sendEventConfig.beforeSend;
 	}
 
 	return sentryConfig satisfies AqaratechSentryConfig;
