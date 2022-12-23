@@ -1,27 +1,31 @@
 import { z } from 'zod';
 
-export const schema = z.object({
-	PUBLIC_AQARATECH_ENV: z.enum([
-		'development',
-		'testing',
-		'staging',
-		'production',
-	]),
+import { envSchema } from '@self/utils';
 
-	// validate debug level, if validation fails, set it to verbose
-	PUBLIC_AQ_DEBUG_LEVEL: z
-		.enum(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
-		.optional()
-		.transform((value) => {
-			if (value === undefined) {
-				console.log(
-					'PUBLIC_AQ_DEBUG_LEVEL is undefined or has failed validation, setting to verbose',
-				);
-				return 'verbose';
-			} else {
-				return value;
-			}
-		}),
+export const backendEnvSchema = envSchema.pick({
+	PUBLIC_AQARATECH_ENV: true,
+	PUBLIC_AQ_DEBUG_LEVEL: true,
+	LOGTAIL_TOKEN: true,
 
-	LOGTAIL_TOKEN: z.string().optional(),
+	DATABASE_URL: true,
+	AUTH0_CLIENT_SECRET: true,
+	PUBLIC_SITE_URL: true,
+
+	// R2
+	R2_ACCOUNT_ID: true,
+	R2_ACCESS_KEY_ID: true,
+	R2_SECRET_ACCESS_KEY: true,
+
+	// PUBLIC_AQ_ENABLE_SENTRY: true,
+	// PUBLIC_TRACE_RATE: true,
+	// PUBLIC_COMMIT_SHA: true,
+
+	// Meilisearch
+	MEILISEARCH_HOST: true,
+	MEILISEARCH_API_KEY: true,
+
+	// Postmark
+	POSTMARK_TOKEN: true,
 });
+
+export type BackendEnvSchema = z.infer<typeof backendEnvSchema>;

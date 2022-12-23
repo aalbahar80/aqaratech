@@ -19,19 +19,17 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		readonly configService: ConfigService<EnvironmentConfig>,
 		readonly usersService: UsersService,
 	) {
-		const domain = configService.get('authConfig.AUTH0_DOMAIN', {
+		const domain = configService.get('auth.AUTH0_DOMAIN', { infer: true });
+
+		const audience = configService.get('auth.AUTH0_API_AUDIENCE', {
 			infer: true,
 		});
 
-		const audience = configService.get('authConfig.AUTH0_API_AUDIENCE', {
-			infer: true,
-		});
-
-		const jwks = configService.get('authConfig.JWKS', { infer: true });
+		const jwks = configService.get('auth.JWKS', { infer: true });
 
 		if (!domain || !audience || !jwks) {
 			throw new Error(
-				'authConfig.AUTH0_DOMAIN and authConfig.AUTH0_API_AUDIENCE must be set',
+				'auth.AUTH0_DOMAIN and auth.AUTH0_API_AUDIENCE must be set',
 			);
 		}
 
@@ -79,10 +77,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 	 * access token as received from Auth0
 	 */
 	validate(rawPayload: unknown): AuthenticatedUser {
-		const apiNamespace = this.configService.get(
-			'authConfig.AUTH0_API_NAMESPACE',
-			{ infer: true },
-		);
+		const apiNamespace = this.configService.get('auth.AUTH0_API_NAMESPACE', {
+			infer: true,
+		});
 
 		if (!apiNamespace) {
 			throw new Error('authConfig.AUTH0_API_NAMESPACE must be set');

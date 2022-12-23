@@ -46,7 +46,7 @@ export const envSchema = z.object({
 	MEILISEARCH_API_KEY: z.string(),
 
 	// Postmark
-	POSTMARK_TOKEN: z.string(),
+	POSTMARK_TOKEN: z.string().optional(),
 
 	// External
 	CI: z.coerce.boolean().optional(),

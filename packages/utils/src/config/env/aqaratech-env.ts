@@ -51,7 +51,7 @@ export interface AqaratechEnv {
 	readonly LOGTAIL_TOKEN?: string | undefined;
 
 	// Postmark
-	readonly POSTMARK_TOKEN: string;
+	readonly POSTMARK_TOKEN?: string | undefined;
 
 	// R2
 	readonly R2_ACCOUNT_ID: string;
