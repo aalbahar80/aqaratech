@@ -6,7 +6,7 @@ import {
 	RequestMethod,
 } from '@nestjs/common';
 import { RouteInfo } from '@nestjs/common/interfaces';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
@@ -19,7 +19,6 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { RoleGuard } from 'src/casl/role.guard';
 import { WinstonConfigService } from 'src/config/winston-config.service';
-import { EnvironmentConfig } from 'src/env/types/environment.interface';
 import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
 import { ResponseInterceptor } from 'src/http-logger/response.interceptor';
 import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
@@ -34,6 +33,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import { EnvModule } from './env/env.module';
+import { EnvService } from './env/env.service';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { FilesModule } from './files/files.module';
@@ -71,12 +71,9 @@ import { UsersModule } from './users/users.module';
 		SentryModule.forRootAsync({
 			// TODO: remove ConfigModule from imports
 			imports: [ConfigModule],
-			inject: [ConfigService, PrismaService],
-			useFactory: (
-				config: ConfigService<EnvironmentConfig>,
-				prismaClient: PrismaService,
-			) => {
-				const sentryConfig = config.get('sentry', { infer: true });
+			inject: [EnvService, PrismaService],
+			useFactory: (env: EnvService, prismaClient: PrismaService) => {
+				const sentryConfig = env.sentry;
 				return {
 					...sentryConfig,
 					integrations: [
