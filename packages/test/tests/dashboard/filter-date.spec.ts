@@ -41,6 +41,8 @@ const test = base.extend<{
 	},
 });
 
+test.describe.configure({ mode: 'parallel' });
+
 test('range filter changes to custom when editing start date', async ({
 	filters,
 }) => {
