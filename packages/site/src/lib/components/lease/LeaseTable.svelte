@@ -72,7 +72,6 @@
 			id: 'tenant',
 			header: 'Tenant',
 			cell: (info) =>
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				renderComponent(ActionCell, {
 					value: info.getValue().label,
 					href: getRoute({

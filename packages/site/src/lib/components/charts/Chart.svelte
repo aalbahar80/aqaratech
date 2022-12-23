@@ -36,7 +36,7 @@
 			chart.legend.fit = function fit() {
 				fitValue.bind(chart.legend)();
 				// padding applied to bottom of legend
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+
 				return (this.height += 100);
 			};
 		},

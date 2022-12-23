@@ -21,6 +21,7 @@ export const maintenanceOrderFixtures: AllFixtures = {
 		// Merge any declared params with the default params
 
 		const maintenanceOrders = R.times(params.length, (n) => {
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const unit = units[n % units.length]!;
 
 			return maintenanceOrderFactory.build({

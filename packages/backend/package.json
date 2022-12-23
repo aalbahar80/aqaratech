@@ -19,7 +19,7 @@
 		"start:prod": "node dist/src/main.js",
 		"preview": "node dist/src/main.js",
 		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,ts,css,md,svelte,yaml,yml,json}\"",
-		"lint": "eslint --max-warnings 0 \"{src,apps,libs,test}/**/*.ts\"",
+		"lint": "eslint --max-warnings 0 --report-unused-disable-directives \"{src,apps,libs,test}/**/*.ts\"",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit --project tsconfig.build.json",
 		"postinstall": "prisma generate",

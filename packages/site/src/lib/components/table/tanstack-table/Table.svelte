@@ -89,7 +89,6 @@
 
 	const setColumnVisibility: OnChangeFn<TableColumnVisibility> = (updater) => {
 		if (updater instanceof Function) {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			columnVisibility = updater(columnVisibility);
 		} else {
 			columnVisibility = updater;

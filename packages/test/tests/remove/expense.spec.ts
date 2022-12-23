@@ -15,10 +15,10 @@ test.fixme('delete expense', async ({ page, org, expenses }) => {
 	const url = getRoute({
 		entity: 'portfolio',
 		pageType: PageTypePortfolio.Expenses,
-		id: expenses[0]!.portfolioId,
+		id: expenses[0].portfolioId,
 		params: {
 			organizationId: org.organization.id,
-			portfolioId: expenses[0]!.portfolioId,
+			portfolioId: expenses[0].portfolioId,
 		},
 	});
 
