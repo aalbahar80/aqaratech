@@ -2,7 +2,6 @@ export type {
 	AqaratechEnv,
 	UnverfiedAqaratechEnv,
 } from './config/env/aqaratech-env';
-export { envCheck } from './config/env/env-check';
 export { envSchema } from './config/env/env.schema';
 export { isLiveEnv } from './config/env/live-envs';
 export { getSentryConfig } from './config/get-sentry-config';
