@@ -53,16 +53,6 @@ module.exports = {
 				project: './tsconfig.json',
 			},
 			rules: {
-				// disable rules that conflict with eslint-plugin-svelte3
-				// List here: https://github.com/sveltejs/eslint-plugin-svelte3/blob/master/OTHER_PLUGINS.md
-				'import/first': 'off',
-				'import/no-duplicates': 'off',
-				'import/no-mutable-exports': 'off',
-				'import/prefer-default-export': 'off',
-
-				// complains about $app/stores
-				'import/no-unresolved': 'off',
-
 				// disable rules that don't work with svelte's generic props
 				'@typescript-eslint/no-unsafe-assignment': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
