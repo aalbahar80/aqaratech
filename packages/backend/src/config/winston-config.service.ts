@@ -1,6 +1,5 @@
 import { LogtailTransport } from '@logtail/winston';
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import {
 	utilities as nestWinstonModuleUtilities,
 	WinstonModuleOptionsFactory,
@@ -9,20 +8,20 @@ import { format, LoggerOptions, transports } from 'winston';
 
 import { httpLogFormat, ignoreHttp, onlyHttp } from '@self/utils';
 
-import { EnvironmentConfig } from 'src/interfaces/environment.interface';
+import { EnvService } from 'src/env/env.service';
 import { LogtailService } from 'src/logtail/logtail.service';
 
 @Injectable()
 export class WinstonConfigService implements WinstonModuleOptionsFactory {
 	constructor(
-		private readonly config: ConfigService<EnvironmentConfig, true>,
+		private readonly env: EnvService,
 		private readonly logtailService: LogtailService,
 	) {}
 
 	createWinstonModuleOptions(): LoggerOptions | Promise<LoggerOptions> {
 		// const winstonConfig = this.config.get('winston', { infer: true });
 
-		const level = this.config.get('PUBLIC_AQ_DEBUG_LEVEL', { infer: true });
+		const level = this.env.e.PUBLIC_AQ_DEBUG_LEVEL;
 
 		const nestTransport = new transports.Console({
 			format: format.combine(

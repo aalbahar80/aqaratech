@@ -12,38 +12,22 @@ import {
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
 import { S3_TTL } from 'src/constants/s3-ttl';
-import { EnvironmentConfig } from 'src/interfaces/environment.interface';
+import { EnvService } from 'src/env/env.service';
 
 @Injectable()
 export class S3Service {
-	constructor(readonly configService: ConfigService<EnvironmentConfig>) {
-		const accountId = configService.get('r2Config.R2_ACCOUNT_ID', {
-			infer: true,
-		});
-
-		const accessKeyId = configService.get('r2Config.R2_ACCESS_KEY_ID', {
-			infer: true,
-		});
-
-		const secretAccessKey = configService.get('r2Config.R2_SECRET_ACCESS_KEY', {
-			infer: true,
-		});
-
-		// TODO use class validator?
-		// https://docs.nestjs.com/techniques/configuration#configuration
-		if (!accountId || !accessKeyId || !secretAccessKey) {
-			throw new Error('R2 config not found');
-		}
+	constructor(private readonly env: EnvService) {
+		const { R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY } =
+			this.env.e;
 
 		this._client = new S3Client({
 			region: 'auto',
-			endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
+			endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
 			credentials: {
-				accessKeyId,
-				secretAccessKey,
+				accessKeyId: R2_ACCESS_KEY_ID,
+				secretAccessKey: R2_SECRET_ACCESS_KEY,
 			},
 		});
 

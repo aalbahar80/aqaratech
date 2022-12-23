@@ -1,5 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { passportJwtSecret } from 'jwks-rsa';
 import { Strategy } from 'passport-jwt';
@@ -7,7 +6,9 @@ import { z } from 'zod';
 
 import { AQARATECH_STAFF_ROLE, Cookie } from '@self/utils';
 
-import { EnvironmentConfig } from 'src/interfaces/environment.interface';
+import { authConfig } from 'src/config/auth.config';
+import { backendEnvSchema } from 'src/env/env.schema';
+import { EnvService } from 'src/env/env.service';
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
 
@@ -16,22 +17,14 @@ import type { Request } from 'express';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
 	constructor(
-		readonly configService: ConfigService<EnvironmentConfig>,
+		private readonly env: EnvService,
 		readonly usersService: UsersService,
 	) {
-		const domain = configService.get('auth.AUTH0_DOMAIN', { infer: true });
+		const auth = authConfig(backendEnvSchema.parse(process.env));
 
-		const audience = configService.get('auth.AUTH0_API_AUDIENCE', {
-			infer: true,
-		});
-
-		const jwks = configService.get('auth.JWKS', { infer: true });
-
-		if (!domain || !audience || !jwks) {
-			throw new Error(
-				'auth.AUTH0_DOMAIN and auth.AUTH0_API_AUDIENCE must be set',
-			);
-		}
+		const domain = auth.AUTH0_DOMAIN;
+		const audience = auth.AUTH0_API_AUDIENCE;
+		const jwks = auth.JWKS;
 
 		const cookieExtractor = function (req: Request) {
 			const cookiesSchema = z.object({
@@ -77,13 +70,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 	 * access token as received from Auth0
 	 */
 	validate(rawPayload: unknown): AuthenticatedUser {
-		const apiNamespace = this.configService.get('auth.AUTH0_API_NAMESPACE', {
-			infer: true,
-		});
-
-		if (!apiNamespace) {
-			throw new Error('authConfig.AUTH0_API_NAMESPACE must be set');
-		}
+		const apiNamespace = this.env.auth.AUTH0_API_NAMESPACE;
 
 		const payload = payloadSchema(apiNamespace).parse(rawPayload);
 

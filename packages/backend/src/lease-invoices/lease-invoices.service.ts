@@ -1,6 +1,5 @@
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import { Any, Object } from 'ts-toolbelt';
@@ -13,8 +12,8 @@ import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
+import { EnvService } from 'src/env/env.service';
 import { InvoiceSendEvent } from 'src/events/invoice-send.event';
-import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import {
 	CreateLeaseInvoiceDto,
@@ -31,7 +30,7 @@ export class LeaseInvoicesService {
 		private readonly prisma: PrismaService,
 		private readonly postmarkService: PostmarkService,
 		private readonly eventEmitter: EventEmitter2,
-		readonly configService: ConfigService<EnvironmentConfig>,
+		private readonly env: EnvService,
 	) {}
 	SubjectType = 'LeaseInvoice' as const;
 
@@ -164,9 +163,7 @@ export class LeaseInvoicesService {
 
 	@OnEvent('invoice.send')
 	async sendEmail(payload: InvoiceSendEvent) {
-		const origin = this.configService.get('siteConfig.PUBLIC_SITE_URL', {
-			infer: true,
-		});
+		const origin = this.env.e.PUBLIC_SITE_URL;
 
 		if (!origin) {
 			this.logger.warn('No site origin configured');

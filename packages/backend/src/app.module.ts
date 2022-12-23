@@ -19,11 +19,11 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
 import { RoleGuard } from 'src/casl/role.guard';
 import { WinstonConfigService } from 'src/config/winston-config.service';
+import { EnvironmentConfig } from 'src/env/types/environment.interface';
 import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
 import { ResponseInterceptor } from 'src/http-logger/response.interceptor';
 import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { TimeoutInterceptor } from 'src/interceptors/timeout.interceptor';
-import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { LoggingMiddleware } from 'src/middleware/logging.middleware';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
@@ -33,7 +33,6 @@ import { AggregateModule } from './aggregate/aggregate.module';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
-import configuration from './config/configuration';
 import { EnvModule } from './env/env.module';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
@@ -60,7 +59,6 @@ import { UsersModule } from './users/users.module';
 	imports: [
 		EnvModule,
 		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
-		ConfigModule.forRoot({ load: [configuration], isGlobal: true }), // can take validation schema
 
 		WinstonModule.forRootAsync({
 			imports: [LogtailModule],

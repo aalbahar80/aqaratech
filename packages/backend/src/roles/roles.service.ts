@@ -1,14 +1,13 @@
 import { accessibleBy } from '@casl/prisma';
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma, Role } from '@prisma/client';
 
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { EnvService } from 'src/env/env.service';
 import { RoleCreatedEvent } from 'src/events/role-created.event';
-import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { PostmarkService } from 'src/postmark/postmark.service';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -20,10 +19,8 @@ export class RolesService {
 		private readonly prisma: PrismaService,
 		private readonly postmarkService: PostmarkService,
 		private readonly eventEmitter: EventEmitter2,
-		private readonly configService: ConfigService<EnvironmentConfig>,
+		private readonly env: EnvService,
 	) {}
-
-	private readonly logger = new Logger(RolesService.name);
 
 	async create({
 		createRoleDto,
@@ -110,13 +107,7 @@ export class RolesService {
 
 	@OnEvent('role.created')
 	async sendWelcomeEmail(payload: RoleCreatedEvent) {
-		const origin = this.configService.get('siteConfig.PUBLIC_SITE_URL', {
-			infer: true,
-		});
-
-		if (!origin) {
-			this.logger.warn('No site origin configured');
-		}
+		const origin = this.env.e.PUBLIC_SITE_URL;
 
 		const role = await this.prisma.role.findUniqueOrThrow({
 			where: { id: payload.roleId },
@@ -136,7 +127,7 @@ export class RolesService {
 				invite_sender_email: payload.senderEmail,
 				invite_sender_organization_name: role.organization.fullName,
 				// TODO replace with url to either (if user !exists) signup page with email prefilled, or (if user exists) portfolio/tenant portal page
-				action_url: origin ?? '',
+				action_url: origin,
 			},
 		});
 	}

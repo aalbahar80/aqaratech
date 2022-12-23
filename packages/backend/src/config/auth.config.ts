@@ -1,4 +1,4 @@
-import { BackendEnvSchema } from 'src/config/config-schema';
+import { BackendEnvSchema } from 'src/env/env.schema';
 import { AuthConfigType } from 'src/env/types/auth.type';
 
 export const authConfig = (environment: BackendEnvSchema) => {

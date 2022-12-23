@@ -5,7 +5,6 @@ import {
 	LoggerService,
 	OnModuleInit,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
 import { instanceToPlain, plainToInstance } from 'class-transformer';
 import { isUUID } from 'class-validator';
@@ -15,12 +14,12 @@ import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { entitiesMap } from '@self/utils';
 
 import { Action } from 'src/casl/action.enum';
+import { EnvService } from 'src/env/env.service';
 import {
 	RemoveDocumentsEvent,
 	TIndexName,
 	UpdateIndexEvent,
 } from 'src/events/update-index.event';
-import { EnvironmentConfig } from 'src/interfaces/environment.interface';
 import { IUser } from 'src/interfaces/user.interface';
 import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-search-document';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -32,20 +31,14 @@ import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 export class SearchService implements OnModuleInit {
 	constructor(
 		private readonly prisma: PrismaService,
-		readonly configService: ConfigService<EnvironmentConfig>,
+		private readonly env: EnvService,
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
 	) {
-		const host = configService.get('meiliSearchConfig.HOST', {
-			infer: true,
+		this.client = new MeiliSearch({
+			host: this.env.e.MEILISEARCH_HOST,
+			apiKey: this.env.e.MEILISEARCH_API_KEY,
 		});
-		const apiKey = configService.get('meiliSearchConfig.API_KEY', {
-			infer: true,
-		});
-		if (!host || !apiKey) {
-			throw new Error('MeiliSearch config is not set');
-		}
-		this.client = new MeiliSearch({ host, apiKey });
 	}
 
 	async onModuleInit() {

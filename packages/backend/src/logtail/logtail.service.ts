@@ -1,19 +1,18 @@
 import { Logtail } from '@logtail/node';
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
-import { addEnvLabel, liveEnvs } from '@self/utils';
+import { addEnvLabel, isLiveEnv } from '@self/utils';
 
-import { EnvironmentConfig } from 'src/interfaces/environment.interface';
+import { EnvService } from 'src/env/env.service';
 
 @Injectable()
 export class LogtailService {
-	constructor(readonly config: ConfigService<EnvironmentConfig, true>) {
-		const env = config.get('PUBLIC_AQARATECH_ENV', { infer: true });
+	constructor(private readonly env: EnvService) {
+		const envName = this.env.e.PUBLIC_AQARATECH_ENV;
 
-		const token = config.get('LOGTAIL_TOKEN', { infer: true });
+		const token = this.env.e.LOGTAIL_TOKEN;
 
-		if (!liveEnvs.includes(env)) {
+		if (!isLiveEnv(envName)) {
 			console.log('Logtail is not initialized. Not a live environment.');
 		} else if (!token) {
 			console.log('Logtail is not initialized. No token provided.');
@@ -21,7 +20,7 @@ export class LogtailService {
 			console.log('Logtail is initialized.');
 			this.logtail = new Logtail(token);
 
-			this.logtail.use(addEnvLabel(env));
+			this.logtail.use(addEnvLabel(envName));
 		}
 	}
 
