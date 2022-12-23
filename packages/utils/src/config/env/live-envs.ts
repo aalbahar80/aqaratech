@@ -1,4 +1,4 @@
-import type { AqaratechEnv } from '../../../../types/environment';
+import type { AqaratechEnv } from '../../../../../types/environment';
 
 /**
  * Environments where we should send events to Sentry, use Logtail, etc.

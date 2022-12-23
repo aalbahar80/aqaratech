@@ -1,7 +1,7 @@
-export { envCheck } from './config/env-check';
+export { envCheck } from './config/env/env-check';
+export { liveEnvs } from './config/env/live-envs';
 export { getSentryConfig } from './config/get-sentry-config';
 export { isHealthCheck } from './config/is-health-check';
-export { liveEnvs } from './config/live-envs';
 export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
 export { Cookie } from './constants/cookie';
 export { countries } from './constants/countries';
