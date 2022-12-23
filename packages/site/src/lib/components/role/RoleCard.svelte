@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Badge from '$lib/components/Badge.svelte';
+	import type { IconTooltip } from '$lib/models/types/icon-tooltip.type';
 	import { getRoleMeta } from '$lib/utils/get-role-meta';
 
 	import type { ValidatedRoleDto } from '$api/openapi';
@@ -9,7 +10,7 @@
 	import MdiAccountTie from '~icons/mdi/account-tie';
 
 	export let role: ValidatedRoleDto;
-	export let icons: any[];
+	export let icons: IconTooltip[];
 
 	const meta = getRoleMeta(role);
 </script>

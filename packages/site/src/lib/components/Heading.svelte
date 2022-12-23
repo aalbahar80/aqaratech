@@ -15,16 +15,10 @@
 		type OnDelete,
 	} from '$lib/components/toast/create-modal-delete';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
-	import type { Icon } from '$lib/models/types/icon.type';
+	import type { IconTooltip } from '$lib/models/types/icon-tooltip.type';
 	import { classes } from '$lib/utils/classes';
 
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
-
-	interface IconTooltip {
-		label: string | number | null | undefined;
-		icon: Icon;
-		tooltip: string;
-	}
 
 	export let title: string;
 	export let id: string;
