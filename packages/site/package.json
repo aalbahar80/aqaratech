@@ -22,12 +22,12 @@
 		"test:ui": "vitest --ui"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.1.154",
+		"@iconify/json": "2.1.155",
 		"@logtail/types": "0.1.12",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:3.2.1",
-		"@sentry/svelte": "7.28.0",
-		"@sentry/tracing": "7.28.0",
+		"@sentry/svelte": "7.28.1",
+		"@sentry/tracing": "7.28.1",
 		"@sveltejs/adapter-node": "1.0.0",
 		"@sveltejs/kit": "1.0.1",
 		"@sveltejs/pancake": "0.0.18",
@@ -63,7 +63,7 @@
 		"sorcery": "0.10.0",
 		"source-map-support": "0.5.21",
 		"svelte": "3.55.0",
-		"svelte-check": "2.10.3",
+		"svelte-check": "3.0.1",
 		"svelte-dnd-action": "0.9.22",
 		"svelte-frappe-charts": "1.9.2",
 		"svelte-french-toast": "1.0.3",
@@ -76,16 +76,16 @@
 		"typescript": "4.9.4",
 		"typescript-svelte-plugin": "0.3.13",
 		"unplugin-icons": "0.14.15",
-		"vite": "4.0.2",
+		"vite": "4.0.3",
 		"vite-plugin-iso-import": "1.0.0",
-		"vitest": "0.26.1",
+		"vitest": "0.26.2",
 		"zod": "3.20.2"
 	},
 	"type": "module",
 	"dependencies": {
 		"@logtail/node": "0.1.14",
 		"@logtail/winston": "0.1.14",
-		"@sentry/node": "7.28.0",
+		"@sentry/node": "7.28.1",
 		"winston": "3.8.2"
 	}
 }
