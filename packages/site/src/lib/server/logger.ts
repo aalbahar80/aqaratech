@@ -35,6 +35,7 @@ const createSiteTransport = () =>
 	});
 
 export const logger = createLogger({
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	level: environment.PUBLIC_AQ_DEBUG_LEVEL || 'info',
 
 	// Common log formats for all transports

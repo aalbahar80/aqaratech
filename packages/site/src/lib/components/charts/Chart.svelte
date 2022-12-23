@@ -20,11 +20,17 @@
 
 	import { CHART_HEIGHT } from '$lib/components/dashboard/cards/chart-height.const';
 
+	type ManualChartType = InstanceType<typeof Chart> & {
+		legend: {
+			height: number;
+			fit: () => void;
+		};
+	};
+
 	// Adds padding to legend
 	const legendMargin = {
 		id: 'legendMargin',
-		// beforeInit(chart: InstanceType<typeof Chart>) {
-		beforeInit(chart: any) {
+		beforeInit(chart: ManualChartType) {
 			const fitValue = chart.legend.fit;
 
 			chart.legend.fit = function fit() {

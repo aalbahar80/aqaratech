@@ -91,12 +91,12 @@
 		</a>
 	</b>
 {/if}
-{#if node.children || node.data.isGroup}
+{#if node.children ?? node.data.isGroup}
 	<!-- The section's y padding will determine how easy it is to make it swallow new children. -->
 	<section
 		class="py-12"
 		use:dndzone={{
-			items: node.children || [],
+			items: node.children ?? [],
 			flipDurationMs,
 			centreDraggedOnCursor: true,
 			dropTargetStyle: {
@@ -112,7 +112,7 @@
 	>
 		<!-- We fallback to en empty array because we still want empty `group nodes` (where node.data.isGroup = true) to be able to swallow new children.
          Otherwise, a dropzone will disappear as soon as all the children have been dragged out. -->
-		{#each node.children?.filter((n) => n.id !== SHADOW_ITEM_MARKER_PROPERTY_NAME) || [] as currentNode (currentNode.id)}
+		{#each node.children?.filter((n) => n.id !== SHADOW_ITEM_MARKER_PROPERTY_NAME) ?? [] as currentNode (currentNode.id)}
 			<div
 				id={node.data.labelEn}
 				animate:flip={{ duration: flipDurationMs }}
