@@ -269,7 +269,7 @@ importers:
       svelte: 3.55.0
       svelte-check: 3.0.1
       svelte-dnd-action: 0.9.22
-      svelte-frappe-charts: 1.9.2
+      svelte-frappe-charts: 1.10.0
       svelte-french-toast: 1.0.3
       svelte-headlessui: 0.0.9
       svelte-preprocess: 5.0.0
@@ -334,7 +334,7 @@ importers:
       svelte: 3.55.0
       svelte-check: 3.0.1_qs7rgzvahok4cbkjoy5bgypde4
       svelte-dnd-action: 0.9.22_svelte@3.55.0
-      svelte-frappe-charts: 1.9.2_svelte@3.55.0
+      svelte-frappe-charts: 1.10.0_svelte@3.55.0
       svelte-french-toast: 1.0.3_svelte@3.55.0
       svelte-headlessui: 0.0.9
       svelte-preprocess: 5.0.0_uldce6htlskfyklq5y55tk7pdy
@@ -10320,8 +10320,8 @@ packages:
       svelte: 3.55.0
     dev: true
 
-  /svelte-frappe-charts/1.9.2_svelte@3.55.0:
-    resolution: {integrity: sha512-FYwbI5lY6fiN8b+5IFu6RvcgpWpCKTTpL0sGCqbwgbth4cIZoOjIAdU7JbzjuaF5mUCHRt4TSnGEsK+345C2hw==}
+  /svelte-frappe-charts/1.10.0_svelte@3.55.0:
+    resolution: {integrity: sha512-TkkcovOAeoieiDFFJS7p56E91WcS5qFq5lpkF+yuCBMG17HaC+7PrkT/0zzii0BBnYlOuumsfb9S5UmsDZRhdg==}
     peerDependencies:
       svelte: ^3.0.0
     dependencies:

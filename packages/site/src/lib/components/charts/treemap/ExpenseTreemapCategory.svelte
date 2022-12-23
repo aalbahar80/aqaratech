@@ -30,7 +30,7 @@
 	});
 
 	$: root.sort((a, b) => {
-		return (b.value || 0) - (a.value || 0);
+		return (b.value ?? 0) - (a.value ?? 0);
 	});
 
 	const getLabel = (node: HierarchyNode<ExpenseCategoryDto>) =>

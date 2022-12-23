@@ -55,8 +55,10 @@
 
 	// Disable some animations that cause high CPU usage
 	// Chart.defaults.animation = false;
-	//@ts-expect-error
-	Chart.defaults.transitions.active.animation.duration = 0; // disables the animation for 'active' mode, causes high CPU usage!
+	if (Chart.defaults.transitions.active) {
+		Chart.defaults.transitions.active.animation.duration = 0; // disables the animation for 'active' mode, causes high CPU usage!
+	}
+
 	Chart.defaults.animations.colors = false; // could enable
 
 	// Chart.defaults.aspectRatio = 2;

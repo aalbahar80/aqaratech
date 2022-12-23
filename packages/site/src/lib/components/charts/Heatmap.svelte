@@ -1,5 +1,6 @@
 <script lang="ts">
-	// @ts-expect-error
+	// @ts-expect-error - library doesn't have types
+	// https://github.com/himynameisdave/svelte-frappe-charts/pull/57
 	import Chart from 'svelte-frappe-charts';
 
 	const colors = ['#ebedf0', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e'];
