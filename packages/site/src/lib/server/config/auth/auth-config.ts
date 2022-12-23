@@ -1,5 +1,6 @@
 import { AUTH_CALLBACK } from '$lib/constants/routes';
 import { environment } from '$lib/environment';
+import type { AuthConfigType } from '$lib/models/types/auth.type';
 import { isProd } from '$lib/server/config/is-production';
 
 import { env as privateEnv } from '$env/dynamic/private';
@@ -8,7 +9,7 @@ import { env as privateEnv } from '$env/dynamic/private';
  * Get the auth config for the current environment.
  */
 export const getAuthConfig = () => {
-	return isProd
+	const config = isProd
 		? {
 				...baseProd,
 				AUTH0_CLIENT_SECRET: privateEnv.AUTH0_CLIENT_SECRET,
@@ -18,6 +19,8 @@ export const getAuthConfig = () => {
 				AUTH0_CLIENT_SECRET:
 					'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
 		  };
+
+	return config satisfies AuthConfigType;
 };
 
 export const baseProd = {
@@ -55,7 +58,7 @@ export const baseProd = {
 			},
 		],
 	},
-};
+} satisfies Omit<AuthConfigType, 'AUTH0_CLIENT_SECRET'>;
 
 export const baseDev = {
 	AUTH0_CLIENT_ID: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
@@ -92,4 +95,4 @@ export const baseDev = {
 			},
 		],
 	},
-};
+} satisfies Omit<AuthConfigType, 'AUTH0_CLIENT_SECRET'>;
