@@ -1,4 +1,10 @@
 module.exports = {
+	extends: [
+		// eslint-config-prettier helps with detecting circular dependencies
+		// https://github.com/import-js/eslint-plugin-import/blob/main/config/recommended.js
+		'plugin:import/recommended',
+		'plugin:import/typescript',
+	],
 	settings: {
 		// https://github.com/import-js/eslint-plugin-import#typescript
 		'import/resolver': {

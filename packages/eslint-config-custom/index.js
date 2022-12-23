@@ -18,13 +18,10 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended-requiring-type-checking',
 		'plugin:@typescript-eslint/strict',
 
-		'turbo',
 		'prettier',
 
-		// eslint-config-prettier helps with detecting circular dependencies
-		// https://github.com/import-js/eslint-plugin-import/blob/main/config/recommended.js
-		'plugin:import/recommended',
-		'plugin:import/typescript',
+		...importConfig.extends,
+		...turboConfig.extends,
 	],
 	plugins: ['@typescript-eslint'],
 	parserOptions: {

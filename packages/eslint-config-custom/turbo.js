@@ -1,4 +1,5 @@
 module.exports = {
+	extends: ['turbo'],
 	rules: {
 		// https://github.com/vercel/turborepo/blob/main/packages/eslint-plugin-turbo/docs/rules/no-undeclared-env-vars.md
 		'turbo/no-undeclared-env-vars': [
