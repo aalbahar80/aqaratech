@@ -10,7 +10,7 @@ import { BackendEnvSchema, backendEnvSchema } from 'src/env/env.schema';
 export class EnvService {
 	readonly e: BackendEnvSchema;
 	readonly auth: ReturnType<typeof authConfig>;
-	readonly sentry: typeof sentryConfig;
+	readonly sentry: ReturnType<typeof sentryConfig>;
 	readonly winston: typeof winstonConfig;
 
 	constructor() {
@@ -18,7 +18,7 @@ export class EnvService {
 
 		this.e = parsed;
 		this.auth = authConfig(parsed);
-		this.sentry = sentryConfig;
+		this.sentry = sentryConfig(parsed);
 		this.winston = winstonConfig;
 
 		console.log(

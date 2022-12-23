@@ -4,6 +4,8 @@ import { Logger } from '@nestjs/common';
 
 import { getSentryConfig } from '@self/utils';
 
+import { BackendEnvSchema } from 'src/env/env.schema';
+
 import { version } from '../../package.json';
 
 /**
@@ -28,21 +30,20 @@ const getCommitSha = () => {
 	}
 };
 
-const baseConfig = getSentryConfig({
-	// Need to set debug manually until dep is updated: aqtech/node_modules/.pnpm/@ntegral+nestjs-sentry@4.0.0_crwiabsxshsc3y4hjqoa5hpuxm/node_modules/@ntegral/nestjs-sentry/dist/sentry.service.js
-	PUBLIC_AQ_ENABLE_SENTRY: process.env.PUBLIC_AQ_ENABLE_SENTRY,
-	PUBLIC_AQ_DEBUG_SENTRY: process.env.PUBLIC_AQ_DEBUG_SENTRY,
-	PUBLIC_AQARATECH_ENV: process.env.PUBLIC_AQARATECH_ENV,
-	PUBLIC_TRACE_RATE: process.env.PUBLIC_TRACE_RATE,
-	version,
-	repoName: 'backend',
+export const sentryConfig = (environment: BackendEnvSchema) => {
+	const base = getSentryConfig({
+		// Need to set debug manually until dep is updated: aqtech/node_modules/.pnpm/@ntegral+nestjs-sentry@4.0.0_crwiabsxshsc3y4hjqoa5hpuxm/node_modules/@ntegral/nestjs-sentry/dist/sentry.service.js
+		PUBLIC_AQ_ENABLE_SENTRY: environment.PUBLIC_AQ_ENABLE_SENTRY,
+		PUBLIC_AQ_DEBUG_SENTRY: environment.PUBLIC_AQ_DEBUG_SENTRY,
+		PUBLIC_AQARATECH_ENV: environment.PUBLIC_AQARATECH_ENV,
+		PUBLIC_TRACE_RATE: environment.PUBLIC_TRACE_RATE,
+		version,
+		repoName: 'backend',
+		commitSha: getCommitSha(),
+	});
 
-	commitSha: getCommitSha(),
-});
-
-Logger.log(baseConfig, 'AqaratechConfig');
-
-export const sentryConfig = {
-	...baseConfig,
-	dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
+	return {
+		...base,
+		dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
+	};
 };

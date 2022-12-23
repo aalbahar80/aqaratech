@@ -16,9 +16,10 @@ export const backendEnvSchema = envSchema.pick({
 	R2_ACCESS_KEY_ID: true,
 	R2_SECRET_ACCESS_KEY: true,
 
-	// PUBLIC_AQ_ENABLE_SENTRY: true,
-	// PUBLIC_TRACE_RATE: true,
-	// PUBLIC_COMMIT_SHA: true,
+	PUBLIC_AQ_ENABLE_SENTRY: true,
+	PUBLIC_AQ_DEBUG_SENTRY: true,
+	PUBLIC_TRACE_RATE: true,
+	PUBLIC_COMMIT_SHA: true,
 
 	// Meilisearch
 	MEILISEARCH_HOST: true,
