@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ActionData, PageData } from './$types';
 	import { setContext } from 'svelte';
 
 	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
@@ -8,8 +9,6 @@
 		type ExpenseCategoryContext,
 	} from '$lib/components/organization/expense-category-context';
 	import { toOptions } from '$lib/utils/expense-type-options';
-
-	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
 	export let form: ActionData;

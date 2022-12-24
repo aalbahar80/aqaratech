@@ -1,9 +1,9 @@
 import { redirect } from '@sveltejs/kit';
 
+import type { LayoutLoad } from './$types';
+
 import { LOGIN } from '$lib/constants/routes';
 import { isPublicRoute } from '$lib/utils/is-public-route';
-
-import type { LayoutLoad } from './$types';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const load: LayoutLoad = async ({ data, url: { pathname } }) => {

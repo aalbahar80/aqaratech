@@ -1,7 +1,7 @@
 <script lang="ts">
-	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
-
 	import type { PageData } from './$types';
+
+	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
 
 	export let data: PageData;
 </script>

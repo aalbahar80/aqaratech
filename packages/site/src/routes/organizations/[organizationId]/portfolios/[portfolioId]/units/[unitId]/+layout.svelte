@@ -2,6 +2,7 @@
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 
 	import { page } from '$app/stores';
+	import type { LayoutData } from './$types';
 
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
@@ -11,8 +12,6 @@
 	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
 
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
-
-	import type { LayoutData } from './$types';
 
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';

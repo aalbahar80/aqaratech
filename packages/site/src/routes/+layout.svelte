@@ -4,6 +4,7 @@
 	import { Toaster } from 'svelte-french-toast';
 
 	import { navigating, page } from '$app/stores';
+	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
 
 	import Alert from '$lib/components/navbar/Alert.svelte';
@@ -19,8 +20,6 @@
 	import { getSentryUser } from '$lib/utils/sentry/common';
 
 	import '../styles/tailwind.css';
-
-	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
 

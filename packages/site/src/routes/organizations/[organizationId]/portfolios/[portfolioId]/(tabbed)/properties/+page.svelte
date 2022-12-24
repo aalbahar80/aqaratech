@@ -1,7 +1,7 @@
 <script lang="ts">
-	import PropertyTable from '$lib/components/property/PropertyTable.svelte';
-
 	import type { PageData } from './$types';
+
+	import PropertyTable from '$lib/components/property/PropertyTable.svelte';
 
 	export let data: PageData;
 </script>

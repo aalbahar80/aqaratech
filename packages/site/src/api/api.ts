@@ -1,6 +1,8 @@
 import * as SentryNode from '@sentry/node?server';
 import * as SentrySvelte from '@sentry/svelte?client';
 
+import type { Breadcrumb } from '@sentry/svelte';
+
 import { environment } from '$aqenvironment';
 
 import {
@@ -22,7 +24,6 @@ import {
 	UsersApi,
 } from './openapi';
 
-import type { Breadcrumb } from '@sentry/svelte';
 import type { LoadEvent } from '@sveltejs/kit';
 
 export const createApi = (loadFetch?: LoadEvent['fetch']) => {

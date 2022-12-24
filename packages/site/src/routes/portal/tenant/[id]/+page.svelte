@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
+	import type { PageData } from './$types';
+
 	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 
 	import type { LeaseInvoiceDto } from '$api/openapi';
-	import type { PageData } from './$types';
 
 	export let data: PageData;
 

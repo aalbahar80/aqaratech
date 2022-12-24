@@ -1,8 +1,8 @@
+import type { LayoutLoad } from './$types';
+
 import { MAX_PROPERTIES, MAX_UNITS } from '$lib/constants/misc';
 
 import { createApi } from '$api';
-
-import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = async ({ fetch, params }) => {
 	const portfolioId = params.portfolioId;

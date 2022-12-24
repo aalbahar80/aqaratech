@@ -1,7 +1,7 @@
 <script lang="ts">
-	import TenantTable from '$lib/components/tenant/TenantTable.svelte';
-
 	import type { PageData } from './$types';
+
+	import TenantTable from '$lib/components/tenant/TenantTable.svelte';
 
 	export let data: PageData;
 </script>

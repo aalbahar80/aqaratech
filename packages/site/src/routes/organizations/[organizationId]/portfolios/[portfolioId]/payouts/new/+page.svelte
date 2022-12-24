@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { ActionData } from './$types';
+
 	import EnhancedForm from '$lib/components/form/EnhancedForm.svelte';
 	import { getEntityFormModel } from '$lib/components/form/model/get-entity-form-model';
-
-	import type { ActionData } from './$types';
 
 	export let form: ActionData;
 

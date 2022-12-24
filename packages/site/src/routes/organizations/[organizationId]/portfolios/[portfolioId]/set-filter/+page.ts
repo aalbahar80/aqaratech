@@ -1,11 +1,11 @@
 import { redirect } from '@sveltejs/kit';
 
+import type { PageLoad } from './$types';
+
 import { FilterInitial } from '@self/utils';
 
 import { property } from '$lib/stores/filter/property';
 import { unit } from '$lib/stores/filter/unit';
-
-import type { PageLoad } from './$types';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const load: PageLoad = async ({ url: { searchParams } }) => {

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ExpenseTable from '$lib/components/expense/ExpenseTable.svelte';
-
 	import type { PageData } from './$types';
+
+	import ExpenseTable from '$lib/components/expense/ExpenseTable.svelte';
 
 	export let data: PageData;
 </script>

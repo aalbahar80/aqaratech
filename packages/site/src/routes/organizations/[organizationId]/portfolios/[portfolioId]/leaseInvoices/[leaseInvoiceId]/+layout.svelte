@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import type { LayoutData } from './$types';
 
 	import { getRoute, PageTab } from '@self/utils';
 
@@ -14,8 +15,6 @@
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
-
-	import type { LayoutData } from './$types';
 
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';
 	import HeroiconsEnvelope from '~icons/heroicons/envelope';

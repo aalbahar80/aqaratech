@@ -4,6 +4,7 @@
 	import * as R from 'remeda';
 
 	import { page } from '$app/stores';
+	import type { PageData } from './$types';
 
 	import { getRoute, PageType } from '@self/utils';
 
@@ -19,8 +20,6 @@
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
-
-	import type { PageData } from './$types';
 
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 	import Fa6SolidPlus from '~icons/fa6-solid/plus';

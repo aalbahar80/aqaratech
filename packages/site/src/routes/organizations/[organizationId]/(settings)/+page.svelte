@@ -1,7 +1,7 @@
 <script lang="ts">
-	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
-
 	import type { PageData } from './$types';
+
+	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
 
 	export let data: PageData;
 </script>

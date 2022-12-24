@@ -1,8 +1,8 @@
 import * as R from 'remeda';
 
-import { createApi } from '$api';
-
 import type { PageLoad } from './$types';
+
+import { createApi } from '$api';
 
 export const load: PageLoad = async ({ url, fetch }) => {
 	const api = createApi(fetch);

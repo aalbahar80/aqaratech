@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { createColumnHelper } from '@tanstack/svelte-table';
 
+	import type { PageData } from './$types';
+
 	import { entity } from '@self/utils';
 
 	import MaintenanceOrderTable from '$lib/components/maintenance-order/MaintenanceOrderTable.svelte';
 
 	import type { MaintenanceOrderDto } from '$api/openapi';
-	import type { PageData } from './$types';
 
 	export let data: PageData;
 

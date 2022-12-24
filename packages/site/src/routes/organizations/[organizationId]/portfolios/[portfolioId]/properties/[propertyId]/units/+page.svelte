@@ -1,7 +1,7 @@
 <script lang="ts">
-	import UnitTable from '$lib/components/unit/UnitTable.svelte';
-
 	import type { PageData } from './$types';
+
+	import UnitTable from '$lib/components/unit/UnitTable.svelte';
 
 	export let data: PageData;
 </script>

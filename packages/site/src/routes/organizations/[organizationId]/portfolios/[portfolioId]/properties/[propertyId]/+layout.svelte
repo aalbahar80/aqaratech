@@ -2,6 +2,7 @@
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 
 	import { page } from '$app/stores';
+	import type { LayoutData } from './$types';
 
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
@@ -10,8 +11,6 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyTabs from '$lib/components/property/PropertyTabs.svelte';
-
-	import type { LayoutData } from './$types';
 
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 	import HeroiconsWrench from '~icons/heroicons/wrench';

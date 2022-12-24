@@ -1,6 +1,6 @@
-import { MAX_AGE } from '$lib/constants/misc';
-
 import type { RequestHandler } from './$types';
+
+import { MAX_AGE } from '$lib/constants/misc';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const GET: RequestHandler = async ({ cookies, params, url }) => {

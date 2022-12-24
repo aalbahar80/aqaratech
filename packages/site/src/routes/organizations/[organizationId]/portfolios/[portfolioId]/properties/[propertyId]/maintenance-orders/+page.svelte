@@ -1,7 +1,7 @@
 <script lang="ts">
-	import MaintenanceOrderTable from '$lib/components/maintenance-order/MaintenanceOrderTable.svelte';
-
 	import type { PageData } from './$types';
+
+	import MaintenanceOrderTable from '$lib/components/maintenance-order/MaintenanceOrderTable.svelte';
 
 	export let data: PageData;
 </script>

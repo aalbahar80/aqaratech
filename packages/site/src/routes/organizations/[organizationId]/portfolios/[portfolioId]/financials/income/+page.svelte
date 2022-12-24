@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { PageData } from './$types';
+
 	import BarChart from './BarChart.svelte';
 	import PieChart from './PieChart.svelte';
-
-	import type { PageData } from './$types';
 
 	export let data: PageData;
 

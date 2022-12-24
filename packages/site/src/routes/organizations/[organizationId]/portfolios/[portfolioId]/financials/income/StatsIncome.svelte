@@ -1,9 +1,9 @@
 <script lang="ts">
+	import type { PageData } from './$types';
+
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
 	import { kwdFormat } from '$lib/utils/common';
-
-	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>

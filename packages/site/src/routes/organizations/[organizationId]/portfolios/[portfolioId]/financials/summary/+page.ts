@@ -1,3 +1,4 @@
+import type { PageLoad } from './$types';
 import { get } from 'svelte/store';
 
 import { calculateNet } from '$lib/components/dashboard/stats/calculate-net';
@@ -7,8 +8,6 @@ import { range } from '$lib/stores/filter/range';
 import { unit } from '$lib/stores/filter/unit';
 
 import { createApi } from '$api';
-
-import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch, params, depends }) => {
 	// Filter options

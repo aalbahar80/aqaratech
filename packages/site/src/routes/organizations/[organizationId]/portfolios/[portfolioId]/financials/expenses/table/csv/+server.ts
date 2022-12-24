@@ -1,8 +1,8 @@
+import type { RequestHandler } from './$types';
+
 import { respondWithCsv } from '$lib/utils/respond-with-csv';
 
 import { createApi } from '$api';
-
-import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ params, fetch }) => {
 	const expenses = await createApi(fetch).portfolios.findAllExpenses({

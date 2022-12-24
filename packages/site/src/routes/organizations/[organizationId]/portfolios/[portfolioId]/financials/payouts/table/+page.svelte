@@ -2,6 +2,7 @@
 	import { createColumnHelper } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
+	import type { PageData } from './$types';
 
 	import { toUTCFormat, entity } from '@self/utils';
 
@@ -13,7 +14,6 @@
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 
 	import type { PayoutDto } from '$api/openapi';
-	import type { PageData } from './$types';
 
 	export let data: PageData;
 

@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { PageData } from './$types';
+
 	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
 	import MaintenanceOrderPage from '$lib/components/maintenance-order/MaintenanceOrderPage.svelte';
-
-	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>

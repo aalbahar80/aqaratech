@@ -1,8 +1,8 @@
+import type { PageLoad } from './$types';
+
 import { parseParams } from '$lib/utils/parse-params';
 
 import { createApi } from '$api';
-
-import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({
 	fetch,

@@ -1,6 +1,6 @@
-import { createApi } from '$api';
-
 import type { LayoutLoad } from './$types';
+
+import { createApi } from '$api';
 
 export const load: LayoutLoad = async ({ params, fetch }) => {
 	const api = createApi(fetch);

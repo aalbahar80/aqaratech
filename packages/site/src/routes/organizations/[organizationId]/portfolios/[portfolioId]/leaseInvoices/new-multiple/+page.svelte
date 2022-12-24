@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Schedule from '$lib/components/lease/Schedule.svelte';
-
 	import type { PageData } from './$types';
+
+	import Schedule from '$lib/components/lease/Schedule.svelte';
 
 	export let data: PageData;
 </script>

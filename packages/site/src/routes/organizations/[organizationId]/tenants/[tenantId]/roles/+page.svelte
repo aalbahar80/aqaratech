@@ -1,7 +1,7 @@
 <script lang="ts">
-	import MemberTab from '$lib/components/member/MemberTab.svelte';
-
 	import type { PageData } from './$types';
+
+	import MemberTab from '$lib/components/member/MemberTab.svelte';
 
 	export let data: PageData;
 </script>
