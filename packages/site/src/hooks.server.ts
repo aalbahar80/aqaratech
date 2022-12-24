@@ -117,7 +117,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 		// set the role cookie if it's not yet set
 		if (!selectedRoleId && user.role) {
-			event.cookies.set('role', user.role.id, {
+			event.cookies.set(Cookie.role, user.role.id, {
 				path: '/',
 				maxAge: MAX_AGE,
 			});
