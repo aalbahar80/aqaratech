@@ -21,7 +21,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	globalTeardown: require.resolve('./global-teardown'),
 	// showing the reporter prevents turbo from caching the test results (on flakey tests)
 	reporter: process.env.CI ? 'github' : [['list'], ['html', { open: 'never' }]],
-	retries: 2,
+	retries: 1,
 	timeout: process.env.CI ? 30 * 1000 : BASE_TIMEOUT,
 	maxFailures: 40,
 	use: {

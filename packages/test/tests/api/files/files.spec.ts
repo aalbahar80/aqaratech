@@ -4,10 +4,6 @@ import { withQuery } from 'ufo';
 import { getPresignedUrl } from '../../../utils/get-presigned-url';
 import { test } from '../api-fixtures';
 
-test.setTimeout(20000);
-
-test.describe.configure({ mode: 'parallel' });
-
 test.use({
 	baseURL: process.env.PUBLIC_API_URL,
 });
