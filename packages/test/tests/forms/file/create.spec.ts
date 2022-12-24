@@ -6,6 +6,7 @@ import { getRoute, PageTab } from '@self/utils';
 
 import { getPresignedUrl } from '../../../utils/get-presigned-url';
 import { test } from '../../api/api-fixtures';
+import { FileFormPage } from '../file-form-model';
 
 const localFilePath = './tests/forms/file/upload-test.png';
 
@@ -28,9 +29,9 @@ test('file can be uploaded', async ({ page, request, portfolio }) => {
 
 	await page.getByRole('link', { name: 'New' }).click();
 
-	await page.getByLabel('File Name').fill(fileName);
-	await page.getByLabel('File *').setInputFiles(localFilePath);
-	await page.getByRole('button', { name: 'Save' }).click();
+	const form = new FileFormPage(page);
+	await form.setFile(fileName, localFilePath);
+	await form.save();
 
 	await expect(page).toHaveURL(url);
 
