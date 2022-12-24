@@ -30,7 +30,7 @@
 		},
 		"check": {
 			"outputs": [],
-			"dependsOn": ["^build"]
+			"dependsOn": ["build"]
 		},
 		"//#check": {
 			"outputs": []
