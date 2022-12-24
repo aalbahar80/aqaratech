@@ -22,7 +22,7 @@
 		"test:ui": "vitest --ui"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.1.155",
+		"@iconify/json": "2.1.156",
 		"@logtail/types": "0.1.12",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:3.2.1",
