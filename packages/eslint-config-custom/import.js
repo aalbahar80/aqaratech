@@ -63,11 +63,16 @@ module.exports = {
 					// cheatsheet: https://globster.xyz/
 					// Order in array matters.
 					{
-						// matches svelte, svelte/transition, etc
-						pattern: '+(svelte|\\$app){,*/**}',
+						pattern: '+(svelte|\\$app|$types){,*/**}',
+						// set pattern options to match "./$types"
+						patternOptions: {
+							matchBase: true,
+							dot: true,
+						},
 						position: 'before',
 						group: 'internal',
 					},
+
 					{
 						pattern: '+(@self){,*/**}',
 						position: 'before',
