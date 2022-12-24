@@ -4,9 +4,6 @@ import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
 
-// NOTE: This test becomes flaky when run in parallel with other tests.
-// It's probably due to multiple tests updating the same meilisearch index in parallel.
-
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
 	tenantsParams: [{ fullName: 'Bob Brown' }],
@@ -59,6 +56,8 @@ const inputs = [
 
 for (const i of inputs) {
 	test(`search: ${i.type}`, async ({ page, isMobile }) => {
+		// test.slow(); // search indexing is async
+
 		const { searchText, resultText, keysToValidate } = i;
 
 		if (isMobile) {
@@ -70,13 +69,20 @@ for (const i of inputs) {
 
 		// search
 		const input = page.getByPlaceholder('Search...');
-		await input.fill(searchText);
-
-		// check result
 		const result = page.getByRole('option', { name: resultText });
-		await expect(result).toBeVisible({
-			timeout: 10000,
-		});
+
+		// Keep trying to type until the result is visible
+		// This is because search indexing is async and not instant
+		await expect(async () => {
+			await input.clear(); // clear to re-trigger search
+
+			await input.fill(searchText);
+
+			// check result
+			await expect(result).toBeVisible({
+				timeout: 1000, // short timeout to fail fast and retry
+			});
+		}).toPass();
 
 		// navigate to result
 		await result.click();
