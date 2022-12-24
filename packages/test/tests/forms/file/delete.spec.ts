@@ -4,6 +4,7 @@ import { getRoute, PageTab } from '@self/utils';
 
 import { getPresignedUrl } from '../../../utils/get-presigned-url';
 import { test } from '../../api/api-fixtures';
+import { Modal } from '../../models/modal';
 
 test('file can be deleted', async ({ page, request, portfolio, file }) => {
 	const url = getRoute({
@@ -17,11 +18,11 @@ test('file can be deleted', async ({ page, request, portfolio, file }) => {
 
 	await page.goto(url);
 
-	const card = page.locator(`data-testid=${file}`);
+	await page.getByRole('button', { name: 'Delete' }).click();
 
-	await card.locator('data-testid=dropdown-menu').click();
-
-	await page.locator('button:has-text("Delete")').click();
+	const modal = new Modal({ page });
+	await modal.deleteConfirm();
+	await modal.waitForHidden();
 
 	// presigned url
 

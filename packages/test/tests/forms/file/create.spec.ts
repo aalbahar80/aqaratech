@@ -26,7 +26,7 @@ test('file can be uploaded', async ({ page, request, portfolio }) => {
 
 	await page.goto(url);
 
-	await page.getByRole('link', { name: 'Attach files' }).click();
+	await page.getByRole('link', { name: 'New' }).click();
 
 	await page.getByLabel('File Name').fill(fileName);
 	await page.getByLabel('File *').setInputFiles(localFilePath);

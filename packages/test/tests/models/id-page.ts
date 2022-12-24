@@ -1,4 +1,6 @@
-import { expect, type Page } from '@playwright/test';
+import { Modal } from './modal';
+
+import type { Page } from '@playwright/test';
 
 /**
  * A model for common id page functionality.
@@ -17,11 +19,8 @@ export class IdPage {
 		const remove = this.page.getByRole('button', { name: 'Delete' });
 		await remove.click();
 
-		const modal = this.page.getByTestId('modal');
-		const confirm = modal.getByRole('button', { name: 'Delete' });
-		await confirm.click();
-
-		// check modal is closed
-		await expect(modal).toBeHidden();
+		const modal = new Modal({ page: this.page });
+		await modal.deleteConfirm();
+		await modal.waitForHidden();
 	}
 }
