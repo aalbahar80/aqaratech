@@ -256,6 +256,16 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 					}) + '/table',
 				icon: HeroiconsOutlineDocumentText,
 			},
+			{
+				name: 'Maintenance',
+				href:
+					getRoute({
+						...getRouteConfig,
+						entity: 'maintenanceOrder',
+						pageType,
+					}) + '/table',
+				icon: HeroiconsWrench,
+			},
 		);
 	}
 
