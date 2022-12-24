@@ -56,7 +56,7 @@ const inputs = [
 
 for (const i of inputs) {
 	test(`search: ${i.type}`, async ({ page, isMobile }) => {
-		// test.slow(); // search indexing is async
+		test.slow(); // search indexing is async
 
 		const { searchText, resultText, keysToValidate } = i;
 
