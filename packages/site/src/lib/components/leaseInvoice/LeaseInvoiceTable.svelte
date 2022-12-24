@@ -21,10 +21,10 @@
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 
+	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
+
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
-
-	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 
 	export let data: PaginatedLeaseInvoiceDto;
 	export let showOptions = false;

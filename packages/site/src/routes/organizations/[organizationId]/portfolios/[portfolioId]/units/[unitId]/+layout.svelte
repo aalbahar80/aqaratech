@@ -12,7 +12,6 @@
 	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
 
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
-
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidStairs from '~icons/fa6-solid/stairs';

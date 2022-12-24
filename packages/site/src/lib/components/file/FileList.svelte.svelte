@@ -15,11 +15,10 @@
 	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 
-	import { createApi } from '$api';
-	import { handleApiError } from '$api/handle-api-error';
-
 	import type { PaginatedFileDto } from '$api/openapi';
 
+	import { createApi } from '$api';
+	import { handleApiError } from '$api/handle-api-error';
 	import Fa6SolidPaperclip from '~icons/fa6-solid/paperclip';
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 	import HeroiconsOutlinePaperClip from '~icons/heroicons-outline/paper-clip';

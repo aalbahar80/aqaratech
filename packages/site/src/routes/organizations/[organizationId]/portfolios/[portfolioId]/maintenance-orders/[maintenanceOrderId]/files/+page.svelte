@@ -1,7 +1,7 @@
 <script lang="ts">
-	import FileTable from '$lib/components/file/FileTable.svelte';
-
 	import type { PageData } from './$types';
+
+	import FileTable from '$lib/components/file/FileTable.svelte';
 
 	export let data: PageData;
 </script>

@@ -14,9 +14,9 @@
 	import { openModal } from '$lib/components/toast/Modal.svelte';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
 
-	import { createApi } from '$api';
-
 	import type { FileDto, PaginatedFileDto } from '$api/openapi';
+
+	import { createApi } from '$api';
 
 	export let data: PaginatedFileDto;
 	export let extraColumns: ColumnDto<FileDto>[] = [];
