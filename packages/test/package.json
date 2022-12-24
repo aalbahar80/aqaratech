@@ -17,8 +17,10 @@
 	"devDependencies": {
 		"@faker-js/faker": "7.6.0",
 		"@playwright/test": "1.29.1",
-		"@self/seed": "workspace:2.2.1",
-		"@self/utils": "workspace:3.2.1",
+		"@self/backend": "workspace:*",
+		"@self/seed": "workspace:*",
+		"@self/site": "workspace:*",
+		"@self/utils": "workspace:*",
 		"@types/node": "18.11.17",
 		"dotenv": "16.0.3",
 		"eslint-config-custom": "workspace:*",

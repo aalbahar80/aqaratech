@@ -39,14 +39,7 @@
 			"outputs": []
 		},
 		"test:e2e": {
-			"inputs": [
-				"**/*.ts",
-				"../seed/src/**",
-				"../utils/src/**",
-				"../site/src/**",
-				"../backend/src/**",
-				"!node_modules/**/*"
-			],
+			"dependsOn": ["^build"],
 			"outputs": [
 				"playwright-report/**",
 				"test-results/**",
