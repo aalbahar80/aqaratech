@@ -1,3 +1,5 @@
+import { error } from '@sveltejs/kit';
+
 import type { Actions } from './$types';
 
 import { fileCreateSchema } from '@self/utils';
@@ -26,11 +28,17 @@ export const actions: Actions = {
 
 				const url = `${environment.PUBLIC_API_URL}/organizations/${event.params.organizationId}/files`;
 
-				await event.fetch(url, {
+				const res = await event.fetch(url, {
 					method: 'POST',
 					credentials: 'include',
 					body: formData,
 				});
+
+				if (!res.ok) {
+					// required since fetch doesn't throw on 4xx/5xx
+					// if error status is *not* 400, handleForm will render error page
+					throw error(res.status, res.statusText);
+				}
 
 				return data;
 			},

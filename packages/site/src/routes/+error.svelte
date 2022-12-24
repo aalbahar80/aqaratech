@@ -7,7 +7,7 @@
 	class="min-h-full px-4 py-16 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8"
 >
 	<div class="mx-auto max-w-max">
-		<main class="sm:flex">
+		<main class="sm:flex" data-testid="error-page">
 			<p class="text-4xl font-extrabold text-indigo-600 sm:text-5xl">
 				{$page.error?.status ?? 500}
 			</p>
