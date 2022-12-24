@@ -14,11 +14,20 @@ export interface TokenTestOptions {
 export const test = base.extend<TokenTestOptions>({
 	token: [EXPIRED_ID_TOKEN, { option: true }],
 
-	page: async ({ page, token, baseURL }, use) => {
+	page: async ({ browser, token, baseURL, storageState }, use) => {
+		if (!storageState) {
+			throw new Error('storageState is required'); // Monitor/remove
+		}
+
+		// Create a new context.
+		const context = await browser.newContext({
+			storageState,
+		});
+
+		const page = await context.newPage();
+
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (!token) {
-			// await use(page);
-			// return;
 			throw new Error('token is not set');
 		}
 
@@ -38,6 +47,8 @@ export const test = base.extend<TokenTestOptions>({
 		]);
 
 		await use(page);
+
+		await context.close();
 	},
 });
 
