@@ -65,6 +65,28 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	],
 	projects: [
 		{
+			name: 'files',
+			testMatch: [...TESTS.FILE],
+		},
+		{
+			name: 'idToken',
+			testMatch: '**/token/**/*.spec.ts',
+			use: { token: EXPIRED_ID_TOKEN },
+		},
+		{
+			name: 'accessToken',
+			testMatch: '**/token/**/*.spec.ts',
+			use: { token: EXPIRED_ACCESS_TOKEN },
+		},
+		{
+			name: 'api',
+			testMatch: [TESTS.API],
+			testIgnore: [...TESTS.FILE],
+			use: {
+				baseURL: process.env.PUBLIC_API_URL,
+			},
+		},
+		{
 			name: 'site:chrome',
 			testIgnore: [...TESTS.NON_SITE, ...TESTS.MOBILE_ONLY],
 			use: {
@@ -130,28 +152,6 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		// 		/delete/g, // causes terminal encoding issues
 		// 	],
 		// },
-		{
-			name: 'api',
-			testMatch: [TESTS.API],
-			testIgnore: [...TESTS.FILE],
-			use: {
-				baseURL: process.env.PUBLIC_API_URL,
-			},
-		},
-		{
-			name: 'files',
-			testMatch: [...TESTS.FILE],
-		},
-		{
-			name: 'idToken',
-			testMatch: '**/token/**/*.spec.ts',
-			use: { token: EXPIRED_ID_TOKEN },
-		},
-		{
-			name: 'accessToken',
-			testMatch: '**/token/**/*.spec.ts',
-			use: { token: EXPIRED_ACCESS_TOKEN },
-		},
 	],
 };
 export default config;
