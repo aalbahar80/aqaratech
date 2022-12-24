@@ -37,6 +37,8 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			screenshots: true,
 			snapshots: true,
 			sources: true,
+			// @ts-expect-error bug
+			fullPage: true,
 		},
 	},
 	webServer: [

@@ -41,7 +41,7 @@ const test = base.extend<{
 	},
 });
 
-test.describe.configure({ mode: 'parallel' });
+// test.describe.configure({ mode: 'parallel' }); // might cause flakiness
 
 test('range filter changes to custom when editing start date', async ({
 	filters,
