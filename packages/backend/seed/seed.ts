@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+
 import {
 	createSeed,
 	insertSeed,
@@ -30,4 +31,6 @@ insertSeed(data)
 		console.error(e);
 		process.exit(1);
 	})
-	.finally(() => prisma.$disconnect());
+	.finally(() => {
+		void prisma.$disconnect();
+	});
