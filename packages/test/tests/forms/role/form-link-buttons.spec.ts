@@ -43,7 +43,7 @@ for (const input of inputs) {
 
 		await page.goto(url);
 
-		const btn = page.getByRole('link', { name: '+ New' });
+		const btn = page.getByRole('link', { name: 'New' });
 
 		await expect(btn).toHaveAttribute('href', form);
 

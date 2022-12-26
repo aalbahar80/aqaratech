@@ -50,7 +50,7 @@ test('create invoice button predefined params', async ({ page, lease }) => {
 
 	await page.goto(url);
 
-	const btn = page.getByRole('link', { name: 'New' });
+	const btn = page.getByRole('link', { name: 'New', exact: true });
 
 	await expect(btn).toHaveAttribute(
 		'href',
