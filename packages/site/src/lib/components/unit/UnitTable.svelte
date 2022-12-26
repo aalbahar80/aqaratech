@@ -61,6 +61,7 @@
 	paginationDto={data.pagination}
 	{columns}
 	columnVisibility={{
+		propertyId: false,
 		floor: false,
 		usage: false,
 	}}
