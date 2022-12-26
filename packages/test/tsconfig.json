@@ -2,7 +2,5 @@
 	"extends": "tsconfig/base.json",
 	"compilerOptions": {
 		"module": "NodeNext"
-	},
-	"include": ["./**/*.*"],
-	"exclude": ["playwright-report", ".eslintrc.js"]
+	}
 }
