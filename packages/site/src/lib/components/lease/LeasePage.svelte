@@ -10,9 +10,10 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
 
+	import Button from '$components/buttons/Button.svelte';
+
 	import type { LeaseDto } from '$api/openapi';
 
-	import Button from '$components/buttons/Button.svelte';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 	import HeroiconsArrowPath from '~icons/heroicons/arrow-path';
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';

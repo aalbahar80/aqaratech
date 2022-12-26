@@ -14,10 +14,10 @@
 	import { openModal } from '$lib/components/toast/Modal.svelte';
 	import { addSuccessToast } from '$lib/stores/toast';
 
-	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
-
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
+
+	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
 
 	export let data: PaginatedRoleDto;
 	export let predefined: {
