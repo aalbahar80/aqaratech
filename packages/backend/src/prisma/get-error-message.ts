@@ -27,7 +27,6 @@ export const getErrorMessage = (rawFieldName: string) => {
 	}
 
 	const result = `Unable to delete ${main}. Please delete any ${foreign} associated with this ${main} before attempting to delete the ${main}.`;
-	console.log(result, '---------------------------------');
 
 	return result;
 };
