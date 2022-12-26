@@ -1,6 +1,6 @@
 {
 	"name": "@self/seed",
-	"version": "2.2.1",
+	"version": "2.3.0",
 	"main": "dist/self-seed.cjs.js",
 	"module": "dist/self-seed.esm.js",
 	"scripts": {

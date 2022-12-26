@@ -1,5 +1,18 @@
 # @self/site
 
+## 2.4.0
+
+### Minor Changes
+
+- 2863e7686: add mo file capability
+- de4715add: dry env parse
+- f29a98fdd: init maintenance orders
+
+### Patch Changes
+
+- 4f01741d4: update deps
+- 326e75b9a: hide some cols
+
 ## 2.3.1
 
 ### Patch Changes

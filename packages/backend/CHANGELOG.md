@@ -1,5 +1,24 @@
 # @self/backend
 
+## 2.4.0
+
+### Minor Changes
+
+- 2863e7686: add mo file capability
+- de4715add: dry env parse
+- f29a98fdd: init maintenance orders
+
+### Patch Changes
+
+- 4f01741d4: update deps
+- 326e75b9a: hide some cols
+- Updated dependencies [4f01741d4]
+- Updated dependencies [2863e7686]
+- Updated dependencies [de4715add]
+- Updated dependencies [f29a98fdd]
+- Updated dependencies [326e75b9a]
+  - @self/utils@3.3.0
+
 ## 2.3.1
 
 ### Patch Changes
