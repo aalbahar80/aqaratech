@@ -1,5 +1,4 @@
 import {
-	CacheModule,
 	ClassSerializerInterceptor,
 	MiddlewareConsumer,
 	Module,
@@ -92,7 +91,6 @@ import { UsersModule } from './users/users.module';
 			},
 		}),
 
-		CacheModule.register({ isGlobal: true }),
 		TenantsModule,
 		PortfoliosModule,
 		CaslModule,

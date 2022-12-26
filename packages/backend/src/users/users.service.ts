@@ -84,9 +84,7 @@ export class UsersService {
 			});
 
 			// cache it
-			await this.cacheManager.set(cacheKey, ability, {
-				ttl: 60 * 60,
-			});
+			await this.cacheManager.set(cacheKey, ability, 60 * 60);
 
 			return ability;
 		}

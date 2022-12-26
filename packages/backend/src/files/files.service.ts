@@ -111,9 +111,7 @@ export class FilesService {
 			});
 
 			// set cache
-			await this.cacheManager.set<s3Objects>(cacheKey, objects, {
-				ttl: 60 * 60 * 24,
-			});
+			await this.cacheManager.set(cacheKey, objects, 60 * 60 * 24);
 		}
 
 		return {
@@ -155,9 +153,7 @@ export class FilesService {
 			});
 
 			// set cache
-			await this.cacheManager.set<string>(cacheKey, presignedUrl, {
-				ttl: S3_TTL / 2,
-			});
+			await this.cacheManager.set(cacheKey, presignedUrl, S3_TTL / 2);
 		}
 
 		return presignedUrl;
