@@ -14,7 +14,7 @@ const NAMES = ['Alex Anderson', 'Zachary Zane'] as const;
 
 test.use({
 	tenantsParams: [
-		...R.times(200, () => ({})),
+		...R.times(50, () => ({})),
 		{ fullName: NAMES[0] },
 		{ fullName: NAMES[1] },
 	],
