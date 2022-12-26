@@ -50,7 +50,7 @@ test('create invoice button predefined params', async ({ page, lease }) => {
 
 	await page.goto(url);
 
-	const btn = page.getByRole('link', { name: '+ New' });
+	const btn = page.getByRole('link', { name: 'New' });
 
 	await expect(btn).toHaveAttribute(
 		'href',
@@ -108,7 +108,7 @@ test('create lease button predefined params', async ({ page, unit }) => {
 
 	await page.goto(url);
 
-	const btn = page.getByRole('link', { name: '+ New' });
+	const btn = page.getByRole('link', { name: 'New' });
 
 	await expect(btn).toHaveAttribute(
 		'href',
@@ -137,7 +137,7 @@ test('create unit button predefined params', async ({ page, property }) => {
 
 	await page.goto(url);
 
-	const btn = page.getByRole('link', { name: '+ New' });
+	const btn = page.getByRole('link', { name: 'New' });
 
 	await expect(btn).toHaveAttribute(
 		'href',
@@ -165,7 +165,7 @@ test('create property button links to form', async ({ page, portfolio }) => {
 
 	await page.goto(url);
 
-	const btn = page.getByRole('link', { name: '+ New' });
+	const btn = page.getByRole('link', { name: 'New' });
 
 	await expect(btn).toHaveAttribute(
 		'href',
@@ -191,7 +191,7 @@ test('create portfolio button links to form', async ({ page, org }) => {
 
 	await page.goto(url);
 
-	const btn = page.getByRole('link', { name: '+ New' });
+	const btn = page.getByRole('link', { name: 'New' });
 
 	await expect(btn).toHaveAttribute(
 		'href',
