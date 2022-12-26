@@ -13,6 +13,7 @@
 	import { createModalDelete } from '$lib/components/toast/create-modal-delete';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
+	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 
 	import type { FileDto, PaginatedFileDto } from '$api/openapi';
 
@@ -110,17 +111,19 @@
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
 			<div slot="custom">
-				<a
-					href={getFormRouteWithRelation({
-						entity: 'file',
-						pathname: $page.url.pathname,
-						params: $page.params,
-						redirectTo: $page.url.pathname,
-					})}
-					class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900"
-				>
-					+ New
-				</a>
+				<RoleGuard roles={['ORGADMIN']}>
+					<a
+						href={getFormRouteWithRelation({
+							entity: 'file',
+							pathname: $page.url.pathname,
+							params: $page.params,
+							redirectTo: $page.url.pathname,
+						})}
+						class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900"
+					>
+						+ New
+					</a>
+				</RoleGuard>
 			</div>
 		</FilterBar>
 	</div>
