@@ -24,6 +24,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 	retries: 1,
 	timeout: process.env.CI ? 30 * 1000 : BASE_TIMEOUT,
 	maxFailures: 40,
+	workers: process.env.CI ? undefined : '70%',
 	use: {
 		storageState: testUsers.orgAdmin.storageStatePath,
 		headless: true,
