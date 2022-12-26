@@ -52,6 +52,8 @@
 					Create expense
 				</MenuItemChild>
 			</a>
+		</MenuItem>
+		<MenuItem as="div" let:active>
 			<a
 				href={getRoute({
 					entity: 'maintenanceOrder',
