@@ -2,7 +2,7 @@
 	"$schema": "https://turborepo.org/schema.json",
 	"pipeline": {
 		"build": {
-			"dependsOn": ["^build"],
+			"dependsOn": ["^build", "check"],
 			"outputs": [".svelte-kit/**", "dist/**", "build/**"]
 		},
 		"dev": {
@@ -29,8 +29,7 @@
 			"outputs": []
 		},
 		"check": {
-			"outputs": [],
-			"dependsOn": ["build"]
+			"outputs": []
 		},
 		"//#check": {
 			"outputs": []
