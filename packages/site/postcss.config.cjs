@@ -1,6 +1,8 @@
-const tailwindcss = require('tailwindcss');
-const autoprefixer = require('autoprefixer');
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+
+const autoprefixer = require('autoprefixer');
+const tailwindcss = require('tailwindcss');
 
 const config = {
 	plugins: [

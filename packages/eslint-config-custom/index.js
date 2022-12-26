@@ -32,7 +32,7 @@ module.exports = {
 			'../*/tsconfig.lint.json',
 			// For root: Helps root .eslintrc.js file find its own tsconfig.json file
 			'../../tsconfig.json',
-			'../../tsconfig.lint.json',
+			// '../../tsconfig.lint.json', // causes packages/* to be misconfigured
 			// sourceType: 'module',
 		],
 		// Either here or in site/.eslintrc.cjs, we need to declare

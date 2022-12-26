@@ -9,6 +9,7 @@
 	"include": [
 		// use pnpm tsc --showConfig to diagnose
 		"scripts/**/*.*",
-		"ambient.d.ts"
+		"ambient.d.ts",
+		".eslintrc.js"
 	]
 }

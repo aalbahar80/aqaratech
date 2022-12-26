@@ -26,7 +26,6 @@ module.exports = {
 		'playwright/no-wait-for-timeout': 'off',
 	},
 	globals: {
-		$: 'readonly',
 		ProcessPromise: 'readonly',
 		ProcessOutput: 'readonly',
 		log: 'readonly',

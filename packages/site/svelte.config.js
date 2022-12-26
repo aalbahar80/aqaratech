@@ -1,7 +1,8 @@
-import adapterNode from '@sveltejs/adapter-node';
 import { dirname, join } from 'path';
-import sveltePreprocess from 'svelte-preprocess';
 import { fileURLToPath } from 'url';
+
+import adapterNode from '@sveltejs/adapter-node';
+import sveltePreprocess from 'svelte-preprocess';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

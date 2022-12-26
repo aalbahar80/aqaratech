@@ -3,6 +3,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import icons from 'unplugin-icons/vite';
 import { defineConfig } from 'vite';
 import { isoImport } from 'vite-plugin-iso-import';
+
 import { version } from './package.json';
 
 const ANALYZE_BUNDLE = process.env.ANALYZE_BUNDLE === '1';

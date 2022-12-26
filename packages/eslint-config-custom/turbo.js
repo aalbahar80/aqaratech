@@ -24,6 +24,7 @@ module.exports = {
 					'PUBLIC_COMMIT_SHA',
 					// 'PUBLIC_AQ_ENABLE_SENTRY',
 					// 'LOGTAIL_TOKEN',
+					'ANALYZE_BUNDLE',
 				],
 			},
 		],
