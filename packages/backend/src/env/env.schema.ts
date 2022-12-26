@@ -11,7 +11,7 @@ export const backendEnvSchema = envSchema.pick({
 	PUBLIC_SITE_URL: true,
 
 	// R2
-	R2_ACCOUNT_ID: true,
+	R2_ENDPOINT: true,
 	R2_ACCESS_KEY_ID: true,
 	R2_SECRET_ACCESS_KEY: true,
 

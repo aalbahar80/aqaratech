@@ -43,7 +43,7 @@ export const envSchema = z.object({
 	DATABASE_URL: z.string(),
 
 	// R2
-	R2_ACCOUNT_ID: z.string(),
+	R2_ENDPOINT: z.string(),
 	R2_ACCESS_KEY_ID: z.string(),
 	R2_SECRET_ACCESS_KEY: z.string(),
 

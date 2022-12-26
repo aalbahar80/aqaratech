@@ -27,7 +27,7 @@ export class EnvService {
 				'PUBLIC_AQARATECH_ENV',
 				'PUBLIC_AQ_DEBUG_LEVEL',
 				'PUBLIC_SITE_URL',
-				'R2_ACCOUNT_ID',
+				'R2_ENDPOINT',
 				'MEILISEARCH_HOST',
 			]),
 		);
