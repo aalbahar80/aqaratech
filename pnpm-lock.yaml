@@ -223,7 +223,7 @@ importers:
 
   packages/site:
     specifiers:
-      '@iconify/json': 2.1.156
+      '@iconify/json': 2.1.157
       '@logtail/node': 0.1.14
       '@logtail/types': 0.1.12
       '@logtail/winston': 0.1.14
@@ -271,7 +271,7 @@ importers:
       svelte-dnd-action: 0.9.22
       svelte-frappe-charts: 1.10.0
       svelte-french-toast: 1.0.3
-      svelte-headlessui: 0.0.9
+      svelte-headlessui: 0.0.10
       svelte-preprocess: 5.0.0
       tailwindcss: 3.2.4
       tippy.js: 6.3.7
@@ -291,7 +291,7 @@ importers:
       '@sentry/node': 7.28.1
       winston: 3.8.2
     devDependencies:
-      '@iconify/json': 2.1.156
+      '@iconify/json': 2.1.157
       '@logtail/types': 0.1.12
       '@rgossiaux/svelte-headlessui': 1.0.2_okvbycgeo7n6fa7ggm4c3cdetm_svelte@3.55.0
       '@self/utils': link:../utils
@@ -336,7 +336,7 @@ importers:
       svelte-dnd-action: 0.9.22_svelte@3.55.0
       svelte-frappe-charts: 1.10.0_svelte@3.55.0
       svelte-french-toast: 1.0.3_svelte@3.55.0
-      svelte-headlessui: 0.0.9
+      svelte-headlessui: 0.0.10
       svelte-preprocess: 5.0.0_uldce6htlskfyklq5y55tk7pdy
       tailwindcss: 3.2.4_postcss@8.4.20
       tippy.js: 6.3.7
@@ -2627,8 +2627,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.1.156:
-    resolution: {integrity: sha512-QaLf/XSPRe6i35Z9WIRBxlWOLykDXNnEGYFf+9E+GWLmRqVQ2VNyTsEo6CNZqP5eGQRDPJyNhd+2vH+gbehGDg==}
+  /@iconify/json/2.1.157:
+    resolution: {integrity: sha512-hMfejLLvAtivI1PSKVbBvTGtIeX/II6DPLcGxJFTIzDA/HhJ/uZxS+Y6XeZPeH7rl+Vjm2X5gNnrYyiosroonw==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 0.3.9
@@ -4877,7 +4877,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.19.0
       '@types/raf': 3.4.0
-      core-js: 3.26.1
+      core-js: 3.27.0
       raf: 3.4.1
       regenerator-runtime: 0.13.9
       rgbcolor: 1.0.1
@@ -5209,8 +5209,8 @@ packages:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
 
-  /core-js/3.26.1:
-    resolution: {integrity: sha512-21491RRQVzUn0GGM9Z1Jrpr6PNPxPi+Za8OM9q4tksTSnlbXXGKK1nXNg/QvwFYettXvSX6zWKCtHHfjN4puyA==}
+  /core-js/3.27.0:
+    resolution: {integrity: sha512-wY6cKosevs430KRkHUIsvepDXHGjlXOZO3hYXNyqpD6JvB0X28aXyv0t1Y1vZMwE7SoKmtfa6IASHCPN52FwBQ==}
     requiresBuild: true
     dev: true
     optional: true
@@ -8149,7 +8149,7 @@ packages:
       fflate: 0.4.8
     optionalDependencies:
       canvg: 3.0.10
-      core-js: 3.26.1
+      core-js: 3.27.0
       dompurify: 2.4.1
       html2canvas: 1.4.1
     dev: true
@@ -10325,8 +10325,8 @@ packages:
       - svelte
     dev: true
 
-  /svelte-headlessui/0.0.9:
-    resolution: {integrity: sha512-BmnliuzDg43y8Vpox8ILCcvw/WrumS0ZhYbocPZu50qqypqpIur5DdXoXA9xcAzHKve5eFhgfKhBFbFipQ40Mg==}
+  /svelte-headlessui/0.0.10:
+    resolution: {integrity: sha512-poBZEg/ceFI3VSngRdm2kXr9sYlBxDR4jLbYg3qg4Yz7ziIBcKtGEecL7ExF13vIRESWXeXILe1XqjlnucJLlw==}
     dependencies:
       svelte-transition: 0.0.7
     dev: true
