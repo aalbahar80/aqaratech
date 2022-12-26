@@ -27,7 +27,7 @@ test('file can be uploaded', async ({ page, request, portfolio }) => {
 
 	await page.goto(url);
 
-	await page.getByRole('link', { name: 'New' }).click();
+	await page.getByRole('link', { name: 'New', exact: true }).click();
 
 	const form = new FileFormPage(page);
 	await form.setFile(fileName, localFilePath);

@@ -1,4 +1,4 @@
-import { test as base } from '@playwright/test';
+import { expect, test as base } from '@playwright/test';
 import * as R from 'remeda';
 
 import { organizationFactory, portfolioFactory } from '@self/seed';
@@ -25,6 +25,7 @@ import type {
 	TestFixtures,
 	TestOptions,
 } from './fixtures/test-fixtures.interface';
+import type { APIResponse } from '@playwright/test';
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
@@ -130,7 +131,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		const fileName = 'test.txt';
 
 		const url = `${apiURL}/organizations/${portfolio.organizationId}/files`;
-		const res = await request.post(url, {
+		const req = request.post(url, {
 			multipart: {
 				fileName: fileName,
 				relationKey: 'portfolio',
@@ -142,7 +143,18 @@ export const test = base.extend<TestFixtures & TestOptions>({
 				},
 			},
 		});
-		resCheck(res); // TODO: flaky
+
+		let res: APIResponse | undefined;
+
+		await expect(async () => {
+			console.log('preparing file fixture...');
+			res = await req;
+			await expect(res).toBeOK();
+		}).toPass();
+
+		if (res === undefined) {
+			throw new Error('res is undefined');
+		}
 
 		const name = await res.text();
 		const key = `portfolio/${portfolio.id}/${name}`;
