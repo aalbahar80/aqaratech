@@ -5,70 +5,85 @@ import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../../api/api-fixtures';
 
-test('create expense for unit button predefined params', async ({
-	page,
-	unit,
-}) => {
-	const url = getRoute({
-		entity: 'unit',
-		id: unit.id,
-		pageType: PageType.Id,
-		params: {
-			organizationId: unit.organizationId,
-			portfolioId: unit.portfolioId,
-		},
+const inputs = [
+	{
+		entity: 'expense',
+		buttonName: 'Create expense',
+		urlName: 'expenses',
+	},
+	{
+		entity: 'maintenanceOrder',
+		buttonName: 'Create maintenance order',
+		urlName: 'maintenance-orders',
+	},
+];
+
+for (const entity of inputs) {
+	test(`create ${entity.entity} for unit button predefined params`, async ({
+		page,
+		unit,
+	}) => {
+		const url = getRoute({
+			entity: 'unit',
+			id: unit.id,
+			pageType: PageType.Id,
+			params: {
+				organizationId: unit.organizationId,
+				portfolioId: unit.portfolioId,
+			},
+		});
+
+		await page.goto(url);
+
+		await page.getByRole('button', { name: 'Open options' }).click();
+
+		const btn = page.getByRole('link', { name: entity.buttonName });
+
+		await expect(btn).toHaveAttribute(
+			'href',
+			resolveURL(
+				'/organizations',
+				unit.organizationId,
+				'portfolios',
+				unit.portfolioId,
+				entity.urlName,
+				'new',
+				`?unitId=${unit.id}`,
+			),
+		);
 	});
 
-	await page.goto(url);
+	test(`create ${entity.entity} for property button predefined params`, async ({
+		page,
+		property,
+	}) => {
+		const url = getRoute({
+			entity: 'property',
+			id: property.id,
+			pageType: PageType.Id,
+			params: {
+				organizationId: property.organizationId,
+				portfolioId: property.portfolioId,
+			},
+		});
 
-	await page.getByRole('button', { name: 'Open options' }).click();
+		await page.goto(url);
 
-	const btn = page.getByRole('link', { name: 'Create expense' });
+		await page.getByRole('button', { name: 'Open options' }).click();
 
-	await expect(btn).toHaveAttribute(
-		'href',
-		resolveURL(
-			'/organizations',
-			unit.organizationId,
-			'portfolios',
-			unit.portfolioId,
-			'expenses',
-			'new',
-			`?unitId=${unit.id}`,
-		),
-	);
-});
+		const btn = page.getByRole('link', { name: entity.buttonName });
 
-test('create expense for property button predefined params', async ({
-	page,
-	property,
-}) => {
-	const url = getRoute({
-		entity: 'property',
-		id: property.id,
-		pageType: PageType.Id,
-		params: {
-			organizationId: property.organizationId,
-			portfolioId: property.portfolioId,
-		},
+		await expect(btn).toHaveAttribute(
+			'href',
+			resolveURL(
+				'/organizations',
+				property.organizationId,
+				'portfolios',
+				property.portfolioId,
+				entity.urlName,
+				'new',
+				`?propertyId=${property.id}`,
+			),
+		);
 	});
-
-	await page.goto(url);
-
-	await page.getByRole('button', { name: 'Open options' }).click();
-
-	const btn = page.getByRole('link', { name: 'Create expense' });
-
-	await expect(btn).toHaveAttribute(
-		'href',
-		resolveURL(
-			'/organizations',
-			property.organizationId,
-			'portfolios',
-			property.portfolioId,
-			'expenses',
-			'new',
-			`?propertyId=${property.id}`,
-		),
-	);
-});
+}
