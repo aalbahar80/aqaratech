@@ -29,8 +29,10 @@ module.exports = {
 		project: [
 			// For sibling packages: Helps each .eslintrc.js file find its own tsconfig.json file
 			'../*/tsconfig.json',
+			'../*/tsconfig.lint.json',
 			// For root: Helps root .eslintrc.js file find its own tsconfig.json file
 			'../../tsconfig.json',
+			'../../tsconfig.lint.json',
 			// sourceType: 'module',
 		],
 		// Either here or in site/.eslintrc.cjs, we need to declare
@@ -93,5 +95,5 @@ module.exports = {
 		...importConfig.rules,
 		...turboConfig.rules,
 	},
-	ignorePatterns: ['.eslintrc.*', '*.sh'],
+	ignorePatterns: ['*.sh'],
 };
