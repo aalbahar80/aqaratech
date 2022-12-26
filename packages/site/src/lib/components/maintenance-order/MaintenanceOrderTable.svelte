@@ -25,8 +25,17 @@
 		PaginatedMaintenanceOrderDto,
 	} from '$api/openapi';
 
+	// type ColumnVisibility = ComponentProps<
+	// 	Table<MaintenanceOrderDto, Record<keyof MaintenanceOrderDto, boolean>>
+	// >['columnVisibility'];
+
+	type ColumnVisibility =
+		| Partial<Record<keyof MaintenanceOrderDto | 'property' | 'unit', boolean>>
+		| Record<string, never>; // empty object
+
 	export let data: PaginatedMaintenanceOrderDto;
 	export let extraColumns: ColumnDef<MaintenanceOrderDto, string>[] = [];
+	export let columnVisibility: ColumnVisibility = {};
 
 	const columnHelper = createColumnHelper<MaintenanceOrderDto>();
 
@@ -61,7 +70,12 @@
 	];
 </script>
 
-<Table items={data.results} paginationDto={data.pagination} {columns}>
+<Table
+	items={data.results}
+	paginationDto={data.pagination}
+	{columns}
+	{columnVisibility}
+>
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
 			<div slot="hero">

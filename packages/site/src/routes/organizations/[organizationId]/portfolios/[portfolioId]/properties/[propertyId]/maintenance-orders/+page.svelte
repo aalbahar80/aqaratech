@@ -6,4 +6,10 @@
 	export let data: PageData;
 </script>
 
-<MaintenanceOrderTable data={data.maintenanceOrders} />
+<MaintenanceOrderTable
+	data={data.maintenanceOrders}
+	columnVisibility={{
+		property: false,
+		unit: false,
+	}}
+/>

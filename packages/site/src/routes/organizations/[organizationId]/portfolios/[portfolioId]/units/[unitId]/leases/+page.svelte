@@ -6,4 +6,10 @@
 	export let data: PageData;
 </script>
 
-<LeaseTable data={data.leases} />
+<LeaseTable
+	data={data.leases}
+	columnVisibility={{
+		property: false,
+		unit: false,
+	}}
+/>

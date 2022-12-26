@@ -19,8 +19,13 @@
 
 	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
 
+	type ColumnVisibility =
+		| Partial<Record<keyof LeaseDto | 'property' | 'unit', boolean>>
+		| Record<string, never>; // empty object
+
 	export let data: PaginatedLeaseDto;
 	export let extraColumns: ColumnDto<LeaseDto>[] = [];
+	export let columnVisibility: ColumnVisibility = {};
 
 	const columnHelper = createColumnHelper<LeaseDto>();
 
@@ -91,6 +96,7 @@
 	{columns}
 	columnVisibility={{
 		deposit: false,
+		...columnVisibility,
 	}}
 >
 	<div slot="filter" let:filters>
