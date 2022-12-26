@@ -11,7 +11,7 @@
 		"preview:node": ". ../../scripts/export-env.sh ../../.env && PORT=3000 ORIGIN=$PUBLIC_SITE_URL node build/index.js",
 		"check": "svelte-kit sync && svelte-check --output machine --compiler-warnings \"a11y-click-events-have-key-events:ignore\"",
 		"check:watch": "pnpm run check --watch",
-		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"(**/*.{js,ts,css,md,svelte,yaml,yml,json}|!pnpm-lock.yaml)\"",
+		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"(**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}|!pnpm-lock.yaml)\"",
 		"lint": "eslint_d --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
 		"lint:fix": "pnpm run lint --fix",
 		"flatten-sourcemaps": "../../scripts/flatten-sourcemaps.sh",

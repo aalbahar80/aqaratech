@@ -4,6 +4,6 @@
 		"@tsconfig/node18-strictest-esm": "1.0.1"
 	},
 	"scripts": {
-		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,ts,css,md,svelte,yaml,yml,json}\""
+		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\""
 	}
 }
