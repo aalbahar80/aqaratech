@@ -22,10 +22,10 @@ import {
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
 
+import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
+
 import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
-
-import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 

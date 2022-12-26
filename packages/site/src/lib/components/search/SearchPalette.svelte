@@ -18,10 +18,9 @@
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
 	import type { Icon } from '$lib/models/types/icon.type';
 
-	import { createApi } from '$api';
-
 	import type { SearchDto } from '$api/openapi';
 
+	import { createApi } from '$api';
 	import HeroiconsOutlineEmojiSad from '~icons/heroicons-outline/emoji-sad';
 	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';
 	import HeroiconsOutlineOfficeBuilding from '~icons/heroicons-outline/office-building';

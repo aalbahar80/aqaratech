@@ -20,7 +20,6 @@
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
-
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 	import Fa6SolidPlus from '~icons/fa6-solid/plus';
 	import HeroiconsCheck from '~icons/heroicons/check';
