@@ -65,13 +65,13 @@
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
 			<div slot="hero">
-				<!-- Don't show hero if we're on the unit/property pages -->
+				<!-- Don't show hero if we're on the property/unit pages -->
 				{#if !('unitId' in $page.params) && !('propertyId' in $page.params)}
 					<FilterHero title="Maintenance" />
 				{/if}
 			</div>
 			<div slot="custom">
-				<!-- Only show button if we're on the unit page -->
+				<!-- Only show button if we're on the property/unit pages -->
 				{#if 'unitId' in $page.params || 'propertyId' in $page.params}
 					<FilterBarButtonForm
 						getRouteOptions={{
