@@ -111,7 +111,10 @@ export class FilesService {
 			});
 
 			// set cache
-			await this.cacheManager.set(cacheKey, objects, 60 * 60 * 24);
+			if (objects !== undefined) {
+				// setting cache to undefined causes CacheManager to throw.
+				await this.cacheManager.set(cacheKey, objects, S3_TTL);
+			}
 		}
 
 		return {
