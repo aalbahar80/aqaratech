@@ -1,5 +1,4 @@
 import type { KeysOfUnion } from 'src/keys-of-union';
-
 import type { z } from 'zod';
 
 /**
