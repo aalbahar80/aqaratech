@@ -17,7 +17,7 @@
 	"scripts": {
 		"build": "tsup --onSuccess \"tsc --emitDeclarationOnly --declaration\"",
 		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\"",
-		"lint": "eslint_d --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
+		"lint": "eslint --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit",
 		"test": "vitest --run",
