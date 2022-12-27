@@ -16,5 +16,6 @@ export * from './tenant.schema';
 export * from './types/editable-keys';
 export * from './types/keys-of-schema';
 export * from './unit.schema';
+export * from './user.schema';
 export * from './utils/date/zod-date-only';
 export * from './utils/zod-string';

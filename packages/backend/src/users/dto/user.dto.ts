@@ -1,37 +1,27 @@
-import {
-	ApiProperty,
-	ApiPropertyOptional,
-	OmitType,
-	PartialType,
-} from '@nestjs/swagger';
-import { User } from '@prisma/client';
-import { IsEmail, IsString } from 'class-validator';
+import { ApiProperty, OmitType } from '@nestjs/swagger';
+
+import { UserCreateSchema, UserUpdateSchema } from '@self/utils';
 
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { RoleDto } from 'src/roles/dto/role.dto';
+import { Exactly } from 'src/types/exactly.type';
 
-export class UserRequiredDto implements Partial<User> {
-	@IsEmail()
+export class UserDto
+	extends AbstractDto
+	implements Exactly<UserCreateSchema & AbstractDto, UserDto>
+{
 	email: string;
-
-	@IsString()
-	fullName: string;
-}
-
-export class CreateUserDto extends UserRequiredDto implements Partial<User> {}
-
-export class UpdateUserDto extends PartialType(
-	OmitType(CreateUserDto, ['email']),
-) {}
-
-export class UserDto extends AbstractDto implements User {
-	@IsEmail()
-	email: string;
-
-	@ApiPropertyOptional()
-	@IsString()
 	fullName: string | null;
 }
+
+export class CreateUserDto implements Exactly<UserCreateSchema, CreateUserDto> {
+	email: string;
+	fullName?: string | null;
+}
+
+export class UpdateUserDto
+	extends OmitType(CreateUserDto, ['email'])
+	implements Exactly<UserUpdateSchema, UpdateUserDto> {}
 
 /**
  * Attach helpful info to the userDto for simpler consumption.

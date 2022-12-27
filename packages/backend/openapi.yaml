@@ -3799,9 +3799,6 @@ components:
         updatedAt:
           type: string
           readOnly: true
-        fullName:
-          type: string
-          nullable: true
         roles:
           type: array
           items:
@@ -3826,12 +3823,16 @@ components:
                         type: string
         email:
           type: string
+        fullName:
+          type: string
+          nullable: true
       required:
         - id
         - createdAt
         - updatedAt
         - roles
         - email
+        - fullName
     CreateOrganizationDto:
       type: object
       properties:

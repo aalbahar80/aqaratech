@@ -3668,12 +3668,6 @@ export interface ValidatedUserDto {
 	readonly updatedAt: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof ValidatedUserDto
-	 */
-	fullName?: string | null;
-	/**
-	 *
 	 * @type {Array<ValidatedRoleDto>}
 	 * @memberof ValidatedUserDto
 	 */
@@ -3684,4 +3678,10 @@ export interface ValidatedUserDto {
 	 * @memberof ValidatedUserDto
 	 */
 	email: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedUserDto
+	 */
+	fullName: string | null;
 }

@@ -90,6 +90,8 @@ export {
 	tenantUpdateSchema,
 	unitCreateSchema,
 	unitUpdateSchema,
+	userCreateSchema,
+	userUpdateSchema,
 	zodDateOnly,
 	zodDateOnlyOptional,
 	zodString,
@@ -131,6 +133,8 @@ export type {
 	UnitCreateSchema,
 	UnitUpdateSchema,
 	UnwrapSchema,
+	UserCreateSchema,
+	UserUpdateSchema,
 } from './schemas';
 export { isDateOnly } from './schemas/utils/date/is-date-only';
 export { isDatetime } from './schemas/utils/date/is-date-time';
