@@ -1,4 +1,5 @@
 import {
+	CreateBucketCommand,
 	DeleteBucketCommand,
 	DeleteObjectCommand,
 	GetObjectCommand,
@@ -143,5 +144,13 @@ export class S3Service {
 		);
 
 		return deleted;
+	}
+
+	async createBucket(bucketName: string) {
+		return await this._client.send(
+			new CreateBucketCommand({
+				Bucket: bucketName,
+			}),
+		);
 	}
 }

@@ -69,6 +69,10 @@ export class OrganizationsService {
 			throw new Error('Organization created without a role');
 		}
 
+		// create bucket for organization
+		// TODO: emit event to create bucket
+		await this.s3.createBucket(organization.id);
+
 		return {
 			organization: plainToInstance(OrganizationDto, organization, {
 				excludeExtraneousValues: true,
