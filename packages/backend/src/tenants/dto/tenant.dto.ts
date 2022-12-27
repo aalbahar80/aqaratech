@@ -4,6 +4,7 @@ import { Expose } from 'class-transformer';
 import { TenantCreateSchema, TenantUpdateSchema } from '@self/utils';
 
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { IOrganizationId, ITitle } from 'src/types/common.types';
 import { Exactly } from 'src/types/exactly.type';
 
 // change z.input after creating validation pipe
@@ -28,7 +29,11 @@ export class UpdateTenantDto
 
 export class TenantDto
 	extends AbstractDto
-	implements Exactly<TenantCreateSchema, CreateTenantDto>
+	implements
+		Exactly<
+			TenantCreateSchema & AbstractDto & IOrganizationId & ITitle,
+			TenantDto
+		>
 {
 	fullName: string;
 	label: string | null;

@@ -108,13 +108,15 @@ export class RoleGuard implements CanActivate {
 
 		// attach ability & roleId to request
 		// TODO spreading here works ok for nested object?
-		request.user = {
+		const authorizedUser = {
 			...request.user,
 			ability,
 			role,
 			id: user.id,
 			fullName: user.fullName,
-		} as IUser;
+		} satisfies IUser;
+
+		request.user = authorizedUser;
 
 		return true;
 	}

@@ -6,6 +6,20 @@ export const roleCreateSchema = z
 	})
 	.strict();
 
+export const roleSchema = z
+	.object({
+		id: z.string().uuid(),
+		email: z.string().email(),
+		// TODO: constrain this to the RoleType enum
+		roleType: z.enum(['ORGADMIN', 'PORTFOLIO', 'TENANT']),
+		organizationId: z.string().uuid(),
+		portfolioId: z.string().uuid().nullable(),
+		tenantId: z.string().uuid().nullable(),
+	})
+	.strict();
+
 // Export types
 
 export type RoleCreateSchema = z.infer<typeof roleCreateSchema>;
+
+export type RoleSchema = z.infer<typeof roleSchema>;

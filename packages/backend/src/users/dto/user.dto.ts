@@ -1,6 +1,6 @@
-import { ApiProperty, OmitType } from '@nestjs/swagger';
+import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
 
-import { UserCreateSchema, UserUpdateSchema } from '@self/utils';
+import { UserCreateSchema, UserSchema, UserUpdateSchema } from '@self/utils';
 
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { RoleDto } from 'src/roles/dto/role.dto';
@@ -26,7 +26,10 @@ export class UpdateUserDto
 /**
  * Attach helpful info to the userDto for simpler consumption.
  */
-export class ValidatedUserDto extends UserDto {
+export class ValidatedUserDto
+	extends PickType(UserDto, ['id', 'email', 'fullName'] as const)
+	implements Exactly<UserSchema, ValidatedUserDto>
+{
 	@ApiProperty({
 		type: 'array',
 		items: {

@@ -1,11 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Role, RoleType } from '@prisma/client';
+import { RoleType } from '@prisma/client';
 
-import { RoleCreateSchema } from '@self/utils';
+import { RoleCreateSchema, RoleSchema } from '@self/utils';
 
-export class RoleDto implements Partial<Role> {
+import { Exactly } from 'src/types/exactly.type';
+
+export class RoleDto implements Exactly<RoleSchema, RoleDto> {
 	id: string;
-	createdAt: Date;
+	// FIX: add date
+	// createdAt: Date;
 	email: string;
 	@ApiProperty({ enum: RoleType, enumName: 'RoleTypeEnum' })
 	roleType: RoleType;

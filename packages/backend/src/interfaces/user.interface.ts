@@ -29,7 +29,7 @@ export interface AuthenticatedUser {
  */
 export interface IUser extends AuthenticatedUser {
 	id: string;
-	fullName: string;
+	fullName: string | null;
 	ability: TAppAbility;
 	role: ValidatedUserDto['roles'][0]; // TODO rm?
 }

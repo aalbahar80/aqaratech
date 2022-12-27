@@ -2978,9 +2978,6 @@ components:
           $ref: '#/components/schemas/RoleTypeEnum'
         id:
           type: string
-        createdAt:
-          format: date-time
-          type: string
         email:
           type: string
         organizationId:
@@ -2994,7 +2991,6 @@ components:
       required:
         - roleType
         - id
-        - createdAt
         - email
         - organizationId
         - portfolioId
@@ -3793,12 +3789,6 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         roles:
           type: array
           items:
@@ -3828,8 +3818,6 @@ components:
           nullable: true
       required:
         - id
-        - createdAt
-        - updatedAt
         - roles
         - email
         - fullName

@@ -163,10 +163,10 @@ export class RolesService {
 			this.prisma.role.count({ where: filter }),
 		]);
 
-		const results: RoleDto[] = data.map((r) => {
+		const results = data.map((r) => {
 			const { user, ...role } = r;
 			return { ...role, email: user.email };
-		});
+		}) satisfies RoleDto[];
 
 		return { total, results };
 	}

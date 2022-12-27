@@ -4,11 +4,16 @@ import { Expose } from 'class-transformer';
 import { PortfolioCreateSchema, PortfolioUpdateSchema } from '@self/utils';
 
 import { AbstractDto } from 'src/common/dto/abstract.dto';
+import { ITitle, IOrganizationId } from 'src/types/common.types';
 import { Exactly } from 'src/types/exactly.type';
 
 export class PortfolioDto
 	extends AbstractDto
-	implements Exactly<PortfolioCreateSchema, CreatePortfolioDto>
+	implements
+		Exactly<
+			CreatePortfolioDto & AbstractDto & ITitle & IOrganizationId,
+			PortfolioDto
+		>
 {
 	fullName: string;
 	label: string | null;

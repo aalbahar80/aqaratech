@@ -33,7 +33,13 @@ export class FileDto {
 	size: number;
 }
 
-export class CreateFileDto implements Exactly<FileCreateSchema, CreateFileDto> {
+export class CreateFileDto
+	implements
+		Exactly<
+			Omit<FileCreateSchema, 'file'> & { file: Express.Multer.File },
+			CreateFileDto
+		>
+{
 	fileName: string;
 	relationValue: string;
 
