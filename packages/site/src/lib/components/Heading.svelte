@@ -15,8 +15,9 @@
 		type OnDelete,
 	} from '$lib/components/toast/create-modal-delete';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
-	import type { IconTooltip } from '$lib/models/types/icon-tooltip.type';
 	import { classes } from '$lib/utils/classes';
+
+	import type { IconTooltip } from '$lib/models/types/icon-tooltip.type';
 
 	import Fa6SolidTrashCan from '~icons/fa6-solid/trash-can';
 

@@ -2,6 +2,7 @@
 	import FilterCheckbox from '$lib/components/filter/FilterCheckbox.svelte';
 	import FilterRadio from '$lib/components/filter/FilterRadio.svelte';
 	import FilterSlideover from '$lib/components/filter/FilterSlideover.svelte';
+
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
 	export let persistent: Filter[] = [];

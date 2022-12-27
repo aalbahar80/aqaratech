@@ -8,6 +8,8 @@ import {
 	isHealthCheck,
 } from '@self/utils';
 
+import { ResponseError } from '$api/openapi';
+import { environment } from '$aqenvironment';
 import { MAX_AGE } from '$lib/constants/misc';
 import { sentryConfig } from '$lib/environment/sentry.config';
 import { logger } from '$lib/server/logger';
@@ -23,9 +25,6 @@ import {
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
 
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
-
-import { ResponseError } from '$api/openapi';
-import { environment } from '$aqenvironment';
 
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 

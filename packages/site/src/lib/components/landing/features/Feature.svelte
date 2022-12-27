@@ -2,6 +2,7 @@
 	import clsx from 'clsx';
 
 	import FeatureBullet from '$lib/components/landing/features/FeatureBullet.svelte';
+
 	import type { IFeature } from '$lib/components/landing/features/features-content';
 
 	export let id: number;

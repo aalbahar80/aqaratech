@@ -3,9 +3,8 @@ import { createLogger, format, transports } from 'winston';
 
 import { httpLogFormat, ignoreHttp, isLiveEnv, onlyHttp } from '@self/utils';
 
-import { logtail } from '$lib/server/utils/logtail';
-
 import { environment } from '$aqenvironment';
+import { logtail } from '$lib/server/utils/logtail';
 
 /**
  * Transport for HTTP logs

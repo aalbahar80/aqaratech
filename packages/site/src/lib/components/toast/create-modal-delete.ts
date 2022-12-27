@@ -2,11 +2,11 @@ import toast from 'svelte-french-toast';
 
 import { goto } from '$app/navigation';
 
-import type { ModalContent } from '$lib/components/toast/modal-content';
-import { addSuccessToast } from '$lib/stores/toast';
-
 import { createApi, type Api } from '$api';
 import { handleApiError } from '$api/handle-api-error';
+import { addSuccessToast } from '$lib/stores/toast';
+
+import type { ModalContent } from '$lib/components/toast/modal-content';
 
 /**
  * Factory function to create ModalContent for a delete modal.

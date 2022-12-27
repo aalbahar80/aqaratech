@@ -6,12 +6,12 @@
 
 	import { getLabel, getRoute, PageTab } from '@self/utils';
 
+	import { createApi } from '$api';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
 
 	import type { LeaseDto } from '$api/openapi';
 
-	import { createApi } from '$api';
 	import HeroiconsTrash from '~icons/heroicons/trash';
 
 	export let lease: LeaseDto;

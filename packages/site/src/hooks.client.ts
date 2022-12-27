@@ -1,8 +1,8 @@
 import * as Sentry from '@sentry/svelte';
 
-import type { HandleClientError } from '@sveltejs/kit';
-
 import { ResponseError } from '$api/openapi';
+
+import type { HandleClientError } from '@sveltejs/kit';
 
 export const handleError: HandleClientError = ({ error, event }) => {
 	console.log({ error });

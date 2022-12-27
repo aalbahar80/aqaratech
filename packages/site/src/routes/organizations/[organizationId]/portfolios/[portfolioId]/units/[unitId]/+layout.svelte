@@ -6,12 +6,12 @@
 
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
+	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
 
-	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidStairs from '~icons/fa6-solid/stairs';

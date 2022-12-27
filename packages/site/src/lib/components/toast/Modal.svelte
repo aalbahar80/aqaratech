@@ -30,6 +30,7 @@
 	import { fade } from 'svelte/transition';
 
 	import Spinner from '$components/Spinner.svelte';
+
 	import HeroiconsExclamationTriangle from '~icons/heroicons/exclamation-triangle';
 
 	let promptInput = '';

@@ -7,8 +7,9 @@
 		Transition,
 	} from '@rgossiaux/svelte-headlessui';
 
-	import type { Filter } from '$lib/models/interfaces/filter.interface';
 	import { classes } from '$lib/utils/classes';
+
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
 	import HeroiconsChevronDown20Solid from '~icons/heroicons/chevron-down-20-solid';
 

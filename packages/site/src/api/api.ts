@@ -3,6 +3,8 @@ import * as SentrySvelte from '@sentry/svelte?client';
 
 import type { Breadcrumb } from '@sentry/svelte';
 
+import { environment } from '$aqenvironment';
+
 import {
 	Configuration,
 	ExpenseCategoriesApi,
@@ -23,8 +25,6 @@ import {
 } from './openapi';
 
 import type { LoadEvent } from '@sveltejs/kit';
-
-import { environment } from '$aqenvironment';
 
 export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 	const headers: Record<string, string> = {

@@ -1,7 +1,6 @@
 import type { EditableSchemaKeys, Entity, KeyOfSchema } from '@self/utils';
 
 import type { FormField } from '$lib/components/form/model/form-field.interface';
-
 import type { z } from 'zod';
 
 export function createFormModel<

@@ -6,10 +6,10 @@
 	import { startCase } from '@self/utils';
 
 	import Hoverable from '$lib/components/Hoverable.svelte';
-	import type { Icon } from '$lib/models/types/icon.type';
 	import { classes } from '$lib/utils/classes';
 
 	import type { HitDto } from '$api/openapi';
+	import type { Icon } from '$lib/models/types/icon.type';
 
 	export let item: HitDto;
 	export let icon: Icon;

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Icon } from '$lib/models/types/icon.type';
-
 	import Spinner from '$components/Spinner.svelte';
+
+	import type { Icon } from '$lib/models/types/icon.type';
 
 	export let loading = false;
 	export let disabled = false;

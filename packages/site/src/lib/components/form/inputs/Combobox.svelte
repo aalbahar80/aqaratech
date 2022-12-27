@@ -6,11 +6,12 @@
 
 	import { clickOutside } from '$lib/actions/click-outside';
 	import Hoverable from '$lib/components/Hoverable.svelte';
+	import { classes } from '$lib/utils/classes';
+
 	import type {
 		Option,
 		SelectedOption,
 	} from '$lib/models/interfaces/option.interface';
-	import { classes } from '$lib/utils/classes';
 
 	import HeroiconsOutlineSelector from '~icons/heroicons-outline/selector';
 	import HeroiconsOutlineXCircle from '~icons/heroicons-outline/x-circle';

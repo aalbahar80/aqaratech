@@ -1,8 +1,7 @@
 import type { PageLoad } from './$types';
 
-import { occupancyRange } from '$lib/components/charts/utils/occupancy-range';
-
 import { createApi } from '$api';
+import { occupancyRange } from '$lib/components/charts/utils/occupancy-range';
 
 export const load: PageLoad = async ({ fetch, params }) => {
 	const { organizationId, portfolioId, propertyId } = params;

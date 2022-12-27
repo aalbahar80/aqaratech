@@ -1,7 +1,8 @@
 import { AUTH_CALLBACK } from '$lib/constants/routes';
 import { environment } from '$lib/environment';
-import type { AuthConfigType } from '$lib/models/types/auth.type';
 import { isProd } from '$lib/server/config/is-production';
+
+import type { AuthConfigType } from '$lib/models/types/auth.type';
 
 import { env as privateEnv } from '$env/dynamic/private';
 

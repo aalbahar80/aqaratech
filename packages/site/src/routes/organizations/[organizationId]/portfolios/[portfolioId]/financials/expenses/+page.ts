@@ -1,10 +1,9 @@
 import type { PageLoad } from './$types';
 import { get } from 'svelte/store';
 
+import { createApi } from '$api';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { range } from '$lib/stores/filter/range';
-
-import { createApi } from '$api';
 
 export const load: PageLoad = async ({ fetch, params, depends }) => {
 	const api = createApi(fetch);

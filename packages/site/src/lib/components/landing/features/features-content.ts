@@ -1,11 +1,11 @@
-import type { Icon } from '$lib/models/types/icon.type';
-
 import UndrawBusinessAnalytics from '../../../../assets/illustrations/undraw_business_analytics.svg';
 import UndrawDataPoints from '../../../../assets/illustrations/undraw_data_points.svg';
 import UndrawHouseSearching from '../../../../assets/illustrations/undraw_house_searching.svg';
 import UndrawOnlinePayments from '../../../../assets/illustrations/undraw_online_payments.svg';
 import UndrawSecureFiles from '../../../../assets/illustrations/undraw_secure_files.svg';
 import UndrawVisualData from '../../../../assets/illustrations/undraw_visual_data.svg';
+
+import type { Icon } from '$lib/models/types/icon.type';
 
 import HeroiconsOutlineChartBar from '~icons/heroicons-outline/chart-bar';
 import HeroiconsOutlineRectangleGroup from '~icons/heroicons-outline/rectangle-group';

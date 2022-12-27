@@ -5,6 +5,7 @@
 
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
+	import Button from '$components/buttons/Button.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -12,7 +13,6 @@
 
 	import type { LeaseDto } from '$api/openapi';
 
-	import Button from '$components/buttons/Button.svelte';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 	import HeroiconsArrowPath from '~icons/heroicons/arrow-path';
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';

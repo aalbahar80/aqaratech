@@ -1,7 +1,6 @@
-import { addErrorToast } from '$lib/stores/toast';
-
 import { ResponseError } from '$api/openapi';
 import { parseApiError } from '$api/parse-api-error';
+import { addErrorToast } from '$lib/stores/toast';
 
 /**
  * Attempts to parse a `ResponseError` into a toast message.

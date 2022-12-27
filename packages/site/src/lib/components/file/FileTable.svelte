@@ -7,7 +7,6 @@
 
 	import { view } from '$lib/components/file/actions/view';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
-	import type { ColumnDto } from '$lib/components/table/column-type';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
@@ -16,6 +15,7 @@
 	import { remove } from './actions/remove';
 
 	import type { FileDto, PaginatedFileDto } from '$api/openapi';
+	import type { ColumnDto } from '$lib/components/table/column-type';
 
 	export let data: PaginatedFileDto;
 	export let extraColumns: ColumnDto<FileDto>[] = [];

@@ -1,12 +1,11 @@
 import * as Sentry from '@sentry/node';
 import { error } from '@sveltejs/kit';
 
+import { environment } from '$aqenvironment';
 import { logger } from '$lib/server/logger';
 
 import type { ValidatedUserDto } from '$api/openapi';
 import type { RequestEvent } from '@sveltejs/kit';
-
-import { environment } from '$aqenvironment';
 
 export const getProfile = async (event: RequestEvent) => {
 	// Sentry

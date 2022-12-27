@@ -6,8 +6,9 @@ import {
 	PageTypePortfolio,
 } from '@self/utils';
 
-import type { NavigationItem } from '$lib/components/sidebar/types';
 import { LOGOUT } from '$lib/constants/routes';
+
+import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
 
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
