@@ -37,11 +37,11 @@ else
 fi
 
 # Run pnpm run check in the first pane and wait for it to finish
-tmux send -t "${session_name}:${window_name}.1" 'pnpm run check && tmux wait -S check || kill '"$pid"'' Enter
+tmux send -t "${session_name}:${window_name}.1" 'pnpm run check:all && tmux wait -S check || kill '"$pid"'' Enter
 tmux wait check
 
 # Run pnpm run lint in the first pane and wait for it to finish
-tmux send -t "${session_name}:${window_name}.1" 'pnpm run lint && tmux wait -S lint || kill '"$pid"'' Enter
+tmux send -t "${session_name}:${window_name}.1" 'pnpm run lint:all && tmux wait -S lint || kill '"$pid"'' Enter
 tmux wait lint
 
 # Run pnpm run build in the first pane and wait for it to finish
