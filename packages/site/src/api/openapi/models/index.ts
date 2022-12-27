@@ -3656,18 +3656,6 @@ export interface ValidatedUserDto {
 	readonly id: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof ValidatedUserDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ValidatedUserDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
 	 * @type {Array<ValidatedRoleDto>}
 	 * @memberof ValidatedUserDto
 	 */

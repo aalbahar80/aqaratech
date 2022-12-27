@@ -30,7 +30,6 @@ export const getUser = async ({
 			id: profile.id,
 			email: profile.email,
 			roleCount: profile.roles.length,
-			createDate: profile.createdAt,
 		}),
 	});
 
