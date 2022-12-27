@@ -30,44 +30,6 @@ export class S3Service {
 				secretAccessKey: R2_SECRET_ACCESS_KEY,
 			},
 		});
-
-		// https://developers.cloudflare.com/r2/platform/s3-compatibility/extensions/#cf-create-bucket-if-missing
-		this._client.middlewareStack.add(
-			(next) => (args) => {
-				if (
-					typeof args.request === 'object' &&
-					args.request &&
-					'headers' in args.request &&
-					'method' in args.request &&
-					'query' in args.request
-				) {
-					const request = args.request;
-					let isPutObject = false;
-					if (
-						request.method === 'PUT' &&
-						request.query &&
-						typeof request.query === 'object' &&
-						'x-id' in request.query &&
-						request.query['x-id'] === 'PutObject'
-					) {
-						isPutObject = true;
-					}
-
-					if (
-						isPutObject &&
-						request.headers &&
-						typeof request.headers === 'object'
-					) {
-						const headers = request.headers as Record<string, unknown>;
-						// throws SignatureDoesNotMatch error if trying to get presigned URL.
-						// So only add this header if we are putting an object.
-						headers['cf-create-bucket-if-missing'] = 'true';
-					}
-				}
-				return next(args);
-			},
-			{ step: 'build' },
-		);
 	}
 
 	private readonly _client: S3Client;
