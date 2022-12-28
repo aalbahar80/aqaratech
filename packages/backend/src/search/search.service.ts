@@ -1,9 +1,12 @@
 import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 
+import { computeLabelProperty } from '@self/utils';
+
 import { Action } from 'src/casl/action.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { fuzzyMatch } from 'src/search/fuzzy/fuzzy-match';
 import { searchBuilder } from 'src/search/search-builder';
 
 @Injectable()
@@ -78,55 +81,30 @@ export class SearchService {
 		]);
 
 		const hits = {
-			tenants,
-			portfolios,
-			properties,
-		};
-		console.log(hits);
-
-		const compat = {
-			tenants: tenants.map((n) => ({
+			tenants: fuzzyMatch(query, tenants).map((n) => ({
 				...n,
-				formatted: this.addFormattingToHit(n),
+				// @ts-expect-error
+				title: n.label || n.fullName,
+				entityType: 'tenant',
 			})),
-			portfolios: portfolios.map((n) => ({
+
+			portfolios: fuzzyMatch(query, portfolios).map((n) => ({
 				...n,
-				formatted: this.addFormattingToHit(n),
+				// @ts-expect-error
+				title: n.label || n.fullName,
+				entityType: 'portfolio',
 			})),
-			properties: properties.map((n) => ({
+
+			properties: fuzzyMatch(query, properties).map((n) => ({
 				...n,
-				formatted: this.addFormattingToHit(n),
+				// @ts-expect-error
+				title: n.label || computeLabelProperty(n),
+				entityType: 'property',
 			})),
 		};
 
-		return compat;
+		// TODO: Add common title field
+		console.log(hits); // TODO: remove
+		return hits;
 	}
-
-	// TODO: use
-	wrapMatch(match: string, start: number, end: number) {
-		const highlightPreTag = '<mark>';
-		const highlightPostTag = '</mark>';
-
-		const pre = match.slice(0, start);
-		const matchStr = match.slice(start, end);
-		const post = match.slice(end);
-
-		return `${pre}${highlightPreTag}${matchStr}${highlightPostTag}${post}`;
-	}
-
-	// WARN: Fix
-	addFormattingToHit(hit: Record<string, unknown>) {
-		return {
-			title: this.wrapMatch(
-				title,
-				Math.floor(Math.random() * title.length), // WARN: Fix
-				title.length, // WARN: Fix
-			),
-		};
-	}
-
-	/**
-	 * Given a string and a search query, determine if the string is a fuzzy match
-	 */
-	isMatch(str: string, query: string) {}
 }

@@ -1,9 +1,13 @@
-import { PortfolioDto } from 'src/portfolios/dto/portfolio.dto';
-import { PropertyDto } from 'src/properties/dto/property.dto';
-import { TenantDto } from 'src/tenants/dto/tenant.dto';
+export class HitDto {
+	id: string;
+	title: string;
+	entityType: string;
+	score: number;
+	hints: Record<string, string>;
+}
 
 export class SearchDto {
-	tenants: TenantDto[];
-	portfolios: PortfolioDto[];
-	properties: PropertyDto[];
+	tenants: HitDto[];
+	portfolios: HitDto[];
+	properties: HitDto[];
 }

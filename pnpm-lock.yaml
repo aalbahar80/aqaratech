@@ -86,6 +86,7 @@ importers:
       helmet: 6.0.1
       js-yaml: 4.1.0
       jwks-rsa: 3.0.0
+      minisearch: 6.0.0
       moment: 2.29.4
       moment-range: 4.0.2
       nest-winston: 1.8.0
@@ -132,6 +133,7 @@ importers:
       date-fns: 2.29.3
       helmet: 6.0.1
       jwks-rsa: 3.0.0
+      minisearch: 6.0.0
       moment: 2.29.4
       moment-range: 4.0.2_moment@2.29.4
       nest-winston: 1.8.0_xlxfmi5fzr5alofp25xqzclqqq
@@ -8605,6 +8607,10 @@ packages:
 
   /minimist/1.2.7:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
+
+  /minisearch/6.0.0:
+    resolution: {integrity: sha512-N7yUgtH5T9iQfdmzI8Dnke8TK+grccrWUsdiwvalGv04hJggOUI/EpWIEQj3v8t7XSi/kSfQ7GdLAS540+GxpQ==}
+    dev: false
 
   /mixme/0.5.4:
     resolution: {integrity: sha512-3KYa4m4Vlqx98GPdOHghxSdNtTvcP8E0kkaJ5Dlh+h2DRzF7zpuVVcA8B0QpKd11YJeP9QQ7ASkKzOeu195Wzw==}

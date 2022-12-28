@@ -16,13 +16,7 @@ export const searchBuilder = <T extends string, Query extends string>(
 		},
 	};
 
-	const search = {
-		[field]: {
-			search: query,
-			mode,
-		},
-	};
-
+	// Query needs handling to prevent errors when using spaces, etc.
 	const searchReplace = {
 		[field]: {
 			// https://github.com/prisma/prisma/issues/8939#issuecomment-933990947
@@ -41,8 +35,8 @@ export const searchBuilder = <T extends string, Query extends string>(
 
 	return [
 		// prettier-mulitline-workaround
+		// TODO: Review differences
 		contains,
-		search,
 		searchReplace,
 		searchSplit,
 	];
