@@ -157,6 +157,8 @@ export class OrganizationsController {
 		@Param('organizationId') organizationId: string,
 		@Query('query') query: string,
 	): Promise<SearchDto[]> {
+		// FIX: Remove
+		// @ts-ignore
 		return this.searchService.search({ query, organizationId, user });
 	}
 }

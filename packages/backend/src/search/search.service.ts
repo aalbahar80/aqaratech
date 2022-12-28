@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import { instanceToPlain, plainToInstance } from 'class-transformer';
-import { isUUID } from 'class-validator';
 import { Filter, Index, MeiliSearch } from 'meilisearch';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
@@ -91,8 +90,11 @@ export class SearchService implements OnModuleInit {
 			subject('Organization', { id: organizationId }),
 		);
 
+		const take = 20;
+
 		const [tenants, portfolios, properties] = await Promise.all([
 			this.prisma.tenant.findMany({
+				// FIX:add permissions to filter
 				where: {
 					OR: [
 						...searchBuilder('fullName', query),
@@ -106,9 +108,11 @@ export class SearchService implements OnModuleInit {
 						{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
 					],
 				},
+				take,
 			}),
 			this.prisma.portfolio.findMany({
 				where: {
+					// FIX:add permissions to filter
 					OR: [
 						...searchBuilder('fullName', query),
 						...searchBuilder('phone', query),
@@ -119,8 +123,10 @@ export class SearchService implements OnModuleInit {
 						{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
 					],
 				},
+				take,
 			}),
 			this.prisma.property.findMany({
+				// FIX:add permissions to filter
 				where: {
 					OR: [
 						...searchBuilder('label', query),
@@ -131,45 +137,81 @@ export class SearchService implements OnModuleInit {
 						// ...searchBuilder('address', query), // NOTE: Use client extensions to search in address?
 					],
 				},
+				take,
 			}),
 		]);
 
-		if (!isUUID(organizationId)) {
-			// might be overkill, but just in case
-			throw new Error('Invalid organization id');
-		}
+		const hits = {
+			tenants,
+			portfolios,
+			properties,
+		};
 
-		// get indexes and search
-		const indexes = await Promise.all(
-			this.indexNames.map((indexName) => {
-				this.assertClientExists();
+		console.log({ hits });
 
-				return this.client.getIndex(indexName);
-			}),
-		);
+		// WARN: Remove once solution ok
+		const compat = [
+			{
+				entityTitle: 'tenant',
+				estimatedTotalHits: tenants.length,
+				hits: tenants.map((n) => ({
+					...n,
+					formatted: this.addFormattingToHit(n),
+				})),
+			},
+			{
+				entityTitle: 'portfolio',
+				estimatedTotalHits: portfolios.length,
+				hits: portfolios.map((n) => ({
+					...n,
+					formatted: this.addFormattingToHit(n),
+				})),
+			},
+			{
+				entityTitle: 'property',
+				estimatedTotalHits: properties.length,
+				hits: properties.map((n) => ({
+					...n,
+					_formatted: this.addFormattingToHit(n),
+				})),
+			},
+		];
 
-		const results = await Promise.all(
-			indexes.map(async (index, n) => {
-				const indexName = this.indexNames[n];
-
-				if (!indexName) {
-					throw new Error('Invalid index name'); // should never happen
-				}
-
-				return {
-					entityTitle: indexName,
-					...(await this.searchIndex({
-						index,
-						indexName,
-						filter: `organizationId = ${organizationId}`,
-						query,
-					})),
-				};
-			}),
-		);
-
-		return results;
+		return compat;
 	}
+
+	// TODO: use
+	wrapMatch(match: string, start: number, end: number) {
+		const highlightPreTag = '<mark>';
+		const highlightPostTag = '</mark>';
+
+		const pre = match.slice(0, start);
+		const matchStr = match.slice(start, end);
+		const post = match.slice(end);
+
+		return `${pre}${highlightPreTag}${matchStr}${highlightPostTag}${post}`;
+	}
+
+	// WARN: Fix
+	// @ts-ignore
+	addFormattingToHit(hit: any) {
+		const title = Math.random().toString(36);
+		// @ts-ignore
+		// @ts-ignore
+		return {
+			// @ts-ignore
+			// title: hit.fullName || hit.label,
+			title: this.wrapMatch(
+				title,
+				//random number between 0 and title.length
+				Math.floor(Math.random() * title.length), // WARN: Fix
+				title.length, // WARN: Fix
+			),
+		};
+	}
+
+	// highlightMatcht()
+	// matchCompatiblity()
 
 	async searchIndex({
 		index,
