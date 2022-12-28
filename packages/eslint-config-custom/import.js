@@ -8,17 +8,22 @@ module.exports = {
 	settings: {
 		// https://github.com/import-js/eslint-plugin-import#typescript
 		'import/resolver': {
+			// make sure to install: eslint-import-resolver-node
+			// required for pnpm
 			node: true,
-			typescript: true,
-			// typescript: {
-			// 	alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
-			// 	project: [
-			// 		// For sibling packages: Helps each .eslintrc.js file find its own tsconfig.json file
-			// 		'../*/tsconfig.json',
-			// 		// For root: Helps root .eslintrc.js file find its own tsconfig.json file
-			// 		'../../tsconfig.json',
-			// 	],
-			// },
+
+			// typescript: true,
+			typescript: {
+				// alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+				// Might cause flaky import/order settings between cli and neovim
+				project: [
+					// For sibling packages: Helps each .eslintrc.js file find its own tsconfig.json file
+					'../*/tsconfig.json',
+					'../*/tsconfig.lint.json',
+					// For root: Helps root .eslintrc.js file find its own tsconfig.json file
+					'../../tsconfig.json',
+				],
+			},
 		},
 		'import/parsers': {
 			// https://github.com/ota-meshi/eslint-plugin-svelte/issues/312#issuecomment-1333345847

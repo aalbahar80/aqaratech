@@ -176,6 +176,7 @@ importers:
       '@typescript-eslint/parser': 5.47.1
       eslint-config-prettier: 8.5.0
       eslint-config-turbo: 0.0.7
+      eslint-import-resolver-node: 0.3.6
       eslint-import-resolver-typescript: 3.5.2
       eslint-plugin-import: 2.26.0
     devDependencies:
@@ -183,6 +184,7 @@ importers:
       '@typescript-eslint/parser': 5.47.1_lzzuuodtsqwxnvqeq4g4likcqa
       eslint-config-prettier: 8.5.0_eslint@8.30.0
       eslint-config-turbo: 0.0.7_eslint@8.30.0
+      eslint-import-resolver-node: 0.3.6
       eslint-import-resolver-typescript: 3.5.2_2lbwmhbr7bncddqbzzpg77o75m
       eslint-plugin-import: 2.26.0_wspzxxdxgd6sryq2cmxnia3diy
 
