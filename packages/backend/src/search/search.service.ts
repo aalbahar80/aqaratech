@@ -26,6 +26,7 @@ import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-search-doc
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PropertySearchDocument } from 'src/properties/dto/property-search-document';
 import { ExtractParams, InitIndexParams } from 'src/search/dto/search-index';
+import { searchBuilder } from 'src/search/search-builder';
 import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 
 @Injectable()
@@ -89,6 +90,49 @@ export class SearchService implements OnModuleInit {
 			Action.Manage,
 			subject('Organization', { id: organizationId }),
 		);
+
+		const [tenants, portfolios, properties] = await Promise.all([
+			this.prisma.tenant.findMany({
+				where: {
+					OR: [
+						...searchBuilder('fullName', query),
+						...searchBuilder('label', query),
+						...searchBuilder('phone', query),
+						...searchBuilder('civilid', query),
+						...searchBuilder('passportNum', query),
+						...searchBuilder('residencyNum', query),
+						// email
+						// prettier-ignore
+						{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
+					],
+				},
+			}),
+			this.prisma.portfolio.findMany({
+				where: {
+					OR: [
+						...searchBuilder('fullName', query),
+						...searchBuilder('phone', query),
+						...searchBuilder('label', query),
+						...searchBuilder('civilid', query),
+						// email
+						// prettier-ignore
+						{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
+					],
+				},
+			}),
+			this.prisma.property.findMany({
+				where: {
+					OR: [
+						...searchBuilder('label', query),
+						...searchBuilder('paci', query),
+						...searchBuilder('area', query),
+						...searchBuilder('street', query),
+						// ...searchBuilder('portfolioId', query), // WARN: Remove? Inherited from old search
+						// ...searchBuilder('address', query), // NOTE: Use client extensions to search in address?
+					],
+				},
+			}),
+		]);
 
 		if (!isUUID(organizationId)) {
 			// might be overkill, but just in case
