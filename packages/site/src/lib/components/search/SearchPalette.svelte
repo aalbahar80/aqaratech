@@ -17,8 +17,9 @@
 
 	import { createApi } from '$api';
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
+	import { objectEntries } from '$lib/utils/common';
 
-	import type { SearchDto } from '$api/openapi';
+	import type { HitDto, SearchDto } from '$api/openapi';
 	import type { Icon } from '$lib/models/types/icon.type';
 
 	import HeroiconsOutlineEmojiSad from '~icons/heroicons-outline/emoji-sad';
@@ -28,7 +29,12 @@
 	import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
 	import HeroiconsMagnifyingGlass from '~icons/heroicons/magnifying-glass';
 
-	let groups: SearchDto[] = [];
+	let groups: Record<keyof SearchDto, HitDto[]> = {
+		// let groups: SearchDto = {
+		tenant: [],
+		portfolio: [],
+		property: [],
+	};
 
 	let query = '';
 	export let open = false;
@@ -47,9 +53,9 @@
 
 	$: void search(query);
 
-	$: hasHits = Object.values(groups).some(
-		(groupHits) => groupHits.estimatedTotalHits > 0,
-	);
+	$: hasHits =
+		groups &&
+		Object.values(groups).some((n) => Array.isArray(n) && n.length > 0);
 
 	const icons: Record<string, Icon> = {
 		tenant: HeroiconsOutlineUser,
@@ -141,17 +147,17 @@
 								class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
 								style:max-height="70vh"
 							>
-								{#each groups as group (group.entityTitle)}
-									{@const entityTitle = group.entityTitle}
+								{#each objectEntries(groups) as [entityTitle, group] (entityTitle)}
 									{#if isEntity(entityTitle)}
 										<li>
 											<h2
 												class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
 											>
+												<!-- TODO: false error -->
 												{entitiesMap[entityTitle].pluralCap}
 											</h2>
 											<ul class="mt-2 text-sm text-gray-800">
-												{#each group.hits as item (item.id)}
+												{#each group as item (item.id)}
 													<div animate:flip={{ duration: 300 }}>
 														<SearchItem
 															{item}

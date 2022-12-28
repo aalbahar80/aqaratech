@@ -1117,7 +1117,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async searchRaw(
 		requestParameters: OrganizationsApiSearchRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<Array<SearchDto>>> {
+	): Promise<runtime.ApiResponse<SearchDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -1169,7 +1169,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async search(
 		requestParameters: OrganizationsApiSearchRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<Array<SearchDto>> {
+	): Promise<SearchDto> {
 		const response = await this.searchRaw(requestParameters, initOverrides);
 		return await response.value();
 	}

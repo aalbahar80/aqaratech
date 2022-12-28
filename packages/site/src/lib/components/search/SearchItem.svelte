@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
 	import clsx from 'clsx';
-	import * as R from 'remeda';
 
 	import { startCase } from '@self/utils';
 
@@ -14,24 +13,8 @@
 	export let item: HitDto;
 	export let icon: Icon;
 
-	const hiddenFields = ['title', 'id', 'organizationId'];
-
-	$: highlightedFields =
-		R.pickBy(
-			item.formatted,
-			(val, key: string) =>
-				typeof val === 'string' &&
-				val.includes('<mark>') &&
-				!hiddenFields.includes(key) &&
-				key in item &&
-				// @ts-expect-error overcome strict interface index signature
-				item[key] !== item.title && // hide any field if it matches title
-				(key !== 'label' || !item.formatted?.title?.includes('<mark>')), // hide label if title is already highlighted
-		) ?? {};
+	// const hiddenFields = ['title', 'id', 'organizationId']; // TODO: Review hidden fields
 </script>
-
-<pre>{JSON.stringify({ highlightedFields })}</pre>
-<pre>{JSON.stringify({ item })}</pre>
 
 <Hoverable let:hovering>
 	<ListboxOption value={item}>
@@ -59,12 +42,12 @@
 				/>
 				<div class="flex flex-col gap-y-1">
 					<p>
-						<!-- {item.formatted.title} -->
+						<!-- TODO: make priority to formatted title -->
 						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-						{@html item.formatted?.title}
+						{@html item.title}
 					</p>
 					<div class="flex flex-col gap-y-1 text-xs font-light">
-						{#each Object.entries(highlightedFields) as [key, val]}
+						{#each Object.entries(item.hints) as [key, val]}
 							<p>
 								<span class="font-extralight">
 									{startCase(key)}:

@@ -1181,6 +1181,12 @@ export interface GroupByMonthDto {
 export interface HitDto {
 	/**
 	 *
+	 * @type {SearchableEntityEnum}
+	 * @memberof HitDto
+	 */
+	entityType: SearchableEntityEnum;
+	/**
+	 *
 	 * @type {string}
 	 * @memberof HitDto
 	 */
@@ -1191,12 +1197,6 @@ export interface HitDto {
 	 * @memberof HitDto
 	 */
 	title: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof HitDto
-	 */
-	entityType: string;
 	/**
 	 *
 	 * @type {number}
@@ -2754,20 +2754,31 @@ export interface SearchDto {
 	 * @type {Array<HitDto>}
 	 * @memberof SearchDto
 	 */
-	tenants: Array<HitDto>;
+	tenant: Array<HitDto>;
 	/**
 	 *
 	 * @type {Array<HitDto>}
 	 * @memberof SearchDto
 	 */
-	portfolios: Array<HitDto>;
+	portfolio: Array<HitDto>;
 	/**
 	 *
 	 * @type {Array<HitDto>}
 	 * @memberof SearchDto
 	 */
-	properties: Array<HitDto>;
+	property: Array<HitDto>;
 }
+/**
+ *
+ * @export
+ */
+export declare const SearchableEntityEnum: {
+	readonly Tenant: 'tenant';
+	readonly Portfolio: 'portfolio';
+	readonly Property: 'property';
+};
+export type SearchableEntityEnum =
+	typeof SearchableEntityEnum[keyof typeof SearchableEntityEnum];
 /**
  *
  * @export

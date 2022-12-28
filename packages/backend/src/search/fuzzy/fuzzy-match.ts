@@ -3,9 +3,9 @@ import MiniSearch from 'minisearch';
 
 import { markHints } from 'src/search/fuzzy/mark-hints';
 
-type SearchableEntity = Tenant | Portfolio | Property;
+type TSearchableEntity = Tenant | Portfolio | Property;
 
-export const fuzzyMatch = (query: string, documents: SearchableEntity[]) => {
+export const fuzzyMatch = (query: string, documents: TSearchableEntity[]) => {
 	const miniSearch = new MiniSearch({
 		fields: ['id', 'text', 'title', 'category', 'label', 'fullName'], // TODO: edit
 		storeFields: ['id', 'text', 'title', 'category', 'label', 'fullName'], // fields to return with search results

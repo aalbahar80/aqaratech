@@ -151,13 +151,11 @@ export class OrganizationsController {
 			organizationId: 'id',
 		},
 	})
-	@ApiOkResponse({ type: SearchDto, isArray: true })
 	search(
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
 		@Query('query') query: string,
 	): Promise<SearchDto> {
-		// TODO:Check return type exists in openapi
 		return this.searchService.search({ query, organizationId, user });
 	}
 }

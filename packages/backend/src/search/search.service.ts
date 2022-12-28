@@ -9,6 +9,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { fuzzyMatch } from 'src/search/fuzzy/fuzzy-match';
 import { searchBuilder } from 'src/search/search-builder';
 
+import { SearchDto } from './dto/search.dto';
+
 @Injectable()
 export class SearchService {
 	constructor(private readonly prisma: PrismaService) {}
@@ -81,27 +83,27 @@ export class SearchService {
 		]);
 
 		const hits = {
-			tenants: fuzzyMatch(query, tenants).map((n) => ({
+			tenant: fuzzyMatch(query, tenants).map((n) => ({
 				...n,
-				// @ts-expect-error
+				// @ts-expect-error TODO: fix type
 				title: n.label || n.fullName,
 				entityType: 'tenant',
 			})),
 
-			portfolios: fuzzyMatch(query, portfolios).map((n) => ({
+			portfolio: fuzzyMatch(query, portfolios).map((n) => ({
 				...n,
-				// @ts-expect-error
+				// @ts-expect-error TODO: fix type
 				title: n.label || n.fullName,
 				entityType: 'portfolio',
 			})),
 
-			properties: fuzzyMatch(query, properties).map((n) => ({
+			property: fuzzyMatch(query, properties).map((n) => ({
 				...n,
-				// @ts-expect-error
+				// @ts-expect-error TODO: fix type
 				title: n.label || computeLabelProperty(n),
 				entityType: 'property',
 			})),
-		};
+		} satisfies SearchDto;
 
 		// TODO: Add common title field
 		console.log(hits); // TODO: remove

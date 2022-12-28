@@ -2079,9 +2079,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SearchDto'
+                $ref: '#/components/schemas/SearchDto'
       tags: *ref_19
       security: *ref_20
   /organizations/{organizationId}/tenants:
@@ -3845,44 +3843,50 @@ components:
           nullable: true
       required:
         - fullName
+    SearchableEntityEnum:
+      type: string
+      enum:
+        - tenant
+        - portfolio
+        - property
     HitDto:
       type: object
       properties:
+        entityType:
+          $ref: '#/components/schemas/SearchableEntityEnum'
         id:
           type: string
         title:
-          type: string
-        entityType:
           type: string
         score:
           type: number
         hints:
           type: object
       required:
+        - entityType
         - id
         - title
-        - entityType
         - score
         - hints
     SearchDto:
       type: object
       properties:
-        tenants:
+        tenant:
           type: array
           items:
             $ref: '#/components/schemas/HitDto'
-        portfolios:
+        portfolio:
           type: array
           items:
             $ref: '#/components/schemas/HitDto'
-        properties:
+        property:
           type: array
           items:
             $ref: '#/components/schemas/HitDto'
       required:
-        - tenants
-        - portfolios
-        - properties
+        - tenant
+        - portfolio
+        - property
     CreateTenantDto:
       type: object
       properties:
