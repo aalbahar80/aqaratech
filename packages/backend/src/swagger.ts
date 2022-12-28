@@ -19,7 +19,6 @@ import { PayoutsModule } from 'src/payouts/payouts.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { PropertiesModule } from 'src/properties/properties.module';
 import { RolesModule } from 'src/roles/roles.module';
-import { SearchModule } from 'src/search/search.module';
 import { TenantsModule } from 'src/tenants/tenants.module';
 import { UnitsModule } from 'src/units/units.module';
 import { UsersModule } from 'src/users/users.module';
@@ -44,7 +43,6 @@ export const setupSwagger = async (app: INestApplication) => {
 			LeasesModule,
 			LeaseInvoicesModule,
 			ExpensesModule,
-			SearchModule,
 			RolesModule,
 			OrganizationsModule,
 			AggregateModule,

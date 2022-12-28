@@ -25,7 +25,6 @@
 		"postinstall": "prisma generate",
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
 		"api:generate": "./get-openapi.sh && rm -rf ../site/src/api/openapi && openapi-generator-cli generate",
-		"up-search": "./seed/up-search.sh",
 		"up-minio": "./seed/up-minio.sh"
 	},
 	"prisma": {
@@ -58,7 +57,6 @@
 		"date-fns": "2.29.3",
 		"helmet": "6.0.1",
 		"jwks-rsa": "3.0.0",
-		"meilisearch": "0.27.0",
 		"moment": "2.29.4",
 		"moment-range": "4.0.2",
 		"nest-winston": "1.8.0",

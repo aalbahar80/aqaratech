@@ -20,10 +20,6 @@ export const backendEnvSchema = envSchema.pick({
 	PUBLIC_TRACE_RATE: true,
 	PUBLIC_COMMIT_SHA: true,
 
-	// Meilisearch
-	MEILISEARCH_HOST: true,
-	MEILISEARCH_API_KEY: true,
-
 	// Postmark
 	POSTMARK_TOKEN: true,
 });

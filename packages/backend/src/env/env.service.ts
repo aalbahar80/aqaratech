@@ -28,7 +28,6 @@ export class EnvService {
 				'PUBLIC_AQ_DEBUG_LEVEL',
 				'PUBLIC_SITE_URL',
 				'R2_ENDPOINT',
-				'MEILISEARCH_HOST',
 			]),
 		);
 

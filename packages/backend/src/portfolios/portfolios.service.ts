@@ -1,17 +1,11 @@
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { plainToInstance } from 'class-transformer';
 
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
-import {
-	RemoveDocumentsEvent,
-	UpdateIndexEvent,
-} from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
-import { PortfolioSearchDocument } from 'src/portfolios/dto/portfolio-search-document';
 import {
 	CreatePortfolioDto,
 	PortfolioDto,
@@ -21,13 +15,9 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PortfoliosService {
-	constructor(
-		private readonly prisma: PrismaService,
-		private readonly eventEmitter: EventEmitter2,
-	) {}
+	constructor(private readonly prisma: PrismaService) {}
 	SubjectType = 'Portfolio' as const;
-	IndexName = 'portfolio' as const;
-	IndexConstructor = PortfolioSearchDocument;
+	IndexName = 'portfolio' as const; // TODO: Remove?
 
 	async create({
 		createPortfolioDto,
@@ -42,11 +32,6 @@ export class PortfoliosService {
 				organizationId,
 			},
 		});
-
-		this.eventEmitter.emit(
-			'update.index',
-			new UpdateIndexEvent([portfolio], this.IndexName, this.IndexConstructor),
-		);
 
 		return plainToInstance(PortfolioDto, portfolio);
 	}
@@ -99,11 +84,6 @@ export class PortfoliosService {
 			data: updatePortfolioDto,
 		});
 
-		this.eventEmitter.emit(
-			'update.index',
-			new UpdateIndexEvent([portfolio], this.IndexName, this.IndexConstructor),
-		);
-
 		return plainToInstance(PortfolioDto, portfolio);
 	}
 
@@ -114,12 +94,8 @@ export class PortfoliosService {
 			},
 		});
 
+		// PERF: Can be optimized after Meilisearch removal
 		const portfolio = await this.prisma.portfolio.delete({ where: { id } });
-
-		this.eventEmitter.emit(
-			'remove.documents',
-			new RemoveDocumentsEvent([id], this.IndexName),
-		);
 
 		return plainToInstance(PortfolioDto, portfolio);
 	}

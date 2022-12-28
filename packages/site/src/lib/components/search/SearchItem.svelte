@@ -30,6 +30,9 @@
 		) ?? {};
 </script>
 
+<pre>{JSON.stringify({ highlightedFields })}</pre>
+<pre>{JSON.stringify({ item })}</pre>
+
 <Hoverable let:hovering>
 	<ListboxOption value={item}>
 		<div
@@ -56,6 +59,7 @@
 				/>
 				<div class="flex flex-col gap-y-1">
 					<p>
+						<!-- {item.formatted.title} -->
 						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 						{@html item.formatted?.title}
 					</p>

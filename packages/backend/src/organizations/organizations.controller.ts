@@ -156,9 +156,8 @@ export class OrganizationsController {
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
 		@Query('query') query: string,
-	): Promise<SearchDto[]> {
-		// FIX: Remove
-		// @ts-ignore
+	) {
+		// TODO:Check return type exists in openapi
 		return this.searchService.search({ query, organizationId, user });
 	}
 }

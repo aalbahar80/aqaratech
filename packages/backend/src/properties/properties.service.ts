@@ -1,19 +1,13 @@
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
-import {
-	RemoveDocumentsEvent,
-	UpdateIndexEvent,
-} from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertySearchDocument } from 'src/properties/dto/property-search-document';
 import {
 	CreatePropertyDto,
 	PropertyDto,
@@ -22,13 +16,9 @@ import {
 
 @Injectable()
 export class PropertiesService {
-	constructor(
-		private readonly prisma: PrismaService,
-		private readonly eventEmitter: EventEmitter2,
-	) {}
+	constructor(private readonly prisma: PrismaService) {}
 	SubjectType = 'Property' as const;
 	IndexName = 'property' as const;
-	IndexConstructor = PropertySearchDocument;
 
 	async create({
 		createPropertyDto,
@@ -45,11 +35,6 @@ export class PropertiesService {
 		});
 
 		const property = new PropertyDto(created);
-
-		this.eventEmitter.emit(
-			'update.index',
-			new UpdateIndexEvent([property], this.IndexName, this.IndexConstructor),
-		);
 
 		return property;
 	}
@@ -113,11 +98,6 @@ export class PropertiesService {
 
 		const property = new PropertyDto(updated);
 
-		this.eventEmitter.emit(
-			'update.index',
-			new UpdateIndexEvent([property], this.IndexName, this.IndexConstructor),
-		);
-
 		return property;
 	}
 
@@ -128,12 +108,8 @@ export class PropertiesService {
 			},
 		});
 
+		// PERF: Can be optimized after Meilisearch removal
 		const deleted = await this.prisma.property.delete({ where: { id } });
-
-		this.eventEmitter.emit(
-			'remove.documents',
-			new RemoveDocumentsEvent([id], this.IndexName),
-		);
 
 		return new PropertyDto(deleted);
 	}

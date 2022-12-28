@@ -86,7 +86,6 @@ importers:
       helmet: 6.0.1
       js-yaml: 4.1.0
       jwks-rsa: 3.0.0
-      meilisearch: 0.27.0
       moment: 2.29.4
       moment-range: 4.0.2
       nest-winston: 1.8.0
@@ -133,7 +132,6 @@ importers:
       date-fns: 2.29.3
       helmet: 6.0.1
       jwks-rsa: 3.0.0
-      meilisearch: 0.27.0
       moment: 2.29.4
       moment-range: 4.0.2_moment@2.29.4
       nest-winston: 1.8.0_xlxfmi5fzr5alofp25xqzclqqq
@@ -8473,14 +8471,6 @@ packages:
   /media-typer/0.3.0:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
-
-  /meilisearch/0.27.0:
-    resolution: {integrity: sha512-kZOZFIuSO7c6xRf+Y2/9/h6A9pl0sCl/G44X4KuaSwxGbruOZPhmxbeVEgLHBv4pUFvQ56rNVTA/2d/5GCU1YA==}
-    dependencies:
-      cross-fetch: 3.1.5
-    transitivePeerDependencies:
-      - encoding
-    dev: false
 
   /memfs/3.4.9:
     resolution: {integrity: sha512-3rm8kbrzpUGRyPKSGuk387NZOwQ90O4rI9tsWQkzNW7BLSnKGp23RsEsKK8N8QVCrtJoAMqy3spxHC4os4G6PQ==}

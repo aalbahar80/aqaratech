@@ -9,8 +9,8 @@ if [ "$isRunning" = "true" ]; then
 	exit 0
 
 	# Force restart - might cause issues with testing (backend likes to start before meilisearch)
-	# echo "Stopping MeiliSearch container"
-	# docker stop meili
+	# echo "Stopping Minio container"
+	# docker stop minio
 else
 	echo "Minio is not running"
 fi

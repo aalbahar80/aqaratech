@@ -66,10 +66,6 @@ export interface AqaratechEnv {
 	readonly PUBLIC_AQ_ENABLE_SENTRY: boolean;
 	readonly PUBLIC_TRACE_RATE: number;
 
-	// MeiliSearch
-	readonly MEILISEARCH_HOST?: string | undefined;
-	readonly MEILISEARCH_API_KEY?: string | undefined;
-
 	// Optional: https://github.com/colinhacks/zod/issues/980#issuecomment-1055823443
 	readonly PUBLIC_COMMIT_SHA?: string | undefined;
 

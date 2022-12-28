@@ -47,10 +47,6 @@ export const envSchema = z.object({
 	R2_ACCESS_KEY_ID: z.string(),
 	R2_SECRET_ACCESS_KEY: z.string(),
 
-	// Meilisearch
-	MEILISEARCH_HOST: z.string().optional(),
-	MEILISEARCH_API_KEY: z.string().optional(),
-
 	// Postmark
 	POSTMARK_TOKEN: z.string().optional(),
 

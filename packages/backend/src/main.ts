@@ -11,7 +11,6 @@ import { setupSwagger } from 'src/swagger';
 import { version } from '../package.json';
 
 import { AppModule } from './app.module';
-import { SearchError } from './common/search-error';
 
 Logger.log(version, 'AqaratechConfig');
 
@@ -57,10 +56,6 @@ void bootstrap();
 process.on('unhandledRejection', (error) => {
 	// By default, Nestjs will crash and exit if an error is thrown during an
 	// event handler (when not in dev)
-	if (error instanceof SearchError) {
-		console.log('SearchError caught. Avoiding exit.');
-		return;
-	}
 
 	console.error('Unhandled Rejection caught. Logging and exiting.');
 	console.error(error);

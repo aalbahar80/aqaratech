@@ -19,7 +19,6 @@ module.exports = {
 					// 'PUBLIC_AQ_DEBUG_PRISMA',
 					// 'PUBLIC_AQ_DEBUG_SENTRY',
 					// 'PUBLIC_TRACE_RATE',
-					// 'MEILISEARCH_HOST',
 					'CI',
 					'PUBLIC_COMMIT_SHA',
 					// 'PUBLIC_AQ_ENABLE_SENTRY',

@@ -1,19 +1,13 @@
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Prisma } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
-import {
-	RemoveDocumentsEvent,
-	UpdateIndexEvent,
-} from 'src/events/update-index.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { TenantSearchDocument } from 'src/tenants/dto/tenant-search-document';
 import {
 	CreateTenantDto,
 	TenantDto,
@@ -22,13 +16,9 @@ import {
 
 @Injectable()
 export class TenantsService {
-	constructor(
-		private readonly prisma: PrismaService,
-		private readonly eventEmitter: EventEmitter2,
-	) {}
+	constructor(private readonly prisma: PrismaService) {}
 	SubjectType = 'Tenant' as const;
 	IndexName = 'tenant' as const;
-	IndexConstructor = TenantSearchDocument;
 
 	async create({
 		createTenantDto,
@@ -43,11 +33,6 @@ export class TenantsService {
 				organizationId,
 			},
 		});
-
-		this.eventEmitter.emit(
-			'update.index',
-			new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
-		);
 
 		return plainToInstance(TenantDto, tenant);
 	}
@@ -106,11 +91,6 @@ export class TenantsService {
 			data: updateTenantDto,
 		});
 
-		this.eventEmitter.emit(
-			'update.index',
-			new UpdateIndexEvent([tenant], this.IndexName, this.IndexConstructor),
-		);
-
 		return plainToInstance(TenantDto, tenant);
 	}
 
@@ -121,12 +101,8 @@ export class TenantsService {
 			},
 		});
 
+		// PERF: Can be optimized after Meilisearch removal
 		const deleted = await this.prisma.tenant.delete({ where: { id } });
-
-		this.eventEmitter.emit(
-			'remove.documents',
-			new RemoveDocumentsEvent([id], this.IndexName),
-		);
 
 		return plainToInstance(TenantDto, deleted);
 	}
