@@ -10,7 +10,6 @@ apis/PayoutsApi.ts
 apis/PortfoliosApi.ts
 apis/PropertiesApi.ts
 apis/RolesApi.ts
-apis/SearchApi.ts
 apis/TenantsApi.ts
 apis/UnitsApi.ts
 apis/UsersApi.ts

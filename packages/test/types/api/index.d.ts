@@ -1190,32 +1190,25 @@ export interface HitDto {
 	 * @type {string}
 	 * @memberof HitDto
 	 */
-	title?: string | null;
+	title: string;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof HitDto
 	 */
-	entity: string;
+	entityType: string;
 	/**
 	 *
-	 * @type {HitDtoFormatted}
+	 * @type {number}
 	 * @memberof HitDto
 	 */
-	formatted: HitDtoFormatted;
-}
-/**
- *
- * @export
- * @interface HitDtoFormatted
- */
-export interface HitDtoFormatted {
+	score: number;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof HitDtoFormatted
+	 * @type {object}
+	 * @memberof HitDto
 	 */
-	title?: string | null;
+	hints: object;
 }
 /**
  *
@@ -2758,52 +2751,22 @@ export type RoleTypeEnum = typeof RoleTypeEnum[keyof typeof RoleTypeEnum];
 export interface SearchDto {
 	/**
 	 *
-	 * @type {string}
+	 * @type {Array<HitDto>}
 	 * @memberof SearchDto
 	 */
-	entityTitle: string;
+	tenants: Array<HitDto>;
 	/**
 	 *
 	 * @type {Array<HitDto>}
 	 * @memberof SearchDto
 	 */
-	hits: Array<HitDto>;
+	portfolios: Array<HitDto>;
 	/**
 	 *
-	 * @type {number}
+	 * @type {Array<HitDto>}
 	 * @memberof SearchDto
 	 */
-	offset: number;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof SearchDto
-	 */
-	limit: number;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof SearchDto
-	 */
-	processingTimeMs: number;
-	/**
-	 *
-	 * @type {object}
-	 * @memberof SearchDto
-	 */
-	facetDistribution?: object;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof SearchDto
-	 */
-	query: string;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof SearchDto
-	 */
-	estimatedTotalHits: number;
+	properties: Array<HitDto>;
 }
 /**
  *
