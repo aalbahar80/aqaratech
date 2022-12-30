@@ -1,7 +1,8 @@
 import { expect, test } from 'vitest';
-import { PageType } from '../enums/page-type.enum';
 
+import { PageType } from '../enums/page-type.enum';
 import { getRoute } from '../get-route';
+
 import type { GetRoute } from '../types/route-helpers.type';
 
 const params = {

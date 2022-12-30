@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+
 import { zodNumberOptional } from './zod-number';
 
 const valid = [

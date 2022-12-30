@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+
 import { toUTCFormat, toUTCFormatMonthYear } from './to-utc-format';
 
 const valid: [string, unknown, unknown][] = [

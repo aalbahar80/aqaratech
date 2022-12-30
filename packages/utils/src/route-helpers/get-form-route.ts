@@ -1,5 +1,6 @@
-import type { Entity } from '../entity/entity-definition';
 import { entitiesMap } from '../entity/entity-map';
+
+import type { Entity } from '../entity/entity-definition';
 import type { GetFormRoute } from './types/route-helpers.type';
 
 export const getFormRoute = (input: GetFormRoute, base: string) => {

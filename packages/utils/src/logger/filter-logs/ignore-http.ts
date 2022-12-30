@@ -1,4 +1,5 @@
 import { isHttpLog } from './is-http-log';
+
 import type { TransformFunction } from './type';
 
 /**

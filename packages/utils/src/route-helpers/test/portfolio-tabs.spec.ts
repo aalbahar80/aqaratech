@@ -1,7 +1,9 @@
 import { expect, test } from 'vitest';
+
 import { PageTypePortfolio } from '../enums/page-tab-portfolio.enum';
-import type { PageTab } from '../enums/page-tab.enum';
 import { PageType } from '../enums/page-type.enum';
+
+import type { PageTab } from '../enums/page-tab.enum';
 
 const baseInput = {
 	entity: 'portfolio',

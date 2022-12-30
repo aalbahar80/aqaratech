@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+
 import { startCase } from './start-case';
 
 const testCases = [

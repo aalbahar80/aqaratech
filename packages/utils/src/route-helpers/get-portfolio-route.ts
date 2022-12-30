@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import type { GetRoute } from './types/route-helpers.type';
 
 export const getOrganizationRoute = (params: GetRoute['params']): string => {

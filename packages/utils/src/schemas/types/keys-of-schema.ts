@@ -1,5 +1,5 @@
-import type { z } from 'zod';
 import type { KeysOfUnion } from '../../keys-of-union';
+import type { z } from 'zod';
 
 /**
  * Extracts keys from a Zod schema.

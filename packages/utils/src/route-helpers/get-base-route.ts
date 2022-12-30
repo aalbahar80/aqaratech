@@ -1,4 +1,5 @@
 import { getOrganizationRoute, getPortfolioRoute } from './get-portfolio-route';
+
 import type { GetRoute } from './types/route-helpers.type';
 
 export const getBaseRoute = (input: Pick<GetRoute, 'entity' | 'params'>) => {

@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+
 import { PageTab } from '../enums/page-tab.enum';
 
 const pageTypes = [
