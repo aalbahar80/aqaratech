@@ -17,6 +17,7 @@ Logger.log(version, 'AqaratechConfig');
 async function bootstrap() {
 	Logger.log(`Version: ${version}`);
 
+	// @ts-expect-error use validated env instead
 	const app = await NestFactory.create(AppModule, {
 		cors: {
 			origin: process.env.PUBLIC_SITE_URL,
