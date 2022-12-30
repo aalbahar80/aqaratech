@@ -2,9 +2,7 @@ import type { UnverfiedAqaratechEnv } from '../packages/utils/src/config/env/aqa
 
 declare global {
 	namespace NodeJS {
+		// eslint-disable-next-line @typescript-eslint/no-empty-interface
 		interface ProcessEnv extends UnverfiedAqaratechEnv {}
-		// type ProcessEnv = {
-		// 	PUBLIC_SITE_URL: string;
-		// };
 	}
 }
