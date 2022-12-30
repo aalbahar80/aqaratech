@@ -13,7 +13,6 @@
 		"importsNotUsedAsValues": "error",
 
 		"types": ["node"],
-		"lib": ["DOM"],
 
 		"sourceMap": true
 	},
