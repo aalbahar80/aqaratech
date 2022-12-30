@@ -2,6 +2,7 @@ import { expect, test } from 'vitest';
 
 import { PageTypePortfolio } from '../enums/page-tab-portfolio.enum';
 import { PageType } from '../enums/page-type.enum';
+import { getRoute } from '../get-route';
 
 import type { PageTab } from '../enums/page-tab.enum';
 

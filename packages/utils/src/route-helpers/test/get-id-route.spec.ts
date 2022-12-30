@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { PageTab } from '../enums/page-tab.enum';
+import { getRoute } from '../get-route';
 
 const pageTypes = [
 	[PageTab.Files, 'files'],
