@@ -3,10 +3,10 @@
 set -x
 # set -e
 
-session_name="mysession"
-window_name="mywindow"
+session_name="check-watcher-session"
+window_name="check-watcher-window"
 
-# TODO: avoid using -d detached flag. Instead, attach and kill the session in trap
+trap "echo 'Killing session ${session_name}'; tmux kill-session -t ${session_name}" EXIT
 
 # if session does not exist, create it and set the initial window name
 tmux has-session -t "${session_name}" || tmux new-session -d -s "${session_name}" -n "${window_name}"
@@ -32,3 +32,9 @@ tmux split-window -t "${session_name}":"${window_name}" -P "${command_1}"
 
 # run command_2 in a temporary pane that automatically closes when the command exits
 tmux split-window -t "${session_name}":"${window_name}" -P "${command_2}"
+
+# attach to the session
+tmux attach-session -t "${session_name}"
+
+# kill session
+tmux kill-session -t "${session_name}"
