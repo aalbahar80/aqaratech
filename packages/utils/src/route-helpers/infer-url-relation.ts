@@ -1,5 +1,5 @@
-import { fromUrl } from 'src/entity/from-url';
-import { isEntityUrlName } from 'src/entity/is-entity';
+import { fromUrl } from '../entity/from-url';
+import { isEntityUrlName } from '../entity/is-entity';
 
 export const inferUrlRelation = (pathname: string) => {
 	// the pathname should be `.../entity/id/files`

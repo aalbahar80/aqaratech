@@ -1,4 +1,4 @@
-import type { Entity } from 'src/entity/entity-definition';
+import type { Entity } from '../../entity/entity-definition';
 
 type RouteParams = Record<string, string>;
 

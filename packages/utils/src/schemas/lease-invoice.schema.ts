@@ -1,10 +1,9 @@
 import { z } from 'zod';
 
-import { zodCheckbox } from 'src/schemas/utils/zod-checkbox';
-import { zodNumber } from 'src/schemas/utils/zod-number';
-
 import { zodDateOnly, zodDateOnlyOptional } from './utils/date/zod-date-only';
 import { isID } from './utils/id.schema';
+import { zodCheckbox } from './utils/zod-checkbox';
+import { zodNumber } from './utils/zod-number';
 import { zodStringOptional } from './utils/zod-string';
 
 const base = z

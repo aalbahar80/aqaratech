@@ -1,5 +1,4 @@
-import { entitiesMap } from 'src/entity/entity-map';
-
+import { entitiesMap } from '../entity/entity-map';
 import {
 	isPageTypePortfolio,
 	PageTypePortfolio,

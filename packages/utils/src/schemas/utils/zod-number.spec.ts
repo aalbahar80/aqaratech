@@ -1,6 +1,5 @@
 import { expect, test } from 'vitest';
-
-import { zodNumber } from 'src/schemas/utils/zod-number';
+import { zodNumber } from './zod-number';
 
 const valid = [
 	['0', 0],

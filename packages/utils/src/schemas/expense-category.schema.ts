@@ -1,8 +1,7 @@
 import { z } from 'zod';
 
-import { zodCheckbox } from 'src/schemas/utils/zod-checkbox';
-
 import { isID } from './utils/id.schema';
+import { zodCheckbox } from './utils/zod-checkbox';
 import { zodString, zodStringOptional } from './utils/zod-string';
 
 // Represents an ExpenseCategory as returned from DB. Since we store ExpenseCategories in a postgres JSON field, we avoid `undefined` for all fields.

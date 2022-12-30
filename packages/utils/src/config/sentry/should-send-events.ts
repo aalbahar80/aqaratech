@@ -1,4 +1,4 @@
-import { isLiveEnv } from 'src/config/env/live-envs';
+import { isLiveEnv } from '../env/live-envs';
 
 import type { Config } from './types';
 import type { Options } from '@sentry/types';

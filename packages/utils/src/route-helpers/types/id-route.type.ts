@@ -1,16 +1,16 @@
-import type { Entity } from 'src/entity/entity-definition';
-import type { PageTypePortfolio } from 'src/route-helpers/enums/page-tab-portfolio.enum';
+import type { Entity } from '../../entity/entity-definition';
+import type { PageTypePortfolio } from '../enums/page-tab-portfolio.enum';
 import type {
-	InvoicePageTab,
-	LeasePageTab,
 	OrganizationPageTab,
 	PortfolioPageTab,
-	PropertyPageTab,
 	TenantPageTab,
+	PropertyPageTab,
 	UnitPageTab,
-} from 'src/route-helpers/enums/page-tab.enum';
-import type { PageType } from 'src/route-helpers/enums/page-type.enum';
-import type { BaseGetRoute } from 'src/route-helpers/types/base-route.type';
+	LeasePageTab,
+	InvoicePageTab,
+} from '../enums/page-tab.enum';
+import type { PageType } from '../enums/page-type.enum';
+import type { BaseGetRoute } from './base-route.type';
 
 // ID Route - Common
 

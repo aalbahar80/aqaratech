@@ -1,9 +1,5 @@
 import { expect, test } from 'vitest';
-
-import {
-	toUTCFormat,
-	toUTCFormatMonthYear,
-} from 'src/entity/form/field/to-utc-format';
+import { toUTCFormat, toUTCFormatMonthYear } from './to-utc-format';
 
 const valid: [string, unknown, unknown][] = [
 	// a list of valid inputs. The first item should be either a short or long iso date string
