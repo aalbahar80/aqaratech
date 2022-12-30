@@ -21,8 +21,9 @@
 		"strictPropertyInitialization": false,
 		"importsNotUsedAsValues": "remove",
 		"paths": {
-			"src": ["./src/"]
+			"src": ["./src/"],
+			"@self/utils": ["../utils/src"]
 		}
-	}
-	// "include": ["src/**/*"]
+	},
+	"include": ["src/**/*", "../utils/src/**/*.ts"]
 }

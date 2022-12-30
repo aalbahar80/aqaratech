@@ -7,6 +7,8 @@ import { isID } from './utils/id.schema';
 export const fileCreateSchema = z
 	.object({
 		fileName: filenameSchema,
+		// @ts-ignore
+		// backend complains without adding lib: ["dom"] to tsconfig
 		file: z.record(z.any()).transform((value) => value as File),
 
 		relationKey: fileRelationKeySchema,
