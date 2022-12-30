@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@faker-js/faker": "7.6.0",
 		"@prisma/client": "4.8.0",
+		"@self/utils": "workspace:*",
 		"date-fns": "2.29.3",
 		"dotenv": "16.0.3",
 		"factory.ts": "1.3.0"
