@@ -20,6 +20,7 @@
 		"lint": "eslint --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
 		"lint:fix": "pnpm run lint --fix",
 		"check": "tsc --noEmit --project tsconfig.build.json",
+		"check:watch": "pnpm run check --watch",
 		"postinstall": "prisma generate",
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
 		"api:generate": "./get-openapi.sh && rm -rf ../site/src/api/openapi && openapi-generator-cli generate",
