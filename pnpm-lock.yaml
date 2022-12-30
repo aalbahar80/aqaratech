@@ -225,7 +225,6 @@ importers:
       '@logtail/types': 0.1.12
       '@logtail/winston': 0.1.14
       '@rgossiaux/svelte-headlessui': 1.0.2
-      '@self/utils': workspace:*
       '@sentry/node': 7.28.1
       '@sentry/svelte': 7.28.1
       '@sentry/tracing': 7.28.1
@@ -291,7 +290,6 @@ importers:
       '@iconify/json': 2.1.157
       '@logtail/types': 0.1.12
       '@rgossiaux/svelte-headlessui': 1.0.2_okvbycgeo7n6fa7ggm4c3cdetm_svelte@3.55.0
-      '@self/utils': link:../utils
       '@sentry/svelte': 7.28.1_svelte@3.55.0
       '@sentry/tracing': 7.28.1
       '@sveltejs/adapter-node': 1.0.0_@sveltejs+kit@1.0.1
