@@ -11,11 +11,9 @@
 	],
 	"scripts": {
 		"build": "rimraf dist && nest build",
-		"start": "nest start",
-		"dev": "nest start --watch --debug --preserveWatchOutput --entryFile ./backend/src/main",
+		"dev": "nest start --watch --preserveWatchOutput --entryFile ./backend/src/main",
+		"dev:debug": "pnpm run dev --debug",
 		"seed": "./seed/create-test-db.sh",
-		"start:debug": "nest start --debug --watch",
-		"start:dev": "nest start --watch",
 		"start:prod": "node dist/backend/src/main.js",
 		"preview": "node dist/backend/src/main.js",
 		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\"",
