@@ -1,5 +1,6 @@
-const mode = 'insensitive' as const;
 import { Function } from 'ts-toolbelt';
+
+const mode = 'insensitive' as const;
 
 export const searchBuilder = <T extends string, Query extends string>(
 	field: Function.Narrow<T>,
