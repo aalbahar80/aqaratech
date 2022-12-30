@@ -8,17 +8,8 @@ window_name="check-watcher-window"
 
 trap "echo 'Killing session ${session_name}'; tmux kill-session -t ${session_name}" EXIT
 
-# if session does not exist, create it and set the initial window name
-tmux has-session -t "${session_name}" || tmux new-session -d -s "${session_name}" -n "${window_name}"
-
-# if window does not exist, create it
-# tmux new-window -t "${session_name}" -n "${window_name}"
-
-# if window has more than one pane, exit with error indicating that the window has leftovers from a previous run
-if [ "$(tmux list-panes -t "${session_name}":"${window_name}" | wc -l)" -gt 1 ]; then
-	echo >&2 "Error: window has leftover panes from a previous run"
-	exit 1
-fi
+# create session and set the initial window name
+tmux new-session -d -s "${session_name}" -n "${window_name}"
 
 # Commands for debugging
 # command_1="sleep 2"
@@ -32,6 +23,12 @@ tmux split-window -t "${session_name}":"${window_name}" -P "${command_1}"
 
 # run command_2 in a temporary pane that automatically closes when the command exits
 tmux split-window -t "${session_name}":"${window_name}" -P "${command_2}"
+
+# close the initial default pane
+tmux kill-pane -t "${session_name}":"${window_name}.1"
+
+# evenly distribute the panes
+tmux select-layout -t "${session_name}":"${window_name}" tiled
 
 # attach to the session
 tmux attach-session -t "${session_name}"
