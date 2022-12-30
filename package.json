@@ -47,6 +47,7 @@
 		}
 	},
 	"dependencies": {
-		"@self/utils": "workspace:^3.3.0"
+		"@self/seed": "workspace:*",
+		"@self/utils": "workspace:*"
 	}
 }
