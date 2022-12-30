@@ -2,20 +2,9 @@
 	"name": "@self/utils",
 	"version": "3.3.0",
 	"type": "module",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
-		}
-	},
-	"main": "./dist/index.cjs",
-	"types": "./dist/index.d.ts",
-	"files": [
-		"dist"
-	],
+	"main": "src/index.ts",
+	"types": "src/index.ts",
 	"scripts": {
-		"build": "tsup --onSuccess \"tsc --emitDeclarationOnly --declaration\"",
 		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\"",
 		"lint": "eslint --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
 		"lint:fix": "pnpm run lint --fix",

@@ -47,7 +47,6 @@
 		"@ntegral/nestjs-sentry": "4.0.0",
 		"@prisma-utils/nestjs-request-parser": "1.2.0",
 		"@prisma/client": "4.8.0",
-		"@self/utils": "workspace:*",
 		"@sentry/node": "7.28.1",
 		"@sentry/tracing": "7.28.1",
 		"cache-manager": "5.1.4",

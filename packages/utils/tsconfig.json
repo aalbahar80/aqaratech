@@ -2,11 +2,11 @@
 	"$schema": "http://json.schemastore.org/tsconfig",
 	"extends": "tsconfig/base.json",
 	"compilerOptions": {
-		"declarationDir": "./dist",
+		"noEmit": true,
 		"baseUrl": "./",
 		"paths": {
 			"src": ["./src/"]
 		}
 	},
-	"exclude": ["dist"]
+	"exclude": ["node_modules"]
 }

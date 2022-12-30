@@ -45,5 +45,8 @@
 		"patchedDependencies": {
 			"@rgossiaux/svelte-headlessui@1.0.2": "patches/@rgossiaux__svelte-headlessui@1.0.2.patch"
 		}
+	},
+	"dependencies": {
+		"@self/utils": "workspace:^3.3.0"
 	}
 }
