@@ -1,5 +1,5 @@
 import {
-	EntityRawSearchResult,
+	EntityReturnedKeys,
 	EntitySearchResult,
 	TSearchableEntity,
 } from './entity-search-result';
@@ -7,7 +7,7 @@ import {
 export const markHints = <T extends TSearchableEntity>(
 	result: EntitySearchResult<T>,
 ) => {
-	const hints: Partial<EntityRawSearchResult<T>> = {};
+	const hints: Partial<Record<EntityReturnedKeys<T>, string>> = {};
 
 	console.log(result);
 	result.terms.forEach((term) => {
