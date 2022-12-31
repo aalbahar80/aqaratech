@@ -35,11 +35,7 @@ export const fuzzyMatch = <T extends TSearchableEntity>(
 		})
 		.map(
 			// @ts-expect-error minisearch types are loose
-			(
-				n: SearchResult &
-					// Represents any fields of entity that are returned with search results
-					Pick<T, Extract<keyof T, typeof ALL_RETURNED_FIELDS[number]>>,
-			) => ({
+			(n: EntitySearchResult<T>) => ({
 				...n,
 				hints: markHints(n),
 			}),
@@ -47,3 +43,13 @@ export const fuzzyMatch = <T extends TSearchableEntity>(
 
 	return results;
 };
+
+/** Represents any fields of entity that are returned with search results */
+type EntityReturnedKeys<T extends TSearchableEntity> = Extract<
+	keyof T,
+	typeof ALL_RETURNED_FIELDS[number]
+>;
+
+/** Represents the search result of a single entity */
+type EntitySearchResult<T extends TSearchableEntity> = SearchResult &
+	Pick<T, EntityReturnedKeys<T>>;
