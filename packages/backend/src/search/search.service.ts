@@ -1,4 +1,5 @@
 import { ForbiddenError, subject } from '@casl/ability';
+import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 
 import { computeLabelProperty } from '@self/utils';
@@ -35,47 +36,59 @@ export class SearchService {
 
 		const [tenants, portfolios, properties] = await Promise.all([
 			this.prisma.tenant.findMany({
-				// FIX:add permissions to filter
 				where: {
-					OR: [
-						...searchBuilder('fullName', query),
-						...searchBuilder('label', query),
-						...searchBuilder('phone', query),
-						...searchBuilder('civilid', query),
-						...searchBuilder('passportNum', query),
-						...searchBuilder('residencyNum', query),
-						// email
-						// prettier-ignore
-						{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
+					AND: [
+						accessibleBy(user.ability, Action.Read).Tenant,
+						{
+							OR: [
+								...searchBuilder('fullName', query),
+								...searchBuilder('label', query),
+								...searchBuilder('phone', query),
+								...searchBuilder('civilid', query),
+								...searchBuilder('passportNum', query),
+								...searchBuilder('residencyNum', query),
+								// email
+								// prettier-ignore
+								{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
+							],
+						},
 					],
 				},
 				take,
 			}),
 			this.prisma.portfolio.findMany({
 				where: {
-					// FIX:add permissions to filter
-					OR: [
-						...searchBuilder('fullName', query),
-						...searchBuilder('phone', query),
-						...searchBuilder('label', query),
-						...searchBuilder('civilid', query),
-						// email
-						// prettier-ignore
-						{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
+					AND: [
+						accessibleBy(user.ability, Action.Read).Portfolio,
+						{
+							OR: [
+								...searchBuilder('fullName', query),
+								...searchBuilder('phone', query),
+								...searchBuilder('label', query),
+								...searchBuilder('civilid', query),
+								// email
+								// prettier-ignore
+								{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
+							],
+						},
 					],
 				},
 				take,
 			}),
 			this.prisma.property.findMany({
-				// FIX:add permissions to filter
 				where: {
-					OR: [
-						...searchBuilder('label', query),
-						...searchBuilder('paci', query),
-						...searchBuilder('area', query),
-						...searchBuilder('street', query),
-						// ...searchBuilder('portfolioId', query), // WARN: Remove? Inherited from old search
-						// ...searchBuilder('address', query), // NOTE: Use client extensions to search in address?
+					AND: [
+						accessibleBy(user.ability, Action.Read).Property,
+						{
+							OR: [
+								...searchBuilder('label', query),
+								...searchBuilder('paci', query),
+								...searchBuilder('area', query),
+								...searchBuilder('street', query),
+								// ...searchBuilder('portfolioId', query), // WARN: Remove? Inherited from old search
+								// ...searchBuilder('address', query), // NOTE: Use client extensions to search in address?
+							],
+						},
 					],
 				},
 				take,
