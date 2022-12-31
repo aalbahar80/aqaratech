@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test:e2e": "pnpm run -F @self/backend up-search && pnpm run -F @self/backend up-minio && pnpm run -F @self/backend seed && playwright test --project \"files\" && playwright test --grep \"search\" && playwright test --project \"idToken\" --project \"accessToken\" && playwright test --grep-invert \"search\" --project \"api\" --project \"site:chrome\" --project \"site:firefox\" --project \"site:webkit\" --project \"site:chrome:mobile\"",
+		"test:e2e": "pnpm run -F @self/backend up-minio && pnpm run -F @self/backend seed && playwright test",
 		"api:generate": "tsc --project tsconfig.api.json",
 		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\"",
 		"lint": "eslint --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
