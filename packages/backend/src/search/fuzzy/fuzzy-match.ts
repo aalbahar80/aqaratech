@@ -1,5 +1,4 @@
-import { Portfolio, Property, Tenant } from '@prisma/client';
-import MiniSearch, { SearchResult } from 'minisearch';
+import MiniSearch from 'minisearch';
 
 import { Mutable } from '@self/utils';
 
@@ -9,7 +8,7 @@ import {
 } from 'src/search/dto/searchable-fields';
 import { markHints } from 'src/search/fuzzy/mark-hints';
 
-type TSearchableEntity = Tenant | Portfolio | Property;
+import { TSearchableEntity } from './entity-search-result';
 
 export const fuzzyMatch = <T extends TSearchableEntity>(
 	query: string,
@@ -43,13 +42,3 @@ export const fuzzyMatch = <T extends TSearchableEntity>(
 
 	return results;
 };
-
-/** Represents any fields of entity that are returned with search results */
-type EntityReturnedKeys<T extends TSearchableEntity> = Extract<
-	keyof T,
-	typeof ALL_RETURNED_FIELDS[number]
->;
-
-/** Represents the search result of a single entity */
-type EntitySearchResult<T extends TSearchableEntity> = SearchResult &
-	Pick<T, EntityReturnedKeys<T>>;
