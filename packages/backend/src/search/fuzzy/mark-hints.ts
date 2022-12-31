@@ -1,6 +1,5 @@
-// @ts-nocheck
 import {
-	EntityReturnedKeys,
+	EntityRawSearchResult,
 	EntitySearchResult,
 	TSearchableEntity,
 } from './entity-search-result';
@@ -8,8 +7,9 @@ import {
 export const markHints = <T extends TSearchableEntity>(
 	result: EntitySearchResult<T>,
 ) => {
-	const hints: Partial<Record<EntityReturnedKeys<T>, 'string'>> = {};
+	const hints: Partial<EntityRawSearchResult<T>> = {};
 
+	console.log(result);
 	result.terms.forEach((term) => {
 		const regexp = new RegExp(`(${term})`, 'gi');
 
@@ -17,18 +17,8 @@ export const markHints = <T extends TSearchableEntity>(
 			const value: unknown = result[field];
 
 			if (typeof value === 'string') {
+				// @ts-expect-error minisearch types are loose
 				hints[field] = value.replace(regexp, '<mark>$1</mark>');
-			} else if (field === 'headings') {
-				const markedValue = value.reduce((items, h) => {
-					if (h.title.toLowerCase().includes(term)) {
-						items.push({
-							id: h.id,
-							title: h.title.replace(regexp, '<mark>$1</mark>'),
-						});
-					}
-					return items;
-				}, []);
-				hints[field] = markedValue.length ? markedValue : null;
 			}
 		});
 	});

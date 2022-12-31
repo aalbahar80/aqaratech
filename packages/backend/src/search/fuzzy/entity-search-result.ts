@@ -11,7 +11,14 @@ export type EntityReturnedKeys<T extends TSearchableEntity> = Extract<
 	typeof ALL_RETURNED_FIELDS[number]
 >;
 
-/** Represents the search result of a single entity */
+/** Represents the raw search result of a single entity, without metadata added
+ * by minisearch */
+export type EntityRawSearchResult<T extends TSearchableEntity> = {
+	[key in EntityReturnedKeys<T>]: T[key];
+};
+
+/** Represents the final search result of a single entity, including metadata
+ * added by minisearch */
 export type EntitySearchResult<
 	T extends TSearchableEntity = TSearchableEntity,
 > = SearchResult & Pick<T, EntityReturnedKeys<T>>;
