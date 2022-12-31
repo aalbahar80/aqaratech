@@ -1,7 +1,10 @@
 import { Portfolio, Property, Tenant } from '@prisma/client';
 import MiniSearch from 'minisearch';
 
-import { ALL_SEARCHABLE_FIELDS } from 'src/search/dto/searchable-fields';
+import {
+	ALL_SEARCHABLE_FIELDS,
+	NON_SEARCHABLE_FIELDS,
+} from 'src/search/dto/searchable-fields';
 import { markHints } from 'src/search/fuzzy/mark-hints';
 
 type TSearchableEntity = Tenant | Portfolio | Property;
@@ -9,7 +12,7 @@ type TSearchableEntity = Tenant | Portfolio | Property;
 export const fuzzyMatch = (query: string, documents: TSearchableEntity[]) => {
 	const miniSearch = new MiniSearch({
 		fields: ALL_SEARCHABLE_FIELDS, // TODO: edit
-		storeFields: ['id', ...ALL_SEARCHABLE_FIELDS], // fields to return with search results
+		storeFields: ['id', ...ALL_SEARCHABLE_FIELDS, ...NON_SEARCHABLE_FIELDS], // fields to return with search results
 	});
 
 	// Index all documents
