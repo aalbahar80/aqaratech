@@ -8,7 +8,7 @@ import {
 } from 'src/search/dto/searchable-fields';
 import { markHints } from 'src/search/fuzzy/mark-hints';
 
-import { TSearchableEntity } from './entity-search-result';
+import { EntitySearchResult, TSearchableEntity } from './entity-search-result';
 
 export const fuzzyMatch = <T extends TSearchableEntity>(
 	query: string,
