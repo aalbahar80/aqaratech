@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Description
+# For a given set of commands, create and attach to a tmux session, run the commands, then kill the session.
+# Commands are run in temporary panes that are closed automatically after the command is run, or by pressing Ctrl+C.
+
 set -x
 # set -e
 
