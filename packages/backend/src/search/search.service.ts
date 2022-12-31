@@ -8,9 +8,11 @@ import { Action } from 'src/casl/action.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { fuzzyMatch } from 'src/search/fuzzy/fuzzy-match';
-import { searchBuilder } from 'src/search/search-builder';
 
 import { SearchDto } from './dto/search.dto';
+import { SearchableFields } from './dto/searchable-fields';
+import { fieldSearchBuilder } from './search-builder/field-search-builder';
+import { searchFor } from './search-builder/search-for';
 
 @Injectable()
 export class SearchService {
@@ -40,15 +42,21 @@ export class SearchService {
 						accessibleBy(user.ability, Action.Read).Tenant,
 						{
 							OR: [
-								...searchBuilder('fullName', query),
-								...searchBuilder('label', query),
-								...searchBuilder('phone', query),
-								...searchBuilder('civilid', query),
-								...searchBuilder('passportNum', query),
-								...searchBuilder('residencyNum', query),
+								...searchFor(
+									[
+										'fullName',
+										'label',
+										'phone',
+										'civilid',
+										'passportNum',
+										'residencyNum',
+									] satisfies typeof SearchableFields.tenant,
+									query,
+								),
+
 								// email
 								// prettier-ignore
-								{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
+								{ roles: { some: { user: { OR: fieldSearchBuilder('email', query) } } } },
 							],
 						},
 					],
@@ -61,13 +69,19 @@ export class SearchService {
 						accessibleBy(user.ability, Action.Read).Portfolio,
 						{
 							OR: [
-								...searchBuilder('fullName', query),
-								...searchBuilder('phone', query),
-								...searchBuilder('label', query),
-								...searchBuilder('civilid', query),
+								...searchFor(
+									[
+										'fullName',
+										'label',
+										'phone',
+										'civilid',
+									] satisfies typeof SearchableFields.portfolio,
+									query,
+								),
+
 								// email
 								// prettier-ignore
-								{ roles: { some: { user: { OR: searchBuilder('email', query) } } } },
+								{ roles: { some: { user: { OR: fieldSearchBuilder('email', query) } } } },
 							],
 						},
 					],
@@ -80,12 +94,15 @@ export class SearchService {
 						accessibleBy(user.ability, Action.Read).Property,
 						{
 							OR: [
-								...searchBuilder('label', query),
-								...searchBuilder('paci', query),
-								...searchBuilder('area', query),
-								...searchBuilder('street', query),
-								// ...searchBuilder('portfolioId', query), // WARN: Remove? Inherited from old search
-								// ...searchBuilder('address', query), // NOTE: Use client extensions to search in address?
+								...searchFor(
+									[
+										'label',
+										'paci',
+										'area',
+										'street',
+									] satisfies typeof SearchableFields.property,
+									query,
+								),
 							],
 						},
 					],
