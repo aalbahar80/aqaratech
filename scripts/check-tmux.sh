@@ -6,7 +6,7 @@ set -x
 session_name="check-watcher-session"
 window_name="check-watcher-window"
 
-trap "echo 'Killing session ${session_name}'; tmux kill-session -t ${session_name}" EXIT
+trap 'echo "Killing session '${session_name}'"; tmux kill-session -t ${session_name}' EXIT
 
 # create session and set the initial window name
 tmux new-session -d -s "${session_name}" -n "${window_name}"
