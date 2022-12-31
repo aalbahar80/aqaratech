@@ -5,7 +5,7 @@
 		"build": "turbo run build --filter !@self/test",
 		"preview": "turbo run preview --filter !@self/test",
 		"dev": "turbo run dev --filter !@self/test",
-		"test": "turbo run test && turbo run test:e2e",
+		"test": "turbo run test",
 		"sentry:release": "turbo run sentry:release",
 		"format": "prettier --check --ignore-path .gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\" \"!pnpm-lock.yaml\" \"!packages/**/*\"",
 		"format:all": "turbo run format --continue",
