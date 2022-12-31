@@ -27,7 +27,10 @@
 	const columnHelper = createColumnHelper<RoleDto>();
 
 	const columns = [
-		columnHelper.accessor('email', { header: getLabel('email') }),
+		columnHelper.accessor('email', {
+			header: getLabel('email'),
+			enableSorting: false,
+		}),
 
 		columnHelper.display({
 			id: 'remove',
