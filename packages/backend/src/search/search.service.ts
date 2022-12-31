@@ -98,21 +98,21 @@ export class SearchService {
 		const hits = {
 			tenant: fuzzyMatch(query, tenants).map((n) => ({
 				...n,
-				// @ts-expect-error TODO: fix type
+				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				title: n.label || n.fullName,
 				entity: 'tenant',
 			})),
 
 			portfolio: fuzzyMatch(query, portfolios).map((n) => ({
 				...n,
-				// @ts-expect-error TODO: fix type
+				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				title: n.label || n.fullName,
 				entity: 'portfolio',
 			})),
 
 			property: fuzzyMatch(query, properties).map((n) => ({
 				...n,
-				// @ts-expect-error TODO: fix type
+				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 				title: n.label || computeLabelProperty(n),
 				entity: 'property',
 			})),

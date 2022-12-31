@@ -144,3 +144,4 @@ export { isDateOnly } from './schemas/utils/date/is-date-only';
 export { isDatetime } from './schemas/utils/date/is-date-time';
 export { startCase } from './start-case';
 export type { DateAsString } from './types/date-as-string';
+export type { Mutable } from './types/mutable';
