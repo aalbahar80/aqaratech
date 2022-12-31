@@ -25,8 +25,7 @@ export class SearchService {
 		organizationId: string;
 		user: IUser;
 	}) {
-		// search is only allowed for admins
-		// TODO: Remove and rely on ability check?
+		// TODO: Remove to unlock search for non-admins
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Manage,
 			subject('Organization', { id: organizationId }),
@@ -118,8 +117,6 @@ export class SearchService {
 			})),
 		} satisfies SearchDto;
 
-		// TODO: Add common title field
-		console.log(hits); // TODO: remove
 		return hits;
 	}
 }
