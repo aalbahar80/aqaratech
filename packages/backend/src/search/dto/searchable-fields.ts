@@ -6,9 +6,8 @@ export const SearchableFields = {
 		'civilid',
 		'passportNum',
 		'residencyNum',
-		'email',
 	] as const,
-	portfolio: ['fullName', 'label', 'phone', 'civilid', 'email'] as const,
+	portfolio: ['fullName', 'label', 'phone', 'civilid'] as const,
 	property: ['label', 'paci', 'area', 'street'] as const,
 };
 
