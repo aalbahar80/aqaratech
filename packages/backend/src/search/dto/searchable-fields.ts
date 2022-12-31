@@ -9,7 +9,7 @@ export const SearchableFields = {
 		'email',
 	] as const,
 	portfolio: ['fullName', 'label', 'phone', 'civilid', 'email'] as const,
-	property: ['label', 'paci', 'area', 'street', 'block', 'number'] as const,
+	property: ['label', 'paci', 'area', 'street'] as const,
 };
 
 /** Fields that should be returned with search results, highlighted, and ranked by minisearch */
@@ -20,7 +20,12 @@ export const ALL_SEARCHABLE_FIELDS = [
 ] as const;
 
 /** Fields that should be returned with search results, but *not* highlighted or ranked by minisearch */
-const NON_SEARCHABLE_FIELDS = ['portfolioId', 'organizationId'] as const;
+const NON_SEARCHABLE_FIELDS = [
+	'block',
+	'number',
+	'portfolioId',
+	'organizationId',
+] as const;
 
 /** Fields that should be returned with search results */
 export const ALL_RETURNED_FIELDS = [

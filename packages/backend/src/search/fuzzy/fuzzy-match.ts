@@ -38,7 +38,7 @@ export const fuzzyMatch = <T extends TSearchableEntity>(
 			(
 				n: SearchResult &
 					// Represents any fields of entity that are returned with search results
-					Pick<T, Extract<keyof T, typeof ALL_SEARCHABLE_FIELDS[number]>>,
+					Pick<T, Extract<keyof T, typeof ALL_RETURNED_FIELDS[number]>>,
 			) => ({
 				...n,
 				hints: markHints(n),
