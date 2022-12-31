@@ -143,22 +143,29 @@ export class RolesService {
 	}): Promise<WithCount<RoleDto>> {
 		const { skip, take, sort } = queryOptions;
 
-		const filter: Prisma.RoleWhereInput = {
+		const filter = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).Role,
 				...(where ? [where] : []),
 				queryOptions.filter,
 			],
-		};
+		} satisfies Prisma.RoleWhereInput;
 
-		// TODO fix filter/select
 		const [data, total] = await Promise.all([
 			this.prisma.role.findMany({
 				take,
 				skip,
 				orderBy: sort,
 				where: filter,
-				include: { user: { select: { email: true } } },
+				select: {
+					id: true,
+					organizationId: true,
+					portfolioId: true,
+					tenantId: true,
+					createdAt: true,
+					roleType: true,
+					user: { select: { email: true } },
+				},
 			}),
 			this.prisma.role.count({ where: filter }),
 		]);
