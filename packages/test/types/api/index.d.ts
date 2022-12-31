@@ -1184,7 +1184,7 @@ export interface HitDto {
 	 * @type {SearchableEntityEnum}
 	 * @memberof HitDto
 	 */
-	entityType: SearchableEntityEnum;
+	entity: SearchableEntityEnum;
 	/**
 	 *
 	 * @type {string}

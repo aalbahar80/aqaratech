@@ -100,21 +100,21 @@ export class SearchService {
 				...n,
 				// @ts-expect-error TODO: fix type
 				title: n.label || n.fullName,
-				entityType: 'tenant',
+				entity: 'tenant',
 			})),
 
 			portfolio: fuzzyMatch(query, portfolios).map((n) => ({
 				...n,
 				// @ts-expect-error TODO: fix type
 				title: n.label || n.fullName,
-				entityType: 'portfolio',
+				entity: 'portfolio',
 			})),
 
 			property: fuzzyMatch(query, properties).map((n) => ({
 				...n,
 				// @ts-expect-error TODO: fix type
 				title: n.label || computeLabelProperty(n),
-				entityType: 'property',
+				entity: 'property',
 			})),
 		} satisfies SearchDto;
 

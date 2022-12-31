@@ -11,7 +11,7 @@ export class HitDto {
 	id: string;
 	title: string;
 	@ApiProperty({ enum: SearchableEntityEnum, enumName: 'SearchableEntityEnum' })
-	entityType: SearchableEntity;
+	entity: SearchableEntity;
 	score: number;
 	hints: Record<string, string>;
 }

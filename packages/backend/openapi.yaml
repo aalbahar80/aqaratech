@@ -3852,7 +3852,7 @@ components:
     HitDto:
       type: object
       properties:
-        entityType:
+        entity:
           $ref: '#/components/schemas/SearchableEntityEnum'
         id:
           type: string
@@ -3863,7 +3863,7 @@ components:
         hints:
           type: object
       required:
-        - entityType
+        - entity
         - id
         - title
         - score
