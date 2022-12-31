@@ -23,7 +23,7 @@ export const expenseFactory = Factory.Sync.makeFactoryWithRequired<
 	categoryId: Factory.each(
 		() =>
 			faker.helpers.arrayElement(
-				generateExpenseCategoryTree().filter((c) => !c.isGroup),
+				generateExpenseCategoryTree(randomUUID).filter((c) => !c.isGroup),
 			).id,
 	),
 

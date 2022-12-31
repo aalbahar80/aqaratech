@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import { NoSuchBucket } from '@aws-sdk/client-s3';
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
@@ -58,7 +60,7 @@ export class OrganizationsService {
 				},
 				organizationSettings: {
 					create: {
-						expenseCategoryTree: generateExpenseCategoryTree(),
+						expenseCategoryTree: generateExpenseCategoryTree(randomUUID),
 					},
 				},
 			},

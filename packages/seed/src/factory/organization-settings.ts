@@ -16,5 +16,7 @@ export const organizationSettingsFactory = Factory.Sync.makeFactoryWithRequired<
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
-	expenseCategoryTree: Factory.each(() => generateExpenseCategoryTree()),
+	expenseCategoryTree: Factory.each(() =>
+		generateExpenseCategoryTree(randomUUID),
+	),
 });

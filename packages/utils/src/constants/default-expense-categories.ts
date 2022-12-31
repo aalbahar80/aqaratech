@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-import { generateId } from '../misc/generate-id';
 import {
 	expenseCategoryCreateSchema,
 	type ExpenseCategoryCreateSchema,
@@ -18,11 +17,11 @@ type ExpenseCategoryCreateWithId = ExpenseCategoryCreateSchema & {
 /**
  * Returns a default expense category tree with random ids.
  */
-export const generateExpenseCategoryTree = () => {
+export const generateExpenseCategoryTree = (getId: () => string) => {
 	const mappedIds = new Map<string, string>();
 
 	defaultExpenseCategoryTree.forEach((category) => {
-		mappedIds.set(category.id, generateId());
+		mappedIds.set(category.id, getId());
 	});
 
 	const withRandomIds = defaultExpenseCategoryTree.map((category) => {
@@ -34,7 +33,7 @@ export const generateExpenseCategoryTree = () => {
 
 		return {
 			...category,
-			id: newId ?? generateId(),
+			id: newId ?? getId(),
 			parentId: newParentId ?? null,
 
 			labelAr: category.labelAr ?? null,

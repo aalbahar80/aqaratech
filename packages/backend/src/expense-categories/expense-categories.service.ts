@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import { ForbiddenError, subject } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import { z } from 'zod';
@@ -34,7 +36,7 @@ export class ExpenseCategoriesService {
 	}) {
 		const categories = await this.fetchJsonCategories({ organizationId });
 
-		const id = generateId();
+		const id = generateId(randomUUID);
 
 		const newCategory = {
 			...createExpenseCategoryDto,

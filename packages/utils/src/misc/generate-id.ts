@@ -1,3 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
-
-export const generateId = () => uuidv4();
+/* If using in node package, pass uuid generator from node:crypto. Otherwise,
+ * use crypto.uuid(). This is for compatibility between node and web
+ * environments. */
+export const generateId = (getId: () => string) => getId();
