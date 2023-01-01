@@ -75,143 +75,73 @@ for (const i of inputs) {
 		});
 
 		test('exact - lowercase', async ({ page, isMobile }) => {
-			const { queryExact, resultText, keysToValidate } = i;
-
-			const query = queryExact.toLowerCase();
-
 			const searchPalette = new SearchPalette({ page, isMobile });
 
-			await searchPalette.open();
-
-			// search
-			const result = page.getByRole('option', { name: resultText });
-
-			await searchPalette.search({ query, result });
-
-			// navigate to result
-			await result.click();
-
-			await searchPalette.verifyResult({ keysToValidate });
+			await searchPalette.searchAndVerify({
+				query: i.queryExact.toLowerCase(),
+				resultText: i.resultText,
+				keysToValidate: i.keysToValidate,
+			});
 		});
 
 		test('exact - uppercase', async ({ page, isMobile }) => {
-			const { queryExact, resultText, keysToValidate } = i;
-
-			const query = queryExact.toUpperCase();
-
 			const searchPalette = new SearchPalette({ page, isMobile });
 
-			await searchPalette.open();
-
-			// search
-			const result = page.getByRole('option', { name: resultText });
-
-			await searchPalette.search({ query, result });
-
-			// navigate to result
-			await result.click();
-
-			await searchPalette.verifyResult({ keysToValidate });
+			await searchPalette.searchAndVerify({
+				query: i.queryExact.toUpperCase(),
+				resultText: i.resultText,
+				keysToValidate: i.keysToValidate,
+			});
 		});
 
 		test('prefix', async ({ page, isMobile }) => {
-			const { queryPrefix, resultText, keysToValidate } = i;
-
-			const query = queryPrefix;
-
 			const searchPalette = new SearchPalette({ page, isMobile });
 
-			await searchPalette.open();
-
-			// search
-			const result = page.getByRole('option', { name: resultText });
-
-			await searchPalette.search({ query, result });
-
-			// navigate to result
-			await result.click();
-
-			await searchPalette.verifyResult({ keysToValidate });
+			await searchPalette.searchAndVerify({
+				query: i.queryPrefix,
+				resultText: i.resultText,
+				keysToValidate: i.keysToValidate,
+			});
 		});
 
 		test('prefix lowercase', async ({ page, isMobile }) => {
-			const { queryPrefix, resultText, keysToValidate } = i;
-
-			const query = queryPrefix.toLowerCase();
-
 			const searchPalette = new SearchPalette({ page, isMobile });
 
-			await searchPalette.open();
-
-			// search
-			const result = page.getByRole('option', { name: resultText });
-
-			await searchPalette.search({ query, result });
-
-			// navigate to result
-			await result.click();
-
-			await searchPalette.verifyResult({ keysToValidate });
+			await searchPalette.searchAndVerify({
+				query: i.queryPrefix.toLowerCase(),
+				resultText: i.resultText,
+				keysToValidate: i.keysToValidate,
+			});
 		});
 
 		test('prefix uppercase', async ({ page, isMobile }) => {
-			const { queryPrefix, resultText, keysToValidate } = i;
-
-			const query = queryPrefix.toUpperCase();
-
 			const searchPalette = new SearchPalette({ page, isMobile });
 
-			await searchPalette.open();
-
-			// search
-			const result = page.getByRole('option', { name: resultText });
-
-			await searchPalette.search({ query, result });
-
-			// navigate to result
-			await result.click();
-
-			await searchPalette.verifyResult({ keysToValidate });
+			await searchPalette.searchAndVerify({
+				query: i.queryPrefix.toUpperCase(),
+				resultText: i.resultText,
+				keysToValidate: i.keysToValidate,
+			});
 		});
 
 		test('suffix', async ({ page, isMobile }) => {
-			const { querySuffix, resultText, keysToValidate } = i;
-
-			const query = querySuffix;
-
 			const searchPalette = new SearchPalette({ page, isMobile });
 
-			await searchPalette.open();
-
-			// search
-			const result = page.getByRole('option', { name: resultText });
-
-			await searchPalette.search({ query, result });
-
-			// navigate to result
-			await result.click();
-
-			await searchPalette.verifyResult({ keysToValidate });
+			await searchPalette.searchAndVerify({
+				query: i.querySuffix,
+				resultText: i.resultText,
+				keysToValidate: i.keysToValidate,
+			});
 		});
 
 		test('suffix - uppercase', async ({ page, isMobile }) => {
-			const { querySuffix, resultText, keysToValidate } = i;
-
-			const query = querySuffix.toUpperCase();
-
 			const searchPalette = new SearchPalette({ page, isMobile });
 
-			await searchPalette.open();
-
-			// search
-			const result = page.getByRole('option', { name: resultText });
-
-			await searchPalette.search({ query, result });
-
-			// navigate to result
-			await result.click();
-
-			await searchPalette.verifyResult({ keysToValidate });
+			await searchPalette.searchAndVerify({
+				query: i.querySuffix.toUpperCase(),
+				resultText: i.resultText,
+				keysToValidate: i.keysToValidate,
+			});
 		});
 	});
 }
