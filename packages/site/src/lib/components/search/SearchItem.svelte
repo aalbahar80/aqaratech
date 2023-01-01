@@ -42,7 +42,6 @@
 				/>
 				<div class="flex flex-col gap-y-1">
 					<p>
-						<!-- TODO: make priority to formatted title -->
 						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 						{@html item.title}
 					</p>

@@ -114,22 +114,19 @@ export class SearchService {
 		const hits = {
 			tenant: fuzzyMatch(query, tenants).map((n) => ({
 				...n,
-				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-				title: n.label || n.fullName,
 				entity: 'tenant',
+				title: n.hints['label'] ?? n.label ?? n.hints['fullName'] ?? n.fullName,
 			})),
 
 			portfolio: fuzzyMatch(query, portfolios).map((n) => ({
 				...n,
-				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-				title: n.label || n.fullName,
 				entity: 'portfolio',
+				title: n.hints['label'] ?? n.label ?? n.hints['fullName'] ?? n.fullName,
 			})),
 
 			property: fuzzyMatch(query, properties).map((n) => ({
 				...n,
-				// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-				title: n.label || computeLabelProperty(n),
+				title: n.hints['label'] ?? n.label ?? computeLabelProperty(n),
 				entity: 'property',
 			})),
 		} satisfies SearchDto;
