@@ -4,12 +4,12 @@ import { test } from '../api/api-fixtures';
 
 import { SearchPalette } from './search-palette-model';
 
-import type { DetailsPaneItem } from './search-palette-model';
+import type { SearchInput } from './search-input.type';
 
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
 	tenantsParams: [{ fullName: 'Bob Brown' }],
-	propertiesParams: [{ street: 'Main St' }],
+	propertiesParams: [{ street: 'The Main St' }],
 
 	page: async (
 		{
@@ -35,29 +35,29 @@ test.use({
 	},
 });
 
-const inputs = [
+const inputs: SearchInput[] = [
 	{
 		queryExact: 'Alex Anderson',
 		queryPrefix: 'Anders',
-		querySuffix: 'derson',
+		querySuffix: 'lex',
 		resultText: 'Alex Anderson',
-		keysToValidate: [['fullName', 'Alex Anderson']] as DetailsPaneItem[],
+		keysToValidate: [['fullName', 'Alex Anderson']],
 		type: 'portfolio',
 	},
 	{
 		queryExact: 'Bob Brown',
 		queryPrefix: 'Brow',
-		querySuffix: 'rown',
+		querySuffix: 'ob',
 		resultText: 'Bob Brown',
-		keysToValidate: [['fullName', 'Bob Brown']] as DetailsPaneItem[],
+		keysToValidate: [['fullName', 'Bob Brown']],
 		type: 'tenant',
 	},
 	{
-		queryExact: 'Main St',
+		queryExact: 'The Main St',
 		queryPrefix: 'Mai',
 		querySuffix: 'ain',
-		resultText: 'Main St',
-		keysToValidate: [['street', 'Main St']] as DetailsPaneItem[],
+		resultText: 'The Main St',
+		keysToValidate: [['street', 'Main St']],
 		type: 'property',
 	},
 ];
