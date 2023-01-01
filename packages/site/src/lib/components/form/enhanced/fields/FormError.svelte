@@ -1,7 +1,11 @@
 <script lang="ts">
-	import FieldError from '$lib/components/form/enhanced/fields/FieldError.svelte';
-
 	export let errors: string[] | undefined = undefined;
 </script>
 
-<FieldError {errors} />
+{#if errors}
+	<ul class="list-inside list-disc space-y-2 p-4 text-sm text-red-600">
+		{#each errors as error}
+			<li>{error}</li>
+		{/each}
+	</ul>
+{/if}
