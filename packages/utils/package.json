@@ -28,5 +28,6 @@
 		"tsconfig": "workspace:*",
 		"typescript": "4.9.4",
 		"vitest": "0.26.2"
-	}
+	},
+	"private": true
 }
