@@ -12,10 +12,11 @@
 </script>
 
 <!-- TODO add back prefetch attribute after optimization -->
+<!-- eslint-disable @typescript-eslint/dot-notation -->
 <svelte:element
 	this={disabled ? 'button' : as}
 	id="sbutton"
-	class={$$props.class}
+	class={$$props['class']}
 	{href}
 	type="submit"
 	{disabled}

@@ -47,7 +47,7 @@
 									onDelete: async (api) => {
 										await api.roles.remove({
 											id: role.id,
-											organizationId: $page.params.organizationId!,
+											organizationId: $page.params['organizationId']!,
 										});
 
 										await invalidateAll();

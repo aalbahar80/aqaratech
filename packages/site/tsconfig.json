@@ -16,11 +16,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
-
-		// Remove @typescript-eslint/dot-notation override when enabling
-		// `noPropertyAccessFromIndexSignature` rule
-		// "noPropertyAccessFromIndexSignature": true,
-
+		"noPropertyAccessFromIndexSignature": true,
 		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,

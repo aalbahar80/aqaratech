@@ -13,7 +13,7 @@
 			href: getRoute({
 				entity: 'portfolio',
 				params: $page.params,
-				id: $page.params.portfolioId!,
+				id: $page.params['portfolioId']!,
 				pageType: PageTypePortfolio[dataType],
 			}),
 			icon: HeroiconsPresentationChartBar,
@@ -23,7 +23,7 @@
 			href: getRoute({
 				entity: 'portfolio',
 				params: $page.params,
-				id: $page.params.portfolioId!,
+				id: $page.params['portfolioId']!,
 				pageType: PageTypePortfolio[`${dataType}Table`],
 			}),
 		},

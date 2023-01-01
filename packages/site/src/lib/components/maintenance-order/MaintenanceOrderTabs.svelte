@@ -7,7 +7,7 @@
 
 	$: baseRoute = getRoute({
 		entity: 'maintenanceOrder',
-		id: $page.params.maintenanceOrderId!,
+		id: $page.params['maintenanceOrderId']!,
 		pageType: PageType.Id,
 		params: $page.params,
 	});

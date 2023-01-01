@@ -7,19 +7,19 @@
 
 	$: baseRoute = getRoute({
 		entity: 'unit',
-		id: $page.params.unitId!,
+		id: $page.params['unitId']!,
 		pageType: PageType.Id,
 		params: $page.params,
 	});
 
 	$: financialsRoute = getRoute({
 		entity: 'portfolio',
-		id: $page.params.portfolioId!,
+		id: $page.params['portfolioId']!,
 		pageType: PageTypePortfolio.Summary,
 		params: $page.params,
 		predefined: {
-			propertyId: $page.data.unit.propertyId,
-			unitId: $page.params.unitId!,
+			propertyId: $page.data['unit'].propertyId,
+			unitId: $page.params['unitId']!,
 		},
 	});
 

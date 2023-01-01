@@ -38,11 +38,11 @@ export const load: PageLoad = async ({
 	// send a literal "undefined"
 
 	if (propertyId) {
-		filter.lease = { unit: { propertyId } };
+		filter['lease'] = { unit: { propertyId } };
 	}
 
 	if (unitId) {
-		filter.lease = { unitId };
+		filter['lease'] = { unitId };
 	}
 
 	const api = createApi(fetch);
