@@ -40,7 +40,7 @@
 
 <form
 	method="POST"
-	class="flex h-full flex-col divide-y divide-gray-200 rounded-md bg-white shadow"
+	class="flex h-full flex-col gap-y-4 divide-gray-200 rounded-md bg-white px-4 shadow sm:px-6"
 	use:enhance={() => {
 		return ({ result, update }) => {
 			if (result.type === 'failure') {
@@ -70,7 +70,10 @@
 		{/each}
 	</Fields>
 
-	<div class="flex flex-shrink-0 justify-end space-x-4 px-4 py-4">
+	<!-- Divider -->
+	<div class="border-t border-gray-200" />
+
+	<div class="flex flex-shrink-0 justify-end space-x-4 py-4 text-lg">
 		<button>Save</button>
 	</div>
 </form>
