@@ -12,8 +12,6 @@
 
 	export let item: HitDto;
 	export let icon: Icon;
-
-	// const hiddenFields = ['title', 'id', 'organizationId']; // TODO: Review hidden fields
 </script>
 
 <Hoverable let:hovering>

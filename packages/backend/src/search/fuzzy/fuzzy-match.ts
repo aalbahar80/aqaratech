@@ -1,4 +1,5 @@
 import MiniSearch from 'minisearch';
+import * as R from 'remeda';
 
 import { Mutable } from '@self/utils';
 
@@ -39,8 +40,11 @@ export const fuzzyMatch = <T extends TSearchableEntity>(
 	const mergedResults = documents.map((document) => {
 		const hit = minisearchHits.find((n) => n.id === document.id);
 
+		// @ts-expect-error we use a common list of returned fields
+		const filtered = R.pick(document, ALL_RETURNED_FIELDS);
+
 		return {
-			...document,
+			...filtered,
 			score: hit?.score ?? 0,
 			hints: hit ? markHints(hit) : {},
 		};
