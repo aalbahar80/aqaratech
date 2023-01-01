@@ -65,21 +65,9 @@ for (const i of inputs) {
 		await searchPalette.open();
 
 		// search
-		const input = page.getByPlaceholder('Search...');
 		const result = page.getByRole('option', { name: resultText });
 
-		// Keep trying to type until the result is visible
-		// This is because search indexing is async and not instant
-		await expect(async () => {
-			await input.clear(); // clear to re-trigger search
-
-			await input.fill(searchText);
-
-			// check result
-			await expect(result).toBeVisible({
-				timeout: 1000, // short timeout to fail fast and retry
-			});
-		}).toPass();
+		await searchPalette.search({ query: searchText, result });
 
 		// navigate to result
 		await result.click();
