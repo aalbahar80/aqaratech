@@ -4,6 +4,8 @@ import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
 
+import { SearchPalette } from './search-palette-model';
+
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
 	tenantsParams: [{ fullName: 'Bob Brown' }],
@@ -58,12 +60,9 @@ for (const i of inputs) {
 	test(`search: ${i.type}`, async ({ page, isMobile }) => {
 		const { searchText, resultText, keysToValidate } = i;
 
-		if (isMobile) {
-			await page.getByRole('button', { name: 'Sidebar' }).click();
-		}
+		const searchPalette = new SearchPalette({ page, isMobile });
 
-		const btn = page.getByRole('button', { name: 'Search' });
-		await btn.click();
+		await searchPalette.open();
 
 		// search
 		const input = page.getByPlaceholder('Search...');
