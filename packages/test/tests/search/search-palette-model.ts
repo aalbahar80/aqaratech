@@ -44,7 +44,9 @@ export class SearchPalette {
 			await expect(result).toBeVisible({
 				timeout: 1000, // short timeout to fail fast and retry
 			});
-		}).toPass();
+		}).toPass({
+			timeout: 3000,
+		});
 	}
 
 	async verifyResult({
