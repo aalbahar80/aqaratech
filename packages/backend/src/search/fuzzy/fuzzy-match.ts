@@ -8,7 +8,7 @@ import {
 } from 'src/search/dto/searchable-fields';
 import { markHints } from 'src/search/fuzzy/mark-hints';
 
-import { EntitySearchResult, TSearchableEntity } from './entity-search-result';
+import { TSearchableEntity } from './entity-search-result';
 
 export const fuzzyMatch = <T extends TSearchableEntity>(
 	query: string,
@@ -20,25 +20,31 @@ export const fuzzyMatch = <T extends TSearchableEntity>(
 		fields: ALL_SEARCHABLE_FIELDS as Mutable<typeof ALL_SEARCHABLE_FIELDS>, // TODO: edit
 
 		// fields to return with search results
-		storeFields: ALL_RETURNED_FIELDS as Mutable<typeof ALL_RETURNED_FIELDS>,
+		storeFields: ALL_RETURNED_FIELDS as Mutable<typeof ALL_RETURNED_FIELDS>, // TODO: remove all except id, we merge the results later
 	});
 
 	// Index all documents
 	miniSearch.addAll(documents);
 
 	// Search with default options
-	const results = miniSearch
-		.search(query, {
-			// we are only using minisearch for ranking, so all results should be returned
-			prefix: true, // highlight partial match
-		})
-		.map(
-			// @ts-expect-error minisearch types are loose
-			(n: EntitySearchResult<T>) => ({
-				...n,
-				hints: markHints(n),
-			}),
-		);
+	const minisearchHits = miniSearch.search(query, {
+		// we are only using minisearch for ranking, so all results should be returned
+		// Also, minisearch isn't great for fuzzy search: https://github.com/lucaong/minisearch/issues/67
+		prefix: true, // highlight partial match
+		fuzzy: true,
+	});
 
-	return results;
+	// map over original documents and add search metadata. This is necessary
+	// because we don't want minisearch to filter out any results
+	const mergedResults = documents.map((document) => {
+		const hit = minisearchHits.find((n) => n.id === document.id);
+
+		return {
+			...document,
+			score: hit?.score ?? 0,
+			hints: hit ? markHints(hit) : {},
+		};
+	});
+
+	return mergedResults;
 };

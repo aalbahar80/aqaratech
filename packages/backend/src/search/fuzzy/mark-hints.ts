@@ -1,15 +1,8 @@
-import {
-	EntityReturnedKeys,
-	EntitySearchResult,
-	TSearchableEntity,
-} from './entity-search-result';
+import { SearchResult } from 'minisearch';
 
-export const markHints = <T extends TSearchableEntity>(
-	result: EntitySearchResult<T>,
-) => {
-	const hints: Partial<Record<EntityReturnedKeys<T>, string>> = {};
+export const markHints = (result: SearchResult) => {
+	const hints: Record<string, string> = {};
 
-	console.log(result);
 	result.terms.forEach((term) => {
 		const regexp = new RegExp(`(${term})`, 'gi');
 
@@ -17,7 +10,6 @@ export const markHints = <T extends TSearchableEntity>(
 			const value: unknown = result[field];
 
 			if (typeof value === 'string') {
-				// @ts-expect-error minisearch types are loose
 				hints[field] = value.replace(regexp, '<mark>$1</mark>');
 			}
 		});
