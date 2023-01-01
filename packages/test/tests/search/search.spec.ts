@@ -83,5 +83,45 @@ for (const i of inputs) {
 
 			await searchPalette.verifyResult({ keysToValidate });
 		});
+
+		test('Prefix', async ({ page, isMobile }) => {
+			const { queryPrefix, resultText, keysToValidate } = i;
+
+			const query = queryPrefix;
+
+			const searchPalette = new SearchPalette({ page, isMobile });
+
+			await searchPalette.open();
+
+			// search
+			const result = page.getByRole('option', { name: resultText });
+
+			await searchPalette.search({ query, result });
+
+			// navigate to result
+			await result.click();
+
+			await searchPalette.verifyResult({ keysToValidate });
+		});
+
+		test('Suffix', async ({ page, isMobile }) => {
+			const { querySuffix, resultText, keysToValidate } = i;
+
+			const query = querySuffix;
+
+			const searchPalette = new SearchPalette({ page, isMobile });
+
+			await searchPalette.open();
+
+			// search
+			const result = page.getByRole('option', { name: resultText });
+
+			await searchPalette.search({ query, result });
+
+			// navigate to result
+			await result.click();
+
+			await searchPalette.verifyResult({ keysToValidate });
+		});
 	});
 }
