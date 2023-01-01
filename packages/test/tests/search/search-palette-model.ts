@@ -42,7 +42,7 @@ export class SearchPalette {
 
 			// check result
 			await expect(result).toBeVisible({
-				timeout: 1000, // short timeout to fail fast and retry
+				timeout: 500, // short timeout to fail fast and retry
 			});
 		}).toPass({
 			timeout: 3000,
