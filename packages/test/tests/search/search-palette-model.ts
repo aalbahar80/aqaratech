@@ -1,4 +1,8 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
+
+import { assertCount } from '@self/seed';
+
+import type { Locator, Page } from '@playwright/test';
 
 /** A model for the global search palette. */
 export class SearchPalette {
@@ -46,13 +50,19 @@ export class SearchPalette {
 	async verifyResult({
 		keysToValidate,
 	}: {
-		keysToValidate: [string, string][];
+		keysToValidate: DetailsPaneItem[];
 	}) {
-		const key = this.page
-			.getByTestId('details-pane')
-			.getByTestId(keysToValidate[0][0])
-			.getByText(keysToValidate[0][1]);
+		if (assertCount(keysToValidate, 1)) {
+			const key = this.page
+				.getByTestId('details-pane')
+				.getByTestId(keysToValidate[0][0])
+				.getByText(keysToValidate[0][1]);
 
-		await expect(key).toBeVisible();
+			await expect(key).toBeVisible();
+		} else {
+			throw new Error('TODO: handle multiple keys');
+		}
 	}
 }
+
+export type DetailsPaneItem = [string, string];

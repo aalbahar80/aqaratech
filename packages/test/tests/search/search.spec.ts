@@ -1,10 +1,10 @@
-import { expect } from '@playwright/test';
-
 import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
 
 import { SearchPalette } from './search-palette-model';
+
+import type { DetailsPaneItem } from './search-palette-model';
 
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
@@ -39,22 +39,22 @@ const inputs = [
 	{
 		searchText: 'Alex',
 		resultText: 'Alex Anderson',
-		keysToValidate: [['fullName', 'Alex Anderson']],
+		keysToValidate: [['fullName', 'Alex Anderson']] as DetailsPaneItem[],
 		type: 'portfolio',
 	},
 	{
 		searchText: 'Bob',
 		resultText: 'Bob Brown',
-		keysToValidate: [['fullName', 'Bob Brown']],
+		keysToValidate: [['fullName', 'Bob Brown']] as DetailsPaneItem[],
 		type: 'tenant',
 	},
 	{
 		searchText: 'Main',
 		resultText: 'Main St',
-		keysToValidate: [['street', 'Main St']],
+		keysToValidate: [['street', 'Main St']] as DetailsPaneItem[],
 		type: 'property',
 	},
-] as const;
+];
 
 for (const i of inputs) {
 	test(`search: ${i.type}`, async ({ page, isMobile }) => {
