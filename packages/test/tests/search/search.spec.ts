@@ -71,11 +71,7 @@ for (const i of inputs) {
 
 		// navigate to result
 		await result.click();
-		const key = page
-			.getByTestId('details-pane')
-			.getByTestId(keysToValidate[0][0])
-			.getByText(keysToValidate[0][1]);
 
-		await expect(key).toBeVisible();
+		await searchPalette.verifyResult({ keysToValidate });
 	});
 }

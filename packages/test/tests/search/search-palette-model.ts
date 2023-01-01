@@ -27,7 +27,7 @@ export class SearchPalette {
 		await btn.click();
 	}
 
-	/* Search for a given text. Retries search until result is visibile. */
+	/** Search for a given text. Retries search until `result` is visibile. */
 	async search({ query, result }: { query: string; result: Locator }) {
 		// Keep trying to type until the result is visible
 		// This is because search indexing is async and not instant
@@ -41,5 +41,18 @@ export class SearchPalette {
 				timeout: 1000, // short timeout to fail fast and retry
 			});
 		}).toPass();
+	}
+
+	async verifyResult({
+		keysToValidate,
+	}: {
+		keysToValidate: [string, string][];
+	}) {
+		const key = this.page
+			.getByTestId('details-pane')
+			.getByTestId(keysToValidate[0][0])
+			.getByText(keysToValidate[0][1]);
+
+		await expect(key).toBeVisible();
 	}
 }
