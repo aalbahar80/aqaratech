@@ -57,21 +57,23 @@ const inputs = [
 ];
 
 for (const i of inputs) {
-	test(`search: ${i.type}`, async ({ page, isMobile }) => {
-		const { searchText, resultText, keysToValidate } = i;
+	test.describe(`Search ${i.type}`, () => {
+		test(`search: ${i.type}`, async ({ page, isMobile }) => {
+			const { searchText, resultText, keysToValidate } = i;
 
-		const searchPalette = new SearchPalette({ page, isMobile });
+			const searchPalette = new SearchPalette({ page, isMobile });
 
-		await searchPalette.open();
+			await searchPalette.open();
 
-		// search
-		const result = page.getByRole('option', { name: resultText });
+			// search
+			const result = page.getByRole('option', { name: resultText });
 
-		await searchPalette.search({ query: searchText, result });
+			await searchPalette.search({ query: searchText, result });
 
-		// navigate to result
-		await result.click();
+			// navigate to result
+			await result.click();
 
-		await searchPalette.verifyResult({ keysToValidate });
+			await searchPalette.verifyResult({ keysToValidate });
+		});
 	});
 }
