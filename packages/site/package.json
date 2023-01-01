@@ -85,6 +85,7 @@
 		"@logtail/node": "0.1.14",
 		"@logtail/winston": "0.1.14",
 		"@sentry/node": "7.28.1",
+		"typesafe-i18n": "5.18.0",
 		"winston": "3.8.2"
 	},
 	"private": true
