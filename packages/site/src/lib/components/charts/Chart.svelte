@@ -61,11 +61,11 @@
 
 	// Disable some animations that cause high CPU usage
 	// Chart.defaults.animation = false;
-	if (Chart.defaults.transitions.active) {
-		Chart.defaults.transitions.active.animation.duration = 0; // disables the animation for 'active' mode, causes high CPU usage!
+	if (Chart.defaults.transitions['active']) {
+		Chart.defaults.transitions['active'].animation.duration = 0; // disables the animation for 'active' mode, causes high CPU usage!
 	}
 
-	Chart.defaults.animations.colors = false; // could enable
+	Chart.defaults.animations['colors'] = false; // could enable
 
 	// Chart.defaults.aspectRatio = 2;
 	Chart.defaults.maintainAspectRatio = false; // important for responsiveness

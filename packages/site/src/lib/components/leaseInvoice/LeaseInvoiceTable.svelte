@@ -138,12 +138,12 @@
 						<FilterBarActionsExport />
 					</FilterBarActions>
 				{/if}
-				{#if $page.params.leaseId}
+				{#if $page.params['leaseId']}
 					<FilterBarButtonForm
 						getRouteOptions={{
 							entity: 'leaseInvoice',
 							predefined: {
-								leaseId: $page.params.leaseId,
+								leaseId: $page.params['leaseId'],
 							},
 						}}
 					/>

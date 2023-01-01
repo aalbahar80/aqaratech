@@ -7,7 +7,7 @@
 
 	$: baseRouteConfig = {
 		entity: 'organization',
-		id: $page.params.organizationId!,
+		id: $page.params['organizationId']!,
 		params: {},
 	} as const;
 

@@ -73,7 +73,7 @@
 					console.debug(difference);
 					console.debug(newList);
 
-					const organizationId = $page.params.organizationId;
+					const organizationId = $page.params['organizationId'];
 
 					// type workaround
 					if (!organizationId) {

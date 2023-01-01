@@ -26,13 +26,13 @@
 	const links: Record<string, string> = {
 		Income: getRoute({
 			entity: 'portfolio',
-			id: $page.params.portfolioId!,
+			id: $page.params['portfolioId']!,
 			params: $page.params,
 			pageType: PageTypePortfolio.Income,
 		}),
 		Expenses: getRoute({
 			entity: 'portfolio',
-			id: $page.params.portfolioId!,
+			id: $page.params['portfolioId']!,
 			params: $page.params,
 			pageType: PageTypePortfolio.Expenses,
 		}),
