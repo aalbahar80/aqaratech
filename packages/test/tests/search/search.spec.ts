@@ -37,19 +37,25 @@ test.use({
 
 const inputs = [
 	{
-		searchText: 'Alex',
+		queryExact: 'Alex Anderson',
+		queryPrefix: 'Anders',
+		querySuffix: 'derson',
 		resultText: 'Alex Anderson',
 		keysToValidate: [['fullName', 'Alex Anderson']] as DetailsPaneItem[],
 		type: 'portfolio',
 	},
 	{
-		searchText: 'Bob',
+		queryExact: 'Bob Brown',
+		queryPrefix: 'Brow',
+		querySuffix: 'rown',
 		resultText: 'Bob Brown',
 		keysToValidate: [['fullName', 'Bob Brown']] as DetailsPaneItem[],
 		type: 'tenant',
 	},
 	{
-		searchText: 'Main',
+		queryExact: 'Main St',
+		queryPrefix: 'Mai',
+		querySuffix: 'ain',
 		resultText: 'Main St',
 		keysToValidate: [['street', 'Main St']] as DetailsPaneItem[],
 		type: 'property',
@@ -58,8 +64,10 @@ const inputs = [
 
 for (const i of inputs) {
 	test.describe(`Search ${i.type}`, () => {
-		test(`search: ${i.type}`, async ({ page, isMobile }) => {
-			const { searchText, resultText, keysToValidate } = i;
+		test('Exact', async ({ page, isMobile }) => {
+			const { queryExact, resultText, keysToValidate } = i;
+
+			const query = queryExact;
 
 			const searchPalette = new SearchPalette({ page, isMobile });
 
@@ -68,7 +76,7 @@ for (const i of inputs) {
 			// search
 			const result = page.getByRole('option', { name: resultText });
 
-			await searchPalette.search({ query: searchText, result });
+			await searchPalette.search({ query, result });
 
 			// navigate to result
 			await result.click();
