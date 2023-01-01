@@ -65,23 +65,13 @@ const inputs = [
 for (const i of inputs) {
 	test.describe(`search for ${i.type}`, () => {
 		test('exact', async ({ page, isMobile }) => {
-			const { queryExact, resultText, keysToValidate } = i;
-
-			const query = queryExact;
-
 			const searchPalette = new SearchPalette({ page, isMobile });
 
-			await searchPalette.open();
-
-			// search
-			const result = page.getByRole('option', { name: resultText });
-
-			await searchPalette.search({ query, result });
-
-			// navigate to result
-			await result.click();
-
-			await searchPalette.verifyResult({ keysToValidate });
+			await searchPalette.searchAndVerify({
+				query: i.queryExact,
+				resultText: i.resultText,
+				keysToValidate: i.keysToValidate,
+			});
 		});
 
 		test('exact - lowercase', async ({ page, isMobile }) => {

@@ -63,6 +63,27 @@ export class SearchPalette {
 			throw new Error('TODO: handle multiple keys');
 		}
 	}
+
+	async searchAndVerify({
+		query,
+		resultText,
+		keysToValidate,
+	}: {
+		query: string;
+		resultText: string;
+		keysToValidate: DetailsPaneItem[];
+	}) {
+		await this.open();
+
+		const result = this.page.getByRole('option', { name: resultText });
+
+		await this.search({ query, result });
+
+		// navigate to result
+		await result.click();
+
+		await this.verifyResult({ keysToValidate });
+	}
 }
 
 export type DetailsPaneItem = [string, string];
