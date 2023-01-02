@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { buttonCn } from '$lib/components/landing/button-cn';
+	import LL from '$i18n/i18n-svelte';
 	import { LOGIN } from '$lib/constants/routes';
 
 	import UnderlineDecoration from './UnderlineDecoration.svelte';
@@ -32,7 +33,7 @@
 					cs: 'w-32',
 				})}
 			>
-				Contact Us
+				{$LL.buttons.contact()}
 			</a>
 			<a
 				href={LOGIN}
@@ -41,7 +42,7 @@
 					variant: 'outline',
 				})}
 			>
-				Log in
+				{$LL.buttons.login()}
 			</a>
 		</div>
 	</div>

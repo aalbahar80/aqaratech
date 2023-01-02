@@ -1,4 +1,6 @@
 <script lang="ts">
+	// eslint-disable-next-line import/no-named-as-default
+	import LL from '$i18n/i18n-svelte';
 	import { buttonCn } from '$lib/components/landing/button-cn';
 	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
 	import { SIGNUP } from '$lib/constants/routes';
@@ -20,12 +22,10 @@
 	<Container>
 		<div class="relative mx-auto max-w-lg text-center">
 			<h2 class="font-display text-3xl tracking-tight text-white sm:text-4xl">
-				Get started today
+				{$LL.landing.callToAction.title()}
 			</h2>
 			<p class="mt-4 text-lg tracking-tight text-white">
-				Try Aqaratech and experience the ease and convenience of managing your
-				properties with just a few clicks! Sign up now and see the difference it
-				can make for your business.
+				{$LL.landing.callToAction.description()}
 			</p>
 
 			<a
@@ -35,7 +35,7 @@
 					color: 'white',
 				})}
 			>
-				Create Account
+				{$LL.landing.callToAction.button()}
 			</a>
 		</div>
 	</Container>

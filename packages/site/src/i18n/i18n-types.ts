@@ -24,6 +24,16 @@ type RootTranslation = {
 	 * @param {string} fileName
 	 */
 	log: RequiredParams<'fileName'>
+	buttons: {
+		/**
+		 * L​o​g​ ​i​n
+		 */
+		login: string
+		/**
+		 * C​o​n​t​a​c​t​ ​u​s
+		 */
+		contact: string
+	}
 	secondaryFeatures: {
 		managers: {
 			/**
@@ -68,6 +78,22 @@ type RootTranslation = {
 			description: string
 		}
 	}
+	landing: {
+		callToAction: {
+			/**
+			 * G​e​t​ ​s​t​a​r​t​e​d​ ​t​o​d​a​y
+			 */
+			title: string
+			/**
+			 * T​r​y​ ​A​q​a​r​a​t​e​c​h​ ​a​n​d​ ​e​x​p​e​r​i​e​n​c​e​ ​t​h​e​ ​e​a​s​e​ ​a​n​d​ ​c​o​n​v​e​n​i​e​n​c​e​ ​o​f​ ​m​a​n​a​g​i​n​g​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​ ​w​i​t​h​ ​j​u​s​t​ ​a​ ​f​e​w​ ​c​l​i​c​k​s​!​ ​S​i​g​n​ ​u​p​ ​n​o​w​ ​a​n​d​ ​s​e​e​ ​t​h​e​ ​d​i​f​f​e​r​e​n​c​e​ ​i​t​ ​c​a​n​ ​m​a​k​e​ ​f​o​r​ ​y​o​u​r​ ​b​u​s​i​n​e​s​s​.
+			 */
+			description: string
+			/**
+			 * C​r​e​a​t​e​ ​A​c​c​o​u​n​t
+			 */
+			button: string
+		}
+	}
 }
 
 export type TranslationFunctions = {
@@ -79,6 +105,16 @@ export type TranslationFunctions = {
 	 * This log was called from '{fileName}'
 	 */
 	log: (arg: { fileName: string }) => LocalizedString
+	buttons: {
+		/**
+		 * Log in
+		 */
+		login: () => LocalizedString
+		/**
+		 * Contact us
+		 */
+		contact: () => LocalizedString
+	}
 	secondaryFeatures: {
 		managers: {
 			/**
@@ -121,6 +157,22 @@ export type TranslationFunctions = {
 			 * Aqaratech simplifies the rental process by allowing tenants to track their payments and leases.
 			 */
 			description: () => LocalizedString
+		}
+	}
+	landing: {
+		callToAction: {
+			/**
+			 * Get started today
+			 */
+			title: () => LocalizedString
+			/**
+			 * Try Aqaratech and experience the ease and convenience of managing your properties with just a few clicks! Sign up now and see the difference it can make for your business.
+			 */
+			description: () => LocalizedString
+			/**
+			 * Create Account
+			 */
+			button: () => LocalizedString
 		}
 	}
 }

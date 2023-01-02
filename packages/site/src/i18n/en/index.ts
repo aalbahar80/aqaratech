@@ -1,8 +1,14 @@
+import { landing } from './landing';
+
 import type { BaseTranslation } from '../i18n-types';
 
 const en: BaseTranslation = {
 	HI: 'Hi {name:string}! Please leave a star if you like this project: https://github.com/ivanhofer/typesafe-i18n',
 	log: `This log was called from '{fileName:string}'`,
+	buttons: {
+		login: 'Log in',
+		contact: 'Contact us',
+	},
 	secondaryFeatures: {
 		managers: {
 			summary: 'For property managers',
@@ -24,6 +30,7 @@ const en: BaseTranslation = {
 			// 'Aqaratech simplifies the rental process by allowing tenants to pay their rent at any time, from any device.',
 		},
 	},
+	landing,
 };
 
 export default en;
