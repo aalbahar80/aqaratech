@@ -15,7 +15,7 @@
 		<!-- {item.name} -->
 		<!-- </p> -->
 	</dt>
-	<dd class="mt-2 ml-16 text-base text-slate-600">
+	<dd class="mt-2 text-base text-slate-600 ltr:ml-16 rtl:mr-16">
 		{item.text}
 	</dd>
 </div>
