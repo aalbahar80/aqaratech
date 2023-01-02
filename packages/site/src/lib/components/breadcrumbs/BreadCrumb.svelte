@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import { entitiesMap, getRoute, isEntity, PageType } from '@self/utils';
+	import { getRoute, isEntity, PageType } from '@self/utils';
 
+	// eslint-disable-next-line import/no-named-as-default
+	import LL from '$i18n/i18n-svelte';
 	import {
 		handleCrumbs,
 		type Crumbs,
@@ -52,7 +54,7 @@
 									)}
 									class:ml-4={idx !== 0}
 								>
-									{entitiesMap[title].singularCap}
+									{$LL.entity[title].singular()}
 								</a>
 							</div>
 						</li>
