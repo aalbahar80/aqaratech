@@ -10,6 +10,7 @@ const ar: BaseTranslation = {
 	buttons: {
 		login: 'تسجيل الدخول',
 		contact: 'اتصل بنا',
+		search: 'بحث',
 	},
 	landing,
 	hero,

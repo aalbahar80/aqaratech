@@ -9,6 +9,7 @@ const en: BaseTranslation = {
 	buttons: {
 		login: 'Log in',
 		contact: 'Contact us',
+		search: 'Search',
 	},
 	landing,
 	secondaryFeatures,

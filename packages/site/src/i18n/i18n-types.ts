@@ -33,6 +33,10 @@ type RootTranslation = {
 		 * C​o​n​t​a​c​t​ ​u​s
 		 */
 		contact: string
+		/**
+		 * S​e​a​r​c​h
+		 */
+		search: string
 	}
 	landing: {
 		hero: {
@@ -242,6 +246,10 @@ export type TranslationFunctions = {
 		 * Contact us
 		 */
 		contact: () => LocalizedString
+		/**
+		 * Search
+		 */
+		search: () => LocalizedString
 	}
 	landing: {
 		hero: {
