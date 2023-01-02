@@ -1,14 +1,8 @@
-import {
-	entity,
-	getRoute,
-	PageTab,
-	PageType,
-	PageTypePortfolio,
-} from '@self/utils';
+import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 
 import { LOGOUT } from '$lib/constants/routes';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line import/no-named-as-default
 import type LL from '$i18n/i18n-svelte';
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
@@ -78,7 +72,7 @@ export const getNavigationTree = (
 			0,
 			0,
 			{
-				name: entity.portfolio.pluralCap,
+				name: L.entity.portfolio.plural(),
 				href: getRoute({
 					entity: 'portfolio',
 					pageType,
@@ -87,7 +81,7 @@ export const getNavigationTree = (
 				icon: HeroiconsOutlineCollection,
 			},
 			{
-				name: L.entity.leases(),
+				name: L.entity.lease.plural(),
 				href: getRoute({
 					entity: 'lease',
 					pageType,
@@ -96,7 +90,7 @@ export const getNavigationTree = (
 				icon: HeroiconsOutlineDocumentText,
 			},
 			{
-				name: L.entity.tenants(),
+				name: L.entity.tenant.plural(),
 				href: getRoute({
 					entity: 'tenant',
 					pageType,
@@ -105,7 +99,7 @@ export const getNavigationTree = (
 				icon: HeroiconsUserGroup,
 			},
 			{
-				name: L.entity.maintenance(),
+				name: L.entity.maintenanceOrder.plural(),
 				href: getRoute({
 					entity: 'maintenanceOrder',
 					pageType,
@@ -129,11 +123,11 @@ export const getNavigationTree = (
 			// path: '/settings/',
 			children: [
 				{
-					name: L.entity.organization(),
+					name: L.entity.organization.singular(),
 					href: settings,
 				},
 				{
-					name: 'Expense Categories',
+					name: L.entity.expenseCategory.plural(),
 					href: getRoute({
 						entity: 'organization',
 						pageType: PageTab.ExpenseCategories,
@@ -193,7 +187,7 @@ export const getNavigationTree = (
 			},
 
 			{
-				name: L.entity.expenses(),
+				name: L.entity.expense.plural(),
 				icon: HeroiconsCreditCard,
 				href: getRoute({
 					...getRouteConfig,
@@ -218,7 +212,7 @@ export const getNavigationTree = (
 			},
 
 			{
-				name: 'Payouts',
+				name: L.entity.payout.plural(),
 				icon: HeroiconsBanknotes,
 				href: getRoute({
 					...getRouteConfig,
@@ -227,7 +221,7 @@ export const getNavigationTree = (
 			},
 
 			{
-				name: L.entity.properties(),
+				name: L.entity.property.plural(),
 				href: getRoute({
 					...getRouteConfig,
 					pageType: PageTab.Properties,
@@ -253,7 +247,7 @@ export const getNavigationTree = (
 			},
 
 			{
-				name: L.entity.leases(),
+				name: L.entity.lease.plural(),
 				href:
 					getRoute({
 						...getRouteConfig,
@@ -263,7 +257,7 @@ export const getNavigationTree = (
 				icon: HeroiconsOutlineDocumentText,
 			},
 			{
-				name: L.entity.maintenance(),
+				name: L.entity.maintenanceOrder.plural(),
 				href:
 					getRoute({
 						...getRouteConfig,

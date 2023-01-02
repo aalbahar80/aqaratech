@@ -25,46 +25,136 @@ type RootTranslation = {
 	 */
 	log: RequiredParams<'fileName'>
 	entity: {
-		/**
-		 * O​r​g​a​n​i​z​a​t​i​o​n
-		 */
-		organization: string
-		/**
-		 * T​e​n​a​n​t​s
-		 */
-		tenants: string
-		/**
-		 * P​o​r​t​f​o​l​i​o​s
-		 */
-		portfolios: string
-		/**
-		 * P​r​o​p​e​r​t​i​e​s
-		 */
-		properties: string
-		/**
-		 * U​n​i​t​s
-		 */
-		units: string
-		/**
-		 * L​e​a​s​e​s
-		 */
-		leases: string
-		/**
-		 * I​n​v​o​i​c​e​s
-		 */
-		invoices: string
-		/**
-		 * M​a​i​n​t​e​n​a​n​c​e
-		 */
-		maintenance: string
-		/**
-		 * E​x​p​e​n​s​e​s
-		 */
-		expenses: string
-		/**
-		 * U​s​e​r​s
-		 */
-		users: string
+		organization: {
+			/**
+			 * O​r​g​a​n​i​z​a​t​i​o​n​s
+			 */
+			plural: string
+			/**
+			 * O​r​g​a​n​i​z​a​t​i​o​n
+			 */
+			singular: string
+		}
+		role: {
+			/**
+			 * R​o​l​e​s
+			 */
+			plural: string
+			/**
+			 * R​o​l​e
+			 */
+			singular: string
+		}
+		tenant: {
+			/**
+			 * T​e​n​a​n​t​s
+			 */
+			plural: string
+			/**
+			 * T​e​n​a​n​t
+			 */
+			singular: string
+		}
+		portfolio: {
+			/**
+			 * O​w​n​e​r​s
+			 */
+			plural: string
+			/**
+			 * O​w​n​e​r
+			 */
+			singular: string
+		}
+		property: {
+			/**
+			 * P​r​o​p​e​r​t​i​e​s
+			 */
+			plural: string
+			/**
+			 * P​r​o​p​e​r​t​y
+			 */
+			singular: string
+		}
+		unit: {
+			/**
+			 * U​n​i​t​s
+			 */
+			plural: string
+			/**
+			 * U​n​i​t
+			 */
+			singular: string
+		}
+		lease: {
+			/**
+			 * L​e​a​s​e​s
+			 */
+			plural: string
+			/**
+			 * L​e​a​s​e
+			 */
+			singular: string
+		}
+		leaseInvoice: {
+			/**
+			 * I​n​v​o​i​c​e​s
+			 */
+			plural: string
+			/**
+			 * I​n​v​o​i​c​e
+			 */
+			singular: string
+		}
+		maintenanceOrder: {
+			/**
+			 * M​a​i​n​t​e​n​a​n​c​e
+			 */
+			plural: string
+			/**
+			 * M​a​i​n​t​e​n​a​n​c​e
+			 */
+			singular: string
+		}
+		payout: {
+			/**
+			 * P​a​y​o​u​t​s
+			 */
+			plural: string
+			/**
+			 * P​a​y​o​u​t
+			 */
+			singular: string
+		}
+		expense: {
+			/**
+			 * E​x​p​e​n​s​e​s
+			 */
+			plural: string
+			/**
+			 * E​x​p​e​n​s​e
+			 */
+			singular: string
+		}
+		expenseCategory: {
+			/**
+			 * E​x​p​e​n​s​e​ ​C​a​t​e​g​o​r​i​e​s
+			 */
+			plural: string
+			/**
+			 * E​x​p​e​n​s​e​ ​C​a​t​e​g​o​r​y
+			 */
+			singular: string
+		}
+		file: {
+			/**
+			 * F​i​l​e​s
+			 */
+			plural: string
+			/**
+			 * F​i​l​e
+			 */
+			singular: string
+		}
 	}
 	buttons: {
 		/**
@@ -338,46 +428,136 @@ export type TranslationFunctions = {
 	 */
 	log: (arg: { fileName: string }) => LocalizedString
 	entity: {
-		/**
-		 * Organization
-		 */
-		organization: () => LocalizedString
-		/**
-		 * Tenants
-		 */
-		tenants: () => LocalizedString
-		/**
-		 * Portfolios
-		 */
-		portfolios: () => LocalizedString
-		/**
-		 * Properties
-		 */
-		properties: () => LocalizedString
-		/**
-		 * Units
-		 */
-		units: () => LocalizedString
-		/**
-		 * Leases
-		 */
-		leases: () => LocalizedString
-		/**
-		 * Invoices
-		 */
-		invoices: () => LocalizedString
-		/**
-		 * Maintenance
-		 */
-		maintenance: () => LocalizedString
-		/**
-		 * Expenses
-		 */
-		expenses: () => LocalizedString
-		/**
-		 * Users
-		 */
-		users: () => LocalizedString
+		organization: {
+			/**
+			 * Organizations
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Organization
+			 */
+			singular: () => LocalizedString
+		}
+		role: {
+			/**
+			 * Roles
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Role
+			 */
+			singular: () => LocalizedString
+		}
+		tenant: {
+			/**
+			 * Tenants
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Tenant
+			 */
+			singular: () => LocalizedString
+		}
+		portfolio: {
+			/**
+			 * Owners
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Owner
+			 */
+			singular: () => LocalizedString
+		}
+		property: {
+			/**
+			 * Properties
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Property
+			 */
+			singular: () => LocalizedString
+		}
+		unit: {
+			/**
+			 * Units
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Unit
+			 */
+			singular: () => LocalizedString
+		}
+		lease: {
+			/**
+			 * Leases
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Lease
+			 */
+			singular: () => LocalizedString
+		}
+		leaseInvoice: {
+			/**
+			 * Invoices
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Invoice
+			 */
+			singular: () => LocalizedString
+		}
+		maintenanceOrder: {
+			/**
+			 * Maintenance
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Maintenance
+			 */
+			singular: () => LocalizedString
+		}
+		payout: {
+			/**
+			 * Payouts
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Payout
+			 */
+			singular: () => LocalizedString
+		}
+		expense: {
+			/**
+			 * Expenses
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Expense
+			 */
+			singular: () => LocalizedString
+		}
+		expenseCategory: {
+			/**
+			 * Expense Categories
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Expense Category
+			 */
+			singular: () => LocalizedString
+		}
+		file: {
+			/**
+			 * Files
+			 */
+			plural: () => LocalizedString
+			/**
+			 * File
+			 */
+			singular: () => LocalizedString
+		}
 	}
 	buttons: {
 		/**
