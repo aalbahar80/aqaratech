@@ -8,8 +8,11 @@ import {
 
 import { LOGOUT } from '$lib/constants/routes';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type LL from '$i18n/i18n-svelte';
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
+import type { ReadableOf } from '$lib/utils/readable-of';
 
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
@@ -27,10 +30,13 @@ import HeroiconsWrench from '~icons/heroicons/wrench';
 // import HeroiconsCalculator from '~icons/heroicons/calculator';
 // import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 
-export const getNavigationTree = (user: User): NavigationItem[] => {
+export const getNavigationTree = (
+	user: User,
+	L: ReadableOf<typeof LL>,
+): NavigationItem[] => {
 	const tree: NavigationItem[] = [
 		{
-			name: 'Account',
+			name: L.nav.account(),
 			href: `/users/${user.id}/roles`,
 			icon: HeroiconsOutlineUser,
 			divided: true,
@@ -39,7 +45,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			},
 		},
 		{
-			name: 'Logout',
+			name: L.buttons.logout(),
 			href: LOGOUT,
 			icon: HeroiconsOutlineLogout,
 			linkOptions: {
@@ -81,7 +87,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 				icon: HeroiconsOutlineCollection,
 			},
 			{
-				name: 'Leases',
+				name: L.entity.leases(),
 				href: getRoute({
 					entity: 'lease',
 					pageType,
@@ -90,7 +96,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 				icon: HeroiconsOutlineDocumentText,
 			},
 			{
-				name: 'Tenants',
+				name: L.entity.tenants(),
 				href: getRoute({
 					entity: 'tenant',
 					pageType,
@@ -99,7 +105,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 				icon: HeroiconsUserGroup,
 			},
 			{
-				name: 'Maintenance',
+				name: L.entity.maintenance(),
 				href: getRoute({
 					entity: 'maintenanceOrder',
 					pageType,
@@ -117,7 +123,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 		});
 
 		tree.splice(-1, 0, {
-			name: 'Settings',
+			name: L.nav.settings(),
 			href: settings,
 			icon: HeroiconsOutlineCog8Tooth,
 			// path: '/settings/',
@@ -188,7 +194,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			},
 
 			{
-				name: 'Expenses',
+				name: L.entity.expenses(),
 				icon: HeroiconsCreditCard,
 				href: getRoute({
 					...getRouteConfig,
@@ -222,7 +228,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			},
 
 			{
-				name: 'Properties',
+				name: L.entity.properties(),
 				href: getRoute({
 					...getRouteConfig,
 					pageType: PageTab.Properties,
@@ -248,7 +254,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 			},
 
 			{
-				name: 'Leases',
+				name: L.entity.leases(),
 				href:
 					getRoute({
 						...getRouteConfig,
@@ -258,7 +264,7 @@ export const getNavigationTree = (user: User): NavigationItem[] => {
 				icon: HeroiconsOutlineDocumentText,
 			},
 			{
-				name: 'Maintenance',
+				name: L.entity.maintenance(),
 				href:
 					getRoute({
 						...getRouteConfig,

@@ -7,7 +7,8 @@
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
 
-	import { setLocale } from '$i18n/i18n-svelte';
+	// eslint-disable-next-line import/no-named-as-default
+	import LL, { setLocale } from '$i18n/i18n-svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
@@ -68,7 +69,7 @@
 {:else}
 	<div class="my-grid">
 		{#if isSidebarAvailable($page.url.pathname) && data.user}
-			<Sidebar navigationTree={getNavigationTree(data.user)} />
+			<Sidebar navigationTree={getNavigationTree(data.user, $LL)} />
 		{/if}
 
 		<main class="col-span-full pt-8 lg:col-start-2">

@@ -24,11 +24,53 @@ type RootTranslation = {
 	 * @param {string} fileName
 	 */
 	log: RequiredParams<'fileName'>
+	entity: {
+		/**
+		 * T​e​n​a​n​t​s
+		 */
+		tenants: string
+		/**
+		 * P​o​r​t​f​o​l​i​o​s
+		 */
+		portfolios: string
+		/**
+		 * P​r​o​p​e​r​t​i​e​s
+		 */
+		properties: string
+		/**
+		 * U​n​i​t​s
+		 */
+		units: string
+		/**
+		 * L​e​a​s​e​s
+		 */
+		leases: string
+		/**
+		 * I​n​v​o​i​c​e​s
+		 */
+		invoices: string
+		/**
+		 * M​a​i​n​t​e​n​a​n​c​e
+		 */
+		maintenance: string
+		/**
+		 * E​x​p​e​n​s​e​s
+		 */
+		expenses: string
+		/**
+		 * U​s​e​r​s
+		 */
+		users: string
+	}
 	buttons: {
 		/**
 		 * L​o​g​ ​i​n
 		 */
 		login: string
+		/**
+		 * L​o​g​ ​o​u​t
+		 */
+		logout: string
 		/**
 		 * C​o​n​t​a​c​t​ ​u​s
 		 */
@@ -37,6 +79,16 @@ type RootTranslation = {
 		 * S​e​a​r​c​h
 		 */
 		search: string
+	}
+	nav: {
+		/**
+		 * S​e​t​t​i​n​g​s
+		 */
+		settings: string
+		/**
+		 * A​c​c​o​u​n​t
+		 */
+		account: string
 	}
 	landing: {
 		hero: {
@@ -237,11 +289,53 @@ export type TranslationFunctions = {
 	 * This log was called from '{fileName}'
 	 */
 	log: (arg: { fileName: string }) => LocalizedString
+	entity: {
+		/**
+		 * Tenants
+		 */
+		tenants: () => LocalizedString
+		/**
+		 * Portfolios
+		 */
+		portfolios: () => LocalizedString
+		/**
+		 * Properties
+		 */
+		properties: () => LocalizedString
+		/**
+		 * Units
+		 */
+		units: () => LocalizedString
+		/**
+		 * Leases
+		 */
+		leases: () => LocalizedString
+		/**
+		 * Invoices
+		 */
+		invoices: () => LocalizedString
+		/**
+		 * Maintenance
+		 */
+		maintenance: () => LocalizedString
+		/**
+		 * Expenses
+		 */
+		expenses: () => LocalizedString
+		/**
+		 * Users
+		 */
+		users: () => LocalizedString
+	}
 	buttons: {
 		/**
 		 * Log in
 		 */
 		login: () => LocalizedString
+		/**
+		 * Log out
+		 */
+		logout: () => LocalizedString
 		/**
 		 * Contact us
 		 */
@@ -250,6 +344,16 @@ export type TranslationFunctions = {
 		 * Search
 		 */
 		search: () => LocalizedString
+	}
+	nav: {
+		/**
+		 * Settings
+		 */
+		settings: () => LocalizedString
+		/**
+		 * Account
+		 */
+		account: () => LocalizedString
 	}
 	landing: {
 		hero: {
