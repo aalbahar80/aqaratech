@@ -42,6 +42,6 @@ export interface ISecondaryFeature {
 	name: string;
 	summary: string;
 	description: string;
-	image: unknown;
+	image: string;
 	icon: Icon;
 }
