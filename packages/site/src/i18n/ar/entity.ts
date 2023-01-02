@@ -1,4 +1,5 @@
 export const entity = {
+	organization: 'مؤسسة',
 	tenants: 'المستأجرين',
 	portfolios: 'محفظات',
 	properties: 'العقارات',

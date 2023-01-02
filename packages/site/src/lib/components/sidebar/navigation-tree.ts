@@ -129,7 +129,7 @@ export const getNavigationTree = (
 			// path: '/settings/',
 			children: [
 				{
-					name: 'Organization',
+					name: L.entity.organization(),
 					href: settings,
 				},
 				{
@@ -159,8 +159,7 @@ export const getNavigationTree = (
 			0,
 
 			{
-				// name: 'Summary',
-				name: 'Financials',
+				name: L.nav.financials(),
 				icon: HeroiconsOutlineDocumentReport,
 				href: getRoute({
 					...getRouteConfig,
@@ -169,7 +168,7 @@ export const getNavigationTree = (
 			},
 
 			{
-				name: 'Income',
+				name: L.nav.income(),
 				icon: HeroiconsReceiptPercent,
 				href: getRoute({
 					...getRouteConfig,
@@ -177,14 +176,14 @@ export const getNavigationTree = (
 				}),
 				children: [
 					{
-						name: 'Charts',
+						name: L.nav.charts(),
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTypePortfolio.Income,
 						}),
 					},
 					{
-						name: 'Data',
+						name: L.nav.data(),
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTypePortfolio.IncomeTable,
@@ -202,14 +201,14 @@ export const getNavigationTree = (
 				}),
 				children: [
 					{
-						name: 'Charts',
+						name: L.nav.charts(),
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTypePortfolio.Expenses,
 						}),
 					},
 					{
-						name: 'Data',
+						name: L.nav.data(),
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTypePortfolio.ExpensesTable,
@@ -236,14 +235,14 @@ export const getNavigationTree = (
 				icon: HeroiconsOutlineHome,
 				children: [
 					{
-						name: 'List',
+						name: L.nav.list(),
 						href: getRoute({
 							...getRouteConfig,
 							pageType: PageTab.Properties,
 						}),
 					},
 					{
-						name: 'Occupancy',
+						name: L.nav.occupancy(),
 						href: getRoute({
 							...getRouteConfig,
 							entity: 'portfolio',

@@ -15,8 +15,22 @@ const en: BaseTranslation = {
 		search: 'Search',
 	},
 	nav: {
+		financials: 'Financials',
+		income: 'Income',
+		charts: 'Charts',
+		data: 'Data',
+		occupancy: 'Occupancy',
+		list: 'List',
 		settings: 'Settings',
 		account: 'Account',
+	},
+	general: {
+		name: 'Name',
+	},
+	filter: {
+		start: 'Start',
+		end: 'End',
+		range: 'Range',
 	},
 	landing,
 	secondaryFeatures,

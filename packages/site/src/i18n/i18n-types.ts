@@ -26,6 +26,10 @@ type RootTranslation = {
 	log: RequiredParams<'fileName'>
 	entity: {
 		/**
+		 * O​r​g​a​n​i​z​a​t​i​o​n
+		 */
+		organization: string
+		/**
 		 * T​e​n​a​n​t​s
 		 */
 		tenants: string
@@ -82,6 +86,30 @@ type RootTranslation = {
 	}
 	nav: {
 		/**
+		 * F​i​n​a​n​c​i​a​l​s
+		 */
+		financials: string
+		/**
+		 * I​n​c​o​m​e
+		 */
+		income: string
+		/**
+		 * C​h​a​r​t​s
+		 */
+		charts: string
+		/**
+		 * D​a​t​a
+		 */
+		data: string
+		/**
+		 * O​c​c​u​p​a​n​c​y
+		 */
+		occupancy: string
+		/**
+		 * L​i​s​t
+		 */
+		list: string
+		/**
 		 * S​e​t​t​i​n​g​s
 		 */
 		settings: string
@@ -89,6 +117,26 @@ type RootTranslation = {
 		 * A​c​c​o​u​n​t
 		 */
 		account: string
+	}
+	general: {
+		/**
+		 * N​a​m​e
+		 */
+		name: string
+	}
+	filter: {
+		/**
+		 * S​t​a​r​t
+		 */
+		start: string
+		/**
+		 * E​n​d
+		 */
+		end: string
+		/**
+		 * R​a​n​g​e
+		 */
+		range: string
 	}
 	landing: {
 		hero: {
@@ -291,6 +339,10 @@ export type TranslationFunctions = {
 	log: (arg: { fileName: string }) => LocalizedString
 	entity: {
 		/**
+		 * Organization
+		 */
+		organization: () => LocalizedString
+		/**
 		 * Tenants
 		 */
 		tenants: () => LocalizedString
@@ -347,6 +399,30 @@ export type TranslationFunctions = {
 	}
 	nav: {
 		/**
+		 * Financials
+		 */
+		financials: () => LocalizedString
+		/**
+		 * Income
+		 */
+		income: () => LocalizedString
+		/**
+		 * Charts
+		 */
+		charts: () => LocalizedString
+		/**
+		 * Data
+		 */
+		data: () => LocalizedString
+		/**
+		 * Occupancy
+		 */
+		occupancy: () => LocalizedString
+		/**
+		 * List
+		 */
+		list: () => LocalizedString
+		/**
 		 * Settings
 		 */
 		settings: () => LocalizedString
@@ -354,6 +430,26 @@ export type TranslationFunctions = {
 		 * Account
 		 */
 		account: () => LocalizedString
+	}
+	general: {
+		/**
+		 * Name
+		 */
+		name: () => LocalizedString
+	}
+	filter: {
+		/**
+		 * Start
+		 */
+		start: () => LocalizedString
+		/**
+		 * End
+		 */
+		end: () => LocalizedString
+		/**
+		 * Range
+		 */
+		range: () => LocalizedString
 	}
 	landing: {
 		hero: {

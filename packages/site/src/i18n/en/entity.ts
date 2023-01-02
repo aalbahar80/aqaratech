@@ -1,4 +1,5 @@
 export const entity = {
+	organization: 'Organization',
 	tenants: 'Tenants',
 	portfolios: 'Portfolios',
 	properties: 'Properties',

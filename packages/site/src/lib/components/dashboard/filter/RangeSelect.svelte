@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+	// eslint-disable-next-line import/no-named-as-default
+	import LL from '$i18n/i18n-svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { range } from '$lib/stores/filter/range';
 
@@ -13,7 +15,7 @@
 </script>
 
 <Select
-	title="Range"
+	title={$LL.filter.range()}
 	current={$range.months}
 	options={rangeOptions}
 	on:select={(e) => {

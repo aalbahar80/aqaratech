@@ -16,8 +16,22 @@ const ar: BaseTranslation = {
 		search: 'بحث',
 	},
 	nav: {
+		financials: 'المالية',
+		income: 'الدخل',
+		charts: 'الرسوم البيانية',
+		data: 'البيانات',
+		occupancy: 'الاستغلال',
+		list: 'القائمة',
 		settings: 'الإعدادات',
 		account: 'الحساب',
+	},
+	filter: {
+		start: 'بداية',
+		end: 'نهاية',
+		range: 'نطاق',
+	},
+	general: {
+		name: 'اسم',
 	},
 	landing,
 	hero,
