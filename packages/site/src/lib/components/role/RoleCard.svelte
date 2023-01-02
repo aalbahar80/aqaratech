@@ -1,4 +1,6 @@
 <script lang="ts">
+	// eslint-disable-next-line import/no-named-as-default
+	import LL from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import { getRoleMeta } from '$lib/utils/get-role-meta';
 
@@ -12,7 +14,7 @@
 	export let role: ValidatedRoleDto;
 	export let icons: IconTooltip[];
 
-	const meta = getRoleMeta(role);
+	$: meta = getRoleMeta(role, $LL);
 </script>
 
 <a
