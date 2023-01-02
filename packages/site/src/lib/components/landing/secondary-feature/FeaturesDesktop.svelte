@@ -8,8 +8,11 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import clsx from 'clsx';
 
-	import { secondaryFeatures } from '$lib/components/landing/secondary-feature/features';
 	import SecondaryFeature from '$lib/components/landing/secondary-feature/SecondaryFeature.svelte';
+
+	import type { ISecondaryFeature } from '$lib/components/landing/secondary-feature/features';
+
+	export let secondaryFeatures: ISecondaryFeature[];
 </script>
 
 <!-- FeaturesDesktop -->

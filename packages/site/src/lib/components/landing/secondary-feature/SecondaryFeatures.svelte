@@ -1,7 +1,12 @@
 <script lang="ts">
+	// eslint-disable-next-line import/no-named-as-default
+	import LL from '$i18n/i18n-svelte';
 	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
+	import { getSecondaryFeatures } from '$lib/components/landing/secondary-feature/features';
 	import FeaturesDesktop from '$lib/components/landing/secondary-feature/FeaturesDesktop.svelte';
 	import FeaturesMobile from '$lib/components/landing/secondary-feature/FeaturesMobile.svelte';
+
+	$: secondaryFeatures = getSecondaryFeatures($LL);
 </script>
 
 <section
@@ -20,7 +25,7 @@
 				and quickly access important information – all in one place.
 			</p>
 		</div>
-		<FeaturesMobile />
-		<FeaturesDesktop />
+		<FeaturesMobile {secondaryFeatures} />
+		<FeaturesDesktop {secondaryFeatures} />
 	</Container>
 </section>
