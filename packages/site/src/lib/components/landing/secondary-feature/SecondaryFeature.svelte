@@ -1,11 +1,11 @@
 <script lang="ts">
 	import clsx from 'clsx';
 
-	import type { SecondaryFeature } from '$lib/components/landing/secondary-feature/features';
+	import type { ISecondaryFeature } from '$lib/components/landing/secondary-feature/features';
 
 	export let cs: string;
 	export let isActive: boolean;
-	export let feature: SecondaryFeature;
+	export let feature: ISecondaryFeature;
 </script>
 
 <div class={clsx(cs, !isActive && 'opacity-75 hover:opacity-100')}>
