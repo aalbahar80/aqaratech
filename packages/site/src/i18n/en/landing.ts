@@ -1,4 +1,7 @@
+import { hero } from './hero';
+
 export const landing = {
+	hero,
 	callToAction: {
 		title: 'Get started today',
 		description:

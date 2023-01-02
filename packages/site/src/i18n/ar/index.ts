@@ -1,3 +1,4 @@
+import { hero } from './hero';
 import { landing } from './landing';
 import { secondaryFeatures } from './secondary-features';
 
@@ -11,6 +12,7 @@ const ar: BaseTranslation = {
 		contact: 'اتصل بنا',
 	},
 	landing,
+	hero,
 	secondaryFeatures,
 };
 

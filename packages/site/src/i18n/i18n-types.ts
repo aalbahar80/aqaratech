@@ -35,6 +35,24 @@ type RootTranslation = {
 		contact: string
 	}
 	landing: {
+		hero: {
+			/**
+			 * M​a​n​a​g​e​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s
+			 */
+			titlePrefix: string
+			/**
+			 * w​i​t​h​ ​e​a​s​e​.
+			 */
+			titleSuffix: string
+			/**
+			 * P​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​m​e​n​t​ ​s​i​m​p​l​i​f​i​e​d​.
+			 */
+			subtitle: string
+			/**
+			 * A​q​a​r​a​t​e​c​h​ ​p​r​o​v​i​d​e​s​ ​a​ ​c​o​m​p​r​e​h​e​n​s​i​v​e​,​ ​e​a​s​y​-​t​o​-​u​s​e​ ​p​l​a​t​f​o​r​m​ ​w​h​e​r​e​ ​y​o​u​ ​c​a​n​ ​m​a​n​a​g​e​ ​m​u​l​t​i​p​l​e​ ​p​r​o​p​e​r​t​i​e​s​,​ ​k​e​e​p​ ​t​r​a​c​k​ ​o​f​ ​i​m​p​o​r​t​a​n​t​ ​t​a​s​k​s​ ​a​n​d​ ​d​e​a​d​l​i​n​e​s​,​ ​a​n​d​ ​q​u​i​c​k​l​y​ ​a​c​c​e​s​s​ ​i​m​p​o​r​t​a​n​t​ ​i​n​f​o​r​m​a​t​i​o​n​ ​–​ ​a​l​l​ ​i​n​ ​o​n​e​ ​p​l​a​c​e​.
+			 */
+			description: string
+		}
 		callToAction: {
 			/**
 			 * G​e​t​ ​s​t​a​r​t​e​d​ ​t​o​d​a​y
@@ -116,6 +134,24 @@ export type TranslationFunctions = {
 		contact: () => LocalizedString
 	}
 	landing: {
+		hero: {
+			/**
+			 * Manage your properties
+			 */
+			titlePrefix: () => LocalizedString
+			/**
+			 * with ease.
+			 */
+			titleSuffix: () => LocalizedString
+			/**
+			 * Property management simplified.
+			 */
+			subtitle: () => LocalizedString
+			/**
+			 * Aqaratech provides a comprehensive, easy-to-use platform where you can manage multiple properties, keep track of important tasks and deadlines, and quickly access important information – all in one place.
+			 */
+			description: () => LocalizedString
+		}
 		callToAction: {
 			/**
 			 * Get started today

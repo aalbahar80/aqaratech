@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { buttonCn } from '$lib/components/landing/button-cn';
+	// eslint-disable-next-line import/no-named-as-default
 	import LL from '$i18n/i18n-svelte';
+	import { buttonCn } from '$lib/components/landing/button-cn';
 	import { LOGIN } from '$lib/constants/routes';
 
 	import UnderlineDecoration from './UnderlineDecoration.svelte';
@@ -11,10 +12,10 @@
 		<h1
 			class="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl"
 		>
-			Manage your properties
+			{$LL.landing.hero.titlePrefix()}
 			<span class="relative whitespace-nowrap text-blue-600">
 				<UnderlineDecoration />
-				<span class="relative">with ease.</span>
+				<span class="relative"> {$LL.landing.hero.titleSuffix()}</span>
 			</span>
 		</h1>
 

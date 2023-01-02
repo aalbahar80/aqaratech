@@ -17,12 +17,10 @@
 	<Container>
 		<div class="mx-auto max-w-2xl md:text-center">
 			<h2 class="text-3xl tracking-tight text-slate-900 sm:text-4xl">
-				Property management simplified.
+				{$LL.landing.hero.subtitle()}
 			</h2>
 			<p class="mt-4 text-lg tracking-tight text-slate-700">
-				Aqaratech provides a comprehensive, easy-to-use platform where you can
-				manage multiple properties, keep track of important tasks and deadlines,
-				and quickly access important information – all in one place.
+				{$LL.landing.hero.description()}
 			</p>
 		</div>
 		<FeaturesMobile {secondaryFeatures} />
