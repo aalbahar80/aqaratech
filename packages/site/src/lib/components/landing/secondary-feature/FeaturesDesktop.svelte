@@ -11,6 +11,7 @@
 	import SecondaryFeature from '$lib/components/landing/secondary-feature/SecondaryFeature.svelte';
 
 	import type { ISecondaryFeature } from '$lib/components/landing/secondary-feature/features';
+	import { locale } from '$i18n/i18n-svelte';
 
 	export let secondaryFeatures: ISecondaryFeature[];
 </script>
@@ -47,7 +48,9 @@
 						'px-5 transition duration-500 ease-in-out [&:not(:focus-visible)]:focus:outline-none',
 						featureIndex !== selectedIndex && 'opacity-60',
 					)}
-					style="transform: translateX(-{(selectedIndex ?? 0) * 100}%);"
+					style="transform: translateX({(selectedIndex ?? 0) *
+						100 *
+						($locale === 'ar' ? 1 : -1)}%);"
 					aria-hidden={featureIndex !== selectedIndex}
 				>
 					<div
@@ -58,6 +61,7 @@
 				</TabPanel>
 			{/each}
 		</div>
+		<!-- TODO: remove empty div? -->
 		<div
 			class="rounded-4xl pointer-events-none absolute inset-0 ring-1 ring-inset ring-slate-900/10"
 		/>
