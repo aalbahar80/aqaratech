@@ -88,7 +88,7 @@
 				aria-label="Pagination"
 			>
 				<button
-					class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
+					class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 rtl:rotate-180"
 					on:click={() => table.previousPage()}
 					disabled={!table.getCanPreviousPage()}
 				>
@@ -124,7 +124,7 @@
 					{/if}
 				{/each}
 				<button
-					class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
+					class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 rtl:rotate-180"
 					on:click={() => table.nextPage()}
 					disabled={!table.getCanNextPage()}
 				>
