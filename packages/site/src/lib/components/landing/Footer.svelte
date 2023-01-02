@@ -16,7 +16,7 @@
 			<!-- 	/> -->
 			<!-- </a> -->
 			<!-- </div> -->
-			<p class="mt-6 text-sm text-slate-500 sm:mt-0">
+			<p class="mt-6 text-sm text-slate-500 sm:mt-0" dir="auto">
 				Copyright &copy; {new Date().getFullYear()} Aqaratech. All rights reserved.
 			</p>
 		</div>
