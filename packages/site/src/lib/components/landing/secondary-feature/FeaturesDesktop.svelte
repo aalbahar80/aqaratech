@@ -8,10 +8,10 @@
 	} from '@rgossiaux/svelte-headlessui';
 	import clsx from 'clsx';
 
+	import { locale } from '$i18n/i18n-svelte';
 	import SecondaryFeature from '$lib/components/landing/secondary-feature/SecondaryFeature.svelte';
 
 	import type { ISecondaryFeature } from '$lib/components/landing/secondary-feature/features';
-	import { locale } from '$i18n/i18n-svelte';
 
 	export let secondaryFeatures: ISecondaryFeature[];
 </script>
