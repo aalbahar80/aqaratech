@@ -7,8 +7,7 @@
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
 
-	// eslint-disable-next-line import/no-named-as-default
-	import LL, { setLocale } from '$i18n/i18n-svelte';
+	import { setLocale } from '$i18n/i18n-svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
@@ -63,8 +62,6 @@
 <SecondaryNavbar />
 {#if $page.url.pathname === '/'}
 	<main>
-		<!-- FIX: Remove this example log -->
-		<pre>{JSON.stringify($LL.HI({ name: 'john' }), null, 2)}</pre>
 		<slot />
 	</main>
 	<VersionFooter />
