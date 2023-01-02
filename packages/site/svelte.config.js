@@ -38,6 +38,7 @@ const config = {
 			'$aqenvironment/*': 'src/lib/environment/*',
 			$api: 'src/api/index.ts',
 			'$api/*': 'src/api/*',
+			$i18n: 'src/i18n',
 		},
 	},
 	// vitePlugin: {

@@ -7,6 +7,8 @@
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
 
+	// eslint-disable-next-line import/no-named-as-default
+	import LL, { setLocale } from '$i18n/i18n-svelte';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
@@ -22,6 +24,9 @@
 	import '../styles/tailwind.css';
 
 	export let data: LayoutData;
+
+	// at the very top, set the locale before you access the store and before the actual rendering takes place
+	setLocale(data.locale);
 
 	onMount(() => {
 		// communicate that the app is ready - used for testing
@@ -58,6 +63,8 @@
 <SecondaryNavbar />
 {#if $page.url.pathname === '/'}
 	<main>
+		<!-- FIX: Remove this example log -->
+		<pre>{JSON.stringify($LL.HI({ name: 'john' }), null, 2)}</pre>
 		<slot />
 	</main>
 	<VersionFooter />
