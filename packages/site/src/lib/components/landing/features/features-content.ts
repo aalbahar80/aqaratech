@@ -5,7 +5,10 @@ import UndrawOnlinePayments from '../../../../assets/illustrations/undraw_online
 import UndrawSecureFiles from '../../../../assets/illustrations/undraw_secure_files.svg';
 import UndrawVisualData from '../../../../assets/illustrations/undraw_visual_data.svg';
 
+// eslint-disable-next-line import/no-named-as-default
+import type LL from '$i18n/i18n-svelte';
 import type { Icon } from '$lib/models/types/icon.type';
+import type { ReadableOf } from '$lib/utils/readable-of';
 
 import HeroiconsOutlineChartBar from '~icons/heroicons-outline/chart-bar';
 import HeroiconsOutlineRectangleGroup from '~icons/heroicons-outline/rectangle-group';
@@ -37,106 +40,107 @@ export interface IFeature {
 	bullets: FeatureBullet[];
 }
 
-export const features = [
-	{
-		title: 'Data and Analytics',
-		image: UndrawBusinessAnalytics,
-		bullets: [
-			{
-				text: 'Comprehensive tracking of property-related data, including units, leases, tenants, and more.',
-				icon: HeroiconsOutlineChartBar,
-			},
-			{
-				text: "Visualize your properties' financial data to identify trends and patterns over time. Use our interactive dashboards to view income, expenses, and profit/loss for each portfolio, property, and unit.",
-				icon: HeroiconsPresentationChartLine,
-			},
-			{
-				text: "Monitor your properties' occupancy rates and vacancy periods using heatmaps.",
-				icon: HeroiconsCalendarDays,
-			},
-		],
-	},
-	{
-		title: 'Rental Payment Tracking',
-		image: UndrawOnlinePayments,
-		bullets: [
-			{
-				text: 'Easy tracking and management of rental payments and lease agreements.',
-				icon: TeenyiconsContractOutline,
-			},
-			{
-				text: 'Automated payment reminders.',
-				icon: HeroiconsBell,
-			},
-			// {
-			// 	text: 'Online KNET rent payments.',
-			// 	icon: HeroiconsCreditCard,
-			// },
-		],
-	},
-	{
-		title: 'Expense Tracking and Visualization',
-		image: UndrawVisualData,
-		bullets: [
-			{
-				text: 'Comprehensive expense tracking provides you with valuable granularity for expense analysis. Choose to attribute expenses to a portfolio, property, or even a single unit.',
-				icon: HeroiconsCubeTransparent,
-			},
-			{
-				text: 'Categorize expenses using a hierarchical system to better understand your expense sources.',
-				icon: HeroiconsOutlineRectangleGroup,
-			},
-			{
-				text: 'Visualize expenses using interactive treemaps, which allow you to quickly identify your cost patterns.',
-				icon: HeroiconsPresentationChartBar,
-			},
-		],
-	},
-	{
-		title: 'Advanced Filtering',
-		image: UndrawDataPoints,
-		bullets: [
-			{
-				text: 'Customizable filters, so you can focus on the information that is most relevant to you.',
-				icon: HeroiconsAdjustmentsVertical,
-			},
-			{
-				text: 'Filter your properties and tenant data by location, including specific properties or units within properties.',
-				icon: HeroiconsFunnel,
-			},
-			{
-				text: 'Filter by time, including specific date ranges or time periods.',
-				icon: HeroiconsClock,
-			},
-		],
-	},
-	{
-		title: 'Document Management',
-		image: UndrawSecureFiles,
-		bullets: [
-			{
-				text: 'Store and manage important documents related to your properties and tenants, including lease agreements, rental payment receipts, and maintenance records.',
-				icon: HeroiconsClipboardDocumentList,
-			},
-			{
-				text: 'Access your documents from anywhere, using any device.',
-				icon: HeroiconsCloud,
-			},
-		],
-	},
+export const getFeatures = (L: ReadableOf<typeof LL>) =>
+	[
+		{
+			title: L.landing.features.data.title(),
+			image: UndrawBusinessAnalytics,
+			bullets: [
+				{
+					text: L.landing.features.data.bullets.track(),
+					icon: HeroiconsOutlineChartBar,
+				},
+				{
+					text: L.landing.features.data.bullets.visualize(),
+					icon: HeroiconsPresentationChartLine,
+				},
+				{
+					text: L.landing.features.data.bullets.monitor(),
+					icon: HeroiconsCalendarDays,
+				},
+			],
+		},
+		{
+			title: L.landing.features.rental.title(),
+			image: UndrawOnlinePayments,
+			bullets: [
+				{
+					text: L.landing.features.rental.bullets.track(),
+					icon: TeenyiconsContractOutline,
+				},
+				{
+					text: L.landing.features.rental.bullets.reminders(),
+					icon: HeroiconsBell,
+				},
+				// {
+				// 	text: 'Online KNET rent payments.',
+				// 	icon: HeroiconsCreditCard,
+				// },
+			],
+		},
+		{
+			title: L.landing.features.expense.title(),
+			image: UndrawVisualData,
+			bullets: [
+				{
+					text: L.landing.features.expense.bullets.track(),
+					icon: HeroiconsCubeTransparent,
+				},
+				{
+					text: L.landing.features.expense.bullets.categorize(),
+					icon: HeroiconsOutlineRectangleGroup,
+				},
+				{
+					text: L.landing.features.expense.bullets.visualize(),
+					icon: HeroiconsPresentationChartBar,
+				},
+			],
+		},
+		{
+			title: L.landing.features.filter.title(),
+			image: UndrawDataPoints,
+			bullets: [
+				{
+					text: L.landing.features.filter.bullets.customizable(),
+					icon: HeroiconsAdjustmentsVertical,
+				},
+				{
+					text: L.landing.features.filter.bullets.properties(),
+					icon: HeroiconsFunnel,
+				},
+				{
+					text: L.landing.features.filter.bullets.time(),
+					icon: HeroiconsClock,
+				},
+			],
+		},
+		{
+			title: L.landing.features.document.title(),
+			image: UndrawSecureFiles,
+			bullets: [
+				{
+					text: L.landing.features.document.bullets.upload(),
+					icon: HeroiconsClipboardDocumentList,
+				},
+				{
+					text: L.landing.features.document.bullets.access(),
+					icon: HeroiconsCloud,
+				},
+			],
+		},
 
-	{
-		title: 'Powerful Search',
-		image: UndrawHouseSearching,
-		bullets: [
-			{
-				text: 'Search through all of your data at the same time.',
-				icon: HeroiconsGlobeAlt,
-			},
-			{
-				text: "Find what you're looking for without knowing the exact spelling.",
-				icon: HeroiconsDocumentMagnifyingGlass,
-			},
-		],
-	},
-] satisfies IFeature[];
+		{
+			title: L.landing.features.search.title(),
+			image: UndrawHouseSearching,
+			bullets: [
+				{
+					text: L.landing.features.search.bullets.all(),
+					icon: HeroiconsGlobeAlt,
+				},
+				{
+					text: L.landing.features.search.bullets.spell(),
+					icon: HeroiconsDocumentMagnifyingGlass,
+				},
+			],
+		},
+	] satisfies IFeature[];

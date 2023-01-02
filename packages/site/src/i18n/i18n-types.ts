@@ -53,6 +53,116 @@ type RootTranslation = {
 			 */
 			description: string
 		}
+		features: {
+			data: {
+				/**
+				 * D​a​t​a​ ​a​n​d​ ​A​n​a​l​y​t​i​c​s
+				 */
+				title: string
+				bullets: {
+					/**
+					 * C​o​m​p​r​e​h​e​n​s​i​v​e​ ​t​r​a​c​k​i​n​g​ ​o​f​ ​p​r​o​p​e​r​t​y​-​r​e​l​a​t​e​d​ ​d​a​t​a​,​ ​i​n​c​l​u​d​i​n​g​ ​u​n​i​t​s​,​ ​l​e​a​s​e​s​,​ ​t​e​n​a​n​t​s​,​ ​a​n​d​ ​m​o​r​e​.
+					 */
+					track: string
+					/**
+					 * V​i​s​u​a​l​i​z​e​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​'​ ​f​i​n​a​n​c​i​a​l​ ​d​a​t​a​ ​t​o​ ​i​d​e​n​t​i​f​y​ ​t​r​e​n​d​s​ ​a​n​d​ ​p​a​t​t​e​r​n​s​ ​o​v​e​r​ ​t​i​m​e​.​ ​U​s​e​ ​o​u​r​ ​i​n​t​e​r​a​c​t​i​v​e​ ​d​a​s​h​b​o​a​r​d​s​ ​t​o​ ​v​i​e​w​ ​i​n​c​o​m​e​,​ ​e​x​p​e​n​s​e​s​,​ ​a​n​d​ ​p​r​o​f​i​t​/​l​o​s​s​ ​f​o​r​ ​e​a​c​h​ ​p​o​r​t​f​o​l​i​o​,​ ​p​r​o​p​e​r​t​y​,​ ​a​n​d​ ​u​n​i​t​.
+					 */
+					visualize: string
+					/**
+					 * M​o​n​i​t​o​r​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​'​ ​o​c​c​u​p​a​n​c​y​ ​r​a​t​e​s​ ​a​n​d​ ​v​a​c​a​n​c​y​ ​p​e​r​i​o​d​s​ ​u​s​i​n​g​ ​h​e​a​t​m​a​p​s​.
+					 */
+					monitor: string
+				}
+			}
+			rental: {
+				/**
+				 * R​e​n​t​a​l​ ​P​a​y​m​e​n​t​ ​T​r​a​c​k​i​n​g
+				 */
+				title: string
+				bullets: {
+					/**
+					 * E​a​s​y​ ​t​r​a​c​k​i​n​g​ ​a​n​d​ ​m​a​n​a​g​e​m​e​n​t​ ​o​f​ ​r​e​n​t​a​l​ ​p​a​y​m​e​n​t​s​ ​a​n​d​ ​l​e​a​s​e​ ​a​g​r​e​e​m​e​n​t​s​.
+					 */
+					track: string
+					/**
+					 * A​u​t​o​m​a​t​e​d​ ​p​a​y​m​e​n​t​ ​r​e​m​i​n​d​e​r​s​.
+					 */
+					reminders: string
+				}
+			}
+			expense: {
+				/**
+				 * E​x​p​e​n​s​e​ ​T​r​a​c​k​i​n​g​ ​a​n​d​ ​V​i​s​u​a​l​i​z​a​t​i​o​n
+				 */
+				title: string
+				bullets: {
+					/**
+					 * C​o​m​p​r​e​h​e​n​s​i​v​e​ ​e​x​p​e​n​s​e​ ​t​r​a​c​k​i​n​g​ ​p​r​o​v​i​d​e​s​ ​y​o​u​ ​w​i​t​h​ ​v​a​l​u​a​b​l​e​ ​g​r​a​n​u​l​a​r​i​t​y​ ​f​o​r​ ​e​x​p​e​n​s​e​ ​a​n​a​l​y​s​i​s​.​ ​C​h​o​o​s​e​ ​t​o​ ​a​t​t​r​i​b​u​t​e​ ​e​x​p​e​n​s​e​s​ ​t​o​ ​a​ ​p​o​r​t​f​o​l​i​o​,​ ​p​r​o​p​e​r​t​y​,​ ​o​r​ ​e​v​e​n​ ​a​ ​s​i​n​g​l​e​ ​u​n​i​t​.
+					 */
+					track: string
+					/**
+					 * C​a​t​e​g​o​r​i​z​e​ ​e​x​p​e​n​s​e​s​ ​u​s​i​n​g​ ​a​ ​h​i​e​r​a​r​c​h​i​c​a​l​ ​s​y​s​t​e​m​ ​t​o​ ​b​e​t​t​e​r​ ​u​n​d​e​r​s​t​a​n​d​ ​y​o​u​r​ ​e​x​p​e​n​s​e​ ​s​o​u​r​c​e​s​.
+					 */
+					categorize: string
+					/**
+					 * V​i​s​u​a​l​i​z​e​ ​e​x​p​e​n​s​e​s​ ​u​s​i​n​g​ ​i​n​t​e​r​a​c​t​i​v​e​ ​t​r​e​e​m​a​p​s​,​ ​w​h​i​c​h​ ​a​l​l​o​w​ ​y​o​u​ ​t​o​ ​q​u​i​c​k​l​y​ ​i​d​e​n​t​i​f​y​ ​y​o​u​r​ ​c​o​s​t​ ​p​a​t​t​e​r​n​s​.
+					 */
+					visualize: string
+				}
+			}
+			filter: {
+				/**
+				 * A​d​v​a​n​c​e​d​ ​F​i​l​t​e​r​i​n​g
+				 */
+				title: string
+				bullets: {
+					/**
+					 * C​u​s​t​o​m​i​z​a​b​l​e​ ​f​i​l​t​e​r​s​,​ ​s​o​ ​y​o​u​ ​c​a​n​ ​f​o​c​u​s​ ​o​n​ ​t​h​e​ ​i​n​f​o​r​m​a​t​i​o​n​ ​t​h​a​t​ ​i​s​ ​m​o​s​t​ ​r​e​l​e​v​a​n​t​ ​t​o​ ​y​o​u​.
+					 */
+					customizable: string
+					/**
+					 * F​i​l​t​e​r​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​ ​a​n​d​ ​t​e​n​a​n​t​ ​d​a​t​a​ ​b​y​ ​l​o​c​a​t​i​o​n​,​ ​i​n​c​l​u​d​i​n​g​ ​s​p​e​c​i​f​i​c​ ​p​r​o​p​e​r​t​i​e​s​ ​o​r​ ​u​n​i​t​s​ ​w​i​t​h​i​n​ ​p​r​o​p​e​r​t​i​e​s​.
+					 */
+					properties: string
+					/**
+					 * F​i​l​t​e​r​ ​b​y​ ​t​i​m​e​,​ ​i​n​c​l​u​d​i​n​g​ ​s​p​e​c​i​f​i​c​ ​d​a​t​e​ ​r​a​n​g​e​s​ ​o​r​ ​t​i​m​e​ ​p​e​r​i​o​d​s​.
+					 */
+					time: string
+				}
+			}
+			document: {
+				/**
+				 * D​o​c​u​m​e​n​t​ ​M​a​n​a​g​e​m​e​n​t
+				 */
+				title: string
+				bullets: {
+					/**
+					 * S​t​o​r​e​ ​a​n​d​ ​m​a​n​a​g​e​ ​i​m​p​o​r​t​a​n​t​ ​d​o​c​u​m​e​n​t​s​ ​r​e​l​a​t​e​d​ ​t​o​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​ ​a​n​d​ ​t​e​n​a​n​t​s​,​ ​i​n​c​l​u​d​i​n​g​ ​l​e​a​s​e​ ​a​g​r​e​e​m​e​n​t​s​,​ ​r​e​n​t​a​l​ ​p​a​y​m​e​n​t​ ​r​e​c​e​i​p​t​s​,​ ​a​n​d​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​c​o​r​d​s​.
+					 */
+					upload: string
+					/**
+					 * A​c​c​e​s​s​ ​y​o​u​r​ ​d​o​c​u​m​e​n​t​s​ ​f​r​o​m​ ​a​n​y​w​h​e​r​e​,​ ​u​s​i​n​g​ ​a​n​y​ ​d​e​v​i​c​e​.
+					 */
+					access: string
+				}
+			}
+			search: {
+				/**
+				 * P​o​w​e​r​f​u​l​ ​S​e​a​r​c​h
+				 */
+				title: string
+				bullets: {
+					/**
+					 * S​e​a​r​c​h​ ​t​h​r​o​u​g​h​ ​a​l​l​ ​o​f​ ​y​o​u​r​ ​d​a​t​a​ ​a​t​ ​t​h​e​ ​s​a​m​e​ ​t​i​m​e​.
+					 */
+					all: string
+					/**
+					 * F​i​n​d​ ​w​h​a​t​ ​y​o​u​'​r​e​ ​l​o​o​k​i​n​g​ ​f​o​r​ ​w​i​t​h​o​u​t​ ​k​n​o​w​i​n​g​ ​t​h​e​ ​e​x​a​c​t​ ​s​p​e​l​l​i​n​g​.
+					 */
+					spell: string
+				}
+			}
+		}
 		callToAction: {
 			/**
 			 * G​e​t​ ​s​t​a​r​t​e​d​ ​t​o​d​a​y
@@ -151,6 +261,116 @@ export type TranslationFunctions = {
 			 * Aqaratech provides a comprehensive, easy-to-use platform where you can manage multiple properties, keep track of important tasks and deadlines, and quickly access important information – all in one place.
 			 */
 			description: () => LocalizedString
+		}
+		features: {
+			data: {
+				/**
+				 * Data and Analytics
+				 */
+				title: () => LocalizedString
+				bullets: {
+					/**
+					 * Comprehensive tracking of property-related data, including units, leases, tenants, and more.
+					 */
+					track: () => LocalizedString
+					/**
+					 * Visualize your properties' financial data to identify trends and patterns over time. Use our interactive dashboards to view income, expenses, and profit/loss for each portfolio, property, and unit.
+					 */
+					visualize: () => LocalizedString
+					/**
+					 * Monitor your properties' occupancy rates and vacancy periods using heatmaps.
+					 */
+					monitor: () => LocalizedString
+				}
+			}
+			rental: {
+				/**
+				 * Rental Payment Tracking
+				 */
+				title: () => LocalizedString
+				bullets: {
+					/**
+					 * Easy tracking and management of rental payments and lease agreements.
+					 */
+					track: () => LocalizedString
+					/**
+					 * Automated payment reminders.
+					 */
+					reminders: () => LocalizedString
+				}
+			}
+			expense: {
+				/**
+				 * Expense Tracking and Visualization
+				 */
+				title: () => LocalizedString
+				bullets: {
+					/**
+					 * Comprehensive expense tracking provides you with valuable granularity for expense analysis. Choose to attribute expenses to a portfolio, property, or even a single unit.
+					 */
+					track: () => LocalizedString
+					/**
+					 * Categorize expenses using a hierarchical system to better understand your expense sources.
+					 */
+					categorize: () => LocalizedString
+					/**
+					 * Visualize expenses using interactive treemaps, which allow you to quickly identify your cost patterns.
+					 */
+					visualize: () => LocalizedString
+				}
+			}
+			filter: {
+				/**
+				 * Advanced Filtering
+				 */
+				title: () => LocalizedString
+				bullets: {
+					/**
+					 * Customizable filters, so you can focus on the information that is most relevant to you.
+					 */
+					customizable: () => LocalizedString
+					/**
+					 * Filter your properties and tenant data by location, including specific properties or units within properties.
+					 */
+					properties: () => LocalizedString
+					/**
+					 * Filter by time, including specific date ranges or time periods.
+					 */
+					time: () => LocalizedString
+				}
+			}
+			document: {
+				/**
+				 * Document Management
+				 */
+				title: () => LocalizedString
+				bullets: {
+					/**
+					 * Store and manage important documents related to your properties and tenants, including lease agreements, rental payment receipts, and maintenance records.
+					 */
+					upload: () => LocalizedString
+					/**
+					 * Access your documents from anywhere, using any device.
+					 */
+					access: () => LocalizedString
+				}
+			}
+			search: {
+				/**
+				 * Powerful Search
+				 */
+				title: () => LocalizedString
+				bullets: {
+					/**
+					 * Search through all of your data at the same time.
+					 */
+					all: () => LocalizedString
+					/**
+					 * Find what you're looking for without knowing the exact spelling.
+					 */
+					spell: () => LocalizedString
+				}
+			}
 		}
 		callToAction: {
 			/**

@@ -1,9 +1,11 @@
+import { features } from './features';
 import { hero } from './hero';
 
 import type { landing as en_landing } from '../en/landing';
 
 export const landing = {
 	hero,
+	features,
 	callToAction: {
 		title: 'ابدأ اليوم',
 		description:

@@ -1,7 +1,9 @@
+import { features } from './features';
 import { hero } from './hero';
 
 export const landing = {
 	hero,
+	features,
 	callToAction: {
 		title: 'Get started today',
 		description:
