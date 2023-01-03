@@ -181,10 +181,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 		transformPageChunk({ html }) {
 			// 1. add trace
 			// 2. replace html lang attribute with correct language
-			return addTraceToHead({ html, span: spanResolve }).replace(
-				'%lang%',
-				lang,
-			);
+			// 2. replace html dir attribute with correct value
+			return addTraceToHead({ html, span: spanResolve })
+				.replace('%lang%', lang)
+				.replace('%dir%', lang === 'ar' ? 'rtl' : 'ltr');
 		},
 	});
 
