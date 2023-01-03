@@ -1,9 +1,5 @@
-import { get } from 'svelte/store';
-
 import { Cookie } from '@self/utils';
 
-// eslint-disable-next-line import/no-named-as-default
-import LL from '$i18n/i18n-svelte';
 import { logger } from '$lib/server/logger';
 import { getProfile } from '$lib/server/utils/get-profile';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
@@ -40,7 +36,7 @@ export const getUser = async ({
 	// augment each role with metadata
 	const roles = profile.roles.map((role) => ({
 		...role,
-		meta: getRoleMeta(role, get(LL)), // TODO: lang param - use lang param once implemented
+		meta: getRoleMeta(role, event.locals.LL, event.locals.locale),
 	}));
 
 	// Resolve user's role
