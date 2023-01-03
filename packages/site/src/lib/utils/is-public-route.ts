@@ -4,7 +4,7 @@
 
 // const isAuthRoute = (path: string) => AUTH_ROUTES.includes(path);
 
-const PUBLIC_ROUTES = ['/'];
+const PUBLIC_ROUTES = ['/', '/en', '/ar'];
 
 export const isPublicRoute = (pathname: string) =>
 	PUBLIC_ROUTES.includes(pathname);
