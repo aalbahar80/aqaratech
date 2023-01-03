@@ -19,7 +19,7 @@ const input: [string, string, string][] = [
 				// FilterEnum.Unit: '4',
 			},
 		}),
-		'/organizations/1/portfolios/2/financials/summary', // redirectTo
+		'/en/organizations/1/portfolios/2/financials/summary', // redirectTo
 		'/organizations/1/portfolios/2/set-filter?initialPropertyId=3&initialUnitId=4', // href
 	],
 ];

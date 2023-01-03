@@ -63,8 +63,10 @@ export const getDashboardRoute = (input: GetDashboardRoute, base: string) => {
 		}
 	}
 
+	const lang = input.params['lang'] ?? 'en';
+
 	// when	we have predefined filters, we want to use redirectTo
-	search.set('redirectTo', destination);
+	search.set('redirectTo', `/${lang}${destination}`);
 
 	return `${idRoute}/set-filter?${search.toString()}`;
 };
