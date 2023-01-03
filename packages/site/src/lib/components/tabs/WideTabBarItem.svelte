@@ -15,6 +15,7 @@
 </script>
 
 <a
+	data-testid={active ? 'active' : 'inactive'}
 	href={tab.href}
 	class={classes(
 		'flex w-full border-b-2 py-4 px-1 text-center text-sm font-medium',
