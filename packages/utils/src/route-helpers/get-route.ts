@@ -24,7 +24,10 @@ export const getRoute = (input: GetRoute) => {
 
 	// always add lang to beginning of route
 	const defaultLocale = 'en';
+
 	const lang = input.params['lang'] ?? defaultLocale;
 
-	return `/${lang}${destination}`;
+	const withLang = `/${lang}${destination}`;
+
+	return withLang;
 };
