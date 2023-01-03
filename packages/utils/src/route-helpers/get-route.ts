@@ -10,13 +10,17 @@ import type { GetRoute } from './types/route-helpers.type';
 export const getRoute = (input: GetRoute) => {
 	const base = getBaseRoute(input);
 
+	let destination;
+
 	if (input.pageType === PageType.List) {
-		return getListRoute(input, base);
+		destination = getListRoute(input, base);
 	} else if (input.pageType === PageType.New) {
-		return getFormRoute(input, base);
+		destination = getFormRoute(input, base);
 	} else if (isDashboardRoute(input)) {
-		return getDashboardRoute(input, base);
+		destination = getDashboardRoute(input, base);
 	} else {
-		return getIdRoute(input, base);
+		destination = getIdRoute(input, base);
 	}
+
+	return destination;
 };
