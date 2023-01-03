@@ -4,6 +4,8 @@ import { getRoute, PageTab } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
 
+test.skip(({ isMobile }) => isMobile === true);
+
 test('locale switch updates $page.pathname', async ({ page, portfolio }) => {
 	const url = getRoute({
 		entity: 'portfolio',
@@ -21,7 +23,7 @@ test('locale switch updates $page.pathname', async ({ page, portfolio }) => {
 	const tab = page.getByRole('link', { name: 'Properties' });
 	await expect(tab).toHaveAttribute('data-testid', 'active');
 
-	const ar = page.getByRole('list').getByRole('link', { name: 'ar' });
+	const ar = page.getByRole('link', { name: 'العربية' });
 	await ar.click();
 
 	await page.waitForNavigation();

@@ -6,6 +6,7 @@
 	import { setLocale, locale } from '$i18n/i18n-svelte';
 	import { locales } from '$i18n/i18n-util';
 	import { loadLocaleAsync } from '$i18n/i18n-util.async';
+	import { LOCALE_LABELS } from '$lib/i18n/locale-labels';
 
 	import { replaceLocaleInUrl } from './replace-local-url';
 
@@ -58,19 +59,12 @@
 			replaceLocaleInUrl($page.url, lang),
 		);
 	}
+
+	$: unselectedLocale = locales.find((l) => l !== $locale)!;
 </script>
 
 <svelte:window on:popstate={handlePopStateEvent} />
 
-<ul>
-	{#each locales as l}
-		<li>
-			<a
-				class:active={l === $locale}
-				href={`${replaceLocaleInUrl($page.url, l)}`}
-			>
-				{l}
-			</a>
-		</li>
-	{/each}
-</ul>
+<a href={`${replaceLocaleInUrl($page.url, unselectedLocale)}`}>
+	{LOCALE_LABELS[unselectedLocale]}
+</a>
