@@ -20,7 +20,6 @@ export const generateSchedule = ({
 			start.getUTCMinutes(),
 			start.getUTCSeconds(),
 		);
-		console.log(new Date(postAtMS), 'postAt');
 		const postAt = new Date(postAtMS).toISOString().substring(0, 10);
 
 		const memo = `Rent for: ${toUTCFormatMonthYear(postAt)}`;

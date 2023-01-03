@@ -124,8 +124,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.locale = locale;
 	event.locals.LL = LL;
 
-	console.info(LL.log({ fileName: 'hooks.server.ts' }));
-
 	const idToken = event.cookies.get(Cookie.idToken);
 	const accessToken = event.cookies.get(Cookie.accessToken);
 	const selectedRoleId = event.cookies.get(Cookie.role);

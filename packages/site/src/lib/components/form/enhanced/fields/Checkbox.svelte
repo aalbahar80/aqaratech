@@ -16,7 +16,6 @@
 
 	export let formField: GFormField;
 	export let value: unknown = undefined;
-	$: console.log(value);
 </script>
 
 <!-- <input type=checkbox /> is not consistent with other HTML inputs -->
@@ -44,7 +43,6 @@
 		let:checked
 		checked={!!value}
 		on:change={(e) => {
-			console.log({ value }, 'Checkbox.svelte ~ 41');
 			value = e.detail;
 			// dispatch('select', { value: e.detail });
 		}}
