@@ -24,7 +24,6 @@
 		$page.url.pathname.includes('/edit')}
 >
 	<div class="sm:hidden">
-		>
 		<label for="tabs" class="sr-only">Select a tab</label>
 		<!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
 		<select
