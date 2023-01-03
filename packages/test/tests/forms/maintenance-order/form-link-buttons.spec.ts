@@ -65,7 +65,7 @@ test('create maintenanceOrder for property button predefined params', async ({
 	await expect(btn).toHaveAttribute(
 		'href',
 		resolveURL(
-			'en',
+			'/en',
 			'/organizations',
 			property.organizationId,
 			'portfolios',
@@ -91,7 +91,7 @@ test.fixme(
 		await expect(btn).toHaveAttribute(
 			'href',
 			resolveURL(
-				'en',
+				'/en',
 				'/organizations',
 				property.organizationId,
 				'portfolios',

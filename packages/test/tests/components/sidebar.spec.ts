@@ -36,7 +36,7 @@ test('sidebar can be opened and closed', async ({ page }) => {
 
 	await sidebar.assertOpen();
 
-	const logout = page.getByRole('link', { name: 'Logout' });
+	const logout = page.getByRole('link', { name: 'Log out' });
 	await expect(logout).toBeVisible();
 
 	// Close sidebar
