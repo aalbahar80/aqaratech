@@ -5,6 +5,7 @@ import type { Actions } from './$types';
 import { fileCreateSchema } from '@self/utils';
 
 import { handleForm } from '$lib/components/form/handle-form';
+import { REDIRECT_TO } from '$lib/constants/misc';
 import { environment } from '$lib/environment';
 
 export const actions: Actions = {
@@ -43,7 +44,7 @@ export const actions: Actions = {
 				return data;
 			},
 
-			redirectTo: () => event.url.searchParams.get('redirectTo') ?? '/',
+			redirectTo: () => event.url.searchParams.get(REDIRECT_TO) ?? '/',
 		});
 	},
 };

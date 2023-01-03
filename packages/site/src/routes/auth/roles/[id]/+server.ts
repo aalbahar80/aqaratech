@@ -2,7 +2,7 @@ import type { RequestHandler } from './$types';
 
 import { Cookie } from '@self/utils';
 
-import { MAX_AGE } from '$lib/constants/misc';
+import { MAX_AGE, REDIRECT_TO } from '$lib/constants/misc';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const GET: RequestHandler = async ({ cookies, params, url }) => {
@@ -11,7 +11,7 @@ export const GET: RequestHandler = async ({ cookies, params, url }) => {
 		maxAge: MAX_AGE,
 	});
 
-	const location = url.searchParams.get('redirectTo') ?? '/concierge';
+	const location = url.searchParams.get(REDIRECT_TO) ?? '/concierge';
 
 	return new Response(undefined, {
 		status: 302,

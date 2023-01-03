@@ -3,6 +3,7 @@ import type { Actions } from './$types';
 import { getRoute, organizationSchema, PageType } from '@self/utils';
 
 import { handleForm } from '$lib/components/form/handle-form';
+import { REDIRECT_TO } from '$lib/constants/misc';
 
 export const actions: Actions = {
 	default: async (event) => {
@@ -29,7 +30,7 @@ export const actions: Actions = {
 				});
 
 				// Switch cookies to new organization/role and redirect to the new org's info page
-				return `/auth/roles/${submitted.roleId}?redirectTo=${orgInfoPage}`;
+				return `/auth/roles/${submitted.roleId}?${REDIRECT_TO}=${orgInfoPage}`;
 			},
 		});
 	},

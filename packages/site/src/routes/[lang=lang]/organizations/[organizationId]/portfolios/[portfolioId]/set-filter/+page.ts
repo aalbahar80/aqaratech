@@ -4,6 +4,7 @@ import type { PageLoad } from './$types';
 
 import { FilterInitial } from '@self/utils';
 
+import { REDIRECT_TO } from '$lib/constants/misc';
 import { property } from '$lib/stores/filter/property';
 import { unit } from '$lib/stores/filter/unit';
 
@@ -27,7 +28,7 @@ export const load: PageLoad = async ({ url: { searchParams } }) => {
 		unit.set(unitId);
 	}
 
-	const location = searchParams.get('redirectTo');
+	const location = searchParams.get(REDIRECT_TO);
 	if (!location) {
 		throw new Error('redirectTo query param is required');
 	}
