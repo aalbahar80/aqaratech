@@ -26,6 +26,11 @@
 		// update `lang` attribute
 		document.querySelector('html')?.setAttribute('lang', newLocale);
 
+		// update `dir` attribute
+		document
+			.querySelector('html')
+			?.setAttribute('dir', newLocale === 'ar' ? 'rtl' : 'ltr');
+
 		if (updateHistoryState) {
 			// update url to reflect locale changes
 			history.pushState(
