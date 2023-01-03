@@ -4,10 +4,10 @@ import { LOGOUT } from '$lib/constants/routes';
 
 // eslint-disable-next-line import/no-named-as-default
 import type LL from '$i18n/i18n-svelte';
+import type { Locales } from '$i18n/i18n-types';
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
 import type { ReadableOf } from '$lib/utils/readable-of';
-import type { Locale } from 'typesafe-i18n/types/runtime/src/core.mjs';
 
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
@@ -28,7 +28,7 @@ import HeroiconsWrench from '~icons/heroicons/wrench';
 export const getNavigationTree = (
 	user: User,
 	L: ReadableOf<typeof LL>,
-	locale: Locale,
+	locale: Locales,
 ): NavigationItem[] => {
 	const langParam = {
 		lang: locale,
@@ -37,7 +37,7 @@ export const getNavigationTree = (
 	const tree: NavigationItem[] = [
 		{
 			name: L.nav.account(),
-			href: `/users/${user.id}/roles`,
+			href: `/${locale}/users/${user.id}/roles`,
 			icon: HeroiconsOutlineUser,
 			divided: true,
 			linkOptions: {
