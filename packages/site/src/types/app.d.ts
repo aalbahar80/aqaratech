@@ -8,6 +8,9 @@ declare namespace App {
 	interface Locals {
 		user: import('$models/types/auth.type').User | undefined;
 		isAqaratechStaff: boolean;
+
+		locale: import('$i18n/i18n-types').Locales;
+		LL: import('$i18n/i18n-types').TranslationFunctions;
 	}
 
 	interface PageData {

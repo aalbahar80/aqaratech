@@ -6,8 +6,7 @@ import { loadLocaleAsync } from '$i18n/i18n-util.async';
 import { LOGIN } from '$lib/constants/routes';
 import { isPublicRoute } from '$lib/utils/is-public-route';
 
-import type { Locales } from '$i18n/i18n-types';
-
+// TODO: destructure `data` to be more verbose
 export const load: LayoutLoad = async ({ data, url: { pathname } }) => {
 	// Checking for data.user and redirecting here causes this function to catch
 	// all the random requests by bots and crawlers that are not logged in.
@@ -18,14 +17,18 @@ export const load: LayoutLoad = async ({ data, url: { pathname } }) => {
 		throw redirect(302, LOGIN);
 	}
 
-	const locale: Locales = 'en'; // WARN: hard-coded for now
+	console.log({ dl: data.locale }); // WARN: Remove
 
+	// TODO: Move to top?
 	// load dictionary into memory
-	await loadLocaleAsync(locale);
+	await loadLocaleAsync(data.locale);
+	// await loadLocaleAsync('en');
+
+	// const locale: Locales = 'en'; // WARN: hard-coded for now
 
 	return {
 		...data,
 		// pass locale to the "rendering context"
-		locale,
+		locale: data.locale,
 	};
 };

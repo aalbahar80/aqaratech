@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
+import { initAcceptLanguageHeaderDetector } from 'typesafe-i18n/detectors';
 
 import {
 	Cookie,
@@ -10,6 +11,8 @@ import {
 
 import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
+import { detectLocale, i18n, isLocale } from '$i18n/i18n-util';
+import { loadAllLocales } from '$i18n/i18n-util.sync';
 import { MAX_AGE } from '$lib/constants/misc';
 import { sentryConfig } from '$lib/environment/sentry.config';
 import { logger } from '$lib/server/logger';
@@ -24,7 +27,12 @@ import {
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
 
-import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
+import type {
+	Handle,
+	HandleFetch,
+	HandleServerError,
+	RequestEvent,
+} from '@sveltejs/kit';
 
 // import * as Tracing from '@sentry/tracing'; // TODO: remove?
 
@@ -53,6 +61,9 @@ Sentry.init({
 		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),
 	],
 });
+
+loadAllLocales();
+const L = i18n();
 
 export const handle: Handle = async ({ event, resolve }) => {
 	// if (event.url.pathname.startsWith('/api/')) {
@@ -91,6 +102,29 @@ export const handle: Handle = async ({ event, resolve }) => {
 		op: 'http.server',
 		description: 'parse cookies and get user',
 	});
+
+	// read language slug
+	const [, lang] = event.url.pathname.split('/');
+
+	// redirect to base locale if no locale slug was found
+	if (!lang) {
+		const locale = getPreferredLocale(event);
+
+		return new Response(null, {
+			status: 302,
+			headers: { Location: `/${locale}` },
+		});
+	}
+
+	// if slug is not a locale, use base locale (e.g. api endpoints)
+	const locale = isLocale(lang) ? lang : getPreferredLocale(event);
+	const LL = L[locale];
+
+	// bind locale and translation functions to current request
+	event.locals.locale = locale;
+	event.locals.LL = LL;
+
+	console.info(LL.log({ fileName: 'hooks.server.ts' }));
 
 	const idToken = event.cookies.get(Cookie.idToken);
 	const accessToken = event.cookies.get(Cookie.accessToken);
@@ -145,7 +179,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const response = await resolve(event, {
 		transformPageChunk({ html }) {
-			return addTraceToHead({ html, span: spanResolve });
+			// 1. add trace
+			// 2. replace html lang attribute with correct language
+			return addTraceToHead({ html, span: spanResolve }).replace(
+				'%lang%',
+				lang,
+			);
 		},
 	});
 
@@ -241,4 +280,12 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 	}
 
 	return await fetch(request);
+};
+
+const getPreferredLocale = ({ request }: RequestEvent) => {
+	// detect the preferred language the user has configured in his browser
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
+	const acceptLanguageDetector = initAcceptLanguageHeaderDetector(request);
+
+	return detectLocale(acceptLanguageDetector);
 };
