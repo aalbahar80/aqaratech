@@ -26,6 +26,7 @@ test('new category button links to form', async ({ page, org }) => {
 	const btn = page.getByRole('link', { name: 'Create New category' });
 
 	const url = resolveURL(
+		'/en',
 		'/organizations',
 		org.organization.id,
 		'expense-categories',

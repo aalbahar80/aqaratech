@@ -26,6 +26,7 @@ test('create invoices-multiple button predefined params', async ({
 	await expect(btn).toHaveAttribute(
 		'href',
 		resolveURL(
+			'/en',
 			'/organizations',
 			lease.organizationId,
 			'portfolios',
@@ -55,6 +56,7 @@ test('create invoice button predefined params', async ({ page, lease }) => {
 	await expect(btn).toHaveAttribute(
 		'href',
 		resolveURL(
+			'/en',
 			'/organizations',
 			lease.organizationId,
 			'portfolios',
@@ -84,6 +86,7 @@ test('renew lease button predefined params', async ({ page, lease }) => {
 	await expect(btn).toHaveAttribute(
 		'href',
 		resolveURL(
+			'/en',
 			'/organizations',
 			lease.organizationId,
 			'portfolios',
@@ -113,6 +116,7 @@ test('create lease button predefined params', async ({ page, unit }) => {
 	await expect(btn).toHaveAttribute(
 		'href',
 		resolveURL(
+			'/en',
 			'/organizations',
 			unit.organizationId,
 			'portfolios',
@@ -142,6 +146,7 @@ test('create unit button predefined params', async ({ page, property }) => {
 	await expect(btn).toHaveAttribute(
 		'href',
 		resolveURL(
+			'/en',
 			'/organizations',
 			property.organizationId,
 			'portfolios',
@@ -170,6 +175,7 @@ test('create property button links to form', async ({ page, portfolio }) => {
 	await expect(btn).toHaveAttribute(
 		'href',
 		resolveURL(
+			'/en',
 			'/organizations',
 			portfolio.organizationId,
 			'portfolios',
@@ -195,6 +201,12 @@ test('create portfolio button links to form', async ({ page, org }) => {
 
 	await expect(btn).toHaveAttribute(
 		'href',
-		resolveURL('/organizations', org.organization.id, 'portfolios', 'new'),
+		resolveURL(
+			'/en',
+			'/organizations',
+			org.organization.id,
+			'portfolios',
+			'new',
+		),
 	);
 });

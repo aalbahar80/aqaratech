@@ -42,6 +42,7 @@ for (const entity of inputs) {
 		await expect(btn).toHaveAttribute(
 			'href',
 			resolveURL(
+				'/en',
 				'/organizations',
 				unit.organizationId,
 				'portfolios',
@@ -76,6 +77,7 @@ for (const entity of inputs) {
 		await expect(btn).toHaveAttribute(
 			'href',
 			resolveURL(
+				'/en',
 				'/organizations',
 				property.organizationId,
 				'portfolios',

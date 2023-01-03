@@ -34,6 +34,7 @@ for (const input of inputs) {
 		});
 
 		const form = resolveURL(
+			'/en',
 			'/organizations',
 			org.organization.id,
 			'roles',
