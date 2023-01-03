@@ -10,11 +10,12 @@ export const replaceLocaleInUrl = (
 	locale: string,
 	full = false,
 ): string => {
-	const [, , ...rest] = url.pathname.split('/');
+	const updatedUrl = new URL(url.toString());
+	const [, , ...rest] = updatedUrl.pathname.split('/');
 	const new_pathname = `/${[locale, ...rest].join('/')}`;
 	if (!full) {
-		return `${new_pathname}${url.search}`;
+		return `${new_pathname}${updatedUrl.search}`;
 	}
-	url.pathname = new_pathname;
-	return url.toString();
+	updatedUrl.pathname = new_pathname;
+	return updatedUrl.toString();
 };
