@@ -23,7 +23,9 @@ export const actions: Actions = {
 					entity: 'organization',
 					id: submitted.organization.id,
 					pageType: PageType.Id,
-					params: {},
+					params: {
+						lang: event.params.lang,
+					},
 				});
 
 				// Switch cookies to new organization/role and redirect to the new org's info page

@@ -8,7 +8,9 @@
 	$: baseRouteConfig = {
 		entity: 'organization',
 		id: $page.params['organizationId']!,
-		params: {},
+		params: {
+			lang: $page.params['lang']!,
+		},
 	} as const;
 
 	$: tabs = [

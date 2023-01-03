@@ -1,3 +1,4 @@
+import type { RouteParams } from '@self/utils';
 import {
 	FileRelationKeyEnum,
 	getRoute,
@@ -15,7 +16,7 @@ export const getFormRouteWithRelation = ({
 }: {
 	entity: GetFormRouteWithRelation['entity'];
 	pathname: string;
-	params: Record<string, string>;
+	params: RouteParams;
 	redirectTo: string;
 }): string => {
 	const relation = inferUrlRelation(pathname);

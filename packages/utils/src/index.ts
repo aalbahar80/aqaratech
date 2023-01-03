@@ -53,6 +53,7 @@ export { PageType } from './route-helpers/enums/page-type.enum';
 export { FilterInitial } from './route-helpers/get-dashboard-route';
 export { getRoute } from './route-helpers/get-route';
 export { inferUrlRelation } from './route-helpers/infer-url-relation';
+export type { RouteParams } from './route-helpers/types/base-route.type';
 export type { GetIdRouteEntity } from './route-helpers/types/id-route.type';
 export type {
 	GetFormRoute,

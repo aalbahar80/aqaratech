@@ -107,6 +107,7 @@
 							params: {
 								organizationId: e.detail.organizationId,
 								portfolioId: e.detail.portfolioId,
+								lang: $page.params['lang'] ?? 'en', // HACK: svelte type limitation
 							},
 						});
 						void goto(url, { noScroll: true });

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	import { getRoute, PageType } from '@self/utils';
 
 	import HeroiconsFolderPlus from '~icons/heroicons/folder-plus';
@@ -21,7 +23,9 @@
 		href={getRoute({
 			entity: 'organization',
 			pageType: PageType.New,
-			params: {},
+			params: {
+				lang: $page.params['lang'] ?? 'en', // HACK: svelte type limitation
+			},
 		})}
 	>
 		<HeroiconsPlusSmall class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
