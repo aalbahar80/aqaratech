@@ -1,34 +1,15 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
-
-	console.info($LL.log({ fileName: '+page.svelte' }));
-
-	let spectators = 0;
-
-	onMount(() => {
-		const interval = setInterval(updateSpectatorCount, 2_000);
-
-		return () => clearInterval(interval);
-	});
-
-	const updateSpectatorCount = async () => {
-		const response = await fetch(
-			'/api/spectators?' +
-				new URLSearchParams({
-					oldSpectators: spectators.toString(),
-				}).toString(),
-		);
-		const result = await response.json();
-		spectators = result.spectators;
-	};
-
-	const day = new Date('2021-11-20');
+	import CallToAction from '$lib/components/landing/CallToAction.svelte';
+	import Features from '$lib/components/landing/features/Features.svelte';
+	import Footer from '$lib/components/landing/Footer.svelte';
+	import Hero from '$lib/components/landing/Hero.svelte';
+	import SecondaryFeatures from '$lib/components/landing/secondary-feature/SecondaryFeatures.svelte';
+	import PopoverDivider from '$lib/components/popover/PopoverDivider.svelte';
 </script>
 
-<h2>
-	<!-- TEST: Remove -->
-	{$LL.general.name()}
-</h2>
+<Hero />
+<PopoverDivider />
+<SecondaryFeatures />
+<CallToAction />
+<Features />
+<Footer />
