@@ -7,6 +7,7 @@ import type LL from '$i18n/i18n-svelte';
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
 import type { ReadableOf } from '$lib/utils/readable-of';
+import type { Locale } from 'typesafe-i18n/types/runtime/src/core.mjs';
 
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
@@ -27,7 +28,12 @@ import HeroiconsWrench from '~icons/heroicons/wrench';
 export const getNavigationTree = (
 	user: User,
 	L: ReadableOf<typeof LL>,
+	locale: Locale,
 ): NavigationItem[] => {
+	const langParam = {
+		lang: locale,
+	};
+
 	const tree: NavigationItem[] = [
 		{
 			name: L.nav.account(),
@@ -56,7 +62,9 @@ export const getNavigationTree = (
 			href: getRoute({
 				entity: 'organization',
 				pageType: PageType.New,
-				params: {},
+				params: {
+					...langParam,
+				},
 			}),
 			icon: HeroiconsPlus,
 			divided: true,
@@ -76,7 +84,7 @@ export const getNavigationTree = (
 				href: getRoute({
 					entity: 'portfolio',
 					pageType,
-					params: { organizationId },
+					params: { organizationId, ...langParam },
 				}),
 				icon: HeroiconsOutlineCollection,
 			},
@@ -85,7 +93,7 @@ export const getNavigationTree = (
 				href: getRoute({
 					entity: 'lease',
 					pageType,
-					params: { organizationId },
+					params: { organizationId, ...langParam },
 				}),
 				icon: HeroiconsOutlineDocumentText,
 			},
@@ -94,7 +102,7 @@ export const getNavigationTree = (
 				href: getRoute({
 					entity: 'tenant',
 					pageType,
-					params: { organizationId },
+					params: { organizationId, ...langParam },
 				}),
 				icon: HeroiconsUserGroup,
 			},
@@ -103,7 +111,7 @@ export const getNavigationTree = (
 				href: getRoute({
 					entity: 'maintenanceOrder',
 					pageType,
-					params: { organizationId },
+					params: { organizationId, ...langParam },
 				}),
 				icon: HeroiconsWrench,
 			},
@@ -113,7 +121,9 @@ export const getNavigationTree = (
 			entity: 'organization',
 			pageType: PageType.Id,
 			id: organizationId,
-			params: {},
+			params: {
+				...langParam,
+			},
 		});
 
 		tree.splice(-1, 0, {
@@ -132,7 +142,9 @@ export const getNavigationTree = (
 						entity: 'organization',
 						pageType: PageTab.ExpenseCategories,
 						id: organizationId,
-						params: {},
+						params: {
+							...langParam,
+						},
 					}),
 				},
 			],
@@ -145,7 +157,7 @@ export const getNavigationTree = (
 		const getRouteConfig = {
 			entity: 'portfolio',
 			id: portfolioId,
-			params: { organizationId, portfolioId },
+			params: { organizationId, portfolioId, ...langParam },
 		} as const;
 
 		tree.splice(
