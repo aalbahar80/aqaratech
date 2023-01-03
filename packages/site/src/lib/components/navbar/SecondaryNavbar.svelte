@@ -5,6 +5,7 @@
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import LocaleSwitcher from '$lib/i18n/LocaleSwitcher.svelte';
+	import { isHomeRoute } from '$lib/utils/is-home-route';
 
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>
@@ -33,7 +34,7 @@
 		</div>
 		<div class="flex gap-12 text-gray-500">
 			<LocaleSwitcher />
-			{#if $page.url.pathname === '/'}
+			{#if isHomeRoute($page.url.pathname)}
 				<LoginButton />
 			{/if}
 		</div>

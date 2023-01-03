@@ -1,10 +1,7 @@
-// import { AUTH_CALLBACK, LOGIN, LOGOUT } from '$lib/constants/routes';
+import { HOME_ROUTES } from './is-home-route';
 
-// const AUTH_ROUTES = [LOGIN, LOGOUT, AUTH_CALLBACK];
-
-// const isAuthRoute = (path: string) => AUTH_ROUTES.includes(path);
-
-const PUBLIC_ROUTES = ['/', '/en', '/ar'];
+// TODO: Remove '/' since lang parameter is required?
+const PUBLIC_ROUTES = ['/', ...HOME_ROUTES];
 
 export const isPublicRoute = (pathname: string) =>
 	PUBLIC_ROUTES.includes(pathname);

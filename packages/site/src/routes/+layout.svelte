@@ -20,6 +20,7 @@
 	import { environment } from '$lib/environment';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
+	import { isHomeRoute } from '$lib/utils/is-home-route';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 
 	import '../styles/tailwind.css';
@@ -63,7 +64,7 @@
 <Modal />
 
 <SecondaryNavbar />
-{#if $page.url.pathname === '/'}
+{#if isHomeRoute($page.url.pathname)}
 	<main>
 		<slot />
 	</main>
