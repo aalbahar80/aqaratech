@@ -42,7 +42,7 @@
 		}
 
 		// run the `load` function again
-		invalidateAll();
+		void invalidateAll();
 	};
 
 	// update locale when navigating via browser back/forward buttons
@@ -52,7 +52,7 @@
 	// update locale when page store changes
 	$: if (browser) {
 		const lang = $page.params['lang'] as Locales;
-		switchLocale(lang, false);
+		void switchLocale(lang, false);
 		history.replaceState(
 			{ ...history.state, locale: lang },
 			'',
