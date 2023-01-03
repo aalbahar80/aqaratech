@@ -39,7 +39,7 @@ test('new users are redirected to /welcome', async ({ page }) => {
 		.getByRole('link', { name: 'Log in' })
 		.click();
 
-	await expect(page).toHaveURL('/welcome');
+	await expect(page).toHaveURL('/en/welcome');
 });
 
 test('new users are redirected to /welcome - hero', async ({ page }) => {
@@ -47,5 +47,5 @@ test('new users are redirected to /welcome - hero', async ({ page }) => {
 
 	await page.getByTestId('hero').getByRole('link', { name: 'Log in' }).click();
 
-	await expect(page).toHaveURL('/welcome');
+	await expect(page).toHaveURL('/en/welcome');
 });
