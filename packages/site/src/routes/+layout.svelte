@@ -19,6 +19,7 @@
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import { environment } from '$lib/environment';
 	import { sentryConfig } from '$lib/environment/sentry.config';
+	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 
 	import '../styles/tailwind.css';
@@ -52,6 +53,7 @@
 <svelte:head>
 	<title>Aqaratech</title>
 	<meta name="description" content="Aqaratech Property Management" />
+	<HeadHrefLangs />
 </svelte:head>
 
 {#if $navigating && !$page.error}
