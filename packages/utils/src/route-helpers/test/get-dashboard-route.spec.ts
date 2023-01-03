@@ -26,5 +26,5 @@ const input: [string, string, string][] = [
 
 test.each(input)('getDashboardRoute', (actual, redirectTo, base) => {
 	const expected = `${base}&redirectTo=${encodeURIComponent(redirectTo)}`;
-	expect(actual).toBe(expected);
+	expect(actual).toBe(`/en${expected}`);
 });

@@ -54,6 +54,6 @@ describe.each(entityTypes)('describe %o', (entityType) => {
 		// @ts-expect-error test
 		const result = getRoute(input);
 
-		expect(result).toBe(url);
+		expect(result).toBe(`/en${url}`);
 	});
 });

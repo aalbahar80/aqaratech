@@ -61,7 +61,7 @@ describe.each(entityTypes)('describe %s', () => {
 			},
 		});
 
-		const base = '/organizations/1/files/new';
+		const base = '/en/organizations/1/files/new';
 
 		expect(route).toEqual(base + query);
 	});

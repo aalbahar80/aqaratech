@@ -212,5 +212,5 @@ const inputs: [GetRoute, string][] = [
 ];
 
 test.each(inputs)('getRoute(%o) === %s', (input, expected) => {
-	expect(getRoute(input)).toBe(expected);
+	expect(getRoute(input)).toBe(`/en${expected}`);
 });

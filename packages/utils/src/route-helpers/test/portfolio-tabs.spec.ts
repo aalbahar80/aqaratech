@@ -26,7 +26,7 @@ const untabbed: [PageTypePortfolio | PageTab | PageType, string][] = [
 test.each(untabbed)(
 	'portfolio non-tab is not prefixed: %s',
 	(pageType, expected) => {
-		const url = `/organizations/1/portfolios/3/${expected}`;
+		const url = `/en/organizations/1/portfolios/3/${expected}`;
 
 		const input = {
 			...baseInput,
