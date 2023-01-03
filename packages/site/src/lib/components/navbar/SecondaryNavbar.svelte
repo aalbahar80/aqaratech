@@ -5,7 +5,6 @@
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import LocaleSwitcher from '$lib/i18n/LocaleSwitcher.svelte';
-	import TempLocaleSwitcher from '$lib/i18n/TempLocaleSwitcher.svelte';
 
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>
@@ -33,8 +32,6 @@
 			</a>
 		</div>
 		<div class="flex gap-12 text-gray-500">
-			<!-- WARN: Remove TempLocaleSwitcher -->
-			<TempLocaleSwitcher />
 			<LocaleSwitcher />
 			{#if $page.url.pathname === '/'}
 				<LoginButton />
