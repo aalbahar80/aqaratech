@@ -16,23 +16,23 @@ import MdiAccountTie from '~icons/mdi/account-tie';
 export const getSecondaryFeatures = (L: ReadableOf<typeof LL>) =>
 	[
 		{
-			name: L.secondaryFeatures.managers.name(),
-			summary: L.secondaryFeatures.managers.summary(),
-			description: L.secondaryFeatures.managers.description(),
+			name: L.landing.secondaryFeatures.managers.name(),
+			summary: L.landing.secondaryFeatures.managers.summary(),
+			description: L.landing.secondaryFeatures.managers.description(),
 			image: screenshotProfitLoss,
 			icon: HeroiconsBuildingOffice2,
 		},
 		{
-			name: L.secondaryFeatures.owners.name(),
-			summary: L.secondaryFeatures.owners.summary(),
-			description: L.secondaryFeatures.owners.description(),
+			name: L.landing.secondaryFeatures.owners.name(),
+			summary: L.landing.secondaryFeatures.owners.summary(),
+			description: L.landing.secondaryFeatures.owners.description(),
 			image: screenshotDashboard,
 			icon: MdiAccountTie,
 		},
 		{
-			name: L.secondaryFeatures.tenants.name(),
-			summary: L.secondaryFeatures.tenants.summary(),
-			description: L.secondaryFeatures.tenants.description(),
+			name: L.landing.secondaryFeatures.tenants.name(),
+			summary: L.landing.secondaryFeatures.tenants.summary(),
+			description: L.landing.secondaryFeatures.tenants.description(),
 			image: screenshotInvoices,
 			icon: HeroiconsUserGroup,
 		},

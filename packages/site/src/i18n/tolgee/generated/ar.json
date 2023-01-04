@@ -4,5 +4,54 @@
     "login" : "تسجيل الدخول",
     "logout" : "تسجيل خروج",
     "search" : "بحث"
+  },
+  "entity" : {
+    "expense" : {
+      "plural" : "المصروفات",
+      "singular" : "مصروف"
+    },
+    "file" : {
+      "plural" : "الملفات",
+      "singular" : "ملف"
+    },
+    "maintenanceOrder" : {
+      "plural" : "اعمال صيانة",
+      "singular" : "عمل صيانة"
+    },
+    "organization" : {
+      "plural" : "المنظمات",
+      "singular" : "منظمة"
+    },
+    "tenant" : {
+      "plural" : "المستأجرين",
+      "singular" : "مستأجر"
+    }
+  },
+  "landing" : {
+    "features" : {
+      "document" : {
+        "title" : "إدارة المستندات"
+      },
+      "expense" : {
+        "bullets" : {
+          "categorize" : "قم بتصنيف النفقات باستخدام نظام هرمي لفهم مصادر النفقات بشكل أفضل."
+        }
+      },
+      "filter" : {
+        "bullets" : {
+          "time" : "تصفية حسب الوقت ، بما في ذلك نطاقات زمنية أو فترات زمنية محددة."
+        }
+      }
+    },
+    "secondaryFeatures" : {
+      "tenants" : {
+        "name" : "إيجارات خالية من المتاعب"
+      }
+    }
+  },
+  "nav" : {
+    "data" : "بيانات",
+    "occupancy" : "الإشغال",
+    "settings" : "إعدادات"
   }
 }
