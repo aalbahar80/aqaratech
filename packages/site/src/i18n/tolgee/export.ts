@@ -12,7 +12,7 @@ import {
 const moduleDir = dirname(new URL(import.meta.url).pathname);
 
 /** The file to upload to the API */
-const outputPath = join(moduleDir, './i18n-output.json');
+const outputPath = join(moduleDir, './generated/i18n-output.json');
 
 /** Send all translations to Tolgee API */
 const sendDataToAPI = (exportMapping: ExportLocaleMapping) => {

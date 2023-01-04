@@ -8,6 +8,8 @@ ENV_FILE="$SCRIPT_DIR/../../../../../.env"
 
 TOLGEE_KEY=$(grep TOLGEE_KEY "$ENV_FILE" | cut -d '=' -f2 | tr -d '"')
 
-curl "https://app.tolgee.io/api/project/export/jsonZip?ak=$TOLGEE_KEY" --output data.zip
-unzip data.zip
-rm data.zip
+ZIP_FILE="$SCRIPT_DIR/generated/data.zip"
+
+curl "https://app.tolgee.io/api/project/export/jsonZip?ak=$TOLGEE_KEY" --output "$ZIP_FILE"
+unzip -o "$ZIP_FILE" -d "$SCRIPT_DIR/generated"
+rm "$ZIP_FILE"

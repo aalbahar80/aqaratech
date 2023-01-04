@@ -11,7 +11,7 @@ TOLGEE_KEY=$(grep TOLGEE_KEY "$ENV_FILE" | cut -d '=' -f2 | tr -d '"')
 url="https://app.tolgee.io/v2/projects/import"
 
 # Set the list of files to include in the request body
-OUTPUT_FILE="$SCRIPT_DIR/i18n-output.json"
+OUTPUT_FILE="$SCRIPT_DIR/generated/i18n-output.json"
 
 files="-F files=@$OUTPUT_FILE"
 
