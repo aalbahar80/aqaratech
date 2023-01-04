@@ -284,3 +284,67 @@ test.skip('end can be an ISO date', async ({
 
 	expect(body).toHaveProperty('end', '2022-12-01T00:00:00.000Z');
 });
+
+test('number can be a decimal', async ({
+	request,
+	org,
+	portfolio,
+	unit,
+	tenant,
+}) => {
+	const lease = R.pick(
+		leaseFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+			unitId: unit.id,
+			tenantId: tenant.id,
+			monthlyRent: 123.456,
+			deposit: 987.0,
+		}),
+		columns,
+	);
+
+	const url = `/organizations/${org.organization.id}/leases`;
+
+	const res = await request.post(url, { data: lease });
+
+	expect(res.status()).toBe(201);
+
+	const body: unknown = await res.json();
+
+	expect(body).toHaveProperty('monthlyRent', 123.456);
+	expect(body).toHaveProperty('deposit', 987);
+});
+
+test('number can be a string', async ({
+	request,
+	org,
+	portfolio,
+	unit,
+	tenant,
+}) => {
+	const lease = R.pick(
+		leaseFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+			unitId: unit.id,
+			tenantId: tenant.id,
+			// @ts-expect-error testing for number coercion
+			monthlyRent: '123.456',
+			// @ts-expect-error testing for number coercion
+			deposit: '987.000',
+		}),
+		columns,
+	);
+
+	const url = `/organizations/${org.organization.id}/leases`;
+
+	const res = await request.post(url, { data: lease });
+
+	expect(res.status()).toBe(201);
+
+	const body: unknown = await res.json();
+
+	expect(body).toHaveProperty('monthlyRent', 123.456);
+	expect(body).toHaveProperty('deposit', 987);
+});
