@@ -5,7 +5,7 @@ import {
 	type ExportLocaleMapping,
 } from 'typesafe-i18n/exporter';
 
-const sendDataToAPI = async (exportMapping: ExportLocaleMapping) => {
+const sendDataToAPI = (exportMapping: ExportLocaleMapping) => {
 	// custom implementation to store the data to a service
 
 	console.log(inspect(exportMapping, false, 999, true));
@@ -14,7 +14,7 @@ const sendDataToAPI = async (exportMapping: ExportLocaleMapping) => {
 const exportTranslationsForLocale = async (locale: string) => {
 	const mapping = await readTranslationFromDisk(locale);
 
-	await sendDataToAPI(mapping);
+	sendDataToAPI(mapping);
 };
 
-exportTranslationsForLocale('en');
+await exportTranslationsForLocale('en');
