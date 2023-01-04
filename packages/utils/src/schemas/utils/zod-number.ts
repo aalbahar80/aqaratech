@@ -2,10 +2,14 @@ import { z } from 'zod';
 
 const tryParseToNumber = (val: unknown) => {
 	if (typeof val === 'string') {
-		const num = parseFloat(val);
+		if (val.trim().length === 0) {
+			// transform empty strings to null before passing them to Number(''), which returns 0
+			return null;
+		} else {
+			const num = Number(val);
 
-		// return num; // this could be NaN
-		return isNaN(num) ? null : num;
+			return isNaN(num) ? null : num;
+		}
 	} else {
 		return val;
 	}

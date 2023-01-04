@@ -31,7 +31,6 @@ test.each(valid)('zodNumber.parse(%s) should return %s', (arg, expected) => {
 });
 
 const invalid = [
-	// fmt
 	'',
 	'abc',
 	null,
@@ -40,6 +39,11 @@ const invalid = [
 	false,
 	[],
 	{},
+	' ',
+	'  ',
+	'12 3',
+	'12.3.4',
+	'12abc4',
 ];
 
 test.each(invalid)('zodNumber.parse(%s) should throw', (arg) => {
