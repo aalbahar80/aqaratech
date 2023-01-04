@@ -1,15 +1,13 @@
+import { callToAction } from './cta';
 import { features } from './features';
 import { hero } from './hero';
+import { secondaryFeatures } from './secondary-features';
 
 import type { landing as en_landing } from '../en/landing';
 
 export const landing = {
 	hero,
 	features,
-	callToAction: {
-		title: 'ابدأ اليوم',
-		description:
-			'جرب Aqaratech واستمتع بسهولة وراحة إدارة ممتلكاتك ببضع نقرات فقط! سجل الآن وشاهد الفرق الذي يمكن أن يجعله لعملك.',
-		button: 'إنشاء حساب',
-	},
+	secondaryFeatures,
+	callToAction,
 } satisfies typeof en_landing;
