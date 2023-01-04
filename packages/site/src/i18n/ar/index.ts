@@ -2,7 +2,6 @@
 import type { Translation } from '../i18n-types'
 
 const ar: Translation = {
-	log: 'تم استدعاء هذا السجل من {fileName: string}',
 	entity: {
 		organization: {
 			plural: 'المنظمات',

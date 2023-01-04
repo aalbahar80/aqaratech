@@ -4,7 +4,6 @@ import { landing } from './landing';
 import type { BaseTranslation } from '../i18n-types';
 
 const en: BaseTranslation = {
-	log: `This log was called from '{fileName:string}'`,
 	entity,
 	buttons: {
 		login: 'Log in',
