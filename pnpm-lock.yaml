@@ -250,6 +250,7 @@ importers:
       d3: 7.8.0
       date-fns: 2.29.3
       debounce: 1.2.1
+      defu: 6.1.1
       eslint-config-custom: workspace:*
       eslint-plugin-svelte: 2.14.1
       frappe-charts: 1.6.2
@@ -317,6 +318,7 @@ importers:
       d3: 7.8.0
       date-fns: 2.29.3
       debounce: 1.2.1
+      defu: 6.1.1
       eslint-config-custom: link:../eslint-config-custom
       eslint-plugin-svelte: 2.14.1_6go7qzsvzihesfwmyvq3tnl5qq
       frappe-charts: 1.6.2
@@ -4915,6 +4917,10 @@ packages:
 
   /defined/1.0.1:
     resolution: {integrity: sha512-hsBd2qSVCRE+5PmNdHt1uzyrFu5d3RwmFDKzyNZMFq/EwDNJF7Ee5+D5oEKF0hU6LhtoUF1macFvOe4AskQC1Q==}
+    dev: true
+
+  /defu/6.1.1:
+    resolution: {integrity: sha512-aA964RUCsBt0FGoNIlA3uFgo2hO+WWC0fiC6DBps/0SFzkKcYoM/3CzVLIa5xSsrFjdioMdYgAIbwo80qp2MoA==}
     dev: true
 
   /delaunator/5.0.0:
