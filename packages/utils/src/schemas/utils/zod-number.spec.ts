@@ -30,7 +30,17 @@ test.each(valid)('zodNumber.parse(%s) should return %s', (arg, expected) => {
 	expect(zodNumber.parse(arg)).toBe(expected);
 });
 
-const invalid = ['', 'abc', null, undefined, true, false, [], {}];
+const invalid = [
+	// fmt
+	'',
+	'abc',
+	null,
+	undefined,
+	true,
+	false,
+	[],
+	{},
+];
 
 test.each(invalid)('zodNumber.parse(%s) should throw', (arg) => {
 	expect(() => zodNumber.parse(arg)).toThrowError();
