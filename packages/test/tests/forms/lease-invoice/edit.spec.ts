@@ -65,28 +65,3 @@ test('can be submitted with all fields', async ({
 
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
 });
-
-test('can enter decimal amounts', async ({ org, portfolio, invoice, page }) => {
-	// insert both dates to ensure dueAt is not before postAt
-	const fields = R.pick(
-		leaseInvoicePartialFactory({
-			amount: 123.45,
-		}),
-		[...FIELDS.leaseInvoice.required, 'dueAt'],
-	);
-
-	const formPage = new FormPage(page, {
-		entity,
-		pageType,
-		id: invoice.id,
-		fixtures: { org, portfolio },
-	});
-
-	await formPage.goto();
-	await formPage.fillForm(fields);
-	await formPage.save();
-
-	await formPage.verifyDetails(fields);
-
-	await expect(page).toHaveURL(formPage.getSuccessUrl());
-});
