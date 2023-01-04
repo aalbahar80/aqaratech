@@ -113,7 +113,14 @@ export const handleForm = async <
 			{ depth: null, colors: true },
 		);
 
-		return fail(400, { ...(data as z.infer<S>), errors });
+		// Returning non-serializable fields causes sveltekit to throw
+		// Remove them before returning. Currently, only the file upload form has a non-serializable field.
+
+		const dataWithoutFile = Object.fromEntries(
+			Object.entries(data).filter(([key]) => key !== 'file'),
+		);
+
+		return fail(400, { ...(dataWithoutFile as z.infer<S>), errors });
 	}
 
 	try {
