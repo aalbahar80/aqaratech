@@ -2,13 +2,11 @@
 
 echo "Getting latest translations from Tolgee..."
 
-# Set TOLGEE_KEY to the value in the .env file
-echo "Getting TOLGEE_KEY..."
+SCRIPT_DIR=$(dirname "$0")
 
-TOLGEE_KEY=$(grep TOLGEE_KEY ../../../../../.env | cut -d '=' -f2 | tr -d '"')
+ENV_FILE="$SCRIPT_DIR/../../../../../.env"
 
-# Run the curl command
-echo "Calling Tolgee API..."
+TOLGEE_KEY=$(grep TOLGEE_KEY "$ENV_FILE" | cut -d '=' -f2 | tr -d '"')
 
 curl "https://app.tolgee.io/api/project/export/jsonZip?ak=$TOLGEE_KEY" --output data.zip
 unzip data.zip

@@ -2,7 +2,11 @@
 
 echo "Sending translations to Tolgee..."
 
-TOLGEE_KEY=$(grep TOLGEE_KEY ../../../../../.env | cut -d '=' -f2 | tr -d '"')
+SCRIPT_DIR=$(dirname "$0")
+
+ENV_FILE="$SCRIPT_DIR/../../../../../.env"
+
+TOLGEE_KEY=$(grep TOLGEE_KEY "$ENV_FILE" | cut -d '=' -f2 | tr -d '"')
 
 url="https://app.tolgee.io/v2/projects/import"
 
