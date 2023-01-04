@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const tryParseToNumber = (val: unknown) => {
 	if (typeof val === 'string') {
-		const num = parseInt(val);
+		const num = parseFloat(val);
 
 		// return num; // this could be NaN
 		return isNaN(num) ? null : num;
