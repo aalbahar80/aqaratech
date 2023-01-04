@@ -28,3 +28,6 @@ storageState.json
 **/*snapshots/*.png
 storage-state
 packages/test/downloads/
+
+# i18n
+**/tolgee/generated
