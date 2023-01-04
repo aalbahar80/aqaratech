@@ -25,7 +25,7 @@
 <div class="mt-1">
 	<svelte:element
 		this={formField.type === 'textarea' ? 'textarea' : 'input'}
-		type={formField.type}
+		type={formField.type === 'number' ? 'tel' : formField.type}
 		name={formField.name}
 		id={formField.name}
 		value={parse(value)}
