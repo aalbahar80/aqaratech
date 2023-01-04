@@ -19,7 +19,7 @@
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
 		"test": "vitest --run",
 		"test:ui": "vitest --ui",
-		"i18n:export": "tsx src/i18n/exporter/export.ts"
+		"i18n:export": "tsx src/i18n/tolgee/export.ts"
 	},
 	"devDependencies": {
 		"@iconify/json": "2.2.2",
