@@ -1,4 +1,5 @@
 import { execSync } from 'node:child_process';
+import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { inspect } from 'util';
 
@@ -7,19 +8,21 @@ import {
 	type ExportLocaleMapping,
 } from 'typesafe-i18n/exporter';
 
+// Get the directory containing the current module
+const moduleDir = dirname(new URL(import.meta.url).pathname);
+
+/** The file to upload to the API */
+const outputPath = join(moduleDir, './i18n-output.json');
+
 /** Send all translations to Tolgee API */
 const sendDataToAPI = (exportMapping: ExportLocaleMapping) => {
 	console.log(inspect(exportMapping, false, 999, true));
 
-	// save to file
-	const exportPath = join(
-		dirname(new URL(import.meta.url).pathname),
-		`i18n-output-en.json`,
+	// Save translations to file
+	writeFileSync(
+		outputPath,
+		JSON.stringify(exportMapping.translations, null, 2),
 	);
-	execSync(`echo '${JSON.stringify(exportMapping)}' > ${exportPath}`);
-
-	// Get the directory containing the current module
-	const moduleDir = dirname(new URL(import.meta.url).pathname);
 
 	// Construct the absolute path to the bash script
 	const verify = join(moduleDir, './tolgee-verify-key.sh');
