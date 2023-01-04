@@ -15,11 +15,6 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
-	 * H​i​ ​{​n​a​m​e​}​!​ ​P​l​e​a​s​e​ ​l​e​a​v​e​ ​a​ ​s​t​a​r​ ​i​f​ ​y​o​u​ ​l​i​k​e​ ​t​h​i​s​ ​p​r​o​j​e​c​t​:​ ​h​t​t​p​s​:​/​/​g​i​t​h​u​b​.​c​o​m​/​i​v​a​n​h​o​f​e​r​/​t​y​p​e​s​a​f​e​-​i​1​8​n
-	 * @param {string} name
-	 */
-	HI: RequiredParams<'name'>
-	/**
 	 * T​h​i​s​ ​l​o​g​ ​w​a​s​ ​c​a​l​l​e​d​ ​f​r​o​m​ ​'​{​f​i​l​e​N​a​m​e​}​'
 	 * @param {string} fileName
 	 */
@@ -357,6 +352,50 @@ type RootTranslation = {
 				}
 			}
 		}
+		secondaryFeatures: {
+			managers: {
+				/**
+				 * F​o​r​ ​p​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​r​s
+				 */
+				summary: string
+				/**
+				 * S​t​r​e​a​m​l​i​n​e​ ​y​o​u​r​ ​w​o​r​k​f​l​o​w​s
+				 */
+				name: string
+				/**
+				 * L​e​v​e​r​a​g​e​ ​o​u​r​ ​p​o​w​e​r​f​u​l​ ​t​o​o​l​s​ ​t​o​ ​k​e​e​p​ ​t​r​a​c​k​ ​o​f​ ​a​l​l​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​.​ ​A​q​a​r​a​t​e​c​h​ ​h​e​l​p​s​ ​y​o​u​ ​o​r​g​a​n​i​z​e​ ​y​o​u​r​ ​b​u​s​i​n​e​s​s​ ​a​n​d​ ​w​o​r​k​ ​m​o​r​e​ ​e​f​f​i​c​i​e​n​t​l​y​.
+				 */
+				description: string
+			}
+			owners: {
+				/**
+				 * F​o​r​ ​o​w​n​e​r​s
+				 */
+				summary: string
+				/**
+				 * C​o​m​p​l​e​t​e​ ​v​i​s​i​b​i​l​i​t​y
+				 */
+				name: string
+				/**
+				 * U​s​e​ ​o​u​r​ ​d​a​s​h​b​o​a​r​d​ ​t​o​ ​a​c​c​e​s​s​ ​a​n​d​ ​m​o​n​i​t​o​r​ ​a​l​l​ ​o​f​ ​y​o​u​r​ ​p​r​o​p​e​r​t​y​ ​i​n​f​o​r​m​a​t​i​o​n​,​ ​g​r​a​n​t​i​n​g​ ​y​o​u​ ​p​e​a​c​e​ ​o​f​ ​m​i​n​d​ ​h​e​l​p​i​n​g​ ​y​o​u​ ​m​a​k​e​ ​i​n​f​o​r​m​e​d​ ​d​e​c​i​s​i​o​n​s​.
+				 */
+				description: string
+			}
+			tenants: {
+				/**
+				 * F​o​r​ ​t​e​n​a​n​t​s
+				 */
+				summary: string
+				/**
+				 * H​a​s​s​l​e​-​f​r​e​e​ ​r​e​n​t​a​l​s
+				 */
+				name: string
+				/**
+				 * A​q​a​r​a​t​e​c​h​ ​s​i​m​p​l​i​f​i​e​s​ ​t​h​e​ ​r​e​n​t​a​l​ ​p​r​o​c​e​s​s​ ​b​y​ ​a​l​l​o​w​i​n​g​ ​t​e​n​a​n​t​s​ ​t​o​ ​t​r​a​c​k​ ​t​h​e​i​r​ ​p​a​y​m​e​n​t​s​ ​a​n​d​ ​l​e​a​s​e​s​.
+				 */
+				description: string
+			}
+		}
 		callToAction: {
 			/**
 			 * G​e​t​ ​s​t​a​r​t​e​d​ ​t​o​d​a​y
@@ -372,57 +411,9 @@ type RootTranslation = {
 			button: string
 		}
 	}
-	secondaryFeatures: {
-		managers: {
-			/**
-			 * F​o​r​ ​p​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​r​s
-			 */
-			summary: string
-			/**
-			 * S​t​r​e​a​m​l​i​n​e​ ​y​o​u​r​ ​w​o​r​k​f​l​o​w​s
-			 */
-			name: string
-			/**
-			 * L​e​v​e​r​a​g​e​ ​o​u​r​ ​p​o​w​e​r​f​u​l​ ​t​o​o​l​s​ ​t​o​ ​k​e​e​p​ ​t​r​a​c​k​ ​o​f​ ​a​l​l​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​.​ ​A​q​a​r​a​t​e​c​h​ ​h​e​l​p​s​ ​y​o​u​ ​o​r​g​a​n​i​z​e​ ​y​o​u​r​ ​b​u​s​i​n​e​s​s​ ​a​n​d​ ​w​o​r​k​ ​m​o​r​e​ ​e​f​f​i​c​i​e​n​t​l​y​.
-			 */
-			description: string
-		}
-		owners: {
-			/**
-			 * F​o​r​ ​o​w​n​e​r​s
-			 */
-			summary: string
-			/**
-			 * C​o​m​p​l​e​t​e​ ​v​i​s​i​b​i​l​i​t​y
-			 */
-			name: string
-			/**
-			 * U​s​e​ ​o​u​r​ ​d​a​s​h​b​o​a​r​d​ ​t​o​ ​a​c​c​e​s​s​ ​a​n​d​ ​m​o​n​i​t​o​r​ ​a​l​l​ ​o​f​ ​y​o​u​r​ ​p​r​o​p​e​r​t​y​ ​i​n​f​o​r​m​a​t​i​o​n​,​ ​g​r​a​n​t​i​n​g​ ​y​o​u​ ​p​e​a​c​e​ ​o​f​ ​m​i​n​d​ ​h​e​l​p​i​n​g​ ​y​o​u​ ​m​a​k​e​ ​i​n​f​o​r​m​e​d​ ​d​e​c​i​s​i​o​n​s​.
-			 */
-			description: string
-		}
-		tenants: {
-			/**
-			 * F​o​r​ ​t​e​n​a​n​t​s
-			 */
-			summary: string
-			/**
-			 * H​a​s​s​l​e​-​f​r​e​e​ ​r​e​n​t​a​l​s
-			 */
-			name: string
-			/**
-			 * A​q​a​r​a​t​e​c​h​ ​s​i​m​p​l​i​f​i​e​s​ ​t​h​e​ ​r​e​n​t​a​l​ ​p​r​o​c​e​s​s​ ​b​y​ ​a​l​l​o​w​i​n​g​ ​t​e​n​a​n​t​s​ ​t​o​ ​t​r​a​c​k​ ​t​h​e​i​r​ ​p​a​y​m​e​n​t​s​ ​a​n​d​ ​l​e​a​s​e​s​.
-			 */
-			description: string
-		}
-	}
 }
 
 export type TranslationFunctions = {
-	/**
-	 * Hi {name}! Please leave a star if you like this project: https://github.com/ivanhofer/typesafe-i18n
-	 */
-	HI: (arg: { name: string }) => LocalizedString
 	/**
 	 * This log was called from '{fileName}'
 	 */
@@ -760,6 +751,50 @@ export type TranslationFunctions = {
 				}
 			}
 		}
+		secondaryFeatures: {
+			managers: {
+				/**
+				 * For property managers
+				 */
+				summary: () => LocalizedString
+				/**
+				 * Streamline your workflows
+				 */
+				name: () => LocalizedString
+				/**
+				 * Leverage our powerful tools to keep track of all your properties. Aqaratech helps you organize your business and work more efficiently.
+				 */
+				description: () => LocalizedString
+			}
+			owners: {
+				/**
+				 * For owners
+				 */
+				summary: () => LocalizedString
+				/**
+				 * Complete visibility
+				 */
+				name: () => LocalizedString
+				/**
+				 * Use our dashboard to access and monitor all of your property information, granting you peace of mind helping you make informed decisions.
+				 */
+				description: () => LocalizedString
+			}
+			tenants: {
+				/**
+				 * For tenants
+				 */
+				summary: () => LocalizedString
+				/**
+				 * Hassle-free rentals
+				 */
+				name: () => LocalizedString
+				/**
+				 * Aqaratech simplifies the rental process by allowing tenants to track their payments and leases.
+				 */
+				description: () => LocalizedString
+			}
+		}
 		callToAction: {
 			/**
 			 * Get started today
@@ -773,50 +808,6 @@ export type TranslationFunctions = {
 			 * Create Account
 			 */
 			button: () => LocalizedString
-		}
-	}
-	secondaryFeatures: {
-		managers: {
-			/**
-			 * For property managers
-			 */
-			summary: () => LocalizedString
-			/**
-			 * Streamline your workflows
-			 */
-			name: () => LocalizedString
-			/**
-			 * Leverage our powerful tools to keep track of all your properties. Aqaratech helps you organize your business and work more efficiently.
-			 */
-			description: () => LocalizedString
-		}
-		owners: {
-			/**
-			 * For owners
-			 */
-			summary: () => LocalizedString
-			/**
-			 * Complete visibility
-			 */
-			name: () => LocalizedString
-			/**
-			 * Use our dashboard to access and monitor all of your property information, granting you peace of mind helping you make informed decisions.
-			 */
-			description: () => LocalizedString
-		}
-		tenants: {
-			/**
-			 * For tenants
-			 */
-			summary: () => LocalizedString
-			/**
-			 * Hassle-free rentals
-			 */
-			name: () => LocalizedString
-			/**
-			 * Aqaratech simplifies the rental process by allowing tenants to track their payments and leases.
-			 */
-			description: () => LocalizedString
 		}
 	}
 }
