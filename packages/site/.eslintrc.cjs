@@ -23,6 +23,7 @@ module.exports = {
 		'flatten.ts',
 		'FrappeChart.svelte',
 		'jspdf-invoice-template.js',
+		'src/i18n/ar/index.ts', // reports unused eslint-disable directive
 	],
 	rules: {
 		// tslint comments in generated api files
