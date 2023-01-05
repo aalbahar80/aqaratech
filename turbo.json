@@ -3,7 +3,8 @@
 	"pipeline": {
 		"build": {
 			"dependsOn": ["^build", "check"],
-			"outputs": [".svelte-kit/**", "dist/**", "build/**"]
+			"outputs": [".svelte-kit/**", "dist/**", "build/**"],
+			"outputMode": "new-only"
 		},
 
 		"dev": {
@@ -17,15 +18,18 @@
 		},
 
 		"format": {
-			"outputs": []
+			"outputs": [],
+			"outputMode": "new-only"
 		},
 
 		"lint": {
-			"outputs": []
+			"outputs": [],
+			"outputMode": "new-only"
 		},
 
 		"check": {
-			"outputs": []
+			"outputs": [],
+			"outputMode": "new-only"
 		},
 
 		"test": {
@@ -59,7 +63,8 @@
 				"readme.md",
 				"tsconfig.json"
 			],
-			"outputs": []
+			"outputs": [],
+			"outputMode": "new-only"
 		},
 
 		"//#lint": {
@@ -78,12 +83,14 @@
 				"readme.md",
 				"tsconfig.json"
 			],
-			"outputs": []
+			"outputs": [],
+			"outputMode": "new-only"
 		},
 
 		"//#check": {
 			"inputs": [".do/**", "scripts/**", "types/**", "tsconfig.json"],
-			"outputs": []
+			"outputs": [],
+			"outputMode": "new-only"
 		},
 
 		"//#api:generate": {
