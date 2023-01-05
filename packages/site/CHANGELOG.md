@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.5.2
+
+### Patch Changes
+
+- 8f1594394: validate filename length
+- f2312677a: rm unused env vars
+
 ## 2.5.1
 
 ### Patch Changes

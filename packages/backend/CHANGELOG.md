@@ -1,5 +1,15 @@
 # @self/backend
 
+## 2.5.1
+
+### Patch Changes
+
+- 8f1594394: validate filename length
+- f2312677a: rm unused env vars
+- Updated dependencies [8f1594394]
+- Updated dependencies [f2312677a]
+  - @self/utils@3.4.1
+
 ## 2.5.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # eslint-config-custom
 
+## 2.4.1
+
+### Patch Changes
+
+- 8f1594394: validate filename length
+- f2312677a: rm unused env vars
+
 ## 2.4.0
 
 ### Minor Changes
