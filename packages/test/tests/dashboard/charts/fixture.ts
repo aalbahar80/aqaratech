@@ -12,14 +12,20 @@ interface TestFixtures {
 	filters: Filters;
 }
 
+interface TestOptions {
+	tab: PageTypePortfolio.Income | PageTypePortfolio.Expenses;
+}
+
 const START_YEAR = 2021;
 
-export const test = base.extend<TestFixtures>({
-	page: async ({ page, org, portfolio }, use) => {
+export const test = base.extend<TestFixtures & TestOptions>({
+	tab: [PageTypePortfolio.Income, { option: true }],
+
+	page: async ({ page, org, portfolio, tab }, use) => {
 		const url = getRoute({
 			entity: 'portfolio',
 			id: portfolio.id,
-			pageType: PageTypePortfolio.Income,
+			pageType: tab,
 			params: {
 				organizationId: org.organization.id,
 				portfolioId: portfolio.id,

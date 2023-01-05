@@ -1,7 +1,21 @@
 import { expect } from '@playwright/test';
 
+import { PageTypePortfolio } from '@self/utils';
+
 import { test } from './fixture';
 
-test('income page', async ({ page }) => {
-	await expect(page).toHaveScreenshot();
+test.describe('income page', () => {
+	test.use({ tab: PageTypePortfolio.Income });
+
+	test('looks the same', async ({ page }) => {
+		await expect(page).toHaveScreenshot();
+	});
+});
+
+test.describe('expense page', () => {
+	test.use({ tab: PageTypePortfolio.Expenses });
+
+	test('looks the same', async ({ page }) => {
+		await expect(page).toHaveScreenshot();
+	});
 });
