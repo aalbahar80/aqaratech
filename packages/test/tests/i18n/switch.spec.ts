@@ -13,23 +13,23 @@ test('locale switch updates $page.pathname', async ({ page, portfolio }) => {
 		pageType: PageTab.Properties,
 		params: {
 			organizationId: portfolio.organizationId,
-			lang: 'en',
+			lang: 'ar',
 		},
 	});
 
 	await page.goto(url);
 
-	// check Properties tab is active
-	const tab = page.getByRole('link', { name: 'Properties' });
-	await expect(tab).toHaveAttribute('data-testid', 'active');
+	const tabAr = page.getByRole('link', { name: 'عقارات' });
+	const tabEn = page.getByRole('link', { name: 'Properties' });
 
-	const ar = page.getByRole('link', { name: 'العربية' });
-	await ar.click();
+	await expect(tabAr).toHaveAttribute('data-testid', 'active');
+
+	// const arLocale = page.getByRole('link', { name: 'العربية' });
+	const enLocale = page.getByRole('link', { name: 'English' });
+	await enLocale.click();
 
 	await page.waitForNavigation();
 
 	// check Properties tab is still active
-	// TODO: enable once translation is implemented
-	// const tabAr = page.getByRole('link', { name: 'العقارات' });
-	await expect(tab).toHaveAttribute('data-testid', 'active');
+	await expect(tabEn).toHaveAttribute('data-testid', 'active');
 });
