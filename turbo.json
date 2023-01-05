@@ -42,7 +42,6 @@
 			"inputs": [
 				".do/**",
 				".github/**",
-				".changeset/**",
 				".vscode/**",
 				"scripts/**",
 				"types/**",
@@ -61,15 +60,7 @@
 			"outputs": []
 		},
 		"//#check": {
-			"inputs": [
-				".do/**",
-				".github/**",
-				".changeset/**",
-				".vscode/**",
-				"scripts/**",
-				"types/**",
-				"tsconfig.json"
-			],
+			"inputs": [".do/**", "scripts/**", "types/**", "tsconfig.json"],
 			"outputs": []
 		},
 		"test": {
