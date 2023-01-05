@@ -1,6 +1,11 @@
 import { z } from 'zod';
 
-export const filenameSchema = z.string().regex(/^[a-zA-Z0-9-_.]+$/, {
-	message:
-		'Invalid characters. Only letters, numbers, dashes, underscores, and periods are allowed.',
-});
+export const filenameSchema = z
+	.string()
+	.max(100, {
+		message: 'File name must be 100 characters or less.',
+	})
+	.regex(/^[a-zA-Z0-9-_.]+$/, {
+		message:
+			'Invalid characters. Only letters, numbers, dashes, underscores, and periods are allowed.',
+	});
