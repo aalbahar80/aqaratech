@@ -5,23 +5,29 @@
 			"dependsOn": ["^build", "check"],
 			"outputs": [".svelte-kit/**", "dist/**", "build/**"]
 		},
+
 		"dev": {
 			"cache": false,
 			"dependsOn": ["^build"]
 		},
+
 		"preview": {
 			"cache": false,
 			"dependsOn": ["build"]
 		},
+
 		"format": {
 			"outputs": []
 		},
+
 		"lint": {
 			"outputs": []
 		},
+
 		"check": {
 			"outputs": []
 		},
+
 		"test": {
 			"dependsOn": ["^build"],
 			"outputs": [
@@ -31,6 +37,11 @@
 				"downloads/**"
 			]
 		},
+
+		// ### Root tasks ###
+		// NOTE: Unexpected behavior: Using "*" or "/*" in <root-task>.inputs will include files in packages
+		// Instead, specify filenames explicitly. Folders are fine.
+
 		"//#format": {
 			"inputs": [
 				".do/**",
@@ -50,6 +61,7 @@
 			],
 			"outputs": []
 		},
+
 		"//#lint": {
 			"inputs": [
 				".do/**",
@@ -68,10 +80,12 @@
 			],
 			"outputs": []
 		},
+
 		"//#check": {
 			"inputs": [".do/**", "scripts/**", "types/**", "tsconfig.json"],
 			"outputs": []
 		},
+
 		"//#api:generate": {
 			"outputs": [
 				"packages/site/src/api/openapi/**",
