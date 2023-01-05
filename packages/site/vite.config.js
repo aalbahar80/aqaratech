@@ -1,3 +1,5 @@
+// @ts-check
+
 import { sveltekit } from '@sveltejs/kit/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import icons from 'unplugin-icons/vite';
