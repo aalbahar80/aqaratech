@@ -17,20 +17,48 @@
 			"outputs": []
 		},
 		"//#format": {
-			"inputs": ["*", "!packages/**/*", "!node_modules/**/*"],
+			"inputs": [
+				"*",
+				".*",
+				".do/**",
+				".github/**",
+				".changeset/**",
+				".vscode/**",
+				"scripts/**",
+				"types/**"
+			],
 			"outputs": []
 		},
 		"lint": {
 			"outputs": []
 		},
 		"//#lint": {
-			"inputs": ["*", "!packages/**/*"],
+			"inputs": [
+				"*",
+				".*",
+				".do/**",
+				".github/**",
+				".changeset/**",
+				".vscode/**",
+				"scripts/**",
+				"types/**"
+			],
 			"outputs": []
 		},
 		"check": {
 			"outputs": []
 		},
 		"//#check": {
+			"inputs": [
+				"*",
+				".*",
+				".do/**",
+				".github/**",
+				".changeset/**",
+				".vscode/**",
+				"scripts/**",
+				"types/**"
+			],
 			"outputs": []
 		},
 		"test": {
