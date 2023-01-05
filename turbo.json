@@ -16,6 +16,21 @@
 		"format": {
 			"outputs": []
 		},
+		"lint": {
+			"outputs": []
+		},
+		"check": {
+			"outputs": []
+		},
+		"test": {
+			"dependsOn": ["^build"],
+			"outputs": [
+				"playwright-report/**",
+				"test-results/**",
+				"storage-state/**",
+				"downloads/**"
+			]
+		},
 		"//#format": {
 			"inputs": [
 				".do/**",
@@ -33,9 +48,6 @@
 				"readme.md",
 				"tsconfig.json"
 			],
-			"outputs": []
-		},
-		"lint": {
 			"outputs": []
 		},
 		"//#lint": {
@@ -56,21 +68,9 @@
 			],
 			"outputs": []
 		},
-		"check": {
-			"outputs": []
-		},
 		"//#check": {
 			"inputs": [".do/**", "scripts/**", "types/**", "tsconfig.json"],
 			"outputs": []
-		},
-		"test": {
-			"dependsOn": ["^build"],
-			"outputs": [
-				"playwright-report/**",
-				"test-results/**",
-				"storage-state/**",
-				"downloads/**"
-			]
 		},
 		"//#api:generate": {
 			"outputs": [
