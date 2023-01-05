@@ -1,5 +1,17 @@
 # @self/test
 
+## 3.4.0
+
+### Minor Changes
+
+- 4fbd51af6: update deps, fix decimal error, render filename error
+- 789ed68af: init rtl support
+- a563160d5: rm meili
+
+### Patch Changes
+
+- 17f4857a8: update cache manager
+
 ## 3.3.0
 
 ### Minor Changes

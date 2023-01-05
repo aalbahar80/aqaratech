@@ -1,5 +1,22 @@
 # @self/backend
 
+## 2.5.0
+
+### Minor Changes
+
+- 4fbd51af6: update deps, fix decimal error, render filename error
+- 789ed68af: init rtl support
+- a563160d5: rm meili
+
+### Patch Changes
+
+- 17f4857a8: update cache manager
+- Updated dependencies [4fbd51af6]
+- Updated dependencies [789ed68af]
+- Updated dependencies [a563160d5]
+- Updated dependencies [17f4857a8]
+  - @self/utils@3.4.0
+
 ## 2.4.0
 
 ### Minor Changes
