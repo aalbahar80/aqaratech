@@ -22,6 +22,9 @@ type SiteEnvSchema = z.infer<typeof siteEnvSchema>;
 
 /**
  * Validated public environment variables.
+ *
+ * Typecast when building, otherwise we'll encounter a type error when building
+ * in CI if not all variables are available.
  */
 export const environment = building
 	? (env as unknown as SiteEnvSchema)

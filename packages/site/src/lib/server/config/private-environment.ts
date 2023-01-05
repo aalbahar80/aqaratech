@@ -2,6 +2,8 @@ import { building } from '$app/environment';
 
 import { envSchema } from '@self/utils';
 
+import type { z } from 'zod';
+
 import { env } from '$env/dynamic/private';
 
 const schema = envSchema.pick({
@@ -10,4 +12,8 @@ const schema = envSchema.pick({
 	ORIGIN: true,
 });
 
-export const privateEnvironment = building ? env : schema.parse(env);
+type SiteEnvPrivateSchema = z.infer<typeof schema>;
+
+export const privateEnvironment = building
+	? (env as unknown as SiteEnvPrivateSchema)
+	: schema.parse(env);
