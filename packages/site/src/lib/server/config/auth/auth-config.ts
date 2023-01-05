@@ -1,10 +1,9 @@
+import { environment } from '$aqenvironment';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
-import { environment } from '$lib/environment';
 import { isProd } from '$lib/server/config/is-production';
+import { privateEnvironment } from '$lib/server/config/private-environment';
 
 import type { AuthConfigType } from '$lib/models/types/auth.type';
-
-import { env as privateEnv } from '$env/dynamic/private';
 
 /**
  * Get the auth config for the current environment.
@@ -13,7 +12,7 @@ export const getAuthConfig = () => {
 	const config = isProd
 		? {
 				...baseProd,
-				AUTH0_CLIENT_SECRET: privateEnv.AUTH0_CLIENT_SECRET,
+				AUTH0_CLIENT_SECRET: privateEnvironment.AUTH0_CLIENT_SECRET,
 		  }
 		: {
 				...baseDev,

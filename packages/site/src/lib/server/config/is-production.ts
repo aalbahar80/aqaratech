@@ -1,3 +1,3 @@
-import { env } from '$env/dynamic/public';
+import { environment } from '$aqenvironment';
 
-export const isProd = env.PUBLIC_AQARATECH_ENV === 'production';
+export const isProd = environment.PUBLIC_AQARATECH_ENV === 'production';
