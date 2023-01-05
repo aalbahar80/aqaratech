@@ -78,7 +78,6 @@ export interface AqaratechEnv {
 		| 'debug'
 		| 'silly';
 
-	readonly PUBLIC_AQ_DEBUG_PRISMA: boolean;
 	readonly PUBLIC_AQ_DEBUG_SENTRY: boolean;
 
 	// External

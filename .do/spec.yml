@@ -25,12 +25,6 @@ envs:
   - key: PUBLIC_AQ_DEBUG_LEVEL
     scope: RUN_AND_BUILD_TIME
     value: 'verbose'
-  - key: PUBLIC_AQ_DEBUG_NEST
-    scope: RUN_AND_BUILD_TIME
-    value: '1'
-  - key: PUBLIC_AQ_DEBUG_PRISMA
-    scope: RUN_AND_BUILD_TIME
-    value: '1'
   - key: PUBLIC_AQARATECH_ENV
     scope: RUN_AND_BUILD_TIME
     value: staging
@@ -78,9 +72,9 @@ services:
         scope: RUN_AND_BUILD_TIME
         type: SECRET
         value: aecd4fd3-1314-44e9-b1b5-d7dbb89fd0ca
-      - key: R2_ACCOUNT_ID
+      - key: R2_ENDPOINT
         scope: RUN_AND_BUILD_TIME
-        value: 8aa55983de332834393a9f4c4fbf1e35
+        value: https://8aa55983de332834393a9f4c4fbf1e35.r2.cloudflarestorage.com
       - key: R2_ACCESS_KEY_ID
         scope: RUN_AND_BUILD_TIME
         value: 19c40a5035eeb256b8e2fd59811c7203
@@ -88,13 +82,6 @@ services:
         scope: RUN_AND_BUILD_TIME
         type: SECRET
         value: 2493bd85d0e72adb6979a06c6385468653693f99dc8b108a655de336e3a04bb1
-      - key: MEILISEARCH_HOST
-        scope: RUN_AND_BUILD_TIME
-        value: http://localhost:7700
-      - key: MEILISEARCH_API_KEY
-        scope: RUN_AND_BUILD_TIME
-        type: SECRET
-        value: MASTER_KEY
       - key: PUBLIC_ROUTE_PATH
         scope: RUN_AND_BUILD_TIME
         value: ${_self.PUBLIC_ROUTE_PATH}

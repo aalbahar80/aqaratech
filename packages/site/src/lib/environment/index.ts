@@ -14,7 +14,6 @@ const siteEnvSchema = envSchema.pick({
 	PUBLIC_AQ_ENABLE_SENTRY: true,
 	PUBLIC_AQ_DEBUG_SENTRY: true,
 	PUBLIC_TRACE_RATE: true,
-	PUBLIC_AQ_DEBUG_SITE: true,
 	PUBLIC_COMMIT_SHA: true,
 	PUBLIC_AQ_DEBUG_LEVEL: true,
 });

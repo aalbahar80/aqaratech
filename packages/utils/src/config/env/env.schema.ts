@@ -23,11 +23,7 @@ export const envSchema = z.object({
 		.enum(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
 		.catch('info'),
 	// @ts-expect-error - zod wrongly infers the type
-	PUBLIC_AQ_DEBUG_SITE: zodEnvBooleanSchema().default(false),
-	// @ts-expect-error - zod wrongly infers the type
 	PUBLIC_AQ_DEBUG_SENTRY: zodEnvBooleanSchema().default(false),
-	// @ts-expect-error - zod wrongly infers the type
-	PUBLIC_AQ_DEBUG_PRISMA: zodEnvBooleanSchema().default(false),
 
 	// Logtail
 	LOGTAIL_TOKEN: z.string().optional(),
