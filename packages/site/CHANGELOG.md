@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.5.1
+
+### Patch Changes
+
+- 39f515210: import from validated priv env
+- 655d931a3: set typesafe-i18n in ssr.noExternal
+
 ## 2.5.0
 
 ### Minor Changes
