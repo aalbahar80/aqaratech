@@ -18,14 +18,20 @@
 		},
 		"//#format": {
 			"inputs": [
-				"*",
-				".*",
 				".do/**",
 				".github/**",
 				".changeset/**",
 				".vscode/**",
 				"scripts/**",
-				"types/**"
+				"types/**",
+				".eslintrc.js",
+				".npmrc",
+				".prettierrc",
+				"Caddyfile",
+				"docker-compose.yml",
+				"pnpm-workspace.yaml",
+				"readme.md",
+				"tsconfig.json"
 			],
 			"outputs": []
 		},
@@ -34,14 +40,20 @@
 		},
 		"//#lint": {
 			"inputs": [
-				"*",
-				".*",
 				".do/**",
 				".github/**",
 				".changeset/**",
 				".vscode/**",
 				"scripts/**",
-				"types/**"
+				"types/**",
+				".eslintrc.js",
+				".npmrc",
+				".prettierrc",
+				"Caddyfile",
+				"docker-compose.yml",
+				"pnpm-workspace.yaml",
+				"readme.md",
+				"tsconfig.json"
 			],
 			"outputs": []
 		},
@@ -50,14 +62,13 @@
 		},
 		"//#check": {
 			"inputs": [
-				"*",
-				".*",
 				".do/**",
 				".github/**",
 				".changeset/**",
 				".vscode/**",
 				"scripts/**",
-				"types/**"
+				"types/**",
+				"tsconfig.json"
 			],
 			"outputs": []
 		},
