@@ -14,6 +14,9 @@ on:
 
 jobs:
   run-ci:
+    # if triggered by pull_request event, only run if PR has label "preview"
+    if: ${{ github.event_name != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'preview') }}
+
     uses: ./.github/workflows/ci.yml
     secrets: inherit
     with:
