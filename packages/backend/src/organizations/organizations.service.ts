@@ -1,6 +1,5 @@
 import { randomUUID } from 'node:crypto';
 
-import { NoSuchBucket } from '@aws-sdk/client-s3';
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
@@ -140,17 +139,10 @@ export class OrganizationsService {
 			subject(this.SubjectType, { id }),
 		);
 
-		try {
-			await this.s3.deleteBucket(id);
-		} catch (error) {
-			if (error instanceof NoSuchBucket) {
-				// Don't throw if the bucket doesn't exist
-				throw error;
-			}
-		}
+		await this.s3.deleteBucket(id);
+
 		this.logger.log(`Deleted bucket ${id}`, OrganizationsService.name);
 
-		// TODO ensure planInvoice stores a `snapshot` of the organization before it is deleted (json field)
 		const deleted = await this.prisma.organization.delete({ where: { id } });
 		this.logger.log(`Deleted organization ${id}`, OrganizationsService.name);
 

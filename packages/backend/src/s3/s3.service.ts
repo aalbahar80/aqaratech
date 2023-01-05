@@ -6,7 +6,6 @@ import {
 	GetObjectCommandInput,
 	ListObjectsV2Command,
 	ListObjectsV2CommandInput,
-	NoSuchBucket,
 	PutObjectCommand,
 	PutObjectCommandInput,
 	S3Client,
@@ -48,20 +47,10 @@ export class S3Service {
 
 	async listObjects(options: ListObjectsV2CommandInput) {
 		this.logger.debug(`Listing objects in bucket ${options.Bucket ?? ''}`);
-		try {
-			const objects = await this._client.send(
-				new ListObjectsV2Command(options),
-			);
-			return objects;
-		} catch (error) {
-			if (error instanceof NoSuchBucket) {
-				this.logger.debug(`No bucket found: ${options.Bucket ?? ''}`);
-				return undefined;
-			} else {
-				this.logger.error(error);
-				throw error;
-			}
-		}
+
+		const objects = await this._client.send(new ListObjectsV2Command(options));
+
+		return objects;
 	}
 
 	async getObject(options: GetObjectCommandInput) {
@@ -87,7 +76,7 @@ export class S3Service {
 			Bucket: bucketName,
 		});
 
-		if (objects?.Contents) {
+		if (objects.Contents) {
 			await Promise.all(
 				objects.Contents.map((object) =>
 					this.removeObject({

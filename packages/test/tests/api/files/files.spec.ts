@@ -8,46 +8,48 @@ test.use({
 	baseURL: process.env.PUBLIC_API_URL,
 });
 
-test('handle noSuchBucket gracefully', async ({ request, portfolio }) => {
-	const url = withQuery('/files', {
-		relationKey: 'portfolio',
-		relationValue: portfolio.id,
-	});
-
-	const res = await request.get(url);
-
-	expect(res.status()).toBe(200);
-
-	expect(await res.json()).toMatchObject({
-		results: [],
-	});
-});
-
-test('buckets are automatically created', async ({ request, portfolio }) => {
-	const url = withQuery(`organizations/${portfolio.organizationId}/files`, {
-		relationKey: 'portfolio',
-		relationValue: portfolio.id,
-	});
-
-	const fileName = 'test.txt';
-
-	const res = await request.post(url, {
-		multipart: {
-			fileName: fileName,
+test.describe('initial bucket state', () => {
+	test('return ok response', async ({ request, portfolio }) => {
+		const url = withQuery('/files', {
 			relationKey: 'portfolio',
 			relationValue: portfolio.id,
-			file: {
-				name: fileName,
-				mimeType: 'text/plain',
-				buffer: Buffer.from('hello world'),
-			},
-		},
+		});
+
+		const res = await request.get(url);
+
+		expect(res.status()).toBe(200);
+
+		expect(await res.json()).toMatchObject({
+			results: [],
+		});
 	});
 
-	expect(res.status()).toBe(201);
+	test('handle initial uploads', async ({ request, portfolio }) => {
+		const url = withQuery(`organizations/${portfolio.organizationId}/files`, {
+			relationKey: 'portfolio',
+			relationValue: portfolio.id,
+		});
 
-	const data = await res.text();
-	expect(data).toBe('test.txt');
+		const fileName = 'test.txt';
+
+		const res = await request.post(url, {
+			multipart: {
+				fileName: fileName,
+				relationKey: 'portfolio',
+				relationValue: portfolio.id,
+				file: {
+					name: fileName,
+					mimeType: 'text/plain',
+					buffer: Buffer.from('hello world'),
+				},
+			},
+		});
+
+		expect(res.status()).toBe(201);
+
+		const data = await res.text();
+		expect(data).toBe('test.txt');
+	});
 });
 
 test('files can be deleted', async ({ request, file }) => {

@@ -109,17 +109,11 @@ export class FilesService {
 				Bucket: bucket,
 				Prefix: directory,
 			});
-
-			// set cache
-			if (objects !== undefined) {
-				// setting cache to undefined causes CacheManager to throw.
-				await this.cacheManager.set(cacheKey, objects, S3_TTL);
-			}
 		}
 
 		return {
-			total: objects?.KeyCount ?? 0,
-			results: objects?.Contents?.map((e) => new FileDto(e)) ?? [],
+			total: objects.KeyCount ?? 0,
+			results: objects.Contents?.map((e) => new FileDto(e)) ?? [],
 		};
 	}
 
