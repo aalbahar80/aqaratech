@@ -8,20 +8,16 @@ import { Filters } from '../filter-model';
 
 import { addDays } from './add-days';
 
-interface TestFixtures {
-	filters: Filters;
-}
-
 interface TestOptions {
 	tab: PageTypePortfolio.Income | PageTypePortfolio.Expenses;
 }
 
 const START_YEAR = 2021;
 
-export const test = base.extend<TestFixtures & TestOptions>({
+export const test = base.extend<TestOptions>({
 	tab: [PageTypePortfolio.Income, { option: true }],
 
-	page: async ({ page, org, portfolio, tab }, use) => {
+	page: async ({ page, org, portfolio, tab, invoices: _invoices }, use) => {
 		const url = getRoute({
 			entity: 'portfolio',
 			id: portfolio.id,
@@ -34,10 +30,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 
 		await page.goto(url);
 
-		await use(page);
-	},
-
-	filters: async ({ page, invoices: _invoices }, use) => {
+		// Set date range to match test data
 		const filters = new Filters(page);
 
 		await expect(filters.range.el).toHaveValue('12');
@@ -50,7 +43,11 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await filters.end.fill(`${START_YEAR}-12-31`);
 		await page.waitForNavigation();
 
-		await use(filters);
+		// wait for all charts to load
+		const empty = page.getByText('No data').first();
+		await expect(empty).toBeHidden();
+
+		await use(page);
 	},
 });
 
