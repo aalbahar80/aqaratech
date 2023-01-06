@@ -4,37 +4,14 @@ import { PageTypePortfolio } from '@self/utils';
 
 import { test } from './fixture';
 
-// PERF: Perforom all tests in the same context/instance
+// PERF: Perform all tests in the same context/instance
 
-test.describe('income page', () => {
-	test.use({ tab: PageTypePortfolio.Income });
+// NOTE: declaring expenses fixture here doesn't seem to work. Needs to be
+// declared in fixture.ts (page property)
 
-	test('looks the same', async ({ page }) => {
-		await expect(page).toHaveScreenshot({
-			fullPage: true,
-		});
-	});
-
-	test('income pie chart', async ({ page }) => {
-		const chart = page
-			.getByTestId('chart-card')
-			.filter({ hasText: 'Income: by Payment Status' });
-
-		await expect(chart).toHaveScreenshot();
-	});
-
-	test('income bar chart', async ({ page }) => {
-		const chart = page
-			.getByTestId('chart-card')
-			.filter({ hasText: 'Income: by Month' });
-
-		await expect(chart).toHaveScreenshot();
-	});
-});
+test.use({ tab: PageTypePortfolio.Expenses });
 
 test.describe('expense page', () => {
-	test.use({ tab: PageTypePortfolio.Expenses });
-
 	test('looks the same', async ({ page }) => {
 		await expect(page).toHaveScreenshot({
 			fullPage: true,
