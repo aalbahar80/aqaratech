@@ -224,12 +224,12 @@ export const handleError: HandleServerError = ({ error, event }) => {
 		return;
 	}
 
-	errorLogger(error);
+	console.error(error);
 
 	const info = extractRequestInfo(event);
 	const user = getSentryUser(event.locals.user);
 
-	logger.debug({ info, user });
+	console.debug({ info, user });
 
 	if (isNotFoundError(error, event)) {
 		// Most 404's are from random bots, but some may be legit.
@@ -251,6 +251,8 @@ export const handleError: HandleServerError = ({ error, event }) => {
 	Sentry.captureException(error, {
 		user,
 	});
+
+	errorLogger(error); // send to logtail at the end only
 
 	if (error instanceof ResponseError) {
 		return {
