@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.4.2
+
+### Patch Changes
+
+- 80488c27e: mark anchors as external
+
 ## 3.4.1
 
 ### Patch Changes

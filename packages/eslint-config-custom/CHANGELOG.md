@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.4.2
+
+### Patch Changes
+
+- 80488c27e: mark anchors as external
+
 ## 2.4.1
 
 ### Patch Changes

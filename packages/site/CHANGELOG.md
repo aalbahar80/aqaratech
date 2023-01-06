@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.5.3
+
+### Patch Changes
+
+- 80488c27e: mark anchors as external
+
 ## 2.5.2
 
 ### Patch Changes
