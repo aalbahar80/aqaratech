@@ -12,7 +12,11 @@ interface TestOptions {
 	tab: PageTypePortfolio.Income | PageTypePortfolio.Expenses;
 }
 
+// Try to aim for dates that fall within the START_YEAR.
 const START_YEAR = 2021;
+const BASE_DATE = new Date(START_YEAR, 0, 2); // set to 2 to avoid timezone issues in CI
+const RECORD_COUNT = 33;
+const DAYS_BETWEEN_RECORDS = 7;
 
 export const test = base.extend<TestOptions>({
 	tab: [PageTypePortfolio.Income, { option: true }],
@@ -58,12 +62,13 @@ test.use({
 	userRoleType: 'PORTFOLIO',
 
 	// Generate consistent data for visual regression testing
+	// Spread out dates. Try to aim for dates that fall within the filter range we set above.
 	portfoliosParams: [{ fullName: 'Evan Evans' }],
 	propertiesParams: [{ label: 'Property 1 Label' }],
 	unitsParams: [{ label: 'Unit 1 Label' }],
 
-	invoicesParams: R.times(30, (n) => {
-		const postAt = new Date(START_YEAR, 0, n + 1);
+	invoicesParams: R.times(RECORD_COUNT, (n) => {
+		const postAt = addDays(BASE_DATE, n * DAYS_BETWEEN_RECORDS);
 		const isPaid = n % 2 === 0;
 
 		return {
@@ -76,8 +81,8 @@ test.use({
 		};
 	}),
 
-	expensesParams: R.times(30, (n) => {
-		const postAt = new Date(START_YEAR, 0, n + 1);
+	expensesParams: R.times(RECORD_COUNT, (n) => {
+		const postAt = addDays(BASE_DATE, n * DAYS_BETWEEN_RECORDS);
 
 		return {
 			amount: n * 100,
