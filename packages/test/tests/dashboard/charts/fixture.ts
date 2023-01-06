@@ -17,7 +17,10 @@ const START_YEAR = 2021;
 export const test = base.extend<TestOptions>({
 	tab: [PageTypePortfolio.Income, { option: true }],
 
-	page: async ({ page, org, portfolio, tab, invoices: _invoices }, use) => {
+	page: async (
+		{ page, org, portfolio, tab, invoices: _invoices, expenses: _expenses },
+		use,
+	) => {
 		const url = getRoute({
 			entity: 'portfolio',
 			id: portfolio.id,
@@ -54,10 +57,12 @@ export const test = base.extend<TestOptions>({
 test.use({
 	userRoleType: 'PORTFOLIO',
 
-	portfoliosParams: [{ fullName: 'Evan Evans' }],
-
 	// Generate consistent data for visual regression testing
-	invoicesParams: R.times(100, (n) => {
+	portfoliosParams: [{ fullName: 'Evan Evans' }],
+	propertiesParams: [{ label: 'Property 1 Label' }],
+	unitsParams: [{ label: 'Unit 1 Label' }],
+
+	invoicesParams: R.times(30, (n) => {
 		const postAt = new Date(START_YEAR, 0, n + 1);
 		const isPaid = n % 2 === 0;
 
@@ -68,6 +73,22 @@ test.use({
 			paidAt: isPaid ? addDays(postAt, 3).toISOString().slice(0, 10) : null,
 			dueAt: addDays(postAt, 17).toISOString().slice(0, 10),
 			memo: `Memo for sample invoice #${n}`,
+		};
+	}),
+
+	expensesParams: R.times(30, (n) => {
+		const postAt = new Date(START_YEAR, 0, n + 1);
+
+		return {
+			amount: n * 100,
+			postAt: postAt.toISOString().slice(0, 10),
+			memo: `Memo for sample expense #${n}`,
+			// TODO: add category
+			// TODO: configure propertyId
+			// propertyId: n % 3 === 1 ? null : undefined,
+			// unitId: n % 3 === 0 ? null : undefined,
+			propertyId: null,
+			unitId: null,
 		};
 	}),
 });
