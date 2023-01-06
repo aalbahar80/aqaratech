@@ -1,3 +1,5 @@
+import { expect } from '@playwright/test';
+
 import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
@@ -142,6 +144,21 @@ for (const i of inputs) {
 				resultText: i.resultText,
 				keysToValidate: i.keysToValidate,
 			});
+		});
+
+		test("spaces don't cause error response", async ({ page, isMobile }) => {
+			const searchPalette = new SearchPalette({ page, isMobile });
+
+			await searchPalette.open();
+
+			const [res] = await Promise.all([
+				page.waitForResponse(/.*search/, {
+					timeout: 5000,
+				}),
+				searchPalette.input.fill(` ${i.queryExact} `),
+			]);
+
+			expect(res.status()).toBeLessThan(400);
 		});
 	});
 }

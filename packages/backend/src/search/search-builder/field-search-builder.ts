@@ -26,19 +26,9 @@ export const fieldSearchBuilder = <T extends string, Query extends string>(
 		},
 	};
 
-	const searchSplit = {
-		[field]: {
-			// https://github.com/prisma/prisma/issues/8939#issuecomment-909388537
-			search: query.split(' ').join(' & '),
-			mode,
-		},
-	};
-
 	return [
 		// prettier-mulitline-workaround
-		// TODO: Review differences
 		contains,
 		searchReplace,
-		searchSplit,
 	];
 };
