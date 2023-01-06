@@ -23,14 +23,14 @@
 		"i18n:import": "tsx src/i18n/tolgee/import.ts && pnpm typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.2",
+		"@iconify/json": "2.2.3",
 		"@logtail/types": "0.1.12",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",
 		"@sentry/svelte": "7.29.0",
 		"@sentry/tracing": "7.29.0",
-		"@sveltejs/adapter-node": "1.0.1",
-		"@sveltejs/kit": "1.0.2",
+		"@sveltejs/adapter-node": "1.1.0",
+		"@sveltejs/kit": "1.0.5",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/forms": "0.5.3",
