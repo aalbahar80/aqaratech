@@ -64,8 +64,10 @@ test.use({
 	// Generate consistent data for visual regression testing
 	// Spread out dates. Try to aim for dates that fall within the filter range we set above.
 	portfoliosParams: [{ fullName: 'Evan Evans' }],
-	propertiesParams: [{ label: 'Property 1 Label' }],
-	unitsParams: [{ label: 'Unit 1 Label' }],
+	propertiesParams: [
+		{ area: 'بيان', block: '1', avenue: '2', street: '3', number: '44' },
+	],
+	unitsParams: [{ type: 'apartment', unitNumber: '100' }],
 
 	invoicesParams: R.times(RECORD_COUNT, (n) => {
 		const postAt = addDays(BASE_DATE, n * DAYS_BETWEEN_RECORDS);
@@ -89,10 +91,9 @@ test.use({
 			postAt: postAt.toISOString().slice(0, 10),
 			memo: `Memo for sample expense #${n}`,
 			// TODO: add category
-			// TODO: configure propertyId
-			// propertyId: n % 3 === 1 ? null : undefined,
-			// unitId: n % 3 === 0 ? null : undefined,
-			propertyId: null,
+
+			// Set a third of expenses as "Unspecified property"
+			...(n % 3 === 0 ? { propertyId: null } : {}),
 			unitId: null,
 		};
 	}),
