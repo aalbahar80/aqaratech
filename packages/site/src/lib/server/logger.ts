@@ -9,8 +9,10 @@ import { logtail } from '$lib/server/utils/logtail';
 /**
  * Transport for HTTP logs
  */
-const createTransportForHttp = () =>
-	new transports.Console({
+const createTransportForHttp = () => {
+	console.log('Creating transport for HTTP logs');
+
+	return new transports.Console({
 		level: 'http',
 		format: format.combine(
 			format(onlyHttp)(),
@@ -18,12 +20,15 @@ const createTransportForHttp = () =>
 			httpLogFormat(format.printf, 'site'),
 		),
 	});
+};
 
 /**
  * Transport for all other logs
  */
-const createSiteTransport = () =>
-	new transports.Console({
+const createSiteTransport = () => {
+	console.log('Creating transport for all other logs');
+
+	return new transports.Console({
 		format: format.combine(
 			format(ignoreHttp)(),
 			// Note: prettyPrint should not be used in production
@@ -32,6 +37,7 @@ const createSiteTransport = () =>
 			format.colorize({ all: true }),
 		),
 	});
+};
 
 export const logger = createLogger({
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition

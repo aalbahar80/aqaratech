@@ -20,9 +20,12 @@ const shouldEnableLogtail = () => {
 
 const createLogtailClient = () => {
 	if (shouldEnableLogtail() && privateEnvironment.LOGTAIL_TOKEN) {
+		console.log('Creating Logtail client');
+
 		const client = new Logtail(privateEnvironment.LOGTAIL_TOKEN);
 
 		client.use(addEnvLabel(environment.PUBLIC_AQARATECH_ENV));
+
 		return client;
 	} else {
 		console.warn('Logtail token not found in environment.');
