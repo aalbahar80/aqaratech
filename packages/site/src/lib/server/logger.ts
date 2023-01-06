@@ -1,7 +1,7 @@
 import { LogtailTransport } from '@logtail/winston';
 import { createLogger, format, transports } from 'winston';
 
-import { httpLogFormat, ignoreHttp, isLiveEnv, onlyHttp } from '@self/utils';
+import { httpLogFormat, ignoreHttp, onlyHttp } from '@self/utils';
 
 import { environment } from '$aqenvironment';
 import { logtail } from '$lib/server/utils/logtail';
@@ -46,11 +46,8 @@ export const logger = createLogger({
 	),
 
 	transports: [
-		// In production, only use the Logtail transport.
-
-		...(isLiveEnv(environment.PUBLIC_AQARATECH_ENV)
-			? []
-			: [createTransportForHttp(), createSiteTransport()]),
+		createTransportForHttp(),
+		createSiteTransport(),
 
 		// Transport for Logtail
 		...(logtail ? [new LogtailTransport(logtail)] : []),
