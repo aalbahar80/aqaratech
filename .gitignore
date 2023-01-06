@@ -25,7 +25,6 @@ vite.config.js.timestamp*
 test-results/
 playwright-report/
 storageState.json
-**/*snapshots/*.png
 storage-state
 packages/test/downloads/
 
