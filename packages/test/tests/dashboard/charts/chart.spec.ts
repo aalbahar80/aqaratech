@@ -8,7 +8,9 @@ test.describe('income page', () => {
 	test.use({ tab: PageTypePortfolio.Income });
 
 	test('looks the same', async ({ page }) => {
-		await expect(page).toHaveScreenshot();
+		await expect(page).toHaveScreenshot({
+			fullPage: true,
+		});
 	});
 });
 
