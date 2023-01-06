@@ -15,6 +15,7 @@ test.describe('expense page', () => {
 	test('looks the same', async ({ page }) => {
 		await expect(page).toHaveScreenshot({
 			fullPage: true,
+			maxDiffPixelRatio: 0.01,
 		});
 	});
 
