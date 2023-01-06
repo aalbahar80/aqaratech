@@ -15,6 +15,7 @@
 </script>
 
 <div
+	data-testid="chart-card"
 	class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
 	style:height="{maxHeight}px"
 >
