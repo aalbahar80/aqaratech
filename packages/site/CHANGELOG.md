@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.5.4
+
+### Patch Changes
+
+- 604db9116: update deps
+- 3303ce47c: handle spaces in search
+
 ## 2.5.3
 
 ### Patch Changes

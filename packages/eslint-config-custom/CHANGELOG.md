@@ -1,5 +1,12 @@
 # eslint-config-custom
 
+## 2.4.3
+
+### Patch Changes
+
+- 604db9116: update deps
+- 3303ce47c: handle spaces in search
+
 ## 2.4.2
 
 ### Patch Changes

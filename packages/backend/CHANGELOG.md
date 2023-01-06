@@ -1,5 +1,15 @@
 # @self/backend
 
+## 2.5.3
+
+### Patch Changes
+
+- 604db9116: update deps
+- 3303ce47c: handle spaces in search
+- Updated dependencies [604db9116]
+- Updated dependencies [3303ce47c]
+  - @self/utils@3.4.3
+
 ## 2.5.2
 
 ### Patch Changes

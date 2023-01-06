@@ -1,5 +1,12 @@
 # @self/test
 
+## 3.4.3
+
+### Patch Changes
+
+- 604db9116: update deps
+- 3303ce47c: handle spaces in search
+
 ## 3.4.2
 
 ### Patch Changes
