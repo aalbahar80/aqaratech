@@ -108,6 +108,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	// redirect to base locale if no locale slug was found
 	if (!lang) {
+		logger.log({
+			level: 'warn',
+			message: `redirecting to base locale. url: ${event.url.toString()}`,
+		});
+
 		const locale = getPreferredLocale(event);
 
 		return new Response(null, {
