@@ -162,3 +162,20 @@ for (const i of inputs) {
 		});
 	});
 }
+
+test('multiple matched words within same field are highlighted', async ({
+	page,
+	isMobile,
+}) => {
+	test.fail(); // TODO: enable after implementing
+	const searchPalette = new SearchPalette({ page, isMobile });
+
+	await searchPalette.open();
+	await searchPalette.input.fill('Alex Anderson');
+
+	const firstName = page.locator('mark').getByText('Alex').first();
+	const lastName = page.locator('mark').getByText('Anderson').first();
+
+	await expect.soft(firstName).toBeVisible();
+	await expect.soft(lastName).toBeVisible();
+});
