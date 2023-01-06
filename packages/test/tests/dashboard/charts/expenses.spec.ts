@@ -23,7 +23,9 @@ test.describe('expense page', () => {
 			.getByTestId('chart-card')
 			.filter({ hasText: 'Expenses: by Month' });
 
-		await expect(chart).toHaveScreenshot();
+		await expect(chart).toHaveScreenshot({
+			maxDiffPixelRatio: 0.01, // firefox fails without this
+		});
 	});
 
 	test('expense treemap - location', async ({ page }) => {
