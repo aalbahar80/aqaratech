@@ -27,7 +27,7 @@
 			<a
 				href="https://ojab1kn3vda.typeform.com/to/eet5fojG"
 				target="_blank"
-				rel="noopener noreferrer"
+				rel="noopener noreferrer external"
 				data-sveltekit-reload
 				type="submit"
 				class={buttonCn({
@@ -37,6 +37,8 @@
 				{$LL.buttons.contact()}
 			</a>
 			<a
+				rel="external"
+				data-sveltekit-reload
 				href={LOGIN}
 				class={buttonCn({
 					cs: 'w-32',
