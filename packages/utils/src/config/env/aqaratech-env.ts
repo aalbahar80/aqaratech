@@ -74,6 +74,7 @@ export interface AqaratechEnv {
 		| 'error'
 		| 'warn'
 		| 'info'
+		| 'http'
 		| 'verbose'
 		| 'debug'
 		| 'silly';

@@ -20,9 +20,9 @@ export const envSchema = z.object({
 
 	// Debug
 	PUBLIC_AQ_DEBUG_LEVEL: z
-		.enum(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
+		.enum(['error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'])
 		.catch(() => {
-			const defaultLevel = 'info' as const;
+			const defaultLevel = 'http' as const;
 			console.log(
 				`WARNING: Either the env var PUBLIC_AQ_DEBUG_LEVEL is not set or it is set to an invalid value. Defaulting to ${defaultLevel}`,
 			);
