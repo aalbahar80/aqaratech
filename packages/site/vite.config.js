@@ -8,7 +8,7 @@ import { isoImport } from 'vite-plugin-iso-import';
 
 import { version } from './package.json';
 
-const ANALYZE_BUNDLE = process.env.ANALYZE_BUNDLE === '1';
+const ANALYZE_BUNDLE = process.env['ANALYZE_BUNDLE'] === '1';
 
 export default defineConfig(() => {
 	/** @type {import('vite').UserConfig} */
@@ -21,11 +21,14 @@ export default defineConfig(() => {
 			sveltekit(),
 			icons({ compiler: 'svelte' }),
 			isoImport(),
-			ANALYZE_BUNDLE &&
-				visualizer({
-					emitFile: true,
-					file: 'stats.html',
-				}),
+			...(ANALYZE_BUNDLE
+				? [
+						visualizer({
+							emitFile: true,
+							filename: 'stats.html',
+						}),
+				  ]
+				: []),
 		],
 		clearScreen: false,
 		ssr: {

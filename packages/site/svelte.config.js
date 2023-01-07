@@ -19,9 +19,9 @@ const config = {
 			},
 		}),
 	],
+	// DOCS: https://svelte.dev/docs#compile-time-svelte-compile
 	compilerOptions: {
 		enableSourcemap: true,
-		sourcemap: true,
 	},
 	kit: {
 		adapter: adapterNode(),
