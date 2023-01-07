@@ -1,11 +1,14 @@
 #!/bin/bash
 
 # Scaffold a new worktree
+# Example: https://chrisdicarlo.ca/blog/working-with-git-worktrees-part-2/
 
-# Check if we're in a git repo
+set -e
+
+# Check if we're in a git worktree
 if [ ! -f "./.git" ]; then
-	echo "This is not a git repository, aborting..."
-	return
+	echo "This is not a git worktree, aborting..."
+	exit 1
 fi
 
 # Setup .env files
