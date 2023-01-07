@@ -1,7 +1,7 @@
 import { LogtailTransport } from '@logtail/winston';
 import { createLogger, format, transports } from 'winston';
 
-import { httpLogFormat, ignoreHttp, onlyHttp } from '@self/utils';
+import { httpLogFormat, ignoreHttp, isLiveEnv, onlyHttp } from '@self/utils';
 
 import { environment } from '$aqenvironment';
 import { logtail } from '$lib/server/utils/logtail';
@@ -31,10 +31,12 @@ const createSiteTransport = () => {
 	return new transports.Console({
 		format: format.combine(
 			format(ignoreHttp)(),
-			// Note: prettyPrint should not be used in production
+
+			// PERF: prettyPrint should not be used in production
 			// More info: https://github.com/winstonjs/logform#prettyprint
-			format.prettyPrint(),
-			format.colorize({ all: true }),
+			...(!isLiveEnv(environment.PUBLIC_AQARATECH_ENV)
+				? [format.cli()]
+				: [format.prettyPrint(), format.colorize({ all: true })]),
 		),
 	});
 };
