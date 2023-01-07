@@ -1091,7 +1091,7 @@ export declare const FileRelationKeyEnum: {
 	readonly MaintenanceOrder: 'maintenanceOrder';
 };
 export type FileRelationKeyEnum =
-	typeof FileRelationKeyEnum[keyof typeof FileRelationKeyEnum];
+	(typeof FileRelationKeyEnum)[keyof typeof FileRelationKeyEnum];
 /**
  *
  * @export
@@ -1502,7 +1502,7 @@ export declare const MAINTENANCEORDERSTATUSENUM: {
 	readonly Empty: '';
 };
 export type MAINTENANCEORDERSTATUSENUM =
-	typeof MAINTENANCEORDERSTATUSENUM[keyof typeof MAINTENANCEORDERSTATUSENUM];
+	(typeof MAINTENANCEORDERSTATUSENUM)[keyof typeof MAINTENANCEORDERSTATUSENUM];
 /**
  *
  * @export
@@ -2742,7 +2742,7 @@ export declare const RoleTypeEnum: {
 	readonly Portfolio: 'PORTFOLIO';
 	readonly Tenant: 'TENANT';
 };
-export type RoleTypeEnum = typeof RoleTypeEnum[keyof typeof RoleTypeEnum];
+export type RoleTypeEnum = (typeof RoleTypeEnum)[keyof typeof RoleTypeEnum];
 /**
  *
  * @export
@@ -2778,7 +2778,7 @@ export declare const SearchableEntityEnum: {
 	readonly Property: 'property';
 };
 export type SearchableEntityEnum =
-	typeof SearchableEntityEnum[keyof typeof SearchableEntityEnum];
+	(typeof SearchableEntityEnum)[keyof typeof SearchableEntityEnum];
 /**
  *
  * @export

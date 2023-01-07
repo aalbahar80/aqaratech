@@ -14,6 +14,6 @@ export const dbEntity = [
 
 export const nonDbEntity = ['expenseCategory', 'file'] as const;
 
-export type DBEntity = typeof dbEntity[number];
-export type NonDBEntity = typeof nonDbEntity[number];
+export type DBEntity = (typeof dbEntity)[number];
+export type NonDBEntity = (typeof nonDbEntity)[number];
 export type Entity = DBEntity | NonDBEntity;

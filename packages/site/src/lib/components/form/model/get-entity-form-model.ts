@@ -35,5 +35,7 @@ export const getEntityFormModel = <
 }: {
 	entity: T extends keyof typeof entityFormModeMap ? T : never;
 }) => {
-	return entityFormModeMap[entity]() as ReturnType<typeof entityFormModeMap[T]>;
+	return entityFormModeMap[entity]() as ReturnType<
+		(typeof entityFormModeMap)[T]
+	>;
 };

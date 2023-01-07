@@ -10,11 +10,11 @@ export interface EntityNames {
 }
 type EntityMap = Record<Entity, EntityNames>;
 
-export type EntitiesMap<T extends Entity> = typeof entitiesMap[T];
+export type EntitiesMap<T extends Entity> = (typeof entitiesMap)[T];
 export type DBEntitiesMap = EntitiesMap<DBEntity>;
 export type NonDBEntitiesMap = EntitiesMap<NonDBEntity>;
 
-export type UEntityMap = typeof entitiesMap[keyof typeof entitiesMap];
+export type UEntityMap = (typeof entitiesMap)[keyof typeof entitiesMap];
 export type URLName = UEntityMap['urlName'];
 
 const organization = {

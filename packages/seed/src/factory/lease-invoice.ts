@@ -59,7 +59,7 @@ export type LeaseInvoiceFactoryParams = Partial<
 >;
 
 export const leaseInvoicePartialFactory = (
-	data?: Partial<Parameters<typeof base['build']>['0']>,
+	data?: Partial<Parameters<(typeof base)['build']>['0']>,
 ) =>
 	leaseInvoiceFactory.build({
 		organizationId: '',

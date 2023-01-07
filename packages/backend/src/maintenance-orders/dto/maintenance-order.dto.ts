@@ -44,7 +44,7 @@ export class MaintenanceOrderDto
 		enum: MAINTENANCE_ORDER_STATUS,
 		enumName: 'MAINTENANCE_ORDER_STATUS_ENUM',
 	})
-	status: typeof MAINTENANCE_ORDER_STATUS[number] | null;
+	status: (typeof MAINTENANCE_ORDER_STATUS)[number] | null;
 
 	organizationId: string;
 
@@ -114,7 +114,7 @@ export class CreateMaintenanceOrderDto
 		enumName: 'MAINTENANCE_ORDER_STATUS_ENUM',
 		nullable: true,
 	})
-	status?: typeof MAINTENANCE_ORDER_STATUS[number] | null;
+	status?: (typeof MAINTENANCE_ORDER_STATUS)[number] | null;
 }
 
 export class UpdateMaintenanceOrderDto

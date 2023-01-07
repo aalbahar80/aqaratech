@@ -8,7 +8,7 @@ export type TSearchableEntity = Tenant | Portfolio | Property;
 /** Represents any fields of entity that are returned with search results */
 export type EntityReturnedKeys<T extends TSearchableEntity> = Extract<
 	keyof T,
-	typeof ALL_RETURNED_FIELDS[number]
+	(typeof ALL_RETURNED_FIELDS)[number]
 >;
 
 /** Represents the raw search result of a single entity, without metadata added
