@@ -6,7 +6,7 @@
 	],
 	"scripts": {
 		"dev": "vite dev --port 3000 --strictPort",
-		"build": "rm -rf ./{.svelte-kit,build} && vite build",
+		"build": "rm -rf ./{.svelte-kit,build} && svelte-kit sync && vite build",
 		"preview": "vite preview --port 3000 --strictPort",
 		"preview:node": ". ../../scripts/export-env.sh ../../.env && PORT=3000 ORIGIN=$PUBLIC_SITE_URL node build/index.js",
 		"check:base": "svelte-check --compiler-warnings \"a11y-click-events-have-key-events:ignore\"",
