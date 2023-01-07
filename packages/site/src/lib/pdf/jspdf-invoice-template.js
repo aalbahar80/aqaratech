@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { jsPDF } from 'jspdf';
 // Vite will convert this to the public URL
 // More info: https://vitejs.dev/guide/assets.html#importing-asset-as-url

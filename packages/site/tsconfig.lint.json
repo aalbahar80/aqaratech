@@ -5,5 +5,13 @@
 		"checkJs": true,
 		"diagnostics": true
 	},
-	"include": ["**/*", "**/.*"]
+	// "include": ["**/*", "**/.*"] // NOTE: This makes linting work (doesn't include config files in root), but may include more files than necessary
+
+	// NOTE: This includes config files in root, but does it hinder linting for src files?
+	"include": [
+		".*", // hidden files
+		"*" // root files
+		// "src/**/*", // includes js,cjs,mjs,ts,cts,mts
+		// "src/**/*.svelte" // NOTE: needed? --showConfig won't show .svelte files even for .svelte-kit/tsconfig.json
+	]
 }
