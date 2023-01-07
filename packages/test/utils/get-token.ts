@@ -2,6 +2,8 @@ import { decodeJwt } from 'jose';
 
 import type { Cookie } from '@self/utils';
 
+import type { BrowserContextOptions } from '@playwright/test';
+
 interface TokenReq {
 	name: Cookie.idToken | Cookie.accessToken;
 	domain: string | undefined;
@@ -47,4 +49,6 @@ const hasJWTExpired = (token: string) => {
 	return !payload.exp || hasExpired(payload.exp);
 };
 
-type Cookies = typeof import('../storage-state/org-admin.json')['cookies'];
+type Cookies = NonNullable<
+	Exclude<BrowserContextOptions['storageState'], string>
+>['cookies'];
