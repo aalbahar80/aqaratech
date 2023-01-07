@@ -23,7 +23,7 @@
 	import { isHomeRoute } from '$lib/utils/is-home-route';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 
-	import '../styles/tailwind.css';
+	import '../app.css';
 
 	export let data: LayoutData;
 

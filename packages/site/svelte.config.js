@@ -1,24 +1,12 @@
 // @ts-check
-
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-
 import adapterNode from '@sveltejs/adapter-node';
-import sveltePreprocess from 'svelte-preprocess';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
-	preprocess: [
-		sveltePreprocess({
-			sourceMap: true,
-			postcss: {
-				configFilePath: join(__dirname, 'postcss.config.cjs'),
-			},
-		}),
-	],
+	preprocess: vitePreprocess(),
+
 	// DOCS: https://svelte.dev/docs#compile-time-svelte-compile
 	compilerOptions: {
 		enableSourcemap: true,

@@ -1,17 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const colors = require('tailwindcss/colors');
-const defaultTheme = require('tailwindcss/defaultTheme');
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-	// content: ['./src/**/*.svelte'],
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-
 	theme: {
 		extend: {
-			teal: colors.teal,
-			cyan: colors.cyan,
 			fontFamily: {
-				sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+				sans: [
+					'Inter var',
+					// eslint-disable-next-line @typescript-eslint/no-var-requires
+					...require('tailwindcss/defaultTheme').fontFamily.sans,
+				],
 			},
 		},
 	},
@@ -22,8 +19,4 @@ module.exports = {
 	],
 
 	darkMode: 'class', // disable auto dark mode
-
-	// corePlugins: {
-	// 	preflight: false,
-	// }
 };
