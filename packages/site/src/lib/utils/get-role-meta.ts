@@ -49,7 +49,7 @@ export const getRoleMeta = (
 	} else if (role.roleType === 'TENANT' && role.tenantId) {
 		return {
 			roleLabel: L.entity.tenant.singular(),
-			home: `/portal/tenant/${role.tenantId}`,
+			home: `${locale}/portal/tenant/${role.tenantId}`,
 		};
 	} else {
 		throw new Error('Unknown role type');
