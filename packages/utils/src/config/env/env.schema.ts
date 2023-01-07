@@ -21,7 +21,13 @@ export const envSchema = z.object({
 	// Debug
 	PUBLIC_AQ_DEBUG_LEVEL: z
 		.enum(['error', 'warn', 'info', 'verbose', 'debug', 'silly'])
-		.catch('info'),
+		.catch(() => {
+			const defaultLevel = 'info' as const;
+			console.log(
+				`WARNING: Either the env var PUBLIC_AQ_DEBUG_LEVEL is not set or it is set to an invalid value. Defaulting to ${defaultLevel}`,
+			);
+			return defaultLevel;
+		}),
 	// @ts-expect-error - zod wrongly infers the type
 	PUBLIC_AQ_DEBUG_SENTRY: zodEnvBooleanSchema().default(false),
 
