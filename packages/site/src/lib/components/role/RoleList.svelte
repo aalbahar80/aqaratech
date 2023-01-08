@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { formatDistance } from 'date-fns';
 
+	import { page } from '$app/stores';
+
+	import { getRoute, PageType } from '@self/utils';
+
 	import RoleCard from '$lib/components/role/RoleCard.svelte';
 	import RoleEmptyState from '$lib/components/role/RoleEmptyState.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
@@ -43,6 +47,11 @@
 
 <a
 	class="text-center text-base font-semibold text-indigo-600 hover:text-indigo-700"
-	href="/organizations/new"
-	>Create new organization<span aria-hidden="true">→</span></a
+	href={getRoute({
+		entity: 'organization',
+		pageType: PageType.New,
+		params: {
+			lang: $page.params['lang'] ?? 'en', // HACK: svelte type limitation
+		},
+	})}>Create new organization<span aria-hidden="true">→</span></a
 >
