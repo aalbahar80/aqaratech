@@ -32,4 +32,13 @@ cp ./packages/backend/prisma/.env.example ./packages/backend/prisma/.env
 # Install dependencies
 pnpm install
 
-# TODO: Enable turbo remote caching
+# Setup Turborepo
+# Docs: https://turbo.build/repo/docs/ci/github-actions#remote-caching
+if [ -z "$TURBO_TEAM" ] || [ -z "$TURBO_KEY" ]; then
+	echo "Either TURBO_TEAM or TURBO_KEY is not set. To enable remote caching manually, run:"
+	echo "pnpm turbo login"
+	echo "pnpm turbo link"
+else
+	echo "TURBO_TEAM and TURBO_KEY environment variables are set, turborepo remote caching should be enabled."
+	echo "TURBO_TEAM: $TURBO_TEAM"
+fi
