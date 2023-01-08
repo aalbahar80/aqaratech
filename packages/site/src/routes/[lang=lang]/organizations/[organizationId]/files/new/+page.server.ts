@@ -28,7 +28,8 @@ export const actions: Actions = {
 					}
 				}
 
-				const url = `${environment.PUBLIC_API_URL}/organizations/${event.params.organizationId}/files`;
+				// Use non-public URL to post file
+				const url = `${environment.PUBLIC_API_URL_LOCAL}/organizations/${event.params.organizationId}/files`;
 
 				const res = await event.fetch(url, {
 					method: 'POST',
