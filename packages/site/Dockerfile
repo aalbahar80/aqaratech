@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.4
 
-FROM node:18.9-alpine
+FROM node:18.12.1-alpine
 
 # For sentry.release. Git is not installed in the node-alpine image.
 ARG PUBLIC_COMMIT_SHA
