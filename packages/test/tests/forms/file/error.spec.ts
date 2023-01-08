@@ -137,7 +137,7 @@ test.describe('file form 400 error renders helpful error message', () => {
 	});
 });
 
-test('file form errors are recovarable', async ({
+test('file form errors are recoverable', async ({
 	page,
 	portfolio,
 	request,
