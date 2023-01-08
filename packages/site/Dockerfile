@@ -10,6 +10,12 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
+# Allow larger uploads. Defaults to 512kb.
+# Docs: https://github.com/sveltejs/kit/tree/master/packages/adapter-node#body_size_limit
+# GOTCHA: The limit (and any overrides) are only in effect when running app with node build/index.js.
+# Running app with `vite dev/preview` has no limit.
+ENV BODY_SIZE_LIMIT=100000000
+
 COPY ./pruned .
 
 # Don't run production as root

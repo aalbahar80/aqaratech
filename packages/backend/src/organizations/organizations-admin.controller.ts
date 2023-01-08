@@ -232,7 +232,11 @@ export class OrganizationsAdminController {
 		@Param('organizationId') organizationId: string,
 		@UploadedFile(
 			new ParseFilePipe({
-				validators: [new MaxFileSizeValidator({ maxSize: 100 * 1000 * 1000 })],
+				validators: [
+					// NOTE: keep in sync with BODY_SIZE_LIMIT env var (sveltekit's node adapter)
+					// It is set in site/Dockerfile and site/package.json (preview:node script)
+					new MaxFileSizeValidator({ maxSize: 100 * 1000 * 1000 }),
+				],
 			}),
 		)
 		file: Express.Multer.File,
