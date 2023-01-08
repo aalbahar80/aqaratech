@@ -9,10 +9,7 @@ import { test } from '../../api/api-fixtures';
 
 const entity = 'leaseInvoice';
 
-const SAMPLE_PATH = path.resolve(
-	__dirname,
-	'../../../downloads/invoice-paid-sample.pdf',
-);
+const SAMPLE_PATH = path.resolve(__dirname, './invoice-paid-sample.pdf');
 
 const PDF_PATH = path.resolve(__dirname, '../../../downloads/invoice-paid.pdf');
 
