@@ -10,6 +10,7 @@ import {
 } from '@self/utils';
 
 import { ResponseError } from '$api/openapi';
+import { privateEnvironment } from '$lib/server/config/private-environment';
 import { environment } from '$aqenvironment';
 import { detectLocale, i18n, isLocale } from '$i18n/i18n-util';
 import { loadAllLocales } from '$i18n/i18n-util.sync';
@@ -41,6 +42,8 @@ logger.log({
 	message: JSON.stringify({
 		name: 'AqaratechConfig',
 		AQARATECH_APP_VERSION: __AQARATECH_APP_VERSION__,
+		ORIGIN: privateEnvironment.ORIGIN,
+		BODY_SIZE_LIMIT: privateEnvironment.BODY_SIZE_LIMIT,
 		...environment,
 	}),
 });
