@@ -31,7 +31,6 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		ignoreHTTPSErrors: true,
 		bypassCSP: true,
 		baseURL: process.env.PUBLIC_SITE_URL,
-		// viewport: { width: 1920, height: 1080 },
 		video: 'on-first-retry',
 		trace: {
 			mode: 'on-first-retry',
@@ -41,6 +40,10 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			// @ts-expect-error bug
 			fullPage: true,
 		},
+		// launchOptions: {
+		// 	args: ['--window-position=0,0'],
+		// 	slowMo: 100,
+		// },
 	},
 	webServer: [
 		// To Debug, use env var: DEBUG=pw:webserver
