@@ -9,6 +9,7 @@ import { FileFormPage } from '../file-form-model';
 const FILES = {
 	png: './tests/forms/file/upload-test.png',
 	pdf: './tests/components/pdf/invoice-paid-sample.pdf',
+	pdfLarge: './tests/forms/file/samples/sample-pdf-large.pdf',
 };
 
 for (const [name, filePath] of Object.entries(FILES)) {
