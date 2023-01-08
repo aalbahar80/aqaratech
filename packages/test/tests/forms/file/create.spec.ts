@@ -9,6 +9,12 @@ import { FileFormPage } from '../file-form-model';
 const FILES = {
 	png: './tests/forms/file/upload-test.png',
 	pdf: './tests/components/pdf/invoice-paid-sample.pdf',
+
+	// NOTE: make sure to test large pdf uploads while starting server with node
+	// build/index.js, which enforces BODY_SIZE_LIMIT just like production. On
+	// the other hand, vite dev/preview will always allow large uploads.
+	// This can lead to a scenario where large uploads work in vite dev/preview
+	// but fail in production.
 	pdfLarge: './tests/forms/file/samples/sample-pdf-large.pdf',
 };
 

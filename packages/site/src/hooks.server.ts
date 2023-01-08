@@ -10,12 +10,12 @@ import {
 } from '@self/utils';
 
 import { ResponseError } from '$api/openapi';
-import { privateEnvironment } from '$lib/server/config/private-environment';
 import { environment } from '$aqenvironment';
 import { detectLocale, i18n, isLocale } from '$i18n/i18n-util';
 import { loadAllLocales } from '$i18n/i18n-util.sync';
 import { MAX_AGE } from '$lib/constants/misc';
 import { sentryConfig } from '$lib/environment/sentry.config';
+import { privateEnvironment } from '$lib/server/config/private-environment';
 import { logger } from '$lib/server/logger';
 import { errorLogger } from '$lib/server/logger/error-logger';
 import { getUser } from '$lib/server/utils/get-user';
