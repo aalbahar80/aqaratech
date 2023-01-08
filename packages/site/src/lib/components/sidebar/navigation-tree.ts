@@ -1,6 +1,6 @@
 import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 
-import { LOGOUT } from '$lib/constants/routes';
+import { LOGOUT, NEW_ORGANIZATION } from '$lib/constants/routes';
 
 // eslint-disable-next-line import/no-named-as-default
 import type LL from '$i18n/i18n-svelte';
@@ -59,13 +59,7 @@ export const getNavigationTree = (
 		// New users have no role yet. Render basic nav links.
 		tree.splice(0, 0, {
 			name: 'Create new organization',
-			href: getRoute({
-				entity: 'organization',
-				pageType: PageType.New,
-				params: {
-					...langParam,
-				},
-			}),
+			href: NEW_ORGANIZATION(locale),
 			icon: HeroiconsPlus,
 			divided: true,
 		});

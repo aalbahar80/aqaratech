@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { locale } from '$i18n/i18n-svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
+	import { NEW_ORGANIZATION } from '$lib/constants/routes';
 
 	import MaterialSymbolsAddBusinessRounded from '~icons/material-symbols/add-business-rounded';
 </script>
@@ -14,7 +16,7 @@
 	<Button
 		text="Create an organization"
 		as="a"
-		href="/organizations/new"
+		href={NEW_ORGANIZATION($locale)}
 		class="mt-6 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 	>
 		<MaterialSymbolsAddBusinessRounded />
