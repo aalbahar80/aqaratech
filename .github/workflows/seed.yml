@@ -41,12 +41,11 @@ jobs:
       - name: Build deps (seed & backend)
         run: pnpm turbo run build --filter=@self/backend --filter=@self/seed
 
-      # Copy env file for seeding R2
-      - name: Set .env file
-        shell: bash
-        run: cp ./.env.test ./.env
-
       - name: Seed db
         run: pnpm -F @self/backend exec prisma migrate reset --force
         env:
           DATABASE_URL: ${{ github.event.inputs.db_url }}
+          PUBLIC_AQARATECH_ENV: 'staging'
+          R2_ENDPOINT: 'https://8aa55983de332834393a9f4c4fbf1e35.r2.cloudflarestorage.com'
+          R2_ACCESS_KEY_ID: '19c40a5035eeb256b8e2fd59811c7203'
+          R2_SECRET_ACCESS_KEY: '2493bd85d0e72adb6979a06c6385468653693f99dc8b108a655de336e3a04bb1'
