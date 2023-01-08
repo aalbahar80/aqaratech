@@ -9,7 +9,24 @@ import type { File } from './types/file.type';
 export const fileCreateSchema = z
 	.object({
 		fileName: filenameSchema,
-		file: z.record(z.any()).transform((value) => value as File),
+
+		file: z
+			.any()
+			.refine(
+				(value) => {
+					console.log('value', value);
+					if (value instanceof Blob) {
+						// Check for file size because by default, the browser will add an
+						// empty Blob object with size 0 when no file is selected.
+						return value.size > 0;
+					}
+					return false;
+				},
+				{
+					message: 'File is required',
+				},
+			)
+			.transform((value) => value as File),
 
 		relationKey: fileRelationKeySchema,
 		relationValue: isID,

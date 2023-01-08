@@ -108,6 +108,33 @@ test.describe('file form 400 error renders helpful error message', () => {
 
 		await expect(message).toBeVisible();
 	});
+
+	test('missing file', async ({ page, portfolio }) => {
+		// go straight to the form page, we want to test the error rendering only
+		const url = getRoute({
+			entity: 'file',
+			pageType: PageType.New,
+			params: {
+				organizationId: portfolio.organizationId,
+				portfolioId: portfolio.id,
+			},
+			predefined: {
+				relationKey: 'portfolio',
+				relationValue: portfolio.id,
+			},
+		});
+
+		await page.goto(url);
+
+		const form = new FileFormPage(page);
+		await page.getByLabel(getLabel('fileName')).fill('missing-file');
+
+		await form.save();
+
+		const message = page.getByText('File is required', { exact: true });
+
+		await expect(message).toBeVisible();
+	});
 });
 
 test('file form errors are recovarable', async ({
