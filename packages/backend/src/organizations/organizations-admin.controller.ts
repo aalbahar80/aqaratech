@@ -33,6 +33,7 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
+import { BackendEnvSchema } from 'src/env/env.schema';
 import {
 	CreateExpenseDto,
 	PartialExpenseDto,
@@ -235,7 +236,11 @@ export class OrganizationsAdminController {
 				validators: [
 					// NOTE: keep in sync with BODY_SIZE_LIMIT env var (sveltekit's node adapter)
 					// It is set in site/Dockerfile and site/package.json (preview:node script)
-					new MaxFileSizeValidator({ maxSize: 100 * 1000 * 1000 }),
+					new MaxFileSizeValidator({
+						// Typecast because we can't access this.env from decorators
+						maxSize: process.env
+							.BODY_SIZE_LIMIT as unknown as BackendEnvSchema['BODY_SIZE_LIMIT'],
+					}),
 				],
 			}),
 		)

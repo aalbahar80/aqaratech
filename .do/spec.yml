@@ -35,6 +35,9 @@ envs:
     scope: RUN_AND_BUILD_TIME
     type: SECRET
     value: qsYDfRpM2TXqyGeYhUNFReag
+  - key: BODY_SIZE_LIMIT
+    scope: RUN_AND_BUILD_TIME
+    value: 100000000
 name: REPLACE_NAME
 region: fra
 services:

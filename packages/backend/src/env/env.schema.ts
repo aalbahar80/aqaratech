@@ -9,6 +9,7 @@ export const backendEnvSchema = envSchema.pick({
 
 	DATABASE_URL: true,
 	PUBLIC_SITE_URL: true,
+	BODY_SIZE_LIMIT: true,
 
 	// R2
 	R2_ENDPOINT: true,

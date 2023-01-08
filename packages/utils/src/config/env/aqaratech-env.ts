@@ -9,8 +9,6 @@ export interface AqaratechEnv {
 
 	// URL's
 
-	readonly ORIGIN: string;
-
 	/**
 	 * The current url origin where the site is hosted.
 	 * In development, this could be `http://localhost:3000`.
@@ -80,6 +78,17 @@ export interface AqaratechEnv {
 		| 'silly';
 
 	readonly PUBLIC_AQ_DEBUG_SENTRY: boolean;
+
+	// Sveltekit adapter-node
+
+	/** Docs: https://github.com/sveltejs/kit/tree/master/packages/adapter-node#body_size_limit */
+	readonly ORIGIN: string;
+
+	// Allow larger uploads. Defaults to 512kb.
+	// Docs: https://github.com/sveltejs/kit/tree/master/packages/adapter-node#body_size_limit
+	// GOTCHA: The limit (and any overrides) are only in effect when running app with node build/index.js.
+	// Running app with `vite dev/preview` has no limit.
+	readonly BODY_SIZE_LIMIT: number;
 
 	// External
 	readonly CI?: boolean | undefined;

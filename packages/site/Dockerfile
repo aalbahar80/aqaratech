@@ -6,15 +6,14 @@ FROM node:18.9-alpine
 ARG PUBLIC_COMMIT_SHA
 ENV PUBLIC_COMMIT_SHA=${PUBLIC_COMMIT_SHA}
 
+# Allow larger uploads. Defaults to 512kb.
+# More info: See definition in packages/utils/src/config/env/aqaratech-env.ts
+ARG BODY_SIZE_LIMIT
+ENV BODY_SIZE_LIMIT=${BODY_SIZE_LIMIT}
+
 WORKDIR /app
 
 ENV NODE_ENV=production
-
-# Allow larger uploads. Defaults to 512kb.
-# Docs: https://github.com/sveltejs/kit/tree/master/packages/adapter-node#body_size_limit
-# GOTCHA: The limit (and any overrides) are only in effect when running app with node build/index.js.
-# Running app with `vite dev/preview` has no limit.
-ENV BODY_SIZE_LIMIT=100000000
 
 COPY ./pruned .
 

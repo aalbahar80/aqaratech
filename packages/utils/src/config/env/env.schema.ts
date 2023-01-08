@@ -34,8 +34,11 @@ export const envSchema = z.object({
 	// Logtail
 	LOGTAIL_TOKEN: z.string().optional(),
 
-	// Site specific
+	// Sveltekit adapter-node
 	ORIGIN: z.string().url(),
+	BODY_SIZE_LIMIT: z.coerce.number().min(0),
+
+	// Site specific
 	PUBLIC_SITE_URL: z.string().url(),
 	PUBLIC_API_URL: z.string().url(),
 	PUBLIC_API_URL_LOCAL: z.string().url(),
