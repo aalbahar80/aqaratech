@@ -4,7 +4,7 @@ import { ResponseError } from '$api/openapi';
 
 import type { HandleClientError } from '@sveltejs/kit';
 
-export const handleError: HandleClientError = ({ error, event }) => {
+export const handleError = (({ error, event }) => {
 	console.log({ error });
 
 	if (error instanceof ResponseError) {
@@ -49,4 +49,4 @@ export const handleError: HandleClientError = ({ error, event }) => {
 
 		return;
 	}
-};
+}) satisfies HandleClientError;

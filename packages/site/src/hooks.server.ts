@@ -68,7 +68,7 @@ Sentry.init({
 loadAllLocales();
 const L = i18n();
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const handle = (async ({ event, resolve }) => {
 	// if (event.url.pathname.startsWith('/api/')) {
 	// 	return fetch(event.request);
 	// }
@@ -219,9 +219,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 	});
 
 	return response;
-};
+}) satisfies Handle;
 
-export const handleError: HandleServerError = ({ error, event }) => {
+export const handleError = (({ error, event }) => {
 	// discard map file errors
 	if (event.url.pathname.endsWith('js.map')) {
 		return;
@@ -265,9 +265,9 @@ export const handleError: HandleServerError = ({ error, event }) => {
 	}
 
 	return;
-};
+}) satisfies HandleServerError;
 
-export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
+export const handleFetch = (async ({ event, request, fetch }) => {
 	// Runs when a load uses `fetch()` on the server
 	const publicUrl = environment.PUBLIC_API_URL;
 	const localUrl = environment.PUBLIC_API_URL_LOCAL;
@@ -288,7 +288,7 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 	}
 
 	return await fetch(request);
-};
+}) satisfies HandleFetch;
 
 const getPreferredLocale = ({ request }: RequestEvent) => {
 	// detect the preferred language the user has configured in his browser
