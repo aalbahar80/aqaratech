@@ -58,7 +58,9 @@
 				});
 			},
 		}),
+	];
 
+	const adminColumns = [
 		// Delete
 		columnHelper.display({
 			id: 'delete',
@@ -82,7 +84,9 @@
 <Table
 	items={data.results}
 	paginationDto={data.pagination}
-	{columns}
+	columns={$page.data.user?.role?.roleType === 'ORGADMIN'
+		? [...columns, ...adminColumns]
+		: columns}
 	columnVisibility={{
 		dueAt: false,
 		paidAt: false,
