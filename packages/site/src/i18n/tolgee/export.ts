@@ -11,6 +11,11 @@ import {
 // Get the directory containing the current module
 const moduleDir = dirname(new URL(import.meta.url).pathname);
 
+// Verify the Tolgee API key and create generated directory if it doesn't exist
+const verify = join(moduleDir, './tolgee-verify-key.sh');
+const verifyResult = execSync(verify);
+console.log(verifyResult.toString());
+
 /** The file to upload to the API */
 const outputPath = join(moduleDir, './generated/i18n-output.json');
 
@@ -24,13 +29,7 @@ const sendDataToAPI = (exportMapping: ExportLocaleMapping) => {
 		JSON.stringify(exportMapping.translations, null, 2),
 	);
 
-	// Construct the absolute path to the bash script
-	const verify = join(moduleDir, './tolgee-verify-key.sh');
 	const send = join(moduleDir, './tolgee-send.sh');
-
-	// Verify the Tolgee API key
-	const verifyResult = execSync(verify);
-	console.log(verifyResult.toString());
 
 	// Send the translations to Tolgee API
 	const sendResult = execSync(send);
