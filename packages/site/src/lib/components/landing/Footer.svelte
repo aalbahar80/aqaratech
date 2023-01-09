@@ -18,7 +18,7 @@
 			<!-- 	/> -->
 			<!-- </a> -->
 			<!-- </div> -->
-			<p class="mt-6 text-sm text-slate-500 sm:mt-0" dir="auto">
+			<p class="mt-6 text-sm text-slate-500 sm:mt-0">
 				&copy; {new Date().toLocaleDateString($locale, {
 					year: 'numeric',
 				})}
