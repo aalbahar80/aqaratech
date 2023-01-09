@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as R from 'remeda';
+	import toast from 'svelte-french-toast';
 
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
@@ -8,7 +9,6 @@
 	import FormError from '$lib/components/form/enhanced/fields/FormError.svelte';
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
-	import { addErrorToast, addSuccessToast } from '$lib/stores/toast';
 	import { objectValues } from '$lib/utils/common';
 
 	import type { FormPageModel } from '$lib/components/form/model/form-field.interface';
@@ -42,12 +42,25 @@
 	method="POST"
 	class="flex h-full flex-col gap-y-4 divide-gray-200 rounded-md bg-white px-4 shadow sm:px-6"
 	use:enhance={() => {
+		const toastId = toast.loading('Loading...');
+
 		// eslint-disable-next-line @typescript-eslint/require-await
 		return async ({ result, update }) => {
 			if (result.type === 'failure') {
-				addErrorToast('Invalid form');
+				toast.error('Invalid form', {
+					id: toastId,
+				});
 			} else if (result.type === 'success' || result.type === 'redirect') {
-				addSuccessToast();
+				toast.success('Success', {
+					id: toastId,
+				});
+			} else if (result.type === 'error') {
+				toast.error('Error', {
+					id: toastId,
+				});
+			} else {
+				// Case not expected. Dismiss toast nonetheless.
+				toast.dismiss(toastId);
 			}
 
 			update();
