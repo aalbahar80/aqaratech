@@ -3,7 +3,7 @@
 	import LL from '$i18n/i18n-svelte';
 </script>
 
-<div>
+<div class="mt-20 border-t border-gray-200">
 	<div
 		class="mx-auto max-w-md py-24 px-6 sm:max-w-3xl sm:py-32 lg:max-w-7xl lg:px-8"
 	>
