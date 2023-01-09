@@ -35,8 +35,6 @@ import type {
 	RequestEvent,
 } from '@sveltejs/kit';
 
-// import * as Tracing from '@sentry/tracing'; // TODO: remove?
-
 logger.log({
 	level: 'info',
 	message: JSON.stringify({
@@ -61,9 +59,11 @@ Sentry.init({
 	dsn: 'https://63374363bb0a4d5194497f0212c0b94f@o1210217.ingest.sentry.io/6735909',
 	integrations: [
 		// enable HTTP calls tracing
-		new Sentry.Integrations.Http({ tracing: true, breadcrumbs: true }),
+		new Sentry.Integrations.Http(),
 	],
 });
+
+Sentry.setTag('svelteKit', 'server');
 
 loadAllLocales();
 const L = i18n();

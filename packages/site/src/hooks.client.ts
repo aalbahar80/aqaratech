@@ -1,14 +1,20 @@
-import * as Sentry from '@sentry/svelte';
+// eslint-disable-next-line import/order
+import * as SentrySvelte from '@sentry/svelte';
+// @ts-expect-error importing @sentry/tracing for side effects
+// eslint-disable-next-line import/order, @typescript-eslint/no-unused-vars
+import { BrowserTracing } from '@sentry/tracing';
 
 import { ResponseError } from '$api/openapi';
 
 import type { HandleClientError } from '@sveltejs/kit';
 
+SentrySvelte.setTag('svelteKit', 'browser');
+
 export const handleError = (({ error, event }) => {
 	console.log({ error });
 
 	if (error instanceof ResponseError) {
-		Sentry.captureEvent(
+		SentrySvelte.captureEvent(
 			{
 				level: 'error',
 				message: error.message,
@@ -32,7 +38,11 @@ export const handleError = (({ error, event }) => {
 			status: error.response.status,
 		};
 	} else {
-		Sentry.captureException(error, {
+		SentrySvelte.captureException(error, {
+			contexts: {
+				svelteKit: { event },
+			},
+			// TODO: Consider removing properties below if contexts.svelteKit.event is enough
 			tags: {
 				routeId: event.route.id,
 				pathname: event.url.pathname,
