@@ -40,10 +40,13 @@ export type LeasePageTab = PageTab.Invoices | PageTab.Files;
 
 export type InvoicePageTab = PageTab.Files;
 
+export type ExpensePageTab = PageTab.Files;
+
 export type PageTabType =
 	| OrganizationPageTab
 	| TenantPageTab
 	| PropertyPageTab
 	| UnitPageTab
 	| LeasePageTab
-	| InvoicePageTab;
+	| InvoicePageTab
+	| ExpensePageTab;

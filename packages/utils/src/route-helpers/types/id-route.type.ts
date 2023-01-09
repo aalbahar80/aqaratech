@@ -8,6 +8,7 @@ import type {
 	UnitPageTab,
 	LeasePageTab,
 	InvoicePageTab,
+	ExpensePageTab,
 } from '../enums/page-tab.enum';
 import type { PageType } from '../enums/page-type.enum';
 import type { BaseGetRoute } from './base-route.type';
@@ -73,6 +74,12 @@ interface GetIdRouteInvoice extends BaseGetRoute {
 	pageType: InvoicePageTab;
 }
 
+interface GetIdRouteExpense extends BaseGetRoute {
+	id: string;
+	entity: Extract<Entity, 'expense'>;
+	pageType: ExpensePageTab;
+}
+
 export type GetIdRoute =
 	| GetIdRouteEntity
 	| GetIdRouteOrganization
@@ -81,4 +88,5 @@ export type GetIdRoute =
 	| GetIdRouteProperty
 	| GetIdRouteUnit
 	| GetIdRouteLease
-	| GetIdRouteInvoice;
+	| GetIdRouteInvoice
+	| GetIdRouteExpense;

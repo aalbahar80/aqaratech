@@ -4,7 +4,6 @@
 	import type { PageData } from './$types';
 
 	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
-	import ExpensePage from '$lib/components/expense/ExpensePage.svelte';
 
 	export let data: PageData;
 
@@ -12,8 +11,6 @@
 		category: data.expense.expenseType?.labelEn,
 	});
 </script>
-
-<ExpensePage expense={data.expense} />
 
 <AutoDetailsPane
 	details={obj}
