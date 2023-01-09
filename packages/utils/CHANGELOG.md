@@ -1,5 +1,15 @@
 # @self/utils
 
+## 3.4.4
+
+### Patch Changes
+
+- c9ad2a85d: update deps
+- 937d0426d: fix large upload errors
+- 998f86274: file input is required
+- 0d6145ee7: update node dockerfile version
+- 635d824f4: use local url for file post, add logging
+
 ## 3.4.3
 
 ### Patch Changes
