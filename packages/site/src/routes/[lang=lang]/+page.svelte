@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CallToAction from '$lib/components/landing/CallToAction.svelte';
+	import Contact from '$lib/components/landing/Contact.svelte';
 	import Features from '$lib/components/landing/features/Features.svelte';
 	import Footer from '$lib/components/landing/Footer.svelte';
 	import Hero from '$lib/components/landing/Hero.svelte';
@@ -12,4 +13,5 @@
 <SecondaryFeatures />
 <CallToAction />
 <Features />
+<Contact />
 <Footer />
