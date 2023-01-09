@@ -164,7 +164,6 @@ const ar: Translation = {
 		fullName: 'شركة عقاراتك لإدارة وتطوير الأراضي والعقارات',
 		shortName: 'عقاراتك',
 	},
-	log: 'تم استدعاء هذا السجل من {fileName: string}',
 }
 
 export default ar
