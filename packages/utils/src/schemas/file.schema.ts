@@ -14,7 +14,6 @@ export const fileCreateSchema = z
 			.any()
 			.refine(
 				(value) => {
-					console.log('value', value);
 					if (value instanceof Blob) {
 						// Check for file size because by default, the browser will add an
 						// empty Blob object with size 0 when no file is selected.

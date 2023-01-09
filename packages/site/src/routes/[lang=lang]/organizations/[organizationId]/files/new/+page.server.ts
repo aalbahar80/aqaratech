@@ -38,12 +38,17 @@ export const actions: Actions = {
 				});
 
 				if (!res.ok) {
-					// required since fetch doesn't throw on 4xx/5xx
+					// checking res.ok is required since fetch doesn't throw on 4xx/5xx
+
+					// At this point, the submission has passed the initial validation,
+					// which happened in the handleForm function. Errors here are from
+					// the backend.
 
 					// log error on server
 					console.error('Error while creating file', res);
 
 					// log error on sentry
+					// NOTE: consider loosening this to only log 5xx errors to Sentry
 					Sentry.captureException(
 						new Error(`Failed to create file: ${res.statusText}`),
 						{
