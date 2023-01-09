@@ -24,18 +24,18 @@
 					<!-- Location -->
 					<div>
 						<h3 class="text-lg font-medium text-slate-900">Location</h3>
-						<div class="mt-2 text-base text-slate-500">
+						<div class="mt-2 flex flex-col gap-2 text-base text-slate-500">
 							<p>
 								25 Alshuhada St, Sulaiman Tower <br />
 								Sharq, 15305, Kuwait
 							</p>
 							<a
-								class="mt-1"
+								class="underline hover:text-slate-900"
 								href="https://goo.gl/maps/8v94cnqcoFJxJvc57"
 								data-sveltekit-reload
 								target="_blank noopener noreferrer"
 							>
-								View on Google Maps
+								Map
 							</a>
 						</div>
 					</div>
@@ -45,7 +45,9 @@
 						<h3 class="text-lg font-medium text-slate-900">Phone</h3>
 						<div class="mt-2 text-base text-slate-500">
 							<!-- TODO: add data-sveltekit-reload? -->
-							<a class="mt-1" href="tel:+96522466664">+965 22466664</a>
+							<a class="hover:text-slate-900" href="tel:+96522466664"
+								>+965 22466664</a
+							>
 						</div>
 					</div>
 
@@ -59,7 +61,7 @@
 								rel="noopener noreferrer external"
 								data-sveltekit-reload
 								type="submit"
-								class="mt-1"
+								class="hover:text-slate-900"
 							>
 								{$LL.buttons.contact()}
 							</a>
