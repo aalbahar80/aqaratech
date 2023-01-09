@@ -7,14 +7,14 @@
 	<div
 		class="mx-auto max-w-md py-24 px-6 sm:max-w-3xl sm:py-32 lg:max-w-7xl lg:px-8"
 	>
-		<div class="divide-warm-gray-200 divide-y">
+		<div class="divide-y divide-slate-200">
 			<section
 				class="lg:grid lg:grid-cols-3 lg:gap-8"
 				aria-labelledby="contact-heading"
 			>
 				<h2
 					id="contact-heading"
-					class="text-warm-gray-900 text-2xl font-bold sm:text-3xl sm:tracking-tight"
+					class="text-3xl tracking-tight text-slate-900 sm:text-4xl"
 				>
 					Get in touch
 				</h2>
@@ -23,8 +23,8 @@
 				>
 					<!-- Location -->
 					<div>
-						<h3 class="text-warm-gray-900 text-lg font-medium">Location</h3>
-						<div class="text-warm-gray-500 mt-2 text-base">
+						<h3 class="text-lg font-medium text-slate-900">Location</h3>
+						<div class="mt-2 text-base text-slate-500">
 							<p>
 								25 Alshuhada St, Sulaiman Tower <br />
 								Sharq, 15305, Kuwait
@@ -42,8 +42,8 @@
 
 					<!-- Phone -->
 					<div>
-						<h3 class="text-warm-gray-900 text-lg font-medium">Phone</h3>
-						<div class="text-warm-gray-500 mt-2 text-base">
+						<h3 class="text-lg font-medium text-slate-900">Phone</h3>
+						<div class="mt-2 text-base text-slate-500">
 							<!-- TODO: add data-sveltekit-reload? -->
 							<a class="mt-1" href="tel:+96522466664">+965 22466664</a>
 						</div>
@@ -51,8 +51,8 @@
 
 					<!-- Online -->
 					<div>
-						<h3 class="text-warm-gray-900 text-lg font-medium">Online</h3>
-						<div class="text-warm-gray-500 mt-2 text-base">
+						<h3 class="text-lg font-medium text-slate-900">Online</h3>
+						<div class="mt-2 text-base text-slate-500">
 							<a
 								href="https://ojab1kn3vda.typeform.com/to/eet5fojG"
 								target="_blank"
