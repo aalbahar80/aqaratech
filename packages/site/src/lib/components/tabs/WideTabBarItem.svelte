@@ -3,12 +3,16 @@
 
 	import { classes } from '$lib/utils/classes';
 
+	import type { RoleDto } from '$api/openapi';
+
 	import HeroiconsArrowTopRightOnSquareSolid from '~icons/heroicons/arrow-top-right-on-square-solid';
 
 	export let tab: {
 		label: string;
 		href: string;
 		isExternal?: boolean;
+		/** If the tab is only visible to users with the given roles. */
+		roles?: RoleDto['roleType'][];
 	};
 
 	$: active = $page.url.pathname === tab.href;

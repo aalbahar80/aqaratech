@@ -3,6 +3,7 @@
 
 	import { entity, getRoute, PageType, PageTypePortfolio } from '@self/utils';
 
+	import { RoleTypeEnum } from '$api/openapi';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 
 	$: baseRoute = getRoute({
@@ -31,7 +32,11 @@
 			href: financialsRoute,
 		},
 		{ label: 'Leases', href: `${baseRoute}/leases` },
-		{ label: 'Files', href: `${baseRoute}/files` },
+		{
+			label: 'Files',
+			href: `${baseRoute}/files`,
+			roles: [RoleTypeEnum.Orgadmin, RoleTypeEnum.Portfolio],
+		},
 		{
 			label: 'Maintenance',
 			href: `${baseRoute}/${entity.maintenanceOrder.urlName}`,

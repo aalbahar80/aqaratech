@@ -10,12 +10,11 @@
 	export let tabs: Tab[];
 
 	$: authorizedTabs = tabs.filter((tab) => {
-		const isTenant = $page.data.user?.role?.roleType === 'TENANT';
-		if (isTenant) {
-			return tab.label !== 'Files';
-		} else {
-			return true;
-		}
+		const isAuthorized = tab.roles
+			? tab.roles.some((role) => role === $page.data.user?.role?.roleType)
+			: true;
+
+		return isAuthorized;
 	});
 </script>
 

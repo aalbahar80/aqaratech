@@ -3,6 +3,7 @@
 
 	import { getRoute, PageType } from '@self/utils';
 
+	import { RoleTypeEnum } from '$api/openapi';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 
 	$: baseRoute = getRoute({
@@ -14,8 +15,11 @@
 
 	$: tabs = [
 		{ label: 'Info', href: baseRoute },
-		{ label: 'Invoices', href: `${baseRoute}/invoices` },
-		{ label: 'Files', href: `${baseRoute}/files` },
+		{
+			label: 'Invoices',
+			href: `${baseRoute}/invoices`,
+			roles: [RoleTypeEnum.Orgadmin, RoleTypeEnum.Portfolio],
+		},
 	];
 </script>
 
