@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.5.1
+
+### Patch Changes
+
+- 4ab73f0d0: update deps
+
 ## 2.5.0
 
 ### Minor Changes

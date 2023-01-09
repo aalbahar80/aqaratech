@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.5.1
+
+### Patch Changes
+
+- 4ab73f0d0: update deps
+- Updated dependencies [4ab73f0d0]
+  - @self/utils@3.5.1
+
 ## 2.5.0
 
 ### Minor Changes

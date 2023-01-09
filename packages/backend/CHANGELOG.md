@@ -1,5 +1,14 @@
 # @self/backend
 
+## 2.6.1
+
+### Patch Changes
+
+- 4ab73f0d0: update deps
+- a3cb38b2b: use relative sources for backend sourcemap
+- Updated dependencies [4ab73f0d0]
+  - @self/utils@3.5.1
+
 ## 2.6.0
 
 ### Minor Changes

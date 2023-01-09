@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.6.1
+
+### Patch Changes
+
+- 4ab73f0d0: update deps
+
 ## 2.6.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.5.1
+
+### Patch Changes
+
+- 4ab73f0d0: update deps
+
 ## 3.5.0
 
 ### Minor Changes
