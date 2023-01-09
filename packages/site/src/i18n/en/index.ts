@@ -1,3 +1,4 @@
+import { aqaratech } from './aqaratech';
 import { entity } from './entity';
 import { landing } from './landing';
 
@@ -30,6 +31,7 @@ const en: BaseTranslation = {
 		range: 'Range',
 	},
 	landing,
+	aqaratech,
 };
 
 export default en;

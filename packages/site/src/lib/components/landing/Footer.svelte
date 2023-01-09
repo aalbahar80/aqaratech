@@ -1,4 +1,6 @@
 <script lang="ts">
+	// eslint-disable-next-line import/no-named-as-default
+	import LL, { locale } from '$i18n/i18n-svelte';
 	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
 	// import TablerBrandInstagram from '~icons/tabler/brand-instagram';
 </script>
@@ -17,7 +19,10 @@
 			<!-- </a> -->
 			<!-- </div> -->
 			<p class="mt-6 text-sm text-slate-500 sm:mt-0" dir="auto">
-				Copyright &copy; {new Date().getFullYear()} Aqaratech. All rights reserved.
+				&copy; {new Date().toLocaleDateString($locale, {
+					year: 'numeric',
+				})}
+				{$LL.landing.footer.legal()}
 			</p>
 		</div>
 	</Container>

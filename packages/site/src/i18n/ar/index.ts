@@ -156,7 +156,15 @@ const ar: Translation = {
 			description: 'Try Aqaratech and experience the ease and convenience of managing your properties with just a few clicks! Sign up now and see the difference it can make for your business.',
 			button: 'إنشاء حساب',
 		},
+		footer: {
+			legal: 'شركة عقاراتك لإدارة وتطوير الأراضي والعقارات. جميع الحقوق محفوظة.',
+		},
 	},
+	aqaratech: {
+		fullName: 'شركة عقاراتك لإدارة وتطوير الأراضي والعقارات',
+		shortName: 'عقاراتك',
+	},
+	log: 'تم استدعاء هذا السجل من {fileName: string}',
 }
 
 export default ar

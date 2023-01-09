@@ -405,6 +405,22 @@ type RootTranslation = {
 			 */
 			button: string
 		}
+		footer: {
+			/**
+			 * A​q​a​r​a​t​e​c​h​,​ ​L​L​C​.​ ​A​l​l​ ​r​i​g​h​t​s​ ​r​e​s​e​r​v​e​d​.
+			 */
+			legal: string
+		}
+	}
+	aqaratech: {
+		/**
+		 * A​q​a​r​a​t​e​c​h​,​ ​L​L​C​.
+		 */
+		fullName: string
+		/**
+		 * A​q​a​r​a​t​e​c​h
+		 */
+		shortName: string
 	}
 }
 
@@ -800,6 +816,22 @@ export type TranslationFunctions = {
 			 */
 			button: () => LocalizedString
 		}
+		footer: {
+			/**
+			 * Aqaratech, LLC. All rights reserved.
+			 */
+			legal: () => LocalizedString
+		}
+	}
+	aqaratech: {
+		/**
+		 * Aqaratech, LLC.
+		 */
+		fullName: () => LocalizedString
+		/**
+		 * Aqaratech
+		 */
+		shortName: () => LocalizedString
 	}
 }
 

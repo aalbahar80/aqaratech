@@ -1,5 +1,6 @@
 import { callToAction } from './cta';
 import { features } from './features';
+import { footer } from './footer';
 import { hero } from './hero';
 import { secondaryFeatures } from './secondary-features';
 
@@ -8,4 +9,5 @@ export const landing = {
 	features,
 	secondaryFeatures,
 	callToAction,
+	footer,
 };
