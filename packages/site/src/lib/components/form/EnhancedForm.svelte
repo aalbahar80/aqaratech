@@ -42,7 +42,8 @@
 	method="POST"
 	class="flex h-full flex-col gap-y-4 divide-gray-200 rounded-md bg-white px-4 shadow sm:px-6"
 	use:enhance={() => {
-		return ({ result, update }) => {
+		// eslint-disable-next-line @typescript-eslint/require-await
+		return async ({ result, update }) => {
 			if (result.type === 'failure') {
 				addErrorToast('Invalid form');
 			} else if (result.type === 'success' || result.type === 'redirect') {
