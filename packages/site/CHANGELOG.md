@@ -1,5 +1,17 @@
 # @self/site
 
+## 2.6.0
+
+### Minor Changes
+
+- e3b51bcbb: expose filetab for expenses
+- f206ba32f: add loading toast
+
+### Patch Changes
+
+- 59265b0f1: hide users tab for nonadmin
+- 2525acb71: hide file delete button for nonadmins
+
 ## 2.5.5
 
 ### Patch Changes

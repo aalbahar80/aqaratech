@@ -1,5 +1,18 @@
 # @self/backend
 
+## 2.6.0
+
+### Minor Changes
+
+- e3b51bcbb: expose filetab for expenses
+- f206ba32f: add loading toast
+
+### Patch Changes
+
+- Updated dependencies [e3b51bcbb]
+- Updated dependencies [f206ba32f]
+  - @self/utils@3.5.0
+
 ## 2.5.4
 
 ### Patch Changes

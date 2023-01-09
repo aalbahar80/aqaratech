@@ -1,5 +1,12 @@
 # eslint-config-custom
 
+## 2.5.0
+
+### Minor Changes
+
+- e3b51bcbb: expose filetab for expenses
+- f206ba32f: add loading toast
+
 ## 2.4.4
 
 ### Patch Changes
