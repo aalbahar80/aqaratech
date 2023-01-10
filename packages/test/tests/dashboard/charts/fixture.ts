@@ -16,8 +16,8 @@ interface TestOptions {
 // Try to aim for dates that fall within the START_YEAR.
 const START_YEAR = 2021;
 const BASE_DATE = new Date(START_YEAR, 0, 2); // set to 2 to avoid timezone issues in CI
-const RECORD_COUNT = 30;
-const DAYS_BETWEEN_RECORDS = 7;
+const RECORD_COUNT = 10;
+const DAYS_BETWEEN_RECORDS = 10;
 
 export const test = base.extend<TestOptions>({
 	tab: [PageTypePortfolio.Income, { option: true }],
