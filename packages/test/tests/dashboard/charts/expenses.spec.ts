@@ -58,6 +58,12 @@ for (const preset of chartTestPresets) {
 			await expect(chart).toHaveScreenshot();
 		});
 
-		// TEST: add treemap - category
+		test('expense treemap - category', async ({ page }) => {
+			const chart = page
+				.getByTestId('chart-card')
+				.filter({ hasText: 'Expenses: by Category' });
+
+			await expect(chart).toHaveScreenshot();
+		});
 	});
 }
