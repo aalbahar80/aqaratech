@@ -38,26 +38,22 @@ for (const preset of incomeChartTestPresets) {
 		});
 
 		test('looks the same', async ({ page }) => {
-			await expect(page).toHaveScreenshot({
+			await expect.soft(page).toHaveScreenshot({
 				fullPage: true,
 				// maxDiffPixelRatio: 0.01,
 			});
-		});
 
-		test('income pie chart', async ({ page }) => {
-			const chart = page
+			const pieChart = page
 				.getByTestId('chart-card')
 				.filter({ hasText: 'Income: by Payment Status' });
 
-			await expect(chart).toHaveScreenshot();
-		});
+			await expect.soft(pieChart).toHaveScreenshot();
 
-		test('income bar chart', async ({ page }) => {
-			const chart = page
+			const barChart = page
 				.getByTestId('chart-card')
 				.filter({ hasText: 'Income: by Month' });
 
-			await expect(chart).toHaveScreenshot({
+			await expect.soft(barChart).toHaveScreenshot({
 				maxDiffPixelRatio: 0.01, // firefox fails without this
 			});
 		});

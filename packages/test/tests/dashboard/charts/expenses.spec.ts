@@ -32,38 +32,34 @@ for (const preset of chartTestPresets) {
 			await page.waitForLoadState('networkidle');
 		});
 
+		// Combine screeshot assertions into a single test to improve performance significantly.
+		// Otherwise, identical fixtures are created for each test.
 		test('looks the same', async ({ page }) => {
-			await expect(page).toHaveScreenshot({
+			await expect.soft(page).toHaveScreenshot({
 				fullPage: true,
 				// NOTE: Care when setting maxDiffPixelRatio in fullPage screenshots,
 				// If necessary, set exact pixel count as low as possible.
 			});
-		});
 
-		test('expense bar chart', async ({ page }) => {
-			const chart = page
+			const barChart = page
 				.getByTestId('chart-card')
 				.filter({ hasText: 'Expenses: by Month' });
 
-			await expect(chart).toHaveScreenshot({
+			await expect.soft(barChart).toHaveScreenshot({
 				maxDiffPixelRatio: 0.01, // firefox fails without this
 			});
-		});
 
-		test('expense treemap - location', async ({ page }) => {
-			const chart = page
+			const locationChart = page
 				.getByTestId('chart-card')
 				.filter({ hasText: 'Expenses: by Location' });
 
-			await expect(chart).toHaveScreenshot();
-		});
+			await expect.soft(locationChart).toHaveScreenshot();
 
-		test('expense treemap - category', async ({ page }) => {
-			const chart = page
+			const categoryChart = page
 				.getByTestId('chart-card')
 				.filter({ hasText: 'Expenses: by Category' });
 
-			await expect(chart).toHaveScreenshot();
+			await expect.soft(categoryChart).toHaveScreenshot();
 		});
 	});
 }
