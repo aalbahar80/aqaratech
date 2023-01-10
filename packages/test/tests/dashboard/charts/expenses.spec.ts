@@ -14,7 +14,6 @@ import { test } from './fixture';
 
 test.use({ tab: PageTypePortfolio.Expenses });
 
-// for (const [n, filterPreset] of filterPresets.entries()) {
 for (const preset of chartTestPresets) {
 	test.describe(`expense page - filter - ${preset.name}`, () => {
 		// apply filter preset
@@ -23,13 +22,14 @@ for (const preset of chartTestPresets) {
 
 			// Select a property
 			await filters.property.el.selectOption({ label: preset.filter.property });
-			await page.waitForLoadState('networkidle');
 
 			// Select a unit
 			if ('unit' in preset.filter) {
 				await filters.unit.el.selectOption({ label: preset.filter.unit });
-				await page.waitForLoadState('networkidle');
 			}
+
+			// wait for fresh data
+			await page.waitForLoadState('networkidle');
 		});
 
 		test('looks the same', async ({ page }) => {
