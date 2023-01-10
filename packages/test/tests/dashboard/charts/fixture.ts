@@ -7,6 +7,7 @@ import { test as base } from '../../api/api-fixtures';
 import { Filters } from '../filter-model';
 
 import { addDays } from './add-days';
+import { nonrandomAttribution } from './random-attribution';
 
 interface TestOptions {
 	tab: PageTypePortfolio.Income | PageTypePortfolio.Expenses;
@@ -92,9 +93,7 @@ test.use({
 			memo: `Memo for sample expense #${n}`,
 			// TODO: add category
 
-			// Set a third of expenses as "Unspecified property"
-			...(n % 3 === 0 ? { propertyId: null } : {}),
-			unitId: null,
+			...nonrandomAttribution(n),
 		};
 	}),
 });

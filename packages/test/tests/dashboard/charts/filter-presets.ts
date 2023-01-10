@@ -35,4 +35,12 @@ export const chartTestPresets = [
 			property: 'بيان ق 1 م 44',
 		},
 	},
+	{
+		name: 'Specific Unit',
+		filter: {
+			...base,
+			property: 'بيان ق 1 م 44',
+			unit: 'apartment 100',
+		},
+	},
 ] satisfies ChartPresetTest[];
