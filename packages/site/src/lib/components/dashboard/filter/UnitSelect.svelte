@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { invalidate } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { onDestroy } from 'svelte';
 
 	import { computeLabelUnit } from '@self/utils';
 
@@ -52,6 +53,12 @@
 						label: 'No units',
 					},
 			  ];
+
+	onDestroy(() => {
+		// Prevent the filter from persisting when navigating to a
+		// different portfolio.
+		unit.set(undefined);
+	});
 </script>
 
 <Select

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { invalidate } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { onDestroy } from 'svelte';
 
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
@@ -39,6 +40,12 @@
 		...(showUnspecifiedPropertyOption ? [unspecifedPropertyOption] : []),
 		...propertyOptions,
 	];
+
+	onDestroy(() => {
+		// Prevent the filter from persisting when navigating to a
+		// different portfolio.
+		property.set(undefined);
+	});
 </script>
 
 <Select
