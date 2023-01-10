@@ -91,9 +91,9 @@ test.use({
 			amount: n * 100,
 			postAt: postAt.toISOString().slice(0, 10),
 			memo: `Memo for sample expense #${n}`,
-			// TODO: add category
-
+			// Attribute an expense to either a portfolio, property, or unit
 			...nonrandomAttribution(n),
+			// TODO: add category
 		};
 	}),
 });

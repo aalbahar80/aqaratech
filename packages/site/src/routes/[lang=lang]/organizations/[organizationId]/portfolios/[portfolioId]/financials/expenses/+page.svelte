@@ -33,6 +33,15 @@
 >
 	<ExpenseTreemapCategory
 		expenses={data.expensesByCategory}
-		categories={data.categories}
+		categories={[
+			...data.categories,
+			{
+				id: 'Uncategorized',
+				labelEn: 'Uncategorized',
+				labelAr: 'غير مصنف',
+				parentId: null,
+				isGroup: false,
+			},
+		]}
 	/>
 </ChartWrapper>
