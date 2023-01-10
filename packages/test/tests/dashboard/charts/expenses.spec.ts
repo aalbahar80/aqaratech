@@ -26,14 +26,17 @@ for (const preset of chartTestPresets) {
 			await page.waitForLoadState('networkidle');
 
 			// Select a unit
-			// await filters.unit.el.selectOption({ label: filterPreset.unit });
-			// await page.waitForLoadState('networkidle');
+			if ('unit' in preset.filter) {
+				await filters.unit.el.selectOption({ label: preset.filter.unit });
+				await page.waitForLoadState('networkidle');
+			}
 		});
 
 		test('looks the same', async ({ page }) => {
 			await expect(page).toHaveScreenshot({
 				fullPage: true,
-				maxDiffPixelRatio: 0.01,
+				// NOTE: Care when setting maxDiffPixelRatio in fullPage screenshots,
+				// If necessary, set exact pixel count as low as possible.
 			});
 		});
 

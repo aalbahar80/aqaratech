@@ -1,7 +1,7 @@
 interface filterPreset {
 	range: string;
 	property: string;
-	unit: string;
+	unit?: string;
 }
 
 interface ChartPresetTest {
@@ -13,7 +13,6 @@ interface ChartPresetTest {
 const base = {
 	range: 'Last 12 Months',
 	property: 'All properties',
-	unit: 'All units',
 } satisfies filterPreset;
 
 export const chartTestPresets = [
