@@ -20,7 +20,8 @@
 
 <div
 	class:hidden={$page.url.pathname.includes('/new') ||
-		$page.url.pathname.includes('/edit')}
+		$page.url.pathname.includes('/edit') ||
+		$page.url.pathname.includes('/contract')}
 >
 	<div class="sm:hidden">
 		<label for="tabs" class="sr-only">Select a tab</label>
