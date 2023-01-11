@@ -12,13 +12,10 @@ import { test } from './fixture';
 // NOTE: declaring expenses fixture here doesn't seem to work. Needs to be
 // declared in fixture.ts (page property)
 
+test.use({ tab: PageTypePortfolio.Expenses });
+
 for (const preset of chartTestPresets) {
 	test.describe(`expense page - filter - ${preset.name}`, () => {
-		test.slow();
-		test.describe.configure({ mode: 'parallel' });
-
-		test.use({ tab: PageTypePortfolio.Expenses });
-
 		// apply filter preset
 		test.beforeEach(async ({ page }) => {
 			const filters = new Filters(page);
