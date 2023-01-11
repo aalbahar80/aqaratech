@@ -76,7 +76,12 @@
 			icon={HeroiconsDocumentText}
 			text="Contract"
 			as="a"
-			href={`/leases/${lease.id}/contract`}
+			href={getRoute({
+				entity: 'lease',
+				pageType: PageTab.Contract,
+				id: lease.id,
+				params: $page.params,
+			})}
 			class="w-full sm:w-auto"
 			prefetch
 		/>
