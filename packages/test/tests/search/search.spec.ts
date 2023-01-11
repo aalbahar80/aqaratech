@@ -2,17 +2,14 @@ import { expect } from '@playwright/test';
 
 import { getRoute, PageType } from '@self/utils';
 
-import { test } from '../api/api-fixtures';
+import { test as base } from '../api/api-fixtures';
 
 import { SearchPalette } from './search-palette-model';
+import { inputs } from './test-data';
 
-import type { SearchInput } from './search-input.type';
-
-test.use({
-	portfoliosParams: [{ fullName: 'Alex Anderson' }],
-	tenantsParams: [{ fullName: 'Bob Brown' }],
-	propertiesParams: [{ street: 'The Main St' }],
-
+const test = base.extend<{
+	searchPalette: SearchPalette;
+}>({
 	page: async (
 		{
 			page,
@@ -35,40 +32,27 @@ test.use({
 
 		await use(page);
 	},
+
+	searchPalette: async ({ page, isMobile }, use) => {
+		const searchPalette = new SearchPalette({ page, isMobile });
+
+		await use(searchPalette);
+	},
 });
 
-const inputs: SearchInput[] = [
-	{
-		queryExact: 'Alex Anderson',
-		queryPrefix: 'Anders',
-		querySuffix: 'lex',
-		resultText: 'Alex Anderson',
-		keysToValidate: [['fullName', 'Alex Anderson']],
-		type: 'portfolio',
-	},
-	{
-		queryExact: 'Bob Brown',
-		queryPrefix: 'Brow',
-		querySuffix: 'ob',
-		resultText: 'Bob Brown',
-		keysToValidate: [['fullName', 'Bob Brown']],
-		type: 'tenant',
-	},
-	{
-		queryExact: 'The Main St',
-		queryPrefix: 'Mai',
-		querySuffix: 'ain',
-		resultText: 'The Main St',
-		keysToValidate: [['street', 'Main St']],
-		type: 'property',
-	},
-];
+test.use({
+	portfoliosParams: [{ fullName: 'Alex Anderson' }],
+	tenantsParams: [{ fullName: 'Bob Brown' }],
+	propertiesParams: [{ street: 'The Main St' }],
+});
+
+// TODO: Make tests re-use organization fixture
 
 for (const i of inputs) {
 	test.describe(`search for ${i.type}`, () => {
-		test('exact', async ({ page, isMobile }) => {
-			const searchPalette = new SearchPalette({ page, isMobile });
+		test.describe.configure({ mode: 'parallel' });
 
+		test('exact', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.queryExact,
 				resultText: i.resultText,
@@ -76,9 +60,7 @@ for (const i of inputs) {
 			});
 		});
 
-		test('exact - lowercase', async ({ page, isMobile }) => {
-			const searchPalette = new SearchPalette({ page, isMobile });
-
+		test('exact - lowercase', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.queryExact.toLowerCase(),
 				resultText: i.resultText,
@@ -86,9 +68,7 @@ for (const i of inputs) {
 			});
 		});
 
-		test('exact - uppercase', async ({ page, isMobile }) => {
-			const searchPalette = new SearchPalette({ page, isMobile });
-
+		test('exact - uppercase', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.queryExact.toUpperCase(),
 				resultText: i.resultText,
@@ -96,9 +76,7 @@ for (const i of inputs) {
 			});
 		});
 
-		test('prefix', async ({ page, isMobile }) => {
-			const searchPalette = new SearchPalette({ page, isMobile });
-
+		test('prefix', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.queryPrefix,
 				resultText: i.resultText,
@@ -106,9 +84,7 @@ for (const i of inputs) {
 			});
 		});
 
-		test('prefix lowercase', async ({ page, isMobile }) => {
-			const searchPalette = new SearchPalette({ page, isMobile });
-
+		test('prefix lowercase', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.queryPrefix.toLowerCase(),
 				resultText: i.resultText,
@@ -116,9 +92,7 @@ for (const i of inputs) {
 			});
 		});
 
-		test('prefix uppercase', async ({ page, isMobile }) => {
-			const searchPalette = new SearchPalette({ page, isMobile });
-
+		test('prefix uppercase', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.queryPrefix.toUpperCase(),
 				resultText: i.resultText,
@@ -126,9 +100,7 @@ for (const i of inputs) {
 			});
 		});
 
-		test('suffix', async ({ page, isMobile }) => {
-			const searchPalette = new SearchPalette({ page, isMobile });
-
+		test('suffix', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.querySuffix,
 				resultText: i.resultText,
@@ -136,9 +108,7 @@ for (const i of inputs) {
 			});
 		});
 
-		test('suffix - uppercase', async ({ page, isMobile }) => {
-			const searchPalette = new SearchPalette({ page, isMobile });
-
+		test('suffix - uppercase', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.querySuffix.toUpperCase(),
 				resultText: i.resultText,
@@ -146,9 +116,10 @@ for (const i of inputs) {
 			});
 		});
 
-		test("spaces don't cause error response", async ({ page, isMobile }) => {
-			const searchPalette = new SearchPalette({ page, isMobile });
-
+		test("spaces don't cause error response", async ({
+			page,
+			searchPalette,
+		}) => {
 			await searchPalette.open();
 
 			const [res] = await Promise.all([
