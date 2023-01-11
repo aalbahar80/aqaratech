@@ -1,5 +1,15 @@
 # @self/utils
 
+## 3.6.0
+
+### Minor Changes
+
+- f5a1e33a0: enable location treemap
+
+### Patch Changes
+
+- 39cb6cbef: fix contract url
+
 ## 3.5.1
 
 ### Patch Changes
