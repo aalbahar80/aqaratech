@@ -12,10 +12,10 @@ import { test } from './fixture';
 // NOTE: declaring expenses fixture here doesn't seem to work. Needs to be
 // declared in fixture.ts (page property)
 
-test.use({ tab: PageTypePortfolio.Expenses });
-
 for (const preset of chartTestPresets) {
 	test.describe(`expense page - filter - ${preset.name}`, () => {
+		test.use({ tab: PageTypePortfolio.Expenses });
+
 		// apply filter preset
 		test.beforeEach(async ({ page }) => {
 			const filters = new Filters(page);
@@ -39,6 +39,7 @@ for (const preset of chartTestPresets) {
 				fullPage: true,
 				// NOTE: Care when setting maxDiffPixelRatio in fullPage screenshots,
 				// If necessary, set exact pixel count as low as possible.
+				mask: [page.getByText('version: ')],
 			});
 
 			const barChart = page
