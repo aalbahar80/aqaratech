@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "pnpm run -F @self/backend up-minio && pnpm run -F @self/backend seed && playwright test",
+		"test": "pnpm run -F @self/backend up-minio && pnpm run -F @self/backend seed && playwright test --project files idToken accessToken api site:chrome site:chrome:mobile",
+		"test:all-browsers": "pnpm run -F @self/backend up-minio && pnpm run -F @self/backend seed && playwright test",
 		"api:generate": "tsc --project tsconfig.api.json",
 		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\"",
 		"lint": "eslint --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
