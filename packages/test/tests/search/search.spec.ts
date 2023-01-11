@@ -5,8 +5,7 @@ import { getRoute, PageType } from '@self/utils';
 import { test } from '../api/api-fixtures';
 
 import { SearchPalette } from './search-palette-model';
-
-import type { SearchInput } from './search-input.type';
+import { inputs } from './test-data';
 
 test.use({
 	portfoliosParams: [{ fullName: 'Alex Anderson' }],
@@ -37,32 +36,7 @@ test.use({
 	},
 });
 
-const inputs: SearchInput[] = [
-	{
-		queryExact: 'Alex Anderson',
-		queryPrefix: 'Anders',
-		querySuffix: 'lex',
-		resultText: 'Alex Anderson',
-		keysToValidate: [['fullName', 'Alex Anderson']],
-		type: 'portfolio',
-	},
-	{
-		queryExact: 'Bob Brown',
-		queryPrefix: 'Brow',
-		querySuffix: 'ob',
-		resultText: 'Bob Brown',
-		keysToValidate: [['fullName', 'Bob Brown']],
-		type: 'tenant',
-	},
-	{
-		queryExact: 'The Main St',
-		queryPrefix: 'Mai',
-		querySuffix: 'ain',
-		resultText: 'The Main St',
-		keysToValidate: [['street', 'Main St']],
-		type: 'property',
-	},
-];
+// TODO: Make tests re-use organization fixture
 
 for (const i of inputs) {
 	test.describe(`search for ${i.type}`, () => {
