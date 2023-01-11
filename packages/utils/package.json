@@ -19,15 +19,15 @@
 		"zod": "3.20.2"
 	},
 	"devDependencies": {
-		"@logtail/types": "0.1.12",
-		"@sentry/types": "7.29.0",
+		"@logtail/types": "0.1.15",
+		"@sentry/types": "7.30.0",
 		"@types/node": "18.11.18",
-		"@vitest/ui": "0.27.0",
+		"@vitest/ui": "0.27.1",
 		"eslint-config-custom": "workspace:*",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"typescript": "4.9.4",
-		"vitest": "0.27.0"
+		"vitest": "0.27.1"
 	},
 	"private": true
 }
