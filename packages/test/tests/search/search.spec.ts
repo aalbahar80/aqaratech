@@ -50,6 +50,8 @@ test.use({
 
 for (const i of inputs) {
 	test.describe(`search for ${i.type}`, () => {
+		test.describe.configure({ mode: 'parallel' });
+
 		test('exact', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.queryExact,
