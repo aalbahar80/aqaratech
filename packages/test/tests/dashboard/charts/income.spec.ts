@@ -12,8 +12,6 @@ import { test } from './fixture';
 // NOTE: declaring invoices fixture here doesn't seem to work. Needs to be
 // declared in fixture.ts (page property)
 
-test.use({ tab: PageTypePortfolio.Income });
-
 const incomeChartTestPresets = chartTestPresets.filter(
 	// Unspecified Property doesn't exist in income page
 	(n) => n.name !== 'Unspecified Property',
@@ -21,6 +19,11 @@ const incomeChartTestPresets = chartTestPresets.filter(
 
 for (const preset of incomeChartTestPresets) {
 	test.describe(`income page - filter - ${preset.name}`, () => {
+		test.slow();
+		test.describe.configure({ mode: 'parallel' });
+
+		test.use({ tab: PageTypePortfolio.Income });
+
 		// apply filter preset
 		test.beforeEach(async ({ page }) => {
 			const filters = new Filters(page);
