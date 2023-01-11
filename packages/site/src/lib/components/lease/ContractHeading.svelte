@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
+	import { getRoute, PageType } from '@self/utils';
+
 	import HeroiconsChevronLeft20Solid from '~icons/heroicons/chevron-left-20-solid';
 	import HeroiconsPrinter from '~icons/heroicons/printer';
 
@@ -9,7 +13,12 @@
 	<div>
 		<nav aria-label="Back">
 			<a
-				href={`/leases/${id}`}
+				href={getRoute({
+					entity: 'lease',
+					id,
+					pageType: PageType.Id,
+					params: $page.params,
+				})}
 				class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700"
 			>
 				<HeroiconsChevronLeft20Solid
