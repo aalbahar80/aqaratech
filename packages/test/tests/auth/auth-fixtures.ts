@@ -14,15 +14,9 @@ export interface TokenTestOptions {
 export const test = base.extend<TokenTestOptions>({
 	token: [EXPIRED_ID_TOKEN, { option: true }],
 
-	page: async ({ browser, token, baseURL, storageState }, use) => {
-		if (!storageState) {
-			throw new Error('storageState is required'); // Monitor/remove
-		}
-
+	page: async ({ browser, token, baseURL }, use) => {
 		// Create a new context.
-		const context = await browser.newContext({
-			storageState,
-		});
+		const context = await browser.newContext();
 
 		const page = await context.newPage();
 
