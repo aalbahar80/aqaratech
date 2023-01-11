@@ -10,18 +10,6 @@ import { inputs } from './test-data';
 const test = base.extend<{
 	searchPalette: SearchPalette;
 }>({
-	searchPalette: async ({ page, isMobile }, use) => {
-		const searchPalette = new SearchPalette({ page, isMobile });
-
-		await use(searchPalette);
-	},
-});
-
-test.use({
-	portfoliosParams: [{ fullName: 'Alex Anderson' }],
-	tenantsParams: [{ fullName: 'Bob Brown' }],
-	propertiesParams: [{ street: 'The Main St' }],
-
 	page: async (
 		{
 			page,
@@ -44,6 +32,18 @@ test.use({
 
 		await use(page);
 	},
+
+	searchPalette: async ({ page, isMobile }, use) => {
+		const searchPalette = new SearchPalette({ page, isMobile });
+
+		await use(searchPalette);
+	},
+});
+
+test.use({
+	portfoliosParams: [{ fullName: 'Alex Anderson' }],
+	tenantsParams: [{ fullName: 'Bob Brown' }],
+	propertiesParams: [{ street: 'The Main St' }],
 });
 
 // TODO: Make tests re-use organization fixture
