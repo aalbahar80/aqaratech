@@ -34,6 +34,10 @@ export const sendToTolgee = async () => {
 
 	const key = process.env['TOLGEE_KEY'];
 
+	if (!key) {
+		throw new Error('TOLGEE_KEY is not set');
+	}
+
 	const res = await fetch(url, {
 		method: 'POST',
 		headers: { 'X-API-Key': key },

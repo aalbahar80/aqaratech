@@ -11,10 +11,11 @@ async function translateObject(obj: Record<string, unknown>) {
 
 	if (typeof obj === 'object') {
 		for (const key in obj) {
-			if (typeof obj[key] === 'string') {
-				obj[key] = await translateString(obj[key]);
-			} else {
-				obj[key] = await translateObject(obj[key]);
+			const value = obj[key];
+			if (typeof value === 'string') {
+				obj[key] = await translateString(value);
+			} else if (value && typeof value === 'object') {
+				obj[key] = await translateObject(value as Record<string, unknown>);
 			}
 		}
 	}
@@ -47,6 +48,7 @@ export const translatepy = async ({
 }) => {
 	const ar = (await fs.readJson(source)) as BaseTranslation;
 
+	// @ts-expect-error not needed yet
 	const result = await translateObject(ar);
 
 	await fs.writeJson(output ?? source, result);
