@@ -37,7 +37,14 @@ if (args.tolgee) {
 // Handle missing translations
 await addMissingTranslations({
 	arFile: join(moduleDir, '../tolgee/generated/ar.json'),
-	enFile: join(moduleDir, '../tolgee/generated/en.json'),
+	enFile: join(
+		moduleDir,
+		// if we haven't fetched the latest translations from tolgee, we probably
+		// want to compare against the latest translations in i18n-output.json
+		args.tolgee
+			? '../tolgee/generated/en.json'
+			: '../tolgee/generated/i18n-output.json',
+	),
 });
 
 // Use translatepy to translate missing keys

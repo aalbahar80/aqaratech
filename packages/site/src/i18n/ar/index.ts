@@ -61,6 +61,14 @@ const ar: Translation = {
 		logout: 'تسجيل خروج',
 		contact: 'اتصل بنا',
 		search: 'بحث',
+		edit: 'تعديل',
+		new: 'جديد',
+		save: 'يحفظ',
+		cancel: 'يلغي',
+		delete: 'حذف',
+		export: 'يصدّر',
+		close: 'يغلق',
+		addMultiple: 'إضافة متعددة',
 	},
 	nav: {
 		financials: 'البيانات المالية',
@@ -74,11 +82,22 @@ const ar: Translation = {
 	},
 	general: {
 		name: 'الاسم',
+		phone: 'هاتف',
+		email: 'بريد إلكتروني',
+		paymentSchedule: 'جدول الدفع',
 	},
 	filter: {
+		filters: 'المرشحات',
 		start: 'بداية',
 		end: 'نهاية',
 		range: 'نطاق',
+	},
+	pagination: {
+		next: 'التالي',
+		previous: 'سابق',
+		showing: 'يظهر',
+		to: 'ل',
+		of: 'من',
 	},
 	landing: {
 		hero: {
@@ -167,7 +186,7 @@ const ar: Translation = {
 		callToAction: {
 			title: 'ابدأ اليوم',
 			description:
-				'جرب AQARATECH وتجربة سهولة وراحة إدارة العقارات الخاصة بك ببضع لحظات فقط!اشترك الآن وشاهد الفرق الذي يمكن أن يحدثه لعملك.',
+				'جرب AQARATECH وتجربة سهولة وراحة إدارة العقارات الخاصة بك ببضع نقرات فقط!اشترك الآن وشاهد الفرق الذي يمكن أن يحدثه لعملك.',
 			button: 'إنشاء حساب',
 		},
 		footer: {
