@@ -18,17 +18,14 @@
 		},
 
 		"format": {
-			"outputs": [],
 			"outputMode": "new-only"
 		},
 
 		"lint": {
-			"outputs": [],
 			"outputMode": "new-only"
 		},
 
 		"check": {
-			"outputs": [],
 			"outputMode": "new-only"
 		},
 
@@ -63,7 +60,6 @@
 				"readme.md",
 				"tsconfig.json"
 			],
-			"outputs": [],
 			"outputMode": "new-only"
 		},
 
@@ -83,13 +79,11 @@
 				"readme.md",
 				"tsconfig.json"
 			],
-			"outputs": [],
 			"outputMode": "new-only"
 		},
 
 		"//#check": {
 			"inputs": [".do/**", "scripts/**", "types/**", "tsconfig.json"],
-			"outputs": [],
 			"outputMode": "new-only"
 		},
 
