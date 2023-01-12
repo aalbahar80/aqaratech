@@ -1,6 +1,4 @@
 #!/usr/bin/env -S tsx
-/* eslint-disable turbo/no-undeclared-env-vars */
-
 import { dirname, join } from 'node:path';
 
 import { config } from 'dotenv';
