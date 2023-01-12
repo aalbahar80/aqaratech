@@ -111,3 +111,17 @@ graph TD;
 		B-->T[test]
 		C-->T
 ```
+
+# Manual Tasks
+
+```bash
+# openapi schema
+pnpm run api:generate:all --force
+
+# Test all browsers
+pnpm run test:all-browsers
+
+# Sync i18n translations through Tolgee
+pnpm run i18n:export
+pnpm run i18n:import
+```
