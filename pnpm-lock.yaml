@@ -254,6 +254,7 @@ importers:
       date-fns: 2.29.3
       debounce: 1.2.1
       defu: 6.1.1
+      dotenv: 16.0.3
       eslint-config-custom: workspace:*
       eslint-plugin-svelte: 2.14.1
       frappe-charts: 1.6.2
@@ -323,6 +324,7 @@ importers:
       date-fns: 2.29.3
       debounce: 1.2.1
       defu: 6.1.1
+      dotenv: 16.0.3
       eslint-config-custom: link:../eslint-config-custom
       eslint-plugin-svelte: 2.14.1_btuntbn75dxkba3nofpps2nvzm
       frappe-charts: 1.6.2

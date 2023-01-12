@@ -11,6 +11,16 @@ const en: BaseTranslation = {
 		logout: 'Log out',
 		contact: 'Contact us',
 		search: 'Search',
+
+		// actions
+		edit: 'Edit',
+		new: 'New',
+		save: 'Save',
+		cancel: 'Cancel',
+		delete: 'Delete',
+		export: 'Export',
+		close: 'Close',
+		addMultiple: 'Add multiple',
 	},
 	nav: {
 		financials: 'Financials',
@@ -24,11 +34,24 @@ const en: BaseTranslation = {
 	},
 	general: {
 		name: 'Name',
+		phone: 'Phone',
+		email: 'Email',
+		paymentSchedule: 'Payment schedule',
 	},
 	filter: {
+		filters: 'Filters',
 		start: 'Start',
 		end: 'End',
 		range: 'Range',
+	},
+	pagination: {
+		next: 'Next',
+		previous: 'Previous',
+		showing: 'Showing',
+		to: 'to',
+		of: 'of',
+		// entries: 'entries',
+		// records: 'records',
 	},
 	landing,
 	aqaratech,

@@ -163,6 +163,38 @@ type RootTranslation = {
 		 * S​e​a​r​c​h
 		 */
 		search: string
+		/**
+		 * E​d​i​t
+		 */
+		edit: string
+		/**
+		 * N​e​w
+		 */
+		'new': string
+		/**
+		 * S​a​v​e
+		 */
+		save: string
+		/**
+		 * C​a​n​c​e​l
+		 */
+		cancel: string
+		/**
+		 * D​e​l​e​t​e
+		 */
+		'delete': string
+		/**
+		 * E​x​p​o​r​t
+		 */
+		'export': string
+		/**
+		 * C​l​o​s​e
+		 */
+		close: string
+		/**
+		 * A​d​d​ ​m​u​l​t​i​p​l​e
+		 */
+		addMultiple: string
 	}
 	nav: {
 		/**
@@ -203,8 +235,24 @@ type RootTranslation = {
 		 * N​a​m​e
 		 */
 		name: string
+		/**
+		 * P​h​o​n​e
+		 */
+		phone: string
+		/**
+		 * E​m​a​i​l
+		 */
+		email: string
+		/**
+		 * P​a​y​m​e​n​t​ ​s​c​h​e​d​u​l​e
+		 */
+		paymentSchedule: string
 	}
 	filter: {
+		/**
+		 * F​i​l​t​e​r​s
+		 */
+		filters: string
 		/**
 		 * S​t​a​r​t
 		 */
@@ -217,6 +265,28 @@ type RootTranslation = {
 		 * R​a​n​g​e
 		 */
 		range: string
+	}
+	pagination: {
+		/**
+		 * N​e​x​t
+		 */
+		next: string
+		/**
+		 * P​r​e​v​i​o​u​s
+		 */
+		previous: string
+		/**
+		 * S​h​o​w​i​n​g
+		 */
+		showing: string
+		/**
+		 * t​o
+		 */
+		to: string
+		/**
+		 * o​f
+		 */
+		of: string
 	}
 	landing: {
 		hero: {
@@ -574,6 +644,38 @@ export type TranslationFunctions = {
 		 * Search
 		 */
 		search: () => LocalizedString
+		/**
+		 * Edit
+		 */
+		edit: () => LocalizedString
+		/**
+		 * New
+		 */
+		'new': () => LocalizedString
+		/**
+		 * Save
+		 */
+		save: () => LocalizedString
+		/**
+		 * Cancel
+		 */
+		cancel: () => LocalizedString
+		/**
+		 * Delete
+		 */
+		'delete': () => LocalizedString
+		/**
+		 * Export
+		 */
+		'export': () => LocalizedString
+		/**
+		 * Close
+		 */
+		close: () => LocalizedString
+		/**
+		 * Add multiple
+		 */
+		addMultiple: () => LocalizedString
 	}
 	nav: {
 		/**
@@ -614,8 +716,24 @@ export type TranslationFunctions = {
 		 * Name
 		 */
 		name: () => LocalizedString
+		/**
+		 * Phone
+		 */
+		phone: () => LocalizedString
+		/**
+		 * Email
+		 */
+		email: () => LocalizedString
+		/**
+		 * Payment schedule
+		 */
+		paymentSchedule: () => LocalizedString
 	}
 	filter: {
+		/**
+		 * Filters
+		 */
+		filters: () => LocalizedString
 		/**
 		 * Start
 		 */
@@ -628,6 +746,28 @@ export type TranslationFunctions = {
 		 * Range
 		 */
 		range: () => LocalizedString
+	}
+	pagination: {
+		/**
+		 * Next
+		 */
+		next: () => LocalizedString
+		/**
+		 * Previous
+		 */
+		previous: () => LocalizedString
+		/**
+		 * Showing
+		 */
+		showing: () => LocalizedString
+		/**
+		 * to
+		 */
+		to: () => LocalizedString
+		/**
+		 * of
+		 */
+		of: () => LocalizedString
 	}
 	landing: {
 		hero: {

@@ -21,8 +21,9 @@
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
 		"test": "vitest --run",
 		"test:ui": "vitest --ui",
-		"i18n:export": "pnpm typesafe-i18n --no-watch && tsx src/i18n/tolgee/export.ts",
-		"i18n:import": "tsx src/i18n/tolgee/import.ts && pnpm typesafe-i18n --no-watch"
+		"i18n:export": "pnpm typesafe-i18n --no-watch && ./src/i18n/translate/export.ts",
+		"i18n:import": "./src/i18n/translate/import.ts --tolgee && pnpm typesafe-i18n --no-watch",
+		"i18n:dev": "./src/i18n/translate/import.ts && pnpm typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
 		"@iconify/json": "2.2.5",
@@ -53,6 +54,7 @@
 		"date-fns": "2.29.3",
 		"debounce": "1.2.1",
 		"defu": "6.1.1",
+		"dotenv": "16.0.3",
 		"eslint-config-custom": "workspace:*",
 		"eslint-plugin-svelte": "2.14.1",
 		"frappe-charts": "1.6.2",
