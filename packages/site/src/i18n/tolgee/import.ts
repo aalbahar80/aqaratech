@@ -36,6 +36,8 @@ const getDataFromAPI = (): BaseTranslation => {
 		readFileSync(arTranslations, { encoding: 'utf-8' }),
 	) as Record<string, unknown>;
 
+	console.log(`\n\n--- Imported translations: ---\n\n`);
+
 	console.log(inspect(ar, false, 999, true));
 
 	const merged = addMissingTranslations(ar);
@@ -65,7 +67,15 @@ const addMissingTranslations = (ar: Record<string, unknown>) => {
 
 	console.log(`\n\n--- MISSING TRANSLATIONS COUNT: ${missing} ---\n\n`);
 
-	return defu(ar, en);
+	const result = defu(ar, en);
+
+	console.log(
+		`\n\n--- Final result after adding missing translations: ---\n\n`,
+	);
+
+	console.log(inspect(result, false, 999, true));
+
+	return result;
 };
 
 /** Recursively count number of keys in object */
