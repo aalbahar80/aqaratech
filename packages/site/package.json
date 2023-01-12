@@ -26,6 +26,7 @@
 	},
 	"devDependencies": {
 		"@iconify/json": "2.2.5",
+		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.1.15",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",

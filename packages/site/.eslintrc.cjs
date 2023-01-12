@@ -35,7 +35,10 @@ module.exports = {
 	overrides: [
 		{
 			files: ['*.svelte'],
-			extends: ['plugin:svelte/recommended'],
+			extends: [
+				'plugin:svelte/recommended',
+				'plugin:@intlify/svelte/recommended',
+			],
 			parser: 'svelte-eslint-parser',
 			parserOptions: {
 				sourceType: 'module',
@@ -111,6 +114,9 @@ module.exports = {
 				'svelte/shorthand-directive': 'error',
 				// 'svelte/sort-attributes': 'error',
 				'svelte/spaced-html-comment': 'error',
+
+				// i18n
+				'@intlify/svelte/no-raw-text': 'warn',
 			},
 		},
 	],
