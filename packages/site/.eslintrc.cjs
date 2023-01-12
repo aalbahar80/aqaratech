@@ -116,7 +116,7 @@ module.exports = {
 				'svelte/spaced-html-comment': 'error',
 
 				// i18n
-				'@intlify/svelte/no-raw-text': 'warn',
+				'@intlify/svelte/no-raw-text': 'off', // For occasional reference
 			},
 		},
 	],
