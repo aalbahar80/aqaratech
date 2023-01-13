@@ -8,7 +8,8 @@
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
-	import { kwdFormat, monthFromShort } from '$lib/utils/common';
+	import { fmtCurrency } from '$lib/i18n/format';
+	import { monthFromShort } from '$lib/utils/common';
 
 	import type { GroupByMonthDto } from '$api/openapi';
 
@@ -73,7 +74,7 @@
 			<StatisticsPane
 				{primaryText}
 				secondaryText={primary[i] ? monthFromShort(date) : ''}
-				primaryValue={kwdFormat(amount)}
+				primaryValue={fmtCurrency(amount)}
 				textColor={colors[kind] ?? ''}
 				chipText={change ? change.toFixed(2) : ''}
 				color={change && change > 0 ? 'green' : 'red'}
