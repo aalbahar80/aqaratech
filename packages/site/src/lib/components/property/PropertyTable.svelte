@@ -3,14 +3,13 @@
 
 	import { page } from '$app/stores';
 
-	import { getLabel } from '@self/utils';
-
 	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	import type { PaginatedPropertyDto, PropertyDto } from '$api/openapi';
 
@@ -19,21 +18,21 @@
 	const columnHelper = createColumnHelper<PropertyDto>();
 
 	const columns = [
-		columnHelper.accessor('label', { header: getLabel('label') }),
+		columnHelper.accessor('label', { header: getIntlLabel('label') }),
 
-		columnHelper.accessor('area', { header: getLabel('area') }),
+		columnHelper.accessor('area', { header: getIntlLabel('area') }),
 
-		columnHelper.accessor('street', { header: getLabel('street') }),
+		columnHelper.accessor('street', { header: getIntlLabel('street') }),
 
-		columnHelper.accessor('avenue', { header: getLabel('avenue') }),
+		columnHelper.accessor('avenue', { header: getIntlLabel('avenue') }),
 
-		columnHelper.accessor('block', { header: getLabel('block') }),
+		columnHelper.accessor('block', { header: getIntlLabel('block') }),
 
-		columnHelper.accessor('number', { header: getLabel('number') }),
+		columnHelper.accessor('number', { header: getIntlLabel('number') }),
 
-		columnHelper.accessor('parcel', { header: getLabel('parcel') }),
+		columnHelper.accessor('parcel', { header: getIntlLabel('parcel') }),
 
-		columnHelper.accessor('paci', { header: getLabel('paci') }),
+		columnHelper.accessor('paci', { header: getIntlLabel('paci') }),
 
 		viewColumnDef(columnHelper, 'property', $page.params),
 	];

@@ -1,4 +1,4 @@
-import { getLabel } from '@self/utils';
+import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 import type {
 	InputFormField,
@@ -28,7 +28,7 @@ export const createFormField = <
 		name,
 		type: 'text',
 
-		label: getLabel(name),
+		label: getIntlLabel(name),
 		description: '',
 		hint: '',
 		placeholder: '',

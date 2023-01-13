@@ -3,13 +3,12 @@
 
 	import { page } from '$app/stores';
 
-	import { getLabel } from '@self/utils';
-
 	import AddButton from '$lib/components/buttons/AddButton.svelte';
 	import { view } from '$lib/components/file/actions/view';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 
@@ -25,7 +24,7 @@
 
 	const columns = [
 		columnHelper.accessor('key', {
-			header: getLabel('key'),
+			header: getIntlLabel('key'),
 			cell: (info) => {
 				const val = info.getValue();
 				return val.split('/').slice(-1);

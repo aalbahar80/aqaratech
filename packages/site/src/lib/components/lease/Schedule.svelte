@@ -4,10 +4,11 @@
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
 
-	import { getLabel, getRoute, PageTab } from '@self/utils';
+	import { getRoute, PageTab } from '@self/utils';
 
 	import { createApi } from '$api';
 	import Button from '$lib/components/buttons/Button.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
 
 	import type { LeaseDto } from '$api/openapi';
@@ -115,7 +116,8 @@
 											>KWD</span
 										>
 										<label>
-											<span class="sr-only">{getLabel('amount')} {idx}</span>
+											<span class="sr-only">{getIntlLabel('amount')} {idx}</span
+											>
 											<input
 												id="schedule-{idx}-amount"
 												name="schedule-{idx}-amount"
@@ -130,7 +132,8 @@
 									<!-- Date -->
 									<div class="">
 										<label>
-											<span class="sr-only">{getLabel('postAt')} {idx}</span>
+											<span class="sr-only">{getIntlLabel('postAt')} {idx}</span
+											>
 											<input
 												id="schedule-{idx}-postAt"
 												name="schedule-{idx}-postAt"

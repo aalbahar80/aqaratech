@@ -1,12 +1,14 @@
 <script lang="ts">
-	import { formatValue, getLabel } from '@self/utils';
+	import { formatValue } from '@self/utils';
+
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	export let key: string;
 	export let value: unknown;
 </script>
 
 <div class="row" data-testid={key}>
-	<dt class="label">{getLabel(key)}</dt>
+	<dt class="label">{getIntlLabel(key)}</dt>
 	<dd class="definition" data-testid={value ?? ''}>
 		<slot>
 			{formatValue(value)}

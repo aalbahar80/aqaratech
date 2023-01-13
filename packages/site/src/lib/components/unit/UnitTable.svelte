@@ -3,13 +3,12 @@
 
 	import { page } from '$app/stores';
 
-	import { getLabel } from '@self/utils';
-
 	import Badge from '$lib/components/Badge.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	import type { PaginatedUnitDto, UnitDto } from '$api/openapi';
 
@@ -18,24 +17,24 @@
 	const columnHelper = createColumnHelper<UnitDto>();
 
 	const columns = [
-		columnHelper.accessor('type', { header: getLabel('type') }),
+		columnHelper.accessor('type', { header: getIntlLabel('type') }),
 
-		columnHelper.accessor('unitNumber', { header: getLabel('unitNumber') }),
+		columnHelper.accessor('unitNumber', { header: getIntlLabel('unitNumber') }),
 
-		columnHelper.accessor('label', { header: getLabel('label') }),
+		columnHelper.accessor('label', { header: getIntlLabel('label') }),
 
-		columnHelper.accessor('floor', { header: getLabel('floor') }),
+		columnHelper.accessor('floor', { header: getIntlLabel('floor') }),
 
-		columnHelper.accessor('bed', { header: getLabel('bed') }),
+		columnHelper.accessor('bed', { header: getIntlLabel('bed') }),
 
-		columnHelper.accessor('bath', { header: getLabel('bath') }),
+		columnHelper.accessor('bath', { header: getIntlLabel('bath') }),
 
-		columnHelper.accessor('size', { header: getLabel('size') }),
+		columnHelper.accessor('size', { header: getIntlLabel('size') }),
 
-		columnHelper.accessor('usage', { header: getLabel('usage') }),
+		columnHelper.accessor('usage', { header: getIntlLabel('usage') }),
 
 		columnHelper.accessor('propertyId', {
-			header: getLabel('property'),
+			header: getIntlLabel('property'),
 			cell: (info) => info.row.original.breadcrumbs.property.label,
 		}),
 

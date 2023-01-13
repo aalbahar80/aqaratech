@@ -4,7 +4,7 @@
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 
-	import { getLabel, type Entity } from '@self/utils';
+	import type { Entity } from '@self/utils';
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
@@ -14,6 +14,7 @@
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { createModalDelete } from '$lib/components/toast/create-modal-delete';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { addSuccessToast } from '$lib/stores/toast';
 
 	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
@@ -28,7 +29,7 @@
 
 	const columns = [
 		columnHelper.accessor('email', {
-			header: getLabel('email'),
+			header: getIntlLabel('email'),
 			enableSorting: false,
 		}),
 
