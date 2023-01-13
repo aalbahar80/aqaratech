@@ -31,7 +31,7 @@
 				{/if}
 
 				<HeroiconsChevronDown20Solid
-					class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+					class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
 					aria-hidden="true"
 				/>
 			</PopoverButton>
@@ -46,7 +46,7 @@
 			leaveTo="transform opacity-0 scale-95"
 		>
 			<PopoverPanel
-				class="absolute right-0 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+				class="absolute mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none ltr:right-0 rtl:left-0"
 			>
 				<form class="space-y-4">
 					{#each filter.options as option, optionIdx (option.value)}
