@@ -8,6 +8,7 @@
 		type GetFormRouteWithRelation,
 	} from '@self/utils';
 
+	import AddButton from '$lib/components/buttons/AddButton.svelte';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 
 	type NoParams<T> = Omit<T, 'params' | 'pageType'>;
@@ -18,15 +19,11 @@
 </script>
 
 <RoleGuard roles={['ORGADMIN']}>
-	<a
+	<AddButton
 		href={getRoute({
 			pageType: PageType.New,
 			params: $page.params,
 			...getRouteOptions,
 		})}
-		class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900"
-	>
-		<span aria-hidden="true"> + </span>
-		New
-	</a>
+	/>
 </RoleGuard>

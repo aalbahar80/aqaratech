@@ -5,6 +5,7 @@
 
 	import { getLabel } from '@self/utils';
 
+	import AddButton from '$lib/components/buttons/AddButton.svelte';
 	import { view } from '$lib/components/file/actions/view';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
@@ -96,18 +97,14 @@
 		<FilterBar responsive={filters}>
 			<div slot="custom">
 				<RoleGuard roles={['ORGADMIN']}>
-					<a
+					<AddButton
 						href={getFormRouteWithRelation({
 							entity: 'file',
 							pathname: $page.url.pathname,
 							params: $page.params,
 							redirectTo: $page.url.pathname,
 						})}
-						class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900"
-					>
-						<span aria-hidden="true"> + </span>
-						New
-					</a>
+					/>
 				</RoleGuard>
 			</div>
 		</FilterBar>
