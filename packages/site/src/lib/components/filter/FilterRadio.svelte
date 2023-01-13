@@ -25,7 +25,7 @@
 		>
 			{label}
 			<HeroiconsChevronDown20Solid
-				class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+				class="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
 				aria-hidden="true"
 			/>
 		</MenuButton>
@@ -42,8 +42,8 @@
 		<MenuItems
 			class={classes(
 				align === 'left'
-					? 'left-0 origin-top-left'
-					: 'right-0 origin-top-right',
+					? 'ltr:left-0 ltr:origin-top-left rtl:right-0 rtl:origin-top-right'
+					: 'ltr:right-0 ltr:origin-top-right rtl:left-0 rtl:origin-top-left',
 				'absolute z-10 mt-2 w-40  rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none',
 			)}
 		>

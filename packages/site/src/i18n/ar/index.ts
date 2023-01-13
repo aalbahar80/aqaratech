@@ -131,6 +131,7 @@ const ar: Translation = {
 		toggleAll: 'عرض الكل',
 		markAsPaid: 'تم الدفع',
 		export: 'تحميل',
+		options: 'خيارات',
 	},
 	nav: {
 		financials: 'البيانات المالية',

@@ -427,6 +427,10 @@ type RootTranslation = {
 		 * M​a​r​k​ ​a​s​ ​p​a​i​d
 		 */
 		markAsPaid: string
+		/**
+		 * O​p​t​i​o​n​s
+		 */
+		options: string
 	}
 	nav: {
 		/**
@@ -1212,6 +1216,10 @@ export type TranslationFunctions = {
 		 * Mark as paid
 		 */
 		markAsPaid: () => LocalizedString
+		/**
+		 * Options
+		 */
+		options: () => LocalizedString
 	}
 	nav: {
 		/**

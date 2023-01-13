@@ -27,6 +27,7 @@ const en: BaseTranslation = {
 		toggleAll: 'Toggle all',
 		markAsPaid: 'Mark as paid',
 		export: 'Export',
+		options: 'Options',
 	},
 	nav: {
 		financials: 'Financials',

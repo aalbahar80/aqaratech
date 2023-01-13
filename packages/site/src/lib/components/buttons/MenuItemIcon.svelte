@@ -10,7 +10,7 @@
 <svelte:component
 	this={icon}
 	class={classes(
-		'mr-3 h-5 w-5 text-gray-400',
+		'h-5 w-5 text-gray-400 ltr:mr-3 rtl:ml-3',
 		disabled ? '' : 'group-hover:text-gray-500',
 	)}
 	aria-hidden="true"
