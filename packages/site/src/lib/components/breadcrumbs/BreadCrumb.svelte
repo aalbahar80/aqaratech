@@ -17,7 +17,7 @@
 
 {#if crumbs}
 	<nav class="flex overflow-auto" aria-label="Breadcrumb">
-		<ol class="flex items-center space-x-4">
+		<ol class="flex items-center gap-x-4">
 			{#each parsedCrumbs as [title, crumb], idx}
 				{#if isEntity(title)}
 					{@const href = getRoute({
@@ -29,7 +29,7 @@
 					{@const currentPage = $page.url.pathname === href}
 					{#if crumb}
 						<li>
-							<div class="flex items-center">
+							<div class="flex items-center gap-x-4">
 								{#if idx !== 0}
 									<svg
 										class="h-5 w-5 flex-shrink-0 text-gray-300"
@@ -51,7 +51,6 @@
 											? 'font-semibold text-indigo-600'
 											: 'text-gray-500 hover:text-gray-700',
 									)}
-									class:ml-4={idx !== 0}
 								>
 									{$L.entity[title].singular()}
 								</a>
