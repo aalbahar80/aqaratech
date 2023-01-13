@@ -50,7 +50,7 @@
 			>
 				<MenuItemChild {active}>
 					<MenuItemIcon icon={HeroiconsSolidCreditCard} />
-					Create expense
+					{$L.buttons.new() + ' ' + $L.entity.expense.singular()}
 				</MenuItemChild>
 			</a>
 		</MenuItem>
@@ -67,7 +67,7 @@
 			>
 				<MenuItemChild {active}>
 					<MenuItemIcon icon={HeroiconsWrench} />
-					Create maintenance order
+					{$L.buttons.new() + ' ' + $L.entity.maintenanceOrder.singular()}
 				</MenuItemChild>
 			</a>
 		</MenuItem>

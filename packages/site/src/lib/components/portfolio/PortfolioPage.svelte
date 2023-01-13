@@ -62,7 +62,7 @@
 			>
 				<MenuItemChild {active}>
 					<MenuItemIcon icon={HeroiconsSolidCreditCard} />
-					Create expense
+					{$L.buttons.new() + ' ' + $L.entity.expense.singular()}
 				</MenuItemChild>
 			</a>
 		</MenuItem>
