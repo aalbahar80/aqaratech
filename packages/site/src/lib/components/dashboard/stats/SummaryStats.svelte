@@ -16,7 +16,10 @@
 		change?: number;
 	}
 
+	type Kind = 'Net' | 'Uncollected' | 'Collected' | 'Income' | 'Expenses';
+
 	export let title: string;
+	export let kind: Kind;
 	export let data: Datapoint[];
 
 	const primary: Record<number, string | undefined> = {
@@ -40,19 +43,19 @@
 		}),
 	};
 
-	const colors: Record<string, string> = {
+	const colors = {
 		Net: 'text-gray-900',
 		Uncollected: 'text-gray-900',
 		Income: 'text-green-600',
 		Collected: 'text-green-600',
 		Expenses: 'text-red-600',
-	};
+	} satisfies Record<Kind, string>;
 </script>
 
 <Stats {title}>
 	<div slot="details">
-		{#if links[title]}
-			<a href={links[title]}>
+		{#if links[kind]}
+			<a href={links[kind]}>
 				<div class="sr-only">
 					{title}
 				</div>
@@ -71,7 +74,7 @@
 				{primaryText}
 				secondaryText={primary[i] ? monthFromShort(date) : ''}
 				primaryValue={kwdFormat(amount)}
-				textColor={colors[title] ?? ''}
+				textColor={colors[kind] ?? ''}
 				chipText={change ? change.toFixed(2) : ''}
 				color={change && change > 0 ? 'green' : 'red'}
 			/>
