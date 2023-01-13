@@ -12,6 +12,7 @@ export const getIntlLabel = (key: string) => {
 	const enLabel = getLabel(key);
 
 	if (currentLocale === 'ar') {
+		// @ts-expect-error wip
 		return (LL.fields[key]() as string) || enLabel;
 	} else {
 		return enLabel;

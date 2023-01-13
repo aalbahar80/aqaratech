@@ -6,6 +6,7 @@
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
+	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';

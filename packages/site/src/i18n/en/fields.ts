@@ -130,10 +130,12 @@ export const fields = {
 	key: 'Name',
 	fileName: 'File Name',
 	size2: 'Size',
+	// @ts-expect-error wip
 } satisfies Fields;
 
 type Fields = Record<Keys, string> & {
 	createdAt: string;
 	updatedAt: string;
 	key: string; // FileDto
+	size2: string; // FileDto
 };
