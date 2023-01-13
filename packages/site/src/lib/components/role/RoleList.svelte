@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { formatDistance } from 'date-fns';
 
-	import { locale } from '$i18n/i18n-svelte';
+	import L, { locale } from '$i18n/i18n-svelte';
 	import RoleCard from '$lib/components/role/RoleCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { NEW_ORGANIZATION } from '$lib/constants/routes';
@@ -39,7 +39,9 @@
 </StackedList>
 
 <a
-	class="text-center text-base font-semibold text-indigo-600 hover:text-indigo-700"
+	class="inline-block text-center text-base font-semibold text-indigo-600 hover:text-indigo-700"
 	href={NEW_ORGANIZATION($locale)}
-	>Create new organization<span aria-hidden="true">→</span>
+>
+	<span class="text-lg">+</span>
+	{[$L.buttons.new(), $L.entity.organization.singular()].join(' ')}
 </a>

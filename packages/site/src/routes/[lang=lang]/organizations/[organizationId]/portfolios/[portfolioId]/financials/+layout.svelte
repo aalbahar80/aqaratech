@@ -4,6 +4,8 @@
 
 	import { getRoute, PageType } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
+	import Arrow from '$lib/components/Arrow.svelte';
 	import Filter from '$lib/components/dashboard/filter/Filter.svelte';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 
@@ -18,7 +20,9 @@
 		class="flex flex-col items-center justify-center rounded-lg bg-white p-8 shadow lg:items-start lg:justify-start"
 	>
 		<div class="flex items-center justify-between self-stretch pb-4">
-			<div class="block text-sm font-medium text-gray-700">Name</div>
+			<div class="block text-sm font-medium text-gray-700">
+				{$L.general.name()}
+			</div>
 
 			<RoleGuard roles={['ORGADMIN']}>
 				<a
@@ -28,7 +32,7 @@
 						id: data.portfolio.id,
 						pageType: PageType.Id,
 						params: $page.params,
-					})}>Details<span aria-hidden="true">→</span></a
+					})}>{$L.general.details()}<Arrow /></a
 				>
 			</RoleGuard>
 		</div>
