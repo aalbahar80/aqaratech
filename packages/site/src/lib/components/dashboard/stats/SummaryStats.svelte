@@ -8,8 +8,8 @@
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
-	import { fmtCurrency } from '$lib/i18n/format';
-	import { monthFromShort } from '$lib/utils/common';
+	import { fmtCurrency, fmtMonth } from '$lib/i18n/format';
+	import { dateFromShort } from '$lib/utils/common';
 
 	import type { GroupByMonthDto } from '$api/openapi';
 
@@ -70,10 +70,11 @@
 
 	<svelte:fragment slot="panes">
 		{#each data.slice(0, 3) as { amount, date, change }, i}
-			{@const primaryText = primary[i] ?? monthFromShort(date)}
+			{@const dateobj = dateFromShort(date)}
+			{@const primaryText = primary[i] ?? (dateobj && fmtMonth(dateobj)) ?? ''}
 			<StatisticsPane
 				{primaryText}
-				secondaryText={primary[i] ? monthFromShort(date) : ''}
+				secondaryText={primary[i] && dateobj ? fmtMonth(dateobj) : ''}
 				primaryValue={fmtCurrency(amount)}
 				textColor={colors[kind] ?? ''}
 				chipText={change

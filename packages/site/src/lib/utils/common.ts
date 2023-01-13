@@ -31,14 +31,14 @@ export const objectEntries = <Obj extends Record<string, unknown>>(
 /**
  * Returns name of month from a 'yyyy-mm' string.
  */
-export const monthFromShort = (yearMonth: string) => {
+export const dateFromShort = (yearMonth: string) => {
 	const month = yearMonth.split('-')[1];
 
 	if (!month) {
 		return '';
 	}
 
-	return new Date(0, parseInt(month) - 1).toLocaleString('default', {
-		month: 'long',
-	});
+	const date = new Date(0, parseInt(month) - 1);
+
+	return date;
 };

@@ -32,6 +32,11 @@ export function fmtDate(date: Date) {
 	return new Intl.DateTimeFormat(CL, formats[CL].date).format(date);
 }
 
+export function fmtMonth(date: Date) {
+	const CL = get(locale);
+	return new Intl.DateTimeFormat(CL, { month: 'short' }).format(date);
+}
+
 export function fmtTime(date: Date) {
 	const CL = get(locale);
 	return new Intl.DateTimeFormat(CL, formats[CL].time).format(date);
