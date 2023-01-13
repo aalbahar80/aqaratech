@@ -37,6 +37,7 @@ const en: BaseTranslation = {
 		phone: 'Phone',
 		email: 'Email',
 		paymentSchedule: 'Payment schedule',
+		balance: 'Balance',
 	},
 	filter: {
 		filters: 'Filters',

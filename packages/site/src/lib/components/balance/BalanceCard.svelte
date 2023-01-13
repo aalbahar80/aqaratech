@@ -3,6 +3,7 @@
 
 	import { getRoute, PageTypePortfolio } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { kwdFormat } from '$lib/utils/common';
@@ -21,7 +22,9 @@
 <section class="overflow-clip rounded-md bg-white shadow">
 	<div class="rounded-t-md border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
 		<div class="flex flex-wrap items-center justify-between sm:flex-nowrap">
-			<h3 class="text-lg font-medium leading-6 text-gray-900">Balance</h3>
+			<h3 class="text-lg font-medium leading-6 text-gray-900">
+				{$L.general.balance()}
+			</h3>
 		</div>
 	</div>
 
@@ -33,7 +36,7 @@
 			})}
 		>
 			<svelte:fragment slot="label">
-				Lease Invoices
+				{$L.entity.leaseInvoice.plural()}
 				<Tooltip text="Sum of all *paid* lease invoices" />
 			</svelte:fragment>
 			<div slot="definition">
@@ -50,7 +53,7 @@
 			})}
 		>
 			<svelte:fragment slot="label">
-				Expenses
+				{$L.entity.expense.plural()}
 				<Tooltip text="Sum of all expenses" />
 			</svelte:fragment>
 			<div slot="definition">
@@ -65,7 +68,7 @@
 			})}
 		>
 			<svelte:fragment slot="label">
-				Payouts
+				{$L.entity.payout.plural()}
 				<Tooltip text="Sum of all payouts" />
 			</svelte:fragment>
 			<div slot="definition">
@@ -75,7 +78,7 @@
 
 		<BalanceLineItem>
 			<svelte:fragment slot="label">
-				<div class="font-semibold text-gray-500">Balance</div>
+				<div class="font-semibold text-gray-500">{$L.general.balance()}</div>
 				<Tooltip text="Balance = Lease Invoices - expenses - payouts" />
 			</svelte:fragment>
 			<div slot="definition">{kwdFormat(balance.total)}</div>

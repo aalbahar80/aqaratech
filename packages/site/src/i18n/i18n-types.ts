@@ -247,6 +247,10 @@ type RootTranslation = {
 		 * P​a​y​m​e​n​t​ ​s​c​h​e​d​u​l​e
 		 */
 		paymentSchedule: string
+		/**
+		 * B​a​l​a​n​c​e
+		 */
+		balance: string
 	}
 	filter: {
 		/**
@@ -750,6 +754,10 @@ export type TranslationFunctions = {
 		 * Payment schedule
 		 */
 		paymentSchedule: () => LocalizedString
+		/**
+		 * Balance
+		 */
+		balance: () => LocalizedString
 	}
 	filter: {
 		/**

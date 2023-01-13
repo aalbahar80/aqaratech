@@ -1,4 +1,5 @@
 <script lang="ts">
+	import L from '$i18n/i18n-svelte';
 	import FilterCheckbox from '$lib/components/filter/FilterCheckbox.svelte';
 	import FilterRadio from '$lib/components/filter/FilterRadio.svelte';
 	import FilterSlideover from '$lib/components/filter/FilterSlideover.svelte';
@@ -18,7 +19,7 @@
 		<slot name="hero" />
 
 		<section aria-labelledby="filter-heading" class="py-6">
-			<h2 id="filter-heading" class="sr-only">Filters</h2>
+			<h2 id="filter-heading" class="sr-only">{$L.filter.filters()}</h2>
 
 			<div class="flex  flex-row-reverse items-center justify-between">
 				{#each persistent as filter, idx (filter.id)}
@@ -42,7 +43,7 @@
 							}
 						}}
 					>
-						Filters
+						{$L.filter.filters()}
 					</button>
 				{/if}
 
