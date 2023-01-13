@@ -351,6 +351,10 @@ type RootTranslation = {
 		 * F​i​l​e​ ​N​a​m​e
 		 */
 		fileName: string
+		/**
+		 * S​i​z​e
+		 */
+		size2: string
 	}
 	buttons: {
 		/**
@@ -447,6 +451,10 @@ type RootTranslation = {
 		 * A​c​c​o​u​n​t
 		 */
 		account: string
+		/**
+		 * I​n​f​o
+		 */
+		info: string
 	}
 	general: {
 		/**
@@ -757,6 +765,18 @@ type RootTranslation = {
 		 * P​r​o​g​r​e​s​s
 		 */
 		progress: string
+		/**
+		 * V​a​c​a​n​c​y
+		 */
+		vacancy: string
+		/**
+		 * V​a​c​a​n​t
+		 */
+		vacant: string
+		/**
+		 * O​c​c​u​p​i​e​d
+		 */
+		occupied: string
 	}
 }
 
@@ -1098,6 +1118,10 @@ export type TranslationFunctions = {
 		 * File Name
 		 */
 		fileName: () => LocalizedString
+		/**
+		 * Size
+		 */
+		size2: () => LocalizedString
 	}
 	buttons: {
 		/**
@@ -1194,6 +1218,10 @@ export type TranslationFunctions = {
 		 * Account
 		 */
 		account: () => LocalizedString
+		/**
+		 * Info
+		 */
+		info: () => LocalizedString
 	}
 	general: {
 		/**
@@ -1504,6 +1532,18 @@ export type TranslationFunctions = {
 		 * Progress
 		 */
 		progress: () => LocalizedString
+		/**
+		 * Vacancy
+		 */
+		vacancy: () => LocalizedString
+		/**
+		 * Vacant
+		 */
+		vacant: () => LocalizedString
+		/**
+		 * Occupied
+		 */
+		occupied: () => LocalizedString
 	}
 }
 

@@ -3,6 +3,7 @@
 
 	import { page } from '$app/stores';
 
+	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
@@ -34,18 +35,18 @@
 		columnHelper.accessor('usage', { header: getIntlLabel('usage') }),
 
 		columnHelper.accessor('propertyId', {
-			header: getIntlLabel('property'),
+			header: $L.entity.property.singular(),
 			cell: (info) => info.row.original.breadcrumbs.property.label,
 		}),
 
 		columnHelper.display({
 			id: 'vacancy',
-			header: '',
+			header: $L.other.vacancy(),
 			cell: (props) => {
 				const unit = props.row.original;
 				const isVacant = unit.vacancy.isVacant;
 				return renderComponent(Badge, {
-					label: isVacant ? 'Vacant' : 'Occupied',
+					label: isVacant ? $L.other.vacant() : $L.other.occupied(),
 					badgeColor: isVacant ? 'green' : 'yellow',
 				});
 			},

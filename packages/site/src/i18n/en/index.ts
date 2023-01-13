@@ -36,6 +36,7 @@ const en: BaseTranslation = {
 		list: 'List',
 		settings: 'Settings',
 		account: 'Account',
+		info: 'Info',
 	},
 	general: {
 		name: 'Name',
@@ -68,6 +69,9 @@ const en: BaseTranslation = {
 	aqaratech,
 	other: {
 		progress: 'Progress',
+		vacancy: 'Vacancy',
+		vacant: 'Vacant',
+		occupied: 'Occupied',
 	},
 };
 

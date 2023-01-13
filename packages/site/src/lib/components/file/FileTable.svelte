@@ -33,7 +33,7 @@
 		}),
 
 		columnHelper.accessor('size', {
-			header: getIntlLabel('size'),
+			header: $L.fields.size2(),
 			cell: (info) => {
 				const val = info.getValue();
 				return Math.round(val / 1000);

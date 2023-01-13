@@ -129,6 +129,7 @@ export const fields = {
 	// file
 	key: 'Name',
 	fileName: 'File Name',
+	size2: 'Size',
 } satisfies Fields;
 
 type Fields = Record<Keys, string> & {

@@ -5,6 +5,7 @@
 
 	import { getRoute, PageType, type Entity } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
 	import Dropdown from '$lib/components/buttons/Dropdown.svelte';
 	import DropdownMenu from '$lib/components/buttons/DropdownMenu.svelte';
 	import HybridButton from '$lib/components/buttons/HybridButton.svelte';
@@ -66,7 +67,7 @@
 							disallowEdit ? 'cursor-not-allowed opacity-50' : '',
 						)}
 					>
-						Edit
+						{$L.buttons.edit()}
 					</a>
 				</div>
 				<div slot="button">
@@ -95,7 +96,7 @@
 							>
 								<MenuItemChild {active} {disabled}>
 									<MenuItemIcon icon={Fa6SolidTrashCan} {disabled} />
-									Delete
+									{$L.buttons.delete()}
 								</MenuItemChild>
 							</button>
 						</MenuItem>

@@ -13,6 +13,7 @@
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	import type { PayoutDto } from '$api/openapi';
 
@@ -22,12 +23,12 @@
 
 	const columns = [
 		columnHelper.accessor('postAt', {
-			header: 'Post Date',
+			header: getIntlLabel('postAt'),
 			cell: (info) => toUTCFormat(info.getValue().toLocaleString()),
 		}),
 
 		columnHelper.accessor('amount', {
-			header: 'Amount (KWD)',
+			header: getIntlLabel('amount'),
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
 
