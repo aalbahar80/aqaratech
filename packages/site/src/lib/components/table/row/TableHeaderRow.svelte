@@ -17,7 +17,7 @@
 	{#each group.headers as header}
 		<th
 			colSpan={header.colSpan}
-			class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
+			class="py-2 px-2 text-start text-sm font-semibold text-gray-900"
 		>
 			{#if !header.isPlaceholder}
 				<div
