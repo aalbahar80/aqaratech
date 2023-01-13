@@ -4,6 +4,7 @@
 	import { getRoute, PageTypePortfolio } from '@self/utils';
 
 	import L from '$i18n/i18n-svelte';
+	import Arrow from '$lib/components/Arrow.svelte';
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
@@ -57,8 +58,7 @@
 				</div>
 				<TextButton
 					>{$L.general.details()}
-					<!-- arrow-right  -->
-					<span aria-hidden="true" class="rtl:rotate-180"> &nbsp;&rarr; </span>
+					<Arrow />
 				</TextButton>
 			</a>
 		{/if}

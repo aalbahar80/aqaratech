@@ -11,6 +11,7 @@
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
 	import { preventTabClose } from '$lib/actions/prevent-tab-close';
+	import Arrow from '$lib/components/Arrow.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ExpenseTree from '$lib/components/expense/ExpenseTree.svelte';
 	import { addSuccessToast } from '$lib/stores/toast';
@@ -106,7 +107,7 @@
 					<span class="w-5/12">
 						{newParentNode?.labelEn ?? ''}
 					</span>
-					<span aria-hidden="true"> &rarr; </span>
+					<Arrow />
 					<span class="w-5/12 text-indigo-600">
 						{changedNode?.labelEn}
 					</span>
