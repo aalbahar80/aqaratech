@@ -61,11 +61,11 @@
 	<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
 		<div class="hidden lg:block">
 			<p data-testid="pagination-info" class="text-sm text-gray-700">
-				{$L.pagination.showing()}<span class="font-medium">{idxStart}</span>
+				{$L.pagination.showing()} <span class="font-medium">{idxStart}</span>
 				{$L.pagination.to()}
 				<span class="font-medium">{idxEnd}</span>
 				{$L.pagination.of()}
-				<span class="font-medium">{itemCount}</span> results
+				<span class="font-medium">{itemCount}</span>
 			</p>
 		</div>
 		<!-- Page size selector -->
