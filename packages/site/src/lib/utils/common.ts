@@ -1,3 +1,4 @@
+// TODO: replace usage with fmtNumber
 export const kwdFormat = (amount: number | null): string =>
 	amount?.toLocaleString('en-KW', {
 		style: 'currency',

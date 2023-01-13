@@ -6,7 +6,7 @@
 	import L, { locale } from '$i18n/i18n-svelte';
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
-	import { kwdFormat } from '$lib/utils/common';
+	import { fmtCurrency } from '$lib/i18n/format';
 
 	import type { BalanceDto } from '$api/openapi';
 
@@ -41,10 +41,7 @@
 			</svelte:fragment>
 			<div slot="definition">
 				<span class="text-green-600">
-					{new Intl.NumberFormat($locale, {
-						style: 'currency',
-						currency: 'KWD',
-					}).format(balance.leaseInvoices)}
+					{fmtCurrency(balance.leaseInvoices, $locale)}
 				</span>
 			</div>
 		</BalanceLineItem>
@@ -61,10 +58,7 @@
 			</svelte:fragment>
 			<div slot="definition">
 				<span class="text-red-600">
-					{new Intl.NumberFormat($locale, {
-						style: 'currency',
-						currency: 'KWD',
-					}).format(balance.expenses)}
+					{fmtCurrency(balance.expenses, $locale)}
 				</span>
 			</div>
 		</BalanceLineItem>
@@ -80,10 +74,7 @@
 				<Tooltip text="Sum of all payouts" />
 			</svelte:fragment>
 			<div slot="definition">
-				{new Intl.NumberFormat($locale, {
-					style: 'currency',
-					currency: 'KWD',
-				}).format(balance.payouts)}
+				{fmtCurrency(balance.payouts, $locale)}
 			</div>
 		</BalanceLineItem>
 
@@ -93,10 +84,7 @@
 				<Tooltip text="Balance = Lease Invoices - expenses - payouts" />
 			</svelte:fragment>
 			<div slot="definition">
-				{new Intl.NumberFormat($locale, {
-					style: 'currency',
-					currency: 'KWD',
-				}).format(balance.total)}
+				{fmtCurrency(balance.total, $locale)}
 			</div>
 		</BalanceLineItem>
 	</ul>
