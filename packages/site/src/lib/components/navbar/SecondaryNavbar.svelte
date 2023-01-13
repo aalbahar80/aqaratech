@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
+	import L from '$i18n/i18n-svelte';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
@@ -29,7 +30,7 @@
 				href={$page.data.user?.role?.meta.home ?? '/'}
 				class="text-3xl font-semibold text-gray-800 dark:text-white"
 			>
-				<h1>Aqaratech</h1>
+				<h1>{$L.aqaratech.shortName()}</h1>
 			</a>
 		</div>
 		<div class="flex gap-12 text-gray-500">
