@@ -1,15 +1,18 @@
 <script lang="ts" context="module">
-	import L from '$i18n/i18n-svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { range } from '$lib/stores/filter/range';
+</script>
+
+<script lang="ts">
+	import L from '$i18n/i18n-svelte';
 
 	// TODO: hide custom range option unless custom range is selected
 	const rangeOptions = [
-		{ value: 0, label: 'Month to date' },
-		{ value: 3, label: 'Last 3 months' },
-		{ value: 6, label: 'Last 6 months' },
-		{ value: 12, label: 'Last 12 months' },
-		{ value: null, label: 'Custom' },
+		{ value: 0, label: $L.filter.monthToDate() },
+		{ value: 3, label: $L.filter.last3Months() },
+		{ value: 6, label: $L.filter.last6Months() },
+		{ value: 12, label: $L.filter.last12Months() },
+		{ value: null, label: $L.filter.custom() },
 	];
 </script>
 

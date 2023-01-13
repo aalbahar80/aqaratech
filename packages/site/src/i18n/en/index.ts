@@ -62,6 +62,11 @@ const en: BaseTranslation = {
 		start: 'Start',
 		end: 'End',
 		range: 'Range',
+		monthToDate: 'Month to date',
+		last3Months: 'Last 3 months',
+		last6Months: 'Last 6 months',
+		last12Months: 'Last 12 months',
+		custom: 'Custom',
 	},
 	pagination: {
 		next: 'Next',

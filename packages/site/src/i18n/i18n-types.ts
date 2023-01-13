@@ -553,6 +553,26 @@ type RootTranslation = {
 		 * R​a​n​g​e
 		 */
 		range: string
+		/**
+		 * M​o​n​t​h​ ​t​o​ ​d​a​t​e
+		 */
+		monthToDate: string
+		/**
+		 * L​a​s​t​ ​3​ ​m​o​n​t​h​s
+		 */
+		last3Months: string
+		/**
+		 * L​a​s​t​ ​6​ ​m​o​n​t​h​s
+		 */
+		last6Months: string
+		/**
+		 * L​a​s​t​ ​1​2​ ​m​o​n​t​h​s
+		 */
+		last12Months: string
+		/**
+		 * C​u​s​t​o​m
+		 */
+		custom: string
 	}
 	pagination: {
 		/**
@@ -1374,6 +1394,26 @@ export type TranslationFunctions = {
 		 * Range
 		 */
 		range: () => LocalizedString
+		/**
+		 * Month to date
+		 */
+		monthToDate: () => LocalizedString
+		/**
+		 * Last 3 months
+		 */
+		last3Months: () => LocalizedString
+		/**
+		 * Last 6 months
+		 */
+		last6Months: () => LocalizedString
+		/**
+		 * Last 12 months
+		 */
+		last12Months: () => LocalizedString
+		/**
+		 * Custom
+		 */
+		custom: () => LocalizedString
 	}
 	pagination: {
 		/**

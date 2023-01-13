@@ -166,6 +166,11 @@ const ar: Translation = {
 		start: 'بداية',
 		end: 'نهاية',
 		range: 'نطاق',
+		monthToDate: 'الشهر الحالي',
+		last3Months: 'آخر 3 أشهر',
+		last6Months: 'آخر 6 أشهر',
+		last12Months: 'آخر 12 شهر',
+		custom: 'مخصص',
 	},
 	pagination: {
 		next: 'التالي',
