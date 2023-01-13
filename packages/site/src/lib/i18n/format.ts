@@ -1,4 +1,6 @@
-import type { Locales } from '$i18n/i18n-types';
+import { get } from 'svelte/store';
+
+import { locale } from '$i18n/i18n-svelte';
 
 const formats = {
 	en: {
@@ -15,18 +17,22 @@ const formats = {
 	},
 } as const;
 
-export function fmtNumber(number: number, locale: Locales) {
-	return new Intl.NumberFormat(locale, formats[locale].number).format(number);
+export function fmtNumber(number: number) {
+	const CL = get(locale);
+	return new Intl.NumberFormat(CL, formats[CL].number).format(number);
 }
 
-export function fmtCurrency(number: number, locale: Locales) {
-	return new Intl.NumberFormat(locale, formats[locale].currency).format(number);
+export function fmtCurrency(number: number) {
+	const CL = get(locale);
+	return new Intl.NumberFormat(CL, formats[CL].currency).format(number);
 }
 
-export function fmtDate(date: Date, locale: Locales) {
-	return new Intl.DateTimeFormat(locale, formats[locale].date).format(date);
+export function fmtDate(date: Date) {
+	const CL = get(locale);
+	return new Intl.DateTimeFormat(CL, formats[CL].date).format(date);
 }
 
-export function fmtTime(date: Date, locale: Locales) {
-	return new Intl.DateTimeFormat(locale, formats[locale].time).format(date);
+export function fmtTime(date: Date) {
+	const CL = get(locale);
+	return new Intl.DateTimeFormat(CL, formats[CL].time).format(date);
 }

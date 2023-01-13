@@ -3,7 +3,7 @@
 
 	import { getRoute, PageTypePortfolio } from '@self/utils';
 
-	import L, { locale } from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { fmtCurrency } from '$lib/i18n/format';
@@ -41,7 +41,7 @@
 			</svelte:fragment>
 			<div slot="definition">
 				<span class="text-green-600">
-					{fmtCurrency(balance.leaseInvoices, $locale)}
+					{fmtCurrency(balance.leaseInvoices)}
 				</span>
 			</div>
 		</BalanceLineItem>
@@ -58,7 +58,7 @@
 			</svelte:fragment>
 			<div slot="definition">
 				<span class="text-red-600">
-					{fmtCurrency(balance.expenses, $locale)}
+					{fmtCurrency(balance.expenses)}
 				</span>
 			</div>
 		</BalanceLineItem>
@@ -74,7 +74,7 @@
 				<Tooltip text="Sum of all payouts" />
 			</svelte:fragment>
 			<div slot="definition">
-				{fmtCurrency(balance.payouts, $locale)}
+				{fmtCurrency(balance.payouts)}
 			</div>
 		</BalanceLineItem>
 
@@ -84,7 +84,7 @@
 				<Tooltip text="Balance = Lease Invoices - expenses - payouts" />
 			</svelte:fragment>
 			<div slot="definition">
-				{fmtCurrency(balance.total, $locale)}
+				{fmtCurrency(balance.total)}
 			</div>
 		</BalanceLineItem>
 	</ul>
