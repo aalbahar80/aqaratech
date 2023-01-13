@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import { getRoute, PageType } from '@self/utils';
+	import { getRoute, PageType, PageTab } from '@self/utils';
 
 	import { RoleTypeEnum } from '$api/openapi';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
@@ -14,9 +14,12 @@
 	});
 
 	$: tabs = [
-		{ label: 'Info', href: baseRoute },
 		{
-			label: 'Files',
+			label: $page.data.tabLabels![PageType.Id],
+			href: baseRoute,
+		},
+		{
+			label: $page.data.tabLabels![PageTab.Files],
 			href: `${baseRoute}/files`,
 			roles: [RoleTypeEnum.Orgadmin, RoleTypeEnum.Portfolio],
 		},

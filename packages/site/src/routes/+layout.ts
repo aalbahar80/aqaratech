@@ -1,9 +1,12 @@
 import { redirect } from '@sveltejs/kit';
 
 import type { LayoutLoad } from './$types';
+import { get } from 'svelte/store';
 
+import L, { setLocale } from '$i18n/i18n-svelte';
 import { baseLocale } from '$i18n/i18n-util';
 import { loadLocaleAsync } from '$i18n/i18n-util.async';
+import { getTabLabels } from '$lib/components/tabs/tab-labels';
 import { LOGIN } from '$lib/constants/routes';
 import { isPublicRoute } from '$lib/utils/is-public-route';
 
@@ -13,6 +16,13 @@ export const load: LayoutLoad = async ({
 }) => {
 	// load dictionary into memory
 	await loadLocaleAsync(locale ?? baseLocale);
+
+	// if you need to output a localized string in a `load` function,
+	// you always need to call `setLocale` right before you access the `LL` store
+	setLocale(locale ?? baseLocale);
+	// get the translation functions value from the store
+	const LL = get(L);
+	const tabLabels = getTabLabels(LL);
 
 	// Checking for data.user and redirecting here causes this function to catch
 	// all the random requests by bots and crawlers that are not logged in.
@@ -27,5 +37,6 @@ export const load: LayoutLoad = async ({
 		user,
 		// pass locale to the "rendering context"
 		locale,
+		tabLabels,
 	};
 };

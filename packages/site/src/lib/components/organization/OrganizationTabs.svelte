@@ -15,14 +15,14 @@
 
 	$: tabs = [
 		{
-			label: 'Info',
+			label: $page.data.tabLabels![PageType.Id],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageType.Id,
 			}),
 		},
 		{
-			label: 'Users',
+			label: $page.data.tabLabels![PageTab.Roles],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Roles,

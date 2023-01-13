@@ -1,12 +1,9 @@
-import { get } from 'svelte/store';
-
 import { PageType, PageTab } from '@self/utils';
 
-import L from '$i18n/i18n-svelte';
+import type L from '$i18n/i18n-svelte';
+import type { ReadableOf } from '$lib/utils/readable-of';
 
-export const getTabLabels = () => {
-	const LL = get(L);
-
+export const getTabLabels = (LL: ReadableOf<typeof L>) => {
 	return {
 		[PageType.Id]: LL.nav.info(),
 		[PageTab.Occupancy]: LL.nav.occupancy(),
@@ -18,5 +15,8 @@ export const getTabLabels = () => {
 		[PageTab.Files]: LL.entity.file.plural(),
 		[PageTab.Units]: LL.entity.unit.plural(),
 		[PageTab.Leases]: LL.entity.lease.plural(),
+		financials: LL.nav.financials(),
 	};
 };
+
+export type TabLabels = ReturnType<typeof getTabLabels>;

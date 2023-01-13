@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import { entity, getRoute, PageType, PageTypePortfolio } from '@self/utils';
+	import {
+		entity,
+		getRoute,
+		PageTab,
+		PageType,
+		PageTypePortfolio,
+	} from '@self/utils';
 
 	import { RoleTypeEnum } from '$api/openapi';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
@@ -25,20 +31,26 @@
 	});
 
 	$: tabs = [
-		{ label: 'Info', href: baseRoute },
 		{
-			label: 'Financials',
+			label: $page.data.tabLabels![PageType.Id],
+			href: baseRoute,
+		},
+		{
+			label: $page.data.tabLabels!.financials,
 			isExternal: true,
 			href: financialsRoute,
 		},
-		{ label: 'Leases', href: `${baseRoute}/leases` },
 		{
-			label: 'Files',
+			label: $page.data.tabLabels![PageTab.Leases],
+			href: `${baseRoute}/leases`,
+		},
+		{
+			label: $page.data.tabLabels![PageTab.Files],
 			href: `${baseRoute}/files`,
 			roles: [RoleTypeEnum.Orgadmin, RoleTypeEnum.Portfolio],
 		},
 		{
-			label: 'Maintenance',
+			label: $page.data.tabLabels![PageTab.Maintenance],
 			href: `${baseRoute}/${entity.maintenanceOrder.urlName}`,
 		},
 	];

@@ -3,7 +3,6 @@
 
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
-	import { getTabLabels } from '$lib/components/tabs/tab-labels';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 
 	$: baseRouteConfig = {
@@ -12,46 +11,44 @@
 		params: $page.params,
 	} as const;
 
-	const tabLabels = getTabLabels();
-
 	$: tabs = [
 		{
-			label: tabLabels[PageType.Id],
+			label: $page.data.tabLabels![PageType.Id],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageType.Id,
 			}),
 		},
 		{
-			label: tabLabels[PageTab.Occupancy],
+			label: $page.data.tabLabels![PageTab.Occupancy],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Occupancy,
 			}),
 		},
 		{
-			label: tabLabels[PageTab.Properties],
+			label: $page.data.tabLabels![PageTab.Properties],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Properties,
 			}),
 		},
 		{
-			label: tabLabels[PageTab.Balance],
+			label: $page.data.tabLabels![PageTab.Balance],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Balance,
 			}),
 		},
 		{
-			label: tabLabels[PageTab.Roles],
+			label: $page.data.tabLabels![PageTab.Roles],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Roles,
 			}),
 		},
 		{
-			label: tabLabels[PageTab.Files],
+			label: $page.data.tabLabels![PageTab.Files],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Files,
