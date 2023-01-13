@@ -63,7 +63,7 @@ export const viewColumnDef = <
 					: params;
 
 			return renderComponent(ActionCell, {
-				value: 'View',
+				value: get(L).buttons.view(),
 				href: getRoute({
 					entity,
 					id: props.row.original.id,

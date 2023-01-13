@@ -370,6 +370,10 @@ type RootTranslation = {
 		 */
 		search: string
 		/**
+		 * V​i​e​w
+		 */
+		view: string
+		/**
 		 * E​d​i​t
 		 */
 		edit: string
@@ -1098,6 +1102,10 @@ export type TranslationFunctions = {
 		 * Search
 		 */
 		search: () => LocalizedString
+		/**
+		 * View
+		 */
+		view: () => LocalizedString
 		/**
 		 * Edit
 		 */

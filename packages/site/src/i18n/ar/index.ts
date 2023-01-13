@@ -122,6 +122,7 @@ const ar: Translation = {
 		export: 'يصدّر',
 		close: 'يغلق',
 		addMultiple: 'إضافة متعددة',
+		view: 'عرض',
 	},
 	nav: {
 		financials: 'البيانات المالية',

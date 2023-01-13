@@ -13,6 +13,7 @@ const en: BaseTranslation = {
 		logout: 'Log out',
 		contact: 'Contact us',
 		search: 'Search',
+		view: 'View',
 
 		// actions
 		edit: 'Edit',
