@@ -1,5 +1,12 @@
 # @self/test
 
+## 3.7.0
+
+### Minor Changes
+
+- 80a2fc617: update deps
+- 0a553e6bd: add tracing to client hooks, use sentry tags
+
 ## 3.6.0
 
 ### Minor Changes

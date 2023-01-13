@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.8.0
+
+### Minor Changes
+
+- 80a2fc617: update deps
+- 0a553e6bd: add tracing to client hooks, use sentry tags
+
 ## 2.7.0
 
 ### Minor Changes
