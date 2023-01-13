@@ -1,9 +1,10 @@
 <script lang="ts">
 	import * as R from 'remeda';
 
+	import L from '$i18n/i18n-svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
-	import { kwdFormat } from '$lib/utils/common';
+	import { fmtCurrency } from '$lib/i18n/format';
 
 	import type { GroupByMonthDto } from '$api/openapi';
 
@@ -15,9 +16,9 @@
 <Stats>
 	<svelte:fragment slot="panes">
 		<StatisticsPane
-			primaryText="Total Expenses"
-			secondaryText="for period"
-			primaryValue={kwdFormat(sum)}
+			primaryText={$L.general.total() + ' ' + $L.entity.expense.plural()}
+			secondaryText={$L.general.forPeriod()}
+			primaryValue={fmtCurrency(sum)}
 		/>
 	</svelte:fragment>
 </Stats>

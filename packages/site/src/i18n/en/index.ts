@@ -26,7 +26,6 @@ const en: BaseTranslation = {
 		addMultiple: 'Add multiple',
 		toggleAll: 'Toggle all',
 		markAsPaid: 'Mark as paid',
-		export: 'Export',
 		options: 'Options',
 	},
 	nav: {
