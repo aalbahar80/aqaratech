@@ -3,6 +3,10 @@ import type { Translation } from '../i18n-types';
 
 const ar: Translation = {
 	entity: {
+		user: {
+			plural: 'المستخدمين',
+			singular: 'مستخدم',
+		},
 		organization: {
 			plural: 'المنظمات',
 			singular: 'منظمة',

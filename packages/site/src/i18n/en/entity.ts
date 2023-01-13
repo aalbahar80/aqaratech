@@ -6,6 +6,10 @@ interface EntityForms {
 }
 
 export const entity = {
+	user: {
+		plural: 'Users',
+		singular: 'User',
+	},
 	organization: {
 		plural: 'Organizations',
 		singular: 'Organization',

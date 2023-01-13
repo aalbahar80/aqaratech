@@ -15,6 +15,16 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	entity: {
+		user: {
+			/**
+			 * U​s​e​r​s
+			 */
+			plural: string
+			/**
+			 * U​s​e​r
+			 */
+			singular: string
+		}
 		organization: {
 			/**
 			 * O​r​g​a​n​i​z​a​t​i​o​n​s
@@ -782,6 +792,16 @@ type RootTranslation = {
 
 export type TranslationFunctions = {
 	entity: {
+		user: {
+			/**
+			 * Users
+			 */
+			plural: () => LocalizedString
+			/**
+			 * User
+			 */
+			singular: () => LocalizedString
+		}
 		organization: {
 			/**
 			 * Organizations
