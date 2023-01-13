@@ -158,6 +158,8 @@ const ar: Translation = {
 		collected: 'المحصل',
 		uncollected: 'غير المحصل',
 		unspecified: 'غير محدد',
+		thisMonth: 'الشهر الحالي',
+		lastMonth: 'الشهر الماضى',
 	},
 	filter: {
 		filters: 'المرشحات',

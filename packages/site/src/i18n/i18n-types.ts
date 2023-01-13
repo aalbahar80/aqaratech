@@ -527,6 +527,14 @@ type RootTranslation = {
 		 * U​n​s​p​e​c​i​f​i​e​d
 		 */
 		unspecified: string
+		/**
+		 * T​h​i​s​ ​m​o​n​t​h
+		 */
+		thisMonth: string
+		/**
+		 * L​a​s​t​ ​m​o​n​t​h
+		 */
+		lastMonth: string
 	}
 	filter: {
 		/**
@@ -1340,6 +1348,14 @@ export type TranslationFunctions = {
 		 * Unspecified
 		 */
 		unspecified: () => LocalizedString
+		/**
+		 * This month
+		 */
+		thisMonth: () => LocalizedString
+		/**
+		 * Last month
+		 */
+		lastMonth: () => LocalizedString
 	}
 	filter: {
 		/**

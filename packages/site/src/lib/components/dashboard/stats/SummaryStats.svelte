@@ -24,8 +24,8 @@
 	export let data: Datapoint[];
 
 	const primary: Record<number, string | undefined> = {
-		0: 'This month',
-		1: 'Last month',
+		0: $L.general.thisMonth(),
+		1: $L.general.lastMonth(),
 		2: undefined,
 	};
 

@@ -54,6 +54,8 @@ const en: BaseTranslation = {
 		collected: 'Collected',
 		uncollected: 'Uncollected',
 		unspecified: 'Unspecified',
+		thisMonth: 'This month',
+		lastMonth: 'Last month',
 	},
 	filter: {
 		filters: 'Filters',
