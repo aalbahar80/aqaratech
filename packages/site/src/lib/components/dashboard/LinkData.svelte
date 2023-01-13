@@ -10,7 +10,7 @@
 
 	export let dataType: 'Expenses' | 'Income';
 
-	const tabs = [
+	$: tabs = [
 		{
 			label: $L.nav.charts(),
 			href: getRoute({
