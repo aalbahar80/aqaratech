@@ -1,4 +1,5 @@
 <script lang="ts">
+	import L from '$i18n/i18n-svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { getButtons } from '$lib/components/pagination/get-buttons';
 	import { classes } from '$lib/utils/classes';
@@ -29,18 +30,18 @@
 				on:click={() => table.previousPage()}
 				disabled={!table.getCanPreviousPage()}
 			>
-				Previous
+				{$L.pagination.previous()}
 			</button>
 			<button
 				class="relative ml-3 inline-flex w-32 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
 				on:click={() => table.nextPage()}
 				disabled={!table.getCanNextPage()}
 			>
-				Next
+				{$L.pagination.next()}
 			</button>
 		</div>
 		<div class="flex items-center gap-x-2">
-			Page
+			{$L.pagination.page()}
 			<input
 				type="number"
 				value={pageIdx + 1}
@@ -52,16 +53,18 @@
 					table.setPageIndex(index - 1);
 				}}
 			/>
-			of
+
+			{$L.pagination.of()}
 			<span class="font-medium">{table.getPageCount()}</span>
 		</div>
 	</div>
 	<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
 		<div class="hidden lg:block">
 			<p data-testid="pagination-info" class="text-sm text-gray-700">
-				Showing <span class="font-medium">{idxStart}</span> to
+				{$L.pagination.showing()}<span class="font-medium">{idxStart}</span>
+				{$L.pagination.to()}
 				<span class="font-medium">{idxEnd}</span>
-				of
+				{$L.pagination.of()}
 				<span class="font-medium">{itemCount}</span> results
 			</p>
 		</div>

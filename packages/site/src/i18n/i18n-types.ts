@@ -251,6 +251,10 @@ type RootTranslation = {
 		 * B​a​l​a​n​c​e
 		 */
 		balance: string
+		/**
+		 * D​e​t​a​i​l​s
+		 */
+		details: string
 	}
 	filter: {
 		/**
@@ -291,6 +295,10 @@ type RootTranslation = {
 		 * o​f
 		 */
 		of: string
+		/**
+		 * P​a​g​e
+		 */
+		page: string
 	}
 	landing: {
 		hero: {
@@ -758,6 +766,10 @@ export type TranslationFunctions = {
 		 * Balance
 		 */
 		balance: () => LocalizedString
+		/**
+		 * Details
+		 */
+		details: () => LocalizedString
 	}
 	filter: {
 		/**
@@ -798,6 +810,10 @@ export type TranslationFunctions = {
 		 * of
 		 */
 		of: () => LocalizedString
+		/**
+		 * Page
+		 */
+		page: () => LocalizedString
 	}
 	landing: {
 		hero: {

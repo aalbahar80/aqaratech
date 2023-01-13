@@ -38,6 +38,7 @@ const en: BaseTranslation = {
 		email: 'Email',
 		paymentSchedule: 'Payment schedule',
 		balance: 'Balance',
+		details: 'Details',
 	},
 	filter: {
 		filters: 'Filters',
