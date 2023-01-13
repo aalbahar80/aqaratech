@@ -67,7 +67,10 @@
 
 <!-- TODO: Remove if condition to enable arabic locale switch. Also see switch.spec.ts test -->
 {#if unselectedLocale !== 'ar'}
-	<a href={`${replaceLocaleInUrl($page.url, unselectedLocale)}`}>
+	<a
+		data-sveltekit-reload
+		href={`${replaceLocaleInUrl($page.url, unselectedLocale)}`}
+	>
 		{LOCALE_LABELS[unselectedLocale]}
 	</a>
 {/if}
