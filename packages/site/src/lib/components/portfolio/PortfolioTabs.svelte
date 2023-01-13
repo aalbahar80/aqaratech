@@ -3,7 +3,7 @@
 
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
-	import L from '$i18n/i18n-svelte';
+	import { getTabLabels } from '$lib/components/tabs/tab-labels';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 
 	$: baseRouteConfig = {
@@ -12,44 +12,46 @@
 		params: $page.params,
 	} as const;
 
+	const tabLabels = getTabLabels();
+
 	$: tabs = [
 		{
-			label: 'Info',
+			label: tabLabels[PageType.Id],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageType.Id,
 			}),
 		},
 		{
-			label: $L.nav.occupancy(),
+			label: tabLabels[PageTab.Occupancy],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Occupancy,
 			}),
 		},
 		{
-			label: $L.entity.property.plural(),
+			label: tabLabels[PageTab.Properties],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Properties,
 			}),
 		},
 		{
-			label: 'Balance',
+			label: tabLabels[PageTab.Balance],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Balance,
 			}),
 		},
 		{
-			label: 'Users',
+			label: tabLabels[PageTab.Roles],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Roles,
 			}),
 		},
 		{
-			label: $L.entity.file.plural(),
+			label: tabLabels[PageTab.Files],
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Files,
