@@ -19,7 +19,7 @@ test('locale switch updates $page.pathname', async ({ page, portfolio }) => {
 
 	await page.goto(url);
 
-	const tabAr = page.getByRole('link', { name: 'عقارات' });
+	const tabAr = page.getByRole('link', { name: 'عقارات', exact: true });
 	const tabEn = page.getByRole('link', { name: 'Properties' });
 
 	await expect(tabAr).toHaveAttribute('data-testid', 'active');

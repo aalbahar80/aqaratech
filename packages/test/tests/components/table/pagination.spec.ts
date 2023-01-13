@@ -46,7 +46,7 @@ test.use({
 test('table pagination smoke test', async ({ page }) => {
 	const table = new TablePage(page);
 
-	const info = `Showing 1 to ${SIZE} of ${TOTAL} results`;
+	const info = `Showing 1 to ${SIZE} of ${TOTAL}`;
 	await expect.soft(table.info).toHaveText(info);
 
 	await expect(table.next).toBeEnabled();
@@ -57,7 +57,7 @@ test('table pagination smoke test', async ({ page }) => {
 	await expect(table.next).toBeDisabled();
 	await expect(table.prev).toBeEnabled();
 
-	const info2 = `Showing ${SIZE + 1} to ${TOTAL} of ${TOTAL} results`;
+	const info2 = `Showing ${SIZE + 1} to ${TOTAL} of ${TOTAL}`;
 	await expect.soft(table.info).toHaveText(info2);
 
 	await expect(table.size).toHaveValue('20');

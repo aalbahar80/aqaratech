@@ -55,7 +55,7 @@ export class RemoveModel {
 		await expect(this.page.getByTestId(this.items[0].id)).toBeHidden();
 
 		// Check pagination info is updated
-		const info = 'Showing 1 to 2 of 2 results';
+		const info = 'Showing 1 to 2 of 2';
 		await expect(this.page.getByText(info)).toBeVisible();
 	}
 }

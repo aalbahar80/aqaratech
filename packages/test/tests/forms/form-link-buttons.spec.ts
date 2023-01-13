@@ -21,7 +21,7 @@ test('create invoices-multiple button predefined params', async ({
 
 	await page.goto(url);
 
-	const btn = page.getByRole('link', { name: 'Add multiple invoices' });
+	const btn = page.getByRole('link', { name: 'Add multiple' });
 
 	await expect(btn).toHaveAttribute(
 		'href',

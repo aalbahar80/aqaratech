@@ -25,7 +25,7 @@ test('can be submitted with minimal fields', async ({
 
 	await page.goto(url);
 
-	await page.getByRole('link', { name: 'Add multiple invoices' }).click();
+	await page.getByRole('link', { name: 'Add multiple' }).click();
 
 	const invoices = R.times(12, (n) => {
 		const date = new Date(Date.UTC(2030, 0, 1));
