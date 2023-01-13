@@ -6,6 +6,7 @@
 
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
@@ -19,7 +20,7 @@
 </script>
 
 <Heading
-	title="Property"
+	title={$L.entity.property.singular()}
 	id={data.property.id}
 	entity="property"
 	onDelete={async (api) => {

@@ -6,6 +6,7 @@
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
 	import Button from '$components/buttons/Button.svelte';
+	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -33,7 +34,7 @@
 </script>
 
 <Heading
-	title="Lease"
+	title={$L.entity.lease.singular()}
 	id={lease.id}
 	entity="lease"
 	{icons}

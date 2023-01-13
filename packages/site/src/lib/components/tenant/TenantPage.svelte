@@ -3,6 +3,7 @@
 
 	import { getRoute, PageType } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
 	import Heading from '$lib/components/Heading.svelte';
 
 	import type { TenantDto } from '$api/openapi';
@@ -11,7 +12,7 @@
 </script>
 
 <Heading
-	title="Tenant"
+	title={$L.entity.tenant.singular()}
 	id={tenant.id}
 	entity="tenant"
 	onDelete={async (api) => {

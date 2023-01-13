@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
+	import L from '$i18n/i18n-svelte';
 	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 
@@ -8,7 +9,7 @@
 </script>
 
 <Heading
-	title="Expense Category"
+	title={$L.entity.expenseCategory.singular()}
 	id={data.expenseCategory.id}
 	entity="expenseCategory"
 />

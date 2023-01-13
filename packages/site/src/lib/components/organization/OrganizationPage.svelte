@@ -1,4 +1,5 @@
 <script lang="ts">
+	import L from '$i18n/i18n-svelte';
 	import Heading from '$lib/components/Heading.svelte';
 
 	import type { OrganizationDto } from '$api/openapi';
@@ -7,7 +8,7 @@
 </script>
 
 <Heading
-	title="Organization"
+	title={$L.entity.organization.singular()}
 	id={organization.id}
 	entity="organization"
 	deletePrompt={organization.fullName}

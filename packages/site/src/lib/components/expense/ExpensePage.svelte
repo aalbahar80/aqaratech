@@ -3,6 +3,7 @@
 
 	import { getRoute, PageTypePortfolio } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 
@@ -12,7 +13,7 @@
 </script>
 
 <Heading
-	title="Expense"
+	title={$L.entity.expense.singular()}
 	id={expense.id}
 	entity="expense"
 	onDelete={async (api) => {

@@ -24,7 +24,7 @@
 </script>
 
 <Heading
-	title="Invoice"
+	title={$L.entity.leaseInvoice.singular()}
 	id={data.leaseInvoice.id}
 	entity="leaseInvoice"
 	onDelete={async (api) => {

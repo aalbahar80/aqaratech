@@ -7,6 +7,7 @@
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
+	import L from '$i18n/i18n-svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -49,7 +50,7 @@
 </script>
 
 <Heading
-	title="Unit"
+	title={$L.entity.unit.singular()}
 	id={data.unit.id}
 	entity="unit"
 	{icons}

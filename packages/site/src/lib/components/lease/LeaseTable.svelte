@@ -106,7 +106,7 @@
 			<div slot="hero">
 				<!-- Don't show hero if we're on the unit page -->
 				{#if !('unitId' in $page.params)}
-					<FilterHero title="Leases" />
+					<FilterHero title={$L.entity.lease.plural()} />
 				{/if}
 			</div>
 			<div slot="custom">

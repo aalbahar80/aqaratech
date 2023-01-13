@@ -1,4 +1,5 @@
 <script lang="ts">
+	import L from '$i18n/i18n-svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 
@@ -8,7 +9,7 @@
 </script>
 
 <Heading
-	title="Maintenance Order"
+	title={$L.entity.maintenanceOrder.singular()}
 	id={maintenanceOrder.id}
 	entity="maintenanceOrder"
 	onDelete={async (api) => {

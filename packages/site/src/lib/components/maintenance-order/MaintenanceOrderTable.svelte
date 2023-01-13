@@ -9,6 +9,7 @@
 
 	import { toUTCFormat } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
@@ -82,7 +83,7 @@
 			<div slot="hero">
 				<!-- Don't show hero if we're on the property/unit pages -->
 				{#if !('unitId' in $page.params) && !('propertyId' in $page.params)}
-					<FilterHero title="Maintenance" />
+					<FilterHero title={$L.entity.maintenanceOrder.plural()} />
 				{/if}
 			</div>
 			<div slot="custom">
