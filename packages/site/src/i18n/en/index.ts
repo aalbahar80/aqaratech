@@ -39,6 +39,7 @@ const en: BaseTranslation = {
 		settings: 'Settings',
 		account: 'Account',
 		info: 'Info',
+		net: 'Net',
 	},
 	general: {
 		name: 'Name',
@@ -49,6 +50,10 @@ const en: BaseTranslation = {
 		details: 'Details',
 		columns: 'Columns',
 		all: 'All',
+		total: 'Total',
+		forPeriod: 'For period',
+		collected: 'Collected',
+		uncollected: 'Uncollected',
 		unspecified: 'Unspecified',
 	},
 	filter: {

@@ -143,6 +143,7 @@ const ar: Translation = {
 		settings: 'إعدادات',
 		account: 'حساب',
 		info: 'تفاصيل',
+		net: 'صافي',
 	},
 	general: {
 		name: 'الاسم',
@@ -153,6 +154,10 @@ const ar: Translation = {
 		details: 'تفاصيل',
 		columns: 'الحقول',
 		all: 'الجميع',
+		total: 'إجمالي',
+		forPeriod: 'للفترة',
+		collected: 'تم جمعه',
+		uncollected: 'غير مجمع',
 		unspecified: 'غير محدد',
 	},
 	filter: {

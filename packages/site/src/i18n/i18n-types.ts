@@ -469,6 +469,10 @@ type RootTranslation = {
 		 * I​n​f​o
 		 */
 		info: string
+		/**
+		 * N​e​t
+		 */
+		net: string
 	}
 	general: {
 		/**
@@ -503,6 +507,22 @@ type RootTranslation = {
 		 * A​l​l
 		 */
 		all: string
+		/**
+		 * T​o​t​a​l
+		 */
+		total: string
+		/**
+		 * F​o​r​ ​p​e​r​i​o​d
+		 */
+		forPeriod: string
+		/**
+		 * C​o​l​l​e​c​t​e​d
+		 */
+		collected: string
+		/**
+		 * U​n​c​o​l​l​e​c​t​e​d
+		 */
+		uncollected: string
 		/**
 		 * U​n​s​p​e​c​i​f​i​e​d
 		 */
@@ -1262,6 +1282,10 @@ export type TranslationFunctions = {
 		 * Info
 		 */
 		info: () => LocalizedString
+		/**
+		 * Net
+		 */
+		net: () => LocalizedString
 	}
 	general: {
 		/**
@@ -1296,6 +1320,22 @@ export type TranslationFunctions = {
 		 * All
 		 */
 		all: () => LocalizedString
+		/**
+		 * Total
+		 */
+		total: () => LocalizedString
+		/**
+		 * For period
+		 */
+		forPeriod: () => LocalizedString
+		/**
+		 * Collected
+		 */
+		collected: () => LocalizedString
+		/**
+		 * Uncollected
+		 */
+		uncollected: () => LocalizedString
 		/**
 		 * Unspecified
 		 */
