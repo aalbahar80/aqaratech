@@ -13,6 +13,7 @@
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	import type { ExpenseDto, PaginatedExpenseDto } from '$api/openapi';
 
@@ -22,17 +23,17 @@
 
 	const columns = [
 		columnHelper.accessor('postAt', {
-			header: 'Post Date',
+			header: getIntlLabel('postAt'),
 			cell: (info) => toUTCFormat(info.getValue().toLocaleString()),
 		}),
 
 		columnHelper.accessor('categoryId', {
-			header: 'Type',
+			header: getIntlLabel('categoryId'),
 			cell: (info) => info.row.original.expenseType?.labelEn,
 		}),
 
 		columnHelper.accessor('amount', {
-			header: 'Amount (KWD)',
+			header: getIntlLabel('amount'),
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
 
