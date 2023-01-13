@@ -3,7 +3,7 @@
 
 	import { getRoute, PageTypePortfolio } from '@self/utils';
 
-	import L from '$i18n/i18n-svelte';
+	import L, { locale } from '$i18n/i18n-svelte';
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { kwdFormat } from '$lib/utils/common';
@@ -41,7 +41,10 @@
 			</svelte:fragment>
 			<div slot="definition">
 				<span class="text-green-600">
-					{balance.leaseInvoices.toLocaleString()}
+					{new Intl.NumberFormat($locale, {
+						style: 'currency',
+						currency: 'KWD',
+					}).format(balance.leaseInvoices)}
 				</span>
 			</div>
 		</BalanceLineItem>
@@ -57,7 +60,12 @@
 				<Tooltip text="Sum of all expenses" />
 			</svelte:fragment>
 			<div slot="definition">
-				<span class="text-red-600">{balance.expenses.toLocaleString()}</span>
+				<span class="text-red-600">
+					{new Intl.NumberFormat($locale, {
+						style: 'currency',
+						currency: 'KWD',
+					}).format(balance.expenses)}
+				</span>
 			</div>
 		</BalanceLineItem>
 
@@ -72,7 +80,10 @@
 				<Tooltip text="Sum of all payouts" />
 			</svelte:fragment>
 			<div slot="definition">
-				{balance.payouts.toLocaleString()}
+				{new Intl.NumberFormat($locale, {
+					style: 'currency',
+					currency: 'KWD',
+				}).format(balance.payouts)}
 			</div>
 		</BalanceLineItem>
 
@@ -81,7 +92,12 @@
 				<div class="font-semibold text-gray-500">{$L.general.balance()}</div>
 				<Tooltip text="Balance = Lease Invoices - expenses - payouts" />
 			</svelte:fragment>
-			<div slot="definition">{kwdFormat(balance.total)}</div>
+			<div slot="definition">
+				{new Intl.NumberFormat($locale, {
+					style: 'currency',
+					currency: 'KWD',
+				}).format(balance.total)}
+			</div>
 		</BalanceLineItem>
 	</ul>
 </section>
