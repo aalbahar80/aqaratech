@@ -1,10 +1,9 @@
 <script lang="ts">
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import Feature from '$lib/components/landing/features/Feature.svelte';
 	import { getFeatures } from '$lib/components/landing/features/features-content';
 
-	$: features = getFeatures($LL);
+	$: features = getFeatures($L);
 </script>
 
 <!-- Use bottom padding to avoid clipping last icon if text is short enough. -->

@@ -5,8 +5,7 @@
 
 	import { getLabel } from '@self/utils';
 
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
@@ -54,7 +53,7 @@
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
 			<div slot="hero">
-				<FilterHero title={$LL.entity.tenant.plural()} />
+				<FilterHero title={$L.entity.tenant.plural()} />
 			</div>
 			<div slot="custom">
 				<FilterBarButtonForm

@@ -1,6 +1,5 @@
 <script lang="ts">
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 </script>
 
 <div class="mt-20 border-t border-gray-200">
@@ -16,7 +15,7 @@
 					id="contact-heading"
 					class="text-3xl tracking-tight text-slate-900 sm:text-4xl"
 				>
-					{$LL.buttons.contact()}
+					{$L.buttons.contact()}
 				</h2>
 				<div
 					class="mt-8 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:col-span-2 lg:mt-0"
@@ -24,12 +23,12 @@
 					<!-- Location -->
 					<div>
 						<h3 class="text-lg font-medium text-slate-900">
-							{$LL.landing.location()}
+							{$L.landing.location()}
 						</h3>
 						<div class="mt-2 flex flex-col gap-2 text-base text-slate-500">
 							<p>
-								{$LL.aqaratech.address.line1()} <br />
-								{$LL.aqaratech.address.line2()}
+								{$L.aqaratech.address.line1()} <br />
+								{$L.aqaratech.address.line2()}
 							</p>
 							<a
 								class="underline hover:text-slate-900"
@@ -37,7 +36,7 @@
 								data-sveltekit-reload
 								target="_blank noopener noreferrer"
 							>
-								{$LL.landing.map()}
+								{$L.landing.map()}
 							</a>
 						</div>
 					</div>
@@ -45,7 +44,7 @@
 					<!-- Phone -->
 					<div>
 						<h3 class="text-lg font-medium text-slate-900">
-							{$LL.general.phone()}
+							{$L.general.phone()}
 						</h3>
 						<div class="mt-2 text-base text-slate-500">
 							<!-- TODO: add data-sveltekit-reload? -->
@@ -58,7 +57,7 @@
 					<!-- Online -->
 					<div>
 						<h3 class="text-lg font-medium text-slate-900">
-							{$LL.landing.online()}
+							{$L.landing.online()}
 						</h3>
 						<div class="mt-2 text-base text-slate-500">
 							<a
@@ -69,7 +68,7 @@
 								type="submit"
 								class="hover:text-slate-900"
 							>
-								{$LL.buttons.contact()}
+								{$L.buttons.contact()}
 							</a>
 						</div>
 					</div>

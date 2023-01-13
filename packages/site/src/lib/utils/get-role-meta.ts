@@ -1,15 +1,14 @@
 import { getRoute, PageType, PageTypePortfolio } from '@self/utils';
 
 import type { ValidatedRoleDto } from '$api/openapi';
-// eslint-disable-next-line import/no-named-as-default
-import type LL from '$i18n/i18n-svelte';
+import type L from '$i18n/i18n-svelte';
 import type { Locales } from '$i18n/i18n-types';
 import type { UserMeta } from '$lib/models/types/auth.type';
 import type { ReadableOf } from './readable-of';
 
 export const getRoleMeta = (
 	role: ValidatedRoleDto,
-	L: ReadableOf<typeof LL>,
+	LL: ReadableOf<typeof L>,
 	locale: Locales,
 ): UserMeta => {
 	const langParam = {
@@ -20,7 +19,7 @@ export const getRoleMeta = (
 
 	if (role.roleType === 'ORGADMIN') {
 		return {
-			roleLabel: L.entity.organization.singular(),
+			roleLabel: LL.entity.organization.singular(),
 			home: getRoute({
 				entity: 'portfolio',
 				pageType: PageType.List,
@@ -34,7 +33,7 @@ export const getRoleMeta = (
 		const portfolioId = role.portfolioId;
 
 		return {
-			roleLabel: L.entity.portfolio.singular(),
+			roleLabel: LL.entity.portfolio.singular(),
 			home: getRoute({
 				entity: 'portfolio',
 				pageType: PageTypePortfolio.Summary,
@@ -48,7 +47,7 @@ export const getRoleMeta = (
 		};
 	} else if (role.roleType === 'TENANT' && role.tenantId) {
 		return {
-			roleLabel: L.entity.tenant.singular(),
+			roleLabel: LL.entity.tenant.singular(),
 			home: `${locale}/portal/tenant/${role.tenantId}`,
 		};
 	} else {

@@ -5,8 +5,7 @@
 
 	import { getLabel } from '@self/utils';
 
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
@@ -55,7 +54,7 @@
 			<!-- Don't show hero if we're on the (tabbed) portfolio page -->
 			<div slot="hero">
 				{#if $page.data.user?.role?.roleType !== 'ORGADMIN'}
-					<FilterHero title={$LL.entity.property.plural()} />
+					<FilterHero title={$L.entity.property.plural()} />
 				{/if}
 			</div>
 			<div slot="custom">

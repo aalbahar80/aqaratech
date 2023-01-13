@@ -1,12 +1,11 @@
 <script lang="ts">
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
 	import { getSecondaryFeatures } from '$lib/components/landing/secondary-feature/features';
 	import FeaturesDesktop from '$lib/components/landing/secondary-feature/FeaturesDesktop.svelte';
 	import FeaturesMobile from '$lib/components/landing/secondary-feature/FeaturesMobile.svelte';
 
-	$: secondaryFeatures = getSecondaryFeatures($LL);
+	$: secondaryFeatures = getSecondaryFeatures($L);
 </script>
 
 <section
@@ -17,10 +16,10 @@
 	<Container>
 		<div class="mx-auto max-w-2xl md:text-center">
 			<h2 class="text-3xl tracking-tight text-slate-900 sm:text-4xl">
-				{$LL.landing.hero.subtitle()}
+				{$L.landing.hero.subtitle()}
 			</h2>
 			<p class="mt-4 text-lg tracking-tight text-slate-700">
-				{$LL.landing.hero.description()}
+				{$L.landing.hero.description()}
 			</p>
 		</div>
 		<FeaturesMobile {secondaryFeatures} />

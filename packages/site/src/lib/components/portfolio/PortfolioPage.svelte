@@ -5,8 +5,7 @@
 
 	import { getRoute, PageType } from '@self/utils';
 
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
@@ -20,7 +19,7 @@
 </script>
 
 <Heading
-	title={$LL.entity.portfolio.singular()}
+	title={$L.entity.portfolio.singular()}
 	id={portfolio.id}
 	entity="portfolio"
 	onDelete={async (api) => {

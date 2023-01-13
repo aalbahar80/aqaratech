@@ -1,6 +1,5 @@
 <script lang="ts">
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import { shortcut } from '$lib/actions/shortcut';
 	import SearchPalette from '$lib/components/search/SearchPalette.svelte';
 
@@ -25,7 +24,7 @@
 		/>
 	</svg>
 
-	<span class="flex-1 text-start">{$LL.buttons.search()}</span>
+	<span class="flex-1 text-start">{$L.buttons.search()}</span>
 	<kbd class="flex-none font-sans" dir="ltr">
 		<!-- https://daisyui.com/components/kbd/ -->
 		<abbr title="Command" class="no-underline">⌘</abbr> K

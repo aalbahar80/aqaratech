@@ -3,8 +3,7 @@
 
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 
 	$: baseRouteConfig = {
@@ -22,14 +21,14 @@
 			}),
 		},
 		{
-			label: $LL.nav.occupancy(),
+			label: $L.nav.occupancy(),
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Occupancy,
 			}),
 		},
 		{
-			label: $LL.entity.property.plural(),
+			label: $L.entity.property.plural(),
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Properties,
@@ -50,7 +49,7 @@
 			}),
 		},
 		{
-			label: $LL.entity.file.plural(),
+			label: $L.entity.file.plural(),
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Files,

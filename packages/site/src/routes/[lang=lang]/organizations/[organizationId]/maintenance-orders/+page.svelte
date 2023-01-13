@@ -3,8 +3,7 @@
 
 	import type { PageData } from './$types';
 
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import MaintenanceOrderTable from '$lib/components/maintenance-order/MaintenanceOrderTable.svelte';
 
 	import type { MaintenanceOrderDto } from '$api/openapi';
@@ -18,7 +17,7 @@
 	data={data.maintenanceOrders}
 	extraColumns={[
 		columnHelper.accessor('portfolioId', {
-			header: $LL.entity.portfolio.singular(),
+			header: $L.entity.portfolio.singular(),
 			cell: (info) => info.row.original.breadcrumbs.portfolio.label,
 		}),
 	]}

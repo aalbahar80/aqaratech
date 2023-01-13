@@ -5,8 +5,7 @@ import UndrawOnlinePayments from '../../../../assets/illustrations/undraw_online
 import UndrawSecureFiles from '../../../../assets/illustrations/undraw_secure_files.svg';
 import UndrawVisualData from '../../../../assets/illustrations/undraw_visual_data.svg';
 
-// eslint-disable-next-line import/no-named-as-default
-import type LL from '$i18n/i18n-svelte';
+import type L from '$i18n/i18n-svelte';
 import type { Icon } from '$lib/models/types/icon.type';
 import type { ReadableOf } from '$lib/utils/readable-of';
 
@@ -40,36 +39,36 @@ export interface IFeature {
 	bullets: FeatureBullet[];
 }
 
-export const getFeatures = (L: ReadableOf<typeof LL>) =>
+export const getFeatures = (LL: ReadableOf<typeof L>) =>
 	[
 		{
-			title: L.landing.features.data.title(),
+			title: LL.landing.features.data.title(),
 			image: UndrawBusinessAnalytics,
 			bullets: [
 				{
-					text: L.landing.features.data.bullets.track(),
+					text: LL.landing.features.data.bullets.track(),
 					icon: HeroiconsOutlineChartBar,
 				},
 				{
-					text: L.landing.features.data.bullets.visualize(),
+					text: LL.landing.features.data.bullets.visualize(),
 					icon: HeroiconsPresentationChartLine,
 				},
 				{
-					text: L.landing.features.data.bullets.monitor(),
+					text: LL.landing.features.data.bullets.monitor(),
 					icon: HeroiconsCalendarDays,
 				},
 			],
 		},
 		{
-			title: L.landing.features.rental.title(),
+			title: LL.landing.features.rental.title(),
 			image: UndrawOnlinePayments,
 			bullets: [
 				{
-					text: L.landing.features.rental.bullets.track(),
+					text: LL.landing.features.rental.bullets.track(),
 					icon: TeenyiconsContractOutline,
 				},
 				{
-					text: L.landing.features.rental.bullets.reminders(),
+					text: LL.landing.features.rental.bullets.reminders(),
 					icon: HeroiconsBell,
 				},
 				// {
@@ -79,66 +78,66 @@ export const getFeatures = (L: ReadableOf<typeof LL>) =>
 			],
 		},
 		{
-			title: L.landing.features.expense.title(),
+			title: LL.landing.features.expense.title(),
 			image: UndrawVisualData,
 			bullets: [
 				{
-					text: L.landing.features.expense.bullets.track(),
+					text: LL.landing.features.expense.bullets.track(),
 					icon: HeroiconsCubeTransparent,
 				},
 				{
-					text: L.landing.features.expense.bullets.categorize(),
+					text: LL.landing.features.expense.bullets.categorize(),
 					icon: HeroiconsOutlineRectangleGroup,
 				},
 				{
-					text: L.landing.features.expense.bullets.visualize(),
+					text: LL.landing.features.expense.bullets.visualize(),
 					icon: HeroiconsPresentationChartBar,
 				},
 			],
 		},
 		{
-			title: L.landing.features.filter.title(),
+			title: LL.landing.features.filter.title(),
 			image: UndrawDataPoints,
 			bullets: [
 				{
-					text: L.landing.features.filter.bullets.customizable(),
+					text: LL.landing.features.filter.bullets.customizable(),
 					icon: HeroiconsAdjustmentsVertical,
 				},
 				{
-					text: L.landing.features.filter.bullets.properties(),
+					text: LL.landing.features.filter.bullets.properties(),
 					icon: HeroiconsFunnel,
 				},
 				{
-					text: L.landing.features.filter.bullets.time(),
+					text: LL.landing.features.filter.bullets.time(),
 					icon: HeroiconsClock,
 				},
 			],
 		},
 		{
-			title: L.landing.features.document.title(),
+			title: LL.landing.features.document.title(),
 			image: UndrawSecureFiles,
 			bullets: [
 				{
-					text: L.landing.features.document.bullets.upload(),
+					text: LL.landing.features.document.bullets.upload(),
 					icon: HeroiconsClipboardDocumentList,
 				},
 				{
-					text: L.landing.features.document.bullets.access(),
+					text: LL.landing.features.document.bullets.access(),
 					icon: HeroiconsCloud,
 				},
 			],
 		},
 
 		{
-			title: L.landing.features.search.title(),
+			title: LL.landing.features.search.title(),
 			image: UndrawHouseSearching,
 			bullets: [
 				{
-					text: L.landing.features.search.bullets.all(),
+					text: LL.landing.features.search.bullets.all(),
 					icon: HeroiconsGlobeAlt,
 				},
 				{
-					text: L.landing.features.search.bullets.spell(),
+					text: LL.landing.features.search.bullets.spell(),
 					icon: HeroiconsDocumentMagnifyingGlass,
 				},
 			],

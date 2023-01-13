@@ -16,8 +16,7 @@
 	import { getRoute, isEntity, PageType } from '@self/utils';
 
 	import { createApi } from '$api';
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
 	import { objectEntries } from '$lib/utils/common';
 
@@ -156,7 +155,7 @@
 											<h2
 												class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
 											>
-												{$LL.entity[entityTitle].plural()}
+												{$L.entity[entityTitle].plural()}
 											</h2>
 											<ul class="mt-2 text-sm text-gray-800">
 												{#each group as item (item.id)}

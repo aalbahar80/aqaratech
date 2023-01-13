@@ -1,6 +1,5 @@
 <script lang="ts" context="module">
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import DateInput from '$lib/components/dashboard/filter/DateInput.svelte';
 	import RangeSelect from '$lib/components/dashboard/filter/RangeSelect.svelte';
 	import { range } from '$lib/stores/filter/range';
@@ -13,7 +12,7 @@
 
 	<div class="flex gap-2 md:w-1/2 md:gap-8">
 		<DateInput
-			name={$LL.filter.start()}
+			name={$L.filter.start()}
 			value={$range.start}
 			on:change={(e) => {
 				// @ts-expect-error until forwareded events are typed
@@ -24,7 +23,7 @@
 		/>
 
 		<DateInput
-			name={$LL.filter.end()}
+			name={$L.filter.end()}
 			value={$range.end}
 			on:change={(e) => {
 				// @ts-expect-error until forwareded events are typed

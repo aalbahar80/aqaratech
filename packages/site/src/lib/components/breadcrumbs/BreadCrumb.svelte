@@ -3,8 +3,7 @@
 
 	import { getRoute, isEntity, PageType } from '@self/utils';
 
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import {
 		handleCrumbs,
 		type Crumbs,
@@ -54,7 +53,7 @@
 									)}
 									class:ml-4={idx !== 0}
 								>
-									{$LL.entity[title].singular()}
+									{$L.entity[title].singular()}
 								</a>
 							</div>
 						</li>

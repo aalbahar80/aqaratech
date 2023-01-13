@@ -6,8 +6,7 @@
 
 	import { toUTCFormat } from '@self/utils';
 
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$i18n/i18n-svelte';
+	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
@@ -44,7 +43,7 @@
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
 			<div slot="hero">
-				<FilterHero title={$LL.entity.payout.plural()} />
+				<FilterHero title={$L.entity.payout.plural()} />
 			</div>
 			<div slot="custom">
 				<FilterBarActions>

@@ -1,6 +1,5 @@
 <script lang="ts">
-	// eslint-disable-next-line import/no-named-as-default
-	import LL, { locale } from '$i18n/i18n-svelte';
+	import L, { locale } from '$i18n/i18n-svelte';
 	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
 	// import TablerBrandInstagram from '~icons/tabler/brand-instagram';
 </script>
@@ -22,7 +21,7 @@
 				&copy; {new Date().toLocaleDateString($locale, {
 					year: 'numeric',
 				})}
-				{$LL.landing.footer.legal()}
+				{$L.landing.footer.legal()}
 			</p>
 		</div>
 	</Container>
