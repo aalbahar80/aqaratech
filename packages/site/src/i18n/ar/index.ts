@@ -156,8 +156,8 @@ const ar: Translation = {
 		all: 'الجميع',
 		total: 'إجمالي',
 		forPeriod: 'للفترة',
-		collected: 'تم جمعه',
-		uncollected: 'غير مجمع',
+		collected: 'المحصل',
+		uncollected: 'غير المحصل',
 		unspecified: 'غير محدد',
 	},
 	filter: {
