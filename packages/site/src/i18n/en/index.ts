@@ -1,11 +1,13 @@
 import { aqaratech } from './aqaratech';
 import { entity } from './entity';
+import { fields } from './fields';
 import { landing } from './landing';
 
 import type { BaseTranslation } from '../i18n-types';
 
 const en: BaseTranslation = {
 	entity,
+	fields,
 	buttons: {
 		login: 'Log in',
 		logout: 'Log out',

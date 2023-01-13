@@ -146,6 +146,212 @@ type RootTranslation = {
 			singular: string
 		}
 	}
+	fields: {
+		/**
+		 * F​u​l​l​ ​N​a​m​e
+		 */
+		fullName: string
+		/**
+		 * L​a​b​e​l
+		 */
+		label: string
+		/**
+		 * D​a​t​e​ ​o​f​ ​B​i​r​t​h
+		 */
+		dob: string
+		/**
+		 * C​i​v​i​l​ ​I​D
+		 */
+		civilid: string
+		/**
+		 * P​h​o​n​e​ ​N​u​m​b​e​r
+		 */
+		phone: string
+		/**
+		 * E​m​a​i​l​ ​A​d​d​r​e​s​s
+		 */
+		email: string
+		/**
+		 * M​e​m​o
+		 */
+		memo: string
+		/**
+		 * A​m​o​u​n​t
+		 */
+		amount: string
+		/**
+		 * C​r​e​a​t​e​d​ ​A​t
+		 */
+		createdAt: string
+		/**
+		 * U​p​d​a​t​e​d​ ​A​t
+		 */
+		updatedAt: string
+		/**
+		 * P​o​s​t​ ​A​t
+		 */
+		postAt: string
+		/**
+		 * P​a​s​s​p​o​r​t​ ​N​u​m​b​e​r
+		 */
+		passportNum: string
+		/**
+		 * R​e​s​i​d​e​n​c​y​ ​N​u​m​b​e​r
+		 */
+		residencyNum: string
+		/**
+		 * R​e​s​i​d​e​n​c​y​ ​E​x​p​i​r​a​t​i​o​n
+		 */
+		residencyEnd: string
+		/**
+		 * N​a​t​i​o​n​a​l​i​t​y
+		 */
+		nationality: string
+		/**
+		 * B​l​o​c​k
+		 */
+		block: string
+		/**
+		 * S​t​r​e​e​t
+		 */
+		street: string
+		/**
+		 * A​v​e​n​u​e
+		 */
+		avenue: string
+		/**
+		 * N​u​m​b​e​r
+		 */
+		number: string
+		/**
+		 * P​a​c​i
+		 */
+		paci: string
+		/**
+		 * P​a​r​c​e​l
+		 */
+		parcel: string
+		/**
+		 * S​i​z​e
+		 */
+		size: string
+		/**
+		 * T​y​p​e
+		 */
+		type: string
+		/**
+		 * U​n​i​t​ ​N​u​m​b​e​r
+		 */
+		unitNumber: string
+		/**
+		 * F​l​o​o​r
+		 */
+		floor: string
+		/**
+		 * B​e​d
+		 */
+		bed: string
+		/**
+		 * B​a​t​h
+		 */
+		bath: string
+		/**
+		 * A​r​e​a
+		 */
+		area: string
+		/**
+		 * U​s​a​g​e
+		 */
+		usage: string
+		/**
+		 * M​a​r​k​e​t​ ​R​e​n​t
+		 */
+		marketRent: string
+		/**
+		 * M​o​n​t​h​l​y​ ​R​e​n​t
+		 */
+		monthlyRent: string
+		/**
+		 * D​e​p​o​s​i​t
+		 */
+		deposit: string
+		/**
+		 * S​t​a​r​t
+		 */
+		start: string
+		/**
+		 * E​n​d
+		 */
+		end: string
+		/**
+		 * S​e​n​d​ ​p​a​y​m​e​n​t​ ​r​e​m​i​n​d​e​r​s
+		 */
+		notify: string
+		/**
+		 * A​l​l​o​w​ ​t​e​n​a​n​t​ ​t​o​ ​p​a​y​ ​i​n​v​o​i​c​e​s​ ​o​n​l​i​n​e
+		 */
+		canPay: string
+		/**
+		 * T​e​n​a​n​t
+		 */
+		tenantId: string
+		/**
+		 * L​i​c​e​n​s​e
+		 */
+		license: string
+		/**
+		 * I​s​ ​P​a​i​d
+		 */
+		isPaid: string
+		/**
+		 * D​u​e​ ​A​t
+		 */
+		dueAt: string
+		/**
+		 * P​a​i​d​ ​A​t
+		 */
+		paidAt: string
+		/**
+		 * C​a​t​e​g​o​r​y
+		 */
+		categoryId: string
+		/**
+		 * T​i​t​l​e
+		 */
+		title: string
+		/**
+		 * D​e​s​c​r​i​p​t​i​o​n
+		 */
+		description: string
+		/**
+		 * S​t​a​t​u​s
+		 */
+		status: string
+		/**
+		 * C​o​m​p​l​e​t​e​d​ ​A​t
+		 */
+		completedAt: string
+		/**
+		 * L​a​b​e​l​ ​(​E​n​g​l​i​s​h​)
+		 */
+		labelEn: string
+		/**
+		 * L​a​b​e​l​ ​(​A​r​a​b​i​c​)
+		 */
+		labelAr: string
+		/**
+		 * I​s​ ​G​r​o​u​p
+		 */
+		isGroup: string
+		/**
+		 * N​a​m​e
+		 */
+		key: string
+		/**
+		 * F​i​l​e​ ​N​a​m​e
+		 */
+		fileName: string
+	}
 	buttons: {
 		/**
 		 * L​o​g​ ​i​n
@@ -668,6 +874,212 @@ export type TranslationFunctions = {
 			 */
 			singular: () => LocalizedString
 		}
+	}
+	fields: {
+		/**
+		 * Full Name
+		 */
+		fullName: () => LocalizedString
+		/**
+		 * Label
+		 */
+		label: () => LocalizedString
+		/**
+		 * Date of Birth
+		 */
+		dob: () => LocalizedString
+		/**
+		 * Civil ID
+		 */
+		civilid: () => LocalizedString
+		/**
+		 * Phone Number
+		 */
+		phone: () => LocalizedString
+		/**
+		 * Email Address
+		 */
+		email: () => LocalizedString
+		/**
+		 * Memo
+		 */
+		memo: () => LocalizedString
+		/**
+		 * Amount
+		 */
+		amount: () => LocalizedString
+		/**
+		 * Created At
+		 */
+		createdAt: () => LocalizedString
+		/**
+		 * Updated At
+		 */
+		updatedAt: () => LocalizedString
+		/**
+		 * Post At
+		 */
+		postAt: () => LocalizedString
+		/**
+		 * Passport Number
+		 */
+		passportNum: () => LocalizedString
+		/**
+		 * Residency Number
+		 */
+		residencyNum: () => LocalizedString
+		/**
+		 * Residency Expiration
+		 */
+		residencyEnd: () => LocalizedString
+		/**
+		 * Nationality
+		 */
+		nationality: () => LocalizedString
+		/**
+		 * Block
+		 */
+		block: () => LocalizedString
+		/**
+		 * Street
+		 */
+		street: () => LocalizedString
+		/**
+		 * Avenue
+		 */
+		avenue: () => LocalizedString
+		/**
+		 * Number
+		 */
+		number: () => LocalizedString
+		/**
+		 * Paci
+		 */
+		paci: () => LocalizedString
+		/**
+		 * Parcel
+		 */
+		parcel: () => LocalizedString
+		/**
+		 * Size
+		 */
+		size: () => LocalizedString
+		/**
+		 * Type
+		 */
+		type: () => LocalizedString
+		/**
+		 * Unit Number
+		 */
+		unitNumber: () => LocalizedString
+		/**
+		 * Floor
+		 */
+		floor: () => LocalizedString
+		/**
+		 * Bed
+		 */
+		bed: () => LocalizedString
+		/**
+		 * Bath
+		 */
+		bath: () => LocalizedString
+		/**
+		 * Area
+		 */
+		area: () => LocalizedString
+		/**
+		 * Usage
+		 */
+		usage: () => LocalizedString
+		/**
+		 * Market Rent
+		 */
+		marketRent: () => LocalizedString
+		/**
+		 * Monthly Rent
+		 */
+		monthlyRent: () => LocalizedString
+		/**
+		 * Deposit
+		 */
+		deposit: () => LocalizedString
+		/**
+		 * Start
+		 */
+		start: () => LocalizedString
+		/**
+		 * End
+		 */
+		end: () => LocalizedString
+		/**
+		 * Send payment reminders
+		 */
+		notify: () => LocalizedString
+		/**
+		 * Allow tenant to pay invoices online
+		 */
+		canPay: () => LocalizedString
+		/**
+		 * Tenant
+		 */
+		tenantId: () => LocalizedString
+		/**
+		 * License
+		 */
+		license: () => LocalizedString
+		/**
+		 * Is Paid
+		 */
+		isPaid: () => LocalizedString
+		/**
+		 * Due At
+		 */
+		dueAt: () => LocalizedString
+		/**
+		 * Paid At
+		 */
+		paidAt: () => LocalizedString
+		/**
+		 * Category
+		 */
+		categoryId: () => LocalizedString
+		/**
+		 * Title
+		 */
+		title: () => LocalizedString
+		/**
+		 * Description
+		 */
+		description: () => LocalizedString
+		/**
+		 * Status
+		 */
+		status: () => LocalizedString
+		/**
+		 * Completed At
+		 */
+		completedAt: () => LocalizedString
+		/**
+		 * Label (English)
+		 */
+		labelEn: () => LocalizedString
+		/**
+		 * Label (Arabic)
+		 */
+		labelAr: () => LocalizedString
+		/**
+		 * Is Group
+		 */
+		isGroup: () => LocalizedString
+		/**
+		 * Name
+		 */
+		key: () => LocalizedString
+		/**
+		 * File Name
+		 */
+		fileName: () => LocalizedString
 	}
 	buttons: {
 		/**
