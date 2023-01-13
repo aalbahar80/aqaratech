@@ -16,7 +16,6 @@
 	import { writable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 
-	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import { handlePagination } from '$lib/components/table/pagination/handle-pagination';
 	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
@@ -172,7 +171,7 @@
 		$table.resetPageIndex();
 	}
 
-	$: filters = [getColumnFilter($table, $L)];
+	$: filters = [getColumnFilter($table)];
 </script>
 
 <div class="inline-block min-w-full align-middle">
