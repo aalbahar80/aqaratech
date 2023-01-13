@@ -16,18 +16,20 @@
 					id="contact-heading"
 					class="text-3xl tracking-tight text-slate-900 sm:text-4xl"
 				>
-					Get in touch
+					{$LL.buttons.contact()}
 				</h2>
 				<div
 					class="mt-8 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:col-span-2 lg:mt-0"
 				>
 					<!-- Location -->
 					<div>
-						<h3 class="text-lg font-medium text-slate-900">Location</h3>
+						<h3 class="text-lg font-medium text-slate-900">
+							{$LL.landing.location()}
+						</h3>
 						<div class="mt-2 flex flex-col gap-2 text-base text-slate-500">
 							<p>
-								25 Alshuhada St, Sulaiman Tower <br />
-								Sharq, 15305, Kuwait
+								{$LL.aqaratech.address.line1()} <br />
+								{$LL.aqaratech.address.line2()}
 							</p>
 							<a
 								class="underline hover:text-slate-900"
@@ -35,17 +37,19 @@
 								data-sveltekit-reload
 								target="_blank noopener noreferrer"
 							>
-								Map
+								{$LL.landing.map()}
 							</a>
 						</div>
 					</div>
 
 					<!-- Phone -->
 					<div>
-						<h3 class="text-lg font-medium text-slate-900">Phone</h3>
+						<h3 class="text-lg font-medium text-slate-900">
+							{$LL.general.phone()}
+						</h3>
 						<div class="mt-2 text-base text-slate-500">
 							<!-- TODO: add data-sveltekit-reload? -->
-							<a class="hover:text-slate-900" href="tel:+96522466664"
+							<a dir="auto" class="hover:text-slate-900" href="tel:+96522466664"
 								>+965 22466664</a
 							>
 						</div>
@@ -53,7 +57,9 @@
 
 					<!-- Online -->
 					<div>
-						<h3 class="text-lg font-medium text-slate-900">Online</h3>
+						<h3 class="text-lg font-medium text-slate-900">
+							{$LL.landing.online()}
+						</h3>
 						<div class="mt-2 text-base text-slate-500">
 							<a
 								href="https://ojab1kn3vda.typeform.com/to/eet5fojG"

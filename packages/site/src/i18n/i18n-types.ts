@@ -481,6 +481,18 @@ type RootTranslation = {
 			 */
 			legal: string
 		}
+		/**
+		 * L​o​c​a​t​i​o​n
+		 */
+		location: string
+		/**
+		 * O​n​l​i​n​e
+		 */
+		online: string
+		/**
+		 * M​a​p
+		 */
+		map: string
 	}
 	aqaratech: {
 		/**
@@ -491,6 +503,16 @@ type RootTranslation = {
 		 * A​q​a​r​a​t​e​c​h
 		 */
 		shortName: string
+		address: {
+			/**
+			 * 2​5​ ​A​l​s​h​u​h​a​d​a​ ​S​t​,​ ​S​u​l​a​i​m​a​n​ ​T​o​w​e​r
+			 */
+			line1: string
+			/**
+			 * S​h​a​r​q​,​ ​1​5​3​0​5​,​ ​K​u​w​a​i​t
+			 */
+			line2: string
+		}
 	}
 }
 
@@ -962,6 +984,18 @@ export type TranslationFunctions = {
 			 */
 			legal: () => LocalizedString
 		}
+		/**
+		 * Location
+		 */
+		location: () => LocalizedString
+		/**
+		 * Online
+		 */
+		online: () => LocalizedString
+		/**
+		 * Map
+		 */
+		map: () => LocalizedString
 	}
 	aqaratech: {
 		/**
@@ -972,6 +1006,16 @@ export type TranslationFunctions = {
 		 * Aqaratech
 		 */
 		shortName: () => LocalizedString
+		address: {
+			/**
+			 * 25 Alshuhada St, Sulaiman Tower
+			 */
+			line1: () => LocalizedString
+			/**
+			 * Sharq, 15305, Kuwait
+			 */
+			line2: () => LocalizedString
+		}
 	}
 }
 

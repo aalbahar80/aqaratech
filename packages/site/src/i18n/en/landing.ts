@@ -10,4 +10,7 @@ export const landing = {
 	secondaryFeatures,
 	callToAction,
 	footer,
+	location: 'Location',
+	online: 'Online',
+	map: 'Map',
 };
