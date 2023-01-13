@@ -48,10 +48,12 @@ export const viewColumnDef = <
 	columnHelper: ColumnHelper<T>,
 	entity: Entity,
 	params: Record<string, string>,
-) =>
-	columnHelper.display({
+) => {
+	const LL = get(L);
+
+	return columnHelper.display({
 		id: 'view',
-		header: '',
+		header: LL.buttons.view(),
 		cell: (props) => {
 			// for portal/tenant page, grab the organizationId from the row
 			const paramsWithOrgId =
@@ -80,3 +82,4 @@ export const viewColumnDef = <
 			});
 		},
 	});
+};
