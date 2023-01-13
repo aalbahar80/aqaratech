@@ -12,7 +12,7 @@ interface ChartPresetTest {
 
 const base = {
 	range: 'Last 12 Months',
-	property: 'All properties',
+	property: 'All',
 } satisfies filterPreset;
 
 export const chartTestPresets = [
@@ -24,7 +24,7 @@ export const chartTestPresets = [
 		name: 'Unspecified Property',
 		filter: {
 			...base,
-			property: 'Unspecified Property',
+			property: 'Unspecified',
 		},
 	},
 	{

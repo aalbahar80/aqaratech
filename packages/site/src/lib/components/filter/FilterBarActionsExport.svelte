@@ -3,6 +3,7 @@
 
 	import { page } from '$app/stores';
 
+	import L from '$i18n/i18n-svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 
@@ -13,7 +14,7 @@
 	<a href={`${$page.url.pathname}/csv`} download="data.csv">
 		<MenuItemChild {active}>
 			<MenuItemIcon icon={Fa6SolidFileCsv} />
-			Export to CSV
+			{$L.buttons.export()}
 		</MenuItemChild>
 	</a>
 </MenuItem>

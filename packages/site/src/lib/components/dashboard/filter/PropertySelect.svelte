@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { onDestroy } from 'svelte';
 
+	import L from '$i18n/i18n-svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 	import { property } from '$lib/stores/filter/property';
@@ -14,14 +15,14 @@
 
 	const allPropertiesOption = {
 		value: undefined,
-		label: 'All properties',
+		label: $L.general.all(),
 	};
 
 	// Show an option: `Unspecified Property` for expenses pages.
 	// Not for income/invoices pages, which are always associated with a property.
 	const unspecifedPropertyOption = {
 		value: null,
-		label: 'Unspecified Property',
+		label: $L.general.unspecified(),
 	};
 
 	const expensesPages = ['financials/expenses'];
@@ -49,7 +50,7 @@
 </script>
 
 <Select
-	title="Property"
+	title={$L.entity.property.singular()}
 	bind:current={$property}
 	{options}
 	on:select={async () => {

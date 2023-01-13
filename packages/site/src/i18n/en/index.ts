@@ -26,6 +26,7 @@ const en: BaseTranslation = {
 		addMultiple: 'Add multiple',
 		toggleAll: 'Toggle all',
 		markAsPaid: 'Mark as paid',
+		export: 'Export',
 	},
 	nav: {
 		financials: 'Financials',
@@ -46,6 +47,8 @@ const en: BaseTranslation = {
 		balance: 'Balance',
 		details: 'Details',
 		columns: 'Columns',
+		all: 'All',
+		unspecified: 'Unspecified',
 	},
 	filter: {
 		filters: 'Filters',

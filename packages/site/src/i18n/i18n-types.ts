@@ -495,6 +495,14 @@ type RootTranslation = {
 		 * C​o​l​u​m​n​s
 		 */
 		columns: string
+		/**
+		 * A​l​l
+		 */
+		all: string
+		/**
+		 * U​n​s​p​e​c​i​f​i​e​d
+		 */
+		unspecified: string
 	}
 	filter: {
 		/**
@@ -1272,6 +1280,14 @@ export type TranslationFunctions = {
 		 * Columns
 		 */
 		columns: () => LocalizedString
+		/**
+		 * All
+		 */
+		all: () => LocalizedString
+		/**
+		 * Unspecified
+		 */
+		unspecified: () => LocalizedString
 	}
 	filter: {
 		/**

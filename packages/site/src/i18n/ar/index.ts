@@ -130,6 +130,7 @@ const ar: Translation = {
 		view: 'عرض',
 		toggleAll: 'عرض الكل',
 		markAsPaid: 'تم الدفع',
+		export: 'تحميل',
 	},
 	nav: {
 		financials: 'البيانات المالية',
@@ -150,6 +151,8 @@ const ar: Translation = {
 		balance: 'الرصيد',
 		details: 'تفاصيل',
 		columns: 'الحقول',
+		all: 'الجميع',
+		unspecified: 'غير محدد',
 	},
 	filter: {
 		filters: 'المرشحات',

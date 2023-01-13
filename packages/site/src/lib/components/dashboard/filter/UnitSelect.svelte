@@ -5,6 +5,7 @@
 
 	import { computeLabelUnit } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 	import { property } from '$lib/stores/filter/property';
@@ -16,14 +17,14 @@
 
 	const allUnitsOption = {
 		value: undefined,
-		label: 'All units',
+		label: $L.general.all(),
 	};
 
 	// Show an option: `Unspecified Unit` for expenses pages.
 	// Not for income/invoices pages, which are always associated with a unit.
 	const unspecifedUnitOption = {
 		value: null,
-		label: 'Unspecified Unit',
+		label: $L.general.unspecified(),
 	};
 
 	const expensesPages = ['financials/expenses'];
@@ -62,7 +63,7 @@
 </script>
 
 <Select
-	title="Unit"
+	title={$L.entity.unit.singular()}
 	bind:current={$unit}
 	disabled={!$property || options.length === 1}
 	{options}

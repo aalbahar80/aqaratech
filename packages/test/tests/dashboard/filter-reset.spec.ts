@@ -36,7 +36,7 @@ test('unit filter resets when updating property', async ({
 
 	const filters = new Filters(page);
 
-	expect(await filters.property.label()).toBe('All properties');
+	expect(await filters.property.label()).toBe('All');
 
 	// Select property
 	await filters.property.el.selectOption({ value: property.id });
@@ -56,5 +56,5 @@ test('unit filter resets when updating property', async ({
 	expect(await filters.property.label()).toBe(properties[1]!.address);
 
 	// Unit filter resets
-	expect(await filters.unit.label()).toBe('All units');
+	expect(await filters.unit.label()).toBe('All');
 });
