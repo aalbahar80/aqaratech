@@ -13,7 +13,7 @@ import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { detectLocale, i18n, isLocale } from '$i18n/i18n-util';
 import { loadAllLocales } from '$i18n/i18n-util.sync';
-import { MAX_AGE } from '$lib/constants/misc';
+import { MAX_AGE, PREF_LOCALE } from '$lib/constants/misc';
 import { sentryConfig } from '$lib/environment/sentry.config';
 import { privateEnvironment } from '$lib/server/config/private-environment';
 import { logger } from '$lib/server/logger';
@@ -110,13 +110,14 @@ export const handle = (async ({ event, resolve }) => {
 	const [, lang] = event.url.pathname.split('/');
 
 	// redirect to base locale if no locale slug was found
+	// NOTE: This does not check for a valid locale.
 	if (!lang) {
 		logger.log({
 			level: 'warn',
 			message: `redirecting to base locale. url: ${event.url.toString()}`,
 		});
 
-		const locale = getPreferredLocale(event);
+		const locale = getPreferredLocale(event.request);
 
 		return new Response(null, {
 			status: 302,
@@ -125,7 +126,7 @@ export const handle = (async ({ event, resolve }) => {
 	}
 
 	// if slug is not a locale, use base locale (e.g. api endpoints)
-	const locale = isLocale(lang) ? lang : getPreferredLocale(event);
+	const locale = isLocale(lang) ? lang : getLocale(event);
 	const LL = L[locale];
 
 	// bind locale and translation functions to current request
@@ -290,10 +291,26 @@ export const handleFetch = (async ({ event, request, fetch }) => {
 	return await fetch(request);
 }) satisfies HandleFetch;
 
-const getPreferredLocale = ({ request }: RequestEvent) => {
+/** Attempt to get the locale from the URL search params */
+const getQueryLocale = (url: URL) => {
+	const query = new URLSearchParams(url.search);
+	return query.get(PREF_LOCALE);
+};
+
+const getPreferredLocale = (request: RequestEvent['request']) => {
 	// detect the preferred language the user has configured in his browser
 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
 	const acceptLanguageDetector = initAcceptLanguageHeaderDetector(request);
 
 	return detectLocale(acceptLanguageDetector);
+};
+
+const getLocale = ({ url, request }: RequestEvent) => {
+	const localeQuery = getQueryLocale(url);
+
+	if (localeQuery && isLocale(localeQuery)) {
+		return localeQuery;
+	} else {
+		return getPreferredLocale(request);
+	}
 };

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import L, { locale } from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
+	import { PREF_LOCALE } from '$lib/constants/misc';
 	import { getRoleMeta } from '$lib/utils/get-role-meta';
 
 	import type { ValidatedRoleDto } from '$api/openapi';
@@ -17,7 +18,7 @@
 </script>
 
 <a
-	href={`/auth/roles/${role.id}`}
+	href={`/auth/roles/${role.id}?${PREF_LOCALE}=${$locale}`}
 	data-sveltekit-reload
 	class="flex flex-col gap-4 px-4 py-4 hover:bg-gray-50 sm:px-6"
 >

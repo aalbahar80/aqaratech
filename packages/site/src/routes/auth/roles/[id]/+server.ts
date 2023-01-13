@@ -2,16 +2,22 @@ import type { RequestHandler } from './$types';
 
 import { Cookie } from '@self/utils';
 
-import { MAX_AGE, REDIRECT_TO } from '$lib/constants/misc';
+import { MAX_AGE, PREF_LOCALE, REDIRECT_TO } from '$lib/constants/misc';
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const GET: RequestHandler = async ({ cookies, params, url }) => {
+export const GET: RequestHandler = async ({
+	cookies,
+	params,
+	url,
+	locals: { locale },
+	// eslint-disable-next-line @typescript-eslint/require-await
+}) => {
 	cookies.set(Cookie.role, params.id, {
 		path: '/',
 		maxAge: MAX_AGE,
 	});
 
-	const location = url.searchParams.get(REDIRECT_TO) ?? '/concierge';
+	const location =
+		url.searchParams.get(REDIRECT_TO) ?? `/concierge?${PREF_LOCALE}=${locale}`;
 
 	return new Response(undefined, {
 		status: 302,
