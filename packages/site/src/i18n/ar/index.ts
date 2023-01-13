@@ -62,7 +62,7 @@ const ar: Translation = {
 		contact: 'اتصل بنا',
 		search: 'بحث',
 		edit: 'تعديل',
-		new: 'جديد',
+		new: 'إضافة',
 		save: 'يحفظ',
 		cancel: 'يلغي',
 		delete: 'حذف',
