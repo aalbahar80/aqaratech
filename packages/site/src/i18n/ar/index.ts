@@ -85,6 +85,9 @@ const ar: Translation = {
 		phone: 'هاتف',
 		email: 'بريد إلكتروني',
 		paymentSchedule: 'جدول الدفع',
+		balance: 'الرصيد',
+		details: 'تفاصيل',
+		columns: 'الحقول',
 	},
 	filter: {
 		filters: 'المرشحات',
@@ -95,11 +98,19 @@ const ar: Translation = {
 	pagination: {
 		next: 'التالي',
 		previous: 'سابق',
-		showing: 'يظهر',
-		to: 'ل',
+		showing: 'عرض',
+		show: 'عرض',
+		to: 'إلى',
 		of: 'من',
+		page: 'صفحة',
 	},
 	landing: {
+		// location: 'Location',
+		// online: 'Online',
+		// map: 'Map',
+		location: 'موقعك',
+		online: 'عبر الإنترنت',
+		map: 'خريطة',
 		hero: {
 			titlePrefix: 'قم بإدارة عقاراتك',
 			titleSuffix: 'بكل سهولة.',
@@ -197,6 +208,11 @@ const ar: Translation = {
 	aqaratech: {
 		fullName: 'شركة عقاراتك لإدارة وتطوير الأراضي والعقارات',
 		shortName: 'عقاراتك',
+
+		address: {
+			line1: 'شارع الشهداء، مبنى سليمان',
+			line2: 'الشرق، 15305، الكويت',
+		},
 	},
 };
 
