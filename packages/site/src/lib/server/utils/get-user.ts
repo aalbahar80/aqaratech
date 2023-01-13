@@ -1,5 +1,6 @@
 import { Cookie } from '@self/utils';
 
+import { baseLocale } from '$i18n/i18n-util';
 import { logger } from '$lib/server/logger';
 import { getProfile } from '$lib/server/utils/get-profile';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
@@ -36,7 +37,7 @@ export const getUser = async ({
 	// augment each role with metadata
 	const roles = profile.roles.map((role) => ({
 		...role,
-		meta: getRoleMeta(role, event.locals.LL, event.locals.locale),
+		meta: getRoleMeta(role, event.locals.LL, event.locals.locale ?? baseLocale),
 	}));
 
 	// Resolve user's role

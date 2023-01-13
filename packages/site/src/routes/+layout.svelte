@@ -8,6 +8,7 @@
 	import { onMount } from 'svelte';
 
 	import L, { setLocale, locale } from '$i18n/i18n-svelte';
+	import { baseLocale } from '$i18n/i18n-util';
 	import Alert from '$lib/components/navbar/Alert.svelte';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
@@ -27,7 +28,7 @@
 	export let data: LayoutData;
 
 	// at the very top, set the locale before you access the store and before the actual rendering takes place
-	setLocale(data.locale);
+	setLocale(data.locale ?? baseLocale);
 
 	onMount(() => {
 		// communicate that the app is ready - used for testing

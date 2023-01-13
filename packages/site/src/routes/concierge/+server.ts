@@ -1,3 +1,5 @@
+import { baseLocale } from '$i18n/i18n-util';
+
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = ({ locals: { user, locale } }) => {
@@ -14,7 +16,7 @@ export const GET: RequestHandler = ({ locals: { user, locale } }) => {
 		throw new Error('User not found in locals');
 	} else if (!user.roles.length) {
 		// if user has no roles yet, redirect to /welcome
-		location = `${locale || 'en'}/welcome`;
+		location = `${locale ?? baseLocale}/welcome`;
 	} else if (user.role?.meta.home) {
 		// if user has a role, redirect to their home page
 		location = user.role.meta.home;
