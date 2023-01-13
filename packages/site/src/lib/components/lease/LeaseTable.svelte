@@ -5,6 +5,7 @@
 
 	import { getProgress, getRoute, PageType, toUTCFormat } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
@@ -15,6 +16,7 @@
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
@@ -31,19 +33,19 @@
 
 	const columns = [
 		columnHelper.accessor('start', {
-			header: 'Start',
+			header: getIntlLabel('start'),
 			cell: (info) => toUTCFormat(info.getValue()),
 		}),
 
 		columnHelper.accessor('end', {
-			header: 'End',
+			header: getIntlLabel('end'),
 			cell: (info) => toUTCFormat(info.getValue()),
 		}),
 
 		// Progress
 		columnHelper.display({
 			id: 'progress',
-			header: 'Progress',
+			header: getIntlLabel('progress'),
 			cell: (props) => {
 				const progress = getProgress(
 					props.row.original.start,
@@ -57,12 +59,12 @@
 		}),
 
 		columnHelper.accessor('monthlyRent', {
-			header: 'Monthly Rent (KWD)',
+			header: getIntlLabel('monthlyRent'),
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
 
 		columnHelper.accessor('deposit', {
-			header: 'Deposit (KWD)',
+			header: getIntlLabel('deposit'),
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
 
@@ -72,7 +74,7 @@
 
 		columnHelper.accessor('breadcrumbs.tenant', {
 			id: 'tenant',
-			header: 'Tenant',
+			header: $L.entity.tenant.singular(),
 			cell: (info) =>
 				renderComponent(ActionCell, {
 					value: info.getValue().label,
