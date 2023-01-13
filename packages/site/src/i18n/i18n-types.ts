@@ -255,6 +255,10 @@ type RootTranslation = {
 		 * D​e​t​a​i​l​s
 		 */
 		details: string
+		/**
+		 * C​o​l​u​m​n​s
+		 */
+		columns: string
 	}
 	filter: {
 		/**
@@ -774,6 +778,10 @@ export type TranslationFunctions = {
 		 * Details
 		 */
 		details: () => LocalizedString
+		/**
+		 * Columns
+		 */
+		columns: () => LocalizedString
 	}
 	filter: {
 		/**

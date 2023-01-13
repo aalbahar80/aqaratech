@@ -39,6 +39,7 @@ const en: BaseTranslation = {
 		paymentSchedule: 'Payment schedule',
 		balance: 'Balance',
 		details: 'Details',
+		columns: 'Columns',
 	},
 	filter: {
 		filters: 'Filters',

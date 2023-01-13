@@ -1,4 +1,6 @@
+import type L from '$i18n/i18n-svelte';
 import type { Filter } from '$lib/models/interfaces/filter.interface';
+import type { ReadableOf } from '$lib/utils/readable-of';
 import type { Table } from '@tanstack/svelte-table';
 
 const getColumns = <T>(table: Table<T>): Filter['options'] =>
@@ -17,8 +19,11 @@ const getToggleAll = <T>(table: Table<T>): Filter['options'][number] => ({
 	action: (e: unknown) => table.getToggleAllColumnsVisibilityHandler()(e),
 });
 
-export const getColumnFilter = <T>(table: Table<T>): Filter => ({
+export const getColumnFilter = <T>(
+	table: Table<T>,
+	LL: ReadableOf<typeof L>,
+): Filter => ({
 	id: 'columns',
-	label: 'Columns',
+	label: LL.general.columns(),
 	options: [getToggleAll(table), ...getColumns(table)],
 });
