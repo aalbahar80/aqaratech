@@ -8,6 +8,7 @@
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
+	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
@@ -19,6 +20,7 @@
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 
@@ -33,12 +35,12 @@
 
 	const columns = [
 		columnHelper.accessor('postAt', {
-			header: 'Post Date',
+			header: getIntlLabel('postAt'),
 			cell: (info) => toUTCFormat(info.getValue().toLocaleString()),
 		}),
 
 		columnHelper.accessor('dueAt', {
-			header: 'Due Date',
+			header: getIntlLabel('dueAt'),
 			cell: (info) => {
 				const val = info.getValue();
 				return val ? toUTCFormat(val) : '';
@@ -46,7 +48,7 @@
 		}),
 
 		columnHelper.accessor('paidAt', {
-			header: 'Paid Date',
+			header: getIntlLabel('paidAt'),
 			cell: (info) => {
 				const val = info.getValue();
 				return val ? toUTCFormat(val) : '';
@@ -54,7 +56,7 @@
 		}),
 
 		columnHelper.accessor('isPaid', {
-			header: 'Paid',
+			header: getIntlLabel('isPaid'),
 			cell: (props) => {
 				const invoice = props.row.original;
 
@@ -72,7 +74,7 @@
 		}),
 
 		columnHelper.accessor('amount', {
-			header: 'Amount (KWD)',
+			header: getIntlLabel('amount'),
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
 
@@ -86,13 +88,13 @@
 	const adminColumns = [
 		columnHelper.display({
 			id: 'markAsPaid',
-			header: '',
+			header: $L.buttons.markAsPaid(),
 			cell: (props) => {
 				const invoice = props.row.original;
 
 				return renderComponent(ActionButton, {
 					options: {
-						label: 'Mark as Paid',
+						label: $L.buttons.markAsPaid(),
 						disabled: invoice.isPaid,
 						onClick: async () => {
 							try {

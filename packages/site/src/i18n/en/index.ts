@@ -25,6 +25,7 @@ const en: BaseTranslation = {
 		close: 'Close',
 		addMultiple: 'Add multiple',
 		toggleAll: 'Toggle all',
+		markAsPaid: 'Mark as paid',
 	},
 	nav: {
 		financials: 'Financials',
@@ -65,6 +66,9 @@ const en: BaseTranslation = {
 	},
 	landing,
 	aqaratech,
+	other: {
+		progress: 'Progress',
+	},
 };
 
 export default en;

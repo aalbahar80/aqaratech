@@ -409,6 +409,10 @@ type RootTranslation = {
 		 * T​o​g​g​l​e​ ​a​l​l
 		 */
 		toggleAll: string
+		/**
+		 * M​a​r​k​ ​a​s​ ​p​a​i​d
+		 */
+		markAsPaid: string
 	}
 	nav: {
 		/**
@@ -747,6 +751,12 @@ type RootTranslation = {
 			 */
 			line2: string
 		}
+	}
+	other: {
+		/**
+		 * P​r​o​g​r​e​s​s
+		 */
+		progress: string
 	}
 }
 
@@ -1146,6 +1156,10 @@ export type TranslationFunctions = {
 		 * Toggle all
 		 */
 		toggleAll: () => LocalizedString
+		/**
+		 * Mark as paid
+		 */
+		markAsPaid: () => LocalizedString
 	}
 	nav: {
 		/**
@@ -1484,6 +1498,12 @@ export type TranslationFunctions = {
 			 */
 			line2: () => LocalizedString
 		}
+	}
+	other: {
+		/**
+		 * Progress
+		 */
+		progress: () => LocalizedString
 	}
 }
 

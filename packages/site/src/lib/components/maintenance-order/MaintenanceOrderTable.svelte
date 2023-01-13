@@ -18,6 +18,7 @@
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { getMaintenanceOrderBadge } from '$lib/utils/get-badge';
 
 	import type {
@@ -41,7 +42,7 @@
 
 	const columns = [
 		columnHelper.accessor('completedAt', {
-			header: 'Completed At',
+			header: getIntlLabel('completedAt'),
 			cell: (info) => {
 				const value = info.getValue();
 				return value ? toUTCFormat(value) : null;
@@ -49,7 +50,7 @@
 		}),
 
 		columnHelper.accessor('status', {
-			header: 'Status',
+			header: getIntlLabel('status'),
 			cell: (props) => {
 				const status = props.row.original.status;
 

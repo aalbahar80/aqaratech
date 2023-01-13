@@ -45,7 +45,7 @@
 		// Progress
 		columnHelper.display({
 			id: 'progress',
-			header: getIntlLabel('progress'),
+			header: $L.other.progress(),
 			cell: (props) => {
 				const progress = getProgress(
 					props.row.original.start,

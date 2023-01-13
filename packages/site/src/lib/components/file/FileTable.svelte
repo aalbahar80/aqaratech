@@ -3,6 +3,7 @@
 
 	import { page } from '$app/stores';
 
+	import L from '$i18n/i18n-svelte';
 	import AddButton from '$lib/components/buttons/AddButton.svelte';
 	import { view } from '$lib/components/file/actions/view';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
@@ -32,7 +33,7 @@
 		}),
 
 		columnHelper.accessor('size', {
-			header: 'Size (kB)',
+			header: getIntlLabel('size'),
 			cell: (info) => {
 				const val = info.getValue();
 				return Math.round(val / 1000);
@@ -44,13 +45,13 @@
 		// View
 		columnHelper.display({
 			id: 'view',
-			header: '',
+			header: $L.buttons.view(),
 			cell: (props) => {
 				const file = props.row.original;
 
 				return renderComponent(ActionButton, {
 					options: {
-						label: 'View',
+						label: $L.buttons.view(),
 						onClick: async () => {
 							await view(file);
 						},
@@ -64,13 +65,13 @@
 		// Delete
 		columnHelper.display({
 			id: 'delete',
-			header: '',
+			header: $L.buttons.delete(),
 			cell: (props) => {
 				const file = props.row.original;
 
 				return renderComponent(ActionButton, {
 					options: {
-						label: 'Delete',
+						label: $L.buttons.delete(),
 						onClick: () => {
 							remove(file);
 						},

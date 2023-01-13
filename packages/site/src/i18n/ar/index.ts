@@ -124,6 +124,7 @@ const ar: Translation = {
 		addMultiple: 'إضافة متعددة',
 		view: 'عرض',
 		toggleAll: 'عرض الكل',
+		markAsPaid: 'تم الدفع',
 	},
 	nav: {
 		financials: 'البيانات المالية',
@@ -264,6 +265,9 @@ const ar: Translation = {
 			line1: 'شارع الشهداء، مبنى سليمان',
 			line2: 'الشرق، 15305، الكويت',
 		},
+	},
+	other: {
+		progress: 'المدة الزمنية',
 	},
 };
 
