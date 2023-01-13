@@ -117,7 +117,7 @@ const ar: Translation = {
 		search: 'بحث',
 		edit: 'تعديل',
 		new: 'إضافة',
-		save: 'يحفظ',
+		save: 'حفظ',
 		cancel: 'يلغي',
 		delete: 'حذف',
 		export: 'يصدّر',

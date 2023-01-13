@@ -30,7 +30,7 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/checkbox#attr-va
 			class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
 		/>
 	</div>
-	<div class="ml-3 text-sm">
+	<div class="mx-3 text-sm">
 		<div class="flex items-center gap-2">
 			<label for={formField.name} class="font-medium text-gray-700">
 				{formField.label}

@@ -5,6 +5,7 @@
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 
+	import L from '$i18n/i18n-svelte';
 	import DebugPane from '$lib/components/form/DebugPane.svelte';
 	import FormError from '$lib/components/form/enhanced/fields/FormError.svelte';
 	import Field from '$lib/components/form/Field.svelte';
@@ -88,7 +89,7 @@
 	<div class="border-t border-gray-200" />
 
 	<div class="flex flex-shrink-0 justify-end space-x-4 py-4 text-lg">
-		<button>Save</button>
+		<button>{$L.buttons.save()}</button>
 	</div>
 </form>
 
