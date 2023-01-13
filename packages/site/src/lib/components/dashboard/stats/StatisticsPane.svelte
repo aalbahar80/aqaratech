@@ -40,11 +40,11 @@
 			>
 				{#if color === 'green'}
 					<HeroiconsArrowUp20Solid
-						class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
+						class="h-5 w-5 flex-shrink-0 self-center text-green-500"
 					/>
 				{:else}
 					<HeroiconsArrowDown20Solid
-						class="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-red-500"
+						class="h-5 w-5 flex-shrink-0 self-center text-red-500"
 					/>
 				{/if}
 				{chipText}

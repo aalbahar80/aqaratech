@@ -3,7 +3,7 @@
 
 	import { getRoute, PageTypePortfolio } from '@self/utils';
 
-	import L from '$i18n/i18n-svelte';
+	import L, { locale } from '$i18n/i18n-svelte';
 	import Arrow from '$lib/components/Arrow.svelte';
 	import TextButton from '$lib/components/buttons/TextButton.svelte';
 	import StatisticsPane from '$lib/components/dashboard/stats/StatisticsPane.svelte';
@@ -76,7 +76,11 @@
 				secondaryText={primary[i] ? monthFromShort(date) : ''}
 				primaryValue={fmtCurrency(amount)}
 				textColor={colors[kind] ?? ''}
-				chipText={change ? change.toFixed(2) : ''}
+				chipText={change
+					? new Intl.NumberFormat($locale, {
+							style: 'percent',
+					  }).format(change / 100)
+					: ''}
 				color={change && change > 0 ? 'green' : 'red'}
 			/>
 		{/each}
