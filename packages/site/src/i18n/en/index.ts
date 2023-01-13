@@ -24,6 +24,7 @@ const en: BaseTranslation = {
 		export: 'Export',
 		close: 'Close',
 		addMultiple: 'Add multiple',
+		toggleAll: 'Toggle all',
 	},
 	nav: {
 		financials: 'Financials',

@@ -123,6 +123,7 @@ const ar: Translation = {
 		close: 'يغلق',
 		addMultiple: 'إضافة متعددة',
 		view: 'عرض',
+		toggleAll: 'عرض الكل',
 	},
 	nav: {
 		financials: 'البيانات المالية',

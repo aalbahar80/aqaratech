@@ -405,6 +405,10 @@ type RootTranslation = {
 		 * A​d​d​ ​m​u​l​t​i​p​l​e
 		 */
 		addMultiple: string
+		/**
+		 * T​o​g​g​l​e​ ​a​l​l
+		 */
+		toggleAll: string
 	}
 	nav: {
 		/**
@@ -1138,6 +1142,10 @@ export type TranslationFunctions = {
 		 * Add multiple
 		 */
 		addMultiple: () => LocalizedString
+		/**
+		 * Toggle all
+		 */
+		toggleAll: () => LocalizedString
 	}
 	nav: {
 		/**

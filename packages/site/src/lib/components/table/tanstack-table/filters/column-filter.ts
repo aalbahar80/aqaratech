@@ -15,7 +15,7 @@ const getColumns = <T>(table: Table<T>): Filter['options'] =>
 	}));
 
 const getToggleAll = <T>(table: Table<T>): Filter['options'][number] => ({
-	label: 'Toggle All',
+	label: get(L).buttons.toggleAll(),
 	value: 'toggle-all',
 	active: table.getIsAllColumnsVisible(),
 	action: (e: unknown) => table.getToggleAllColumnsVisibilityHandler()(e),
