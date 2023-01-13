@@ -1,1 +1,3 @@
-<span aria-hidden="true" class="rtl:rotate-180"> &nbsp;&rarr; </span>
+<span aria-hidden="true" class="inline-block rtl:rotate-180">
+	&nbsp;&rarr;
+</span>
