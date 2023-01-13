@@ -2,6 +2,7 @@ import type { RequestHandler } from './$types';
 
 import { Cookie } from '@self/utils';
 
+import { baseLocale } from '$i18n/i18n-util';
 import { MAX_AGE, PREF_LOCALE, REDIRECT_TO } from '$lib/constants/misc';
 
 export const GET: RequestHandler = async ({
@@ -17,7 +18,8 @@ export const GET: RequestHandler = async ({
 	});
 
 	const location =
-		url.searchParams.get(REDIRECT_TO) ?? `/concierge?${PREF_LOCALE}=${locale}`;
+		url.searchParams.get(REDIRECT_TO) ??
+		`/concierge?${PREF_LOCALE}=${locale ?? baseLocale}`;
 
 	return new Response(undefined, {
 		status: 302,
