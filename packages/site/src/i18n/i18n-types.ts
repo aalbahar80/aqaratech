@@ -799,6 +799,10 @@ type RootTranslation = {
 		 * O​c​c​u​p​i​e​d
 		 */
 		occupied: string
+		/**
+		 * A​r​e​ ​y​o​u​ ​s​u​r​e​?
+		 */
+		areYouSure: string
 	}
 }
 
@@ -1588,6 +1592,10 @@ export type TranslationFunctions = {
 		 * Occupied
 		 */
 		occupied: () => LocalizedString
+		/**
+		 * Are you sure?
+		 */
+		areYouSure: () => LocalizedString
 	}
 }
 

@@ -1,6 +1,8 @@
 <script lang="ts" context="module">
 	import { writable } from 'svelte/store';
 
+	import L from '$i18n/i18n-svelte';
+
 	import type { ModalContent } from '$lib/components/toast/modal-content';
 
 	// Example from: https://github.com/ivanhofer/sveltekit-typescript-showcase/blob/b334e865894ac9d7c3673168e0ee6d3f7f1806e3/src/01-props/09-svelte-component/Component.svelte#L26
@@ -84,7 +86,7 @@
 									aria-hidden="true"
 								/>
 							</div>
-							<div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+							<div class="mt-3 text-center sm:mx-4 sm:mt-0 sm:text-start">
 								<DialogTitle
 									as="h3"
 									class="text-lg font-medium leading-6 text-gray-900"
@@ -127,7 +129,7 @@
 							class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
 							on:click={closeModal}
 						>
-							Cancel
+							{$L.buttons.cancel()}
 						</button>
 						<button
 							type="button"
@@ -137,7 +139,7 @@
 							on:click={handleConfirm}
 						>
 							<Spinner loading={isLoading} />
-							Delete
+							{$L.buttons.delete()}
 						</button>
 					</div>
 				</div>

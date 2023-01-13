@@ -1,9 +1,11 @@
 import toast from 'svelte-french-toast';
 
 import { goto } from '$app/navigation';
+import { get } from 'svelte/store';
 
 import { createApi, type Api } from '$api';
 import { handleApiError } from '$api/handle-api-error';
+import L from '$i18n/i18n-svelte';
 import { addSuccessToast } from '$lib/stores/toast';
 
 import type { ModalContent } from '$lib/components/toast/modal-content';
@@ -18,9 +20,11 @@ export const createModalDelete = ({
 	deletePrompt?: string | undefined;
 	onDelete: OnDelete;
 }): ModalContent => {
+	const LL = get(L);
+
 	return {
-		title: 'Delete',
-		description: 'Are you sure?',
+		title: LL.buttons.delete(),
+		description: LL.other.areYouSure(),
 		deletePrompt: deletePrompt ?? '',
 		onConfirm: async () => {
 			try {

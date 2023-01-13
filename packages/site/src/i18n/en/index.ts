@@ -76,6 +76,7 @@ const en: BaseTranslation = {
 		vacancy: 'Vacancy',
 		vacant: 'Vacant',
 		occupied: 'Occupied',
+		areYouSure: 'Are you sure?',
 	},
 };
 

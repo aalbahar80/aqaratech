@@ -40,7 +40,7 @@ const ar: Translation = {
 			singular: 'فاتورة',
 		},
 		maintenanceOrder: {
-			plural: 'اعمال صيانة',
+			plural: 'اعمال الصيانة',
 			singular: 'عمل صيانة',
 		},
 		payout: {
@@ -122,7 +122,7 @@ const ar: Translation = {
 		edit: 'تعديل',
 		new: 'إضافة',
 		save: 'حفظ',
-		cancel: 'يلغي',
+		cancel: 'إلغاء',
 		delete: 'حذف',
 		export: 'يصدّر',
 		close: 'يغلق',
@@ -281,6 +281,7 @@ const ar: Translation = {
 		vacancy: 'حالة الإيجار',
 		vacant: 'شاغر',
 		occupied: 'مستأجر',
+		areYouSure: 'هل انت متاكد؟',
 	},
 };
 
