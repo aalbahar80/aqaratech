@@ -75,7 +75,7 @@
 					current={table.getState().pagination.pageSize}
 					options={[10, 20, 50, 75, 100].map((size) => ({
 						value: size,
-						label: `Show ${size}`,
+						label: `${$L.pagination.show()} ${size}`,
 					}))}
 					on:select={(e) => {
 						table.setPageSize(e.detail.value);

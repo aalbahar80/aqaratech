@@ -288,6 +288,10 @@ type RootTranslation = {
 		 */
 		showing: string
 		/**
+		 * S​h​o​w
+		 */
+		show: string
+		/**
 		 * t​o
 		 */
 		to: string
@@ -802,6 +806,10 @@ export type TranslationFunctions = {
 		 * Showing
 		 */
 		showing: () => LocalizedString
+		/**
+		 * Show
+		 */
+		show: () => LocalizedString
 		/**
 		 * to
 		 */
