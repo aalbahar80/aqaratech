@@ -9,6 +9,8 @@ import { config } from 'dotenv';
 import { readTranslationFromDisk } from 'typesafe-i18n/exporter';
 import 'zx/globals';
 
+import { i18n_OUTPUT } from './constants';
+
 console.log({ argv });
 
 const moduleDir = dirname(new URL(import.meta.url).pathname);
@@ -22,7 +24,7 @@ config({
 // Save translations to file
 const mapping = await readTranslationFromDisk('en');
 await fs.writeJson(
-	join(moduleDir, '../tolgee/generated/i18n-output.json'),
+	join(moduleDir, `../tolgee/generated/${i18n_OUTPUT}`),
 	mapping.translations,
 	{ spaces: 2 },
 );

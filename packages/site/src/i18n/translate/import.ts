@@ -8,6 +8,7 @@ import { config } from 'dotenv';
 import 'zx/globals';
 
 import { addMissingTranslations } from './add-missing-translations';
+import { i18n_OUTPUT } from './constants';
 import { storeTranslations } from './store-translations';
 import { translatepy } from './translate';
 
@@ -43,7 +44,7 @@ await addMissingTranslations({
 		// want to compare against the latest translations in i18n-output.json
 		args.tolgee
 			? '../tolgee/generated/en.json'
-			: '../tolgee/generated/i18n-output.json',
+			: `../tolgee/generated/${i18n_OUTPUT}`,
 	),
 });
 

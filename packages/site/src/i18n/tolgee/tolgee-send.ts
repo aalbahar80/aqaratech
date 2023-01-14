@@ -4,6 +4,8 @@ import { dirname, join } from 'node:path';
 import { config } from 'dotenv';
 import 'zx/globals';
 
+import { i18n_OUTPUT } from '$i18n/translate/constants';
+
 const moduleDir = dirname(new URL(import.meta.url).pathname);
 
 // Initiate dotenv
@@ -14,7 +16,7 @@ config({
 // loads .env, creates generated directory, and checks if TOLGEE_KEY is valid
 await $`${join(moduleDir, './tolgee-prepare.ts')}`;
 
-const OUTPUT_FILE = `${moduleDir}/generated/i18n-output.json`;
+const OUTPUT_FILE = `${moduleDir}/generated/${i18n_OUTPUT}`;
 
 /** Grab latest translations from Tolgee API. Saves them in a JSON file. */
 export const sendToTolgee = async () => {
@@ -28,7 +30,7 @@ export const sendToTolgee = async () => {
 		type: 'application/json',
 	});
 
-	formData.append('files', fileBlob, 'i18n-output.json');
+	formData.append('files', fileBlob, i18n_OUTPUT);
 
 	const key = process.env['TOLGEE_KEY'];
 

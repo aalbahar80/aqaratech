@@ -8,6 +8,8 @@ import {
 	type ExportLocaleMapping,
 } from 'typesafe-i18n/exporter';
 
+import { i18n_OUTPUT } from '$i18n/translate/constants';
+
 // Get the directory containing the current module
 const moduleDir = dirname(new URL(import.meta.url).pathname);
 
@@ -17,7 +19,7 @@ const verifyResult = execSync(verify);
 console.log(verifyResult.toString());
 
 /** The file to upload to the API */
-const outputPath = join(moduleDir, './generated/i18n-output.json');
+const outputPath = join(moduleDir, `./generated/${i18n_OUTPUT}.json`);
 
 /** Send all translations to Tolgee API */
 const sendDataToAPI = (exportMapping: ExportLocaleMapping) => {
