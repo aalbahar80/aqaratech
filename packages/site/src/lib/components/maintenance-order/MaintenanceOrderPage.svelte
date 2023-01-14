@@ -1,11 +1,15 @@
 <script lang="ts">
 	import L from '$i18n/i18n-svelte';
+	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import { getMaintenanceOrderBadge } from '$lib/utils/get-badge';
 
 	import type { MaintenanceOrderDto } from '$api/openapi';
 
 	export let maintenanceOrder: MaintenanceOrderDto;
+
+	$: badge = getMaintenanceOrderBadge(maintenanceOrder.status);
 </script>
 
 <Heading
@@ -24,3 +28,5 @@
 		<BreadCrumb crumbs={maintenanceOrder.breadcrumbs} />
 	</svelte:fragment>
 </Heading>
+
+<Badge label={badge.label} badgeColor={badge.color} />
