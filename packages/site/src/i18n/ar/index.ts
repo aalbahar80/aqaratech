@@ -189,6 +189,20 @@ const ar: Translation = {
 			subtitle2: ' اضغط على البلاط للتكبير. حجم البلاط متناسب مع حجم المبلغ.',
 		},
 	},
+	badge: {
+		notYetDue: 'لم يتم الدفع بعد',
+		due: 'مستحق',
+		overdue: 'متأخر',
+		paid: 'مدفوع',
+
+		upcoming: 'قادم',
+		current: 'جاري',
+		expired: 'منتهي',
+
+		inProgress: 'جاري',
+		completed: 'مكتمل',
+		cancelled: 'ملغي',
+	},
 	filter: {
 		filters: 'المرشحات',
 		start: 'بداية',

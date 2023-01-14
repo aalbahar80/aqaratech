@@ -606,6 +606,48 @@ type RootTranslation = {
 			subtitle2: string
 		}
 	}
+	badge: {
+		/**
+		 * U​p​c​o​m​i​n​g
+		 */
+		upcoming: string
+		/**
+		 * C​u​r​r​e​n​t
+		 */
+		current: string
+		/**
+		 * E​x​p​i​r​e​d
+		 */
+		expired: string
+		/**
+		 * N​o​t​ ​y​e​t​ ​d​u​e
+		 */
+		notYetDue: string
+		/**
+		 * D​u​e
+		 */
+		due: string
+		/**
+		 * P​a​s​t​ ​d​u​e
+		 */
+		overdue: string
+		/**
+		 * P​a​i​d
+		 */
+		paid: string
+		/**
+		 * I​n​ ​p​r​o​g​r​e​s​s
+		 */
+		inProgress: string
+		/**
+		 * C​o​m​p​l​e​t​e​d
+		 */
+		completed: string
+		/**
+		 * C​a​n​c​e​l​l​e​d
+		 */
+		cancelled: string
+	}
 	filter: {
 		/**
 		 * F​i​l​t​e​r​s
@@ -1516,6 +1558,48 @@ export type TranslationFunctions = {
 			 */
 			subtitle2: () => LocalizedString
 		}
+	}
+	badge: {
+		/**
+		 * Upcoming
+		 */
+		upcoming: () => LocalizedString
+		/**
+		 * Current
+		 */
+		current: () => LocalizedString
+		/**
+		 * Expired
+		 */
+		expired: () => LocalizedString
+		/**
+		 * Not yet due
+		 */
+		notYetDue: () => LocalizedString
+		/**
+		 * Due
+		 */
+		due: () => LocalizedString
+		/**
+		 * Past due
+		 */
+		overdue: () => LocalizedString
+		/**
+		 * Paid
+		 */
+		paid: () => LocalizedString
+		/**
+		 * In progress
+		 */
+		inProgress: () => LocalizedString
+		/**
+		 * Completed
+		 */
+		completed: () => LocalizedString
+		/**
+		 * Cancelled
+		 */
+		cancelled: () => LocalizedString
 	}
 	filter: {
 		/**

@@ -87,6 +87,23 @@ const en: BaseTranslation = {
 				' Click on a tile to zoom in. Tile size is proportional to amount.',
 		},
 	},
+	badge: {
+		// Lease
+		upcoming: 'Upcoming',
+		current: 'Current',
+		expired: 'Expired',
+
+		// Invoice
+		notYetDue: 'Not yet due',
+		due: 'Due',
+		overdue: 'Past due',
+		paid: 'Paid',
+
+		// Maintenance
+		inProgress: 'In progress',
+		completed: 'Completed',
+		cancelled: 'Cancelled',
+	},
 	filter: {
 		filters: 'Filters',
 		start: 'Start',
