@@ -6,7 +6,7 @@
 // Otherwise (default) the URL relative to the base is returned.
 // e.g. https://mywebsite.com/en/blog/article-1 => /de/blog/article-1
 export const replaceLocaleInUrl = (
-	url: URL,
+	url: Readonly<URL>,
 	locale: string,
 	full = false,
 ): string => {

@@ -15,7 +15,7 @@ export const getFormRouteWithRelation = ({
 	redirectTo,
 }: {
 	entity: GetFormRouteWithRelation['entity'];
-	pathname: string;
+	pathname: Readonly<URL>['pathname'];
 	params: RouteParams;
 	redirectTo: string;
 }): string => {

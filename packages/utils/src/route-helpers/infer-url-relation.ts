@@ -1,7 +1,7 @@
 import { fromUrl } from '../entity/from-url';
 import { isEntityUrlName } from '../entity/is-entity';
 
-export const inferUrlRelation = (pathname: string) => {
+export const inferUrlRelation = (pathname: Readonly<URL>['pathname']) => {
 	// the pathname should be `.../entity/id/files`
 	const [urlName, id] = pathname.split('/').slice(-3, -1);
 

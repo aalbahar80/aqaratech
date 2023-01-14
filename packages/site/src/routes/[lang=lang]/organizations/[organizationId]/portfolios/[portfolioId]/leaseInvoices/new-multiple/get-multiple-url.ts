@@ -4,7 +4,7 @@
  * Must be called from the new invoice form page since it uses the url params
  * and query from the current page.
  */
-export const getMultipleUrl = (url: URL) => {
+export const getMultipleUrl = (url: Readonly<URL>) => {
 	// avoid mutating the original url
 	const urlN = new URL(url.toString());
 
