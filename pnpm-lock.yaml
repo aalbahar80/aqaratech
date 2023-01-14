@@ -15,7 +15,7 @@ importers:
       eslint: 8.31.0
       eslint-config-custom: workspace:*
       madge: 5.0.1
-      prettier: 2.8.2
+      prettier: 2.8.3
       prettier-plugin-svelte: 2.9.0
       prettier-plugin-tailwindcss: 0.2.1
       tree-kill: 1.2.2
@@ -32,9 +32,9 @@ importers:
       eslint: 8.31.0
       eslint-config-custom: link:packages/eslint-config-custom
       madge: 5.0.1
-      prettier: 2.8.2
-      prettier-plugin-svelte: 2.9.0_y74x4qymbshr6ujrzcfe2sydsa
-      prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.2
+      prettier: 2.8.3
+      prettier-plugin-svelte: 2.9.0_kdmmghgdi3ngrsq6otxkjilbry
+      prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.3
       tree-kill: 1.2.2
       ts-morph: 17.0.1
       tsconfig: link:packages/tsconfig
@@ -223,7 +223,7 @@ importers:
 
   packages/site:
     specifiers:
-      '@iconify/json': 2.2.5
+      '@iconify/json': 2.2.6
       '@intlify/eslint-plugin-svelte': 0.1.1
       '@logtail/node': 0.1.15
       '@logtail/types': 0.1.15
@@ -233,8 +233,8 @@ importers:
       '@sentry/node': 7.30.0
       '@sentry/svelte': 7.30.0
       '@sentry/tracing': 7.30.0
-      '@sveltejs/adapter-node': 1.1.0
-      '@sveltejs/kit': 1.0.11
+      '@sveltejs/adapter-node': 1.1.1
+      '@sveltejs/kit': 1.1.0
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2
       '@tailwindcss/forms': 0.5.3
@@ -263,6 +263,7 @@ importers:
       jspdf: 2.5.1
       just-diff: 5.2.0
       lodash-es: 4.17.21
+      nanoid: 4.0.0
       papaparse: 5.3.2
       postcss: 8.4.21
       remeda: 1.3.0
@@ -296,15 +297,15 @@ importers:
       typesafe-i18n: 5.18.1_typescript@4.9.4
       winston: 3.8.2
     devDependencies:
-      '@iconify/json': 2.2.5
+      '@iconify/json': 2.2.6
       '@intlify/eslint-plugin-svelte': 0.1.1_btuntbn75dxkba3nofpps2nvzm
       '@logtail/types': 0.1.15
       '@rgossiaux/svelte-headlessui': 1.0.2_okvbycgeo7n6fa7ggm4c3cdetm_svelte@3.55.1
       '@self/utils': link:../utils
       '@sentry/svelte': 7.30.0_svelte@3.55.1
       '@sentry/tracing': 7.30.0
-      '@sveltejs/adapter-node': 1.1.0_@sveltejs+kit@1.0.11
-      '@sveltejs/kit': 1.0.11_svelte@3.55.1+vite@4.0.4
+      '@sveltejs/adapter-node': 1.1.1_@sveltejs+kit@1.1.0
+      '@sveltejs/kit': 1.1.0_svelte@3.55.1+vite@4.0.4
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.4
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.4
@@ -333,6 +334,7 @@ importers:
       jspdf: 2.5.1
       just-diff: 5.2.0
       lodash-es: 4.17.21
+      nanoid: 4.0.0
       papaparse: 5.3.2
       postcss: 8.4.21
       remeda: 1.3.0
@@ -1600,7 +1602,7 @@ packages:
       fs-extra: 7.0.1
       lodash.startcase: 4.4.0
       outdent: 0.5.0
-      prettier: 2.8.2
+      prettier: 2.8.3
       resolve-from: 5.0.0
       semver: 5.7.1
     dev: true
@@ -1768,7 +1770,7 @@ packages:
       '@changesets/types': 5.2.1
       fs-extra: 7.0.1
       human-id: 1.0.2
-      prettier: 2.8.2
+      prettier: 2.8.3
     dev: true
 
   /@colors/colors/1.5.0:
@@ -2095,8 +2097,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.2.5:
-    resolution: {integrity: sha512-AIbJTRF9HJz7FJ8t7058huwDXHaFEY4a4f6uuPtctEQ8/I3ybrX66iZMgoLD1kLaamU4tzZPlZ6tSpA3pM8LZg==}
+  /@iconify/json/2.2.6:
+    resolution: {integrity: sha512-fRP5PwXvX0PAGne1/xHvd6zVYiHq9dQzdvhhxamwJuNjoIVRWNNP5y465NkxybzEX94kn2JnoULkA9kbZkXoqA==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.0.0
@@ -2743,7 +2745,7 @@ packages:
     dev: true
     patched: true
 
-  /@rollup/plugin-commonjs/24.0.0_rollup@3.9.1:
+  /@rollup/plugin-commonjs/24.0.0_rollup@3.10.0:
     resolution: {integrity: sha512-0w0wyykzdyRRPHOb0cQt14mIBLujfAv6GgP6g8nvg/iBxEm112t3YPPq+Buqe2+imvElTka+bjNlJ/gB56TD8g==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2752,16 +2754,16 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
+      '@rollup/pluginutils': 5.0.2_rollup@3.10.0
       commondir: 1.0.1
       estree-walker: 2.0.2
       glob: 8.0.3
       is-reference: 1.2.1
       magic-string: 0.27.0
-      rollup: 3.9.1
+      rollup: 3.10.0
     dev: true
 
-  /@rollup/plugin-json/6.0.0_rollup@3.9.1:
+  /@rollup/plugin-json/6.0.0_rollup@3.10.0:
     resolution: {integrity: sha512-i/4C5Jrdr1XUarRhVu27EEwjt4GObltD7c+MkCIpO2QIbojw8MUs+CCTqOphQi3Qtg1FLmYt+l+6YeoIf51J7w==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2770,11 +2772,11 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
-      rollup: 3.9.1
+      '@rollup/pluginutils': 5.0.2_rollup@3.10.0
+      rollup: 3.10.0
     dev: true
 
-  /@rollup/plugin-node-resolve/15.0.1_rollup@3.9.1:
+  /@rollup/plugin-node-resolve/15.0.1_rollup@3.10.0:
     resolution: {integrity: sha512-ReY88T7JhJjeRVbfCyNj+NXAG3IIsVMsX9b5/9jC98dRP8/yxlZdz7mHZbHk5zHr24wZZICS5AcXsFZAXYUQEg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2783,16 +2785,16 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
+      '@rollup/pluginutils': 5.0.2_rollup@3.10.0
       '@types/resolve': 1.20.2
       deepmerge: 4.2.2
       is-builtin-module: 3.2.0
       is-module: 1.0.0
       resolve: 1.22.1
-      rollup: 3.9.1
+      rollup: 3.10.0
     dev: true
 
-  /@rollup/pluginutils/5.0.2_rollup@3.9.1:
+  /@rollup/pluginutils/5.0.2_rollup@3.10.0:
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -2804,7 +2806,7 @@ packages:
       '@types/estree': 1.0.0
       estree-walker: 2.0.2
       picomatch: 2.3.1
-      rollup: 3.9.1
+      rollup: 3.10.0
     dev: true
 
   /@sentry/browser/7.30.0:
@@ -2897,20 +2899,20 @@ packages:
       '@sentry/types': 7.30.0
       tslib: 1.14.1
 
-  /@sveltejs/adapter-node/1.1.0_@sveltejs+kit@1.0.11:
-    resolution: {integrity: sha512-br/KlTI24/TFOuQ+SmoTSfwzgWjslGXkSreOYALW8ElVsG8dAh8stDM07hDZjtQQ46r6snd2tev89Sagh8ZOtA==}
+  /@sveltejs/adapter-node/1.1.1_@sveltejs+kit@1.1.0:
+    resolution: {integrity: sha512-APCKDP3fE6iMYMqIL0ba0KI5T8ctuztSqx9lb+GTKWGlw3Rk74utiR9NiegkHUj6VJuBRhhVc+0Fh7AraJpMUg==}
     peerDependencies:
       '@sveltejs/kit': ^1.0.0
     dependencies:
-      '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
-      '@rollup/plugin-json': 6.0.0_rollup@3.9.1
-      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
-      '@sveltejs/kit': 1.0.11_svelte@3.55.1+vite@4.0.4
-      rollup: 3.9.1
+      '@rollup/plugin-commonjs': 24.0.0_rollup@3.10.0
+      '@rollup/plugin-json': 6.0.0_rollup@3.10.0
+      '@rollup/plugin-node-resolve': 15.0.1_rollup@3.10.0
+      '@sveltejs/kit': 1.1.0_svelte@3.55.1+vite@4.0.4
+      rollup: 3.10.0
     dev: true
 
-  /@sveltejs/kit/1.0.11_svelte@3.55.1+vite@4.0.4:
-    resolution: {integrity: sha512-FcbR2/jlKtSfFBXwnqgpWnoOG54foLQB2esdkkdz7uei0+KnK5ulWZw0lJbMzXTy7kfxRvH1spxlXoBpPizUqg==}
+  /@sveltejs/kit/1.1.0_svelte@3.55.1+vite@4.0.4:
+    resolution: {integrity: sha512-SSAOaEpiBtR7l4Y/jN+AGHonpZUQ2tcl4yhE7S+rqSJA8iw8dxiWPVpNe7JI3N70hXVylezTj9I6P3cykq8a1Q==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     requiresBuild: true
@@ -2931,7 +2933,7 @@ packages:
       sirv: 2.0.2
       svelte: 3.55.1
       tiny-glob: 0.2.9
-      undici: 5.14.0
+      undici: 5.15.0
       vite: 4.0.4
     transitivePeerDependencies:
       - supports-color
@@ -7616,6 +7618,12 @@ packages:
     hasBin: true
     dev: true
 
+  /nanoid/4.0.0:
+    resolution: {integrity: sha512-IgBP8piMxe/gf73RTQx7hmnhwz0aaEXYakvqZyE302IXW3HyVNhdNGC+O2MwMAVhLEnvXlvKtGbtJf6wvHihCg==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: true
+
   /natural-compare-lite/1.4.0:
     resolution: {integrity: sha512-Tj+HTDSJJKaZnfiuw+iaF9skdPpTo2GtEly5JHnWV/hfv2Qj/9RKsGISQtLh2ox3l5EAGw487hnBee0sIJ6v2g==}
     dev: true
@@ -8218,27 +8226,27 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-svelte/2.9.0_y74x4qymbshr6ujrzcfe2sydsa:
+  /prettier-plugin-svelte/2.9.0_kdmmghgdi3ngrsq6otxkjilbry:
     resolution: {integrity: sha512-3doBi5NO4IVgaNPtwewvrgPpqAcvNv0NwJNflr76PIGgi9nf1oguQV1Hpdm9TI2ALIQVn/9iIwLpBO5UcD2Jiw==}
     peerDependencies:
       prettier: ^1.16.4 || ^2.0.0
       svelte: ^3.2.0
     dependencies:
-      prettier: 2.8.2
+      prettier: 2.8.3
       svelte: 3.55.1
     dev: true
 
-  /prettier-plugin-tailwindcss/0.2.1_prettier@2.8.2:
+  /prettier-plugin-tailwindcss/0.2.1_prettier@2.8.3:
     resolution: {integrity: sha512-aIO8IguumORyRsmT+E7JfJ3A9FEoyhqZR7Au7TBOege3VZkgMvHJMkufeYp4zjnDK2iq4ktkvGMNOQR9T8lisQ==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       prettier: '>=2.2.0'
     dependencies:
-      prettier: 2.8.2
+      prettier: 2.8.3
     dev: true
 
-  /prettier/2.8.2:
-    resolution: {integrity: sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==}
+  /prettier/2.8.3:
+    resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -8550,6 +8558,14 @@ packages:
       picomatch: 2.3.1
       source-map: 0.7.4
       yargs: 17.6.2
+    dev: true
+
+  /rollup/3.10.0:
+    resolution: {integrity: sha512-JmRYz44NjC1MjVF2VKxc0M1a97vn+cDxeqWmnwyAF4FvpjK8YFdHpaqvQB+3IxCvX05vJxKZkoMDU8TShhmJVA==}
+    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /rollup/3.9.1:
@@ -9709,8 +9725,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /undici/5.14.0:
-    resolution: {integrity: sha512-yJlHYw6yXPPsuOH0x2Ib1Km61vu4hLiRRQoafs+WUgX1vO64vgnxiCEN9dpIrhZyHFsai3F0AEj4P9zy19enEQ==}
+  /undici/5.15.0:
+    resolution: {integrity: sha512-wCAZJDyjw9Myv+Ay62LAoB+hZLPW9SmKbQkbHIhMw/acKSlpn7WohdMUc/Vd4j1iSMBO0hWwU8mjB7a5p5bl8g==}
     engines: {node: '>=12.18'}
     dependencies:
       busboy: 1.6.0

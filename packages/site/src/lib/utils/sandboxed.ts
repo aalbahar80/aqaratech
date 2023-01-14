@@ -2,8 +2,9 @@
 import { browser } from '$app/environment';
 import { getStores } from '$app/stores';
 import { get, writable as svelteWritable, type Writable } from 'svelte/store';
+import { nanoid } from 'nanoid';
 
-const storesKey = `sandbox_${crypto.randomUUID()}`;
+const storesKey = `sandbox_${nanoid()}`;
 
 /**
  * Creates a facade for a writable store that is a sandboxed store that may be used as a
@@ -27,7 +28,7 @@ const storesKey = `sandbox_${crypto.randomUUID()}`;
  * @see https://github.com/AkitoTsukahara/munote/blob/5412443c14904f5f624ce511c81cdcfbd4d65ffa/src/lib/package/isolation/store.ts
  */
 export const writable = <T>(initialValue: T, key?: string): Writable<T> => {
-	key = key ? `${key}_${crypto.randomUUID()}` : crypto.randomUUID();
+	key = key ? `${key}_${nanoid()}` : nanoid();
 
 	function setStore(value) {
 		try {
