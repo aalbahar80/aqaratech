@@ -13,6 +13,7 @@ export const getIntlLabel = (key: string) => {
 
 	if (currentLocale === 'ar') {
 		// @ts-expect-error wip
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		return (LL.fields[key]() as string) || enLabel;
 	} else {
 		return enLabel;
