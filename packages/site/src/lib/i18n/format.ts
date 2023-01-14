@@ -3,31 +3,27 @@ import { get } from 'svelte/store';
 import { locale } from '$i18n/i18n-svelte';
 
 const formats = {
-	en: {
-		currency: { style: 'currency', currency: 'KWD' },
-		date: { year: 'numeric', month: 'short', day: 'numeric' },
-		time: { hour: 'numeric', minute: 'numeric' },
-	},
-	ar: {
-		currency: { style: 'currency', currency: 'KWD' },
-		date: { year: 'numeric', month: 'short', day: 'numeric' },
-		time: { hour: 'numeric', minute: 'numeric', hour12: true },
-	},
+	currency: { style: 'currency', currency: 'KWD' },
+	date: { year: 'numeric', month: 'short', day: 'numeric' },
+	time: { hour: 'numeric', minute: 'numeric', hour12: true },
 } as const;
 
+// Number
 export function fmtNumber(number: number) {
 	const CL = get(locale);
 	return new Intl.NumberFormat(CL).format(number);
 }
 
+// Currency
 export function fmtCurrency(number: number) {
 	const CL = get(locale);
-	return new Intl.NumberFormat(CL, formats[CL].currency).format(number);
+	return new Intl.NumberFormat(CL, formats.currency).format(number);
 }
 
+// Date
 export function fmtDate(date: Date) {
 	const CL = get(locale);
-	return new Intl.DateTimeFormat(CL, formats[CL].date).format(date);
+	return new Intl.DateTimeFormat(CL, formats.date).format(date);
 }
 
 export function fmtMonth(date: Date) {
@@ -37,5 +33,5 @@ export function fmtMonth(date: Date) {
 
 export function fmtTime(date: Date) {
 	const CL = get(locale);
-	return new Intl.DateTimeFormat(CL, formats[CL].time).format(date);
+	return new Intl.DateTimeFormat(CL, formats.time).format(date);
 }
