@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 
 import { PageTypePortfolio } from '@self/utils';
 
+import { navbar } from '../../../locators/navbar';
 import { Filters } from '../filter-model';
 
 import { chartTestPresets } from './filter-presets';
@@ -39,7 +40,7 @@ for (const preset of chartTestPresets) {
 				fullPage: true,
 				// NOTE: Care when setting maxDiffPixelRatio in fullPage screenshots,
 				// If necessary, set exact pixel count as low as possible.
-				mask: [page.getByText('version: ')],
+				mask: [page.getByText('version: '), navbar(page)],
 			});
 
 			const barChart = page
@@ -48,19 +49,24 @@ for (const preset of chartTestPresets) {
 
 			await expect.soft(barChart).toHaveScreenshot({
 				maxDiffPixelRatio: 0.01, // firefox fails without this
+				mask: [navbar(page)],
 			});
 
 			const locationChart = page
 				.getByTestId('chart-card')
 				.filter({ hasText: 'Expenses: by Location' });
 
-			await expect.soft(locationChart).toHaveScreenshot();
+			await expect.soft(locationChart).toHaveScreenshot({
+				mask: [navbar(page)],
+			});
 
 			const categoryChart = page
 				.getByTestId('chart-card')
 				.filter({ hasText: 'Expenses: by Category' });
 
-			await expect.soft(categoryChart).toHaveScreenshot();
+			await expect.soft(categoryChart).toHaveScreenshot({
+				mask: [navbar(page)],
+			});
 		});
 	});
 }

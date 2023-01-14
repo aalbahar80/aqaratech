@@ -50,7 +50,7 @@ const en: BaseTranslation = {
 		columns: 'Columns',
 		all: 'All',
 		total: 'Total',
-		forPeriod: 'For period',
+		forPeriod: 'for period',
 		collected: 'Collected',
 		uncollected: 'Uncollected',
 		unspecified: 'Unspecified',
