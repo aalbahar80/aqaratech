@@ -3,11 +3,25 @@ import { get } from 'svelte/store';
 import { locale } from '$i18n/i18n-svelte';
 
 const formats = {
-	currency: { style: 'currency', currency: 'KWD' },
-	date: { year: 'numeric', month: 'short', day: 'numeric' },
-	month: { month: 'short' },
-	time: { hour: 'numeric', minute: 'numeric', hour12: true },
-} as const;
+	currency: {
+		style: 'currency',
+		currency: 'KWD',
+	} satisfies Intl.NumberFormatOptions,
+
+	date: {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric',
+	} satisfies Intl.DateTimeFormatOptions,
+
+	month: { month: 'short' } satisfies Intl.DateTimeFormatOptions,
+
+	time: {
+		hour: 'numeric',
+		minute: 'numeric',
+		hour12: true,
+	} satisfies Intl.DateTimeFormatOptions,
+};
 
 // Number
 export function fmtNumber(number: number) {
