@@ -512,7 +512,7 @@ type RootTranslation = {
 		 */
 		total: string
 		/**
-		 * F​o​r​ ​p​e​r​i​o​d
+		 * f​o​r​ ​p​e​r​i​o​d
 		 */
 		forPeriod: string
 		/**
@@ -535,6 +535,76 @@ type RootTranslation = {
 		 * L​a​s​t​ ​m​o​n​t​h
 		 */
 		lastMonth: string
+	}
+	charts: {
+		incomePie: {
+			/**
+			 * I​n​c​o​m​e​:​ ​b​y​ ​p​a​y​m​e​n​t​ ​s​t​a​t​u​s
+			 */
+			title: string
+			/**
+			 * T​o​t​a​l​ ​i​n​c​o​m​e​ ​b​y​ ​p​a​y​m​e​n​t​ ​s​t​a​t​u​s​ ​f​o​r​ ​t​h​e​ ​s​e​l​e​c​t​e​d​ ​p​e​r​i​o​d​.
+			 */
+			subtitle: string
+		}
+		incomeBar: {
+			/**
+			 * I​n​c​o​m​e​:​ ​b​y​ ​m​o​n​t​h
+			 */
+			title: string
+			/**
+			 * T​o​t​a​l​ ​i​n​c​o​m​e​ ​b​y​ ​m​o​n​t​h​ ​f​o​r​ ​t​h​e​ ​s​e​l​e​c​t​e​d​ ​p​e​r​i​o​d​.
+			 */
+			subtitle: string
+		}
+		occupancyHeatmap: {
+			/**
+			 * O​c​c​u​p​a​n​c​y
+			 */
+			title: string
+			/**
+			 * P​e​r​c​e​n​t​a​g​e​ ​o​f​ ​o​c​c​u​p​i​e​d​ ​u​n​i​t​s​.
+			 */
+			subtitle: string
+		}
+		expensesBar: {
+			/**
+			 * E​x​p​e​n​s​e​s​:​ ​b​y​ ​m​o​n​t​h
+			 */
+			title: string
+			/**
+			 * T​o​t​a​l​ ​e​x​p​e​n​s​e​s​ ​b​y​ ​m​o​n​t​h​ ​f​o​r​ ​t​h​e​ ​s​e​l​e​c​t​e​d​ ​p​e​r​i​o​d​.
+			 */
+			subtitle: string
+		}
+		expensesLocationTreeMap: {
+			/**
+			 * E​x​p​e​n​s​e​s​:​ ​b​y​ ​l​o​c​a​t​i​o​n
+			 */
+			title: string
+			/**
+			 * T​o​t​a​l​ ​e​x​p​e​n​s​e​s​ ​b​y​ ​l​o​c​a​t​i​o​n​ ​f​o​r​ ​t​h​e​ ​s​e​l​e​c​t​e​d​ ​p​e​r​i​o​d​.
+			 */
+			subtitle: string
+			/**
+			 *  ​C​l​i​c​k​ ​o​n​ ​a​ ​t​i​l​e​ ​t​o​ ​z​o​o​m​ ​i​n​.​ ​T​i​l​e​ ​s​i​z​e​ ​i​s​ ​p​r​o​p​o​r​t​i​o​n​a​l​ ​t​o​ ​a​m​o​u​n​t​.
+			 */
+			subtitle2: string
+		}
+		expensesCategoryTreeMap: {
+			/**
+			 * E​x​p​e​n​s​e​s​:​ ​b​y​ ​c​a​t​e​g​o​r​y
+			 */
+			title: string
+			/**
+			 * T​o​t​a​l​ ​e​x​p​e​n​s​e​s​ ​b​y​ ​c​a​t​e​g​o​r​y​ ​f​o​r​ ​t​h​e​ ​s​e​l​e​c​t​e​d​ ​p​e​r​i​o​d​.
+			 */
+			subtitle: string
+			/**
+			 *  ​C​l​i​c​k​ ​o​n​ ​a​ ​t​i​l​e​ ​t​o​ ​z​o​o​m​ ​i​n​.​ ​T​i​l​e​ ​s​i​z​e​ ​i​s​ ​p​r​o​p​o​r​t​i​o​n​a​l​ ​t​o​ ​a​m​o​u​n​t​.
+			 */
+			subtitle2: string
+		}
 	}
 	filter: {
 		/**
@@ -1353,7 +1423,7 @@ export type TranslationFunctions = {
 		 */
 		total: () => LocalizedString
 		/**
-		 * For period
+		 * for period
 		 */
 		forPeriod: () => LocalizedString
 		/**
@@ -1376,6 +1446,76 @@ export type TranslationFunctions = {
 		 * Last month
 		 */
 		lastMonth: () => LocalizedString
+	}
+	charts: {
+		incomePie: {
+			/**
+			 * Income: by payment status
+			 */
+			title: () => LocalizedString
+			/**
+			 * Total income by payment status for the selected period.
+			 */
+			subtitle: () => LocalizedString
+		}
+		incomeBar: {
+			/**
+			 * Income: by month
+			 */
+			title: () => LocalizedString
+			/**
+			 * Total income by month for the selected period.
+			 */
+			subtitle: () => LocalizedString
+		}
+		occupancyHeatmap: {
+			/**
+			 * Occupancy
+			 */
+			title: () => LocalizedString
+			/**
+			 * Percentage of occupied units.
+			 */
+			subtitle: () => LocalizedString
+		}
+		expensesBar: {
+			/**
+			 * Expenses: by month
+			 */
+			title: () => LocalizedString
+			/**
+			 * Total expenses by month for the selected period.
+			 */
+			subtitle: () => LocalizedString
+		}
+		expensesLocationTreeMap: {
+			/**
+			 * Expenses: by location
+			 */
+			title: () => LocalizedString
+			/**
+			 * Total expenses by location for the selected period.
+			 */
+			subtitle: () => LocalizedString
+			/**
+			 *  Click on a tile to zoom in. Tile size is proportional to amount.
+			 */
+			subtitle2: () => LocalizedString
+		}
+		expensesCategoryTreeMap: {
+			/**
+			 * Expenses: by category
+			 */
+			title: () => LocalizedString
+			/**
+			 * Total expenses by category for the selected period.
+			 */
+			subtitle: () => LocalizedString
+			/**
+			 *  Click on a tile to zoom in. Tile size is proportional to amount.
+			 */
+			subtitle2: () => LocalizedString
+		}
 	}
 	filter: {
 		/**

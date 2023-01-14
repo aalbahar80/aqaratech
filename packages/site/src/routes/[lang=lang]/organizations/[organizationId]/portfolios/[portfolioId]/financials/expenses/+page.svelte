@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
+	import L from '$i18n/i18n-svelte';
 	import ExpenseTreemapCategory from '$lib/components/charts/treemap/ExpenseTreemapCategory.svelte';
 	import ExpenseTreemapProperty from '$lib/components/charts/treemap/ExpenseTreemapProperty.svelte';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
@@ -16,9 +17,9 @@
 
 <ChartWrapper
 	empty={data.expensesByLocation.length < 1}
-	title="Expenses: by Location"
-	subtitle="Total expenses by location for the selected period."
-	subtitle2="Click on a tile to zoom in. Tile size is proportional."
+	title={$L.charts.expensesLocationTreeMap.title()}
+	subtitle={$L.charts.expensesLocationTreeMap.subtitle()}
+	subtitle2={$L.charts.expensesLocationTreeMap.subtitle2()}
 	{maxHeight}
 >
 	<ExpenseTreemapProperty expenses={data.expensesByLocation} />
@@ -26,9 +27,9 @@
 
 <ChartWrapper
 	empty={data.expensesByCategory.length < 1}
-	title="Expenses: by Category"
-	subtitle="Total expenses by category for the selected period."
-	subtitle2="Click on a tile to zoom in. Tile size is proportional."
+	title={$L.charts.expensesCategoryTreeMap.title()}
+	subtitle={$L.charts.expensesCategoryTreeMap.subtitle()}
+	subtitle2={$L.charts.expensesCategoryTreeMap.subtitle2()}
 	{maxHeight}
 >
 	<ExpenseTreemapCategory

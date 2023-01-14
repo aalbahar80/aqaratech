@@ -1,4 +1,5 @@
 <script lang="ts">
+	import L from '$i18n/i18n-svelte';
 	import OccupancyHeatmap from '$lib/components/charts/OccupancyHeatmap.svelte';
 	import DashCard from '$lib/components/dashboard/DashCard.svelte';
 
@@ -9,8 +10,8 @@
 </script>
 
 <DashCard
-	title="Occupancy"
-	subtitle="Percentage of occupied units."
+	title={$L.charts.occupancyHeatmap.title()}
+	subtitle={$L.charts.occupancyHeatmap.subtitle()}
 	empty={occupancy.length < 1}
 >
 	<OccupancyHeatmap

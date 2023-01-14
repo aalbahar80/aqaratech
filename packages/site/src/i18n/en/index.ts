@@ -57,6 +57,36 @@ const en: BaseTranslation = {
 		thisMonth: 'This month',
 		lastMonth: 'Last month',
 	},
+	charts: {
+		incomePie: {
+			title: 'Income: by payment status',
+			subtitle: 'Total income by payment status for the selected period.',
+		},
+		incomeBar: {
+			title: 'Income: by month',
+			subtitle: 'Total income by month for the selected period.',
+		},
+		occupancyHeatmap: {
+			title: 'Occupancy',
+			subtitle: 'Percentage of occupied units.',
+		},
+		expensesBar: {
+			title: 'Expenses: by month',
+			subtitle: 'Total expenses by month for the selected period.',
+		},
+		expensesLocationTreeMap: {
+			title: 'Expenses: by location',
+			subtitle: 'Total expenses by location for the selected period.',
+			subtitle2:
+				' Click on a tile to zoom in. Tile size is proportional to amount.',
+		},
+		expensesCategoryTreeMap: {
+			title: 'Expenses: by category',
+			subtitle: 'Total expenses by category for the selected period.',
+			subtitle2:
+				' Click on a tile to zoom in. Tile size is proportional to amount.',
+		},
+	},
 	filter: {
 		filters: 'Filters',
 		start: 'Start',

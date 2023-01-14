@@ -1,4 +1,5 @@
 <script lang="ts">
+	import L from '$i18n/i18n-svelte';
 	import Chart from '$lib/components/charts/Chart.svelte';
 	import { revenuePie } from '$lib/components/charts/revenue-pie';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
@@ -18,8 +19,8 @@
 </script>
 
 <ChartWrapper
-	title="Income: by Payment Status"
-	subtitle="Total income by payment status for the selected period."
+	title={$L.charts.incomePie.title()}
+	subtitle={$L.charts.incomePie.subtitle()}
 	{empty}
 >
 	<Chart let:height let:width>

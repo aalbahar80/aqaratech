@@ -1,4 +1,5 @@
 <script lang="ts">
+	import L from '$i18n/i18n-svelte';
 	import Chart from '$lib/components/charts/Chart.svelte';
 	import { revenueChart } from '$lib/components/charts/revenue';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
@@ -25,8 +26,8 @@
 
 <ChartWrapper
 	empty={expenses.every((e) => e.amount === 0)}
-	title="Expenses: by Month"
-	subtitle="Total expenses by month for the selected period."
+	title={$L.charts.expensesBar.title()}
+	subtitle={$L.charts.expensesBar.subtitle()}
 >
 	<Chart let:height let:width>
 		<canvas {height} {width} use:revenueChart={barDatasets} />
