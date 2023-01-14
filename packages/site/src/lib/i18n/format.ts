@@ -6,6 +6,9 @@ const formats = {
 	currency: {
 		style: 'currency',
 		currency: 'KWD',
+		compactDisplay: 'short',
+		maximumFractionDigits: 0, // Don't show cents
+		// notation: 'compact',
 	} satisfies Intl.NumberFormatOptions,
 
 	date: {
@@ -30,9 +33,15 @@ export function fmtNumber(number: number) {
 }
 
 // Currency
-export function fmtCurrency(number: number) {
+export function fmtCurrency(
+	number: number,
+	options?: Intl.NumberFormatOptions,
+) {
 	const CL = get(locale);
-	return new Intl.NumberFormat(CL, formats.currency).format(number);
+	return new Intl.NumberFormat(CL, {
+		...formats.currency,
+		...options,
+	}).format(number);
 }
 
 // Date
