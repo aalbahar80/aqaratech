@@ -1,6 +1,7 @@
 #!/usr/bin/env -S tsx
 
 // Run with `pnpm run i18n:export`
+// --lang: language to export
 // --skip-send: Don't send to Tolgee API, only generate the file
 
 import { dirname, join } from 'node:path';
@@ -11,7 +12,14 @@ import 'zx/globals';
 
 import { i18n_OUTPUT } from './constants';
 
+import type { Locales } from '$i18n/i18n-types';
+
 console.log({ argv });
+
+const args = argv as unknown as {
+	'skip-send'?: boolean;
+	lang: Locales;
+};
 
 const moduleDir = dirname(new URL(import.meta.url).pathname);
 
@@ -22,14 +30,14 @@ config({
 });
 
 // Save translations to file
-const mapping = await readTranslationFromDisk('en');
+const mapping = await readTranslationFromDisk(args.lang);
 await fs.writeJson(
-	join(moduleDir, `../tolgee/generated/${i18n_OUTPUT}`),
+	join(moduleDir, `../tolgee/generated/${args.lang}-${i18n_OUTPUT}`),
 	mapping,
 	{ spaces: 2 },
 );
 
-if (argv['skip-send']) {
+if (args['skip-send']) {
 	console.log('Skipping sending to Tolgee API');
 	process.exit(0);
 }
