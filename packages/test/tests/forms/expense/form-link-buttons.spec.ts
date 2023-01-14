@@ -8,12 +8,12 @@ import { test } from '../../api/api-fixtures';
 const inputs = [
 	{
 		entity: 'expense',
-		buttonName: 'Create expense',
+		buttonName: 'New Expense',
 		urlName: 'expenses',
 	},
 	{
 		entity: 'maintenanceOrder',
-		buttonName: 'Create maintenance order',
+		buttonName: 'New Maintenance',
 		urlName: 'maintenance-orders',
 	},
 ];

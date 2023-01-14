@@ -37,7 +37,7 @@ test('can export csv from income table', async ({
 
 	const [download] = await Promise.all([
 		page.waitForEvent('download'),
-		page.getByRole('link', { name: 'Export to CSV' }).click(),
+		page.getByRole('link', { name: 'Export' }).click(),
 	]);
 
 	await download.saveAs(SAVE_PATH);

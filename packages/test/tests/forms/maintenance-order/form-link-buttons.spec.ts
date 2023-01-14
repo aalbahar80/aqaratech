@@ -5,7 +5,7 @@ import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../../api/api-fixtures';
 
-const BUTTON_LABEL = 'Create maintenance order';
+const BUTTON_LABEL = 'New Maintenance';
 
 test('create maintenanceOrder for unit button predefined params', async ({
 	page,
