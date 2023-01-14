@@ -25,7 +25,7 @@ config({
 const mapping = await readTranslationFromDisk('en');
 await fs.writeJson(
 	join(moduleDir, `../tolgee/generated/${i18n_OUTPUT}`),
-	mapping.translations,
+	mapping,
 	{ spaces: 2 },
 );
 

@@ -26,10 +26,7 @@ const sendDataToAPI = (exportMapping: ExportLocaleMapping) => {
 	console.log(inspect(exportMapping, false, 999, true));
 
 	// Save translations to file
-	writeFileSync(
-		outputPath,
-		JSON.stringify(exportMapping.translations, null, 2),
-	);
+	writeFileSync(outputPath, JSON.stringify(exportMapping, null, 2));
 
 	const send = join(moduleDir, './tolgee-send.sh');
 
