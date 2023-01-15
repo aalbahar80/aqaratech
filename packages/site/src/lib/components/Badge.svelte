@@ -5,7 +5,7 @@
 
 <div
 	data-testid="badge"
-	class="rounded-md px-2.5 py-0.5 text-center font-medium"
+	class="rounded-md px-2.5 py-0.5 text-center font-medium print:hidden"
 	class:green={badgeColor === 'green'}
 	class:red={badgeColor === 'red'}
 	class:indigo={badgeColor === 'indigo'}

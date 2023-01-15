@@ -31,7 +31,7 @@
 	export let onDelete: OnDelete | undefined = undefined;
 </script>
 
-<div class="grid grid-cols-2 items-center justify-between gap-y-4">
+<div class="grid grid-cols-2 items-center justify-between gap-y-4 print:hidden">
 	<!-- Breadcrumbs -->
 	{#if $$slots.breadcrumbs}
 		<div class="col-span-full">
