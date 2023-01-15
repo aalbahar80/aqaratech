@@ -65,8 +65,8 @@
 		"postmark": "3.0.15",
 		"prisma": "4.8.1",
 		"reflect-metadata": "0.1.13",
-		"remeda": "1.3.0",
-		"rimraf": "3.0.2",
+		"remeda": "1.4.0",
+		"rimraf": "4.0.5",
 		"rxjs": "7.8.0",
 		"winston": "3.8.2",
 		"zod": "3.20.2"
