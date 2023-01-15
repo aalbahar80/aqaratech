@@ -4,6 +4,8 @@
 
 	import { fade } from 'svelte/transition';
 
+	import { TABLE_ROW_SPACING } from './spacing';
+
 	export let row: Row<{ id: string }>;
 </script>
 
@@ -12,9 +14,11 @@
 		{@const cellValueType = typeof cell.getValue()}
 		<td
 			in:fade={{ duration: 200 }}
-			class={clsx('py-4 px-2 text-base text-gray-600', {
-				'slashed-zero tabular-nums': cellValueType === 'number',
-			})}
+			class={clsx(
+				'py-4 px-2 text-base text-gray-600',
+				{ 'slashed-zero tabular-nums': cellValueType === 'number' },
+				TABLE_ROW_SPACING,
+			)}
 		>
 			<!-- Rendering null cells throws. This might only be an issue
 									when the entire column is null on a given page. -->
@@ -26,9 +30,3 @@
 		</td>
 	{/each}
 </tr>
-
-<style lang="postcss">
-	td {
-		@apply whitespace-nowrap first:pl-4 last:pr-4;
-	}
-</style>

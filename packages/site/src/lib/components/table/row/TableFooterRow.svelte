@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { flexRender, type HeaderGroup } from '@tanstack/svelte-table';
 
+	import { TABLE_ROW_SPACING } from './spacing';
+
 	type T = $$Generic;
 
 	export let group: HeaderGroup<T>;
@@ -10,7 +12,7 @@
 	{#each group.headers as header}
 		<th
 			colSpan={header.colSpan}
-			class="py-2 px-2 text-left text-sm font-semibold text-gray-900"
+			class={`py-2 px-2 text-left text-sm font-semibold text-gray-900 ${TABLE_ROW_SPACING}`}
 		>
 			{#if !header.isPlaceholder}
 				<svelte:component
@@ -20,9 +22,3 @@
 		</th>
 	{/each}
 </tr>
-
-<style lang="postcss">
-	th {
-		@apply whitespace-nowrap first:pl-4 last:pr-4;
-	}
-</style>
