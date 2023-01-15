@@ -1,6 +1,8 @@
 <script>
 	import { fade } from 'svelte/transition';
 
+	import L from '$i18n/i18n-svelte';
+
 	import HeroiconsTableCells from '~icons/heroicons/table-cells';
 </script>
 
@@ -13,7 +15,7 @@
 	>
 		<HeroiconsTableCells class="mx-auto h-20 w-20  text-gray-300" />
 		<span class="block px-8 pt-8 text-xl font-light text-gray-900">
-			There are no items to display.
+			{$L.general.noItems()}
 		</span>
 	</div>
 </div>

@@ -551,8 +551,18 @@ type RootTranslation = {
 		 * L​a​s​t​ ​m​o​n​t​h
 		 */
 		lastMonth: string
+		/**
+		 * T​h​e​r​e​ ​a​r​e​ ​n​o​ ​i​t​e​m​s​ ​t​o​ ​d​i​s​p​l​a​y​.
+		 */
+		noItems: string
 	}
 	charts: {
+		empty: {
+			/**
+			 * N​o​ ​d​a​t​a
+			 */
+			title: string
+		}
 		incomePie: {
 			/**
 			 * I​n​c​o​m​e​:​ ​b​y​ ​p​a​y​m​e​n​t​ ​s​t​a​t​u​s
@@ -1534,8 +1544,18 @@ export type TranslationFunctions = {
 		 * Last month
 		 */
 		lastMonth: () => LocalizedString
+		/**
+		 * There are no items to display.
+		 */
+		noItems: () => LocalizedString
 	}
 	charts: {
+		empty: {
+			/**
+			 * No data
+			 */
+			title: () => LocalizedString
+		}
 		incomePie: {
 			/**
 			 * Income: by payment status

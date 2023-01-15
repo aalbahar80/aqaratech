@@ -60,8 +60,13 @@ const en: BaseTranslation = {
 		unspecified: 'Unspecified',
 		thisMonth: 'This month',
 		lastMonth: 'Last month',
+		noItems: 'There are no items to display.',
 	},
 	charts: {
+		empty: {
+			title: 'No data',
+			// subtitle: 'There is no data available for your selection.',
+		},
 		incomePie: {
 			title: 'Income: by payment status',
 			subtitle: 'Total income by payment status for the selected period.',

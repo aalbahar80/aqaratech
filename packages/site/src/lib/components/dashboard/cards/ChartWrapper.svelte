@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 
+	import L from '$i18n/i18n-svelte';
+
 	import HeroiconsChartPie from '~icons/heroicons/chart-pie';
 
 	export let empty: boolean;
@@ -25,7 +27,9 @@
 			in:fade
 		>
 			<HeroiconsChartPie class="mx-auto h-20 w-20  text-gray-300" />
-			<span class="block pt-8 text-xl font-light text-gray-900">No data</span>
+			<span class="block pt-8 text-xl font-light text-gray-900"
+				>{$L.charts.empty.title()}</span
+			>
 		</div>
 	{:else}
 		<div class="prose prose-base lg:pb-10" in:fade>

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import L from '$i18n/i18n-svelte';
+
 	export let title: string;
 	export let subtitle = '';
 	export let empty = false;
@@ -15,9 +17,9 @@
 			class="inline-flex h-52 grow flex-col place-content-center rounded-md bg-gray-100 text-center"
 		>
 			<div class="prose prose-xl place-self-center">
-				<small class="font-medium">No Data</small>
+				<small class="font-medium">{$L.charts.empty.title()}</small>
 				<br />
-				<small>There's no data available for your selection.</small>
+				<!-- <small>{$L.charts.empty.subtitle()}</small> -->
 			</div>
 		</div>
 	{:else}

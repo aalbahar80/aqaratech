@@ -164,8 +164,13 @@ const ar: Translation = {
 		unspecified: 'غير محدد',
 		thisMonth: 'الشهر الحالي',
 		lastMonth: 'الشهر الماضى',
+		noItems: 'لا توجد بيانات يمكن عرضها.',
 	},
 	charts: {
+		empty: {
+			title: 'لا توجد بيانات',
+			// subtitle: 'لا توجد بيانات متاحة للتحديد الخاص بك.',
+		},
 		incomePie: {
 			title: 'الدخل: حسب حالة الدفع',
 			subtitle: 'إجمالي الدخل حسب حالة الدفع للفترة المحددة.',
