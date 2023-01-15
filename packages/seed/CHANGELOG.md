@@ -1,5 +1,18 @@
 # @self/seed
 
+## 2.8.0
+
+### Minor Changes
+
+- 8a75e459e: update deps
+- d0ae307ea: many i18n updates
+
+### Patch Changes
+
+- Updated dependencies [8a75e459e]
+- Updated dependencies [d0ae307ea]
+  - @self/utils@3.8.0
+
 ## 2.7.0
 
 ### Minor Changes

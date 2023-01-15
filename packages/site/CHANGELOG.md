@@ -1,5 +1,16 @@
 # @self/site
 
+## 2.9.0
+
+### Minor Changes
+
+- 8a75e459e: update deps
+- d0ae307ea: many i18n updates
+
+### Patch Changes
+
+- f846c50aa: add back files tab to lease page
+
 ## 2.8.0
 
 ### Minor Changes
