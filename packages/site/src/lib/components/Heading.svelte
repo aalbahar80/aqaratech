@@ -112,14 +112,14 @@
 	<!-- Icons -->
 	{#if icons}
 		<div
-			class="col-span-full mt-0 flex flex-row flex-wrap space-x-6 sm:col-span-1"
+			class="col-span-full mt-0 flex flex-row flex-wrap gap-x-6 sm:col-span-1"
 		>
 			{#each icons as { label, icon, tooltip } (tooltip)}
 				{#if label != undefined && icon}
 					<div class="mt-2 flex items-center text-sm text-gray-500">
 						<svelte:component
 							this={icon}
-							class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+							class="h-5 w-5 flex-shrink-0 text-gray-400 ltr:mr-1.5 rtl:ml-1.5"
 						/>
 						{label}
 					</div>
