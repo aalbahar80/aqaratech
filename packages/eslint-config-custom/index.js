@@ -18,6 +18,21 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended-requiring-type-checking',
 		'plugin:@typescript-eslint/strict',
 
+		// https://github.com/eslint-community/eslint-plugin-security#rules
+		'plugin:security/recommended',
+
+		// https://mysticatea.github.io/eslint-plugin-eslint-comments/
+		'plugin:eslint-comments/recommended',
+
+		// https://github.com/eslint-community/eslint-plugin-promise#usage
+		'plugin:promise/recommended',
+
+		// https://github.com/eslint-community/eslint-plugin-n#eslint-plugin-n
+		'plugin:n/recommended',
+
+		// https://github.com/ota-meshi/eslint-plugin-regexp#book-usage
+		'plugin:regexp/recommended',
+
 		'prettier',
 
 		...importConfig.extends,
@@ -87,6 +102,21 @@ module.exports = {
 		'@typescript-eslint/require-array-sort-compare': 'warn',
 		'@typescript-eslint/prefer-regexp-exec': 'warn',
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
+
+		'eslint-comments/no-unlimited-disable': 'off', // Ideally turn off only for generated files
+		'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
+
+		'n/no-missing-import': 'off', // superseded by eslint-plugin-import
+		'n/shebang': 'off', // zx uses shebangs
+		'n/no-process-exit': 'off', // zx uses process.exit()
+		'n/no-extraneous-import': [
+			'error',
+			{
+				allowModules: ['zx'],
+			},
+		],
+
+		'security/detect-object-injection': 'off',
 
 		// Overkill:
 		// '@typescript-eslint/strict-boolean-expressions': 'warn',
