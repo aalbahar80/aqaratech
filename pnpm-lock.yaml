@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 patchedDependencies:
   '@rgossiaux/svelte-headlessui@1.0.2':
-    hash: okvbycgeo7n6fa7ggm4c3cdetm
+    hash: tvgqshloapx5y3z3as5gnhnhfq
     path: patches/@rgossiaux__svelte-headlessui@1.0.2.patch
 
 importers:
