@@ -23,6 +23,11 @@
 			href: `${baseRoute}/invoices`,
 			roles: [RoleTypeEnum.Orgadmin, RoleTypeEnum.Portfolio],
 		},
+		{
+			label: $page.data.tabLabels![PageTab.Files],
+			href: `${baseRoute}/files`,
+			roles: [RoleTypeEnum.Orgadmin, RoleTypeEnum.Portfolio],
+		},
 	];
 </script>
 
