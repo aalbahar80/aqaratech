@@ -1,10 +1,10 @@
 <script lang="ts">
-	import L from '$i18n/i18n-svelte';
 	import debounce from 'debounce';
 	import Fuse from 'fuse.js';
 
 	import { createEventDispatcher, tick } from 'svelte';
 
+	import L from '$i18n/i18n-svelte';
 	import { clickOutside } from '$lib/actions/click-outside';
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { classes } from '$lib/utils/classes';
