@@ -6,7 +6,6 @@
 	import { page } from '$app/stores';
 
 	import L from '$i18n/i18n-svelte';
-	import DebugPane from '$lib/components/form/DebugPane.svelte';
 	import FormError from '$lib/components/form/enhanced/fields/FormError.svelte';
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
@@ -93,4 +92,4 @@
 	</div>
 </form>
 
-<DebugPane data={form} />
+<!-- <DebugPane data={form} /> -->
