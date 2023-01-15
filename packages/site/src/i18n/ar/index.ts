@@ -64,7 +64,7 @@ const ar: Translation = {
 		fullName: 'الاسم الكامل',
 		label: 'مسمى',
 		dob: 'تاريخ الولادة',
-		civilid: 'الهوية المدنية',
+		civilid: 'الرقم المدني',
 		phone: 'رقم الهاتف',
 		email: 'عنوان البريد الإلكتروني',
 		memo: 'مذكرة',
