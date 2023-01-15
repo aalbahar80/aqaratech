@@ -8,7 +8,7 @@ export const propertyCreateSchema = z
 		portfolioId: isID,
 		label: zodStringOptional,
 		area: zodString,
-		block: zodString.refine((val) => /^[0-9]+$/.exec(val) !== null, {
+		block: zodString.refine((val) => /^\d+$/.exec(val) !== null, {
 			message: 'Block must contain only numbers',
 		}),
 		street: zodString,

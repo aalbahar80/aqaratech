@@ -47,6 +47,7 @@ const data = preprocessSeed(raw);
 
 validateSeed(data);
 
+// eslint-disable-next-line promise/catch-or-return
 insertSeed(data)
 	.catch((e) => {
 		console.error(e);

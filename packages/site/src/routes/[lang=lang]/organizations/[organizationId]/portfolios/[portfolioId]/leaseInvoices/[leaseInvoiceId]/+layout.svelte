@@ -68,13 +68,17 @@
 			text={$L.buttons.sendReminder()}
 			solid
 			disabled={data.leaseInvoice.isPaid}
-			on:click={() => {
-				createApi()
-					.leaseInvoices.sendEmail({ id: data.leaseInvoice.id })
-					.then(() => {
-						addSuccessToast();
-					})
-					.catch(handleApiError);
+			on:click={async () => {
+				try {
+					await createApi().leaseInvoices.sendEmail({
+						id: data.leaseInvoice.id,
+					});
+
+					addSuccessToast();
+				} catch (e) {
+					console.error(e);
+					await handleApiError(e);
+				}
 			}}
 		/>
 	</svelte:fragment>

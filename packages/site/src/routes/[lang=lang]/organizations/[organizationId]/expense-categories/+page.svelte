@@ -70,7 +70,7 @@
 				disabled={difference.length === 0}
 				as="button"
 				class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-				on:click={() => {
+				on:click={async () => {
 					console.debug(difference);
 					console.debug(newList);
 
@@ -81,18 +81,19 @@
 						throw new Error('Organization ID is required');
 					}
 
-					createApi()
-						.expenseCategories.updateAll({
+					try {
+						const res = await createApi().expenseCategories.updateAll({
 							updateExpenseCategoryTreeDto: newList.map((category) =>
 								R.omit(category, ['isGroup']),
 							),
 							organizationId,
-						})
-						.then((res) => {
-							addSuccessToast();
-							data.categories = res;
-						})
-						.catch(handleApiError);
+						});
+						data.categories = res;
+						addSuccessToast();
+					} catch (e) {
+						console.error(e);
+						await handleApiError(e);
+					}
 				}}
 			>
 				<Fa6SolidFloppyDisk />

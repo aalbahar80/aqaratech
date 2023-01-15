@@ -26,6 +26,7 @@ const sendDataToAPI = (exportMapping: ExportLocaleMapping) => {
 	console.log(inspect(exportMapping, false, 999, true));
 
 	// Save translations to file
+	// eslint-disable-next-line security/detect-non-literal-fs-filename
 	writeFileSync(outputPath, JSON.stringify(exportMapping, null, 2));
 
 	const send = join(moduleDir, './tolgee-send.sh');
