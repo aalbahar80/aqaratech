@@ -1,4 +1,5 @@
 <script lang="ts">
+	import L from '$i18n/i18n-svelte';
 	import debounce from 'debounce';
 	import Fuse from 'fuse.js';
 
@@ -196,9 +197,9 @@
 		id={inputId}
 		data-value={selection?.value}
 		{disabled}
-		class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
+		class="w-full rounded-md border border-gray-300 bg-white py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none ltr:pr-10 ltr:pl-3 rtl:pl-10 rtl:pr-3 sm:text-sm"
 		class:form-invalid={invalid}
-		placeholder="Search..."
+		placeholder={`${$L.buttons.search()}...`}
 		autocomplete="off"
 		type="text"
 		bind:value={inputValue}
@@ -216,7 +217,7 @@
 		}}
 	/>
 	<div
-		class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none"
+		class="absolute inset-y-0 flex items-center rounded-r-md px-2 focus:outline-none ltr:right-0 rtl:left-0"
 	>
 		<button
 			class="mr-4"
@@ -258,7 +259,7 @@
 					<li
 						value={item}
 						class={classes(
-							'relative cursor-default select-none py-2 pl-3 pr-9',
+							'relative cursor-default select-none py-2 ltr:pl-3 ltr:pr-9 rtl:pr-3 rtl:pl-9',
 							hovering || activeOption === item ? 'isActive' : '',
 							(hovering || activeOption === item) && !item.disabled
 								? 'bg-indigo-600 text-white'
@@ -283,7 +284,7 @@
 						{#if selected}
 							<span
 								class={classes(
-									'absolute inset-y-0 right-0 flex items-center pr-4',
+									'absolute inset-y-0 flex items-center ltr:right-0 ltr:pr-4 rtl:left-0 rtl:pl-4',
 									hovering ? 'text-white' : 'text-indigo-600',
 								)}
 							>
