@@ -31,7 +31,7 @@
 		<div class="prose prose-base lg:pb-10" in:fade>
 			<h3>{title}</h3>
 			<p>{subtitle}</p>
-			<span class="italic text-gray-500">{subtitle2}</span>
+			<p class="italic text-gray-500">{subtitle2}</p>
 		</div>
 		<slot />
 	{/if}

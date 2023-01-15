@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 
 import { PageTypePortfolio } from '@self/utils';
 
-import { navbar } from '../../../locators/navbar';
+import { chartText, navbar } from '../../../locators/common';
 import { Filters } from '../filter-model';
 
 import { chartTestPresets } from './filter-presets';
@@ -41,7 +41,7 @@ for (const preset of incomeChartTestPresets) {
 		test('looks the same', async ({ page }) => {
 			await expect.soft(page).toHaveScreenshot({
 				fullPage: true,
-				mask: [page.getByText('version: '), navbar(page)],
+				mask: [page.getByText('version: '), navbar(page), ...chartText(page)],
 				// maxDiffPixelRatio: 0.01,
 			});
 
@@ -50,7 +50,7 @@ for (const preset of incomeChartTestPresets) {
 				.filter({ hasText: 'Income: by Payment Status' });
 
 			await expect.soft(pieChart).toHaveScreenshot({
-				mask: [navbar(page)],
+				mask: [navbar(page), ...chartText(page)],
 			});
 
 			const barChart = page
@@ -59,7 +59,7 @@ for (const preset of incomeChartTestPresets) {
 
 			await expect.soft(barChart).toHaveScreenshot({
 				maxDiffPixelRatio: 0.01, // firefox fails without this
-				mask: [navbar(page)],
+				mask: [navbar(page), ...chartText(page)],
 			});
 		});
 	});
