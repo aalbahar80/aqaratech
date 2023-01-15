@@ -127,6 +127,11 @@ const en: BaseTranslation = {
 		// entries: 'entries',
 		// records: 'records',
 	},
+	search: {
+		title: 'Search for tenants, owners, or properties.',
+		subtitle: 'Search by name, address, etc.',
+		noResults: 'No results found',
+	},
 	landing,
 	aqaratech,
 	other: {

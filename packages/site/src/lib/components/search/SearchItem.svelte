@@ -2,9 +2,8 @@
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
 	import clsx from 'clsx';
 
-	import { startCase } from '@self/utils';
-
 	import Hoverable from '$lib/components/Hoverable.svelte';
+	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { classes } from '$lib/utils/classes';
 
 	import type { HitDto } from '$api/openapi';
@@ -33,7 +32,7 @@
 				<svelte:component
 					this={icon}
 					class={classes(
-						'mr-2 h-6 w-6 flex-none text-opacity-40',
+						'h-6 w-6 flex-none text-opacity-40 ltr:mr-2 rtl:ml-2',
 						hovering ? 'text-white text-opacity-70' : 'text-gray-400',
 					)}
 					aria-hidden="true"
@@ -47,7 +46,7 @@
 						{#each Object.entries(item.hints) as [key, val]}
 							<p>
 								<span class="font-extralight">
-									{startCase(key)}:
+									{getIntlLabel(key)}:
 								</span>
 								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 								{@html val}

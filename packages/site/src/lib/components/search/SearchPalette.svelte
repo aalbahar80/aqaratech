@@ -115,12 +115,12 @@
 				>
 					<div class="relative">
 						<HeroiconsMagnifyingGlass
-							class="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
+							class="pointer-events-none absolute top-3.5 h-5 w-5 text-gray-400 ltr:left-4 rtl:right-4"
 							aria-hidden="true"
 						/>
 						<input
-							class="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
-							placeholder="Search..."
+							class="h-12 w-full border-0 bg-transparent text-gray-800 placeholder-gray-400 focus:ring-0 ltr:pl-11 rtl:pr-11 sm:text-sm"
+							placeholder={`${$L.buttons.search()}...`}
 							type="text"
 							on:input={(event) => {
 								query = event.currentTarget?.value;
@@ -137,9 +137,9 @@
 								aria-hidden="true"
 							/>
 							<p class="mt-4 font-semibold text-gray-900">
-								Search for tenants, owners, or properties.
+								{$L.search.title()}
 							</p>
-							<p class="mt-2 text-gray-500">Search by name, address, etc.</p>
+							<p class="mt-2 text-gray-500">{$L.search.subtitle()}</p>
 						</div>
 					{/if}
 
@@ -183,10 +183,12 @@
 								class="mx-auto h-6 w-6 text-gray-400"
 								aria-hidden="true"
 							/>
-							<p class="mt-4 font-semibold text-gray-900">No results found</p>
-							<p class="mt-2 text-gray-500">
-								We couldn’t find anything with that term. Please try again.
+							<p class="mt-4 font-semibold text-gray-900">
+								{$L.search.noResults()}
 							</p>
+							<!-- <p class="mt-2 text-gray-500"> -->
+							<!-- 	We couldn’t find anything with that term. Please try again. -->
+							<!-- </p> -->
 						</div>
 					{/if}
 				</Listbox>

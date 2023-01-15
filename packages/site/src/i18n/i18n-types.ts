@@ -716,6 +716,20 @@ type RootTranslation = {
 		 */
 		page: string
 	}
+	search: {
+		/**
+		 * S​e​a​r​c​h​ ​f​o​r​ ​t​e​n​a​n​t​s​,​ ​o​w​n​e​r​s​,​ ​o​r​ ​p​r​o​p​e​r​t​i​e​s​.
+		 */
+		title: string
+		/**
+		 * S​e​a​r​c​h​ ​b​y​ ​n​a​m​e​,​ ​a​d​d​r​e​s​s​,​ ​e​t​c​.
+		 */
+		subtitle: string
+		/**
+		 * N​o​ ​r​e​s​u​l​t​s​ ​f​o​u​n​d
+		 */
+		noResults: string
+	}
 	landing: {
 		hero: {
 			/**
@@ -1668,6 +1682,20 @@ export type TranslationFunctions = {
 		 * Page
 		 */
 		page: () => LocalizedString
+	}
+	search: {
+		/**
+		 * Search for tenants, owners, or properties.
+		 */
+		title: () => LocalizedString
+		/**
+		 * Search by name, address, etc.
+		 */
+		subtitle: () => LocalizedString
+		/**
+		 * No results found
+		 */
+		noResults: () => LocalizedString
 	}
 	landing: {
 		hero: {
