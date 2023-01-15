@@ -257,7 +257,7 @@
 					<!-- Don't confuse `disabled` (entire component) with `item.disabled` (single option) -->
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<li
-						value={item}
+						value={item.value}
 						class={classes(
 							'relative cursor-default select-none py-2 ltr:pl-3 ltr:pr-9 rtl:pr-3 rtl:pl-9',
 							hovering || activeOption === item ? 'isActive' : '',
