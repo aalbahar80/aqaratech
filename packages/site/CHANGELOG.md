@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.10.1
+
+### Patch Changes
+
+- 753867bda: update deps
+
 ## 2.10.0
 
 ### Minor Changes

@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.9.1
+
+### Patch Changes
+
+- 753867bda: update deps
+- Updated dependencies [753867bda]
+  - @self/utils@3.9.1
+
 ## 2.9.0
 
 ### Minor Changes
