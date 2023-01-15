@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.9.0
+
+### Minor Changes
+
+- 39bcce416: search i18n
+
 ## 3.8.0
 
 ### Minor Changes

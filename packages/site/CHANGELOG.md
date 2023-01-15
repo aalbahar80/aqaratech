@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.10.0
+
+### Minor Changes
+
+- 39bcce416: search i18n
+
 ## 2.9.0
 
 ### Minor Changes

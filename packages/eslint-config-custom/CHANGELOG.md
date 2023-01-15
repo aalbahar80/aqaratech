@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.9.0
+
+### Minor Changes
+
+- 39bcce416: search i18n
+
 ## 2.8.0
 
 ### Minor Changes
