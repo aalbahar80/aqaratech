@@ -22,7 +22,7 @@
 	{disabled}
 	on:click
 >
-	<div class="-ml-1 mr-2 hidden h-5 w-5 sm:block">
+	<div class="hidden h-5 w-5 ltr:mr-2 rtl:ml-2 sm:block">
 		<Spinner {loading} />
 		<slot>
 			{#if icon && !loading}
