@@ -15,7 +15,7 @@ test('expense tile links to edit form', async ({ page }) => {
 	await tile.getByRole('link', { name: 'Edit' }).click();
 
 	// expect page to have url ending with /edit
-	const re = new RegExp(`.*/edit$`);
+	const re = /.*\/edit$/;
 	await expect(page).toHaveURL(re);
 
 	const labelEn = page.getByLabel('Label En');

@@ -61,8 +61,7 @@ test('login', async ({ page }) => {
 	const cookies = await page.context().cookies();
 	const accessToken = cookies.find((c) => c.name === Cookie.accessToken);
 
-	const selectRolePage =
-		/^users\/[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\/roles$/;
+	const selectRolePage = /^users\/[\w-]+\.[\w-]+\.[\w-]+\/roles$/;
 
 	const possibleDestinations = ['/', selectRolePage, user.destination()];
 
@@ -70,9 +69,7 @@ test('login', async ({ page }) => {
 	await expect(page).toHaveURL(RegExp(possibleDestinations.join('|')));
 
 	const token = {
-		value: expect.stringMatching(
-			/^[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+$/,
-		),
+		value: expect.stringMatching(/^[\w-]+\.[\w-]+\.[\w-]+$/),
 		domain,
 		path: '/',
 		expires: expect.any(Number),

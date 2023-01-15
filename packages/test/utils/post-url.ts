@@ -1,6 +1,5 @@
 import { apiURL } from '../tests/api/fixtures/api-url';
 
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 export const PostUrl = (orgId: string) => {
 	return {
 		tenant: `${apiURL}/organizations/${orgId}/tenants`,
@@ -41,7 +40,13 @@ export const getUrl = ({
 	organizationId?: string;
 	portfolioId?: string | null;
 	tenantId?: string | null;
-}) => ({
-	incomeAggregate: `${apiURL}/organizations/${organizationId}/portfolios/${portfolioId}/aggregate/income`,
-	expensesAggregate: `${apiURL}/organizations/${organizationId}/portfolios/${portfolioId}/aggregate/expenses`,
-});
+}) => {
+	if (!organizationId || !portfolioId) {
+		throw new Error('Missing organizationId or portfolioId');
+	}
+
+	return {
+		incomeAggregate: `${apiURL}/organizations/${organizationId}/portfolios/${portfolioId}/aggregate/income`,
+		expensesAggregate: `${apiURL}/organizations/${organizationId}/portfolios/${portfolioId}/aggregate/expenses`,
+	};
+};

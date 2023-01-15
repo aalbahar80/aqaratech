@@ -24,6 +24,9 @@ module.exports = {
 		'playwright/no-conditional-in-test': 'off',
 		'playwright/no-skipped-test': 'off',
 		'playwright/no-wait-for-timeout': 'off',
+
+		'security/detect-non-literal-fs-filename': 'off',
+		'security/detect-non-literal-regexp': 'off',
 	},
 	globals: {
 		ProcessPromise: 'readonly',

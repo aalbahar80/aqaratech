@@ -107,6 +107,13 @@ module.exports = {
 		'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
 
 		'n/no-missing-import': 'off', // superseded by eslint-plugin-import
+		'n/no-missing-require': [
+			'error',
+			{
+				tryExtensions: ['.js', '.json', '.node', '.ts', '.tsx', '.svelte'],
+			},
+		],
+
 		'n/shebang': 'off', // zx uses shebangs
 		'n/no-process-exit': 'off', // zx uses process.exit()
 		'n/no-extraneous-import': [
