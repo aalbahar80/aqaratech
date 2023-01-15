@@ -1,4 +1,5 @@
 const importConfig = require('./import');
+// const unicornConfig = require('./unicorn');
 const turboConfig = require('./turbo');
 
 /**
@@ -37,6 +38,7 @@ module.exports = {
 
 		...importConfig.extends,
 		...turboConfig.extends,
+		// ...unicornConfig.extends,
 	],
 	plugins: ['@typescript-eslint'],
 	parserOptions: {
@@ -131,6 +133,7 @@ module.exports = {
 
 		...importConfig.rules,
 		...turboConfig.rules,
+		// ...unicornConfig.rules,
 	},
 	ignorePatterns: ['*.sh'],
 };
