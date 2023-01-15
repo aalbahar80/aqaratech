@@ -7,11 +7,12 @@
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
-	import L from '$i18n/i18n-svelte';
+	import L, { locale } from '$i18n/i18n-svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
+	import { fmtNumber } from '$lib/i18n/format';
 
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
@@ -24,25 +25,29 @@
 
 	const icons = [
 		{
-			label: data.unit.bed,
+			label: data.unit.bed ? fmtNumber(data.unit.bed) : data.unit.bed,
 			icon: Fa6SolidBed,
 			tooltip: 'Bedrooms',
 		},
 		{
-			label: data.unit.bath,
+			label: data.unit.bath ? fmtNumber(data.unit.bath) : data.unit.bath,
 			icon: FaSolidBath,
 			tooltip: 'Bathrooms',
 		},
 		{
 			label:
 				typeof data.unit.size === 'number'
-					? `${data.unit.size.toLocaleString()} m²`
+					? new Intl.NumberFormat($locale, {
+							style: 'unit',
+							unit: 'meter',
+							unitDisplay: 'short',
+					  }).format(data.unit.size)
 					: data.unit.size,
 			tooltip: 'Size',
 			icon: GisMeasure,
 		},
 		{
-			label: data.unit.floor,
+			label: data.unit.floor ? fmtNumber(data.unit.floor) : data.unit.floor,
 			icon: Fa6SolidStairs,
 			tooltip: 'Floor',
 		},
