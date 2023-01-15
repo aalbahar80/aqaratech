@@ -58,7 +58,7 @@
 	<svelte:fragment slot="actions">
 		<Button
 			icon={HeroiconsArrowPath}
-			text="Renew"
+			text={$L.buttons.renew()}
 			as="a"
 			href={getRoute({
 				entity: 'lease',
@@ -75,7 +75,7 @@
 
 		<Button
 			icon={HeroiconsDocumentText}
-			text="Contract"
+			text={$L.buttons.contract()}
 			as="a"
 			href={getRoute({
 				entity: 'lease',

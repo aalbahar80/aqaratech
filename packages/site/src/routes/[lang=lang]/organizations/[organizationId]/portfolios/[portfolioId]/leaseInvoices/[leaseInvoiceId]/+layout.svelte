@@ -56,7 +56,7 @@
 		/> -->
 		<Button
 			icon={HeroiconsDocumentText}
-			text="Print"
+			text={$L.buttons.print()}
 			as="button"
 			on:click={async () =>
 				await createPDF({ invoice: data.leaseInvoice, outputType: 'save' })}
@@ -65,7 +65,7 @@
 		/>
 		<Button
 			icon={HeroiconsEnvelope}
-			text="Send email reminder"
+			text={$L.buttons.sendReminder()}
 			solid
 			disabled={data.leaseInvoice.isPaid}
 			on:click={() => {

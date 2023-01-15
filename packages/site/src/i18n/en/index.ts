@@ -27,6 +27,10 @@ const en: BaseTranslation = {
 		toggleAll: 'Toggle all',
 		markAsPaid: 'Mark as paid',
 		options: 'Options',
+		renew: 'Renew',
+		contract: 'Contract',
+		print: 'Print',
+		sendReminder: 'Send reminder',
 	},
 	nav: {
 		financials: 'Financials',

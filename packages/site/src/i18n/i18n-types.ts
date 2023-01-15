@@ -431,6 +431,22 @@ type RootTranslation = {
 		 * O​p​t​i​o​n​s
 		 */
 		options: string
+		/**
+		 * R​e​n​e​w
+		 */
+		renew: string
+		/**
+		 * C​o​n​t​r​a​c​t
+		 */
+		contract: string
+		/**
+		 * P​r​i​n​t
+		 */
+		print: string
+		/**
+		 * S​e​n​d​ ​r​e​m​i​n​d​e​r
+		 */
+		sendReminder: string
 	}
 	nav: {
 		/**
@@ -1398,6 +1414,22 @@ export type TranslationFunctions = {
 		 * Options
 		 */
 		options: () => LocalizedString
+		/**
+		 * Renew
+		 */
+		renew: () => LocalizedString
+		/**
+		 * Contract
+		 */
+		contract: () => LocalizedString
+		/**
+		 * Print
+		 */
+		print: () => LocalizedString
+		/**
+		 * Send reminder
+		 */
+		sendReminder: () => LocalizedString
 	}
 	nav: {
 		/**

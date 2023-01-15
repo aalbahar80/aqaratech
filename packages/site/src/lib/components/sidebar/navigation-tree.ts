@@ -57,7 +57,7 @@ export const getNavigationTree = (
 	if (!user.role) {
 		// New users have no role yet. Render basic nav links.
 		tree.splice(0, 0, {
-			name: 'Create new organization',
+			name: [LL.buttons.new(), LL.entity.organization.singular()].join(' '),
 			href: NEW_ORGANIZATION(locale),
 			icon: HeroiconsPlus,
 			divided: true,
