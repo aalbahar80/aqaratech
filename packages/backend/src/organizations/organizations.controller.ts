@@ -34,6 +34,7 @@ import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
 import { SearchDto } from 'src/search/dto/search.dto';
 import { SearchService } from 'src/search/search.service';
+import { escapeStringRegexp } from 'src/utils/regex';
 
 import {
 	CreateOrganizationDto,
@@ -156,6 +157,11 @@ export class OrganizationsController {
 		@Param('organizationId') organizationId: string,
 		@Query('query') query: string,
 	): Promise<SearchDto> {
-		return this.searchService.search({ query, organizationId, user });
+		return this.searchService.search({
+			// Safely escape the query string
+			query: escapeStringRegexp(query),
+			organizationId,
+			user,
+		});
 	}
 }

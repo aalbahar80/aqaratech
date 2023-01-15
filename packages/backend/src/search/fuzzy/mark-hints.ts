@@ -4,6 +4,7 @@ export const markHints = (result: SearchResult) => {
 	const hints: Record<string, string> = {};
 
 	result.terms.forEach((term) => {
+		// eslint-disable-next-line security/detect-non-literal-regexp
 		const regexp = new RegExp(`(${term})`, 'gi');
 
 		result.match[term]?.forEach((field) => {

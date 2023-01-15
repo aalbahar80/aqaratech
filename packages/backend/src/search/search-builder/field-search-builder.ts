@@ -21,7 +21,7 @@ export const fieldSearchBuilder = <T extends string, Query extends string>(
 	const searchReplace = {
 		[field]: {
 			// https://github.com/prisma/prisma/issues/8939#issuecomment-933990947
-			search: query.replace(/[\s\n\t]/g, '_'),
+			search: query.replace(/\s/g, '_'),
 			mode,
 		},
 	};
