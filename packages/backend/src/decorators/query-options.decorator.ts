@@ -9,6 +9,7 @@ import {
 	RequestQueryOptions,
 } from '@prisma-utils/nestjs-request-parser';
 import { Request } from 'express';
+import queryType from 'query-types';
 import { z } from 'zod';
 
 import { queryOptionsParsedSchema } from '@self/utils';
@@ -48,15 +49,24 @@ export const QueryParser = createParamDecorator(
 			filter: z.record(filterKeySchema, z.any()),
 		});
 
-		const output = new ZodValidationPipe(schema).transform(
-			{
-				...parsed,
-				filter: request.query['filter'] ?? {},
-			},
-			{
-				type: 'custom',
-			},
-		);
+		// Convert query string to javascript object
+		const queryAsPrimitives = queryType.parseObject(request.query);
+
+		// Only keep the filter
+		const filter =
+			'filter' in queryAsPrimitives ? queryAsPrimitives['filter'] : {};
+
+		// Validate both the parsed query and the filter This is the final step
+		// before we have a valid QueryOptionsRequestDto to use in the
+		// controller/services layers.
+		const input = {
+			...parsed,
+			filter,
+		};
+
+		const output = new ZodValidationPipe(schema).transform(input, {
+			type: 'custom',
+		});
 
 		return output;
 	},

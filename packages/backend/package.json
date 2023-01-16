@@ -64,6 +64,7 @@
 		"passport-jwt": "4.0.1",
 		"postmark": "3.0.15",
 		"prisma": "4.9.0",
+		"query-types": "0.1.4",
 		"reflect-metadata": "0.1.13",
 		"remeda": "1.6.0",
 		"rimraf": "4.1.1",

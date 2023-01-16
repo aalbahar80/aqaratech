@@ -95,6 +95,7 @@ importers:
       passport-jwt: 4.0.1
       postmark: 3.0.15
       prisma: 4.9.0
+      query-types: 0.1.4
       reflect-metadata: 0.1.13
       remeda: 1.6.0
       rimraf: 4.1.1
@@ -142,6 +143,7 @@ importers:
       passport-jwt: 4.0.1
       postmark: 3.0.15
       prisma: 4.9.0
+      query-types: 0.1.4
       reflect-metadata: 0.1.13
       remeda: 1.6.0
       rimraf: 4.1.1
@@ -8460,6 +8462,10 @@ packages:
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4
+
+  /query-types/0.1.4:
+    resolution: {integrity: sha512-DvOCeSGI+RJeZ8+13NYTZUGbGva3P85GmATpY2ojj0mIsNfw70xeTpQW51JaYDZyQ2Li/svGT+FUdd4CBUoDcQ==}
+    dev: false
 
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
