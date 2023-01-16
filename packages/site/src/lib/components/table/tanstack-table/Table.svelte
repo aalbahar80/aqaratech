@@ -13,6 +13,7 @@
 
 	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
+	import { flip } from 'svelte/animate';
 	import { writable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 
@@ -188,7 +189,6 @@
 	{#if $table.getRowModel().rows.length > 0}
 		<div
 			class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
-			in:fade
 		>
 			<div class="overflow-x-auto">
 				<table class="min-w-full divide-y divide-gray-300">
@@ -199,7 +199,14 @@
 					</thead>
 					<tbody>
 						{#each $table.getRowModel().rows as row (row.original.id)}
-							<TableBodyRow {row} />
+							<tr
+								animate:flip={{ duration: 300 }}
+								in:fade|local={{ duration: 300 }}
+								class="odd:bg-white even:bg-gray-50"
+								data-testid={row.original.id}
+							>
+								<TableBodyRow {row} />
+							</tr>
 						{/each}
 					</tbody>
 					<tfoot class="bg-gray-50">
