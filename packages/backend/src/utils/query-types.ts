@@ -1,4 +1,5 @@
 // @ts-nocheck
+
 // Source: https://github.com/xpepermint/query-types/blob/master/index.js
 
 const isObject = (val: unknown): val is object => val.constructor === Object;
@@ -12,7 +13,9 @@ const isBoolean = (val: unknown): val is boolean =>
 const isArray = Array.isArray;
 
 const parseValue = (val: unknown): unknown => {
-	if (typeof val == 'undefined' || val == '') {
+	if (typeof val === 'undefined' || val === 'undefined') {
+		return undefined;
+	} else if (val === 'null') {
 		return null;
 	} else if (isBoolean(val)) {
 		return parseBoolean(val);
@@ -31,7 +34,7 @@ export const parseObject = (obj: Record<string, unknown>) => {
 	const result = {};
 	for (const key in obj) {
 		const val = parseValue(obj[key]);
-		if (val !== null) result[key] = val;
+		result[key] = val;
 	}
 	return result;
 };
