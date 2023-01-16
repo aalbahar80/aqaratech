@@ -85,6 +85,7 @@ export class LeasesController {
 		@Param('id') id: string,
 		@QueryParser({
 			parserOptions: { orderDefaultValue: 'postAt' },
+			filterOptions: { keys: ['isPaid'] },
 		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {

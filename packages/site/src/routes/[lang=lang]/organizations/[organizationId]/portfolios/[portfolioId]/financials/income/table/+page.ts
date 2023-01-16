@@ -3,6 +3,7 @@ import { get } from 'svelte/store';
 
 import { createApi } from '$api';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
+import { isPaid } from '$lib/stores/filter/is-paid';
 import { property } from '$lib/stores/filter/property';
 import { range } from '$lib/stores/filter/range';
 import { unit } from '$lib/stores/filter/unit';
@@ -18,20 +19,26 @@ export const load: PageLoad = async ({
 	const { start, end } = get(range);
 	const propertyId = get(property);
 	const unitId = get(unit);
-	depends(FilterEnum.Range, FilterEnum.Property, FilterEnum.Unit);
+	const isPaidFilter = get(isPaid);
+
+	depends(
+		FilterEnum.Range,
+		FilterEnum.Property,
+		FilterEnum.Unit,
+		FilterEnum.IsPaid,
+	);
 
 	// If we use filter from the URL, we need to make an update here to avoid
 	// overriding the start/end when spreading the searchParams.
 	const queryFilter = searchParams.get('filter');
 
 	if (queryFilter) {
-		throw new Error(
-			'Update this code to merge the URL + start/end filter options',
-		);
+		throw new Error('Not implemented');
 	}
 
 	const filter: Record<string, unknown> = {
 		postAt: { gte: new Date(start), lte: new Date(end) },
+		isPaid: isPaidFilter,
 	};
 
 	// Only include propertyId & unitId if they're not null, otherwise we might
