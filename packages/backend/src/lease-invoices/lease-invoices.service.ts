@@ -59,15 +59,15 @@ export class LeaseInvoicesService {
 		queryOptions: QueryOptionsDto;
 		whereCustom?: Prisma.LeaseInvoiceWhereInput;
 	}): Promise<WithCount<LeaseInvoiceDto>> {
-		const { take, skip, sort } = queryOptions;
+		const { take, skip, sort, filter } = queryOptions;
 
-		const where: Prisma.LeaseInvoiceWhereInput = {
+		const where = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).LeaseInvoice,
 				...(whereCustom ? [whereCustom] : []), // combine with other filters/remove?
-				queryOptions.filter,
+				filter,
 			],
-		};
+		} satisfies Prisma.LeaseInvoiceWhereInput;
 
 		const [data, total] = await Promise.all([
 			this.prisma.leaseInvoice.findMany({
