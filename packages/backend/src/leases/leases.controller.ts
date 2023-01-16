@@ -89,6 +89,10 @@ export class LeasesController {
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {
 		const where: Prisma.LeaseInvoiceWhereInput = { leaseId: { equals: id } };
-		return this.leaseInvoicesService.findAll({ user, queryOptions, where });
+		return this.leaseInvoicesService.findAll({
+			user,
+			queryOptions,
+			whereCustom: where,
+		});
 	}
 }

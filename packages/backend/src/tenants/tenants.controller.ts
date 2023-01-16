@@ -109,7 +109,11 @@ export class TenantsController {
 		const where: Prisma.LeaseInvoiceWhereInput = {
 			lease: { tenantId: { equals: id } },
 		};
-		return this.leaseInvoicesService.findAll({ user, queryOptions, where });
+		return this.leaseInvoicesService.findAll({
+			user,
+			queryOptions,
+			whereCustom: where,
+		});
 	}
 
 	@Get(':id/roles')

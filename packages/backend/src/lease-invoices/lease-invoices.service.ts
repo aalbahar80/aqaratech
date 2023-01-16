@@ -53,18 +53,18 @@ export class LeaseInvoicesService {
 	async findAll({
 		user,
 		queryOptions,
-		where,
+		whereCustom,
 	}: {
 		user: IUser;
 		queryOptions: QueryOptionsDto;
-		where?: Prisma.LeaseInvoiceWhereInput;
+		whereCustom?: Prisma.LeaseInvoiceWhereInput;
 	}): Promise<WithCount<LeaseInvoiceDto>> {
 		const { take, skip, sort } = queryOptions;
 
 		const filter: Prisma.LeaseInvoiceWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).LeaseInvoice,
-				...(where ? [where] : []), // combine with other filters/remove?
+				...(whereCustom ? [whereCustom] : []), // combine with other filters/remove?
 				queryOptions.filter,
 			],
 		};

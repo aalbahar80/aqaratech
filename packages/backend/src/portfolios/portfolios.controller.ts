@@ -245,7 +245,7 @@ export class PortfoliosController {
 		return this.leaseInvoicesService.findAll({
 			queryOptions,
 			user,
-			where: { portfolioId },
+			whereCustom: { portfolioId },
 		});
 	}
 
