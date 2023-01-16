@@ -203,6 +203,7 @@ const ar: Translation = {
 		due: 'مستحق',
 		overdue: 'متأخر',
 		paid: 'مدفوع',
+		unpaid: 'غير مدفوع',
 
 		upcoming: 'قادم',
 		current: 'جاري',

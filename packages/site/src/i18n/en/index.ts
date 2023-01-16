@@ -107,6 +107,7 @@ const en: BaseTranslation = {
 		due: 'Due',
 		overdue: 'Past due',
 		paid: 'Paid',
+		unpaid: 'Unpaid',
 
 		// Maintenance
 		inProgress: 'In progress',

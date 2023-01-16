@@ -662,6 +662,10 @@ type RootTranslation = {
 		 */
 		paid: string
 		/**
+		 * U​n​p​a​i​d
+		 */
+		unpaid: string
+		/**
 		 * I​n​ ​p​r​o​g​r​e​s​s
 		 */
 		inProgress: string
@@ -1654,6 +1658,10 @@ export type TranslationFunctions = {
 		 * Paid
 		 */
 		paid: () => LocalizedString
+		/**
+		 * Unpaid
+		 */
+		unpaid: () => LocalizedString
 		/**
 		 * In progress
 		 */
