@@ -68,6 +68,7 @@ Sentry.setTag('svelteKit', 'server');
 loadAllLocales();
 const L = i18n();
 
+// TODO: Use `sequence` to clean up handle
 export const handle = (async ({ event, resolve }) => {
 	// if (event.url.pathname.startsWith('/api/')) {
 	// 	return fetch(event.request);
