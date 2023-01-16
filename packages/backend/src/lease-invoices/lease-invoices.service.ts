@@ -61,7 +61,7 @@ export class LeaseInvoicesService {
 	}): Promise<WithCount<LeaseInvoiceDto>> {
 		const { take, skip, sort } = queryOptions;
 
-		const filter: Prisma.LeaseInvoiceWhereInput = {
+		const where: Prisma.LeaseInvoiceWhereInput = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).LeaseInvoice,
 				...(whereCustom ? [whereCustom] : []), // combine with other filters/remove?
@@ -74,10 +74,10 @@ export class LeaseInvoicesService {
 				take,
 				skip,
 				orderBy: sort,
-				where: filter,
+				where,
 				include: { lease: crumbs.lease },
 			}),
-			this.prisma.leaseInvoice.count({ where: filter }),
+			this.prisma.leaseInvoice.count({ where }),
 		]);
 
 		return { total, results: data.map((d) => new LeaseInvoiceDto(d)) };
