@@ -27,7 +27,7 @@ const parseValue = (val: unknown): unknown => {
 	}
 };
 
-const parseObject = (obj: Record<string, unknown>) => {
+export const parseObject = (obj: Record<string, unknown>) => {
 	const result = {};
 	for (const key in obj) {
 		const val = parseValue(obj[key]);
