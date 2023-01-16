@@ -29,6 +29,7 @@
 	export let data: PaginatedLeaseInvoiceDto;
 	export let showOptions = false;
 	export let extraColumns: ColumnDto<LeaseInvoiceDto>[] = [];
+	export let extraFilters: Filter[] | undefined = undefined;
 
 	const columnHelper = createColumnHelper<LeaseInvoiceDto>();
 
@@ -132,14 +133,7 @@
 	}}
 >
 	<div slot="filter" let:filters>
-		<FilterBar
-			responsive={[
-				...filters,
-				// TODO: Hide in tenant portal
-				// TODO: Set input type to radio
-				$isPaidFilter,
-			]}
-		>
+		<FilterBar responsive={[...filters, ...(extraFilters ?? [])]}>
 			<div slot="custom">
 				{#if showOptions}
 					<FilterBarActions>

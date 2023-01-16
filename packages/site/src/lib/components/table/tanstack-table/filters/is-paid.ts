@@ -8,6 +8,7 @@ import { isPaid, PAID_STATUS } from '$lib/stores/filter/is-paid';
 
 import type { Filter } from '$lib/models/interfaces/filter.interface';
 
+// TODO: Set input type to radio
 export const isPaidFilter = derived(isPaid, ($isPaid) => {
 	const LL = get(L);
 
