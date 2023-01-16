@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
-	import { invalidateAll } from '$app/navigation';
+	import { invalidate, invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { toUTCFormat } from '@self/utils';
 
@@ -23,6 +23,8 @@
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
+	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
+	import { isPaid, PAID_STATUS } from '$lib/stores/filter/is-paid';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 
@@ -132,7 +134,47 @@
 	}}
 >
 	<div slot="filter" let:filters>
-		<FilterBar responsive={filters}>
+		<FilterBar
+			responsive={[
+				...filters,
+				// TODO: Externalize
+				// TODO: Hide in tenant portal
+				// TODO: Set input type to radio
+				{
+					id: FilterEnum.IsPaid,
+					label: $L.fields.isPaid(),
+					options: [
+						{
+							label: $L.badge.paid(),
+							value: PAID_STATUS.PAID,
+							active: $isPaid === true,
+							action: async () => {
+								$isPaid = true;
+								await invalidate(FilterEnum.IsPaid);
+							},
+						},
+						{
+							label: 'unpaid',
+							value: PAID_STATUS.UNPAID,
+							active: $isPaid === false,
+							action: async () => {
+								$isPaid = false;
+								await invalidate(FilterEnum.IsPaid);
+							},
+						},
+						{
+							label: $L.general.all(),
+							value: PAID_STATUS.ALL,
+							active: $isPaid === undefined,
+							action: async () => {
+								$isPaid = undefined;
+								await invalidate(FilterEnum.IsPaid);
+							},
+						},
+					],
+				},
+			]}
+		>
 			<div slot="custom">
 				{#if showOptions}
 					<FilterBarActions>
