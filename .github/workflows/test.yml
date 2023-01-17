@@ -35,6 +35,7 @@ jobs:
 
   test:
     name: Build and Test
+    needs: shouldTest
     if: ${{ needs.shouldTest.outputs.shouldTest == 'true' }}
     timeout-minutes: 15
     # use env for auth0
