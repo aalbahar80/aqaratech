@@ -69,7 +69,7 @@ jobs:
 
       - name: Set .env file
         shell: bash
-        run: cp ./.env.test ./.env
+        run: cp ./.env.example ./.env && cat ./.env.test >> ./.env
 
       # Move format/lint/check to a seperate job when removing `continue-on-error`
       - run: pnpm run format:all
