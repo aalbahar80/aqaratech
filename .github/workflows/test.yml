@@ -82,6 +82,8 @@ jobs:
         continue-on-error: true
 
       - run: pnpm run test -vvv
+        env:
+          DEBUG: 'pw:webserver'
 
       - uses: actions/upload-artifact@v2
         if: failure()
