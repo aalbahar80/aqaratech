@@ -24,7 +24,7 @@ jobs:
       shouldTest: ${{ steps.shouldTest.outputs.shouldTest }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
       # Skip this workflow if the commit message starts with "Version Packages".
