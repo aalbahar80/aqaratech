@@ -19,24 +19,24 @@ ENV_FILE=$1
 
 # warn if running without source
 if [ "$BASH_SOURCE" = "$0" ]; then
-  echo "WARNING: This script should be run with 'source' to export the environment variables into the current shell."
-  echo "Example: source ./export-env.sh .env"
+	echo "WARNING: This script should be run with 'source' to export the environment variables into the current shell."
+	echo "Example: source ./export-env.sh .env"
 fi
 
 # Check if the .env file exists
 if [ ! -f "$ENV_FILE" ]; then
-  echo "Environment file does not exist: $ENV_FILE"
-  echo "Exiting..."
-  exit 1
+	echo "Environment file does not exist: $ENV_FILE"
+	echo "Exiting..."
+	exit 1
 fi
 
 # Set, log, and export the environment variables so they are available to subsequent commands
 echo "Setting environment variables..."
 while IFS= read -r LINE; do
-  if [[ $LINE =~ ^[A-Za-z0-9_]+=.+$ ]]; then
-    KEY=$(echo "$LINE" | cut -d '=' -f 1)
-    VALUE=$(echo "$LINE" | cut -d '=' -f 2-)
-    echo "$KEY=$VALUE"
-    export "$KEY=$VALUE"
-  fi
-done < "$ENV_FILE"
+	if [[ $LINE =~ ^[A-Za-z0-9_]+=.+$ ]]; then
+		KEY=$(echo "$LINE" | cut -d '=' -f 1)
+		VALUE=$(echo "$LINE" | cut -d '=' -f 2-)
+		echo "$KEY=$VALUE"
+		export "$KEY=$VALUE"
+	fi
+done <"$ENV_FILE"

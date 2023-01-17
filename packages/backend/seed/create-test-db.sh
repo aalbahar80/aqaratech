@@ -10,14 +10,14 @@ echo "Preparing DB. DATABASE_URL is $DATABASE_URL"
 
 # If DATABASE_URL does not contain "localhost", abort and warn the user
 if [[ $DATABASE_URL != *"localhost"* ]]; then
-  echo "DATABASE_URL does not contain 'localhost'. Aborting."
-  exit 1
+	echo "DATABASE_URL does not contain 'localhost'. Aborting."
+	exit 1
 fi
 
 # check if the container is already running, if not, start it
 if ! docker ps | grep test-postgres; then
-  echo "Starting test-postgres container"
-  docker run --rm --name test-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d -p 5434:5432 postgres:14
+	echo "Starting test-postgres container"
+	docker run --rm --name test-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d -p 5434:5432 postgres:14
 fi
 
 # poll until the server is ready

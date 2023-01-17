@@ -11,7 +11,7 @@
 
 # TODO:
 # map /site which uses svelte-check (use the machine readable output option)
-# map root directory 
+# map root directory
 
 # Groups
 # 1: @self/
