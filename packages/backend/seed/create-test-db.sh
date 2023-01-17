@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATABASE_URL=$(awk '/^DATABASE_URL/' ../../.env.example | awk -F '=' '{print $2}')
+DATABASE_URL=$(awk '/^DATABASE_URL/' ./prisma/.env.example | awk -F '=' '{print $2}')
 
 set -e
 
