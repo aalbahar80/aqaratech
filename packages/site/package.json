@@ -9,7 +9,7 @@
 		"build": "rm -rf ./{.svelte-kit,build} && svelte-kit sync && vite build",
 		"preview": "pnpm run preview:node",
 		"preview:vite": "vite preview --port 3000 --strictPort",
-		"preview:node": ". ../../scripts/export-env.sh ../../.env && BODY_SIZE_LIMIT=$BODY_SIZE_LIMIT ORIGIN=$PUBLIC_SITE_URL PORT=3000 node build/index.js",
+		"preview:node": ". ../../scripts/export-env.sh && BODY_SIZE_LIMIT=$BODY_SIZE_LIMIT ORIGIN=$PUBLIC_SITE_URL PORT=3000 node build/index.js",
 		"check:base": "svelte-check --compiler-warnings \"a11y-click-events-have-key-events:ignore\"",
 		"check": "svelte-kit sync && pnpm run check:config && pnpm run check:base --output human",
 		"check:watch": "pnpm run check:base --watch",
