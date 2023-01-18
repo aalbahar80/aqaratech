@@ -7,8 +7,8 @@ import { resCheck } from '../../../utils/res-check';
 
 import { apiURL } from './api-url';
 
-import type { LeaseDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
+import type { LeaseDto } from '../../../types/api';
 
 export const leaseFixtures: AllFixtures = {
 	leasesParams: [undefined, { option: true }],

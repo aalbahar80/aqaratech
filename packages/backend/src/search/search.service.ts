@@ -3,7 +3,6 @@ import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 
 import { computeLabelProperty } from '@self/utils';
-
 import { Action } from 'src/casl/action.enum';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';

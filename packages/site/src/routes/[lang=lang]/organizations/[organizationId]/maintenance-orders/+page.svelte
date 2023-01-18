@@ -3,10 +3,10 @@
 
 	import type { PageData } from './$types';
 
+	import type { MaintenanceOrderDto } from '$api/openapi';
+
 	import L from '$i18n/i18n-svelte';
 	import MaintenanceOrderTable from '$lib/components/maintenance-order/MaintenanceOrderTable.svelte';
-
-	import type { MaintenanceOrderDto } from '$api/openapi';
 
 	export let data: PageData;
 

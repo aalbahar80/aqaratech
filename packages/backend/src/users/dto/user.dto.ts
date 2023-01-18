@@ -1,7 +1,6 @@
 import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
 
 import { UserCreateSchema, UserSchema, UserUpdateSchema } from '@self/utils';
-
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { Exactly } from 'src/types/exactly.type';

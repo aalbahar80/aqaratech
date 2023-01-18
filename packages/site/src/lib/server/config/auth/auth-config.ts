@@ -1,9 +1,9 @@
+import type { AuthConfigType } from '$lib/models/types/auth.type';
+
 import { environment } from '$aqenvironment';
 import { AUTH_CALLBACK } from '$lib/constants/routes';
 import { isProd } from '$lib/server/config/is-production';
 import { privateEnvironment } from '$lib/server/config/private-environment';
-
-import type { AuthConfigType } from '$lib/models/types/auth.type';
 
 /**
  * Get the auth config for the current environment.

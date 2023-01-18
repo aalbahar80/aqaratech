@@ -20,11 +20,11 @@ import { scopedRequestFixtures } from './fixtures/scoped-request.fixture';
 import { tenantFixtures } from './fixtures/tenant.fixture';
 import { unitFixtures } from './fixtures/unit.fixture';
 
-import type { OrganizationCreatedDto, PortfolioDto } from '../../types/api';
 import type {
 	TestFixtures,
 	TestOptions,
 } from './fixtures/test-fixtures.interface';
+import type { OrganizationCreatedDto, PortfolioDto } from '../../types/api';
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.

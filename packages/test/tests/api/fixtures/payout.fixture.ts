@@ -6,8 +6,8 @@ import { resCheck } from '../../../utils/res-check';
 
 import { apiURL } from './api-url';
 
-import type { PayoutDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
+import type { PayoutDto } from '../../../types/api';
 
 export const payoutFixtures: AllFixtures = {
 	payoutsParams: [undefined, { option: true }],

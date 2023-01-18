@@ -1,3 +1,4 @@
+import type { BaseGetRoute } from './base-route.type';
 import type { Entity } from '../../entity/entity-definition';
 import type { PageTypePortfolio } from '../enums/page-tab-portfolio.enum';
 import type {
@@ -11,7 +12,6 @@ import type {
 	ExpensePageTab,
 } from '../enums/page-tab.enum';
 import type { PageType } from '../enums/page-type.enum';
-import type { BaseGetRoute } from './base-route.type';
 
 // ID Route - Common
 

@@ -2,7 +2,6 @@
 	import L, { locale } from '$i18n/i18n-svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { NEW_ORGANIZATION } from '$lib/constants/routes';
-
 	import MaterialSymbolsAddBusinessRounded from '~icons/material-symbols/add-business-rounded';
 </script>
 

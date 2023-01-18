@@ -3,8 +3,9 @@
 
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
-
 	import type { Entity } from '@self/utils';
+
+	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
@@ -16,8 +17,6 @@
 	import { openModal } from '$lib/components/toast/Modal.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { addSuccessToast } from '$lib/stores/toast';
-
-	import type { PaginatedRoleDto, RoleDto } from '$api/openapi';
 
 	export let data: PaginatedRoleDto;
 	export let predefined: {

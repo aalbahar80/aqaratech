@@ -1,5 +1,4 @@
 import type { RequestHandler } from './$types';
-
 import { Cookie } from '@self/utils';
 
 import { baseLocale } from '$i18n/i18n-util';

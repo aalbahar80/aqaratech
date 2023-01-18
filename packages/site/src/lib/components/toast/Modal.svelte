@@ -1,9 +1,9 @@
 <script lang="ts" context="module">
 	import { writable } from 'svelte/store';
 
-	import L from '$i18n/i18n-svelte';
-
 	import type { ModalContent } from '$lib/components/toast/modal-content';
+
+	import L from '$i18n/i18n-svelte';
 
 	// Example from: https://github.com/ivanhofer/sveltekit-typescript-showcase/blob/b334e865894ac9d7c3673168e0ee6d3f7f1806e3/src/01-props/09-svelte-component/Component.svelte#L26
 
@@ -32,7 +32,6 @@
 	import { fade } from 'svelte/transition';
 
 	import Spinner from '$components/Spinner.svelte';
-
 	import HeroiconsExclamationTriangle from '~icons/heroicons/exclamation-triangle';
 
 	let promptInput = '';

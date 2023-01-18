@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { stratify } from 'd3';
 
-	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
-	import { ROOT_NODE } from '$lib/utils/expense-type-options';
-
 	import type { ExpenseCategoryDto, GroupByCategoryDto } from '$api/openapi';
 	import type { HierarchyNode } from 'd3';
+
+	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
+	import { ROOT_NODE } from '$lib/utils/expense-type-options';
 
 	export let expenses: GroupByCategoryDto[];
 	export let categories: ExpenseCategoryDto[];

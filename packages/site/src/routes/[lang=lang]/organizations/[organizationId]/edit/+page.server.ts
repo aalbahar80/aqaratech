@@ -1,5 +1,4 @@
 import type { Actions } from './$types';
-
 import { organizationSchema } from '@self/utils';
 
 import { handleForm } from '$lib/components/form/handle-form';

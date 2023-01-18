@@ -3,7 +3,6 @@
 
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
-
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
 	import BreadCrumb from '$components/breadcrumbs/BreadCrumb.svelte';
@@ -13,13 +12,12 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import UnitTabs from '$lib/components/unit/UnitTabs.svelte';
 	import { fmtNumber } from '$lib/i18n/format';
-
 	import FaSolidBath from '~icons/fa-solid/bath';
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidStairs from '~icons/fa6-solid/stairs';
 	import GisMeasure from '~icons/gis/measure';
-	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 	import HeroiconsWrench from '~icons/heroicons/wrench';
+	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let data: LayoutData;
 

@@ -7,7 +7,6 @@
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import LocaleSwitcher from '$lib/i18n/LocaleSwitcher.svelte';
 	import { isHomeRoute } from '$lib/utils/is-home-route';
-
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>
 

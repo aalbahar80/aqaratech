@@ -1,10 +1,10 @@
 <script lang="ts">
+	import backgroundImage from '../../../assets/background-call-to-action.jpg';
+
 	import L from '$i18n/i18n-svelte';
 	import { buttonCn } from '$lib/components/landing/button-cn';
 	import Container from '$lib/components/landing/secondary-feature/Container.svelte';
 	import { SIGNUP } from '$lib/constants/routes';
-
-	import backgroundImage from '../../../assets/background-call-to-action.jpg';
 </script>
 
 <section

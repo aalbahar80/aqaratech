@@ -2,8 +2,9 @@
 	import { createColumnHelper } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
-
 	import { toUTCFormat } from '@self/utils';
+
+	import type { ExpenseDto, PaginatedExpenseDto } from '$api/openapi';
 
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
@@ -14,8 +15,6 @@
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
-
-	import type { ExpenseDto, PaginatedExpenseDto } from '$api/openapi';
 
 	export let data: PaginatedExpenseDto;
 

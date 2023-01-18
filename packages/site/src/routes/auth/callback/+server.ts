@@ -1,10 +1,10 @@
 import { Cookie } from '@self/utils';
 
+import type { RequestHandler } from '@sveltejs/kit';
+
 import { MAX_AGE } from '$lib/constants/misc';
 import { authConfig } from '$lib/server/config/auth';
 import { errorLogger } from '$lib/server/logger/error-logger';
-
-import type { RequestHandler } from '@sveltejs/kit';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
 export interface TokenResponse {

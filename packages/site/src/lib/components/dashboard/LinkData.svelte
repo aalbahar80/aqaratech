@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { getRoute, PageTypePortfolio } from '@self/utils';
 
 	import L from '$i18n/i18n-svelte';
 	import Arrow from '$lib/components/Arrow.svelte';
-
 	import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 
 	export let dataType: 'Expenses' | 'Income';

@@ -10,7 +10,6 @@ import {
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { leaseInvoiceUpdateSchema } from '@self/utils';
-
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';

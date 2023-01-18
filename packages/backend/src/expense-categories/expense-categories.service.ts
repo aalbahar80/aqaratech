@@ -9,7 +9,6 @@ import {
 	expenseCategoryTreeSchema,
 	generateId,
 } from '@self/utils';
-
 import { Action } from 'src/casl/action.enum';
 import {
 	CreateExpenseCategoryDto,

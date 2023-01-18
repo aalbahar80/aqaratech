@@ -1,13 +1,18 @@
 import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 
-import { LOGOUT, NEW_ORGANIZATION } from '$lib/constants/routes';
-
 import type L from '$i18n/i18n-svelte';
 import type { Locales } from '$i18n/i18n-types';
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
 import type { ReadableOf } from '$lib/utils/readable-of';
 
+import { LOGOUT, NEW_ORGANIZATION } from '$lib/constants/routes';
+import HeroiconsBanknotes from '~icons/heroicons/banknotes';
+import HeroiconsCreditCard from '~icons/heroicons/credit-card';
+import HeroiconsPlus from '~icons/heroicons/plus';
+import HeroiconsReceiptPercent from '~icons/heroicons/receipt-percent';
+import HeroiconsUserGroup from '~icons/heroicons/user-group';
+import HeroiconsWrench from '~icons/heroicons/wrench';
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
 import HeroiconsOutlineDocumentReport from '~icons/heroicons-outline/document-report';
@@ -15,12 +20,6 @@ import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
 import HeroiconsOutlineLogout from '~icons/heroicons-outline/logout';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
-import HeroiconsBanknotes from '~icons/heroicons/banknotes';
-import HeroiconsCreditCard from '~icons/heroicons/credit-card';
-import HeroiconsPlus from '~icons/heroicons/plus';
-import HeroiconsReceiptPercent from '~icons/heroicons/receipt-percent';
-import HeroiconsUserGroup from '~icons/heroicons/user-group';
-import HeroiconsWrench from '~icons/heroicons/wrench';
 // import HeroiconsCalculator from '~icons/heroicons/calculator';
 // import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 

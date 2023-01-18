@@ -6,8 +6,8 @@ import { resCheck } from '../../../utils/res-check';
 
 import { apiURL } from './api-url';
 
-import type { LeaseInvoiceDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
+import type { LeaseInvoiceDto } from '../../../types/api';
 
 export const invoiceFixtures: AllFixtures = {
 	invoicesParams: [undefined, { option: true }],

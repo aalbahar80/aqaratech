@@ -3,7 +3,6 @@ import { Expose } from 'class-transformer';
 import { z } from 'zod';
 
 import { OrganizationSchema, organizationSchema } from '@self/utils';
-
 import { Exactly } from 'src/types/exactly.type';
 
 export class OrganizationDto implements z.infer<typeof organizationSchema> {

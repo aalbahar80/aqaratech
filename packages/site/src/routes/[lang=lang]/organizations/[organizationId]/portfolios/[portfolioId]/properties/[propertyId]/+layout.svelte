@@ -3,7 +3,6 @@
 
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
-
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
 	import L from '$i18n/i18n-svelte';
@@ -12,9 +11,8 @@
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import PropertyTabs from '$lib/components/property/PropertyTabs.svelte';
-
-	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 	import HeroiconsWrench from '~icons/heroicons/wrench';
+	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let data: LayoutData;
 </script>

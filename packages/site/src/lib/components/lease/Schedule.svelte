@@ -3,17 +3,15 @@
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
-
 	import { getRoute, PageTab } from '@self/utils';
+
+	import type { LeaseDto } from '$api/openapi';
 
 	import { createApi } from '$api';
 	import L from '$i18n/i18n-svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { generateSchedule } from '$lib/utils/generate-schedule';
-
-	import type { LeaseDto } from '$api/openapi';
-
 	import HeroiconsTrash from '~icons/heroicons/trash';
 
 	export let lease: LeaseDto;

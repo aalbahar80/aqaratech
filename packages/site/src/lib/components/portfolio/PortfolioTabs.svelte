@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';

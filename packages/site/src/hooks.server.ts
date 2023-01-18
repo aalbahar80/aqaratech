@@ -9,6 +9,13 @@ import {
 	isHealthCheck,
 } from '@self/utils';
 
+import type {
+	Handle,
+	HandleFetch,
+	HandleServerError,
+	RequestEvent,
+} from '@sveltejs/kit';
+
 import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
 import { detectLocale, i18n, isLocale } from '$i18n/i18n-util';
@@ -27,13 +34,6 @@ import {
 	getSentryUser,
 } from '$lib/utils/sentry/common';
 import { isNotFoundError } from '$lib/utils/sentry/redirect';
-
-import type {
-	Handle,
-	HandleFetch,
-	HandleServerError,
-	RequestEvent,
-} from '@sveltejs/kit';
 
 logger.log({
 	level: 'info',

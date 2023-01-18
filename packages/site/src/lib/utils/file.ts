@@ -1,11 +1,13 @@
-import type { RouteParams } from '@self/utils';
 import {
 	FileRelationKeyEnum,
 	getRoute,
 	inferUrlRelation,
 	PageType,
-	type FileRelationKey,
-	type GetFormRouteWithRelation,
+} from '@self/utils';
+import type {
+	RouteParams,
+	FileRelationKey,
+	GetFormRouteWithRelation,
 } from '@self/utils';
 
 export const getFormRouteWithRelation = ({

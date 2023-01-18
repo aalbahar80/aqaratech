@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { getRoute, isEntity, PageType } from '@self/utils';
 
 	import L from '$i18n/i18n-svelte';

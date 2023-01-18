@@ -2,7 +2,6 @@
 	import { fade } from 'svelte/transition';
 
 	import L from '$i18n/i18n-svelte';
-
 	import HeroiconsTableCells from '~icons/heroicons/table-cells';
 </script>
 

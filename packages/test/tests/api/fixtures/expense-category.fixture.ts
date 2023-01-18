@@ -5,8 +5,8 @@ import { expenseCategoryFactory } from '@self/seed';
 import { PostUrl } from '../../../utils/post-url';
 import { resCheck } from '../../../utils/res-check';
 
-import type { ExpenseCategoryDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
+import type { ExpenseCategoryDto } from '../../../types/api';
 
 export const expenseCategoryFixtures: AllFixtures = {
 	expenseCategoryParams: [undefined, { option: true }],

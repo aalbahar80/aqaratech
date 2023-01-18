@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
-
 	import { getRoute, PageType } from '@self/utils';
 
 	import L from '$i18n/i18n-svelte';

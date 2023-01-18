@@ -6,8 +6,8 @@ import { resCheck } from '../../../utils/res-check';
 
 import { apiURL } from './api-url';
 
-import type { PortfolioDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
+import type { PortfolioDto } from '../../../types/api';
 
 export const portfolioFixtures: AllFixtures = {
 	portfoliosParams: [undefined, { option: true }],

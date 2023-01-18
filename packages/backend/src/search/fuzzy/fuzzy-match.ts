@@ -2,7 +2,6 @@ import MiniSearch from 'minisearch';
 import * as R from 'remeda';
 
 import { Mutable } from '@self/utils';
-
 import {
 	ALL_RETURNED_FIELDS,
 	ALL_SEARCHABLE_FIELDS,

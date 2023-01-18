@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { getRoute, PageTypePortfolio } from '@self/utils';
+
+	import type { BalanceDto } from '$api/openapi';
 
 	import L from '$i18n/i18n-svelte';
 	import BalanceLineItem from '$lib/components/balance/BalanceLineItem.svelte';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { fmtCurrency } from '$lib/i18n/format';
-
-	import type { BalanceDto } from '$api/openapi';
 
 	export let balance: BalanceDto;
 

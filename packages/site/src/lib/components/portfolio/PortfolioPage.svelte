@@ -2,16 +2,14 @@
 	import { MenuItem } from '@rgossiaux/svelte-headlessui';
 
 	import { page } from '$app/stores';
-
 	import { getRoute, PageType } from '@self/utils';
+
+	import type { PortfolioDto } from '$api/openapi';
 
 	import L from '$i18n/i18n-svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-
-	import type { PortfolioDto } from '$api/openapi';
-
 	import Fa6SolidMoneyBillTransfer from '~icons/fa6-solid/money-bill-transfer';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 

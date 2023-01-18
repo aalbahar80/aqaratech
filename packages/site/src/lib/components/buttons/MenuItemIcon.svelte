@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { classes } from '$lib/utils/classes';
-
 	import type { Icon } from '$lib/models/types/icon.type';
+
+	import { classes } from '$lib/utils/classes';
 
 	export let icon: Icon;
 	export let disabled = false;

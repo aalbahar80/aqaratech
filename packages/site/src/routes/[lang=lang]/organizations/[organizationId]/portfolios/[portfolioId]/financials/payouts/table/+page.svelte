@@ -3,8 +3,9 @@
 
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
-
 	import { toUTCFormat } from '@self/utils';
+
+	import type { PayoutDto } from '$api/openapi';
 
 	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
@@ -14,8 +15,6 @@
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
-
-	import type { PayoutDto } from '$api/openapi';
 
 	export let data: PageData;
 

@@ -6,8 +6,12 @@
 	} from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
-
 	import { toUTCFormat } from '@self/utils';
+
+	import type {
+		MaintenanceOrderDto,
+		PaginatedMaintenanceOrderDto,
+	} from '$api/openapi';
 
 	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
@@ -21,11 +25,6 @@
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { getMaintenanceOrderBadge } from '$lib/utils/get-badge';
-
-	import type {
-		MaintenanceOrderDto,
-		PaginatedMaintenanceOrderDto,
-	} from '$api/openapi';
 
 	// type ColumnVisibility = ComponentProps<
 	// 	Table<MaintenanceOrderDto, Record<keyof MaintenanceOrderDto, boolean>>

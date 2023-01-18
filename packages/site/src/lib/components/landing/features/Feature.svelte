@@ -1,9 +1,9 @@
 <script lang="ts">
 	import clsx from 'clsx';
 
-	import FeatureBullet from '$lib/components/landing/features/FeatureBullet.svelte';
-
 	import type { IFeature } from '$lib/components/landing/features/features-content';
+
+	import FeatureBullet from '$lib/components/landing/features/FeatureBullet.svelte';
 
 	export let id: number;
 	export let feature: IFeature;

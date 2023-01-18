@@ -8,7 +8,6 @@
 
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
-
 	import { getRoute, PageType } from '@self/utils';
 
 	import { classes } from '$lib/utils/classes';

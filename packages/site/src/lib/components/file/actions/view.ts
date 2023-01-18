@@ -1,6 +1,6 @@
-import { createApi } from '$api';
-
 import type { FileDto } from '$api/openapi';
+
+import { createApi } from '$api';
 
 export const view = async (file: FileDto) => {
 	// encode file name to avoid special characters

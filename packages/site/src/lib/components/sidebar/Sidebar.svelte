@@ -14,11 +14,11 @@
 	import { page } from '$app/stores';
 	import { fly } from 'svelte/transition';
 
+	import type { NavigationItem } from '$lib/components/sidebar/types';
+
 	import { clickOutside } from '$lib/actions/click-outside';
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
-
-	import type { NavigationItem } from '$lib/components/sidebar/types';
 
 	export let navigationTree: NavigationItem[];
 

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { getRoute, PageTypePortfolio } from '@self/utils';
+
+	import type { GroupByMonthDto } from '$api/openapi';
 
 	import L, { locale } from '$i18n/i18n-svelte';
 	import Arrow from '$lib/components/Arrow.svelte';
@@ -10,8 +11,6 @@
 	import Stats from '$lib/components/dashboard/stats/Stats.svelte';
 	import { fmtCurrency, fmtMonth } from '$lib/i18n/format';
 	import { dateFromShort } from '$lib/utils/common';
-
-	import type { GroupByMonthDto } from '$api/openapi';
 
 	interface Datapoint extends GroupByMonthDto {
 		change?: number;

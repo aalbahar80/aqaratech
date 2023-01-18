@@ -5,7 +5,6 @@ import { Prisma } from '@prisma/client';
 import { Any, Object } from 'ts-toolbelt';
 
 import { entitiesMap } from '@self/utils';
-
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';

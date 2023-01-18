@@ -17,7 +17,6 @@ import {
 import { Prisma } from '@prisma/client';
 
 import { portfolioUpdateSchema } from '@self/utils';
-
 import { AggregateService } from 'src/aggregate/aggregate.service';
 import { AggregateOptionsExpensesDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { BalanceDto } from 'src/aggregate/dto/balance.dto';

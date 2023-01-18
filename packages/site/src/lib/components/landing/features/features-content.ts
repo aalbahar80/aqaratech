@@ -9,8 +9,6 @@ import type L from '$i18n/i18n-svelte';
 import type { Icon } from '$lib/models/types/icon.type';
 import type { ReadableOf } from '$lib/utils/readable-of';
 
-import HeroiconsOutlineChartBar from '~icons/heroicons-outline/chart-bar';
-import HeroiconsOutlineRectangleGroup from '~icons/heroicons-outline/rectangle-group';
 import HeroiconsAdjustmentsVertical from '~icons/heroicons/adjustments-vertical';
 import HeroiconsBell from '~icons/heroicons/bell';
 import HeroiconsCalendarDays from '~icons/heroicons/calendar-days';
@@ -24,6 +22,8 @@ import HeroiconsFunnel from '~icons/heroicons/funnel';
 import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
 import HeroiconsPresentationChartBar from '~icons/heroicons/presentation-chart-bar';
 import HeroiconsPresentationChartLine from '~icons/heroicons/presentation-chart-line';
+import HeroiconsOutlineChartBar from '~icons/heroicons-outline/chart-bar';
+import HeroiconsOutlineRectangleGroup from '~icons/heroicons-outline/rectangle-group';
 import TeenyiconsContractOutline from '~icons/teenyicons/contract-outline';
 
 // Illustrations

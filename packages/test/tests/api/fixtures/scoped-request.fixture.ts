@@ -5,8 +5,8 @@ import { testUsers } from '../fixtures/users/test-users';
 
 import { apiURL } from './api-url';
 
-import type { RoleDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
+import type { RoleDto } from '../../../types/api';
 
 export const scopedRequestFixtures: AllFixtures = {
 	// Determines the cookies that are sent with the request.

@@ -1,9 +1,9 @@
 <script lang="ts">
+	import UnderlineDecoration from './UnderlineDecoration.svelte';
+
 	import L from '$i18n/i18n-svelte';
 	import { buttonCn } from '$lib/components/landing/button-cn';
 	import { LOGIN } from '$lib/constants/routes';
-
-	import UnderlineDecoration from './UnderlineDecoration.svelte';
 </script>
 
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-testid="hero">

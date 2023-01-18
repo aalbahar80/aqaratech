@@ -12,23 +12,21 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
-
 	import { getRoute, isEntity, PageType } from '@self/utils';
+
+	import type { HitDto, SearchDto } from '$api/openapi';
+	import type { Icon } from '$lib/models/types/icon.type';
 
 	import { createApi } from '$api';
 	import L from '$i18n/i18n-svelte';
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
 	import { objectEntries } from '$lib/utils/common';
-
-	import type { HitDto, SearchDto } from '$api/openapi';
-	import type { Icon } from '$lib/models/types/icon.type';
-
+	import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
+	import HeroiconsMagnifyingGlass from '~icons/heroicons/magnifying-glass';
 	import HeroiconsOutlineEmojiSad from '~icons/heroicons-outline/emoji-sad';
 	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';
 	import HeroiconsOutlineOfficeBuilding from '~icons/heroicons-outline/office-building';
 	import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
-	import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
-	import HeroiconsMagnifyingGlass from '~icons/heroicons/magnifying-glass';
 
 	let groups: Record<keyof SearchDto, HitDto[]> = {
 		// let groups: SearchDto = {

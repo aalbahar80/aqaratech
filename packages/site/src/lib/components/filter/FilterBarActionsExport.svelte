@@ -6,7 +6,6 @@
 	import L from '$i18n/i18n-svelte';
 	import MenuItemChild from '$lib/components/buttons/MenuItemChild.svelte';
 	import MenuItemIcon from '$lib/components/buttons/MenuItemIcon.svelte';
-
 	import Fa6SolidFileCsv from '~icons/fa6-solid/file-csv';
 </script>
 

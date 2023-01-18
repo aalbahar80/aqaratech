@@ -1,9 +1,9 @@
 import { invalidateAll } from '$app/navigation';
 
+import type { FileDto } from '$api/openapi';
+
 import { createModalDelete } from '$lib/components/toast/create-modal-delete';
 import { openModal } from '$lib/components/toast/Modal.svelte';
-
-import type { FileDto } from '$api/openapi';
 
 export const remove = (file: FileDto) => {
 	// @typescript-eslint fails to infer type of exported function `openModal`

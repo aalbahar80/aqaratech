@@ -1,7 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 
 import type { PageLoad } from './$types';
-
 import { FilterInitial } from '@self/utils';
 
 import { REDIRECT_TO } from '$lib/constants/misc';

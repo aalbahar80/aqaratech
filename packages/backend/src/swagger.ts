@@ -4,7 +4,6 @@ import { INestApplication, Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { Cookie } from '@self/utils';
-
 import { AggregateModule } from 'src/aggregate/aggregate.module';
 import { BreadcrumbDto, BreadcrumbsDto } from 'src/common/dto/breadcrumb.dto';
 import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';

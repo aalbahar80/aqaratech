@@ -2,16 +2,15 @@
 	import { invalidate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onDestroy } from 'svelte';
-
 	import { computeLabelUnit } from '@self/utils';
+
+	import type { UnitMinimalDto } from '$api/openapi';
 
 	import L from '$i18n/i18n-svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 	import { property } from '$lib/stores/filter/property';
 	import { unit } from '$lib/stores/filter/unit';
-
-	import type { UnitMinimalDto } from '$api/openapi';
 
 	export let items: UnitMinimalDto[];
 

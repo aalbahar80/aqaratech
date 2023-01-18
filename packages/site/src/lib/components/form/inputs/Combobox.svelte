@@ -4,19 +4,18 @@
 
 	import { createEventDispatcher, tick } from 'svelte';
 
-	import L from '$i18n/i18n-svelte';
-	import { clickOutside } from '$lib/actions/click-outside';
-	import Hoverable from '$lib/components/Hoverable.svelte';
-	import { classes } from '$lib/utils/classes';
-
 	import type {
 		Option,
 		SelectedOption,
 	} from '$lib/models/interfaces/option.interface';
 
+	import L from '$i18n/i18n-svelte';
+	import { clickOutside } from '$lib/actions/click-outside';
+	import Hoverable from '$lib/components/Hoverable.svelte';
+	import { classes } from '$lib/utils/classes';
+	import HeroiconsCheck from '~icons/heroicons/check';
 	import HeroiconsOutlineSelector from '~icons/heroicons-outline/selector';
 	import HeroiconsOutlineXCircle from '~icons/heroicons-outline/x-circle';
-	import HeroiconsCheck from '~icons/heroicons/check';
 	// TODO optimize use lodash debounce?
 
 	// P.S. At time of writing, headlessui does not have a native combobox.

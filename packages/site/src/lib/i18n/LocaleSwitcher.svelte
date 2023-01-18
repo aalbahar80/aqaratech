@@ -3,14 +3,14 @@
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 
+	import { replaceLocaleInUrl } from './replace-local-url';
+
+	import type { Locales } from '$i18n/i18n-types';
+
 	import { setLocale, locale } from '$i18n/i18n-svelte';
 	import { locales } from '$i18n/i18n-util';
 	import { loadLocaleAsync } from '$i18n/i18n-util.async';
 	import { LOCALE_LABELS } from '$lib/i18n/locale-labels';
-
-	import { replaceLocaleInUrl } from './replace-local-url';
-
-	import type { Locales } from '$i18n/i18n-types';
 
 	const switchLocale = async (
 		newLocale: Locales,

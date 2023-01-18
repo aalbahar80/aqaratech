@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { getRoute, PageTypePortfolio } from '@self/utils';
+
+	import type { ExpenseDto } from '$api/openapi';
 
 	import L from '$i18n/i18n-svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-
-	import type { ExpenseDto } from '$api/openapi';
 
 	export let expense: ExpenseDto;
 </script>

@@ -2,7 +2,6 @@
 	import { fade } from 'svelte/transition';
 
 	import L from '$i18n/i18n-svelte';
-
 	import HeroiconsChartPie from '~icons/heroicons/chart-pie';
 
 	export let empty: boolean;

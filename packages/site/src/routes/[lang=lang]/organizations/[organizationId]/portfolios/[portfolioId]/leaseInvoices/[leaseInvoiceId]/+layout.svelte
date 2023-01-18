@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
-
 	import { getRoute, PageTab } from '@self/utils';
 
 	import { createApi } from '$api';
@@ -15,7 +14,6 @@
 	import LeaseInvoiceTabs from '$lib/components/leaseInvoice/LeaseInvoiceTabs.svelte';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
-
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';
 	import HeroiconsEnvelope from '~icons/heroicons/envelope';
 

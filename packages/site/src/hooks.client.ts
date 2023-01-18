@@ -1,12 +1,11 @@
-// eslint-disable-next-line import/order
 import * as SentrySvelte from '@sentry/svelte';
 // @ts-expect-error importing @sentry/tracing for side effects
 // eslint-disable-next-line import/order, @typescript-eslint/no-unused-vars
 import { BrowserTracing } from '@sentry/tracing';
 
-import { ResponseError } from '$api/openapi';
-
 import type { HandleClientError } from '@sveltejs/kit';
+
+import { ResponseError } from '$api/openapi';
 
 SentrySvelte.setTag('svelteKit', 'browser');
 

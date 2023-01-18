@@ -3,6 +3,8 @@
 
 	import { page } from '$app/stores';
 
+	import type { PaginatedPropertyDto, PropertyDto } from '$api/openapi';
+
 	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
@@ -10,8 +12,6 @@
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
-
-	import type { PaginatedPropertyDto, PropertyDto } from '$api/openapi';
 
 	export let data: PaginatedPropertyDto;
 

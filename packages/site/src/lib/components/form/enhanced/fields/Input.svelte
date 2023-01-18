@@ -1,7 +1,7 @@
 <script lang="ts">
-	import FieldLabel from '$lib/components/form/enhanced/fields/FieldLabel.svelte';
-
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
+
+	import FieldLabel from '$lib/components/form/enhanced/fields/FieldLabel.svelte';
 
 	type Name = $$Generic;
 	type GFormField = $$Generic<FormField<Name>>;

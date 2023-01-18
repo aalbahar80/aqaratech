@@ -6,8 +6,8 @@ import { resCheck } from '../../../utils/res-check';
 
 import { apiURL } from './api-url';
 
-import type { MaintenanceOrderDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
+import type { MaintenanceOrderDto } from '../../../types/api';
 
 export const maintenanceOrderFixtures: AllFixtures = {
 	maintenanceOrdersParams: [undefined, { option: true }],

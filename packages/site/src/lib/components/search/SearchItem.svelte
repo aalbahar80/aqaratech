@@ -2,12 +2,12 @@
 	import { ListboxOption } from '@rgossiaux/svelte-headlessui';
 	import clsx from 'clsx';
 
+	import type { HitDto } from '$api/openapi';
+	import type { Icon } from '$lib/models/types/icon.type';
+
 	import Hoverable from '$lib/components/Hoverable.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { classes } from '$lib/utils/classes';
-
-	import type { HitDto } from '$api/openapi';
-	import type { Icon } from '$lib/models/types/icon.type';
 
 	export let item: HitDto;
 	export let icon: Icon;

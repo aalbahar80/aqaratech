@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Tooltip from '$lib/components/Tooltip.svelte';
-
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
+
+	import Tooltip from '$lib/components/Tooltip.svelte';
 
 	type Name = $$Generic<string>;
 	type GFormField = $$Generic<FormField<Name>>;

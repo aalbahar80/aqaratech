@@ -1,12 +1,12 @@
 <script lang="ts">
-	import DateFilter from '$lib/components/dashboard/filter/DateFilter.svelte';
-	import PropertySelect from '$lib/components/dashboard/filter/PropertySelect.svelte';
-	import UnitSelect from '$lib/components/dashboard/filter/UnitSelect.svelte';
-
 	import type {
 		PaginatedPropertyDto,
 		PaginatedUnitMinimalDto,
 	} from '$api/openapi';
+
+	import DateFilter from '$lib/components/dashboard/filter/DateFilter.svelte';
+	import PropertySelect from '$lib/components/dashboard/filter/PropertySelect.svelte';
+	import UnitSelect from '$lib/components/dashboard/filter/UnitSelect.svelte';
 
 	export let hideRange = false;
 	export let hideProperty = false;

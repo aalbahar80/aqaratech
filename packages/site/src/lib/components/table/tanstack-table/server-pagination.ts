@@ -1,11 +1,11 @@
 import { goto } from '$app/navigation';
 
+import type { PaginationState } from '@tanstack/svelte-table';
+
 import {
 	DEFAULT_PAGINATION_KEY,
 	PAGE_SIZE,
 } from '$lib/constants/pagination-keys';
-
-import type { PaginationState } from '@tanstack/svelte-table';
 
 export const handleServerPagination = async (
 	pagination: PaginationState,

@@ -5,7 +5,6 @@
 
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
-
 	import { getRoute, PageType } from '@self/utils';
 
 	import { createApi } from '$api';
@@ -20,7 +19,6 @@
 		toHeirarchy,
 		type ExpenseNode,
 	} from '$lib/utils/expense-type-options';
-
 	import Fa6SolidFloppyDisk from '~icons/fa6-solid/floppy-disk';
 	import Fa6SolidPlus from '~icons/fa6-solid/plus';
 	import HeroiconsCheck from '~icons/heroicons/check';

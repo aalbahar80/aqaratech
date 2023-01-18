@@ -1,12 +1,11 @@
 <script lang="ts">
+	import type { ValidatedRoleDto } from '$api/openapi';
+	import type { IconTooltip } from '$lib/models/types/icon-tooltip.type';
+
 	import L, { locale } from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import { PREF_LOCALE } from '$lib/constants/misc';
 	import { getRoleMeta } from '$lib/utils/get-role-meta';
-
-	import type { ValidatedRoleDto } from '$api/openapi';
-	import type { IconTooltip } from '$lib/models/types/icon-tooltip.type';
-
 	import BxsBusiness from '~icons/bxs/business';
 	import MdiAccount from '~icons/mdi/account';
 	import MdiAccountTie from '~icons/mdi/account-tie';

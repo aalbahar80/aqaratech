@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { OrganizationDto } from '$api/openapi';
+
 	import L from '$i18n/i18n-svelte';
 	import Heading from '$lib/components/Heading.svelte';
-
-	import type { OrganizationDto } from '$api/openapi';
 
 	export let organization: OrganizationDto;
 </script>

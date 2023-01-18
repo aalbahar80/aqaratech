@@ -1,7 +1,7 @@
-import type { Entity } from '../../entity/entity-definition';
-import type { PageType } from '../enums/page-type.enum';
 import type { BaseGetRoute } from './base-route.type';
 import type { GetIdRoute, GetDashboardRoute } from './id-route.type';
+import type { Entity } from '../../entity/entity-definition';
+import type { PageType } from '../enums/page-type.enum';
 
 // List Route
 

@@ -53,7 +53,7 @@ module.exports = {
 					caseInsensitive: true, // in import paths
 				},
 				pathGroupsExcludedImportTypes: ['svelte'], // allows pathGroups to work with svelte imports
-				// distinctGroup: false, // not released yet
+				distinctGroup: false, // not released yet
 				groups: [
 					'builtin',
 					'external',

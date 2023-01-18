@@ -1,9 +1,9 @@
 import { get } from 'svelte/store';
 
-import L from '$i18n/i18n-svelte';
-
 import type { Filter } from '$lib/models/interfaces/filter.interface';
 import type { Table } from '@tanstack/svelte-table';
+
+import L from '$i18n/i18n-svelte';
 
 const getColumns = <T>(table: Table<T>): Filter['options'] =>
 	table.getAllLeafColumns().map((c) => ({

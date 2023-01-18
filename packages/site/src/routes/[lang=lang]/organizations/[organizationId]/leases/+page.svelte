@@ -3,10 +3,10 @@
 
 	import type { PageData } from './$types';
 
+	import type { LeaseDto } from '$api/openapi';
+
 	import L from '$i18n/i18n-svelte';
 	import LeaseTable from '$lib/components/lease/LeaseTable.svelte';
-
-	import type { LeaseDto } from '$api/openapi';
 
 	export let data: PageData;
 

@@ -3,6 +3,11 @@
 
 	import { page } from '$app/stores';
 
+	import { remove } from './actions/remove';
+
+	import type { FileDto, PaginatedFileDto } from '$api/openapi';
+	import type { ColumnDto } from '$lib/components/table/column-type';
+
 	import L from '$i18n/i18n-svelte';
 	import AddButton from '$lib/components/buttons/AddButton.svelte';
 	import { view } from '$lib/components/file/actions/view';
@@ -12,11 +17,6 @@
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
-
-	import { remove } from './actions/remove';
-
-	import type { FileDto, PaginatedFileDto } from '$api/openapi';
-	import type { ColumnDto } from '$lib/components/table/column-type';
 
 	export let data: PaginatedFileDto;
 	export let extraColumns: ColumnDto<FileDto>[] = [];

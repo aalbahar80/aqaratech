@@ -7,7 +7,6 @@ import { plainToInstance } from 'class-transformer';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 import { generateExpenseCategoryTree } from '@self/utils';
-
 import { Action } from 'src/casl/action.enum';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import {

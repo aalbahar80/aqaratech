@@ -16,6 +16,8 @@
 	import { writable } from 'svelte/store';
 	import { fade } from 'svelte/transition';
 
+	import type { PaginatedDto } from '$api/openapi';
+
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import { handlePagination } from '$lib/components/table/pagination/handle-pagination';
 	import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
@@ -26,8 +28,6 @@
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
 	import TableEmptyState from '$lib/components/table/tanstack-table/TableEmptyState.svelte';
-
-	import type { PaginatedDto } from '$api/openapi';
 
 	type T = $$Generic<{ id: string }>;
 

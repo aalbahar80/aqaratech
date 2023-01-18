@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { RoleType } from '@prisma/client';
 
 import { RoleCreateSchema, RoleSchema } from '@self/utils';
-
 import { Exactly } from 'src/types/exactly.type';
 
 export class RoleDto implements Exactly<RoleSchema, RoleDto> {

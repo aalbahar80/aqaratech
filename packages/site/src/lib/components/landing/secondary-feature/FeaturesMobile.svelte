@@ -1,7 +1,7 @@
 <script lang="ts">
-	import SecondaryFeature from '$lib/components/landing/secondary-feature/SecondaryFeature.svelte';
-
 	import type { ISecondaryFeature } from '$lib/components/landing/secondary-feature/features';
+
+	import SecondaryFeature from '$lib/components/landing/secondary-feature/SecondaryFeature.svelte';
 
 	export let secondaryFeatures: ISecondaryFeature[];
 </script>

@@ -7,6 +7,8 @@
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
 
+	import '../app.css';
+
 	import L, { setLocale, locale } from '$i18n/i18n-svelte';
 	import { baseLocale } from '$i18n/i18n-util';
 	import Alert from '$lib/components/navbar/Alert.svelte';
@@ -22,8 +24,6 @@
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
 	import { isHomeRoute } from '$lib/utils/is-home-route';
 	import { getSentryUser } from '$lib/utils/sentry/common';
-
-	import '../app.css';
 
 	export let data: LayoutData;
 

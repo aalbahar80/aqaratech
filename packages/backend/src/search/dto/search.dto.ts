@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { DBEntity } from '@self/utils';
-
 import { Exactly } from 'src/types/exactly.type';
 
 type SearchableEntity = Extract<DBEntity, 'tenant' | 'portfolio' | 'property'>;

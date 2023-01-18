@@ -1,6 +1,6 @@
-import { baseLocale } from '$i18n/i18n-util';
-
 import type { RequestHandler } from '@sveltejs/kit';
+
+import { baseLocale } from '$i18n/i18n-util';
 
 export const GET: RequestHandler = ({ locals: { user, locale } }) => {
 	// This route is used:

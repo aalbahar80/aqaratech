@@ -2,8 +2,10 @@
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
-
 	import { getProgress, getRoute, PageType, toUTCFormat } from '@self/utils';
+
+	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
+	import type { ColumnDto } from '$lib/components/table/column-type';
 
 	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
@@ -17,9 +19,6 @@
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
-
-	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
-	import type { ColumnDto } from '$lib/components/table/column-type';
 
 	type ColumnVisibility =
 		| Partial<Record<keyof LeaseDto | 'property' | 'unit', boolean>>

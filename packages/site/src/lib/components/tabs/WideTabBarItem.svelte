@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import { classes } from '$lib/utils/classes';
-
 	import type { RoleDto } from '$api/openapi';
 
+	import { classes } from '$lib/utils/classes';
 	import HeroiconsArrowTopRightOnSquareSolid from '~icons/heroicons/arrow-top-right-on-square-solid';
 
 	export let tab: {

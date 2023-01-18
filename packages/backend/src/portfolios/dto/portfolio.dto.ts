@@ -2,7 +2,6 @@ import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 
 import { PortfolioCreateSchema, PortfolioUpdateSchema } from '@self/utils';
-
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { ITitle, IOrganizationId } from 'src/types/common.types';
 import { Exactly } from 'src/types/exactly.type';

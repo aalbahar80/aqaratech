@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-boolean-literal-compare */
 import { goto } from '$app/navigation';
 
-import { SORT } from '$lib/constants/pagination-keys';
-
 import type { SortingState } from '@tanstack/svelte-table';
+
+import { SORT } from '$lib/constants/pagination-keys';
 
 /**
  * Navigate to a new page with the given sorting state.

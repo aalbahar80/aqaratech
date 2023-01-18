@@ -1,12 +1,12 @@
 import { Cookie } from '@self/utils';
 
+import type { RoleSK, User } from '$lib/models/types/auth.type';
+import type { RequestEvent } from '@sveltejs/kit';
+
 import { baseLocale } from '$i18n/i18n-util';
 import { logger } from '$lib/server/logger';
 import { getProfile } from '$lib/server/utils/get-profile';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
-
-import type { RoleSK, User } from '$lib/models/types/auth.type';
-import type { RequestEvent } from '@sveltejs/kit';
 
 /**
  * Contact the backend to get the user's info.

@@ -6,8 +6,8 @@ import { resCheck } from '../../../utils/res-check';
 
 import { apiURL } from './api-url';
 
-import type { PropertyDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
+import type { PropertyDto } from '../../../types/api';
 
 export const propertyFixtures: AllFixtures = {
 	propertiesParams: [undefined, { option: true }],

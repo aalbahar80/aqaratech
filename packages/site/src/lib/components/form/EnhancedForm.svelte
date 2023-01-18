@@ -5,13 +5,13 @@
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 
+	import type { FormPageModel } from '$lib/components/form/model/form-field.interface';
+
 	import L from '$i18n/i18n-svelte';
 	import FormError from '$lib/components/form/enhanced/fields/FormError.svelte';
 	import Field from '$lib/components/form/Field.svelte';
 	import Fields from '$lib/components/form/Fields.svelte';
 	import { objectValues } from '$lib/utils/common';
-
-	import type { FormPageModel } from '$lib/components/form/model/form-field.interface';
 
 	// Types
 

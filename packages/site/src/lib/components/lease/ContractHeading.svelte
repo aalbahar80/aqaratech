@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { getRoute, PageType } from '@self/utils';
 
 	import HeroiconsChevronLeft20Solid from '~icons/heroicons/chevron-left-20-solid';

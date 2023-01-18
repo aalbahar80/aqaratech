@@ -1,6 +1,6 @@
-import { authConfig } from '$lib/server/config/auth';
-
 import type { RequestHandler } from '@sveltejs/kit';
+
+import { authConfig } from '$lib/server/config/auth';
 
 export const GET: RequestHandler = ({ url }) => {
 	const query = new URLSearchParams({

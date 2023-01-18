@@ -1,8 +1,8 @@
 import { get } from 'svelte/store';
 
-import L from '$i18n/i18n-svelte';
-
 import type { MAINTENANCEORDERSTATUSENUM } from '$api/openapi';
+
+import L from '$i18n/i18n-svelte';
 
 export const getInvoiceBadge = (trx: {
 	isPaid: boolean;

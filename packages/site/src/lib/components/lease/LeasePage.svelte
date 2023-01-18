@@ -2,8 +2,9 @@
 	import { formatDistance } from 'date-fns';
 
 	import { page } from '$app/stores';
-
 	import { getRoute, PageTab, PageType } from '@self/utils';
+
+	import type { LeaseDto } from '$api/openapi';
 
 	import Button from '$components/buttons/Button.svelte';
 	import L from '$i18n/i18n-svelte';
@@ -11,9 +12,6 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
-
-	import type { LeaseDto } from '$api/openapi';
-
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 	import HeroiconsArrowPath from '~icons/heroicons/arrow-path';
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';

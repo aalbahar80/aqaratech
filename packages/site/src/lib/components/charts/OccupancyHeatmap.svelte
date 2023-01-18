@@ -1,6 +1,8 @@
 <script lang="ts">
 	import * as R from 'remeda';
 
+	import type { Occupancy } from '$api/openapi';
+
 	import FrappeChart from '$lib/components/charts/FrappeCharts/FrappeChart.svelte';
 	import { getOneYearAgo } from '$lib/components/charts/utils/date-range';
 	// Frappe: https://frappe.io/charts/docs/basic/heatmap
@@ -9,7 +11,6 @@
 
 	// forked from svelte-frappe-charts to add functionality (mainly countLabel prop + typescript)
 	// reuse package once functionality is merged
-	import type { Occupancy } from '$api/openapi';
 
 	export let occupancy: Occupancy[];
 	export let title = '';

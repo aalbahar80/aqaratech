@@ -1,5 +1,4 @@
 import { get } from 'svelte/store';
-
 import { getLabel } from '@self/utils';
 
 import L, { locale } from '$i18n/i18n-svelte';

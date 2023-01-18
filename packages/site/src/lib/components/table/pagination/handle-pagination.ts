@@ -1,8 +1,8 @@
-import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
-import { handleServerPagination } from '$lib/components/table/tanstack-table/server-pagination';
-
 import type { PaginatedDto } from '$api/openapi';
 import type { PaginationState, Updater } from '@tanstack/svelte-table';
+
+import { createTablePaginationModel } from '$lib/components/table/pagination/table-pagination-model';
+import { handleServerPagination } from '$lib/components/table/tanstack-table/server-pagination';
 
 export const handlePagination = ({
 	updater,

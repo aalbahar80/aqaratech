@@ -1,10 +1,10 @@
 <script lang="ts">
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
+
 	import L from '$i18n/i18n-svelte';
 	import FilterCheckbox from '$lib/components/filter/FilterCheckbox.svelte';
 	import FilterRadio from '$lib/components/filter/FilterRadio.svelte';
 	import FilterSlideover from '$lib/components/filter/FilterSlideover.svelte';
-
-	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
 	export let persistent: Filter[] = [];
 	export let responsive: Filter[] = [];

@@ -3,10 +3,10 @@
 
 	import type { PageData } from './$types';
 
+	import type { LeaseInvoiceDto } from '$api/openapi';
+
 	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
-
-	import type { LeaseInvoiceDto } from '$api/openapi';
 
 	export let data: PageData;
 

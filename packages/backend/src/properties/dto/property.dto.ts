@@ -17,7 +17,6 @@ import {
 } from 'class-validator';
 
 import { PropertyCreateSchema, PropertyUpdateSchema } from '@self/utils';
-
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
 	BreadcrumbDto,

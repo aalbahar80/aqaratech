@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
-	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-
 	import type { OrganizationDto } from '$api/openapi';
 	import type { ColumnDef } from '@tanstack/svelte-table';
+
+	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 
 	export let data: PageData;
 

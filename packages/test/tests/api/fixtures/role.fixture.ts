@@ -5,8 +5,8 @@ import { roleFactory } from '@self/seed';
 import { PostUrlRole } from '../../../utils/post-url';
 import { resCheck } from '../../../utils/res-check';
 
-import type { RoleDto } from '../../../types/api';
 import type { AllFixtures } from './test-fixtures.interface';
+import type { RoleDto } from '../../../types/api';
 
 export const roleFixtures: AllFixtures = {
 	roleParams: [undefined, { option: true }],

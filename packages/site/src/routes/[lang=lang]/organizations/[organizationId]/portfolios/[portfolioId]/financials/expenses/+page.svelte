@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
+	import BarChart from './BarChart.svelte';
+
 	import L from '$i18n/i18n-svelte';
 	import ExpenseTreemapCategory from '$lib/components/charts/treemap/ExpenseTreemapCategory.svelte';
 	import ExpenseTreemapProperty from '$lib/components/charts/treemap/ExpenseTreemapProperty.svelte';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
-
-	import BarChart from './BarChart.svelte';
 
 	export let data: PageData;
 

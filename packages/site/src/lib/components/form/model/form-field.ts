@@ -1,10 +1,10 @@
-import { getIntlLabel } from '$lib/i18n/get-intl-label';
-
 import type {
 	InputFormField,
 	SelectFormField,
 } from '$lib/components/form/model/form-field.interface';
 import type { Option } from '$lib/models/interfaces/option.interface';
+
+import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 type WithOptions<Name extends string> = {
 	type: 'select';
