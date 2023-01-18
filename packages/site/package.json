@@ -15,7 +15,7 @@
 		"check:watch": "pnpm run check:base --watch",
 		"check:config": "tsc --noEmit --project tsconfig.lint.json",
 		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"(**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}|!pnpm-lock.yaml)\" \"!src/i18n/{i18n-*,ar/*}\"",
-		"lint": "eslint --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
+		"lint": "eslint --cache --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
 		"lint:fix": "pnpm run lint --fix",
 		"flatten-sourcemaps": "../../scripts/flatten-sourcemaps.sh",
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",

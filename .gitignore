@@ -13,6 +13,7 @@ package-lock.json
 
 
 .turbo
+.eslintcache
 pruned
 meili_data
 build
