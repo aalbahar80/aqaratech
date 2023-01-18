@@ -7,12 +7,12 @@
 		"diagnostics": true
 	},
 	"include": [
-		"test/**/*.js",
-		"test/**/*.cjs",
-		"test/**/*.mjs",
-		"test/**/*.ts",
-		"test/**/*.cts",
-		"test/**/*.mts",
+		"tests/**/*.js",
+		"tests/**/*.cjs",
+		"tests/**/*.mjs",
+		"tests/**/*.ts",
+		"tests/**/*.cts",
+		"tests/**/*.mts",
 
 		// include files in current directory
 		"./*.js",
