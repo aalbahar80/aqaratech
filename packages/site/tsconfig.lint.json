@@ -8,12 +8,22 @@
 	"include": [
 		"src/**/*.svelte",
 		"src/**/*.js",
+		"src/**/*.cjs",
+		"src/**/*.mjs",
 		"src/**/*.ts",
+		"src/**/*.cts",
+		"src/**/*.mts",
 
 		// include files in current directory
-		"./.eslintrc.cjs",
 		"./*.js",
 		"./*.cjs",
-		"./*.ts"
+		"./*.mjs",
+		"./*.ts",
+		"./*.cts",
+		"./*.mts",
+
+		// dotfiles
+		"./.*.js",
+		"./.*.cjs"
 	]
 }

@@ -13,7 +13,7 @@
 		"lint": "eslint --max-warnings 0 --report-unused-disable-directives --ignore-path .gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
 		"lint:all": "TIMING=1 turbo run lint --continue",
 		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
-		"check": "tsc --noEmit; pnpm run check:circular",
+		"check": "tsc --noEmit --project tsconfig.lint.json; pnpm run check:circular",
 		"check:circular": "madge --circular --extensions ts --exclude .svelte-kit --no-spinner .",
 		"check:all": "turbo run check --continue",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
