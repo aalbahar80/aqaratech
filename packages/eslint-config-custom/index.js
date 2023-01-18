@@ -42,12 +42,16 @@ module.exports = {
 	parserOptions: {
 		tsconfigRootDir: __dirname,
 		project: [
-			// For sibling packages: Helps each .eslintrc.js file find its own tsconfig.json file
-			'../*/tsconfig.json',
-			'../*/tsconfig.lint.json',
-			// For root: Helps root .eslintrc.js file find its own tsconfig.json file
-			'../../tsconfig.json',
-			// '../../tsconfig.lint.json', // causes packages/* to be misconfigured
+			// declare files individually for better performance
+
+			'../../tsconfig.lint.json', // root
+
+			'../backend/tsconfig.lint.json',
+			'../site/tsconfig.lint.json',
+			'../seed/tsconfig.lint.json',
+			'../test/tsconfig.lint.json',
+			'../utils/tsconfig.lint.json',
+
 			// sourceType: 'module',
 		],
 		// Either here or in site/.eslintrc.cjs, we need to declare
