@@ -50,7 +50,7 @@ module.exports = {
 				// (a) the root of the project ex. vscode eslint extension,
 				// (b) from within the packages directory, using the eslint/svelte-check cli
 				tsconfigRootDir: __dirname,
-				project: './tsconfig.json',
+				project: './tsconfig.lint.json',
 			},
 			settings: {
 				// https://ota-meshi.github.io/eslint-plugin-svelte/user-guide/#settings-svelte
