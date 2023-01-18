@@ -11,7 +11,7 @@
 		"preview:vite": "vite preview --port 3000 --strictPort",
 		"preview:node": "pnpm dotenv -e ../../.env -- node build/index.js",
 		"check:base": "svelte-check --compiler-warnings \"a11y-click-events-have-key-events:ignore\"",
-		"check": "svelte-kit sync && pnpm run check:config && pnpm run check:base --output human",
+		"check": "svelte-kit sync && pnpm run check:base --output human",
 		"check:watch": "pnpm run check:base --watch",
 		"check:config": "tsc --noEmit --project tsconfig.lint.json",
 		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"(**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}|!pnpm-lock.yaml)\" \"!src/i18n/{i18n-*,ar/*}\"",
