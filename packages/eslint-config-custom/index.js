@@ -124,6 +124,7 @@ module.exports = {
 		],
 
 		'security/detect-object-injection': 'off',
+		'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
 
 		// Overkill:
 		// '@typescript-eslint/strict-boolean-expressions': 'warn',
