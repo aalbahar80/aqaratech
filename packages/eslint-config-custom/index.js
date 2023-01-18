@@ -1,6 +1,5 @@
 const importConfig = require('./import');
 // const unicornConfig = require('./unicorn');
-const turboConfig = require('./turbo');
 
 /**
  * @type {import("eslint").Linter.Config}
@@ -35,7 +34,6 @@ module.exports = {
 		'plugin:regexp/recommended',
 
 		...importConfig.extends,
-		...turboConfig.extends,
 		// ...unicornConfig.extends,
 	],
 	plugins: ['@typescript-eslint'],
@@ -135,7 +133,6 @@ module.exports = {
 		// '@typescript-eslint/prefer-readonly-parameter-types': 'warn',
 
 		...importConfig.rules,
-		...turboConfig.rules,
 		// ...unicornConfig.rules,
 	},
 	ignorePatterns: ['*.sh'],
