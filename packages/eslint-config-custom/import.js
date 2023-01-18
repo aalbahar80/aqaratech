@@ -87,5 +87,12 @@ module.exports = {
 			},
 		],
 		// 'sort-imports': ['error'],
+
+		// superseded by typescript-eslint
+		// https://typescript-eslint.io/linting/troubleshooting/performance-troubleshooting#eslint-plugin-import
+		'import/named': 'off',
+		'import/namespace': 'off',
+		'import/default': 'off',
+		'import/no-named-as-default-member': 'off',
 	},
 };
