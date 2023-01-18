@@ -267,6 +267,7 @@ importers:
       debounce: 1.2.1
       defu: 6.1.1
       dotenv: 16.0.3
+      dotenv-cli: 6.0.0
       eslint-config-custom: workspace:*
       eslint-plugin-svelte: 2.14.1
       frappe-charts: 1.6.2
@@ -312,7 +313,7 @@ importers:
       '@iconify/json': 2.2.7
       '@intlify/eslint-plugin-svelte': 0.1.1_tmo5zkisvhu6htudosk5k7m6pu
       '@logtail/types': 0.1.15
-      '@rgossiaux/svelte-headlessui': 1.0.2_okvbycgeo7n6fa7ggm4c3cdetm_svelte@3.55.1
+      '@rgossiaux/svelte-headlessui': 1.0.2_tvgqshloapx5y3z3as5gnhnhfq_svelte@3.55.1
       '@self/utils': link:../utils
       '@sentry/svelte': 7.30.0_svelte@3.55.1
       '@sentry/tracing': 7.30.0
@@ -338,6 +339,7 @@ importers:
       debounce: 1.2.1
       defu: 6.1.1
       dotenv: 16.0.3
+      dotenv-cli: 6.0.0
       eslint-config-custom: link:../eslint-config-custom
       eslint-plugin-svelte: 2.14.1_tmo5zkisvhu6htudosk5k7m6pu
       frappe-charts: 1.6.2
@@ -2760,7 +2762,7 @@ packages:
     resolution: {integrity: sha512-93tctjNXcIS+i/e552IO6tqw17sX8liivv8WX9lDMCpEEe3ci+nT9F+1oHtAafqruXLepKF80i/D20Mm+ESlOw==}
     requiresBuild: true
 
-  /@rgossiaux/svelte-headlessui/1.0.2_okvbycgeo7n6fa7ggm4c3cdetm_svelte@3.55.1:
+  /@rgossiaux/svelte-headlessui/1.0.2_tvgqshloapx5y3z3as5gnhnhfq_svelte@3.55.1:
     resolution: {integrity: sha512-sauopYTSivhzXe1kAvgawkhyYJcQlK8Li3p0d2OtcCIVprOzdbard5lbqWB4xHDv83zAobt2mR08oizO2poHLQ==}
     peerDependencies:
       svelte: ^3.44.0
@@ -5184,10 +5186,19 @@ packages:
     dev: true
     optional: true
 
+  /dotenv-cli/6.0.0:
+    resolution: {integrity: sha512-qXlCOi3UMDhCWFKe0yq5sg3X+pJAz+RQDiFN38AMSbUrnY3uZshSfDJUAge951OS7J9gwLZGfsBlWRSOYz/TRg==}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+      dotenv: 16.0.3
+      dotenv-expand: 8.0.3
+      minimist: 1.2.7
+    dev: true
+
   /dotenv-expand/8.0.3:
     resolution: {integrity: sha512-SErOMvge0ZUyWd5B0NXMQlDkN+8r+HhVUsxgOO7IoPDOdDRD2JjExpN6y3KnFR66jsJMwSn1pqIivhU5rcJiNg==}
     engines: {node: '>=12'}
-    dev: false
 
   /dotenv/16.0.1:
     resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
