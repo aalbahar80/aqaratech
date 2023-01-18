@@ -14,20 +14,20 @@
 	},
 	"dependencies": {
 		"date-fns": "2.29.3",
-		"remeda": "1.4.0",
+		"remeda": "1.6.0",
 		"winston": "3.8.2",
 		"zod": "3.20.2"
 	},
 	"devDependencies": {
 		"@logtail/types": "0.1.15",
-		"@sentry/types": "7.30.0",
+		"@sentry/types": "7.31.1",
 		"@types/node": "18.11.18",
-		"@vitest/ui": "0.27.1",
+		"@vitest/ui": "0.27.2",
 		"eslint-config-custom": "workspace:*",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"typescript": "4.9.4",
-		"vitest": "0.27.1"
+		"vitest": "0.27.2"
 	},
 	"private": true,
 	"engines": {
