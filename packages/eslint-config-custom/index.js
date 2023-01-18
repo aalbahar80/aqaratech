@@ -34,8 +34,6 @@ module.exports = {
 		// https://github.com/ota-meshi/eslint-plugin-regexp#book-usage
 		'plugin:regexp/recommended',
 
-		'prettier',
-
 		...importConfig.extends,
 		...turboConfig.extends,
 		// ...unicornConfig.extends,
