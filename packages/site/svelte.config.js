@@ -31,15 +31,21 @@ const config = {
 			$i18n: 'src/i18n',
 		},
 	},
-	// vitePlugin: {
-	// 	experimental: {
-	// 		// 	prebundleSvelteLibraries: true,
-	// 		/** shortcut: meta + shift */
-	// 		inspector: {
-	// 			showToggleButton: 'always',
-	// 		},
-	// 	},
-	// },
+	vitePlugin: {
+		experimental: {
+			// 	prebundleSvelteLibraries: true,
+
+			// https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector
+			/** shortcut: meta + shift */
+			inspector: {
+				toggleKeyCombo: 'meta-shift',
+				// showToggleButton: 'active',
+				showToggleButton: 'always',
+				holdMode: true,
+				toggleButtonPos: 'bottom-right',
+			},
+		},
+	},
 };
 
 export default config;
