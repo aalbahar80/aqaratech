@@ -90,6 +90,15 @@ export const getNavigationTree = (
 				icon: HeroiconsOutlineDocumentText,
 			},
 			{
+				name: LL.entity.leaseInvoice.plural(),
+				href: getRoute({
+					entity: 'leaseInvoice',
+					pageType,
+					params: { organizationId, ...langParam },
+				}),
+				icon: HeroiconsOutlineDocumentText,
+			},
+			{
 				name: LL.entity.tenant.plural(),
 				href: getRoute({
 					entity: 'tenant',
