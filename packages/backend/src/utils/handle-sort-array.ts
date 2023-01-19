@@ -14,21 +14,38 @@ import * as R from 'remeda';
  * ```
  */
 export const handleSortArray = (sort: ParsedQueryModel['sort']) => {
+	const final: Record<string, unknown>[] = [];
+
 	// Handle dot notation in sort array
-	const expanded = sort.map((n) => {
+	sort.forEach((n) => {
 		const obj = {};
 
+		// Handle dot notation for the requested key
 		R.forEachObj.indexed(n, (val, key) => {
 			if (typeof key === 'string') {
 				set(obj, key, val);
+				final.push(obj);
 			}
 		});
 
-		return obj;
+		// Add an id tiebreaker, where id is a sibling of the requested key
+		// e.g. [{ 'lease.tenantId': 'desc' }] => [{ 'lease': { 'tenantId': 'desc' } }, { 'lease': { 'id': 'desc' } }]
+
+		const tiebreaker = {};
+
+		R.forEachObj.indexed(n, (val, key) => {
+			if (typeof key === 'string') {
+				const withoutLast = key.split('.').slice(0, -1).join('.');
+				if (withoutLast.length > 0) {
+					set(tiebreaker, withoutLast, { id: val });
+					final.push(tiebreaker);
+				}
+			}
+		});
 	});
 
 	// Add an id tiebreaker to prevent pagination issues
-	const withId = [...expanded, { id: 'asc' }];
+	const withId = [...final, { id: 'desc' }];
 
 	return withId;
 };
