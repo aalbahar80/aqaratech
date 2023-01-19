@@ -33,7 +33,15 @@ export const handleSortArray = (sort: ParsedQueryModel['sort']) => {
 		R.forEachObj.indexed(n, (val, key) => {
 			if (typeof key === 'string') {
 				const withoutLast = key.split('.').slice(0, -1).join('.');
-				if (withoutLast.length > 0) {
+
+				const keyIsRoot = withoutLast === '';
+
+				// If the key at the root level, add an id tiebreaker
+				if (keyIsRoot) {
+					final.push({ id: 'desc' });
+				} else {
+					// Otherwise if the key is not at the root level,
+					// add an id tiebreaker at the same level as the requested key
 					const tiebreaker = {};
 					set(tiebreaker, withoutLast, { id: val });
 					final.push(tiebreaker);
@@ -42,8 +50,5 @@ export const handleSortArray = (sort: ParsedQueryModel['sort']) => {
 		});
 	});
 
-	// Add an id tiebreaker to prevent pagination issues
-	const withId = [...final, { id: 'desc' }];
-
-	return withId;
+	return final;
 };
