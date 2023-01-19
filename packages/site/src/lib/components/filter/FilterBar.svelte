@@ -30,9 +30,12 @@
 					/>
 				{/each}
 
-				{#each responsive as filter (filter.id)}
-					<FilterCheckbox {filter} />
-				{/each}
+				<div class="hidden flex-row-reverse gap-6 sm:flex">
+					{#each responsive as filter (filter.id)}
+						<FilterCheckbox {filter} />
+					{/each}
+				</div>
+
 				{#if responsive.length}
 					<button
 						type="button"
