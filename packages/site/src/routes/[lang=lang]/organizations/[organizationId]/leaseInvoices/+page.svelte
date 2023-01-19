@@ -7,6 +7,7 @@
 
 	import L from '$i18n/i18n-svelte';
 	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
+	import { isPaidFilter } from '$lib/components/table/tanstack-table/filters/is-paid';
 
 	export let data: PageData;
 
@@ -15,6 +16,7 @@
 
 <LeaseInvoiceTable
 	data={data.invoices}
+	extraFilters={[$isPaidFilter]}
 	extraColumns={[
 		columnHelper.accessor('portfolioId', {
 			header: $L.entity.portfolio.singular(),
