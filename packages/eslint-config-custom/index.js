@@ -8,7 +8,7 @@ module.exports = {
 	env: {
 		node: true,
 	},
-	parser: '@typescript-eslint/parser',
+	plugins: ['@typescript-eslint'],
 	extends: [
 		'eslint:recommended',
 
@@ -36,7 +36,7 @@ module.exports = {
 		...importConfig.extends,
 		// ...unicornConfig.extends,
 	],
-	plugins: ['@typescript-eslint'],
+	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		tsconfigRootDir: __dirname,
 		project: [
