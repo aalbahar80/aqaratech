@@ -28,6 +28,8 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
+import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { RoleDto } from 'src/roles/dto/role.dto';
 import { RolesService } from 'src/roles/roles.service';
@@ -53,6 +55,7 @@ export class OrganizationsController {
 		private readonly organizationsService: OrganizationsService,
 		private readonly rolesService: RolesService,
 		private readonly searchService: SearchService,
+		private readonly leaseInvoicesService: LeaseInvoicesService,
 	) {}
 
 	@Post()
@@ -161,6 +164,26 @@ export class OrganizationsController {
 			query: escapeStringRegexp(query),
 			organizationId,
 			user,
+		});
+	}
+
+	@Get(':id/leaseInvoices')
+	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	@ApiQueryOptions()
+	@ApiPaginatedResponse(LeaseInvoiceDto)
+	findAllLeaseInvoices(
+		@User() user: IUser,
+		@Param('id') organizationId: string,
+		@QueryParser({
+			parserOptions: { orderDefaultValue: 'postAt' },
+			filterOptions: { keys: ['postAt', 'lease', 'isPaid'] },
+		})
+		queryOptions: QueryOptionsDto,
+	): Promise<WithCount<LeaseInvoiceDto>> {
+		return this.leaseInvoicesService.findAll({
+			queryOptions,
+			user,
+			whereCustom: { organizationId },
 		});
 	}
 }

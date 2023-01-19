@@ -27,6 +27,7 @@ import type {
 	FileRelationKeyEnum,
 	OrganizationCreatedDto,
 	OrganizationDto,
+	PaginatedLeaseInvoiceDto,
 	PaginatedOrganizationDto,
 	PaginatedRoleDto,
 	PartialExpenseDto,
@@ -97,6 +98,15 @@ export interface OrganizationsApiCreate0Request {
 	file: Blob;
 	fileName: string;
 	relationValue: string;
+}
+
+export interface OrganizationsApiFindAllLeaseInvoicesRequest {
+	id: string;
+	page?: number | undefined;
+	skip?: number | undefined;
+	take?: number | undefined;
+	sort?: Array<string> | undefined;
+	filter?: object | undefined;
 }
 
 export interface OrganizationsApiFindOneRequest {
@@ -946,6 +956,76 @@ export class OrganizationsApi extends runtime.BaseAPI {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<PaginatedOrganizationDto> {
 		const response = await this.findAllRaw(initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findAllLeaseInvoicesRaw(
+		requestParameters: OrganizationsApiFindAllLeaseInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<PaginatedLeaseInvoiceDto>> {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling findAllLeaseInvoices.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		if (requestParameters.page !== undefined) {
+			queryParameters['page'] = requestParameters.page;
+		}
+
+		if (requestParameters.skip !== undefined) {
+			queryParameters['skip'] = requestParameters.skip;
+		}
+
+		if (requestParameters.take !== undefined) {
+			queryParameters['take'] = requestParameters.take;
+		}
+
+		if (requestParameters.sort) {
+			queryParameters['sort'] = requestParameters.sort;
+		}
+
+		if (requestParameters.filter !== undefined) {
+			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/organizations/{id}/leaseInvoices`.replace(
+					`{${'id'}}`,
+					encodeURIComponent(String(requestParameters.id)),
+				),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findAllLeaseInvoices(
+		requestParameters: OrganizationsApiFindAllLeaseInvoicesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<PaginatedLeaseInvoiceDto> {
+		const response = await this.findAllLeaseInvoicesRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

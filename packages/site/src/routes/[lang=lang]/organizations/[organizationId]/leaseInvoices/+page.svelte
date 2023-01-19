@@ -14,7 +14,7 @@
 </script>
 
 <LeaseInvoiceTable
-	data={data.leases}
+	data={data.invoices}
 	extraColumns={[
 		columnHelper.accessor('portfolioId', {
 			header: $L.entity.portfolio.singular(),

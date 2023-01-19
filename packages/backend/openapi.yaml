@@ -2082,6 +2082,63 @@ paths:
                 $ref: '#/components/schemas/SearchDto'
       tags: *ref_19
       security: *ref_20
+  /organizations/{id}/leaseInvoices:
+    get:
+      operationId: OrganizationsController_findAllLeaseInvoices
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedLeaseInvoiceDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfLeaseInvoiceDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceDto'
+      tags: *ref_19
+      security: *ref_20
   /organizations/{organizationId}/tenants:
     post:
       operationId: OrganizationsAdminController_createTenant
