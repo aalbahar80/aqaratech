@@ -69,7 +69,10 @@
 
 		...extraColumns,
 
-		locationColumnDef(columnHelper),
+		locationColumnDef(columnHelper, {
+			propertyColumnId: 'unit.property.label',
+			unitColumnId: 'unit.label',
+		}),
 
 		columnHelper.accessor('breadcrumbs.tenant', {
 			id: 'tenant.fullName', // used for sorting

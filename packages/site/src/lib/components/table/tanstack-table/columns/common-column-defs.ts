@@ -11,6 +11,8 @@ import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 
 export const locationColumnDef = <T extends Breadcrumbs>(
 	columnHelper: ColumnHelper<T>,
+	/* Keys to use for sorting */
+	options: { propertyColumnId: string; unitColumnId: string },
 ) => {
 	const LL = get(L);
 
@@ -18,18 +20,16 @@ export const locationColumnDef = <T extends Breadcrumbs>(
 		header: LL.landing.location(),
 		columns: [
 			columnHelper.accessor((a) => a.breadcrumbs.property, {
-				id: 'property',
+				id: options.propertyColumnId,
 				header: LL.entity.property.singular(),
 				cell: (info) =>
 					info.getValue<T['breadcrumbs']['property']>()?.label ?? '',
-				enableSorting: false,
 			}),
 
 			columnHelper.accessor((a) => a.breadcrumbs.unit, {
-				id: 'unit',
+				id: options.unitColumnId,
 				header: LL.entity.unit.singular(),
 				cell: (info) => info.getValue<T['breadcrumbs']['unit']>()?.label ?? '',
-				enableSorting: false,
 			}),
 		],
 	});

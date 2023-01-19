@@ -79,7 +79,10 @@
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
 
-		locationColumnDef(columnHelper),
+		locationColumnDef(columnHelper, {
+			propertyColumnId: 'lease.unit.property.label',
+			unitColumnId: 'lease.unit.label',
+		}),
 
 		...extraColumns,
 

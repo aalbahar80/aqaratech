@@ -65,7 +65,10 @@
 
 		...extraColumns,
 
-		locationColumnDef(columnHelper),
+		locationColumnDef(columnHelper, {
+			propertyColumnId: 'property.label',
+			unitColumnId: 'unit.label',
+		}),
 
 		viewColumnDef(columnHelper, 'maintenanceOrder', $page.params),
 	];

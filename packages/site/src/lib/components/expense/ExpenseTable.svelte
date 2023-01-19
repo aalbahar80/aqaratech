@@ -36,7 +36,10 @@
 			cell: (info) => info.getValue().toLocaleString(),
 		}),
 
-		locationColumnDef(columnHelper),
+		locationColumnDef(columnHelper, {
+			propertyColumnId: 'property.label',
+			unitColumnId: 'unit.label',
+		}),
 
 		viewColumnDef(columnHelper, 'expense', $page.params),
 	];
