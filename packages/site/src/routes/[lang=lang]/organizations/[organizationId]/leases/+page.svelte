@@ -16,9 +16,9 @@
 <LeaseTable
 	data={data.leases}
 	extraColumns={[
-		columnHelper.accessor('portfolioId', {
+		columnHelper.accessor('breadcrumbs.portfolio.label', {
+			id: 'portfolio.fullName', // used for sorting
 			header: $L.entity.portfolio.singular(),
-			cell: (info) => info.row.original.breadcrumbs.portfolio.label,
 		}),
 	]}
 />

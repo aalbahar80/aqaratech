@@ -27,9 +27,9 @@
 	data={data.invoices}
 	extraFilters={[$isPaidFilter]}
 	extraColumns={[
-		columnHelper.accessor('portfolioId', {
+		columnHelper.accessor('breadcrumbs.portfolio.label', {
+			id: 'portfolio.fullName', // used for sorting
 			header: $L.entity.portfolio.singular(),
-			cell: (info) => info.row.original.breadcrumbs.portfolio.label,
 		}),
 		{
 			id: 'lease.tenant.fullName', // used for sorting
