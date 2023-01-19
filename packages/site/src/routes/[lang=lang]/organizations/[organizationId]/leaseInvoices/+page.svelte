@@ -31,5 +31,11 @@
 			header: $L.entity.portfolio.singular(),
 			cell: (info) => info.row.original.breadcrumbs.portfolio.label,
 		}),
+		{
+			header: 'Tenant',
+			footer: 'Tenant',
+			id: 'lease.tenantId', // used for sorting
+			accessorKey: 'breadcrumbs.tenant.label', // used for display
+		},
 	]}
 />

@@ -9,6 +9,8 @@ import {
 	RequestQueryOptions,
 } from '@prisma-utils/nestjs-request-parser';
 import { Request } from 'express';
+import set from 'lodash.set';
+import * as R from 'remeda';
 import { z } from 'zod';
 
 import { queryOptionsParsedSchema } from '@self/utils';
@@ -67,6 +69,25 @@ export const QueryParser = createParamDecorator(
 		const output = new ZodValidationPipe(schema).transform(input, {
 			type: 'custom',
 		});
+
+		// Handle dot notation in sort array
+		const sort = parsed.sort.map((n) => {
+			// transform keys to dot notation
+			// e.g. { 'lease.tenantId': 'desc' } => { 'lease': { 'tenantId': 'desc' } }
+
+			const obj = {};
+
+			R.forEachObj.indexed(n, (val, key) => {
+				if (typeof key === 'string') {
+					set(obj, key, val);
+				}
+			});
+
+			return obj;
+		});
+
+		// replace the original sort array with the new one
+		output.sort = sort;
 
 		return output;
 	},
