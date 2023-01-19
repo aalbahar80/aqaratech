@@ -9,8 +9,6 @@ import {
 	RequestQueryOptions,
 } from '@prisma-utils/nestjs-request-parser';
 import { Request } from 'express';
-import set from 'lodash.set';
-import * as R from 'remeda';
 import { z } from 'zod';
 
 import { queryOptionsParsedSchema } from '@self/utils';
@@ -22,6 +20,7 @@ import {
 	TAKE_PARAM_DEFAULT,
 } from 'src/constants/pagination.constant';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
+import { handleSortArray } from 'src/utils/handle-sort-array';
 import { parseObject } from 'src/utils/query-types';
 
 export const QueryParser = createParamDecorator(
@@ -70,26 +69,10 @@ export const QueryParser = createParamDecorator(
 			type: 'custom',
 		});
 
-		// Handle dot notation in sort array
-		const sort = parsed.sort.map((n) => {
-			// transform keys to dot notation
-			// e.g. { 'lease.tenantId': 'desc' } => { 'lease': { 'tenantId': 'desc' } }
-
-			const obj = {};
-
-			R.forEachObj.indexed(n, (val, key) => {
-				if (typeof key === 'string') {
-					set(obj, key, val);
-				}
-			});
-
-			return obj;
-		});
-
-		// replace the original sort array with the new one
-		output.sort = sort;
-
-		return output;
+		return {
+			...output,
+			sort: handleSortArray(output.sort),
+		};
 	},
 );
 
