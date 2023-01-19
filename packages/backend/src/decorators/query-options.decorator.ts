@@ -34,6 +34,10 @@ export const QueryParser = createParamDecorator(
 			limitDefaultValue: TAKE_PARAM_DEFAULT,
 			limitParamName: TAKE_PARAM,
 
+			// Prevent default sort in decorator.
+			// Default sort can be set in the controller on a per-handler basis
+			orderDefaultValue: '',
+
 			// don't use `prisma-utils` to parse the filter, we do it ourselves using zod
 			filterParamName: 'NEVER',
 
