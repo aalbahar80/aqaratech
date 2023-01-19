@@ -1,10 +1,10 @@
-import { Chart, type ChartDataset } from 'chart.js';
+import { Chart } from 'chart.js';
 
 import { currencyTooltip } from './utils/currency';
 
 import type { GroupByMonthDto } from '$api/openapi';
 
-type DataSets = ChartDataset<'bar', GroupByMonthDto[]>[];
+type DataSets = Chart<'bar', GroupByMonthDto[]>['data']['datasets'];
 
 export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
 	const chart = new Chart(node, {
@@ -59,8 +59,6 @@ export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
 
 	return {
 		update(datasets: DataSets) {
-			// @ts-expect-error - chart.js types are wrong - missing custom data type which is parsed by `parsing` property
-			// https://www.chartjs.org/docs/latest/general/data-structures.html#data-structures
 			chart.data.datasets = datasets;
 			chart.update();
 		},
