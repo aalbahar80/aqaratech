@@ -27,8 +27,8 @@ export const handleSortArray = (sort: ParsedQueryModel['sort']) => {
 		return obj;
 	});
 
-	return [
-		...expanded,
-		{ id: 'asc' }, // Add an id tiebreaker to prevent pagination issues
-	];
+	// Add an id tiebreaker to prevent pagination issues
+	const withId = [...expanded, { id: 'asc' }];
+
+	return withId;
 };
