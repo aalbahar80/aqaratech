@@ -96,7 +96,7 @@ export const getNavigationTree = (
 					pageType,
 					params: { organizationId, ...langParam },
 				}),
-				icon: HeroiconsOutlineDocumentText,
+				icon: HeroiconsReceiptPercent,
 			},
 			{
 				name: LL.entity.tenant.plural(),
