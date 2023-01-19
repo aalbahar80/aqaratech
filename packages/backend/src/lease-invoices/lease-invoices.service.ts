@@ -73,7 +73,12 @@ export class LeaseInvoicesService {
 			this.prisma.leaseInvoice.findMany({
 				take,
 				skip,
-				orderBy: sort,
+				orderBy: [
+					...sort,
+					// tie-breaker - prevent repeated sorting when dates are identical
+					{ id: 'desc' },
+				],
+
 				where,
 				include: { lease: crumbs.lease },
 			}),
