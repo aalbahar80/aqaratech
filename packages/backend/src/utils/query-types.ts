@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 // Source: https://github.com/xpepermint/query-types/blob/master/index.js
