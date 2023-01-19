@@ -3,7 +3,7 @@ import set from 'lodash.set';
 import * as R from 'remeda';
 
 /**
- * Transform keys to dot notation.
+ * Transform keys to dot notation. Add an id tiebreaker.
  *
  * ```typescript
  * // original
@@ -27,5 +27,8 @@ export const handleSortArray = (sort: ParsedQueryModel['sort']) => {
 		return obj;
 	});
 
-	return expanded;
+	return [
+		...expanded,
+		{ id: 'asc' }, // Add an id tiebreaker to prevent pagination issues
+	];
 };
