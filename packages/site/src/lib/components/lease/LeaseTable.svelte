@@ -72,7 +72,7 @@
 		locationColumnDef(columnHelper),
 
 		columnHelper.accessor('breadcrumbs.tenant', {
-			id: 'tenant',
+			id: 'tenant.fullName', // used for sorting
 			header: $L.entity.tenant.singular(),
 			cell: (info) =>
 				renderComponent(ActionCell, {
@@ -84,7 +84,6 @@
 						id: info.getValue().id,
 					}),
 				}),
-			enableSorting: false,
 		}),
 
 		viewColumnDef(columnHelper, 'lease', $page.params),
