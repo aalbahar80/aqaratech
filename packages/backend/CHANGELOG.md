@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.10.2
+
+### Patch Changes
+
+- 21326817b: update deps
+- Updated dependencies [21326817b]
+  - @self/utils@3.9.2
+
 ## 2.10.1
 
 ### Patch Changes
