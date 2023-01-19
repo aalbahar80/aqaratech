@@ -32,7 +32,7 @@
 			cell: (info) => info.row.original.breadcrumbs.portfolio.label,
 		}),
 		{
-			id: 'lease.tenantId', // used for sorting
+			id: 'lease.tenant.fullName', // used for sorting
 			header: $L.entity.tenant.singular(),
 			accessorKey: 'breadcrumbs.tenant.label', // used for display
 		},
