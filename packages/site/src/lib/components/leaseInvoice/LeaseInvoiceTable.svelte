@@ -7,6 +7,7 @@
 
 	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
