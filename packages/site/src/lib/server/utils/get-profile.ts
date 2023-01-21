@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/node';
-import { error } from '@sveltejs/kit';
 
 import type { ValidatedUserDto } from '$api/openapi';
 import type { RequestEvent } from '@sveltejs/kit';
@@ -53,8 +52,9 @@ export const getProfile = async (event: RequestEvent) => {
 			}),
 		});
 
-		throw error(500, {
-			message: 'Service unavailable',
+		// Avoid using error helper to invoke error hook
+		throw new Error('Backend responded with an error when fetching user', {
+			cause: res,
 		});
 	}
 
