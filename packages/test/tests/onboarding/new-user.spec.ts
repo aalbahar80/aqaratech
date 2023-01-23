@@ -32,6 +32,8 @@ test.use({
 });
 
 test('new users are redirected to /welcome', async ({ page }) => {
+	test.slow();
+
 	await page.goto('/');
 
 	await page
@@ -43,6 +45,8 @@ test('new users are redirected to /welcome', async ({ page }) => {
 });
 
 test('new users are redirected to /welcome - hero', async ({ page }) => {
+	test.slow();
+
 	await page.goto('/');
 
 	await page.getByTestId('hero').getByRole('link', { name: 'Log in' }).click();

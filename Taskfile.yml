@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://json.schemastore.org/taskfile.json
+---
+version: '3'
+
+# Run `ACTION=write task format` in any directory to format it's files.
+tasks:
+  format:
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - prettier --cache --{{.ACTION | default "check"}} --config {{.TASKFILE_DIR}}/.prettierrc --ignore-path {{.TASKFILE_DIR}}/.gitignore "**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}" "!src/i18n/{i18n-*,ar/*}" "!pnpm-lock.yaml" "!packages/**"
+
+  lint:
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - pnpm eslint --cache --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore "**/*.{js,cjs,mjs,ts,cts,mts,svelte}" {{.CLI_ARGS}}

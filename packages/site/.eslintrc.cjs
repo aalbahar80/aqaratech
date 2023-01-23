@@ -32,6 +32,9 @@ module.exports = {
 		// not compatible with sveltekit's throw redirct/error
 		'@typescript-eslint/no-throw-literal': 'off',
 	},
+	parserOptions: {
+		extraFileExtensions: ['.svelte'],
+	},
 	overrides: [
 		{
 			files: ['*.svelte'],

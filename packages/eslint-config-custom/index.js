@@ -38,23 +38,10 @@ module.exports = {
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
-		tsconfigRootDir: __dirname,
-		project: [
-			// declare files individually for better performance
-
-			'../../tsconfig.lint.json', // root
-
-			'../backend/tsconfig.lint.json',
-			'../site/tsconfig.lint.json',
-			'../seed/tsconfig.lint.json',
-			'../test/tsconfig.lint.json',
-			'../utils/tsconfig.lint.json',
-
-			// sourceType: 'module',
-		],
-		// Either here or in site/.eslintrc.cjs, we need to declare
-		// `extraFileExtensions: ['.svelte']` option for `@typescript-eslint/parser`.
-		extraFileExtensions: ['.svelte'],
+		// Declare a single tsconfig file. Don't set tsconfigRootDir. Don't use globs.
+		// Otherwise, the parser will try to find tsconfig.json files in parent/sibling directories.
+		// Also see resolver setting in eslint-plugin-import.
+		project: './tsconfig.lint.json',
 	},
 	root: true,
 	settings: {

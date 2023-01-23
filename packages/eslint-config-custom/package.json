@@ -17,7 +17,7 @@
 		"eslint-plugin-unicorn": "45.0.2"
 	},
 	"scripts": {
-		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\""
+		"format": "task format"
 	},
 	"engines": {
 		"node": ">= 16"

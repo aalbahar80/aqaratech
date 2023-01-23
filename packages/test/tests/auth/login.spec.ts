@@ -56,6 +56,8 @@ const test = base.extend({
 });
 
 test('login', async ({ page }) => {
+	test.slow();
+
 	const domain = new URL(siteURL).hostname;
 
 	const cookies = await page.context().cookies();

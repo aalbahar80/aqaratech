@@ -11,6 +11,7 @@ importers:
     specifiers:
       '@changesets/changelog-git': 0.1.14
       '@changesets/cli': 2.26.0
+      '@go-task/cli': 3.20.0
       '@types/node': 18.11.18
       eslint: 8.32.0
       eslint-config-custom: workspace:*
@@ -28,6 +29,7 @@ importers:
     devDependencies:
       '@changesets/changelog-git': 0.1.14
       '@changesets/cli': 2.26.0
+      '@go-task/cli': 3.20.0
       '@types/node': 18.11.18
       eslint: 8.32.0
       eslint-config-custom: link:packages/eslint-config-custom
@@ -387,6 +389,7 @@ importers:
       '@types/node': 18.11.18
       '@types/qs': 6.9.7
       dotenv: 16.0.3
+      dotenv-cli: 7.0.0
       eslint-config-custom: workspace:*
       eslint-plugin-playwright: 0.12.0
       jose: 4.11.2
@@ -409,6 +412,7 @@ importers:
       '@self/utils': link:../utils
       '@types/node': 18.11.18
       dotenv: 16.0.3
+      dotenv-cli: 7.0.0
       eslint-config-custom: link:../eslint-config-custom
       eslint-plugin-playwright: 0.12.0_eslint@8.32.0
       jose: 4.11.2
@@ -2281,6 +2285,18 @@ packages:
   /@faker-js/faker/7.6.0:
     resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+
+  /@go-task/cli/3.20.0:
+    resolution: {integrity: sha512-EfwTUeXj/vqzihrLFdgV810B33uF9gIHpXGgO5cpEkiW0cmaRzvBF2hz8D9Xq7C4yQ1QJp+VgHyQhzRJ04Uqjg==}
+    requiresBuild: true
+    dependencies:
+      '@go-task/go-npm': 0.1.17
+    dev: true
+
+  /@go-task/go-npm/0.1.17:
+    resolution: {integrity: sha512-j+xydQWrAxsqLYjweok1fWzDmBAA1g/gmFbPyG8kRI/d/+rzXGGLlro8zdS6mJ3Is+8BrIy2ZBmQkoONhowh7A==}
+    hasBin: true
+    dev: true
 
   /@graphql-tools/merge/8.3.12_graphql@16.6.0:
     resolution: {integrity: sha512-BFL8r4+FrqecPnIW0H8UJCBRQ4Y8Ep60aujw9c/sQuFmQTiqgWgpphswMGfaosP2zUinDE3ojU5wwcS2IJnumA==}

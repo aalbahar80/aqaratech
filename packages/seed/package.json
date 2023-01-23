@@ -4,9 +4,9 @@
 	"main": "src/index.ts",
 	"types": "src/index.ts",
 	"scripts": {
-		"format": "prettier --check --config ../../.prettierrc --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\"",
-		"lint": "eslint --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
-		"lint:fix": "pnpm run lint --fix",
+		"format": "task format",
+		"lint": "task lint",
+		"lint:fix": "task lint -- --fix",
 		"check": "tsc --noEmit"
 	},
 	"dependencies": {

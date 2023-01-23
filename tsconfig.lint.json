@@ -11,6 +11,7 @@
 		// use pnpm tsc --showConfig to diagnose
 		"scripts/**/*.*",
 		"ambient.d.ts",
-		".eslintrc.js"
+		".eslintrc.js",
+		"types/process-env.d.ts"
 	]
 }

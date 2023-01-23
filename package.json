@@ -7,9 +7,8 @@
 		"dev": "turbo run dev --filter !@self/test",
 		"test": "turbo run test",
 		"sentry:release": "turbo run sentry:release",
-		"format": "prettier --check --ignore-path .gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}\" \"!pnpm-lock.yaml\" \"!packages/**/*\"",
+		"format": "task format",
 		"format:all": "turbo run format --continue",
-		"format:fix": "prettier --write --ignore-path .gitignore \"(**/*.{js,cjs,mjs,ts,cts,mts,svelte,css,md,yaml,yml,json,jsonc}|!pnpm-lock.yaml)\"",
 		"lint": "eslint --max-warnings 0 --report-unused-disable-directives --ignore-path .gitignore \"**/*.{js,cjs,mjs,ts,cts,mts,svelte}\"",
 		"lint:all": "TIMING=1 turbo run lint --continue",
 		"lint:fix": "pnpm run -r --no-bail --parallel --aggregate-output lint:fix",
@@ -21,11 +20,12 @@
 		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate && ./scripts/add-nocheck.sh && tsx ./scripts/rm-unused-jsdoc.ts && pnpm prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'",
 		"api:generate:all": "turbo run api:generate",
 		"seed": "pnpm -F @self/backend exec prisma migrate reset --force",
-		"precompute": "pnpm format:all && pnpm check:all && pnpm lint:all && pnpm build && pnpm test"
+		"precompute": "TIMING=1 turbo run format check lint build test --continue"
 	},
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.14",
 		"@changesets/cli": "2.26.0",
+		"@go-task/cli": "3.20.0",
 		"@types/node": "18.11.18",
 		"eslint": "8.32.0",
 		"eslint-config-custom": "workspace:*",
