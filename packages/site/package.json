@@ -27,7 +27,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && pnpm typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.9",
+		"@iconify/json": "2.2.10",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.1.15",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -35,7 +35,7 @@
 		"@sentry/svelte": "7.31.1",
 		"@sentry/tracing": "7.31.1",
 		"@sveltejs/adapter-node": "1.1.4",
-		"@sveltejs/kit": "1.2.1",
+		"@sveltejs/kit": "1.2.2",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/forms": "0.5.3",
@@ -88,7 +88,7 @@
 		"unplugin-icons": "0.15.1",
 		"vite": "4.0.4",
 		"vite-plugin-iso-import": "1.0.0",
-		"vitest": "0.27.2",
+		"vitest": "0.27.3",
 		"zod": "3.20.2"
 	},
 	"type": "module",
