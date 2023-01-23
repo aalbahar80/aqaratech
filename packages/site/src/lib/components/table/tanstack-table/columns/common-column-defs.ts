@@ -1,20 +1,28 @@
 import { renderComponent, type ColumnHelper } from '@tanstack/svelte-table';
 
+import { page } from '$app/stores';
 import { get } from 'svelte/store';
-import { getRoute, PageType } from '@self/utils';
 import type { Entity } from '@self/utils';
+import { getRoute, PageType } from '@self/utils';
 
-import type { BreadcrumbsDto } from '$api/openapi';
+import type {
+	ExpenseBreadcrumbsDto,
+	LeaseInvoiceBreadcrumbsDto,
+	MaintenanceOrderBreadcrumbsDto,
+} from '$api/openapi';
 
 import L from '$i18n/i18n-svelte';
 import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 
-export const locationColumnDef = <T extends Breadcrumbs>(
+export const locationColumnDef = <
+	T extends Breadcrumbs & { portfolioId: string },
+>(
 	columnHelper: ColumnHelper<T>,
 	/* Keys to use for sorting */
 	options: { propertyColumnId: string; unitColumnId: string },
 ) => {
 	const LL = get(L);
+	const user = get(page).data.user;
 
 	return columnHelper.group({
 		header: LL.landing.location(),
@@ -22,21 +30,75 @@ export const locationColumnDef = <T extends Breadcrumbs>(
 			columnHelper.accessor((a) => a.breadcrumbs.property, {
 				id: options.propertyColumnId,
 				header: LL.entity.property.singular(),
-				cell: (info) =>
-					info.getValue<T['breadcrumbs']['property']>()?.label ?? '',
+				cell: (info) => {
+					const row = info.row.original;
+					const property = row.breadcrumbs.property;
+
+					// Cases where we don't have a property (expenses, maintenance orders)
+					if (!property) {
+						return '';
+					}
+
+					// Avoid rendering a link in tenant portal
+					if (user?.role?.roleType === 'TENANT') {
+						return property.label;
+					}
+
+					return renderComponent(ActionCell, {
+						value: property.label,
+						href: getRoute({
+							entity: 'property',
+							id: property.id,
+							pageType: PageType.Id,
+							params: {
+								...get(page).params,
+								portfolioId: row.portfolioId,
+							},
+						}),
+					});
+				},
 			}),
 
 			columnHelper.accessor((a) => a.breadcrumbs.unit, {
 				id: options.unitColumnId,
 				header: LL.entity.unit.singular(),
-				cell: (info) => info.getValue<T['breadcrumbs']['unit']>()?.label ?? '',
+				cell: (info) => {
+					const row = info.row.original;
+					const unit = row.breadcrumbs.unit;
+
+					// Cases where we don't have a unit (expenses, maintenance orders)
+					if (!unit) {
+						return '';
+					}
+
+					// Avoid rendering a link in tenant portal
+					if (user?.role?.roleType === 'TENANT') {
+						return unit.label;
+					}
+
+					return renderComponent(ActionCell, {
+						value: unit.label,
+						href: getRoute({
+							entity: 'unit',
+							id: unit.id,
+							pageType: PageType.Id,
+							params: {
+								...get(page).params,
+								portfolioId: row.portfolioId,
+							},
+						}),
+					});
+				},
 			}),
 		],
 	});
 };
 
 interface Breadcrumbs {
-	breadcrumbs: Partial<Pick<BreadcrumbsDto, 'property' | 'unit'>>;
+	breadcrumbs:
+		| ExpenseBreadcrumbsDto
+		| LeaseInvoiceBreadcrumbsDto
+		| MaintenanceOrderBreadcrumbsDto;
 }
 
 export const viewColumnDef = <

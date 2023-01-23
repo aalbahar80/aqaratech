@@ -8,6 +8,7 @@
 	import L from '$i18n/i18n-svelte';
 	import DateFilter from '$lib/components/dashboard/filter/DateFilter.svelte';
 	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
+	import { portfolioColumnDef } from '$lib/components/table/tanstack-table/columns/portfolio';
 	import { isPaidFilter } from '$lib/components/table/tanstack-table/filters/is-paid';
 
 	export let data: PageData;
@@ -27,10 +28,7 @@
 	data={data.invoices}
 	extraFilters={[$isPaidFilter]}
 	extraColumns={[
-		columnHelper.accessor('breadcrumbs.portfolio.label', {
-			id: 'portfolio.fullName', // used for sorting
-			header: $L.entity.portfolio.singular(),
-		}),
+		portfolioColumnDef(columnHelper),
 		{
 			id: 'lease.tenant.fullName', // used for sorting
 			header: $L.entity.tenant.singular(),

@@ -5,8 +5,8 @@
 
 	import type { MaintenanceOrderDto } from '$api/openapi';
 
-	import L from '$i18n/i18n-svelte';
 	import MaintenanceOrderTable from '$lib/components/maintenance-order/MaintenanceOrderTable.svelte';
+	import { portfolioColumnDef } from '$lib/components/table/tanstack-table/columns/portfolio';
 
 	export let data: PageData;
 
@@ -15,10 +15,5 @@
 
 <MaintenanceOrderTable
 	data={data.maintenanceOrders}
-	extraColumns={[
-		columnHelper.accessor('breadcrumbs.portfolio.label', {
-			id: 'portfolio.fullName', // used for sorting
-			header: $L.entity.portfolio.singular(),
-		}),
-	]}
+	extraColumns={[portfolioColumnDef(columnHelper)]}
 />
