@@ -27,15 +27,15 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && pnpm typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.10",
+		"@iconify/json": "2.2.11",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.1.15",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",
-		"@sentry/svelte": "7.31.1",
-		"@sentry/tracing": "7.31.1",
+		"@sentry/svelte": "7.32.0",
+		"@sentry/tracing": "7.32.0",
 		"@sveltejs/adapter-node": "1.1.4",
-		"@sveltejs/kit": "1.2.2",
+		"@sveltejs/kit": "1.2.3",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/forms": "0.5.3",
@@ -88,14 +88,14 @@
 		"unplugin-icons": "0.15.1",
 		"vite": "4.0.4",
 		"vite-plugin-iso-import": "1.0.0",
-		"vitest": "0.27.3",
+		"vitest": "0.28.1",
 		"zod": "3.20.2"
 	},
 	"type": "module",
 	"dependencies": {
 		"@logtail/node": "0.1.15",
 		"@logtail/winston": "0.1.15",
-		"@sentry/node": "7.31.1",
+		"@sentry/node": "7.32.0",
 		"typesafe-i18n": "5.20.0",
 		"winston": "3.8.2"
 	},
