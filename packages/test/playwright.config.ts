@@ -1,6 +1,8 @@
 import { devices, type PlaywrightTestConfig } from '@playwright/test';
 import { config as dotenv } from 'dotenv';
 
+import type { AqaratechEnv } from '@self/utils';
+
 import { TESTS } from './config/test-groups';
 import {
 	EXPIRED_ACCESS_TOKEN,
@@ -13,6 +15,10 @@ import type { TokenTestOptions } from './tests/auth/auth-fixtures';
 dotenv({
 	path: '../../.env',
 });
+
+const env = {
+	PUBLIC_AQARATECH_ENV: 'testing',
+} satisfies Partial<AqaratechEnv>;
 
 const BASE_TIMEOUT = 10 * 1000;
 
@@ -56,7 +62,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
 			timeout: 60 * 1000,
-			// env: { DEBUG: 'pw:webserver' },
+			env,
 		},
 		{
 			cwd: '../../',
@@ -66,7 +72,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
 			timeout: 120 * 1000,
-			// env: { DEBUG: 'pw:webserver' },
+			env,
 		},
 	],
 	projects: [

@@ -1,38 +1,48 @@
-import { Logger } from '@nestjs/common';
+import { INestApplication, Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import '@sentry/tracing';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
+import { AppModule } from 'src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
 
 import { version } from '../package.json';
 
-import { AppModule } from './app.module';
-
 Logger.log(version, 'AqaratechConfig');
 
-async function bootstrap() {
-	Logger.log(`Version: ${version}`);
+const options = {
+	abortOnError: false,
+	cors: {
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		origin: process.env.PUBLIC_SITE_URL!,
+		credentials: true,
+		allowedHeaders: [
+			'Authorization',
+			'Cookie',
+			'Content-Type',
+			'x-sws-authenticated',
+			'baggage', // sentry
+			'sentry-trace', // sentry
+		],
+		maxAge: 24 * 60 * 60,
+	},
+};
 
-	// @ts-expect-error use validated env instead
-	const app = await NestFactory.create(AppModule, {
-		cors: {
-			origin: process.env.PUBLIC_SITE_URL,
-			credentials: true,
-			allowedHeaders: [
-				'Authorization',
-				'Cookie',
-				'Content-Type',
-				'x-sws-authenticated',
-				'baggage', // sentry
-				'sentry-trace', // sentry
-			],
-			maxAge: 24 * 60 * 60,
-		},
-	});
+async function bootstrap() {
+	let app: INestApplication;
+
+	if (process.env.PUBLIC_AQARATECH_ENV === 'testing') {
+		const createTestApp = (await import('./test/create-app.stub'))
+			.createTestApp;
+		app = await createTestApp(options);
+	} else {
+		app = await NestFactory.create(AppModule, options);
+	}
+
+	Logger.log(`Version: ${version}`);
 
 	app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 

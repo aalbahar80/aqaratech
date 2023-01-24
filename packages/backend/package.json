@@ -77,6 +77,7 @@
 		"@logtail/types": "0.1.15",
 		"@nestjs/cli": "9.1.8",
 		"@nestjs/schematics": "9.0.4",
+		"@nestjs/testing": "9.2.1",
 		"@openapitools/openapi-generator-cli": "2.5.2",
 		"@self/seed": "workspace:*",
 		"@tsconfig/node18-strictest": "1.0.0",
@@ -88,15 +89,19 @@
 		"@types/multer": "1.4.7",
 		"@types/node": "18.11.18",
 		"@types/passport-jwt": "3.0.8",
+		"@types/sinon": "10.0.13",
+		"@vitest/ui": "0.28.1",
 		"dotenv": "16.0.3",
 		"eslint-config-custom": "workspace:*",
 		"js-yaml": "4.1.0",
+		"sinon": "15.0.1",
 		"source-map-support": "0.5.21",
 		"ts-loader": "9.4.2",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig-paths": "4.1.2",
 		"tsx": "3.12.2",
-		"typescript": "4.9.4"
+		"typescript": "4.9.4",
+		"vitest": "0.28.1"
 	},
 	"engines": {
 		"node": ">= 16"

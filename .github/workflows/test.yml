@@ -69,7 +69,7 @@ jobs:
 
       - name: Set .env file
         shell: bash
-        run: cp ./.env.example ./.env && cat ./.env.test >> ./.env && cat ./packages/backend/prisma/.env.example >> ./.env
+        run: cp ./.env.example ./.env && cat ./packages/backend/prisma/.env.example >> ./.env
 
       # Move format/lint/check to a seperate job when removing `continue-on-error`
       - run: pnpm run format:all
