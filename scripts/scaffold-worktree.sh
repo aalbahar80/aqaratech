@@ -32,6 +32,9 @@ cp ./packages/backend/prisma/.env.example ./packages/backend/prisma/.env
 # Install dependencies
 pnpm install
 
+# Run svelete-kit sync
+pnpm -F @self/site exec svelte-kit sync
+
 # Setup Turborepo
 # Docs: https://turbo.build/repo/docs/ci/github-actions#remote-caching
 if [ -z "$TURBO_TEAM" ] || [ -z "$TURBO_TOKEN" ]; then
