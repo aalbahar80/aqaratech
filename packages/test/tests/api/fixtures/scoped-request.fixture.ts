@@ -49,8 +49,21 @@ export const scopedRequestFixtures: AllFixtures = {
 
 		// set role cookie
 
-		const context = await browser.newContext({
+		// Avoid setting storageStatePath in newContext, because it will
+		// contaminate the context. Possibly by writing to the storageStatePath.
+		// Instead, we just extract the storageState object.
+		const existingContext = await browser.newContext({
 			storageState: storageStatePath,
+		});
+
+		const extractedStorageState = await existingContext.storageState();
+
+		// Immediately close the context after extracting the storageState
+		await existingContext.close();
+
+		// Now we can create a new context with the extracted storageState
+		const context = await browser.newContext({
+			storageState: extractedStorageState,
 		});
 
 		await context.addCookies([

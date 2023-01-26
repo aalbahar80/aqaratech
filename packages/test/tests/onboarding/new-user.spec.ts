@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { testUsers } from '../api/fixtures/users/test-users';
+// import { testUsers } from '../api/fixtures/users/test-users';
 import { LoginPage } from '../auth/login-page';
 
 const email = 'dev.tester.1@mailthink.net';
@@ -9,7 +9,7 @@ const password = 'cloud12';
 // Setting storageState should be enough to re-use auth state. However, this is
 // not working at the moment. So we manually login again for now.
 test.use({
-	storageState: testUsers.freshUser.storageStatePath,
+	// storageState: testUsers.freshUser.storageStatePath,
 
 	page: async ({ browser }, use) => {
 		// Create a new incognito browser context.
