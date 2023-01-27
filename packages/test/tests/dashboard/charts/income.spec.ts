@@ -33,9 +33,6 @@ for (const preset of incomeChartTestPresets) {
 			if ('unit' in preset.filter) {
 				await filters.unit.el.selectOption({ label: preset.filter.unit });
 			}
-
-			// wait for fresh data
-			await page.waitForLoadState('networkidle');
 		});
 
 		test('looks the same', async ({ page }) => {

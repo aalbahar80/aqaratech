@@ -28,9 +28,6 @@ for (const preset of chartTestPresets) {
 			if ('unit' in preset.filter) {
 				await filters.unit.el.selectOption({ label: preset.filter.unit });
 			}
-
-			// wait for fresh data
-			await page.waitForLoadState('networkidle');
 		});
 
 		// Combine screeshot assertions into a single test to improve performance significantly.
