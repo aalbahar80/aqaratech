@@ -100,11 +100,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		{
 			name: 'site:chrome',
-			testIgnore: [
-				...TESTS.NON_SITE,
-				...TESTS.MOBILE_ONLY,
-				...TESTS.EXPIRED_TOKEN,
-			],
+			testIgnore: [...TESTS.NON_SITE, ...TESTS.MOBILE_ONLY],
 			use: {
 				...devices['Desktop Chrome'],
 				launchOptions: {
@@ -117,9 +113,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
-				...TESTS.EXPIRED_TOKEN,
 				'**/tests/components/expense-tree/drag.spec.ts',
-				'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix this test
 			],
 			use: devices['Desktop Firefox'],
 		},
@@ -128,9 +122,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
-				...TESTS.EXPIRED_TOKEN,
 				'**/tests/onboarding/new-user.spec.ts', // TODO: fix
-				'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix
 			],
 			use: devices['Desktop Safari'],
 			// Webkit Issues:
@@ -144,7 +136,6 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.DESKTOP_ONLY,
-				...TESTS.EXPIRED_TOKEN,
 				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
 			],
 			grepInvert: [
@@ -159,9 +150,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		// 	testIgnore: [
 		// 		...TESTS.NON_SITE,
 		//		...TESTS.DESKTOP_ONLY,
-		//		...TESTS.EXPIRED_TOKEN,
 		// 		'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
-		// 		'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix
 		// 		'**/tests/forms/lease-invoice/**/*.spec.ts', // fails in headless mode. viewport shakes
 		// 		'**/tests/dashboard/csv/**/*.spec.ts', // TODO: fix
 		// 		'**/tests/onboarding/new-user.spec.ts', // TODO: fix
