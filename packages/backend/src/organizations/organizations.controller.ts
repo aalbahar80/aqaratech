@@ -7,7 +7,6 @@ import {
 	Patch,
 	Post,
 	Query,
-	UseGuards,
 } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
@@ -16,7 +15,6 @@ import { organizationSchema } from '@self/utils';
 import { SkipRoleGuard } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
-import { AqaratechStaffGuard } from 'src/casl/aqaratech-staff.guard';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
@@ -72,13 +70,6 @@ export class OrganizationsController {
 			createOrganizationDto,
 			user,
 		});
-	}
-
-	@Get()
-	@UseGuards(AqaratechStaffGuard)
-	@ApiPaginatedResponse(OrganizationDto)
-	findAll(): Promise<WithCount<OrganizationDto>> {
-		return this.organizationsService.findAll();
 	}
 
 	@Get(':id')

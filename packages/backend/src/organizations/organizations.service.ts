@@ -118,20 +118,6 @@ export class OrganizationsService {
 		});
 	}
 
-	async findAll() {
-		const [results, total] = await Promise.all([
-			this.prisma.organization.findMany(),
-			this.prisma.organization.count(),
-		]);
-
-		return {
-			total,
-			results: plainToInstance(OrganizationDto, results, {
-				excludeExtraneousValues: true,
-			}),
-		};
-	}
-
 	async remove({ id, user }: { id: string; user: IUser }) {
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Delete,
