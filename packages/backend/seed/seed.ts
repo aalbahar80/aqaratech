@@ -11,6 +11,8 @@ import { envSchema } from '@self/utils';
 
 import { createBucketDev } from './create-bucket';
 
+console.log('--- Running seed script backend/seed/seed.ts ---');
+
 dotenv({
 	path: '../../../.env',
 });
@@ -64,7 +66,7 @@ validateSeed(data);
 insertSeed(data)
 	.catch((e) => {
 		console.error(e);
-		process.exit(1);
+		// process.exit(1);
 	})
 	.finally(() => {
 		void prisma.$disconnect();
@@ -78,5 +80,7 @@ createBucketDev(
 	env,
 ).catch((e) => {
 	console.error(e);
-	process.exit(1);
+	// process.exit(1);
 });
+
+console.log('--- Completed seed script backend/seed/seed.ts ---');
