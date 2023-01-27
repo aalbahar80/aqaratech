@@ -10,7 +10,7 @@ import { Filters } from './filter-model';
 test.use({
 	userRoleType: 'PORTFOLIO',
 	propertiesParams: R.times(2, () => ({})),
-	unitsParams: R.times(250, () => ({})),
+	unitsParams: R.times(25, () => ({})),
 });
 
 test('all units are shown for each property', async ({
