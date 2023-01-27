@@ -5,10 +5,6 @@ import { getRoute, PageTypePortfolio } from '@self/utils';
 import { test as base } from '../../api/api-fixtures';
 import { Filters } from '../filter-model';
 
-base.use({
-	userRoleType: 'PORTFOLIO',
-});
-
 export const test = base.extend<{
 	filters: Filters;
 }>({
@@ -38,4 +34,8 @@ export const test = base.extend<{
 
 		await use(filters);
 	},
+});
+
+test.use({
+	userRoleType: 'PORTFOLIO',
 });
