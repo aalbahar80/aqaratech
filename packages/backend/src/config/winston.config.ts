@@ -1,7 +1,6 @@
-import { format, LoggerOptions, transports } from 'winston';
+import { format, type LoggerOptions, transports } from 'winston';
 
-// TODO: use satisfies operator
-export const winstonConfig: LoggerOptions = {
+export const winstonConfig = {
 	format: format.combine(
 		format.timestamp(),
 		format.json(),
@@ -16,4 +15,4 @@ export const winstonConfig: LoggerOptions = {
 			),
 		}),
 	],
-};
+} satisfies LoggerOptions as LoggerOptions;

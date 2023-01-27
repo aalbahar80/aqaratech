@@ -1,14 +1,17 @@
 import { z } from 'zod';
 
 import type { Actions } from './$types';
-import { getRoute, PageTab, roleCreateSchema } from '@self/utils';
+import { getRoute, PageTab, roleCreateSchema, type Entity } from '@self/utils';
 
 import { handleForm } from '$lib/components/form/handle-form';
 
 export const actions: Actions = {
 	default: async (event) => {
-		// TODO satsifies satisfies Readonly<Entity[]>;
-		const keys = ['organization', 'portfolio', 'tenant'] as const;
+		const keys = [
+			'organization',
+			'portfolio',
+			'tenant',
+		] as const satisfies Readonly<Entity[]>;
 
 		const schema = z.object({
 			relationKey: z.enum(keys),

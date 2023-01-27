@@ -24,7 +24,6 @@ import { userFactory } from './factory/user';
 import { isDefined } from './utils/is-defined';
 import { findOrFail, random, randomCategory } from './utils/random';
 
-// TODO use satisfies SeedCount
 const defaultSeedCount = {
 	portfolios: 10,
 	properties: 10,
@@ -35,7 +34,7 @@ const defaultSeedCount = {
 	expenses: 10,
 	maintenanceOrders: 10,
 	payouts: 10,
-};
+} satisfies SeedOptions['count'];
 
 export const createSeed = (options?: SeedOptions) => {
 	const count = {

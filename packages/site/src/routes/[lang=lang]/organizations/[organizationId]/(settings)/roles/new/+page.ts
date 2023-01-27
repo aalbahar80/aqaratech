@@ -1,11 +1,15 @@
 import { z } from 'zod';
 
 import type { PageLoad } from './$types';
+import type { Entity } from '@self/utils';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const load: PageLoad = async ({ url: { searchParams } }) => {
-	// TODO satsifies satisfies Readonly<Entity[]>;
-	const keys = ['organization', 'portfolio', 'tenant'] as const;
+	const keys = [
+		'organization',
+		'portfolio',
+		'tenant',
+	] as const satisfies Readonly<Entity[]>;
 
 	const schema = z.object({
 		relationKey: z.enum(keys),
