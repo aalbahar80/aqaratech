@@ -9,6 +9,7 @@ const MOBILE_ONLY = ['**/tests/components/sidebar.spec.ts'];
 const DESKTOP_ONLY: string[] = [
 	// '**/tests/components/expense-tree/drag.spec.ts',
 ];
+const EXPIRED_TOKEN = ['**/token/**/*.spec.ts'];
 
 export const TESTS = {
 	API,
@@ -16,4 +17,5 @@ export const TESTS = {
 	NON_SITE,
 	MOBILE_ONLY,
 	DESKTOP_ONLY,
+	EXPIRED_TOKEN,
 };

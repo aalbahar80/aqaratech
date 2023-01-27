@@ -82,12 +82,12 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		{
 			name: 'idToken',
-			testMatch: '**/token/**/*.spec.ts',
+			testMatch: [...TESTS.EXPIRED_TOKEN],
 			use: { token: EXPIRED_ID_TOKEN },
 		},
 		{
 			name: 'accessToken',
-			testMatch: '**/token/**/*.spec.ts',
+			testMatch: [...TESTS.EXPIRED_TOKEN],
 			use: { token: EXPIRED_ACCESS_TOKEN },
 		},
 		{
@@ -100,7 +100,11 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		{
 			name: 'site:chrome',
-			testIgnore: [...TESTS.NON_SITE, ...TESTS.MOBILE_ONLY],
+			testIgnore: [
+				...TESTS.NON_SITE,
+				...TESTS.MOBILE_ONLY,
+				...TESTS.EXPIRED_TOKEN,
+			],
 			use: {
 				...devices['Desktop Chrome'],
 				launchOptions: {
@@ -113,6 +117,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
+				...TESTS.EXPIRED_TOKEN,
 				'**/tests/components/expense-tree/drag.spec.ts',
 				'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix this test
 			],
@@ -123,6 +128,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
+				...TESTS.EXPIRED_TOKEN,
 				'**/tests/onboarding/new-user.spec.ts', // TODO: fix
 				'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix
 			],
@@ -138,6 +144,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.DESKTOP_ONLY,
+				...TESTS.EXPIRED_TOKEN,
 				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
 			],
 			grepInvert: [
@@ -152,6 +159,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		// 	testIgnore: [
 		// 		...TESTS.NON_SITE,
 		//		...TESTS.DESKTOP_ONLY,
+		//		...TESTS.EXPIRED_TOKEN,
 		// 		'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
 		// 		'**/tests/auth/token/expired-jwt.spec.ts', // TODO: fix
 		// 		'**/tests/forms/lease-invoice/**/*.spec.ts', // fails in headless mode. viewport shakes
