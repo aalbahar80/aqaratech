@@ -83,12 +83,18 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			name: 'idToken',
 			testMatch: [...TESTS.EXPIRED_TOKEN],
-			use: { token: EXPIRED_ID_TOKEN },
+			use: {
+				token: EXPIRED_ID_TOKEN,
+				storageState: undefined, // Avoid inheriting from the default use.storageState
+			},
 		},
 		{
 			name: 'accessToken',
 			testMatch: [...TESTS.EXPIRED_TOKEN],
-			use: { token: EXPIRED_ACCESS_TOKEN },
+			use: {
+				token: EXPIRED_ACCESS_TOKEN,
+				storageState: undefined, // Avoid inheriting from the default use.storageState
+			},
 		},
 		{
 			name: 'api',
