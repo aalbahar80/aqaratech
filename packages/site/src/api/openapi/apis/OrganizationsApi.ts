@@ -28,7 +28,6 @@ import type {
 	OrganizationCreatedDto,
 	OrganizationDto,
 	PaginatedLeaseInvoiceDto,
-	PaginatedOrganizationDto,
 	PaginatedRoleDto,
 	PartialExpenseDto,
 	PartialLeaseDto,
@@ -921,41 +920,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<string> {
 		const response = await this.create_1Raw(requestParameters, initOverrides);
-		return await response.value();
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async findAllRaw(
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PaginatedOrganizationDto>> {
-		const queryParameters: any = {};
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		const response = await this.request(
-			{
-				path: `/organizations`,
-				method: 'GET',
-				headers: headerParameters,
-				query: queryParameters,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 *
-	 *
-	 */
-	async findAll(
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PaginatedOrganizationDto> {
-		const response = await this.findAllRaw(initOverrides);
 		return await response.value();
 	}
 

@@ -66,19 +66,6 @@ export interface ArrayOfMaintenanceOrderDto {
 /**
  *
  * @export
- * @interface ArrayOfOrganizationDto
- */
-export interface ArrayOfOrganizationDto {
-	/**
-	 *
-	 * @type {Array<OrganizationDto>}
-	 * @memberof ArrayOfOrganizationDto
-	 */
-	results?: Array<OrganizationDto>;
-}
-/**
- *
- * @export
  * @interface ArrayOfPayoutDto
  */
 export interface ArrayOfPayoutDto {
@@ -1856,25 +1843,6 @@ export interface PaginatedMetaDto {
 	 * @memberof PaginatedMetaDto
 	 */
 	pagination: PaginatedDto;
-}
-/**
- *
- * @export
- * @interface PaginatedOrganizationDto
- */
-export interface PaginatedOrganizationDto {
-	/**
-	 *
-	 * @type {PaginatedDto}
-	 * @memberof PaginatedOrganizationDto
-	 */
-	pagination: PaginatedDto;
-	/**
-	 *
-	 * @type {Array<OrganizationDto>}
-	 * @memberof PaginatedOrganizationDto
-	 */
-	results: Array<OrganizationDto>;
 }
 /**
  *

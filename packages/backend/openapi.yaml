@@ -1912,30 +1912,6 @@ paths:
         - organizations
       security: &ref_20
         - accessToken: []
-    get:
-      operationId: OrganizationsController_findAll
-      summary: ''
-      description: ''
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedOrganizationDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfOrganizationDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_19
-      security: *ref_20
   /organizations/{id}:
     get:
       operationId: OrganizationsController_findOne
