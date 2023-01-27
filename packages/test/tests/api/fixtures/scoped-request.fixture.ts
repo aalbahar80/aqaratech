@@ -13,7 +13,7 @@ export const scopedRequestFixtures: AllFixtures = {
 	userRoleType: ['ORGADMIN', { option: true }],
 
 	scopedContext: async (
-		{ userRoleType, browser, portfolio, tenant, request },
+		{ userRoleType, browser, org, portfolio, tenant, request },
 		use,
 	) => {
 		let url: string;
@@ -35,17 +35,32 @@ export const scopedRequestFixtures: AllFixtures = {
 
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		} else if (userRoleType === 'ORGADMIN') {
-			throw new Error(
+			console.warn(
 				"Don't use ORGADMIN for scopedRequest. Use normal request instead.",
 			);
+
+			url = `${apiURL}/organizations/${tenant.organizationId}/roles`;
+
+			email = testUsers.orgAdmin.email;
+
+			storageStatePath = testUsers.orgAdmin.storageStatePath;
 		} else {
 			throw new Error('Invalid userRoleType');
 		}
 
-		const res = await request.post(url, { data: { email } });
-		resCheck(res);
+		let roleId: string;
 
-		const body = (await res.json()) as RoleDto;
+		if (userRoleType === 'ORGADMIN') {
+			roleId = org.roleId;
+		} else {
+			// Only create role if userRoleType is not ORGADMIN, because
+			// ORGADMIN already has a role (will return 400).
+			const res = await request.post(url, { data: { email } });
+			resCheck(res);
+
+			const body = (await res.json()) as RoleDto;
+			roleId = body.id;
+		}
 
 		// set role cookie
 
@@ -69,7 +84,7 @@ export const scopedRequestFixtures: AllFixtures = {
 		await context.addCookies([
 			{
 				name: Cookie.role,
-				value: body.id,
+				value: roleId,
 				domain: 'localhost',
 				path: '/',
 				expires: -1,
