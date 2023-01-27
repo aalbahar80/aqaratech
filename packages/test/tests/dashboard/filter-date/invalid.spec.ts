@@ -1,16 +1,12 @@
+import { expect } from '@playwright/test';
+
 import { test } from './setup';
 
 test('invalid date does not trigger http call', async ({ page, filters }) => {
-	// this test should fail to indicate that no http call is made
-	test.fail();
+	// prepare to catch request if it happens
+	const requestPromise = page.waitForRequest(/.*end/, { timeout: 5000 });
 
-	// @ts-expect-error no use
-	const [request] = await Promise.all([
-		page.waitForRequest(/.*end/, {
-			timeout: 5000,
-		}),
+	await filters.end.fill('1990-01-01');
 
-		// set invalid end	date
-		filters.end.fill('1990-01-01'),
-	]);
+	await expect(requestPromise).rejects.toThrowError(/Timeout/);
 });
