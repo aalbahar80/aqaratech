@@ -27,4 +27,4 @@ echo "Postgres is ready @ $DATABASE_URL. Note the port is $(echo $DATABASE_URL |
 
 cd ../backend
 
-DATABASE_URL=$DATABASE_URL pnpm prisma migrate reset --force
+DATABASE_URL=$DATABASE_URL pnpm prisma migrate reset --force --skip-seed
