@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test:setup": "pnpm run -F @self/backend up-minio && pnpm run -F @self/backend seed",
+		"test:setup": "PUBLIC_AQARATECH_ENV=testing pnpm run -F @self/backend dev:setup",
 		"test": "pnpm dotenv -e ../../.env.test -- pnpm run test:setup && playwright test --project files idToken accessToken api site:chrome site:chrome:mobile",
 		"test:all-browsers": "pnpm run test:setup && playwright test",
 		"api:generate": "tsc --project tsconfig.api.json",

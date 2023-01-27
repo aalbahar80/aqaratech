@@ -13,6 +13,7 @@
 		"build": "rimraf dist && nest build --path tsconfig.build.json",
 		"dev": "nest start --watch --preserveWatchOutput --entryFile ./backend/src/main --path tsconfig.json",
 		"dev:debug": "pnpm run dev --debug",
+		"dev:setup": "pnpm run up-minio && pnpm run seed",
 		"seed": "./seed/create-test-db.sh && tsx ./seed/seed.ts",
 		"start:prod": "node dist/backend/src/main.js",
 		"preview": "node dist/backend/src/main.js",
