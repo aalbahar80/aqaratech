@@ -16,13 +16,7 @@ module.exports = {
 			typescript: {
 				// alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
 				// Might cause flaky import/order settings between cli and neovim
-				project: [
-					// For sibling packages: Helps each .eslintrc.js file find its own tsconfig.json file
-					'../*/tsconfig.json',
-					'../*/tsconfig.lint.json',
-					// For root: Helps root .eslintrc.js file find its own tsconfig.json file
-					'../../tsconfig.json',
-				],
+				project: './tsconfig.lint.json',
 			},
 		},
 		'import/parsers': {
