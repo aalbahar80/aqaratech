@@ -20,6 +20,7 @@
 		"noUnusedLocals": false,
 		"strictPropertyInitialization": false,
 		"importsNotUsedAsValues": "remove",
+		// "verbatimModuleSyntax": true, // needs special consideration for nestjs
 		"paths": {
 			"src": ["./src/"],
 			"@self/utils": ["../utils/src"]

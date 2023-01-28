@@ -33,7 +33,7 @@
 		"tree-kill": "1.2.2",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
-		"typescript": "4.9.4",
+		"typescript": "5.0.0-beta",
 		"ufo": "1.0.1"
 	},
 	"dependencies": {

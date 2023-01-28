@@ -83,7 +83,7 @@
 		"tippy.js": "6.3.7",
 		"ts-toolbelt": "9.6.0",
 		"tslib": "2.5.0",
-		"typescript": "4.9.4",
+		"typescript": "5.0.0-beta",
 		"typescript-svelte-plugin": "0.3.14",
 		"unplugin-icons": "0.15.1",
 		"vite": "4.0.4",

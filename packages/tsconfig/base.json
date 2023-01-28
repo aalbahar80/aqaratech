@@ -10,7 +10,8 @@
 		"isolatedModules": true,
 		"resolveJsonModule": true,
 		"preserveWatchOutput": true,
-		"importsNotUsedAsValues": "error",
+		"importsNotUsedAsValues": "remove",
+		"verbatimModuleSyntax": true,
 
 		"types": ["node"],
 

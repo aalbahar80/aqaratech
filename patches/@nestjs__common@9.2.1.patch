@@ -1,0 +1,10 @@
+diff --git a/decorators/core/inject.decorator.d.ts b/decorators/core/inject.decorator.d.ts
+index 224d4de5e1c2a71fdf4df61e21bd814d68bad250..20c03b56c7e9c1bc9bb33a37780b4ab27f15df42 100644
+--- a/decorators/core/inject.decorator.d.ts
++++ b/decorators/core/inject.decorator.d.ts
+@@ -27,4 +27,4 @@
+  *
+  * @publicApi
+  */
+-export declare function Inject<T = any>(token?: T): (target: object, key: string | symbol, index?: number) => void;
++export declare function Inject<T = any>(token?: T): (target: object, key: string | symbol | undefined, index?: number) => void;
