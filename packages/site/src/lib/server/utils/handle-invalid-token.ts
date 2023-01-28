@@ -2,6 +2,7 @@ import { Cookie } from '@self/utils';
 
 import type { Handle } from '@sveltejs/kit';
 
+import { DESTINATION } from '$lib/constants/misc';
 import { LOGIN } from '$lib/constants/routes';
 
 type SKEvent = Parameters<Handle>[0]['event'];
@@ -29,7 +30,17 @@ export const handleInvalidToken = (event: SKEvent) => {
 	}
 
 	// redirect to login
-	headers.append('Location', LOGIN);
+	// TODO: use withQuery
+	const path = LOGIN;
+
+	// add current destination to query, so we can redirect back after login
+	const location = new URL(path, event.url.origin);
+
+	location.searchParams.set(DESTINATION, event.url.pathname);
+
+	const locationString = `${location.pathname}${location.search}`;
+
+	headers.append('Location', locationString);
 
 	return new Response(undefined, {
 		status: 302,

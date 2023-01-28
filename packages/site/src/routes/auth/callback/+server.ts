@@ -2,7 +2,7 @@ import { Cookie } from '@self/utils';
 
 import type { RequestHandler } from '@sveltejs/kit';
 
-import { MAX_AGE } from '$lib/constants/misc';
+import { DESTINATION, MAX_AGE } from '$lib/constants/misc';
 import { authConfig } from '$lib/server/config/auth';
 import { errorLogger } from '$lib/server/logger/error-logger';
 
@@ -65,8 +65,9 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 		maxAge: MAX_AGE,
 	});
 
-	// Redirect to `/concierge`.
-	const location = '/concierge';
+	// Redirect to the destination or default location.
+	const defaultLocation = '/concierge';
+	const location = url.searchParams.get(DESTINATION) ?? defaultLocation;
 
 	return new Response(undefined, {
 		status: 302,

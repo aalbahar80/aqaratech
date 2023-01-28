@@ -7,6 +7,7 @@ import L, { setLocale } from '$i18n/i18n-svelte';
 import { baseLocale } from '$i18n/i18n-util';
 import { loadLocaleAsync } from '$i18n/i18n-util.async';
 import { getTabLabels } from '$lib/components/tabs/tab-labels';
+import { DESTINATION } from '$lib/constants/misc';
 import { LOGIN } from '$lib/constants/routes';
 import { isPublicRoute } from '$lib/utils/is-public-route';
 
@@ -30,7 +31,12 @@ export const load: LayoutLoad = async ({
 	// letting all random requests fall through to the 404 page instead of
 	// redirecting them to the auth0 login page.
 	if (!isPublicRoute(pathname) && !user) {
-		throw redirect(302, LOGIN);
+		// preserve the current destination in the query string,
+		// so we can redirect back after login
+		const searchParams = new URLSearchParams({ [DESTINATION]: pathname });
+		const location = `${LOGIN}?${searchParams.toString()}`;
+
+		throw redirect(302, location);
 	}
 
 	return {
