@@ -316,6 +316,7 @@ importers:
       typesafe-i18n: 5.20.0
       typescript: 5.0.0-beta
       typescript-svelte-plugin: 0.3.14
+      ufo: 1.0.1
       unplugin-icons: 0.15.1
       vite: 4.0.4
       vite-plugin-iso-import: 1.0.0
@@ -387,6 +388,7 @@ importers:
       tslib: 2.5.0
       typescript: 5.0.0-beta
       typescript-svelte-plugin: 0.3.14_7btt5e5jbvkzqqbvjeeo4qebyu
+      ufo: 1.0.1
       unplugin-icons: 0.15.1
       vite: 4.0.4
       vite-plugin-iso-import: 1.0.0_vite@4.0.4

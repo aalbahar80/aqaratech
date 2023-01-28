@@ -85,6 +85,7 @@
 		"tslib": "2.5.0",
 		"typescript": "5.0.0-beta",
 		"typescript-svelte-plugin": "0.3.14",
+		"ufo": "1.0.1",
 		"unplugin-icons": "0.15.1",
 		"vite": "4.0.4",
 		"vite-plugin-iso-import": "1.0.0",

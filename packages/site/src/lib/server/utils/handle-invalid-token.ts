@@ -1,3 +1,5 @@
+import { withQuery } from 'ufo';
+
 import { Cookie } from '@self/utils';
 
 import type { Handle } from '@sveltejs/kit';
@@ -30,17 +32,10 @@ export const handleInvalidToken = (event: SKEvent) => {
 	}
 
 	// redirect to login
-	// TODO: use withQuery
-	const path = LOGIN;
-
 	// add current destination to query, so we can redirect back after login
-	const location = new URL(path, event.url.origin);
+	const location = withQuery(LOGIN, { [DESTINATION]: event.url.pathname });
 
-	location.searchParams.set(DESTINATION, event.url.pathname);
-
-	const locationString = `${location.pathname}${location.search}`;
-
-	headers.append('Location', locationString);
+	headers.append('Location', location);
 
 	return new Response(undefined, {
 		status: 302,

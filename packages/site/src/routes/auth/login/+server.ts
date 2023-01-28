@@ -11,7 +11,6 @@ export const GET: RequestHandler = ({ url }) => {
 	const destination = url.searchParams.get(DESTINATION);
 
 	if (destination) {
-		// TODO: use withQuery
 		redirect.searchParams.set(DESTINATION, destination);
 	}
 

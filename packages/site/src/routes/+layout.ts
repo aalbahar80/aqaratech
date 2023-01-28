@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import { withQuery } from 'ufo';
 
 import type { LayoutLoad } from './$types';
 import { get } from 'svelte/store';
@@ -33,8 +34,7 @@ export const load: LayoutLoad = async ({
 	if (!isPublicRoute(pathname) && !user) {
 		// preserve the current destination in the query string,
 		// so we can redirect back after login
-		const searchParams = new URLSearchParams({ [DESTINATION]: pathname });
-		const location = `${LOGIN}?${searchParams.toString()}`;
+		const location = withQuery(LOGIN, { [DESTINATION]: pathname });
 
 		throw redirect(302, location);
 	}
