@@ -12,4 +12,4 @@ tasks:
   lint:
     dir: '{{.USER_WORKING_DIR}}'
     cmds:
-      - pnpm eslint --cache --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore "**/*.{js,cjs,mjs,ts,cts,mts,svelte}" {{.CLI_ARGS}}
+      - pnpm eslint --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore "**/*.{js,cjs,mjs,ts,cts,mts,svelte}" {{.CLI_ARGS}}

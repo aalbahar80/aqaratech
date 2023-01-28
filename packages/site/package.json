@@ -15,7 +15,7 @@
 		"check:watch": "pnpm run check:base --watch",
 		"check:config": "tsc --noEmit --project tsconfig.lint.json",
 		"format": "task format",
-		"lint": "task lint",
+		"lint": "task lint -- --cache",
 		"lint:fix": "task lint -- --fix",
 		"flatten-sourcemaps": "../../scripts/flatten-sourcemaps.sh",
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
