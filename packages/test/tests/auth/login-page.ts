@@ -19,7 +19,12 @@ export class LoginPage {
 	}
 
 	async fill({ email, password }: { email: string; password: string }) {
-		await this.page.getByLabel('Email address').fill(email);
+		const emailInput = this.page.getByLabel('Email address');
+		await expect(emailInput, {
+			message:
+				'Auth0 login page might not have loaded. This might be caused by rate limiting.',
+		}).toBeVisible();
+		await emailInput.fill(email);
 		await this.page.getByLabel('Password').fill(password);
 		await this.page.getByRole('button', { name: 'Continue' }).click();
 
