@@ -45,8 +45,6 @@ test('user redirected to destination after login', async ({ browser }) => {
 	expect.soft(location.host).toContain('auth0.com');
 	expect.soft(location.pathname).toBe('/authorize');
 
-	console.log({ location });
-
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const redirectParam = new URL(location.searchParams.get('redirect_uri')!);
 	const redirect = new URL(redirectParam);
