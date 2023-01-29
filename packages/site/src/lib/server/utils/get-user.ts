@@ -43,11 +43,44 @@ export const getUser = async ({
 	// Resolve user's role
 	let role: RoleSK | undefined;
 
-	// First, try to use the selected role
+	// First, try to use the selected role.
+	// This mean if the Role cookie is set, we always use that role.
 	if (selectedRoleId) {
 		logger.debug(`Attempting to set role to selectedRoleId: ${selectedRoleId}`);
 
 		role = roles.find((role) => role.id === selectedRoleId);
+	} else {
+		// If there's no selected role, try to use a role that can access the
+		// current page.
+
+		// This case usually happens when the user was redirected to the login page
+		// while trying to access a page that required authentication. We should
+		// try to set the role to one that can access that page.
+
+		// Get the organizationId from the query string
+		const orgId = getOrgIdFromPath(event.url.pathname);
+
+		logger.debug(
+			`Attempting to set role to one that can access ${event.url.pathname}`,
+		);
+
+		// Find a role that can access the organization
+		const rolesInOrg = roles.filter((role) => role.organizationId === orgId);
+
+		// prioritize roles as follows: ORGADMIN, PORTFOLIO, TENANT
+		const ranks = {
+			ORGADMIN: 0,
+			PORTFOLIO: 1,
+			TENANT: 2,
+		};
+
+		role = rolesInOrg.reduce((acc, curr) => {
+			if (ranks[curr.roleType] < ranks[acc.roleType]) {
+				return curr;
+			}
+
+			return acc;
+		});
 	}
 
 	// If that fails, or if no role was selected, use the default role
@@ -67,4 +100,14 @@ export const getUser = async ({
 	};
 
 	return user;
+};
+
+const getOrgIdFromPath = (path: string) => {
+	// split items, then get the item after the one that is equal to 'organizations'
+	const orgId = path
+		.split('/')
+		.slice(path.split('/').indexOf('organizations') + 1)
+		.shift();
+
+	return orgId;
 };
