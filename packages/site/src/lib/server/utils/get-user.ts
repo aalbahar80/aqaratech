@@ -6,6 +6,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { baseLocale } from '$i18n/i18n-util';
 import { logger } from '$lib/server/logger';
 import { getProfile } from '$lib/server/utils/get-profile';
+import { resolveRole } from '$lib/server/utils/resolve-role';
 import { getRoleMeta } from '$lib/utils/get-role-meta';
 
 /**
@@ -57,30 +58,7 @@ export const getUser = async ({
 		// while trying to access a page that required authentication. We should
 		// try to set the role to one that can access that page.
 
-		// Get the organizationId from the query string
-		const orgId = getOrgIdFromPath(event.url.pathname);
-
-		logger.debug(
-			`Attempting to set role to one that can access ${event.url.pathname}`,
-		);
-
-		// Find a role that can access the organization
-		const rolesInOrg = roles.filter((role) => role.organizationId === orgId);
-
-		// prioritize roles as follows: ORGADMIN, PORTFOLIO, TENANT
-		const ranks = {
-			ORGADMIN: 0,
-			PORTFOLIO: 1,
-			TENANT: 2,
-		};
-
-		role = rolesInOrg.reduce((acc, curr) => {
-			if (ranks[curr.roleType] < ranks[acc.roleType]) {
-				return curr;
-			}
-
-			return acc;
-		});
+		role = resolveRole({ roles, event });
 	}
 
 	// If that fails, or if no role was selected, use the default role
@@ -100,14 +78,4 @@ export const getUser = async ({
 	};
 
 	return user;
-};
-
-const getOrgIdFromPath = (path: string) => {
-	// split items, then get the item after the one that is equal to 'organizations'
-	const orgId = path
-		.split('/')
-		.slice(path.split('/').indexOf('organizations') + 1)
-		.shift();
-
-	return orgId;
 };
