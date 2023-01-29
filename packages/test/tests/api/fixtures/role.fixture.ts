@@ -9,29 +9,45 @@ import type { AllFixtures } from './test-fixtures.interface';
 import type { RoleDto } from '../../../types/api';
 
 export const roleFixtures: AllFixtures = {
-	roleParams: [undefined, { option: true }],
+	rolesParams: [undefined, { option: true }],
 
-	role: async ({ org, portfolio, tenant, request, roleParams }, use) => {
-		const role = roleFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: portfolio.id,
-			tenantId: tenant.id,
-			...roleParams,
+	roles: async ({ org, portfolio, tenant, request, rolesParams }, use) => {
+		const params = rolesParams ?? [{}];
+
+		// Merge any declared params with the default params
+
+		const roles = R.times(params.length, (n) => {
+			return roleFactory.build({
+				organizationId: org.organization.id,
+				portfolioId: portfolio.id,
+				tenantId: tenant.id,
+				...params[n],
+			});
 		});
 
-		const url = PostUrlRole({
-			organizationId: role.organizationId,
-			portfolioId: role.portfolioId,
-			tenantId: role.tenantId,
-		})[role.roleType];
+		// Insert roles
 
-		const res = await request.post(`${url}`, {
-			data: R.pick(role, ['email']),
-		});
-		resCheck(res);
+		const created = (await Promise.all(
+			roles.map(async (role) => {
+				const picked = R.pick(role, ['email']);
 
-		const created = (await res.json()) as RoleDto;
+				const url = PostUrlRole({
+					organizationId: role.organizationId,
+					portfolioId: role.portfolioId,
+					tenantId: role.tenantId,
+				})[role.roleType];
+
+				const res = await request.post(url, { data: picked });
+				resCheck(res);
+
+				return (await res.json()) as RoleDto;
+			}),
+		)) as [RoleDto, ...RoleDto[]];
 
 		await use(created);
+	},
+
+	role: async ({ roles }, use) => {
+		await use(roles[0]);
 	},
 };

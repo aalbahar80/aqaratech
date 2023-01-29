@@ -42,6 +42,7 @@ export interface TestFixtures {
 
 	org: OrganizationCreatedDto;
 	role: RoleDto;
+	roles: [RoleDto, ...RoleDto[]];
 	tenant: TenantDto;
 	tenants: [TenantDto, ...TenantDto[]];
 	portfolio: PortfolioDto;
@@ -67,7 +68,7 @@ export interface TestFixtures {
 export interface TestOptions {
 	// auth
 	userRoleType: RoleDto['roleType'];
-	roleParams: RoleFactoryParams | undefined;
+	rolesParams: RoleFactoryParams[] | undefined;
 
 	tenantsParams: TenantFactoryParams[] | undefined;
 	portfoliosParams: PortfolioFactoryParams[] | undefined;

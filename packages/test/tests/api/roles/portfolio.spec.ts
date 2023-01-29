@@ -5,9 +5,11 @@ import { test } from '../api-fixtures';
 import type { PaginatedRoleDto } from '../../../types/api';
 
 test.use({
-	roleParams: {
-		roleType: 'PORTFOLIO',
-	},
+	rolesParams: [
+		{
+			roleType: 'PORTFOLIO',
+		},
+	],
 });
 
 test('porfolio role', async ({ request, org, portfolio, role: _role }) => {
