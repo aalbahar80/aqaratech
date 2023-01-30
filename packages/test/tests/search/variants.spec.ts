@@ -84,26 +84,26 @@ for (const i of inputs) {
 				expect.soft(result).toHaveProperty(key, value);
 			});
 		}
+	});
+}
 
-		const invalid = [
-			' ',
-			'  ',
-			encodeURIComponent(''),
-			encodeURIComponent(' '),
-			encodeURIComponent('  '),
-		];
+const invalid = [
+	' ',
+	'  ',
+	encodeURIComponent(''),
+	encodeURIComponent(' '),
+	encodeURIComponent('  '),
+];
 
-		for (const q of invalid) {
-			test(`does not return error for empty query - ${q}`, async ({
-				request,
-				searchUrl,
-			}) => {
-				const url = withQuery(searchUrl, { query: q });
+for (const q of invalid) {
+	test(`does not return error for empty query - ${q}`, async ({
+		request,
+		searchUrl,
+	}) => {
+		const url = withQuery(searchUrl, { query: q });
 
-				const res = await request.get(url);
+		const res = await request.get(url);
 
-				expect.soft(res.status()).toBe(200);
-			});
-		}
+		expect.soft(res.status()).toBe(200);
 	});
 }
