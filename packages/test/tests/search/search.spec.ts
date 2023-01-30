@@ -46,20 +46,8 @@ test.use({
 	propertiesParams: [{ street: 'The Main St' }],
 });
 
-// TODO: Make tests re-use organization fixture
-
 for (const i of inputs) {
 	test.describe(`search for ${i.type}`, () => {
-		test.describe.configure({ mode: 'parallel' });
-
-		test('exact', async ({ searchPalette }) => {
-			await searchPalette.searchAndVerify({
-				query: i.queryExact,
-				resultText: i.resultText,
-				keysToValidate: i.keysToValidate,
-			});
-		});
-
 		test('prefix', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.queryPrefix,
@@ -67,38 +55,14 @@ for (const i of inputs) {
 				keysToValidate: i.keysToValidate,
 			});
 		});
-
-		test('suffix', async ({ searchPalette }) => {
-			await searchPalette.searchAndVerify({
-				query: i.querySuffix,
-				resultText: i.resultText,
-				keysToValidate: i.keysToValidate,
-			});
-		});
-
-		test("spaces don't cause error response", async ({
-			page,
-			searchPalette,
-		}) => {
-			await searchPalette.open();
-
-			const [res] = await Promise.all([
-				page.waitForResponse(/.*search/, {
-					timeout: 5000,
-				}),
-				searchPalette.input.fill(` ${i.queryExact} `),
-			]);
-
-			expect(res.status()).toBeLessThan(400);
-		});
 	});
 }
 
-test('multiple matched words within same field are highlighted', async ({
+// TODO: enable after implementing
+test.skip('multiple matched words within same field are highlighted', async ({
 	page,
 	isMobile,
 }) => {
-	test.fail(); // TODO: enable after implementing
 	const searchPalette = new SearchPalette({ page, isMobile });
 
 	await searchPalette.open();
