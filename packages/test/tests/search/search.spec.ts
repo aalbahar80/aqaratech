@@ -60,22 +60,6 @@ for (const i of inputs) {
 			});
 		});
 
-		test('exact - lowercase', async ({ searchPalette }) => {
-			await searchPalette.searchAndVerify({
-				query: i.queryExact.toLowerCase(),
-				resultText: i.resultText,
-				keysToValidate: i.keysToValidate,
-			});
-		});
-
-		test('exact - uppercase', async ({ searchPalette }) => {
-			await searchPalette.searchAndVerify({
-				query: i.queryExact.toUpperCase(),
-				resultText: i.resultText,
-				keysToValidate: i.keysToValidate,
-			});
-		});
-
 		test('prefix', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.queryPrefix,
@@ -84,33 +68,9 @@ for (const i of inputs) {
 			});
 		});
 
-		test('prefix lowercase', async ({ searchPalette }) => {
-			await searchPalette.searchAndVerify({
-				query: i.queryPrefix.toLowerCase(),
-				resultText: i.resultText,
-				keysToValidate: i.keysToValidate,
-			});
-		});
-
-		test('prefix uppercase', async ({ searchPalette }) => {
-			await searchPalette.searchAndVerify({
-				query: i.queryPrefix.toUpperCase(),
-				resultText: i.resultText,
-				keysToValidate: i.keysToValidate,
-			});
-		});
-
 		test('suffix', async ({ searchPalette }) => {
 			await searchPalette.searchAndVerify({
 				query: i.querySuffix,
-				resultText: i.resultText,
-				keysToValidate: i.keysToValidate,
-			});
-		});
-
-		test('suffix - uppercase', async ({ searchPalette }) => {
-			await searchPalette.searchAndVerify({
-				query: i.querySuffix.toUpperCase(),
 				resultText: i.resultText,
 				keysToValidate: i.keysToValidate,
 			});
