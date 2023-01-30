@@ -98,7 +98,7 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		},
 		{
 			name: 'api',
-			testMatch: [TESTS.API],
+			testMatch: [...TESTS.API],
 			testIgnore: [...TESTS.FILE],
 			use: {
 				baseURL: process.env.PUBLIC_API_URL,
