@@ -176,10 +176,13 @@ test('file form errors are recoverable', async ({
 	// fix the file name
 	await page.getByLabel(getLabel('fileName')).fill(validFileName);
 
+	// wait for the request to complete before exiting browser
+	const resPromise = page.waitForResponse((res) => res.status() === 200);
+
 	await form.save();
 
 	// wait for the request to complete before exiting browser
-	await page.waitForNavigation();
+	await resPromise;
 
 	const key = `portfolio/${portfolio.id}/${validFileName}`;
 

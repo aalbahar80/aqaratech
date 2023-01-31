@@ -3,49 +3,49 @@ import * as R from 'remeda';
 import { leaseFactory } from '@self/seed';
 import { FIELDS } from '@self/utils';
 
-import { resCheck } from '../../../utils/res-check';
-
-import { apiURL } from './api-url';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { LeaseDto } from '../../../types/api';
 
 export const leaseFixtures: AllFixtures = {
 	leasesParams: [undefined, { option: true }],
 
-	leases: async ({ org, unit, tenant, request, leasesParams }, use) => {
+	leases: async ({ org, unit, tenant, leasesParams }, use) => {
 		const params = leasesParams ?? [{}];
 
 		// Merge any declared params with the default params
 
-		const leases = R.times(params.length, (n) =>
-			leaseFactory.build({
+		const leases = R.times(params.length, (n) => {
+			const data = leaseFactory.build({
 				organizationId: unit.organizationId,
 				portfolioId: unit.portfolioId,
 				unitId: unit.id,
 				tenantId: tenant.id,
 				...params[n],
-			}),
-		);
+			});
+
+			data.start &&= new Date(data.start).toISOString();
+			data.end &&= new Date(data.end).toISOString();
+
+			return data;
+		});
 
 		// Insert leases
 
-		const url = `${apiURL}/organizations/${org.organization.id}/leases`;
-
-		const created = (await Promise.all(
-			leases.map(async (lease) => {
-				const picked = R.pick(lease, [
+		await prisma.lease.createMany({
+			data: leases.map(
+				R.pick([
 					...FIELDS.lease.all,
+					'organizationId',
 					'portfolioId',
 					'unitId',
-				]);
+				]),
+			),
+		});
 
-				const res = await request.post(url, { data: picked });
-				resCheck(res);
-
-				return (await res.json()) as LeaseDto;
-			}),
-		)) as [LeaseDto, ...LeaseDto[]];
+		const created = await prisma.lease.findMany({
+			where: { organizationId: org.organization.id },
+		});
 
 		await use(created);
 	},

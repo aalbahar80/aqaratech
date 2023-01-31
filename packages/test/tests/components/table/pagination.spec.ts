@@ -74,8 +74,9 @@ test('pagination is updated when changing property filter', async ({
 	await expect.soft(table.property).toHaveValue('undefined');
 
 	// Go to next page
+	const resPromise = page.waitForResponse((res) => res.status() === 200);
 	await table.next.click();
-	await page.waitForNavigation();
+	await resPromise;
 
 	// Change property filter
 

@@ -2,17 +2,14 @@ import * as R from 'remeda';
 
 import { expenseFactory } from '@self/seed';
 
-import { resCheck } from '../../../utils/res-check';
-
-import { apiURL } from './api-url';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { ExpenseDto } from '../../../types/api';
 
 export const expenseFixtures: AllFixtures = {
 	expensesParams: [undefined, { option: true }],
 
-	expenses: async ({ org, units, request, expensesParams }, use) => {
+	expenses: async ({ org, units, expensesParams }, use) => {
 		const params = expensesParams ?? [{}];
 
 		// Merge any declared params with the default params
@@ -21,7 +18,7 @@ export const expenseFixtures: AllFixtures = {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const unit = units[n % units.length]!;
 
-			return expenseFactory.build({
+			const data = expenseFactory.build({
 				organizationId: org.organization.id,
 				portfolioId: unit.portfolioId,
 				propertyId: unit.propertyId,
@@ -29,28 +26,31 @@ export const expenseFixtures: AllFixtures = {
 				unitId: unit.id,
 				...params[n],
 			});
+
+			// turn the date into a iso string
+			data.postAt &&= new Date(data.postAt).toISOString();
+
+			return data;
 		});
 
 		// Insert expenses
 
-		const url = `${apiURL}/organizations/${org.organization.id}/expenses`;
+		await prisma.expense.createMany({
+			data: expenses.map((e) => ({
+				organizationId: e.organizationId,
+				portfolioId: e.portfolioId,
+				propertyId: e.propertyId ?? undefined,
+				unitId: e.unitId,
+				amount: e.amount,
+				postAt: e.postAt,
+			})),
+		});
 
-		const created = (await Promise.all(
-			expenses.map(async (expense) => {
-				const picked = R.pick(expense, [
-					'portfolioId',
-					'propertyId',
-					'unitId',
-					'amount',
-					'postAt',
-				]);
-
-				const res = await request.post(url, { data: picked });
-				resCheck(res);
-
-				return (await res.json()) as ExpenseDto;
-			}),
-		)) as [ExpenseDto, ...ExpenseDto[]];
+		const created = await prisma.expense.findMany({
+			where: {
+				organizationId: org.organization.id,
+			},
+		});
 
 		await use(created);
 	},

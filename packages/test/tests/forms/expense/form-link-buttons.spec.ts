@@ -4,6 +4,7 @@ import { resolveURL } from 'ufo';
 import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../../api/api-fixtures';
+import { IdPage } from '../../models/id-page';
 
 const inputs = [
 	{
@@ -35,9 +36,10 @@ for (const entity of inputs) {
 
 		await page.goto(url);
 
-		await page.getByRole('button', { name: 'Open options' }).click();
+		const idPage = new IdPage({ page });
 
 		const btn = page.getByRole('link', { name: entity.buttonName });
+		await idPage.expandOptions(btn);
 
 		await expect(btn).toHaveAttribute(
 			'href',
@@ -70,9 +72,10 @@ for (const entity of inputs) {
 
 		await page.goto(url);
 
-		await page.getByRole('button', { name: 'Open options' }).click();
+		const idPage = new IdPage({ page });
 
 		const btn = page.getByRole('link', { name: entity.buttonName });
+		await idPage.expandOptions(btn);
 
 		await expect(btn).toHaveAttribute(
 			'href',

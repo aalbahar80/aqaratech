@@ -1,9 +1,17 @@
+import { randomUUID } from 'crypto';
+
 import { test as base } from '@playwright/test';
 import * as R from 'remeda';
 
-import { organizationFactory, portfolioFactory } from '@self/seed';
-import { Cookie } from '@self/utils';
+import {
+	organizationFactory,
+	portfolioFactory,
+	testOrgEmail,
+} from '@self/seed';
+import { Cookie, generateExpenseCategoryTree } from '@self/utils';
 
+import { prisma } from '../../prisma';
+import { createBucketDev } from '../../utils/create-bucket';
 import { resCheck } from '../../utils/res-check';
 
 import { apiURL } from './fixtures/api-url';
@@ -24,37 +32,62 @@ import type {
 	TestFixtures,
 	TestOptions,
 } from './fixtures/test-fixtures.interface';
-import type { OrganizationCreatedDto, PortfolioDto } from '../../types/api';
+import type { OrganizationCreatedDto } from '../../types/api';
 
 // Extend basic test by providing an "org" fixture.
 // `org` is a fresh organization. Role ID header is set in extraHTTPHeaders.
 export const test = base.extend<TestFixtures & TestOptions>({
+	waitForHydration: [true, { option: true }],
+
 	// Dependency map: org -> request
 	// 1. A new org is created
 	// 3. The `request` fixture is overriden with the new page.request, which has the new role cookie set
 	// 4. Any test that imports from this file will have access to the new org, and request
 
 	// A fixture that returns a fresh organization.
-	org: async ({ baseURL, context }, use) => {
-		if (!baseURL) throw new Error('baseURL is not set');
+	org: [
+		async ({ createBucket }, use) => {
+			const organization = R.pick(organizationFactory.build(), ['fullName']);
 
-		// baseURL is populated because it is set very early in playwright.config.ts
-		// For some reason though, contextOptions.baseURL is not set.
-		// P.S. We can't use extraHTTPHeaders here, because it'll cause a circular dependency.
-		// contextOptions might be empty because this is executed before test.use is called?
-		// For this reason, we create a new context here.
+			const created = await prisma.organization.create({
+				data: {
+					...organization,
+					organizationSettings: {
+						create: {
+							expenseCategoryTree: generateExpenseCategoryTree(randomUUID),
+						},
+					},
+					roles: {
+						create: {
+							roleType: 'ORGADMIN',
+							user: { connect: { email: testOrgEmail } },
+						},
+					},
+				},
+				include: {
+					roles: true,
+				},
+			});
 
-		const organization = R.pick(organizationFactory.build(), ['fullName']);
+			const org = {
+				organization: {
+					...created,
+					title: created.fullName,
+				},
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				roleId: created.roles[0]!.id,
+			} satisfies OrganizationCreatedDto;
 
-		const res = await context.request.post(`${apiURL}/organizations`, {
-			data: organization,
-		});
-		resCheck(res);
+			if (createBucket) {
+				await createBucketDev(org.organization.id, process.env);
+			}
 
-		const created = (await res.json()) as OrganizationCreatedDto;
-
-		await use(created);
-	},
+			await use(org);
+		},
+		{
+			scope: 'test',
+		},
+	],
 
 	roleCookie: async ({ org, context }, use) => {
 		const staleRoleCookie = (await context.cookies()).find(
@@ -85,45 +118,54 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	},
 
 	// adds the new org's roleID to context's cookies
-	page: async ({ context, roleCookie }, use) => {
+	page: async ({ context, roleCookie, waitForHydration }, use) => {
 		await context.addCookies([roleCookie]);
 
 		const page = await context.newPage();
 
-		// eslint-disable-next-line @typescript-eslint/unbound-method
-		const goto = page.goto;
+		if (waitForHydration) {
+			// eslint-disable-next-line @typescript-eslint/unbound-method
+			const goto = page.goto;
 
-		page.goto = async function (url, opts) {
-			const res = await goto.call(page, url, opts);
+			page.goto = async function (url, opts) {
+				const res = await goto.call(page, url, opts);
 
-			// https://github.com/sveltejs/kit/pull/6484
-			await page.waitForSelector('body.started', { timeout: 5000 });
+				// https://github.com/sveltejs/kit/pull/6484
+				await page.waitForSelector('body.started', { timeout: 5000 });
 
-			return res;
-		};
+				return res;
+			};
+		}
 
 		await use(page);
 	},
 
 	// A fixture that returns a fresh portfolio in a fresh organization.
 	// Fixtures are "composable", i.e when a test uses both org and portfolio fixtures, the same organization is used.
-	portfolio: async ({ org, request }, use) => {
-		// create fresh portfolio
-		const portfolio = portfolioFactory.build({
-			organizationId: org.organization.id,
-		});
+	portfolio: [
+		async ({ org }, use) => {
+			const data = portfolioFactory.build({
+				organizationId: org.organization.id,
+			});
 
-		const picked = R.pick(portfolio, ['fullName']);
+			const portfolio = await prisma.portfolio.create({
+				data: {
+					fullName: data.fullName,
+					organization: { connect: { id: org.organization.id } },
+				},
+			});
 
-		const url = `${apiURL}/organizations/${org.organization.id}/portfolios`;
+			await use({
+				...portfolio,
+				title: portfolio.fullName,
+			});
+		},
+		{
+			scope: 'test',
+		},
+	],
 
-		const res = await request.post(url, { data: picked });
-		resCheck(res);
-
-		const created = (await res.json()) as PortfolioDto;
-
-		await use(created);
-	},
+	createBucket: [false, { option: true }],
 
 	// A fixture that returns a fresh file in a fresh portfolio.
 	file: async ({ portfolio, request }, use) => {

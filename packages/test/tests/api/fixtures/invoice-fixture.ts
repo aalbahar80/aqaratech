@@ -2,35 +2,37 @@ import * as R from 'remeda';
 
 import { leaseInvoiceFactory } from '@self/seed';
 
-import { resCheck } from '../../../utils/res-check';
-
-import { apiURL } from './api-url';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { LeaseInvoiceDto } from '../../../types/api';
 
 export const invoiceFixtures: AllFixtures = {
 	invoicesParams: [undefined, { option: true }],
 
-	invoices: async ({ org, portfolio, lease, request, invoicesParams }, use) => {
+	invoices: async ({ org, portfolio, lease, invoicesParams }, use) => {
 		const params = invoicesParams ?? [{}];
 
-		const leaseInvoices = R.times(params.length, (n) =>
-			leaseInvoiceFactory.build({
+		const leaseInvoices = R.times(params.length, (n) => {
+			const data = leaseInvoiceFactory.build({
 				organizationId: org.organization.id,
 				portfolioId: portfolio.id,
 				leaseId: lease.id,
 				...params[n],
-			}),
-		);
+			});
+
+			data.postAt &&= new Date(data.postAt).toISOString();
+			data.dueAt &&= new Date(data.dueAt).toISOString();
+			data.paidAt &&= new Date(data.paidAt).toISOString();
+
+			return data;
+		});
 
 		// Insert leaseInvoices
 
-		const url = `${apiURL}/organizations/${org.organization.id}/leaseInvoices`;
-
-		const created = (await Promise.all(
-			leaseInvoices.map(async (leaseInvoice) => {
-				const picked = R.pick(leaseInvoice, [
+		await prisma.leaseInvoice.createMany({
+			data: leaseInvoices.map(
+				R.pick([
+					'organizationId',
 					'portfolioId',
 					'leaseId',
 					'amount',
@@ -39,14 +41,15 @@ export const invoiceFixtures: AllFixtures = {
 					'postAt',
 					'paidAt',
 					'dueAt',
-				]);
+				]),
+			),
+		});
 
-				const res = await request.post(url, { data: picked });
-				resCheck(res);
-
-				return (await res.json()) as LeaseInvoiceDto;
-			}),
-		)) as [LeaseInvoiceDto, ...LeaseInvoiceDto[]];
+		const created = await prisma.leaseInvoice.findMany({
+			where: {
+				organizationId: org.organization.id,
+			},
+		});
 
 		await use(created);
 	},

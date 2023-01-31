@@ -84,6 +84,12 @@ export interface TestOptions {
 	expensesParams: ExpenseFactoryParams[] | undefined;
 	expenseCategoryParams: ExpenseCategoryFactoryParams | undefined;
 	maintenanceOrdersParams: MaintenanceOrderFactoryParams[] | undefined;
+
+	/** Whether to create an organization storage bucket for the project. */
+	createBucket: boolean;
+
+	/** Wait for body.started selector. Some tests are flakey without this check. */
+	waitForHydration: boolean;
 }
 
 export type AllFixtures = Fixtures<

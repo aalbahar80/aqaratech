@@ -4,6 +4,7 @@ import { resolveURL } from 'ufo';
 import { getRoute, PageType } from '@self/utils';
 
 import { test } from '../../api/api-fixtures';
+import { IdPage } from '../../models/id-page';
 
 const BUTTON_LABEL = 'New Maintenance';
 
@@ -23,9 +24,11 @@ test('create maintenanceOrder for unit button predefined params', async ({
 
 	await page.goto(url);
 
-	await page.getByRole('button', { name: 'Open options' }).click();
+	const idPage = new IdPage({ page });
 
 	const btn = page.getByRole('link', { name: BUTTON_LABEL });
+
+	await idPage.expandOptions(btn);
 
 	await expect(btn).toHaveAttribute(
 		'href',
@@ -58,9 +61,11 @@ test('create maintenanceOrder for property button predefined params', async ({
 
 	await page.goto(url);
 
-	await page.getByRole('button', { name: 'Open options' }).click();
+	const idPage = new IdPage({ page });
 
 	const btn = page.getByRole('link', { name: BUTTON_LABEL });
+
+	await idPage.expandOptions(btn);
 
 	await expect(btn).toHaveAttribute(
 		'href',
@@ -84,9 +89,11 @@ test.fixme(
 
 		await page.goto(url);
 
-		await page.getByRole('button', { name: 'Open options' }).click();
+		const idPage = new IdPage({ page });
 
 		const btn = page.getByRole('link', { name: BUTTON_LABEL });
+
+		await idPage.expandOptions(btn);
 
 		await expect(btn).toHaveAttribute(
 			'href',

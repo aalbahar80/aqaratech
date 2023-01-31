@@ -24,11 +24,13 @@ test('locale switch updates $page.pathname', async ({ page, portfolio }) => {
 
 	await expect(tabAr).toHaveAttribute('data-testid', 'active');
 
+	const resPromise = page.waitForResponse((res) => res.status() === 200);
+
 	// const arLocale = page.getByRole('link', { name: 'العربية' });
 	const enLocale = page.getByRole('link', { name: 'English' });
 	await enLocale.click();
 
-	await page.waitForNavigation();
+	await resPromise;
 
 	// check Properties tab is still active
 	await expect(tabEn).toHaveAttribute('data-testid', 'active');

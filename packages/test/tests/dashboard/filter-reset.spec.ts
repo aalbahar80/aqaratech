@@ -1,7 +1,12 @@
 import { expect } from '@playwright/test';
 import * as R from 'remeda';
 
-import { computeLabelUnit, getRoute, PageTypePortfolio } from '@self/utils';
+import {
+	computeLabelProperty,
+	computeLabelUnit,
+	getRoute,
+	PageTypePortfolio,
+} from '@self/utils';
 
 import { test } from '../api/api-fixtures';
 
@@ -41,7 +46,7 @@ test('unit filter resets when updating property', async ({
 	// Select property
 	await filters.property.el.selectOption({ value: property.id });
 
-	expect(await filters.property.label()).toBe(property.address);
+	expect(await filters.property.label()).toBe(computeLabelProperty(property));
 
 	// Select unit
 	await filters.unit.el.selectOption({ value: unit.id });
@@ -52,8 +57,10 @@ test('unit filter resets when updating property', async ({
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	await filters.property.el.selectOption({ value: properties[1]!.id });
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	expect(await filters.property.label()).toBe(properties[1]!.address);
+	expect(await filters.property.label()).toBe(
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		computeLabelProperty(properties[1]!),
+	);
 
 	// Unit filter resets
 	expect(await filters.unit.label()).toBe('All');

@@ -15,6 +15,7 @@ test.use({
 	userRoleType: 'PORTFOLIO',
 	expensesParams: R.times(10, () => ({
 		amount: 100,
+		propertyId: null,
 	})),
 });
 

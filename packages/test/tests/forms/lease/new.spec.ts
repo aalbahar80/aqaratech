@@ -43,7 +43,8 @@ test('can be submitted with minimal fields', async ({
 	await formPage.fillForm({
 		...lease,
 		tenantId: new ComboboxOption({
-			label: tenants[5]!.fullName,
+			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+			label: tenants[5]!.label || tenants[5]!.fullName,
 			value: tenants[5]!.id,
 		}),
 	});
@@ -52,7 +53,8 @@ test('can be submitted with minimal fields', async ({
 
 	await formPage.verifyDetails({
 		...lease,
-		tenant: tenants[5]!.fullName,
+		// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+		tenant: tenants[5]!.label || tenants[5]!.fullName,
 	});
 
 	const successUrl = getRoute({
@@ -94,7 +96,8 @@ test('can be submitted with all fields', async ({
 	await formPage.fillForm({
 		...lease,
 		tenantId: new ComboboxOption({
-			label: tenants[5]!.fullName,
+			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+			label: tenants[5]!.label || tenants[5]!.fullName,
 			value: tenants[5]!.id,
 		}),
 	});
@@ -103,7 +106,8 @@ test('can be submitted with all fields', async ({
 
 	await formPage.verifyDetails({
 		...R.omit(lease, ['tenantId']),
-		tenant: tenants[5]!.fullName,
+		// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+		tenant: tenants[5]!.label || tenants[5]!.fullName,
 	});
 
 	const successUrl = getRoute({

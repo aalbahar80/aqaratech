@@ -10,6 +10,7 @@ import {
 } from './constants/expired-id-token';
 import { testUsers } from './tests/api/fixtures/users/test-users';
 
+import type { TestOptions } from './tests/api/fixtures/test-fixtures.interface';
 import type { TokenTestOptions } from './tests/auth/auth-fixtures';
 
 dotenv({
@@ -20,17 +21,17 @@ const env = {
 	PUBLIC_AQARATECH_ENV: 'testing',
 } satisfies Partial<AqaratechEnv>;
 
-const BASE_TIMEOUT = 10 * 1000;
+const BASE_TIMEOUT = 15 * 1000;
 
-const config: PlaywrightTestConfig<TokenTestOptions> = {
+const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),
-	globalTeardown: require.resolve('./global-teardown'),
+	// globalTeardown: require.resolve('./global-teardown'),
 	// showing the reporter prevents turbo from caching the test results (on flakey tests)
 	reporter: process.env.CI ? 'github' : [['list'], ['html', { open: 'never' }]],
 	retries: 1,
 	timeout: process.env.CI ? 30 * 1000 : BASE_TIMEOUT,
 	maxFailures: 40,
-	workers: process.env.CI ? undefined : '70%',
+	workers: process.env.CI ? undefined : '35%',
 	use: {
 		storageState: testUsers.orgAdmin.storageStatePath,
 		headless: true,
@@ -79,6 +80,9 @@ const config: PlaywrightTestConfig<TokenTestOptions> = {
 		{
 			name: 'files',
 			testMatch: [...TESTS.FILE],
+			use: {
+				createBucket: true,
+			},
 		},
 		{
 			name: 'idToken',

@@ -27,7 +27,7 @@ test('screenshot smoke test', async ({ page, org, tenant }) => {
 
 	await expect(page).toHaveURL(edit);
 
-	await page.locator('text=Save').click();
+	await page.getByRole('button', { name: 'Save' }).click();
 
 	// ensure same entity
 	await expect(page).toHaveURL(url);

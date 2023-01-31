@@ -11,7 +11,6 @@
 
 	import L, { setLocale, locale } from '$i18n/i18n-svelte';
 	import { baseLocale } from '$i18n/i18n-util';
-	import Alert from '$lib/components/navbar/Alert.svelte';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
@@ -19,7 +18,6 @@
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import Modal from '$lib/components/toast/Modal.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
-	import { environment } from '$lib/environment';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
 	import { isHomeRoute } from '$lib/utils/is-home-route';
@@ -31,9 +29,6 @@
 	setLocale(data.locale ?? baseLocale);
 
 	onMount(() => {
-		// communicate that the app is ready - used for testing
-		document.body.classList.add('started');
-
 		// https://github.com/bluwy/vite-plugin-iso-import#what-happens-if-i-use-an-import-value-that-has-been-stripped-off
 		if (!import.meta.env.SSR) {
 			Sentry.init({
@@ -48,6 +43,9 @@
 				scope.setUser(getSentryUser(data.user));
 			});
 		}
+
+		// communicate that the app is ready - used for testing
+		document.body.classList.add('started');
 	});
 </script>
 
@@ -77,9 +75,6 @@
 
 		<main class="col-span-full pt-8 lg:col-start-2">
 			<div class="mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8">
-				{#if environment.PUBLIC_AQARATECH_ENV !== 'production'}
-					<Alert />
-				{/if}
 				<slot />
 				<VersionFooter />
 			</div>

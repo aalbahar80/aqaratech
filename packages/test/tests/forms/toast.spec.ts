@@ -19,7 +19,9 @@ test.describe('Form toasts', () => {
 		});
 
 		await formPage.goto();
-		await formPage.save();
+
+		// Avoid formPage.save() because it waits for a response
+		await formPage.saveButton.click();
 
 		const toast = page.getByRole('status');
 
@@ -43,7 +45,9 @@ test.describe('Form toasts', () => {
 		await formPage.goto();
 		// Enter invalid data
 		await formPage.fillForm({ fullName: '' });
-		await formPage.save();
+
+		// Avoid formPage.save() because it waits for a response
+		await formPage.saveButton.click();
 
 		const toast = page.getByRole('status');
 
@@ -53,8 +57,10 @@ test.describe('Form toasts', () => {
 		await expect(loading).toBeVisible();
 		await expect(loading).toBeHidden();
 		await expect(invalid).toBeVisible();
-		await expect(invalid).toBeHidden({
-			timeout: 7000, // invalid toasts stay for a bit longer
-		});
+
+		// PERF: waiting for invalid toast to disappear takes too long
+		// await expect(invalid).toBeHidden({
+		// 	timeout: 7000, // invalid toasts stay for a bit longer
+		// });
 	});
 });

@@ -45,11 +45,17 @@ export const test = base.extend<TestOptions>({
 		expect(await filters.range.label()).toBe('Last 12 months');
 
 		// wait for navigation between setting filters to avoid race condition
+		const responsePromise1 = page.waitForResponse(
+			(res) => res.status() === 200,
+		);
 		await filters.start.fill(`${START_YEAR}-01-01`);
-		await page.waitForNavigation();
+		await responsePromise1;
 
+		const responsePromise2 = page.waitForResponse(
+			(res) => res.status() === 200,
+		);
 		await filters.end.fill(`${START_YEAR}-12-31`);
-		await page.waitForNavigation();
+		await responsePromise2;
 
 		// wait for all charts to load
 		const empty = page.getByText('No data').first();

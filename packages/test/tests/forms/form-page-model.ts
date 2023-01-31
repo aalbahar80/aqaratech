@@ -26,7 +26,20 @@ export class FormPage {
 	}
 
 	async save() {
+		// check that network request was fired,
+		// if not, fail with a message
+		// PERF: set timeout to fail faster
+		// NOTE: wait for ANY request?
+		const requestPromise = this.page.waitForRequest(
+			(request) => request.method() === 'POST' || request.method() === 'PATCH',
+		);
+
 		await this.saveButton.click();
+
+		// only assert that the request was fired
+		const request = await requestPromise;
+
+		expect(request, 'Save button fired a network request').toBeTruthy();
 	}
 
 	async goto() {
@@ -40,7 +53,7 @@ export class FormPage {
 
 		for (const [key, value] of Object.entries(labeled)) {
 			// The key may be followed by an asterisk.
-			const keyRegex = new RegExp(`${key}|${key} \\*`);
+			const keyRegex = key;
 
 			// Combobox Fields
 
@@ -99,7 +112,7 @@ export class FormPage {
 				throw new Error(`Unsupported value type: ${typeof value}`);
 			}
 
-			await this.page.getByLabel(keyRegex).fill(valueString);
+			await this.page.getByLabel(keyRegex, { exact: true }).fill(valueString);
 		}
 	};
 

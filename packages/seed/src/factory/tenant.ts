@@ -22,7 +22,7 @@ const base = Factory.Sync.makeFactoryWithRequired<Tenant, 'organizationId'>({
 		].join(' '),
 	),
 
-	label: null,
+	label: Factory.each(() => null),
 
 	civilid: Factory.each(() =>
 		faker.datatype.number({ min: 200000000000, max: 399999999999 }).toString(),

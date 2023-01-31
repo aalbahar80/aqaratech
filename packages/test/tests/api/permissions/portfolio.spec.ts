@@ -32,15 +32,21 @@ for (const route of notAccessible) {
 	});
 }
 
-test(`can get portfolio /files`, async ({ portfolio, scopedRequest }) => {
-	const res = await scopedRequest.get('/files', {
-		params: {
-			relationKey: 'portfolio',
-			relationValue: portfolio.id,
-		},
+test.describe('files', () => {
+	test.use({
+		createBucket: true,
 	});
 
-	await expect(res).toBeOK();
+	test(`can get portfolio /files`, async ({ portfolio, scopedRequest }) => {
+		const res = await scopedRequest.get('/files', {
+			params: {
+				relationKey: 'portfolio',
+				relationValue: portfolio.id,
+			},
+		});
+
+		await expect(res).toBeOK();
+	});
 });
 
 const scoped = ['/leaseInvoices', '/expenses'];

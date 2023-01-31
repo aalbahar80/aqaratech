@@ -2,17 +2,14 @@ import * as R from 'remeda';
 
 import { propertyFactory } from '@self/seed';
 
-import { resCheck } from '../../../utils/res-check';
-
-import { apiURL } from './api-url';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { PropertyDto } from '../../../types/api';
 
 export const propertyFixtures: AllFixtures = {
 	propertiesParams: [undefined, { option: true }],
 
-	properties: async ({ org, portfolio, request, propertiesParams }, use) => {
+	properties: async ({ org, portfolio, propertiesParams }, use) => {
 		const params = propertiesParams ?? [{}];
 
 		// Merge any declared params with the default params
@@ -27,24 +24,22 @@ export const propertyFixtures: AllFixtures = {
 
 		// Insert properties
 
-		const url = `${apiURL}/organizations/${org.organization.id}/properties`;
-
-		const created = (await Promise.all(
-			properties.map(async (property) => {
-				const picked = R.pick(property, [
+		await prisma.property.createMany({
+			data: properties.map(
+				R.pick([
+					'organizationId',
 					'portfolioId',
 					'area',
 					'block',
 					'street',
 					'number',
-				]);
+				]),
+			),
+		});
 
-				const res = await request.post(url, { data: picked });
-				resCheck(res);
-
-				return (await res.json()) as PropertyDto;
-			}),
-		)) as [PropertyDto, ...PropertyDto[]];
+		const created = await prisma.property.findMany({
+			where: { organizationId: org.organization.id },
+		});
 
 		await use(created);
 	},

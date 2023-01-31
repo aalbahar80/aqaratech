@@ -3,6 +3,7 @@ import { expect } from '@playwright/test';
 import { getRoute, PageType } from '@self/utils';
 
 import { test as base } from '../api/api-fixtures';
+import { IdPage } from '../models/id-page';
 
 const test = base.extend({
 	page: async ({ page, org }, use) => {
@@ -15,9 +16,13 @@ const test = base.extend({
 
 		await page.goto(url);
 
-		await page.locator(`data-testid=more-actions-button`).click();
+		const idPage = new IdPage({ page });
 
-		await page.locator('button:has-text("Delete")').click();
+		const remove = page.getByRole('button', { name: 'Delete' });
+
+		await idPage.expandOptions(remove);
+
+		await remove.click();
 
 		await use(page);
 	},

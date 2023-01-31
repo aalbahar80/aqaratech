@@ -24,10 +24,7 @@ export class Combobox {
 	}
 
 	async fill(option: ComboboxOption) {
-		// The key may be followed by an asterisk.
-		const keyRegex = new RegExp(`${this.key}|${this.key} \\*`);
-
-		const input = this.page.getByLabel(keyRegex);
+		const input = this.page.getByLabel(this.key, { exact: true });
 
 		await input.fill(option.label);
 

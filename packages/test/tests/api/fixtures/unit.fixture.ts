@@ -2,17 +2,14 @@ import * as R from 'remeda';
 
 import { unitFactory } from '@self/seed';
 
-import { resCheck } from '../../../utils/res-check';
-
-import { apiURL } from './api-url';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { UnitDto } from '../../../types/api';
 
 export const unitFixtures: AllFixtures = {
 	unitsParams: [undefined, { option: true }],
 
-	units: async ({ org, properties, request, unitsParams }, use) => {
+	units: async ({ org, properties, unitsParams }, use) => {
 		const params = unitsParams ?? [{}];
 
 		// Merge any declared params with the default params
@@ -30,23 +27,21 @@ export const unitFixtures: AllFixtures = {
 
 		// Insert units
 
-		const url = `${apiURL}/organizations/${org.organization.id}/units`;
-
-		const created = (await Promise.all(
-			units.map(async (unit) => {
-				const picked = R.pick(unit, [
-					'type',
-					'unitNumber',
+		await prisma.unit.createMany({
+			data: units.map(
+				R.pick([
+					'organizationId',
 					'portfolioId',
 					'propertyId',
-				]);
+					'unitNumber',
+					'type',
+				]),
+			),
+		});
 
-				const res = await request.post(url, { data: picked });
-				resCheck(res);
-
-				return (await res.json()) as UnitDto;
-			}),
-		)) as [UnitDto, ...UnitDto[]];
+		const created = await prisma.unit.findMany({
+			where: { organizationId: org.organization.id },
+		});
 
 		await use(created);
 	},

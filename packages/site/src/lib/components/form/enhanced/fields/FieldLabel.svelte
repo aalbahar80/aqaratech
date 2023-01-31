@@ -10,13 +10,16 @@
 
 <div class="flex justify-between">
 	<div class="flex items-center gap-2">
-		<label for={formField.name} class="block text-sm font-medium text-gray-700">
-			{formField.label}
+		<div class="block text-sm font-medium text-gray-700">
+			<label for={formField.name}>
+				{formField.label}
+			</label>
 
+			<!-- Leave the asterisk out of the label to simplify testing locators -->
 			{#if formField.required}
-				<span class="text-red-600">*</span>
+				<span class="text-red-600" aria-hidden="true">*</span>
 			{/if}
-		</label>
+		</div>
 
 		{#if formField.hint}
 			<div class="mr-1.5">

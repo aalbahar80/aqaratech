@@ -2,20 +2,14 @@ import * as R from 'remeda';
 
 import { maintenanceOrderFactory } from '@self/seed';
 
-import { resCheck } from '../../../utils/res-check';
-
-import { apiURL } from './api-url';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { MaintenanceOrderDto } from '../../../types/api';
 
 export const maintenanceOrderFixtures: AllFixtures = {
 	maintenanceOrdersParams: [undefined, { option: true }],
 
-	maintenanceOrders: async (
-		{ org, units, request, maintenanceOrdersParams },
-		use,
-	) => {
+	maintenanceOrders: async ({ org, units, maintenanceOrdersParams }, use) => {
 		const params = maintenanceOrdersParams ?? [{}];
 
 		// Merge any declared params with the default params
@@ -24,22 +18,25 @@ export const maintenanceOrderFixtures: AllFixtures = {
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const unit = units[n % units.length]!;
 
-			return maintenanceOrderFactory.build({
+			const data = maintenanceOrderFactory.build({
 				organizationId: org.organization.id,
 				portfolioId: unit.portfolioId,
 				propertyId: unit.propertyId,
 				unitId: unit.id,
 				...params[n],
 			});
+
+			data.completedAt &&= new Date(data.completedAt).toISOString();
+
+			return data;
 		});
 
 		// Insert maintenanceOrders
 
-		const url = `${apiURL}/organizations/${org.organization.id}/maintenance-orders`;
-
-		const created = (await Promise.all(
-			maintenanceOrders.map(async (maintenanceOrder) => {
-				const picked = R.pick(maintenanceOrder, [
+		await prisma.maintenanceOrder.createMany({
+			data: maintenanceOrders.map(
+				R.pick([
+					'organizationId',
 					'portfolioId',
 					'propertyId',
 					'unitId',
@@ -48,14 +45,13 @@ export const maintenanceOrderFixtures: AllFixtures = {
 					'description',
 					'status',
 					'completedAt',
-				]);
+				]),
+			),
+		});
 
-				const res = await request.post(url, { data: picked });
-				resCheck(res);
-
-				return (await res.json()) as MaintenanceOrderDto;
-			}),
-		)) as [MaintenanceOrderDto, ...MaintenanceOrderDto[]];
+		const created = await prisma.maintenanceOrder.findMany({
+			where: { organizationId: org.organization.id },
+		});
 
 		await use(created);
 	},

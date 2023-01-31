@@ -39,9 +39,12 @@ export class RemoveModel {
 
 		const row = this.page.getByTestId(this.items[0].id);
 		const view = row.getByRole('link', { name: 'View' });
+
 		await view.click();
 
-		await this.page.waitForNavigation(); // Otherwise opening dropdown is flaky.
+		// We need to wait for the actual navigation,
+		// otherwise the dropdown on the current page will be clicked.
+		await expect(view).toBeHidden();
 
 		const idPage = new IdPage({ page: this.page });
 		await idPage.delete();
