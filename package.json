@@ -37,7 +37,7 @@
 		"ts-morph": "17.0.1",
 		"tsconfig": "workspace:*",
 		"tsx": "3.12.2",
-		"turbo": "1.7.0",
+		"turbo": "1.7.1",
 		"typescript": "5.0.0-beta",
 		"zx": "7.1.1"
 	},
