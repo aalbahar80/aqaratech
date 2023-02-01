@@ -65,13 +65,20 @@ export class LeaseInvoicesService {
 		queryOptions: QueryOptionsDto;
 		whereCustom?: Prisma.LeaseInvoiceWhereInput;
 	}): Promise<WithCount<LeaseInvoiceDto>> {
-		const { take, skip, sort, filter } = queryOptions;
+		const { take, skip, sort, filter, filterCustom } = queryOptions;
 
 		const where = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).LeaseInvoice,
 				...(whereCustom ? [whereCustom] : []), // combine with other filters/remove?
 				filter,
+				// differentiate between undefined and false.
+				// undefined means no filter, false means filter for false
+				filterCustom['isPaidLate'] === true
+					? { paidAt: { gt: this.prisma.leaseInvoice.fields.dueAt } }
+					: filterCustom['isPaidLate'] === false
+					? { paidAt: { lte: this.prisma.leaseInvoice.fields.dueAt } }
+					: {},
 			],
 		} satisfies Prisma.LeaseInvoiceWhereInput;
 

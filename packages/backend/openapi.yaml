@@ -33,6 +33,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -156,6 +164,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -213,6 +229,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -267,6 +291,14 @@ paths:
               type: string
         - required: false
           name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
           in: query
           schema:
             type: object
@@ -570,6 +602,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -693,6 +733,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -742,6 +790,14 @@ paths:
               type: string
         - required: false
           name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
           in: query
           schema:
             type: object
@@ -868,6 +924,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -922,6 +986,14 @@ paths:
               type: string
         - required: false
           name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
           in: query
           schema:
             type: object
@@ -982,6 +1054,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1039,6 +1119,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1093,6 +1181,14 @@ paths:
               type: string
         - required: false
           name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
           in: query
           schema:
             type: object
@@ -1173,6 +1269,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1227,6 +1331,14 @@ paths:
               type: string
         - required: false
           name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
           in: query
           schema:
             type: object
@@ -1535,6 +1647,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1724,6 +1844,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -1773,6 +1901,14 @@ paths:
               type: string
         - required: false
           name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
           in: query
           schema:
             type: object
@@ -2046,6 +2182,14 @@ paths:
           in: query
           schema:
             type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
       responses:
         '200':
           description: ''
@@ -2125,6 +2269,14 @@ paths:
               type: string
         - required: false
           name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
           in: query
           schema:
             type: object
@@ -2657,6 +2809,14 @@ paths:
               type: string
         - required: false
           name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
           in: query
           schema:
             type: object

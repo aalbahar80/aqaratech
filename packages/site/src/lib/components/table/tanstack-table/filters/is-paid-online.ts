@@ -21,18 +21,27 @@ export const isPaidOnlineFilter = derived(isPaidOnline, ($isPaidOnline) => {
 			{
 				label: LL.general.online(),
 				value: PAY_METHOD.ONLINE,
-				active: $isPaidOnline,
+				active: $isPaidOnline === true,
 				action: async () => {
 					isPaidOnline.set(true);
 					await invalidate(FilterEnum.IsPaidOnline);
 				},
 			},
 			{
-				label: LL.general.all(),
+				label: LL.general.manual(),
 				value: PAY_METHOD.MANUAL,
-				active: $isPaidOnline,
+				active: $isPaidOnline === false,
 				action: async () => {
 					isPaidOnline.set(false);
+					await invalidate(FilterEnum.IsPaidOnline);
+				},
+			},
+			{
+				label: LL.general.all(),
+				value: PAY_METHOD.ALL,
+				active: $isPaidOnline === undefined,
+				action: async () => {
+					isPaidOnline.set(undefined);
 					await invalidate(FilterEnum.IsPaidOnline);
 				},
 			},

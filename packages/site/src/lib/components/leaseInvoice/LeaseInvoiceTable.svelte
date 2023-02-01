@@ -50,6 +50,26 @@
 			},
 		}),
 
+		columnHelper.display({
+			id: 'isPaidLate',
+			header: 'Paid Late', // TODO: i18n
+			enableSorting: false,
+			cell: (info) => {
+				const invoice = info.row.original;
+
+				if (!invoice.isPaid || !invoice.paidAt || !invoice.dueAt) {
+					return '';
+				}
+
+				const isPaidLate = new Date(invoice.paidAt) > new Date(invoice.dueAt);
+
+				return renderComponent(Badge, {
+					label: isPaidLate ? 'Late' : 'On Time',
+					badgeColor: isPaidLate ? 'red' : 'green',
+				});
+			},
+		}),
+
 		columnHelper.accessor('isPaid', {
 			header: getIntlLabel('isPaid'),
 			cell: (props) => {

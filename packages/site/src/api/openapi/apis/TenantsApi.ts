@@ -28,6 +28,7 @@ export interface TenantsApiFindAllRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface TenantsApiFindInvoicesRequest {
@@ -37,6 +38,7 @@ export interface TenantsApiFindInvoicesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface TenantsApiFindLeasesRequest {
@@ -46,6 +48,7 @@ export interface TenantsApiFindLeasesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface TenantsApiFindOneRequest {
@@ -59,6 +62,7 @@ export interface TenantsApiFindRolesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface TenantsApiRemoveRequest {
@@ -102,6 +106,10 @@ export class TenantsApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -166,6 +174,10 @@ export class TenantsApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -236,6 +248,10 @@ export class TenantsApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -350,6 +366,10 @@ export class TenantsApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

@@ -27,6 +27,7 @@ export interface LeasesApiFindAllRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface LeasesApiFindInvoicesRequest {
@@ -36,6 +37,7 @@ export interface LeasesApiFindInvoicesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface LeasesApiFindOneRequest {
@@ -83,6 +85,10 @@ export class LeasesApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -147,6 +153,10 @@ export class LeasesApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

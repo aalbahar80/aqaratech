@@ -12,6 +12,7 @@ export class QueryOptionsDto implements Omit<ParsedQueryModel, 'filter'> {
 	take: number;
 	sort: ParsedQuerySortModel[];
 	filter: object;
+	filterCustom: Record<string, unknown>;
 }
 
 /**
@@ -27,4 +28,7 @@ export class QueryOptionsRequestDto
 	take?: number;
 	sort?: string[];
 	filter?: object;
+	/** For arbitrary filters that are not part of the schema.
+	 * Ex. `filterCustom: { isPaidLate: true }` */
+	filterCustom?: object;
 }

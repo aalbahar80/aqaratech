@@ -27,6 +27,7 @@ export interface UnitsApiFindLeasesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface UnitsApiFindOneRequest {
@@ -81,6 +82,10 @@ export class UnitsApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

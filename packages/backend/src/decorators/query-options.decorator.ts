@@ -57,9 +57,12 @@ export const QueryParser = createParamDecorator(
 		// Convert query string to javascript object
 		const queryAsPrimitives = parseObject(request.query);
 
-		// Only keep the filter
+		// Only keep the filters
 		const filter =
 			'filter' in queryAsPrimitives ? queryAsPrimitives.filter : {};
+
+		const filterCustom =
+			'filterCustom' in queryAsPrimitives ? queryAsPrimitives.filterCustom : {};
 
 		// Validate both the parsed query and the filter This is the final step
 		// before we have a valid QueryOptionsRequestDto to use in the
@@ -67,6 +70,7 @@ export const QueryParser = createParamDecorator(
 		const input = {
 			...parsed,
 			filter,
+			filterCustom,
 		};
 
 		const output = new ZodValidationPipe(schema).transform(input, {

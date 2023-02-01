@@ -6,7 +6,7 @@ export const queryOptionsParsedSchema = z
 		skip: z.number().min(0),
 		take: z.number().min(1),
 		sort: z.array(z.record(z.enum(['asc', 'desc']))),
-		// filter: z.record(z.any()),
+		filterCustom: z.record(z.any()),
 	})
 	.strict();
 

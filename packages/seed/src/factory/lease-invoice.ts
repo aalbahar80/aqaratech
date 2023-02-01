@@ -48,9 +48,11 @@ export const leaseInvoiceFactory = addDueDate
 		if (!leaseInvoice.isPaid) {
 			return null;
 		}
-		// set paidAt to be 5 days after dueAt
+
+		const dur = faker.datatype.number({ min: 0, max: 40 });
+
 		const paidAt = new Date(leaseInvoice.postAt);
-		paidAt.setDate(paidAt.getDate() + 5);
+		paidAt.setDate(paidAt.getDate() + dur);
 		return paidAt.toISOString().slice(0, 10);
 	})
 	.withDerivation('mfPaymentId', (leaseInvoice) => {

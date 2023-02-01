@@ -106,6 +106,7 @@ export interface OrganizationsApiFindAllLeaseInvoicesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface OrganizationsApiFindOneRequest {
@@ -119,6 +120,7 @@ export interface OrganizationsApiFindRolesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface OrganizationsApiRemoveRequest {
@@ -960,6 +962,10 @@ export class OrganizationsApi extends runtime.BaseAPI {
 			queryParameters['filter'] = requestParameters.filter;
 		}
 
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
+		}
+
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
@@ -1075,6 +1081,10 @@ export class OrganizationsApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};

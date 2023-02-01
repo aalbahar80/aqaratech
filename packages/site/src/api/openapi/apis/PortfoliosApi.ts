@@ -38,6 +38,7 @@ export interface PortfoliosApiFindAllRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface PortfoliosApiFindAllExpensesRequest {
@@ -47,6 +48,7 @@ export interface PortfoliosApiFindAllExpensesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 	propertyId?: string | null | undefined;
 	unitId?: string | null | undefined;
 }
@@ -58,6 +60,7 @@ export interface PortfoliosApiFindAllLeaseInvoicesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface PortfoliosApiFindOneRequest {
@@ -71,6 +74,7 @@ export interface PortfoliosApiFindPayoutsRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface PortfoliosApiFindPropertiesRequest {
@@ -80,6 +84,7 @@ export interface PortfoliosApiFindPropertiesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface PortfoliosApiFindRolesRequest {
@@ -89,6 +94,7 @@ export interface PortfoliosApiFindRolesRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface PortfoliosApiFindUnitsRequest {
@@ -98,6 +104,7 @@ export interface PortfoliosApiFindUnitsRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface PortfoliosApiFindUnitsMinimalRequest {
@@ -107,6 +114,7 @@ export interface PortfoliosApiFindUnitsMinimalRequest {
 	take?: number | undefined;
 	sort?: Array<string> | undefined;
 	filter?: object | undefined;
+	filterCustom?: object | undefined;
 }
 
 export interface PortfoliosApiGetBalanceRequest {
@@ -201,6 +209,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 			queryParameters['filter'] = requestParameters.filter;
 		}
 
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
+		}
+
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
@@ -263,6 +275,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		if (requestParameters.propertyId !== undefined) {
@@ -341,6 +357,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -460,6 +480,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 			queryParameters['filter'] = requestParameters.filter;
 		}
 
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
+		}
+
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
@@ -528,6 +552,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
@@ -600,6 +628,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 			queryParameters['filter'] = requestParameters.filter;
 		}
 
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
+		}
+
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
@@ -667,6 +699,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 			queryParameters['filter'] = requestParameters.filter;
 		}
 
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
+		}
+
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
@@ -732,6 +768,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 
 		if (requestParameters.filter !== undefined) {
 			queryParameters['filter'] = requestParameters.filter;
+		}
+
+		if (requestParameters.filterCustom !== undefined) {
+			queryParameters['filterCustom'] = requestParameters.filterCustom;
 		}
 
 		const headerParameters: runtime.HTTPHeaders = {};
