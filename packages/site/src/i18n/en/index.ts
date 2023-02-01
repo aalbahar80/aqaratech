@@ -115,6 +115,9 @@ const en: BaseTranslation = {
 		paid: 'Paid',
 		unpaid: 'Unpaid',
 
+		onTime: 'On time',
+		late: 'Late',
+
 		// Maintenance
 		inProgress: 'In progress',
 		completed: 'Completed',

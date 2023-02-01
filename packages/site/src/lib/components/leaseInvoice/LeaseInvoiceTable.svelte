@@ -60,7 +60,7 @@
 				const isPaidLate = new Date(invoice.paidAt) > new Date(invoice.dueAt);
 
 				return renderComponent(Badge, {
-					label: isPaidLate ? 'Late' : 'On Time',
+					label: isPaidLate ? $L.badge.late() : $L.general.notLate(),
 					badgeColor: isPaidLate ? 'red' : 'green',
 				});
 			},
