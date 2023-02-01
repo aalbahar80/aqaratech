@@ -18,7 +18,7 @@
 				// @ts-expect-error until forwareded events are typed
 				const value = e.currentTarget.value;
 
-				void range.setDates(value, $range.end);
+				range.setDates(value, $range.end);
 			}}
 		/>
 
@@ -29,7 +29,7 @@
 				// @ts-expect-error until forwareded events are typed
 				const value = e.currentTarget.value;
 
-				void range.setDates($range.start, value);
+				range.setDates($range.start, value);
 			}}
 		/>
 	</div>
