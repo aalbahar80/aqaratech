@@ -1,21 +1,14 @@
 import { expect } from '@playwright/test';
 
 import { resCheck } from '../../../../../utils/res-check';
-import { test } from '../../../api-fixtures';
+import { test as base } from '../../../api-fixtures';
 
 import type { ExpenseDto } from '../../../../../types/api';
 
-test.use({
-	expensesParams: [
-		{
-			unitId: null,
-		},
-	],
-
-	/**
-	 * Override the default `expenses` fixture to get the expense with breadcrumbs.
-	 */
-	expense: async ({ request, expense }, use) => {
+const test = base.extend<{ expenseDto: ExpenseDto }>({
+	/** Override the default `maintenanceOrders` fixture to get the
+	 * maintenanceOrder with breadcrumbs. */
+	expenseDto: async ({ request, expense }, use) => {
 		const res = await request.get(`/expenses/${expense.id}`);
 		resCheck(res);
 
@@ -25,7 +18,11 @@ test.use({
 	},
 });
 
-test('expense does not include duplicate breadcrumbs', ({ expense }) => {
+test.use({ expensesParams: [{ unitId: null }] });
+
+test('expense does not include duplicate breadcrumbs', ({
+	expenseDto: expense,
+}) => {
 	expect.soft(expense).not.toHaveProperty('portfolio');
 	expect.soft(expense).not.toHaveProperty('property');
 	expect.soft(expense).not.toHaveProperty('unit');
@@ -33,13 +30,13 @@ test('expense does not include duplicate breadcrumbs', ({ expense }) => {
 	expect(expense.breadcrumbs).toHaveProperty('portfolio');
 });
 
-test('expense has breadcrumbs - portfolio', ({ expense }) => {
+test('expense has breadcrumbs - portfolio', ({ expenseDto: expense }) => {
 	expect(expense.breadcrumbs).toHaveProperty('portfolio');
 	expect(expense.breadcrumbs.portfolio).toHaveProperty('id');
 	expect(expense.breadcrumbs.portfolio).toHaveProperty('label');
 });
 
-test('expense has breadcrumbs - property', ({ expense }) => {
+test('expense has breadcrumbs - property', ({ expenseDto: expense }) => {
 	expect(expense.breadcrumbs).toHaveProperty('property');
 	expect(expense.breadcrumbs.property).toHaveProperty('id');
 	expect(expense.breadcrumbs.property).toHaveProperty('label');

@@ -14,17 +14,9 @@ import type {
 
 import type {
 	ExpenseCategoryDto,
-	ExpenseDto,
-	LeaseDto,
-	LeaseInvoiceDto,
-	MaintenanceOrderDto,
 	OrganizationCreatedDto,
 	PayoutDto,
-	PortfolioDto,
-	PropertyDto,
 	RoleDto,
-	TenantDto,
-	UnitDto,
 } from '../../../types/api';
 import type {
 	BrowserContext,
@@ -32,6 +24,16 @@ import type {
 	PlaywrightTestArgs,
 	PlaywrightWorkerArgs,
 } from '@playwright/test';
+import type {
+	Expense,
+	Lease,
+	LeaseInvoice,
+	MaintenanceOrder,
+	Portfolio,
+	Property,
+	Tenant,
+	Unit,
+} from '@prisma/client';
 
 export interface TestFixtures {
 	// auth
@@ -43,24 +45,24 @@ export interface TestFixtures {
 	org: OrganizationCreatedDto;
 	role: RoleDto;
 	roles: [RoleDto, ...RoleDto[]];
-	tenant: TenantDto;
-	tenants: [TenantDto, ...TenantDto[]];
-	portfolio: PortfolioDto;
-	portfolios: [PortfolioDto, ...PortfolioDto[]];
-	property: PropertyDto;
-	properties: [PropertyDto, ...PropertyDto[]];
-	unit: UnitDto;
-	units: [UnitDto, ...UnitDto[]];
-	lease: LeaseDto;
-	leases: [LeaseDto, ...LeaseDto[]];
-	invoice: LeaseInvoiceDto;
-	invoices: [LeaseInvoiceDto, ...LeaseInvoiceDto[]];
-	expense: ExpenseDto;
-	expenses: [ExpenseDto, ...ExpenseDto[]];
+	tenant: Tenant;
+	tenants: [Tenant, ...Tenant[]];
+	portfolio: Portfolio;
+	portfolios: [Portfolio, ...Portfolio[]];
+	property: Property;
+	properties: [Property, ...Property[]];
+	unit: Unit;
+	units: [Unit, ...Unit[]];
+	lease: Lease;
+	leases: [Lease, ...Lease[]];
+	invoice: LeaseInvoice;
+	invoices: [LeaseInvoice, ...LeaseInvoice[]];
+	expense: Expense;
+	expenses: [Expense, ...Expense[]];
 	payout: PayoutDto;
 	payouts: [PayoutDto, ...PayoutDto[]];
-	maintenanceOrder: MaintenanceOrderDto;
-	maintenanceOrders: [MaintenanceOrderDto, ...MaintenanceOrderDto[]];
+	maintenanceOrder: MaintenanceOrder;
+	maintenanceOrders: [MaintenanceOrder, ...MaintenanceOrder[]];
 	expenseCategory: ExpenseCategoryDto;
 	file: string;
 }

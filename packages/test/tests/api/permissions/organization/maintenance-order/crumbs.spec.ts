@@ -1,22 +1,17 @@
 import { expect } from '@playwright/test';
 
 import { resCheck } from '../../../../../utils/res-check';
-import { test } from '../../../api-fixtures';
+import { test as base } from '../../../api-fixtures';
 
 import type { MaintenanceOrderDto } from '../../../../../types/api';
 
-test.use({
-	maintenanceOrdersParams: [
-		{
-			unitId: null,
-		},
-	],
-
-	/**
-	 * Override the default `maintenanceOrders` fixture to get the maintenanceOrder with breadcrumbs.
-	 */
-	maintenanceOrder: async ({ request, maintenanceOrder }, use) => {
-		const res = await request.get(`/maintenance-orders/${maintenanceOrder.id}`);
+const test = base.extend<{ maintenanceOrderDto: MaintenanceOrderDto }>({
+	/** Override the default `maintenanceOrders` fixture to get the
+	 * maintenanceOrder with breadcrumbs. */
+	maintenanceOrderDto: async ({ request, maintenanceOrders }, use) => {
+		const res = await request.get(
+			`/maintenance-orders/${maintenanceOrders[0].id}`,
+		);
 		resCheck(res);
 
 		const body = (await res.json()) as MaintenanceOrderDto;
@@ -25,8 +20,10 @@ test.use({
 	},
 });
 
+test.use({ maintenanceOrdersParams: [{ unitId: null }] });
+
 test('maintenanceOrder does not include duplicate breadcrumbs', ({
-	maintenanceOrder,
+	maintenanceOrderDto: maintenanceOrder,
 }) => {
 	expect.soft(maintenanceOrder).not.toHaveProperty('portfolio');
 	expect.soft(maintenanceOrder).not.toHaveProperty('property');
@@ -35,13 +32,17 @@ test('maintenanceOrder does not include duplicate breadcrumbs', ({
 	expect(maintenanceOrder.breadcrumbs).toHaveProperty('portfolio');
 });
 
-test('maintenanceOrder has breadcrumbs - portfolio', ({ maintenanceOrder }) => {
+test('maintenanceOrder has breadcrumbs - portfolio', ({
+	maintenanceOrderDto: maintenanceOrder,
+}) => {
 	expect(maintenanceOrder.breadcrumbs).toHaveProperty('portfolio');
 	expect(maintenanceOrder.breadcrumbs.portfolio).toHaveProperty('id');
 	expect(maintenanceOrder.breadcrumbs.portfolio).toHaveProperty('label');
 });
 
-test('maintenanceOrder has breadcrumbs - property', ({ maintenanceOrder }) => {
+test('maintenanceOrder has breadcrumbs - property', ({
+	maintenanceOrderDto: maintenanceOrder,
+}) => {
 	expect(maintenanceOrder.breadcrumbs).toHaveProperty('property');
 	expect(maintenanceOrder.breadcrumbs.property).toHaveProperty('id');
 	expect(maintenanceOrder.breadcrumbs.property).toHaveProperty('label');
