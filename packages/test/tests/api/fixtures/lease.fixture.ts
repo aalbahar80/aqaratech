@@ -6,6 +6,7 @@ import { FIELDS } from '@self/utils';
 import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
+import type { Lease } from '@prisma/client';
 
 export const leaseFixtures: AllFixtures = {
 	leasesParams: [undefined, { option: true }],
@@ -47,7 +48,7 @@ export const leaseFixtures: AllFixtures = {
 			where: { organizationId: org.organization.id },
 		});
 
-		await use(created);
+		await use(created as [Lease, ...Lease[]]);
 	},
 
 	lease: async ({ leases }, use) => {

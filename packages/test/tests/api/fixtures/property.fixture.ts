@@ -5,6 +5,7 @@ import { propertyFactory } from '@self/seed';
 import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
+import type { Property } from '@prisma/client';
 
 export const propertyFixtures: AllFixtures = {
 	propertiesParams: [undefined, { option: true }],
@@ -41,7 +42,7 @@ export const propertyFixtures: AllFixtures = {
 			where: { organizationId: org.organization.id },
 		});
 
-		await use(created);
+		await use(created as [Property, ...Property[]]);
 	},
 
 	property: async ({ properties }, use) => {

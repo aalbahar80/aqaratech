@@ -5,6 +5,7 @@ import { maintenanceOrderFactory } from '@self/seed';
 import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
+import type { MaintenanceOrder } from '@prisma/client';
 
 export const maintenanceOrderFixtures: AllFixtures = {
 	maintenanceOrdersParams: [undefined, { option: true }],
@@ -53,7 +54,7 @@ export const maintenanceOrderFixtures: AllFixtures = {
 			where: { organizationId: org.organization.id },
 		});
 
-		await use(created);
+		await use(created as [MaintenanceOrder, ...MaintenanceOrder[]]);
 	},
 
 	maintenanceOrder: async ({ maintenanceOrders }, use) => {

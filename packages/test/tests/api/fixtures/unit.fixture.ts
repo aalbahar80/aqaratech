@@ -5,6 +5,7 @@ import { unitFactory } from '@self/seed';
 import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
+import type { Unit } from '@prisma/client';
 
 export const unitFixtures: AllFixtures = {
 	unitsParams: [undefined, { option: true }],
@@ -43,7 +44,7 @@ export const unitFixtures: AllFixtures = {
 			where: { organizationId: org.organization.id },
 		});
 
-		await use(created);
+		await use(created as [Unit, ...Unit[]]);
 	},
 
 	unit: async ({ units }, use) => {

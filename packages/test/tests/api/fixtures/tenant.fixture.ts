@@ -5,6 +5,7 @@ import { tenantFactory } from '@self/seed';
 import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
+import type { Tenant } from '@prisma/client';
 
 export const tenantFixtures: AllFixtures = {
 	tenantsParams: [undefined, { option: true }],
@@ -37,7 +38,7 @@ export const tenantFixtures: AllFixtures = {
 			},
 		});
 
-		await use(created);
+		await use(created as [Tenant, ...Tenant[]]);
 	},
 
 	tenant: async ({ tenants }, use) => {

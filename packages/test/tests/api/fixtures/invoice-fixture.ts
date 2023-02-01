@@ -5,6 +5,7 @@ import { leaseInvoiceFactory } from '@self/seed';
 import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
+import type { LeaseInvoice } from '@prisma/client';
 
 export const invoiceFixtures: AllFixtures = {
 	invoicesParams: [undefined, { option: true }],
@@ -51,7 +52,7 @@ export const invoiceFixtures: AllFixtures = {
 			},
 		});
 
-		await use(created);
+		await use(created as [LeaseInvoice, ...LeaseInvoice[]]);
 	},
 
 	invoice: async ({ invoices }, use) => {

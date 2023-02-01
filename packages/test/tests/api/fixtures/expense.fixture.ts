@@ -5,6 +5,7 @@ import { expenseFactory } from '@self/seed';
 import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
+import type { Expense } from '@prisma/client';
 
 export const expenseFixtures: AllFixtures = {
 	expensesParams: [undefined, { option: true }],
@@ -53,7 +54,7 @@ export const expenseFixtures: AllFixtures = {
 			},
 		});
 
-		await use(created);
+		await use(created as [Expense, ...Expense[]]);
 	},
 
 	expense: async ({ expenses }, use) => {
