@@ -2,7 +2,7 @@ import { isDateOnly } from '../../../schemas/utils/date/is-date-only';
 import { isDatetime } from '../../../schemas/utils/date/is-date-time';
 import { startCase } from '../../../start-case';
 
-import { toUTCFormat } from './to-utc-format';
+import { fmt } from './format';
 
 import type {
 	portfolioCreateSchema,
@@ -59,13 +59,16 @@ export const EMPTY_VALUE = '-';
 /**
  * Convenience function to format a field's value.
  */
-export const formatValue = (value: unknown): string => {
+export const formatValue = (
+	value: unknown,
+	locale: 'en' | 'ar' = 'en',
+): string => {
 	if (typeof value === 'string' && (isDatetime(value) || isDateOnly(value))) {
-		return toUTCFormat(value);
+		return fmt({ type: 'date', value, locale });
 	} else if (typeof value === 'string') {
 		return value;
 	} else if (typeof value === 'number') {
-		return value.toLocaleString();
+		return fmt({ type: 'number', value, locale });
 	} else if (value === null || value === undefined) {
 		return EMPTY_VALUE;
 	} else {

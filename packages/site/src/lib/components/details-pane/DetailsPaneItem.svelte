@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { formatValue } from '@self/utils';
 
+	import { locale } from '$i18n/i18n-svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	export let key: string;
@@ -11,7 +12,7 @@
 	<dt class="label">{getIntlLabel(key)}</dt>
 	<dd class="definition" data-testid={value ?? ''}>
 		<slot>
-			{formatValue(value)}
+			{formatValue(value, $locale)}
 		</slot>
 	</dd>
 </div>

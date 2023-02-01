@@ -3,7 +3,6 @@
 
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
-	import { toUTCFormat } from '@self/utils';
 
 	import type { PayoutDto } from '$api/openapi';
 
@@ -12,6 +11,7 @@
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
+	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
@@ -23,12 +23,12 @@
 	const columns = [
 		columnHelper.accessor('postAt', {
 			header: getIntlLabel('postAt'),
-			cell: (info) => toUTCFormat(info.getValue().toLocaleString()),
+			cell: fmtCell('date'),
 		}),
 
 		columnHelper.accessor('amount', {
 			header: getIntlLabel('amount'),
-			cell: (info) => info.getValue().toLocaleString(),
+			cell: fmtCell('currency'),
 		}),
 
 		viewColumnDef(columnHelper, 'payout', $page.params),

@@ -2,13 +2,13 @@
 	import { createColumnHelper } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
-	import { toUTCFormat } from '@self/utils';
 
 	import type { ExpenseDto, PaginatedExpenseDto } from '$api/openapi';
 
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
+	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
 	import {
 		locationColumnDef,
 		viewColumnDef,
@@ -23,7 +23,7 @@
 	const columns = [
 		columnHelper.accessor('postAt', {
 			header: getIntlLabel('postAt'),
-			cell: (info) => toUTCFormat(info.getValue().toLocaleString()),
+			cell: fmtCell('date'),
 		}),
 
 		columnHelper.accessor('categoryId', {
@@ -33,7 +33,7 @@
 
 		columnHelper.accessor('amount', {
 			header: getIntlLabel('amount'),
-			cell: (info) => info.getValue().toLocaleString(),
+			cell: fmtCell('currency'),
 		}),
 
 		locationColumnDef(columnHelper, {
