@@ -16,7 +16,7 @@ export const portfolioFormModel = () =>
 			}),
 
 			label: createFormField('label', {
-				hint: labelHint,
+				hint: labelHint(),
 			}),
 
 			phone: createFormField('phone'),

@@ -48,7 +48,7 @@ export const propertyFormModel = () =>
 			}),
 
 			label: createFormField('label', {
-				hint: labelHint,
+				hint: labelHint(),
 			}),
 		},
 	});

@@ -16,7 +16,7 @@ export const organizationFormModel = () =>
 			}),
 
 			label: createFormField('label', {
-				hint: labelHint,
+				hint: labelHint(),
 			}),
 		},
 	});

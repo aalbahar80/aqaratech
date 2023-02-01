@@ -40,7 +40,7 @@ export const unitFormModel = () =>
 			usage: createFormField('usage'),
 
 			label: createFormField('label', {
-				hint: labelHint,
+				hint: labelHint(),
 			}),
 		},
 	});
