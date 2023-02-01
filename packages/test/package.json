@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test:setup": "PUBLIC_AQARATECH_ENV=testing pnpm run -F @self/backend dev:setup",
+		"test:setup": "PUBLIC_AQARATECH_ENV=testing pnpm run -F @self/backend setup:all",
 		"test": "pnpm dotenv -e ../../.env.test -- pnpm run test:setup && playwright test --project files idToken accessToken api site:chrome site:chrome:mobile",
 		"test:all-browsers": "pnpm run test:setup && playwright test",
 		"api:generate": "tsc --project tsconfig.api.json",
@@ -33,6 +33,7 @@
 		"jose": "4.11.2",
 		"prisma": "4.9.0",
 		"remeda": "1.6.1",
+		"simple-json-db": "2.0.0",
 		"tree-kill": "1.2.2",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",

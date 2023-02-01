@@ -4,10 +4,19 @@ import { Cookie } from '@self/utils';
 
 import { testUsers } from './tests/api/fixtures/users/test-users';
 import { LoginPage } from './tests/auth/login-page';
+import { checkStubbed } from './utils/check-stubbed';
 import { getToken } from './utils/get-token';
 
 async function globalSetup(config: FullConfig) {
 	const project = config.projects[0];
+
+	const isStubbed = await checkStubbed();
+	console.log(`[globalSetup] isStubbed: ${isStubbed}`);
+
+	if (!isStubbed) {
+		// Throw error if running pay tests without stubbing
+		throw new Error('Pay tests should be run with stubbed services');
+	}
 
 	if (!project) {
 		throw new Error('No project found');

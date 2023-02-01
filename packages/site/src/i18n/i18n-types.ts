@@ -447,6 +447,10 @@ type RootTranslation = {
 		 * S​e​n​d​ ​r​e​m​i​n​d​e​r
 		 */
 		sendReminder: string
+		/**
+		 * P​a​y
+		 */
+		pay: string
 	}
 	nav: {
 		/**
@@ -555,6 +559,18 @@ type RootTranslation = {
 		 * T​h​e​r​e​ ​a​r​e​ ​n​o​ ​i​t​e​m​s​ ​t​o​ ​d​i​s​p​l​a​y​.
 		 */
 		noItems: string
+		/**
+		 * P​a​y​m​e​n​t​ ​m​e​t​h​o​d
+		 */
+		paymentMethod: string
+		/**
+		 * O​n​l​i​n​e
+		 */
+		online: string
+		/**
+		 * M​a​n​u​a​l
+		 */
+		manual: string
 	}
 	charts: {
 		empty: {
@@ -1444,6 +1460,10 @@ export type TranslationFunctions = {
 		 * Send reminder
 		 */
 		sendReminder: () => LocalizedString
+		/**
+		 * Pay
+		 */
+		pay: () => LocalizedString
 	}
 	nav: {
 		/**
@@ -1552,6 +1572,18 @@ export type TranslationFunctions = {
 		 * There are no items to display.
 		 */
 		noItems: () => LocalizedString
+		/**
+		 * Payment method
+		 */
+		paymentMethod: () => LocalizedString
+		/**
+		 * Online
+		 */
+		online: () => LocalizedString
+		/**
+		 * Manual
+		 */
+		manual: () => LocalizedString
 	}
 	charts: {
 		empty: {

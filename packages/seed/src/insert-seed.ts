@@ -40,6 +40,7 @@ export const insertSeed = async (fake: PreprocessedSeed) => {
 
 	await prisma.lease.createMany({ data: leases });
 
+	// @ts-expect-error JsonNull vs JsonValue
 	await prisma.leaseInvoice.createMany({ data: leaseInvoices });
 
 	await prisma.expense.createMany({ data: expenses });

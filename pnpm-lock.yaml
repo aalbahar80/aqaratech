@@ -110,6 +110,7 @@ importers:
       remeda: 1.6.1
       rimraf: 4.1.2
       rxjs: 7.8.0
+      simple-json-db: 2.0.0
       sinon: 15.0.1
       source-map-support: 0.5.21
       ts-loader: 9.4.2
@@ -184,6 +185,7 @@ importers:
       dotenv: 16.0.3
       eslint-config-custom: link:../eslint-config-custom
       js-yaml: 4.1.0
+      simple-json-db: 2.0.0
       sinon: 15.0.1
       source-map-support: 0.5.21
       ts-loader: 9.4.2_gsr5445d24ppw4rq7ldc57vvyy
@@ -415,6 +417,7 @@ importers:
       prisma: 4.9.0
       qs: 6.11.0
       remeda: 1.6.1
+      simple-json-db: 2.0.0
       tree-kill: 1.2.2
       ts-toolbelt: 9.6.0
       tsconfig: workspace:*
@@ -440,6 +443,7 @@ importers:
       jose: 4.11.2
       prisma: 4.9.0
       remeda: 1.6.1
+      simple-json-db: 2.0.0
       tree-kill: 1.2.2
       ts-toolbelt: 9.6.0
       tsconfig: link:../tsconfig
@@ -9318,6 +9322,11 @@ packages:
 
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
+    dev: true
+
+  /simple-json-db/2.0.0:
+    resolution: {integrity: sha512-oTh7gFQzqAe0E8RN3EkisPo0CojkzcKCKibTcJncg0yt47hWTaNwwjX/FsxfXSTDxfMjBFXFVnZe/EskAlJr7w==}
+    engines: {node: '>=10.0'}
     dev: true
 
   /simple-swizzle/0.2.2:

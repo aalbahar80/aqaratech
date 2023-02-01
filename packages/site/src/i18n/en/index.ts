@@ -31,6 +31,7 @@ const en: BaseTranslation = {
 		contract: 'Contract',
 		print: 'Print',
 		sendReminder: 'Send reminder',
+		pay: 'Pay',
 	},
 	nav: {
 		financials: 'Financials',
@@ -61,6 +62,9 @@ const en: BaseTranslation = {
 		thisMonth: 'This month',
 		lastMonth: 'Last month',
 		noItems: 'There are no items to display.',
+		paymentMethod: 'Payment method',
+		online: 'Online',
+		manual: 'Manual',
 	},
 	charts: {
 		empty: {

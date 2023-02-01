@@ -264,6 +264,7 @@ model LeaseInvoice {
   amount      Float
   memo        String?
   mfPaymentId String?
+  mfData      Json?
   leaseId     String
   lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
 

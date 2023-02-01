@@ -8,18 +8,28 @@
 	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
+	import { buttonCn } from '$lib/components/buttons/button-cn';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { createPDF } from '$lib/components/leaseInvoice/invoice-to-pdf';
 	import LeaseInvoiceTabs from '$lib/components/leaseInvoice/LeaseInvoiceTabs.svelte';
+	import { environment } from '$lib/environment';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
+	import RoleGuard from '$lib/utils/RoleGuard.svelte';
+	import HeroiconsClipboardDocument from '~icons/heroicons/clipboard-document';
+	import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';
 	import HeroiconsEnvelope from '~icons/heroicons/envelope';
 
 	export let data: LayoutData;
 
 	$: badge = getInvoiceBadge(data.leaseInvoice);
+
+	$: payURL = `${environment.PUBLIC_API_URL}/leaseInvoices/${data.leaseInvoice.id}/pay`;
+	$: payDisabled =
+		data.leaseInvoice.isPaid ||
+		Date.now() < Date.parse(data.leaseInvoice.postAt);
 </script>
 
 <Heading
@@ -44,14 +54,36 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="actions">
-		<!-- TODO PAYMENT -->
-		<!-- <Button
-			as="button"
-			icon={ClipboardCopy}
-			on:click={() => copyTrxUrl(data.leaseInvoice.id, $page.url.origin)}
-			text={'Copy public URL'}
-			solid
-		/> -->
+		<RoleGuard roles={['ORGADMIN']}>
+			<Button
+				as="button"
+				icon={HeroiconsClipboardDocument}
+				on:click={async () => {
+					await navigator.clipboard.writeText(payURL);
+					addSuccessToast();
+				}}
+				text="Copy payment URL"
+				solid
+				disabled={payDisabled}
+			/>
+		</RoleGuard>
+
+		<a
+			href={payDisabled ? null : payURL}
+			class={buttonCn({
+				disabled: payDisabled,
+			})}
+			rel="external"
+			data-sveltekit-reload
+		>
+			<svelte:component
+				this={HeroiconsCreditCard}
+				aria-hidden="true"
+				class="hidden h-5 w-5 ltr:mr-2 rtl:ml-2 sm:block"
+			/>
+			{$L.buttons.pay()}
+		</a>
+
 		<Button
 			icon={HeroiconsDocumentText}
 			text={$L.buttons.print()}
@@ -61,24 +93,27 @@
 			class="w-full sm:w-auto"
 			prefetch
 		/>
-		<Button
-			icon={HeroiconsEnvelope}
-			text={$L.buttons.sendReminder()}
-			solid
-			disabled={data.leaseInvoice.isPaid}
-			on:click={async () => {
-				try {
-					await createApi().leaseInvoices.sendEmail({
-						id: data.leaseInvoice.id,
-					});
 
-					addSuccessToast();
-				} catch (e) {
-					console.error(e);
-					await handleApiError(e);
-				}
-			}}
-		/>
+		<RoleGuard roles={['ORGADMIN']}>
+			<Button
+				icon={HeroiconsEnvelope}
+				text={$L.buttons.sendReminder()}
+				solid
+				disabled={data.leaseInvoice.isPaid}
+				on:click={async () => {
+					try {
+						await createApi().leaseInvoices.sendEmail({
+							id: data.leaseInvoice.id,
+						});
+
+						addSuccessToast();
+					} catch (e) {
+						console.error(e);
+						await handleApiError(e);
+					}
+				}}
+			/>
+		</RoleGuard>
 	</svelte:fragment>
 </Heading>
 

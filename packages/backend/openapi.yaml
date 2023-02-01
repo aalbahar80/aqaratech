@@ -419,6 +419,24 @@ paths:
         '201':
           description: ''
       tags: *ref_2
+  /leaseInvoices/myfatoorah-callback:
+    get:
+      operationId: LeaseInvoicesController_myfatoorahCallback
+      summary: ''
+      description: ''
+      parameters:
+        - name: paymentId
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: &ref_3
+        - leaseInvoices
+      security: &ref_4
+        - accessToken: []
   /leaseInvoices/{id}:
     get:
       operationId: LeaseInvoicesController_findOne
@@ -437,10 +455,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: &ref_3
-        - leaseInvoices
-      security: &ref_4
-        - accessToken: []
+      tags: *ref_3
+      security: *ref_4
     patch:
       operationId: LeaseInvoicesController_update
       summary: ''
@@ -503,6 +519,22 @@ paths:
             application/json:
               schema:
                 type: string
+      tags: *ref_3
+      security: *ref_4
+  /leaseInvoices/{id}/pay:
+    get:
+      operationId: LeaseInvoicesController_payInvoice
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
       tags: *ref_3
       security: *ref_4
   /leases:

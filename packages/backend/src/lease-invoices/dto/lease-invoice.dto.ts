@@ -55,7 +55,6 @@ class LeaseInvoiceOptionalDto {
 	@IsString()
 	memo: string | null;
 
-	// TODO replace with json field
 	@IsString()
 	mfPaymentId: string | null;
 }
@@ -73,7 +72,7 @@ export class LeaseInvoiceDto
 		AbstractDto,
 		IntersectionType(LeaseInvoiceRequiredDto, LeaseInvoiceOptionalDto),
 	)
-	implements LeaseInvoice
+	implements Omit<LeaseInvoice, 'mfData'>
 {
 	constructor(partial: Partial<LeaseInvoiceDto>) {
 		super();

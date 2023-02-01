@@ -2,7 +2,6 @@
 	import {
 		createSvelteTable,
 		getCoreRowModel,
-		getSortedRowModel,
 		type ColumnDef,
 		type OnChangeFn,
 		type PaginationState,
@@ -124,7 +123,6 @@
 		// Sorting. Docs: https://tanstack.com/table/v8/docs/api/features/sorting
 		manualSorting: true, // use false for client-side sorting
 		onSortingChange: setSorting,
-		getSortedRowModel: getSortedRowModel(),
 
 		// Column visibility
 		// @ts-expect-error until better typing

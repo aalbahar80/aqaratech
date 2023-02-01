@@ -1,12 +1,16 @@
 import cp from 'node:child_process';
 
-import kill from 'tree-kill';
+// import kill from 'tree-kill';
 
-import { wasProcessStartedByPlaywright } from './utils/check-port';
+// import { wasProcessStartedByPlaywright } from './utils/check-port';
+import { getdb } from './utils/leveldb';
 
 import type { FullConfig } from '@playwright/test';
 
 function globalTeardown(config: FullConfig) {
+	// clear stub db
+	getdb().deleteAll();
+
 	// Kill any hanging servers
 
 	// const PORTS = [3000, 3002];
@@ -40,11 +44,11 @@ function globalTeardown(config: FullConfig) {
 		}
 	}
 
-	for (const pid of pids) {
-		if (wasProcessStartedByPlaywright(pid)) {
-			kill(pid);
-		}
-	}
+	// for (const pid of pids) {
+	// 	if (wasProcessStartedByPlaywright(pid)) {
+	// 		kill(pid);
+	// 	}
+	// }
 }
 
 export default globalTeardown;

@@ -75,6 +75,38 @@ import { UsersModule } from './users/users.module';
 				const sentryConfig = env.sentry;
 				return {
 					...sentryConfig,
+
+					/** Adding data using the beforeSend callback seems to be more
+					 * consistent, especially for nested objects. For example, calling
+					 * sentry.captureEvent() and setting the extra & data properties renders nested
+					 * objects as [object Object] in the sentry UI. */
+					beforeSend(event, hint) {
+						// enrich error events with additional data
+						const error = hint.originalException;
+
+						const cause = error instanceof Error ? error.cause : undefined;
+
+						const extra = {
+							...event.extra,
+							cause,
+							innerCause: cause instanceof Error ? cause.cause : undefined,
+
+							// Manually add the hint here, otherwise it won't be sent to sentry
+							...hint,
+						};
+
+						event.extra = extra;
+
+						if (env.sentry.debug) {
+							console.log('Sentry beforeSend');
+							console.log('user', event.user);
+							console.log('event', event);
+							console.log('hint', hint);
+							console.log('extra', extra);
+						}
+
+						return event;
+					},
 					integrations: [
 						// Enabling debug will make sentry list integrations on startup
 						// More info: https://docs.sentry.io/platforms/node/configuration/integrations/default-integrations/

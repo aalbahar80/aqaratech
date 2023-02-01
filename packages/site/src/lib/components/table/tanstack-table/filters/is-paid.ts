@@ -2,19 +2,21 @@ import { invalidate } from '$app/navigation';
 import { derived, get } from 'svelte/store';
 import type { Readable } from 'svelte/store';
 
-import type { Filter } from '$lib/models/interfaces/filter.interface';
-
 import L from '$i18n/i18n-svelte';
+import {
+	FILTER_TYPE,
+	type Filter,
+} from '$lib/models/interfaces/filter.interface';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { isPaid, PAID_STATUS } from '$lib/stores/filter/is-paid';
 
-// TODO: Set input type to radio
 export const isPaidFilter = derived(isPaid, ($isPaid) => {
 	const LL = get(L);
 
 	return {
 		id: FilterEnum.IsPaid,
 		label: LL.fields.isPaid(),
+		type: FILTER_TYPE.RADIO,
 		options: [
 			{
 				label: LL.badge.paid(),

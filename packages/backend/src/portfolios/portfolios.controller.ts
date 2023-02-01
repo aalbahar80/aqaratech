@@ -238,7 +238,7 @@ export class PortfoliosController {
 		@Param('id') portfolioId: string,
 		@QueryParser({
 			parserOptions: { orderDefaultValue: 'postAt' },
-			filterOptions: { keys: ['postAt', 'lease', 'isPaid'] },
+			filterOptions: { keys: ['postAt', 'lease', 'isPaid', 'mfPaymentId'] },
 		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {

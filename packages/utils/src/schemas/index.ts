@@ -2,6 +2,7 @@ export * from './expense-category.schema';
 export * from './expense.schema';
 export * from './file-relation-key.schema';
 export * from './file.schema';
+export * from './json.schema';
 export * from './lease-invoice-warn.schema';
 export * from './lease-invoice.schema';
 export * from './lease.schema';

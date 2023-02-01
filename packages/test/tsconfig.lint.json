@@ -14,6 +14,15 @@
 		"tests/**/*.cts",
 		"tests/**/*.mts",
 
+		"types/**/*.d.ts",
+
+		"utils/**/*.js",
+		"utils/**/*.cjs",
+		"utils/**/*.mjs",
+		"utils/**/*.ts",
+		"utils/**/*.cts",
+		"utils/**/*.mts",
+
 		// include files in current directory
 		"./*.js",
 		"./*.cjs",

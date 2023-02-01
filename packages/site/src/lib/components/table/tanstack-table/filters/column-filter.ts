@@ -1,9 +1,12 @@
 import { get } from 'svelte/store';
 
-import type { Filter } from '$lib/models/interfaces/filter.interface';
 import type { Table } from '@tanstack/svelte-table';
 
 import L from '$i18n/i18n-svelte';
+import {
+	FILTER_TYPE,
+	type Filter,
+} from '$lib/models/interfaces/filter.interface';
 
 const getColumns = <T>(table: Table<T>): Filter['options'] =>
 	table.getAllLeafColumns().map((c) => ({
@@ -24,5 +27,6 @@ const getToggleAll = <T>(table: Table<T>): Filter['options'][number] => ({
 export const getColumnFilter = <T>(table: Table<T>): Filter => ({
 	id: 'columns',
 	label: get(L).general.columns(),
+	type: FILTER_TYPE.CHECKBOX,
 	options: [getToggleAll(table), ...getColumns(table)],
 });

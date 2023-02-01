@@ -56,8 +56,9 @@
 								name={`${filter.id}[]`}
 								checked={option.active}
 								on:change={(e) => option.action(e)}
-								type="checkbox"
-								class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+								type={filter.type}
+								class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+								class:rounded={filter.type === 'checkbox'}
 							/>
 							<label
 								for={`filter-${filter.id}-${optionIdx}`}

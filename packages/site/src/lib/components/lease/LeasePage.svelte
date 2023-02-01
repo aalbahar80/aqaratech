@@ -12,6 +12,7 @@
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
+	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
 	import HeroiconsArrowPath from '~icons/heroicons/arrow-path';
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';
@@ -54,36 +55,40 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="actions">
-		<Button
-			icon={HeroiconsArrowPath}
-			text={$L.buttons.renew()}
-			as="a"
-			href={getRoute({
-				entity: 'lease',
-				pageType: PageType.New,
-				params: $page.params,
-				predefined: {
-					unitId: lease.unitId,
-					leaseId: lease.id,
-				},
-			})}
-			class="w-full sm:w-auto"
-			prefetch
-		/>
+		<RoleGuard roles={['ORGADMIN']}>
+			<Button
+				icon={HeroiconsArrowPath}
+				text={$L.buttons.renew()}
+				as="a"
+				href={getRoute({
+					entity: 'lease',
+					pageType: PageType.New,
+					params: $page.params,
+					predefined: {
+						unitId: lease.unitId,
+						leaseId: lease.id,
+					},
+				})}
+				class="w-full sm:w-auto"
+				prefetch
+			/>
+		</RoleGuard>
 
-		<Button
-			icon={HeroiconsDocumentText}
-			text={$L.buttons.contract()}
-			as="a"
-			href={getRoute({
-				entity: 'lease',
-				pageType: PageTab.Contract,
-				id: lease.id,
-				params: $page.params,
-			})}
-			class="w-full sm:w-auto"
-			prefetch
-		/>
+		<RoleGuard roles={['ORGADMIN']}>
+			<Button
+				icon={HeroiconsDocumentText}
+				text={$L.buttons.contract()}
+				as="a"
+				href={getRoute({
+					entity: 'lease',
+					pageType: PageTab.Contract,
+					id: lease.id,
+					params: $page.params,
+				})}
+				class="w-full sm:w-auto"
+				prefetch
+			/>
+		</RoleGuard>
 	</svelte:fragment>
 </Heading>
 

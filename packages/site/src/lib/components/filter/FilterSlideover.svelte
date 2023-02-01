@@ -99,12 +99,13 @@
 												name={`${filter.id}[]`}
 												checked={option.active}
 												on:change={(e) => option.action(e)}
-												type="checkbox"
-												class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+												type={filter.type}
+												class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+												class:rounded={filter.type === 'checkbox'}
 											/>
 											<label
 												for={`filter-mobile-${filter.id}-${optionIdx}`}
-												class="ml-3 text-sm text-gray-500"
+												class="ml-3 text-sm text-gray-700"
 											>
 												{option.label}
 											</label>

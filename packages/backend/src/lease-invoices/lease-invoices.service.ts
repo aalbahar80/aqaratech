@@ -1,6 +1,7 @@
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
 import { Any, Object } from 'ts-toolbelt';
 
@@ -19,6 +20,8 @@ import {
 	LeaseInvoiceDto,
 	UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { MyfatoorahService } from 'src/myfatoorah/myfatoorah.service';
+import { GetPaymentStatusResult } from 'src/myfatoorah/types/myfatoorah.types';
 import { PostmarkService } from 'src/postmark/postmark.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { kwdFormat } from 'src/utils/format';
@@ -30,6 +33,9 @@ export class LeaseInvoicesService {
 		private readonly postmarkService: PostmarkService,
 		private readonly eventEmitter: EventEmitter2,
 		private readonly env: EnvService,
+		private readonly myfatoorah: MyfatoorahService,
+		// @ts-expect-error until update to ts 5.0
+		@InjectSentry() private readonly sentry: SentryService,
 	) {}
 	SubjectType = 'LeaseInvoice' as const;
 
@@ -75,7 +81,25 @@ export class LeaseInvoicesService {
 				skip,
 				orderBy: sort,
 				where,
-				include: { lease: crumbs.lease },
+				select: {
+					// Explicitly select fields because prisma will return all fields by
+					// default. Most notably, we want to avoid returning the mfData field
+					// for performance reasons.
+					id: true,
+					createdAt: true,
+					updatedAt: true,
+					dueAt: true,
+					postAt: true,
+					paidAt: true,
+					isPaid: true,
+					amount: true,
+					memo: true,
+					mfPaymentId: true,
+					leaseId: true,
+					portfolioId: true,
+					organizationId: true,
+					lease: crumbs.lease,
+				},
 			}),
 			this.prisma.leaseInvoice.count({ where }),
 		]);
@@ -102,6 +126,21 @@ export class LeaseInvoicesService {
 		updateLeaseInvoiceDto: UpdateLeaseInvoiceDto;
 		user: IUser;
 	}) {
+		const invoice = await this.prisma.leaseInvoice.findUniqueOrThrow({
+			where: {
+				id,
+				AND: accessibleBy(user.ability, Action.Update).LeaseInvoice,
+			},
+		});
+
+		const isPaidOnline = invoice.isPaid && invoice.mfPaymentId;
+
+		if (isPaidOnline) {
+			throw new BadRequestException(
+				'Cannot update invoices that were paid online.',
+			);
+		}
+
 		return await this.prisma.leaseInvoice.update({
 			where: {
 				id,
@@ -121,6 +160,107 @@ export class LeaseInvoicesService {
 
 		await this.prisma.leaseInvoice.delete({ where: { id: deleted.id } });
 		return deleted.id;
+	}
+
+	async handleMyfatoorahCallback(status: GetPaymentStatusResult) {
+		this.logger.log({
+			message: 'Myfatoorah callback',
+			status,
+		});
+
+		const originalInvoice = await this.prisma.leaseInvoice.findUniqueOrThrow({
+			where: { id: status.leaseInvoiceId },
+		});
+
+		if (!status.isPaid) {
+			this.logger.log({
+				level: 'warn',
+				message: 'Myfatoorah callback: payment not successful',
+				status,
+				originalInvoice,
+			});
+
+			this.sentry.instance().captureEvent(
+				{
+					level: 'info',
+					message: 'Myfatoorah callback: payment not successful',
+					tags: {
+						organizationId: originalInvoice.organizationId,
+						portfolioId: originalInvoice.portfolioId,
+					},
+				},
+				{
+					data: {
+						invoice: originalInvoice,
+						myfatoorah: status,
+					},
+				},
+			);
+
+			return originalInvoice;
+		}
+
+		const paidInvoice = await this.prisma.leaseInvoice.update({
+			where: {
+				id: status.leaseInvoiceId,
+				// Don't check for isPaid here, check was done when generating the link
+			},
+			data: {
+				isPaid: true,
+				paidAt: new Date(),
+				mfPaymentId: status.paymentId,
+				// Prisma.DbNull means that the entire db field will be set to null
+				// https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#inserting-null-values
+				mfData: status.json ?? Prisma.DbNull,
+			},
+		});
+
+		return paidInvoice;
+	}
+
+	async generatePaymentLink(id: string) {
+		const invoice = await this.prisma.leaseInvoice.findUniqueOrThrow({
+			where: { id: id },
+			include: {
+				lease: {
+					include: {
+						tenant: { select: { id: true, fullName: true, phone: true } },
+					},
+				},
+			},
+		});
+
+		let error: string | undefined;
+
+		if (invoice.isPaid) {
+			error = 'Invoice is already paid';
+		}
+
+		if (invoice.postAt > new Date()) {
+			error = 'Invoice is not yet posted';
+		}
+
+		if (!invoice.lease.canPay) {
+			error = 'Online payments are disabled for this lease';
+		}
+
+		if (error) {
+			throw new BadRequestException(error, {
+				cause: new Error(`Failed to generate payment link: ${error}`, {
+					cause: invoice,
+				}),
+			});
+		}
+
+		const link = await this.myfatoorah.createPaymentLink({
+			organizationId: invoice.organizationId,
+			reference: invoice.id,
+			amount: invoice.amount,
+			name: invoice.lease.tenant.fullName,
+			callbackUrl: this.myfatoorah.getCallbackURL(),
+		});
+
+		return link;
 	}
 
 	async sendInvoice({ id, user }: { id: string; user: IUser }) {

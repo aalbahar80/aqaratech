@@ -4,6 +4,7 @@ import { get } from 'svelte/store';
 import { createApi } from '$api';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { isPaid } from '$lib/stores/filter/is-paid';
+import { isPaidOnline } from '$lib/stores/filter/is-paid-online';
 import { parseParams } from '$lib/utils/parse-params';
 
 export const load: PageLoad = async ({
@@ -14,8 +15,9 @@ export const load: PageLoad = async ({
 }) => {
 	// Filter options
 	const isPaidFilter = get(isPaid);
+	const isPaidOnlineFilter = get(isPaidOnline);
 
-	depends(FilterEnum.IsPaid);
+	depends(FilterEnum.IsPaid, FilterEnum.IsPaidOnline);
 
 	const api = createApi(fetch);
 
@@ -25,6 +27,7 @@ export const load: PageLoad = async ({
 		id: leaseId,
 		filter: {
 			isPaid: isPaidFilter,
+			mfPaymentId: isPaidOnlineFilter ? { not: null } : undefined,
 		},
 		...parseParams(searchParams),
 	});

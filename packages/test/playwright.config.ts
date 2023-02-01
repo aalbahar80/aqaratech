@@ -133,6 +133,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
 				'**/tests/onboarding/new-user.spec.ts', // TODO: fix
+				'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit
 			],
 			use: devices['Desktop Safari'],
 			// Webkit Issues:

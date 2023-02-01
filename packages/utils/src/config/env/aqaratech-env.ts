@@ -51,6 +51,10 @@ export interface AqaratechEnv {
 	// Postmark
 	readonly POSTMARK_TOKEN?: string | undefined;
 
+	// Myfatoorah
+	readonly MYFATOORAH_URL: string;
+	readonly MYFATOORAH_KEY: string;
+
 	// R2
 	readonly R2_ENDPOINT: string;
 	readonly R2_ACCESS_KEY_ID: string;

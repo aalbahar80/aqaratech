@@ -25,7 +25,17 @@
 				<div
 					class:cursor-pointer={header.column.getCanSort()}
 					class:select-none={header.column.getCanSort()}
-					on:click={header.column.getToggleSortingHandler()}
+					on:click={() => {
+						// Sort order: desc -> asc -> none
+						const dir = header.column.getIsSorted();
+						if (!dir) {
+							header.column.toggleSorting(true);
+						} else if (dir === 'desc') {
+							header.column.toggleSorting(false);
+						} else {
+							header.column.clearSorting();
+						}
+					}}
 				>
 					<svelte:component
 						this={flexRender(

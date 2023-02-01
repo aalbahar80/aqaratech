@@ -23,6 +23,14 @@ export interface LeaseInvoicesApiFindOneRequest {
 	id: string;
 }
 
+export interface LeaseInvoicesApiMyfatoorahCallbackRequest {
+	paymentId: string;
+}
+
+export interface LeaseInvoicesApiPayInvoiceRequest {
+	id: string;
+}
+
 export interface LeaseInvoicesApiRemoveRequest {
 	id: string;
 }
@@ -85,6 +93,102 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	): Promise<LeaseInvoiceDto> {
 		const response = await this.findOneRaw(requestParameters, initOverrides);
 		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async myfatoorahCallbackRaw(
+		requestParameters: LeaseInvoicesApiMyfatoorahCallbackRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<void>> {
+		if (
+			requestParameters.paymentId === null ||
+			requestParameters.paymentId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'paymentId',
+				'Required parameter requestParameters.paymentId was null or undefined when calling myfatoorahCallback.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		if (requestParameters.paymentId !== undefined) {
+			queryParameters['paymentId'] = requestParameters.paymentId;
+		}
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/leaseInvoices/myfatoorah-callback`,
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.VoidApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async myfatoorahCallback(
+		requestParameters: LeaseInvoicesApiMyfatoorahCallbackRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<void> {
+		await this.myfatoorahCallbackRaw(requestParameters, initOverrides);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async payInvoiceRaw(
+		requestParameters: LeaseInvoicesApiPayInvoiceRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<void>> {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling payInvoice.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/leaseInvoices/{id}/pay`.replace(
+					`{${'id'}}`,
+					encodeURIComponent(String(requestParameters.id)),
+				),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.VoidApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async payInvoice(
+		requestParameters: LeaseInvoicesApiPayInvoiceRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<void> {
+		await this.payInvoiceRaw(requestParameters, initOverrides);
 	}
 
 	/**

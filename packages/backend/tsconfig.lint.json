@@ -13,6 +13,7 @@
 		"src/**/*.ts",
 		"src/**/*.cts",
 		"src/**/*.mts",
+		"src/**/*.d.ts",
 
 		// include files in current directory
 		"./*.js",

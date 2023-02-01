@@ -167,7 +167,7 @@ export class OrganizationsController {
 		@Param('id') organizationId: string,
 		@QueryParser({
 			parserOptions: { orderDefaultValue: 'postAt' },
-			filterOptions: { keys: ['postAt', 'lease', 'isPaid'] },
+			filterOptions: { keys: ['postAt', 'lease', 'isPaid', 'mfPaymentId'] },
 		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {

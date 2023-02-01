@@ -34,6 +34,10 @@ export const envSchema = z.object({
 	// Logtail
 	LOGTAIL_TOKEN: z.string().optional(),
 
+	// Myfatoorah
+	MYFATOORAH_URL: z.string().url(),
+	MYFATOORAH_KEY: z.string(),
+
 	// Sveltekit adapter-node
 	ORIGIN: z.string().url(),
 	BODY_SIZE_LIMIT: z.coerce.number().min(0),

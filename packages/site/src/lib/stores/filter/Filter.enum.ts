@@ -3,4 +3,5 @@ export const FilterEnum = {
 	Property: 'filter:property',
 	Unit: 'filter:unit',
 	IsPaid: 'filter:is-paid',
+	IsPaidOnline: 'filter:is-paid-online',
 };

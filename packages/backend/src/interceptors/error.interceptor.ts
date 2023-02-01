@@ -42,7 +42,16 @@ export class ErrorsInterceptor implements NestInterceptor {
 
 		return next.handle().pipe(
 			catchError((err) => {
-				this.logger.error(err);
+				if (err instanceof Error) {
+					this.logger.error({
+						message: err.message,
+						stack: err.stack,
+						cause: err.cause,
+					});
+				} else {
+					this.logger.error(err);
+				}
+
 				return throwError(() => {
 					if (err instanceof HttpException) {
 						// We don't want to remap HTTP exceptions

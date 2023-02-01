@@ -135,6 +135,7 @@ const ar: Translation = {
 		contract: 'عقد',
 		print: 'طباعة',
 		sendReminder: 'إرسال تذكير',
+		pay: 'دفع',
 	},
 	nav: {
 		financials: 'البيانات المالية',
@@ -165,6 +166,9 @@ const ar: Translation = {
 		thisMonth: 'الشهر الحالي',
 		lastMonth: 'الشهر الماضى',
 		noItems: 'لا توجد بيانات يمكن عرضها.',
+		paymentMethod: 'طريقة الدفع',
+		online: 'عبر الإنترنت',
+		manual: 'يدوي',
 	},
 	charts: {
 		empty: {

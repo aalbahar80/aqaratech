@@ -30,9 +30,12 @@ export const entityFieldLabels = {
 
 	categoryId: 'Category',
 
+	mfPaymentId: 'MyFatoorah Payment ID',
+
 	key: 'Name',
 } satisfies Partial<Union.Strict<Record<Keys, string>>> & {
 	key: string; // FileDto
+	mfPaymentId: string; // LeaseInvoiceDto (not in schema)
 };
 
 type Schemas =

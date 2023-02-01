@@ -3,6 +3,7 @@
 	"extends": "@tsconfig/node18-strictest/tsconfig.json",
 	"compilerOptions": {
 		"target": "ES2022",
+		"lib": ["ES2022"],
 		"declaration": true,
 		"removeComments": true,
 		"emitDecoratorMetadata": true,
@@ -20,6 +21,7 @@
 		"noUnusedLocals": false,
 		"strictPropertyInitialization": false,
 		"importsNotUsedAsValues": "remove",
+		"types": ["multer", "vitest/globals"],
 		// "verbatimModuleSyntax": true, // needs special consideration for nestjs
 		"paths": {
 			"src": ["./src/"],

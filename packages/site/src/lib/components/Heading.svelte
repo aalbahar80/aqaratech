@@ -127,9 +127,9 @@
 	{/if}
 
 	<!-- Actions -->
-	{#if $$slots.actions && $page.data.user?.role?.roleType === 'ORGADMIN'}
+	{#if $$slots.actions}
 		<div
-			class="col-span-full col-start-1 flex flex-col justify-between gap-y-4 sm:col-start-auto sm:flex-row sm:justify-end sm:gap-x-4 sm:gap-y-0"
+			class="col-span-full col-start-1 flex flex-col justify-between gap-y-4 sm:flex-row sm:justify-end sm:gap-x-4 sm:gap-y-0"
 		>
 			<slot name="actions" />
 		</div>

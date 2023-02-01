@@ -37,7 +37,7 @@ test('cannot update leaseInvoice in another org', async ({
 
 	await expect.soft(res).not.toBeOK();
 
-	expect(res.status()).toBe(400);
+	expect(res.status()).toBe(404);
 });
 
 test('cannot update non-existing leaseInvoice', async ({ request }) => {
@@ -47,5 +47,5 @@ test('cannot update non-existing leaseInvoice', async ({ request }) => {
 
 	await expect.soft(res).not.toBeOK();
 
-	expect(res.status()).toBe(400);
+	expect(res.status()).toBe(404);
 });
