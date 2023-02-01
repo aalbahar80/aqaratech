@@ -19,6 +19,7 @@
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { fmtCurrency, fmtDate } from '$lib/i18n/format';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 
@@ -32,14 +33,17 @@
 	const columns = [
 		columnHelper.accessor('postAt', {
 			header: getIntlLabel('postAt'),
-			cell: (info) => toUTCFormat(info.getValue().toLocaleString()),
+			cell: (info) => {
+				const val = info.getValue();
+				return val ? fmtDate(val) : '';
+			},
 		}),
 
 		columnHelper.accessor('dueAt', {
 			header: getIntlLabel('dueAt'),
 			cell: (info) => {
 				const val = info.getValue();
-				return val ? toUTCFormat(val) : '';
+				return val ? fmtDate(val) : '';
 			},
 		}),
 
@@ -47,7 +51,7 @@
 			header: getIntlLabel('paidAt'),
 			cell: (info) => {
 				const val = info.getValue();
-				return val ? toUTCFormat(val) : '';
+				return val ? fmtDate(val) : '';
 			},
 		}),
 
@@ -95,7 +99,7 @@
 
 		columnHelper.accessor('amount', {
 			header: getIntlLabel('amount'),
-			cell: (info) => info.getValue().toLocaleString(),
+			cell: (info) => fmtCurrency(info.getValue()),
 		}),
 
 		locationColumnDef(columnHelper, {

@@ -18,6 +18,7 @@
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { fmtCurrency, fmtDate } from '$lib/i18n/format';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	type ColumnVisibility =
@@ -33,12 +34,12 @@
 	const columns = [
 		columnHelper.accessor('start', {
 			header: getIntlLabel('start'),
-			cell: (info) => toUTCFormat(info.getValue()),
+			cell: (info) => fmtDate(info.getValue()),
 		}),
 
 		columnHelper.accessor('end', {
 			header: getIntlLabel('end'),
-			cell: (info) => toUTCFormat(info.getValue()),
+			cell: (info) => fmtDate(info.getValue()),
 		}),
 
 		// Progress
@@ -59,12 +60,12 @@
 
 		columnHelper.accessor('monthlyRent', {
 			header: getIntlLabel('monthlyRent'),
-			cell: (info) => info.getValue().toLocaleString(),
+			cell: (info) => fmtCurrency(info.getValue()),
 		}),
 
 		columnHelper.accessor('deposit', {
 			header: getIntlLabel('deposit'),
-			cell: (info) => info.getValue().toLocaleString(),
+			cell: (info) => fmtCurrency(info.getValue()),
 		}),
 
 		...extraColumns,

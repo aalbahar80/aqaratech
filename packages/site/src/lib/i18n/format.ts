@@ -45,9 +45,11 @@ export function fmtCurrency(
 }
 
 // Date
-export function fmtDate(date: Date) {
+export function fmtDate(date: Date | string) {
+	const value = typeof date === 'string' ? new Date(date) : date;
+
 	const CL = get(locale);
-	return new Intl.DateTimeFormat(CL, formats.date).format(date);
+	return new Intl.DateTimeFormat(CL, formats.date).format(value);
 }
 
 export function fmtMonth(date: Date) {
