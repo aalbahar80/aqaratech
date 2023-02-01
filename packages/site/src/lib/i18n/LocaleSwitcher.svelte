@@ -65,12 +65,9 @@
 
 <svelte:window on:popstate={handlePopStateEvent} />
 
-<!-- TODO: Remove if condition to enable arabic locale switch. Also see switch.spec.ts test -->
-{#if unselectedLocale !== 'ar'}
-	<a
-		data-sveltekit-reload
-		href={`${replaceLocaleInUrl($page.url, unselectedLocale)}`}
-	>
-		{LOCALE_LABELS[unselectedLocale]}
-	</a>
-{/if}
+<a
+	data-sveltekit-reload
+	href={`${replaceLocaleInUrl($page.url, unselectedLocale)}`}
+>
+	{LOCALE_LABELS[unselectedLocale]}
+</a>
