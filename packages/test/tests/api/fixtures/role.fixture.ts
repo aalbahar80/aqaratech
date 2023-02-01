@@ -3,9 +3,10 @@ import * as R from 'remeda';
 import { roleFactory } from '@self/seed';
 
 import { prisma } from '../../../prisma';
+import { createRole } from '../../../utils/create-role';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { Prisma, Role } from '@prisma/client';
+import type { Role } from '@prisma/client';
 
 export const roleFixtures: AllFixtures = {
 	rolesParams: [undefined, { option: true }],
@@ -27,24 +28,7 @@ export const roleFixtures: AllFixtures = {
 		// Insert roles
 
 		for (const r of roles) {
-			const data: Prisma.RoleCreateInput = {
-				user: {
-					connectOrCreate: {
-						where: { email: r.email },
-						create: { email: r.email },
-					},
-				},
-				organization: { connect: { id: r.organizationId } },
-				roleType: r.roleType,
-			};
-
-			if (r.portfolioId && r.roleType === 'PORTFOLIO') {
-				data.portfolio = { connect: { id: r.portfolioId } };
-			} else if (r.tenantId && r.roleType === 'TENANT') {
-				data.tenant = { connect: { id: r.tenantId } };
-			}
-
-			await prisma.role.create({ data });
+			await createRole(r);
 		}
 
 		const created = await prisma.role.findMany({
