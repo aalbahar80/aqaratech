@@ -4,6 +4,7 @@
 	import L from '$i18n/i18n-svelte';
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { getButtons } from '$lib/components/pagination/get-buttons';
+	import { fmtNumber } from '$lib/i18n/format';
 	import { classes } from '$lib/utils/classes';
 	import HeroiconsChevronLeft20Solid from '~icons/heroicons/chevron-left-20-solid';
 	import HeroiconsChevronRight20Solid from '~icons/heroicons/chevron-right-20-solid';
@@ -60,11 +61,12 @@
 	<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
 		<div class="hidden lg:block">
 			<p data-testid="pagination-info" class="text-sm text-gray-700">
-				{$L.pagination.showing()} <span class="font-medium">{idxStart}</span>
+				{$L.pagination.showing()}
+				<span class="font-medium">{fmtNumber(idxStart)}</span>
 				{$L.pagination.to()}
-				<span class="font-medium">{idxEnd}</span>
+				<span class="font-medium">{fmtNumber(idxEnd)}</span>
 				{$L.pagination.of()}
-				<span class="font-medium">{itemCount}</span>
+				<span class="font-medium">{fmtNumber(itemCount)}</span>
 			</p>
 		</div>
 		<!-- Page size selector -->
@@ -74,7 +76,7 @@
 					current={table.getState().pagination.pageSize}
 					options={[10, 20, 50, 75, 100].map((size) => ({
 						value: size,
-						label: `${$L.pagination.show()} ${size}`,
+						label: `${$L.pagination.show()} ${fmtNumber(size)}`,
 					}))}
 					on:select={(e) => {
 						table.setPageSize(e.detail.value);
@@ -115,7 +117,7 @@
 								}
 							}}
 						>
-							{button}
+							{fmtNumber(button)}
 						</button>
 					{:else}
 						<span
