@@ -4,7 +4,7 @@
 		"build": {
 			"dependsOn": ["^build", "check"],
 			"outputs": [".svelte-kit/**", "dist/**", "build/**"],
-			"outputMode": "errors-only"
+			"outputMode": "new-only"
 		},
 
 		"dev": {
@@ -20,15 +20,15 @@
 		},
 
 		"format": {
-			"outputMode": "errors-only"
+			"outputMode": "new-only"
 		},
 
 		"lint": {
-			"outputMode": "errors-only"
+			"outputMode": "new-only"
 		},
 
 		"check": {
-			"outputMode": "errors-only"
+			"outputMode": "new-only"
 		},
 
 		"test": {
@@ -62,7 +62,7 @@
 				"readme.md",
 				"tsconfig.json"
 			],
-			"outputMode": "errors-only"
+			"outputMode": "new-only"
 		},
 
 		"//#lint": {
@@ -81,12 +81,12 @@
 				"readme.md",
 				"tsconfig.json"
 			],
-			"outputMode": "errors-only"
+			"outputMode": "new-only"
 		},
 
 		"//#check": {
 			"inputs": [".do/**", "scripts/**", "types/**", "tsconfig.json"],
-			"outputMode": "errors-only"
+			"outputMode": "new-only"
 		},
 
 		"//#api:generate": {
