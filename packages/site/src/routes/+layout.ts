@@ -1,3 +1,6 @@
+import { QueryClient } from '@tanstack/svelte-query';
+
+import { browser } from '$app/environment';
 import type { LayoutLoad } from './$types';
 import { get } from 'svelte/store';
 
@@ -12,6 +15,14 @@ export const load: LayoutLoad = async ({
 	url: { pathname },
 	route,
 }) => {
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				enabled: browser,
+			},
+		},
+	});
+
 	const LLL = locale ?? baseLocale;
 	// load dictionary into memory
 	await loadLocaleAsync(LLL);
@@ -34,5 +45,6 @@ export const load: LayoutLoad = async ({
 		// pass locale to the "rendering context"
 		locale,
 		tabLabels,
+		queryClient,
 	};
 };

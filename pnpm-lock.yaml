@@ -275,6 +275,7 @@ importers:
       '@tailwindcss/aspect-ratio': 0.4.2
       '@tailwindcss/forms': 0.5.3
       '@tailwindcss/typography': 0.5.9
+      '@tanstack/svelte-query': 4.24.4
       '@tanstack/svelte-table': 8.7.9
       '@types/cookie': 0.5.1
       '@types/d3': 7.4.0
@@ -346,6 +347,7 @@ importers:
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.7
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
       '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
+      '@tanstack/svelte-query': 4.24.4_svelte@3.55.1
       '@tanstack/svelte-table': 8.7.9_svelte@3.55.1
       '@types/cookie': 0.5.1
       '@types/d3': 7.4.0
@@ -3096,6 +3098,19 @@ packages:
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.2.7_postcss@8.4.21
+    dev: true
+
+  /@tanstack/query-core/4.24.4:
+    resolution: {integrity: sha512-9dqjv9eeB6VHN7lD3cLo16ZAjfjCsdXetSAD5+VyKqLUvcKTL0CklGQRJu+bWzdrS69R6Ea4UZo8obHYZnG6aA==}
+    dev: true
+
+  /@tanstack/svelte-query/4.24.4_svelte@3.55.1:
+    resolution: {integrity: sha512-B2N+nNPOe9wxZ01i3Ebvkc8vDX9ZDQTiaazXqpld7O27R+zhIBlk6MU8vNzPBDSKrhhl2kak8SwyJOExsVZQXA==}
+    peerDependencies:
+      svelte: ^3.54.0
+    dependencies:
+      '@tanstack/query-core': 4.24.4
+      svelte: 3.55.1
     dev: true
 
   /@tanstack/svelte-table/8.7.9_svelte@3.55.1:

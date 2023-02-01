@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
+	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import clsx from 'clsx';
 	import { Toaster } from 'svelte-french-toast';
 
@@ -55,37 +56,39 @@
 	<HeadHrefLangs />
 </svelte:head>
 
-{#if $navigating && !$page.error}
-	<PreloadingIndicator />
-{/if}
-<Toaster />
-<Modal />
+<QueryClientProvider client={data.queryClient}>
+	{#if $navigating && !$page.error}
+		<PreloadingIndicator />
+	{/if}
+	<Toaster />
+	<Modal />
 
-<SecondaryNavbar />
-{#if isHomeRoute($page.route)}
-	<main>
-		<slot />
-	</main>
-	<VersionFooter />
-{:else}
-	<div class="my-grid">
-		{#if isSidebarAvailable($page.route) && data.user}
-			<Sidebar navigationTree={getNavigationTree(data.user, $L, $locale)} />
-		{/if}
-
-		<main class="col-span-full pt-8 lg:col-start-2">
-			<div
-				class={clsx(
-					'mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8',
-					$width,
-				)}
-			>
-				<slot />
-				<VersionFooter />
-			</div>
+	<SecondaryNavbar />
+	{#if isHomeRoute($page.route)}
+		<main>
+			<slot />
 		</main>
-	</div>
-{/if}
+		<VersionFooter />
+	{:else}
+		<div class="my-grid">
+			{#if isSidebarAvailable($page.route) && data.user}
+				<Sidebar navigationTree={getNavigationTree(data.user, $L, $locale)} />
+			{/if}
+
+			<main class="col-span-full pt-8 lg:col-start-2">
+				<div
+					class={clsx(
+						'mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8',
+						$width,
+					)}
+				>
+					<slot />
+					<VersionFooter />
+				</div>
+			</main>
+		</div>
+	{/if}
+</QueryClientProvider>
 
 <style>
 	.my-grid {
