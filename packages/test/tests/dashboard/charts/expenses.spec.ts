@@ -13,6 +13,8 @@ import { test } from './fixture';
 // NOTE: declaring expenses fixture here doesn't seem to work. Needs to be
 // declared in fixture.ts (page property)
 
+test.describe.configure({ mode: 'parallel' });
+
 for (const preset of chartTestPresets) {
 	test.describe(`expense page - filter - ${preset.name}`, () => {
 		test.slow();

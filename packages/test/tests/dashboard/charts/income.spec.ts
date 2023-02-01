@@ -13,6 +13,8 @@ import { test } from './fixture';
 // NOTE: declaring invoices fixture here doesn't seem to work. Needs to be
 // declared in fixture.ts (page property)
 
+test.describe.configure({ mode: 'parallel' });
+
 const incomeChartTestPresets = chartTestPresets.filter(
 	// Unspecified Property doesn't exist in income page
 	(n) => n.name !== 'Unspecified Property',
