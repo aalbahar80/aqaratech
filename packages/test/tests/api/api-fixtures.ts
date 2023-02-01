@@ -155,10 +155,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 				},
 			});
 
-			await use({
-				...portfolio,
-				title: portfolio.fullName,
-			});
+			await use(portfolio);
 		},
 		{
 			scope: 'test',

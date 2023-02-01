@@ -36,6 +36,7 @@ export const expenseFixtures: AllFixtures = {
 		// Insert expenses
 
 		await prisma.expense.createMany({
+			// @ts-expect-error prisma lacks support for exactOptionalPropertyTypes
 			data: expenses.map((e) => ({
 				organizationId: e.organizationId,
 				portfolioId: e.portfolioId,

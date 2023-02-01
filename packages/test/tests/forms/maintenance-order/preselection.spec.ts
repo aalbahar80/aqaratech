@@ -19,5 +19,5 @@ test('status is preselected', async ({ page, maintenanceOrder }) => {
 
 	const el = page.getByLabel(getLabel('status'));
 
-	await expect(el).toHaveValue(maintenanceOrder.status);
+	await expect(el).toHaveValue(maintenanceOrder.status ?? '');
 });
