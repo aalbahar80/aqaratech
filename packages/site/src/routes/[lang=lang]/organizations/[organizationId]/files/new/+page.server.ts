@@ -44,7 +44,12 @@ export const actions: Actions = {
 					// the backend.
 
 					// log error on server
-					console.error('Error while creating file', res);
+					console.warn({
+						message: `Failed to create file: ${res.statusText}. See sentry for more details.`,
+						href: event.url.href,
+						backendUrl: url,
+						status: res.status,
+					});
 
 					// log error on sentry
 					// NOTE: consider loosening this to only log 5xx errors to Sentry
