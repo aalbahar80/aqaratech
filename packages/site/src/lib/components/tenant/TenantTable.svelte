@@ -9,6 +9,7 @@
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
+	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
 	import { viewColumnDef } from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
@@ -28,14 +29,14 @@
 			header: getIntlLabel('nationality'),
 		}),
 
-		columnHelper.accessor('createdAt', { header: getIntlLabel('createdAt') }),
-
-		columnHelper.accessor('updatedAt', { header: getIntlLabel('updatedAt') }),
-
-		columnHelper.accessor('dob', { header: getIntlLabel('dob') }),
+		columnHelper.accessor('dob', {
+			header: getIntlLabel('dob'),
+			cell: fmtCell('date'),
+		}),
 
 		columnHelper.accessor('residencyEnd', {
 			header: getIntlLabel('residencyEnd'),
+			cell: fmtCell('date'),
 		}),
 
 		viewColumnDef(columnHelper, 'tenant', $page.params),

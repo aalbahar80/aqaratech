@@ -18,6 +18,7 @@
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
+	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
 	import {
 		locationColumnDef,
 		viewColumnDef,
@@ -43,10 +44,7 @@
 	const columns = [
 		columnHelper.accessor('completedAt', {
 			header: getIntlLabel('completedAt'),
-			cell: (info) => {
-				const value = info.getValue();
-				return value ? toUTCFormat(value) : null;
-			},
+			cell: fmtCell('date'),
 		}),
 
 		columnHelper.accessor('status', {

@@ -2,7 +2,7 @@
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
-	import { getProgress, getRoute, PageType, toUTCFormat } from '@self/utils';
+	import { getProgress, getRoute, PageType } from '@self/utils';
 
 	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
@@ -13,12 +13,12 @@
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import RadialProgress from '$lib/components/RadialProgress.svelte';
 	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
+	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
 	import {
 		locationColumnDef,
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { fmtCurrency, fmtDate } from '$lib/i18n/format';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	type ColumnVisibility =
@@ -34,12 +34,12 @@
 	const columns = [
 		columnHelper.accessor('start', {
 			header: getIntlLabel('start'),
-			cell: (info) => fmtDate(info.getValue()),
+			cell: fmtCell('date'),
 		}),
 
 		columnHelper.accessor('end', {
 			header: getIntlLabel('end'),
-			cell: (info) => fmtDate(info.getValue()),
+			cell: fmtCell('date'),
 		}),
 
 		// Progress
@@ -60,12 +60,12 @@
 
 		columnHelper.accessor('monthlyRent', {
 			header: getIntlLabel('monthlyRent'),
-			cell: (info) => fmtCurrency(info.getValue()),
+			cell: fmtCell('currency'),
 		}),
 
 		columnHelper.accessor('deposit', {
 			header: getIntlLabel('deposit'),
-			cell: (info) => fmtCurrency(info.getValue()),
+			cell: fmtCell('currency'),
 		}),
 
 		...extraColumns,

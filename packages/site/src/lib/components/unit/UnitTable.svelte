@@ -3,6 +3,8 @@
 
 	import { page } from '$app/stores';
 
+	import { fmtCell } from '../table/tanstack-table/columns/as-date';
+
 	import type { PaginatedUnitDto, UnitDto } from '$api/openapi';
 
 	import L from '$i18n/i18n-svelte';
@@ -24,13 +26,25 @@
 
 		columnHelper.accessor('label', { header: getIntlLabel('label') }),
 
-		columnHelper.accessor('floor', { header: getIntlLabel('floor') }),
+		columnHelper.accessor('floor', {
+			header: getIntlLabel('floor'),
+			cell: fmtCell('number'),
+		}),
 
-		columnHelper.accessor('bed', { header: getIntlLabel('bed') }),
+		columnHelper.accessor('bed', {
+			header: getIntlLabel('bed'),
+			cell: fmtCell('number'),
+		}),
 
-		columnHelper.accessor('bath', { header: getIntlLabel('bath') }),
+		columnHelper.accessor('bath', {
+			header: getIntlLabel('bath'),
+			cell: fmtCell('number'),
+		}),
 
-		columnHelper.accessor('size', { header: getIntlLabel('size') }),
+		columnHelper.accessor('size', {
+			header: getIntlLabel('size'),
+			cell: fmtCell('number'),
+		}),
 
 		columnHelper.accessor('usage', { header: getIntlLabel('usage') }),
 

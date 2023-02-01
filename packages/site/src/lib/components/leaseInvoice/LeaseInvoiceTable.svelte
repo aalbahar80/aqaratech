@@ -2,7 +2,7 @@
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
-	import { getLabel, toUTCFormat } from '@self/utils';
+	import { getLabel } from '@self/utils';
 
 	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
@@ -14,12 +14,12 @@
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
+	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
 	import {
 		locationColumnDef,
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
-	import { fmtCurrency, fmtDate } from '$lib/i18n/format';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 
@@ -33,26 +33,17 @@
 	const columns = [
 		columnHelper.accessor('postAt', {
 			header: getIntlLabel('postAt'),
-			cell: (info) => {
-				const val = info.getValue();
-				return val ? fmtDate(val) : '';
-			},
+			cell: fmtCell('date'),
 		}),
 
 		columnHelper.accessor('dueAt', {
 			header: getIntlLabel('dueAt'),
-			cell: (info) => {
-				const val = info.getValue();
-				return val ? fmtDate(val) : '';
-			},
+			cell: fmtCell('date'),
 		}),
 
 		columnHelper.accessor('paidAt', {
 			header: getIntlLabel('paidAt'),
-			cell: (info) => {
-				const val = info.getValue();
-				return val ? fmtDate(val) : '';
-			},
+			cell: fmtCell('date'),
 		}),
 
 		columnHelper.display({
@@ -99,7 +90,7 @@
 
 		columnHelper.accessor('amount', {
 			header: getIntlLabel('amount'),
-			cell: (info) => fmtCurrency(info.getValue()),
+			cell: fmtCell('currency'),
 		}),
 
 		locationColumnDef(columnHelper, {
