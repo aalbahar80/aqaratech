@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { resolveURL } from 'ufo';
 
 import { jsonSchema } from '@self/utils';
 import { EnvService } from 'src/env/env.service';
@@ -187,10 +188,13 @@ export class MyfatoorahService {
 	/** Myfatoorah prevents us from using localhost as a callback URL. Instead,
 	 * we use 127.0.0.1 */
 	getCallbackURL() {
-		const url = new URL(
-			MYFATOORAH_CALLBACK_PATHNAME,
+		// resolveURL ensures /api prefix is preserved (for staging env)
+		const href = resolveURL(
 			this.env.e.PUBLIC_API_URL,
+			MYFATOORAH_CALLBACK_PATHNAME,
 		);
+
+		const url = new URL(href);
 
 		if (url.hostname === 'localhost') {
 			url.hostname = '127.0.0.1';

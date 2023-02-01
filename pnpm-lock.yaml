@@ -118,6 +118,7 @@ importers:
       tsconfig-paths: 4.1.2
       tsx: 3.12.2
       typescript: 5.0.0-beta
+      ufo: 1.0.1
       vitest: 0.28.3
       winston: 3.8.2
       zod: 3.20.2
@@ -162,6 +163,7 @@ importers:
       remeda: 1.6.1
       rimraf: 4.1.2
       rxjs: 7.8.0
+      ufo: 1.0.1
       winston: 3.8.2
       zod: 3.20.2
     devDependencies:
@@ -10376,7 +10378,6 @@ packages:
 
   /ufo/1.0.1:
     resolution: {integrity: sha512-boAm74ubXHY7KJQZLlXrtMz52qFvpsbOxDcZOnw/Wf+LS4Mmyu7JxmzD4tDLtUQtmZECypJ0FrCz4QIe6dvKRA==}
-    dev: true
 
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
