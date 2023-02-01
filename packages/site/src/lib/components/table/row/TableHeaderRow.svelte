@@ -26,6 +26,10 @@
 					class:cursor-pointer={header.column.getCanSort()}
 					class:select-none={header.column.getCanSort()}
 					on:click={() => {
+						if (!header.column.getCanSort()) {
+							return;
+						}
+
 						// Sort order: desc -> asc -> none
 						const dir = header.column.getIsSorted();
 						if (!dir) {
