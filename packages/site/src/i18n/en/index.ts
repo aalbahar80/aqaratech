@@ -65,6 +65,8 @@ const en: BaseTranslation = {
 		paymentMethod: 'Payment method',
 		online: 'Online',
 		manual: 'Manual',
+		late: 'Late',
+		notLate: 'Not late',
 	},
 	charts: {
 		empty: {
@@ -128,6 +130,7 @@ const en: BaseTranslation = {
 		last6Months: 'Last 6 months',
 		last12Months: 'Last 12 months',
 		custom: 'Custom',
+		isPaidLate: 'Payment time',
 	},
 	pagination: {
 		next: 'Next',

@@ -169,6 +169,8 @@ const ar: Translation = {
 		paymentMethod: 'طريقة الدفع',
 		online: 'عبر الإنترنت',
 		manual: 'يدوي',
+		late: 'متأخر',
+		notLate: 'غير متأخر',
 	},
 	charts: {
 		empty: {
@@ -227,6 +229,7 @@ const ar: Translation = {
 		last6Months: 'آخر 6 أشهر',
 		last12Months: 'آخر 12 شهر',
 		custom: 'مخصص',
+		isPaidLate: 'وقت السداد',
 	},
 	pagination: {
 		next: 'التالي',

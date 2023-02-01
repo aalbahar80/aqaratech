@@ -571,6 +571,14 @@ type RootTranslation = {
 		 * M​a​n​u​a​l
 		 */
 		manual: string
+		/**
+		 * L​a​t​e
+		 */
+		late: string
+		/**
+		 * N​o​t​ ​l​a​t​e
+		 */
+		notLate: string
 	}
 	charts: {
 		empty: {
@@ -731,6 +739,10 @@ type RootTranslation = {
 		 * C​u​s​t​o​m
 		 */
 		custom: string
+		/**
+		 * P​a​y​m​e​n​t​ ​t​i​m​e
+		 */
+		isPaidLate: string
 	}
 	pagination: {
 		/**
@@ -1584,6 +1596,14 @@ export type TranslationFunctions = {
 		 * Manual
 		 */
 		manual: () => LocalizedString
+		/**
+		 * Late
+		 */
+		late: () => LocalizedString
+		/**
+		 * Not late
+		 */
+		notLate: () => LocalizedString
 	}
 	charts: {
 		empty: {
@@ -1744,6 +1764,10 @@ export type TranslationFunctions = {
 		 * Custom
 		 */
 		custom: () => LocalizedString
+		/**
+		 * Payment time
+		 */
+		isPaidLate: () => LocalizedString
 	}
 	pagination: {
 		/**

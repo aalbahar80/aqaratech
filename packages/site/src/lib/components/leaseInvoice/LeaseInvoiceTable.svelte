@@ -8,6 +8,7 @@
 	import type { ColumnDto } from '$lib/components/table/column-type';
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
+	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
@@ -52,7 +53,7 @@
 
 		columnHelper.display({
 			id: 'isPaidLate',
-			header: 'Paid Late', // TODO: i18n
+			header: $L.filter.isPaidLate(),
 			enableSorting: false,
 			cell: (info) => {
 				const invoice = info.row.original;

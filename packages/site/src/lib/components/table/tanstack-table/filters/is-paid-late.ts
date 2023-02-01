@@ -15,11 +15,11 @@ export const isPaidLateFilter = derived(isPaidLate, ($isPaidLate) => {
 
 	return {
 		id: FilterEnum.IsPaidLate,
-		label: 'Paid Late',
+		label: LL.filter.isPaidLate(),
 		type: FILTER_TYPE.RADIO,
 		options: [
 			{
-				label: 'Late',
+				label: LL.general.late(),
 				value: PAID_LATE.LATE,
 				active: $isPaidLate === true,
 				action: async () => {
@@ -28,7 +28,7 @@ export const isPaidLateFilter = derived(isPaidLate, ($isPaidLate) => {
 				},
 			},
 			{
-				label: 'Not Late',
+				label: LL.general.notLate(),
 				value: PAID_LATE.NOT_LATE,
 				active: $isPaidLate === false,
 				action: async () => {
