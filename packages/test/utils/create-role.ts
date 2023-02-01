@@ -2,11 +2,10 @@ import { prisma } from '../prisma';
 
 import type { Prisma, Role } from '@prisma/client';
 
-type RoleInput = Pick<
-	Role,
-	'organizationId' | 'portfolioId' | 'tenantId' | 'roleType'
-> & {
+type RoleInput = Pick<Role, 'organizationId' | 'roleType'> & {
 	email: string;
+	tenantId?: string | null;
+	portfolioId?: string | null;
 };
 
 export const createRole = async (r: RoleInput) => {
@@ -27,5 +26,5 @@ export const createRole = async (r: RoleInput) => {
 		data.tenant = { connect: { id: r.tenantId } };
 	}
 
-	await prisma.role.create({ data });
+	return await prisma.role.create({ data });
 };

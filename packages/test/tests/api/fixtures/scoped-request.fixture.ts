@@ -1,35 +1,38 @@
 import { Cookie } from '@self/utils';
 
-import { resCheck } from '../../../utils/res-check';
+import { createRole } from '../../../utils/create-role';
 import { testUsers } from '../fixtures/users/test-users';
 
-import { apiURL } from './api-url';
-
 import type { AllFixtures } from './test-fixtures.interface';
-import type { RoleDto } from '../../../types/api';
 
 export const scopedRequestFixtures: AllFixtures = {
 	// Determines the cookies that are sent with the request.
 	userRoleType: ['ORGADMIN', { option: true }],
 
 	scopedContext: async (
-		{ userRoleType, browser, org, portfolio, tenant, request },
+		{ userRoleType, browser, org, portfolio, tenant },
 		use,
 	) => {
-		let url: string;
-		let email: string;
 		let storageStatePath: string;
 
-		if (userRoleType === 'PORTFOLIO') {
-			url = `${apiURL}/organizations/${portfolio.organizationId}/portfolios/${portfolio.id}/roles`;
+		let input: Parameters<typeof createRole>[0];
 
-			email = testUsers.portfolio.email;
+		if (userRoleType === 'PORTFOLIO') {
+			input = {
+				organizationId: portfolio.organizationId,
+				portfolioId: portfolio.id,
+				roleType: 'PORTFOLIO',
+				email: testUsers.portfolio.email,
+			};
 
 			storageStatePath = testUsers.portfolio.storageStatePath;
 		} else if (userRoleType === 'TENANT') {
-			url = `${apiURL}/organizations/${tenant.organizationId}/tenants/${tenant.id}/roles`;
-
-			email = testUsers.tenant.email;
+			input = {
+				organizationId: tenant.organizationId,
+				tenantId: tenant.id,
+				roleType: 'TENANT',
+				email: testUsers.tenant.email,
+			};
 
 			storageStatePath = testUsers.tenant.storageStatePath;
 
@@ -38,10 +41,11 @@ export const scopedRequestFixtures: AllFixtures = {
 			console.warn(
 				"Don't use ORGADMIN for scopedRequest. Use normal request instead.",
 			);
-
-			url = `${apiURL}/organizations/${tenant.organizationId}/roles`;
-
-			email = testUsers.orgAdmin.email;
+			input = {
+				organizationId: org.organization.id,
+				roleType: 'ORGADMIN',
+				email: testUsers.orgAdmin.email,
+			};
 
 			storageStatePath = testUsers.orgAdmin.storageStatePath;
 		} else {
@@ -50,16 +54,13 @@ export const scopedRequestFixtures: AllFixtures = {
 
 		let roleId: string;
 
+		// Only create role if userRoleType is not ORGADMIN, because
+		// ORGADMIN already has a role (will return 400).
 		if (userRoleType === 'ORGADMIN') {
 			roleId = org.roleId;
 		} else {
-			// Only create role if userRoleType is not ORGADMIN, because
-			// ORGADMIN already has a role (will return 400).
-			const res = await request.post(url, { data: { email } });
-			resCheck(res);
-
-			const body = (await res.json()) as RoleDto;
-			roleId = body.id;
+			const role = await createRole(input);
+			roleId = role.id;
 		}
 
 		// set role cookie
