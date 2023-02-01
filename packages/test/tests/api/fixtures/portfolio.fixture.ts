@@ -2,50 +2,39 @@ import * as R from 'remeda';
 
 import { portfolioFactory } from '@self/seed';
 
-import { resCheck } from '../../../utils/res-check';
-
-import { apiURL } from './api-url';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { PortfolioDto } from '../../../types/api';
+import type { Portfolio } from '@prisma/client';
 
 export const portfolioFixtures: AllFixtures = {
 	portfoliosParams: [undefined, { option: true }],
 
-	portfolios: async ({ org, request, portfoliosParams }, use) => {
+	portfolios: async ({ org, portfoliosParams }, use) => {
 		const params = portfoliosParams ?? [{}];
 
 		// Merge any declared params with the default params
 
 		const portfolios = R.times(params.length, (n) => {
-			return portfolioFactory.build({
+			const data = portfolioFactory.build({
 				organizationId: org.organization.id,
 				...params[n],
 			});
+
+			data.dob &&= new Date(data.dob).toISOString();
+
+			return data;
 		});
 
 		// Insert portfolios
 
-		const url = `${apiURL}/organizations/${org.organization.id}/portfolios`;
+		await prisma.portfolio.createMany({ data: portfolios });
 
-		const created = (await Promise.all(
-			portfolios.map(async (portfolio) => {
-				const picked = R.pick(portfolio, [
-					'fullName',
-					'label',
-					'civilid',
-					'phone',
-					'dob',
-				]);
+		const created = await prisma.portfolio.findMany({
+			where: { organizationId: org.organization.id },
+		});
 
-				const res = await request.post(url, { data: picked });
-				resCheck(res);
-
-				return (await res.json()) as PortfolioDto;
-			}),
-		)) as [PortfolioDto, ...PortfolioDto[]];
-
-		await use(created);
+		await use(created as [Portfolio, ...Portfolio[]]);
 	},
 
 	portfolio: async ({ portfolios }, use) => {
