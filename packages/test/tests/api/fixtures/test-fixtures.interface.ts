@@ -16,7 +16,6 @@ import type {
 	ExpenseCategoryDto,
 	OrganizationCreatedDto,
 	PayoutDto,
-	RoleDto,
 } from '../../../types/api';
 import type {
 	BrowserContext,
@@ -31,6 +30,7 @@ import type {
 	MaintenanceOrder,
 	Portfolio,
 	Property,
+	Role,
 	Tenant,
 	Unit,
 } from '@prisma/client';
@@ -43,8 +43,8 @@ export interface TestFixtures {
 	roleCookie: Parameters<BrowserContext['addCookies']>[0][0];
 
 	org: OrganizationCreatedDto;
-	role: RoleDto;
-	roles: [RoleDto, ...RoleDto[]];
+	role: Role;
+	roles: [Role, ...Role[]];
 	tenant: Tenant;
 	tenants: [Tenant, ...Tenant[]];
 	portfolio: Portfolio;
@@ -69,7 +69,7 @@ export interface TestFixtures {
 
 export interface TestOptions {
 	// auth
-	userRoleType: RoleDto['roleType'];
+	userRoleType: Role['roleType'];
 	rolesParams: RoleFactoryParams[] | undefined;
 
 	tenantsParams: TenantFactoryParams[] | undefined;

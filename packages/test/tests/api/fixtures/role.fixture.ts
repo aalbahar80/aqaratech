@@ -2,16 +2,15 @@ import * as R from 'remeda';
 
 import { roleFactory } from '@self/seed';
 
-import { PostUrlRole } from '../../../utils/post-url';
-import { resCheck } from '../../../utils/res-check';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { RoleDto } from '../../../types/api';
+import type { Prisma, Role } from '@prisma/client';
 
 export const roleFixtures: AllFixtures = {
 	rolesParams: [undefined, { option: true }],
 
-	roles: async ({ org, portfolio, tenant, request, rolesParams }, use) => {
+	roles: async ({ org, portfolio, tenant, rolesParams }, use) => {
 		const params = rolesParams ?? [{}];
 
 		// Merge any declared params with the default params
@@ -27,24 +26,32 @@ export const roleFixtures: AllFixtures = {
 
 		// Insert roles
 
-		const created = (await Promise.all(
-			roles.map(async (role) => {
-				const picked = R.pick(role, ['email']);
+		for (const r of roles) {
+			const data: Prisma.RoleCreateInput = {
+				user: {
+					connectOrCreate: {
+						where: { email: r.email },
+						create: { email: r.email },
+					},
+				},
+				organization: { connect: { id: r.organizationId } },
+				roleType: r.roleType,
+			};
 
-				const url = PostUrlRole({
-					organizationId: role.organizationId,
-					portfolioId: role.portfolioId,
-					tenantId: role.tenantId,
-				})[role.roleType];
+			if (r.portfolioId && r.roleType === 'PORTFOLIO') {
+				data.portfolio = { connect: { id: r.portfolioId } };
+			} else if (r.tenantId && r.roleType === 'TENANT') {
+				data.tenant = { connect: { id: r.tenantId } };
+			}
 
-				const res = await request.post(url, { data: picked });
-				resCheck(res);
+			await prisma.role.create({ data });
+		}
 
-				return (await res.json()) as RoleDto;
-			}),
-		)) as [RoleDto, ...RoleDto[]];
+		const created = await prisma.role.findMany({
+			where: { organizationId: org.organization.id },
+		});
 
-		await use(created);
+		await use(created as [Role, ...Role[]]);
 	},
 
 	role: async ({ roles }, use) => {
