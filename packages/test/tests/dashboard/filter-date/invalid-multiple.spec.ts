@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test';
+import { expect, type ConsoleMessage } from '@playwright/test';
 
 import { test } from './setup';
 
@@ -6,18 +6,32 @@ test('invalid date does not trigger http call - multiple', async ({
 	page,
 	filters,
 }) => {
+	page.on('request', (request) => {
+		// force test to fail if a request is made
+		expect(request.url()).toContain('--');
+	});
+
 	// set start date in the future
 	await filters.start.fill('2030-01-01');
 
-	// prepare to catch request if it happens
-	const requestPromise = page.waitForRequest(/.*end/, { timeout: 5000 });
+	const errors: ConsoleMessage[] = [];
+
+	// check console for errors
+	page.on('console', (msg) => {
+		errors.push(msg);
+	});
 
 	// set invalid end dates
 	await filters.end.fill('2019-01-01');
 	await filters.end.fill('2020-01-01');
 	await filters.end.fill('2021-01-01');
+	await filters.end.fill('2022-01-01');
+	await filters.end.fill('2023-01-01');
 
-	// await filters.end.fill('2022-01-01'); // Why does this trigger a request?
+	// check for errors
+	expect(errors).toHaveLength(5);
 
-	await expect(requestPromise).rejects.toThrowError(/Timeout/);
+	for (const error of errors) {
+		expect(error.text()).toBe('Invalid date range');
+	}
 });
