@@ -20,7 +20,7 @@
 	},
 	"devDependencies": {
 		"@logtail/types": "0.1.15",
-		"@sentry/types": "7.34.0",
+		"@sentry/types": "7.36.0",
 		"@types/node": "18.11.18",
 		"@vitest/ui": "0.28.3",
 		"eslint-config-custom": "workspace:*",
