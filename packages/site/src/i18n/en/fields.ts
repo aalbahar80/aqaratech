@@ -108,7 +108,7 @@ export const fields = {
 	license: 'License',
 
 	// invoice
-	isPaid: 'Is Paid',
+	isPaid: 'Payment Status',
 	dueAt: 'Due At',
 	paidAt: 'Paid At',
 
