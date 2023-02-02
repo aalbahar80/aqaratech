@@ -37,6 +37,7 @@ export const envSchema = z.object({
 	// Myfatoorah
 	MYFATOORAH_URL: z.string().url(),
 	MYFATOORAH_KEY: z.string(),
+	PUBLIC_MYFATOORAH_SITE_URL: z.string().url(),
 
 	// Sveltekit adapter-node
 	ORIGIN: z.string().url(),

@@ -52,8 +52,13 @@ export interface AqaratechEnv {
 	readonly POSTMARK_TOKEN?: string | undefined;
 
 	// Myfatoorah
+	/** Myfatoorah's API URL */
 	readonly MYFATOORAH_URL: string;
 	readonly MYFATOORAH_KEY: string;
+	/** Myfatoorah's frontend URL. Used to view invoices.
+	 * ex. `https://demo.myfatoorah.com/En/KWT/PayInvoice/Result?paymentId=100202303436098464`
+	 * */
+	readonly PUBLIC_MYFATOORAH_SITE_URL: string;
 
 	// R2
 	readonly R2_ENDPOINT: string;

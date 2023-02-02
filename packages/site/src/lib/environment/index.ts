@@ -15,6 +15,7 @@ const siteEnvSchema = envSchema.pick({
 	PUBLIC_TRACE_RATE: true,
 	PUBLIC_COMMIT_SHA: true,
 	PUBLIC_AQ_DEBUG_LEVEL: true,
+	PUBLIC_MYFATOORAH_SITE_URL: true,
 });
 
 type SiteEnvSchema = z.infer<typeof siteEnvSchema>;

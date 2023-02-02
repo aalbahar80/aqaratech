@@ -4,6 +4,8 @@
 	import { page } from '$app/stores';
 	import { getLabel } from '@self/utils';
 
+	import { getMyfatoorahReceipt } from './get-myfatoorah-receipt';
+
 	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
@@ -14,6 +16,7 @@
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
+	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
 	import {
 		locationColumnDef,
@@ -31,6 +34,10 @@
 	const columnHelper = createColumnHelper<LeaseInvoiceDto>();
 
 	const columns = [
+		columnHelper.accessor('id', {
+			header: getIntlLabel('id'),
+		}),
+
 		columnHelper.accessor('postAt', {
 			header: getIntlLabel('postAt'),
 			cell: fmtCell('date'),
@@ -86,6 +93,18 @@
 
 		columnHelper.accessor('mfPaymentId', {
 			header: getLabel('mfPaymentId'),
+			cell: (props) => {
+				const paymentId = props.cell.getValue();
+
+				if (!paymentId) {
+					return '';
+				}
+
+				return renderComponent(ActionCell, {
+					value: paymentId,
+					href: getMyfatoorahReceipt(paymentId),
+				});
+			},
 		}),
 
 		columnHelper.accessor('amount', {
@@ -109,6 +128,7 @@
 	paginationDto={data.pagination}
 	{columns}
 	columnVisibility={{
+		id: false,
 		dueAt: false,
 		paidAt: false,
 		mfPaymentId: false,

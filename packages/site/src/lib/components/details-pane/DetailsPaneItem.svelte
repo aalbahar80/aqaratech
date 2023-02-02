@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { formatValue } from '@self/utils';
 
+	import { getMyfatoorahReceipt } from '../leaseInvoice/get-myfatoorah-receipt';
+
 	import { locale } from '$i18n/i18n-svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
@@ -11,9 +13,18 @@
 <div class="row" data-testid={key}>
 	<dt class="label">{getIntlLabel(key)}</dt>
 	<dd class="definition" data-testid={value ?? ''}>
-		<slot>
+		{#if key === 'mfPaymentId' && value && typeof value === 'string'}
+			<a
+				href={getMyfatoorahReceipt(value)}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-indigo-600 hover:text-indigo-900"
+			>
+				{value}
+			</a>
+		{:else}
 			{formatValue(value, $locale)}
-		</slot>
+		{/if}
 	</dd>
 </div>
 
