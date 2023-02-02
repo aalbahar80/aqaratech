@@ -28,7 +28,7 @@ export const isPaidLateFilter = derived(isPaidLate, ($isPaidLate) => {
 				},
 			},
 			{
-				label: LL.general.notLate(),
+				label: LL.badge.onTime(),
 				value: PAID_LATE.NOT_LATE,
 				active: $isPaidLate === false,
 				action: async () => {
