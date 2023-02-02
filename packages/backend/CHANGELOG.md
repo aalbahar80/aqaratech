@@ -1,5 +1,16 @@
 # @self/backend
 
+## 2.12.0
+
+### Minor Changes
+
+- 7f5b790c4: link to myfatoorah invoice
+
+### Patch Changes
+
+- Updated dependencies [7f5b790c4]
+  - @self/utils@3.11.0
+
 ## 2.11.1
 
 ### Patch Changes

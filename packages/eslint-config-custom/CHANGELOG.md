@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.11.0
+
+### Minor Changes
+
+- 7f5b790c4: link to myfatoorah invoice
+
 ## 2.10.0
 
 ### Minor Changes

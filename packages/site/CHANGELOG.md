@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.12.0
+
+### Minor Changes
+
+- 7f5b790c4: link to myfatoorah invoice
+
 ## 2.11.1
 
 ### Patch Changes

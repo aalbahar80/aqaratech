@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.11.0
+
+### Minor Changes
+
+- 7f5b790c4: link to myfatoorah invoice
+
+### Patch Changes
+
+- Updated dependencies [7f5b790c4]
+  - @self/utils@3.11.0
+
 ## 2.10.1
 
 ### Patch Changes

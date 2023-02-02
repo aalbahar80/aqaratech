@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.11.0
+
+### Minor Changes
+
+- 7f5b790c4: link to myfatoorah invoice
+
 ## 3.10.1
 
 ### Patch Changes
