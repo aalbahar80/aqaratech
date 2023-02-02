@@ -1,5 +1,12 @@
 # @self/backend
 
+## 2.11.1
+
+### Patch Changes
+
+- Updated dependencies [01815f590]
+  - @self/utils@3.10.1
+
 ## 2.11.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.11.1
+
+### Patch Changes
+
+- 01815f590: fix arabic numerals in chrome
+
 ## 2.11.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # @self/seed
 
+## 2.10.1
+
+### Patch Changes
+
+- Updated dependencies [01815f590]
+  - @self/utils@3.10.1
+
 ## 2.10.0
 
 ### Minor Changes

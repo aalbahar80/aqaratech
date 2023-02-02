@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.10.1
+
+### Patch Changes
+
+- 01815f590: fix arabic numerals in chrome
+
 ## 3.10.0
 
 ### Minor Changes
