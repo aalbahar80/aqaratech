@@ -1,12 +1,3 @@
-// TODO: replace usage with fmtNumber
-export const kwdFormat = (amount: number | null): string =>
-	amount?.toLocaleString('en-KW', {
-		style: 'currency',
-		currency: 'KWD',
-		maximumFractionDigits: 0,
-		minimumFractionDigits: 0,
-	}) ?? '-';
-
 export const objectKeys = <Obj extends Record<string, unknown>>(
 	obj: Obj,
 ): (keyof Obj)[] => {

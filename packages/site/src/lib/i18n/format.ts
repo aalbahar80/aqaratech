@@ -6,7 +6,7 @@ import { locale } from '$i18n/i18n-svelte';
 // Number
 export function fmtNumber(number: number) {
 	const CL = get(locale);
-	return new Intl.NumberFormat(CL).format(number);
+	return fmt({ locale: CL, type: 'number', value: number });
 }
 
 // Currency

@@ -32,7 +32,11 @@ export {
 	toUTCFormat,
 	toUTCFormatMonthYear,
 } from './entity/form/field';
-export { fmt } from './entity/form/field/format';
+export {
+	AR_BROWSER_LOCALE,
+	fmt,
+	toBrowserLocale,
+} from './entity/form/field/format';
 export { fromUrl } from './entity/from-url';
 export { isEntity, isEntityUrlName } from './entity/is-entity';
 export type { KeysOfUnion } from './keys-of-union';

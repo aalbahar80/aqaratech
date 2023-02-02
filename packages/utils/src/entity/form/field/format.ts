@@ -41,7 +41,9 @@ type FormatTypeOptions =
 type FormatOptions = FormatTypeOptions & { locale: Locale };
 
 export const fmt = (options: FormatOptions) => {
-	const { locale, type, value } = options;
+	const { type, value } = options;
+
+	const locale = toBrowserLocale(options.locale);
 
 	switch (type) {
 		case 'number':
@@ -56,5 +58,18 @@ export const fmt = (options: FormatOptions) => {
 			return new Intl.DateTimeFormat(locale, formats.month).format(value);
 		case 'time':
 			return new Intl.DateTimeFormat(locale, formats.time).format(value);
+	}
+};
+
+/** Explicitly specify arabic numerals for arabic locale. If we don't
+ * explicitly specify arabic numerals in local, chrome will use english numerals
+ * for arabic locale. */
+export const AR_BROWSER_LOCALE = 'ar-u-nu-arab';
+
+export const toBrowserLocale = (locale: Locale) => {
+	if (locale === 'ar') {
+		return AR_BROWSER_LOCALE;
+	} else {
+		return locale;
 	}
 };

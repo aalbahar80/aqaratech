@@ -9,8 +9,8 @@
 	import { fade } from 'svelte/transition';
 
 	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
+	import { fmtCurrency } from '$lib/i18n/format';
 	import { classes } from '$lib/utils/classes';
-	import { kwdFormat } from '$lib/utils/common';
 
 	// export let hierarchy: HierarchyNode<any>;
 	// export let getLabel: (node: HierarchyNode<any>) => string;
@@ -138,7 +138,7 @@ Create a treemap from a d3-hierarchy.
 							{/if}
 							{#if area > 0.012}
 								<strong>{getLabel(node) ?? ''}</strong>
-								<span>{kwdFormat(node.value)}</span>
+								<span>{fmtCurrency(node.value)}</span>
 							{/if}
 						</div>
 					</div>
