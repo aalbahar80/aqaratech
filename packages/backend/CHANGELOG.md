@@ -1,5 +1,21 @@
 # @self/backend
 
+## 2.11.0
+
+### Minor Changes
+
+- 5bc05f522: initialize myfatoorah integration
+- e8f03c769: add filter for paid-late invoices
+- 8bbe0d214: add link to portfolio,property,unit from tables
+
+### Patch Changes
+
+- 5a7338791: preserve callback url suffix
+- Updated dependencies [5bc05f522]
+- Updated dependencies [e8f03c769]
+- Updated dependencies [8bbe0d214]
+  - @self/utils@3.10.0
+
 ## 2.10.2
 
 ### Patch Changes

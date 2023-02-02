@@ -1,5 +1,13 @@
 # @self/utils
 
+## 3.10.0
+
+### Minor Changes
+
+- 5bc05f522: initialize myfatoorah integration
+- e8f03c769: add filter for paid-late invoices
+- 8bbe0d214: add link to portfolio,property,unit from tables
+
 ## 3.9.2
 
 ### Patch Changes
