@@ -2,9 +2,11 @@ import { expect } from '@playwright/test';
 
 import { getRoute, PageType } from '@self/utils';
 
-import { assertUneditedForm } from '../../../utils/matchers/unedited-form';
+import {
+	assertUneditedForm,
+	fromApi,
+} from '../../../utils/matchers/unedited-form';
 import { test } from '../../api/api-fixtures';
-import { apiURL } from '../../api/fixtures/api-url';
 
 test('screenshot smoke test', async ({ page, org, tenant }) => {
 	const url = getRoute({
@@ -14,10 +16,7 @@ test('screenshot smoke test', async ({ page, org, tenant }) => {
 		params: { organizationId: org.organization.id },
 	});
 
-	const resPromise = page.waitForResponse((res) => {
-		const u = new URL(res.url());
-		return u.href.includes(apiURL) && u.pathname.includes('tenants');
-	});
+	const resPromise = page.waitForResponse(fromApi);
 
 	await page.goto(url);
 
@@ -34,14 +33,7 @@ test('screenshot smoke test', async ({ page, org, tenant }) => {
 
 	await expect(page).toHaveURL(edit);
 
-	const resPromise2 = page.waitForResponse((res) => {
-		const u = new URL(res.url());
-		return (
-			u.href.includes(apiURL) &&
-			u.pathname.includes('tenants') &&
-			res.request().method() === 'GET'
-		);
-	});
+	const resPromise2 = page.waitForResponse(fromApi);
 
 	await page.getByRole('button', { name: 'Save' }).click();
 
