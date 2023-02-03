@@ -28,7 +28,7 @@ const createLogtailClient = () => {
 
 		return client;
 	} else {
-		console.warn('Logtail token not found in environment.');
+		console.log('Logtail token not found in environment.');
 
 		return undefined;
 	}

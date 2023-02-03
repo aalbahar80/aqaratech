@@ -87,7 +87,7 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 			{
 				// eslint-disable-next-line @typescript-eslint/require-await
 				async onError(context) {
-					console.error('error in api middleware', context);
+					console.log('error in api middleware', context);
 					const breadcrumb: Breadcrumb = {
 						category: 'http',
 						message: `Error in api middleware while fetching: ${context.url}`,

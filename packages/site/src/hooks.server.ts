@@ -30,7 +30,7 @@ export const handleError = (({ error, event }) => {
 		return;
 	}
 
-	console.error(error);
+	console.log(error);
 
 	const info = extractRequestInfo(event);
 	const user = getSentryUser(event.locals.user);

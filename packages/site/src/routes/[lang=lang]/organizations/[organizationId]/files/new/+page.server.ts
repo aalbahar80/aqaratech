@@ -44,7 +44,7 @@ export const actions: Actions = {
 					// the backend.
 
 					// log error on server
-					console.warn({
+					console.log({
 						message: `Failed to create file: ${res.statusText}. See sentry for more details.`,
 						href: event.url.href,
 						backendUrl: url,

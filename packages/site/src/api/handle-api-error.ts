@@ -11,14 +11,14 @@ export const handleApiError = async (
 ) => {
 	let message = undefined;
 
-	console.error(error);
+	console.log(error);
 
 	if (error instanceof ResponseError) {
 		const data = await parseApiError(error);
 
 		message = data.message;
 
-		console.error(data);
+		console.log(data);
 	}
 
 	if (onCustomToast && message) {
