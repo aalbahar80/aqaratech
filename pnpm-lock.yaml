@@ -4,9 +4,6 @@ patchedDependencies:
   '@rgossiaux/svelte-headlessui@1.0.2':
     hash: tvgqshloapx5y3z3as5gnhnhfq
     path: patches/@rgossiaux__svelte-headlessui@1.0.2.patch
-  '@nestjs/common@9.2.1':
-    hash: r4dk3g2at7swfsa7pokc4m5gfu
-    path: patches/@nestjs__common@9.2.1.patch
 
 importers:
 

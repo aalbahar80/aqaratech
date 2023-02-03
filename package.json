@@ -43,8 +43,7 @@
 	},
 	"pnpm": {
 		"patchedDependencies": {
-			"@rgossiaux/svelte-headlessui@1.0.2": "patches/@rgossiaux__svelte-headlessui@1.0.2.patch",
-			"@nestjs/common@9.2.1": "patches/@nestjs__common@9.2.1.patch"
+			"@rgossiaux/svelte-headlessui@1.0.2": "patches/@rgossiaux__svelte-headlessui@1.0.2.patch"
 		}
 	},
 	"private": true,
