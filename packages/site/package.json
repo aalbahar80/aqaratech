@@ -29,7 +29,7 @@
 	"devDependencies": {
 		"@iconify/json": "2.2.16",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
-		"@logtail/types": "0.1.15",
+		"@logtail/types": "0.1.16",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",
 		"@sentry/svelte": "7.36.0",
@@ -94,8 +94,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@logtail/node": "0.1.15",
-		"@logtail/winston": "0.1.15",
+		"@logtail/node": "0.1.16",
+		"@logtail/winston": "0.1.16",
 		"@sentry/node": "7.36.0",
 		"typesafe-i18n": "5.21.0",
 		"winston": "3.8.2"
