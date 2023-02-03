@@ -39,5 +39,7 @@ test('screenshot smoke test', async ({
 
 	const latest = await page.getByTestId('details-pane').screenshot();
 
-	expect(original.toString()).toEqual(latest.toString());
+	const isSame = original.toString() === latest.toString();
+
+	expect(isSame, 'screenshots should be the same').toBe(true);
 });
