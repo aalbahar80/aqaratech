@@ -35,7 +35,10 @@ export function createRange() {
 			const parsed = DateRange.schema.safeParse({ start, end });
 
 			if (parsed.success) {
-				debouncedInvalidate().catch((error) => {
+				// debouncedInvalidate() will return undefined the first time it's
+				// called so we add nullish coalescing to prevent an error
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+				debouncedInvalidate()?.catch((error) => {
 					console.error(error);
 				});
 			} else {
