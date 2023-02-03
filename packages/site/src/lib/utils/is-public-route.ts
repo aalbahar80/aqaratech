@@ -1,7 +1,20 @@
-import { HOME_ROUTES } from './is-home-route';
+import type { LoadEvent } from '@sveltejs/kit/types';
 
-// TODO: Remove '/' since lang parameter is required?
-const PUBLIC_ROUTES = ['/', ...HOME_ROUTES];
+/** Routes that require authentication. Generally, all declared routes
+ * except for the home page.
+ *
+ * Does not include server-side routes such as /auth/* or /health.
+ *
+ * Does not include unknown routes such as /does-not-exist. This is
+ * important to avoid redirecting bots & crawlers to the login page. */
+export const isProtectedRoute = (route: LoadEvent['route']) => {
+	const protectedRoutes = ['/organizations', '/portal', '/users', '/welcome'];
 
-export const isPublicRoute = (pathname: string) =>
-	PUBLIC_ROUTES.includes(pathname);
+	const isProtected = protectedRoutes.some((protectedRoute) =>
+		route.id?.includes(protectedRoute),
+	);
+
+	// TODO: Only log if log level is set to debug
+
+	return isProtected;
+};
