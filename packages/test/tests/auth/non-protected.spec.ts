@@ -7,6 +7,7 @@ const PUBLIC_ROUTES = [
 	'/en',
 	'/health',
 	'/robots.txt',
+	'/favicon.png',
 ];
 
 const NONEXISTENT_ROUTES = [
