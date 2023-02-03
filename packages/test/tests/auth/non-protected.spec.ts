@@ -6,11 +6,11 @@ const PUBLIC_ROUTES = [
 	'/ar',
 	'/en',
 	'/health',
+	'/robots.txt',
 ];
 
 const NONEXISTENT_ROUTES = [
 	//
-	// '/robots.txt', // TODO: move this test after robots.txt is added
 	'/does-not-exist',
 	'/en/does-not-exist',
 	'/en/organization/1/portfolio',
