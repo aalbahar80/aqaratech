@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.11.1
+
+### Patch Changes
+
+- 13eb0bf66: update deps
+
 ## 3.11.0
 
 ### Minor Changes

@@ -1,5 +1,12 @@
 # @self/backend
 
+## 2.12.1
+
+### Patch Changes
+
+- 13eb0bf66: update deps
+  - @self/utils@3.11.0
+
 ## 2.12.0
 
 ### Minor Changes

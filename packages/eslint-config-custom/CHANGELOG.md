@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.11.1
+
+### Patch Changes
+
+- 13eb0bf66: update deps
+
 ## 2.11.0
 
 ### Minor Changes

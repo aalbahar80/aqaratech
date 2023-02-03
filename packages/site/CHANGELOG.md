@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.12.1
+
+### Patch Changes
+
+- 13eb0bf66: update deps
+- e8f9b9148: prevent error on first setRange call
+
 ## 2.12.0
 
 ### Minor Changes
