@@ -6,19 +6,20 @@ const PUBLIC_ROUTES = [
 	'/ar',
 	'/en',
 	'/health',
-	// '/robots.txt', // TODO: enable this test when robots.txt is added
 ];
 
 const NONEXISTENT_ROUTES = [
 	//
+	// '/robots.txt', // TODO: move this test after robots.txt is added
 	'/does-not-exist',
 	'/en/does-not-exist',
+	'/en/organization/1/portfolio',
+	'/users/1',
 ];
 
 const PROTECTED_ROUTES = [
-	'/en/organization/1/portfolio',
+	//
 	'/en/welcome',
-	'/users/1',
 ];
 
 // test that public routes are not protected (return 200, don't redirect to login). Run tests without storage state.
@@ -39,6 +40,35 @@ test.describe('unauthorized users', () => {
 			const res = await resPromise;
 
 			expect.soft(res.status()).toBe(200);
+		});
+	}
+
+	for (const route of NONEXISTENT_ROUTES) {
+		test(`should get 404 for ${route}`, async ({ page }) => {
+			const resPromise = page.waitForResponse(
+				(res) => new URL(res.url()).pathname === route,
+			);
+
+			await page.goto(route);
+
+			const res = await resPromise;
+
+			expect.soft(res.status()).toBe(404);
+		});
+	}
+
+	for (const route of PROTECTED_ROUTES) {
+		test(`should be redirected to login for ${route}`, async ({ page }) => {
+			const resPromise = page.waitForResponse(
+				(res) => new URL(res.url()).pathname === route,
+			);
+
+			await page.goto(route);
+
+			const res = await resPromise;
+
+			expect.soft(res.status()).toBe(302);
+			expect.soft(res.headers()['location']).toBeTruthy();
 		});
 	}
 });
