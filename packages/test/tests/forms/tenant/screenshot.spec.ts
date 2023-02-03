@@ -21,8 +21,7 @@ test('screenshot smoke test', async ({ page, org, tenant }) => {
 
 	await page.goto(url);
 
-	const res = await resPromise;
-	const original: unknown = await res.json();
+	const original = await resPromise;
 
 	await page.getByRole('link', { name: 'Edit' }).click();
 
@@ -49,8 +48,7 @@ test('screenshot smoke test', async ({ page, org, tenant }) => {
 	// ensure same entity
 	await expect(page).toHaveURL(url);
 
-	const res2 = await resPromise2;
-	const latest: unknown = await res2.json();
+	const latest = await resPromise2;
 
-	assertUneditedForm(original, latest);
+	await assertUneditedForm(original, latest);
 });

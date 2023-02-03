@@ -4,7 +4,13 @@
 import { expect } from '@playwright/test';
 import * as R from 'remeda';
 
-export const assertUneditedForm = (original: unknown, latest: unknown) => {
+export const assertUneditedForm = async (
+	originalRes: Response,
+	latestRes: Response,
+) => {
+	const original = await originalRes.json();
+	const latest = await latestRes.json();
+
 	return expect
 		.soft(R.omit(original, ['updatedAt']))
 		.toEqual(R.omit(latest, ['updatedAt']));
