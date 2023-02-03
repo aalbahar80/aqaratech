@@ -22,6 +22,7 @@ export const tenantFixtures: AllFixtures = {
 			});
 
 			data.dob &&= new Date(data.dob).toISOString();
+			data.residencyEnd &&= new Date(data.residencyEnd).toISOString();
 
 			return data;
 		});

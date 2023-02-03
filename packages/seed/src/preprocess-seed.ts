@@ -10,7 +10,7 @@ export const preprocessSeed = (seed: Seed) => {
 	const roles = changePermissionsToUndefined(removeEmail(seed.roles));
 
 	const tenants = seed.tenants.map((tenant) =>
-		convertToDatetimeArray(['dob'], tenant),
+		convertToDatetimeArray(['dob', 'residencyEnd'], tenant),
 	);
 
 	const portfolios = seed.portfolios.map((portfolio) =>

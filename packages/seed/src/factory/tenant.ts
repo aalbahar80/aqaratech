@@ -42,7 +42,7 @@ const base = Factory.Sync.makeFactoryWithRequired<Tenant, 'organizationId'>({
 		faker.datatype.number({ min: 100000000, max: 999999999 }).toString(),
 	),
 
-	residencyEnd: Factory.each(() => faker.date.future(2)),
+	residencyEnd: Factory.each(() => fakeDate()),
 });
 
 export const tenantFactory = base.withDerivation('label', (tenant) => {
