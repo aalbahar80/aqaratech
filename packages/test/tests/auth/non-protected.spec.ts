@@ -21,14 +21,16 @@ const NONEXISTENT_ROUTES = [
 const PROTECTED_ROUTES = [
 	//
 	'/en/welcome',
+	'/en/organizations/1/portfolios',
 ];
 
 // test that public routes are not protected (return 200, don't redirect to login). Run tests without storage state.
 test.describe('unauthorized users', () => {
+	test.describe.configure({ mode: 'parallel', timeout: 3000 });
+
 	test.use({
 		storageState: { cookies: [], origins: [] },
 	});
-	test.setTimeout(3000);
 
 	for (const route of PUBLIC_ROUTES) {
 		test(`should be able to access ${route}`, async ({ page }) => {
@@ -72,4 +74,24 @@ test.describe('unauthorized users', () => {
 			expect.soft(res.headers()['location']).toBeTruthy();
 		});
 	}
+
+	test(`should be redirected to /en from /`, async ({ page }) => {
+		const resPromise = page.waitForResponse(
+			(res) => new URL(res.url()).pathname === '/',
+		);
+
+		const resPromise2 = page.waitForResponse(
+			(res) => new URL(res.url()).pathname === '/en',
+		);
+
+		await page.goto('/');
+
+		const res = await resPromise;
+
+		expect.soft(res.status()).toBe(302);
+		expect.soft(res.headers()['location']).toBe('/en');
+
+		const res2 = await resPromise2;
+		expect.soft(res2.status()).toBe(200);
+	});
 });
