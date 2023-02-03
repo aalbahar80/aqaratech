@@ -27,7 +27,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && pnpm typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.15",
+		"@iconify/json": "2.2.16",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.1.15",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -89,7 +89,7 @@
 		"unplugin-icons": "0.15.2",
 		"vite": "4.1.1",
 		"vite-plugin-iso-import": "1.0.0",
-		"vitest": "0.28.3",
+		"vitest": "0.28.4",
 		"zod": "3.20.2"
 	},
 	"type": "module",
