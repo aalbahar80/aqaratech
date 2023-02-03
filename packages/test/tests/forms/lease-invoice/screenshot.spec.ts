@@ -2,49 +2,51 @@ import { expect } from '@playwright/test';
 
 import { getRoute, PageType } from '@self/utils';
 
+import {
+	assertUneditedForm,
+	fromApi,
+} from '../../../utils/matchers/unedited-form';
 import { test } from '../../api/api-fixtures';
 
-// Test is failing ever since we added mfPaymentId to details pane
-test.fixme(
-	'screenshot smoke test',
-	async ({ page, org, portfolio, invoice }) => {
-		const url = getRoute({
-			entity: 'leaseInvoice',
-			pageType: PageType.Id,
-			id: invoice.id,
-			params: {
-				organizationId: org.organization.id,
-				portfolioId: portfolio.id,
-			},
-		});
+test('screenshot smoke test', async ({ page, org, portfolio, invoice }) => {
+	const url = getRoute({
+		entity: 'leaseInvoice',
+		pageType: PageType.Id,
+		id: invoice.id,
+		params: {
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+		},
+	});
 
-		await page.goto(url);
+	const resPromise = page.waitForResponse(fromApi);
 
-		const original = await page.getByTestId('details-pane').screenshot();
+	await page.goto(url);
 
-		await page.getByRole('link', { name: 'Edit' }).click();
+	const original = await resPromise;
 
-		const edit = getRoute({
-			entity: 'leaseInvoice',
-			pageType: PageType.Edit,
-			id: invoice.id,
-			params: {
-				organizationId: org.organization.id,
-				portfolioId: portfolio.id,
-			},
-		});
+	await page.getByRole('link', { name: 'Edit' }).click();
 
-		await expect(page).toHaveURL(edit);
+	const edit = getRoute({
+		entity: 'leaseInvoice',
+		pageType: PageType.Edit,
+		id: invoice.id,
+		params: {
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+		},
+	});
 
-		await page.locator('text=Save').click();
+	await expect(page).toHaveURL(edit);
 
-		// ensure same entity
-		await expect(page).toHaveURL(url);
+	const resPromise2 = page.waitForResponse(fromApi);
 
-		const latest = await page.getByTestId('details-pane').screenshot();
+	await page.locator('text=Save').click();
 
-		const isSame = original.toString() === latest.toString();
+	// ensure same entity
+	await expect(page).toHaveURL(url);
 
-		expect(isSame, 'screenshots should be the same').toBe(true);
-	},
-);
+	const latest = await resPromise2;
+
+	await assertUneditedForm(original, latest);
+});
