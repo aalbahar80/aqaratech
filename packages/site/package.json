@@ -34,7 +34,7 @@
 		"@self/utils": "workspace:*",
 		"@sentry/svelte": "7.36.0",
 		"@sentry/tracing": "7.36.0",
-		"@sveltejs/adapter-node": "1.1.5",
+		"@sveltejs/adapter-node": "1.1.6",
 		"@sveltejs/kit": "1.3.10",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
