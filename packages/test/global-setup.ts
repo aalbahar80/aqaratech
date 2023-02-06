@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import { chromium, type FullConfig } from '@playwright/test';
 
 import { Cookie } from '@self/utils';
@@ -6,6 +8,7 @@ import { testUsers } from './tests/api/fixtures/users/test-users';
 import { LoginPage } from './tests/auth/login-page';
 import { checkStubbed } from './utils/check-stubbed';
 import { getToken } from './utils/get-token';
+import { globalStoragePath } from './utils/global-storage-path';
 
 async function globalSetup(config: FullConfig) {
 	const project = config.projects[0];
@@ -29,13 +32,7 @@ async function globalSetup(config: FullConfig) {
 
 	const browser = await chromium.launch();
 
-	for (const {
-		roleType,
-		email,
-		password,
-		storageStatePath,
-		storageStateFilename,
-	} of [
+	for (const { roleType, email, password, storageStateFilename } of [
 		testUsers.orgAdmin,
 		testUsers.portfolio,
 		testUsers.tenant,
@@ -43,6 +40,7 @@ async function globalSetup(config: FullConfig) {
 		testUsers.aqaratechStaff,
 	]) {
 		console.log(`Checking auth cookies for user.roletype: ${roleType}...`);
+		const storagePath = path.join(globalStoragePath, storageStateFilename);
 
 		// Avoid logging in again if cookies have not expired
 		try {
@@ -61,7 +59,7 @@ async function globalSetup(config: FullConfig) {
 
 			if (accessToken && idToken) {
 				console.log(
-					`[Global Setup] Skipping login and using existing cookies from: ${storageStatePath}`,
+					`[Global Setup] Skipping login and using existing cookies from: ${storagePath}`,
 				);
 
 				continue;
@@ -80,7 +78,7 @@ async function globalSetup(config: FullConfig) {
 		await loginPage.fill({ email, password });
 
 		// Save cookies
-		await page.context().storageState({ path: storageStatePath });
+		await page.context().storageState({ path: storagePath });
 	}
 
 	await browser.close();

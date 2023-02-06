@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import { devices, type PlaywrightTestConfig } from '@playwright/test';
 import { config as dotenv } from 'dotenv';
 
@@ -9,6 +11,7 @@ import {
 	EXPIRED_ID_TOKEN,
 } from './constants/expired-id-token';
 import { testUsers } from './tests/api/fixtures/users/test-users';
+import { globalStoragePath } from './utils/global-storage-path';
 
 import type { TestOptions } from './tests/api/fixtures/test-fixtures.interface';
 import type { TokenTestOptions } from './tests/auth/auth-fixtures';
@@ -33,7 +36,10 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 	maxFailures: 40,
 	workers: process.env.CI ? undefined : '35%',
 	use: {
-		storageState: testUsers.orgAdmin.storageStatePath,
+		storageState: path.join(
+			globalStoragePath,
+			testUsers.orgAdmin.storageStateFilename,
+		),
 		headless: true,
 		ignoreHTTPSErrors: true,
 		bypassCSP: true,

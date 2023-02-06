@@ -1,6 +1,9 @@
+import path from 'node:path';
+
 import { Cookie } from '@self/utils';
 
 import { createRole } from '../../../utils/create-role';
+import { globalStoragePath } from '../../../utils/global-storage-path';
 import { testUsers } from '../fixtures/users/test-users';
 
 import type { AllFixtures } from './test-fixtures.interface';
@@ -25,7 +28,10 @@ export const scopedRequestFixtures: AllFixtures = {
 				email: testUsers.portfolio.email,
 			};
 
-			storageStatePath = testUsers.portfolio.storageStatePath;
+			storageStatePath = path.join(
+				globalStoragePath,
+				testUsers.portfolio.storageStateFilename,
+			);
 		} else if (userRoleType === 'TENANT') {
 			input = {
 				organizationId: tenant.organizationId,
@@ -34,7 +40,10 @@ export const scopedRequestFixtures: AllFixtures = {
 				email: testUsers.tenant.email,
 			};
 
-			storageStatePath = testUsers.tenant.storageStatePath;
+			storageStatePath = path.join(
+				globalStoragePath,
+				testUsers.tenant.storageStateFilename,
+			);
 
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		} else if (userRoleType === 'ORGADMIN') {
@@ -47,7 +56,10 @@ export const scopedRequestFixtures: AllFixtures = {
 				email: testUsers.orgAdmin.email,
 			};
 
-			storageStatePath = testUsers.orgAdmin.storageStatePath;
+			storageStatePath = path.join(
+				globalStoragePath,
+				testUsers.orgAdmin.storageStateFilename,
+			);
 		} else {
 			throw new Error('Invalid userRoleType');
 		}

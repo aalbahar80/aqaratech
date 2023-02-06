@@ -1,6 +1,10 @@
+import path from 'node:path';
+
 import { decodeJwt } from 'jose';
 
 import type { Cookie } from '@self/utils';
+
+import { globalStoragePath } from './global-storage-path';
 
 import type { BrowserContextOptions } from '@playwright/test';
 
@@ -35,9 +39,10 @@ export const getToken = async (
 };
 
 const getCookies = async (filename: string) => {
+	const file = path.join(globalStoragePath, filename);
+
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	const cookies = (await import(`../storage-state/${filename}`))
-		.cookies as Cookies;
+	const cookies = (await import(file)).cookies as Cookies;
 
 	return cookies;
 };
