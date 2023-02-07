@@ -18,12 +18,12 @@
 		"factory.ts": "1.3.0"
 	},
 	"devDependencies": {
-		"@types/node": "18.11.18",
+		"@types/node": "18.13.0",
 		"eslint-config-custom": "workspace:*",
 		"prisma": "4.9.0",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
-		"tsx": "3.12.2",
+		"tsx": "3.12.3",
 		"typescript": "5.0.0-beta"
 	},
 	"engines": {
