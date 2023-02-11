@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@faker-js/faker": "7.6.0",
-		"@prisma/client": "4.10.0",
+		"@prisma/client": "4.10.1",
 		"@self/utils": "workspace:*",
 		"date-fns": "2.29.3",
 		"dotenv": "16.0.3",
@@ -20,7 +20,7 @@
 	"devDependencies": {
 		"@types/node": "18.13.0",
 		"eslint-config-custom": "workspace:*",
-		"prisma": "4.10.0",
+		"prisma": "4.10.1",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"tsx": "3.12.3",

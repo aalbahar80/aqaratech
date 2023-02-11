@@ -27,7 +27,7 @@
 		"@changesets/cli": "2.26.0",
 		"@go-task/cli": "3.20.0",
 		"@types/node": "18.13.0",
-		"eslint": "8.33.0",
+		"eslint": "8.34.0",
 		"eslint-config-custom": "workspace:*",
 		"madge": "6.0.0",
 		"prettier": "2.8.4",

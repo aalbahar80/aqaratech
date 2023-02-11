@@ -27,15 +27,15 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && pnpm typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.19",
+		"@iconify/json": "2.2.20",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.2.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",
-		"@sentry/svelte": "7.36.0",
-		"@sentry/tracing": "7.36.0",
-		"@sveltejs/adapter-node": "1.1.7",
-		"@sveltejs/kit": "1.5.0",
+		"@sentry/svelte": "7.37.1",
+		"@sentry/tracing": "7.37.1",
+		"@sveltejs/adapter-node": "1.1.8",
+		"@sveltejs/kit": "1.5.5",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/forms": "0.5.3",
@@ -58,7 +58,7 @@
 		"dotenv": "16.0.3",
 		"dotenv-cli": "7.0.0",
 		"eslint-config-custom": "workspace:*",
-		"eslint-plugin-svelte": "2.17.0",
+		"eslint-plugin-svelte": "2.18.0",
 		"frappe-charts": "1.6.2",
 		"fuse.js": "6.6.2",
 		"jose": "4.11.4",
@@ -90,13 +90,13 @@
 		"vite": "4.1.1",
 		"vite-plugin-iso-import": "1.0.0",
 		"vitest": "0.28.4",
-		"zod": "3.20.3"
+		"zod": "3.20.6"
 	},
 	"type": "module",
 	"dependencies": {
 		"@logtail/node": "0.2.0",
 		"@logtail/winston": "0.2.0",
-		"@sentry/node": "7.36.0",
+		"@sentry/node": "7.37.1",
 		"typesafe-i18n": "5.24.0",
 		"winston": "3.8.2"
 	},
