@@ -32,14 +32,13 @@ async function globalSetup(config: FullConfig) {
 
 	const browser = await chromium.launch();
 
-	for (const { roleType, email, password, storageStateFilename } of [
+	for (const { email, password, storageStateFilename } of [
 		testUsers.orgAdmin,
 		testUsers.portfolio,
 		testUsers.tenant,
 		testUsers.freshUser,
 		testUsers.aqaratechStaff,
 	]) {
-		console.log(`Checking auth cookies for user.roletype: ${roleType}...`);
 		const storagePath = path.join(globalStoragePath, storageStateFilename);
 
 		// Avoid logging in again if cookies have not expired
@@ -58,9 +57,9 @@ async function globalSetup(config: FullConfig) {
 			);
 
 			if (accessToken && idToken) {
-				console.log(
-					`[Global Setup] Skipping login and using existing cookies from: ${storagePath}`,
-				);
+				// console.log(
+				// 	`[Global Setup] Skipping login and using existing cookies from: ${storagePath}`,
+				// );
 
 				continue;
 			}
