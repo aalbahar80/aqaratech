@@ -49,7 +49,7 @@ export const leaseInvoiceFactory = addDueDate
 			return null;
 		}
 
-		const dur = faker.datatype.number({ min: 0, max: 40 });
+		const dur = faker.datatype.number({ min: -10, max: 40 });
 
 		const paidAt = new Date(leaseInvoice.postAt);
 		paidAt.setDate(paidAt.getDate() + dur);

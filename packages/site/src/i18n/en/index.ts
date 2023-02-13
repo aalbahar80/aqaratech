@@ -117,6 +117,7 @@ const en: BaseTranslation = {
 
 		onTime: 'On time',
 		late: 'Late',
+		advanced: 'Advanced',
 
 		// Maintenance
 		inProgress: 'In progress',

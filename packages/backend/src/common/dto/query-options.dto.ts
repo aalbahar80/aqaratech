@@ -3,6 +3,8 @@ import {
 	ParsedQuerySortModel,
 } from '@prisma-utils/nestjs-request-parser';
 
+import { PaidLate } from '@self/utils';
+
 /**
  * Query options after parsing.
  */
@@ -12,7 +14,10 @@ export class QueryOptionsDto implements Omit<ParsedQueryModel, 'filter'> {
 	take: number;
 	sort: ParsedQuerySortModel[];
 	filter: object;
-	filterCustom: Record<string, unknown>;
+	filterCustom: {
+		isPaidLate: PaidLate | undefined;
+		[key: string]: unknown;
+	};
 }
 
 /**

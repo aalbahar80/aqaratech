@@ -310,7 +310,7 @@ type RootTranslation = {
 		 */
 		license: string
 		/**
-		 * I​s​ ​P​a​i​d
+		 * P​a​y​m​e​n​t​ ​S​t​a​t​u​s
 		 */
 		isPaid: string
 		/**
@@ -697,6 +697,10 @@ type RootTranslation = {
 		 * L​a​t​e
 		 */
 		late: string
+		/**
+		 * A​d​v​a​n​c​e​d
+		 */
+		advanced: string
 		/**
 		 * I​n​ ​p​r​o​g​r​e​s​s
 		 */
@@ -1343,7 +1347,7 @@ export type TranslationFunctions = {
 		 */
 		license: () => LocalizedString
 		/**
-		 * Is Paid
+		 * Payment Status
 		 */
 		isPaid: () => LocalizedString
 		/**
@@ -1730,6 +1734,10 @@ export type TranslationFunctions = {
 		 * Late
 		 */
 		late: () => LocalizedString
+		/**
+		 * Advanced
+		 */
+		advanced: () => LocalizedString
 		/**
 		 * In progress
 		 */

@@ -64,11 +64,26 @@
 					return '';
 				}
 
-				const isPaidLate = new Date(invoice.paidAt) > new Date(invoice.dueAt);
+				let label: string;
+				let badgeColor = 'green';
+
+				if (new Date(invoice.paidAt) > new Date(invoice.dueAt)) {
+					label = $L.badge.late();
+					badgeColor = 'red';
+				} else if (
+					new Date(invoice.paidAt) <= new Date(invoice.dueAt) &&
+					new Date(invoice.paidAt) >= new Date(invoice.postAt)
+				) {
+					label = $L.badge.onTime();
+					badgeColor = 'green';
+				} else {
+					label = $L.badge.advanced();
+					badgeColor = 'green';
+				}
 
 				return renderComponent(Badge, {
-					label: isPaidLate ? $L.badge.late() : $L.badge.onTime(),
-					badgeColor: isPaidLate ? 'red' : 'green',
+					label,
+					badgeColor,
 				});
 			},
 		}),

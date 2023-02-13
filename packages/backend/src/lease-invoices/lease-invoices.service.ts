@@ -5,7 +5,7 @@ import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
 import { Any, Object } from 'ts-toolbelt';
 
-import { entitiesMap } from '@self/utils';
+import { PAID_LATE, entitiesMap } from '@self/utils';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
@@ -67,17 +67,26 @@ export class LeaseInvoicesService {
 	}): Promise<WithCount<LeaseInvoiceDto>> {
 		const { take, skip, sort, filter, filterCustom } = queryOptions;
 
+		const isPaidLateFilter = filterCustom.isPaidLate;
+
 		const where = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).LeaseInvoice,
 				...(whereCustom ? [whereCustom] : []), // combine with other filters/remove?
 				filter,
 				// differentiate between undefined and false.
-				// undefined means no filter, false means filter for false
-				filterCustom['isPaidLate'] === true
+				// undefined means no filter (PAID_LATE.ALL)
+				isPaidLateFilter === PAID_LATE.LATE
 					? { paidAt: { gt: this.prisma.leaseInvoice.fields.dueAt } }
-					: filterCustom['isPaidLate'] === false
-					? { paidAt: { lte: this.prisma.leaseInvoice.fields.dueAt } }
+					: isPaidLateFilter === PAID_LATE.ON_TIME
+					? {
+							paidAt: {
+								lte: this.prisma.leaseInvoice.fields.dueAt,
+								gte: this.prisma.leaseInvoice.fields.postAt,
+							},
+					  }
+					: isPaidLateFilter === PAID_LATE.ADVANCED
+					? { paidAt: { lt: this.prisma.leaseInvoice.fields.postAt } }
 					: {},
 			],
 		} satisfies Prisma.LeaseInvoiceWhereInput;

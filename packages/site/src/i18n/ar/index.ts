@@ -213,6 +213,7 @@ const ar: Translation = {
 
 		onTime: 'في الوقت المحدد',
 		late: 'متأخر',
+		advanced: 'مسبق',
 
 		upcoming: 'قادم',
 		current: 'جاري',
