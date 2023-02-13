@@ -1,5 +1,15 @@
 # @self/utils
 
+## 3.12.0
+
+### Minor Changes
+
+- 370b1818a: add advanced paytime filter
+
+### Patch Changes
+
+- 0531e34dd: display dates in UTC
+
 ## 3.11.0
 
 ### Minor Changes
