@@ -330,6 +330,7 @@ export class LeaseInvoicesService {
 					{
 						month: 'long',
 						year: 'numeric',
+						timeZone: 'UTC',
 					},
 				),
 			},

@@ -1,3 +1,5 @@
+const timeZone = 'UTC';
+
 const formats = {
 	currency: {
 		style: 'currency',
@@ -11,14 +13,19 @@ const formats = {
 		year: 'numeric',
 		month: 'short',
 		day: 'numeric',
+		timeZone,
 	} satisfies Intl.DateTimeFormatOptions,
 
-	month: { month: 'short' } satisfies Intl.DateTimeFormatOptions,
+	month: {
+		month: 'short',
+		timeZone,
+	} satisfies Intl.DateTimeFormatOptions,
 
 	time: {
 		hour: 'numeric',
 		minute: 'numeric',
 		hour12: true,
+		timeZone,
 	} satisfies Intl.DateTimeFormatOptions,
 };
 
