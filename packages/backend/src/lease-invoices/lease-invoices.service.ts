@@ -243,10 +243,6 @@ export class LeaseInvoicesService {
 			error = 'Invoice is already paid';
 		}
 
-		if (invoice.postAt > new Date()) {
-			error = 'Invoice is not yet posted';
-		}
-
 		if (!invoice.lease.canPay) {
 			error = 'Online payments are disabled for this lease';
 		}

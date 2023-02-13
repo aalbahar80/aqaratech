@@ -99,16 +99,4 @@ test.describe('invoices not yet posted', () => {
 		await expect(pay).toBeVisible();
 		expect(await pay.getAttribute('href')).toBeNull();
 	});
-
-	test('does not generate pay link', async ({ request, invoice }) => {
-		const url = `${apiURL}/leaseInvoices/${invoice.id}/pay`;
-
-		const res = await request.get(url);
-
-		expect(res.status()).toBe(400);
-		expect(await res.json()).toHaveProperty(
-			'message',
-			'Invoice is not yet posted',
-		);
-	});
 });
