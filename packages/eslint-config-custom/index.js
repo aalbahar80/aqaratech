@@ -78,6 +78,7 @@ module.exports = {
 
 		'@typescript-eslint/ban-ts-comment': 'warn',
 
+		'@typescript-eslint/no-import-type-side-effects': 'warn',
 		'@typescript-eslint/consistent-type-exports': 'error',
 		'@typescript-eslint/consistent-type-imports': [
 			'error',

@@ -20,14 +20,14 @@
 	},
 	"devDependencies": {
 		"@logtail/types": "0.2.0",
-		"@sentry/types": "7.37.1",
+		"@sentry/types": "7.37.2",
 		"@types/node": "18.13.0",
-		"@vitest/ui": "0.28.4",
+		"@vitest/ui": "0.28.5",
 		"eslint-config-custom": "workspace:*",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"typescript": "5.0.0-beta",
-		"vitest": "0.28.4"
+		"vitest": "0.28.5"
 	},
 	"private": true,
 	"engines": {

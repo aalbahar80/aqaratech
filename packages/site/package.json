@@ -27,15 +27,15 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && pnpm typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.20",
+		"@iconify/json": "2.2.21",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.2.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",
-		"@sentry/svelte": "7.37.1",
-		"@sentry/tracing": "7.37.1",
-		"@sveltejs/adapter-node": "1.1.8",
-		"@sveltejs/kit": "1.5.5",
+		"@sentry/svelte": "7.37.2",
+		"@sentry/tracing": "7.37.2",
+		"@sveltejs/adapter-node": "1.2.0",
+		"@sveltejs/kit": "1.5.6",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/forms": "0.5.3",
@@ -86,18 +86,18 @@
 		"typescript": "5.0.0-beta",
 		"typescript-svelte-plugin": "0.3.14",
 		"ufo": "1.0.1",
-		"unplugin-icons": "0.15.2",
+		"unplugin-icons": "0.15.3",
 		"vite": "4.1.1",
 		"vite-plugin-iso-import": "1.0.0",
-		"vitest": "0.28.4",
+		"vitest": "0.28.5",
 		"zod": "3.20.6"
 	},
 	"type": "module",
 	"dependencies": {
 		"@logtail/node": "0.2.0",
 		"@logtail/winston": "0.2.0",
-		"@sentry/node": "7.37.1",
-		"typesafe-i18n": "5.24.0",
+		"@sentry/node": "7.37.2",
+		"typesafe-i18n": "5.24.1",
 		"winston": "3.8.2"
 	},
 	"engines": {
