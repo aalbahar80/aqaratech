@@ -1,5 +1,4 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { Expose } from 'class-transformer';
+import { PartialType } from '@nestjs/swagger';
 
 import { TenantCreateSchema, TenantUpdateSchema } from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -46,9 +45,5 @@ export class TenantDto
 
 	organizationId: string;
 
-	@ApiProperty()
-	@Expose()
-	get title(): string {
-		return this.label ?? this.fullName;
-	}
+	title: string;
 }

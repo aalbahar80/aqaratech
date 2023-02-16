@@ -2322,7 +2322,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TenantDto'
+                type: object
       tags: &ref_21
         - organizations
       security: &ref_22
@@ -2915,8 +2915,6 @@ components:
         id:
           type: string
           readOnly: true
-        title:
-          type: string
         fullName:
           type: string
         label:
@@ -2945,6 +2943,8 @@ components:
           nullable: true
         organizationId:
           type: string
+        title:
+          type: string
         createdAt:
           format: date-time
           type: string
@@ -2953,7 +2953,6 @@ components:
           type: string
       required:
         - id
-        - title
         - fullName
         - label
         - civilid
@@ -2964,6 +2963,7 @@ components:
         - residencyEnd
         - residencyNum
         - organizationId
+        - title
         - createdAt
         - updatedAt
     UpdateTenantDto:

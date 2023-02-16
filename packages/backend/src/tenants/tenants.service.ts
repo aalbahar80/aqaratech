@@ -34,7 +34,7 @@ export class TenantsService {
 			},
 		});
 
-		return plainToInstance(TenantDto, tenant);
+		return tenant;
 	}
 
 	async findAll({
