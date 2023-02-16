@@ -3403,12 +3403,10 @@ components:
         id:
           type: string
           readOnly: true
-        address:
-          type: string
-        title:
-          type: string
         breadcrumbs:
           $ref: '#/components/schemas/PropertyBreadcrumbsDto'
+        title:
+          type: string
         createdAt:
           format: date-time
           type: string
@@ -3454,9 +3452,8 @@ components:
           nullable: true
       required:
         - id
-        - address
-        - title
         - breadcrumbs
+        - title
         - createdAt
         - updatedAt
         - organizationId

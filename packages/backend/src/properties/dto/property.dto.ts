@@ -70,19 +70,7 @@ export class PropertyDto
 	@Exclude()
 	portfolio: IBreadcrumbs['portfolio'];
 
-	@ApiProperty()
-	@Expose()
-	get address(): string {
-		return [this.area, 'ق', this.block, 'م', this.number]
-			.filter(Boolean)
-			.join(' ');
-	}
-
-	@ApiProperty()
-	@Expose()
-	get title(): string {
-		return this.label ?? this.address;
-	}
+	title: string;
 
 	@ApiProperty()
 	@Expose()

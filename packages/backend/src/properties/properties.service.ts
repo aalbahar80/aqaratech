@@ -18,7 +18,6 @@ import {
 export class PropertiesService {
 	constructor(private readonly prisma: PrismaService) {}
 	SubjectType = 'Property' as const;
-	IndexName = 'property' as const;
 
 	async create({
 		createPropertyDto,

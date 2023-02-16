@@ -17,7 +17,6 @@ import {
 export class TenantsService {
 	constructor(private readonly prisma: PrismaService) {}
 	SubjectType = 'Tenant' as const;
-	IndexName = 'tenant' as const;
 
 	async create({
 		createTenantDto,

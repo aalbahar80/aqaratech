@@ -2551,22 +2551,16 @@ export interface PropertyDto {
 	readonly id: string;
 	/**
 	 *
-	 * @type {string}
+	 * @type {PropertyBreadcrumbsDto}
 	 * @memberof PropertyDto
 	 */
-	address: string;
+	breadcrumbs: PropertyBreadcrumbsDto;
 	/**
 	 *
 	 * @type {string}
 	 * @memberof PropertyDto
 	 */
 	title: string;
-	/**
-	 *
-	 * @type {PropertyBreadcrumbsDto}
-	 * @memberof PropertyDto
-	 */
-	breadcrumbs: PropertyBreadcrumbsDto;
 	/**
 	 *
 	 * @type {string}
