@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 
-import { DateAsString } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
@@ -27,7 +26,7 @@ export class TenantsService {
 	}: {
 		createTenantDto: CreateTenantDto;
 		organizationId: string;
-	}) {
+	}): Promise<TenantDto> {
 		const tenant = await this.prisma.c.tenant.create({
 			data: {
 				...createTenantDto,
