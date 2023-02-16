@@ -10,12 +10,7 @@ import { Unit } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
 import { formatDistance } from 'date-fns';
 
-import {
-	computeLabelUnit,
-	hasItems,
-	UnitCreateSchema,
-	UnitUpdateSchema,
-} from '@self/utils';
+import { hasItems, UnitCreateSchema, UnitUpdateSchema } from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
 	BreadcrumbDto,
@@ -90,15 +85,6 @@ export class UnitDto
 	@ApiHideProperty()
 	@Exclude()
 	property: IBreadcrumbs['property'];
-
-	@ApiProperty()
-	@Expose()
-	get title(): string {
-		return (
-			this.label ??
-			computeLabelUnit({ type: this.type, unitNumber: this.unitNumber })
-		);
-	}
 
 	@ApiProperty()
 	@Expose()
