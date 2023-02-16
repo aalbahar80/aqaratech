@@ -35,7 +35,7 @@ export class SearchService {
 		const take = 20;
 
 		const [tenants, portfolios, properties] = await Promise.all([
-			this.prisma.tenant.findMany({
+			this.prisma.c.tenant.findMany({
 				where: {
 					AND: [
 						accessibleBy(user.ability, Action.Read).Tenant,
@@ -62,7 +62,7 @@ export class SearchService {
 				},
 				take,
 			}),
-			this.prisma.portfolio.findMany({
+			this.prisma.c.portfolio.findMany({
 				where: {
 					AND: [
 						accessibleBy(user.ability, Action.Read).Portfolio,
@@ -87,7 +87,7 @@ export class SearchService {
 				},
 				take,
 			}),
-			this.prisma.property.findMany({
+			this.prisma.c.property.findMany({
 				where: {
 					AND: [
 						accessibleBy(user.ability, Action.Read).Property,

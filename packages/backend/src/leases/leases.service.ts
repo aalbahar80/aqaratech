@@ -28,7 +28,7 @@ export class LeasesService {
 		organizationId: string;
 	}) {
 		// TODO: consider returning a lease dto class
-		return await this.prisma.lease.create({
+		return await this.prisma.c.lease.create({
 			data: {
 				...createLeaseDto,
 				organizationId,
@@ -56,7 +56,7 @@ export class LeasesService {
 		};
 
 		const [data, total] = await Promise.all([
-			this.prisma.lease.findMany({
+			this.prisma.c.lease.findMany({
 				take,
 				skip,
 				where: filter,
@@ -66,14 +66,14 @@ export class LeasesService {
 					unit: crumbs.unit,
 				},
 			}),
-			this.prisma.lease.count({ where: filter }),
+			this.prisma.c.lease.count({ where: filter }),
 		]);
 
 		return { total, results: data.map((l) => new LeaseDto(l)) };
 	}
 
 	async findOne({ id }: { id: string }) {
-		const data = await this.prisma.lease.findUniqueOrThrow({
+		const data = await this.prisma.c.lease.findUniqueOrThrow({
 			where: { id },
 			include: {
 				tenant: crumbs.tenant,
@@ -92,14 +92,14 @@ export class LeasesService {
 		updateLeaseDto: UpdateLeaseDto;
 		user: IUser;
 	}) {
-		return await this.prisma.lease.update({
+		return await this.prisma.c.lease.update({
 			where: { id, AND: accessibleBy(user.ability, Action.Update).Lease },
 			data: updateLeaseDto,
 		});
 	}
 
 	async remove({ id }: { id: string }) {
-		const deleted = await this.prisma.lease.delete({ where: { id } });
+		const deleted = await this.prisma.c.lease.delete({ where: { id } });
 		return deleted.id;
 	}
 
@@ -114,7 +114,7 @@ export class LeasesService {
 		createManyLeaseInvoicesDto: CreateManyLeaseInvoicesDto[];
 		organizationId: string;
 	}) {
-		const updated = await this.prisma.lease.update({
+		const updated = await this.prisma.c.lease.update({
 			where: { id: leaseId },
 			data: {
 				leaseInvoices: {

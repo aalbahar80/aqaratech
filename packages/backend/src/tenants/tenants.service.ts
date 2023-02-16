@@ -27,7 +27,7 @@ export class TenantsService {
 		createTenantDto: CreateTenantDto;
 		organizationId: string;
 	}) {
-		const tenant = await this.prisma.tenant.create({
+		const tenant = await this.prisma.c.tenant.create({
 			data: {
 				...createTenantDto,
 				organizationId,
@@ -51,13 +51,13 @@ export class TenantsService {
 		};
 
 		const [results, total] = await Promise.all([
-			this.prisma.tenant.findMany({
+			this.prisma.c.tenant.findMany({
 				take,
 				skip,
 				orderBy: sort,
 				where,
 			}),
-			this.prisma.tenant.count({
+			this.prisma.c.tenant.count({
 				where,
 			}),
 		]);
@@ -66,7 +66,7 @@ export class TenantsService {
 	}
 
 	async findOne({ id }: { id: string }) {
-		const data = await this.prisma.tenant.findUniqueOrThrow({
+		const data = await this.prisma.c.tenant.findUniqueOrThrow({
 			where: { id },
 		});
 
@@ -82,7 +82,7 @@ export class TenantsService {
 		updateTenantDto: UpdateTenantDto;
 		user: IUser;
 	}) {
-		const tenant = await this.prisma.tenant.update({
+		const tenant = await this.prisma.c.tenant.update({
 			where: {
 				id,
 				// TODO double check this
@@ -95,14 +95,14 @@ export class TenantsService {
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		await this.prisma.tenant.findFirstOrThrow({
+		await this.prisma.c.tenant.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Delete).Tenant],
 			},
 		});
 
 		// PERF: Can be optimized after Meilisearch removal
-		const deleted = await this.prisma.tenant.delete({ where: { id } });
+		const deleted = await this.prisma.c.tenant.delete({ where: { id } });
 
 		return plainToInstance(TenantDto, deleted);
 	}

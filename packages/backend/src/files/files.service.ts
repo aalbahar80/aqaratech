@@ -193,7 +193,7 @@ export class FilesService {
 	}) {
 		const entityMap = entitiesMap[relationKey];
 		// @ts-expect-error - uniontype not cutting it
-		await this.prisma[relationKey].findFirstOrThrow({
+		await this.prisma.c[relationKey].findFirstOrThrow({
 			where: {
 				AND: [
 					{ id: relationValue },

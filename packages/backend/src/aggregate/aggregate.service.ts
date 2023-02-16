@@ -40,7 +40,7 @@ export class AggregateService {
 		options: AggregateOptionsDto;
 		paidStatus: PaidStatus;
 	}) {
-		const leaseInvoices = await this.prisma.leaseInvoice.findMany({
+		const leaseInvoices = await this.prisma.c.leaseInvoice.findMany({
 			where: {
 				AND: [
 					{
@@ -79,7 +79,7 @@ export class AggregateService {
 		portfolioId: string;
 		options: AggregateOptionsExpensesDto;
 	}) {
-		const expenses = await this.prisma.expense.findMany({
+		const expenses = await this.prisma.c.expense.findMany({
 			where: {
 				AND: [
 					{
@@ -175,7 +175,7 @@ export class AggregateService {
 		const grouped = groupByLocation(expenses);
 
 		// Add property label or unit label to each location
-		const units = await this.prisma.unit.findMany({
+		const units = await this.prisma.c.unit.findMany({
 			where: {
 				organizationId,
 				portfolioId,
@@ -233,7 +233,7 @@ export class AggregateService {
 		portfolioId: string;
 		options: AggregateOptionsDto;
 	}) {
-		const units = await this.prisma.unit.findMany({
+		const units = await this.prisma.c.unit.findMany({
 			where: {
 				organizationId,
 				portfolioId,
@@ -317,7 +317,7 @@ export class AggregateService {
 		portfolioId: string;
 		user: IUser;
 	}) {
-		const portfolio = await this.prisma.portfolio.findUniqueOrThrow({
+		const portfolio = await this.prisma.c.portfolio.findUniqueOrThrow({
 			where: { id: portfolioId },
 			select: {
 				id: true,
@@ -331,20 +331,20 @@ export class AggregateService {
 		);
 
 		const [leaseInvoices, expenses, payouts] = await Promise.all([
-			this.prisma.leaseInvoice.aggregate({
+			this.prisma.c.leaseInvoice.aggregate({
 				_sum: { amount: true },
 				where: {
 					portfolioId: portfolioId,
 					isPaid: true,
 				},
 			}),
-			this.prisma.expense.aggregate({
+			this.prisma.c.expense.aggregate({
 				_sum: { amount: true },
 				where: {
 					portfolioId: portfolioId,
 				},
 			}),
-			this.prisma.payout.aggregate({
+			this.prisma.c.payout.aggregate({
 				_sum: { amount: true },
 				where: {
 					portfolioId: portfolioId,

@@ -48,7 +48,7 @@ export class LeaseInvoicesService {
 		createLeaseInvoiceDto: CreateLeaseInvoiceDto;
 		organizationId: string;
 	}) {
-		return await this.prisma.leaseInvoice.create({
+		return await this.prisma.c.leaseInvoice.create({
 			data: {
 				...createLeaseInvoiceDto,
 				organizationId,
@@ -77,22 +77,22 @@ export class LeaseInvoicesService {
 				// differentiate between undefined and false.
 				// undefined means no filter (PAID_LATE.ALL)
 				isPaidLateFilter === PAID_LATE.LATE
-					? { paidAt: { gt: this.prisma.leaseInvoice.fields.dueAt } }
+					? { paidAt: { gt: this.prisma.c.leaseInvoice.fields.dueAt } }
 					: isPaidLateFilter === PAID_LATE.ON_TIME
 					? {
 							paidAt: {
-								lte: this.prisma.leaseInvoice.fields.dueAt,
-								gte: this.prisma.leaseInvoice.fields.postAt,
+								lte: this.prisma.c.leaseInvoice.fields.dueAt,
+								gte: this.prisma.c.leaseInvoice.fields.postAt,
 							},
 					  }
 					: isPaidLateFilter === PAID_LATE.ADVANCED
-					? { paidAt: { lt: this.prisma.leaseInvoice.fields.postAt } }
+					? { paidAt: { lt: this.prisma.c.leaseInvoice.fields.postAt } }
 					: {},
 			],
 		} satisfies Prisma.LeaseInvoiceWhereInput;
 
 		const [data, total] = await Promise.all([
-			this.prisma.leaseInvoice.findMany({
+			this.prisma.c.leaseInvoice.findMany({
 				take,
 				skip,
 				orderBy: sort,
@@ -117,14 +117,14 @@ export class LeaseInvoicesService {
 					lease: crumbs.lease,
 				},
 			}),
-			this.prisma.leaseInvoice.count({ where }),
+			this.prisma.c.leaseInvoice.count({ where }),
 		]);
 
 		return { total, results: data.map((d) => new LeaseInvoiceDto(d)) };
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const data = await this.prisma.leaseInvoice.findFirstOrThrow({
+		const data = await this.prisma.c.leaseInvoice.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Read).LeaseInvoice],
 			},
@@ -142,7 +142,7 @@ export class LeaseInvoicesService {
 		updateLeaseInvoiceDto: UpdateLeaseInvoiceDto;
 		user: IUser;
 	}) {
-		const invoice = await this.prisma.leaseInvoice.findUniqueOrThrow({
+		const invoice = await this.prisma.c.leaseInvoice.findUniqueOrThrow({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Update).LeaseInvoice,
@@ -157,7 +157,7 @@ export class LeaseInvoicesService {
 			);
 		}
 
-		return await this.prisma.leaseInvoice.update({
+		return await this.prisma.c.leaseInvoice.update({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Update).LeaseInvoice,
@@ -167,14 +167,14 @@ export class LeaseInvoicesService {
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		const deleted = await this.prisma.leaseInvoice.findFirstOrThrow({
+		const deleted = await this.prisma.c.leaseInvoice.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Delete).LeaseInvoice],
 			},
 			select: { id: true },
 		});
 
-		await this.prisma.leaseInvoice.delete({ where: { id: deleted.id } });
+		await this.prisma.c.leaseInvoice.delete({ where: { id: deleted.id } });
 		return deleted.id;
 	}
 
@@ -184,7 +184,7 @@ export class LeaseInvoicesService {
 			status,
 		});
 
-		const originalInvoice = await this.prisma.leaseInvoice.findUniqueOrThrow({
+		const originalInvoice = await this.prisma.c.leaseInvoice.findUniqueOrThrow({
 			where: { id: status.leaseInvoiceId },
 		});
 
@@ -216,7 +216,7 @@ export class LeaseInvoicesService {
 			return originalInvoice;
 		}
 
-		const paidInvoice = await this.prisma.leaseInvoice.update({
+		const paidInvoice = await this.prisma.c.leaseInvoice.update({
 			where: {
 				id: status.leaseInvoiceId,
 				// Don't check for isPaid here, check was done when generating the link
@@ -235,7 +235,7 @@ export class LeaseInvoicesService {
 	}
 
 	async generatePaymentLink(id: string) {
-		const invoice = await this.prisma.leaseInvoice.findUniqueOrThrow({
+		const invoice = await this.prisma.c.leaseInvoice.findUniqueOrThrow({
 			where: { id: id },
 			include: {
 				lease: {
@@ -276,7 +276,7 @@ export class LeaseInvoicesService {
 	}
 
 	async sendInvoice({ id, user }: { id: string; user: IUser }) {
-		const invoice = await this.prisma.leaseInvoice.findFirstOrThrow({
+		const invoice = await this.prisma.c.leaseInvoice.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Update).LeaseInvoice],
 			},

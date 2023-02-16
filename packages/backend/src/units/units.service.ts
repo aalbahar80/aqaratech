@@ -29,7 +29,7 @@ export class UnitsService {
 	}) {
 		const { portfolioId, propertyId, ...rest } = createUnitDto;
 
-		const created = await this.prisma.unit.create({
+		const created = await this.prisma.c.unit.create({
 			data: {
 				...rest,
 				property: {
@@ -71,7 +71,7 @@ export class UnitsService {
 		} satisfies Prisma.UnitWhereInput;
 
 		const [data, total] = await Promise.all([
-			this.prisma.unit.findMany({
+			this.prisma.c.unit.findMany({
 				take,
 				skip,
 				orderBy: sort,
@@ -86,7 +86,7 @@ export class UnitsService {
 					property: crumbs.property,
 				},
 			}),
-			this.prisma.unit.count({ where }),
+			this.prisma.c.unit.count({ where }),
 		]);
 
 		return { total, results: data.map((u) => new UnitDto(u)) };
@@ -115,7 +115,7 @@ export class UnitsService {
 		} satisfies Prisma.UnitWhereInput;
 
 		const [data, total] = await Promise.all([
-			this.prisma.unit.findMany({
+			this.prisma.c.unit.findMany({
 				take,
 				skip,
 				orderBy: sort,
@@ -127,14 +127,14 @@ export class UnitsService {
 					propertyId: true,
 				},
 			}),
-			this.prisma.unit.count({ where }),
+			this.prisma.c.unit.count({ where }),
 		]);
 
 		return { total, results: data };
 	}
 
 	async findOne({ id }: { id: string }): Promise<UnitDto> {
-		const data = await this.prisma.unit.findUniqueOrThrow({
+		const data = await this.prisma.c.unit.findUniqueOrThrow({
 			where: { id },
 			include: {
 				leases: {
@@ -157,7 +157,7 @@ export class UnitsService {
 		updateUnitDto: UpdateUnitDto;
 		user: IUser;
 	}) {
-		const updated = await this.prisma.unit.update({
+		const updated = await this.prisma.c.unit.update({
 			where: { id, AND: accessibleBy(user.ability, Action.Update).Unit },
 			data: updateUnitDto,
 		});
@@ -166,7 +166,7 @@ export class UnitsService {
 	}
 
 	async remove({ id }: { id: string }) {
-		await this.prisma.unit.delete({ where: { id } });
+		await this.prisma.c.unit.delete({ where: { id } });
 		return id;
 	}
 }

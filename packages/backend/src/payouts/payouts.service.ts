@@ -22,7 +22,7 @@ export class PayoutsService {
 		createPayoutDto: CreatePayoutDto;
 		organizationId: string;
 	}) {
-		const created = await this.prisma.payout.create({
+		const created = await this.prisma.c.payout.create({
 			data: {
 				...createPayoutDto,
 				organizationId,
@@ -54,21 +54,21 @@ export class PayoutsService {
 		};
 
 		const [results, total] = await Promise.all([
-			this.prisma.payout.findMany({
+			this.prisma.c.payout.findMany({
 				take,
 				skip,
 				orderBy: sort,
 				where: filter,
 				include: { portfolio: crumbs.portfolio },
 			}),
-			this.prisma.payout.count({ where: filter }),
+			this.prisma.c.payout.count({ where: filter }),
 		]);
 
 		return { total, results: results.map((p) => new PayoutDto(p)) };
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const payout = await this.prisma.payout.findFirstOrThrow({
+		const payout = await this.prisma.c.payout.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Read).Payout],
 			},
@@ -79,12 +79,12 @@ export class PayoutsService {
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		await this.prisma.payout.findFirstOrThrow({
+		await this.prisma.c.payout.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Delete).Payout],
 			},
 		});
-		const deleted = await this.prisma.payout.delete({ where: { id } });
+		const deleted = await this.prisma.c.payout.delete({ where: { id } });
 		return deleted.id;
 	}
 }

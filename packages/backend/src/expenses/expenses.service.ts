@@ -43,7 +43,7 @@ export class ExpensesService {
 		let expense: Expense;
 
 		if (unitId) {
-			expense = await this.prisma.expense.create({
+			expense = await this.prisma.c.expense.create({
 				data: {
 					...data,
 					unit: {
@@ -58,7 +58,7 @@ export class ExpensesService {
 				},
 			});
 		} else if (propertyId) {
-			expense = await this.prisma.expense.create({
+			expense = await this.prisma.c.expense.create({
 				data: {
 					...data,
 					property: {
@@ -73,7 +73,7 @@ export class ExpensesService {
 				},
 			});
 		} else {
-			expense = await this.prisma.expense.create({
+			expense = await this.prisma.c.expense.create({
 				data: {
 					...data,
 					portfolio: {
@@ -109,7 +109,7 @@ export class ExpensesService {
 		};
 
 		const [data, total, settings] = await Promise.all([
-			this.prisma.expense.findMany({
+			this.prisma.c.expense.findMany({
 				take,
 				skip,
 				orderBy: sort,
@@ -120,10 +120,10 @@ export class ExpensesService {
 					unit: crumbs.unit,
 				},
 			}),
-			this.prisma.expense.count({ where: filter }),
+			this.prisma.c.expense.count({ where: filter }),
 
 			// TODO get from orgservice
-			this.prisma.organizationSettings.findUniqueOrThrow({
+			this.prisma.c.organizationSettings.findUniqueOrThrow({
 				where: { organizationId: user.role.organizationId },
 				select: { expenseCategoryTree: true },
 			}),
@@ -139,7 +139,7 @@ export class ExpensesService {
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
 		const [data, settings] = await Promise.all([
-			this.prisma.expense.findFirstOrThrow({
+			this.prisma.c.expense.findFirstOrThrow({
 				where: {
 					AND: [{ id }, accessibleBy(user.ability, Action.Read).Expense],
 				},
@@ -151,7 +151,7 @@ export class ExpensesService {
 			}),
 
 			// TODO get from orgservice
-			this.prisma.organizationSettings.findUniqueOrThrow({
+			this.prisma.c.organizationSettings.findUniqueOrThrow({
 				where: { organizationId: user.role.organizationId },
 				select: { expenseCategoryTree: true },
 			}),
@@ -179,7 +179,7 @@ export class ExpensesService {
 			await this.validateCategoryId(updateExpenseDto.categoryId, user);
 		}
 
-		const expense = await this.prisma.expense.update({
+		const expense = await this.prisma.c.expense.update({
 			where: { id, AND: accessibleBy(user.ability, Action.Update).Expense },
 			data: updateExpenseDto,
 		});
@@ -188,24 +188,26 @@ export class ExpensesService {
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		const deleted = await this.prisma.expense.findFirstOrThrow({
+		const deleted = await this.prisma.c.expense.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Delete).Expense],
 			},
 			select: { id: true },
 		});
 
-		await this.prisma.expense.delete({ where: { id: deleted.id } });
+		await this.prisma.c.expense.delete({ where: { id: deleted.id } });
 		return deleted.id;
 	}
 
 	// ::: HELPERS :::
 
 	async validateCategoryId(categoryId: string, user: IUser) {
-		const settings = await this.prisma.organizationSettings.findUniqueOrThrow({
-			where: { organizationId: user.role.organizationId },
-			select: { expenseCategoryTree: true },
-		});
+		const settings = await this.prisma.c.organizationSettings.findUniqueOrThrow(
+			{
+				where: { organizationId: user.role.organizationId },
+				select: { expenseCategoryTree: true },
+			},
+		);
 
 		const categories = expenseCategorySchema
 			.array()

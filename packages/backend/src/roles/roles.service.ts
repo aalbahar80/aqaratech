@@ -37,7 +37,7 @@ export class RolesService {
 		tenantId: string | null;
 		user: IUser;
 	}) {
-		const existingRole = await this.prisma.role.findFirst({
+		const existingRole = await this.prisma.c.role.findFirst({
 			where: {
 				user: { email: createRoleDto.email },
 				roleType,
@@ -51,7 +51,7 @@ export class RolesService {
 			throw new BadRequestException('Role already exists for this user');
 		}
 
-		const role = await this.prisma.role.create({
+		const role = await this.prisma.c.role.create({
 			data: {
 				roleType,
 				organization: { connect: { id: organizationId } },
@@ -109,7 +109,7 @@ export class RolesService {
 	async sendWelcomeEmail(payload: RoleCreatedEvent) {
 		const origin = this.env.e.PUBLIC_SITE_URL;
 
-		const role = await this.prisma.role.findUniqueOrThrow({
+		const role = await this.prisma.c.role.findUniqueOrThrow({
 			where: { id: payload.roleId },
 			include: {
 				user: { select: { email: true } },
@@ -152,7 +152,7 @@ export class RolesService {
 		} satisfies Prisma.RoleWhereInput;
 
 		const [data, total] = await Promise.all([
-			this.prisma.role.findMany({
+			this.prisma.c.role.findMany({
 				take,
 				skip,
 				orderBy: sort,
@@ -167,7 +167,7 @@ export class RolesService {
 					user: { select: { email: true } },
 				},
 			}),
-			this.prisma.role.count({ where: filter }),
+			this.prisma.c.role.count({ where: filter }),
 		]);
 
 		const results = data.map((r) => {
@@ -179,7 +179,7 @@ export class RolesService {
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		const role = await this.prisma.role.delete({
+		const role = await this.prisma.c.role.delete({
 			where: {
 				id,
 				AND: [accessibleBy(user.ability, Action.Delete).Role],

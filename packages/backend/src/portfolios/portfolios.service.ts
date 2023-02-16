@@ -26,7 +26,7 @@ export class PortfoliosService {
 		createPortfolioDto: CreatePortfolioDto;
 		organizationId: string;
 	}) {
-		const portfolio = await this.prisma.portfolio.create({
+		const portfolio = await this.prisma.c.portfolio.create({
 			data: {
 				...createPortfolioDto,
 				organizationId,
@@ -46,13 +46,13 @@ export class PortfoliosService {
 		const { skip, take, sort } = queryOptions;
 
 		const [results, total] = await Promise.all([
-			this.prisma.portfolio.findMany({
+			this.prisma.c.portfolio.findMany({
 				take,
 				skip,
 				orderBy: sort,
 				where: accessibleBy(user.ability, Action.Read).Portfolio,
 			}),
-			this.prisma.portfolio.count({
+			this.prisma.c.portfolio.count({
 				where: accessibleBy(user.ability, Action.Read).Portfolio,
 			}),
 		]);
@@ -61,7 +61,7 @@ export class PortfoliosService {
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const data = await this.prisma.portfolio.findFirstOrThrow({
+		const data = await this.prisma.c.portfolio.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Read).Portfolio],
 			},
@@ -79,7 +79,7 @@ export class PortfoliosService {
 		updatePortfolioDto: UpdatePortfolioDto;
 		user: IUser;
 	}) {
-		const portfolio = await this.prisma.portfolio.update({
+		const portfolio = await this.prisma.c.portfolio.update({
 			where: { id, AND: accessibleBy(user.ability, Action.Update).Portfolio },
 			data: updatePortfolioDto,
 		});
@@ -88,14 +88,14 @@ export class PortfoliosService {
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		await this.prisma.portfolio.findFirstOrThrow({
+		await this.prisma.c.portfolio.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Delete).Portfolio],
 			},
 		});
 
 		// PERF: Can be optimized after Meilisearch removal
-		const portfolio = await this.prisma.portfolio.delete({ where: { id } });
+		const portfolio = await this.prisma.c.portfolio.delete({ where: { id } });
 
 		return plainToInstance(PortfolioDto, portfolio);
 	}

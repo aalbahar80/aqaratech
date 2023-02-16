@@ -39,7 +39,7 @@ export class OrganizationsService {
 			OrganizationsService.name,
 		);
 
-		const organization = await this.prisma.organization.create({
+		const organization = await this.prisma.c.organization.create({
 			data: {
 				fullName: createOrganizationDto.fullName,
 				label: createOrganizationDto.label ?? null,
@@ -82,7 +82,7 @@ export class OrganizationsService {
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const data = await this.prisma.organization.findUniqueOrThrow({
+		const data = await this.prisma.c.organization.findUniqueOrThrow({
 			where: { id, AND: accessibleBy(user.ability, Action.Read).Organization },
 		});
 
@@ -105,7 +105,7 @@ export class OrganizationsService {
 			subject(this.SubjectType, { ...updateOrganizationDto, id }),
 		);
 
-		const updated = await this.prisma.organization.update({
+		const updated = await this.prisma.c.organization.update({
 			where: { id },
 			data: {
 				fullName: updateOrganizationDto.fullName,
@@ -128,7 +128,7 @@ export class OrganizationsService {
 
 		this.logger.log(`Deleted bucket ${id}`, OrganizationsService.name);
 
-		const deleted = await this.prisma.organization.delete({ where: { id } });
+		const deleted = await this.prisma.c.organization.delete({ where: { id } });
 		this.logger.log(`Deleted organization ${id}`, OrganizationsService.name);
 
 		return plainToInstance(OrganizationDto, deleted, {

@@ -48,7 +48,7 @@ export class ExpenseCategoriesService {
 
 		categories.push(newCategory);
 
-		await this.prisma.organizationSettings.update({
+		await this.prisma.c.organizationSettings.update({
 			where: { organizationId },
 			data: { expenseCategoryTree: categories },
 		});
@@ -59,7 +59,7 @@ export class ExpenseCategoriesService {
 	}
 
 	async findAll({ organizationId }: { organizationId: string }) {
-		const data = await this.prisma.organizationSettings.findUniqueOrThrow({
+		const data = await this.prisma.c.organizationSettings.findUniqueOrThrow({
 			where: { organizationId },
 		});
 
@@ -106,7 +106,7 @@ export class ExpenseCategoriesService {
 			});
 		}
 
-		const settings = await this.prisma.organizationSettings.update({
+		const settings = await this.prisma.c.organizationSettings.update({
 			where: { organizationId },
 			data: { expenseCategoryTree: proposed },
 		});
@@ -143,7 +143,7 @@ export class ExpenseCategoriesService {
 			}
 		});
 
-		const settings = await this.prisma.organizationSettings.update({
+		const settings = await this.prisma.c.organizationSettings.update({
 			where: { organizationId },
 			data: { expenseCategoryTree: modified },
 		});
@@ -163,10 +163,12 @@ export class ExpenseCategoriesService {
 
 	async fetchJsonCategories({ organizationId }: { organizationId: string }) {
 		// Reference: https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#advanced-example-update-a-nested-json-key-value
-		const settings = await this.prisma.organizationSettings.findUniqueOrThrow({
-			where: { organizationId },
-			select: { expenseCategoryTree: true },
-		});
+		const settings = await this.prisma.c.organizationSettings.findUniqueOrThrow(
+			{
+				where: { organizationId },
+				select: { expenseCategoryTree: true },
+			},
+		);
 
 		const categoriesJson = settings.expenseCategoryTree;
 

@@ -42,7 +42,7 @@ export class MaintenanceOrdersService {
 		const { portfolioId, propertyId, unitId, tenantId, ...data } =
 			createMaintenanceOrderDto;
 
-		const mo = this.prisma.maintenanceOrder.create({
+		const mo = this.prisma.c.maintenanceOrder.create({
 			data: {
 				...data,
 				organization: { connect: { id: organizationId } },
@@ -73,7 +73,7 @@ export class MaintenanceOrdersService {
 		};
 
 		const [data, total] = await Promise.all([
-			this.prisma.maintenanceOrder.findMany({
+			this.prisma.c.maintenanceOrder.findMany({
 				take,
 				skip,
 				orderBy: sort,
@@ -86,14 +86,14 @@ export class MaintenanceOrdersService {
 				},
 			}),
 
-			this.prisma.maintenanceOrder.count({ where: filter }),
+			this.prisma.c.maintenanceOrder.count({ where: filter }),
 		]);
 
 		return { total, results: plainToInstance(MaintenanceOrderDto, data) };
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const data = await this.prisma.maintenanceOrder.findUniqueOrThrow({
+		const data = await this.prisma.c.maintenanceOrder.findUniqueOrThrow({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Read).MaintenanceOrder,
@@ -118,7 +118,7 @@ export class MaintenanceOrdersService {
 		updateMaintenanceOrderDto: UpdateMaintenanceOrderDto;
 		user: IUser;
 	}) {
-		const data = await this.prisma.maintenanceOrder.update({
+		const data = await this.prisma.c.maintenanceOrder.update({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Update).MaintenanceOrder,
@@ -130,7 +130,7 @@ export class MaintenanceOrdersService {
 	}
 
 	remove({ id, user }: { id: string; user: IUser }) {
-		return this.prisma.maintenanceOrder.delete({
+		return this.prisma.c.maintenanceOrder.delete({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Delete).MaintenanceOrder,

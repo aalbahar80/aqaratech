@@ -19,11 +19,11 @@ export class UsersService {
 	private readonly logger = new Logger(UsersService.name);
 
 	async create({ createUserDto }: { createUserDto: CreateUserDto }) {
-		return await this.prisma.user.create({ data: createUserDto });
+		return await this.prisma.c.user.create({ data: createUserDto });
 	}
 
 	async findOneByEmail(email: string) {
-		let user = await this.prisma.user.findUnique({
+		let user = await this.prisma.c.user.findUnique({
 			where: { email },
 			include: {
 				roles: {
@@ -41,7 +41,7 @@ export class UsersService {
 				`User with email: ${email} does not yet exist in our db. Creating...`,
 			);
 
-			user = await this.prisma.user.create({
+			user = await this.prisma.c.user.create({
 				data: {
 					email,
 				},

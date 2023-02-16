@@ -27,7 +27,7 @@ export class PropertiesService {
 		createPropertyDto: CreatePropertyDto;
 		organizationId: string;
 	}) {
-		const created = await this.prisma.property.create({
+		const created = await this.prisma.c.property.create({
 			data: {
 				...createPropertyDto,
 				organizationId,
@@ -58,21 +58,21 @@ export class PropertiesService {
 		};
 
 		const [results, total] = await Promise.all([
-			this.prisma.property.findMany({
+			this.prisma.c.property.findMany({
 				take,
 				skip,
 				orderBy: sort,
 				where: filter,
 				include: { portfolio: crumbs.portfolio },
 			}),
-			this.prisma.property.count({ where: filter }),
+			this.prisma.c.property.count({ where: filter }),
 		]);
 
 		return { total, results: results.map((p) => new PropertyDto(p)) };
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const property = await this.prisma.property.findFirstOrThrow({
+		const property = await this.prisma.c.property.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Read).Property],
 			},
@@ -91,7 +91,7 @@ export class PropertiesService {
 		updatePropertyDto: UpdatePropertyDto;
 		user: IUser;
 	}) {
-		const updated = await this.prisma.property.update({
+		const updated = await this.prisma.c.property.update({
 			where: { id, AND: accessibleBy(user.ability, Action.Update).Property },
 			data: updatePropertyDto,
 		});
@@ -102,14 +102,14 @@ export class PropertiesService {
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		await this.prisma.property.findFirstOrThrow({
+		await this.prisma.c.property.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Delete).Property],
 			},
 		});
 
 		// PERF: Can be optimized after Meilisearch removal
-		const deleted = await this.prisma.property.delete({ where: { id } });
+		const deleted = await this.prisma.c.property.delete({ where: { id } });
 
 		return new PropertyDto(deleted);
 	}
