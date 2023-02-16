@@ -65,18 +65,18 @@ export const setupSwagger = async (app: INestApplication) => {
 			}),
 		);
 
-		SwaggerModule.setup('swagger', app, document, {
-			swaggerOptions: {
-				// https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
-				oauth: {
-					clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
-					clientSecret:
-						'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
-					scopes: ['openid', 'profile', 'email'], // default scopes to request
-				},
-				persistAuthorization: true,
-			},
-		});
+		// SwaggerModule.setup('swagger', app, document, {
+		// 	swaggerOptions: {
+		// 		// https://github.com/nestjs/swagger/issues/1828#issuecomment-1084833100
+		// 		oauth: {
+		// 			clientId: 'z6oqyOuPLao6XhJeCje9tZ8ZbiJa5zct',
+		// 			clientSecret:
+		// 				'uSR4Gjf3XNN-1kfZGuppDqRdbz7XD6A4o2g8yY1GdZgqCXeYhWhdqfPUoIIJLBRf',
+		// 			scopes: ['openid', 'profile', 'email'], // default scopes to request
+		// 		},
+		// 		persistAuthorization: true,
+		// 	},
+		// });
 	} catch (e) {
 		Logger.error('Could not write swagger file');
 		Logger.error(e);
