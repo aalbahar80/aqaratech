@@ -2927,6 +2927,7 @@ components:
           type: string
           nullable: true
         dob:
+          format: date-time
           type: string
           nullable: true
         nationality:
@@ -2936,6 +2937,7 @@ components:
           type: string
           nullable: true
         residencyEnd:
+          format: date-time
           type: string
           nullable: true
         residencyNum:

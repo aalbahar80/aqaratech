@@ -2764,12 +2764,6 @@ export interface TenantDto {
 	 * @type {string}
 	 * @memberof TenantDto
 	 */
-	title: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof TenantDto
-	 */
 	fullName: string;
 	/**
 	 *
@@ -2825,6 +2819,12 @@ export interface TenantDto {
 	 * @memberof TenantDto
 	 */
 	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	title: string;
 	/**
 	 *
 	 * @type {string}

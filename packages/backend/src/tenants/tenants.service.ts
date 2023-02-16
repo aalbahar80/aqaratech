@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 
+import { DateAsString } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
@@ -62,7 +63,7 @@ export class TenantsService {
 			}),
 		]);
 
-		return { total, results: plainToInstance(TenantDto, results) };
+		return { total, results };
 	}
 
 	async findOne({ id }: { id: string }) {

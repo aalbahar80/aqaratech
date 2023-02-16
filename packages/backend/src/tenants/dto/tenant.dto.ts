@@ -1,6 +1,10 @@
 import { PartialType } from '@nestjs/swagger';
 
-import { TenantCreateSchema, TenantUpdateSchema } from '@self/utils';
+import {
+	StringifyDateKeys,
+	TenantCreateSchema,
+	TenantUpdateSchema,
+} from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { IOrganizationId, ITitle } from 'src/types/common.types';
 import { Exactly } from 'src/types/exactly.type';
@@ -29,7 +33,10 @@ export class TenantDto
 	extends AbstractDto
 	implements
 		Exactly<
-			TenantCreateSchema & AbstractDto & IOrganizationId & ITitle,
+			StringifyDateKeys<TenantCreateSchema, 'dob' | 'residencyEnd'> &
+				AbstractDto &
+				IOrganizationId &
+				ITitle,
 			TenantDto
 		>
 {
@@ -37,10 +44,10 @@ export class TenantDto
 	label: string | null;
 	civilid: string | null;
 	phone: string | null;
-	dob: string | null;
+	dob: Date | null;
 	nationality: string | null;
 	passportNum: string | null;
-	residencyEnd: string | null;
+	residencyEnd: Date | null;
 	residencyNum: string | null;
 
 	organizationId: string;
