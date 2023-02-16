@@ -8,7 +8,6 @@ import {
 } from '@nestjs/swagger';
 import { Unit } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
-import { IsNumber, IsPositive, IsString, Length } from 'class-validator';
 import { formatDistance } from 'date-fns';
 
 import {
@@ -24,47 +23,34 @@ import {
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
-import { IsID } from 'src/decorators/field.decorators';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 import { Exactly } from 'src/types/exactly.type';
 
 class UnitRequiredDto {
-	@IsID()
 	organizationId: string;
 
-	@IsID()
 	portfolioId: string;
 
-	@IsID()
 	propertyId: string;
 
-	@Length(1, 255)
 	unitNumber: string;
 }
 
 class UnitOptionalDto {
-	@IsNumber()
 	floor: number | null;
 
-	@IsPositive()
 	size: number | null;
 
-	@IsPositive()
 	bed: number | null;
 
-	@IsPositive()
 	bath: number | null;
 
-	@IsPositive()
 	marketRent: number | null;
 
-	@IsString()
 	type: string | null;
 
-	@IsString()
 	usage: string | null;
 
-	@IsString()
 	label: string | null;
 }
 

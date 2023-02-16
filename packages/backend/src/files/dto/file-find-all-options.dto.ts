@@ -1,18 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsString } from 'class-validator';
 
-import { FileRelationKey, FileRelationKeyEnum } from '@self/utils';
+import {
+	FileFindAllOptionsSchema,
+	FileFindOneOptionsSchema,
+	FileRelationKey,
+	FileRelationKeyEnum,
+} from '@self/utils';
+import { Exactly } from 'src/types/exactly.type';
 
-export class FileFindAllOptionsDto {
-	@IsEnum(FileRelationKeyEnum)
+export class FileFindAllOptionsDto
+	implements Exactly<FileFindAllOptionsSchema, FileFindAllOptionsDto>
+{
 	@ApiProperty({ enum: FileRelationKeyEnum, enumName: 'FileRelationKeyEnum' })
 	relationKey: FileRelationKey;
 
-	@IsString()
 	relationValue: string;
 }
 
-export class FileFindOneOptionsDto {
-	@IsString()
+export class FileFindOneOptionsDto
+	implements Exactly<FileFindOneOptionsSchema, FileFindOneOptionsDto>
+{
 	key: string;
 }

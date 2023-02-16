@@ -6,7 +6,6 @@ import {
 } from '@nestjs/swagger';
 import { Payout } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
-import { IsOptional, IsPositive, IsString } from 'class-validator';
 
 import { PayoutCreateSchema } from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -16,25 +15,17 @@ import {
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
-import { DateType } from 'src/decorators/date-type.decorator';
-import { IsID } from 'src/decorators/field.decorators';
 import { Exactly } from 'src/types/exactly.type';
 
 class PayoutRequiredDto {
-	@IsID()
 	organizationId: string;
 
-	@IsID()
 	portfolioId: string;
 
-	@IsPositive()
 	amount: number;
 
-	@DateType()
 	postAt: Date;
 
-	@IsOptional()
-	@IsString()
 	memo?: string | null;
 }
 

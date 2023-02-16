@@ -1,7 +1,6 @@
 import { ListObjectsV2Output } from '@aws-sdk/client-s3';
 import { InternalServerErrorException } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString } from 'class-validator';
 
 import {
 	FileCreateSchema,
@@ -21,14 +20,11 @@ export class FileDto {
 		this.size = obj.Size ?? 0;
 	}
 
-	@IsString()
 	id: string;
 
 	// TODO rm duplicate, use id instead
-	@IsString()
 	key: string;
 
-	@IsNumber()
 	size: number;
 }
 

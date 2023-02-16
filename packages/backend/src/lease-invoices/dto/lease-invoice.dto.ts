@@ -8,7 +8,6 @@ import {
 } from '@nestjs/swagger';
 import { LeaseInvoice } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
-import { IsBoolean, IsPositive, IsString } from 'class-validator';
 
 import {
 	LeaseInvoiceCreateManySchema,
@@ -22,40 +21,28 @@ import {
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
-import { DateType } from 'src/decorators/date-type.decorator';
-import { IsID } from 'src/decorators/field.decorators';
 
 class LeaseInvoiceRequiredDto {
-	@IsID()
 	organizationId: string;
 
-	@IsID()
 	portfolioId: string;
 
-	@IsPositive()
 	amount: number;
 
-	@DateType()
 	postAt: Date;
 
-	@IsID()
 	leaseId: string;
 }
 
 class LeaseInvoiceOptionalDto {
-	@DateType(false)
 	dueAt: Date | null;
 
-	@DateType(false)
 	paidAt: Date | null;
 
-	@IsBoolean()
 	isPaid: boolean;
 
-	@IsString()
 	memo: string | null;
 
-	@IsString()
 	mfPaymentId: string | null;
 }
 

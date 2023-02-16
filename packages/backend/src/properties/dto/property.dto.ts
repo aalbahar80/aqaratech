@@ -8,13 +8,6 @@ import {
 } from '@nestjs/swagger';
 import { Property } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
-import {
-	IsLatitude,
-	IsLongitude,
-	IsNumber,
-	IsString,
-	Length,
-} from 'class-validator';
 
 import { PropertyCreateSchema, PropertyUpdateSchema } from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -24,49 +17,35 @@ import {
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
-import { IsID } from 'src/decorators/field.decorators';
 import { Exactly } from 'src/types/exactly.type';
 
 class PropertyRequiredDto {
-	@IsID()
 	organizationId: string;
 
-	@IsID()
 	portfolioId: string;
 
-	@Length(1, 255)
 	area: string | null;
 }
 
 class PropertyOptionalDto {
-	@IsString()
 	block: string | null;
 
-	@IsString()
 	avenue: string | null;
 
-	@IsString()
 	street: string | null;
 
-	@IsString()
 	number: string | null;
 
-	@IsString()
 	parcel: string | null;
 
-	@IsString()
 	paci: string | null;
 
-	@IsNumber()
 	cost: number | null;
 
-	@IsString()
 	label: string | null;
 
-	@IsLongitude()
 	long: number | null;
 
-	@IsLatitude()
 	lat: number | null;
 }
 

@@ -2915,12 +2915,6 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         title:
           type: string
         fullName:
@@ -2951,10 +2945,14 @@ components:
           nullable: true
         organizationId:
           type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
       required:
         - id
-        - createdAt
-        - updatedAt
         - title
         - fullName
         - label
@@ -2966,6 +2964,8 @@ components:
         - residencyEnd
         - residencyNum
         - organizationId
+        - createdAt
+        - updatedAt
     UpdateTenantDto:
       type: object
       properties:
@@ -3033,18 +3033,14 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
-        start:
-          type: string
-        end:
-          type: string
         breadcrumbs:
           $ref: '#/components/schemas/LeaseBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         organizationId:
           type: string
         portfolioId:
@@ -3053,9 +3049,14 @@ components:
           type: string
         unitId:
           type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
         monthlyRent:
           type: number
-          minimum: 1
         deposit:
           type: number
         canPay:
@@ -3067,15 +3068,15 @@ components:
           nullable: true
       required:
         - id
+        - breadcrumbs
         - createdAt
         - updatedAt
-        - start
-        - end
-        - breadcrumbs
         - organizationId
         - portfolioId
         - tenantId
         - unitId
+        - start
+        - end
         - monthlyRent
         - deposit
         - canPay
@@ -3114,31 +3115,33 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
-        postAt:
-          type: string
-        dueAt:
-          type: string
-          nullable: true
-        paidAt:
-          type: string
-          nullable: true
         breadcrumbs:
           $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         organizationId:
           type: string
         portfolioId:
           type: string
         amount:
           type: number
-          minimum: 1
+        postAt:
+          format: date-time
+          type: string
         leaseId:
           type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
         isPaid:
           type: boolean
         memo:
@@ -3149,16 +3152,16 @@ components:
           nullable: true
       required:
         - id
+        - breadcrumbs
         - createdAt
         - updatedAt
-        - postAt
-        - dueAt
-        - paidAt
-        - breadcrumbs
         - organizationId
         - portfolioId
         - amount
+        - postAt
         - leaseId
+        - dueAt
+        - paidAt
         - isPaid
         - memo
         - mfPaymentId
@@ -3227,31 +3230,33 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
-        postAt:
-          type: string
-        dueAt:
-          type: string
-          nullable: true
-        paidAt:
-          type: string
-          nullable: true
         breadcrumbs:
           $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         organizationId:
           type: string
         portfolioId:
           type: string
         amount:
           type: number
-          minimum: 1
+        postAt:
+          format: date-time
+          type: string
         leaseId:
           type: string
+        dueAt:
+          format: date-time
+          type: string
+          nullable: true
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
         isPaid:
           type: boolean
         memo:
@@ -3284,18 +3289,14 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
-        start:
-          type: string
-        end:
-          type: string
         breadcrumbs:
           $ref: '#/components/schemas/LeaseBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         organizationId:
           type: string
         portfolioId:
@@ -3304,9 +3305,14 @@ components:
           type: string
         unitId:
           type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
         monthlyRent:
           type: number
-          minimum: 1
         deposit:
           type: number
         canPay:
@@ -3320,12 +3326,6 @@ components:
       type: object
       properties:
         id:
-          type: string
-          readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
           type: string
           readOnly: true
         title:
@@ -3346,10 +3346,14 @@ components:
           nullable: true
         organizationId:
           type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
       required:
         - id
-        - createdAt
-        - updatedAt
         - title
         - fullName
         - label
@@ -3357,6 +3361,8 @@ components:
         - civilid
         - dob
         - organizationId
+        - createdAt
+        - updatedAt
     UpdatePortfolioDto:
       type: object
       properties:
@@ -3394,18 +3400,18 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         address:
           type: string
         title:
           type: string
         breadcrumbs:
           $ref: '#/components/schemas/PropertyBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         organizationId:
           type: string
         portfolioId:
@@ -3413,8 +3419,6 @@ components:
         area:
           type: string
           nullable: true
-          minLength: 1
-          maxLength: 255
         block:
           type: string
           nullable: true
@@ -3447,11 +3451,11 @@ components:
           nullable: true
       required:
         - id
-        - createdAt
-        - updatedAt
         - address
         - title
         - breadcrumbs
+        - createdAt
+        - updatedAt
         - organizationId
         - portfolioId
         - area
@@ -3504,18 +3508,18 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         title:
           type: string
         vacancy:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         organizationId:
           type: string
         portfolioId:
@@ -3524,27 +3528,21 @@ components:
           type: string
         unitNumber:
           type: string
-          minLength: 1
-          maxLength: 255
         floor:
           type: number
           nullable: true
         size:
           type: number
           nullable: true
-          minimum: 1
         bed:
           type: number
           nullable: true
-          minimum: 1
         bath:
           type: number
           nullable: true
-          minimum: 1
         marketRent:
           type: number
           nullable: true
-          minimum: 1
         type:
           type: string
           nullable: true
@@ -3556,11 +3554,11 @@ components:
           nullable: true
       required:
         - id
-        - createdAt
-        - updatedAt
         - title
         - vacancy
         - breadcrumbs
+        - createdAt
+        - updatedAt
         - organizationId
         - portfolioId
         - propertyId
@@ -3605,35 +3603,35 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
-        postAt:
-          type: string
         breadcrumbs:
           $ref: '#/components/schemas/PayoutBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         organizationId:
           type: string
         portfolioId:
           type: string
         amount:
           type: number
-          minimum: 1
+        postAt:
+          format: date-time
+          type: string
         memo:
           type: string
           nullable: true
       required:
         - id
+        - breadcrumbs
         - createdAt
         - updatedAt
-        - postAt
-        - breadcrumbs
         - organizationId
         - portfolioId
         - amount
+        - postAt
     BalanceDto:
       type: object
       properties:
@@ -3694,12 +3692,6 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         expenseType:
           nullable: true
           allOf:
@@ -3729,10 +3721,14 @@ components:
           nullable: true
         organizationId:
           type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
       required:
         - id
-        - createdAt
-        - updatedAt
         - expenseType
         - breadcrumbs
         - portfolioId
@@ -3744,6 +3740,8 @@ components:
         - memo
         - label
         - organizationId
+        - createdAt
+        - updatedAt
     GroupByMonthDto:
       type: object
       properties:
@@ -3877,18 +3875,18 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         title:
           type: string
         vacancy:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         organizationId:
           type: string
         portfolioId:
@@ -3897,27 +3895,21 @@ components:
           type: string
         unitNumber:
           type: string
-          minLength: 1
-          maxLength: 255
         floor:
           type: number
           nullable: true
         size:
           type: number
           nullable: true
-          minimum: 1
         bed:
           type: number
           nullable: true
-          minimum: 1
         bath:
           type: number
           nullable: true
-          minimum: 1
         marketRent:
           type: number
           nullable: true
-          minimum: 1
         type:
           type: string
           nullable: true
@@ -3949,18 +3941,18 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         expenseType:
           nullable: true
           allOf:
             - $ref: '#/components/schemas/ExpenseCategoryDto'
         breadcrumbs:
           $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
         portfolioId:
           type: string
         propertyId:
@@ -4514,12 +4506,6 @@ components:
         id:
           type: string
           readOnly: true
-        createdAt:
-          type: string
-          readOnly: true
-        updatedAt:
-          type: string
-          readOnly: true
         status:
           nullable: true
           $ref: '#/components/schemas/MAINTENANCE_ORDER_STATUS_ENUM'
@@ -4547,10 +4533,14 @@ components:
           nullable: true
         organizationId:
           type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
       required:
         - id
-        - createdAt
-        - updatedAt
         - status
         - breadcrumbs
         - portfolioId
@@ -4561,6 +4551,8 @@ components:
         - title
         - description
         - organizationId
+        - createdAt
+        - updatedAt
     UpdateMaintenanceOrderDto:
       type: object
       properties:

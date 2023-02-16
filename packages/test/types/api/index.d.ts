@@ -924,18 +924,6 @@ export interface ExpenseDto {
 	readonly id: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof ExpenseDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
 	 * @type {ExpenseDtoExpenseType}
 	 * @memberof ExpenseDto
 	 */
@@ -1000,6 +988,18 @@ export interface ExpenseDto {
 	 * @memberof ExpenseDto
 	 */
 	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ExpenseDto
+	 */
+	updatedAt: string;
 }
 /**
  *
@@ -1267,34 +1267,22 @@ export interface LeaseDto {
 	readonly id: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof LeaseDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof LeaseDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof LeaseDto
-	 */
-	start: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof LeaseDto
-	 */
-	end: string;
-	/**
-	 *
 	 * @type {LeaseBreadcrumbsDto}
 	 * @memberof LeaseDto
 	 */
 	breadcrumbs: LeaseBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	updatedAt: string;
 	/**
 	 *
 	 * @type {string}
@@ -1319,6 +1307,18 @@ export interface LeaseDto {
 	 * @memberof LeaseDto
 	 */
 	unitId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	start: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseDto
+	 */
+	end: string;
 	/**
 	 *
 	 * @type {number}
@@ -1401,40 +1401,22 @@ export interface LeaseInvoiceDto {
 	readonly id: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof LeaseInvoiceDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof LeaseInvoiceDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof LeaseInvoiceDto
-	 */
-	postAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof LeaseInvoiceDto
-	 */
-	dueAt: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof LeaseInvoiceDto
-	 */
-	paidAt: string | null;
-	/**
-	 *
 	 * @type {LeaseInvoiceBreadcrumbsDto}
 	 * @memberof LeaseInvoiceDto
 	 */
 	breadcrumbs: LeaseInvoiceBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	updatedAt: string;
 	/**
 	 *
 	 * @type {string}
@@ -1458,7 +1440,25 @@ export interface LeaseInvoiceDto {
 	 * @type {string}
 	 * @memberof LeaseInvoiceDto
 	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
 	leaseId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	dueAt: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoiceDto
+	 */
+	paidAt: string | null;
 	/**
 	 *
 	 * @type {boolean}
@@ -1535,18 +1535,6 @@ export interface MaintenanceOrderDto {
 	readonly id: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof MaintenanceOrderDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof MaintenanceOrderDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
 	 * @type {MAINTENANCEORDERSTATUSENUM}
 	 * @memberof MaintenanceOrderDto
 	 */
@@ -1605,6 +1593,18 @@ export interface MaintenanceOrderDto {
 	 * @memberof MaintenanceOrderDto
 	 */
 	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MaintenanceOrderDto
+	 */
+	updatedAt: string;
 }
 /**
  *
@@ -1991,18 +1991,6 @@ export interface PartialExpenseDto {
 	readonly id?: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDto
-	 */
-	readonly createdAt?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialExpenseDto
-	 */
-	readonly updatedAt?: string;
-	/**
-	 *
 	 * @type {ExpenseDtoExpenseType}
 	 * @memberof PartialExpenseDto
 	 */
@@ -2013,6 +2001,18 @@ export interface PartialExpenseDto {
 	 * @memberof PartialExpenseDto
 	 */
 	breadcrumbs?: ExpenseBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	createdAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialExpenseDto
+	 */
+	updatedAt?: string;
 	/**
 	 *
 	 * @type {string}
@@ -2082,34 +2082,22 @@ export interface PartialLeaseDto {
 	readonly id?: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof PartialLeaseDto
-	 */
-	readonly createdAt?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialLeaseDto
-	 */
-	readonly updatedAt?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialLeaseDto
-	 */
-	start?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialLeaseDto
-	 */
-	end?: string;
-	/**
-	 *
 	 * @type {LeaseBreadcrumbsDto}
 	 * @memberof PartialLeaseDto
 	 */
 	breadcrumbs?: LeaseBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	createdAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	updatedAt?: string;
 	/**
 	 *
 	 * @type {string}
@@ -2134,6 +2122,18 @@ export interface PartialLeaseDto {
 	 * @memberof PartialLeaseDto
 	 */
 	unitId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	start?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseDto
+	 */
+	end?: string;
 	/**
 	 *
 	 * @type {number}
@@ -2179,40 +2179,22 @@ export interface PartialLeaseInvoiceDto {
 	readonly id?: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof PartialLeaseInvoiceDto
-	 */
-	readonly createdAt?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialLeaseInvoiceDto
-	 */
-	readonly updatedAt?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialLeaseInvoiceDto
-	 */
-	postAt?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialLeaseInvoiceDto
-	 */
-	dueAt?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialLeaseInvoiceDto
-	 */
-	paidAt?: string | null;
-	/**
-	 *
 	 * @type {LeaseInvoiceBreadcrumbsDto}
 	 * @memberof PartialLeaseInvoiceDto
 	 */
 	breadcrumbs?: LeaseInvoiceBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	createdAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	updatedAt?: string;
 	/**
 	 *
 	 * @type {string}
@@ -2236,7 +2218,25 @@ export interface PartialLeaseInvoiceDto {
 	 * @type {string}
 	 * @memberof PartialLeaseInvoiceDto
 	 */
+	postAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
 	leaseId?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	dueAt?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialLeaseInvoiceDto
+	 */
+	paidAt?: string | null;
 	/**
 	 *
 	 * @type {boolean}
@@ -2273,18 +2273,6 @@ export interface PartialUnitDto {
 	 * @type {string}
 	 * @memberof PartialUnitDto
 	 */
-	readonly createdAt?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialUnitDto
-	 */
-	readonly updatedAt?: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PartialUnitDto
-	 */
 	title?: string;
 	/**
 	 *
@@ -2298,6 +2286,18 @@ export interface PartialUnitDto {
 	 * @memberof PartialUnitDto
 	 */
 	breadcrumbs?: UnitBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	createdAt?: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	updatedAt?: string;
 	/**
 	 *
 	 * @type {string}
@@ -2398,28 +2398,22 @@ export interface PayoutDto {
 	readonly id: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof PayoutDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PayoutDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PayoutDto
-	 */
-	postAt: string;
-	/**
-	 *
 	 * @type {PayoutBreadcrumbsDto}
 	 * @memberof PayoutDto
 	 */
 	breadcrumbs: PayoutBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
+	updatedAt: string;
 	/**
 	 *
 	 * @type {string}
@@ -2443,6 +2437,12 @@ export interface PayoutDto {
 	 * @type {string}
 	 * @memberof PayoutDto
 	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PayoutDto
+	 */
 	memo?: string | null;
 }
 /**
@@ -2457,18 +2457,6 @@ export interface PortfolioDto {
 	 * @memberof PortfolioDto
 	 */
 	readonly id: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PortfolioDto
-	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PortfolioDto
-	 */
-	readonly updatedAt: string;
 	/**
 	 *
 	 * @type {string}
@@ -2511,6 +2499,18 @@ export interface PortfolioDto {
 	 * @memberof PortfolioDto
 	 */
 	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	updatedAt: string;
 }
 /**
  *
@@ -2548,18 +2548,6 @@ export interface PropertyDto {
 	 * @type {string}
 	 * @memberof PropertyDto
 	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PropertyDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PropertyDto
-	 */
 	address: string;
 	/**
 	 *
@@ -2573,6 +2561,18 @@ export interface PropertyDto {
 	 * @memberof PropertyDto
 	 */
 	breadcrumbs: PropertyBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyDto
+	 */
+	updatedAt: string;
 	/**
 	 *
 	 * @type {string}
@@ -2764,18 +2764,6 @@ export interface TenantDto {
 	 * @type {string}
 	 * @memberof TenantDto
 	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof TenantDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof TenantDto
-	 */
 	title: string;
 	/**
 	 *
@@ -2837,6 +2825,18 @@ export interface TenantDto {
 	 * @memberof TenantDto
 	 */
 	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof TenantDto
+	 */
+	updatedAt: string;
 }
 /**
  *
@@ -2880,18 +2880,6 @@ export interface UnitDto {
 	 * @type {string}
 	 * @memberof UnitDto
 	 */
-	readonly createdAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UnitDto
-	 */
-	readonly updatedAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UnitDto
-	 */
 	title: string;
 	/**
 	 *
@@ -2905,6 +2893,18 @@ export interface UnitDto {
 	 * @memberof UnitDto
 	 */
 	breadcrumbs: UnitBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	updatedAt: string;
 	/**
 	 *
 	 * @type {string}

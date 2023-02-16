@@ -1,6 +1,10 @@
 import { Controller, Delete, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
+import {
+	fileFindAllOptionsSchema,
+	fileFindOneOptionsSchema,
+} from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -13,6 +17,7 @@ import {
 } from 'src/files/dto/file-find-all-options.dto';
 import { FileDto } from 'src/files/dto/file.dto';
 import { IUser } from 'src/interfaces/user.interface';
+import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 
 import { FilesService } from './files.service';
 
@@ -27,7 +32,8 @@ export class FilesController {
 	@ApiPaginatedResponse(FileDto)
 	findAll(
 		@User() user: IUser,
-		@Query() fileFindAllOptionsDto: FileFindAllOptionsDto,
+		@Query(new ZodValidationPipe(fileFindAllOptionsSchema))
+		fileFindAllOptionsDto: FileFindAllOptionsDto,
 	): Promise<WithCount<FileDto>> {
 		const { relationKey, relationValue } = fileFindAllOptionsDto;
 		return this.filesService.findAll({ relationKey, relationValue, user });
@@ -37,7 +43,8 @@ export class FilesController {
 	@ApiOkResponse({ type: String })
 	async findOne(
 		@User() user: IUser,
-		@Query() fileFindOneOptionsDto: FileFindOneOptionsDto,
+		@Query(new ZodValidationPipe(fileFindOneOptionsSchema))
+		fileFindOneOptionsDto: FileFindOneOptionsDto,
 	): Promise<string> {
 		const key = fileFindOneOptionsDto.key;
 

@@ -8,7 +8,6 @@ import {
 } from '@nestjs/swagger';
 import { Lease } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
-import { IsBoolean, IsNumber, IsPositive, IsString } from 'class-validator';
 
 import { LeaseCreateSchema, LeaseUpdateSchema } from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
@@ -18,44 +17,31 @@ import {
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
 import { Rel } from 'src/constants/rel.enum';
-import { DateType } from 'src/decorators/date-type.decorator';
-import { IsID } from 'src/decorators/field.decorators';
 import { UnitDto } from 'src/units/dto/unit.dto';
 
 class LeaseRequiredDto {
-	@IsID()
 	organizationId: string;
 
-	@IsID()
 	portfolioId: string;
 
-	@IsID()
 	tenantId: string;
 
-	@IsID()
 	unitId: string;
 
-	@DateType()
 	start: Date;
 
-	@DateType()
 	end: Date;
 
-	@IsPositive()
 	monthlyRent: number;
 }
 
 class LeaseOptionalDto {
-	@IsNumber()
 	deposit: number;
 
-	@IsBoolean()
 	canPay: boolean;
 
-	@IsBoolean()
 	notify: boolean;
 
-	@IsString()
 	license: string | null;
 }
 

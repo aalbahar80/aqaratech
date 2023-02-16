@@ -32,5 +32,18 @@ export const fileCreateSchema = z
 	})
 	.strict();
 
+export const fileFindAllOptionsSchema = fileCreateSchema.pick({
+	relationKey: true,
+	relationValue: true,
+});
+
+export const fileFindOneOptionsSchema = z.object({
+	key: z.string(),
+});
+
 // Export types
 export type FileCreateSchema = z.infer<typeof fileCreateSchema>;
+
+export type FileFindAllOptionsSchema = z.infer<typeof fileFindAllOptionsSchema>;
+
+export type FileFindOneOptionsSchema = z.infer<typeof fileFindOneOptionsSchema>;
