@@ -1,7 +1,6 @@
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { plainToInstance } from 'class-transformer';
 
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -70,7 +69,7 @@ export class TenantsService {
 			where: { id },
 		});
 
-		return plainToInstance(TenantDto, data);
+		return data;
 	}
 
 	async update({
@@ -81,7 +80,7 @@ export class TenantsService {
 		id: string;
 		updateTenantDto: UpdateTenantDto;
 		user: IUser;
-	}) {
+	}): Promise<TenantDto> {
 		const tenant = await this.prisma.c.tenant.update({
 			where: {
 				id,
@@ -91,19 +90,12 @@ export class TenantsService {
 			data: updateTenantDto,
 		});
 
-		return plainToInstance(TenantDto, tenant);
+		return tenant;
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		await this.prisma.c.tenant.findFirstOrThrow({
-			where: {
-				AND: [{ id }, accessibleBy(user.ability, Action.Delete).Tenant],
-			},
+		return await this.prisma.c.tenant.delete({
+			where: { id, AND: accessibleBy(user.ability, Action.Delete).Tenant },
 		});
-
-		// PERF: Can be optimized after Meilisearch removal
-		const deleted = await this.prisma.c.tenant.delete({ where: { id } });
-
-		return plainToInstance(TenantDto, deleted);
 	}
 }

@@ -9,8 +9,6 @@ import { AbstractDto } from 'src/common/dto/abstract.dto';
 import { IOrganizationId, ITitle } from 'src/types/common.types';
 import { Exactly } from 'src/types/exactly.type';
 
-// change z.input after creating validation pipe
-// Doesn't error if we add extra fields, is there a version of implement that does?
 export class CreateTenantDto
 	implements Exactly<TenantCreateSchema, CreateTenantDto>
 {
