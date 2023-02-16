@@ -2468,12 +2468,6 @@ export interface PortfolioDto {
 	 * @type {string}
 	 * @memberof PortfolioDto
 	 */
-	title: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof PortfolioDto
-	 */
 	fullName: string;
 	/**
 	 *
@@ -2505,6 +2499,12 @@ export interface PortfolioDto {
 	 * @memberof PortfolioDto
 	 */
 	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PortfolioDto
+	 */
+	title: string;
 	/**
 	 *
 	 * @type {string}

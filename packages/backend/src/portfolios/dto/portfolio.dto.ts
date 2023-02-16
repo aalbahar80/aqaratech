@@ -1,16 +1,22 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { Expose } from 'class-transformer';
+import { PartialType } from '@nestjs/swagger';
 
-import { PortfolioCreateSchema, PortfolioUpdateSchema } from '@self/utils';
+import {
+	PortfolioCreateSchema,
+	PortfolioUpdateSchema,
+	StringifyDateKeys,
+} from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
-import { ITitle, IOrganizationId } from 'src/types/common.types';
+import { IOrganizationId, ITitle } from 'src/types/common.types';
 import { Exactly } from 'src/types/exactly.type';
 
 export class PortfolioDto
 	extends AbstractDto
 	implements
 		Exactly<
-			CreatePortfolioDto & AbstractDto & ITitle & IOrganizationId,
+			StringifyDateKeys<CreatePortfolioDto, 'dob'> &
+				AbstractDto &
+				IOrganizationId &
+				ITitle,
 			PortfolioDto
 		>
 {
@@ -18,16 +24,11 @@ export class PortfolioDto
 	label: string | null;
 	phone: string | null;
 	civilid: string | null;
-	dob: string | null;
+	dob: Date | null;
 
 	organizationId: string;
 
-	@ApiProperty()
-	@Expose()
-	get title(): string {
-		// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-		return this.label || this.fullName;
-	}
+	title: string;
 }
 
 export class CreatePortfolioDto

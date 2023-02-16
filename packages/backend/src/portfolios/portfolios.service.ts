@@ -1,6 +1,5 @@
 import { accessibleBy } from '@casl/prisma';
 import { Injectable } from '@nestjs/common';
-import { plainToInstance } from 'class-transformer';
 
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -17,7 +16,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class PortfoliosService {
 	constructor(private readonly prisma: PrismaService) {}
 	SubjectType = 'Portfolio' as const;
-	IndexName = 'portfolio' as const; // TODO: Remove?
 
 	async create({
 		createPortfolioDto,
@@ -25,7 +23,7 @@ export class PortfoliosService {
 	}: {
 		createPortfolioDto: CreatePortfolioDto;
 		organizationId: string;
-	}) {
+	}): Promise<PortfolioDto> {
 		const portfolio = await this.prisma.c.portfolio.create({
 			data: {
 				...createPortfolioDto,
@@ -33,7 +31,7 @@ export class PortfoliosService {
 			},
 		});
 
-		return plainToInstance(PortfolioDto, portfolio);
+		return portfolio;
 	}
 
 	async findAll({
@@ -57,7 +55,7 @@ export class PortfoliosService {
 			}),
 		]);
 
-		return { total, results: plainToInstance(PortfolioDto, results) };
+		return { total, results };
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
@@ -67,7 +65,7 @@ export class PortfoliosService {
 			},
 		});
 
-		return plainToInstance(PortfolioDto, data);
+		return data;
 	}
 
 	async update({
@@ -78,25 +76,18 @@ export class PortfoliosService {
 		id: string;
 		updatePortfolioDto: UpdatePortfolioDto;
 		user: IUser;
-	}) {
+	}): Promise<PortfolioDto> {
 		const portfolio = await this.prisma.c.portfolio.update({
 			where: { id, AND: accessibleBy(user.ability, Action.Update).Portfolio },
 			data: updatePortfolioDto,
 		});
 
-		return plainToInstance(PortfolioDto, portfolio);
+		return portfolio;
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		await this.prisma.c.portfolio.findFirstOrThrow({
-			where: {
-				AND: [{ id }, accessibleBy(user.ability, Action.Delete).Portfolio],
-			},
+		return await this.prisma.c.portfolio.delete({
+			where: { id, AND: accessibleBy(user.ability, Action.Delete).Portfolio },
 		});
-
-		// PERF: Can be optimized after Meilisearch removal
-		const portfolio = await this.prisma.c.portfolio.delete({ where: { id } });
-
-		return plainToInstance(PortfolioDto, portfolio);
 	}
 }

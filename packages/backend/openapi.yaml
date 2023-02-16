@@ -3330,8 +3330,6 @@ components:
         id:
           type: string
           readOnly: true
-        title:
-          type: string
         fullName:
           type: string
         label:
@@ -3344,9 +3342,12 @@ components:
           type: string
           nullable: true
         dob:
+          format: date-time
           type: string
           nullable: true
         organizationId:
+          type: string
+        title:
           type: string
         createdAt:
           format: date-time
@@ -3356,13 +3357,13 @@ components:
           type: string
       required:
         - id
-        - title
         - fullName
         - label
         - phone
         - civilid
         - dob
         - organizationId
+        - title
         - createdAt
         - updatedAt
     UpdatePortfolioDto:
