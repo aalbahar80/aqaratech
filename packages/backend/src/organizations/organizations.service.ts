@@ -3,7 +3,6 @@ import { randomUUID } from 'node:crypto';
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
-import { plainToInstance } from 'class-transformer';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 import { generateExpenseCategoryTree } from '@self/utils';
@@ -74,21 +73,27 @@ export class OrganizationsService {
 		await this.s3.createBucket(organization.id);
 
 		return {
-			organization: plainToInstance(OrganizationDto, organization, {
-				excludeExtraneousValues: true,
-			}),
+			organization: {
+				id: organization.id,
+				fullName: organization.fullName,
+				label: organization.label,
+				title: organization.title,
+			},
 			roleId: organization.roles[0].id,
 		};
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const data = await this.prisma.c.organization.findUniqueOrThrow({
+		const organization = await this.prisma.c.organization.findUniqueOrThrow({
 			where: { id, AND: accessibleBy(user.ability, Action.Read).Organization },
 		});
 
-		return plainToInstance(OrganizationDto, data, {
-			excludeExtraneousValues: true,
-		});
+		return {
+			id: organization.id,
+			fullName: organization.fullName,
+			label: organization.label,
+			title: organization.title,
+		};
 	}
 
 	async update({
@@ -99,13 +104,13 @@ export class OrganizationsService {
 		id: string;
 		updateOrganizationDto: UpdateOrganizationDto;
 		user: IUser;
-	}) {
+	}): Promise<OrganizationDto> {
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Update,
 			subject(this.SubjectType, { ...updateOrganizationDto, id }),
 		);
 
-		const updated = await this.prisma.c.organization.update({
+		const organization = await this.prisma.c.organization.update({
 			where: { id },
 			data: {
 				fullName: updateOrganizationDto.fullName,
@@ -113,9 +118,12 @@ export class OrganizationsService {
 			},
 		});
 
-		return plainToInstance(OrganizationDto, updated, {
-			excludeExtraneousValues: true,
-		});
+		return {
+			id: organization.id,
+			fullName: organization.fullName,
+			label: organization.label,
+			title: organization.title,
+		};
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
@@ -128,11 +136,17 @@ export class OrganizationsService {
 
 		this.logger.log(`Deleted bucket ${id}`, OrganizationsService.name);
 
-		const deleted = await this.prisma.c.organization.delete({ where: { id } });
+		const organization = await this.prisma.c.organization.delete({
+			where: { id },
+		});
+
 		this.logger.log(`Deleted organization ${id}`, OrganizationsService.name);
 
-		return plainToInstance(OrganizationDto, deleted, {
-			excludeExtraneousValues: true,
-		});
+		return {
+			id: organization.id,
+			fullName: organization.fullName,
+			label: organization.label,
+			title: organization.title,
+		};
 	}
 }

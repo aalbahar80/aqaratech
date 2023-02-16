@@ -4030,8 +4030,6 @@ components:
     OrganizationDto:
       type: object
       properties:
-        title:
-          type: string
         id:
           type: string
         fullName:
@@ -4039,10 +4037,12 @@ components:
         label:
           type: string
           nullable: true
+        title:
+          type: string
       required:
-        - title
         - id
         - fullName
+        - title
     OrganizationCreatedDto:
       type: object
       properties:

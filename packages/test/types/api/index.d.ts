@@ -1655,12 +1655,6 @@ export interface OrganizationDto {
 	 * @type {string}
 	 * @memberof OrganizationDto
 	 */
-	title: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof OrganizationDto
-	 */
 	id: string;
 	/**
 	 *
@@ -1674,6 +1668,12 @@ export interface OrganizationDto {
 	 * @memberof OrganizationDto
 	 */
 	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof OrganizationDto
+	 */
+	title: string;
 }
 /**
  *

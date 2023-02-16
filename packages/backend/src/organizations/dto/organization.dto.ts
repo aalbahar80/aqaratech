@@ -1,25 +1,16 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Expose } from 'class-transformer';
 import { z } from 'zod';
 
 import { OrganizationSchema, organizationSchema } from '@self/utils';
 import { Exactly } from 'src/types/exactly.type';
 
 export class OrganizationDto implements z.infer<typeof organizationSchema> {
-	@Expose()
 	id: string;
 
-	@Expose()
 	fullName: string;
 
-	@Expose()
 	label?: string | null;
 
-	@ApiProperty()
-	@Expose()
-	get title(): string {
-		return this.label ?? this.fullName;
-	}
+	title: string;
 }
 
 export class CreateOrganizationDto

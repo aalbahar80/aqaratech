@@ -1,10 +1,8 @@
 import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
 import { Cache } from 'cache-manager';
-import { plainToInstance } from 'class-transformer';
 
 import { TAppAbility } from 'src/casl/abilities/ability-types';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
-import { OrganizationDto } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from 'src/users/dto/user.dto';
 
@@ -28,7 +26,9 @@ export class UsersService {
 			include: {
 				roles: {
 					include: {
-						organization: { select: { id: true, fullName: true, label: true } },
+						organization: {
+							select: { id: true, fullName: true, label: true, title: true },
+						},
 					},
 				},
 			},
@@ -49,7 +49,7 @@ export class UsersService {
 					roles: {
 						include: {
 							organization: {
-								select: { id: true, fullName: true, label: true },
+								select: { id: true, fullName: true, label: true, title: true },
 							},
 						},
 					},
@@ -62,7 +62,11 @@ export class UsersService {
 			roles: user.roles.map((role) => ({
 				...role,
 				email, // needed?
-				organization: plainToInstance(OrganizationDto, role.organization),
+				organization: {
+					id: role.organization.id,
+					fullName: role.organization.fullName,
+					title: role.organization.title,
+				},
 			})),
 		};
 
