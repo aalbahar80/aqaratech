@@ -35,8 +35,22 @@ const createSiteTransport = () => {
 			// PERF: prettyPrint should not be used in production
 			// More info: https://github.com/winstonjs/logform#prettyprint
 			...(!isLiveEnv(environment.PUBLIC_AQARATECH_ENV)
-				? [format.cli()]
-				: [format.prettyPrint(), format.colorize({ all: true })]),
+				? [
+						format.timestamp({
+							format: 'M/D/YYYY, h:mm:ss A',
+						}),
+						format.colorize({ level: true }),
+						format.padLevels(),
+						format.printf(({ level, message, label, timestamp }) => {
+							// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+							return `[${label}] ${level} ${timestamp}: ${message}`;
+						}),
+				  ]
+				: [
+						format.timestamp(),
+						format.prettyPrint(),
+						format.colorize({ all: true }),
+				  ]),
 		),
 	});
 };
@@ -48,7 +62,6 @@ export const logger = createLogger({
 	format: format.combine(
 		// https://github.com/winstonjs/logform#errors
 		format.errors({ stack: true }),
-		format.timestamp(),
 		format.label({ label: 'site' }),
 	),
 
