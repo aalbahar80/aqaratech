@@ -12,28 +12,30 @@ const storagePath = path.join(globalStoragePath, file);
 
 test.use({ storageState: storagePath });
 
-test('new users are redirected to /welcome', async ({ page }) => {
-	await page.goto('/');
+test.describe('new user', () => {
+	test('is redirected to /welcome if no role', async ({ page }) => {
+		await page.goto('/');
 
-	await page
-		.getByRole('banner', { name: 'Global' })
-		.getByRole('link', { name: 'Log in' })
-		.click();
+		await page
+			.getByRole('banner', { name: 'Global' })
+			.getByRole('link', { name: 'Log in' })
+			.click();
 
-	await expect(page).toHaveURL('/en/welcome');
-});
+		await expect(page).toHaveURL('/en/welcome');
+	});
 
-test('new users are redirected to /welcome - hero', async ({ page }) => {
-	await page.goto('/');
+	test('is redirected to /welcome if no role (hero)', async ({ page }) => {
+		await page.goto('/');
 
-	await page.getByTestId('hero').getByRole('link', { name: 'Log in' }).click();
+		await page
+			.getByTestId('hero')
+			.getByRole('link', { name: 'Log in' })
+			.click();
 
-	await expect(page).toHaveURL('/en/welcome');
-});
+		await expect(page).toHaveURL('/en/welcome');
+	});
 
-test.describe.fixme('new user', () => {
-	// TODO: move tests from above into this describe block
-	test('is redirected to new org form if no role', async ({ page }) => {});
-	test('is redirected to portfolio portal if portolio', async ({ page }) => {});
-	test('is redirected to tenant portal if tenant', async ({ page }) => {});
+	test.fixme('is redirected to portfolio portal if portolio', async () => {});
+
+	test.fixme('is redirected to tenant portal if tenant', async () => {});
 });
