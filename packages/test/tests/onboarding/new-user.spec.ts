@@ -51,7 +51,7 @@ test.describe('new user', () => {
 		page,
 		portfolio,
 	}) => {
-		// simulate that the user has been invited to a portfolio
+		// simulate that the user has been invited as a portfolio
 		await prisma.role.create({
 			data: {
 				user: { create: { email } },
@@ -76,5 +76,22 @@ test.describe('new user', () => {
 		await expect(page).toHaveURL(`${siteURL}${url}`);
 	});
 
-	test.fixme('is redirected to tenant portal if tenant', async () => {});
+	test('is redirected to tenant portal if tenant', async ({ page, tenant }) => {
+		// simulate that the user has been invited as a tenant
+		await prisma.role.create({
+			data: {
+				user: { create: { email } },
+				tenant: { connect: { id: tenant.id } },
+				roleType: 'TENANT',
+				organization: { connect: { id: tenant.organizationId } },
+			},
+		});
+
+		await page.goto('/');
+		await page.getByRole('link', { name: 'Log in' }).first().click();
+
+		const url = `${siteURL}/en/portal/tenant/${tenant.id}`;
+
+		await expect(page).toHaveURL(url);
+	});
 });
