@@ -32,10 +32,9 @@ const createSiteTransport = () => {
 		format: format.combine(
 			format(ignoreHttp)(),
 
-			// PERF: prettyPrint should not be used in production
-			// More info: https://github.com/winstonjs/logform#prettyprint
-			...(!isLiveEnv(environment.PUBLIC_AQARATECH_ENV)
-				? [
+			...(isLiveEnv(environment.PUBLIC_AQARATECH_ENV)
+				? [format.timestamp(), format.json()]
+				: [
 						format.timestamp({
 							format: 'M/D/YYYY, h:mm:ss A',
 						}),
@@ -45,11 +44,6 @@ const createSiteTransport = () => {
 							// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 							return `[${label}] ${level} ${timestamp}: ${message}`;
 						}),
-				  ]
-				: [
-						format.timestamp(),
-						format.prettyPrint(),
-						format.colorize({ all: true }),
 				  ]),
 		),
 	});
