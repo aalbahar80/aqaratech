@@ -34,3 +34,10 @@ test.fixme('new users are redirected to /welcome - hero', async ({ page }) => {
 
 	await expect(page).toHaveURL('/en/welcome');
 });
+
+test.describe.fixme('new user', () => {
+	// TODO: move tests from above into this describe block
+	test('is redirected to new org form if no role', async ({ page }) => {});
+	test('is redirected to portfolio portal if portolio', async ({ page }) => {});
+	test('is redirected to tenant portal if tenant', async ({ page }) => {});
+});
