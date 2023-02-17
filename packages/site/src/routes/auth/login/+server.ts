@@ -2,9 +2,26 @@ import type { RequestHandler } from '@sveltejs/kit';
 
 import { DESTINATION } from '$lib/constants/misc';
 import { authConfig } from '$lib/server/config/auth';
+import { logger } from '$lib/server/logger';
 
-export const GET: RequestHandler = ({ url }) => {
+export const GET: RequestHandler = ({ url, locals }) => {
 	const redirect = new URL(authConfig.AUTH0_REDIRECT_URI);
+
+	if (locals.user) {
+		logger.log({
+			level: 'debug',
+			message:
+				'User is already logged in. Intercepting call to /auth/login. Redirecting to /concierge.',
+		});
+
+		// If the user is already logged in, don't redirect them to the login page.
+		return new Response(undefined, {
+			status: 302,
+			headers: {
+				location: '/concierge',
+			},
+		});
+	}
 
 	// Preserve destination if it exists. We'll use it in the callback
 	// to redirect the user to the page they were trying to access.

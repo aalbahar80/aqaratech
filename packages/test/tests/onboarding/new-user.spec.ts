@@ -12,11 +12,7 @@ const storagePath = path.join(globalStoragePath, file);
 
 test.use({ storageState: storagePath });
 
-// TODO: Clicking the "Log in" link in the header is erroneously
-// redirecting to login instead of welcome. This is a bug.
-// `concierge` is correctly redirecting to welcome.
-// Find out they're different and fix the bug.
-test.fixme('new users are redirected to /welcome', async ({ page }) => {
+test('new users are redirected to /welcome', async ({ page }) => {
 	await page.goto('/');
 
 	await page
@@ -27,7 +23,7 @@ test.fixme('new users are redirected to /welcome', async ({ page }) => {
 	await expect(page).toHaveURL('/en/welcome');
 });
 
-test.fixme('new users are redirected to /welcome - hero', async ({ page }) => {
+test('new users are redirected to /welcome - hero', async ({ page }) => {
 	await page.goto('/');
 
 	await page.getByTestId('hero').getByRole('link', { name: 'Log in' }).click();
