@@ -27,15 +27,15 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && pnpm typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.23",
+		"@iconify/json": "2.2.24",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.2.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",
-		"@sentry/svelte": "7.37.2",
-		"@sentry/tracing": "7.37.2",
+		"@sentry/svelte": "7.38.0",
+		"@sentry/tracing": "7.38.0",
 		"@sveltejs/adapter-node": "1.2.0",
-		"@sveltejs/kit": "1.7.1",
+		"@sveltejs/kit": "1.7.2",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/forms": "0.5.3",
@@ -96,7 +96,7 @@
 	"dependencies": {
 		"@logtail/node": "0.2.0",
 		"@logtail/winston": "0.2.0",
-		"@sentry/node": "7.37.2",
+		"@sentry/node": "7.38.0",
 		"typesafe-i18n": "5.24.1",
 		"winston": "3.8.2"
 	},
