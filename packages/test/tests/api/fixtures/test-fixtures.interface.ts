@@ -40,7 +40,7 @@ export interface TestFixtures {
 	scopedContext: PlaywrightTestArgs['context'];
 	scopedRequest: PlaywrightTestArgs['request'];
 	scopedPage: PlaywrightTestArgs['page'];
-	roleCookie: Parameters<BrowserContext['addCookies']>[0][0];
+	roleCookie: Parameters<BrowserContext['addCookies']>[0][0] | null;
 
 	org: OrganizationCreatedDto;
 	role: Role;

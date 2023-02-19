@@ -90,35 +90,65 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		},
 	],
 
-	roleCookie: async ({ org, context }, use) => {
-		const staleRoleCookie = await getCookie({
-			context,
-			cookieName: Cookie.role,
-		});
+	roleCookie: async (
+		{ org, portfolio, tenant, userRoleType, context, storageState },
+		use,
+	) => {
+		let optOut: boolean;
 
-		if (!staleRoleCookie) throw new Error('role cookie is not set');
+		if (!storageState) {
+			optOut = true;
+		} else if (typeof storageState === 'string') {
+			optOut = storageState.length === 0;
+		} else {
+			optOut = storageState.cookies.length === 0;
+		}
 
-		const cookie = {
-			...staleRoleCookie,
-			value: org.roleId,
-			name: Cookie.role,
-		};
+		if (optOut) {
+			await use(null);
+		} else {
+			const baseCookie = await getCookie({
+				context,
+				// We don't care *which* cookie, we just need to get the cookie options such as domain, path, etc.
+				cookieName: Cookie.idToken,
+			});
 
-		await context.addCookies([cookie]);
+			if (!baseCookie) throw new Error('no base role cookie');
 
-		await use(cookie);
+			let roleId;
+
+			if (userRoleType === 'TENANT') {
+				roleId = tenant.id;
+			} else if (userRoleType === 'PORTFOLIO') {
+				roleId = portfolio.id;
+			} else {
+				roleId = org.roleId;
+			}
+
+			const cookie = {
+				...baseCookie,
+				value: roleId,
+				name: Cookie.role,
+			};
+
+			await use(cookie);
+		}
 	},
 
 	// adds the new org's roleID to context's cookies
 	request: async ({ context, roleCookie }, use) => {
-		await context.addCookies([roleCookie]);
+		if (roleCookie) {
+			await context.addCookies([roleCookie]);
+		}
 
 		await use(context.request);
 	},
 
 	// adds the new org's roleID to context's cookies
 	page: async ({ context, roleCookie, waitForHydration }, use) => {
-		await context.addCookies([roleCookie]);
+		if (roleCookie) {
+			await context.addCookies([roleCookie]);
+		}
 
 		const page = await context.newPage();
 
