@@ -6,10 +6,6 @@ import { config as dotenv } from 'dotenv';
 import type { AqaratechEnv } from '@self/utils';
 
 import { TESTS } from './config/test-groups';
-import {
-	EXPIRED_ACCESS_TOKEN,
-	EXPIRED_ID_TOKEN,
-} from './constants/expired-id-token';
 import { testUsers } from './tests/api/fixtures/users/test-users';
 import { globalStoragePath } from './utils/global-storage-path';
 
@@ -88,22 +84,6 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			testMatch: [...TESTS.FILE],
 			use: {
 				createBucket: true,
-			},
-		},
-		{
-			name: 'idToken',
-			testMatch: [...TESTS.EXPIRED_TOKEN],
-			use: {
-				token: EXPIRED_ID_TOKEN,
-				storageState: undefined, // Avoid inheriting from the default use.storageState
-			},
-		},
-		{
-			name: 'accessToken',
-			testMatch: [...TESTS.EXPIRED_TOKEN],
-			use: {
-				token: EXPIRED_ACCESS_TOKEN,
-				storageState: undefined, // Avoid inheriting from the default use.storageState
 			},
 		},
 		{

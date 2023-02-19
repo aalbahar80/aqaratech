@@ -1,72 +1,86 @@
 import { Cookie } from '@self/utils';
 
+import {
+	EXPIRED_ACCESS_TOKEN,
+	EXPIRED_ID_TOKEN,
+} from '../../../constants/expired-id-token';
 import { siteURL } from '../../api/fixtures/site-url';
 import { expect, test } from '../auth-fixtures';
 
 // Consider using test.use() to skip global setup login?
 // test.use({ token: { name: Cookie.idToken, value: '123' } });
 
-test('redirect to login form', async ({ page }) => {
-	// expect to be redirected to login page
-	// Checking for username/password input is flaky because it's on an external site,
-	// if we still want to do so, at lease use test.slow()
-	// await page.goto(siteURL);
-	// const emailInput = page.locator('input[name="username"]');
-	// const passwordInput = page.locator('input[name="password"]');
-	// await expect(emailInput).toBeVisible();
-	// await expect(passwordInput).toBeVisible();
+const tokens = [EXPIRED_ID_TOKEN, EXPIRED_ACCESS_TOKEN];
 
-	// Instead, test for the redirect to /auth/login
+for (const token of tokens) {
+	test.describe(`Expired ${token.name} token`, () => {
+		test.use({
+			token,
+		});
 
-	// catch the request when it happens
-	const requestPromise = page.waitForRequest((res) =>
-		res.url().includes('/auth/login'),
-	);
+		test('redirect to login form', async ({ page }) => {
+			// expect to be redirected to login page
+			// Checking for username/password input is flaky because it's on an external site,
+			// if we still want to do so, at lease use test.slow()
+			// await page.goto(siteURL);
+			// const emailInput = page.locator('input[name="username"]');
+			// const passwordInput = page.locator('input[name="password"]');
+			// await expect(emailInput).toBeVisible();
+			// await expect(passwordInput).toBeVisible();
 
-	await page.goto(siteURL);
+			// Instead, test for the redirect to /auth/login
 
-	const request = await requestPromise;
+			// catch the request when it happens
+			const requestPromise = page.waitForRequest((res) =>
+				res.url().includes('/auth/login'),
+			);
 
-	const response = await request.response();
-	expect(response).toBeTruthy();
+			await page.goto(siteURL);
 
-	if (!response) throw new Error('No response'); // type purposes only
-	expect.soft(response.status()).toBe(302);
+			const request = await requestPromise;
 
-	const locationHeader = response.headers()['location'];
-	expect(locationHeader).toBeTruthy();
+			const response = await request.response();
+			expect(response).toBeTruthy();
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const location = new URL(locationHeader!);
-	expect.soft(location.host).toContain('auth0.com');
-	expect.soft(location.pathname).toBe('/authorize');
+			if (!response) throw new Error('No response'); // type purposes only
+			expect.soft(response.status()).toBe(302);
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-	const redirectParam = new URL(location.searchParams.get('redirect_uri')!);
-	const redirect = new URL(redirectParam);
+			const locationHeader = response.headers()['location'];
+			expect(locationHeader).toBeTruthy();
 
-	expect.soft(redirect.pathname).toBe('/auth/callback');
-});
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			const location = new URL(locationHeader!);
+			expect.soft(location.host).toContain('auth0.com');
+			expect.soft(location.pathname).toBe('/authorize');
 
-test('cookies are cleared', async ({ page }) => {
-	await page.goto(`${siteURL}/concierge`);
-	// expect idToken and accessToken to be cleared
-	const cookies = await page.context().cookies();
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			const redirectParam = new URL(location.searchParams.get('redirect_uri')!);
+			const redirect = new URL(redirectParam);
 
-	const cookieNames = [Cookie.idToken, Cookie.accessToken];
+			expect.soft(redirect.pathname).toBe('/auth/callback');
+		});
 
-	for (const cookieName of cookieNames) {
-		const cookie = cookies.find((cookie) => cookie.name === cookieName);
+		test('cookies are cleared', async ({ page }) => {
+			await page.goto(`${siteURL}/concierge`);
+			// expect idToken and accessToken to be cleared
+			const cookies = await page.context().cookies();
 
-		expect(cookie).toBe(undefined);
-	}
-});
+			const cookieNames = [Cookie.idToken, Cookie.accessToken];
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.skip('expired cookies are handled', async () => {});
+			for (const cookieName of cookieNames) {
+				const cookie = cookies.find((cookie) => cookie.name === cookieName);
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.skip('expired accesstoken is refreshed', async () => {});
+				expect(cookie).toBe(undefined);
+			}
+		});
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.skip('jwt is refreshed', async () => {});
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		test.skip('expired cookies are handled', async () => {});
+
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		test.skip('expired accesstoken is refreshed', async () => {});
+
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		test.skip('jwt is refreshed', async () => {});
+	});
+}
