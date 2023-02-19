@@ -6,6 +6,7 @@ import { test } from '../api-fixtures';
 
 test.use({
 	baseURL: process.env.PUBLIC_API_URL,
+	createBucket: true,
 });
 
 test.describe('initial bucket state', () => {

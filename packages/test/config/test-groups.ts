@@ -1,9 +1,5 @@
 const API = ['**/tests/api/**/*.spec.ts', '**/tests/search/variants.spec.ts'];
-const FILE = [
-	'**/tests/forms/file/**/*.spec.ts',
-	'**/tests/api/files/**/*.spec.ts',
-];
-const NON_SITE = [...API, ...FILE];
+const NON_SITE = [...API];
 const MOBILE_ONLY = ['**/tests/components/sidebar.spec.ts'];
 const DESKTOP_ONLY: string[] = [
 	// '**/tests/components/expense-tree/drag.spec.ts',
@@ -11,7 +7,6 @@ const DESKTOP_ONLY: string[] = [
 
 export const TESTS = {
 	API,
-	FILE,
 	NON_SITE,
 	MOBILE_ONLY,
 	DESKTOP_ONLY,

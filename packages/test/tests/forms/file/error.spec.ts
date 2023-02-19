@@ -10,6 +10,8 @@ import { FileFormPage } from '../file-form-model';
 
 const localFilePath = resolve(__dirname, './upload-test.png');
 
+test.use({ createBucket: true });
+
 test.describe('file form non-400 error', () => {
 	test.use({
 		// roletype has no signifance here. It's the fastest way to trigger a non-400 error.

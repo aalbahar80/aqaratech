@@ -6,6 +6,8 @@ import { getPresignedUrl } from '../../../utils/get-presigned-url';
 import { test } from '../../api/api-fixtures';
 import { Modal } from '../../models/modal';
 
+test.use({ createBucket: true });
+
 test('file can be deleted', async ({ page, request, portfolio, file }) => {
 	const url = getRoute({
 		entity: 'portfolio',

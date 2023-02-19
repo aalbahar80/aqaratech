@@ -80,16 +80,8 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 	],
 	projects: [
 		{
-			name: 'files',
-			testMatch: [...TESTS.FILE],
-			use: {
-				createBucket: true,
-			},
-		},
-		{
 			name: 'api',
 			testMatch: [...TESTS.API],
-			testIgnore: [...TESTS.FILE],
 			use: {
 				baseURL: process.env.PUBLIC_API_URL,
 			},

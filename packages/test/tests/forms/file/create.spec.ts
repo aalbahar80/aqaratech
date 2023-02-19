@@ -6,6 +6,8 @@ import { verifyUploadedFile } from '../../../utils/get-presigned-url';
 import { test } from '../../api/api-fixtures';
 import { FileFormPage } from '../file-form-model';
 
+test.use({ createBucket: true });
+
 const FILES = {
 	png: './tests/forms/file/upload-test.png',
 	pdf: './tests/components/pdf/invoice-paid-sample.pdf',
