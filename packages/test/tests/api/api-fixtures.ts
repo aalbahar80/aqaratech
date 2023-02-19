@@ -12,6 +12,7 @@ import { Cookie, generateExpenseCategoryTree } from '@self/utils';
 
 import { prisma } from '../../prisma';
 import { createBucketDev } from '../../utils/create-bucket';
+import { getCookie } from '../../utils/get-cookie';
 import { resCheck } from '../../utils/res-check';
 
 import { apiURL } from './fixtures/api-url';
@@ -90,12 +91,10 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	],
 
 	roleCookie: async ({ org, context }, use) => {
-		const staleRoleCookie = (await context.cookies()).find(
-			(cookie) =>
-				cookie.name === Cookie.role ||
-				cookie.name === Cookie.accessToken ||
-				cookie.name === Cookie.idToken,
-		);
+		const staleRoleCookie = await getCookie({
+			context,
+			cookieName: Cookie.role,
+		});
 
 		if (!staleRoleCookie) throw new Error('role cookie is not set');
 
