@@ -4,11 +4,11 @@ import * as R from 'remeda';
 import { expenseFactory } from '@self/seed';
 
 import { getUrl } from '../../../utils/post-url';
-import { test } from '../api-fixtures';
+import { test as base } from '../api-fixtures';
 
 import type { GroupByMonthDto } from '../../../types/api';
 
-test.use({
+const test = base.extend({
 	// create 2 expenses for each month of 2021
 	portfolio: async ({ request, portfolio }, use) => {
 		const expenses = R.range(0, 12).flatMap((month) => {
