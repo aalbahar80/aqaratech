@@ -133,23 +133,22 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			],
 			use: devices['Pixel 5'],
 		},
-		// {
-		// 	name: 'site:webkit:mobile',
-		// 	use: devices['iPhone 13 Mini'],
-		// 	testIgnore: [
-		// 		...TESTS.NON_SITE,
-		//		...TESTS.DESKTOP_ONLY,
-		// 		'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
-		// 		'**/tests/forms/lease-invoice/**/*.spec.ts', // fails in headless mode. viewport shakes
-		// 		'**/tests/dashboard/csv/**/*.spec.ts', // TODO: fix
-		// 		'**/tests/onboarding/new-user.spec.ts', // TODO: fix
-		// 		'**/test/tests/dashboard/filter-reset.spec.ts', // issues waiting for body.started (uses scopedPage)
-		// 	],
-		// 	grepInvert: [
-		// 		/screenshot/g, // causes terminal encoding issues
-		// 		/delete/g, // causes terminal encoding issues
-		// 	],
-		// },
+		{
+			name: 'site:webkit:mobile',
+			use: devices['iPhone 13 Mini'],
+			testIgnore: [
+				...TESTS.NON_SITE,
+				...TESTS.DESKTOP_ONLY,
+				'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit
+				'**/tests/auth/token/expired-jwt.spec.ts',
+				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
+			],
+			grepInvert: [
+				/screenshot/g, // causes terminal encoding issues
+				/delete/g, // causes terminal encoding issues
+			],
+			timeout: BASE_TIMEOUT * 2,
+		},
 	],
 };
 export default config;
