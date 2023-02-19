@@ -58,8 +58,25 @@ export class RemoveModel {
 		await expect(this.page.getByTestId(this.items[0].id)).toBeHidden();
 
 		// Check pagination info is updated
-		const info = 'Showing 1 to 2 of 2';
-		await expect(this.page.getByText(info)).toBeVisible();
+		const info = '1 to 2 of 2';
+		const els = this.page.getByText(info);
+
+		// We only check if one of the elements is visible.
+		// One is always hidden based on the viewport size.
+		await expect(async () => {
+			console.log('test');
+			let infoVisible = false;
+			for (const el of await els.all()) {
+				if (await el.isVisible()) {
+					infoVisible = true;
+				}
+			}
+			if (!infoVisible) {
+				throw new Error('Info is not visible');
+			}
+		}).toPass({
+			timeout: 5000,
+		});
 	}
 }
 

@@ -40,28 +40,29 @@
 				{$L.pagination.next()}
 			</button>
 		</div>
-		<div class="flex items-center gap-x-2">
-			{$L.pagination.page()}
-			<input
-				type="number"
-				value={pageIdx + 1}
-				max={table.getPageCount()}
-				min={1}
-				class="block w-20 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-				on:change={(e) => {
-					const index = e.currentTarget.valueAsNumber;
-					table.setPageIndex(index - 1);
-				}}
-			/>
+		<div class="flex items-center justify-between gap-x-3">
+			<div class="flex items-center gap-x-2">
+				{$L.pagination.page()}
+				<input
+					type="number"
+					value={pageIdx + 1}
+					max={table.getPageCount()}
+					min={1}
+					class="block w-20 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+					on:change={(e) => {
+						const index = e.currentTarget.valueAsNumber;
+						table.setPageIndex(index - 1);
+					}}
+				/>
 
-			{$L.pagination.of()}
-			<span class="font-medium">{table.getPageCount()}</span>
-		</div>
-	</div>
-	<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-		<div class="hidden lg:block">
-			<p data-testid="pagination-info" class="text-sm text-gray-700">
-				{$L.pagination.showing()}
+				{$L.pagination.of()}
+				<span class="font-medium">{table.getPageCount()}</span>
+			</div>
+
+			<p
+				data-testid="pagination-info"
+				class="overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray-700 lg:hidden"
+			>
 				<span class="font-medium">{fmtNumber(idxStart)}</span>
 				{$L.pagination.to()}
 				<span class="font-medium">{fmtNumber(idxEnd)}</span>
@@ -69,6 +70,19 @@
 				<span class="font-medium">{fmtNumber(itemCount)}</span>
 			</p>
 		</div>
+	</div>
+	<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+		<p
+			data-testid="pagination-info"
+			class="hidden text-sm text-gray-700 lg:block"
+		>
+			{$L.pagination.showing()}
+			<span class="font-medium">{fmtNumber(idxStart)}</span>
+			{$L.pagination.to()}
+			<span class="font-medium">{fmtNumber(idxEnd)}</span>
+			{$L.pagination.of()}
+			<span class="font-medium">{fmtNumber(itemCount)}</span>
+		</p>
 		<!-- Page size selector -->
 		{#if !hidePageSizeOptions}
 			<div class="grow-0">
