@@ -2,6 +2,7 @@ import { Function } from 'ts-toolbelt';
 
 const mode = 'insensitive' as const;
 
+// TODO: replace Narrow with const T once https://github.com/prettier/prettier/issues/14240 is closed.
 export const fieldSearchBuilder = <T extends string, Query extends string>(
 	field: Function.Narrow<T>,
 	query: Query,

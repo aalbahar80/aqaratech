@@ -4,7 +4,6 @@ import defu from 'defu';
 import 'zx/globals';
 
 import type { BaseTranslation } from '$i18n/i18n-types';
-import type { Union } from 'ts-toolbelt';
 
 /** Add missing translations to arabic translation file, uses English as fallback. */
 export const addMissingTranslations = async ({
@@ -14,12 +13,12 @@ export const addMissingTranslations = async ({
 	arFile: string;
 	enFile: string;
 }) => {
-	const ar = (await fs.readJson(arFile)) as Union.Exclude<
+	const ar = (await fs.readJson(arFile)) as Exclude<
 		BaseTranslation,
 		string[] | readonly string[]
 	>;
 
-	const en = (await fs.readJson(enFile)) as Union.Exclude<
+	const en = (await fs.readJson(enFile)) as Exclude<
 		BaseTranslation,
 		string[] | readonly string[]
 	>;

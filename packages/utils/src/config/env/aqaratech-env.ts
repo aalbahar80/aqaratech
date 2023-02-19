@@ -1,5 +1,3 @@
-import type { Object } from 'ts-toolbelt';
-
 export interface AqaratechEnv {
 	readonly PUBLIC_AQARATECH_ENV:
 		| 'production'
@@ -106,9 +104,6 @@ export interface AqaratechEnv {
 /**
  * Unverified env type
  */
-export type UnverfiedAqaratechEnv = Object.Update<
-	AqaratechEnv,
-	keyof AqaratechEnv,
-	// Any.x | undefined
-	string | undefined
->;
+export type UnverfiedAqaratechEnv = {
+	readonly [K in keyof AqaratechEnv]: string | undefined;
+};

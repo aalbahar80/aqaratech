@@ -1,13 +1,11 @@
 <script lang="ts">
-	import type { Union } from 'ts-toolbelt';
-
 	import DetailsPaneItem from '$lib/components/details-pane/DetailsPaneItem.svelte';
 
 	type Details = $$Generic;
 	type Keys = $$Generic<keyof Details>;
 
 	export let details: Details;
-	export let keys: Union.Exclude<Keys, number | symbol>[];
+	export let keys: Exclude<Keys, number | symbol>[];
 </script>
 
 <div data-testid="details-pane">
