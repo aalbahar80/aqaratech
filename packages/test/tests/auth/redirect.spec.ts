@@ -5,13 +5,11 @@ import { PageType, getRoute } from '@self/utils';
 
 const LOGIN = '/auth/login';
 
-test('user redirected to destination after login', async ({ browser }) => {
-	// create new context avoid interfering with interfering with other tests
-	const context = await browser.newContext();
-	await context.clearCookies();
+test.use({
+	storageState: { cookies: [], origins: [] },
+});
 
-	const page = await context.newPage();
-
+test('user redirected to destination after login', async ({ page }) => {
 	// catch the request when it happens
 	const requestPromise = page.waitForRequest((res) =>
 		res.url().includes(LOGIN),
@@ -50,6 +48,4 @@ test('user redirected to destination after login', async ({ browser }) => {
 	const redirect = new URL(redirectParam);
 
 	expect.soft(redirect.searchParams.get('destination')).toBe(url);
-
-	await context.close();
 });
