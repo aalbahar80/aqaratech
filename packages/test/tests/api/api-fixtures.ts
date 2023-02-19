@@ -24,7 +24,6 @@ import { payoutFixtures } from './fixtures/payout.fixture';
 import { portfolioFixtures } from './fixtures/portfolio.fixture';
 import { propertyFixtures } from './fixtures/property.fixture';
 import { roleFixtures } from './fixtures/role.fixture';
-import { scopedRequestFixtures } from './fixtures/scoped-request.fixture';
 import { tenantFixtures } from './fixtures/tenant.fixture';
 import { unitFixtures } from './fixtures/unit.fixture';
 
@@ -90,6 +89,8 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		},
 	],
 
+	userRoleType: ['ORGADMIN', { option: true }],
+
 	roleCookie: async (
 		{ baseURL, org, portfolio, tenant, userRoleType, storageState },
 		use,
@@ -111,6 +112,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 				path: '/',
 				domain: baseURL ? new URL(baseURL).host : 'localhost',
 				expires: Date.now() / 1000 + 86400, // expires tomorrow
+				// expires: -1,
 				httpOnly: true,
 				secure: false,
 				sameSite: 'Lax',
@@ -221,7 +223,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		await use(key);
 	},
 
-	...scopedRequestFixtures,
 	...tenantFixtures,
 	...portfolioFixtures,
 	...leaseFixtures,

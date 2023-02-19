@@ -39,9 +39,6 @@ export type PWCookie = Parameters<BrowserContext['addCookies']>[0][0];
 
 export interface TestFixtures {
 	// auth
-	scopedContext: PlaywrightTestArgs['context'];
-	scopedRequest: PlaywrightTestArgs['request'];
-	scopedPage: PlaywrightTestArgs['page'];
 	roleCookie: PWCookie | null;
 
 	org: OrganizationCreatedDto;
