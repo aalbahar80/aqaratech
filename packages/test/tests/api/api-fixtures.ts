@@ -12,7 +12,6 @@ import { Cookie, generateExpenseCategoryTree } from '@self/utils';
 
 import { prisma } from '../../prisma';
 import { createBucketDev } from '../../utils/create-bucket';
-import { getCookie } from '../../utils/get-cookie';
 import { resCheck } from '../../utils/res-check';
 
 import { apiURL } from './fixtures/api-url';
@@ -30,6 +29,7 @@ import { tenantFixtures } from './fixtures/tenant.fixture';
 import { unitFixtures } from './fixtures/unit.fixture';
 
 import type {
+	PWCookie,
 	TestFixtures,
 	TestOptions,
 } from './fixtures/test-fixtures.interface';
@@ -91,7 +91,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	],
 
 	roleCookie: async (
-		{ org, portfolio, tenant, userRoleType, context, storageState },
+		{ baseURL, org, portfolio, tenant, userRoleType, storageState },
 		use,
 	) => {
 		let optOut: boolean;
@@ -107,13 +107,14 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		if (optOut) {
 			await use(null);
 		} else {
-			const baseCookie = await getCookie({
-				context,
-				// We don't care *which* cookie, we just need to get the cookie options such as domain, path, etc.
-				cookieName: Cookie.idToken,
-			});
-
-			if (!baseCookie) throw new Error('no base role cookie');
+			const baseCookie: Omit<PWCookie, 'name' | 'value'> = {
+				path: '/',
+				domain: baseURL ? new URL(baseURL).host : 'localhost',
+				expires: Date.now() / 1000 + 86400, // expires tomorrow
+				httpOnly: true,
+				secure: false,
+				sameSite: 'Lax',
+			};
 
 			let roleId;
 

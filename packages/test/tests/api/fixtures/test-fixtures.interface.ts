@@ -35,12 +35,14 @@ import type {
 	Unit,
 } from '@prisma/client';
 
+export type PWCookie = Parameters<BrowserContext['addCookies']>[0][0];
+
 export interface TestFixtures {
 	// auth
 	scopedContext: PlaywrightTestArgs['context'];
 	scopedRequest: PlaywrightTestArgs['request'];
 	scopedPage: PlaywrightTestArgs['page'];
-	roleCookie: Parameters<BrowserContext['addCookies']>[0][0] | null;
+	roleCookie: PWCookie | null;
 
 	org: OrganizationCreatedDto;
 	role: Role;
