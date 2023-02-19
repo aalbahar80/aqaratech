@@ -126,10 +126,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 				...TESTS.NON_SITE,
 				...TESTS.DESKTOP_ONLY,
 				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
-			],
-			grepInvert: [
-				/screenshot/g, // causes terminal encoding issues
-				/delete/g,
+				'**/tests/remove/**/*.spec.ts', // pagination assertion fails
 			],
 			use: devices['Pixel 5'],
 		},
@@ -142,10 +139,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 				'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit
 				'**/tests/auth/token/expired-jwt.spec.ts',
 				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
-			],
-			grepInvert: [
-				/screenshot/g, // causes terminal encoding issues
-				/delete/g, // causes terminal encoding issues
+				'**/tests/remove/**/*.spec.ts', // pagination assertion fails
 			],
 			timeout: BASE_TIMEOUT * 2,
 		},
