@@ -22,8 +22,6 @@ const incomeChartTestPresets = chartTestPresets.filter(
 
 for (const preset of incomeChartTestPresets) {
 	test.describe(`income page - filter - ${preset.name}`, () => {
-		test.slow();
-
 		test.use({ tab: PageTypePortfolio.Income });
 
 		// apply filter preset

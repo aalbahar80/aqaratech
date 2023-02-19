@@ -17,8 +17,6 @@ test.describe.configure({ mode: 'parallel' });
 
 for (const preset of chartTestPresets) {
 	test.describe(`expense page - filter - ${preset.name}`, () => {
-		test.slow();
-
 		test.use({ tab: PageTypePortfolio.Expenses });
 
 		// apply filter preset
