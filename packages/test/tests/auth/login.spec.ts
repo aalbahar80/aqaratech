@@ -1,9 +1,8 @@
-import { expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 import { testOrgEmail, testPassword } from '@self/seed';
 import { Cookie } from '@self/utils';
 
-import { test as base } from '../api/api-fixtures';
 import { siteURL } from '../api/fixtures/site-url';
 
 import { LoginPage } from './login-page';
@@ -15,48 +14,18 @@ const user = {
 	destination: () => '/',
 };
 
-// const users = [
-// 	{
-// 		role: "portfolio",
-// 		id: testPortfolioId,
-// 		email: testPortfolioEmail,
-// 		password: testPassword,
-// 	destination: (id: string) => `/portfolios/${id}/financials/summary`,
-// 	},
-// 	{
-// 		role: "tenant",
-// 		id: testTenantId,
-// 		email: testTenantEmail,
-// 		password: testPassword,
-// 		destination: `/portal/tenant/${testTenantId}`,
-// 	},
-// ] as const;
-
-const test = base.extend({
-	page: async ({ browser }, use) => {
-		// Create a new incognito browser context.
-		const context = await browser.newContext();
-		await context.clearCookies();
-		// Create a new page in a pristine context.
-		const page = await context.newPage();
-
-		// Login
-		const { email, password } = user;
-
-		const loginPage = new LoginPage(page);
-		await loginPage.goto();
-		await loginPage.fill({ email, password });
-
-		// Use fixture
-		await use(page);
-
-		// Gracefully close the context we created
-		await context.close();
-	},
+test.use({
+	storageState: { cookies: [], origins: [] },
 });
 
 test('login', async ({ page }) => {
 	test.slow();
+
+	const { email, password } = user;
+
+	const loginPage = new LoginPage(page);
+	await loginPage.goto();
+	await loginPage.fill({ email, password });
 
 	const domain = new URL(siteURL).hostname;
 
@@ -68,7 +37,7 @@ test('login', async ({ page }) => {
 	const possibleDestinations = ['/', selectRolePage, user.destination()];
 
 	// check that url is one of the possible destinations
-	await expect(page).toHaveURL(RegExp(possibleDestinations.join('|')));
+	await expect.soft(page).toHaveURL(RegExp(possibleDestinations.join('|')));
 
 	const token = {
 		value: expect.stringMatching(/^[\w-]+\.[\w-]+\.[\w-]+$/),
