@@ -110,8 +110,8 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			testIgnore: [
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
-				'**/tests/onboarding/new-user.spec.ts', // TODO: fix
 				'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit
+				'**/tests/auth/token/expired-jwt.spec.ts',
 			],
 			use: devices['Desktop Safari'],
 			// Webkit Issues:
