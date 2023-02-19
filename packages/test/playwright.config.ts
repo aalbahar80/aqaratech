@@ -40,9 +40,9 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		ignoreHTTPSErrors: true,
 		bypassCSP: true,
 		baseURL: process.env.PUBLIC_SITE_URL,
-		video: 'on-first-retry',
+		video: 'on',
 		trace: {
-			mode: 'on-first-retry',
+			mode: 'on',
 			screenshots: true,
 			snapshots: true,
 			sources: true,
