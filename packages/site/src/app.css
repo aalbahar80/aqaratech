@@ -20,6 +20,16 @@
 	font-named-instance: 'Italic';
 }
 
+@font-face {
+	font-family: 'NotoSansArabic var';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('./assets/fonts/NotoSansArabic-VariableFont_wdth,wght.ttf')
+		format('truetype');
+	font-named-instance: 'Regular';
+}
+
 .tippy-content {
 	white-space: pre-line;
 }

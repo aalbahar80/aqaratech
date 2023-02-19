@@ -6,6 +6,7 @@ module.exports = {
 			fontFamily: {
 				sans: [
 					'Inter var',
+					'NotoSansArabic var',
 					// eslint-disable-next-line @typescript-eslint/no-var-requires
 					...require('tailwindcss/defaultTheme').fontFamily.sans,
 				],
