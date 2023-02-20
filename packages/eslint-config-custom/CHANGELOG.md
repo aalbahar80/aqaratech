@@ -1,5 +1,15 @@
 # eslint-config-custom
 
+## 2.13.0
+
+### Minor Changes
+
+- eb8d18301: add stripe billing
+
+### Patch Changes
+
+- 8f76629e2: rm class-validator
+
 ## 2.12.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # @self/seed
 
+## 2.13.0
+
+### Minor Changes
+
+- eb8d18301: add stripe billing
+
+### Patch Changes
+
+- 8f76629e2: rm class-validator
+- Updated dependencies [eb8d18301]
+- Updated dependencies [8f76629e2]
+  - @self/utils@3.13.0
+
 ## 2.12.0
 
 ### Minor Changes
