@@ -13,22 +13,19 @@ test.use({
 });
 
 for (const agg of aggregateTypes) {
-	test(`can get ${agg} for own portfolio`, async ({
-		scopedRequest,
-		portfolio,
-	}) => {
+	test(`can get ${agg} for own portfolio`, async ({ request, portfolio }) => {
 		const url = getUrl({
 			organizationId: portfolio.organizationId,
 			portfolioId: portfolio.id,
 		})[agg];
 
-		const res = await scopedRequest.get(url);
+		const res = await request.get(url);
 
 		expect(res.status()).toBe(200);
 	});
 
 	test(`cannot get ${agg} for other portfolio`, async ({
-		scopedRequest,
+		request,
 		portfolio,
 	}) => {
 		const url = getUrl({
@@ -36,21 +33,21 @@ for (const agg of aggregateTypes) {
 			portfolioId: sample.portfolios[0].id,
 		})[agg];
 
-		const res = await scopedRequest.get(url);
+		const res = await request.get(url);
 
 		expect(res.status()).toBe(403);
 	});
 
 	test(`cannot get ${agg} for non-existing portfolio`, async ({
 		org,
-		scopedRequest,
+		request,
 	}) => {
 		const url = getUrl({
 			organizationId: org.organization.id,
 			portfolioId: randomUUID(),
 		})[agg];
 
-		const res = await scopedRequest.get(url);
+		const res = await request.get(url);
 
 		expect(res.status()).toBe(403);
 	});

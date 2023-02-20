@@ -17,7 +17,7 @@ for (const route of units) {
 		portfolio,
 		property,
 		units,
-		scopedRequest: request,
+		request,
 	}) => {
 		const filter = {
 			filter: {

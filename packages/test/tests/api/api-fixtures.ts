@@ -12,6 +12,7 @@ import { Cookie, generateExpenseCategoryTree } from '@self/utils';
 
 import { prisma } from '../../prisma';
 import { createBucketDev } from '../../utils/create-bucket';
+import { createRole } from '../../utils/create-role';
 import { resCheck } from '../../utils/res-check';
 
 import { apiURL } from './fixtures/api-url';
@@ -121,9 +122,21 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			let roleId;
 
 			if (userRoleType === 'TENANT') {
-				roleId = tenant.id;
+				const role = await createRole({
+					roleType: 'TENANT',
+					tenantId: tenant.id,
+					organizationId: org.organization.id,
+					email: testOrgEmail,
+				});
+				roleId = role.id;
 			} else if (userRoleType === 'PORTFOLIO') {
-				roleId = portfolio.id;
+				const role = await createRole({
+					roleType: 'PORTFOLIO',
+					portfolioId: portfolio.id,
+					organizationId: org.organization.id,
+					email: testOrgEmail,
+				});
+				roleId = role.id;
 			} else {
 				roleId = org.roleId;
 			}
