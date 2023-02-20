@@ -13,7 +13,7 @@ test.describe('paid rent', () => {
 		invoicesParams: [{ isPaid: false, postAt: '2020-01-01' }],
 	});
 
-	test('failed payment', async ({ scopedPage: page, org, invoice }) => {
+	test('failed payment', async ({ page, org, invoice }) => {
 		const url = getRoute({
 			entity: 'leaseInvoice',
 			pageType: PageType.Id,

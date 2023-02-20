@@ -18,7 +18,7 @@ test.describe('file form non-400 error', () => {
 		userRoleType: 'PORTFOLIO',
 	});
 
-	test('renders error page', async ({ scopedPage: page, portfolio }) => {
+	test('renders error page', async ({ page, portfolio }) => {
 		const fileName = 'test-file-upload';
 
 		// go straight to the form page, we want to test the error rendering only

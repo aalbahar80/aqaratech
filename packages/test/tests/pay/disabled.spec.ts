@@ -12,7 +12,7 @@ test.describe('paid rent', () => {
 		invoicesParams: [{ isPaid: true }],
 	});
 
-	test('pay button is disabled', async ({ scopedPage: page, org, invoice }) => {
+	test('pay button is disabled', async ({ page, org, invoice }) => {
 		const url = getRoute({
 			entity: 'leaseInvoice',
 			pageType: PageType.Id,
@@ -77,7 +77,7 @@ test.describe('invoices not yet posted', () => {
 		],
 	});
 
-	test('pay button is disabled', async ({ scopedPage: page, org, invoice }) => {
+	test('pay button is disabled', async ({ page, org, invoice }) => {
 		const url = getRoute({
 			entity: 'leaseInvoice',
 			pageType: PageType.Id,

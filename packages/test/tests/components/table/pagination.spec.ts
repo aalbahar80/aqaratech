@@ -23,10 +23,7 @@ test.use({
 		amount: 30,
 	})),
 
-	page: async (
-		{ scopedPage: page, org, portfolio, expenses: _expenses },
-		use,
-	) => {
+	page: async ({ page, org, portfolio, expenses: _expenses }, use) => {
 		const url = getRoute({
 			entity: 'portfolio',
 			id: portfolio.id,

@@ -23,7 +23,7 @@ const PAGES = ['Income', 'Expenses'];
 
 for (const PAGE_NAME of PAGES) {
 	test(`filter persists through ${PAGE_NAME} details pane`, async ({
-		scopedPage: page,
+		page,
 		org,
 		property,
 		unit,

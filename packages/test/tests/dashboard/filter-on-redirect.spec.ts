@@ -21,7 +21,7 @@ test.use({
 });
 
 test('filter is prepopulated on redirect - property TO financials', async ({
-	scopedPage: page,
+	page,
 	org,
 	property,
 	expenses: _expenses,
@@ -78,7 +78,7 @@ test('filter is prepopulated on redirect - property TO financials', async ({
 });
 
 test('filter is prepopulated on redirect - unit TO financials', async ({
-	scopedPage: page,
+	page,
 	org,
 	property,
 	unit,

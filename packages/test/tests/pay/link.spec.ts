@@ -11,12 +11,7 @@ test.describe('paid rent', () => {
 		invoicesParams: [{ isPaid: false, postAt: '2020-01-01' }],
 	});
 
-	test('pay link attributes', async ({
-		scopedPage: page,
-		org,
-		invoice,
-		tenant,
-	}) => {
+	test('pay link attributes', async ({ page, org, invoice, tenant }) => {
 		const url = getRoute({
 			entity: 'leaseInvoice',
 			pageType: PageType.Id,

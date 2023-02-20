@@ -16,7 +16,7 @@ test.use({
 
 test.describe('unpaid rent', () => {
 	test('pay button redirects to pay endpoint', async ({
-		scopedPage: page,
+		page,
 		org,
 		invoice,
 	}) => {
@@ -45,11 +45,7 @@ test.describe('unpaid rent', () => {
 	// This test assumes that the myfatoorah stub is running.
 	// It's a workaround for flaking tests due to external payment gateway.
 	// Consider unit testing the payment gateway integration instead in /backend.
-	test('can be paid once - stubbed', async ({
-		scopedPage: page,
-		org,
-		invoice,
-	}) => {
+	test('can be paid once - stubbed', async ({ page, org, invoice }) => {
 		test.slow();
 
 		const url = getRoute({
@@ -101,11 +97,7 @@ test.describe('unpaid rent', () => {
 	});
 
 	// This test is flaky because of the external payment gateway.
-	test.skip('can be paid once - actual', async ({
-		scopedPage: page,
-		org,
-		invoice,
-	}) => {
+	test.skip('can be paid once - actual', async ({ page, org, invoice }) => {
 		test.slow();
 
 		const url = getRoute({

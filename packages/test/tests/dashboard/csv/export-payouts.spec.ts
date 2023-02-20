@@ -19,7 +19,7 @@ test.use({
 });
 
 test('can export csv from payout table', async ({
-	scopedPage: page,
+	page,
 	org,
 	portfolio,
 	payouts,

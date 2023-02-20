@@ -8,7 +8,7 @@ import { Filters } from '../filter-model';
 export const test = base.extend<{
 	filters: Filters;
 }>({
-	page: async ({ scopedPage: page, org, property }, use) => {
+	page: async ({ page, org, property }, use) => {
 		const params = {
 			organizationId: org.organization.id,
 			portfolioId: property.portfolioId,

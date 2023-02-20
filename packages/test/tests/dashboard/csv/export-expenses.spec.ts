@@ -20,7 +20,7 @@ test.use({
 });
 
 test('can export csv from expenses table', async ({
-	scopedPage: page,
+	page,
 	org,
 	portfolio,
 	expenses,

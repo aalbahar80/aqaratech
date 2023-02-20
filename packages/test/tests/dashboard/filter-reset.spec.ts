@@ -19,7 +19,7 @@ test.use({
 });
 
 test('unit filter resets when updating property', async ({
-	scopedPage: page,
+	page,
 	org,
 	property,
 	properties,
