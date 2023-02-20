@@ -43,7 +43,7 @@ envs:
     value: 'sk_test_51MFU85GjhXLpX9m0IPXC4T3TzGGoc7eYa4mx5v6PraQtwhJ1IRZCZY86ZmiNDk4bl6RPglUfUqGLY72cfIIdufRz00VNUyVPcP'
   - key: PUBLIC_TIER_PLAN_ID_1
     scope: RUN_AND_BUILD_TIME
-    value: plan:perunit@1
+    value: plan:core@1
 name: REPLACE_NAME
 region: fra
 services:
