@@ -37,7 +37,13 @@ envs:
     value: qsYDfRpM2TXqyGeYhUNFReag
   - key: BODY_SIZE_LIMIT
     scope: RUN_AND_BUILD_TIME
-    value: 100000000
+    value: '100000000'
+  - key: STRIPE_API_KEY
+    scope: RUN_AND_BUILD_TIME
+    value: 'sk_test_51MFU85GjhXLpX9m0IPXC4T3TzGGoc7eYa4mx5v6PraQtwhJ1IRZCZY86ZmiNDk4bl6RPglUfUqGLY72cfIIdufRz00VNUyVPcP'
+  - key: PUBLIC_TIER_PLAN_ID_1
+    scope: RUN_AND_BUILD_TIME
+    value: plan:perunit@1
 name: REPLACE_NAME
 region: fra
 services:
@@ -128,3 +134,6 @@ services:
       - key: ORIGIN
         scope: RUN_AND_BUILD_TIME
         value: ${APP_URL}
+      - key: PUBLIC_MYFATOORAH_SITE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://demo.myfatoorah.com

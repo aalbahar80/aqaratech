@@ -1,13 +1,9 @@
-import {
-	changePermissionsToUndefined,
-	convertToDatetimeArray,
-	removeEmail,
-} from './sanitize';
+import { convertToDatetimeArray, removeEmail } from './sanitize';
 
 import type { Seed } from './create-seed';
 
 export const preprocessSeed = (seed: Seed) => {
-	const roles = changePermissionsToUndefined(removeEmail(seed.roles));
+	const roles = removeEmail(seed.roles);
 
 	const tenants = seed.tenants.map((tenant) =>
 		convertToDatetimeArray(['dob', 'residencyEnd'], tenant),

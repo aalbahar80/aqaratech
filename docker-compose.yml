@@ -1,32 +1,7 @@
 services:
-  # caddy:
-  #   image: caddy/caddy:2.6.0-alpine
-  #   container_name: caddy-service
-  #   restart: unless-stopped
-  #   ports:
-  #     - '80:80'
-  #     - '443:443'
-  #   volumes:
-  #     - $PWD/Caddyfile:/etc/caddy/Caddyfile
-  #     - caddy_data:/data
-  #     - caddy_config:/config
-  #     - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock
-  #   networks:
-  #     - aq-network
-
-  # meilisearch:
-  #   image: getmeili/meilisearch:v0.28.1
-  #   container_name: meilisearch
-  #   volumes:
-  #     - meili_data:/meili_data
-  #   environment:
-  #     - MEILI_MASTER_KEY=MASTER_KEY
-  #   networks:
-  #     - aq-network
-  #
-
   site:
-    image: registry.digitalocean.com/aqtech/aqaratech-site:latest
+    # image: registry.digitalocean.com/aqtech/aqaratech-site:latest
+    container_name: site
     build:
       context: ./packages/site
       dockerfile: ./Dockerfile
@@ -38,7 +13,8 @@ services:
       - PUBLIC_API_URL_LOCAL=http://backend:3002
 
   backend:
-    image: registry.digitalocean.com/aqtech/aqaratech-backend:latest
+    # image: registry.digitalocean.com/aqtech/aqaratech-backend:latest
+    container_name: backend
     build:
       context: ./packages/backend
       dockerfile: ./Dockerfile
@@ -48,6 +24,12 @@ services:
     environment:
       - PUBLIC_API_URL_LOCAL=http://backend:3002
       - DATABASE_URL=postgres://postgres:postgres@postgres:5432/aq-db
+      - R2_ENDPOINT=http://minio:9000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
 
   postgres:
     image: postgres:14
@@ -59,14 +41,31 @@ services:
       - '5434:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d aq-db']
+      interval: 2s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    command: server --address 0.0.0.0:9000 --console-address ":9001" /data
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://127.0.0.1:9000/minio/health/live']
+      interval: 2s
+      timeout: 5s
+      retries: 10
 
 volumes:
   postgres_data:
-    # caddy_data:
-    # caddy_config:
-    # meili_data:
-
-    # networks:
-    #   aq-network:
-    #     driver: bridge
-    #     name: aq-network
+  minio_data:
+  # networks:
+  #   aq-network:
+  #     driver: bridge
+  #     name: aq-network

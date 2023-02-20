@@ -8,6 +8,7 @@ import { RouteInfo } from '@nestjs/common/interfaces';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ScheduleModule } from '@nestjs/schedule';
 import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
@@ -51,6 +52,7 @@ import { RolesModule } from './roles/roles.module';
 import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 import { TenantsModule } from './tenants/tenants.module';
+import { TierService } from './tier/tier.service';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
 
@@ -144,6 +146,7 @@ import { UsersModule } from './users/users.module';
 		FilesModule,
 		PayoutsModule,
 		MaintenanceOrdersModule,
+		ScheduleModule.forRoot(),
 	],
 	controllers: [AppController],
 	providers: [
@@ -171,6 +174,7 @@ import { UsersModule } from './users/users.module';
 		S3Service,
 		PostmarkService,
 		HttpLoggerService,
+		TierService,
 	],
 })
 export class AppModule {

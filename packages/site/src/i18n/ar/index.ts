@@ -145,6 +145,7 @@ const ar: Translation = {
 		occupancy: 'الإشغال',
 		list: 'قائمة',
 		settings: 'إعدادات',
+		billing: 'الاشتراك',
 		account: 'حساب',
 		info: 'تفاصيل',
 		net: 'صافي',

@@ -41,6 +41,7 @@ const en: BaseTranslation = {
 		occupancy: 'Occupancy',
 		list: 'List',
 		settings: 'Settings',
+		billing: 'Billing',
 		account: 'Account',
 		info: 'Info',
 		net: 'Net',

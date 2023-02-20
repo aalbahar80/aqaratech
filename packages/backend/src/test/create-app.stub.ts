@@ -13,6 +13,8 @@ export async function createTestApp(options: NestApplicationOptions) {
 	})
 		.overrideProvider(MyfatoorahService)
 		.useValue(createStubMyfatoorah())
+		// .overrideProvider(S3Service)
+		// .useValue(createStubS3())
 		.compile();
 
 	console.log('Test app is ready');

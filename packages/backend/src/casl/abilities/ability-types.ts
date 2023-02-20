@@ -7,8 +7,6 @@ import {
 	MaintenanceOrder,
 	Organization,
 	Payout,
-	Plan,
-	PlanInvoice,
 	Portfolio,
 	Property,
 	Role,
@@ -17,11 +15,13 @@ import {
 	User,
 } from '@prisma/client';
 
+import { DateAsString } from '@self/utils';
+
 export type TAppAbility = PrismaAbility<[string, 'all' | Subject]>;
 
 // type withoutAbstract<T> = Omit<T, 'id' | 'createdAt' | 'updatedAt'>;
 // type P<T> = withoutAbstract<Partial<T>>;
-type P<T> = Partial<T>;
+type P<T> = Partial<DateAsString<T>>;
 // type P<T> = T;
 export type Subject = Subjects<{
 	Expense: P<Expense>;
@@ -29,8 +29,6 @@ export type Subject = Subjects<{
 	MaintenanceOrder: P<MaintenanceOrder>;
 	Organization: P<Organization>;
 	Payout: P<Payout>;
-	Plan: P<Plan>;
-	PlanInvoice: P<PlanInvoice>;
 	Portfolio: P<Portfolio>;
 	Property: P<Property>;
 	Role: P<Role>;

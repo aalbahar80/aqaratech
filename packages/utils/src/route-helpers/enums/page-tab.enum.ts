@@ -12,13 +12,16 @@ export enum PageTab {
 	Roles = 'roles',
 	Balance = 'balance',
 
-	Settings = 'settings',
 	ExpenseCategories = 'expense-categories',
+	Billing = 'billing',
 
 	Contract = 'contract',
 }
 
-export type OrganizationPageTab = PageTab.Roles | PageTab.ExpenseCategories;
+export type OrganizationPageTab =
+	| PageTab.Roles
+	| PageTab.ExpenseCategories
+	| PageTab.Billing;
 
 export type TenantPageTab = PageTab.Leases | PageTab.Roles | PageTab.Files;
 

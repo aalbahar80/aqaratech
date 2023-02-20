@@ -14,10 +14,10 @@ export const GET: RequestHandler = ({ locals: { user, locale } }) => {
 	if (!user) {
 		// This should never happen, but just in case...
 		throw new Error('User not found in locals');
-	} else if (!user.roles.length) {
+	} else if (!user.roles.length || !user.role) {
 		// if user has no roles yet, redirect to /welcome
 		location = `${locale ?? baseLocale}/welcome`;
-	} else if (user.role?.meta.home) {
+	} else if (user.role.meta.home) {
 		// if user has a role, redirect to their home page
 		location = user.role.meta.home;
 	} else {

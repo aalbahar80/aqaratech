@@ -1,3 +1,5 @@
+import type { Feature } from './feature.schema';
+
 export interface AqaratechEnv {
 	readonly PUBLIC_AQARATECH_ENV:
 		| 'production'
@@ -42,6 +44,21 @@ export interface AqaratechEnv {
 
 	// Auth0
 	readonly AUTH0_CLIENT_SECRET: string;
+
+	// Stripe
+	readonly STRIPE_API_KEY: string;
+	readonly STRIPE_PAUSE_USAGE_REPORTS?: boolean;
+	readonly STRIPE_USAGE_REPORT_CRON?: string | undefined;
+	/** The id of the *active* tier plan from the `pricing.json`.
+	 * Can either be a general plan: `plan:perunit@0`
+	 * Or a specific feature: `feature:unit@plan:perunit@0`
+	 *
+	 * *Literal Type is taken from tier sdk library.*
+	 */
+	readonly PUBLIC_TIER_PLAN_ID_1: Feature;
+	/** A flag to enable/disable the paywall. Used to disable the paywall in
+	 * development and staging environments. */
+	readonly PUBLIC_IS_PAYWALL_ACTIVE: boolean;
 
 	// Logtail
 	readonly LOGTAIL_TOKEN?: string | undefined;

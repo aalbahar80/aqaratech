@@ -27,8 +27,6 @@ export const roleFactory = Factory.Sync.makeFactoryWithRequired<
 
 	isDefault: Factory.each(() => faker.datatype.boolean()),
 
-	permissions: Factory.each(() => null),
-
 	email: Factory.each(() => faker.internet.email()),
 });
 

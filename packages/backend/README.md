@@ -1,12 +1,8 @@
 ## Generate client library from openApi schema
 
 ```bash
-npx openapi-generator-cli generate
+pnpm run api:generate:all --force
 # uses configs defined in openapitools.json (requires docker or java)
-```
-
-```bash
-docker compose -f docker-compose-monitor.yml up
 ```
 
 # Model notes
@@ -23,7 +19,8 @@ Example: Portfolio model has a `fullName` field as well as `label` field.
 
 For convenience, those same models also expose a `title` field on the API level. The `title` field always equals the `label`, unless it is undefined, in which case it will revert to another existing field. (`fullName` for Portfolio, derived `address` for Property, etc)
 
-RM from db
-role.permissions
-lat/long
-planid
+# Billing
+
+1. New organization is created.
+2. We create a new Stripe customer for the organization.
+3. We create a new Stripe subscription for the organization.

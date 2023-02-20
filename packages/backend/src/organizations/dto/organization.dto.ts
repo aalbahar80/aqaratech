@@ -10,6 +10,8 @@ export class OrganizationDto implements z.infer<typeof organizationSchema> {
 
 	label?: string | null;
 
+	isActive: boolean;
+
 	title: string;
 }
 

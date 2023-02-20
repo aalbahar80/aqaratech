@@ -3,12 +3,18 @@ import {
 	Controller,
 	Delete,
 	Get,
+	NotFoundException,
 	Param,
 	Patch,
 	Post,
 	Query,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+	ApiCreatedResponse,
+	ApiExcludeEndpoint,
+	ApiOkResponse,
+	ApiTags,
+} from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 
 import { organizationSchema } from '@self/utils';
@@ -25,6 +31,7 @@ import {
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { UserBasic } from 'src/decorators/user-basic.decorator';
 import { User } from 'src/decorators/user.decorator';
+import { EnvService } from 'src/env/env.service';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -54,6 +61,7 @@ export class OrganizationsController {
 		private readonly rolesService: RolesService,
 		private readonly searchService: SearchService,
 		private readonly leaseInvoicesService: LeaseInvoicesService,
+		private readonly env: EnvService,
 	) {}
 
 	@Post()
@@ -175,6 +183,33 @@ export class OrganizationsController {
 			queryOptions,
 			user,
 			whereCustom: { organizationId },
+		});
+	}
+
+	/** Report usage of the API */
+	@Post(':id/report')
+	@ApiExcludeEndpoint()
+	report(@Param('id') organizationId: string) {
+		// Rely on cron job in production
+		if (this.env.e.PUBLIC_AQARATECH_ENV === 'production') {
+			throw new NotFoundException();
+		}
+
+		return this.organizationsService.reportUsageAll({
+			id: organizationId,
+		});
+	}
+
+	/** Trigger a refresh of the subscription status of an organization. */
+	@Post(':id/status-refresh')
+	@CheckAbilities({
+		action: Action.Read,
+		subject: SubjectType,
+		useParams: false,
+	})
+	async statusRefresh(@Param('id') organizationId: string): Promise<void> {
+		return await this.organizationsService.refreshActiveStatus({
+			id: organizationId,
 		});
 	}
 }

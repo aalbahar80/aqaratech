@@ -46,6 +46,7 @@ export class ValidatedUserDto
 								id: { type: 'string' },
 								fullName: { type: 'string' },
 								title: { type: 'string' },
+								isActive: { type: 'boolean' },
 							},
 						},
 					},
@@ -54,6 +55,11 @@ export class ValidatedUserDto
 		},
 	})
 	roles: (RoleDto & {
-		organization: { id: string; fullName: string; title: string };
+		organization: {
+			id: string;
+			fullName: string;
+			title: string;
+			isActive: boolean;
+		};
 	})[];
 }

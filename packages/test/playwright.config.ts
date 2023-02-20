@@ -22,12 +22,19 @@ const env = {
 
 const BASE_TIMEOUT = 15 * 1000;
 
+// @ts-expect-error ---
+const NVIM: unknown = process.env['PW_NVIM'];
+
 const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),
 	// globalTeardown: require.resolve('./global-teardown'),
 	// showing the reporter prevents turbo from caching the test results (on flakey tests)
-	reporter: process.env.CI ? 'github' : [['list'], ['html', { open: 'never' }]],
-	retries: 1,
+	reporter: process.env.CI
+		? 'github'
+		: NVIM
+		? [['json'], ['list'], ['html', { open: 'never' }]]
+		: [['list'], ['html', { open: 'never' }]],
+	retries: NVIM ? 0 : 1,
 	timeout: process.env.CI ? 30 * 1000 : BASE_TIMEOUT,
 	maxFailures: 40,
 	workers: process.env.CI ? undefined : '35%',
@@ -40,9 +47,9 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		ignoreHTTPSErrors: true,
 		bypassCSP: true,
 		baseURL: process.env.PUBLIC_SITE_URL,
-		video: 'retain-on-failure',
+		video: NVIM ? 'on' : 'retain-on-failure',
 		trace: {
-			mode: 'retain-on-failure',
+			mode: NVIM ? 'on' : 'retain-on-failure',
 			screenshots: true,
 			snapshots: true,
 			sources: true,
@@ -56,11 +63,11 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 	},
 	webServer: [
 		// To Debug, use env var: DEBUG=pw:webserver
-		// Build with turbo, then run preview seperately. This is to enable turbo to cache the build.
 		{
 			cwd: '../../',
-			command:
-				'pnpm turbo run build --filter=@self/backend && pnpm -F @self/backend preview',
+			command: NVIM
+				? 'echo "Please start server manually" 1>&2 && exit 1'
+				: 'pnpm turbo run build --filter=@self/backend && pnpm -F @self/backend preview',
 			port: 3002,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
@@ -69,8 +76,9 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		},
 		{
 			cwd: '../../',
-			command:
-				'pnpm turbo run build --filter=@self/site && pnpm -F @self/site preview',
+			command: NVIM
+				? 'echo "Please start server manually" 1>&2 && exit 1'
+				: 'pnpm turbo run build --filter=@self/site && pnpm -F @self/site preview',
 			port: 3000,
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,

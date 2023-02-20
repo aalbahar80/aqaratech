@@ -16,7 +16,10 @@ export const organizationFactory = Factory.Sync.makeFactory<Organization>({
 
 	label: Factory.each(() => faker.company.catchPhrase()),
 
-	isActive: Factory.each(() => faker.datatype.boolean()),
-
-	planId: Factory.each(() => null),
+	// isActive should always be true unless a test explicitly sets it to false
+	isActive: Factory.each(() => true),
 });
+
+export type OrganizationFactoryParams = Partial<
+	Parameters<typeof organizationFactory.build>[0]
+>;

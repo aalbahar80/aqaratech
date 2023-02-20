@@ -1670,6 +1670,12 @@ export interface OrganizationDto {
 	label?: string | null;
 	/**
 	 *
+	 * @type {boolean}
+	 * @memberof OrganizationDto
+	 */
+	isActive: boolean;
+	/**
+	 *
 	 * @type {string}
 	 * @memberof OrganizationDto
 	 */
@@ -2270,12 +2276,6 @@ export interface PartialUnitDto {
 	readonly id?: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof PartialUnitDto
-	 */
-	title?: string;
-	/**
-	 *
 	 * @type {UnitVacancy}
 	 * @memberof PartialUnitDto
 	 */
@@ -2869,12 +2869,6 @@ export interface UnitDto {
 	 * @memberof UnitDto
 	 */
 	readonly id: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UnitDto
-	 */
-	title: string;
 	/**
 	 *
 	 * @type {UnitVacancy}
@@ -3569,6 +3563,12 @@ export interface ValidatedRoleDtoAllOfOrganization {
 	 * @memberof ValidatedRoleDtoAllOfOrganization
 	 */
 	title?: string;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof ValidatedRoleDtoAllOfOrganization
+	 */
+	isActive?: boolean;
 }
 /**
  *

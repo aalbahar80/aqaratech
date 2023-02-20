@@ -138,6 +138,17 @@ export const getNavigationTree = (
 					href: settings,
 				},
 				{
+					name: LL.nav.billing(),
+					href: getRoute({
+						entity: 'organization',
+						pageType: PageTab.Billing,
+						id: organizationId,
+						params: {
+							...langParam,
+						},
+					}),
+				},
+				{
 					name: LL.entity.expenseCategory.plural(),
 					href: getRoute({
 						entity: 'organization',

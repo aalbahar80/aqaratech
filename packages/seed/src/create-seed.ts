@@ -21,6 +21,7 @@ import { roleFactory } from './factory/role';
 import { tenantFactory } from './factory/tenant';
 import { unitFactory } from './factory/unit';
 import { userFactory } from './factory/user';
+import { sample } from './sample-data';
 import { isDefined } from './utils/is-defined';
 import { findOrFail, random, randomCategory } from './utils/random';
 
@@ -59,7 +60,9 @@ export const createSeed = (options?: SeedOptions) => {
 
 	// Organizations
 
-	const org1 = organizationFactory.build();
+	const org1 = organizationFactory.build({
+		id: sample.organizations[0].id,
+	});
 
 	const organizations = [org1];
 

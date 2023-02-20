@@ -4,6 +4,7 @@ import type {
 	LeaseFactoryParams,
 	LeaseInvoiceFactoryParams,
 	MaintenanceOrderFactoryParams,
+	OrganizationFactoryParams,
 	PayoutFactoryParams,
 	PortfolioFactoryParams,
 	PropertyFactoryParams,
@@ -71,6 +72,7 @@ export interface TestOptions {
 	userRoleType: Role['roleType'];
 	rolesParams: RoleFactoryParams[] | undefined;
 
+	organizationParams: OrganizationFactoryParams | undefined;
 	tenantsParams: TenantFactoryParams[] | undefined;
 	portfoliosParams: PortfolioFactoryParams[] | undefined;
 	propertiesParams: PropertyFactoryParams[] | undefined;

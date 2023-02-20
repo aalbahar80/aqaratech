@@ -132,6 +132,10 @@ export interface OrganizationsApiSearchRequest {
 	query: string;
 }
 
+export interface OrganizationsApiStatusRefreshRequest {
+	id: string;
+}
+
 export interface OrganizationsApiUpdateRequest {
 	id: string;
 	updateOrganizationDto: UpdateOrganizationDto;
@@ -1226,6 +1230,52 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	): Promise<SearchDto> {
 		const response = await this.searchRaw(requestParameters, initOverrides);
 		return await response.value();
+	}
+
+	/**
+	 * Trigger a refresh of the subscription status of an organization.
+	 *
+	 */
+	async statusRefreshRaw(
+		requestParameters: OrganizationsApiStatusRefreshRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<void>> {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling statusRefresh.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/organizations/{id}/status-refresh`.replace(
+					`{${'id'}}`,
+					encodeURIComponent(String(requestParameters.id)),
+				),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.VoidApiResponse(response);
+	}
+
+	/**
+	 * Trigger a refresh of the subscription status of an organization.
+	 *
+	 */
+	async statusRefresh(
+		requestParameters: OrganizationsApiStatusRefreshRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<void> {
+		await this.statusRefreshRaw(requestParameters, initOverrides);
 	}
 
 	/**

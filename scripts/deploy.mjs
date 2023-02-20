@@ -113,7 +113,15 @@ if (siteUnchanged && backendUnchanged) {
 // save spec
 console.log(chalk.blue(`Saving spec...`));
 await fs.writeFile(SPEC, YAML.stringify(latestSpec));
+
+console.log(chalk.yellow('console.log'));
 console.log(latestSpec);
+
+console.log(chalk.yellow('echo'));
+echo(latestSpec);
+
+console.log(chalk.yellow('await cat:'));
+await $`cat ${SPEC}`;
 
 // deploy
 console.log(chalk.blue(`Deploying...`));

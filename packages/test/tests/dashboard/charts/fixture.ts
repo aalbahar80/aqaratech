@@ -1,7 +1,8 @@
 import { expect } from '@playwright/test';
 import * as R from 'remeda';
 
-import { getRoute, PageTypePortfolio } from '@self/utils';
+import type { PageTypePortfolio } from '@self/utils';
+import { getRoute } from '@self/utils';
 
 import { test as base } from '../../api/api-fixtures';
 import { Filters } from '../filter-model';
@@ -10,7 +11,7 @@ import { addDays } from './add-days';
 import { nonrandomAttribution } from './random-attribution';
 
 interface TestOptions {
-	tab: PageTypePortfolio.Income | PageTypePortfolio.Expenses;
+	tab: PageTypePortfolio.Income | PageTypePortfolio.Expenses | null;
 }
 
 // Try to aim for dates that fall within the START_YEAR.
@@ -20,12 +21,16 @@ const RECORD_COUNT = 10;
 const DAYS_BETWEEN_RECORDS = 10;
 
 export const test = base.extend<TestOptions>({
-	tab: [PageTypePortfolio.Income, { option: true }],
+	tab: [null, { option: true }],
 
 	page: async (
 		{ page, org, portfolio, tab, invoices: _invoices, expenses: _expenses },
 		use,
 	) => {
+		if (!tab) {
+			throw new Error('Must specify a tab');
+		}
+
 		const url = getRoute({
 			entity: 'portfolio',
 			id: portfolio.id,
@@ -65,39 +70,51 @@ export const test = base.extend<TestOptions>({
 	},
 });
 
-test.use({
-	// Generate consistent data for visual regression testing
-	// Spread out dates. Try to aim for dates that fall within the filter range we set above.
-	portfoliosParams: [{ fullName: 'Evan Evans' }],
-	propertiesParams: [
-		{ area: 'بيان', block: '1', avenue: '2', street: '3', number: '44' },
-	],
-	unitsParams: [{ type: 'apartment', unitNumber: '100' }],
+// Generate consistent data for visual regression testing
+// Spread out dates. Try to aim for dates that fall within the filter range we set above.
 
-	invoicesParams: R.times(RECORD_COUNT, (n) => {
-		const postAt = addDays(BASE_DATE, n * DAYS_BETWEEN_RECORDS);
-		const isPaid = n % 2 === 0;
+export const portfoliosParams = [{ fullName: 'Evan Evans' }];
 
-		return {
-			amount: n * 100,
-			isPaid,
-			postAt: postAt.toISOString().slice(0, 10),
-			paidAt: isPaid ? addDays(postAt, 3).toISOString().slice(0, 10) : null,
-			dueAt: addDays(postAt, 17).toISOString().slice(0, 10),
-			memo: `Memo for sample invoice #${n}`,
-		};
-	}),
+export const propertiesParams = [
+	{ area: 'بيان', block: '1', avenue: '2', street: '3', number: '44' },
+];
 
-	expensesParams: R.times(RECORD_COUNT, (n) => {
-		const postAt = addDays(BASE_DATE, n * DAYS_BETWEEN_RECORDS);
+export const unitsParams = [{ type: 'apartment', unitNumber: '100' }];
 
-		return {
-			amount: n * 100,
-			postAt: postAt.toISOString().slice(0, 10),
-			memo: `Memo for sample expense #${n}`,
-			// Attribute an expense to either a portfolio, property, or unit
-			...nonrandomAttribution(n),
-			// TODO: add category
-		};
-	}),
+/** Common fixtures for both income and expenses */
+export const fixtureParams = {
+	portfoliosParams,
+	propertiesParams,
+	unitsParams,
+};
+
+// ### Income test fixtures ###
+
+export const invoicesParams = R.times(RECORD_COUNT, (n) => {
+	const postAt = addDays(BASE_DATE, n * DAYS_BETWEEN_RECORDS);
+	const isPaid = n % 2 === 0;
+
+	return {
+		amount: n * 100,
+		isPaid,
+		postAt: postAt.toISOString().slice(0, 10),
+		paidAt: isPaid ? addDays(postAt, 3).toISOString().slice(0, 10) : null,
+		dueAt: addDays(postAt, 17).toISOString().slice(0, 10),
+		memo: `Memo for sample invoice #${n}`,
+	};
+});
+
+// ### Expenses test fixtures ###
+
+export const expensesParams = R.times(RECORD_COUNT, (n) => {
+	const postAt = addDays(BASE_DATE, n * DAYS_BETWEEN_RECORDS);
+
+	return {
+		amount: n * 100,
+		postAt: postAt.toISOString().slice(0, 10),
+		memo: `Memo for sample expense #${n}`,
+		// Attribute an expense to either a portfolio, property, or unit
+		...nonrandomAttribution(n),
+		// TODO: add category
+	};
 });

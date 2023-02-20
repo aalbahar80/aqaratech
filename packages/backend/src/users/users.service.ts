@@ -27,7 +27,13 @@ export class UsersService {
 				roles: {
 					include: {
 						organization: {
-							select: { id: true, fullName: true, label: true, title: true },
+							select: {
+								id: true,
+								fullName: true,
+								label: true,
+								title: true,
+								isActive: true,
+							},
 						},
 					},
 				},
@@ -49,7 +55,13 @@ export class UsersService {
 					roles: {
 						include: {
 							organization: {
-								select: { id: true, fullName: true, label: true, title: true },
+								select: {
+									id: true,
+									fullName: true,
+									label: true,
+									title: true,
+									isActive: true,
+								},
 							},
 						},
 					},
@@ -66,6 +78,7 @@ export class UsersService {
 					id: role.organization.id,
 					fullName: role.organization.fullName,
 					title: role.organization.title,
+					isActive: role.organization.isActive,
 				},
 			})),
 		};

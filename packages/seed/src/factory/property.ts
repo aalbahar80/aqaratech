@@ -42,10 +42,6 @@ export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 		faker.datatype.number({ min: 1, max: 100 }).toString(),
 	),
 
-	lat: Factory.each(() => +faker.address.latitude()),
-
-	long: Factory.each(() => +faker.address.longitude()),
-
 	paci: Factory.each(() =>
 		faker.datatype.number({ min: 10000000, max: 19999999 }).toString(),
 	),

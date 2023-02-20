@@ -42,8 +42,6 @@ pt -- --project "chromium"
 cd packages/site/tests && ./run-docker-test.sh
 ```
 
-Requires [.env.test](packages/site/.env.test.example) for the db connection string. Will delete and set up the db on each run.
-
 ### Build 📦
 
 ```bash

@@ -12,21 +12,6 @@ export const removeEmail = <T extends { email: string }>(
 };
 
 /**
- * Delete after removing permissions columns from the database.
- */
-export const changePermissionsToUndefined = <
-	T extends { permissions: unknown },
->(
-	array: T[],
-): Omit<T, 'permissions'>[] => {
-	return array.map((element) => {
-		const { permissions, ...rest } = element;
-
-		return rest;
-	});
-};
-
-/**
  * Convert date from 'yyyy-mm-dd' to 'yyyy-mm-ddT00:00:00.000Z' for each given property.
  */
 export const convertToDatetimeObj = <

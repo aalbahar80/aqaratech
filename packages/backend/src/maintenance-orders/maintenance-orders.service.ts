@@ -32,7 +32,6 @@ export class MaintenanceOrdersService {
 	}) {
 		ForbiddenError.from(user.ability).throwUnlessCan(
 			Action.Create,
-			// @ts-expect-error use DateAsString
 			subject('MaintenanceOrder', {
 				...createMaintenanceOrderDto,
 				organizationId,

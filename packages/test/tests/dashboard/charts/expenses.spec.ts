@@ -6,7 +6,7 @@ import { chartText, navbar, sidebar } from '../../../locators/common';
 import { Filters } from '../filter-model';
 
 import { chartTestPresets } from './filter-presets';
-import { test } from './fixture';
+import { expensesParams, fixtureParams, test } from './fixture';
 
 // PERF: Perform all tests in the same context/instance
 
@@ -17,7 +17,11 @@ test.describe.configure({ mode: 'parallel' });
 
 for (const preset of chartTestPresets) {
 	test.describe(`expense page - filter - ${preset.name}`, () => {
-		test.use({ tab: PageTypePortfolio.Expenses });
+		test.use({
+			tab: PageTypePortfolio.Expenses,
+			...fixtureParams,
+			expensesParams,
+		});
 
 		// apply filter preset
 		test.beforeEach(async ({ page }) => {

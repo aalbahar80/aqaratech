@@ -7,6 +7,7 @@ import { env } from '$env/dynamic/private';
 
 const schema = envSchema.pick({
 	AUTH0_CLIENT_SECRET: true,
+	STRIPE_API_KEY: true,
 	LOGTAIL_TOKEN: true,
 	ORIGIN: true,
 

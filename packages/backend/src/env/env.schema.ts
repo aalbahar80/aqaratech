@@ -12,6 +12,12 @@ export const backendEnvSchema = envSchema.pick({
 	PUBLIC_API_URL: true,
 	BODY_SIZE_LIMIT: true,
 
+	// Stripe
+	STRIPE_API_KEY: true,
+	STRIPE_PAUSE_USAGE_REPORTS: true,
+	STRIPE_USAGE_REPORT_CRON: true,
+	PUBLIC_TIER_PLAN_ID_1: true,
+
 	// R2
 	R2_ENDPOINT: true,
 	R2_ACCESS_KEY_ID: true,

@@ -1,0 +1,16 @@
+{
+	// "$schema": "https://www.tier.run/docs/pricing.schema.json",
+	"plans": {
+		"plan:core@1": {
+			"title": "Aqaratech Core",
+			"interval": "@monthly",
+			"features": {
+				"feature:unit": {
+					"title": "Per Unit",
+					"aggregate": "perpetual",
+					"tiers": [{ "price": 500, "base": 0 }]
+				}
+			}
+		}
+	}
+}

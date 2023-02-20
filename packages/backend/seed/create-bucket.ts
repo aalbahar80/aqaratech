@@ -26,11 +26,19 @@ export const createBucketDev = async (
 	});
 
 	for (const bucketName of bucketNames) {
-		await client.send(
-			new CreateBucketCommand({
-				Bucket: bucketName,
-			}),
-		);
+		try {
+			await client.send(
+				new CreateBucketCommand({
+					Bucket: bucketName,
+				}),
+			);
+		} catch (error) {
+			if (error.name === 'BucketAlreadyOwnedByYou') {
+				console.log(`Test Bucket ${bucketName} already exists. Continuing...`);
+			} else {
+				throw error;
+			}
+		}
 
 		console.log(`Created bucket ${bucketName}`);
 	}

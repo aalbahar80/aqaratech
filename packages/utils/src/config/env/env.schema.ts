@@ -1,5 +1,6 @@
 import { z, type ZodTypeDef } from 'zod';
 
+import { featureSchema } from './feature.schema';
 import { zodEnvBooleanSchema } from './zod-env-boolean.schema';
 
 import type { AqaratechEnv } from './aqaratech-env';
@@ -30,6 +31,15 @@ export const envSchema = z.object({
 		}),
 	// @ts-expect-error - zod wrongly infers the type
 	PUBLIC_AQ_DEBUG_SENTRY: zodEnvBooleanSchema().default(false),
+
+	// Stripe
+	STRIPE_API_KEY: z.string(),
+	// @ts-expect-error - zod wrongly infers the type
+	STRIPE_PAUSE_USAGE_REPORTS: zodEnvBooleanSchema().default(false),
+	STRIPE_USAGE_REPORT_CRON: z.string().optional(),
+	PUBLIC_TIER_PLAN_ID_1: featureSchema,
+	// @ts-expect-error - zod wrongly infers the type
+	PUBLIC_IS_PAYWALL_ACTIVE: zodEnvBooleanSchema().default(true),
 
 	// Logtail
 	LOGTAIL_TOKEN: z.string().optional(),

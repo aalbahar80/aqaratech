@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 
 import { test as base } from '@playwright/test';
-import * as R from 'remeda';
+import tier from 'tier';
 
 import {
 	organizationFactory,
@@ -16,6 +16,7 @@ import { createRole } from '../../utils/create-role';
 import { resCheck } from '../../utils/res-check';
 
 import { apiURL } from './fixtures/api-url';
+import { plan } from './fixtures/env';
 import { expenseCategoryFixtures } from './fixtures/expense-category.fixture';
 import { expenseFixtures } from './fixtures/expense.fixture';
 import { invoiceFixtures } from './fixtures/invoice-fixture';
@@ -46,9 +47,24 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	// 4. Any test that imports from this file will have access to the new org, and request
 
 	// A fixture that returns a fresh organization.
+	organizationParams: [undefined, { option: true }],
 	org: [
-		async ({ createBucket }, use) => {
-			const organization = R.pick(organizationFactory.build(), ['fullName']);
+		async ({ createBucket, organizationParams }, use) => {
+			const organization = organizationFactory.build(organizationParams);
+
+			// only subscribes if the test fixture has `isActive: true`,
+			// not whether the factory has `isActive: true`
+			if (organizationParams?.isActive) {
+				await tier.subscribe(`org:${organization.id}`, plan, {
+					info: {
+						name: organization.fullName,
+						email: testOrgEmail,
+						phone: '',
+						description: '',
+						metadata: {},
+					},
+				});
+			}
 
 			const created = await prisma.organization.create({
 				data: {

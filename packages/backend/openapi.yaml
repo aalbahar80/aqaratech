@@ -2299,6 +2299,22 @@ paths:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
       tags: *ref_19
       security: *ref_20
+  /organizations/{id}/status-refresh:
+    post:
+      operationId: OrganizationsController_statusRefresh
+      summary: ''
+      description: Trigger a refresh of the subscription status of an organization.
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      tags: *ref_19
+      security: *ref_20
   /organizations/{organizationId}/tenants:
     post:
       operationId: OrganizationsAdminController_createTenant
@@ -3508,8 +3524,6 @@ components:
         id:
           type: string
           readOnly: true
-        title:
-          type: string
         vacancy:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:
@@ -3554,7 +3568,6 @@ components:
           nullable: true
       required:
         - id
-        - title
         - vacancy
         - breadcrumbs
         - createdAt
@@ -3875,8 +3888,6 @@ components:
         id:
           type: string
           readOnly: true
-        title:
-          type: string
         vacancy:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:
@@ -4004,6 +4015,8 @@ components:
                         type: string
                       title:
                         type: string
+                      isActive:
+                        type: boolean
         email:
           type: string
         fullName:
@@ -4034,11 +4047,14 @@ components:
         label:
           type: string
           nullable: true
+        isActive:
+          type: boolean
         title:
           type: string
       required:
         - id
         - fullName
+        - isActive
         - title
     OrganizationCreatedDto:
       type: object

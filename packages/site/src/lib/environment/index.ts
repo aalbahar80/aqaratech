@@ -16,6 +16,8 @@ const siteEnvSchema = envSchema.pick({
 	PUBLIC_COMMIT_SHA: true,
 	PUBLIC_AQ_DEBUG_LEVEL: true,
 	PUBLIC_MYFATOORAH_SITE_URL: true,
+	PUBLIC_TIER_PLAN_ID_1: true,
+	PUBLIC_IS_PAYWALL_ACTIVE: true,
 });
 
 type SiteEnvSchema = z.infer<typeof siteEnvSchema>;

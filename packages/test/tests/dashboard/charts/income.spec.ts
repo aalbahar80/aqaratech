@@ -6,7 +6,7 @@ import { chartText, navbar, sidebar } from '../../../locators/common';
 import { Filters } from '../filter-model';
 
 import { chartTestPresets } from './filter-presets';
-import { test } from './fixture';
+import { fixtureParams, invoicesParams, test } from './fixture';
 
 // PERF: Perform all tests in the same context/instance
 
@@ -22,7 +22,11 @@ const incomeChartTestPresets = chartTestPresets.filter(
 
 for (const preset of incomeChartTestPresets) {
 	test.describe(`income page - filter - ${preset.name}`, () => {
-		test.use({ tab: PageTypePortfolio.Income });
+		test.use({
+			tab: PageTypePortfolio.Income,
+			...fixtureParams,
+			invoicesParams,
+		});
 
 		// apply filter preset
 		test.beforeEach(async ({ page }) => {

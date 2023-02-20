@@ -13,6 +13,17 @@ ENV BODY_SIZE_LIMIT=${BODY_SIZE_LIMIT}
 
 WORKDIR /app
 
+# Add tools required for installing tier cli
+RUN apk update && apk add wget tar
+
+# Download and extract the "tier" binary
+RUN wget --verbose https://github.com/tierrun/tier/releases/download/v0.8.0/tier_0.8.0_linux_amd64.tar.gz \
+    && tar -xzvf tier_0.8.0_linux_amd64.tar.gz \
+    && rm tier_0.8.0_linux_amd64.tar.gz
+
+# Add tier to PATH
+ENV PATH="${PATH}:/app"
+
 ENV NODE_ENV=production
 
 COPY ./pruned .

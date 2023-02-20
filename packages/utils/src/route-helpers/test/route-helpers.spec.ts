@@ -1,5 +1,6 @@
 import { expect, test } from 'vitest';
 
+import { PageTab } from '../enums/page-tab.enum';
 import { PageType } from '../enums/page-type.enum';
 import { getRoute } from '../get-route';
 
@@ -11,6 +12,27 @@ const params = {
 };
 
 const inputs: [GetRoute, string][] = [
+	// Organizations
+	[
+		{
+			entity: 'organization',
+			pageType: PageType.Id,
+			params: {},
+			id: '1',
+		},
+		'/organizations/1',
+	],
+
+	[
+		{
+			entity: 'organization',
+			pageType: PageTab.Billing,
+			params: {},
+			id: '1',
+		},
+		'/organizations/1/billing',
+	],
+
 	// Properties
 	[
 		{

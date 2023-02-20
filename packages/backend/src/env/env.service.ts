@@ -29,6 +29,7 @@ export class EnvService {
 				'PUBLIC_SITE_URL',
 				'R2_ENDPOINT',
 				'BODY_SIZE_LIMIT',
+				'STRIPE_PAUSE_USAGE_REPORTS',
 			]),
 		);
 

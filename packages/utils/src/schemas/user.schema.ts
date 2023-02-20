@@ -26,6 +26,7 @@ export const userSchema = userCreateSchema
 						id: z.string().uuid(),
 						fullName: z.string(),
 						title: z.string(),
+						isActive: z.boolean(),
 					})
 					.strict(),
 			}),

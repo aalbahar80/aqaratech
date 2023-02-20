@@ -482,6 +482,10 @@ type RootTranslation = {
 		 */
 		settings: string
 		/**
+		 * B​i​l​l​i​n​g
+		 */
+		billing: string
+		/**
 		 * A​c​c​o​u​n​t
 		 */
 		account: string
@@ -1518,6 +1522,10 @@ export type TranslationFunctions = {
 		 * Settings
 		 */
 		settings: () => LocalizedString
+		/**
+		 * Billing
+		 */
+		billing: () => LocalizedString
 		/**
 		 * Account
 		 */
