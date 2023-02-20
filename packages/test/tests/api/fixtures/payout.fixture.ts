@@ -2,50 +2,45 @@ import * as R from 'remeda';
 
 import { payoutFactory } from '@self/seed';
 
-import { resCheck } from '../../../utils/res-check';
-
-import { apiURL } from './api-url';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { PayoutDto } from '../../../types/api';
+import type { Payout } from '@prisma/client';
 
 export const payoutFixtures: AllFixtures = {
 	payoutsParams: [undefined, { option: true }],
 
-	payouts: async ({ org, portfolio, request, payoutsParams }, use) => {
+	payouts: async ({ org, portfolio, payoutsParams }, use) => {
 		const params = payoutsParams ?? [{}];
 
 		// Merge any declared params with the default params
 
-		const payouts = R.times(params.length, (n) =>
-			payoutFactory.build({
+		const payouts = R.times(params.length, (n) => {
+			const data = payoutFactory.build({
 				organizationId: org.organization.id,
 				portfolioId: portfolio.id,
 				...params[n],
-			}),
-		);
+			});
+
+			data.postAt &&= new Date(data.postAt).toISOString();
+
+			return data;
+		});
 
 		// Insert payouts
 
-		const url = `${apiURL}/organizations/${org.organization.id}/payouts`;
+		await prisma.payout.createMany({
+			data: payouts.map(
+				R.pick(['organizationId', 'portfolioId', 'amount', 'postAt', 'memo']),
+			),
+		});
 
-		const created = (await Promise.all(
-			payouts.map(async (payout) => {
-				const picked = R.pick(payout, [
-					'amount',
-					'postAt',
-					'memo',
-					'portfolioId',
-				]);
+		const created = await prisma.payout.findMany({
+			where: { organizationId: org.organization.id },
+		});
 
-				const res = await request.post(url, { data: picked });
-				resCheck(res);
-
-				return (await res.json()) as PayoutDto;
-			}),
-		)) as [PayoutDto, ...PayoutDto[]];
-
-		await use(created);
+		// @ts-expect-error test
+		await use(created as [Payout, ...Payout[]]);
 	},
 
 	payout: async ({ payouts }, use) => {
