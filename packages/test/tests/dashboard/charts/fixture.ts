@@ -66,8 +66,6 @@ export const test = base.extend<TestOptions>({
 });
 
 test.use({
-	userRoleType: 'PORTFOLIO',
-
 	// Generate consistent data for visual regression testing
 	// Spread out dates. Try to aim for dates that fall within the filter range we set above.
 	portfoliosParams: [{ fullName: 'Evan Evans' }],
