@@ -1,12 +1,10 @@
 import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 
 import { roleCreateSchema } from '@self/utils';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { User } from 'src/decorators/user.decorator';
-import { RoleCreatedEvent } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
@@ -16,10 +14,7 @@ import { RolesService } from './roles.service';
 @Controller('organizations/:organizationId')
 @ApiTags('roles')
 export class RolesController {
-	constructor(
-		private readonly rolesService: RolesService,
-		private readonly eventEmitter: EventEmitter2,
-	) {}
+	constructor(private readonly rolesService: RolesService) {}
 
 	@Post('roles')
 	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
@@ -87,10 +82,13 @@ export class RolesController {
 	@CheckAbilities({ action: Action.Create, subject: 'Role', useParams: true })
 	@ApiParam({ name: 'organizationId', required: true, type: String })
 	@Post('roles/:roleId/send-invite')
-	sendInvite(@User() user: IUser, @Param('roleId') id: string) {
-		this.eventEmitter.emit(
-			'role.created',
-			new RoleCreatedEvent(id, user.email),
-		);
+	async sendInvite(
+		@User() user: IUser,
+		@Param('roleId') id: string,
+	): Promise<string> {
+		return await this.rolesService.sendWelcomeEmail({
+			roleId: id,
+			senderEmail: user.email,
+		});
 	}
 }

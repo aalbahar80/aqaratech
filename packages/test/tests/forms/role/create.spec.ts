@@ -5,22 +5,46 @@ import { getRoute, PageTab } from '@self/utils';
 import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';
 
-// TODO: add organization to array, after making PageTab.Roles goes to organization roles page
 const email = 'test@aqtest.com';
 
-const entities = ['portfolio', 'tenant'] as const;
+const entities = ['organization', 'portfolio', 'tenant'] as const;
 
 for (const entity of entities) {
-	test(`can invite role to ${entity}`, async ({ page, tenant, portfolio }) => {
-		const instance = entity === 'tenant' ? tenant : portfolio;
+	test(`can invite role to ${entity}`, async ({
+		page,
+		org,
+		tenant,
+		portfolio,
+	}) => {
+		// get url to roles page
+		let instance;
+		let id: string;
+		let params: Record<string, string> = {};
+
+		switch (entity) {
+			case 'organization':
+				instance = org;
+				id = org.organization.id;
+				break;
+			case 'portfolio':
+				instance = portfolio;
+				id = portfolio.id;
+				params = { organizationId: portfolio.organizationId };
+				break;
+			case 'tenant':
+				instance = tenant;
+				id = tenant.id;
+				params = { organizationId: tenant.organizationId };
+				break;
+			default:
+				throw new Error('entity not found');
+		}
 
 		const url = getRoute({
 			entity,
-			id: instance.id,
+			id,
 			pageType: PageTab.Roles,
-			params: {
-				organizationId: instance.organizationId,
-			},
+			params,
 		});
 
 		await page.goto(url);
@@ -36,10 +60,8 @@ for (const entity of entities) {
 		const successUrl = getRoute({
 			entity,
 			pageType: PageTab.Roles,
-			id: instance.id,
-			params: {
-				organizationId: instance.organizationId,
-			},
+			id,
+			params,
 		});
 
 		await expect(page).toHaveURL(successUrl);
@@ -47,6 +69,31 @@ for (const entity of entities) {
 		const cell = page.getByRole('cell', { name: email });
 
 		await expect(cell).toHaveText(email);
+
+		// ### Manually send invite ###
+
+		const responsePromise = page.waitForResponse((res) =>
+			res.url().includes('send-invite'),
+		);
+
+		// find the row with the test email
+		const btn = page
+			.getByRole('row')
+			.filter({
+				hasText: email,
+			})
+			.getByRole('button', { name: 'Send Invite' });
+
+		await btn.click();
+
+		const response = await responsePromise;
+
+		expect(response.status()).toBe(201);
+
+		const body = await response.text();
+
+		// check email was sent
+		expect(body).toStrictEqual(email);
 	});
 }
 

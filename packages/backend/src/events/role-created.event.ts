@@ -1,6 +1,4 @@
-export class RoleCreatedEvent {
-	constructor(
-		public readonly roleId: string,
-		public readonly senderEmail: string,
-	) {}
+export interface RoleCreatedPayload {
+	roleId: string;
+	senderEmail: string;
 }

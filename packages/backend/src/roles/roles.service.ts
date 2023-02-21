@@ -1,13 +1,12 @@
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { Prisma, Role } from '@prisma/client';
 
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { EnvService } from 'src/env/env.service';
-import { RoleCreatedEvent } from 'src/events/role-created.event';
+import { RoleCreatedPayload } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PostmarkService } from 'src/postmark/postmark.service';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -18,7 +17,6 @@ export class RolesService {
 	constructor(
 		private readonly prisma: PrismaService,
 		private readonly postmarkService: PostmarkService,
-		private readonly eventEmitter: EventEmitter2,
 		private readonly env: EnvService,
 	) {}
 
@@ -89,10 +87,7 @@ export class RolesService {
 			},
 		});
 
-		this.eventEmitter.emit(
-			'role.created',
-			new RoleCreatedEvent(role.id, user.email),
-		);
+		await this.sendWelcomeEmail({ roleId: role.id, senderEmail: user.email });
 
 		return {
 			id: role.id,
@@ -105,8 +100,7 @@ export class RolesService {
 		};
 	}
 
-	@OnEvent('role.created')
-	async sendWelcomeEmail(payload: RoleCreatedEvent) {
+	async sendWelcomeEmail(payload: RoleCreatedPayload) {
 		const origin = this.env.e.PUBLIC_SITE_URL;
 
 		const role = await this.prisma.c.role.findUniqueOrThrow({
@@ -119,7 +113,7 @@ export class RolesService {
 			},
 		});
 
-		await this.postmarkService.sendEmail({
+		const msg = await this.postmarkService.sendEmail({
 			From: 'Aqaratech <notifications@aqaratech.com>',
 			To: role.user.email,
 			TemplateAlias: 'user-invitation',
@@ -130,6 +124,9 @@ export class RolesService {
 				action_url: origin,
 			},
 		});
+
+		// eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
+		return msg.To as typeof role.user.email;
 	}
 
 	async findAll({

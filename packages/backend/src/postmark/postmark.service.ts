@@ -27,14 +27,10 @@ export class PostmarkService {
 	async sendEmail(
 		template: TemplatedMessage,
 		callback?: Callback<MessageSendingResponse> | undefined,
-	): Promise<MessageSendingResponse | undefined> {
-		try {
-			// Wrap in a try/catch, otherwise an error here will cause the server to crash
-			// when it occurs durring an `@OnEvent` invocation
-			return await this.postmark?.sendEmailWithTemplate(template, callback);
-		} catch (error) {
-			this.logger.error(error);
-			return;
+	) {
+		if (!this.postmark) {
+			throw new Error('Postmark client not initialized.');
 		}
+		return await this.postmark.sendEmailWithTemplate(template, callback);
 	}
 }

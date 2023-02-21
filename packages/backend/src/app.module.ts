@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { RouteInfo } from '@nestjs/common/interfaces';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import * as Sentry from '@sentry/node';
@@ -135,7 +134,6 @@ import { UsersModule } from './users/users.module';
 		RolesModule,
 		OrganizationsModule,
 		AggregateModule,
-		EventEmitterModule.forRoot(),
 		PostmarkModule,
 		ExpenseCategoriesModule,
 		S3Module,
