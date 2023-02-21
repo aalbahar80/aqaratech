@@ -550,7 +550,9 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                type: array
+                items:
+                  type: string
       tags: *ref_3
       security: *ref_4
   /leaseInvoices/{id}/pay:

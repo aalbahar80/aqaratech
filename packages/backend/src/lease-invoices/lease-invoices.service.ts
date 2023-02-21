@@ -1,11 +1,15 @@
 import { accessibleBy } from '@casl/prisma';
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
-import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import {
+	BadRequestException,
+	Injectable,
+	InternalServerErrorException,
+	Logger,
+} from '@nestjs/common';
 import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
 import { Any, Object } from 'ts-toolbelt';
 
-import { PAID_LATE, entitiesMap } from '@self/utils';
+import { PAID_LATE } from '@self/utils';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
@@ -13,7 +17,7 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
 import { EnvService } from 'src/env/env.service';
-import { InvoiceSendEvent } from 'src/events/invoice-send.event';
+import { InvoiceSendPayload } from 'src/events/invoice-send.event';
 import { IUser } from 'src/interfaces/user.interface';
 import {
 	CreateLeaseInvoiceDto,
@@ -31,7 +35,6 @@ export class LeaseInvoicesService {
 	constructor(
 		private readonly prisma: PrismaService,
 		private readonly postmarkService: PostmarkService,
-		private readonly eventEmitter: EventEmitter2,
 		private readonly env: EnvService,
 		private readonly myfatoorah: MyfatoorahService,
 		// @ts-expect-error until update to ts 5.0
@@ -304,18 +307,27 @@ export class LeaseInvoicesService {
 			throw new BadRequestException('No emails found for tenant.');
 		}
 
-		emails.forEach((email) =>
-			this.eventEmitter.emit(
-				'invoice.send',
-				new InvoiceSendEvent(email, invoice),
-			),
+		const promises = emails.map((email) =>
+			this.sendEmail({
+				invoice,
+				email,
+			}),
 		);
 
-		return `Invoice will be sent to ${emails.join(', ')}.`;
+		const results = await Promise.allSettled(promises);
+
+		const failed = results.filter((result) => result.status === 'rejected');
+
+		if (failed.length) {
+			throw new InternalServerErrorException('Failed to send email', {
+				cause: new Error('Failed to send email', { cause: failed }),
+			});
+		}
+
+		return emails;
 	}
 
-	@OnEvent('invoice.send')
-	async sendEmail(payload: InvoiceSendEvent) {
+	async sendEmail(payload: InvoiceSendPayload) {
 		const invoice = payload.invoice;
 		const origin = this.env.e.PUBLIC_SITE_URL;
 

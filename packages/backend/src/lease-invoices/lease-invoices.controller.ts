@@ -109,8 +109,8 @@ export class LeaseInvoicesController {
 
 	@Post('/:id/send-email')
 	@CheckAbilities({ action: Action.Update, subject: SubjectType })
-	@ApiCreatedResponse({ type: String })
-	sendEmail(@Param('id') id: string, @User() user: IUser): Promise<string> {
+	@ApiCreatedResponse({ type: String, isArray: true })
+	sendEmail(@Param('id') id: string, @User() user: IUser): Promise<string[]> {
 		return this.leaseInvoicesService.sendInvoice({ id, user });
 	}
 

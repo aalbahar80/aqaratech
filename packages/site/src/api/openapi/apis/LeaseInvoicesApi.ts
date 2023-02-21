@@ -245,7 +245,7 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	async sendEmailRaw(
 		requestParameters: LeaseInvoicesApiSendEmailRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>> {
+	): Promise<runtime.ApiResponse<Array<string>>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -270,7 +270,7 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 			initOverrides,
 		);
 
-		return new runtime.TextApiResponse(response) as any;
+		return new runtime.JSONApiResponse<any>(response);
 	}
 
 	/**
@@ -280,7 +280,7 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	async sendEmail(
 		requestParameters: LeaseInvoicesApiSendEmailRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string> {
+	): Promise<Array<string>> {
 		const response = await this.sendEmailRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
