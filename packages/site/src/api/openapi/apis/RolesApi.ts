@@ -343,7 +343,7 @@ export class RolesApi extends runtime.BaseAPI {
 	async sendInviteRaw(
 		requestParameters: RolesApiSendInviteRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<void>> {
+	): Promise<runtime.ApiResponse<string>> {
 		if (
 			requestParameters.roleId === null ||
 			requestParameters.roleId === undefined
@@ -386,7 +386,7 @@ export class RolesApi extends runtime.BaseAPI {
 			initOverrides,
 		);
 
-		return new runtime.VoidApiResponse(response);
+		return new runtime.TextApiResponse(response) as any;
 	}
 
 	/**
@@ -396,7 +396,8 @@ export class RolesApi extends runtime.BaseAPI {
 	async sendInvite(
 		requestParameters: RolesApiSendInviteRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<void> {
-		await this.sendInviteRaw(requestParameters, initOverrides);
+	): Promise<string> {
+		const response = await this.sendInviteRaw(requestParameters, initOverrides);
+		return await response.value();
 	}
 }

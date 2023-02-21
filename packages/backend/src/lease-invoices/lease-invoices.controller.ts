@@ -10,7 +10,12 @@ import {
 	Query,
 	Redirect,
 } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+	ApiCreatedResponse,
+	ApiOkResponse,
+	ApiParam,
+	ApiTags,
+} from '@nestjs/swagger';
 
 import { getRoute, leaseInvoiceUpdateSchema, PageType } from '@self/utils';
 import { Public } from 'src/auth/public.decorator';
@@ -108,7 +113,12 @@ export class LeaseInvoicesController {
 	}
 
 	@Post('/:id/send-email')
-	@CheckAbilities({ action: Action.Update, subject: SubjectType })
+	@CheckAbilities({
+		action: Action.Update,
+		subject: SubjectType,
+		useParams: true,
+	})
+	@ApiParam({ name: 'organizationId', required: true, type: String })
 	@ApiCreatedResponse({ type: String, isArray: true })
 	sendEmail(@Param('id') id: string, @User() user: IUser): Promise<string[]> {
 		return this.leaseInvoicesService.sendInvoice({ id, user });

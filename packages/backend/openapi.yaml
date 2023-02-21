@@ -548,6 +548,11 @@ paths:
           in: path
           schema:
             type: string
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
       responses:
         '201':
           description: ''

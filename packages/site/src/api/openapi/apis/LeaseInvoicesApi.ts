@@ -37,6 +37,7 @@ export interface LeaseInvoicesApiRemoveRequest {
 
 export interface LeaseInvoicesApiSendEmailRequest {
 	id: string;
+	organizationId: string;
 }
 
 export interface LeaseInvoicesApiUpdateRequest {
@@ -253,16 +254,31 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 			);
 		}
 
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling sendEmail.',
+			);
+		}
+
 		const queryParameters: any = {};
 
 		const headerParameters: runtime.HTTPHeaders = {};
 
 		const response = await this.request(
 			{
-				path: `/leaseInvoices/{id}/send-email`.replace(
-					`{${'id'}}`,
-					encodeURIComponent(String(requestParameters.id)),
-				),
+				path: `/leaseInvoices/{id}/send-email`
+					.replace(
+						`{${'id'}}`,
+						encodeURIComponent(String(requestParameters.id)),
+					)
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					),
 				method: 'POST',
 				headers: headerParameters,
 				query: queryParameters,

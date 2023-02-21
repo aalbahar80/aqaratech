@@ -104,6 +104,7 @@
 					try {
 						await createApi().leaseInvoices.sendEmail({
 							id: data.leaseInvoice.id,
+							organizationId: data.leaseInvoice.organizationId,
 						});
 
 						addSuccessToast();
