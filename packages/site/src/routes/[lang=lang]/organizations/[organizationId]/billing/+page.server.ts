@@ -71,8 +71,6 @@ export const actions: Actions = {
 				console.log(inspect(e, false, null, true));
 			}
 		}
-
-		// WARN: reload page/data
 	},
 
 	// Redirect to stripe checkout to enter card details and resubscribe.
