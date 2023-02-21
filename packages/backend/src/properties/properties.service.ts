@@ -101,15 +101,8 @@ export class PropertiesService {
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		await this.prisma.c.property.findFirstOrThrow({
-			where: {
-				AND: [{ id }, accessibleBy(user.ability, Action.Delete).Property],
-			},
+		return await this.prisma.c.property.delete({
+			where: { id, AND: accessibleBy(user.ability, Action.Delete).Property },
 		});
-
-		// PERF: Can be optimized after Meilisearch removal
-		const deleted = await this.prisma.c.property.delete({ where: { id } });
-
-		return new PropertyDto(deleted);
 	}
 }

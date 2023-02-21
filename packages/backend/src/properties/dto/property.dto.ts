@@ -43,10 +43,6 @@ class PropertyOptionalDto {
 	cost: number | null;
 
 	label: string | null;
-
-	long: number | null;
-
-	lat: number | null;
 }
 
 class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, [

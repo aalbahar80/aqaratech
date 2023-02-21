@@ -3460,12 +3460,6 @@ components:
         label:
           type: string
           nullable: true
-        long:
-          type: number
-          nullable: true
-        lat:
-          type: number
-          nullable: true
       required:
         - id
         - breadcrumbs
@@ -3483,8 +3477,6 @@ components:
         - paci
         - cost
         - label
-        - long
-        - lat
     UnitVacancy:
       type: object
       properties:

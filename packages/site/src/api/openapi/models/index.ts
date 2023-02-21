@@ -2639,18 +2639,6 @@ export interface PropertyDto {
 	 * @memberof PropertyDto
 	 */
 	label: string | null;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof PropertyDto
-	 */
-	_long: number | null;
-	/**
-	 *
-	 * @type {number}
-	 * @memberof PropertyDto
-	 */
-	lat: number | null;
 }
 /**
  *
