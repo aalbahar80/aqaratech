@@ -1002,10 +1002,6 @@ type RootTranslation = {
 		 */
 		location: string
 		/**
-		 * O​n​l​i​n​e
-		 */
-		online: string
-		/**
 		 * M​a​p
 		 */
 		map: string
@@ -2042,10 +2038,6 @@ export type TranslationFunctions = {
 		 * Location
 		 */
 		location: () => LocalizedString
-		/**
-		 * Online
-		 */
-		online: () => LocalizedString
 		/**
 		 * Map
 		 */

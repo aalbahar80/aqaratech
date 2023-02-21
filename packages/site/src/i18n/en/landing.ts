@@ -11,6 +11,5 @@ export const landing = {
 	callToAction,
 	footer,
 	location: 'Location',
-	online: 'Online',
 	map: 'Map',
 };

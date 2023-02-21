@@ -57,7 +57,7 @@
 					<!-- Online -->
 					<div>
 						<h3 class="text-lg font-medium text-slate-900">
-							{$L.landing.online()}
+							{$L.general.online()}
 						</h3>
 						<div class="mt-2 text-base text-slate-500">
 							<a

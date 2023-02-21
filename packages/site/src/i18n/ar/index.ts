@@ -328,7 +328,6 @@ const ar: Translation = {
 		},
 		location: 'الموقع',
 		map: 'الخريطة',
-		online: 'متصل',
 		secondaryFeatures: {
 			managers: {
 				description:
