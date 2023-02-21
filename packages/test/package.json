@@ -32,7 +32,7 @@
 		"eslint-plugin-playwright": "0.12.0",
 		"jose": "4.12.0",
 		"prisma": "4.10.1",
-		"remeda": "1.6.1",
+		"remeda": "1.6.2",
 		"simple-json-db": "2.0.0",
 		"tier": "5.1.2",
 		"tree-kill": "1.2.2",
