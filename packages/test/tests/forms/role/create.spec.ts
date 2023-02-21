@@ -92,6 +92,3 @@ for (const entity of entities) {
 		expect(body).toStrictEqual(email);
 	});
 }
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.fixme('can delete role', () => {});
