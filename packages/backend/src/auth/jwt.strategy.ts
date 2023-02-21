@@ -4,7 +4,7 @@ import { passportJwtSecret } from 'jwks-rsa';
 import { Strategy } from 'passport-jwt';
 import { z } from 'zod';
 
-import { AQARATECH_STAFF_ROLE, Cookie } from '@self/utils';
+import { Cookie } from '@self/utils';
 import { authConfig } from 'src/config/auth.config';
 import { backendEnvSchema } from 'src/env/env.schema';
 import { EnvService } from 'src/env/env.service';
@@ -76,12 +76,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		const emailKey = `${apiNamespace}/email`;
 		const email = z.string().parse(payload[emailKey]);
 
-		const rolesKey = `${apiNamespace}/roles`;
-		const roles = z.array(z.string()).parse(payload[rolesKey]);
-
-		const isAqaratechStaff = roles.includes(AQARATECH_STAFF_ROLE);
-
-		return { email, isAqaratechStaff };
+		return { email };
 	}
 }
 

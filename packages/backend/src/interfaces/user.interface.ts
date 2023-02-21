@@ -12,11 +12,6 @@ import { ValidatedUserDto } from 'src/users/dto/user.dto';
  */
 export interface AuthenticatedUser {
 	email: string;
-
-	/**
-	 * Whether the user has an `aqaratech-staff` role set in their auth0 profile.
-	 */
-	isAqaratechStaff: boolean;
 }
 
 /**

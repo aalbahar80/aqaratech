@@ -37,7 +37,6 @@ async function globalSetup(config: FullConfig) {
 		testUsers.portfolio,
 		testUsers.tenant,
 		testUsers.freshUser,
-		testUsers.aqaratechStaff,
 	]) {
 		const storagePath = path.join(globalStoragePath, storageStateFilename);
 

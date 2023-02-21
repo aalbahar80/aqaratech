@@ -17,14 +17,12 @@ export const getUserSentry = (request: Request) => {
 			email: user.email,
 			roleId: user.role.id,
 			username: user.fullName ?? '',
-			isAqaratechStaff: user.isAqaratechStaff,
 		};
 	} else if (user) {
 		sentryUser = {
 			...sentryUser,
 			ip_address: request.ip,
 			email: user.email,
-			isAqaratechStaff: user.isAqaratechStaff,
 		};
 	}
 

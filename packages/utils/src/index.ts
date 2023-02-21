@@ -6,7 +6,6 @@ export { envSchema } from './config/env/env.schema';
 export { isLiveEnv } from './config/env/live-envs';
 export { getSentryConfig } from './config/get-sentry-config';
 export { isHealthCheck } from './config/is-health-check';
-export { AQARATECH_STAFF_ROLE } from './constants/aqaratech-staff-role';
 export { Cookie } from './constants/cookie';
 export { countries } from './constants/countries';
 export { generateExpenseCategoryTree } from './constants/default-expense-categories';
