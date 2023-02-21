@@ -284,6 +284,8 @@ export class LeaseInvoicesService {
 				id: true,
 				amount: true,
 				postAt: true,
+				portfolioId: true,
+				organizationId: true,
 				lease: {
 					select: {
 						tenant: {
@@ -314,26 +316,24 @@ export class LeaseInvoicesService {
 
 	@OnEvent('invoice.send')
 	async sendEmail(payload: InvoiceSendEvent) {
+		const invoice = payload.invoice;
 		const origin = this.env.e.PUBLIC_SITE_URL;
+
+		const trxUrl = `${origin}/en/organizations/${invoice.organizationId}/portfolios/${invoice.portfolioId}/leaseInvoices/${invoice.id}`;
 
 		return await this.postmarkService.sendEmail({
 			From: 'Aqaratech <notifications@aqaratech.com>',
 			To: payload.email,
 			TemplateAlias: 'invoice',
 			TemplateModel: {
-				amount: kwdFormat(payload.invoice.amount),
-				date: payload.invoice.postAt.toISOString().split('T')[0],
-				trxUrl: origin
-					? `${origin}/${entitiesMap.leaseInvoice.urlName}/${payload.invoice.id}`
-					: `https://aqaratech.com/${entitiesMap.leaseInvoice.urlName}/${payload.invoice.id}`,
-				monthYear: new Date(payload.invoice.postAt).toLocaleDateString(
-					'en-US',
-					{
-						month: 'long',
-						year: 'numeric',
-						timeZone: 'UTC',
-					},
-				),
+				amount: kwdFormat(invoice.amount),
+				date: invoice.postAt.toISOString().split('T')[0],
+				trxUrl,
+				monthYear: new Date(invoice.postAt).toLocaleDateString('en-US', {
+					month: 'long',
+					year: 'numeric',
+					timeZone: 'UTC',
+				}),
 			},
 		});
 	}
