@@ -16,7 +16,7 @@
 	aria-label="Global"
 >
 	<!-- Main horizontal navbar area -->
-	<div class="flex items-center justify-between py-8 px-4">
+	<div class="flex items-center justify-between py-4 px-4 sm:py-8">
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
 			{#if isSidebarAvailable($page.url.pathname)}
@@ -32,7 +32,7 @@
 				<h1>{$L.aqaratech.shortName()}</h1>
 			</a>
 		</div>
-		<div class="flex gap-12 text-gray-500">
+		<div class="flex flex-col gap-y-4 gap-x-12 text-gray-500 sm:flex-row">
 			<LocaleSwitcher />
 			{#if isHomeRoute($page.url.pathname)}
 				<LoginButton />
