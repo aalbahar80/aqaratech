@@ -216,8 +216,4 @@ export class MyfatoorahService {
 
 		return ALLOWED_ORGANIZATIONS.includes(organizationId);
 	}
-
-	// TODO: how to get correct invoice URL?
-	// 'https://demo.myfatoorah.com/En/KWT/PayInvoice/Details/01072121063737';
-	// 'https://demo.myfatoorah.com/En/KWT/PayInvoice/Result?paymentId=100202210635345720';
 }

@@ -1,27 +1,35 @@
 import { expect } from '@playwright/test';
 
-import { sample } from '@self/seed';
-
 import { test } from './api-fixtures';
 
 import type { BalanceDto } from '../../types/api';
 
-const portfolio = sample.portfolios[0];
-const leaseInvoices = sample.leaseInvoices;
-const expenses = sample.expenses;
-const payouts = sample.payouts;
+test.use({
+	invoicesParams: [
+		{ amount: 10, isPaid: false },
+		{ amount: 20, isPaid: true },
+		{ amount: 30, isPaid: true },
+	],
+	expensesParams: [{ amount: 15 }, { amount: 25 }, { amount: 35 }],
+	payoutsParams: [{ amount: 7 }, { amount: 17 }, { amount: 27 }],
+});
 
-// TODO: other tests that add data will cause this test to fail
-test.skip(`balance`, async ({ request }) => {
+test(`balance`, async ({
+	request,
+	portfolio,
+	invoices: _invoices,
+	expenses: _expenses,
+	payouts: _payouts,
+}) => {
 	const res = await request.get(`/portfolios/${portfolio.id}/balance`);
 
 	await expect(res).toBeOK();
+
 	const sums = {
-		leaseInvoices: leaseInvoices
-			.filter((i) => i.isPaid)
-			.reduce((acc, cur) => acc + cur.amount, 0),
-		expenses: expenses.reduce((acc, cur) => acc + cur.amount, 0),
-		payouts: payouts.reduce((acc, cur) => acc + cur.amount, 0),
+		leaseInvoices: 50,
+		expenses: 75,
+		payouts: 51,
+		total: 50 - 75 - 51,
 	};
 
 	const body = (await res.json()) as BalanceDto;
@@ -32,7 +40,5 @@ test.skip(`balance`, async ({ request }) => {
 
 	expect.soft(body.payouts).toBe(sums.payouts);
 
-	expect
-		.soft(body.total)
-		.toBe(sums.leaseInvoices - sums.expenses - sums.payouts);
+	expect.soft(body.total).toBe(sums.total);
 });

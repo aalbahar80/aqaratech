@@ -15,7 +15,7 @@ export const expenseCategorySchema = z
 		// Instead, we use `z.string().nullable()` to allow null values coming from the db.
 		labelAr: z.string().nullable(),
 
-		parentId: zodString.nullable(), // TODO: use isID
+		parentId: zodString.nullable(),
 		isGroup: zodCheckbox,
 	})
 	.strict();
@@ -26,7 +26,7 @@ export const expenseCategoryCreateSchema = z
 	.object({
 		labelEn: zodString,
 		labelAr: zodStringOptional,
-		parentId: zodStringOptional, // TODO: use isID
+		parentId: zodStringOptional,
 		isGroup: zodCheckbox,
 	})
 	.strict();

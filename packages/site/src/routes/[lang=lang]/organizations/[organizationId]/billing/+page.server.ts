@@ -106,7 +106,6 @@ export const actions: Actions = {
 		// Get CUSTOMER_ID
 		const whois = await tier.whois(tierid(role.organizationId));
 
-		// TODO: Handle renewing expired subscriptions
 		const session = await stripe.billingPortal.sessions.create({
 			customer: whois.stripe_id,
 			return_url: event.url.toString(),

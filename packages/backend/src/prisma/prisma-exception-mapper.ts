@@ -10,7 +10,6 @@ import { Prisma } from '@prisma/client';
 
 import { getErrorMessage } from './get-error-message';
 
-// TODO: review error messages
 export const mapPrismaException = (
 	exception: Prisma.PrismaClientKnownRequestError | Prisma.NotFoundError,
 	method: string,
@@ -26,7 +25,6 @@ export const mapPrismaException = (
 		 * https://www.prisma.io/docs/reference/api-reference/error-reference#p2025
 		 *
 		 */
-		// TODO: should be a 404 instead of a 400?
 		responseError = new BadRequestException(exception.meta?.['cause']);
 	} else if (exception.code === 'P2014') {
 		/**
@@ -35,7 +33,6 @@ export const mapPrismaException = (
 		 * https://www.prisma.io/docs/reference/api-reference/error-reference#p2025
 		 *
 		 */
-		// TODO should we add a fallback error message?
 		const meta = exception.meta;
 		const modela = meta?.['model_a_name'];
 		const modelb = meta?.['model_b_name'];
@@ -78,8 +75,6 @@ export const mapPrismaException = (
 			responseError = new NotFoundException();
 		}
 	} else {
-		// TODO return error message?
-		// TODO Test minimial error message (auto set in prod by Prisma)
 		Logger.warn('Potentially unhandled Prisma error:', 'PrismaExceptionMapper');
 		Logger.warn(exception, 'PrismaExceptionMapper');
 		responseError = new InternalServerErrorException();
