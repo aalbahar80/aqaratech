@@ -5,6 +5,7 @@
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
+	import { SIDEBAR_TOGGLE } from '$lib/constants/misc';
 	import LocaleSwitcher from '$lib/i18n/LocaleSwitcher.svelte';
 	import { isHomeRoute } from '$lib/utils/is-home-route';
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
@@ -22,7 +23,7 @@
 			{#if isSidebarAvailable($page.route)}
 				<button class="lg:hidden" use:sidebar.button>
 					<span class="sr-only">Toggle sidebar</span>
-					<HeroiconsBars3 class="h-8 w-8" />
+					<HeroiconsBars3 class="h-8 w-8" id={SIDEBAR_TOGGLE} />
 				</button>
 			{/if}
 			<a

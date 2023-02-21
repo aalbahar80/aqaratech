@@ -1,3 +1,5 @@
+import { SIDEBAR_TOGGLE } from '$lib/constants/misc';
+
 /**
  * Emits `clickoutside` event whenever pointer clicks outside of node
  *
@@ -6,8 +8,10 @@
 export function clickOutside(node: HTMLElement) {
 	function handleClick(e: MouseEvent) {
 		if (
-			e.target instanceof Node &&
+			e.target instanceof HTMLElement &&
 			!node.contains(e.target) &&
+			// don't emit if the click was on the toggle button (id="sidebar-toggle")
+			e.target.id !== SIDEBAR_TOGGLE &&
 			!e.defaultPrevented
 		) {
 			node.dispatchEvent(new MouseEvent('outclick', e));

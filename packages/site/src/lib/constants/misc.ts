@@ -6,3 +6,5 @@ export const MAX_UNITS = 400;
 export const REDIRECT_TO = 'redirectTo';
 export const PREF_LOCALE = 'preferredLocale';
 export const DESTINATION = 'destination';
+
+export const SIDEBAR_TOGGLE = 'sidebar-toggle';
