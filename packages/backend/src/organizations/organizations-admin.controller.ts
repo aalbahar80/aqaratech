@@ -251,7 +251,7 @@ export class OrganizationsAdminController {
 		return this.filesService.create({ file, createFileDto, organizationId });
 	}
 
-	@Post('leaseInvoices/:id/send-email')
+	@Post('leaseInvoices/:id/send-invoice-email')
 	@CheckAbilities({
 		action: Action.Update,
 		subject: 'LeaseInvoice',
@@ -259,7 +259,10 @@ export class OrganizationsAdminController {
 	})
 	@ApiCreatedResponse({ type: String, isArray: true })
 	@ApiParam({ name: 'organizationId', required: true, type: String })
-	sendEmail(@Param('id') id: string, @User() user: IUser): Promise<string[]> {
+	sendInvoiceEmail(
+		@Param('id') id: string,
+		@User() user: IUser,
+	): Promise<string[]> {
 		return this.leaseInvoicesService.sendInvoice({ id, user });
 	}
 }

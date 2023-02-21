@@ -132,7 +132,7 @@ export interface OrganizationsApiSearchRequest {
 	query: string;
 }
 
-export interface OrganizationsApiSendEmailRequest {
+export interface OrganizationsApiSendInvoiceEmailRequest {
 	id: string;
 	organizationId: string;
 }
@@ -1241,14 +1241,14 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	 *
 	 *
 	 */
-	async sendEmailRaw(
-		requestParameters: OrganizationsApiSendEmailRequest,
+	async sendInvoiceEmailRaw(
+		requestParameters: OrganizationsApiSendInvoiceEmailRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<runtime.ApiResponse<Array<string>>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
-				'Required parameter requestParameters.id was null or undefined when calling sendEmail.',
+				'Required parameter requestParameters.id was null or undefined when calling sendInvoiceEmail.',
 			);
 		}
 
@@ -1258,7 +1258,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 		) {
 			throw new runtime.RequiredError(
 				'organizationId',
-				'Required parameter requestParameters.organizationId was null or undefined when calling sendEmail.',
+				'Required parameter requestParameters.organizationId was null or undefined when calling sendInvoiceEmail.',
 			);
 		}
 
@@ -1268,7 +1268,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/leaseInvoices/{id}/send-email`
+				path: `/organizations/{organizationId}/leaseInvoices/{id}/send-invoice-email`
 					.replace(
 						`{${'id'}}`,
 						encodeURIComponent(String(requestParameters.id)),
@@ -1291,11 +1291,14 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	 *
 	 *
 	 */
-	async sendEmail(
-		requestParameters: OrganizationsApiSendEmailRequest,
+	async sendInvoiceEmail(
+		requestParameters: OrganizationsApiSendInvoiceEmailRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<string>> {
-		const response = await this.sendEmailRaw(requestParameters, initOverrides);
+		const response = await this.sendInvoiceEmailRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

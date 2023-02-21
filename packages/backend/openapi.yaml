@@ -2568,9 +2568,9 @@ paths:
                 type: string
       tags: *ref_21
       security: *ref_22
-  /organizations/{organizationId}/leaseInvoices/{id}/send-email:
+  /organizations/{organizationId}/leaseInvoices/{id}/send-invoice-email:
     post:
-      operationId: OrganizationsAdminController_sendEmail
+      operationId: OrganizationsAdminController_sendInvoiceEmail
       summary: ''
       description: ''
       parameters:

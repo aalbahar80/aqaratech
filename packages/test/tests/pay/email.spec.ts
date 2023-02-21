@@ -53,7 +53,7 @@ test('invoice due email', async ({ page, tenant, invoice }) => {
 	const send = page.getByRole('button', { name: 'Send reminder' });
 
 	const responsePromise = page.waitForResponse((res) =>
-		res.url().includes('send-email'),
+		res.url().includes('send-invoice-email'),
 	);
 
 	await send.click();
@@ -65,6 +65,7 @@ test('invoice due email', async ({ page, tenant, invoice }) => {
 	const body = (await response.json()) as string[];
 
 	// check email was sent
-	expect.soft(body).toEqual(emails);
 	expect.soft(body).toHaveLength(2);
+	expect.soft(body).toContain(email1);
+	expect.soft(body).toContain(email2);
 });

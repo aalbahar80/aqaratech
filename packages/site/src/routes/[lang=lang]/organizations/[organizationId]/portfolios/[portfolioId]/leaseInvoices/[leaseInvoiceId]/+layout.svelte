@@ -102,7 +102,7 @@
 				disabled={data.leaseInvoice.isPaid}
 				on:click={async () => {
 					try {
-						await createApi().organizations.sendEmail({
+						await createApi().organizations.sendInvoiceEmail({
 							id: data.leaseInvoice.id,
 							organizationId: data.leaseInvoice.organizationId,
 						});
