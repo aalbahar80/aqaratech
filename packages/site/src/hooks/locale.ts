@@ -19,7 +19,7 @@ export const handleLocale = (async ({ event, resolve }) => {
 	// NOTE: This does not check for a valid locale.
 	if (!lang) {
 		logger.log({
-			level: 'warn',
+			level: 'debug',
 			message: `redirecting to base locale. url: ${event.url.toString()}`,
 		});
 
