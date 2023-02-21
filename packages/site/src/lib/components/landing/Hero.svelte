@@ -9,7 +9,7 @@
 <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-testid="hero">
 	<div class="flex flex-col gap-8 pt-20 pb-16 text-center lg:pt-32">
 		<h1
-			class="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl"
+			class="font-display mx-auto max-w-4xl text-3xl font-medium tracking-tight text-slate-900 min-[400px]:text-4xl min-[500px]:text-5xl sm:text-7xl"
 		>
 			{$L.landing.hero.titlePrefix()}
 			<span class="relative whitespace-nowrap text-blue-600">
