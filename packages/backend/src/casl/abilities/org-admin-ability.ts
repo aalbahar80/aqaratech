@@ -12,14 +12,9 @@ export const defineOrgAdminAbility = (
 		throw new Error('roleType is not ORGADMIN');
 	}
 
-	// TODO: limit fields
-	// TODO only superadmins can manage orgs/orgSettings?
 	can(Action.Manage, ['Organization'], {
 		id: { equals: role.organizationId },
 	});
-
-	// TODO: limit fields
-	// TODO only superadmins can manage org roles?
 
 	can(Action.Manage, 'Role', {
 		organizationId: { equals: role.organizationId },
