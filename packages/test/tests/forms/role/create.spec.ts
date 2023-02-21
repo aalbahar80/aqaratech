@@ -17,22 +17,18 @@ for (const entity of entities) {
 		portfolio,
 	}) => {
 		// get url to roles page
-		let instance;
 		let id: string;
 		let params: Record<string, string> = {};
 
 		switch (entity) {
 			case 'organization':
-				instance = org;
 				id = org.organization.id;
 				break;
 			case 'portfolio':
-				instance = portfolio;
 				id = portfolio.id;
 				params = { organizationId: portfolio.organizationId };
 				break;
 			case 'tenant':
-				instance = tenant;
 				id = tenant.id;
 				params = { organizationId: tenant.organizationId };
 				break;

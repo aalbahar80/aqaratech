@@ -64,7 +64,7 @@ export interface AqaratechEnv {
 	readonly LOGTAIL_TOKEN?: string | undefined;
 
 	// Postmark
-	readonly POSTMARK_TOKEN?: string | undefined;
+	readonly POSTMARK_TOKEN: string;
 
 	// Myfatoorah
 	/** Myfatoorah's API URL */

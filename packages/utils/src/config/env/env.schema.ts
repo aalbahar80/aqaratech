@@ -68,7 +68,7 @@ export const envSchema = z.object({
 	R2_SECRET_ACCESS_KEY: z.string(),
 
 	// Postmark
-	POSTMARK_TOKEN: z.string().optional(),
+	POSTMARK_TOKEN: z.string(),
 
 	// External
 	CI: zodEnvBooleanSchema().optional(),

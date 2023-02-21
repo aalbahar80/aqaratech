@@ -1,36 +1,18 @@
-import { Inject, Injectable, LoggerService } from '@nestjs/common';
-import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { Injectable } from '@nestjs/common';
 import { ServerClient, TemplatedMessage } from 'postmark';
-import { Callback, MessageSendingResponse } from 'postmark/dist/client/models';
 
 import { EnvService } from 'src/env/env.service';
 
 @Injectable()
 export class PostmarkService {
-	constructor(
-		private readonly env: EnvService,
-		@Inject(WINSTON_MODULE_NEST_PROVIDER)
-		private readonly logger: LoggerService,
-	) {
+	constructor(private readonly env: EnvService) {
 		const token = this.env.e.POSTMARK_TOKEN;
-
-		if (token) {
-			this.logger.log('Token detected. Initializing Postmark client.');
-			this.postmark = new ServerClient(token);
-		} else {
-			this.logger.warn('No token detected. Postmark client not initialized.');
-		}
+		this.postmark = new ServerClient(token);
 	}
 
-	readonly postmark: ServerClient | undefined;
+	readonly postmark: ServerClient;
 
-	async sendEmail(
-		template: TemplatedMessage,
-		callback?: Callback<MessageSendingResponse> | undefined,
-	) {
-		if (!this.postmark) {
-			throw new Error('Postmark client not initialized.');
-		}
-		return await this.postmark.sendEmailWithTemplate(template, callback);
+	async sendEmail(template: TemplatedMessage) {
+		return await this.postmark.sendEmailWithTemplate(template);
 	}
 }
