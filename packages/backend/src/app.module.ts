@@ -52,7 +52,6 @@ import { RolesModule } from './roles/roles.module';
 import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 import { TenantsModule } from './tenants/tenants.module';
-import { TierService } from './tier/tier.service';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
 
@@ -174,7 +173,6 @@ import { UsersModule } from './users/users.module';
 		S3Service,
 		PostmarkService,
 		HttpLoggerService,
-		TierService,
 	],
 })
 export class AppModule {
