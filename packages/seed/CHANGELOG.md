@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.13.1
+
+### Patch Changes
+
+- 783805c93: decrease upload size
+- Updated dependencies [783805c93]
+  - @self/utils@3.13.1
+
 ## 2.13.0
 
 ### Minor Changes

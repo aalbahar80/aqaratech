@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.13.1
+
+### Patch Changes
+
+- 783805c93: decrease upload size
+
 ## 3.13.0
 
 ### Minor Changes

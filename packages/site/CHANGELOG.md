@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.14.1
+
+### Patch Changes
+
+- ab198828d: navbar fixes
+- 783805c93: decrease upload size
+
 ## 2.14.0
 
 ### Minor Changes

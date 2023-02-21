@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.13.1
+
+### Patch Changes
+
+- 783805c93: decrease upload size
+
 ## 2.13.0
 
 ### Minor Changes
