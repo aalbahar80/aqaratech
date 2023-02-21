@@ -20,7 +20,6 @@ export const userSchema = userCreateSchema
 		email: z.string().email(),
 		roles: z.array(
 			roleSchema.extend({
-				// TODO: constrain with organizationSchema
 				organization: z
 					.object({
 						id: z.string().uuid(),

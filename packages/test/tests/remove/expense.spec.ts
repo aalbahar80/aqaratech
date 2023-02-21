@@ -1,32 +1,35 @@
-import * as R from 'remeda';
+import { expect } from '@playwright/test';
 
-import { getRoute, PageTypePortfolio } from '@self/utils';
+import { getRoute, PageType } from '@self/utils';
 
+import { prisma } from '../../prisma';
 import { test } from '../api/api-fixtures';
+import { IdPage } from '../models/id-page';
 
-import { RemoveModel } from './remove-model';
-
-test.use({
-	expensesParams: R.times(3, () => ({})),
-});
-
-test.fixme('delete expense', async ({ page, org, expenses }) => {
-	// TODO: add /table routes to getRoute
+test('delete expense', async ({ page, org, expense }) => {
 	const url = getRoute({
-		entity: 'portfolio',
-		pageType: PageTypePortfolio.Expenses,
-		id: expenses[0].portfolioId,
+		entity: 'expense',
+		pageType: PageType.Id,
+		id: expense.id,
 		params: {
 			organizationId: org.organization.id,
-			portfolioId: expenses[0].portfolioId,
+			portfolioId: expense.portfolioId,
 		},
 	});
 
-	const model = new RemoveModel({
-		page,
-		url,
-		items: expenses,
+	await page.goto(url);
+
+	const responsePromise = page.waitForResponse(
+		(res) => res.request().method() === 'DELETE',
+	);
+
+	const idPage = new IdPage({ page });
+	await idPage.delete();
+	await responsePromise;
+
+	const deleted = await prisma.expense.findUnique({
+		where: { id: expense.id },
 	});
 
-	await model.deleteAndVerify();
+	expect(deleted).toBeNull();
 });

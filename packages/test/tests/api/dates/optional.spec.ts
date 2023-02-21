@@ -43,7 +43,7 @@ test('portfolio dob default to midnight UTC', async ({ request, org }) => {
 	expect(body).toHaveProperty('dob', '2022-01-01T00:00:00.000Z');
 });
 
-test.skip('leaseInvoice dueAt default to midnight UTC', async ({
+test('leaseInvoice dueAt default to midnight UTC', async ({
 	request,
 	org,
 	portfolio,
@@ -54,17 +54,18 @@ test.skip('leaseInvoice dueAt default to midnight UTC', async ({
 			organizationId: org.organization.id,
 			portfolioId: portfolio.id,
 			leaseId: lease.id,
+			postAt: '2021-01-01',
 			dueAt: '2022-01-01',
 		}),
-		['amount', 'postAt', 'leaseId', 'portfolioId'],
+		['amount', 'postAt', 'leaseId', 'portfolioId', 'dueAt'],
 	);
 
-	// TODO: check/confirm url
-	const url = `/organizations/${org.organization.id}/lease-invoices`;
+	const url = `/organizations/${org.organization.id}/leaseInvoices`;
 
 	const res = await request.post(url, { data: invoice });
 
 	const body: unknown = await res.json();
+	console.log({ body });
 
 	expect(body).toHaveProperty('dueAt', '2022-01-01T00:00:00.000Z');
 });

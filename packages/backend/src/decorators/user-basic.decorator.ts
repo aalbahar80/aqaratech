@@ -3,13 +3,7 @@ import { Request } from 'express';
 
 import { AuthenticatedUser } from 'src/interfaces/user.interface';
 
-/**
- *
- * TODO: Rename to AuthenticatedUser
- *
- * For use in routes marked with `@SkipRoleGuard()`.
- *
- */
+/** For use in routes marked with `@SkipRoleGuard()`. */
 export const UserBasic = createParamDecorator(
 	(_data: unknown, ctx: ExecutionContext) => {
 		// return request.user;

@@ -1,16 +1,14 @@
 This repository is a mono-repo containing multiple packages located in the `packages` directory. Maintained using [pnpm](https://pnpm.io/) and [turborepo](https://turborepo.org/).
 
-`site`: Main site built with [sveltekit](https://kit.svelte.dev/) & `typescript`. Uses [playwright](https://playwright.dev/) for testing.
+`site`: Main site built with [sveltekit](https://kit.svelte.dev/) & `typescript`.
 
 `backend`: Server built with [nest](https://github.com/nestjs/nest) & `typescript`.
 
-`docs`: Documentation for site. Built using [kit-docs](https://github.com/svelteness/kit-docs).
+`test`: End-to-end tests for both site and backend. Uses with [playwright](https://playwright.dev/).
+
+`utils`: Various utilities used by other packages.
 
 `seed`: Helpers for generating realistic fake data to use for development/testing.
-
-`utils`: Contains code to trigger [`/notify-all`](packages/site/src/routes/transactions/notify-all.ts) webhook to send payment reminders to tenants. Hosted on [render](https://render.com/).
-
-`scripts`: Utility scripts for ci/cd.
 
 ## Develop:
 
@@ -21,9 +19,6 @@ This repository is a mono-repo containing multiple packages located in the `pack
 ```bash
 pnpm dev
 # runs site on port 3000, and backend on port 3002.
-
-pnpm outdated --long -r # view outdated deps
-pnpm update -iLr # interactively update deps
 ```
 
 Take a look [.env.example](.env.example) to know what env vars are required.
@@ -31,95 +26,38 @@ Take a look [.env.example](.env.example) to know what env vars are required.
 ### Test 🧪
 
 ```bash
-# local
-pnpm run preview
-# or pnpm run preview:tunnel (set correct .env if tunnel)
-# NOTE: preview mode requires passing in env vars through command line in sveltekit until further notice
-pt
-pt -- --project "chromium"
-
-# docker - using the included convenience bash script
-cd packages/site/tests && ./run-docker-test.sh
+pnpm run test
 ```
 
 ### Build 📦
 
 ```bash
-pnpm build
+pnpm run build
 ```
 
 ### Update 📦
 
 ```bash
 # create a changeset file
-npx changset
+pnpm changeset
 
-# consume changest file, update versions in package.json + update CHANGELOG.md
-npx changest version
-
-# publish changed packages to npm (not used)
-# npx changest publish
-
-```
-
-## Deploy:
-
-Site and docs are deployed on vercel as sepereate projects.
-
-Settings:
-
-> Site (vercel):
-
-```bash
-# build
-pnpm build && pnpm run postbuild:vercel
-# install
-pnpm install --filter=@self/site
-```
-
-> /notify-all cron job (render.com):
-
-```bash
-# schedule
-0 6 1,3,7,14 * *
-# build
-cd packages/utils && npm install && npm run build
-# run
-cd packages/utils && npm run start
+# Changeset files will be consumed by CI and a PR will be opened.
+# The PR can be merged to trigger a release.
 ```
 
 #
 
-To skip deployment on pushed to `master`:
-
-- include `[skip ci]` flag in the commit message
-  - good for adding docs, comments in code, etc
-  - This will not:
-    - open a PR
-    - run tests
-- add a changeset. This will cause a PR to be opened. When that PR is closed, app will be deployed.
-
-```mermaid
-graph TD;
-    A[push to master]-->B[with changesets];
-    A[push to master]-->C[without changesets];
-    A[push to master]-->F[with `skip-ci` flag];
-		B-->E[PR will be created/updated]
-	  C-->D[trigger deployment in production]
-		B-->T[test]
-		C-->T
-```
-
 # Manual Tasks
 
 ```bash
-# openapi schema
+# generate types after changing openapi schema (note: openapi schema is only generated in when running pnpm dev)
 pnpm run api:generate:all --force
 
 # Test all browsers
+cd packages/test
 pnpm run test:all-browsers
 
-# Sync i18n translations through Tolgee
-pnpm run i18n:export
-pnpm run i18n:import
+# To update i18n types after changing i18n files
+cd packages/site
+pnpm typesafe-i18n
 ```

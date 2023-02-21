@@ -1,4 +1,3 @@
-// TODO: use this in all factories
 export const TIMESPAN = 2;
 
 export const areas: [string, string][] = [

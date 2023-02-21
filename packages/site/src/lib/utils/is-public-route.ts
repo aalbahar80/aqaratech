@@ -14,7 +14,5 @@ export const isProtectedRoute = (route: LoadEvent['route']) => {
 		route.id?.includes(protectedRoute),
 	);
 
-	// TODO: Only log if log level is set to debug
-
 	return isProtected;
 };

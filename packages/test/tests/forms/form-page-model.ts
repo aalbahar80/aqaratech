@@ -108,7 +108,6 @@ export class FormPage {
 			} else if (value === null) {
 				valueString = '';
 			} else {
-				// TODO: Handle other types as needed
 				throw new Error(`Unsupported value type: ${typeof value}`);
 			}
 

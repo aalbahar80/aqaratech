@@ -47,9 +47,11 @@
 							{$L.general.phone()}
 						</h3>
 						<div class="mt-2 text-base text-slate-500">
-							<!-- TODO: add data-sveltekit-reload? -->
-							<a dir="auto" class="hover:text-slate-900" href="tel:+96522466664"
-								>+965 22466664</a
+							<a
+								dir="auto"
+								class="hover:text-slate-900"
+								href="tel:+96522466664"
+								data-sveltekit-reload>+965 22466664</a
 							>
 						</div>
 					</div>

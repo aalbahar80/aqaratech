@@ -5,7 +5,6 @@ import {
 	RequestMethod,
 } from '@nestjs/common';
 import { RouteInfo } from '@nestjs/common/interfaces';
-import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ScheduleModule } from '@nestjs/schedule';
@@ -69,8 +68,6 @@ import { UsersModule } from './users/users.module';
 
 		// or use async: https://github.com/podkrepi-bg/api/blob/f62fba53eea6405539653c022c13f1d49990b93c/apps/api/src/app/app.module.ts#L60
 		SentryModule.forRootAsync({
-			// TODO: remove ConfigModule from imports
-			imports: [ConfigModule],
 			inject: [EnvService, PrismaService],
 			useFactory: (env: EnvService, prismaClient: PrismaService) => {
 				const sentryConfig = env.sentry;

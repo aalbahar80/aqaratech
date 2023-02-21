@@ -11,7 +11,6 @@ export const roleSchema = z
 		id: z.string().uuid(),
 		email: z.string().email(),
 		createdAt: z.date(),
-		// TODO: constrain this to the RoleType enum
 		roleType: z.enum(['ORGADMIN', 'PORTFOLIO', 'TENANT']),
 		organizationId: z.string().uuid(),
 		portfolioId: z.string().uuid().nullable(),
