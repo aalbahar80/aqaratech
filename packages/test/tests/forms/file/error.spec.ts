@@ -8,7 +8,7 @@ import { verifyUploadedFile } from '../../../utils/get-presigned-url';
 import { test } from '../../api/api-fixtures';
 import { FileFormPage } from '../file-form-model';
 
-const localFilePath = resolve(__dirname, './upload-test.png');
+const localFilePath = resolve(__dirname, './samples/upload-test.png');
 
 test.use({ createBucket: true });
 

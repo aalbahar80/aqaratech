@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import { expect } from '@playwright/test';
 
 import { getRoute, PageTab } from '@self/utils';
@@ -9,15 +11,15 @@ import { FileFormPage } from '../file-form-model';
 test.use({ createBucket: true });
 
 const FILES = {
-	png: './tests/forms/file/upload-test.png',
-	pdf: './tests/components/pdf/invoice-paid-sample.pdf',
+	png: path.resolve(__dirname, './samples/upload-test.png'),
+	pdf: path.resolve(__dirname, '../../components/pdf/invoice-paid-sample.pdf'),
 
 	// NOTE: make sure to test large pdf uploads while starting server with node
 	// build/index.js, which enforces BODY_SIZE_LIMIT just like production. On
 	// the other hand, vite dev/preview will always allow large uploads.
 	// This can lead to a scenario where large uploads work in vite dev/preview
 	// but fail in production.
-	pdfLarge: './tests/forms/file/samples/sample-pdf-large.pdf',
+	pdfLarge: path.resolve(__dirname, './samples/sample-pdf-large.pdf'),
 };
 
 for (const [name, filePath] of Object.entries(FILES)) {
