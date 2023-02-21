@@ -4,6 +4,7 @@ import { sequence } from '@sveltejs/kit/hooks';
 import { handleAuth } from './hooks/auth';
 import { handleLocale } from './hooks/locale';
 import { handleLog } from './hooks/log';
+import { handleMisc } from './hooks/misc';
 import { handleSentry } from './hooks/sentry';
 
 import type { HandleFetch, HandleServerError } from '@sveltejs/kit';
@@ -19,6 +20,7 @@ logConfig();
 
 export const handle = sequence(
 	handleLog,
+	handleMisc,
 	handleSentry,
 	handleLocale,
 	handleAuth,
