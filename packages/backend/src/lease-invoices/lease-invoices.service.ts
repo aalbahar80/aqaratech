@@ -316,10 +316,6 @@ export class LeaseInvoicesService {
 	async sendEmail(payload: InvoiceSendEvent) {
 		const origin = this.env.e.PUBLIC_SITE_URL;
 
-		if (!origin) {
-			this.logger.warn('No site origin configured');
-		}
-
 		return await this.postmarkService.sendEmail({
 			From: 'Aqaratech <notifications@aqaratech.com>',
 			To: payload.email,
