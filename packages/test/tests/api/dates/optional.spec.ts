@@ -65,7 +65,6 @@ test('leaseInvoice dueAt default to midnight UTC', async ({
 	const res = await request.post(url, { data: invoice });
 
 	const body: unknown = await res.json();
-	console.log({ body });
 
 	expect(body).toHaveProperty('dueAt', '2022-01-01T00:00:00.000Z');
 });

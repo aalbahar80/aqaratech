@@ -31,7 +31,9 @@ test.describe('unsubscribed', () => {
 
 		await page.getByRole('button', { name: 'Subscribe' }).click();
 
-		await expect(page).toHaveURL(/checkout\.stripe\.com/, { timeout: 10000 });
+		await expect(page).toHaveURL(/checkout\.aqaratech\.com/, {
+			timeout: 10000,
+		});
 	});
 
 	test('isActive is restored after subscribing', async ({ page, org }) => {
