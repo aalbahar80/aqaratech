@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.13.2
+
+### Patch Changes
+
+- 06a8e95eb: mark stripe links external
+
 ## 2.13.1
 
 ### Patch Changes

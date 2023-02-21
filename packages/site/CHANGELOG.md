@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.14.2
+
+### Patch Changes
+
+- 06a8e95eb: mark stripe links external
+
 ## 2.14.1
 
 ### Patch Changes

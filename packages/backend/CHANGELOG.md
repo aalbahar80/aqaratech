@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.14.2
+
+### Patch Changes
+
+- 06a8e95eb: mark stripe links external
+- Updated dependencies [06a8e95eb]
+  - @self/utils@3.13.2
+
 ## 2.14.1
 
 ### Patch Changes
