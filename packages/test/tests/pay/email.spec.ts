@@ -65,6 +65,6 @@ test('invoice due email', async ({ page, tenant, invoice }) => {
 	const body = (await response.json()) as string[];
 
 	// check email was sent
-	expect(body).toEqual(emails);
-	expect(body).toHaveLength(2);
+	expect.soft(body).toEqual(emails);
+	expect.soft(body).toHaveLength(2);
 });

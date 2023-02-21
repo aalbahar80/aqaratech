@@ -132,6 +132,11 @@ export interface OrganizationsApiSearchRequest {
 	query: string;
 }
 
+export interface OrganizationsApiSendEmailRequest {
+	id: string;
+	organizationId: string;
+}
+
 export interface OrganizationsApiStatusRefreshRequest {
 	id: string;
 }
@@ -1229,6 +1234,68 @@ export class OrganizationsApi extends runtime.BaseAPI {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<SearchDto> {
 		const response = await this.searchRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async sendEmailRaw(
+		requestParameters: OrganizationsApiSendEmailRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<Array<string>>> {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling sendEmail.',
+			);
+		}
+
+		if (
+			requestParameters.organizationId === null ||
+			requestParameters.organizationId === undefined
+		) {
+			throw new runtime.RequiredError(
+				'organizationId',
+				'Required parameter requestParameters.organizationId was null or undefined when calling sendEmail.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/organizations/{organizationId}/leaseInvoices/{id}/send-email`
+					.replace(
+						`{${'id'}}`,
+						encodeURIComponent(String(requestParameters.id)),
+					)
+					.replace(
+						`{${'organizationId'}}`,
+						encodeURIComponent(String(requestParameters.organizationId)),
+					),
+				method: 'POST',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse<any>(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async sendEmail(
+		requestParameters: OrganizationsApiSendEmailRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<Array<string>> {
+		const response = await this.sendEmailRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
 

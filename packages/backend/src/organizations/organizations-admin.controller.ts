@@ -13,6 +13,7 @@ import {
 	ApiBody,
 	ApiConsumes,
 	ApiCreatedResponse,
+	ApiParam,
 	ApiTags,
 } from '@nestjs/swagger';
 
@@ -248,5 +249,17 @@ export class OrganizationsAdminController {
 		createFileDto: Omit<CreateFileDto, 'file'>,
 	): Promise<string> {
 		return this.filesService.create({ file, createFileDto, organizationId });
+	}
+
+	@Post('leaseInvoices/:id/send-email')
+	@CheckAbilities({
+		action: Action.Update,
+		subject: 'LeaseInvoice',
+		useParams: true,
+	})
+	@ApiCreatedResponse({ type: String, isArray: true })
+	@ApiParam({ name: 'organizationId', required: true, type: String })
+	sendEmail(@Param('id') id: string, @User() user: IUser): Promise<string[]> {
+		return this.leaseInvoicesService.sendInvoice({ id, user });
 	}
 }
