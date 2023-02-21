@@ -69,7 +69,7 @@
 	<VersionFooter />
 {:else}
 	<div class="my-grid">
-		{#if isSidebarAvailable($page.url.pathname) && data.user}
+		{#if isSidebarAvailable($page.route) && data.user}
 			<Sidebar navigationTree={getNavigationTree(data.user, $L, $locale)} />
 		{/if}
 

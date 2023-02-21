@@ -19,7 +19,7 @@
 	<div class="flex items-center justify-between py-4 px-4 sm:py-8">
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
-			{#if isSidebarAvailable($page.url.pathname)}
+			{#if isSidebarAvailable($page.route)}
 				<button class="lg:hidden" use:sidebar.button>
 					<span class="sr-only">Toggle sidebar</span>
 					<HeroiconsBars3 class="h-8 w-8" />
