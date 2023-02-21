@@ -6,9 +6,8 @@ import { authConfig } from '$lib/server/config/auth';
 import { logger } from '$lib/server/logger';
 
 type TokenType = Cookie.idToken | Cookie.accessToken;
-/**
- * Validates idtoken and returns payload.
- */
+
+/** Validates token and returns payload. */
 export const validateToken = async (token: string, tokenType: TokenType) => {
 	const JWKS = createLocalJWKSet(authConfig.JWKS);
 

@@ -9,11 +9,7 @@ import { LOGIN } from '$lib/constants/routes';
 
 type SKEvent = Parameters<Handle>[0]['event'];
 
-/**
- * Most likely the token has expired. Delete the cookies and redirect to login.
- *
- * TODO: make sure both tokens have same expiry. If they don't, we need to also check the access token.
- */
+/** Most likely the token has expired. Delete the cookies and redirect to login. */
 export const handleInvalidToken = (event: SKEvent) => {
 	const clearCookie = (name: string) =>
 		event.cookies.serialize(name, '', {

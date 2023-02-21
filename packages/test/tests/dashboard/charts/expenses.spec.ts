@@ -10,9 +10,6 @@ import { expensesParams, fixtureParams, test } from './fixture';
 
 // PERF: Perform all tests in the same context/instance
 
-// NOTE: declaring expenses fixture here doesn't seem to work. Needs to be
-// declared in fixture.ts (page property)
-
 test.describe.configure({ mode: 'parallel' });
 
 for (const preset of chartTestPresets) {
