@@ -5,4 +5,4 @@ import { z } from 'zod';
  * Otherwise, '0' is coerced to true because it's a non-empty string.
  */
 export const zodEnvBooleanSchema = () =>
-	z.pipeline(z.coerce.number(), z.coerce.boolean());
+	z.coerce.number().pipe(z.coerce.boolean());
