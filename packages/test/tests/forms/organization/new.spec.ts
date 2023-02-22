@@ -24,7 +24,15 @@ test('can be submitted with minimal fields', async ({ org, page }) => {
 
 	await formPage.goto();
 	await formPage.fillForm(organization);
+
+	const responsePromise = page.waitForResponse(
+		(res) => res.request().method() === 'POST',
+	);
+
 	await formPage.save();
+
+	// This can a bit slow since it depends on stripe api
+	await responsePromise;
 
 	await formPage.verifyDetails(organization);
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
@@ -44,7 +52,15 @@ test('can be submitted with all fields', async ({ org, page }) => {
 
 	await formPage.goto();
 	await formPage.fillForm(organization);
+
+	const responsePromise = page.waitForResponse(
+		(res) => res.request().method() === 'POST',
+	);
+
 	await formPage.save();
+
+	// This can a bit slow since it depends on stripe api
+	await responsePromise;
 
 	await formPage.verifyDetails(organization);
 	await expect(page).toHaveURL(formPage.getSuccessUrl());
