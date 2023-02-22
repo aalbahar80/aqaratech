@@ -9,24 +9,27 @@ import type { AqaratechEnv } from './aqaratech-env';
 export const envSchema = z.object({
 	PUBLIC_AQARATECH_ENV: z.enum(['development', 'staging', 'production']),
 
-	PUBLIC_IS_TESTING: zodEnvBooleanSchema().refine(
-		(isTesting) => {
-			const envName = process.env[
-				'PUBLIC_AQARATECH_ENV'
-			] as AqaratechEnv['PUBLIC_AQARATECH_ENV'];
+	PUBLIC_IS_TESTING: zodEnvBooleanSchema()
+		.refine(
+			(isTesting) => {
+				const envName = process.env[
+					'PUBLIC_AQARATECH_ENV'
+				] as AqaratechEnv['PUBLIC_AQARATECH_ENV'];
 
-			if (isTesting && isLiveEnv(envName)) {
-				// testing is only allowed in development
-				return false;
-			} else {
-				return true;
-			}
-		},
-		{
-			message:
-				'Testing is only allowed in development. Set PUBLIC_AQARATECH_ENV to development',
-		},
-	),
+				if (isTesting && isLiveEnv(envName)) {
+					// testing is only allowed in development
+					return false;
+				} else {
+					return true;
+				}
+			},
+			{
+				message:
+					'Testing is only allowed in development. Set PUBLIC_AQARATECH_ENV to development',
+			},
+		)
+		// @ts-expect-error - zod wrongly infers the type
+		.default(false),
 
 	// Sentry
 	// @ts-expect-error - zod wrongly infers the type

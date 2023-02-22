@@ -34,7 +34,12 @@ const options = {
 
 async function bootstrap() {
 	let app: INestApplication;
-	const env = envSchema.parse(process.env);
+	const env = envSchema
+		.pick({
+			PUBLIC_AQARATECH_ENV: true,
+			PUBLIC_IS_TESTING: true,
+		})
+		.parse(process.env);
 
 	if (env.PUBLIC_IS_TESTING) {
 		const createTestApp = (await import('./test/create-app.stub'))
