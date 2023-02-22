@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.14.3
+
+### Patch Changes
+
+- cc1ea6a31: fix external redirect in enhanced form
+
 ## 2.14.2
 
 ### Patch Changes
