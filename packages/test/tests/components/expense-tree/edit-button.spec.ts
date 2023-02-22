@@ -5,7 +5,7 @@ import { getLabel } from '@self/utils';
 
 import { test } from './tree.fixture';
 
-test.skip(({ isMobile }) => isMobile === true);
+test.skip(({ isMobile }) => isMobile);
 
 test('expense tile links to edit form', async ({ page }) => {
 	const name = 'Fire Fighting Contract';

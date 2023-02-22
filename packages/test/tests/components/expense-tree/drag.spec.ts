@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 
 import { test } from './tree.fixture';
 
-test.skip(({ isMobile }) => isMobile === true);
+test.skip(({ isMobile }) => isMobile);
 
 const CATEGORY = 'Fire Fighting Contract';
 const GROUP = 'Other CapEx';

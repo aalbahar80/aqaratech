@@ -47,8 +47,8 @@ importers:
 
   packages/backend:
     specifiers:
-      '@aws-sdk/client-s3': 3.272.0
-      '@aws-sdk/s3-request-presigner': 3.272.0
+      '@aws-sdk/client-s3': 3.276.0
+      '@aws-sdk/s3-request-presigner': 3.276.0
       '@casl/ability': 6.3.3
       '@casl/prisma': 1.3.3
       '@logtail/node': 0.2.0
@@ -122,8 +122,8 @@ importers:
       winston: 3.8.2
       zod: 3.20.6
     dependencies:
-      '@aws-sdk/client-s3': 3.272.0
-      '@aws-sdk/s3-request-presigner': 3.272.0
+      '@aws-sdk/client-s3': 3.276.0
+      '@aws-sdk/s3-request-presigner': 3.276.0
       '@casl/ability': 6.3.3
       '@casl/prisma': 1.3.3_lv32rbsnfkhtl7qtlavf2leiae
       '@logtail/node': 0.2.0
@@ -325,7 +325,7 @@ importers:
       typescript-svelte-plugin: 0.3.14
       ufo: 1.1.0
       unplugin-icons: 0.15.3
-      vite: 4.1.3
+      vite: 4.1.4
       vite-plugin-iso-import: 1.0.0
       vitest: 0.28.5
       winston: 3.8.2
@@ -345,7 +345,7 @@ importers:
       '@sentry/svelte': 7.38.0_svelte@3.55.1
       '@sentry/tracing': 7.38.0
       '@sveltejs/adapter-node': 1.2.0_@sveltejs+kit@1.8.3
-      '@sveltejs/kit': 1.8.3_svelte@3.55.1+vite@4.1.3
+      '@sveltejs/kit': 1.8.3_svelte@3.55.1+vite@4.1.4
       '@sveltejs/pancake': 0.0.18
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.7
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
@@ -399,16 +399,16 @@ importers:
       typescript-svelte-plugin: 0.3.14_7btt5e5jbvkzqqbvjeeo4qebyu
       ufo: 1.1.0
       unplugin-icons: 0.15.3
-      vite: 4.1.3
-      vite-plugin-iso-import: 1.0.0_vite@4.1.3
+      vite: 4.1.4
+      vite-plugin-iso-import: 1.0.0_vite@4.1.4
       vitest: 0.28.5
       zod: 3.20.6
 
   packages/test:
     specifiers:
-      '@aws-sdk/client-s3': 3.272.0
+      '@aws-sdk/client-s3': 3.276.0
       '@faker-js/faker': 7.6.0
-      '@playwright/test': 1.30.0
+      '@playwright/test': 1.31.0
       '@prisma/client': 4.10.1
       '@self/backend': workspace:*
       '@self/seed': workspace:*
@@ -435,9 +435,9 @@ importers:
       '@types/qs': 6.9.7
       qs: 6.11.0
     devDependencies:
-      '@aws-sdk/client-s3': 3.272.0
+      '@aws-sdk/client-s3': 3.276.0
       '@faker-js/faker': 7.6.0
-      '@playwright/test': 1.30.0
+      '@playwright/test': 1.31.0
       '@prisma/client': 4.10.1_prisma@4.10.1
       '@self/backend': link:../backend
       '@self/seed': link:../seed
@@ -692,14 +692,14 @@ packages:
     dependencies:
       tslib: 2.5.0
 
-  /@aws-sdk/client-s3/3.272.0:
-    resolution: {integrity: sha512-KxlVhTHfmcm3HlAP5+vY1cuQt60AaYOISp1ccYOPsww7Ly7fbDnbov0AV9bcwlLLVcfZFWQYJqH+Gvk2SpyXFQ==}
+  /@aws-sdk/client-s3/3.276.0:
+    resolution: {integrity: sha512-9cwrYeMTx9a9MUWSxBr2i87NACEw3Vc8ALnDYZSvhps8UivdgZ1v3zN8c0v/g/3RrJJNco2HCs9je+lOPRvq3w==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha1-browser': 3.0.0
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sts': 3.272.0
+      '@aws-sdk/client-sts': 3.276.0
       '@aws-sdk/config-resolver': 3.272.0
       '@aws-sdk/credential-provider-node': 3.272.0
       '@aws-sdk/eventstream-serde-browser': 3.272.0
@@ -748,7 +748,7 @@ packages:
       '@aws-sdk/util-utf8': 3.254.0
       '@aws-sdk/util-waiter': 3.272.0
       '@aws-sdk/xml-builder': 3.201.0
-      fast-xml-parser: 4.0.11
+      fast-xml-parser: 4.1.2
       tslib: 2.5.0
     transitivePeerDependencies:
       - '@aws-sdk/signature-v4-crt'
@@ -832,8 +832,8 @@ packages:
     transitivePeerDependencies:
       - aws-crt
 
-  /@aws-sdk/client-sts/3.272.0:
-    resolution: {integrity: sha512-kigxCxURp3WupufGaL/LABMb7UQfzAQkKcj9royizL3ItJ0vw5kW/JFrPje5IW1mfLgdPF7PI9ShOjE0fCLTqA==}
+  /@aws-sdk/client-sts/3.276.0:
+    resolution: {integrity: sha512-J6FR4tYa/WdDdwWAKhw/mXQXKWUaZZQpMiyFEbFPQyURSWu3u17nv97NUdvVOgCth48H6Wb6a4ksssYy4K9tFQ==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
@@ -870,7 +870,7 @@ packages:
       '@aws-sdk/util-user-agent-browser': 3.272.0
       '@aws-sdk/util-user-agent-node': 3.272.0
       '@aws-sdk/util-utf8': 3.254.0
-      fast-xml-parser: 4.0.11
+      fast-xml-parser: 4.1.2
       tslib: 2.5.0
     transitivePeerDependencies:
       - aws-crt
@@ -1258,8 +1258,8 @@ packages:
       '@aws-sdk/types': 3.272.0
       tslib: 2.5.0
 
-  /@aws-sdk/s3-request-presigner/3.272.0:
-    resolution: {integrity: sha512-WniD9K8JyLpl6qs6Z0xLVqDR0EVHjacWDZc8s4X6N2mLnkV/4WexsCz9Tlg8WQtiuiWY4L/pR+JTALt7w30HCw==}
+  /@aws-sdk/s3-request-presigner/3.276.0:
+    resolution: {integrity: sha512-xRp+1eiErM8ys3IIjasxeS8kWAPnwO0byNB26i5htppJ2AgzH11mIuipjhhbzcHB+7EO3JiVxHJB+NSFmHdLaw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/middleware-endpoint': 3.272.0
@@ -2777,13 +2777,15 @@ packages:
       tslib: 2.5.0
     dev: true
 
-  /@playwright/test/1.30.0:
-    resolution: {integrity: sha512-SVxkQw1xvn/Wk/EvBnqWIq6NLo1AppwbYOjNLmyU0R1RoQ3rLEBtmjTnElcnz8VEtn11fptj1ECxK0tgURhajw==}
+  /@playwright/test/1.31.0:
+    resolution: {integrity: sha512-Ys5s/06Dg9g3zAIdCIb/UOBYim3U7Zjb3DvC6XBtnRmnglH5O47iwYzmtxXu9fhSyzI2Jn28apkXIOD81GgCdw==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.14.0
-      playwright-core: 1.30.0
+      playwright-core: 1.31.0
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /@polka/url/1.0.0-next.21:
@@ -3018,11 +3020,11 @@ packages:
       '@rollup/plugin-commonjs': 24.0.1_rollup@3.15.0
       '@rollup/plugin-json': 6.0.0_rollup@3.15.0
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.15.0
-      '@sveltejs/kit': 1.8.3_svelte@3.55.1+vite@4.1.3
+      '@sveltejs/kit': 1.8.3_svelte@3.55.1+vite@4.1.4
       rollup: 3.15.0
     dev: true
 
-  /@sveltejs/kit/1.8.3_svelte@3.55.1+vite@4.1.3:
+  /@sveltejs/kit/1.8.3_svelte@3.55.1+vite@4.1.4:
     resolution: {integrity: sha512-32tiLy5PPpt2lquK2p53/5wR+ghAXw0HymIBEezmwmwtzx7Xf36xw3RG3fDYQ9gyzon89T+JRweXgAv/qhhvSQ==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
@@ -3031,7 +3033,7 @@ packages:
       svelte: ^3.54.0
       vite: ^4.0.0
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 2.0.2_svelte@3.55.1+vite@4.1.3
+      '@sveltejs/vite-plugin-svelte': 2.0.2_svelte@3.55.1+vite@4.1.4
       '@types/cookie': 0.5.1
       cookie: 0.5.0
       devalue: 4.3.0
@@ -3045,7 +3047,7 @@ packages:
       svelte: 3.55.1
       tiny-glob: 0.2.9
       undici: 5.20.0
-      vite: 4.1.3
+      vite: 4.1.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3056,7 +3058,7 @@ packages:
       yootils: 0.0.16
     dev: true
 
-  /@sveltejs/vite-plugin-svelte/2.0.2_svelte@3.55.1+vite@4.1.3:
+  /@sveltejs/vite-plugin-svelte/2.0.2_svelte@3.55.1+vite@4.1.4:
     resolution: {integrity: sha512-xCEan0/NNpQuL0l5aS42FjwQ6wwskdxC3pW1OeFtEKNZwRg7Evro9lac9HesGP6TdFsTv2xMes5ASQVKbCacxg==}
     engines: {node: ^14.18.0 || >= 16}
     peerDependencies:
@@ -3069,8 +3071,8 @@ packages:
       magic-string: 0.27.0
       svelte: 3.55.1
       svelte-hmr: 0.15.1_svelte@3.55.1
-      vite: 4.1.3
-      vitefu: 0.2.4_vite@4.1.3
+      vite: 4.1.4
+      vitefu: 0.2.4_vite@4.1.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6495,8 +6497,8 @@ packages:
   /fast-safe-stringify/2.1.1:
     resolution: {integrity: sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==}
 
-  /fast-xml-parser/4.0.11:
-    resolution: {integrity: sha512-4aUg3aNRR/WjQAcpceODG1C3x3lFANXRo8+1biqfieHmg9pyMt7qB4lQV/Ta6sJCTbA5vfD8fnA8S54JATiFUA==}
+  /fast-xml-parser/4.1.2:
+    resolution: {integrity: sha512-CDYeykkle1LiA/uqQyNwYpFbyF6Axec6YapmpUP+/RHWIoR1zKjocdvNaTsxCxZzQ6v9MLXaSYm9Qq0thv0DHg==}
     hasBin: true
     dependencies:
       strnum: 1.0.5
@@ -8635,8 +8637,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core/1.30.0:
-    resolution: {integrity: sha512-7AnRmTCf+GVYhHbLJsGUtskWTE33SwMZkybJ0v6rqR1boxq2x36U7p1vDRV7HO2IwTZgmycracLxPEJI49wu4g==}
+  /playwright-core/1.31.0:
+    resolution: {integrity: sha512-/KquBjS5DcASCh8cGeNVHuC0kyb7c9plKTwaKxgOGtxT7+DZO2fjmFvPDBSXslEIK5CeOO/2kk5rOCktFXKEdA==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -10742,14 +10744,14 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-iso-import/1.0.0_vite@4.1.3:
+  /vite-plugin-iso-import/1.0.0_vite@4.1.4:
     resolution: {integrity: sha512-DqhCElHfkbkqLXtm0UMiAXqh9FdqRHegHpawXtp5LWHjGsdAqYPhmUGBTKFuTRwPSNFYCpyjHRsm7lvM2dskGw==}
     peerDependencies:
       vite: ^2.0.0 || ^3.0.0 || ^4.0.0
     dependencies:
       es-module-lexer: 1.1.0
       magic-string: 0.27.0
-      vite: 4.1.3
+      vite: 4.1.4
     dev: true
 
   /vite/4.1.1_@types+node@18.14.0:
@@ -10786,8 +10788,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite/4.1.3:
-    resolution: {integrity: sha512-0Zqo4/Fr/swSOBmbl+HAAhOjrqNwju+yTtoe4hQX9UsARdcuc9njyOdr6xU0DDnV7YP0RT6mgTTOiRtZgxfCxA==}
+  /vite/4.1.4:
+    resolution: {integrity: sha512-3knk/HsbSTKEin43zHu7jTwYWv81f8kgAL99G5NWBcA1LKvtvcVAC4JjBH1arBunO9kQka+1oGbrMKOjk4ZrBg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -10819,41 +10821,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite/4.1.3_@types+node@18.14.0:
-    resolution: {integrity: sha512-0Zqo4/Fr/swSOBmbl+HAAhOjrqNwju+yTtoe4hQX9UsARdcuc9njyOdr6xU0DDnV7YP0RT6mgTTOiRtZgxfCxA==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 18.14.0
-      esbuild: 0.16.17
-      postcss: 8.4.21
-      resolve: 1.22.1
-      rollup: 3.15.0
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
-  /vitefu/0.2.4_vite@4.1.3:
+  /vitefu/0.2.4_vite@4.1.4:
     resolution: {integrity: sha512-fanAXjSaf9xXtOOeno8wZXIhgia+CZury481LsDaV++lSvcU2R9Ch2bPh3PYFyoHW+w9LqAeYRISVQjUIew14g==}
     peerDependencies:
       vite: ^3.0.0 || ^4.0.0
@@ -10861,7 +10829,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.1.3
+      vite: 4.1.4
     dev: true
 
   /vitest/0.28.5:
@@ -10907,7 +10875,7 @@ packages:
       tinybench: 2.3.1
       tinypool: 0.3.1
       tinyspy: 1.1.1
-      vite: 4.1.3_@types+node@18.14.0
+      vite: 4.1.1_@types+node@18.14.0
       vite-node: 0.28.5_@types+node@18.14.0
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
