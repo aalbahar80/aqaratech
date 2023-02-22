@@ -11,8 +11,8 @@ export const checkStubbed = async () => {
 		res.ok &&
 		data &&
 		typeof data === 'object' &&
-		'PUBLIC_AQARATECH_ENV' in data &&
-		data.PUBLIC_AQARATECH_ENV === 'testing' && // avoid running tests against non-stubbed services (myfatoorah)
+		'PUBLIC_IS_TESTING' in data &&
+		data.PUBLIC_IS_TESTING === true && // avoid running tests against non-stubbed services (myfatoorah)
 		// @ts-expect-error test
 		data.SENTRY_ENABLED === false // avoid running tests against live sentry
 	) {

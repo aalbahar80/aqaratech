@@ -7,9 +7,10 @@ export class AppService {
 	constructor(private readonly env: EnvService) {}
 
 	getConfig() {
-		const { PUBLIC_AQARATECH_ENV } = this.env.e;
+		const { PUBLIC_AQARATECH_ENV, PUBLIC_IS_TESTING } = this.env.e;
 		return {
 			PUBLIC_AQARATECH_ENV,
+			PUBLIC_IS_TESTING,
 			SENTRY_ENABLED: this.env.sentry.enabled,
 		};
 	}

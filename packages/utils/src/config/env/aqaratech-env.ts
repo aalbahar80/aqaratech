@@ -1,11 +1,8 @@
 import type { Feature } from './feature.schema';
 
 export interface AqaratechEnv {
-	readonly PUBLIC_AQARATECH_ENV:
-		| 'production'
-		| 'development'
-		| 'staging'
-		| 'testing';
+	readonly PUBLIC_AQARATECH_ENV: 'production' | 'development' | 'staging';
+	readonly PUBLIC_IS_TESTING?: boolean;
 
 	// URL's
 

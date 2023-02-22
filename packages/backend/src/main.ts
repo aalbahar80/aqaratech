@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
+import { envSchema } from '@self/utils';
 import { AppModule } from 'src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
@@ -33,8 +34,9 @@ const options = {
 
 async function bootstrap() {
 	let app: INestApplication;
+	const env = envSchema.parse(process.env);
 
-	if (process.env.PUBLIC_AQARATECH_ENV === 'testing') {
+	if (env.PUBLIC_IS_TESTING) {
 		const createTestApp = (await import('./test/create-app.stub'))
 			.createTestApp;
 		app = await createTestApp(options);
@@ -53,7 +55,7 @@ async function bootstrap() {
 	const prismaService = app.get(PrismaService);
 	await prismaService.enableShutdownHooks(app);
 
-	if (process.env.PUBLIC_AQARATECH_ENV === 'development' && !process.env.CI) {
+	if (env.PUBLIC_AQARATECH_ENV === 'development' && !process.env.CI) {
 		await setupSwagger(app);
 	} else {
 		Logger.warn('Swagger is not enabled in production/staging');

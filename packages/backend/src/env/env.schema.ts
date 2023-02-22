@@ -5,6 +5,7 @@ import { envSchema } from '@self/utils';
 export const backendEnvSchema = envSchema.pick({
 	PUBLIC_AQARATECH_ENV: true,
 	PUBLIC_AQ_DEBUG_LEVEL: true,
+	PUBLIC_IS_TESTING: true,
 	LOGTAIL_TOKEN: true,
 
 	DATABASE_URL: true,

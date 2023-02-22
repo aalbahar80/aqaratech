@@ -26,6 +26,7 @@ export class EnvService {
 			R.pick(this.e, [
 				'PUBLIC_AQARATECH_ENV',
 				'PUBLIC_AQ_DEBUG_LEVEL',
+				'PUBLIC_IS_TESTING',
 				'PUBLIC_SITE_URL',
 				'R2_ENDPOINT',
 				'BODY_SIZE_LIMIT',

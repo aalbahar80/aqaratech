@@ -17,8 +17,8 @@ dotenv({
 });
 
 const env = {
-	PUBLIC_AQARATECH_ENV: 'testing',
-} satisfies Partial<AqaratechEnv>;
+	PUBLIC_IS_TESTING: '1',
+} satisfies Partial<Record<keyof AqaratechEnv, string>>;
 
 const BASE_TIMEOUT = 15 * 1000;
 

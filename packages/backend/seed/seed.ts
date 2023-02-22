@@ -20,6 +20,7 @@ dotenv({
 const env = envSchema
 	.pick({
 		PUBLIC_AQARATECH_ENV: true,
+		PUBLIC_IS_TESTING: true,
 		R2_ENDPOINT: true,
 		R2_ACCESS_KEY_ID: true,
 		R2_SECRET_ACCESS_KEY: true,
@@ -32,26 +33,25 @@ if (env.PUBLIC_AQARATECH_ENV === 'production') {
 
 const prisma = new PrismaClient();
 
-const count =
-	env.PUBLIC_AQARATECH_ENV === 'testing'
-		? {
-				properties: 10,
-				units: 20,
-				leases: 10,
-				expenses: 100,
-				leaseInvoices: 100,
-				payouts: 100,
-				maintenanceOrders: 100,
-		  }
-		: {
-				properties: 100,
-				units: 200,
-				leases: 1000,
-				expenses: 10000,
-				leaseInvoices: 10000,
-				payouts: 1000,
-				maintenanceOrders: 1000,
-		  };
+const count = env.PUBLIC_IS_TESTING
+	? {
+			properties: 10,
+			units: 20,
+			leases: 10,
+			expenses: 100,
+			leaseInvoices: 100,
+			payouts: 100,
+			maintenanceOrders: 100,
+	  }
+	: {
+			properties: 100,
+			units: 200,
+			leases: 1000,
+			expenses: 10000,
+			leaseInvoices: 10000,
+			payouts: 1000,
+			maintenanceOrders: 1000,
+	  };
 
 const raw = createSeed({
 	print: false,
