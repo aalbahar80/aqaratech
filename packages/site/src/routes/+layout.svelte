@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as Sentry from '@sentry/svelte?client';
 	import { BrowserTracing } from '@sentry/tracing?client';
+	import clsx from 'clsx';
 	import { Toaster } from 'svelte-french-toast';
 
 	import { navigating, page } from '$app/stores';
@@ -19,6 +20,7 @@
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
+	import { width } from '$lib/stores/width';
 	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 
@@ -72,7 +74,12 @@
 		{/if}
 
 		<main class="col-span-full pt-8 lg:col-start-2">
-			<div class="mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8">
+			<div
+				class={clsx(
+					'mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8',
+					$width,
+				)}
+			>
 				<slot />
 				<VersionFooter />
 			</div>

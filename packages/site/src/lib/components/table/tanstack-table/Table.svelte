@@ -24,6 +24,7 @@
 	import TableBodyRow from '$lib/components/table/row/TableBodyRow.svelte';
 	import TableFooterRow from '$lib/components/table/row/TableFooterRow.svelte';
 	import TableHeaderRow from '$lib/components/table/row/TableHeaderRow.svelte';
+	import Expand from '$lib/components/table/tanstack-table/Expand.svelte';
 	import { getColumnFilter } from '$lib/components/table/tanstack-table/filters/column-filter';
 	import Pagination from '$lib/components/table/tanstack-table/Pagination.svelte';
 	import { handleServerSorting } from '$lib/components/table/tanstack-table/server-sorting';
@@ -189,8 +190,9 @@
 			class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
 		>
 			<div class="overflow-x-auto">
-				<table class="min-w-full divide-y divide-gray-300">
+				<table class="relative min-w-full divide-y divide-gray-300">
 					<thead class="bg-gray-50">
+						<Expand />
 						{#each $table.getHeaderGroups() as group}
 							<TableHeaderRow {group} />
 						{/each}
