@@ -5,8 +5,8 @@
 	import { getRoute, PageType } from '@self/utils';
 
 	import type { GroupByLocationDto } from '$api/openapi';
-	import L from '$i18n/i18n-svelte';
 
+	import L from '$i18n/i18n-svelte';
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
 
 	export let expenses: GroupByLocationDto[];

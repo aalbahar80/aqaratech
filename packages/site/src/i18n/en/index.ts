@@ -121,7 +121,7 @@ const en: BaseTranslation = {
 		advanced: 'Advanced',
 
 		// Maintenance
-		inProgress: 'In progress',
+		inProgress: 'Pending',
 		completed: 'Completed',
 		cancelled: 'Cancelled',
 	},

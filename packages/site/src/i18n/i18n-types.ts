@@ -706,7 +706,7 @@ type RootTranslation = {
 		 */
 		advanced: string
 		/**
-		 * I​n​ ​p​r​o​g​r​e​s​s
+		 * P​e​n​d​i​n​g
 		 */
 		inProgress: string
 		/**
@@ -1743,7 +1743,7 @@ export type TranslationFunctions = {
 		 */
 		advanced: () => LocalizedString
 		/**
-		 * In progress
+		 * Pending
 		 */
 		inProgress: () => LocalizedString
 		/**

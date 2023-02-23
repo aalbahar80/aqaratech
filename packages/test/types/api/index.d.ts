@@ -1483,10 +1483,9 @@ export interface LeaseInvoiceDto {
  * @export
  */
 export declare const MAINTENANCEORDERSTATUSENUM: {
-	readonly Pending: 'PENDING';
-	readonly Completed: 'COMPLETED';
-	readonly Cancelled: 'CANCELLED';
-	readonly Empty: '';
+	readonly Pending: 'Pending';
+	readonly Completed: 'Completed';
+	readonly Cancelled: 'Cancelled';
 };
 export type MAINTENANCEORDERSTATUSENUM =
 	(typeof MAINTENANCEORDERSTATUSENUM)[keyof typeof MAINTENANCEORDERSTATUSENUM];

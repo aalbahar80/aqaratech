@@ -1,8 +1,11 @@
 import { get } from 'svelte/store';
-
-import type { MAINTENANCEORDERSTATUSENUM } from '$api/openapi';
+import {
+	MAINTENANCE_ORDER_STATUS,
+	type MaintenanceOrderStatus,
+} from '@self/utils';
 
 import L from '$i18n/i18n-svelte';
+import { getMaintenanceOrderLabels } from '$lib/constants/maintenance-status-options';
 
 export const getInvoiceBadge = (trx: {
 	isPaid: boolean;
@@ -57,25 +60,23 @@ export const getLeaseBadge = (dates: { start: string; end: string }) => {
 	};
 };
 
-export const getMaintenanceOrderBadge = (
-	status: MAINTENANCEORDERSTATUSENUM,
-) => {
-	const LL = get(L);
+export const getMaintenanceOrderBadge = (status: MaintenanceOrderStatus) => {
+	const labels = getMaintenanceOrderLabels();
 
 	switch (status) {
-		case 'PENDING':
+		case MAINTENANCE_ORDER_STATUS.PENDING:
 			return {
-				label: LL.badge.inProgress(),
+				label: labels.Pending,
 				color: 'indigo',
 			};
-		case 'COMPLETED':
+		case MAINTENANCE_ORDER_STATUS.COMPLETED:
 			return {
-				label: LL.badge.completed(),
+				label: labels.Completed,
 				color: 'green',
 			};
-		case 'CANCELLED':
+		case MAINTENANCE_ORDER_STATUS.CANCELLED:
 			return {
-				label: LL.badge.cancelled(),
+				label: labels.Cancelled,
 				color: 'red',
 			};
 		default:

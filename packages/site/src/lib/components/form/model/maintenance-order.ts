@@ -23,7 +23,7 @@ export const maintenanceOrderFormModel = () =>
 
 			status: createFormField('status', {
 				type: 'select',
-				options: maintenanceStatusOptions,
+				options: maintenanceStatusOptions(),
 			}),
 
 			completedAt: createFormField('completedAt', {

@@ -13,6 +13,7 @@ import {
 	MaintenanceOrderCreateSchema,
 	MaintenanceOrderUpdateSchema,
 	MAINTENANCE_ORDER_STATUS,
+	MaintenanceOrderStatus,
 } from '@self/utils';
 import { AbstractDto } from 'src/common/dto/abstract.dto';
 import {
@@ -43,7 +44,7 @@ export class MaintenanceOrderDto
 		enum: MAINTENANCE_ORDER_STATUS,
 		enumName: 'MAINTENANCE_ORDER_STATUS_ENUM',
 	})
-	status: (typeof MAINTENANCE_ORDER_STATUS)[number] | null;
+	status: MaintenanceOrderStatus | null;
 
 	organizationId: string;
 
@@ -113,7 +114,7 @@ export class CreateMaintenanceOrderDto
 		enumName: 'MAINTENANCE_ORDER_STATUS_ENUM',
 		nullable: true,
 	})
-	status?: (typeof MAINTENANCE_ORDER_STATUS)[number] | null;
+	status?: MaintenanceOrderStatus | null;
 }
 
 export class UpdateMaintenanceOrderDto

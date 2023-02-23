@@ -3,6 +3,8 @@ import { randomUUID } from 'node:crypto';
 import { faker } from '@faker-js/faker';
 import * as Factory from 'factory.ts';
 
+import { MAINTENANCE_ORDER_STATUS } from '@self/utils';
+
 import { createdAt, updatedAt } from '../utils/dates';
 import { fakeDate } from '../utils/fake-date';
 
@@ -21,7 +23,7 @@ export const maintenanceOrderFactory = Factory.Sync.makeFactoryWithRequired<
 	description: Factory.each(() => faker.lorem.sentences(3)),
 
 	status: Factory.each(() =>
-		faker.helpers.arrayElement(['PENDING', 'COMPLETED', 'CANCELLED', '']),
+		faker.helpers.arrayElement(Object.values(MAINTENANCE_ORDER_STATUS)),
 	),
 
 	completedAt: Factory.each(() => fakeDate()),

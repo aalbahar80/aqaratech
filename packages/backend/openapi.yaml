@@ -4465,10 +4465,9 @@ components:
     MAINTENANCE_ORDER_STATUS_ENUM:
       type: string
       enum:
-        - PENDING
-        - COMPLETED
-        - CANCELLED
-        - ''
+        - Pending
+        - Completed
+        - Cancelled
     CreateMaintenanceOrderDto:
       type: object
       properties:
