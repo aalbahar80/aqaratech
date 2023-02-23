@@ -26,6 +26,8 @@ test.describe('unsubscribed', () => {
 	});
 
 	test('can subscribe', async ({ page, org }) => {
+		test.slow();
+
 		const url = getRoute({
 			entity: 'organization',
 			pageType: PageTab.Billing,

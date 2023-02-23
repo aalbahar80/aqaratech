@@ -53,6 +53,8 @@ test.describe('subscribed', () => {
 
 	// Stripe billing portal includes updating payment method + viewing invoices
 	test('can manage subscription', async ({ page, org }) => {
+		test.slow();
+
 		const url = getRoute({
 			entity: 'organization',
 			pageType: PageTab.Billing,
