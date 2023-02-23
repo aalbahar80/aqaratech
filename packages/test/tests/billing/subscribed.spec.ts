@@ -67,9 +67,15 @@ test.describe('subscribed', () => {
 		await page.getByRole('button', { name: 'Manage payment' }).click();
 
 		// expect to be on the stripe billing portal
-		await expect(page).toHaveURL(/checkout\.aqaratech\.com/, {
+		await expect(page).toHaveURL(/billing\.aqaratech\.com/, {
 			timeout: 10000,
 		});
+
+		const invoices = page.getByText('Invoice history', { exact: true });
+		await expect.soft(invoices).toBeVisible();
+
+		const payment = page.getByRole('link', { name: 'Add payment method' });
+		await expect.soft(payment).toBeVisible();
 	});
 });
 

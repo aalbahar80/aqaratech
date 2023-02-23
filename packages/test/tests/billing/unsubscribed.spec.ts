@@ -31,9 +31,14 @@ test.describe('unsubscribed', () => {
 
 		await page.getByRole('button', { name: 'Subscribe' }).click();
 
-		await expect(page).toHaveURL(/checkout\.aqaratech\.com/, {
+		await expect.soft(page).toHaveURL(/billing\.aqaratech\.com/, {
 			timeout: 10000,
 		});
+
+		// Stripe's "subscribe" button
+		const btn = page.getByTestId('hosted-payment-submit-button');
+
+		await expect(btn).toBeVisible();
 	});
 
 	test('isActive is restored after subscribing', async ({ page, org }) => {
@@ -50,7 +55,7 @@ test.describe('unsubscribed', () => {
 		// Then, the billing page's load function will attempt to
 		// fetch the latest subscription status from Stripe, and
 		// update it in our db if it's different.
-		await expect.soft(page).toHaveURL(/\/billing/);
+		await expect.soft(page).toHaveURL(/\/billing$/);
 
 		// expect to see the cancel subscription button
 		const cancel = page.getByRole('button', { name: 'Cancel subscription' });
