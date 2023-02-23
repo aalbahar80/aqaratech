@@ -34,7 +34,7 @@
 		"prisma": "4.10.1",
 		"remeda": "1.6.2",
 		"simple-json-db": "2.0.0",
-		"tier": "5.1.2",
+		"tier": "5.2.0",
 		"tree-kill": "1.2.2",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
