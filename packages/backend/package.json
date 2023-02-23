@@ -13,7 +13,7 @@
 		"build": "rimraf dist && nest build --path tsconfig.build.json",
 		"dev": "nest start --watch --preserveWatchOutput --entryFile ./backend/src/main --path tsconfig.json",
 		"dev:debug": "pnpm run dev --debug",
-		"dev:setup": "PUBLIC_AQARATECH_ENV=development pnpm run setup:all",
+		"dev:setup": "PUBLIC_IS_TESTING=0 pnpm run setup:all",
 		"setup:all": "pnpm run up-minio && pnpm run seed",
 		"seed": "./seed/create-test-db.sh && tsx ./seed/seed.ts",
 		"start:prod": "node dist/backend/src/main.js",
