@@ -5,6 +5,7 @@
 	import { getRoute, PageType } from '@self/utils';
 
 	import type { GroupByLocationDto } from '$api/openapi';
+	import L from '$i18n/i18n-svelte';
 
 	import TreemapChart from '$lib/components/charts/treemap/TreemapChart.svelte';
 
@@ -15,8 +16,8 @@
 		// reduceFn,
 		(d) => sum(d, (e) => e.amount),
 		// groupingFns,
-		(d) => d.propertyId ?? 'Unspecified Property',
-		(d) => d.unitId ?? 'Unspecified Unit',
+		(d) => d.propertyId ?? $L.general.unspecified(),
+		(d) => d.unitId ?? $L.general.unspecified(),
 	);
 
 	// Type of each node is either null OR a nested maps up to 3 levels deep.
