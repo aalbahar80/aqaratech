@@ -9,9 +9,9 @@ test.use({
 	timezoneId: 'America/Los_Angeles',
 	invoicesParams: [
 		{
-			postAt: Date.UTC(2030, 0, 1),
-			dueAt: Date.UTC(2030, 0, 31),
-			paidAt: Date.UTC(2030, 0, 15),
+			postAt: Date.UTC(2023, 0, 1),
+			dueAt: Date.UTC(2023, 0, 31),
+			paidAt: Date.UTC(2023, 0, 15),
 			isPaid: true,
 		},
 	],
@@ -30,7 +30,7 @@ test('dates in utc', async ({ page, org, invoices }) => {
 
 	await page.goto(url);
 
-	await expect(page.getByText('Jan 1, 2030')).toBeVisible();
-	await expect(page.getByText('Jan 31, 2030')).toBeVisible();
-	await expect(page.getByText('Jan 15, 2030')).toBeVisible();
+	await expect(page.getByText('Jan 1, 2023')).toBeVisible();
+	await expect(page.getByText('Jan 31, 2023')).toBeVisible();
+	await expect(page.getByText('Jan 15, 2023')).toBeVisible();
 });

@@ -12,7 +12,7 @@
 
 	$: barDatasets = [
 		{
-			label: 'Paid',
+			label: $L.badge.paid(),
 			borderColor: getColor(0, 2),
 			data: income.paid,
 			parsing: {
@@ -23,7 +23,7 @@
 			borderRadius: 10,
 		},
 		{
-			label: 'Unpaid',
+			label: $L.badge.unpaid(),
 			borderColor: getColor(1, 2),
 			data: income.unpaid,
 			parsing: {

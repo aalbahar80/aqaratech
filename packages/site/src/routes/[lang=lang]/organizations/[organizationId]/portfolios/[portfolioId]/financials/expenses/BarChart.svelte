@@ -11,7 +11,7 @@
 
 	$: barDatasets = [
 		{
-			label: 'Expenses',
+			label: $L.entity.expense.plural(),
 			borderColor: getColor(0, 2),
 			data: expenses,
 			parsing: {

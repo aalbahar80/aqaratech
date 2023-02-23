@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts">
 	import {
 		ArcElement,
 		BarController,
@@ -17,7 +17,11 @@
 		type ActiveElement,
 	} from 'chart.js';
 	import 'chartjs-adapter-date-fns';
+	import { ar } from 'date-fns/locale';
 
+	import { toBrowserLocale } from '@self/utils';
+
+	import { locale } from '$i18n/i18n-svelte';
 	import { CHART_HEIGHT } from '$lib/components/dashboard/cards/chart-height.const';
 
 	type ManualChartType = InstanceType<typeof Chart> & {
@@ -76,14 +80,33 @@
 	Chart.defaults.plugins.legend.labels.usePointStyle = true;
 	Chart.defaults.plugins.legend.labels.pointStyle = 'rectRounded';
 	Chart.defaults.normalized = true; // TODO ok?
-	Chart.defaults.scales.time.time = {
-		...Chart.defaults.scales.time.time,
-		unit: 'month',
-		tooltipFormat: 'MMM yy',
-		displayFormats: {
-			month: 'MMM yy',
-		},
+
+	// Format
+
+	// reverse x axis for RTL
+	Chart.defaults.scales.time.reverse = $locale === 'ar';
+
+	// place y axis on the right for RTL
+	Chart.defaults.scales.linear.position = $locale === 'ar' ? 'right' : 'left';
+
+	Chart.defaults.plugins.legend.rtl = $locale === 'ar';
+	Chart.defaults.plugins.tooltip.rtl = $locale === 'ar';
+	Chart.defaults.locale = toBrowserLocale($locale);
+	Chart.defaults.scales.time.adapters.date = {
+		locale: $locale === 'ar' ? ar : undefined,
 	};
+
+	Chart.defaults.scales.linear.ticks.format = Intl.NumberFormat(
+		toBrowserLocale($locale),
+		{ notation: 'compact' },
+	).resolvedOptions();
+
+	Chart.defaults.scales.time.time.unit = 'month';
+	Chart.defaults.scales.time.time.tooltipFormat = 'MMM yy';
+	Chart.defaults.scales.time.time.displayFormats = {
+		month: 'MMM yy',
+	};
+
 	Chart.defaults.plugins.legend.labels.textAlign = 'center';
 	Chart.defaults.plugins.legend.labels.padding = 14;
 	Chart.defaults.plugins.tooltip = {
@@ -96,6 +119,9 @@
 		titleMarginBottom: 10,
 		usePointStyle: true,
 		borderWidth: 1,
+
+		// Reverse alignment makes the numbers easier to read
+		bodyAlign: $locale === 'ar' ? 'left' : 'right',
 
 		// Colors
 		// displayColors: true,

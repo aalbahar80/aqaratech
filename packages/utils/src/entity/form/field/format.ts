@@ -1,6 +1,6 @@
 const timeZone = 'UTC';
 
-const formats = {
+export const FORMATS = {
 	currency: {
 		style: 'currency',
 		currency: 'KWD',
@@ -56,15 +56,15 @@ export const fmt = (options: FormatOptions) => {
 		case 'number':
 			return new Intl.NumberFormat(locale).format(value);
 		case 'currency':
-			return new Intl.NumberFormat(locale, formats.currency).format(value);
+			return new Intl.NumberFormat(locale, FORMATS.currency).format(value);
 		case 'date':
-			return new Intl.DateTimeFormat(locale, formats.date).format(
+			return new Intl.DateTimeFormat(locale, FORMATS.date).format(
 				typeof value === 'string' ? new Date(value) : value,
 			);
 		case 'month':
-			return new Intl.DateTimeFormat(locale, formats.month).format(value);
+			return new Intl.DateTimeFormat(locale, FORMATS.month).format(value);
 		case 'time':
-			return new Intl.DateTimeFormat(locale, formats.time).format(value);
+			return new Intl.DateTimeFormat(locale, FORMATS.time).format(value);
 	}
 };
 

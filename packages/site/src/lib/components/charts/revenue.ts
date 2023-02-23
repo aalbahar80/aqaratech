@@ -1,12 +1,18 @@
 import { Chart } from 'chart.js';
 
+import { get } from 'svelte/store';
+import { toBrowserLocale } from '@self/utils';
+
 import { currencyTooltip } from './utils/currency';
 
 import type { GroupByMonthDto } from '$api/openapi';
 
+import { locale } from '$i18n/i18n-svelte';
+
 type DataSets = Chart<'bar', GroupByMonthDto[]>['data']['datasets'];
 
 export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
+	const CL = toBrowserLocale(get(locale));
 	const chart = new Chart(node, {
 		type: 'bar',
 		data: { datasets },
@@ -28,9 +34,6 @@ export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
 					ticks: {
 						// maxTicksLimit: 6,
 						autoSkipPadding: 50,
-						format: Intl.NumberFormat('en-GB', {
-							notation: 'compact',
-						}).resolvedOptions(),
 					},
 					grace: '20%',
 					grid: {
@@ -50,7 +53,9 @@ export function revenueChart(node: HTMLCanvasElement, datasets: DataSets) {
 			plugins: {
 				tooltip: {
 					callbacks: {
-						label: currencyTooltip,
+						label(tooltipItem) {
+							return currencyTooltip(tooltipItem, CL);
+						},
 					},
 				},
 			},

@@ -11,7 +11,7 @@
 
 	$: pieDatasets = [
 		{
-			label: 'Payment Status',
+			label: '',
 			data: [paid, unpaid],
 			backgroundColor: [getColor(0, 2), getColor(1, 2)],
 		},
