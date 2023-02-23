@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.13.3
+
+### Patch Changes
+
+- c61cb4fa7: updated translations
+
 ## 3.13.2
 
 ### Patch Changes

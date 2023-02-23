@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.13.3
+
+### Patch Changes
+
+- c61cb4fa7: updated translations
+- Updated dependencies [c61cb4fa7]
+  - @self/utils@3.13.3
+
 ## 2.13.2
 
 ### Patch Changes

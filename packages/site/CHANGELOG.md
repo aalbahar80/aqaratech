@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.14.4
+
+### Patch Changes
+
+- c61cb4fa7: updated translations
+
 ## 2.14.3
 
 ### Patch Changes
