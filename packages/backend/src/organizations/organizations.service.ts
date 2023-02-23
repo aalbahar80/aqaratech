@@ -90,7 +90,7 @@ export class OrganizationsService {
 		}
 
 		await tier.subscribe(
-			`org:${organization.id}`,
+			tierid(organization.id),
 			this.env.e.PUBLIC_TIER_PLAN_ID_1,
 			{
 				trialDays: 90,

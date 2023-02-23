@@ -8,7 +8,7 @@ import {
 	portfolioFactory,
 	testOrgEmail,
 } from '@self/seed';
-import { Cookie, generateExpenseCategoryTree } from '@self/utils';
+import { Cookie, generateExpenseCategoryTree, tierid } from '@self/utils';
 
 import { prisma } from '../../prisma';
 import { createBucketDev } from '../../utils/create-bucket';
@@ -55,7 +55,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 			// only subscribes if the test fixture has `isActive: true`,
 			// not whether the factory has `isActive: true`
 			if (organizationParams?.isActive) {
-				await tier.subscribe(`org:${organization.id}`, plan, {
+				await tier.subscribe(tierid(organization.id), plan, {
 					info: {
 						name: organization.fullName,
 						email: testOrgEmail,

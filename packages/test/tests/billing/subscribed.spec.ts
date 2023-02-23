@@ -11,7 +11,7 @@ test.use({ organizationParams: { isActive: true } });
 
 test.describe('subscribed', () => {
 	test('can unsubscribe', async ({ page, org }) => {
-		const orgId = `org:${org.organization.id}` as const;
+		const orgId = tierid(org.organization.id);
 
 		const phase = await tier.lookupPhase(orgId);
 
