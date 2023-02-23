@@ -52,7 +52,7 @@
 		"@self/utils": "workspace:*",
 		"@sentry/node": "7.38.0",
 		"@sentry/tracing": "7.38.0",
-		"cache-manager": "5.1.6",
+		"cache-manager": "5.1.7",
 		"class-transformer": "0.5.1",
 		"cookie-parser": "1.4.6",
 		"date-fns": "2.29.3",

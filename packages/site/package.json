@@ -27,7 +27,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && pnpm typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.25",
+		"@iconify/json": "2.2.26",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.2.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -58,7 +58,7 @@
 		"dotenv": "16.0.3",
 		"dotenv-cli": "7.0.0",
 		"eslint-config-custom": "workspace:*",
-		"eslint-plugin-svelte": "2.19.0",
+		"eslint-plugin-svelte": "2.19.1",
 		"frappe-charts": "1.6.2",
 		"fuse.js": "6.6.2",
 		"jose": "4.12.0",
