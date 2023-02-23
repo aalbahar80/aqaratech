@@ -8,5 +8,5 @@
 
 <AutoDetailsPane
 	details={data.maintenanceOrder}
-	keys={['title', 'description', 'status', 'completedAt']}
+	keys={['title', 'description', 'completedAt']}
 />
