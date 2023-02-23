@@ -4,17 +4,25 @@ import tier from 'tier';
 import { testOrgUserId } from '@self/seed';
 import { getRoute, PageTab, PageType, tierid } from '@self/utils';
 
+import { prisma } from '../../prisma';
 import { test } from '../api/api-fixtures';
 import { plan } from '../api/fixtures/env';
 import { siteURL } from '../api/fixtures/site-url';
 
 test.describe('unsubscribed', () => {
-	test.use({ organizationParams: { isActive: false } });
+	// Sub then unsub to ensure we're in the right state
 
+	// 1. start with an active subscription,
+	test.use({ organizationParams: { isActive: true } });
+
+	// 2. then cancel it in beforeEach
 	test.beforeEach(async ({ org }) => {
-		// sub then unsub to ensure we're in the right state
-		await tier.subscribe(tierid(org.organization.id), plan);
 		await tier.cancel(tierid(org.organization.id));
+		// set isActive to false in our db
+		await prisma.organization.update({
+			where: { id: org.organization.id },
+			data: { isActive: false },
+		});
 	});
 
 	test('can subscribe', async ({ page, org }) => {
