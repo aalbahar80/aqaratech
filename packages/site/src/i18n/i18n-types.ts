@@ -993,7 +993,7 @@ type RootTranslation = {
 		}
 		footer: {
 			/**
-			 * A​q​a​r​a​t​e​c​h​,​ ​L​L​C​.​ ​A​l​l​ ​r​i​g​h​t​s​ ​r​e​s​e​r​v​e​d​.
+			 * A​q​a​r​a​t​e​c​h​,​ ​W​L​L​.​ ​A​l​l​ ​r​i​g​h​t​s​ ​r​e​s​e​r​v​e​d​.
 			 */
 			legal: string
 		}
@@ -2030,7 +2030,7 @@ export type TranslationFunctions = {
 		}
 		footer: {
 			/**
-			 * Aqaratech, LLC. All rights reserved.
+			 * Aqaratech, WLL. All rights reserved.
 			 */
 			legal: () => LocalizedString
 		}

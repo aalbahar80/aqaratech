@@ -1,3 +1,3 @@
 export const footer = {
-	legal: 'Aqaratech, LLC. All rights reserved.',
+	legal: 'Aqaratech, WLL. All rights reserved.',
 };
