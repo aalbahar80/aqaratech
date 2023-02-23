@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 
 import { faker } from '@faker-js/faker';
+import { faker as fakerAr } from '@faker-js/faker/locale/ar';
 import * as Factory from 'factory.ts';
 
 import { assertCount } from '../utils';
@@ -14,13 +15,12 @@ const base = Factory.Sync.makeFactoryWithRequired<Portfolio, 'organizationId'>({
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
-	fullName: Factory.each(() =>
-		[
-			faker.name.firstName(),
-			faker.name.firstName(),
-			faker.name.lastName(),
-		].join(' '),
-	),
+	fullName: Factory.each(() => {
+		const f = Math.random() > 0.5 ? faker : fakerAr;
+		return [f.name.firstName(), f.name.firstName(), f.name.lastName()].join(
+			' ',
+		);
+	}),
 
 	label: Factory.each(() => faker.name.jobTitle()),
 
