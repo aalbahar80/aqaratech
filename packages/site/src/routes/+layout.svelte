@@ -13,14 +13,13 @@
 	import { baseLocale } from '$i18n/i18n-util';
 	import SecondaryNavbar from '$lib/components/navbar/SecondaryNavbar.svelte';
 	import PreloadingIndicator from '$lib/components/PreloadingIndicator.svelte';
-	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import Modal from '$lib/components/toast/Modal.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
-	import { isHomeRoute } from '$lib/utils/is-home-route';
+	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 
 	export let data: LayoutData;
@@ -61,7 +60,7 @@
 <Modal />
 
 <SecondaryNavbar />
-{#if isHomeRoute($page.url.pathname)}
+{#if isHomeRoute($page.route)}
 	<main>
 		<slot />
 	</main>

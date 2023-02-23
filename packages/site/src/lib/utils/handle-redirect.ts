@@ -3,17 +3,16 @@ import { withQuery } from 'ufo';
 
 import { getRoute, PageTab } from '@self/utils';
 
-import {
-	isAllowedWhileInactive,
-	isAllowedWhileNoRole,
-} from './allowed-while-inactive';
-import { isProtectedRoute } from './is-public-route';
-
 import type { LoadEvent } from '@sveltejs/kit/types';
 
 import { DESTINATION } from '$lib/constants/misc';
 import { LOGIN } from '$lib/constants/routes';
 import { environment } from '$lib/environment';
+import {
+	isAllowedWhileInactive,
+	isAllowedWhileNoRole,
+	isProtectedRoute,
+} from '$lib/utils/route-utils';
 
 export const handleRedirect = ({
 	user,
@@ -50,7 +49,7 @@ export const handleRedirect = ({
 
 	// Users with a role
 
-	if (isAllowedWhileNoRole({ route })) {
+	if (isAllowedWhileNoRole(route)) {
 		return;
 	} else if (!user.role) {
 		throw error(403);
@@ -64,7 +63,7 @@ export const handleRedirect = ({
 
 	// Users with a role in an active organization
 
-	if (!user.role.organization.isActive && !isAllowedWhileInactive({ route })) {
+	if (!user.role.organization.isActive && !isAllowedWhileInactive(route)) {
 		const roleType = user.role.roleType;
 		if (roleType === 'ORGADMIN') {
 			const inactive = getRoute({

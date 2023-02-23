@@ -3,11 +3,10 @@
 
 	import L from '$i18n/i18n-svelte';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
-	import { isSidebarAvailable } from '$lib/components/sidebar/is-sidebar-available';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import { SIDEBAR_TOGGLE } from '$lib/constants/misc';
 	import LocaleSwitcher from '$lib/i18n/LocaleSwitcher.svelte';
-	import { isHomeRoute } from '$lib/utils/is-home-route';
+	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>
 
@@ -35,7 +34,7 @@
 		</div>
 		<div class="flex flex-col gap-y-4 gap-x-12 text-gray-500 sm:flex-row">
 			<LocaleSwitcher />
-			{#if isHomeRoute($page.url.pathname)}
+			{#if isHomeRoute($page.route)}
 				<LoginButton />
 			{/if}
 		</div>
