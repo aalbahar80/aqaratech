@@ -29,6 +29,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 	globalSetup: require.resolve('./global-setup'),
 	// globalTeardown: require.resolve('./global-teardown'),
 	// showing the reporter prevents turbo from caching the test results (on flakey tests)
+	testDir: './tests',
 	reporter: process.env.CI
 		? 'github'
 		: NVIM
