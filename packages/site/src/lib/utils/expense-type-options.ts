@@ -35,52 +35,6 @@ export const toHeirarchy = (
 };
 
 /**
- * Converts a HierarchyNode to an array of ExpenseCategoryDto
- */
-export const fromHeirarchy = ({
-	root,
-	original,
-}: {
-	root: HierarchyNode<ExpenseCategoryDto>;
-	original: ExpenseCategoryDto[];
-}): ExpenseCategoryDto[] => {
-	const data: ExpenseCategoryDto[] = root.descendants().map((d) => d.data);
-
-	const allCategories = dejectRoot(data);
-
-	// A node is only considered updated if it's parentId is different
-	const updated: ExpenseCategoryDto[] = [];
-
-	allCategories.forEach((child) => {
-		const newParentId = child.parentId;
-
-		const oldSelf = original.find((o) => o.id === child.id);
-		const oldParentId = oldSelf?.parentId;
-
-		const hasNewParent = newParentId !== oldParentId;
-		if (hasNewParent) {
-			updated.push({
-				...child,
-				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-				parentId: newParentId === undefined ? null : newParentId,
-			});
-		}
-	});
-
-	if (updated.length < 1) return original;
-
-	const result = original.map((o) => {
-		const changedCategory = updated.find((u) => u.id === o.id);
-		if (changedCategory) {
-			return changedCategory;
-		}
-		return o;
-	});
-
-	return result;
-};
-
-/**
  * Add an artificial root node to satisfy d3's "one root" requirement.
  * Convert any node with a parentId of `null` to have a parentId of 'root'.
  */
@@ -104,27 +58,6 @@ export const injectRoot = (categories: ExpenseCategoryDto[]) => {
 	updated.push(ROOT_NODE);
 	return updated;
 };
-
-/**
- * Remove the artificial root node added by `injectRoot`.
- * Convert any node with a parentId of 'root' back to it's original parentId of `null`.
- */
-export const dejectRoot = (categories: ExpenseCategoryDto[]) => {
-	const hasRoot = categories.some((c) => c.id === ROOT_ID);
-	const hasRootChildren = categories.some((c) => c.parentId === ROOT_ID);
-	if (!hasRoot || !hasRootChildren) return categories;
-
-	// remove the root node
-	const updated = categories.filter((c) => c.id !== ROOT_ID);
-
-	// convert any node with a parentId of 'root' back to it's original parentId of `null`
-	updated.forEach((c) => {
-		if (c.parentId === ROOT_ID) c.parentId = null;
-	});
-
-	return updated;
-};
-
 /**
  * Takes a list of expense categories and converts them to a list of options
  * to be consumed by a select or combobox input.

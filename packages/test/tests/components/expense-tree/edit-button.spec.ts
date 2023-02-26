@@ -1,18 +1,22 @@
 import { expect } from '@playwright/test';
 import { resolveURL } from 'ufo';
 
-import { getLabel } from '@self/utils';
+import { PageTab, getLabel, getRoute } from '@self/utils';
 
 import { test } from './tree.fixture';
 
-test.skip(({ isMobile }) => isMobile);
-
-test('expense tile links to edit form', async ({ page }) => {
+test('icon links to details page', async ({ page }) => {
 	const name = 'Fire Fighting Contract';
 
-	const tile = page.getByText(name);
+	const view = page
+		.getByText('Fire Fighting Contract')
+		.getByRole('link', { name: 'View' });
 
-	await tile.getByRole('link', { name: 'Edit' }).click();
+	await view.click();
+
+	// Go to edit page
+
+	await page.getByRole('link', { name: 'Edit' }).click();
 
 	// expect page to have url ending with /edit
 	const re = /.*\/edit$/;
@@ -22,24 +26,61 @@ test('expense tile links to edit form', async ({ page }) => {
 	await expect(labelEn).toHaveValue(name);
 });
 
-test('new category button links to form', async ({ page, org }) => {
-	const btn = page.getByRole('link', { name: 'Create New category' });
+test.describe('expense category group', () => {
+	test.use({
+		expenseCategoryParams: { isGroup: true, labelEn: 'Test Group' },
+	});
 
-	const url = resolveURL(
-		'/en',
-		'/organizations',
-		org.organization.id,
-		'expense-categories',
-		'new',
-	);
+	test('add button links to form', async ({ page, org, expenseCategory }) => {
+		const url = getRoute({
+			entity: 'organization',
+			id: org.organization.id,
+			pageType: PageTab.ExpenseCategories,
+			params: {},
+		});
 
-	await expect.soft(btn).toHaveAttribute('href', url);
+		await page.reload(); // reload to give a chance for category to show up (created using api)
 
-	await btn.click();
+		const btn = page
+			.getByRole('listitem')
+			.filter({ hasText: 'Test Group' })
+			.getByRole('link', { name: 'Add child' });
 
-	await expect(page).toHaveURL(url);
+		await expect(btn).toBeVisible();
 
-	const labelEn = page.getByLabel(getLabel('labelEn'));
+		await expect
+			.soft(btn)
+			.toHaveAttribute(
+				'href',
+				resolveURL(
+					'/en',
+					'/organizations',
+					org.organization.id,
+					'expense-categories',
+					'/new',
+					`?parentId=${expenseCategory.id}`,
+				),
+			);
 
-	await expect(labelEn).toBeEditable();
+		await btn.click();
+
+		const labelEn = page.getByLabel(getLabel('labelEn'));
+
+		await labelEn.fill('Test Child');
+
+		await page.getByRole('button', { name: 'Save' }).click();
+
+		await page.goto(url);
+
+		await expect.soft(page.getByText('Test Child')).toBeVisible();
+
+		// check that child is added to correct parent
+
+		await expect(
+			page
+				.getByRole('listitem')
+				.filter({ hasText: 'Test Group' })
+				.getByText('Test Child'),
+		).toBeVisible();
+	});
 });

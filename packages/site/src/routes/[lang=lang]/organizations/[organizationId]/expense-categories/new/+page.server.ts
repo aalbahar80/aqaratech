@@ -8,6 +8,7 @@ export const actions: Actions = {
 		return await handleForm({
 			entity: 'expenseCategory',
 			schema: expenseCategoryCreateSchema,
+			fromQuery: ['parentId'],
 			checkboxKeys: {
 				isGroup: true,
 			},

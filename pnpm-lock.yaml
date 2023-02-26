@@ -279,7 +279,6 @@ importers:
       '@types/cookie': 0.5.1
       '@types/d3': 7.4.0
       '@types/debounce': 1.2.1
-      '@types/lodash-es': 4.17.6
       '@types/papaparse': 5.3.7
       autoprefixer: 10.4.13
       chart.js: 4.0.1
@@ -298,8 +297,6 @@ importers:
       fuse.js: 6.6.2
       jose: 4.12.0
       jspdf: 2.5.1
-      just-diff: 5.2.0
-      lodash-es: 4.17.21
       nanoid: 4.0.1
       papaparse: 5.3.2
       postcss: 8.4.21
@@ -310,7 +307,6 @@ importers:
       stripe: 11.12.0
       svelte: 3.55.1
       svelte-check: 3.0.4
-      svelte-dnd-action: 0.9.22
       svelte-frappe-charts: 1.10.0
       svelte-french-toast: 1.0.3
       svelte-headlessui: 0.0.15
@@ -354,7 +350,6 @@ importers:
       '@types/cookie': 0.5.1
       '@types/d3': 7.4.0
       '@types/debounce': 1.2.1
-      '@types/lodash-es': 4.17.6
       '@types/papaparse': 5.3.7
       autoprefixer: 10.4.13_postcss@8.4.21
       chart.js: 4.0.1
@@ -373,8 +368,6 @@ importers:
       fuse.js: 6.6.2
       jose: 4.12.0
       jspdf: 2.5.1
-      just-diff: 5.2.0
-      lodash-es: 4.17.21
       nanoid: 4.0.1
       papaparse: 5.3.2
       postcss: 8.4.21
@@ -385,7 +378,6 @@ importers:
       stripe: 11.12.0
       svelte: 3.55.1
       svelte-check: 3.0.4_pehl75e5jsy22vp33udjja4soi
-      svelte-dnd-action: 0.9.22_svelte@3.55.1
       svelte-frappe-charts: 1.10.0_svelte@3.55.1
       svelte-french-toast: 1.0.3_svelte@3.55.1
       svelte-headlessui: 0.0.15
@@ -3445,12 +3437,6 @@ packages:
     resolution: {integrity: sha512-c5ltxazpWabia/4UzhIoaDcIza4KViOQhdbjRlfcIGVnsE3c3brkz9Z+F/EeJIECOQP7W7US2hNE930cWWkPiw==}
     dependencies:
       '@types/node': 18.14.1
-
-  /@types/lodash-es/4.17.6:
-    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
-    dependencies:
-      '@types/lodash': 4.14.191
-    dev: true
 
   /@types/lodash.set/4.3.7:
     resolution: {integrity: sha512-bS5Wkg/nrT82YUfkNYPSccFrNZRL+irl7Yt4iM6OTSQ0VZJED2oUIVm15NkNtUAQ8SRhCe+axqERUV6MJgkeEg==}
@@ -7626,10 +7612,6 @@ packages:
       html2canvas: 1.4.1
     dev: true
 
-  /just-diff/5.2.0:
-    resolution: {integrity: sha512-6ufhP9SHjb7jibNFrNxyFZ6od3g+An6Ai9mhGRvcYe8UJlH0prseN64M+6ZBBUoKYHZsitDP42gAJ8+eVWr3lw==}
-    dev: true
-
   /just-extend/4.2.1:
     resolution: {integrity: sha512-g3UB796vUFIY90VIv/WX3L2c8CS2MdWUww3CNrYmqza1Fg0DURc2K/O4YrnklBdQarSJ/y8JnJYDGc+1iumQjg==}
     dev: true
@@ -7748,10 +7730,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
-    dev: true
-
-  /lodash-es/4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: true
 
   /lodash.castarray/4.4.0:
@@ -9875,14 +9853,6 @@ packages:
       - sass
       - stylus
       - sugarss
-    dev: true
-
-  /svelte-dnd-action/0.9.22_svelte@3.55.1:
-    resolution: {integrity: sha512-lOQJsNLM1QWv5mdxIkCVtk6k4lHCtLgfE59y8rs7iOM6erchbLC9hMEFYSveZz7biJV0mpg7yDSs4bj/RT/YkA==}
-    peerDependencies:
-      svelte: '>=3.23.0'
-    dependencies:
-      svelte: 3.55.1
     dev: true
 
   /svelte-eslint-parser/0.22.4_svelte@3.55.1:
