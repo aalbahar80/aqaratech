@@ -8,10 +8,8 @@
 	import ExpenseTreemapCategory from '$lib/components/charts/treemap/ExpenseTreemapCategory.svelte';
 	import ExpenseTreemapProperty from '$lib/components/charts/treemap/ExpenseTreemapProperty.svelte';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
-	import {
-		categoriesRaw,
-		expensesByCategory,
-	} from '$lib/stores/expense-tree-cat';
+	import { categoriesRaw } from '$lib/stores/expense-categories';
+	import { expensesByCategory } from '$lib/stores/expense-tree-cat';
 
 	export let data: PageData;
 
