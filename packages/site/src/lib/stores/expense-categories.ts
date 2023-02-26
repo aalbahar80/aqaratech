@@ -4,7 +4,7 @@ import type { ExpenseCategoryDto } from '$api/openapi';
 
 import { locale } from '$i18n/i18n-svelte';
 
-export const categoriesRaw = writable<ExpenseCategoryDto[]>(); // TODO: make global
+export const categoriesRaw = writable<ExpenseCategoryDto[]>([]);
 
 /** The categories with the label according to the locale.
  * Also includes an `Uncategorized` item. */

@@ -10,9 +10,6 @@
 	export let formField: GFormField;
 	export let value: unknown = undefined;
 	export let errors: string[] | undefined = undefined;
-
-	$: options =
-		'getOptions' in formField ? formField.getOptions() : formField.options;
 </script>
 
 <FieldLabel {formField} />
@@ -20,7 +17,7 @@
 <Combobox
 	initialValue={value}
 	inputId={formField.name}
-	{options}
+	options={formField.options}
 	invalid={!!errors}
 	on:select={(e) => {
 		value = e.detail.value;

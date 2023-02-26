@@ -8,7 +8,6 @@
 	import ExpenseTreemapCategory from '$lib/components/charts/treemap/ExpenseTreemapCategory.svelte';
 	import ExpenseTreemapProperty from '$lib/components/charts/treemap/ExpenseTreemapProperty.svelte';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
-	import { categoriesRaw } from '$lib/stores/expense-categories';
 	import { expensesByCategory } from '$lib/stores/expense-tree-cat';
 
 	export let data: PageData;
@@ -16,7 +15,6 @@
 	const maxHeight = 872;
 
 	$: expensesByCategory.set(data.expensesByCategory);
-	$: categoriesRaw.set(data.categories); // TODO: make global
 </script>
 
 <div class="grid grid-cols-1 gap-8 xl:grid-cols-3">

@@ -1,12 +1,10 @@
-import { getContext } from 'svelte';
+import { get } from 'svelte/store';
 import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
 
 import { createFormField } from '$lib/components/form/model/form-field';
 import { createFormModel } from '$lib/components/form/model/form-model';
-import {
-	key,
-	type ExpenseCategoryContext,
-} from '$lib/components/organization/expense-category-context';
+import { categoriesRaw } from '$lib/stores/expense-categories';
+import { toOptions } from '$lib/utils/expense-type-options';
 
 export const expenseFormModel = () =>
 	createFormModel({
@@ -29,10 +27,7 @@ export const expenseFormModel = () =>
 			categoryId: createFormField('categoryId', {
 				type: 'select',
 				combobox: true,
-				getOptions: () => {
-					const context = getContext<ExpenseCategoryContext>(key);
-					return context.data;
-				},
+				options: toOptions(get(categoriesRaw)),
 			}),
 
 			memo: createFormField('memo'),

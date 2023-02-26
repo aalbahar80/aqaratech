@@ -1,7 +1,9 @@
+import { browser } from '$app/environment';
 import type { PageLoad } from './$types';
 import { get } from 'svelte/store';
 
 import { createApi } from '$api';
+import { categoriesRaw } from '$lib/stores/expense-categories';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { property } from '$lib/stores/filter/property';
 import { range } from '$lib/stores/filter/range';
@@ -37,10 +39,17 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 				unitId,
 			}),
 
-			api.expenseCategories.findAll({
-				organizationId,
-			}),
+			// get categories from the store if possible
+			// otherwise, fetch them from the API
+			browser && get(categoriesRaw).length > 0
+				? get(categoriesRaw)
+				: api.expenseCategories.findAll({
+						organizationId,
+				  }),
 		]);
+
+	// set categories in the store
+	browser && categoriesRaw.set(categories);
 
 	return {
 		expensesByCategory,

@@ -9,11 +9,8 @@
 
 	export let formField: GFormField;
 	export let value: unknown = undefined;
-
-	$: options =
-		'getOptions' in formField ? formField.getOptions() : formField.options;
 </script>
 
 <FieldLabel {formField} />
 
-<Select id={formField.name} {options} current={value} />
+<Select id={formField.name} options={formField.options} current={value} />

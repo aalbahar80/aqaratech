@@ -9,7 +9,6 @@ import { getIntlLabel } from '$lib/i18n/get-intl-label';
 type WithOptions<Name extends string> = {
 	type: 'select';
 	options?: Option[];
-	getOptions?: () => Option[];
 } & Partial<SelectFormField<Name>>;
 
 type WithoutOptions<Name extends string> = Partial<InputFormField<Name>>;

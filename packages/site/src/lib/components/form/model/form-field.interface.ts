@@ -42,13 +42,9 @@ interface BaseSelectFormField<T> extends BaseFormField<T> {
 	combobox: boolean;
 }
 
-type FieldOptions =
-	| {
-			options: Option[];
-	  }
-	| {
-			getOptions: () => Option[];
-	  };
+interface FieldOptions {
+	options: Option[];
+}
 
 export type SelectFormField<T> = BaseSelectFormField<T> & FieldOptions;
 
