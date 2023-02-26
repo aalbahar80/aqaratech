@@ -48,6 +48,15 @@ for (const preset of chartTestPresets) {
 				],
 			});
 
+			const pieChart = page.getByTestId('chart-card').filter({
+				hasText: 'Expenses: by Category',
+				has: page.locator('canvas'),
+			});
+
+			await expect.soft(pieChart).toHaveScreenshot({
+				mask: [navbar(page), sidebar(page), ...chartText(page)],
+			});
+
 			const barChart = page
 				.getByTestId('chart-card')
 				.filter({ hasText: 'Expenses: by Month' });
@@ -65,9 +74,10 @@ for (const preset of chartTestPresets) {
 				mask: [navbar(page), sidebar(page), ...chartText(page)],
 			});
 
-			const categoryChart = page
-				.getByTestId('chart-card')
-				.filter({ hasText: 'Expenses: by Category' });
+			const categoryChart = page.getByTestId('chart-card').filter({
+				hasText: 'Expenses: by Category',
+				has: page.locator('.pancake-chart'),
+			});
 
 			await expect.soft(categoryChart).toHaveScreenshot({
 				mask: [navbar(page), sidebar(page), ...chartText(page)],

@@ -2,6 +2,7 @@ import { stratify } from 'd3';
 
 import type { ExpenseCategoryDto } from '$api/openapi';
 import type { Option } from '$lib/models/interfaces/option.interface';
+import type { ExpenseCategoryLocalized } from '$lib/stores/expense-tree-cat';
 import type { HierarchyNode } from 'd3';
 
 export type ExpenseNode = HierarchyNode<ExpenseCategoryDto>;
@@ -9,13 +10,14 @@ export type ExpenseNode = HierarchyNode<ExpenseCategoryDto>;
  * A constant artifical id to use around the app, to avoid inconsistencies.
  */
 export const ROOT_ID = 'root';
-export const ROOT_NODE: ExpenseCategoryDto = {
+export const ROOT_NODE = {
 	id: ROOT_ID,
 	parentId: null,
 	isGroup: true,
 	labelEn: '',
 	labelAr: '',
-};
+	label: '',
+} satisfies ExpenseCategoryLocalized;
 
 /**
  * Converts an array of ExpenseCategoryDto to HierarchyNode
