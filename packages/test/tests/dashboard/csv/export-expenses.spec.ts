@@ -13,7 +13,7 @@ const SAVE_PATH = path.resolve(__dirname, '../../../downloads/expenses.csv');
 
 test.use({
 	userRoleType: 'PORTFOLIO',
-	expensesParams: R.times(10, () => ({
+	expensesParams: R.times(100, () => ({
 		amount: 100,
 		propertyId: null,
 	})),

@@ -15,7 +15,7 @@ import { Filters } from './filter-model';
 
 test.use({
 	userRoleType: 'PORTFOLIO',
-	expensesParams: R.times(10, () => ({
+	expensesParams: R.times(100, () => ({
 		amount: 100,
 	})),
 });
