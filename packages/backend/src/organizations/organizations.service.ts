@@ -19,6 +19,7 @@ import {
 } from 'src/organizations/dto/organization.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
+import { TierService } from 'src/tier/tier.service';
 
 @Injectable()
 export class OrganizationsService {
@@ -28,6 +29,7 @@ export class OrganizationsService {
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
 		private readonly env: EnvService,
+		private readonly tier: TierService,
 	) {}
 	SubjectType = 'Organization' as const;
 
@@ -89,20 +91,10 @@ export class OrganizationsService {
 			}
 		}
 
-		await tier.subscribe(
-			tierid(organization.id),
-			this.env.e.PUBLIC_TIER_PLAN_ID_1,
-			{
-				trialDays: 90,
-				info: {
-					name: organization.fullName,
-					email: user.email,
-					phone: '',
-					description: '',
-					metadata: {},
-				},
-			},
-		);
+		await this.tier.subscribe({
+			organization,
+			user,
+		});
 
 		return {
 			organization: {

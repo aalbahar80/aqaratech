@@ -14,7 +14,7 @@ const test = base.extend<{ neworg: OrganizationCreatedDto }>({
 		const url = `${apiURL}/organizations`;
 
 		const res = await request.post(url, {
-			data: { fullName: 'Test Org' },
+			data: { fullName: 'no-stub' },
 		});
 
 		const org = (await res.json()) as OrganizationCreatedDto;

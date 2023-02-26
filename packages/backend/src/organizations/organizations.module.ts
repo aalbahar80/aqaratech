@@ -12,6 +12,7 @@ import { RolesModule } from 'src/roles/roles.module';
 import { S3Module } from 'src/s3/s3.module';
 import { SearchModule } from 'src/search/search.module';
 import { TenantsModule } from 'src/tenants/tenants.module';
+import { TierService } from 'src/tier/tier.service';
 import { UnitsModule } from 'src/units/units.module';
 
 import { OrganizationsController } from './organizations.controller';
@@ -19,7 +20,7 @@ import { OrganizationsService } from './organizations.service';
 
 @Module({
 	controllers: [OrganizationsController, OrganizationsAdminController],
-	providers: [OrganizationsService],
+	providers: [OrganizationsService, TierService],
 	imports: [
 		RolesModule,
 		SearchModule,
