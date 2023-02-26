@@ -451,6 +451,10 @@ type RootTranslation = {
 		 * P​a​y
 		 */
 		pay: string
+		/**
+		 * B​a​c​k
+		 */
+		back: string
 	}
 	nav: {
 		/**
@@ -1488,6 +1492,10 @@ export type TranslationFunctions = {
 		 * Pay
 		 */
 		pay: () => LocalizedString
+		/**
+		 * Back
+		 */
+		back: () => LocalizedString
 	}
 	nav: {
 		/**

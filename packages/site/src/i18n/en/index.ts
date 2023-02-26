@@ -32,6 +32,7 @@ const en: BaseTranslation = {
 		print: 'Print',
 		sendReminder: 'Send reminder',
 		pay: 'Pay',
+		back: 'Back',
 	},
 	nav: {
 		financials: 'Financials',

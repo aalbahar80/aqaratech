@@ -136,6 +136,7 @@ const ar: Translation = {
 		print: 'طباعة',
 		sendReminder: 'إرسال تذكير',
 		pay: 'دفع',
+		back: 'عودة',
 	},
 	nav: {
 		financials: 'البيانات المالية',
