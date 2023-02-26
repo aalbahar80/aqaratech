@@ -9,6 +9,8 @@ import { test } from '../api/api-fixtures';
 import { plan } from '../api/fixtures/env';
 import { siteURL } from '../api/fixtures/site-url';
 
+test.slow();
+
 test.describe('unsubscribed', () => {
 	// Sub then unsub to ensure we're in the right state
 
@@ -26,8 +28,6 @@ test.describe('unsubscribed', () => {
 	});
 
 	test('can subscribe', async ({ page, org }) => {
-		test.slow();
-
 		const url = getRoute({
 			entity: 'organization',
 			pageType: PageTab.Billing,

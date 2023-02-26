@@ -9,6 +9,8 @@ import { plan } from '../api/fixtures/env';
 
 test.use({ organizationParams: { isActive: true } });
 
+test.slow();
+
 test.describe('subscribed', () => {
 	test('can unsubscribe', async ({ page, org }) => {
 		const orgId = tierid(org.organization.id);
@@ -53,8 +55,6 @@ test.describe('subscribed', () => {
 
 	// Stripe billing portal includes updating payment method + viewing invoices
 	test('can manage subscription', async ({ page, org }) => {
-		test.slow();
-
 		const url = getRoute({
 			entity: 'organization',
 			pageType: PageTab.Billing,
