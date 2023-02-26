@@ -5,6 +5,7 @@
 
 	import type { ExpenseDto, PaginatedExpenseDto } from '$api/openapi';
 
+	import { locale } from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
@@ -28,7 +29,10 @@
 
 		columnHelper.accessor('categoryId', {
 			header: getIntlLabel('categoryId'),
-			cell: (info) => info.row.original.expenseType?.labelEn,
+			cell: (info) =>
+				$locale === 'ar' && info.row.original.expenseType?.labelAr
+					? info.row.original.expenseType?.labelAr
+					: info.row.original.expenseType?.labelEn,
 		}),
 
 		columnHelper.accessor('amount', {
