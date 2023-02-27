@@ -11,6 +11,8 @@ test.use({ organizationParams: { isActive: true } });
 
 test.slow();
 
+test.describe.configure({ mode: 'parallel' });
+
 test.describe('subscribed', () => {
 	test('can unsubscribe', async ({ page, org }) => {
 		const orgId = tierid(org.organization.id);

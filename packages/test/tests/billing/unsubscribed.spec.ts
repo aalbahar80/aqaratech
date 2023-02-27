@@ -10,6 +10,9 @@ import { siteURL } from '../api/fixtures/site-url';
 
 test.slow();
 
+// tests in describe don't run in parallel
+test.describe.configure({ mode: 'parallel' });
+
 test.describe('unsubscribed', () => {
 	// Sub then unsub to ensure we're in the right state
 

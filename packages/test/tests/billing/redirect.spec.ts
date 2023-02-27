@@ -8,6 +8,8 @@ import { siteURL } from '../api/fixtures/site-url';
 
 test.slow();
 
+test.describe.configure({ mode: 'parallel' });
+
 test.describe('redirect for non-active subscriptions- ORGADMIN', () => {
 	test.use({ organizationParams: { isActive: false } });
 	test('redirected to billing page to re-subscribe', async ({ page, org }) => {
