@@ -23,6 +23,7 @@
 
 	import { locale } from '$i18n/i18n-svelte';
 	import { CHART_HEIGHT } from '$lib/components/dashboard/cards/chart-height.const';
+	import { isRTL } from '$lib/i18n/locale-labels';
 
 	type ManualChartType = InstanceType<typeof Chart> & {
 		legend: {
@@ -84,16 +85,16 @@
 	// Format
 
 	// reverse x axis for RTL
-	Chart.defaults.scales.time.reverse = $locale === 'ar';
+	Chart.defaults.scales.time.reverse = isRTL($locale);
 
 	// place y axis on the right for RTL
-	Chart.defaults.scales.linear.position = $locale === 'ar' ? 'right' : 'left';
+	Chart.defaults.scales.linear.position = isRTL($locale) ? 'right' : 'left';
 
-	Chart.defaults.plugins.legend.rtl = $locale === 'ar';
-	Chart.defaults.plugins.tooltip.rtl = $locale === 'ar';
+	Chart.defaults.plugins.legend.rtl = isRTL($locale);
+	Chart.defaults.plugins.tooltip.rtl = isRTL($locale);
 	Chart.defaults.locale = toBrowserLocale($locale);
 	Chart.defaults.scales.time.adapters.date = {
-		locale: $locale === 'ar' ? ar : undefined,
+		locale: isRTL($locale) ? ar : undefined,
 	};
 
 	Chart.defaults.scales.linear.ticks.format = Intl.NumberFormat(
@@ -121,7 +122,7 @@
 		borderWidth: 1,
 
 		// Reverse alignment makes the numbers easier to read
-		bodyAlign: $locale === 'ar' ? 'left' : 'right',
+		bodyAlign: isRTL($locale) ? 'left' : 'right',
 
 		// Colors
 		// displayColors: true,

@@ -5,12 +5,13 @@
 
 	import { locale } from '$i18n/i18n-svelte';
 	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
+	import { isRTL } from '$lib/i18n/locale-labels';
 
 	export let data: PageData;
 
 	$: obj = R.merge(data.expense, {
 		category:
-			($locale === 'ar' && data.expense.expenseType?.labelAr) ||
+			(isRTL($locale) && data.expense.expenseType?.labelAr) ||
 			data.expense.expenseType?.labelEn,
 	});
 </script>

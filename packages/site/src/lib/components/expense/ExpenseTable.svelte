@@ -16,6 +16,7 @@
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
+	import { isRTL } from '$lib/i18n/locale-labels';
 
 	export let data: PaginatedExpenseDto;
 
@@ -30,7 +31,7 @@
 		columnHelper.accessor('categoryId', {
 			header: getIntlLabel('categoryId'),
 			cell: (info) =>
-				$locale === 'ar' && info.row.original.expenseType?.labelAr
+				isRTL($locale) && info.row.original.expenseType?.labelAr
 					? info.row.original.expenseType?.labelAr
 					: info.row.original.expenseType?.labelEn,
 		}),

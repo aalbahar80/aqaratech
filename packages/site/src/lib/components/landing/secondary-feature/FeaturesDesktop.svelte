@@ -12,6 +12,7 @@
 
 	import { locale } from '$i18n/i18n-svelte';
 	import SecondaryFeature from '$lib/components/landing/secondary-feature/SecondaryFeature.svelte';
+	import { isRTL } from '$lib/i18n/locale-labels';
 
 	export let secondaryFeatures: ISecondaryFeature[];
 </script>
@@ -50,7 +51,7 @@
 					)}
 					style="transform: translateX({(selectedIndex ?? 0) *
 						100 *
-						($locale === 'ar' ? 1 : -1)}%);"
+						(isRTL($locale) ? 1 : -1)}%);"
 					aria-hidden={featureIndex !== selectedIndex}
 				>
 					<div
