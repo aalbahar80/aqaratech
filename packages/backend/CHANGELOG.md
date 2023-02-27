@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.15.2
+
+### Patch Changes
+
+- 7f8f6b332: localize billing page
+- Updated dependencies [7f8f6b332]
+  - @self/utils@3.14.2
+
 ## 2.15.1
 
 ### Patch Changes

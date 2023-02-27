@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.14.2
+
+### Patch Changes
+
+- 7f8f6b332: localize billing page
+
 ## 2.14.1
 
 ### Patch Changes

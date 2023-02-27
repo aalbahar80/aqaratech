@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.15.3
+
+### Patch Changes
+
+- 997d81e28: handle isPaid label display
+- 7f8f6b332: localize billing page
+
 ## 2.15.2
 
 ### Patch Changes

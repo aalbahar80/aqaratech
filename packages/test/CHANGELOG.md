@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.14.2
+
+### Patch Changes
+
+- 7f8f6b332: localize billing page
+
 ## 3.14.1
 
 ### Patch Changes
