@@ -1,0 +1,8 @@
+{
+	"$schema": "https://json.schemastore.org/web-manifest-combined.json",
+	"id": "aqaratech",
+	"name": "Aqaratech",
+	"short_name": "Aqaratech",
+	"start_url": "https://aqaratech.com",
+	"display": "standalone"
+}
