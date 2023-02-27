@@ -5,17 +5,15 @@ import { startCase } from '../../../start-case';
 import { fmt } from './format';
 
 import type {
-	portfolioCreateSchema,
-	portfolioUpdateSchema,
-	tenantCreateSchema,
-	tenantUpdateSchema,
-	InnerSchema,
-	leaseCreateSchema,
-	expenseCreateSchema,
+	ExpenseCreateSchema,
+	LeaseCreateSchema,
+	LeaseInvoiceCreateSchema,
+	PortfolioCreateSchema,
+	TenantCreateSchema,
 } from '../../../schemas';
 import type { Union } from 'ts-toolbelt';
 
-export const entityFieldLabels = {
+const entityFieldLabels = {
 	fullName: 'Full Name',
 	dob: 'Date of Birth',
 	civilid: 'Civil ID',
@@ -33,20 +31,7 @@ export const entityFieldLabels = {
 	mfPaymentId: 'MyFatoorah Payment ID',
 
 	key: 'Name',
-} satisfies Partial<Union.Strict<Record<Keys, string>>> & {
-	key: string; // FileDto
-	mfPaymentId: string; // LeaseInvoiceDto (not in schema)
-};
-
-type Schemas =
-	| typeof portfolioCreateSchema
-	| typeof portfolioUpdateSchema
-	| typeof tenantCreateSchema
-	| typeof tenantUpdateSchema
-	| InnerSchema<typeof leaseCreateSchema>
-	| typeof expenseCreateSchema;
-
-type Keys = keyof Union.IntersectOf<Schemas['shape']>;
+} satisfies FieldLabels;
 
 export const getLabel = (key: string) =>
 	(entityFieldLabels as Record<string, string>)[key] ?? startCase(key);
@@ -77,4 +62,18 @@ export const formatValue = (
 	} else {
 		return JSON.stringify(value);
 	}
+};
+
+type Schemas =
+	| PortfolioCreateSchema
+	| TenantCreateSchema
+	| ExpenseCreateSchema
+	| LeaseInvoiceCreateSchema
+	| LeaseCreateSchema;
+
+type Keys = keyof Union.IntersectOf<Schemas>;
+
+type FieldLabels = Partial<Union.Strict<Record<Keys, string>>> & {
+	key: string; // FileDto
+	mfPaymentId: string; // LeaseInvoiceDto (not in schema)
 };

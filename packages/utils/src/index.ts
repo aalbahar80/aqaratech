@@ -27,7 +27,6 @@ export type {
 } from './entity/entity-map';
 export {
 	EMPTY_VALUE,
-	entityFieldLabels,
 	formatValue,
 	getLabel,
 	toUTCFormat,
