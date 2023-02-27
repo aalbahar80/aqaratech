@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.14.6
+
+### Patch Changes
+
+- f4b7c1bcf: use curly braces for github output
+
 ## 2.14.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.14.6
+
+### Patch Changes
+
+- f4b7c1bcf: use curly braces for github output
+
 ## 3.14.5
 
 ### Patch Changes

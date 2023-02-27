@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.14.6
+
+### Patch Changes
+
+- f4b7c1bcf: use curly braces for github output
+- Updated dependencies [f4b7c1bcf]
+  - @self/utils@3.14.6
+
 ## 2.14.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.15.8
+
+### Patch Changes
+
+- f4b7c1bcf: use curly braces for github output
+
 ## 2.15.7
 
 ### Patch Changes
