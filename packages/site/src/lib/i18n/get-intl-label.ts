@@ -11,9 +11,28 @@ const synonyms: Record<string, string> = {
 	category: 'categoryId',
 };
 
-/** Attempt to get label based on locale, falling back to English. */
-export const getIntlLabel = (key: string) => {
+const NON_FORM_LABELS: Record<string, { en: string; ar: string }> = {
+	isPaid: {
+		en: 'PaymentStatus',
+		ar: 'حالة السداد',
+	},
+};
+
+/** Attempt to get label based on locale, falling back to English.
+ * @param key The key to use to get the label.
+ * @param form Whether or not the label is for a form. If false,
+ * the label will be pulled from NON_FORM_LABELS.
+ */
+export const getIntlLabel = (key: string, form = true) => {
 	const currentLocale = get(locale);
+
+	if (!form) {
+		// short-circuit if not a form and override is declared
+		const label = NON_FORM_LABELS[key]?.[currentLocale];
+		if (label) {
+			return label;
+		}
+	}
 
 	const enLabel = getLabel(key);
 

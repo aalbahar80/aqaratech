@@ -3,6 +3,7 @@ import { derived, get } from 'svelte/store';
 import type { Readable } from 'svelte/store';
 
 import L from '$i18n/i18n-svelte';
+import { getIntlLabel } from '$lib/i18n/get-intl-label';
 import {
 	FILTER_TYPE,
 	type Filter,
@@ -15,7 +16,7 @@ export const isPaidFilter = derived(isPaid, ($isPaid) => {
 
 	return {
 		id: FilterEnum.IsPaid,
-		label: LL.fields.isPaid(),
+		label: getIntlLabel('isPaid', false),
 		type: FILTER_TYPE.RADIO,
 		options: [
 			{

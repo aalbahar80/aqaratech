@@ -99,7 +99,7 @@ const ar: Translation = {
 		canPay: 'السماح للمستأجر بدفع الفواتير عبر الإنترنت',
 		tenantId: 'مستأجر',
 		license: 'رخصة',
-		isPaid: 'حالة السداد',
+		isPaid: 'مدفوع',
 		dueAt: 'تاريخ الاستحقاق النهائي',
 		paidAt: 'تاريخ الدفع',
 		categoryId: 'فئة',
@@ -219,7 +219,7 @@ const ar: Translation = {
 		notYetDue: 'لم يتم الدفع بعد',
 		due: 'مستحق',
 		overdue: 'غير مدفوع',
-		paid: 'دفع',
+		paid: 'مدفوع',
 		unpaid: 'غير مدفوع',
 
 		onTime: 'في الوقت المحدد',

@@ -89,7 +89,7 @@
 		}),
 
 		columnHelper.accessor('isPaid', {
-			header: getIntlLabel('isPaid'),
+			header: getIntlLabel('isPaid', false),
 			cell: (props) => {
 				const invoice = props.row.original;
 
