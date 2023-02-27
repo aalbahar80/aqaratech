@@ -19,6 +19,7 @@
 	import { clickOutside } from '$lib/actions/click-outside';
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
+	import VersionFooter from '$lib/components/VersionFooter.svelte';
 
 	export let navigationTree: NavigationItem[];
 
@@ -51,4 +52,5 @@
 			<SidebarItem {item} />
 		{/each}
 	</nav>
+	<VersionFooter />
 </aside>

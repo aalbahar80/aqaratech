@@ -2,6 +2,6 @@
 	import { sentryConfig } from '$lib/environment/sentry.config';
 </script>
 
-<div class="text-end text-xs text-gray-600 print:hidden">
-	version: {sentryConfig.release}
+<div class="text-[0.5rem] text-gray-600">
+	v: {sentryConfig.release}
 </div>

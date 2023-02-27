@@ -18,7 +18,6 @@
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import Modal from '$lib/components/toast/Modal.svelte';
-	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
 	import { width } from '$lib/stores/width';
@@ -68,7 +67,6 @@
 		<main>
 			<slot />
 		</main>
-		<VersionFooter />
 	{:else}
 		<div class="my-grid">
 			{#if isSidebarAvailable($page.route) && data.user}
@@ -83,7 +81,6 @@
 					)}
 				>
 					<slot />
-					<VersionFooter />
 				</div>
 			</main>
 		</div>
