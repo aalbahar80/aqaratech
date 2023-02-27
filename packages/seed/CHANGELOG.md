@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.14.4
+
+### Patch Changes
+
+- 225c715e7: use set-output for release
+- Updated dependencies [225c715e7]
+  - @self/utils@3.14.4
+
 ## 2.14.3
 
 ### Patch Changes

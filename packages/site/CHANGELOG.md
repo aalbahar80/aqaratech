@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.15.6
+
+### Patch Changes
+
+- 225c715e7: use set-output for release
+
 ## 2.15.5
 
 ### Patch Changes

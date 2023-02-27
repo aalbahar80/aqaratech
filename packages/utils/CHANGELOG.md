@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.14.4
+
+### Patch Changes
+
+- 225c715e7: use set-output for release
+
 ## 3.14.3
 
 ### Patch Changes
