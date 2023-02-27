@@ -64,8 +64,8 @@ jobs:
           echo '${{ steps.changesets.outputs.publishedPackages }}' > publishedPackages.json
           SITE_TAG=$(jq -r '.[] | select(.name == "@self/site") | .version' publishedPackages.json)
           BACKEND_TAG=$(jq -r '.[] | select(.name == "@self/backend") | .version' publishedPackages.json)
-          echo "::set-output name=siteTag::${SITE_TAG}"
-          echo "::set-output name=backendTag::${BACKEND_TAG}"
+          echo "SITE_TAG=$SITE_TAG" >> $GITHUB_OUTPUT
+          echo "BACKEND_TAG=$BACKEND_TAG" >> $GITHUB_OUTPUT
 
   # TODO optional: add task to purge cloudflare cache
   # https://api.cloudflare.com/#zone-purge-all-files

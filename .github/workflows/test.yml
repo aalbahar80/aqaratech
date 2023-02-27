@@ -31,7 +31,7 @@ jobs:
       - name: Should Test
         id: shouldTest
         run: |
-          echo "::set-output name=shouldTest::${{ !startsWith(github.event.head_commit.message, 'Version Packages') }}"
+          echo "shouldTest=${{ !startsWith(github.event.head_commit.message, 'Version Packages') }}" >>$GITHUB_OUTPUT
 
   test:
     name: Build and Test
