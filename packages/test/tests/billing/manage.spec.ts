@@ -20,7 +20,7 @@ test('can manage subscription', async ({ page, org }) => {
 
 	await page.goto(url);
 
-	await page.getByRole('button', { name: 'Manage payment' }).click();
+	await page.getByRole('button', { name: 'Subscription settings' }).click();
 
 	// expect to be on the stripe billing portal
 	await expect(page).toHaveURL(/billing\.aqaratech\.com/, {
