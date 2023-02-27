@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.15.5
+
+### Patch Changes
+
+- 843ed41f9: fix sidebar height
+
 ## 2.15.4
 
 ### Patch Changes
