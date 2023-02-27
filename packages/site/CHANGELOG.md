@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.15.1
+
+### Patch Changes
+
+- 6d96794f2: tolgee latest
+
 ## 2.15.0
 
 ### Minor Changes
