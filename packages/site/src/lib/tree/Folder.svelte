@@ -16,7 +16,7 @@
 </script>
 
 <div class="flex gap-2" class:hidden={node.data.id === ROOT_ID}>
-	<button class:expanded on:click={toggle} class="flex gap-2 pl-6 font-bold">
+	<button class:expanded on:click={toggle} class="ps-6 flex gap-2 font-bold">
 		<svelte:component
 			this={expanded ? HeroiconsFolderOpen : HeroiconsFolder}
 			class="text-gray-600"
@@ -30,7 +30,7 @@
 </div>
 
 {#if expanded}
-	<ul class="ml-2 list-none border-l-2 border-gray-200 pl-2">
+	<ul class="ms-2 ps-2 list-none border-l-2 border-gray-200 py-2">
 		{#each node.children ?? [] as file}
 			<li class="p-1">
 				{#if file.data.isGroup}
