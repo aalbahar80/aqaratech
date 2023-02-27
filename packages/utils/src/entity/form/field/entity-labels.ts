@@ -71,6 +71,10 @@ export const formatValue = (
 		return fmt({ type: 'number', value, locale });
 	} else if (value === null || value === undefined) {
 		return EMPTY_VALUE;
+	} else if (typeof value === 'boolean') {
+		const yes = locale === 'en' ? 'Yes' : 'نعم';
+		const no = locale === 'en' ? 'No' : 'لا';
+		return value ? yes : no;
 	} else {
 		return JSON.stringify(value);
 	}
