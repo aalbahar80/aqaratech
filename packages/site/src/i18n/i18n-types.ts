@@ -455,6 +455,36 @@ type RootTranslation = {
 		 * B​a​c​k
 		 */
 		back: string
+		/**
+		 * S​u​b​s​c​r​i​b​e
+		 */
+		subscribe: string
+	}
+	billing: {
+		/**
+		 * S​u​b​s​c​r​i​p​t​i​o​n​ ​s​e​t​t​i​n​g​s
+		 */
+		subscriptionSettings: string
+		/**
+		 * A​c​t​i​v​a​t​e​ ​a​ ​n​e​w​ ​s​u​b​s​c​r​i​p​t​i​o​n
+		 */
+		activateNewSubscription: string
+		/**
+		 * V​i​e​w​ ​y​o​u​r​ ​i​n​v​o​i​c​e​s
+		 */
+		viewInvoices: string
+		/**
+		 * U​p​d​a​t​e​ ​y​o​u​r​ ​p​a​y​m​e​n​t​ ​m​e​t​h​o​d
+		 */
+		updatePaymentMethod: string
+		/**
+		 * C​a​n​c​e​l​ ​s​u​b​s​c​r​i​p​t​i​o​n
+		 */
+		cancelSubscription: string
+		/**
+		 * C​a​n​c​e​l​ ​y​o​u​r​ ​s​u​b​s​c​r​i​p​t​i​o​n​ ​i​m​m​e​d​i​a​t​e​l​y
+		 */
+		cancelSubscriptionImmediately: string
 	}
 	nav: {
 		/**
@@ -1496,6 +1526,36 @@ export type TranslationFunctions = {
 		 * Back
 		 */
 		back: () => LocalizedString
+		/**
+		 * Subscribe
+		 */
+		subscribe: () => LocalizedString
+	}
+	billing: {
+		/**
+		 * Subscription settings
+		 */
+		subscriptionSettings: () => LocalizedString
+		/**
+		 * Activate a new subscription
+		 */
+		activateNewSubscription: () => LocalizedString
+		/**
+		 * View your invoices
+		 */
+		viewInvoices: () => LocalizedString
+		/**
+		 * Update your payment method
+		 */
+		updatePaymentMethod: () => LocalizedString
+		/**
+		 * Cancel subscription
+		 */
+		cancelSubscription: () => LocalizedString
+		/**
+		 * Cancel your subscription immediately
+		 */
+		cancelSubscriptionImmediately: () => LocalizedString
 	}
 	nav: {
 		/**

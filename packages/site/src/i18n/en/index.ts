@@ -33,6 +33,15 @@ const en: BaseTranslation = {
 		sendReminder: 'Send reminder',
 		pay: 'Pay',
 		back: 'Back',
+		subscribe: 'Subscribe',
+	},
+	billing: {
+		subscriptionSettings: 'Subscription settings',
+		activateNewSubscription: 'Activate a new subscription',
+		viewInvoices: 'View your invoices',
+		updatePaymentMethod: 'Update your payment method',
+		cancelSubscription: 'Cancel subscription',
+		cancelSubscriptionImmediately: 'Cancel your subscription immediately',
 	},
 	nav: {
 		financials: 'Financials',

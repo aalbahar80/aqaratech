@@ -137,6 +137,15 @@ const ar: Translation = {
 		sendReminder: 'إرسال تذكير',
 		pay: 'دفع',
 		back: 'عودة',
+		subscribe: 'اشترك',
+	},
+	billing: {
+		subscriptionSettings: 'إعدادات الاشتراك',
+		activateNewSubscription: 'تفعيل اشتراك جديد',
+		viewInvoices: 'عرض الفواتير',
+		updatePaymentMethod: 'تحديث طريقة الدفع',
+		cancelSubscription: 'إلغاء الاشتراك',
+		cancelSubscriptionImmediately: 'قم بإلغاء اشتراكك على الفور',
 	},
 	nav: {
 		financials: 'البيانات المالية',
