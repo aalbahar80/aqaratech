@@ -3,7 +3,7 @@ import { expenseCreateSchema, expenseUpdateSchema } from '@self/utils';
 
 import { createFormField } from '$lib/components/form/model/form-field';
 import { createFormModel } from '$lib/components/form/model/form-model';
-import { categoriesRaw } from '$lib/stores/expense-categories';
+import { categories } from '$lib/stores/expense-categories';
 import { toOptions } from '$lib/utils/expense-type-options';
 
 export const expenseFormModel = () =>
@@ -27,7 +27,7 @@ export const expenseFormModel = () =>
 			categoryId: createFormField('categoryId', {
 				type: 'select',
 				combobox: true,
-				options: toOptions(get(categoriesRaw)),
+				options: toOptions(get(categories)),
 			}),
 
 			memo: createFormField('memo'),
