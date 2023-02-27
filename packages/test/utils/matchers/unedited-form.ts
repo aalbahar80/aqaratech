@@ -20,11 +20,16 @@ export const assertUneditedForm = async (
 };
 
 /** A helper function to get the response from the api */
-export const fromApi = (res: Response) => {
+export const fromApi = (
+	res: Response,
+	/** A function to additionally filter the response */
+	constraints?: () => boolean,
+) => {
 	const url = new URL(res.url());
 	return (
 		url.href.includes(apiURL) &&
 		// url.pathname.includes('tenants') &&
-		res.request().method() === 'GET'
+		res.request().method() === 'GET' &&
+		(constraints ? constraints() : true)
 	);
 };

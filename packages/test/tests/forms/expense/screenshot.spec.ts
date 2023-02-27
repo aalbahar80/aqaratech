@@ -16,7 +16,10 @@ test('screenshot smoke test', async ({ page, org, portfolio, expense }) => {
 		params: { organizationId: org.organization.id, portfolioId: portfolio.id },
 	});
 
-	const resPromise = page.waitForResponse(fromApi);
+	const resPromise = page.waitForResponse((res) =>
+		// be explicit, avoid catching categories request
+		fromApi(res, () => res.url().includes(expense.id)),
+	);
 
 	await page.goto(url);
 
@@ -33,7 +36,10 @@ test('screenshot smoke test', async ({ page, org, portfolio, expense }) => {
 
 	await expect(page).toHaveURL(edit);
 
-	const resPromise2 = page.waitForResponse(fromApi);
+	const resPromise2 = page.waitForResponse((res) =>
+		// be explicit, avoid catching categories request
+		fromApi(res, () => res.url().includes(expense.id)),
+	);
 
 	await page.locator('text=Save').click();
 
