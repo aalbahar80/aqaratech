@@ -20,7 +20,7 @@ export const payoutFormModel = () =>
 			}),
 
 			memo: createFormField('memo', {
-				hint: 'Enter a short description of the payout. This will be visible to the portfolio user.',
+				hint: 'A short description of the transaction. The description will be visible to the owner.\n\nوصف موجز للمعاملة. سيكون الوصف مرئيًا للمالك.',
 			}),
 		},
 	});
