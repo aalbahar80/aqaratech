@@ -1,5 +1,20 @@
 # @self/seed
 
+## 2.14.0
+
+### Minor Changes
+
+- 671ed6c7d: apply locale to charts
+- a93e53dcd: replace expense tree editor
+
+### Patch Changes
+
+- d9428cbf2: arabic expense categories in expense table
+- Updated dependencies [671ed6c7d]
+- Updated dependencies [a93e53dcd]
+- Updated dependencies [d9428cbf2]
+  - @self/utils@3.14.0
+
 ## 2.13.3
 
 ### Patch Changes

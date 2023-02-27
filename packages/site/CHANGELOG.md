@@ -1,5 +1,20 @@
 # @self/site
 
+## 2.15.0
+
+### Minor Changes
+
+- 671ed6c7d: apply locale to charts
+- a93e53dcd: replace expense tree editor
+- 3524a2817: add expense pie chart
+
+### Patch Changes
+
+- 2dd67e9dc: use i18n labels in treemaps
+- 3a5b3e829: add table width toggle
+- dccb69194: rtl contract page
+- d9428cbf2: arabic expense categories in expense table
+
 ## 2.14.4
 
 ### Patch Changes

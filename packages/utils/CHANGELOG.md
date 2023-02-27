@@ -1,5 +1,16 @@
 # @self/utils
 
+## 3.14.0
+
+### Minor Changes
+
+- 671ed6c7d: apply locale to charts
+- a93e53dcd: replace expense tree editor
+
+### Patch Changes
+
+- d9428cbf2: arabic expense categories in expense table
+
 ## 3.13.3
 
 ### Patch Changes
