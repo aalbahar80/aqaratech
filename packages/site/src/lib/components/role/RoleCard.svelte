@@ -47,7 +47,7 @@
 					<p class="flex items-center text-sm text-gray-500">
 						<svelte:component
 							this={icon}
-							class="mr-1.5 h-4 w-4 flex-shrink-0 text-gray-400"
+							class="me-1.5 h-4 w-4 flex-shrink-0 text-gray-400"
 						/>
 						{label}
 					</p>

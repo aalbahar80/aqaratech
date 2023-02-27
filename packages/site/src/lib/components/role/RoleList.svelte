@@ -7,20 +7,20 @@
 	import RoleCard from '$lib/components/role/RoleCard.svelte';
 	import StackedList from '$lib/components/StackedList.svelte';
 	import { NEW_ORGANIZATION } from '$lib/constants/routes';
+	import { dateFnsLocale } from '$lib/i18n/date-fns-locale';
 	import Fa6SolidUserPlus from '~icons/fa6-solid/user-plus';
 
 	export let roles: ValidatedRoleDto[];
 </script>
 
-<StackedList title="Role">
+<StackedList title={$L.entity.role.singular()}>
 	{#each roles as role (role.id)}
 		{@const icons = [
 			{
-				label:
-					'Added ' +
-					formatDistance(new Date(role.createdAt), new Date(), {
-						addSuffix: true,
-					}),
+				label: formatDistance(new Date(role.createdAt), new Date(), {
+					locale: dateFnsLocale($locale),
+					addSuffix: true,
+				}),
 				icon: Fa6SolidUserPlus,
 				tooltip: 'createdAt',
 			},
