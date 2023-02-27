@@ -62,8 +62,10 @@ jobs:
       - id: pkgversions
         run: |
           echo '${{ steps.changesets.outputs.publishedPackages }}' > publishedPackages.json
-          echo "SITE_TAG=$(jq -r '.[] | select(.name == \"@self/site\") | .version' publishedPackages.json)" >> $GITHUB_OUTPUT
-          echo "BACKEND_TAG=$(jq -r '.[] | select(.name == \"@self/backend\") | .version' publishedPackages.json)" >> $GITHUB_OUTPUT
+          SITE_TAG=$(jq -r '.[] | select(.name == "@self/site") | .version' publishedPackages.json)
+          BACKEND_TAG=$(jq -r '.[] | select(.name == "@self/backend") | .version' publishedPackages.json)
+          echo "SITE_TAG=${SITE_TAG}" >> $GITHUB_OUTPUT
+          echo "BACKEND_TAG=${BACKEND_TAG}" >> $GITHUB_OUTPUT
 
   # TODO optional: add task to purge cloudflare cache
   # https://api.cloudflare.com/#zone-purge-all-files
