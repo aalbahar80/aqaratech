@@ -61,3 +61,5 @@ pnpm run test:all-browsers
 cd packages/site
 pnpm typesafe-i18n
 ```
+
+- updating sentry cli (`SENTRY_CLI_VERSOIN` in `.github/workflows/ci.yml`)
