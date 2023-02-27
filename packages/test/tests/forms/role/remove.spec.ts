@@ -46,7 +46,7 @@ test.describe('can delete role', () => {
 			.filter({
 				hasText: email,
 			})
-			.getByRole('button', { name: 'Remove' });
+			.getByRole('button', { name: 'Delete' });
 
 		await btn.click();
 
@@ -89,7 +89,7 @@ test.describe('can delete role', () => {
 			.filter({
 				hasText: email,
 			})
-			.getByRole('button', { name: 'Remove' });
+			.getByRole('button', { name: 'Delete' });
 
 		await btn.click();
 
@@ -132,7 +132,7 @@ test.describe('can delete role', () => {
 			.filter({
 				hasText: email,
 			})
-			.getByRole('button', { name: 'Remove' });
+			.getByRole('button', { name: 'Delete' });
 
 		await btn.click();
 
