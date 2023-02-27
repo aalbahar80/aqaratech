@@ -119,6 +119,7 @@ const en: BaseTranslation = {
 		upcoming: 'Upcoming',
 		current: 'Current',
 		expired: 'Expired',
+		expiry: 'Expiry',
 
 		// Invoice
 		notYetDue: 'Not yet due',

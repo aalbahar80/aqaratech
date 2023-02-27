@@ -230,6 +230,7 @@ const ar: Translation = {
 		upcoming: 'قادم',
 		current: 'جاري',
 		expired: 'منتهي',
+		expiry: 'انتهاء',
 
 		inProgress: 'جاري',
 		completed: 'متمم',

@@ -712,6 +712,10 @@ type RootTranslation = {
 		 */
 		expired: string
 		/**
+		 * E​x​p​i​r​y
+		 */
+		expiry: string
+		/**
 		 * N​o​t​ ​y​e​t​ ​d​u​e
 		 */
 		notYetDue: string
@@ -1786,6 +1790,10 @@ export type TranslationFunctions = {
 		 * Expired
 		 */
 		expired: () => LocalizedString
+		/**
+		 * Expiry
+		 */
+		expiry: () => LocalizedString
 		/**
 		 * Not yet due
 		 */

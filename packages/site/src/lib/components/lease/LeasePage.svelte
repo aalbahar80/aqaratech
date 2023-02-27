@@ -7,10 +7,11 @@
 	import type { LeaseDto } from '$api/openapi';
 
 	import Button from '$components/buttons/Button.svelte';
-	import L from '$i18n/i18n-svelte';
+	import L, { locale } from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
 	import Heading from '$lib/components/Heading.svelte';
+	import { dateFnsLocale } from '$lib/i18n/date-fns-locale';
 	import { getLeaseBadge } from '$lib/utils/get-badge';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 	import Fa6SolidCalendarXmark from '~icons/fa6-solid/calendar-xmark';
@@ -21,9 +22,14 @@
 
 	const icons = [
 		{
-			label: `Expiry: ${formatDistance(new Date(lease.end), new Date(), {
-				addSuffix: true,
-			})}`,
+			label: `${$L.badge.expiry()}: ${formatDistance(
+				new Date(lease.end),
+				new Date(),
+				{
+					locale: dateFnsLocale($locale),
+					addSuffix: true,
+				},
+			)}`,
 			icon: Fa6SolidCalendarXmark,
 			tooltip: 'Bedrooms',
 		},
