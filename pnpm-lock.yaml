@@ -259,7 +259,7 @@ importers:
 
   packages/site:
     specifiers:
-      '@iconify/json': 2.2.27
+      '@iconify/json': 2.2.28
       '@intlify/eslint-plugin-svelte': 0.1.1
       '@logtail/node': 0.2.0
       '@logtail/types': 0.2.0
@@ -319,7 +319,7 @@ importers:
       tslib: 2.5.0
       typesafe-i18n: 5.24.1
       typescript: 5.0.0-beta
-      typescript-svelte-plugin: 0.3.16
+      typescript-svelte-plugin: 0.3.17
       ufo: 1.1.0
       unplugin-icons: 0.15.3
       vite: 4.1.4
@@ -334,7 +334,7 @@ importers:
       typesafe-i18n: 5.24.1_typescript@5.0.0-beta
       winston: 3.8.2
     devDependencies:
-      '@iconify/json': 2.2.27
+      '@iconify/json': 2.2.28
       '@intlify/eslint-plugin-svelte': 0.1.1_n4ieifq2d7jq3sqoe474cgqlim
       '@logtail/types': 0.2.0
       '@rgossiaux/svelte-headlessui': 1.0.2_tvgqshloapx5y3z3as5gnhnhfq_svelte@3.55.1
@@ -390,7 +390,7 @@ importers:
       ts-toolbelt: 9.6.0
       tslib: 2.5.0
       typescript: 5.0.0-beta
-      typescript-svelte-plugin: 0.3.16_7btt5e5jbvkzqqbvjeeo4qebyu
+      typescript-svelte-plugin: 0.3.17_7btt5e5jbvkzqqbvjeeo4qebyu
       ufo: 1.1.0
       unplugin-icons: 0.15.3
       vite: 4.1.4
@@ -2155,8 +2155,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.2.27:
-    resolution: {integrity: sha512-8Fqx7iP9XOBOJY20HtFeqAJ90Tr0/RX7rb9wqhEHBEdF4vX6H/riWXlGUXTWsB04h8FbJ3Lgs0sTMAKDUzPtPA==}
+  /@iconify/json/2.2.28:
+    resolution: {integrity: sha512-GlWrkBdm5h4KrL3PFW3D8PPP/tlxcvW/AZu0w7StlLNbUbC2AKq9NnO9hTk4DaZmTyEGMMCyFHZ5/dYnpaUiPQ==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.0
@@ -9360,14 +9360,6 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /rollup/3.17.3:
-    resolution: {integrity: sha512-p5LaCXiiOL/wrOkj8djsIDFmyU9ysUxcyW+EKRLHb6TKldJzXpImjcRSR+vgo09DBdofGcOoLOsRyxxG2n5/qQ==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /run-async/2.4.1:
     resolution: {integrity: sha512-tvVnVv01b8c1RrA6Ep7JkStj85Guv/YrMcwqYQnwjsAS2cTmmPGBBjAjpCW7RrSodNSoE2/qg9O4bceNvUuDgQ==}
     engines: {node: '>=0.12.0'}
@@ -10621,8 +10613,8 @@ packages:
       typescript: 5.0.0-beta
     dev: false
 
-  /typescript-svelte-plugin/0.3.16_7btt5e5jbvkzqqbvjeeo4qebyu:
-    resolution: {integrity: sha512-eNVFsjN/kGj311G37swDMW6DEffGZnPXq5r4b3J+iUNG6Ud06oL9t1GyiNaNCeur6XErLyqpi3xuiKX6RAMmgQ==}
+  /typescript-svelte-plugin/0.3.17_7btt5e5jbvkzqqbvjeeo4qebyu:
+    resolution: {integrity: sha512-LDiMED2IJxHOCZgeIAmeXHFHPVCu1IwTr6+x/ERxSPHgsJqYoq0dfbNQnTtR8T9BI9iDU8zOX2B/vG8q2+MiMA==}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.14
       svelte2tsx: 0.6.2_7btt5e5jbvkzqqbvjeeo4qebyu
@@ -10895,7 +10887,7 @@ packages:
       esbuild: 0.16.17
       postcss: 8.4.21
       resolve: 1.22.1
-      rollup: 3.17.3
+      rollup: 3.17.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
