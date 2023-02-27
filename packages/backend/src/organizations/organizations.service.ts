@@ -253,6 +253,7 @@ export class OrganizationsService {
 
 	/** Report usage for a single organization. */
 	async reportUsage(organization: Organization & { _count: { Unit: number } }) {
+		// TODO: stub to avoid running in dev
 		return await tier.report(
 			tierid(organization.id),
 			'feature:unit',
@@ -276,6 +277,7 @@ export class OrganizationsService {
 			  });
 
 		const promises = organizations.map(async (organization) => {
+			// TODO: stub to avoid running in dev
 			const active = await tier.can(tierid(organization.id), 'feature:unit');
 			if (active.err) {
 				// Don't update the organization's status if we can't check it
