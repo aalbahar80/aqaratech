@@ -16,6 +16,7 @@
 	aria-label="Global"
 >
 	<!-- Main horizontal navbar area -->
+	<!-- NOTE: Any height offset should be kept in sync with Sidebar height -->
 	<div class="flex items-center justify-between py-4 px-4 sm:py-8">
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">

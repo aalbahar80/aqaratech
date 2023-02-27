@@ -31,7 +31,7 @@
 
 <aside
 	class={clsx(
-		'fixed z-40 h-[calc(100%-100px)] w-64 flex-col gap-6 border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900',
+		'fixed z-40 h-[calc(100%-68px)] w-64 flex-col gap-6 border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900 sm:h-[calc(100%-100px)]',
 		$sidebar.expanded ? 'flex' : 'hidden lg:flex', // ignore $isOpen on lg breakpoint
 	)}
 	in:fly={{ x: -100, duration: 150 }}
