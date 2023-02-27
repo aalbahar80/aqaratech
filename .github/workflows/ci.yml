@@ -54,7 +54,8 @@ jobs:
           fi
 
           echo $matrix
-          echo "matrix=$matrix" >> $GITHUB_OUTPUT
+          # echo "matrix=$matrix" >> $GITHUB_OUTPUT
+          echo "::set-output name=matrix::$matrix"
 
   build-package:
     runs-on: ubuntu-latest
