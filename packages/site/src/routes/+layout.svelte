@@ -8,6 +8,7 @@
 	import { navigating, page } from '$app/stores';
 	import type { LayoutData } from './$types';
 	import { onMount } from 'svelte';
+	import { isLiveEnv } from '@self/utils';
 
 	import '../app.css';
 
@@ -18,6 +19,7 @@
 	import { getNavigationTree } from '$lib/components/sidebar/navigation-tree';
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import Modal from '$lib/components/toast/Modal.svelte';
+	import { environment } from '$lib/environment';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
 	import { width } from '$lib/stores/width';
@@ -44,8 +46,10 @@
 			});
 		}
 
-		// communicate that the app is ready - used for testing
-		document.body.classList.add('started');
+		if (!isLiveEnv(environment.PUBLIC_AQARATECH_ENV)) {
+			// communicate that the app is ready - used for testing
+			document.body.classList.add('started');
+		}
 	});
 </script>
 
