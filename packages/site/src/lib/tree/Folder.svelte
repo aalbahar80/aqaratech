@@ -21,7 +21,7 @@
 			this={expanded ? HeroiconsFolderOpen : HeroiconsFolder}
 			class="text-gray-600"
 		/>
-		{node.data.labelEn}
+		{node.data.label}
 	</button>
 
 	<LinkButton {node} />

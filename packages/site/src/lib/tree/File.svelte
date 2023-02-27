@@ -11,7 +11,7 @@
 <div class="ps-6 flex gap-2 text-gray-700">
 	<HeroiconsDocument class="text-gray-500" />
 
-	{node.data.labelEn}
+	{node.data.label}
 
 	<LinkButton {node} />
 </div>
