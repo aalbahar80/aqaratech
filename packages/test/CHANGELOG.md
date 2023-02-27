@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.14.3
+
+### Patch Changes
+
+- e10c3f6ab: localize table buttons
+
 ## 3.14.2
 
 ### Patch Changes

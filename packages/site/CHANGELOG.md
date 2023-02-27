@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.15.4
+
+### Patch Changes
+
+- e10c3f6ab: localize table buttons
+
 ## 2.15.3
 
 ### Patch Changes

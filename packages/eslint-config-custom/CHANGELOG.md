@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.14.3
+
+### Patch Changes
+
+- e10c3f6ab: localize table buttons
+
 ## 2.14.2
 
 ### Patch Changes

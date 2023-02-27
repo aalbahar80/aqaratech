@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.14.3
+
+### Patch Changes
+
+- e10c3f6ab: localize table buttons
+- Updated dependencies [e10c3f6ab]
+  - @self/utils@3.14.3
+
 ## 2.14.2
 
 ### Patch Changes
