@@ -51,30 +51,29 @@ type Keys = keyof Union.IntersectOf<Schemas['shape']>;
 export const getLabel = (key: string) =>
 	(entityFieldLabels as Record<string, string>)[key] ?? startCase(key);
 
-/**
- * Displayed when a value is null or undefined.
- */
+/** Displayed when a value is null or undefined. */
 export const EMPTY_VALUE = '-';
 
-/**
- * Convenience function to format a field's value.
- */
+/** Convenience function to format a field's value. */
 export const formatValue = (
 	value: unknown,
 	locale: 'en' | 'ar' = 'en',
 ): string => {
-	if (typeof value === 'string' && (isDatetime(value) || isDateOnly(value))) {
-		return fmt({ type: 'date', value, locale });
-	} else if (typeof value === 'string') {
-		return value;
-	} else if (typeof value === 'number') {
-		return fmt({ type: 'number', value, locale });
-	} else if (value === null || value === undefined) {
+	if (value === null || value === undefined) {
 		return EMPTY_VALUE;
 	} else if (typeof value === 'boolean') {
 		const yes = locale === 'en' ? 'Yes' : 'نعم';
 		const no = locale === 'en' ? 'No' : 'لا';
 		return value ? yes : no;
+	} else if (typeof value === 'number') {
+		return fmt({ type: 'number', value, locale });
+	} else if (
+		typeof value === 'string' &&
+		(isDatetime(value) || isDateOnly(value))
+	) {
+		return fmt({ type: 'date', value, locale });
+	} else if (typeof value === 'string') {
+		return value;
 	} else {
 		return JSON.stringify(value);
 	}
