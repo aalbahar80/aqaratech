@@ -30,7 +30,9 @@
 </div>
 
 {#if expanded}
-	<ul class="ms-2 ps-2 list-none border-l-2 border-gray-200 py-2">
+	<ul
+		class="ms-2 ps-2 list-none border-gray-200 py-2 ltr:border-l-2 rtl:border-r-2"
+	>
 		{#each node.children ?? [] as file}
 			<li class="p-1">
 				{#if file.data.isGroup}

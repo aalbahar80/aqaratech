@@ -17,7 +17,7 @@
 		params: $page.params,
 		id: node.data.id,
 	})}
-	class="inline-flex items-center text-xs text-gray-500"
+	class="inline-flex items-center text-xs text-gray-500 rtl:-scale-x-100"
 >
 	<HeroiconsArrowTopRightOnSquare />
 </a>
