@@ -9,6 +9,7 @@
 
 	import { createApi } from '$api';
 	import { handleApiError } from '$api/handle-api-error';
+	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
@@ -40,7 +41,7 @@
 
 				return renderComponent(ActionButton, {
 					options: {
-						label: 'Remove',
+						label: $L.buttons.delete(),
 						onClick: () => {
 							openModal(
 								createModalDelete({
@@ -70,7 +71,7 @@
 
 				return renderComponent(ActionButton, {
 					options: {
-						label: 'Send Invite',
+						label: $L.buttons.sendInvite(),
 						onClick: async () => {
 							try {
 								await createApi().roles.sendInvite({

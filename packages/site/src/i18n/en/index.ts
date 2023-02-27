@@ -31,6 +31,7 @@ const en: BaseTranslation = {
 		contract: 'Contract',
 		print: 'Print',
 		sendReminder: 'Send reminder',
+		sendInvite: 'Send invite',
 		pay: 'Pay',
 		back: 'Back',
 		subscribe: 'Subscribe',

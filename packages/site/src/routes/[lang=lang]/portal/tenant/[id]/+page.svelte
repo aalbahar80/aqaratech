@@ -5,6 +5,7 @@
 
 	import type { LeaseInvoiceDto } from '$api/openapi';
 
+	import L from '$i18n/i18n-svelte';
 	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
 	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 
@@ -24,7 +25,7 @@
 
 				return renderComponent(ActionButton, {
 					options: {
-						label: 'Pay now',
+						label: $L.buttons.pay(),
 						disabled: true, // TODO payment
 						// eslint-disable-next-line @typescript-eslint/no-empty-function
 						onClick: () => {},

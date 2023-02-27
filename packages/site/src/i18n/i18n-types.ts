@@ -448,6 +448,10 @@ type RootTranslation = {
 		 */
 		sendReminder: string
 		/**
+		 * S​e​n​d​ ​i​n​v​i​t​e
+		 */
+		sendInvite: string
+		/**
 		 * P​a​y
 		 */
 		pay: string
@@ -1518,6 +1522,10 @@ export type TranslationFunctions = {
 		 * Send reminder
 		 */
 		sendReminder: () => LocalizedString
+		/**
+		 * Send invite
+		 */
+		sendInvite: () => LocalizedString
 		/**
 		 * Pay
 		 */

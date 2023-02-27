@@ -135,6 +135,7 @@ const ar: Translation = {
 		contract: 'عقد',
 		print: 'طباعة',
 		sendReminder: 'إرسال تذكير',
+		sendInvite: 'إرسال دعوة',
 		pay: 'دفع',
 		back: 'عودة',
 		subscribe: 'اشترك',
