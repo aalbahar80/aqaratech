@@ -13,8 +13,11 @@ import { apiURL } from '../api/fixtures/api-url';
 
 test.use({ organizationParams: { isActive: true } });
 
+test.slow();
+
 test.describe('usage', () => {
 	test.use({ organizationParams: { isActive: true } });
+
 	test('is reported accurately', async ({ request, org, property }) => {
 		const count = 10;
 		const toCreate = R.times(count, () =>

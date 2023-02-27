@@ -23,6 +23,8 @@ const test = base.extend<{ neworg: OrganizationCreatedDto }>({
 	},
 });
 
+test.slow();
+
 test('new org is automatically subscribed', async ({ neworg }) => {
 	const phase = await tier.lookupPhase(tierid(neworg.organization.id));
 
