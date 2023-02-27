@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.14.1
+
+### Patch Changes
+
+- 11cde561c: better expense category tree
+
 ## 3.14.0
 
 ### Minor Changes

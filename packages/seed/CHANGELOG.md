@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.14.1
+
+### Patch Changes
+
+- 11cde561c: better expense category tree
+- Updated dependencies [11cde561c]
+  - @self/utils@3.14.1
+
 ## 2.14.0
 
 ### Minor Changes

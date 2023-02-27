@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.14.1
+
+### Patch Changes
+
+- 11cde561c: better expense category tree
+
 ## 2.14.0
 
 ### Minor Changes

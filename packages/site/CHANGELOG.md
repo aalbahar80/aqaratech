@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.15.2
+
+### Patch Changes
+
+- 11cde561c: better expense category tree
+
 ## 2.15.1
 
 ### Patch Changes
