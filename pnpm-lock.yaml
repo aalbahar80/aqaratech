@@ -71,8 +71,8 @@ importers:
       '@prisma/client': 4.10.1
       '@self/seed': workspace:*
       '@self/utils': workspace:*
-      '@sentry/node': 7.38.0
-      '@sentry/tracing': 7.38.0
+      '@sentry/node': 7.39.0
+      '@sentry/tracing': 7.39.0
       '@tsconfig/node18-strictest': 1.0.0
       '@types/cache-manager': 4.0.2
       '@types/cookie-parser': 1.4.3
@@ -136,12 +136,12 @@ importers:
       '@nestjs/platform-express': 9.3.9_77foi4w27ghy47yutmnzv7krjy
       '@nestjs/schedule': 2.2.0_shbtxdxgogsm4p64bg2toeylku
       '@nestjs/swagger': 6.1.4_4ye3zyvotmmgjwmdubg63pykbi
-      '@ntegral/nestjs-sentry': 4.0.0_nns6oflpmgsdwe7g272jhgy4k4
+      '@ntegral/nestjs-sentry': 4.0.0_5fbm44ppxa7vsp4raukzst5hpe
       '@prisma-utils/nestjs-request-parser': 1.2.0_nxacp3te5npuoznd6i3rrwvgae
       '@prisma/client': 4.10.1_prisma@4.10.1
       '@self/utils': link:../utils
-      '@sentry/node': 7.38.0
-      '@sentry/tracing': 7.38.0
+      '@sentry/node': 7.39.0
+      '@sentry/tracing': 7.39.0
       cache-manager: 5.1.7
       class-transformer: 0.5.1
       cookie-parser: 1.4.6
@@ -266,9 +266,9 @@ importers:
       '@logtail/winston': 0.2.0
       '@rgossiaux/svelte-headlessui': 1.0.2
       '@self/utils': workspace:*
-      '@sentry/node': 7.38.0
-      '@sentry/svelte': 7.38.0
-      '@sentry/tracing': 7.38.0
+      '@sentry/node': 7.39.0
+      '@sentry/svelte': 7.39.0
+      '@sentry/tracing': 7.39.0
       '@sveltejs/adapter-node': 1.2.0
       '@sveltejs/kit': 1.8.5
       '@sveltejs/pancake': 0.0.18
@@ -296,7 +296,7 @@ importers:
       eslint-plugin-svelte: 2.19.1
       frappe-charts: 1.6.2
       fuse.js: 6.6.2
-      jose: 4.12.0
+      jose: 4.12.2
       jspdf: 2.5.1
       nanoid: 4.0.1
       papaparse: 5.3.2
@@ -330,7 +330,7 @@ importers:
     dependencies:
       '@logtail/node': 0.2.0
       '@logtail/winston': 0.2.0_7ioj2zrmyoaq7emjm3xtze2syu
-      '@sentry/node': 7.38.0
+      '@sentry/node': 7.39.0
       typesafe-i18n: 5.24.1_typescript@5.0.0-beta
       winston: 3.8.2
     devDependencies:
@@ -339,8 +339,8 @@ importers:
       '@logtail/types': 0.2.0
       '@rgossiaux/svelte-headlessui': 1.0.2_tvgqshloapx5y3z3as5gnhnhfq_svelte@3.55.1
       '@self/utils': link:../utils
-      '@sentry/svelte': 7.38.0_svelte@3.55.1
-      '@sentry/tracing': 7.38.0
+      '@sentry/svelte': 7.39.0_svelte@3.55.1
+      '@sentry/tracing': 7.39.0
       '@sveltejs/adapter-node': 1.2.0_@sveltejs+kit@1.8.5
       '@sveltejs/kit': 1.8.5_svelte@3.55.1+vite@4.1.4
       '@sveltejs/pancake': 0.0.18
@@ -368,7 +368,7 @@ importers:
       eslint-plugin-svelte: 2.19.1_n4ieifq2d7jq3sqoe474cgqlim
       frappe-charts: 1.6.2
       fuse.js: 6.6.2
-      jose: 4.12.0
+      jose: 4.12.2
       jspdf: 2.5.1
       nanoid: 4.0.1
       papaparse: 5.3.2
@@ -414,7 +414,7 @@ importers:
       dotenv-cli: 7.0.0
       eslint-config-custom: workspace:*
       eslint-plugin-playwright: 0.12.0
-      jose: 4.12.0
+      jose: 4.12.2
       prisma: 4.10.1
       qs: 6.11.0
       remeda: 1.8.0
@@ -442,7 +442,7 @@ importers:
       dotenv-cli: 7.0.0
       eslint-config-custom: link:../eslint-config-custom
       eslint-plugin-playwright: 0.12.0_eslint@8.35.0
-      jose: 4.12.0
+      jose: 4.12.2
       prisma: 4.10.1
       remeda: 1.8.0
       simple-json-db: 2.0.0
@@ -462,7 +462,7 @@ importers:
   packages/utils:
     specifiers:
       '@logtail/types': 0.2.0
-      '@sentry/types': 7.38.0
+      '@sentry/types': 7.39.0
       '@types/node': 18.14.2
       '@vitest/ui': 0.29.1
       date-fns: 2.29.3
@@ -481,7 +481,7 @@ importers:
       zod: 3.20.6
     devDependencies:
       '@logtail/types': 0.2.0
-      '@sentry/types': 7.38.0
+      '@sentry/types': 7.39.0
       '@types/node': 18.14.2
       '@vitest/ui': 0.29.1
       eslint-config-custom: link:../eslint-config-custom
@@ -2708,7 +2708,7 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@ntegral/nestjs-sentry/4.0.0_nns6oflpmgsdwe7g272jhgy4k4:
+  /@ntegral/nestjs-sentry/4.0.0_5fbm44ppxa7vsp4raukzst5hpe:
     resolution: {integrity: sha512-6WHZcK7NLeg7ue1y3Z61msEBzCGZeXQ0hWhliH1ddQH0kPbZ6lXLxduGMWYb0N/fPjXAX1Astz8urqnoTOZBQw==}
     peerDependencies:
       '@nestjs/common': ^9.0.4
@@ -2721,8 +2721,8 @@ packages:
     dependencies:
       '@nestjs/common': 9.3.9_nxacp3te5npuoznd6i3rrwvgae
       '@nestjs/core': 9.3.9_q6agyr4hwia55oswpsa7zjxcpm
-      '@sentry/hub': 7.38.0
-      '@sentry/node': 7.38.0
+      '@sentry/hub': 7.39.0
+      '@sentry/node': 7.39.0
       reflect-metadata: 0.1.13
       rimraf: 4.1.2
       rxjs: 7.8.0
@@ -2917,42 +2917,42 @@ packages:
       rollup: 3.15.0
     dev: true
 
-  /@sentry/browser/7.38.0:
-    resolution: {integrity: sha512-rPJr+2jRYL29PeMYA2JgzYKTZQx6bc3T9evbAdIh0n+popSjpVyOpOMV/3l6A7KZeeix3dpp6eUZUxTJukqriQ==}
+  /@sentry/browser/7.39.0:
+    resolution: {integrity: sha512-LSa89bLDfGK33ArrgutVU8p4UDb809BgOn29qe/YPUL/Wor+cO59XoEmKVmXEqMZYEVjsaUVoBanUoxXKSlYgw==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.38.0
-      '@sentry/replay': 7.38.0
-      '@sentry/types': 7.38.0
-      '@sentry/utils': 7.38.0
+      '@sentry/core': 7.39.0
+      '@sentry/replay': 7.39.0
+      '@sentry/types': 7.39.0
+      '@sentry/utils': 7.39.0
       tslib: 1.14.1
     dev: true
 
-  /@sentry/core/7.38.0:
-    resolution: {integrity: sha512-+hXh/SO3Ie6WC2b+wi01xLhyVREdkRXS5QBmCiv3z2ks2HvYXp7PoKSXJvNKiwCP+pBD+enOnM1YEzM2yEy5yw==}
+  /@sentry/core/7.39.0:
+    resolution: {integrity: sha512-45WJIcWWCQnZ8zhHtcrkJjQ4YydmzMWY4pmRuBG7Qp+zrCT6ISoyODcjY+SCHFdvXkiYFi8+bFZa1qG3YQnnYw==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.38.0
-      '@sentry/utils': 7.38.0
+      '@sentry/types': 7.39.0
+      '@sentry/utils': 7.39.0
       tslib: 1.14.1
 
-  /@sentry/hub/7.38.0:
-    resolution: {integrity: sha512-KydqmBKVfMaW1ykEY0qJuNAgBOV1pPxI+lZFo5J88Bl2Ii3P/KO3EExjtaG/qiGcr9kPLawvs3syxfjAKI1eIA==}
+  /@sentry/hub/7.39.0:
+    resolution: {integrity: sha512-bJoTJTQ8J00Fh2IuQHu8DKYH+u/U0peyICLM/zem4s5Q3+TR5/WtbBkPVOq+m0upaD3cccmgDm3+6OESGxgqLA==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.38.0
-      '@sentry/types': 7.38.0
-      '@sentry/utils': 7.38.0
+      '@sentry/core': 7.39.0
+      '@sentry/types': 7.39.0
+      '@sentry/utils': 7.39.0
       tslib: 1.14.1
     dev: false
 
-  /@sentry/node/7.38.0:
-    resolution: {integrity: sha512-jNIN6NZvgzn/oms8RQzffjX8Z0LQDTN6N28nnhzqGCvnfmS1QtTt0FlU+pTuFXZNNSjfGy4XMXMYvLlbvhm2bg==}
+  /@sentry/node/7.39.0:
+    resolution: {integrity: sha512-oe1OBxgs6t/FizjxkSPtuvJv5wJMO+mLENZkiE0PpBD56JyZrWK48kYIt2ccWAfk6Vh235/oIpmqET150xB4lQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.38.0
-      '@sentry/types': 7.38.0
-      '@sentry/utils': 7.38.0
+      '@sentry/core': 7.39.0
+      '@sentry/types': 7.39.0
+      '@sentry/utils': 7.39.0
       cookie: 0.4.2
       https-proxy-agent: 5.0.1
       lru_map: 0.3.3
@@ -2961,47 +2961,47 @@ packages:
       - supports-color
     dev: false
 
-  /@sentry/replay/7.38.0:
-    resolution: {integrity: sha512-Ai78/OIYedny605x8uS0n/a5uj7qnuevogGD6agLat9lGc8DFvC07m2iS+EFyGOwtQzyDlRYJvYkHL8peR3crQ==}
+  /@sentry/replay/7.39.0:
+    resolution: {integrity: sha512-pL5JMk/fOx9KFbNBnqoJQwx7X0ZM4BrypWMzkGKsoENjm5sn6pB/dtO4N4k3gmIy929a89d1qL+HbxHAAxFylQ==}
     engines: {node: '>=12'}
     dependencies:
-      '@sentry/core': 7.38.0
-      '@sentry/types': 7.38.0
-      '@sentry/utils': 7.38.0
+      '@sentry/core': 7.39.0
+      '@sentry/types': 7.39.0
+      '@sentry/utils': 7.39.0
     dev: true
 
-  /@sentry/svelte/7.38.0_svelte@3.55.1:
-    resolution: {integrity: sha512-9+4t7keeu0S22GMEZ0edscHgj46DRFqIfHTLpgNMModOb+H1F3M083OvcLIKVjZDY9saGBDbYdjolrcv0H507g==}
+  /@sentry/svelte/7.39.0_svelte@3.55.1:
+    resolution: {integrity: sha512-o5cAiQJ8ND92rsPPU1I/oE9gTI1ZsMBgcLI4hWiVlsXDViD6fmdKq1vv93c/TZw9OSO448gOzeeX2WWgqv960A==}
     engines: {node: '>=8'}
     peerDependencies:
       svelte: 3.x
     dependencies:
-      '@sentry/browser': 7.38.0
-      '@sentry/types': 7.38.0
-      '@sentry/utils': 7.38.0
+      '@sentry/browser': 7.39.0
+      '@sentry/types': 7.39.0
+      '@sentry/utils': 7.39.0
       magic-string: 0.26.7
       svelte: 3.55.1
       tslib: 1.14.1
     dev: true
 
-  /@sentry/tracing/7.38.0:
-    resolution: {integrity: sha512-ejXJp8oOT64MVtBzqdECUUaNzKbpu25St8Klub1i4Sm7xO+ZjDQDI4TIHvWojZvtkwQ3F4jcsCclc8KuyJunyQ==}
+  /@sentry/tracing/7.39.0:
+    resolution: {integrity: sha512-bSRdUMzp/n54J+Qf4hHC4WVvdv4vZEv3NEbNNsnIZNAhnVAq6QB9VzsGRJZ12PqxJU3StDuqLiZFVOmGxETCkQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.38.0
-      '@sentry/types': 7.38.0
-      '@sentry/utils': 7.38.0
+      '@sentry/core': 7.39.0
+      '@sentry/types': 7.39.0
+      '@sentry/utils': 7.39.0
       tslib: 1.14.1
 
-  /@sentry/types/7.38.0:
-    resolution: {integrity: sha512-NKOALR6pNUMzUrsk2m+dkPrO8uGNvNh1LD0BCPswKNjC2qHo1h1mDGCgBmF9+EWyii8ZoACTIsxvsda+MBf97Q==}
+  /@sentry/types/7.39.0:
+    resolution: {integrity: sha512-5Y83Y8O3dT5zT2jTKEIPMcpn5lUm05KRMaCXuw0sRsv4r9TbBUKeqiSU1LjowT8rB/XNy8m7DHav8+NmogPaJw==}
     engines: {node: '>=8'}
 
-  /@sentry/utils/7.38.0:
-    resolution: {integrity: sha512-MgbI3YmYuyyhUtvcXkgGBqjOW+nuLLNGUdWCK+C4kObf8VbLt3dSE/7SEMT6TSHLYQmxs2BxFgx5Agn97m68kQ==}
+  /@sentry/utils/7.39.0:
+    resolution: {integrity: sha512-/ZxlPgm1mGgmuMckCTc9iyqDuFTEYNEoMB53IjVFz8ann+37OiWB7Py/QV1rEEsv3xKrGbA8thhRhV9E1sjTlQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.38.0
+      '@sentry/types': 7.39.0
       tslib: 1.14.1
 
   /@sinonjs/commons/2.0.0:
@@ -7588,8 +7588,8 @@ packages:
     resolution: {integrity: sha512-njj0VL2TsIxCtgzhO+9RRobBvws4oYyCM8TpvoUQwl/MbIM3NFJRR9+e6x0sS5xXaP1t6OCBkaBME98OV9zU5A==}
     dev: false
 
-  /jose/4.12.0:
-    resolution: {integrity: sha512-wW1u3cK81b+SFcHjGC8zw87yuyUweEFe0UJirrXEw1NasW00eF7sZjeG3SLBGz001ozxQ46Y9sofDvhBmWFtXQ==}
+  /jose/4.12.2:
+    resolution: {integrity: sha512-DGcMJCoICP0/yP/KLTfJ1dgyyHXVkiEwDPUdUsej4+8ywnutO3Q7SIL6UY1l67Ox0nzOs/sC2BkbIcdfy/nWYw==}
     dev: true
 
   /js-sdsl/4.3.0:
