@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.15.7
+
+### Patch Changes
+
+- 7c84eca29: fix output var names
+- Updated dependencies [7c84eca29]
+  - @self/utils@3.14.7
+
 ## 2.15.6
 
 ### Patch Changes

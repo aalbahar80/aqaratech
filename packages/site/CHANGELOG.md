@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.15.9
+
+### Patch Changes
+
+- 7c84eca29: fix output var names
+
 ## 2.15.8
 
 ### Patch Changes

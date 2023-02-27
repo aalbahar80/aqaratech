@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.14.7
+
+### Patch Changes
+
+- 7c84eca29: fix output var names
+
 ## 2.14.6
 
 ### Patch Changes
