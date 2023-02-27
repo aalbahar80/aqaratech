@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.14.5
+
+### Patch Changes
+
+- 51da71402: gh action - escape
+
 ## 2.14.4
 
 ### Patch Changes

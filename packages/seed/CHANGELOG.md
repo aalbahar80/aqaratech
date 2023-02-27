@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.14.5
+
+### Patch Changes
+
+- 51da71402: gh action - escape
+- Updated dependencies [51da71402]
+  - @self/utils@3.14.5
+
 ## 2.14.4
 
 ### Patch Changes

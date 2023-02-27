@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.15.5
+
+### Patch Changes
+
+- 51da71402: gh action - escape
+- Updated dependencies [51da71402]
+  - @self/utils@3.14.5
+
 ## 2.15.4
 
 ### Patch Changes
