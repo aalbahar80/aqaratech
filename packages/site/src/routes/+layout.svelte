@@ -77,7 +77,7 @@
 				<Sidebar navigationTree={getNavigationTree(data.user, $L, $locale)} />
 			{/if}
 
-			<main class="col-span-full pt-8 lg:col-start-2">
+			<main class="col-span-full py-8 lg:col-start-2">
 				<div
 					class={clsx(
 						'mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8',
