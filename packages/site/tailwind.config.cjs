@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
@@ -26,6 +27,7 @@ module.exports = {
 		plugin(function ({ matchUtilities, theme }) {
 			matchUtilities(
 				{
+					/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 					ms: (value) => ({
 						'margin-inline-start': value,
 					}),
@@ -44,6 +46,7 @@ module.exports = {
 					end: (value) => ({
 						'inset-inline-end': value,
 					}),
+					/* eslint-enable @typescript-eslint/no-unsafe-assignment */
 				},
 				{ values: theme('spacing') },
 			);
