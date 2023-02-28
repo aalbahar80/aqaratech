@@ -11,6 +11,7 @@
 
 	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
+	import L from '$i18n/i18n-svelte';
 	import { classes } from '$lib/utils/classes';
 	import HeroiconsChevronDown20Solid from '~icons/heroicons/chevron-down-20-solid';
 	import HeroiconsXMark20Solid from '~icons/heroicons/x-mark-20-solid';
@@ -45,20 +46,22 @@
 
 		<TransitionChild
 			enter="transition ease-in-out duration-300 transform"
-			enterFrom="translate-x-full"
+			enterFrom="ltr:translate-x-full rtl:-translate-x-full"
 			enterTo="translate-x-0"
 			leave="transition ease-in-out duration-300 transform"
 			leaveFrom="translate-x-0"
-			leaveTo="translate-x-full"
+			leaveTo="ltr:translate-x-full rtl:-translate-x-full"
 		>
 			<div
 				class="relative ml-auto flex h-full w-52 max-w-xs flex-col overflow-y-auto bg-white pt-52 pb-6 shadow-xl"
 			>
 				<div class="flex items-center justify-between px-4">
-					<h2 class="text-lg font-medium text-gray-900">Filters</h2>
+					<h2 class="text-lg font-medium text-gray-900">
+						{$L.filter.filters()}
+					</h2>
 					<button
 						type="button"
-						class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+						class="flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 ltr:-mr-2 rtl:-ml-2"
 						on:click={close}
 					>
 						<span class="sr-only">Close menu</span>
@@ -79,7 +82,7 @@
 									class="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400"
 								>
 									<span class="font-medium text-gray-900">{filter.label}</span>
-									<span class="ml-6 flex items-center">
+									<span class="ms-6 flex items-center">
 										<HeroiconsChevronDown20Solid
 											class={classes(
 												open ? '-rotate-180' : 'rotate-0',
@@ -105,7 +108,7 @@
 											/>
 											<label
 												for={`filter-mobile-${filter.id}-${optionIdx}`}
-												class="ml-3 text-sm text-gray-700"
+												class="ms-3 text-sm text-gray-700"
 											>
 												{option.label}
 											</label>
