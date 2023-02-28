@@ -30,7 +30,7 @@
 		"dotenv-cli": "7.0.0",
 		"eslint-config-custom": "workspace:*",
 		"eslint-plugin-playwright": "0.12.0",
-		"jose": "4.12.2",
+		"jose": "4.13.0",
 		"prisma": "4.10.1",
 		"remeda": "1.8.0",
 		"simple-json-db": "2.0.0",
@@ -39,7 +39,7 @@
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"typescript": "5.0.0-beta",
-		"ufo": "1.1.0"
+		"ufo": "1.1.1"
 	},
 	"dependencies": {
 		"@types/qs": "6.9.7",
