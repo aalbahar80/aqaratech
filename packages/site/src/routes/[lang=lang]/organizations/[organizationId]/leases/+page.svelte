@@ -6,7 +6,10 @@
 	import type { LeaseDto } from '$api/openapi';
 
 	import LeaseTable from '$lib/components/lease/LeaseTable.svelte';
-	import { portfolioColumnDef } from '$lib/components/table/tanstack-table/columns/portfolio';
+	import {
+		portfolioColumnDef,
+		tenantColumnDef,
+	} from '$lib/components/table/tanstack-table/columns/portfolio';
 
 	export let data: PageData;
 
@@ -15,5 +18,8 @@
 
 <LeaseTable
 	data={data.leases}
-	extraColumns={[portfolioColumnDef(columnHelper)]}
+	extraColumns={[
+		portfolioColumnDef(columnHelper),
+		tenantColumnDef(columnHelper),
+	]}
 />

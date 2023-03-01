@@ -231,6 +231,32 @@ const inputs: [GetRoute, string][] = [
 		},
 		'/organizations/1/roles/new?relationKey=organization&relationValue=1',
 	],
+
+	// Tenant portal
+	[
+		{
+			entity: 'lease',
+			pageType: PageType.List,
+			params: { organizationId: '1', tenantId: '2' },
+		},
+		'/portal/tenant/2/leases',
+	],
+	[
+		{
+			entity: 'leaseInvoice',
+			pageType: PageType.List,
+			params: { organizationId: '1', tenantId: '2' },
+		},
+		'/portal/tenant/2/leaseInvoices',
+	],
+	[
+		{
+			entity: 'maintenanceOrder',
+			pageType: PageType.List,
+			params: { organizationId: '1', tenantId: '2' },
+		},
+		'/portal/tenant/2/maintenance-orders',
+	],
 ];
 
 test.each(inputs)('getRoute(%o) === %s', (input, expected) => {

@@ -38,7 +38,7 @@ export const fileFindAllOptionsSchema = fileCreateSchema.pick({
 });
 
 export const fileFindOneOptionsSchema = z.object({
-	key: z.string(),
+	id: z.string(),
 });
 
 // Export types

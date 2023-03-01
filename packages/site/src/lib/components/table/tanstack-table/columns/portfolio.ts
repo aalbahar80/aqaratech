@@ -55,3 +55,35 @@ export const portfolioColumnDef = <
 		},
 	);
 };
+
+export const tenantColumnDef = <
+	T extends Helper,
+	K extends LeaseDto = T extends ColumnHelper<infer Entity>
+		? Entity extends LeaseDto
+			? Entity
+			: never
+		: never,
+>(
+	helper: T,
+) => {
+	return (helper.accessor as unknown as ColumnHelper<K>['accessor'])(
+		'breadcrumbs.tenant' as unknown as AccessorFn<K>,
+		{
+			id: 'tenant.fullName', // used for sorting
+			header: get(L).entity.tenant.singular(),
+			cell: (info) => {
+				const row = info.row.original;
+
+				return renderComponent(ActionCell, {
+					value: row.breadcrumbs.tenant.label,
+					href: getRoute({
+						entity: 'tenant',
+						id: row.tenantId,
+						pageType: PageType.Id,
+						params: get(page).params,
+					}),
+				});
+			},
+		},
+	);
+};

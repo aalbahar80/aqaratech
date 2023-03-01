@@ -7,7 +7,7 @@
 
 	import L from '$i18n/i18n-svelte';
 	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
-	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
+	import GenericActionCell from '$lib/components/table/tanstack-table/GenericActionCell.svelte';
 
 	export let data: PageData;
 
@@ -23,8 +23,9 @@
 			cell: () => {
 				// const invoice = props.row.original;
 
-				return renderComponent(ActionButton, {
+				return renderComponent(GenericActionCell, {
 					options: {
+						element: 'button',
 						label: $L.buttons.pay(),
 						disabled: true, // TODO payment
 						// eslint-disable-next-line @typescript-eslint/no-empty-function

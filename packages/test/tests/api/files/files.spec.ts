@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { withQuery } from 'ufo';
+import { resolveURL, withQuery } from 'ufo';
 
 import { getPresignedUrl } from '../../../utils/get-presigned-url';
 import { test } from '../api-fixtures';
@@ -11,10 +11,13 @@ test.use({
 
 test.describe('initial bucket state', () => {
 	test('return ok response', async ({ request, portfolio }) => {
-		const url = withQuery('/files', {
-			relationKey: 'portfolio',
-			relationValue: portfolio.id,
-		});
+		const url = withQuery(
+			resolveURL('organizations', portfolio.organizationId, 'files'),
+			{
+				relationKey: 'portfolio',
+				relationValue: portfolio.id,
+			},
+		);
 
 		const res = await request.get(url);
 
@@ -53,10 +56,13 @@ test.describe('initial bucket state', () => {
 	});
 });
 
-test('files can be deleted', async ({ request, file }) => {
-	const url = withQuery('/files', {
-		key: file,
-	});
+test('files can be deleted', async ({ request, org, file }) => {
+	const url = withQuery(
+		resolveURL('organizations', org.organization.id, 'files'),
+		{
+			id: file,
+		},
+	);
 
 	// console.log({ url });
 	const res = await request.delete(url);
@@ -64,10 +70,11 @@ test('files can be deleted', async ({ request, file }) => {
 	expect(res.status()).toBe(200);
 });
 
-test('files can be downloaded', async ({ request, file }) => {
+test('files can be downloaded', async ({ request, org, file }) => {
 	const url = await getPresignedUrl({
 		request,
 		key: file,
+		organizationId: org.organization.id,
 	});
 
 	// console.log({ url });

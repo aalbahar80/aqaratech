@@ -31,6 +31,7 @@ test('file can be deleted', async ({ page, request, portfolio, file }) => {
 	const presignedUrl = await getPresignedUrl({
 		request,
 		key: file,
+		organizationId: portfolio.organizationId,
 	});
 
 	const res = await request.fetch(presignedUrl);

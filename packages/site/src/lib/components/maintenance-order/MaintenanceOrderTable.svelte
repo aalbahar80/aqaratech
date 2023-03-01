@@ -41,6 +41,15 @@
 	const columnHelper = createColumnHelper<MaintenanceOrderDto>();
 
 	const columns = [
+		columnHelper.accessor('title', {
+			header: getIntlLabel('title'),
+			cell: (props) =>
+				// trim title and use ellipsis
+				props.row.original.title
+					? props.row.original.title.slice(0, 20) + '...'
+					: '',
+		}),
+
 		columnHelper.accessor('completedAt', {
 			header: getIntlLabel('completedAt'),
 			cell: fmtCell('date'),

@@ -8,6 +8,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 	const files = await api.files.findAll({
 		relationKey: 'lease',
 		relationValue: params.leaseId,
+		organizationId: params.organizationId,
 	});
 
 	return {

@@ -1052,12 +1052,6 @@ export interface FileDto {
 	id: string;
 	/**
 	 *
-	 * @type {string}
-	 * @memberof FileDto
-	 */
-	key: string;
-	/**
-	 *
 	 * @type {number}
 	 * @memberof FileDto
 	 */

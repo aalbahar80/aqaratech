@@ -48,7 +48,11 @@ export const getRoleMeta = (
 	} else if (role.roleType === 'TENANT' && role.tenantId) {
 		return {
 			roleLabel: LL.entity.tenant.singular(),
-			home: `/${locale}/portal/tenant/${role.tenantId}`,
+			home: getRoute({
+				entity: 'leaseInvoice',
+				pageType: PageType.List,
+				params: { organizationId, tenantId: role.tenantId, ...langParam },
+			}),
 		};
 	} else {
 		throw new Error('Unknown role type');

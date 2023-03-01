@@ -25,4 +25,12 @@ export const defineTenantAbility = (role: Role, can: TCan) => {
 	can([Action.Read, Action.Create, Action.Update], ['MaintenanceOrder'], {
 		tenantId: { equals: role.tenantId },
 	});
+
+	// File create permisson is further checked depending on the relationKey in
+	// the service layer.
+	can([Action.Create, Action.Read], ['File'], {
+		organizationId: { equals: role.organizationId },
+		relationKey: { in: ['maintenanceOrder'] },
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	} as any);
 };

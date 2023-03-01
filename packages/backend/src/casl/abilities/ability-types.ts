@@ -15,7 +15,7 @@ import {
 	User,
 } from '@prisma/client';
 
-import { DateAsString } from '@self/utils';
+import { DateAsString, FileRelationKey } from '@self/utils';
 
 export type TAppAbility = PrismaAbility<[string, 'all' | Subject]>;
 
@@ -38,6 +38,7 @@ export type Subject = Subjects<{
 	User: P<User>;
 	File: {
 		organizationId: string;
+		relationKey: FileRelationKey;
 	};
 	ExpenseCategory: {
 		organizationId: string;

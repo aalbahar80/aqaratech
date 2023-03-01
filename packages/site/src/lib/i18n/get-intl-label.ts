@@ -41,7 +41,12 @@ export const getIntlLabel = (key: string, form = true) => {
 
 		// @ts-expect-error wip
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-		return (LL.fields[synonyms[key] ?? key]() as string) || enLabel;
+		let arLabel = LL.fields[synonyms[key] ?? key]() as string;
+		// @ts-expect-error type hack
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+		arLabel ||= LL.entity[key]?.singular() as string;
+		arLabel ||= enLabel;
+		return arLabel;
 	} else {
 		return enLabel;
 	}

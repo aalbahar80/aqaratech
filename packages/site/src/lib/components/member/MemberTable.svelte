@@ -12,7 +12,7 @@
 	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
-	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
+	import GenericActionCell from '$lib/components/table/tanstack-table/GenericActionCell.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { createModalDelete } from '$lib/components/toast/create-modal-delete';
 	import { openModal } from '$lib/components/toast/Modal.svelte';
@@ -39,8 +39,9 @@
 			cell: (props) => {
 				const role = props.row.original;
 
-				return renderComponent(ActionButton, {
+				return renderComponent(GenericActionCell, {
 					options: {
+						element: 'button',
 						label: $L.buttons.delete(),
 						onClick: () => {
 							openModal(
@@ -69,8 +70,9 @@
 			cell: (props) => {
 				const role = props.row.original;
 
-				return renderComponent(ActionButton, {
+				return renderComponent(GenericActionCell, {
 					options: {
+						element: 'button',
 						label: $L.buttons.sendInvite(),
 						onClick: async () => {
 							try {

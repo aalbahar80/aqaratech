@@ -20,7 +20,11 @@
 		{
 			label: $page.data.tabLabels![PageTab.Files],
 			href: `${baseRoute}/files`,
-			roles: [RoleTypeEnum.Orgadmin, RoleTypeEnum.Portfolio],
+			roles: [
+				RoleTypeEnum.Orgadmin,
+				RoleTypeEnum.Portfolio,
+				RoleTypeEnum.Tenant,
+			],
 		},
 	];
 </script>

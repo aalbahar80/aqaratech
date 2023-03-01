@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { resolveURL } from 'ufo';
 
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
@@ -38,12 +39,15 @@ test.describe('files', () => {
 	});
 
 	test(`can get portfolio /files`, async ({ portfolio, request }) => {
-		const res = await request.get('/files', {
-			params: {
-				relationKey: 'portfolio',
-				relationValue: portfolio.id,
+		const res = await request.get(
+			resolveURL('organizations', portfolio.organizationId, 'files'),
+			{
+				params: {
+					relationKey: 'portfolio',
+					relationValue: portfolio.id,
+				},
 			},
-		});
+		);
 
 		await expect(res).toBeOK();
 	});

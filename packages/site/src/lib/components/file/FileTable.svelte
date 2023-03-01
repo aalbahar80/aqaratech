@@ -2,17 +2,23 @@
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
+	import { inferUrlRelation } from '@self/utils';
+
+	import GenericActionCell from '../table/tanstack-table/GenericActionCell.svelte';
 
 	import { remove } from './actions/remove';
 
-	import type { FileDto, PaginatedFileDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
 
+	import {
+		RoleTypeEnum,
+		type FileDto,
+		type PaginatedFileDto,
+	} from '$api/openapi';
 	import L from '$i18n/i18n-svelte';
 	import AddButton from '$lib/components/buttons/AddButton.svelte';
 	import { view } from '$lib/components/file/actions/view';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
-	import ActionButton from '$lib/components/table/tanstack-table/ActionButton.svelte';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { getFormRouteWithRelation } from '$lib/utils/file';
@@ -24,8 +30,8 @@
 	const columnHelper = createColumnHelper<FileDto>();
 
 	const columns = [
-		columnHelper.accessor('key', {
-			header: getIntlLabel('key'),
+		columnHelper.accessor('id', {
+			header: getIntlLabel('key'), // use key for the label
 			cell: (info) => {
 				const val = info.getValue();
 				return val.split('/').slice(-1);
@@ -49,11 +55,12 @@
 			cell: (props) => {
 				const file = props.row.original;
 
-				return renderComponent(ActionButton, {
+				return renderComponent(GenericActionCell, {
 					options: {
+						element: 'button',
 						label: $L.buttons.view(),
 						onClick: async () => {
-							await view(file);
+							await view(file, $page.data.user!.role!.organizationId);
 						},
 					},
 				});
@@ -69,17 +76,21 @@
 			cell: (props) => {
 				const file = props.row.original;
 
-				return renderComponent(ActionButton, {
+				return renderComponent(GenericActionCell, {
 					options: {
+						element: 'button',
 						label: $L.buttons.delete(),
 						onClick: () => {
-							remove(file);
+							remove(file, $page.data.user!.role!.organizationId);
 						},
 					},
 				});
 			},
 		}),
 	];
+
+	$: maintenancePage =
+		inferUrlRelation($page.url.pathname).entity === 'maintenanceOrder';
 </script>
 
 <Table
@@ -96,7 +107,13 @@
 	<div slot="filter" let:filters>
 		<FilterBar responsive={filters}>
 			<div slot="custom">
-				<RoleGuard roles={['ORGADMIN']}>
+				<RoleGuard
+					roles={[
+						RoleTypeEnum.Orgadmin,
+						// Tenants can attach files to maintenance orders
+						...(maintenancePage ? [RoleTypeEnum.Tenant] : []),
+					]}
+				>
 					<AddButton
 						href={getFormRouteWithRelation({
 							entity: 'file',

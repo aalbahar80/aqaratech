@@ -2,6 +2,7 @@ import { randomUUID } from 'crypto';
 
 import { test as base } from '@playwright/test';
 import tier from 'tier';
+import { resolveURL } from 'ufo';
 
 import {
 	organizationFactory,
@@ -229,7 +230,14 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	file: async ({ portfolio, request }, use) => {
 		const fileName = 'test.txt';
 
-		const url = `${apiURL}/organizations/${portfolio.organizationId}/files`;
+		// const url = `${apiURL}/organizations/${portfolio.organizationId}/files`;
+		const url = resolveURL(
+			apiURL,
+			'organizations',
+			portfolio.organizationId,
+			'files',
+		);
+
 		const req = request.post(url, {
 			multipart: {
 				fileName: fileName,

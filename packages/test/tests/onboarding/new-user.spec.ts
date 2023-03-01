@@ -90,7 +90,7 @@ test.describe('new user', () => {
 		await page.goto('/');
 		await page.getByRole('link', { name: 'Log in' }).first().click();
 
-		const url = `${siteURL}/en/portal/tenant/${tenant.id}`;
+		const url = `${siteURL}/en/portal/tenant/${tenant.id}/leaseInvoices`;
 
 		await expect(page).toHaveURL(url);
 	});

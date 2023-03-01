@@ -161,9 +161,7 @@ export const getNavigationTree = (
 				},
 			],
 		});
-	}
-
-	if (user.role.roleType === 'PORTFOLIO' && user.role.portfolioId) {
+	} else if (user.role.roleType === 'PORTFOLIO' && user.role.portfolioId) {
 		const portfolioId = user.role.portfolioId;
 
 		const getRouteConfig = {
@@ -289,6 +287,44 @@ export const getNavigationTree = (
 						pageType,
 					}) + '/table',
 				icon: HeroiconsWrench,
+			},
+		);
+	} else if (user.role.roleType === 'TENANT' && user.role.tenantId) {
+		const tenantId = user.role.tenantId;
+
+		const getRouteConfig = {
+			params: { organizationId, tenantId, ...langParam },
+		} as const;
+
+		tree.splice(
+			0,
+			0,
+			{
+				name: LL.entity.lease.plural(),
+				icon: HeroiconsOutlineDocumentText,
+				href: getRoute({
+					entity: 'lease',
+					pageType: PageType.List,
+					...getRouteConfig,
+				}),
+			},
+			{
+				name: LL.entity.leaseInvoice.plural(),
+				icon: HeroiconsReceiptPercent,
+				href: getRoute({
+					entity: 'leaseInvoice',
+					pageType: PageType.List,
+					...getRouteConfig,
+				}),
+			},
+			{
+				name: LL.entity.maintenanceOrder.plural(),
+				icon: HeroiconsWrench,
+				href: getRoute({
+					entity: 'maintenanceOrder',
+					pageType: PageType.List,
+					...getRouteConfig,
+				}),
 			},
 		);
 	}

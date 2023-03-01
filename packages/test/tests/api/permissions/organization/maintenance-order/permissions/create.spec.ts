@@ -130,3 +130,121 @@ test('cannot create maintenanceOrder in non-existing unit', async ({
 
 	expect(res.status()).toBe(400);
 });
+
+test('must specify unit if tenant is specified', async ({
+	request,
+	org,
+	portfolio,
+	property,
+}) => {
+	const maintenanceOrder = R.pick(
+		maintenanceOrderFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: portfolio.id,
+			propertyId: property.id,
+			tenantId: randomUUID(),
+		}),
+		FIELDS,
+	);
+
+	const url = getUrl(org.organization.id);
+
+	const res = await request.post(url, { data: maintenanceOrder });
+
+	await expect.soft(res).not.toBeOK();
+
+	expect(res.status()).toBe(400);
+
+	const body: unknown = await res.json();
+
+	expect(body).toHaveProperty('fieldErrors', {
+		unitId: ['Unit must be specified if tenant is specified.'],
+	});
+});
+
+test.describe('tenant can create maintenance order', () => {
+	test.use({ userRoleType: 'TENANT' });
+
+	test('with own id', async ({ request, org, tenant, unit }) => {
+		const maintenanceOrder = R.pick(
+			maintenanceOrderFactory.build({
+				organizationId: org.organization.id,
+				portfolioId: unit.portfolioId,
+				propertyId: unit.propertyId,
+				unitId: unit.id,
+				// tenantId: randomUUID(),
+				tenantId: tenant.id,
+			}),
+			FIELDS,
+		);
+
+		const url = getUrl(org.organization.id);
+
+		const res = await request.post(url, { data: maintenanceOrder });
+
+		expect(res.status()).toBe(201);
+	});
+
+	test('not with null tenantId', async ({ request, org, unit }) => {
+		const maintenanceOrder = R.pick(
+			maintenanceOrderFactory.build({
+				organizationId: org.organization.id,
+				portfolioId: unit.portfolioId,
+				propertyId: unit.propertyId,
+				unitId: unit.id,
+				tenantId: null,
+			}),
+			FIELDS,
+		);
+
+		const url = getUrl(org.organization.id);
+
+		const res = await request.post(url, { data: maintenanceOrder });
+
+		expect(res.status()).toBe(403);
+	});
+
+	test('not with incorrect id', async ({ request, org, unit }) => {
+		const maintenanceOrder = R.pick(
+			maintenanceOrderFactory.build({
+				organizationId: org.organization.id,
+				portfolioId: unit.portfolioId,
+				propertyId: unit.propertyId,
+				unitId: unit.id,
+				tenantId: randomUUID(),
+			}),
+			FIELDS,
+		);
+
+		const url = getUrl(org.organization.id);
+
+		const res = await request.post(url, { data: maintenanceOrder });
+
+		expect(res.status()).toBe(403);
+	});
+
+	test('not without unitId', async ({ request, org, unit }) => {
+		const maintenanceOrder = R.pick(
+			maintenanceOrderFactory.build({
+				organizationId: org.organization.id,
+				portfolioId: unit.portfolioId,
+				propertyId: unit.propertyId,
+				unitId: null,
+				tenantId: randomUUID(),
+			}),
+			FIELDS,
+		);
+
+		const url = getUrl(org.organization.id);
+
+		const res = await request.post(url, { data: maintenanceOrder });
+
+		expect(res.status()).toBe(400);
+
+		const body: unknown = await res.json();
+
+		expect(body).toHaveProperty('fieldErrors', {
+			unitId: ['Unit must be specified if tenant is specified.'],
+		});
+	});
+});

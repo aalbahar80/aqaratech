@@ -1,5 +1,7 @@
 import { expect } from '@playwright/test';
+import { resolveURL } from 'ufo';
 
+import { prisma } from '../../../prisma';
 import { getUrl } from '../../../utils/post-url';
 import { test } from '../api-fixtures';
 
@@ -72,14 +74,44 @@ test('cannot get data from /aggregate', async ({ portfolio, request }) => {
 	}
 });
 
-test('cannot get files from "/files"', async ({ tenant, request }) => {
-	const res = await request.get('/files', {
-		params: {
-			relationKey: 'tenant',
-			relationValue: tenant.id,
-		},
+test.describe('files', () => {
+	test.use({ createBucket: true });
+
+	test('can get files for mo', async ({ tenant, request, lease }) => {
+		const maintenanceOrder = await prisma.maintenanceOrder.create({
+			data: {
+				title: 'test',
+				organizationId: tenant.organizationId,
+				portfolioId: lease.portfolioId,
+				tenantId: tenant.id,
+			},
+		});
+
+		const res = await request.get(
+			resolveURL('organizations', tenant.organizationId, 'files'),
+			{
+				params: {
+					relationKey: 'maintenanceOrder',
+					relationValue: maintenanceOrder.id,
+				},
+			},
+		);
+
+		expect.soft(res.status()).toBe(200);
 	});
-	expect(res.status()).toBe(403);
+
+	test('can not get files for non mo', async ({ tenant, request }) => {
+		const res = await request.get(
+			resolveURL('organizations', tenant.organizationId, 'files'),
+			{
+				params: {
+					relationKey: 'tenant',
+					relationValue: tenant.id,
+				},
+			},
+		);
+		expect(res.status()).toBe(403);
+	});
 });
 
 const scoped = ['/leaseInvoices', '/expenses'];
@@ -97,12 +129,15 @@ for (const route of scoped) {
 }
 
 test('cannot get /files', async ({ portfolio, request }) => {
-	const res = await request.get('/files', {
-		params: {
-			relationKey: 'portfolio',
-			relationValue: portfolio.id,
+	const res = await request.get(
+		resolveURL('organizations', portfolio.organizationId, 'files'),
+		{
+			params: {
+				relationKey: 'portfolio',
+				relationValue: portfolio.id,
+			},
 		},
-	});
+	);
 
 	await expect.soft(res).not.toBeOK();
 

@@ -20,5 +20,5 @@ export class FileFindAllOptionsDto
 export class FileFindOneOptionsDto
 	implements Exactly<FileFindOneOptionsSchema, FileFindOneOptionsDto>
 {
-	key: string;
+	id: string;
 }

@@ -2,7 +2,7 @@
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
-	import { getProgress, getRoute, PageType } from '@self/utils';
+	import { getProgress } from '@self/utils';
 
 	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
@@ -12,7 +12,6 @@
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
 	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import RadialProgress from '$lib/components/RadialProgress.svelte';
-	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
 	import {
 		locationColumnDef,
@@ -68,27 +67,12 @@
 			cell: fmtCell('currency'),
 		}),
 
-		...extraColumns,
-
 		locationColumnDef(columnHelper, {
 			propertyColumnId: 'unit.property.label',
 			unitColumnId: 'unit.label',
 		}),
 
-		columnHelper.accessor('breadcrumbs.tenant', {
-			id: 'tenant.fullName', // used for sorting
-			header: $L.entity.tenant.singular(),
-			cell: (info) =>
-				renderComponent(ActionCell, {
-					value: info.getValue().label,
-					href: getRoute({
-						entity: 'tenant',
-						pageType: PageType.Id,
-						params: $page.params,
-						id: info.getValue().id,
-					}),
-				}),
-		}),
+		...extraColumns,
 
 		viewColumnDef(columnHelper, 'lease', $page.params),
 	];

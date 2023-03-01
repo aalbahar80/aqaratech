@@ -2542,32 +2542,6 @@ paths:
                 $ref: '#/components/schemas/PayoutDto'
       tags: *ref_21
       security: *ref_22
-  /organizations/{organizationId}/files:
-    post:
-      operationId: OrganizationsAdminController_create
-      summary: ''
-      description: ''
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CreateFileDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_21
-      security: *ref_22
   /organizations/{organizationId}/leaseInvoices/{id}/send-invoice-email:
     post:
       operationId: OrganizationsAdminController_sendInvoiceEmail
@@ -2595,12 +2569,44 @@ paths:
                   type: string
       tags: *ref_21
       security: *ref_22
-  /files:
+  /organizations/{organizationId}/files:
+    post:
+      operationId: FilesController_create
+      summary: ''
+      description: ''
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateFileDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: &ref_23
+        - files
+      security: &ref_24
+        - accessToken: []
     get:
       operationId: FilesController_findAll
       summary: ''
       description: ''
       parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
         - name: relationKey
           required: true
           in: query
@@ -2628,16 +2634,19 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/FileDto'
-      tags: &ref_23
-        - files
-      security: &ref_24
-        - accessToken: []
+      tags: *ref_23
+      security: *ref_24
     delete:
       operationId: FilesController_remove
       summary: ''
       description: ''
       parameters:
-        - name: key
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
           required: true
           in: query
           schema:
@@ -2651,13 +2660,18 @@ paths:
                 type: string
       tags: *ref_23
       security: *ref_24
-  /files/find-one:
+  /organizations/{organizationId}/files/find-one:
     get:
       operationId: FilesController_findOne
       summary: ''
       description: ''
       parameters:
-        - name: key
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
           required: true
           in: query
           schema:
@@ -4407,13 +4421,10 @@ components:
       properties:
         id:
           type: string
-        key:
-          type: string
         size:
           type: number
       required:
         - id
-        - key
         - size
     CreateExpenseCategoryDto:
       type: object

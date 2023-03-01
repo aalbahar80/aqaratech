@@ -1,11 +1,19 @@
 import { ListObjectsV2CommandOutput } from '@aws-sdk/client-s3';
+import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
+import {
+	CACHE_MANAGER,
+	ForbiddenException,
+	Inject,
+	Injectable,
+	Logger,
+} from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
 import {
 	DBEntity,
 	entitiesMap,
+	FileCreateSchema,
 	fileCreateSchema,
 	FileRelationKey,
 } from '@self/utils';
@@ -31,33 +39,52 @@ export class FilesService {
 		createFileDto,
 		file,
 		organizationId,
+		user,
 	}: {
 		createFileDto: Omit<CreateFileDto, 'file'>;
 		file: Express.Multer.File;
 		organizationId: string;
+		user: IUser;
 	}) {
-		const key = this.computeFileKey({
+		// Check permission on 'File' entity
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Create,
+			subject('File', {
+				relationKey: createFileDto.relationKey,
+				organizationId,
+			}),
+		);
+
+		// check whether user can update the relation
+		await this.canAccess({
+			relationKey: createFileDto.relationKey,
+			relationValue: createFileDto.relationValue,
+			user,
+			action: Action.Update,
+		});
+
+		const id = this.computeFileId({
 			relationKey: createFileDto.relationKey,
 			relationValue: createFileDto.relationValue,
 			fileName: createFileDto.fileName,
 		});
 
-		const directory = this.getFileDirectory({ key });
+		const directory = this.getFileDirectory({ id: id });
 
 		const bucket = organizationId;
 
 		this.logger.debug(
-			`Attempting to create file: ${key} in bucket: ${bucket} in directory: ${directory}`,
+			`Attempting to create file: ${id} in bucket: ${bucket} in directory: ${directory}`,
 		);
 
 		// bust cache for file and directory (prefix)
-		this.logger.debug(`CACHE BUST: key: ${key}`);
-		await this.cacheManager.del(key);
+		this.logger.debug(`CACHE BUST: id: ${id}`);
+		await this.cacheManager.del(id);
 		await this.cacheManager.del(directory);
 
 		const uploaded = await this.s3.putObject({
 			Bucket: bucket,
-			Key: key,
+			Key: id,
 			Body: file.buffer,
 			ContentType: file.mimetype,
 		});
@@ -68,15 +95,25 @@ export class FilesService {
 
 	async findAll({
 		user,
-		// TODO: validate relationKey and relationValue
+		organizationId,
 		relationKey,
 		relationValue,
 	}: {
 		user: IUser;
+		organizationId: string;
 		relationKey: FileRelationKey;
 		relationValue: string;
 	}): Promise<WithCount<FileDto>> {
-		const bucket = this.getFileBucket({ user });
+		// Check permission on 'File' entity
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Read,
+			subject('File', {
+				relationKey,
+				organizationId,
+			}),
+		);
+
+		const bucket = organizationId;
 
 		await this.canAccess({
 			relationKey,
@@ -116,12 +153,29 @@ export class FilesService {
 		};
 	}
 
-	async findOne({ key, user }: { key: string; user: IUser }) {
-		const bucket = this.getFileBucket({ user });
+	async findOne({
+		id,
+		user,
+		organizationId,
+	}: {
+		id: string;
+		user: IUser;
+		organizationId: string;
+	}) {
+		const bucket = organizationId;
 
-		const directory = this.getFileDirectory({ key });
+		const directory = this.getFileDirectory({ id });
 
 		const { relationKey, relationValue } = this.getFileDetails({ directory });
+
+		// Check permission on 'File' entity
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Read,
+			subject('File', {
+				relationKey,
+				organizationId,
+			}),
+		);
 
 		await this.canAccess({
 			relationKey,
@@ -133,7 +187,7 @@ export class FilesService {
 		// attempt to get from cache
 		let presignedUrl: string;
 
-		const cacheKey = key;
+		const cacheKey = id;
 		const cached = await this.cacheManager.get<string>(cacheKey);
 
 		if (cached) {
@@ -145,7 +199,7 @@ export class FilesService {
 			// get fresh from s3
 			presignedUrl = await this.s3.getObject({
 				Bucket: bucket,
-				Key: key,
+				Key: id,
 			});
 
 			// set cache
@@ -155,31 +209,51 @@ export class FilesService {
 		return presignedUrl;
 	}
 
-	async remove({ key, user }: { key: string; user: IUser }) {
-		const bucket = this.getFileBucket({ user });
+	async remove({
+		id,
+		user,
+		organizationId,
+	}: {
+		id: string;
+		user: IUser;
+		organizationId: string;
+	}) {
+		const bucket = organizationId;
 
-		const directory = this.getFileDirectory({ key });
+		const directory = this.getFileDirectory({ id });
 
 		const { relationKey, relationValue } = this.getFileDetails({ directory });
+
+		// Check permission on 'File' entity
+		ForbiddenError.from(user.ability).throwUnlessCan(
+			Action.Delete,
+			subject('File', {
+				relationKey,
+				organizationId,
+			}),
+		);
 
 		await this.canAccess({
 			relationKey,
 			relationValue,
 			user,
+			// Check for update permission on the relation rather than delete
+			// permission on the file.
 			action: Action.Update,
 		});
 
 		// bust cache for file and directory (prefix)
-		this.logger.debug(`CACHE BUST: key: ${key} - directory: ${directory}`);
-		await this.cacheManager.del(key);
+		this.logger.debug(`CACHE BUST: key: ${id} - directory: ${directory}`);
+		await this.cacheManager.del(id);
 		await this.cacheManager.del(directory);
 
 		await this.s3.removeObject({
 			Bucket: bucket,
-			Key: key,
+			Key: id,
 		});
 	}
 
+	/** Permission check on the relation entity */
 	async canAccess({
 		relationKey,
 		relationValue,
@@ -193,7 +267,7 @@ export class FilesService {
 	}) {
 		const entityMap = entitiesMap[relationKey];
 		// @ts-expect-error - uniontype not cutting it
-		await this.prisma.c[relationKey].findFirstOrThrow({
+		const result: unknown = await this.prisma.c[relationKey].findFirst({
 			where: {
 				AND: [
 					{ id: relationValue },
@@ -201,16 +275,19 @@ export class FilesService {
 				],
 			},
 		});
+
+		if (!result) {
+			throw new ForbiddenException();
+		}
 	}
 
-	computeFileKey({
+	computeFileId({
 		relationKey,
 		relationValue,
 		fileName,
 	}: {
-		// TODO: validate relationKey and relationValue upstream
-		relationKey: FileRelationKey;
-		relationValue: string;
+		relationKey: FileCreateSchema['relationKey'];
+		relationValue: FileCreateSchema['relationValue'];
 		fileName: string;
 	}) {
 		const directory = this.computeDirectoryKey({
@@ -218,31 +295,29 @@ export class FilesService {
 			relationValue,
 		});
 
-		const key = `${directory}/${fileName}`;
+		const id = `${directory}/${fileName}`;
 
-		return key;
+		return id;
 	}
 
 	computeDirectoryKey({
 		relationKey,
 		relationValue,
 	}: {
-		// TODO: infer from file.schema
-		relationKey: string;
-		relationValue: string;
+		relationKey: FileCreateSchema['relationKey'];
+		relationValue: FileCreateSchema['relationValue'];
 	}) {
 		const key = `${relationKey}/${relationValue}`;
 
 		return key;
 	}
 
-	getFileDirectory({ key }: { key: string }) {
-		const directory = key.split('/').slice(0, -1).join('/');
+	getFileDirectory({ id }: { id: string }) {
+		const directory = id.split('/').slice(0, -1).join('/');
 
 		return directory;
 	}
 
-	// TODO: rename
 	getFileDetails({ directory }: { directory: string }) {
 		const schema = fileCreateSchema.pick({
 			relationKey: true,
@@ -253,12 +328,5 @@ export class FilesService {
 			relationKey: directory.split('/')[0],
 			relationValue: directory.split('/')[1],
 		});
-	}
-
-	getFileBucket({ user }: { user: IUser }) {
-		// TODO: organizationId is better gotten from the url param
-		const bucket = user.role.organizationId;
-
-		return bucket;
 	}
 }

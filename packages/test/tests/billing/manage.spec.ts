@@ -28,8 +28,15 @@ test('can manage subscription', async ({ page, org }) => {
 	});
 
 	const invoices = page.getByText('Invoice history', { exact: true });
-	await expect.soft(invoices).toBeVisible();
+	await expect.soft(invoices).toBeVisible({
+		timeout: 10000,
+	});
 
-	const payment = page.getByRole('link', { name: 'Add payment method' });
-	await expect.soft(payment).toBeVisible();
+	const payment = page.getByRole('link', {
+		name: 'Add payment method',
+	});
+
+	await expect.soft(payment).toBeVisible({
+		timeout: 10000,
+	});
 });

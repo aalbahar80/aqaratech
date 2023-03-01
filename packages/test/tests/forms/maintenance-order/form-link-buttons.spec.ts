@@ -82,31 +82,40 @@ test('create maintenanceOrder for property button predefined params', async ({
 	);
 });
 
-test.fixme(
-	'create maintenanceOrder for tenant button predefined params',
-	async ({ page, property }) => {
-		const url = 'TODO: TENANT PORTAL URL';
+test.describe('tenant portal', () => {
+	test.use({ userRoleType: 'TENANT' });
+
+	test('create maintenanceOrder has predefined params', async ({
+		page,
+		tenant,
+		lease,
+	}) => {
+		const url = getRoute({
+			entity: 'lease',
+			pageType: PageType.List,
+			params: {
+				organizationId: tenant.organizationId,
+				tenantId: tenant.id,
+			},
+		});
 
 		await page.goto(url);
 
-		const idPage = new IdPage({ page });
-
-		const btn = page.getByRole('link', { name: BUTTON_LABEL });
-
-		await idPage.expandOptions(btn);
+		const btn = page.getByRole('link', { name: 'New Maintenance' });
 
 		await expect(btn).toHaveAttribute(
 			'href',
 			resolveURL(
 				'/en',
 				'/organizations',
-				property.organizationId,
+				tenant.organizationId,
 				'portfolios',
-				property.portfolioId,
+				lease.portfolioId,
 				'maintenance-orders',
 				'new',
-				`?propertyId=${property.id}`,
-			),
+			) +
+				// ufo tries to encode if there's a `&` in the string
+				[`?unitId=${lease.unitId}`, `&tenantId=${tenant.id}`].join(''),
 		);
-	},
-);
+	});
+});

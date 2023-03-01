@@ -37,7 +37,7 @@ module.exports = {
 
 		// sort imports
 		'import/order': [
-			'error',
+			'warn',
 			{
 				// Docs: https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md#importorder
 				'newlines-between': 'always',

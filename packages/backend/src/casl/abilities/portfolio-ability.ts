@@ -54,6 +54,6 @@ export const definePortfolioAbility = (role: Role, can: TCan) => {
 	});
 
 	can(Action.Read, 'File', {
-		portfolioId: { equals: role.portfolioId },
+		organizationId: { equals: role.organizationId },
 	});
 };

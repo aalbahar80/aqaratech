@@ -19,6 +19,10 @@ export const getBaseRoute = (input: Pick<GetRoute, 'entity' | 'params'>) => {
 		const portfolio = getPortfolioRoute(input.params);
 
 		return portfolio;
+	} else if ('tenantId' in input.params) {
+		// tenant portal if tenantId is present
+
+		return `/portal/tenant/${input.params['tenantId']}`;
 	} else if (input.entity === 'organization') {
 		// Avoid adding base here. It will be added in getIdRoute instead.
 		return '';

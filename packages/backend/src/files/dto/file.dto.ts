@@ -16,14 +16,10 @@ export class FileDto {
 			throw new InternalServerErrorException('Error in FileDto, invalid key');
 		}
 		this.id = obj.Key;
-		this.key = obj.Key;
 		this.size = obj.Size ?? 0;
 	}
 
 	id: string;
-
-	// TODO rm duplicate, use id instead
-	key: string;
 
 	size: number;
 }

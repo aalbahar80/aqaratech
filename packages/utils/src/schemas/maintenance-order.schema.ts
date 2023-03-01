@@ -11,7 +11,7 @@ import { zodStringOptional } from './utils/zod-string';
 
 import type { Union } from 'ts-toolbelt';
 
-export const maintenanceOrderCreateSchema = z
+export const base = z
 	.object({
 		portfolioId: isID,
 		propertyId: isID.nullish(),
@@ -31,7 +31,15 @@ export const maintenanceOrderCreateSchema = z
 	})
 	.strict();
 
-export const maintenanceOrderUpdateSchema = maintenanceOrderCreateSchema
+export const maintenanceOrderCreateSchema = base.refine(
+	(val) => (val.tenantId ? val.unitId : true),
+	{
+		path: ['unitId'],
+		message: 'Unit must be specified if tenant is specified.',
+	},
+);
+
+export const maintenanceOrderUpdateSchema = base
 	.omit({
 		portfolioId: true,
 		propertyId: true,
