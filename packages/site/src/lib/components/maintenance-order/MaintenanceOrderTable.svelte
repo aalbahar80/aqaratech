@@ -96,10 +96,22 @@
 			</div>
 			<div slot="custom">
 				<!-- Only show button if we're on the property/unit pages -->
-				{#if 'unitId' in $page.params || 'propertyId' in $page.params}
+				{#if $page.params['unitId']}
 					<FilterBarButtonForm
 						getRouteOptions={{
 							entity: 'maintenanceOrder',
+							predefined: {
+								unitId: $page.params['unitId'],
+							},
+						}}
+					/>
+				{:else if $page.params['propertyId']}
+					<FilterBarButtonForm
+						getRouteOptions={{
+							entity: 'maintenanceOrder',
+							predefined: {
+								propertyId: $page.params['propertyId'],
+							},
 						}}
 					/>
 				{/if}

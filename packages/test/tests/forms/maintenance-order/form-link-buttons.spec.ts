@@ -1,12 +1,9 @@
 import { expect } from '@playwright/test';
 import { resolveURL } from 'ufo';
 
-import { getRoute, PageType } from '@self/utils';
+import { getRoute, PageTab, PageType } from '@self/utils';
 
 import { test } from '../../api/api-fixtures';
-import { IdPage } from '../../models/id-page';
-
-const BUTTON_LABEL = 'New Maintenance';
 
 test('create maintenanceOrder for unit button predefined params', async ({
 	page,
@@ -15,7 +12,7 @@ test('create maintenanceOrder for unit button predefined params', async ({
 	const url = getRoute({
 		entity: 'unit',
 		id: unit.id,
-		pageType: PageType.Id,
+		pageType: PageTab.Maintenance,
 		params: {
 			organizationId: unit.organizationId,
 			portfolioId: unit.portfolioId,
@@ -24,11 +21,7 @@ test('create maintenanceOrder for unit button predefined params', async ({
 
 	await page.goto(url);
 
-	const idPage = new IdPage({ page });
-
-	const btn = page.getByRole('link', { name: BUTTON_LABEL });
-
-	await idPage.expandOptions(btn);
+	const btn = page.getByRole('link', { name: 'New' });
 
 	await expect(btn).toHaveAttribute(
 		'href',
@@ -52,7 +45,7 @@ test('create maintenanceOrder for property button predefined params', async ({
 	const url = getRoute({
 		entity: 'property',
 		id: property.id,
-		pageType: PageType.Id,
+		pageType: PageTab.Maintenance,
 		params: {
 			organizationId: property.organizationId,
 			portfolioId: property.portfolioId,
@@ -61,11 +54,7 @@ test('create maintenanceOrder for property button predefined params', async ({
 
 	await page.goto(url);
 
-	const idPage = new IdPage({ page });
-
-	const btn = page.getByRole('link', { name: BUTTON_LABEL });
-
-	await idPage.expandOptions(btn);
+	const btn = page.getByRole('link', { name: 'New' });
 
 	await expect(btn).toHaveAttribute(
 		'href',

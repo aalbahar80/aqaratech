@@ -16,7 +16,6 @@
 	import Fa6SolidBed from '~icons/fa6-solid/bed';
 	import Fa6SolidStairs from '~icons/fa6-solid/stairs';
 	import GisMeasure from '~icons/gis/measure';
-	import HeroiconsWrench from '~icons/heroicons/wrench';
 	import HeroiconsSolidCreditCard from '~icons/heroicons-solid/credit-card';
 
 	export let data: LayoutData;
@@ -85,23 +84,6 @@
 				<MenuItemChild {active}>
 					<MenuItemIcon icon={HeroiconsSolidCreditCard} />
 					{$L.buttons.new() + ' ' + $L.entity.expense.singular()}
-				</MenuItemChild>
-			</a>
-		</MenuItem>
-		<MenuItem as="div" let:active>
-			<a
-				href={getRoute({
-					entity: 'maintenanceOrder',
-					pageType: PageType.New,
-					params: $page.params,
-					predefined: {
-						unitId: data.unit.id,
-					},
-				})}
-			>
-				<MenuItemChild {active}>
-					<MenuItemIcon icon={HeroiconsWrench} />
-					{$L.buttons.new() + ' ' + $L.entity.maintenanceOrder.singular()}
 				</MenuItemChild>
 			</a>
 		</MenuItem>

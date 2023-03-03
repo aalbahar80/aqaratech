@@ -12,11 +12,6 @@ const inputs = [
 		buttonName: 'New Expense',
 		urlName: 'expenses',
 	},
-	{
-		entity: 'maintenanceOrder',
-		buttonName: 'New Maintenance',
-		urlName: 'maintenance-orders',
-	},
 ];
 
 for (const entity of inputs) {
