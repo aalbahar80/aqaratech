@@ -1089,6 +1089,10 @@ type RootTranslation = {
 		 * A​r​e​ ​y​o​u​ ​s​u​r​e​?
 		 */
 		areYouSure: string
+		/**
+		 * T​o​ ​d​i​s​p​l​a​y​ ​a​ ​c​u​s​t​o​m​ ​v​a​l​u​e​,​ ​u​s​e​ ​t​h​e​ ​l​a​b​e​l​ ​f​i​e​l​d​.
+		 */
+		customUnitLabel: string
 	}
 }
 
@@ -2168,6 +2172,10 @@ export type TranslationFunctions = {
 		 * Are you sure?
 		 */
 		areYouSure: () => LocalizedString
+		/**
+		 * To display a custom value, use the label field.
+		 */
+		customUnitLabel: () => LocalizedString
 	}
 }
 

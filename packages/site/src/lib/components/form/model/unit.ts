@@ -1,5 +1,7 @@
+import { get } from 'svelte/store';
 import { unitCreateSchema, unitUpdateSchema } from '@self/utils';
 
+import L from '$i18n/i18n-svelte';
 import { createFormField } from '$lib/components/form/model/form-field';
 import { createFormModel } from '$lib/components/form/model/form-model';
 import { labelHint } from '$lib/constants/form-hints';
@@ -17,6 +19,11 @@ export const unitFormModel = () =>
 			type: createFormField('type', {
 				type: 'select',
 				options: unitTypeOptions,
+				hint: get(L).other.customUnitLabel(),
+			}),
+
+			label: createFormField('label', {
+				hint: labelHint(),
 			}),
 
 			bed: createFormField('bed', {
@@ -38,9 +45,5 @@ export const unitFormModel = () =>
 			}),
 
 			usage: createFormField('usage'),
-
-			label: createFormField('label', {
-				hint: labelHint(),
-			}),
 		},
 	});
