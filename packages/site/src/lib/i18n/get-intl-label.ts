@@ -13,7 +13,7 @@ const synonyms: Record<string, string> = {
 
 const NON_FORM_LABELS: Record<string, { en: string; ar: string }> = {
 	isPaid: {
-		en: 'PaymentStatus',
+		en: 'Payment Status',
 		ar: 'حالة السداد',
 	},
 };
