@@ -8,8 +8,8 @@
 
 	const searchableEntities: SearchableEntityEnum[] =
 		$page.data.user?.role?.roleType === 'ORGADMIN'
-			? ['tenant', 'portfolio', 'property']
-			: ['tenant', 'property'];
+			? ['portfolio', 'property', 'tenant']
+			: ['property', 'tenant'];
 
 	const localizedEntities = searchableEntities.map((e) =>
 		$L.entity[e].plural(),

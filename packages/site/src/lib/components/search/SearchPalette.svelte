@@ -30,9 +30,9 @@
 
 	let groups: Record<keyof SearchDto, HitDto[]> = {
 		// let groups: SearchDto = {
-		tenant: [],
 		portfolio: [],
 		property: [],
+		tenant: [],
 	};
 
 	let query = '';
