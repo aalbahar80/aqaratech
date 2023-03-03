@@ -374,8 +374,9 @@ const ar: Translation = {
 		vacant: 'شاغر',
 		occupied: 'مستأجر',
 		areYouSure: 'هل انت متاكد؟',
-		// customUnitLabel: 'To display a custom value, use the label field.',
 		customUnitLabel: 'لعرض قيمة مخصصة ، استخدم حقل التسمية.',
+		unspecifiedUnit: 'وحدة غير محددة',
+		unspecifiedProperty: 'عقار غير محدد',
 	},
 };
 

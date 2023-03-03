@@ -16,8 +16,8 @@
 		// reduceFn,
 		(d) => sum(d, (e) => e.amount),
 		// groupingFns,
-		(d) => d.propertyId ?? $L.general.unspecified(),
-		(d) => d.unitId ?? $L.general.unspecified(),
+		(d) => d.propertyId ?? $L.other.unspecifiedProperty(),
+		(d) => d.unitId ?? $L.other.unspecifiedUnit(),
 	);
 
 	// Type of each node is either null OR a nested maps up to 3 levels deep.

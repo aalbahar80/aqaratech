@@ -176,6 +176,8 @@ const en: BaseTranslation = {
 		occupied: 'Occupied',
 		areYouSure: 'Are you sure?',
 		customUnitLabel: 'To display a custom value, use the label field.',
+		unspecifiedUnit: 'Unspecified unit',
+		unspecifiedProperty: 'Unspecified property',
 	},
 };
 

@@ -1093,6 +1093,14 @@ type RootTranslation = {
 		 * T​o​ ​d​i​s​p​l​a​y​ ​a​ ​c​u​s​t​o​m​ ​v​a​l​u​e​,​ ​u​s​e​ ​t​h​e​ ​l​a​b​e​l​ ​f​i​e​l​d​.
 		 */
 		customUnitLabel: string
+		/**
+		 * U​n​s​p​e​c​i​f​i​e​d​ ​u​n​i​t
+		 */
+		unspecifiedUnit: string
+		/**
+		 * U​n​s​p​e​c​i​f​i​e​d​ ​p​r​o​p​e​r​t​y
+		 */
+		unspecifiedProperty: string
 	}
 }
 
@@ -2176,6 +2184,14 @@ export type TranslationFunctions = {
 		 * To display a custom value, use the label field.
 		 */
 		customUnitLabel: () => LocalizedString
+		/**
+		 * Unspecified unit
+		 */
+		unspecifiedUnit: () => LocalizedString
+		/**
+		 * Unspecified property
+		 */
+		unspecifiedProperty: () => LocalizedString
 	}
 }
 
