@@ -27,6 +27,7 @@ import {
 import { MyfatoorahService } from 'src/myfatoorah/myfatoorah.service';
 import { GetPaymentStatusResult } from 'src/myfatoorah/types/myfatoorah.types';
 import { PostmarkService } from 'src/postmark/postmark.service';
+import { MESSAGE_TAG } from 'src/postmark/tags';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { kwdFormat } from 'src/utils/format';
 
@@ -307,20 +308,16 @@ export class LeaseInvoicesService {
 			throw new BadRequestException('No emails found for tenant.');
 		}
 
-		const promises = emails.map((email) =>
-			this.sendEmail({
+		try {
+			await this.sendEmail({
 				invoice,
-				email,
-			}),
-		);
+				emails: emails,
+			});
+		} catch (error) {
+			this.logger.error(error);
 
-		const results = await Promise.allSettled(promises);
-
-		const failed = results.filter((result) => result.status === 'rejected');
-
-		if (failed.length) {
 			throw new InternalServerErrorException('Failed to send email', {
-				cause: new Error('Failed to send email', { cause: failed }),
+				cause: new Error('Failed to send email', { cause: error }),
 			});
 		}
 
@@ -335,8 +332,13 @@ export class LeaseInvoicesService {
 
 		return await this.postmarkService.sendEmail({
 			From: 'Aqaratech <notifications@aqaratech.com>',
-			To: payload.email,
+			To: payload.emails.join(','),
 			TemplateAlias: 'invoice',
+			Metadata: {
+				organizationId: invoice.organizationId,
+				leaseInvoiceId: invoice.id,
+			},
+			Tag: MESSAGE_TAG.INVOICE_REMINDER,
 			TemplateModel: {
 				amount: kwdFormat(invoice.amount),
 				date: invoice.postAt.toISOString().split('T')[0],
@@ -348,6 +350,22 @@ export class LeaseInvoicesService {
 				}),
 			},
 		});
+	}
+
+	async findMessages({ id, user }: { id: string; user: IUser }) {
+		// authz check
+		await this.prisma.c.leaseInvoice.findFirstOrThrow({
+			where: {
+				AND: [{ id }, accessibleBy(user.ability, Action.Read).LeaseInvoice],
+			},
+		});
+
+		const messages = await this.postmarkService.getSentEmails({
+			tag: MESSAGE_TAG.INVOICE_REMINDER,
+			leaseInvoiceId: id,
+		});
+
+		return messages;
 	}
 
 	// ::: HELPERS :::

@@ -1,5 +1,5 @@
 export interface InvoiceSendPayload {
-	email: string;
+	emails: string[];
 	invoice: {
 		id: string;
 		amount: number;

@@ -59,6 +59,10 @@ const ar: Translation = {
 			plural: 'الملفات',
 			singular: 'ملف',
 		},
+		message: {
+			plural: 'الرسائل',
+			singular: 'رسالة',
+		},
 	},
 	fields: {
 		fullName: 'الاسم الكامل',
@@ -113,6 +117,8 @@ const ar: Translation = {
 		key: 'اسم',
 		fileName: 'اسم الملف',
 		size2: 'حجم',
+		receivedAt: 'تاريخ الإستلام',
+		recipients: 'المستلمين',
 	},
 	buttons: {
 		login: 'تسجيل الدخول',

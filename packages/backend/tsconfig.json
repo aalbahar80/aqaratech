@@ -20,6 +20,8 @@
 		"strict": true,
 		"noUnusedLocals": false,
 		"strictPropertyInitialization": false,
+		"noUnusedParameters": false,
+		"allowUnusedLabels": true,
 		"importsNotUsedAsValues": "remove",
 		"types": ["multer", "vitest/globals"],
 		// "verbatimModuleSyntax": true, // needs special consideration for nestjs

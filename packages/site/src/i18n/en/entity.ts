@@ -62,4 +62,8 @@ export const entity = {
 		plural: 'Files',
 		singular: 'File',
 	},
-} satisfies Record<Entity | 'user', EntityForms>;
+	message: {
+		plural: 'Messages',
+		singular: 'Message',
+	},
+} satisfies Record<Entity, EntityForms> & Record<string, EntityForms>;

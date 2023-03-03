@@ -24,11 +24,11 @@ import {
 	PartialLeaseInvoiceDto,
 	UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { MYFATOORAH_CALLBACK_ENDPOINT } from 'src/myfatoorah/myfatoorah-callback.const';
 import { MyfatoorahService } from 'src/myfatoorah/myfatoorah.service';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
-
-import { LeaseInvoicesService } from './lease-invoices.service';
+import { MessageDto } from 'src/postmark/message.dto';
 
 const SubjectType = 'LeaseInvoice';
 
@@ -112,5 +112,16 @@ export class LeaseInvoicesController {
 	async payInvoice(@Param('id') id: string) {
 		const url = await this.leaseInvoicesService.generatePaymentLink(id);
 		return { url };
+	}
+
+	@Get(':id/messages')
+	@CheckAbilities({ action: Action.Read, subject: SubjectType })
+	async findMessages(
+		@Param('id') id: string,
+		@User() user: IUser,
+	): Promise<MessageDto[]> {
+		const messages = await this.leaseInvoicesService.findMessages({ id, user });
+
+		return messages;
 	}
 }

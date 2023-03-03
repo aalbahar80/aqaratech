@@ -7,6 +7,7 @@ export enum PageTab {
 	Invoices = 'invoices',
 	Leases = 'leases',
 	Maintenance = 'maintenance',
+	Messages = 'messages',
 
 	// Admin
 	Roles = 'roles',
@@ -43,7 +44,7 @@ export type UnitPageTab = PageTab.Leases | PageTab.Files | PageTab.Maintenance;
 
 export type LeasePageTab = PageTab.Invoices | PageTab.Files | PageTab.Contract;
 
-export type InvoicePageTab = PageTab.Files;
+export type InvoicePageTab = PageTab.Files | PageTab.Messages;
 
 export type ExpensePageTab = PageTab.Files;
 

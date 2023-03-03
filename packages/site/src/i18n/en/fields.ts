@@ -25,6 +25,7 @@ import type {
 	FileCreateSchema,
 } from '@self/utils';
 
+import type { MessageDto } from '$api/openapi';
 import type { Union } from 'ts-toolbelt';
 
 type Schemas =
@@ -51,7 +52,8 @@ type Schemas =
 	| MaintenanceOrderCreateSchema
 	| MaintenanceOrderUpdateSchema
 	| PayoutCreateSchema
-	| FileCreateSchema;
+	| FileCreateSchema
+	| MessageDto;
 
 // type Keys = KeysOfUnion<Schemas>;
 type Keys = keyof Union.IntersectOf<Schemas>;
@@ -130,6 +132,11 @@ export const fields = {
 	key: 'Name',
 	fileName: 'File Name',
 	size2: 'Size',
+
+	// message
+	receivedAt: 'Received At',
+	recipients: 'Recipients',
+
 	// @ts-expect-error wip
 } satisfies Fields;
 

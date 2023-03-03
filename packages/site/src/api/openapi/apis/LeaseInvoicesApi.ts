@@ -15,9 +15,14 @@
 import * as runtime from '../runtime';
 import type {
 	LeaseInvoiceDto,
+	MessageDto,
 	PartialLeaseInvoiceDto,
 	UpdateLeaseInvoiceDto,
 } from '../models';
+
+export interface LeaseInvoicesApiFindMessagesRequest {
+	id: string;
+}
 
 export interface LeaseInvoicesApiFindOneRequest {
 	id: string;
@@ -44,6 +49,56 @@ export interface LeaseInvoicesApiUpdateRequest {
  *
  */
 export class LeaseInvoicesApi extends runtime.BaseAPI {
+	/**
+	 *
+	 *
+	 */
+	async findMessagesRaw(
+		requestParameters: LeaseInvoicesApiFindMessagesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<Array<MessageDto>>> {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling findMessages.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/leaseInvoices/{id}/messages`.replace(
+					`{${'id'}}`,
+					encodeURIComponent(String(requestParameters.id)),
+				),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 *
+	 *
+	 */
+	async findMessages(
+		requestParameters: LeaseInvoicesApiFindMessagesRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<Array<MessageDto>> {
+		const response = await this.findMessagesRaw(
+			requestParameters,
+			initOverrides,
+		);
+		return await response.value();
+	}
+
 	/**
 	 *
 	 *

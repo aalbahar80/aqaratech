@@ -1602,6 +1602,37 @@ export interface MaintenanceOrderDto {
 /**
  *
  * @export
+ * @interface MessageDto
+ */
+export interface MessageDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MessageDto
+	 */
+	id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MessageDto
+	 */
+	status: string;
+	/**
+	 *
+	 * @type {Array<string>}
+	 * @memberof MessageDto
+	 */
+	recipients: Array<string>;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof MessageDto
+	 */
+	receivedAt: string;
+}
+/**
+ *
+ * @export
  * @interface Occupancy
  */
 export interface Occupancy {

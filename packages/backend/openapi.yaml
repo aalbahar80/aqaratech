@@ -553,6 +553,28 @@ paths:
           description: ''
       tags: *ref_3
       security: *ref_4
+  /leaseInvoices/{id}/messages:
+    get:
+      operationId: LeaseInvoicesController_findMessages
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MessageDto'
+      tags: *ref_3
+      security: *ref_4
   /leases:
     get:
       operationId: LeasesController_findAll
@@ -3308,6 +3330,24 @@ components:
         mfPaymentId:
           type: string
           nullable: true
+    MessageDto:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        recipients:
+          type: array
+          items:
+            type: string
+        receivedAt:
+          type: string
+      required:
+        - id
+        - status
+        - recipients
+        - receivedAt
     UpdateLeaseDto:
       type: object
       properties:

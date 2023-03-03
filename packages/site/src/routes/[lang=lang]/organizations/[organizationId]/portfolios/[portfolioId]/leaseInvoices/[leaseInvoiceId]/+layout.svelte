@@ -3,8 +3,6 @@
 	import type { LayoutData } from './$types';
 	import { getRoute, PageTab } from '@self/utils';
 
-	import { createApi } from '$api';
-	import { handleApiError } from '$api/handle-api-error';
 	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import BreadCrumb from '$lib/components/breadcrumbs/BreadCrumb.svelte';
@@ -20,7 +18,6 @@
 	import HeroiconsClipboardDocument from '~icons/heroicons/clipboard-document';
 	import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 	import HeroiconsDocumentText from '~icons/heroicons/document-text';
-	import HeroiconsEnvelope from '~icons/heroicons/envelope';
 
 	export let data: LayoutData;
 
@@ -93,28 +90,6 @@
 			class="w-full sm:w-auto"
 			prefetch
 		/>
-
-		<RoleGuard roles={['ORGADMIN']}>
-			<Button
-				icon={HeroiconsEnvelope}
-				text={$L.buttons.sendReminder()}
-				solid
-				disabled={data.leaseInvoice.isPaid}
-				on:click={async () => {
-					try {
-						await createApi().organizations.sendInvoiceEmail({
-							id: data.leaseInvoice.id,
-							organizationId: data.leaseInvoice.organizationId,
-						});
-
-						addSuccessToast();
-					} catch (e) {
-						console.error(e);
-						await handleApiError(e);
-					}
-				}}
-			/>
-		</RoleGuard>
 	</svelte:fragment>
 </Heading>
 

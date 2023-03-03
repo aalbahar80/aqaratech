@@ -27,6 +27,16 @@ export const FORMATS = {
 		hour12: true,
 		timeZone,
 	} satisfies Intl.DateTimeFormatOptions,
+
+	datetime: {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric',
+		hour: 'numeric',
+		minute: 'numeric',
+		hour12: true,
+		timeZone,
+	} satisfies Intl.DateTimeFormatOptions,
 };
 
 type Locale = 'en' | 'ar';

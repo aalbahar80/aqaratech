@@ -155,6 +155,16 @@ type RootTranslation = {
 			 */
 			singular: string
 		}
+		message: {
+			/**
+			 * M​e​s​s​a​g​e​s
+			 */
+			plural: string
+			/**
+			 * M​e​s​s​a​g​e
+			 */
+			singular: string
+		}
 	}
 	fields: {
 		/**
@@ -365,6 +375,14 @@ type RootTranslation = {
 		 * S​i​z​e
 		 */
 		size2: string
+		/**
+		 * R​e​c​e​i​v​e​d​ ​A​t
+		 */
+		receivedAt: string
+		/**
+		 * R​e​c​i​p​i​e​n​t​s
+		 */
+		recipients: string
 	}
 	buttons: {
 		/**
@@ -1246,6 +1264,16 @@ export type TranslationFunctions = {
 			 */
 			singular: () => LocalizedString
 		}
+		message: {
+			/**
+			 * Messages
+			 */
+			plural: () => LocalizedString
+			/**
+			 * Message
+			 */
+			singular: () => LocalizedString
+		}
 	}
 	fields: {
 		/**
@@ -1456,6 +1484,14 @@ export type TranslationFunctions = {
 		 * Size
 		 */
 		size2: () => LocalizedString
+		/**
+		 * Received At
+		 */
+		receivedAt: () => LocalizedString
+		/**
+		 * Recipients
+		 */
+		recipients: () => LocalizedString
 	}
 	buttons: {
 		/**

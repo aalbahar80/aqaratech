@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { expect } from '@playwright/test';
 
-import { getRoute, PageType } from '@self/utils';
+import { getRoute, PageTab } from '@self/utils';
 
 import { prisma } from '../../prisma';
 import { test } from '../api/api-fixtures';
@@ -41,7 +41,7 @@ test('invoice due email', async ({ page, tenant, invoice }) => {
 	const url = getRoute({
 		entity: 'leaseInvoice',
 		id: invoice.id,
-		pageType: PageType.Id,
+		pageType: PageTab.Messages,
 		params: {
 			organizationId: invoice.organizationId,
 			portfolioId: invoice.portfolioId,
