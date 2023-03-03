@@ -121,9 +121,9 @@ Create a treemap from a d3-hierarchy.
 							class:text-xl={area > 0.07}
 						>
 							<!-- Consider passing in link in data structure if there is a need to optimize -->
-							{#if getLink?.(node)}
+							{#if getLink?.(node) && width > 0.02 && height > 0.06}
 								<a
-									class="align-middle text-lg text-indigo-600"
+									class="absolute right-2 top-2 align-middle text-lg text-indigo-600"
 									class:hidden={node.children}
 									href={getLink(node)}
 									target="_blank"
