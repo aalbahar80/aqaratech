@@ -834,9 +834,9 @@ type RootTranslation = {
 	}
 	search: {
 		/**
-		 * S​e​a​r​c​h​ ​f​o​r​ ​t​e​n​a​n​t​s​,​ ​o​w​n​e​r​s​,​ ​o​r​ ​p​r​o​p​e​r​t​i​e​s​.
+		 * S​e​a​c​h​ ​f​o​r
 		 */
-		title: string
+		titlePrefix: string
 		/**
 		 * S​e​a​r​c​h​ ​b​y​ ​n​a​m​e​,​ ​a​d​d​r​e​s​s​,​ ​e​t​c​.
 		 */
@@ -1913,9 +1913,9 @@ export type TranslationFunctions = {
 	}
 	search: {
 		/**
-		 * Search for tenants, owners, or properties.
+		 * Seach for
 		 */
-		title: () => LocalizedString
+		titlePrefix: () => LocalizedString
 		/**
 		 * Search by name, address, etc.
 		 */

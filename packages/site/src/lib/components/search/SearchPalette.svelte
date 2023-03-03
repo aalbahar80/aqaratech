@@ -20,8 +20,8 @@
 	import { createApi } from '$api';
 	import L from '$i18n/i18n-svelte';
 	import SearchItem from '$lib/components/search/SearchItem.svelte';
+	import SearchPlaceholder from '$lib/components/search/SearchPlaceholder.svelte';
 	import { objectEntries } from '$lib/utils/common';
-	import HeroiconsGlobeAlt from '~icons/heroicons/globe-alt';
 	import HeroiconsMagnifyingGlass from '~icons/heroicons/magnifying-glass';
 	import HeroiconsOutlineEmojiSad from '~icons/heroicons-outline/emoji-sad';
 	import HeroiconsOutlineFolder from '~icons/heroicons-outline/folder';
@@ -127,18 +127,7 @@
 					</div>
 
 					{#if query === ''}
-						<div
-							class="border-t border-gray-100 py-14 px-6 text-center text-sm sm:px-14"
-						>
-							<HeroiconsGlobeAlt
-								class="mx-auto h-6 w-6 text-gray-400"
-								aria-hidden="true"
-							/>
-							<p class="mt-4 font-semibold text-gray-900">
-								{$L.search.title()}
-							</p>
-							<p class="mt-2 text-gray-500">{$L.search.subtitle()}</p>
-						</div>
+						<SearchPlaceholder />
 					{/if}
 
 					{#if hasHits && query !== ''}

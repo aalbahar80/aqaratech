@@ -162,7 +162,8 @@ const en: BaseTranslation = {
 		// records: 'records',
 	},
 	search: {
-		title: 'Search for tenants, owners, or properties.',
+		titlePrefix: 'Seach for',
+		// title: 'Search for tenants, owners, or properties.',
 		subtitle: 'Search by name, address, etc.',
 		noResults: 'No results found',
 	},
