@@ -10,7 +10,6 @@
 
 	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
 	import { fmtCurrency } from '$lib/i18n/format';
-	import { classes } from '$lib/utils/classes';
 
 	// export let hierarchy: HierarchyNode<any>;
 	// export let getLabel: (node: HierarchyNode<any>) => string;
