@@ -46,6 +46,16 @@ const config = {
 			},
 		},
 	},
+	onwarn: (
+		/** @type {import('svelte/types/compiler/interfaces').Warning} */
+		warning,
+		/** @type {(arg0: import("svelte/types/compiler/interfaces").Warning) => void} */ handler,
+	) => {
+		if (warning.code === 'a11y-click-events-have-key-events') {
+			return;
+		}
+		handler(warning);
+	},
 };
 
 export default config;
