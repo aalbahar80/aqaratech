@@ -2,6 +2,7 @@ import {
 	Body,
 	Controller,
 	Delete,
+	ForbiddenException,
 	Get,
 	NotFoundException,
 	Param,
@@ -15,7 +16,7 @@ import {
 	ApiOkResponse,
 	ApiTags,
 } from '@nestjs/swagger';
-import { Prisma } from '@prisma/client';
+import { Prisma, RoleType } from '@prisma/client';
 
 import { organizationSchema } from '@self/utils';
 import { SkipRoleGuard } from 'src/auth/public.decorator';
@@ -145,23 +146,34 @@ export class OrganizationsController {
 	}
 
 	@Get(':organizationId/search')
-	@CheckAbilities({
-		action: Action.Manage,
-		subject: SubjectType,
-		useParams: true,
-		overrideParams: {
-			organizationId: 'id',
-		},
-	})
+	// The service always takes the user's permissions into account for the search,
+	// but we check here if the user is allowed to search at all to avoid unnecessary
+	// database queries.
+	// @CheckAbilities({
+	// 	action: Action.Manage,
+	// 	subject: SubjectType,
+	// 	useParams: true,
+	// 	overrideParams: {
+	// 		organizationId: 'id',
+	// 	},
+	// })
 	search(
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
 		@Query('query') query: string,
 	): Promise<SearchDto> {
+		const SEARCH_ROLES: RoleType[] = ['ORGADMIN', 'PORTFOLIO'];
+		// TODO: move authz logic to casl, reinstate @CheckAbilities
+		if (
+			user.role.organizationId !== organizationId ||
+			!SEARCH_ROLES.includes(user.role.roleType)
+		) {
+			throw new ForbiddenException();
+		}
+
 		return this.searchService.search({
 			// Safely escape the query string
 			query: escapeStringRegexp(query),
-			organizationId,
 			user,
 		});
 	}

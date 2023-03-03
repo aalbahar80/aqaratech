@@ -17,21 +17,7 @@ import { searchFor } from './search-builder/search-for';
 export class SearchService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	async search({
-		query,
-		organizationId,
-		user,
-	}: {
-		query: string;
-		organizationId: string;
-		user: IUser;
-	}) {
-		// TODO: Remove to unlock search for non-admins
-		ForbiddenError.from(user.ability).throwUnlessCan(
-			Action.Manage,
-			subject('Organization', { id: organizationId }),
-		);
-
+	async search({ query, user }: { query: string; user: IUser }) {
 		const take = 20;
 
 		const [tenants, portfolios, properties] = await Promise.all([

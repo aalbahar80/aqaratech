@@ -11,7 +11,6 @@
 	import clsx from 'clsx';
 
 	import { afterNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
 	import { fly } from 'svelte/transition';
 
 	import type { NavigationItem } from '$lib/components/sidebar/types';
@@ -20,6 +19,7 @@
 	import SearchButton from '$lib/components/search/SearchButton.svelte';
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
+	import RoleGuard from '$lib/utils/RoleGuard.svelte';
 
 	export let navigationTree: NavigationItem[];
 
@@ -39,9 +39,9 @@
 	use:clickOutside
 	on:outclick={sidebar.close}
 >
-	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
+	<RoleGuard roles={['ORGADMIN', 'PORTFOLIO']}>
 		<SearchButton />
-	{/if}
+	</RoleGuard>
 
 	<nav class="flex flex-1 flex-col overflow-y-auto overscroll-y-contain">
 		{#each navigationTree as item}
