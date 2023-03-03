@@ -25,6 +25,7 @@
 		"@self/seed": "workspace:*",
 		"@self/site": "workspace:*",
 		"@self/utils": "workspace:*",
+		"@total-typescript/ts-reset": "0.3.7",
 		"@types/node": "18.14.4",
 		"dotenv": "16.0.3",
 		"dotenv-cli": "7.0.0",
