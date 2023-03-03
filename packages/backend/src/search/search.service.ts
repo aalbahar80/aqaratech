@@ -48,31 +48,34 @@ export class SearchService {
 				},
 				take,
 			}),
-			this.prisma.c.portfolio.findMany({
-				where: {
-					AND: [
-						accessibleBy(user.ability, Action.Read).Portfolio,
-						{
-							OR: [
-								...searchFor(
-									[
-										'fullName',
-										'label',
-										'phone',
-										'civilid',
-									] satisfies typeof SearchableFields.portfolio,
-									query,
-								),
+			// avoid returning the portfolio of the user searching
+			user.role.roleType === 'PORTFOLIO'
+				? []
+				: this.prisma.c.portfolio.findMany({
+						where: {
+							AND: [
+								accessibleBy(user.ability, Action.Read).Portfolio,
+								{
+									OR: [
+										...searchFor(
+											[
+												'fullName',
+												'label',
+												'phone',
+												'civilid',
+											] satisfies typeof SearchableFields.portfolio,
+											query,
+										),
 
-								// email
-								// prettier-ignore
-								{ roles: { some: { user: { OR: fieldSearchBuilder('email', query) } } } },
+										// email
+										// prettier-ignore
+										{ roles: { some: { user: { OR: fieldSearchBuilder('email', query) } } } },
+									],
+								},
 							],
 						},
-					],
-				},
-				take,
-			}),
+						take,
+				  }),
 			this.prisma.c.property.findMany({
 				where: {
 					AND: [

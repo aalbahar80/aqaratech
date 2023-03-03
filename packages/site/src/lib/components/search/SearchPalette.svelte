@@ -148,7 +148,7 @@
 								style:max-height="70vh"
 							>
 								{#each objectEntries(groups) as [entityTitle, group] (entityTitle)}
-									{#if isEntity(entityTitle)}
+									{#if isEntity(entityTitle) && group.length > 0}
 										<li>
 											<h2
 												class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
