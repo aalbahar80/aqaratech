@@ -174,10 +174,10 @@ Create a treemap from a d3-hierarchy.
 		width: 100%;
 		height: 100%;
 		padding: 0.3rem 0.4rem;
-		border: 1px solid white;
+		border: 5px solid white;
 		background-color: hsl(240, 8%, 70%);
 		color: white;
-		border-radius: 4px;
+		border-radius: 8px;
 		box-sizing: border-box;
 	}
 
