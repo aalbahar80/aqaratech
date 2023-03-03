@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.15.0
+
+### Minor Changes
+
+- 38dd9d4e5: enable maintenance orders in tenant portal
+
+### Patch Changes
+
+- Updated dependencies [38dd9d4e5]
+  - @self/utils@3.15.0
+
 ## 2.14.7
 
 ### Patch Changes

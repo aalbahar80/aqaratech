@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.15.0
+
+### Minor Changes
+
+- 38dd9d4e5: enable maintenance orders in tenant portal
+
 ## 3.14.7
 
 ### Patch Changes

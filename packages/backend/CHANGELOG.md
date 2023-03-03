@@ -1,5 +1,17 @@
 # @self/backend
 
+## 2.16.0
+
+### Minor Changes
+
+- 38dd9d4e5: enable maintenance orders in tenant portal
+
+### Patch Changes
+
+- 709eea8fa: update deps
+- Updated dependencies [38dd9d4e5]
+  - @self/utils@3.15.0
+
 ## 2.15.7
 
 ### Patch Changes

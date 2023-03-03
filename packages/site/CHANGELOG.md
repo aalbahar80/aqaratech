@@ -1,5 +1,16 @@
 # @self/site
 
+## 2.16.0
+
+### Minor Changes
+
+- 38dd9d4e5: enable maintenance orders in tenant portal
+
+### Patch Changes
+
+- d0b7298ab: rtl filter slideover
+- 709eea8fa: update deps
+
 ## 2.15.9
 
 ### Patch Changes
