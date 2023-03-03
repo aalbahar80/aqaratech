@@ -1,5 +1,3 @@
-import { inspect } from 'node:util';
-
 import { Injectable } from '@nestjs/common';
 import { ServerClient, TemplatedMessage } from 'postmark';
 
@@ -32,8 +30,6 @@ export class PostmarkService {
 			tag: tag,
 			metadata_leaseInvoiceId: leaseInvoiceId,
 		});
-
-		console.log(inspect(sentEmails, false, null, true));
 
 		const messages = sentEmails.Messages.map((m) => ({
 			id: m.MessageID,
