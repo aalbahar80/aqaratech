@@ -14,7 +14,9 @@ export const unitFormModel = () =>
 		createSchema: unitCreateSchema,
 		updateSchema: unitUpdateSchema,
 		fields: {
-			unitNumber: createFormField('unitNumber'),
+			unitNumber: createFormField('unitNumber', {
+				required: true,
+			}),
 
 			type: createFormField('type', {
 				type: 'select',
