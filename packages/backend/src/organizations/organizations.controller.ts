@@ -146,24 +146,15 @@ export class OrganizationsController {
 	}
 
 	@Get(':organizationId/search')
-	// The service always takes the user's permissions into account for the search,
-	// but we check here if the user is allowed to search at all to avoid unnecessary
-	// database queries.
-	// @CheckAbilities({
-	// 	action: Action.Manage,
-	// 	subject: SubjectType,
-	// 	useParams: true,
-	// 	overrideParams: {
-	// 		organizationId: 'id',
-	// 	},
-	// })
 	search(
 		@User() user: IUser,
 		@Param('organizationId') organizationId: string,
 		@Query('query') query: string,
 	): Promise<SearchDto> {
 		const SEARCH_ROLES: RoleType[] = ['ORGADMIN', 'PORTFOLIO'];
-		// TODO: move authz logic to casl, reinstate @CheckAbilities
+		// The service always takes the user's permissions into account for the search,
+		// but we check here if the user is allowed to search at all to avoid unnecessary
+		// database queries.
 		if (
 			user.role.organizationId !== organizationId ||
 			!SEARCH_ROLES.includes(user.role.roleType)
