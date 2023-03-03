@@ -4,5 +4,5 @@ import { locale } from '$i18n/i18n-svelte';
 
 export const labelHint = () =>
 	get(locale) === 'ar'
-		? '(اختياري) إذا تم توفير تسمية ، فسيتم استخدامها بدلاً من الاسم الكامل في واجهة المستخدم.'
-		: '(Optional) If a label is provided, it will be used instead of the full name in the UI.';
+		? '(اختياري) استخدم تسمية مخصصة للإشارة إلى هذا الكيان.'
+		: '(Optional) Use a custom label to refer to this entity.';
