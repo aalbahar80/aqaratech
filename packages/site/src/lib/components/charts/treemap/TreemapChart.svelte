@@ -115,10 +115,7 @@ Create a treemap from a d3-hierarchy.
 				>
 					<div class="node-contents">
 						<div
-							class={classes(
-								height > width ? 'flex-col' : 'flex-row',
-								'flex flex-nowrap gap-x-2 overflow-hidden text-ellipsis',
-							)}
+							class="flex flex-col flex-nowrap gap-x-2 overflow-hidden text-ellipsis"
 							class:text-xs={area < 0.03}
 							class:text-md={area > 0.03 && area < 0.07}
 							class:text-xl={area > 0.07}
@@ -171,6 +168,9 @@ Create a treemap from a d3-hierarchy.
 	}
 
 	.node-contents {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
 		height: 100%;
 		padding: 0.3rem 0.4rem;
