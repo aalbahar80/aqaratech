@@ -28,6 +28,8 @@ playwright-report/
 storageState.json
 storage-state
 packages/test/downloads/
+.nyc_output/
+coverage/
 
 # i18n
 **/tolgee/generated
