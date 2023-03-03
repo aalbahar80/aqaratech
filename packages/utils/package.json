@@ -21,7 +21,7 @@
 	"devDependencies": {
 		"@logtail/types": "0.2.0",
 		"@sentry/types": "7.40.0",
-		"@types/node": "18.14.2",
+		"@types/node": "18.14.4",
 		"@vitest/ui": "0.29.2",
 		"eslint-config-custom": "workspace:*",
 		"ts-toolbelt": "9.6.0",
