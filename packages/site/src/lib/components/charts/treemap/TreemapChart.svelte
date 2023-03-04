@@ -2,6 +2,7 @@
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-nocheck
 	import * as Pancake from '@sveltejs/pancake';
+	import clsx from 'clsx';
 	import { treemap } from 'd3';
 
 	import * as eases from 'svelte/easing';
@@ -105,15 +106,23 @@ Create a treemap from a d3-hierarchy.
 				{@const width = (node.x1 - node.x0) / ($extents.x2 - $extents.x1)}
 				{@const height = (node.y1 - node.y0) / ($extents.y1 - $extents.y2)}
 				{@const area = width * height}
+				{@const leaf = !node.children}
 
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
 					in:fade={{ duration: 400 }}
-					class="node"
-					class:leaf={!node.children}
+					class="pointer-events-auto absolute h-full w-full overflow-hidden bg-white"
+					class:cursor-pointer={!leaf}
 					on:click={() => select(node)}
 				>
-					<div class="node-contents">
+					<!-- Tile -->
+					<div
+						class={clsx(
+							'flex h-full w-full items-center justify-center rounded-lg border-4 border-white px-1 py-1.5 text-white',
+							leaf ? 'bg-gray-400' : 'bg-gray-500',
+						)}
+					>
+						<!-- Label -->
 						<div
 							class="flex flex-col flex-nowrap gap-x-2 overflow-hidden text-ellipsis"
 							class:text-xs={area < 0.03}
@@ -152,21 +161,5 @@ Create a treemap from a d3-hierarchy.
 		padding: 0;
 		margin: 0 -1px 36px -1px;
 		overflow: hidden;
-	}
-
-	.node {
-		@apply pointer-events-auto absolute h-full w-full overflow-hidden bg-white;
-	}
-
-	.node:not(.leaf) {
-		@apply cursor-pointer;
-	}
-
-	.node-contents {
-		@apply flex h-full w-full items-center justify-center rounded-lg border-4 border-white bg-gray-400 px-1 py-1.5 text-white;
-	}
-
-	.node:not(.leaf) .node-contents {
-		@apply bg-gray-500;
 	}
 </style>
