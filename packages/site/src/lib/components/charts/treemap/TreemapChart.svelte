@@ -102,10 +102,6 @@ Create a treemap from a d3-hierarchy.
 	>
 		<Treemap {root} let:node>
 			{#if is_visible(node, selected)}
-				<!-- only display label if square is big enough -->
-				{@const width = (node.x1 - node.x0) / ($extents.x2 - $extents.x1)}
-				{@const height = (node.y1 - node.y0) / ($extents.y1 - $extents.y2)}
-				{@const area = width * height}
 				{@const leaf = !node.children}
 
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -125,12 +121,9 @@ Create a treemap from a d3-hierarchy.
 						<!-- Label -->
 						<div
 							class="flex flex-col flex-nowrap gap-x-2 overflow-hidden text-ellipsis"
-							class:text-xs={area < 0.03}
-							class:text-md={area > 0.03 && area < 0.07}
-							class:text-xl={area > 0.07}
 						>
 							<!-- Consider passing in link in data structure if there is a need to optimize -->
-							{#if getLink?.(node) && width > 0.02 && height > 0.06}
+							{#if getLink?.(node)}
 								<a
 									class="absolute right-2 top-2 align-middle text-lg text-indigo-600"
 									class:hidden={node.children}
@@ -142,10 +135,8 @@ Create a treemap from a d3-hierarchy.
 									&#8599;
 								</a>
 							{/if}
-							{#if area > 0.012}
-								<strong>{getLabel(node) ?? ''}</strong>
-								<span>{fmtCurrency(node.value)}</span>
-							{/if}
+							<strong>{getLabel(node) ?? ''}</strong>
+							<span>{fmtCurrency(node.value)}</span>
 						</div>
 					</div>
 				</div>
