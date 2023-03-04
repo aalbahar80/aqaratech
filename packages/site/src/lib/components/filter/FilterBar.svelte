@@ -18,7 +18,7 @@
 	<div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:max-w-full lg:px-8">
 		<slot name="hero" />
 
-		<section aria-labelledby="filter-heading" class="py-6">
+		<section aria-labelledby="filter-heading" class="py-4 md:py-6">
 			<h2 id="filter-heading" class="sr-only">{$L.filter.filters()}</h2>
 
 			<div class="flex flex-row-reverse items-center justify-between">
