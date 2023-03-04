@@ -118,7 +118,7 @@ Create a treemap from a d3-hierarchy.
 					>
 						<!-- Label -->
 						<div
-							class="@[3em]:flex @[6em]:text-xs @[8em]:text-base @[15em]:text-4xl hidden flex-col text-[0.5rem] transition-[font-size] duration-150 ease-out"
+							class="@[3em]:flex @[6em]:text-xs @[8em]:text-base @[15em]:text-4xl hidden flex-col text-[0.5rem] transition-[font-size] duration-700 ease-out"
 						>
 							<!-- Consider passing in link in data structure if there is a need to optimize -->
 							{#if getLink?.(node)}
