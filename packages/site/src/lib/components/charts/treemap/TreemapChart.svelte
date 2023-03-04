@@ -7,9 +7,11 @@
 
 	import * as eases from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
+	import { toBrowserLocale } from '@self/utils';
+	import { FORMATS } from '@self/utils/src/entity/form/field/format';
 
+	import { locale } from '$i18n/i18n-svelte';
 	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
-	import { fmtCurrency } from '$lib/i18n/format';
 
 	// export let hierarchy: HierarchyNode<any>;
 	// export let getLabel: (node: HierarchyNode<any>) => string;
@@ -134,7 +136,12 @@ Create a treemap from a d3-hierarchy.
 								</a>
 							{/if}
 							<strong>{getLabel(node) ?? ''}</strong>
-							<span>{fmtCurrency(node.value)}</span>
+							<span
+								>{new Intl.NumberFormat(toBrowserLocale($locale), {
+									...FORMATS.currency,
+									style: undefined,
+								}).format(node.value)}</span
+							>
 						</div>
 					</div>
 				</div>
