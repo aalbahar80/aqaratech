@@ -11,7 +11,7 @@
 	{@const cellValueType = typeof cell.getValue()}
 	<td
 		class={clsx(
-			'py-4 px-2 text-base text-gray-600',
+			'py-2 px-2 text-base text-gray-600',
 			{ 'slashed-zero tabular-nums': cellValueType === 'number' },
 			TABLE_ROW_SPACING,
 		)}
