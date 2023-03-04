@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.15.1
+
+### Patch Changes
+
+- b1c4a77dc: various - center tile labe - fix MO button
+
 ## 3.15.0
 
 ### Minor Changes

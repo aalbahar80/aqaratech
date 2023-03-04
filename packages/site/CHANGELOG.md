@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.16.1
+
+### Patch Changes
+
+- b1c4a77dc: various - center tile labe - fix MO button
+
 ## 2.16.0
 
 ### Minor Changes
