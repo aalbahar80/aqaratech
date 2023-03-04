@@ -7,7 +7,6 @@
 
 	import * as eases from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
-	import { fade } from 'svelte/transition';
 
 	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
 	import { fmtCurrency } from '$lib/i18n/format';
@@ -119,8 +118,7 @@ Create a treemap from a d3-hierarchy.
 					>
 						<!-- Label -->
 						<div
-							class="@[4em]:flex @[8em]:text-base @[15em]:text-4xl hidden flex-col text-xs"
-							in:fade={{ duration: 400 }}
+							class="@[4em]:flex @[8em]:text-base @[15em]:text-4xl hidden flex-col text-xs transition-[font-size] duration-150 ease-out"
 						>
 							<!-- Consider passing in link in data structure if there is a need to optimize -->
 							{#if getLink?.(node)}
