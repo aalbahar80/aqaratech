@@ -114,12 +114,12 @@ Create a treemap from a d3-hierarchy.
 					<!-- Tile -->
 					<div
 						class={clsx(
-							'flex h-full w-full items-center justify-center rounded-lg border-4 border-white px-1 py-1.5 text-white',
+							'@container flex h-full w-full items-center justify-center rounded-lg border-4 border-white px-1 py-1.5 text-white',
 							leaf ? 'bg-gray-400' : 'bg-gray-500',
 						)}
 					>
 						<!-- Label -->
-						<div class="flex flex-col">
+						<div class="@[6em]:flex hidden flex-col">
 							<!-- Consider passing in link in data structure if there is a need to optimize -->
 							{#if getLink?.(node)}
 								<a
