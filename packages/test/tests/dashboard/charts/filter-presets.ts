@@ -24,7 +24,7 @@ export const chartTestPresets = [
 		name: 'Unspecified Property',
 		filter: {
 			...base,
-			property: 'Unspecified',
+			property: 'Unspecified property',
 		},
 	},
 	{

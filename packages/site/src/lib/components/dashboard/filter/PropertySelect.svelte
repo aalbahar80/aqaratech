@@ -22,7 +22,7 @@
 	// Not for income/invoices pages, which are always associated with a property.
 	const unspecifedPropertyOption = {
 		value: null,
-		label: $L.general.unspecified(),
+		label: $L.other.unspecifiedProperty(),
 	};
 
 	const expensesPages = ['financials/expenses'];

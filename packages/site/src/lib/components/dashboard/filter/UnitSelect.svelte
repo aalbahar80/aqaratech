@@ -23,7 +23,7 @@
 	// Not for income/invoices pages, which are always associated with a unit.
 	const unspecifedUnitOption = {
 		value: null,
-		label: $L.general.unspecified(),
+		label: $L.other.unspecifiedUnit(),
 	};
 
 	const expensesPages = ['financials/expenses'];
@@ -50,7 +50,7 @@
 			  [
 					{
 						value: undefined,
-						label: 'No units',
+						label: '',
 					},
 			  ];
 
