@@ -106,7 +106,6 @@ Create a treemap from a d3-hierarchy.
 
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
-					in:fade={{ duration: 400 }}
 					class="pointer-events-auto absolute h-full w-full overflow-hidden bg-white"
 					class:cursor-pointer={!leaf}
 					on:click={() => select(node)}
@@ -121,6 +120,7 @@ Create a treemap from a d3-hierarchy.
 						<!-- Label -->
 						<div
 							class="@[4em]:flex @[8em]:text-base @[15em]:text-4xl hidden flex-col text-xs"
+							in:fade={{ duration: 400 }}
 						>
 							<!-- Consider passing in link in data structure if there is a need to optimize -->
 							{#if getLink?.(node)}
