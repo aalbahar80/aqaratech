@@ -10,5 +10,9 @@ export const view = async (file: FileDto, organizationId: string) => {
 	});
 
 	// opens in new tab because of content-disposition header
-	window.open(url);
+	// window.open(url);
+
+	// open in same tab
+	// @ts-expect-error overkill
+	window.location = url;
 };
