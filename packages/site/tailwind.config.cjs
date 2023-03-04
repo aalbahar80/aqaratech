@@ -21,6 +21,7 @@ module.exports = {
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/aspect-ratio'),
+		require('@tailwindcss/container-queries'),
 
 		// TODO: remove once feature is released
 		// https://github.com/tailwindlabs/tailwindcss/pull/10166#issuecomment-1432382055

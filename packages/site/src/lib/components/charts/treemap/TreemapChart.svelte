@@ -144,7 +144,7 @@ Create a treemap from a d3-hierarchy.
 	</Pancake.Chart>
 </div>
 
-<style>
+<style lang="postcss">
 	.chart {
 		width: calc(100% + 2px);
 		height: 600px;
@@ -154,33 +154,18 @@ Create a treemap from a d3-hierarchy.
 	}
 
 	.node {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		background-color: white;
-		overflow: hidden;
-		pointer-events: all;
+		@apply pointer-events-auto absolute h-full w-full overflow-hidden bg-white;
 	}
 
 	.node:not(.leaf) {
-		cursor: pointer;
+		@apply cursor-pointer;
 	}
 
 	.node-contents {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-		padding: 0.3rem 0.4rem;
-		border: 5px solid white;
-		background-color: hsl(240, 8%, 70%);
-		color: white;
-		border-radius: 8px;
-		box-sizing: border-box;
+		@apply flex h-full w-full items-center justify-center rounded-lg border-4 border-white bg-gray-400 px-1 py-1.5 text-white;
 	}
 
 	.node:not(.leaf) .node-contents {
-		background-color: hsl(240, 8%, 44%);
+		@apply bg-gray-500;
 	}
 </style>
