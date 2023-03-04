@@ -21,7 +21,7 @@
 		<section aria-labelledby="filter-heading" class="py-6">
 			<h2 id="filter-heading" class="sr-only">{$L.filter.filters()}</h2>
 
-			<div class="flex  flex-row-reverse items-center justify-between">
+			<div class="flex flex-row-reverse items-center justify-between">
 				{#each persistent as filter, idx (filter.id)}
 					<FilterRadio
 						{filter}
