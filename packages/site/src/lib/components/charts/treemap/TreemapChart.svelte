@@ -106,6 +106,7 @@ Create a treemap from a d3-hierarchy.
 				{@const height = (node.y1 - node.y0) / ($extents.y1 - $extents.y2)}
 				{@const area = width * height}
 
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
 					in:fade={{ duration: 400 }}
 					class="node"
