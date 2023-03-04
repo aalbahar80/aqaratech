@@ -57,7 +57,7 @@ test.describe('paid rent', () => {
 		await pay.click();
 
 		// assert that payment is still marked as unpaid
-		await expect.soft(page.getByText('Past due')).toBeVisible();
+		await expect.soft(page.getByText('Unpaid (Past due)')).toBeVisible();
 		await expect.soft(pay).toBeVisible();
 	});
 });

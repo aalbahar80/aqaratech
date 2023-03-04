@@ -23,12 +23,12 @@ export const getInvoiceBadge = (trx: {
 		};
 	} else if (due && due < new Date()) {
 		return {
-			label: LL.badge.overdue(),
+			label: `${LL.badge.unpaid()} (${LL.badge.overdue()})`,
 			color: 'red',
 		};
 	} else if (post < new Date()) {
 		return {
-			label: LL.badge.due(),
+			label: `${LL.badge.unpaid()} (${LL.badge.due()})`,
 			color: 'yellow',
 		};
 	} else {
