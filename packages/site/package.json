@@ -41,7 +41,7 @@
 		"@tailwindcss/container-queries": "0.1.0",
 		"@tailwindcss/forms": "0.5.3",
 		"@tailwindcss/typography": "0.5.9",
-		"@tanstack/svelte-query": "4.24.10",
+		"@tanstack/svelte-query": "4.26.0",
 		"@tanstack/svelte-table": "8.7.9",
 		"@types/cookie": "0.5.1",
 		"@types/d3": "7.4.0",
@@ -79,7 +79,7 @@
 		"svelte-headlessui": "0.0.15",
 		"svelte-preprocess": "5.0.1",
 		"tailwindcss": "3.2.7",
-		"tier": "5.5.1",
+		"tier": "5.5.3",
 		"tippy.js": "6.3.7",
 		"ts-toolbelt": "9.6.0",
 		"tslib": "2.5.0",
@@ -90,7 +90,7 @@
 		"vite": "4.1.4",
 		"vite-plugin-iso-import": "1.0.0",
 		"vitest": "0.29.2",
-		"zod": "3.20.6"
+		"zod": "3.21.0"
 	},
 	"type": "module",
 	"dependencies": {
