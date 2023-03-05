@@ -69,9 +69,8 @@
 @component
 Create a treemap from a d3-hierarchy.
 -->
-
 <button
-	class="flex items-center p-1.5"
+	class="mb-4 mt-8 flex h-4 items-center"
 	disabled={!selected.parent}
 	on:click={() => (selected = selected.parent)}
 >
