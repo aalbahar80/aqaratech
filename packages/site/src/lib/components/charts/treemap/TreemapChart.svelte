@@ -137,7 +137,7 @@ Create a treemap from a d3-hierarchy.
 									&#8599;
 								</a>
 							{/if}
-							<strong>{getLabel(node) ?? ''}</strong>
+							<strong class="md:pb-3">{getLabel(node) ?? ''}</strong>
 							<span
 								>{new Intl.NumberFormat(toBrowserLocale($locale), {
 									...FORMATS.currency,
