@@ -7,6 +7,7 @@
 
 	import * as eases from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
+	import { fade } from 'svelte/transition';
 	import { toBrowserLocale } from '@self/utils';
 	import { FORMATS } from '@self/utils/src/entity/form/field/format';
 
@@ -110,6 +111,7 @@ Create a treemap from a d3-hierarchy.
 					class="pointer-events-auto absolute h-full w-full overflow-hidden bg-white"
 					class:cursor-pointer={!leaf}
 					on:click={() => select(node)}
+					in:fade={{ duration: 400 }}
 				>
 					<!-- Tile -->
 					<div
