@@ -116,8 +116,10 @@ Create a treemap from a d3-hierarchy.
 					<!-- Tile -->
 					<div
 						class={clsx(
-							'@container flex h-full w-full items-center justify-center rounded-lg border-4 border-white px-1 py-1.5 text-white',
-							leaf ? 'bg-gray-400' : 'bg-gray-500',
+							'@container flex h-full w-full items-center justify-center rounded-lg border-4 border-white px-1 py-1.5 text-gray-500',
+							leaf
+								? 'bg-gradient-to-br from-blue-600/50 via-blue-400/50 to-rose-50'
+								: 'bg-gradient-to-br from-blue-100 to-rose-50',
 						)}
 					>
 						<!-- Label -->
