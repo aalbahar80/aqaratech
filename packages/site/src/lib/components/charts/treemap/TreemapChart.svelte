@@ -95,7 +95,10 @@ Create a treemap from a d3-hierarchy.
 	{/each}
 </button>
 
-<div class="chart">
+<div
+	class="relative -mx-[1px] mb-9 h-[600px] overflow-hidden"
+	style:width="calc(100% + 2px)"
+>
 	<Pancake.Chart
 		x1={$extents.x1}
 		x2={$extents.x2}
@@ -153,13 +156,3 @@ Create a treemap from a d3-hierarchy.
 		</Treemap>
 	</Pancake.Chart>
 </div>
-
-<style lang="postcss">
-	.chart {
-		width: calc(100% + 2px);
-		height: 600px;
-		padding: 0;
-		margin: 0 -1px 36px -1px;
-		overflow: hidden;
-	}
-</style>
