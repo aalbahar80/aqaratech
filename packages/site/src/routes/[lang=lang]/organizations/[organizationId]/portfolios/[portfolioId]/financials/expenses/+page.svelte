@@ -12,8 +12,6 @@
 
 	export let data: PageData;
 
-	const maxHeight = 872;
-
 	$: expensesByCategory.set(data.expensesByCategory);
 </script>
 
@@ -30,7 +28,7 @@
 	title={$L.charts.expensesLocationTreeMap.title()}
 	subtitle={$L.charts.expensesLocationTreeMap.subtitle()}
 	subtitle2={$L.charts.expensesLocationTreeMap.subtitle2()}
-	{maxHeight}
+	isFixedHeight={false}
 >
 	<ExpenseTreemapProperty expenses={data.expensesByLocation} />
 </ChartWrapper>
@@ -40,7 +38,7 @@
 	title={$L.charts.expensesCategoryTreeMap.title()}
 	subtitle={$L.charts.expensesCategoryTreeMap.subtitle()}
 	subtitle2={$L.charts.expensesCategoryTreeMap.subtitle2()}
-	{maxHeight}
+	isFixedHeight={false}
 >
 	<ExpenseTreemapCategory />
 </ChartWrapper>

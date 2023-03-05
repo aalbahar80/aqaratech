@@ -8,17 +8,15 @@
 	export let title: string;
 	export let subtitle = '';
 	export let subtitle2 = '';
-	/**
-	 * Should be the same for all charts. Except treemaps, which have a larger height.
-	 * Make sure treemaps are not on the same row as other charts.
-	 */
-	export let maxHeight = 696;
+	/** Should be the same for all charts. Except treemaps, which have a larger height.
+	 * Make sure treemaps are not on the same row as other charts. */
+	export let isFixedHeight = true;
 </script>
 
 <div
 	data-testid="chart-card"
 	class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
-	style:height="{maxHeight}px"
+	class:chart-fixed-height={isFixedHeight}
 >
 	{#if empty}
 		<div
@@ -39,3 +37,9 @@
 		<slot />
 	{/if}
 </div>
+
+<style>
+	.chart-fixed-height {
+		height: 696px;
+	}
+</style>

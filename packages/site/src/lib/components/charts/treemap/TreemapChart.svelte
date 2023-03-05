@@ -96,7 +96,7 @@ Create a treemap from a d3-hierarchy.
 </button>
 
 <div
-	class="relative -mx-[1px] mb-9 h-[600px] overflow-hidden"
+	class="relative -mx-[1px] mb-9 h-[400px] overflow-hidden md:h-[600px]"
 	style:width="calc(100% + 2px)"
 >
 	<Pancake.Chart
