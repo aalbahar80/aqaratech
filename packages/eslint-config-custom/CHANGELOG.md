@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.16.0
+
+### Minor Changes
+
+- a0d7b77c1: treemap improvements
+
 ## 2.15.1
 
 ### Patch Changes

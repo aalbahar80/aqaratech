@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.16.0
+
+### Minor Changes
+
+- a0d7b77c1: treemap improvements
+
 ## 3.15.1
 
 ### Patch Changes

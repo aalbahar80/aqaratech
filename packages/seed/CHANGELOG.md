@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.16.0
+
+### Minor Changes
+
+- a0d7b77c1: treemap improvements
+
+### Patch Changes
+
+- Updated dependencies [a0d7b77c1]
+  - @self/utils@3.16.0
+
 ## 2.15.1
 
 ### Patch Changes

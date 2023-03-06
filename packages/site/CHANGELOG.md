@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.17.0
+
+### Minor Changes
+
+- a0d7b77c1: treemap improvements
+
 ## 2.16.1
 
 ### Patch Changes
