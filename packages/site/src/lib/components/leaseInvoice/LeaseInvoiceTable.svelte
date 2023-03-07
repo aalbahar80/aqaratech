@@ -149,7 +149,10 @@
 		mfPaymentId: false,
 	}}
 >
-	<div slot="filter" let:filters>
+	<div
+		slot="filter"
+		let:filters
+	>
 		<FilterBar responsive={[...filters, ...(extraFilters ?? [])]}>
 			<div slot="custom">
 				{#if showOptions}

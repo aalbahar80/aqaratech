@@ -75,7 +75,10 @@
 					<div class="bg-white px-4 py-5 sm:p-6">
 						<div class="grid grid-cols-6 gap-6">
 							<div class="col-span-6 sm:col-span-3">
-								<label for="count" class="text-sm font-medium text-gray-700">
+								<label
+									for="count"
+									class="text-sm font-medium text-gray-700"
+								>
 									Count
 								</label>
 								<input
@@ -91,7 +94,10 @@
 							</div>
 
 							<!-- Divider -->
-							<div aria-hidden="true" class="col-span-full">
+							<div
+								aria-hidden="true"
+								class="col-span-full"
+							>
 								<div class="py-5">
 									<div class="border-t  border-gray-200" />
 								</div>

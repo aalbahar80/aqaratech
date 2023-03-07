@@ -37,7 +37,11 @@
 					let:active
 					let:checked
 				>
-					<slot {active} {checked} {option}>
+					<slot
+						{active}
+						{checked}
+						{option}
+					>
 						<div
 							class={classes(
 								!option.disabled

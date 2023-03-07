@@ -10,9 +10,15 @@
 	export let value: unknown;
 </script>
 
-<div class="row" data-testid={key}>
+<div
+	class="row"
+	data-testid={key}
+>
 	<dt class="label">{getIntlLabel(key)}</dt>
-	<dd class="definition" data-testid={value ?? ''}>
+	<dd
+		class="definition"
+		data-testid={value ?? ''}
+	>
 		{#if key === 'mfPaymentId' && value && typeof value === 'string'}
 			<a
 				href={getMyfatoorahReceipt(value)}

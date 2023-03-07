@@ -41,7 +41,14 @@
 	subtitle={$L.charts.incomeBar.subtitle()}
 	{empty}
 >
-	<Chart let:height let:width>
-		<canvas {height} {width} use:revenueChart={barDatasets} />
+	<Chart
+		let:height
+		let:width
+	>
+		<canvas
+			{height}
+			{width}
+			use:revenueChart={barDatasets}
+		/>
 	</Chart>
 </ChartWrapper>

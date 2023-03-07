@@ -13,4 +13,7 @@
 	const columnHelper = createColumnHelper<LeaseDto>();
 </script>
 
-<LeaseTable data={data.leases} extraColumns={[tenantColumnDef(columnHelper)]} />
+<LeaseTable
+	data={data.leases}
+	extraColumns={[tenantColumnDef(columnHelper)]}
+/>

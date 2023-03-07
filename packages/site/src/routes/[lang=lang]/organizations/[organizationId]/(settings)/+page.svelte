@@ -15,4 +15,7 @@
 	});
 </script>
 
-<AutoDetailsPane details={obj} keys={['fullName', 'label', 'dueDuration']} />
+<AutoDetailsPane
+	details={obj}
+	keys={['fullName', 'label', 'dueDuration']}
+/>

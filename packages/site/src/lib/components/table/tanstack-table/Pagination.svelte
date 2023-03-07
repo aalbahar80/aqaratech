@@ -60,7 +60,10 @@
 	</div>
 	<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
 		<div class="hidden lg:block">
-			<p data-testid="pagination-info" class="text-sm text-gray-700">
+			<p
+				data-testid="pagination-info"
+				class="text-sm text-gray-700"
+			>
 				{$L.pagination.showing()}
 				<span class="font-medium">{fmtNumber(idxStart)}</span>
 				{$L.pagination.to()}
@@ -97,7 +100,10 @@
 					disabled={!table.getCanPreviousPage()}
 				>
 					<span class="sr-only">Previous</span>
-					<HeroiconsChevronLeft20Solid class="h-5 w-5" aria-hidden="true" />
+					<HeroiconsChevronLeft20Solid
+						class="h-5 w-5"
+						aria-hidden="true"
+					/>
 				</button>
 				{#each getButtons(pageIdx, table.getPageCount()) as button}
 					{#if button}
@@ -133,7 +139,10 @@
 					disabled={!table.getCanNextPage()}
 				>
 					<span class="sr-only">Next</span>
-					<HeroiconsChevronRight20Solid class="h-5 w-5" aria-hidden="true" />
+					<HeroiconsChevronRight20Solid
+						class="h-5 w-5"
+						aria-hidden="true"
+					/>
 				</button>
 			</nav>
 		</div>

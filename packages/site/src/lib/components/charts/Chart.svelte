@@ -161,5 +161,8 @@
 </script>
 
 <div>
-	<slot {height} {width} />
+	<slot
+		{height}
+		{width}
+	/>
 </div>

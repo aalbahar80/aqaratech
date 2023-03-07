@@ -12,4 +12,8 @@
 	});
 </script>
 
-<EnhancedForm {form} {formModel} data={data.unit} />
+<EnhancedForm
+	{form}
+	{formModel}
+	data={data.unit}
+/>

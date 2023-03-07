@@ -9,4 +9,7 @@
 
 <PayoutPage payout={data.payout} />
 
-<AutoDetailsPane details={data.payout} keys={['postAt', 'amount', 'memo']} />
+<AutoDetailsPane
+	details={data.payout}
+	keys={['postAt', 'amount', 'memo']}
+/>

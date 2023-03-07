@@ -12,4 +12,8 @@
 	});
 </script>
 
-<EnhancedForm {form} {formModel} data={data.property} />
+<EnhancedForm
+	{form}
+	{formModel}
+	data={data.property}
+/>

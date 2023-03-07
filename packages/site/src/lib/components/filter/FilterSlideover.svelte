@@ -65,7 +65,10 @@
 						on:click={close}
 					>
 						<span class="sr-only">Close menu</span>
-						<HeroiconsXMark20Solid class="h-5 w-5" aria-hidden="true" />
+						<HeroiconsXMark20Solid
+							class="h-5 w-5"
+							aria-hidden="true"
+						/>
 					</button>
 				</div>
 

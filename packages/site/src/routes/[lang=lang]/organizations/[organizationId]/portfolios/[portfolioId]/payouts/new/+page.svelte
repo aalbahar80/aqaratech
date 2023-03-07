@@ -11,4 +11,7 @@
 	});
 </script>
 
-<EnhancedForm {formModel} {form} />
+<EnhancedForm
+	{formModel}
+	{form}
+/>

@@ -23,4 +23,7 @@
 		<Arrow />
 	</a>
 </TextButton>
-<EnhancedForm {formModel} {form} />
+<EnhancedForm
+	{formModel}
+	{form}
+/>

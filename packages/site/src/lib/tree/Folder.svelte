@@ -16,8 +16,15 @@
 	}
 </script>
 
-<div class="flex gap-2" class:hidden={node.data.id === ROOT_ID}>
-	<button class:expanded on:click={toggle} class="ps-6 flex gap-2 font-bold">
+<div
+	class="flex gap-2"
+	class:hidden={node.data.id === ROOT_ID}
+>
+	<button
+		class:expanded
+		on:click={toggle}
+		class="ps-6 flex gap-2 font-bold"
+	>
 		<svelte:component
 			this={expanded ? HeroiconsFolderOpen : HeroiconsFolder}
 			class="text-gray-600"

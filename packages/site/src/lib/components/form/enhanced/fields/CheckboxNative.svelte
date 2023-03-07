@@ -32,7 +32,10 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/checkbox#attr-va
 	</div>
 	<div class="mx-3 text-sm">
 		<div class="flex items-center gap-2">
-			<label for={formField.name} class="font-medium text-gray-700">
+			<label
+				for={formField.name}
+				class="font-medium text-gray-700"
+			>
 				{formField.label}
 			</label>
 
@@ -42,7 +45,10 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/checkbox#attr-va
 				</div>
 			{/if}
 		</div>
-		<p id={`${formField.name}-description`} class="text-gray-500">
+		<p
+			id={`${formField.name}-description`}
+			class="text-gray-500"
+		>
 			{formField.hint}
 		</p>
 	</div>

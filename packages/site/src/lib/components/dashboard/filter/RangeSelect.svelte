@@ -1,4 +1,7 @@
-<script lang="ts" context="module">
+<script
+	lang="ts"
+	context="module"
+>
 	import Select from '$lib/components/form/inputs/Select.svelte';
 	import { range } from '$lib/stores/filter/range';
 </script>

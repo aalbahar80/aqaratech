@@ -50,8 +50,15 @@
 	];
 </script>
 
-<Table items={data.results} paginationDto={data.pagination} {columns}>
-	<div slot="filter" let:filters>
+<Table
+	items={data.results}
+	paginationDto={data.pagination}
+	{columns}
+>
+	<div
+		slot="filter"
+		let:filters
+	>
 		<FilterBar responsive={filters}>
 			<div slot="custom">
 				<FilterBarActions>

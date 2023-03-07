@@ -6,4 +6,7 @@
 	export let root: ExpenseNode;
 </script>
 
-<Folder node={root} expanded />
+<Folder
+	node={root}
+	expanded
+/>

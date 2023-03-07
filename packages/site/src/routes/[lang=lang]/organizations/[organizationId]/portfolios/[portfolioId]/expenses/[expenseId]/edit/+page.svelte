@@ -12,4 +12,8 @@
 	});
 </script>
 
-<EnhancedForm {form} {formModel} data={data.expense} />
+<EnhancedForm
+	{form}
+	{formModel}
+	data={data.expense}
+/>

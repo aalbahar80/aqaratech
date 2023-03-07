@@ -39,7 +39,10 @@
 		{...item.linkOptions}
 	>
 		{#if item.icon}
-			<svelte:component this={item.icon} class="h-5 w-5" />
+			<svelte:component
+				this={item.icon}
+				class="h-5 w-5"
+			/>
 		{:else}
 			<!--	 whitespace to align text	 -->
 			<span class="h-5 w-5" />
@@ -61,6 +64,9 @@
 </div>
 {#if item.children && expanded}
 	{#each item.children as child}
-		<svelte:self item={child} isChild />
+		<svelte:self
+			item={child}
+			isChild
+		/>
 	{/each}
 {/if}

@@ -14,7 +14,10 @@
 		<div class="flex flex-wrap items-center justify-between">
 			<div class="flex w-0 flex-1 items-center">
 				<span class="flex rounded-lg bg-indigo-800 p-2">
-					<HeroiconsXMark class="h-6 w-6 text-white" aria-hidden="true" />
+					<HeroiconsXMark
+						class="h-6 w-6 text-white"
+						aria-hidden="true"
+					/>
 				</span>
 				<p class="ml-3 truncate font-medium text-white">
 					{message}
@@ -39,7 +42,10 @@
 					class="-mr-1 flex rounded-md p-2 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
 				>
 					<span class="sr-only">Dismiss</span>
-					<HeroiconsXMark class="h-6 w-6 text-white" aria-hidden="true" />
+					<HeroiconsXMark
+						class="h-6 w-6 text-white"
+						aria-hidden="true"
+					/>
 				</button>
 			</div>
 		</div>

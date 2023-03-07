@@ -55,7 +55,10 @@
 
 <svelte:head>
 	<title>Aqaratech</title>
-	<meta name="description" content="Aqaratech Property Management" />
+	<meta
+		name="description"
+		content="Aqaratech Property Management"
+	/>
 	<HeadHrefLangs />
 </svelte:head>
 

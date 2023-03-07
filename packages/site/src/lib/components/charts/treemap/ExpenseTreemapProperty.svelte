@@ -79,5 +79,9 @@
 </script>
 
 {#key expenses}
-	<TreemapChart hierarchy={hierarchyData} {getLabel} {getLink} />
+	<TreemapChart
+		hierarchy={hierarchyData}
+		{getLabel}
+		{getLink}
+	/>
 {/key}

@@ -33,7 +33,10 @@
 						}}
 					>
 						<span class="sr-only">Dismiss</span>
-						<HeroiconsXMark class="h-5 w-5" aria-hidden="true" />
+						<HeroiconsXMark
+							class="h-5 w-5"
+							aria-hidden="true"
+						/>
 					</button>
 				</div>
 			</div>

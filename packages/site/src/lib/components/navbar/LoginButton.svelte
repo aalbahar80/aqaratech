@@ -5,7 +5,12 @@
 </script>
 
 <TextButton>
-	<a href={LOGIN} rel="external" data-sveltekit-reload class="font-semibold">
+	<a
+		href={LOGIN}
+		rel="external"
+		data-sveltekit-reload
+		class="font-semibold"
+	>
 		{$L.buttons.login()}
 	</a>
 </TextButton>

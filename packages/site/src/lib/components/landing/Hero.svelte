@@ -6,7 +6,10 @@
 	import { LOGIN } from '$lib/constants/routes';
 </script>
 
-<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-testid="hero">
+<div
+	class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+	data-testid="hero"
+>
 	<div class="flex flex-col gap-8 pt-20 pb-16 text-center lg:pt-32">
 		<h1
 			class="font-display mx-auto max-w-4xl text-5xl font-medium tracking-tight text-slate-900 max-[300px]:text-4xl sm:text-7xl"

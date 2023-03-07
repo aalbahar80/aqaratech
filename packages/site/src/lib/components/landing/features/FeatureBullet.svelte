@@ -9,7 +9,11 @@
 		<div
 			class="absolute flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white"
 		>
-			<svelte:component this={item.icon} class="h-8 w-8" aria-hidden="true" />
+			<svelte:component
+				this={item.icon}
+				class="h-8 w-8"
+				aria-hidden="true"
+			/>
 		</div>
 		<!-- <p class="ml-16 text-lg font-medium leading-6 text-gray-900"> -->
 		<!-- {item.name} -->

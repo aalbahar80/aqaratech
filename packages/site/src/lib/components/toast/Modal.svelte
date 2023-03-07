@@ -1,4 +1,7 @@
-<script lang="ts" context="module">
+<script
+	lang="ts"
+	context="module"
+>
 	import { writable } from 'svelte/store';
 
 	import type { ModalContent } from '$lib/components/toast/modal-content';

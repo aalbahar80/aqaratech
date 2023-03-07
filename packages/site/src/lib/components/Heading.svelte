@@ -75,7 +75,12 @@
 				<div slot="menu">
 					<DropdownMenu>
 						<slot name="menu-items" />
-						<MenuItem as="div" disabled={!onDelete} let:active let:disabled>
+						<MenuItem
+							as="div"
+							disabled={!onDelete}
+							let:active
+							let:disabled
+						>
 							<button
 								{disabled}
 								on:click={() => {
@@ -92,8 +97,14 @@
 								}}
 								class="w-full"
 							>
-								<MenuItemChild {active} {disabled}>
-									<MenuItemIcon icon={Fa6SolidTrashCan} {disabled} />
+								<MenuItemChild
+									{active}
+									{disabled}
+								>
+									<MenuItemIcon
+										icon={Fa6SolidTrashCan}
+										{disabled}
+									/>
 									{$L.buttons.delete()}
 								</MenuItemChild>
 							</button>

@@ -12,4 +12,8 @@
 	});
 </script>
 
-<EnhancedForm {form} {formModel} data={data.maintenanceOrder} />
+<EnhancedForm
+	{form}
+	{formModel}
+	data={data.maintenanceOrder}
+/>

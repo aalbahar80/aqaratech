@@ -63,7 +63,11 @@
 	};
 </script>
 
-<TransitionRoot show={open} on:afterLeave={() => (query = '')} appear>
+<TransitionRoot
+	show={open}
+	on:afterLeave={() => (query = '')}
+	appear
+>
 	<Dialog
 		class="fixed inset-0 z-50 overflow-y-auto p-4 sm:p-6 md:p-20"
 		on:close={() => {

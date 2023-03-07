@@ -57,7 +57,12 @@
 					<div
 						class="w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10"
 					>
-						<img class="w-full" src={feature.image} alt="" sizes="52.75rem" />
+						<img
+							class="w-full"
+							src={feature.image}
+							alt=""
+							sizes="52.75rem"
+						/>
 					</div>
 				</TabPanel>
 			{/each}

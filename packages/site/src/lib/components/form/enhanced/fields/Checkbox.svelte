@@ -35,7 +35,10 @@
 				</div>
 			{/if}
 		</SwitchLabel>
-		<SwitchDescription as="span" class="text-sm text-gray-500">
+		<SwitchDescription
+			as="span"
+			class="text-sm text-gray-500"
+		>
 			{formField.description}
 		</SwitchDescription>
 	</span>

@@ -11,7 +11,10 @@
 <div data-testid="details-pane">
 	<dl class="rounded-lg shadow">
 		{#each keys as key}
-			<DetailsPaneItem {key} value={details[key]} />
+			<DetailsPaneItem
+				{key}
+				value={details[key]}
+			/>
 		{/each}
 	</dl>
 </div>

@@ -1,4 +1,7 @@
-<script lang="ts" context="module">
+<script
+	lang="ts"
+	context="module"
+>
 	import L from '$i18n/i18n-svelte';
 	import DateInput from '$lib/components/dashboard/filter/DateInput.svelte';
 	import RangeSelect from '$lib/components/dashboard/filter/RangeSelect.svelte';

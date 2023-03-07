@@ -12,4 +12,8 @@
 	});
 </script>
 
-<EnhancedForm {form} {formModel} data={data.tenant} />
+<EnhancedForm
+	{form}
+	{formModel}
+	data={data.tenant}
+/>

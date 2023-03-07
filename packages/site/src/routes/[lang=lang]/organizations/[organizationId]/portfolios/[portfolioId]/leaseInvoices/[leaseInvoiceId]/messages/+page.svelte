@@ -6,4 +6,7 @@
 	export let data: PageData;
 </script>
 
-<MessageTable data={data.messages} invoice={data.leaseInvoice} />
+<MessageTable
+	data={data.messages}
+	invoice={data.leaseInvoice}
+/>

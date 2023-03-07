@@ -17,7 +17,10 @@
 	export let align = 'left';
 </script>
 
-<Menu as="div" class="relative z-10 inline-block text-left">
+<Menu
+	as="div"
+	class="relative z-10 inline-block text-left"
+>
 	<div>
 		<MenuButton
 			class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"

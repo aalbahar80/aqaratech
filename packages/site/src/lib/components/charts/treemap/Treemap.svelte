@@ -9,7 +9,10 @@
 </script>
 
 <pancake-treemap>
-	<TreemapNode node={root} let:node>
+	<TreemapNode
+		node={root}
+		let:node
+	>
 		<slot {node} />
 	</TreemapNode>
 </pancake-treemap>

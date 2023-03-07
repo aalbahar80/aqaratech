@@ -29,7 +29,10 @@
 			>
 		</div>
 	{:else}
-		<div class="prose prose-base lg:pb-10" in:fade>
+		<div
+			class="prose prose-base lg:pb-10"
+			in:fade
+		>
 			<h3>{title}</h3>
 			<p>{subtitle}</p>
 			<p class="italic text-gray-500">{subtitle2}</p>

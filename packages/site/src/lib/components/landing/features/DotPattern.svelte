@@ -32,5 +32,9 @@
 			/>
 		</pattern>
 	</defs>
-	<rect width={404} height={784} fill={`url(#${patternId})`} />
+	<rect
+		width={404}
+		height={784}
+		fill={`url(#${patternId})`}
+	/>
 </svg>

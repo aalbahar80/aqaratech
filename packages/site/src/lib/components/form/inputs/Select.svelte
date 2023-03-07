@@ -42,7 +42,11 @@
 	on:change={() => dispatch('select', { value: current })}
 >
 	{#each options as { label, value, disabled }}
-		<option {value} selected={value === current} {disabled}>{label}</option>
+		<option
+			{value}
+			selected={value === current}
+			{disabled}>{label}</option
+		>
 	{/each}
 </select>
 

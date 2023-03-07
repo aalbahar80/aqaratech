@@ -9,8 +9,14 @@
 	import Fa6SolidFileCsv from '~icons/fa6-solid/file-csv';
 </script>
 
-<MenuItem as="div" let:active>
-	<a href={`${$page.url.pathname}/csv`} download="data.csv">
+<MenuItem
+	as="div"
+	let:active
+>
+	<a
+		href={`${$page.url.pathname}/csv`}
+		download="data.csv"
+	>
 		<MenuItemChild {active}>
 			<MenuItemIcon icon={Fa6SolidFileCsv} />
 			{$L.buttons.export()}

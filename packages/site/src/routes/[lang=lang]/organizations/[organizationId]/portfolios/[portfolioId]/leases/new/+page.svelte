@@ -12,4 +12,8 @@
 	});
 </script>
 
-<EnhancedForm {formModel} {form} data={data.predefined} />
+<EnhancedForm
+	{formModel}
+	{form}
+	data={data.predefined}
+/>

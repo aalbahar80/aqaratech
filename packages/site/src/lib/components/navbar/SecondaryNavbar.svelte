@@ -21,9 +21,15 @@
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
 			{#if isSidebarAvailable($page.route)}
-				<button class="lg:hidden" use:sidebar.button>
+				<button
+					class="lg:hidden"
+					use:sidebar.button
+				>
 					<span class="sr-only">Toggle sidebar</span>
-					<HeroiconsBars3 class="h-8 w-8" id={SIDEBAR_TOGGLE} />
+					<HeroiconsBars3
+						class="h-8 w-8"
+						id={SIDEBAR_TOGGLE}
+					/>
 				</button>
 			{/if}
 			<a

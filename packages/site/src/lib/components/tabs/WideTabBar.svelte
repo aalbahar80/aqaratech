@@ -24,7 +24,10 @@
 		$page.url.pathname.includes('/contract')}
 >
 	<div class="sm:hidden">
-		<label for="tabs" class="sr-only">Select a tab</label>
+		<label
+			for="tabs"
+			class="sr-only">Select a tab</label
+		>
 		<!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
 		<select
 			id="tabs"
@@ -37,15 +40,19 @@
 			}}
 		>
 			{#each authorizedTabs as tab}
-				<option selected={$page.url.pathname === tab.href} value={tab.href}
-					>{tab.label}</option
+				<option
+					selected={$page.url.pathname === tab.href}
+					value={tab.href}>{tab.label}</option
 				>
 			{/each}
 		</select>
 	</div>
 	<div class="hidden sm:block">
 		<div class="border-b border-gray-200">
-			<nav class="-mb-px flex" aria-label="Tabs">
+			<nav
+				class="-mb-px flex"
+				aria-label="Tabs"
+			>
 				{#each authorizedTabs as tab}
 					<WideTabBarItem {tab} />
 				{/each}

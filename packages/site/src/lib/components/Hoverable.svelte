@@ -10,6 +10,9 @@
 	}
 </script>
 
-<div on:mouseenter={enter} on:mouseleave={leave}>
+<div
+	on:mouseenter={enter}
+	on:mouseleave={leave}
+>
 	<slot {hovering} />
 </div>

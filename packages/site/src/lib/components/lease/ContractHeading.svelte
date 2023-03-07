@@ -49,7 +49,10 @@
 				}}
 				class="inline-flex items-center gap-x-2 rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 			>
-				<HeroiconsPrinter class="h-5 w-5" aria-hidden="true" />
+				<HeroiconsPrinter
+					class="h-5 w-5"
+					aria-hidden="true"
+				/>
 				{$L.buttons.print()}
 			</button>
 		</div>

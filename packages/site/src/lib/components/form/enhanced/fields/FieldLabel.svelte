@@ -17,7 +17,10 @@
 
 			<!-- Leave the asterisk out of the label to simplify testing locators -->
 			{#if formField.required}
-				<span class="text-red-600" aria-hidden="true">*</span>
+				<span
+					class="text-red-600"
+					aria-hidden="true">*</span
+				>
 			{/if}
 		</div>
 

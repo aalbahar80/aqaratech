@@ -34,7 +34,10 @@
 	}}
 >
 	<div slot="menu-items">
-		<MenuItem as="div" let:active>
+		<MenuItem
+			as="div"
+			let:active
+		>
 			<a
 				href={getRoute({
 					entity: 'expense',

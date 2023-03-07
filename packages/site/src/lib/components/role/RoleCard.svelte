@@ -23,15 +23,24 @@
 >
 	<div class="self-end">
 		{#if role.roleType === 'ORGADMIN'}
-			<Badge label={meta.roleLabel} badgeColor="indigo">
+			<Badge
+				label={meta.roleLabel}
+				badgeColor="indigo"
+			>
 				<BxsBusiness class="mr-2 inline" />
 			</Badge>
 		{:else if role.roleType === 'PORTFOLIO'}
-			<Badge label={meta.roleLabel} badgeColor="indigo">
+			<Badge
+				label={meta.roleLabel}
+				badgeColor="indigo"
+			>
 				<MdiAccountTie class="mr-2 inline" />
 			</Badge>
 		{:else if role.roleType === 'TENANT'}
-			<Badge label={meta.roleLabel} badgeColor="indigo">
+			<Badge
+				label={meta.roleLabel}
+				badgeColor="indigo"
+			>
 				<MdiAccount class="mr-2 inline" />
 			</Badge>
 		{/if}

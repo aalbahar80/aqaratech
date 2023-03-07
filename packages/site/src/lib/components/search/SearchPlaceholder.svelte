@@ -22,7 +22,10 @@
 </script>
 
 <div class="border-t border-gray-100 py-14 px-6 text-center text-sm sm:px-14">
-	<HeroiconsGlobeAlt class="mx-auto h-6 w-6 text-gray-400" aria-hidden="true" />
+	<HeroiconsGlobeAlt
+		class="mx-auto h-6 w-6 text-gray-400"
+		aria-hidden="true"
+	/>
 	<p class="mt-4 font-semibold text-gray-900">
 		{$L.search.titlePrefix()}
 		{localizedList}

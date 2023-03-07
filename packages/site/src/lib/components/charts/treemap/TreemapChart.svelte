@@ -104,7 +104,10 @@ Create a treemap from a d3-hierarchy.
 		y1={$extents.y1}
 		y2={$extents.y2}
 	>
-		<Treemap {root} let:node>
+		<Treemap
+			{root}
+			let:node
+		>
 			{#if is_visible(node, selected)}
 				{@const leaf = !node.children}
 

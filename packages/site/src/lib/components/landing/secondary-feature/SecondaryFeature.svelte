@@ -12,7 +12,10 @@
 	<div
 		class={clsx('w-9 rounded-lg', isActive ? 'bg-blue-600' : 'bg-slate-500')}
 	>
-		<svelte:component this={feature.icon} class="h-9 w-9 text-white" />
+		<svelte:component
+			this={feature.icon}
+			class="h-9 w-9 text-white"
+		/>
 	</div>
 	<h3
 		class={clsx(

@@ -48,7 +48,10 @@
 		parcel: false,
 	}}
 >
-	<div slot="filter" let:filters>
+	<div
+		slot="filter"
+		let:filters
+	>
 		<FilterBar responsive={filters}>
 			<!-- Don't show hero if we're on the (tabbed) portfolio page -->
 			<div slot="hero">

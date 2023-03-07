@@ -13,9 +13,17 @@
 </div>
 <!-- TotalPanes -->
 <div class="flex flex-col gap-y-12">
-	<SummaryStats title={$L.nav.net()} data={data.net} kind="Net" />
+	<SummaryStats
+		title={$L.nav.net()}
+		data={data.net}
+		kind="Net"
+	/>
 
-	<SummaryStats title={$L.nav.income()} data={data.income.paid} kind="Income" />
+	<SummaryStats
+		title={$L.nav.income()}
+		data={data.income.paid}
+		kind="Income"
+	/>
 
 	<SummaryStats
 		title={$L.entity.expense.plural()}

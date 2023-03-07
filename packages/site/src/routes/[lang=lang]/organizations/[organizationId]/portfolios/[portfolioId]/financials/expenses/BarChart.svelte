@@ -29,7 +29,14 @@
 	title={$L.charts.expensesBar.title()}
 	subtitle={$L.charts.expensesBar.subtitle()}
 >
-	<Chart let:height let:width>
-		<canvas {height} {width} use:revenueChart={barDatasets} />
+	<Chart
+		let:height
+		let:width
+	>
+		<canvas
+			{height}
+			{width}
+			use:revenueChart={barDatasets}
+		/>
 	</Chart>
 </ChartWrapper>

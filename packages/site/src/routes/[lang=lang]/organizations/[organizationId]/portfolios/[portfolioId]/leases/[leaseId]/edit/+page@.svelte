@@ -12,4 +12,8 @@
 	});
 </script>
 
-<EnhancedForm {form} {formModel} data={data.lease} />
+<EnhancedForm
+	{form}
+	{formModel}
+	data={data.lease}
+/>

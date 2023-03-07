@@ -286,7 +286,10 @@
 									hovering ? 'text-white' : 'text-indigo-600',
 								)}
 							>
-								<HeroiconsCheck class="h-5 w-5" aria-hidden="true" />
+								<HeroiconsCheck
+									class="h-5 w-5"
+									aria-hidden="true"
+								/>
 							</span>
 						{/if}
 					</li>

@@ -26,7 +26,14 @@
 	subtitle={$L.charts.incomePie.subtitle()}
 	{empty}
 >
-	<Chart let:height let:width>
-		<canvas {height} {width} use:pie={pieData} />
+	<Chart
+		let:height
+		let:width
+	>
+		<canvas
+			{height}
+			{width}
+			use:pie={pieData}
+		/>
 	</Chart>
 </ChartWrapper>

@@ -16,7 +16,10 @@
 </script>
 
 <PopoverGroup class="hidden sm:flex sm:items-baseline sm:space-x-8">
-	<Popover as="div" class="relative z-10 inline-block text-left">
+	<Popover
+		as="div"
+		class="relative z-10 inline-block text-left"
+	>
 		<div>
 			<PopoverButton
 				class="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"

@@ -93,7 +93,10 @@
 	</svelte:fragment>
 </Heading>
 
-<Badge label={badge.label} badgeColor={badge.color} />
+<Badge
+	label={badge.label}
+	badgeColor={badge.color}
+/>
 
 <LeaseInvoiceTabs />
 

@@ -26,7 +26,10 @@
 		<Spinner {loading} />
 		<slot>
 			{#if icon && !loading}
-				<svelte:component this={icon} aria-hidden="true" />
+				<svelte:component
+					this={icon}
+					aria-hidden="true"
+				/>
 			{/if}
 		</slot>
 	</div>

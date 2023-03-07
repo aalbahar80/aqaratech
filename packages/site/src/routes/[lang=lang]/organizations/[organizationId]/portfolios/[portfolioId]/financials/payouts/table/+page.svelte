@@ -40,7 +40,10 @@
 	paginationDto={data.payouts.pagination}
 	{columns}
 >
-	<div slot="filter" let:filters>
+	<div
+		slot="filter"
+		let:filters
+	>
 		<FilterBar responsive={filters}>
 			<div slot="hero">
 				<FilterHero title={$L.entity.payout.plural()} />

@@ -12,4 +12,8 @@
 	});
 </script>
 
-<EnhancedForm {form} {formModel} data={data.portfolio} />
+<EnhancedForm
+	{form}
+	{formModel}
+	data={data.portfolio}
+/>

@@ -15,4 +15,8 @@
 	};
 </script>
 
-<Chart type="heatmap" {data} {colors} />
+<Chart
+	type="heatmap"
+	{data}
+	{colors}
+/>

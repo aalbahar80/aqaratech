@@ -86,7 +86,10 @@
 	{columns}
 	{columnVisibility}
 >
-	<div slot="filter" let:filters>
+	<div
+		slot="filter"
+		let:filters
+	>
 		<FilterBar responsive={filters}>
 			<div slot="hero">
 				<!-- Don't show hero if we're on the property/unit pages -->

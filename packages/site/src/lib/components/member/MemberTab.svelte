@@ -12,4 +12,7 @@
 	};
 </script>
 
-<MemberTable {data} {predefined} />
+<MemberTable
+	{data}
+	{predefined}
+/>

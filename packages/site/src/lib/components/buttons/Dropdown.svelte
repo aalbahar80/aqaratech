@@ -4,7 +4,10 @@
 	import ThreeDotsButton from '$lib/components/buttons/ThreeDotsButton.svelte';
 </script>
 
-<Menu as="div" class="relative inline-block text-left align-middle">
+<Menu
+	as="div"
+	class="relative inline-block text-left align-middle"
+>
 	<div class="flex">
 		<slot name="beforeButton" />
 		<MenuButton>

@@ -12,5 +12,8 @@
 </script>
 
 {#key $expenseTreeCat}
-	<TreemapChart hierarchy={$expenseTreeCat} {getLabel} />
+	<TreemapChart
+		hierarchy={$expenseTreeCat}
+		{getLabel}
+	/>
 {/key}
