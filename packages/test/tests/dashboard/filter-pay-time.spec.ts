@@ -9,28 +9,24 @@ test.use({
 		// advance
 		{
 			postAt: Date.UTC(2030, 0, 1),
-			dueAt: Date.UTC(2030, 0, 10),
 			paidAt: Date.UTC(2029, 11, 14),
 			isPaid: true,
 		},
 		// ontime
 		{
 			postAt: Date.UTC(2030, 1, 1),
-			dueAt: Date.UTC(2030, 1, 10),
 			paidAt: Date.UTC(2030, 1, 5),
 			isPaid: true,
 		},
-		// late
+		// late (default dueDuration is 30 days)
 		{
 			postAt: Date.UTC(2030, 2, 1),
-			dueAt: Date.UTC(2030, 2, 10),
-			paidAt: Date.UTC(2030, 2, 20),
+			paidAt: Date.UTC(2030, 3, 20),
 			isPaid: true,
 		},
 		// unpaid
 		{
 			postAt: Date.UTC(2030, 3, 1),
-			dueAt: Date.UTC(2030, 3, 30),
 			paidAt: null,
 			isPaid: false,
 		},

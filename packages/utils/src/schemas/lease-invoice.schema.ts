@@ -8,7 +8,6 @@ import { zodStringOptional } from './utils/zod-string';
 
 const base = z
 	.object({
-		dueAt: zodDateOnlyOptional,
 		postAt: zodDateOnly,
 		paidAt: zodDateOnlyOptional,
 		isPaid: zodCheckbox,
@@ -48,40 +47,15 @@ function refineSchema<
 		unknown
 	>,
 >(schema: T) {
-	return schema
-		.refine(
-			(val) => {
-				/**
-				 * Indicates that dueAt is set and is after postAt.
-				 */
-				const dueAterPost =
-					val.dueAt &&
-					val.postAt &&
-					Date.parse(val.dueAt) >= Date.parse(val.postAt);
-
-				// Return true if `dueAt` is not set to skip validation.
-				return (
-					val.dueAt === undefined ||
-					val.dueAt === null ||
-					val.dueAt === '' ||
-					// Date.parse(val.postAt) <= Date.parse(val.dueAt)
-					dueAterPost
-				);
-			},
-			{
-				path: ['dueAt'],
-				message: 'Due date cannot be before post date',
-			},
-		)
-		.refine(
-			(val) => (val.isPaid && val.paidAt) || (!val.isPaid && !val.paidAt),
-			(val) => ({
-				path: ['paidAt'],
-				message: val.isPaid
-					? 'If this transaction is paid, you must enter a payment date'
-					: 'If this transaction is not paid, you must clear the payment date',
-			}),
-		);
+	return schema.refine(
+		(val) => (val.isPaid && val.paidAt) || (!val.isPaid && !val.paidAt),
+		(val) => ({
+			path: ['paidAt'],
+			message: val.isPaid
+				? 'If this transaction is paid, you must enter a payment date'
+				: 'If this transaction is not paid, you must clear the payment date',
+		}),
+	);
 }
 
 // Export types

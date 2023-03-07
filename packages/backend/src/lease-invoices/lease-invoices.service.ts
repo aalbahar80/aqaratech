@@ -75,28 +75,28 @@ export class LeaseInvoicesService {
 
 		const where = {
 			AND: [
-				accessibleBy(user.ability, Action.Read).LeaseInvoice,
+				accessibleBy(user.ability, Action.Read).LeaseInvoiceV,
 				...(whereCustom ? [whereCustom] : []), // combine with other filters/remove?
 				filter,
 				// differentiate between undefined and false.
 				// undefined means no filter (PAID_LATE.ALL)
 				isPaidLateFilter === PAID_LATE.LATE
-					? { paidAt: { gt: this.prisma.c.leaseInvoice.fields.dueAt } }
+					? { paidAt: { gt: this.prisma.c.leaseInvoiceV.fields.dueAt } }
 					: isPaidLateFilter === PAID_LATE.ON_TIME
 					? {
 							paidAt: {
-								lte: this.prisma.c.leaseInvoice.fields.dueAt,
-								gte: this.prisma.c.leaseInvoice.fields.postAt,
+								lte: this.prisma.c.leaseInvoiceV.fields.dueAt,
+								gte: this.prisma.c.leaseInvoiceV.fields.postAt,
 							},
 					  }
 					: isPaidLateFilter === PAID_LATE.ADVANCED
-					? { paidAt: { lt: this.prisma.c.leaseInvoice.fields.postAt } }
+					? { paidAt: { lt: this.prisma.c.leaseInvoiceV.fields.postAt } }
 					: {},
 			],
-		} satisfies Prisma.LeaseInvoiceWhereInput;
+		} satisfies Prisma.LeaseInvoiceVWhereInput;
 
 		const [data, total] = await Promise.all([
-			this.prisma.c.leaseInvoice.findMany({
+			this.prisma.c.leaseInvoiceV.findMany({
 				take,
 				skip,
 				orderBy: sort,
@@ -121,16 +121,16 @@ export class LeaseInvoicesService {
 					lease: crumbs.lease,
 				},
 			}),
-			this.prisma.c.leaseInvoice.count({ where }),
+			this.prisma.c.leaseInvoiceV.count({ where }),
 		]);
 
 		return { total, results: data.map((d) => new LeaseInvoiceDto(d)) };
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const data = await this.prisma.c.leaseInvoice.findFirstOrThrow({
+		const data = await this.prisma.c.leaseInvoiceV.findFirstOrThrow({
 			where: {
-				AND: [{ id }, accessibleBy(user.ability, Action.Read).LeaseInvoice],
+				AND: [{ id }, accessibleBy(user.ability, Action.Read).LeaseInvoiceV],
 			},
 			include: { lease: crumbs.lease },
 		});

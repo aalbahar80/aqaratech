@@ -5,6 +5,9 @@ import { FilesModule } from 'src/files/files.module';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
 import { OrganizationsAdminController } from 'src/organizations/organizations-admin.controller';
+import { OrganizationsController } from 'src/organizations/organizations.controller';
+import { OrganizationsService } from 'src/organizations/organizations.service';
+import { OrganizationsSettingsService } from 'src/organizations/settings.service';
 import { PayoutsModule } from 'src/payouts/payouts.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { PropertiesModule } from 'src/properties/properties.module';
@@ -15,12 +18,9 @@ import { TenantsModule } from 'src/tenants/tenants.module';
 import { TierService } from 'src/tier/tier.service';
 import { UnitsModule } from 'src/units/units.module';
 
-import { OrganizationsController } from './organizations.controller';
-import { OrganizationsService } from './organizations.service';
-
 @Module({
 	controllers: [OrganizationsController, OrganizationsAdminController],
-	providers: [OrganizationsService, TierService],
+	providers: [OrganizationsService, OrganizationsSettingsService, TierService],
 	imports: [
 		RolesModule,
 		SearchModule,

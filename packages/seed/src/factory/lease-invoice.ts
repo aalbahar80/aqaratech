@@ -31,19 +31,10 @@ const base = Factory.Sync.makeFactoryWithRequired<
 	// Dates
 	postAt: Factory.each(() => fakeDate()),
 
-	dueAt: Factory.each(() => fakeDate()),
-
 	paidAt: Factory.each(() => fakeDate()),
 });
 
-export const addDueDate = base.withDerivation('dueAt', (leaseInvoice) => {
-	// set dueAt to be 30 days after postAt
-	const dueAt = new Date(leaseInvoice.postAt);
-	dueAt.setDate(dueAt.getDate() + 30);
-	return dueAt.toISOString().slice(0, 10);
-});
-
-export const leaseInvoiceFactory = addDueDate
+export const leaseInvoiceFactory = base
 	.withDerivation('paidAt', (leaseInvoice) => {
 		if (!leaseInvoice.isPaid) {
 			return null;

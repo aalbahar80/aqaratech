@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import * as R from 'remeda';
 
-import { leaseInvoiceFactory, tenantFactory } from '@self/seed';
+import { tenantFactory } from '@self/seed';
 
 import { test } from '../api-fixtures';
 
@@ -41,30 +41,4 @@ test('portfolio dob default to midnight UTC', async ({ request, org }) => {
 	const body: unknown = await res.json();
 
 	expect(body).toHaveProperty('dob', '2022-01-01T00:00:00.000Z');
-});
-
-test('leaseInvoice dueAt default to midnight UTC', async ({
-	request,
-	org,
-	portfolio,
-	lease,
-}) => {
-	const invoice = R.pick(
-		leaseInvoiceFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: portfolio.id,
-			leaseId: lease.id,
-			postAt: '2021-01-01',
-			dueAt: '2022-01-01',
-		}),
-		['amount', 'postAt', 'leaseId', 'portfolioId', 'dueAt'],
-	);
-
-	const url = `/organizations/${org.organization.id}/leaseInvoices`;
-
-	const res = await request.post(url, { data: invoice });
-
-	const body: unknown = await res.json();
-
-	expect(body).toHaveProperty('dueAt', '2022-01-01T00:00:00.000Z');
 });

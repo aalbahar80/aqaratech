@@ -145,4 +145,5 @@ type Fields = Record<Keys, string> & {
 	updatedAt: string;
 	key: string; // FileDto
 	size2: string; // FileDto
+	dueAt: string; // computed
 };

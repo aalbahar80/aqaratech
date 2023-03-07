@@ -16,7 +16,6 @@ const keys = [
 	'memo',
 	'postAt',
 	'paidAt',
-	'dueAt',
 ] as const;
 
 const url = (orgId: string, leaseId: string) =>

@@ -16,7 +16,6 @@ const keys = [
 	'memo',
 	'postAt',
 	'paidAt',
-	'dueAt',
 ] as const;
 
 test('can create leaseInvoice in own org', async ({ request, org, lease }) => {

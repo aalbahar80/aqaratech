@@ -437,12 +437,6 @@ export interface CreateLeaseInvoiceDto {
 	 * @type {string}
 	 * @memberof CreateLeaseInvoiceDto
 	 */
-	dueAt?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateLeaseInvoiceDto
-	 */
 	paidAt?: string | null;
 	/**
 	 *
@@ -536,12 +530,6 @@ export interface CreateManyLeaseInvoicesDto {
 	 * @memberof CreateManyLeaseInvoicesDto
 	 */
 	postAt: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof CreateManyLeaseInvoicesDto
-	 */
-	dueAt?: string | null;
 	/**
 	 *
 	 * @type {string}
@@ -849,6 +837,25 @@ export interface CreateUnitDto {
 	 * @memberof CreateUnitDto
 	 */
 	usage?: string | null;
+}
+/**
+ *
+ * @export
+ * @interface DueDurationDto
+ */
+export interface DueDurationDto {
+	/**
+	 *
+	 * @type {number}
+	 * @memberof DueDurationDto
+	 */
+	months: number;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof DueDurationDto
+	 */
+	days: number;
 }
 /**
  *
@@ -1710,6 +1717,25 @@ export interface OrganizationDto {
 	 * @memberof OrganizationDto
 	 */
 	title: string;
+	/**
+	 *
+	 * @type {OrganizationSettingsDto}
+	 * @memberof OrganizationDto
+	 */
+	settings?: OrganizationSettingsDto;
+}
+/**
+ *
+ * @export
+ * @interface OrganizationSettingsDto
+ */
+export interface OrganizationSettingsDto {
+	/**
+	 *
+	 * @type {DueDurationDto}
+	 * @memberof OrganizationSettingsDto
+	 */
+	dueDuration: DueDurationDto;
 }
 /**
  *
@@ -3215,12 +3241,6 @@ export interface UpdateLeaseInvoiceDto {
 	 * @type {string}
 	 * @memberof UpdateLeaseInvoiceDto
 	 */
-	dueAt?: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof UpdateLeaseInvoiceDto
-	 */
 	paidAt?: string | null;
 	/**
 	 *
@@ -3278,6 +3298,12 @@ export interface UpdateOrganizationDto {
 	 * @memberof UpdateOrganizationDto
 	 */
 	label?: string | null;
+	/**
+	 *
+	 * @type {OrganizationSettingsDto}
+	 * @memberof UpdateOrganizationDto
+	 */
+	settings?: OrganizationSettingsDto;
 }
 /**
  *

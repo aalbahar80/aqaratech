@@ -108,7 +108,7 @@
 		"ts-toolbelt": "9.6.0",
 		"tsconfig-paths": "4.1.2",
 		"tsx": "3.12.3",
-		"typescript": "5.0.0-beta",
+		"typescript": "5.0.1-rc",
 		"vitest": "0.29.2"
 	},
 	"engines": {

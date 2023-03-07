@@ -25,7 +25,7 @@
 	export let data: FPM['data'] = undefined;
 
 	$: formType =
-		$page.url.pathname.split('/').slice(-1)[0] === 'edit' ? 'edit' : 'new';
+		$page.url.pathname.split('/').slice(-1)[0] === 'edit' ? 'edit' : 'create';
 
 	$: fields = R.omitBy(formModel.fields, (field) => {
 		// omit fields based on formType
@@ -73,7 +73,9 @@
 			<!-- If check here is only for typing purposes -->
 			{#if formField}
 				{@const valueFromForm = form?.[formField.name]}
-				{@const valueFromData = data?.[formField.name]}
+				{@const valueFromData = formField.getValue
+					? formField.getValue(data)
+					: data?.[formField.name]}
 				<!-- valueFromForm is the value as it is being edited. Always prioritize it unless it's `undefined`. -->
 				<Field
 					{formField}
@@ -91,5 +93,3 @@
 		<button>{$L.buttons.save()}</button>
 	</div>
 </form>
-
-<!-- <DebugPane data={form} /> -->

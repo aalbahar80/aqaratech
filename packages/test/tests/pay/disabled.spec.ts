@@ -72,9 +72,7 @@ test.describe('invoices not yet posted', () => {
 	test.use({
 		userRoleType: 'TENANT',
 		leasesParams: [{ canPay: true }],
-		invoicesParams: [
-			{ isPaid: false, postAt: '2025-01-01', dueAt: '2025-01-02' },
-		],
+		invoicesParams: [{ isPaid: false, postAt: '2025-01-01' }],
 	});
 
 	test('pay button is disabled', async ({ page, org, invoice }) => {

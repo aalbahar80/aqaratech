@@ -53,7 +53,7 @@ export const lease = {
 export const leaseInvoice = {
 	required: ['amount', 'postAt'],
 
-	all: ['amount', 'isPaid', 'postAt', 'dueAt', 'paidAt', 'memo'],
+	all: ['amount', 'isPaid', 'postAt', 'paidAt', 'memo'],
 } as const;
 
 export const expense = {

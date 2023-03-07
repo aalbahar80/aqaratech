@@ -33,3 +33,5 @@ coverage/
 
 # i18n
 **/tolgee/generated
+
+Session.vim

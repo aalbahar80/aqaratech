@@ -25,7 +25,6 @@ test.use({
 				'amount',
 				'postAt',
 				'isPaid',
-				'dueAt',
 				'paidAt',
 				'portfolioId',
 				'leaseId',

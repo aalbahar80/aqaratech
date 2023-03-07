@@ -27,10 +27,6 @@ export const leaseInvoiceFormModel = () =>
 				required: true,
 			}),
 
-			dueAt: createFormField('dueAt', {
-				type: 'date',
-			}),
-
 			paidAt: createFormField('paidAt', {
 				type: 'date',
 			}),

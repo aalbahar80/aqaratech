@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["extendedWhereUnique", "fullTextSearch", "fieldReference", "clientExtensions"]
+  previewFeatures = ["extendedWhereUnique", "fullTextSearch", "fieldReference", "clientExtensions", "views"]
 }
 
 datasource db {
@@ -62,6 +62,7 @@ model Organization {
   Unit             Unit[]
   Lease            Lease[]
   LeaseInvoice     LeaseInvoice[]
+  LeaseInvoiceV    LeaseInvoiceV[]
   Expense          Expense[]
   MaintenanceOrder MaintenanceOrder[]
 
@@ -75,6 +76,7 @@ model OrganizationSettings {
   updatedAt DateTime @updatedAt
 
   expenseCategoryTree Json
+  dueDuration         Unsupported("interval")? @default(dbgenerated("'1 month'"))
 
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String       @unique
@@ -121,9 +123,10 @@ model Portfolio {
   maintenanceOrders MaintenanceOrder[]
   properties        Property[]
 
-  Unit         Unit[]
-  Lease        Lease[]
-  LeaseInvoice LeaseInvoice[]
+  Unit          Unit[]
+  Lease         Lease[]
+  LeaseInvoice  LeaseInvoice[]
+  LeaseInvoiceV LeaseInvoiceV[]
 
   roles Role[]
 
@@ -191,21 +194,22 @@ model Unit {
 }
 
 model Lease {
-  id            String         @id @default(uuid())
+  id            String          @id @default(uuid())
   tenantId      String
   unitId        String
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   start         DateTime
   end           DateTime
   monthlyRent   Float
-  deposit       Float          @default(0)
-  canPay        Boolean        @default(true)
-  notify        Boolean        @default(true)
+  deposit       Float           @default(0)
+  canPay        Boolean         @default(true)
+  notify        Boolean         @default(true)
   license       String?
-  tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Restrict)
-  unit          Unit           @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  tenant        Tenant          @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  unit          Unit            @relation(fields: [unitId], references: [id], onDelete: Restrict)
   leaseInvoices LeaseInvoice[]
+  LeaseInvoiceV LeaseInvoiceV[]
 
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
@@ -223,10 +227,35 @@ model LeaseInvoice {
   id          String    @id @default(uuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  dueAt       DateTime?
   postAt      DateTime
   paidAt      DateTime?
   isPaid      Boolean   @default(false)
+  amount      Float
+  memo        String?
+  mfPaymentId String?
+  mfData      Json?
+  leaseId     String
+  lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
+
+  @@index([leaseId])
+  @@index([organizationId])
+  @@index([portfolioId])
+}
+
+view LeaseInvoiceV {
+  id          String    @id
+  createdAt   DateTime
+  updatedAt   DateTime
+  dueAt       DateTime?
+  postAt      DateTime
+  paidAt      DateTime?
+  isPaid      Boolean
   amount      Float
   memo        String?
   mfPaymentId String?

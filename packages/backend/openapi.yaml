@@ -3280,9 +3280,6 @@ components:
           type: boolean
         postAt:
           type: string
-        dueAt:
-          type: string
-          nullable: true
         paidAt:
           type: string
           nullable: true
@@ -4094,6 +4091,23 @@ components:
           nullable: true
       required:
         - fullName
+    DueDurationDto:
+      type: object
+      properties:
+        months:
+          type: number
+        days:
+          type: number
+      required:
+        - months
+        - days
+    OrganizationSettingsDto:
+      type: object
+      properties:
+        dueDuration:
+          $ref: '#/components/schemas/DueDurationDto'
+      required:
+        - dueDuration
     OrganizationDto:
       type: object
       properties:
@@ -4108,6 +4122,8 @@ components:
           type: boolean
         title:
           type: string
+        settings:
+          $ref: '#/components/schemas/OrganizationSettingsDto'
       required:
         - id
         - fullName
@@ -4131,6 +4147,8 @@ components:
         label:
           type: string
           nullable: true
+        settings:
+          $ref: '#/components/schemas/OrganizationSettingsDto'
       required:
         - fullName
     SearchableEntityEnum:
@@ -4342,9 +4360,6 @@ components:
           type: boolean
         postAt:
           type: string
-        dueAt:
-          type: string
-          nullable: true
         paidAt:
           type: string
           nullable: true
@@ -4368,9 +4383,6 @@ components:
           type: boolean
         postAt:
           type: string
-        dueAt:
-          type: string
-          nullable: true
         paidAt:
           type: string
           nullable: true

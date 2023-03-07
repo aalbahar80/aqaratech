@@ -17,6 +17,7 @@ import {
 	OrganizationDto,
 	UpdateOrganizationDto,
 } from 'src/organizations/dto/organization.dto';
+import { OrganizationsSettingsService } from 'src/organizations/settings.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { S3Service } from 'src/s3/s3.service';
 import { TierService } from 'src/tier/tier.service';
@@ -30,6 +31,7 @@ export class OrganizationsService {
 		private readonly logger: LoggerService,
 		private readonly env: EnvService,
 		private readonly tier: TierService,
+		private readonly organizationSettings: OrganizationsSettingsService,
 	) {}
 	SubjectType = 'Organization' as const;
 
@@ -109,9 +111,16 @@ export class OrganizationsService {
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
-		const organization = await this.prisma.c.organization.findUniqueOrThrow({
-			where: { id, AND: accessibleBy(user.ability, Action.Read).Organization },
-		});
+		const [organization, settings] = await Promise.all([
+			this.prisma.c.organization.findUniqueOrThrow({
+				where: {
+					id,
+					AND: accessibleBy(user.ability, Action.Read).Organization,
+				},
+			}),
+
+			this.organizationSettings.findSettings({ id, user }),
+		]);
 
 		return {
 			id: organization.id,
@@ -119,6 +128,7 @@ export class OrganizationsService {
 			label: organization.label,
 			title: organization.title,
 			isActive: organization.isActive,
+			settings,
 		};
 	}
 
@@ -143,6 +153,15 @@ export class OrganizationsService {
 				label: updateOrganizationDto.label ?? null,
 			},
 		});
+
+		const settings = updateOrganizationDto.settings;
+		if (settings) {
+			await this.organizationSettings.updateSettings({
+				id,
+				user,
+				settings: settings,
+			});
+		}
 
 		return {
 			id: organization.id,

@@ -17,7 +17,7 @@ export const defineTenantAbility = (role: Role, can: TCan) => {
 	});
 
 	// TODO some fields should be public
-	can(Action.Read, ['LeaseInvoice'], {
+	can(Action.Read, ['LeaseInvoice', 'LeaseInvoiceV'], {
 		lease: { tenantId: { equals: role.tenantId } },
 	});
 

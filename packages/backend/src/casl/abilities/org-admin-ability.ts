@@ -40,7 +40,7 @@ export const defineOrgAdminAbility = (
 		organizationId: { equals: role.organizationId },
 	});
 
-	can(Action.Manage, 'LeaseInvoice', {
+	can(Action.Manage, ['LeaseInvoice', 'LeaseInvoiceV'], {
 		organizationId: { equals: role.organizationId },
 	});
 

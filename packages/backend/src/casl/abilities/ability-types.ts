@@ -4,6 +4,7 @@ import {
 	Expense,
 	Lease,
 	LeaseInvoice,
+	LeaseInvoiceV,
 	MaintenanceOrder,
 	Organization,
 	Payout,
@@ -34,6 +35,7 @@ export type Subject = Subjects<{
 	Role: P<Role>;
 	Tenant: Partial<Tenant>;
 	LeaseInvoice: P<LeaseInvoice>;
+	LeaseInvoiceV: P<LeaseInvoiceV>;
 	Unit: P<Unit>;
 	User: P<User>;
 	File: {

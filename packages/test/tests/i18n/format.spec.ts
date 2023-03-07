@@ -10,7 +10,6 @@ test.use({
 	invoicesParams: [
 		{
 			postAt: Date.UTC(2023, 0, 1),
-			dueAt: Date.UTC(2023, 0, 31),
 			paidAt: Date.UTC(2023, 0, 15),
 			isPaid: true,
 		},
@@ -31,6 +30,6 @@ test('dates in utc', async ({ page, org, invoices }) => {
 	await page.goto(url);
 
 	await expect(page.getByText('Jan 1, 2023')).toBeVisible();
-	await expect(page.getByText('Jan 31, 2023')).toBeVisible();
+	await expect(page.getByText('Feb 1, 2023')).toBeVisible();
 	await expect(page.getByText('Jan 15, 2023')).toBeVisible();
 });

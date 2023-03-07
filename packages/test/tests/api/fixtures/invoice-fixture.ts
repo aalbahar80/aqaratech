@@ -22,7 +22,6 @@ export const invoiceFixtures: AllFixtures = {
 			});
 
 			data.postAt &&= new Date(data.postAt).toISOString();
-			data.dueAt &&= new Date(data.dueAt).toISOString();
 			data.paidAt &&= new Date(data.paidAt).toISOString();
 
 			return data;
@@ -41,7 +40,6 @@ export const invoiceFixtures: AllFixtures = {
 					'memo',
 					'postAt',
 					'paidAt',
-					'dueAt',
 				]),
 			),
 		});

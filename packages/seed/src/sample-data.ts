@@ -146,7 +146,6 @@ const leaseInvoices = [
 		leaseId: leases[0]!.id,
 		amount: 1000,
 		postAt: new Date('2020-01-01'),
-		dueAt: new Date('2020-01-10'),
 		isPaid: false,
 	}),
 	leaseInvoiceFactory.build({
@@ -156,7 +155,6 @@ const leaseInvoices = [
 		leaseId: leases[0]!.id,
 		amount: 1001,
 		postAt: new Date('2020-01-01'),
-		dueAt: new Date('2020-01-10'),
 		isPaid: true,
 	}),
 	leaseInvoiceFactory.build({
@@ -166,7 +164,6 @@ const leaseInvoices = [
 		leaseId: leases[0]!.id,
 		amount: 1002,
 		postAt: new Date('2020-01-01'),
-		dueAt: new Date('2020-01-10'),
 		isPaid: true,
 	}),
 ] as const;

@@ -22,7 +22,6 @@ test('invoice paid online cannot be updated', async ({
 			mfPaymentId: 'testmfpaymentid',
 			paidAt: new Date(),
 			postAt: new Date(Date.now() - 10000),
-			dueAt: new Date(Date.now() + 10000),
 		},
 	});
 

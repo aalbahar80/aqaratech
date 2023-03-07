@@ -18,7 +18,7 @@ export const preprocessSeed = (seed: Seed) => {
 	);
 
 	const leaseInvoices = seed.leaseInvoices.map((leaseInvoice) =>
-		convertToDatetimeArray(['postAt', 'dueAt', 'paidAt'], leaseInvoice),
+		convertToDatetimeArray(['postAt', 'paidAt'], leaseInvoice),
 	);
 
 	const expenses = seed.expenses.map((expense) =>

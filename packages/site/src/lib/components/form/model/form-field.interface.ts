@@ -16,6 +16,8 @@ export interface BaseFormField<T> {
 
 	// html attributes
 	hintId: string;
+
+	getValue?: (data: unknown) => unknown;
 }
 
 // Input field

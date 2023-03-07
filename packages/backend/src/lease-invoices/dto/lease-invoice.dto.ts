@@ -106,7 +106,6 @@ export class CreateLeaseInvoiceDto implements LeaseInvoiceCreateSchema {
 	amount: number;
 	isPaid: boolean;
 	postAt: string;
-	dueAt?: string | null;
 	paidAt?: string | null;
 	memo?: string | null;
 }

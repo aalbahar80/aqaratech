@@ -25,6 +25,7 @@ const createPrismaClient = () => {
 	const client = new PrismaClient({
 		// Consider using built-in debug mode
 		// Info: https://www.prisma.io/docs/concepts/components/prisma-client/debugging
+		// WARN: sync with app loglevel
 		log: ['info', 'warn', 'error'],
 	});
 

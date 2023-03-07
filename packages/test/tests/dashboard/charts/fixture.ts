@@ -99,7 +99,6 @@ export const invoicesParams = R.times(RECORD_COUNT, (n) => {
 		isPaid,
 		postAt: postAt.toISOString().slice(0, 10),
 		paidAt: isPaid ? addDays(postAt, 3).toISOString().slice(0, 10) : null,
-		dueAt: addDays(postAt, 17).toISOString().slice(0, 10),
 		memo: `Memo for sample invoice #${n}`,
 	};
 });

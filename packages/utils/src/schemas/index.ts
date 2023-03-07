@@ -7,6 +7,7 @@ export * from './lease-invoice-warn.schema';
 export * from './lease-invoice.schema';
 export * from './lease.schema';
 export * from './maintenance-order.schema';
+export * from './organization-settings.schema';
 export * from './organization.schema';
 export * from './payout.schema';
 export * from './portfolio.schema';

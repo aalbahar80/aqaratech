@@ -33,7 +33,7 @@ export const definePortfolioAbility = (role: Role, can: TCan) => {
 		portfolioId: { equals: role.portfolioId },
 	});
 
-	can(Action.Read, ['LeaseInvoice'], {
+	can(Action.Read, ['LeaseInvoice', 'LeaseInvoiceV'], {
 		portfolioId: { equals: role.portfolioId },
 	});
 
