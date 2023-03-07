@@ -122,7 +122,7 @@ importers:
       ufo: 1.1.1
       vitest: 0.29.2
       winston: 3.8.2
-      zod: 3.21.3
+      zod: 3.21.4
     dependencies:
       '@aws-sdk/client-s3': 3.282.0
       '@aws-sdk/s3-request-presigner': 3.282.0
@@ -167,7 +167,7 @@ importers:
       tier: 5.5.4
       ufo: 1.1.1
       winston: 3.8.2
-      zod: 3.21.3
+      zod: 3.21.4
     devDependencies:
       '@logtail/types': 0.2.0
       '@nestjs/cli': 9.2.0
@@ -298,7 +298,7 @@ importers:
       dotenv: 16.0.3
       dotenv-cli: 7.0.0
       eslint-config-custom: workspace:*
-      eslint-plugin-svelte: 2.20.0
+      eslint-plugin-svelte: 2.20.1
       frappe-charts: 1.6.2
       fuse.js: 6.6.2
       jose: 4.13.1
@@ -324,14 +324,14 @@ importers:
       tslib: 2.5.0
       typesafe-i18n: 5.24.2
       typescript: 5.0.1-rc
-      typescript-svelte-plugin: 0.3.17
+      typescript-svelte-plugin: 0.3.18
       ufo: 1.1.1
       unplugin-icons: 0.15.3
       vite: 4.1.4
       vite-plugin-iso-import: 1.0.0
       vitest: 0.29.2
       winston: 3.8.2
-      zod: 3.21.3
+      zod: 3.21.4
     dependencies:
       '@logtail/node': 0.2.0
       '@logtail/winston': 0.2.0_7ioj2zrmyoaq7emjm3xtze2syu
@@ -371,7 +371,7 @@ importers:
       dotenv: 16.0.3
       dotenv-cli: 7.0.0
       eslint-config-custom: link:../eslint-config-custom
-      eslint-plugin-svelte: 2.20.0_n4ieifq2d7jq3sqoe474cgqlim
+      eslint-plugin-svelte: 2.20.1_n4ieifq2d7jq3sqoe474cgqlim
       frappe-charts: 1.6.2
       fuse.js: 6.6.2
       jose: 4.13.1
@@ -396,13 +396,13 @@ importers:
       ts-toolbelt: 9.6.0
       tslib: 2.5.0
       typescript: 5.0.1-rc
-      typescript-svelte-plugin: 0.3.17_5o7wwtcou3d625l7os6a27fl6q
+      typescript-svelte-plugin: 0.3.18_5o7wwtcou3d625l7os6a27fl6q
       ufo: 1.1.1
       unplugin-icons: 0.15.3
       vite: 4.1.4
       vite-plugin-iso-import: 1.0.0_vite@4.1.4
       vitest: 0.29.2
-      zod: 3.21.3
+      zod: 3.21.4
 
   packages/test:
     specifiers:
@@ -423,7 +423,7 @@ importers:
       eslint-plugin-playwright: 0.12.0
       jose: 4.13.1
       prisma: 4.11.0
-      qs: 6.11.0
+      qs: 6.11.1
       remeda: 1.8.1
       simple-json-db: 2.0.0
       tier: 5.5.4
@@ -434,7 +434,7 @@ importers:
       ufo: 1.1.1
     dependencies:
       '@types/qs': 6.9.7
-      qs: 6.11.0
+      qs: 6.11.1
     devDependencies:
       '@aws-sdk/client-s3': 3.282.0
       '@faker-js/faker': 7.6.0
@@ -481,12 +481,12 @@ importers:
       typescript: 5.0.1-rc
       vitest: 0.29.2
       winston: 3.8.2
-      zod: 3.21.3
+      zod: 3.21.4
     dependencies:
       date-fns: 2.29.3
       remeda: 1.8.1
       winston: 3.8.2
-      zod: 3.21.3
+      zod: 3.21.4
     devDependencies:
       '@logtail/types': 0.2.0
       '@sentry/types': 7.41.0
@@ -6447,8 +6447,8 @@ packages:
       safe-regex: 2.1.1
     dev: true
 
-  /eslint-plugin-svelte/2.20.0_n4ieifq2d7jq3sqoe474cgqlim:
-    resolution: {integrity: sha512-N+15K8RkTf2QMiJ55QiUF8zdvpKwJLUFi+Ol+kcLdUsB26hCzFDM3uJ41XHvEBvzwpYZEy4aLQkMk62v8GZXmA==}
+  /eslint-plugin-svelte/2.20.1_n4ieifq2d7jq3sqoe474cgqlim:
+    resolution: {integrity: sha512-THEBweVaSMIi0e07YA+mKIka3cJJLFosSAWXWJa1gyyWXzUESgJJYWIFzeMGQgdxlqjwM/7uaCunN9pcZY83+g==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0-0
@@ -8128,6 +8128,11 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /lilconfig/2.1.0:
+    resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
+    engines: {node: '>=10'}
+    dev: true
+
   /limiter/1.1.5:
     resolution: {integrity: sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA==}
     dev: false
@@ -9207,7 +9212,7 @@ packages:
       ts-node:
         optional: true
     dependencies:
-      lilconfig: 2.0.6
+      lilconfig: 2.1.0
       postcss: 8.4.21
       yaml: 1.10.2
     dev: true
@@ -9493,6 +9498,13 @@ packages:
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4
+
+  /qs/6.11.1:
+    resolution: {integrity: sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==}
+    engines: {node: '>=0.6'}
+    dependencies:
+      side-channel: 1.0.4
+    dev: false
 
   /query-types/0.1.4:
     resolution: {integrity: sha512-DvOCeSGI+RJeZ8+13NYTZUGbGva3P85GmATpY2ojj0mIsNfw70xeTpQW51JaYDZyQ2Li/svGT+FUdd4CBUoDcQ==}
@@ -10624,8 +10636,8 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /svelte2tsx/0.6.2_5o7wwtcou3d625l7os6a27fl6q:
-    resolution: {integrity: sha512-0ircYY2/jMOfistf+iq8fVHERnu1i90nku56c78+btC8svyafsc3OjOV37LDEOV7buqYY1Rv/uy03eMxhopH2Q==}
+  /svelte2tsx/0.6.3_5o7wwtcou3d625l7os6a27fl6q:
+    resolution: {integrity: sha512-2e0rB9l7oih3CEa5S8OEYm1FvlXKj6c444hAVRMqt7LZgOm6oTu3FqfzIPXViDNh7LmU9Yb3PiYWhS7a7D7zow==}
     peerDependencies:
       svelte: ^3.55
       typescript: ^4.9.4
@@ -11132,11 +11144,11 @@ packages:
       typescript: 5.0.1-rc
     dev: false
 
-  /typescript-svelte-plugin/0.3.17_5o7wwtcou3d625l7os6a27fl6q:
-    resolution: {integrity: sha512-LDiMED2IJxHOCZgeIAmeXHFHPVCu1IwTr6+x/ERxSPHgsJqYoq0dfbNQnTtR8T9BI9iDU8zOX2B/vG8q2+MiMA==}
+  /typescript-svelte-plugin/0.3.18_5o7wwtcou3d625l7os6a27fl6q:
+    resolution: {integrity: sha512-xeWkG8utoGEmvrXXygtmj7uMRuF3vKb3Rr7xFUpUoLNWHn0LB0VUx5VacBDFrwjitaCUFmm2/eKjkX0SoY2s/A==}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.14
-      svelte2tsx: 0.6.2_5o7wwtcou3d625l7os6a27fl6q
+      svelte2tsx: 0.6.3_5o7wwtcou3d625l7os6a27fl6q
     transitivePeerDependencies:
       - svelte
       - typescript
@@ -11903,8 +11915,8 @@ packages:
     resolution: {integrity: sha512-aIVecm5ucOzwhtKbl0zkfg0ZSOUR9c2da0k8cIc9umjjzkvVCWUUX/UHZ1CLPsv4wmJLqt0aWeLB7p9n9JDwYQ==}
     dev: true
 
-  /zod/3.21.3:
-    resolution: {integrity: sha512-tz1QgJomEhMTQhOBvQxnnrTo8q77EjpGLlaWicCoEEkMzScuONzDkJKIHr83CS89fGY24iGCStj2ZOCHpPOEyA==}
+  /zod/3.21.4:
+    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
 
   /zx/7.2.0:
     resolution: {integrity: sha512-SMuOZ21zFnBxicw+WMtTv3z3eERh6KBtZExAJaL8EAV+Ev/3M1NIAOkrZ8kRfCzD9acv9heUH/WZctTR4vQxBQ==}

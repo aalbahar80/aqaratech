@@ -44,7 +44,7 @@
 	},
 	"dependencies": {
 		"@types/qs": "6.9.7",
-		"qs": "6.11.0"
+		"qs": "6.11.1"
 	},
 	"engines": {
 		"node": ">= 16"
