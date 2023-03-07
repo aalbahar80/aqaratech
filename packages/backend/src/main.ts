@@ -1,4 +1,8 @@
-import { INestApplication, Logger } from '@nestjs/common';
+import {
+	INestApplication,
+	Logger,
+	NestApplicationOptions,
+} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import '@sentry/tracing';
 import cookieParser from 'cookie-parser';
@@ -30,7 +34,7 @@ const options = {
 		],
 		maxAge: 24 * 60 * 60,
 	},
-};
+} satisfies NestApplicationOptions;
 
 async function bootstrap() {
 	let app: INestApplication;
