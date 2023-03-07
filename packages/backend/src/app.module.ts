@@ -30,7 +30,6 @@ import { TraceMiddleware } from 'src/sentry/trace.middleware';
 
 import { AggregateModule } from './aggregate/aggregate.module';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import { EnvModule } from './env/env.module';
 import { EnvService } from './env/env.service';
@@ -129,7 +128,6 @@ import { UsersModule } from './users/users.module';
 		TenantsModule,
 		PortfoliosModule,
 		CaslModule,
-		AuthModule,
 		UsersModule,
 		PropertiesModule,
 		UnitsModule,
