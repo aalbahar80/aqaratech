@@ -51,8 +51,8 @@
 		"@prisma-utils/nestjs-request-parser": "1.2.0",
 		"@prisma/client": "4.11.0",
 		"@self/utils": "workspace:*",
-		"@sentry/node": "7.40.0",
-		"@sentry/tracing": "7.40.0",
+		"@sentry/node": "7.41.0",
+		"@sentry/tracing": "7.41.0",
 		"cache-manager": "5.1.7",
 		"class-transformer": "0.5.1",
 		"cookie-parser": "1.4.6",
@@ -71,12 +71,12 @@
 		"query-types": "0.1.4",
 		"reflect-metadata": "0.1.13",
 		"remeda": "1.8.1",
-		"rimraf": "4.3.0",
+		"rimraf": "4.3.1",
 		"rxjs": "7.8.0",
-		"tier": "5.5.3",
+		"tier": "5.5.4",
 		"ufo": "1.1.1",
 		"winston": "3.8.2",
-		"zod": "3.21.0"
+		"zod": "3.21.3"
 	},
 	"devDependencies": {
 		"@logtail/types": "0.2.0",
