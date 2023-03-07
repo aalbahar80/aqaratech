@@ -8,7 +8,6 @@ import { FilesService } from './files.service';
 @Module({
 	controllers: [FilesController],
 	providers: [FilesService],
-	exports: [FilesService],
 	imports: [CacheModule.register(), S3Module],
 })
 export class FilesModule {}
