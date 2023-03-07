@@ -25,7 +25,6 @@ import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { TimeoutInterceptor } from 'src/interceptors/timeout.interceptor';
 import { LoggingMiddleware } from 'src/middleware/logging.middleware';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { S3Service } from 'src/s3/s3.service';
 import { TraceMiddleware } from 'src/sentry/trace.middleware';
 
 import { AggregateModule } from './aggregate/aggregate.module';
@@ -43,7 +42,6 @@ import { OrganizationsModule } from './organizations/organizations.module';
 import { PayoutsModule } from './payouts/payouts.module';
 import { PortfoliosModule } from './portfolios/portfolios.module';
 import { PostmarkModule } from './postmark/postmark.module';
-import { PostmarkService } from './postmark/postmark.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { PropertiesModule } from './properties/properties.module';
 import { RolesModule } from './roles/roles.module';
@@ -167,8 +165,6 @@ import { UsersModule } from './users/users.module';
 		{ provide: APP_GUARD, useClass: RoleGuard },
 		{ provide: APP_GUARD, useClass: AbilitiesGuard },
 		{ provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
-		S3Service,
-		PostmarkService,
 		HttpLoggerService,
 	],
 })
