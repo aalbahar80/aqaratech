@@ -12,7 +12,6 @@ import { PayoutsModule } from 'src/payouts/payouts.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { PropertiesModule } from 'src/properties/properties.module';
 import { RolesModule } from 'src/roles/roles.module';
-import { S3Module } from 'src/s3/s3.module';
 import { SearchModule } from 'src/search/search.module';
 import { TenantsModule } from 'src/tenants/tenants.module';
 import { TierService } from 'src/tier/tier.service';
@@ -24,7 +23,6 @@ import { UnitsModule } from 'src/units/units.module';
 	imports: [
 		RolesModule,
 		SearchModule,
-		S3Module,
 		TenantsModule,
 		PortfoliosModule,
 		PropertiesModule,

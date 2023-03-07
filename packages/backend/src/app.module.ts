@@ -45,7 +45,6 @@ import { PostmarkModule } from './postmark/postmark.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { PropertiesModule } from './properties/properties.module';
 import { RolesModule } from './roles/roles.module';
-import { S3Module } from './s3/s3.module';
 import { SearchModule } from './search/search.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
@@ -136,7 +135,6 @@ import { UsersModule } from './users/users.module';
 		AggregateModule,
 		PostmarkModule,
 		ExpenseCategoriesModule,
-		S3Module,
 		FilesModule,
 		PayoutsModule,
 		MaintenanceOrdersModule,
