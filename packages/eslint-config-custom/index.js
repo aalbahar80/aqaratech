@@ -50,13 +50,13 @@ module.exports = {
 	rules: {
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': [
-			'error',
+			'warn',
 			{ destructuredArrayIgnorePattern: '^_', ignoreRestSiblings: true },
 		],
 
 		// https://eslint.org/docs/latest/rules/prefer-const#options
 		'prefer-const': [
-			'error',
+			'warn',
 			{
 				destructuring: 'all',
 				ignoreReadBeforeAssign: false,
@@ -64,7 +64,7 @@ module.exports = {
 		],
 
 		'@typescript-eslint/restrict-template-expressions': [
-			'error',
+			'warn',
 			{
 				allowBoolean: true,
 			},
@@ -79,9 +79,9 @@ module.exports = {
 		'@typescript-eslint/ban-ts-comment': 'warn',
 
 		'@typescript-eslint/no-import-type-side-effects': 'warn',
-		'@typescript-eslint/consistent-type-exports': 'error',
+		'@typescript-eslint/consistent-type-exports': 'warn',
 		'@typescript-eslint/consistent-type-imports': [
-			'error',
+			'warn',
 			{
 				disallowTypeAnnotations: false, // we need this for the declaration files (*.d.ts)
 			},
@@ -94,7 +94,7 @@ module.exports = {
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
 
 		'eslint-comments/no-unlimited-disable': 'off', // Ideally turn off only for generated files
-		'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
+		'eslint-comments/disable-enable-pair': ['warn', { allowWholeFile: true }],
 
 		'n/no-missing-import': 'off', // superseded by eslint-plugin-import
 		'n/no-missing-require': [
@@ -114,7 +114,7 @@ module.exports = {
 		],
 
 		'security/detect-object-injection': 'off',
-		'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+		'no-mixed-spaces-and-tabs': ['warn', 'smart-tabs'],
 
 		// Overkill:
 		// '@typescript-eslint/strict-boolean-expressions': 'warn',

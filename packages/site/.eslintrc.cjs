@@ -76,7 +76,7 @@ module.exports = {
 				// https://ota-meshi.github.io/eslint-plugin-svelte/rules/@typescript-eslint/no-unnecessary-condition/
 				'@typescript-eslint/no-unnecessary-condition': 'off',
 				'svelte/valid-compile': [
-					'error',
+					'warn',
 					{
 						// To ignore 'svelte(a11y-click-events-have-key-events)'
 						ignoreWarnings: true,
@@ -107,7 +107,7 @@ module.exports = {
 				// 'svelte/first-attribute-linebreak': 'error',
 				'svelte/html-closing-bracket-spacing': 'error',
 				'svelte/html-quotes': 'error',
-				// 'svelte/max-attributes-per-line': 'error',
+				'svelte/max-attributes-per-line': 'warn',
 				'svelte/mustache-spacing': 'error',
 				'svelte/no-extra-reactive-curlies': 'error',
 				'svelte/no-spaces-around-equal-signs-in-attribute': 'error',
