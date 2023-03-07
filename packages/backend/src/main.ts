@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
-import { envSchema } from '@self/utils';
+import { envSchema, isLiveEnv } from '@self/utils';
 import { AppModule } from 'src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
@@ -19,6 +19,8 @@ import { version } from '../package.json';
 Logger.log(version, 'AqaratechConfig');
 
 const options = {
+	// @ts-expect-error overkill
+	snapshot: !isLiveEnv(process.env.PUBLIC_AQARATECH_ENV),
 	abortOnError: false,
 	cors: {
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
