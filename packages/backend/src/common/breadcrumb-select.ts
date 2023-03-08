@@ -1,5 +1,3 @@
-import type { Prisma } from '@prisma/client';
-
 const lease = {
 	select: {
 		id: true,
@@ -29,7 +27,7 @@ const lease = {
 				},
 			},
 		},
-	} satisfies Prisma.LeaseSelect,
+	},
 };
 
 const unit = {
@@ -49,7 +47,7 @@ const unit = {
 				portfolio: { select: { id: true, label: true, fullName: true } },
 			},
 		},
-	} satisfies Prisma.UnitSelect,
+	},
 };
 
 const property = {
@@ -60,15 +58,11 @@ const property = {
 		block: true,
 		number: true,
 		portfolio: { select: { id: true, label: true, fullName: true } },
-	} satisfies Prisma.PropertySelect,
+	},
 };
 
 const portfolio = {
-	select: {
-		id: true,
-		label: true,
-		fullName: true,
-	} satisfies Prisma.PortfolioSelect,
+	select: { id: true, label: true, fullName: true },
 };
 
 const tenant = {
@@ -76,7 +70,7 @@ const tenant = {
 		id: true,
 		label: true,
 		fullName: true,
-	} satisfies Prisma.TenantSelect,
+	},
 };
 
 export const crumbs = {
