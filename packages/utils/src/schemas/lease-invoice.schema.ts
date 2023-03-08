@@ -55,7 +55,8 @@ function refineSchema<
 				? 'If this transaction is paid, you must enter a payment date'
 				: 'If this transaction is not paid, you must clear the payment date',
 		}),
-	);
+		// Cast back to T to make it easier for z.infer to infer the type.
+	) as unknown as T;
 }
 
 // Export types

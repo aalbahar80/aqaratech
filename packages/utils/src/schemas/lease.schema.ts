@@ -53,7 +53,7 @@ function refineSchema<
 				path: ['end'],
 				message: 'End date must be after start date',
 			},
-		);
+		) as unknown as T;
 }
 
 // Export types
