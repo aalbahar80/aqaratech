@@ -7,6 +7,7 @@
 docker compose -f docker-compose.yml down
 
 # Clean out old pruned packages
+rm -rf pruned
 rm -rf packages/backend/pruned
 rm -rf packages/site/pruned
 
