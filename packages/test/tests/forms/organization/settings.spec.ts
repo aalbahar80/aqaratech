@@ -9,6 +9,12 @@ import { FormPage } from '../form-page-model';
 const months = getLabel('dueDurationMonths');
 const days = getLabel('dueDurationDays');
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type DueDuration = {
+	dueDurationMonths: number;
+	dueDurationDays: number;
+};
+
 test('dueDuration defaults to 1 month 0 days', async ({ page, org }) => {
 	const url = getRoute({
 		entity: 'organization',
@@ -19,9 +25,14 @@ test('dueDuration defaults to 1 month 0 days', async ({ page, org }) => {
 
 	await page.goto(url);
 
-	const duration = page.getByText('1 months 0 days');
+	const form = new FormPage(page);
 
-	await expect(duration).toBeVisible();
+	const duration: DueDuration = {
+		dueDurationMonths: 1,
+		dueDurationDays: 0,
+	};
+
+	await form.verifyDetails(duration);
 });
 
 test('can be changed to 2 months 1 day', async ({ page, org }) => {
@@ -41,9 +52,12 @@ test('can be changed to 2 months 1 day', async ({ page, org }) => {
 
 	await form.save();
 
-	const duration = page.getByText('2 months 1 day');
+	const duration: DueDuration = {
+		dueDurationMonths: 2,
+		dueDurationDays: 1,
+	};
 
-	await expect(duration).toBeVisible();
+	await form.verifyDetails(duration);
 });
 
 test('can be changed to 0 month 14 days', async ({ page, org }) => {
@@ -63,9 +77,12 @@ test('can be changed to 0 month 14 days', async ({ page, org }) => {
 
 	await form.save();
 
-	const duration = page.getByText('0 months 14 days');
+	const duration: DueDuration = {
+		dueDurationMonths: 0,
+		dueDurationDays: 14,
+	};
 
-	await expect(duration).toBeVisible();
+	await form.verifyDetails(duration);
 });
 
 test('can be changed to 0 month 0 days', async ({ page, org }) => {
@@ -85,9 +102,12 @@ test('can be changed to 0 month 0 days', async ({ page, org }) => {
 
 	await form.save();
 
-	const duration = page.getByText('0 months 0 days');
+	const duration: DueDuration = {
+		dueDurationMonths: 0,
+		dueDurationDays: 0,
+	};
 
-	await expect(duration).toBeVisible();
+	await form.verifyDetails(duration);
 });
 
 test('reject negative values', async ({ page, org }) => {
@@ -165,9 +185,12 @@ test.describe('dueDuration update', () => {
 
 		await form.save();
 
-		const duration = page.getByText('2 months 14 day');
+		const duration: DueDuration = {
+			dueDurationMonths: 2,
+			dueDurationDays: 14,
+		};
 
-		await expect(duration).toBeVisible();
+		await form.verifyDetails(duration);
 
 		const i2: unknown = await (await request.get(invoiceUrl)).json();
 
@@ -209,6 +232,10 @@ test('blank input is coerced to zero', async ({ page, org }) => {
 
 	await form.save();
 
-	const duration = page.getByText('0 months 0 days');
-	await expect(duration).toBeVisible();
+	const duration: DueDuration = {
+		dueDurationMonths: 0,
+		dueDurationDays: 0,
+	};
+
+	await form.verifyDetails(duration);
 });
