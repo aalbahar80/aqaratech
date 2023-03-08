@@ -6,14 +6,12 @@ import {
 } from '@nestjs/common';
 import { RouteInfo } from '@nestjs/common/interfaces';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { DevtoolsModule } from '@nestjs/devtools-integration';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 import { WinstonModule } from 'nest-winston';
 
-import { isLiveEnv } from '@self/utils';
 import { AppController } from 'src/app.controller';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
@@ -52,10 +50,10 @@ import { UsersModule } from './users/users.module';
 
 @Module({
 	imports: [
-		DevtoolsModule.register({
-			// @ts-expect-error overkill
-			http: !isLiveEnv(process.env.PUBLIC_AQARATECH_ENV),
-		}),
+		// DevtoolsModule.register({
+		// 	// @ts-expect-error overkill
+		// 	http: !isLiveEnv(process.env.PUBLIC_AQARATECH_ENV),
+		// }),
 		EnvModule,
 		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
 
