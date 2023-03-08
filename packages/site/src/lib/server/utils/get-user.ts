@@ -23,16 +23,14 @@ export const getUser = async ({
 	selectedRoleId: string | undefined;
 	event: RequestEvent;
 }) => {
-	logger.debug('[getUser] Getting user');
-
 	const profile = await getProfile(event);
 
-	logger.debug('Got profile', {
-		message: JSON.stringify({
-			id: profile.id,
-			email: profile.email,
-			roleCount: profile.roles.length,
-		}),
+	logger.log({
+		level: 'debug',
+		message: 'Got profile',
+		id: profile.id,
+		email: profile.email,
+		roleCount: profile.roles.length,
 	});
 
 	// augment each role with metadata

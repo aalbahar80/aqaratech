@@ -51,18 +51,20 @@ export const actions: Actions = {
 
 		const role = event.locals.user.role;
 
-		logger.info('unsubscribe', {
-			message: JSON.stringify({
-				user: { id: event.locals.user.id, email: role.email },
-				organization: role.organization,
-			}),
+		logger.log({
+			level: 'info',
+			message: 'unsubscribe',
+			user: { id: event.locals.user.id, email: role.email },
+			organization: role.organization,
 		});
 
 		try {
 			const c = await tier.cancel(tierid(role.organizationId));
 
-			logger.info('unsubscribed', {
-				message: JSON.stringify(c),
+			logger.log({
+				level: 'info',
+				message: 'unsubscribed',
+				...c,
 			});
 		} catch (e) {
 			logger.error(e);
