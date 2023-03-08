@@ -332,6 +332,14 @@ type RootTranslation = {
 		 */
 		dueDuration: string
 		/**
+		 * D​u​e​ ​D​u​r​a​t​i​o​n​ ​(​m​o​n​t​h​s​)
+		 */
+		dueDurationMonths: string
+		/**
+		 * D​u​e​ ​D​u​r​a​t​i​o​n​ ​(​d​a​y​s​)
+		 */
+		dueDurationDays: string
+		/**
 		 * P​a​i​d​ ​A​t
 		 */
 		paidAt: string
@@ -1460,6 +1468,14 @@ export type TranslationFunctions = {
 		 * Due Duration
 		 */
 		dueDuration: () => LocalizedString
+		/**
+		 * Due Duration (months)
+		 */
+		dueDurationMonths: () => LocalizedString
+		/**
+		 * Due Duration (days)
+		 */
+		dueDurationDays: () => LocalizedString
 		/**
 		 * Paid At
 		 */

@@ -9,13 +9,14 @@
 
 	$: obj = R.merge(data.organization, {
 		// n months n days
-		dueDuration: `${
+		dueDurationMonths: `${
 			data.organization.settings?.dueDuration.months ?? ''
-		} months ${data.organization.settings?.dueDuration.days ?? ''} days`,
+		}`,
+		dueDurationDays: `${data.organization.settings?.dueDuration.days ?? ''}`,
 	});
 </script>
 
 <AutoDetailsPane
 	details={obj}
-	keys={['fullName', 'label', 'dueDuration']}
+	keys={['fullName', 'label', 'dueDurationMonths', 'dueDurationDays']}
 />

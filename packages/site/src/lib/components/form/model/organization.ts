@@ -26,7 +26,6 @@ export const organizationFormModel = () =>
 			// @ts-expect-error nested field
 			months: createFormField(MONTHS_KEY, {
 				type: 'number',
-				label: `${get(L).fields.dueDuration()} (${get(L).general.months()})`,
 				hint: get(L).other.dueDurationLabel(),
 				hideWhenCreate: true,
 				getValue: (data) =>
@@ -35,7 +34,6 @@ export const organizationFormModel = () =>
 
 			days: createFormField(DAYS_KEY, {
 				type: 'number',
-				label: `${get(L).fields.dueDuration()} (${get(L).general.days()})`,
 				hint: get(L).other.dueDurationLabel(),
 				hideWhenCreate: true,
 				getValue: (data) =>
@@ -44,5 +42,5 @@ export const organizationFormModel = () =>
 		},
 	});
 
-export const MONTHS_KEY = 'settings.dueDuration.months';
-export const DAYS_KEY = 'settings.dueDuration.days';
+export const MONTHS_KEY = 'dueDurationMonths';
+export const DAYS_KEY = 'dueDurationDays';

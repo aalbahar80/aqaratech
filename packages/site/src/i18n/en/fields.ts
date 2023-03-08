@@ -1,32 +1,36 @@
 import type {
-	UserCreateSchema,
-	UserUpdateSchema,
-	RoleCreateSchema,
+	ExpenseCategoryCreateSchema,
+	ExpenseCategoryUpdateSchema,
+	ExpenseCreateSchema,
+	ExpenseUpdateSchema,
+	FileCreateSchema,
+	LeaseCreateSchema,
+	LeaseInvoiceCreateSchema,
+	LeaseInvoiceUpdateSchema,
+	LeaseUpdateSchema,
+	MaintenanceOrderCreateSchema,
+	MaintenanceOrderUpdateSchema,
 	OrganizationSchema,
-	TenantCreateSchema,
-	TenantUpdateSchema,
+	PayoutCreateSchema,
 	PortfolioCreateSchema,
 	PortfolioUpdateSchema,
 	PropertyCreateSchema,
 	PropertyUpdateSchema,
+	RoleCreateSchema,
+	TenantCreateSchema,
+	TenantUpdateSchema,
 	UnitCreateSchema,
 	UnitUpdateSchema,
-	LeaseCreateSchema,
-	LeaseUpdateSchema,
-	LeaseInvoiceCreateSchema,
-	LeaseInvoiceUpdateSchema,
-	ExpenseCreateSchema,
-	ExpenseUpdateSchema,
-	ExpenseCategoryCreateSchema,
-	ExpenseCategoryUpdateSchema,
-	MaintenanceOrderCreateSchema,
-	MaintenanceOrderUpdateSchema,
-	PayoutCreateSchema,
-	FileCreateSchema,
+	UserCreateSchema,
+	UserUpdateSchema,
 } from '@self/utils';
 import type { OrganizationSettingsSchema } from '@self/utils/src/schemas';
 
 import type { MessageDto } from '$api/openapi';
+import type {
+	DAYS_KEY,
+	MONTHS_KEY,
+} from '$lib/components/form/model/organization';
 import type { Union } from 'ts-toolbelt';
 
 type Schemas =
@@ -115,6 +119,8 @@ export const fields = {
 	isPaid: 'Payment Status',
 	dueAt: 'Due At',
 	dueDuration: 'Due Duration',
+	dueDurationMonths: 'Due Duration (months)',
+	dueDurationDays: 'Due Duration (days)',
 	paidAt: 'Paid At',
 
 	// expense
@@ -149,4 +155,6 @@ type Fields = Record<Keys, string> & {
 	key: string; // FileDto
 	size2: string; // FileDto
 	dueAt: string; // computed
+	[MONTHS_KEY]: string;
+	[DAYS_KEY]: string;
 };

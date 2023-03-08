@@ -106,6 +106,8 @@ const ar: Translation = {
 		isPaid: 'مدفوع',
 		dueAt: 'تاريخ الاستحقاق النهائي',
 		dueDuration: 'مدة الاستحقاق',
+		dueDurationMonths: 'مدة الاستحقاق (شهور)',
+		dueDurationDays: 'مدة الاستحقاق (أيام)',
 		paidAt: 'تاريخ الدفع',
 		categoryId: 'فئة',
 		title: 'العنوان',
