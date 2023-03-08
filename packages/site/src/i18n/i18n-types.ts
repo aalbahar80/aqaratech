@@ -332,11 +332,11 @@ type RootTranslation = {
 		 */
 		dueDuration: string
 		/**
-		 * D​u​e​ ​D​u​r​a​t​i​o​n​ ​(​m​o​n​t​h​s​)
+		 * D​u​e​ ​d​u​r​a​t​i​o​n​ ​(​m​o​n​t​h​s​)
 		 */
 		dueDurationMonths: string
 		/**
-		 * D​u​e​ ​D​u​r​a​t​i​o​n​ ​(​d​a​y​s​)
+		 * D​u​e​ ​d​u​r​a​t​i​o​n​ ​(​d​a​y​s​)
 		 */
 		dueDurationDays: string
 		/**
@@ -1471,11 +1471,11 @@ export type TranslationFunctions = {
 		 */
 		dueDuration: () => LocalizedString
 		/**
-		 * Due Duration (months)
+		 * Due duration (months)
 		 */
 		dueDurationMonths: () => LocalizedString
 		/**
-		 * Due Duration (days)
+		 * Due duration (days)
 		 */
 		dueDurationDays: () => LocalizedString
 		/**

@@ -119,8 +119,8 @@ export const fields = {
 	isPaid: 'Payment Status',
 	dueAt: 'Due At',
 	dueDuration: 'Due Duration',
-	dueDurationMonths: 'Due Duration (months)',
-	dueDurationDays: 'Due Duration (days)',
+	dueDurationMonths: 'Due duration (months)',
+	dueDurationDays: 'Due duration (days)',
 	paidAt: 'Paid At',
 
 	// expense

@@ -31,8 +31,8 @@ const entityFieldLabels = {
 	mfPaymentId: 'MyFatoorah Payment ID',
 
 	key: 'Name',
-	dueDurationMonths: 'Due Duration (months)',
-	dueDurationDays: 'Due Duration (days)',
+	dueDurationMonths: 'Due duration (months)',
+	dueDurationDays: 'Due duration (days)',
 } satisfies FieldLabels;
 
 export const getLabel = (key: string) =>

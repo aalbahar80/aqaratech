@@ -6,8 +6,8 @@ import { test } from '../../api/api-fixtures';
 import { apiURL } from '../../api/fixtures/api-url';
 import { FormPage } from '../form-page-model';
 
-const months = 'Due duration (months)';
-const days = 'Due duration (days)';
+const months = getLabel('dueDurationMonths');
+const days = getLabel('dueDurationDays');
 
 test('dueDuration defaults to 1 month 0 days', async ({ page, org }) => {
 	const url = getRoute({
