@@ -85,7 +85,6 @@ importers:
       '@types/node': 18.14.6
       '@types/passport-jwt': 3.0.8
       '@types/sinon': 10.0.13
-      '@vitest/ui': 0.29.2
       cache-manager: 5.1.7
       class-transformer: 0.5.1
       cookie-parser: 1.4.6
@@ -120,7 +119,6 @@ importers:
       tsx: 3.12.3
       typescript: 5.0.1-rc
       ufo: 1.1.1
-      vitest: 0.29.2
       winston: 3.8.2
       zod: 3.21.4
     dependencies:
@@ -187,7 +185,6 @@ importers:
       '@types/node': 18.14.6
       '@types/passport-jwt': 3.0.8
       '@types/sinon': 10.0.13
-      '@vitest/ui': 0.29.2
       dotenv: 16.0.3
       eslint-config-custom: link:../eslint-config-custom
       js-yaml: 4.1.0
@@ -200,7 +197,6 @@ importers:
       tsconfig-paths: 4.1.2
       tsx: 3.12.3
       typescript: 5.0.1-rc
-      vitest: 0.29.2_@vitest+ui@0.29.2
 
   packages/eslint-config-custom:
     specifiers:

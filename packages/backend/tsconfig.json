@@ -23,7 +23,7 @@
 		"noUnusedParameters": false,
 		"allowUnusedLabels": true,
 		"importsNotUsedAsValues": "remove",
-		"types": ["multer", "vitest/globals"],
+		"types": ["multer"],
 		// "verbatimModuleSyntax": true, // needs special consideration for nestjs
 		"paths": {
 			"src": ["./src/"],
