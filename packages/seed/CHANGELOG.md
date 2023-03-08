@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.18.0
+
+### Minor Changes
+
+- fc2a76f55: disable deleting last role
+
+### Patch Changes
+
+- Updated dependencies [fc2a76f55]
+  - @self/utils@3.18.0
+
 ## 2.17.0
 
 ### Minor Changes

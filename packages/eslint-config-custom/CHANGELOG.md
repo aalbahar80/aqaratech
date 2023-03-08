@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.18.0
+
+### Minor Changes
+
+- fc2a76f55: disable deleting last role
+
 ## 2.17.0
 
 ### Minor Changes

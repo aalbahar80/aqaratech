@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.18.0
+
+### Minor Changes
+
+- fc2a76f55: disable deleting last role
+
 ## 3.17.0
 
 ### Minor Changes
