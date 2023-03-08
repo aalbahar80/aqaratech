@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.17.0
+
+### Minor Changes
+
+- 91adf064a: add dueDuration setting
+
 ## 3.16.0
 
 ### Minor Changes

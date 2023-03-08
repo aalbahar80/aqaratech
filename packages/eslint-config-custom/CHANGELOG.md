@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.17.0
+
+### Minor Changes
+
+- 91adf064a: add dueDuration setting
+
 ## 2.16.0
 
 ### Minor Changes

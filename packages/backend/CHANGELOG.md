@@ -1,5 +1,16 @@
 # @self/backend
 
+## 2.18.0
+
+### Minor Changes
+
+- 91adf064a: add dueDuration setting
+
+### Patch Changes
+
+- Updated dependencies [91adf064a]
+  - @self/utils@3.17.0
+
 ## 2.17.0
 
 ### Minor Changes

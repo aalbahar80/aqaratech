@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.18.0
+
+### Minor Changes
+
+- 91adf064a: add dueDuration setting
+
 ## 2.17.0
 
 ### Minor Changes
