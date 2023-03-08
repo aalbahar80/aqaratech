@@ -180,7 +180,7 @@ const en: BaseTranslation = {
 		areYouSure: 'Are you sure?',
 		customUnitLabel: 'To display a custom value, use the label field.',
 		dueDurationLabel:
-			'Set the due duration for all invoices. Can be set as a number of months or days (or both).',
+			'Set the due duration for all invoices. Can be set as a number of months or days (or both).\n\nDue duration is used to determine when to consider a payment as late.',
 		unspecifiedUnit: 'Unspecified unit',
 		unspecifiedProperty: 'Unspecified property',
 	},

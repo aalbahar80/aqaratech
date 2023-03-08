@@ -1136,7 +1136,9 @@ type RootTranslation = {
 		 */
 		customUnitLabel: string
 		/**
-		 * S​e​t​ ​t​h​e​ ​d​u​e​ ​d​u​r​a​t​i​o​n​ ​f​o​r​ ​a​l​l​ ​i​n​v​o​i​c​e​s​.​ ​C​a​n​ ​b​e​ ​s​e​t​ ​a​s​ ​a​ ​n​u​m​b​e​r​ ​o​f​ ​m​o​n​t​h​s​ ​o​r​ ​d​a​y​s​ ​(​o​r​ ​b​o​t​h​)​.
+		 * S​e​t​ ​t​h​e​ ​d​u​e​ ​d​u​r​a​t​i​o​n​ ​f​o​r​ ​a​l​l​ ​i​n​v​o​i​c​e​s​.​ ​C​a​n​ ​b​e​ ​s​e​t​ ​a​s​ ​a​ ​n​u​m​b​e​r​ ​o​f​ ​m​o​n​t​h​s​ ​o​r​ ​d​a​y​s​ ​(​o​r​ ​b​o​t​h​)​.​
+	​
+	​D​u​e​ ​d​u​r​a​t​i​o​n​ ​i​s​ ​u​s​e​d​ ​t​o​ ​d​e​t​e​r​m​i​n​e​ ​w​h​e​n​ ​t​o​ ​c​o​n​s​i​d​e​r​ ​a​ ​p​a​y​m​e​n​t​ ​a​s​ ​l​a​t​e​.
 		 */
 		dueDurationLabel: string
 		/**
@@ -2274,6 +2276,8 @@ export type TranslationFunctions = {
 		customUnitLabel: () => LocalizedString
 		/**
 		 * Set the due duration for all invoices. Can be set as a number of months or days (or both).
+
+	Due duration is used to determine when to consider a payment as late.
 		 */
 		dueDurationLabel: () => LocalizedString
 		/**
