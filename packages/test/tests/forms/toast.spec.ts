@@ -25,11 +25,12 @@ test.describe('Form toasts', () => {
 
 		const toast = page.getByRole('status');
 
-		const success = toast.getByText('Success');
-		const loading = toast.getByText('Loading');
+		// loading is too fast to test
+		// const loading = toast.getByText('Loading');
+		// await expect(loading).toBeVisible();
+		// await expect(loading).toBeHidden();
 
-		await expect(loading).toBeVisible();
-		await expect(loading).toBeHidden();
+		const success = toast.getByText('Success');
 		await expect(success).toBeVisible();
 		await expect(success).toBeHidden();
 	});
@@ -51,11 +52,12 @@ test.describe('Form toasts', () => {
 
 		const toast = page.getByRole('status');
 
-		const loading = toast.getByText('Loading');
-		const invalid = toast.getByText('Invalid form');
+		// loading is too fast to test
+		// const loading = toast.getByText('Loading');
+		// await expect(loading).toBeVisible();
+		// await expect(loading).toBeHidden();
 
-		await expect(loading).toBeVisible();
-		await expect(loading).toBeHidden();
+		const invalid = toast.getByText('Invalid form');
 		await expect(invalid).toBeVisible();
 
 		// PERF: waiting for invalid toast to disappear takes too long
