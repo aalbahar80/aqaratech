@@ -1,31 +1,22 @@
-import * as R from 'remeda';
-
 import { expenseCategoryFactory } from '@self/seed';
 
-import { PostUrl } from '../../../utils/post-url';
-import { resCheck } from '../../../utils/res-check';
+import { prisma } from '../../../prisma';
 
 import type { AllFixtures } from './test-fixtures.interface';
-import type { ExpenseCategoryDto } from '../../../types/api';
 
 export const expenseCategoryFixtures: AllFixtures = {
 	expenseCategoryParams: [undefined, { option: true }],
 
-	expenseCategory: async ({ org, request, expenseCategoryParams }, use) => {
-		const expenseCategory = R.omit(
-			expenseCategoryFactory.build({
-				...expenseCategoryParams,
-			}),
-			['id'],
-		);
+	expenseCategory: async ({ org, expenseCategoryParams }, use) => {
+		const expenseCategory = expenseCategoryFactory.build(expenseCategoryParams);
 
-		const url = PostUrl(org.organization.id).expenseCategory;
+		await prisma.organizationSettings.update({
+			where: { organizationId: org.organization.id },
+			data: {
+				expenseCategoryTree: [expenseCategory],
+			},
+		});
 
-		const res = await request.post(url, { data: expenseCategory });
-		resCheck(res);
-
-		const created = (await res.json()) as ExpenseCategoryDto;
-
-		await use(created);
+		await use(expenseCategory);
 	},
 };
