@@ -176,13 +176,37 @@ export class RolesService {
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {
-		const role = await this.prisma.c.role.delete({
+		const role = await this.prisma.c.role.findUniqueOrThrow({
 			where: {
 				id,
 				AND: [accessibleBy(user.ability, Action.Delete).Role],
 			},
 		});
 
-		return role.id;
+		// Ensure that the organization has at least one admin role
+		if (role.roleType === 'ORGADMIN') {
+			const org = await this.prisma.c.organization.findUniqueOrThrow({
+				where: {
+					id: user.role.organizationId,
+					AND: [accessibleBy(user.ability, Action.Read).Organization],
+				},
+				select: { roles: { where: { roleType: 'ORGADMIN' } } },
+			});
+
+			if (org.roles.length <= 1) {
+				throw new BadRequestException(
+					'Deletion unsuccessful. Please ensure that the organization has at least one admin role before attempting to delete.',
+				);
+			}
+		}
+
+		const deleted = await this.prisma.c.role.delete({
+			where: {
+				id,
+				AND: [accessibleBy(user.ability, Action.Delete).Role],
+			},
+		});
+
+		return deleted.id;
 	}
 }

@@ -146,3 +146,53 @@ test.describe('can delete role', () => {
 		expect(deleted).toBeNull();
 	});
 });
+
+test.describe('final admin role cannot be deleted', () => {
+	test('form', async ({ page, org }) => {
+		const roles = await prisma.role.findMany({
+			where: {
+				roleType: 'ORGADMIN',
+				organizationId: org.organization.id,
+			},
+		});
+
+		expect(roles).toHaveLength(1);
+
+		const url = getRoute({
+			entity: 'organization',
+			id: org.organization.id,
+			pageType: PageTab.Roles,
+			params: {},
+		});
+
+		await page.goto(url);
+
+		const responsePromise = page.waitForResponse(
+			(res) => res.request().method() === 'DELETE',
+		);
+
+		// find the only row
+		const btn = page.getByRole('row').getByRole('button', { name: 'Delete' });
+
+		await btn.click();
+
+		const modal = new Modal({ page });
+		await modal.deleteConfirm();
+
+		const toast = page.getByRole('status');
+
+		const invalid = toast.getByText(
+			'Deletion unsuccessful. Please ensure that the organization has at least one admin role before attempting to delete.',
+		);
+		await expect(invalid).toBeVisible();
+
+		await responsePromise;
+
+		const role = await prisma.role.findUnique({
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			where: { id: roles[0]!.id },
+		});
+
+		expect(role).not.toBeNull();
+	});
+});
