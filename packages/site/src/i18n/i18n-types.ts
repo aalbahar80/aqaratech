@@ -474,6 +474,10 @@ type RootTranslation = {
 		 */
 		pay: string
 		/**
+		 * C​o​p​y​ ​p​a​y​m​e​n​t​ ​l​i​n​k
+		 */
+		copyPayLink: string
+		/**
 		 * B​a​c​k
 		 */
 		back: string
@@ -1582,6 +1586,10 @@ export type TranslationFunctions = {
 		 * Pay
 		 */
 		pay: () => LocalizedString
+		/**
+		 * Copy payment link
+		 */
+		copyPayLink: () => LocalizedString
 		/**
 		 * Back
 		 */

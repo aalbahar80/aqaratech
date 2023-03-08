@@ -59,7 +59,7 @@
 					await navigator.clipboard.writeText(payURL);
 					addSuccessToast();
 				}}
-				text="Copy payment URL"
+				text={$L.buttons.copyPayLink()}
 				solid
 				disabled={payDisabled}
 			/>

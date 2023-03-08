@@ -143,6 +143,7 @@ const ar: Translation = {
 		sendReminder: 'إرسال تذكير',
 		sendInvite: 'إرسال دعوة',
 		pay: 'دفع',
+		copyPayLink: 'نسخ رابط الدفع',
 		back: 'عودة',
 		subscribe: 'اشترك',
 	},

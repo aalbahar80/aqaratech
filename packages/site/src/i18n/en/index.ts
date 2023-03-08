@@ -33,6 +33,7 @@ const en: BaseTranslation = {
 		sendReminder: 'Send reminder',
 		sendInvite: 'Send invite',
 		pay: 'Pay',
+		copyPayLink: 'Copy payment link',
 		back: 'Back',
 		subscribe: 'Subscribe',
 	},
