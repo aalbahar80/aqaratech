@@ -80,6 +80,8 @@ const en: BaseTranslation = {
 		manual: 'Manual',
 		late: 'Late',
 		notLate: 'Not late',
+		months: 'months',
+		days: 'days',
 	},
 	charts: {
 		empty: {
@@ -177,6 +179,8 @@ const en: BaseTranslation = {
 		occupied: 'Occupied',
 		areYouSure: 'Are you sure?',
 		customUnitLabel: 'To display a custom value, use the label field.',
+		dueDurationLabel:
+			'Set the due duration for all invoices. Can be set as a number of months or days (or both).',
 		unspecifiedUnit: 'Unspecified unit',
 		unspecifiedProperty: 'Unspecified property',
 	},

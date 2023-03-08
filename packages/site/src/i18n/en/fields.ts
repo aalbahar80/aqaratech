@@ -24,11 +24,13 @@ import type {
 	PayoutCreateSchema,
 	FileCreateSchema,
 } from '@self/utils';
+import type { OrganizationSettingsSchema } from '@self/utils/src/schemas';
 
 import type { MessageDto } from '$api/openapi';
 import type { Union } from 'ts-toolbelt';
 
 type Schemas =
+	| OrganizationSettingsSchema
 	| UserCreateSchema
 	| UserUpdateSchema
 	| RoleCreateSchema
@@ -112,6 +114,7 @@ export const fields = {
 	// invoice
 	isPaid: 'Payment Status',
 	dueAt: 'Due At',
+	dueDuration: 'Due Duration',
 	paidAt: 'Paid At',
 
 	// expense

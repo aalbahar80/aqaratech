@@ -1,7 +1,9 @@
+import { get } from 'svelte/store';
 import { organizationSchema } from '@self/utils';
 
 import type { OrganizationDto } from '$api/openapi';
 
+import L from '$i18n/i18n-svelte';
 import { createFormField } from '$lib/components/form/model/form-field';
 import { createFormModel } from '$lib/components/form/model/form-model';
 import { labelHint } from '$lib/constants/form-hints';
@@ -24,7 +26,8 @@ export const organizationFormModel = () =>
 			// @ts-expect-error nested field
 			months: createFormField(MONTHS_KEY, {
 				type: 'number',
-				label: 'Due duration (months)',
+				label: `${get(L).fields.dueDuration()} (${get(L).general.months()})`,
+				hint: get(L).other.dueDurationLabel(),
 				hideWhenCreate: true,
 				getValue: (data) =>
 					(data as OrganizationDto).settings?.dueDuration.months,
@@ -32,7 +35,8 @@ export const organizationFormModel = () =>
 
 			days: createFormField(DAYS_KEY, {
 				type: 'number',
-				label: 'Due duration (days)',
+				label: `${get(L).fields.dueDuration()} (${get(L).general.days()})`,
+				hint: get(L).other.dueDurationLabel(),
 				hideWhenCreate: true,
 				getValue: (data) =>
 					(data as OrganizationDto).settings?.dueDuration.days,

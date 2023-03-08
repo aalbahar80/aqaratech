@@ -328,6 +328,10 @@ type RootTranslation = {
 		 */
 		dueAt: string
 		/**
+		 * D​u​e​ ​D​u​r​a​t​i​o​n
+		 */
+		dueDuration: string
+		/**
 		 * P​a​i​d​ ​A​t
 		 */
 		paidAt: string
@@ -643,6 +647,14 @@ type RootTranslation = {
 		 * N​o​t​ ​l​a​t​e
 		 */
 		notLate: string
+		/**
+		 * m​o​n​t​h​s
+		 */
+		months: string
+		/**
+		 * d​a​y​s
+		 */
+		days: string
 	}
 	charts: {
 		empty: {
@@ -1116,6 +1128,10 @@ type RootTranslation = {
 		 */
 		customUnitLabel: string
 		/**
+		 * S​e​t​ ​t​h​e​ ​d​u​e​ ​d​u​r​a​t​i​o​n​ ​f​o​r​ ​a​l​l​ ​i​n​v​o​i​c​e​s​.​ ​C​a​n​ ​b​e​ ​s​e​t​ ​a​s​ ​a​ ​n​u​m​b​e​r​ ​o​f​ ​m​o​n​t​h​s​ ​o​r​ ​d​a​y​s​ ​(​o​r​ ​b​o​t​h​)​.
+		 */
+		dueDurationLabel: string
+		/**
 		 * U​n​s​p​e​c​i​f​i​e​d​ ​u​n​i​t
 		 */
 		unspecifiedUnit: string
@@ -1441,6 +1457,10 @@ export type TranslationFunctions = {
 		 */
 		dueAt: () => LocalizedString
 		/**
+		 * Due Duration
+		 */
+		dueDuration: () => LocalizedString
+		/**
 		 * Paid At
 		 */
 		paidAt: () => LocalizedString
@@ -1756,6 +1776,14 @@ export type TranslationFunctions = {
 		 * Not late
 		 */
 		notLate: () => LocalizedString
+		/**
+		 * months
+		 */
+		months: () => LocalizedString
+		/**
+		 * days
+		 */
+		days: () => LocalizedString
 	}
 	charts: {
 		empty: {
@@ -2228,6 +2256,10 @@ export type TranslationFunctions = {
 		 * To display a custom value, use the label field.
 		 */
 		customUnitLabel: () => LocalizedString
+		/**
+		 * Set the due duration for all invoices. Can be set as a number of months or days (or both).
+		 */
+		dueDurationLabel: () => LocalizedString
 		/**
 		 * Unspecified unit
 		 */

@@ -105,6 +105,7 @@ const ar: Translation = {
 		license: 'رخصة',
 		isPaid: 'مدفوع',
 		dueAt: 'تاريخ الاستحقاق النهائي',
+		dueDuration: 'مدة الاستحقاق',
 		paidAt: 'تاريخ الدفع',
 		categoryId: 'فئة',
 		title: 'العنوان',
@@ -190,6 +191,8 @@ const ar: Translation = {
 		manual: 'يدوي',
 		late: 'متأخر',
 		notLate: 'غير متأخر',
+		months: 'أشهر',
+		days: 'أيام',
 	},
 	charts: {
 		empty: {
@@ -382,6 +385,8 @@ const ar: Translation = {
 		occupied: 'مستأجر',
 		areYouSure: 'هل انت متاكد؟',
 		customUnitLabel: 'لعرض قيمة مخصصة ، استخدم حقل التسمية.',
+		dueDurationLabel:
+			'حدد مدة لاستحقاق لجميع الفواتير. يمكن تعيين المدة بعدد الأشهر أو الأيام (أو كليهما).',
 		unspecifiedUnit: 'وحدة غير محددة',
 		unspecifiedProperty: 'عقار غير محدد',
 	},
