@@ -15,8 +15,6 @@ export const actions: Actions = {
 			onSubmit: async (api, data, event) => {
 				const submitted = await api.organizations.createLeaseInvoice({
 					organizationId: event.params.organizationId,
-					//  TODO: fix type
-					// @ts-expect-error KeyOfSchema<LeaseInvoiceCreateSchema> resolves to never
 					createLeaseInvoiceDto: data,
 				});
 

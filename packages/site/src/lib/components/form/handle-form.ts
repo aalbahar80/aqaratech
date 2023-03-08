@@ -5,7 +5,6 @@ import {
 	PageType,
 	type EditableSchemaKeys,
 	type Entity,
-	type InnerSchema,
 	type KeyOfSchema,
 } from '@self/utils';
 
@@ -66,7 +65,7 @@ export const handleForm = async <
 	/**
 	 * Checkboxes are handled weirdly by HTML forms, so we convert them to booleans.
 	 */
-	checkboxKeys?: PickBooleans<z.infer<InnerSchema<S>>>;
+	checkboxKeys?: PickBooleans<z.infer<S>>;
 }) => {
 	const { request, fetch, params } = event;
 
