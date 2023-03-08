@@ -8,7 +8,13 @@ test('invalid date does not trigger http call - multiple', async ({
 }) => {
 	page.on('request', (request) => {
 		// force test to fail if a request is made
-		expect(request.url()).toContain('--');
+		const url = request.url();
+		// don't fail if the request is for the favicon
+		if (url.includes('favicon')) {
+			return;
+		} else {
+			expect(request.url()).toContain('--');
+		}
 	});
 
 	// set start date in the future
