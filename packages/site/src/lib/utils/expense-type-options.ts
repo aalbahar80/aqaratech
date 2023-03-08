@@ -37,7 +37,7 @@ export const toHeirarchy = (
  * Add an artificial root node to satisfy d3's "one root" requirement.
  * Convert any node with a parentId of `null` to have a parentId of 'root'.
  */
-export const injectRoot = (categories: ExpenseCategoryLocalized[]) => {
+const injectRoot = (categories: ExpenseCategoryLocalized[]) => {
 	const hasRoot = categories.some((c) => c.id === ROOT_ID);
 	if (hasRoot) {
 		return categories;
