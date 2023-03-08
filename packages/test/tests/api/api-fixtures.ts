@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 
-import { test as base } from '@playwright/test';
+import { test as base, expect } from '@playwright/test';
 import tier from 'tier';
 import { resolveURL } from 'ufo';
 
@@ -179,12 +179,10 @@ export const test = base.extend<TestFixtures & TestOptions>({
 	},
 
 	// adds the new org's roleID to context's cookies
-	page: async ({ context, roleCookie, waitForHydration }, use) => {
+	page: async ({ context, page, roleCookie, waitForHydration }, use) => {
 		if (roleCookie) {
 			await context.addCookies([roleCookie]);
 		}
-
-		const page = await context.newPage();
 
 		if (waitForHydration) {
 			// eslint-disable-next-line @typescript-eslint/unbound-method
