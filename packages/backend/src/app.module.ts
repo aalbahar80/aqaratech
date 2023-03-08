@@ -30,6 +30,7 @@ import { TraceMiddleware } from 'src/sentry/trace.middleware';
 import { AggregateModule } from './aggregate/aggregate.module';
 import { AppService } from './app.service';
 import { EnvModule } from './env/env.module';
+import { backendEnvSchema } from './env/env.schema';
 import { EnvService } from './env/env.service';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { ExpensesModule } from './expenses/expenses.module';
@@ -50,12 +51,17 @@ import { TenantsModule } from './tenants/tenants.module';
 import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
 
+const env = backendEnvSchema.parse(process.env);
+
 @Module({
 	imports: [
-		DevtoolsModule.register({
-			// @ts-expect-error overkill
-			http: !isLiveEnv(process.env.PUBLIC_AQARATECH_ENV),
-		}),
+		...(isLiveEnv(env.PUBLIC_AQARATECH_ENV)
+			? []
+			: [
+					DevtoolsModule.register({
+						http: !isLiveEnv(env.PUBLIC_AQARATECH_ENV),
+					}),
+			  ]),
 		EnvModule,
 		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
 
