@@ -192,7 +192,8 @@ export const test = base.extend<TestFixtures & TestOptions>({
 				const res = await goto.call(page, url, opts);
 
 				// https://github.com/sveltejs/kit/pull/6484
-				await page.waitForSelector('body.started', { timeout: 5000 });
+				const started = page.getByTestId('started');
+				await expect(started).toBeVisible();
 
 				return res;
 			};

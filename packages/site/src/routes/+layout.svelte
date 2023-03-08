@@ -48,7 +48,7 @@
 
 		if (!isLiveEnv(environment.PUBLIC_AQARATECH_ENV)) {
 			// communicate that the app is ready - used for testing
-			document.body.classList.add('started');
+			document.body.setAttribute('data-testid', 'started');
 		}
 	});
 </script>
