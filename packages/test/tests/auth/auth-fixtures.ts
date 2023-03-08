@@ -25,7 +25,7 @@ export const test = base.extend<TokenTestOptions>({
 			throw new Error('token is not set');
 		}
 
-		const domain = baseURL ? new URL(baseURL).host : 'localhost';
+		const domain = baseURL ? new URL(baseURL).hostname : 'localhost';
 
 		// replace the idToken cookie with an expired one
 		// TODO: clear all cookies instead? If so, check access token doesn't interfere with result.

@@ -128,9 +128,10 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		} else {
 			const baseCookie: Omit<PWCookie, 'name' | 'value'> = {
 				path: '/',
-				domain: baseURL ? new URL(baseURL).host : 'localhost',
+				// exclude port number from domain. Chrome will omit it anyway,
+				// but will fail webkit.
+				domain: baseURL ? new URL(baseURL).hostname : 'localhost',
 				expires: Date.now() / 1000 + 86400, // expires tomorrow
-				// expires: -1,
 				httpOnly: true,
 				secure: false,
 				sameSite: 'Lax',
