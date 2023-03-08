@@ -63,7 +63,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		// },
 	},
 	webServer: [
-		// To Debug, use env var: DEBUG=pw:webserver
+		// To Debug, use env var: DEBUG="pw:webserver,pw:browser*,pw:api"
 		{
 			cwd: '../../',
 			command: NVIM
