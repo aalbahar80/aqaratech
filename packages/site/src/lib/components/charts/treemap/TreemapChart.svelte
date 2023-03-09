@@ -2,17 +2,14 @@
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-nocheck
 	import * as Pancake from '@sveltejs/pancake';
-	import clsx from 'clsx';
 	import { treemap } from 'd3';
 
 	import * as eases from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
 	import { fade } from 'svelte/transition';
-	import { toBrowserLocale } from '@self/utils';
-	import { FORMATS } from '@self/utils/src/entity/form/field/format';
 
-	import { locale } from '$i18n/i18n-svelte';
 	import Treemap from '$lib/components/charts/treemap/Treemap.svelte';
+	import TreemapTile from '$lib/components/charts/treemap/TreemapTile.svelte';
 
 	// export let hierarchy: HierarchyNode<any>;
 	// export let getLabel: (node: HierarchyNode<any>) => string;
@@ -118,41 +115,12 @@ Create a treemap from a d3-hierarchy.
 					on:click={() => select(node)}
 					in:fade={{ duration: 400 }}
 				>
-					<!-- Tile -->
-					<div
-						class={clsx(
-							'@container flex h-full w-full items-center justify-center rounded-lg border-4 border-white px-1 py-1.5 text-gray-500',
-							leaf
-								? 'bg-gradient-to-br from-blue-600/50 via-blue-400/50 to-rose-50'
-								: 'bg-gradient-to-br from-blue-100 to-rose-50',
-						)}
-					>
-						<!-- Label -->
-						<div
-							class="@[3em]:flex @[6em]:text-xs @[8em]:text-base @[15em]:text-4xl hidden flex-col text-[0.5rem] transition-[font-size] duration-700 ease-out"
-						>
-							<!-- Consider passing in link in data structure if there is a need to optimize -->
-							{#if getLink?.(node)}
-								<a
-									class="absolute right-2 top-2 align-middle text-indigo-600"
-									class:hidden={node.children}
-									href={getLink(node)}
-									target="_blank"
-									rel="noopener noreferrer"
-									data-sveltekit-reload
-								>
-									&#8599;
-								</a>
-							{/if}
-							<strong class="md:pb-3">{getLabel(node) ?? ''}</strong>
-							<span
-								>{new Intl.NumberFormat(toBrowserLocale($locale), {
-									...FORMATS.currency,
-									style: undefined,
-								}).format(node.value)}</span
-							>
-						</div>
-					</div>
+					<TreemapTile
+						{node}
+						{leaf}
+						{getLabel}
+						{getLink}
+					/>
 				</div>
 			{/if}
 		</Treemap>

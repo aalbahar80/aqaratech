@@ -1,0 +1,44 @@
+/* Placed in seperate file until support is merged:
+* https://github.com/sveltejs/svelte/issues/6969
+*/
+
+/* Set container-type to size in order to support querying by height */
+.tile {
+	container-type: size;
+}
+
+@container (max-width: 3em) {
+	.label {
+		display: none;
+	}
+}
+
+@container (min-width: 3em) {
+	.label {
+		display: flex;
+		flex-direction: column;
+		font-size: 0.5rem;
+	}
+}
+
+@container (min-width: 6em) {
+	.label {
+		font-size: 0.75rem;
+		line-height: 1rem;
+	}
+}
+
+@container (min-width: 8em) and (min-height: 4em) {
+	.label {
+		font-size: 1rem;
+		line-height: 1.5rem;
+	}
+}
+
+/* Limit by width and height */
+@container (min-width: 15em) and (min-height: 6em) {
+	.label {
+		font-size: 2.25rem;
+		line-height: 2.5rem;
+	}
+}
