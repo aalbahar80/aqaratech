@@ -1,93 +1,39 @@
-import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
-import { computeLabelProperty, computeLabelUnit } from '@self/utils';
-import { Rel } from 'src/constants/rel.enum';
+interface LabelParams {
+	id: string;
+	title: string;
+}
 
 export interface IBreadcrumbs {
-	tenant: TenantLabelParams;
-	portfolio: PortfolioLabelParams;
-	property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
-	unit: UnitLabelParams & {
-		property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
+	tenant: LabelParams;
+	portfolio: LabelParams;
+	property: LabelParams & { portfolio: LabelParams };
+	unit: LabelParams & {
+		property: LabelParams & { portfolio: LabelParams };
 	};
-	lease: LeaseLabelParams & {
-		tenant: TenantLabelParams;
-		unit: UnitLabelParams & {
-			property: PropertyLabelParams & { portfolio: PortfolioLabelParams };
+	lease: LabelParamsId & {
+		tenant: LabelParams;
+		unit: LabelParams & {
+			property: LabelParams & { portfolio: LabelParams };
 		};
 	};
 }
 
-export interface TenantLabelParams {
-	id: string;
-	label: string | null;
-	fullName: string;
-}
-export interface PortfolioLabelParams {
-	id: string;
-	label: string | null;
-	fullName: string;
-}
-export interface PropertyLabelParams {
-	id: string;
-	label: string | null;
-	area: string | null;
-	block: string | null;
-	number: string | null;
-}
-export interface UnitLabelParams {
-	id: string;
-	label: string | null;
-	type: string | null;
-	unitNumber: string;
-}
-interface LeaseLabelParams {
+interface LabelParamsId {
 	id: string;
 }
-interface MOParams {
-	id: string;
-}
-
-type BreadcrumbDtoParameters =
-	| (TenantLabelParams & { rel: Rel.Tenant })
-	| (PortfolioLabelParams & { rel: Rel.Portfolio })
-	| (PropertyLabelParams & { rel: Rel.Property })
-	| (UnitLabelParams & { rel: Rel.Unit })
-	| (LeaseLabelParams & { rel: Rel.Lease })
-	| (MOParams & { rel: Rel.MaintenanceOrder });
-
-// interface BreadcrumbDtoParameters {
-//   labelParams: LabelParams;
-// }
 
 export class BreadcrumbDto {
-	@ApiHideProperty()
-	rel: Rel;
-
 	@ApiProperty()
 	id: string;
 
 	@ApiProperty()
 	label: string;
 
-	constructor(labelParams: BreadcrumbDtoParameters) {
-		const { rel, id } = labelParams;
-		this.id = id;
-
-		if (rel === Rel.Tenant) {
-			this.label = labelParams.label ?? labelParams.fullName;
-		} else if (rel === Rel.Portfolio) {
-			this.label = labelParams.label ?? labelParams.fullName;
-		} else if (rel === Rel.Property) {
-			this.label = labelParams.label ?? computeLabelProperty(labelParams);
-		} else if (rel === Rel.Unit) {
-			this.label = labelParams.label ?? computeLabelUnit(labelParams);
-		} else if (rel === Rel.Lease) {
-			this.label = labelParams.id;
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-		} else if (rel === Rel.MaintenanceOrder) {
-			this.label = labelParams.id;
-		}
+	constructor(labelParams: LabelParams) {
+		this.id = labelParams.id;
+		this.label = labelParams.title;
 	}
 }
 

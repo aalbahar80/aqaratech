@@ -20,7 +20,6 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
-import { Rel } from 'src/constants/rel.enum';
 
 class LeaseInvoiceRequiredDto {
 	organizationId: string;
@@ -75,24 +74,24 @@ export class LeaseInvoiceDto
 	get breadcrumbs(): LeaseInvoiceBreadcrumbsDto {
 		return {
 			portfolio: new BreadcrumbDto({
-				rel: Rel.Portfolio,
-				...this.lease.unit.property.portfolio,
+				id: this.portfolioId,
+				title: this.lease.unit.property.portfolio.title,
 			}),
 			property: new BreadcrumbDto({
-				rel: Rel.Property,
-				...this.lease.unit.property,
+				id: this.lease.unit.property.id,
+				title: this.lease.unit.property.title,
 			}),
 			unit: new BreadcrumbDto({
-				rel: Rel.Unit,
-				...this.lease.unit,
+				id: this.lease.unit.id,
+				title: this.lease.unit.title,
 			}),
 			tenant: new BreadcrumbDto({
-				rel: Rel.Tenant,
-				...this.lease.tenant,
+				id: this.lease.tenant.id,
+				title: this.lease.tenant.title,
 			}),
 			lease: new BreadcrumbDto({
-				rel: Rel.Lease,
-				...this.lease,
+				id: this.lease.id,
+				title: this.lease.id,
 			}),
 		};
 	}

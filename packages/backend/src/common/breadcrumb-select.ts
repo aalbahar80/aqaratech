@@ -4,25 +4,23 @@ const lease = {
 		tenant: {
 			select: {
 				id: true,
-				label: true,
-				fullName: true,
+				title: true,
 			},
 		},
 		unit: {
 			select: {
 				id: true,
-				label: true,
-				propertyId: true,
-				type: true,
-				unitNumber: true,
+				title: true,
 				property: {
 					select: {
 						id: true,
-						label: true,
-						area: true,
-						block: true,
-						number: true,
-						portfolio: { select: { id: true, label: true, fullName: true } },
+						title: true,
+						portfolio: {
+							select: {
+								id: true,
+								title: true,
+							},
+						},
 					},
 				},
 			},
@@ -33,18 +31,18 @@ const lease = {
 const unit = {
 	select: {
 		id: true,
-		label: true,
+		title: true,
 		propertyId: true,
-		type: true,
-		unitNumber: true,
 		property: {
 			select: {
 				id: true,
-				label: true,
-				area: true,
-				block: true,
-				number: true,
-				portfolio: { select: { id: true, label: true, fullName: true } },
+				title: true,
+				portfolio: {
+					select: {
+						id: true,
+						title: true,
+					},
+				},
 			},
 		},
 	},
@@ -53,23 +51,27 @@ const unit = {
 const property = {
 	select: {
 		id: true,
-		label: true,
-		area: true,
-		block: true,
-		number: true,
-		portfolio: { select: { id: true, label: true, fullName: true } },
+		title: true,
+		portfolio: {
+			select: {
+				id: true,
+				title: true,
+			},
+		},
 	},
 };
 
 const portfolio = {
-	select: { id: true, label: true, fullName: true },
+	select: {
+		id: true,
+		title: true,
+	},
 };
 
 const tenant = {
 	select: {
 		id: true,
-		label: true,
-		fullName: true,
+		title: true,
 	},
 };
 

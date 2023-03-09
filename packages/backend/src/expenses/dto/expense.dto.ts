@@ -15,7 +15,6 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
-import { Rel } from 'src/constants/rel.enum';
 import { ExpenseCategoryDto } from 'src/expense-categories/expense-category.dto';
 import { Exactly } from 'src/types/exactly.type';
 
@@ -48,22 +47,22 @@ export class ExpenseDto
 	get breadcrumbs(): ExpenseBreadcrumbsDto {
 		const crumbs: ExpenseBreadcrumbsDto = {
 			portfolio: new BreadcrumbDto({
-				rel: Rel.Portfolio,
-				...this.portfolio,
+				id: this.portfolioId,
+				title: this.portfolio.title,
 			}),
 		};
 
 		if (this.property) {
 			crumbs.property = new BreadcrumbDto({
-				rel: Rel.Property,
-				...this.property,
+				id: this.property.id,
+				title: this.property.title,
 			});
 		}
 
 		if (this.unit) {
 			crumbs.unit = new BreadcrumbDto({
-				rel: Rel.Unit,
-				...this.unit,
+				id: this.unit.id,
+				title: this.unit.title,
 			});
 		}
 

@@ -14,7 +14,6 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
-import { Rel } from 'src/constants/rel.enum';
 import { Exactly } from 'src/types/exactly.type';
 
 class PayoutRequiredDto {
@@ -49,8 +48,8 @@ export class PayoutDto
 	get breadcrumbs(): PayoutBreadcrumbsDto {
 		return {
 			portfolio: new BreadcrumbDto({
-				rel: Rel.Portfolio,
-				...this.portfolio,
+				id: this.portfolioId,
+				title: this.portfolio.title,
 			}),
 		};
 	}

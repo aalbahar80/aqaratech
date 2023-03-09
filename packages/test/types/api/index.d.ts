@@ -2420,6 +2420,12 @@ export interface PartialUnitDto {
 	 * @memberof PartialUnitDto
 	 */
 	label?: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PartialUnitDto
+	 */
+	title?: string;
 }
 /**
  *
@@ -2919,6 +2925,12 @@ export interface UnitDto {
 	 * @memberof UnitDto
 	 */
 	breadcrumbs: UnitBreadcrumbsDto;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UnitDto
+	 */
+	title: string;
 	/**
 	 *
 	 * @type {string}

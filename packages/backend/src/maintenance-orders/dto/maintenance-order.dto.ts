@@ -21,7 +21,6 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
-import { Rel } from 'src/constants/rel.enum';
 import { Exactly } from 'src/types/exactly.type';
 
 class MaintenanceOrderBreadcrumbsDto extends IntersectionType(
@@ -69,29 +68,29 @@ export class MaintenanceOrderDto
 	get breadcrumbs(): MaintenanceOrderBreadcrumbsDto {
 		const crumbs: MaintenanceOrderBreadcrumbsDto = {
 			portfolio: new BreadcrumbDto({
-				rel: Rel.Portfolio,
-				...this.portfolio,
+				id: this.portfolioId,
+				title: this.portfolio.title,
 			}),
 		};
 
 		if (this.property) {
 			crumbs.property = new BreadcrumbDto({
-				rel: Rel.Property,
-				...this.property,
+				id: this.property.id,
+				title: this.property.title,
 			});
 		}
 
 		if (this.unit) {
 			crumbs.unit = new BreadcrumbDto({
-				rel: Rel.Unit,
-				...this.unit,
+				id: this.unit.id,
+				title: this.unit.title,
 			});
 		}
 
 		if (this.tenant) {
 			crumbs.tenant = new BreadcrumbDto({
-				rel: Rel.Tenant,
-				...this.tenant,
+				id: this.tenant.id,
+				title: this.tenant.title,
 			});
 		}
 

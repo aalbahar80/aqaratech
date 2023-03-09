@@ -16,7 +16,6 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
-import { Rel } from 'src/constants/rel.enum';
 import { UnitDto } from 'src/units/dto/unit.dto';
 
 class LeaseRequiredDto {
@@ -81,8 +80,8 @@ export class LeaseDto
 			property: unit.breadcrumbs.property,
 			unit: unit.breadcrumbs.unit,
 			tenant: new BreadcrumbDto({
-				rel: Rel.Tenant,
-				...this.tenant,
+				id: this.tenant.id,
+				title: this.tenant.title,
 			}),
 		};
 	}

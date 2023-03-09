@@ -3582,6 +3582,8 @@ components:
           $ref: '#/components/schemas/UnitVacancy'
         breadcrumbs:
           $ref: '#/components/schemas/UnitBreadcrumbsDto'
+        title:
+          type: string
         createdAt:
           format: date-time
           type: string
@@ -3624,6 +3626,7 @@ components:
         - id
         - vacancy
         - breadcrumbs
+        - title
         - createdAt
         - updatedAt
         - organizationId
@@ -3984,6 +3987,8 @@ components:
         label:
           type: string
           nullable: true
+        title:
+          type: string
     UpdateExpenseDto:
       type: object
       properties:

@@ -17,7 +17,6 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
-import { Rel } from 'src/constants/rel.enum';
 import { PropertyDto } from 'src/properties/dto/property.dto';
 import { Exactly } from 'src/types/exactly.type';
 
@@ -75,6 +74,8 @@ export class UnitDto
 		Object.assign(this, partial);
 	}
 
+	title: string;
+
 	@ApiHideProperty()
 	@Exclude()
 	leases: {
@@ -125,8 +126,8 @@ export class UnitDto
 			portfolio: property.breadcrumbs.portfolio,
 			property: property.breadcrumbs.property,
 			unit: new BreadcrumbDto({
-				rel: Rel.Unit,
-				...this,
+				id: this.id,
+				title: this.title,
 			}),
 		};
 	}
