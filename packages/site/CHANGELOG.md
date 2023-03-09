@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.19.1
+
+### Patch Changes
+
+- 841988c13: treemap labels: take height into account
+
 ## 2.19.0
 
 ### Minor Changes
