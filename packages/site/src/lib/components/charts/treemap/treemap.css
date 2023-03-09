@@ -7,13 +7,13 @@
 	container-type: size;
 }
 
-@container (max-width: 3em) {
+@container (max-width: 3em) or (max-height: 3em) {
 	.label {
 		display: none;
 	}
 }
 
-@container (min-width: 3em) {
+@container (min-width: 3em) and (min-height: 3em) {
 	.label {
 		display: flex;
 		flex-direction: column;
@@ -21,7 +21,7 @@
 	}
 }
 
-@container (min-width: 6em) {
+@container (min-width: 6em) and (min-height: 3em) {
 	.label {
 		font-size: 0.75rem;
 		line-height: 1rem;
