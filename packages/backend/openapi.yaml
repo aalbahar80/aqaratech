@@ -3073,25 +3073,19 @@ components:
     LeaseBreadcrumbsDto:
       type: object
       properties:
-        portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
         tenant:
           $ref: '#/components/schemas/BreadcrumbDto'
+        portfolio:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          $ref: '#/components/schemas/BreadcrumbDto'
       required:
+        - tenant
         - portfolio
         - property
         - unit
-        - tenant
     LeaseDto:
       type: object
       properties:
@@ -3150,30 +3144,22 @@ components:
     LeaseInvoiceBreadcrumbsDto:
       type: object
       properties:
-        portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        lease:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
         tenant:
           $ref: '#/components/schemas/BreadcrumbDto'
+        portfolio:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        lease:
+          $ref: '#/components/schemas/BreadcrumbDto'
       required:
+        - tenant
         - portfolio
         - property
         - unit
         - lease
-        - tenant
     LeaseInvoiceDto:
       type: object
       properties:
@@ -3465,13 +3451,9 @@ components:
       type: object
       properties:
         portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
         property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
       required:
         - portfolio
         - property
@@ -3557,17 +3539,11 @@ components:
       type: object
       properties:
         portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
         property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
         unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
       required:
         - portfolio
         - property
@@ -3662,9 +3638,7 @@ components:
       type: object
       properties:
         portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
       required:
         - portfolio
     PayoutDto:
@@ -3743,17 +3717,11 @@ components:
       type: object
       properties:
         portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
         property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
         unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
       required:
         - portfolio
     ExpenseDto:
@@ -4571,17 +4539,11 @@ components:
       type: object
       properties:
         portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
         property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
         unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
+          $ref: '#/components/schemas/BreadcrumbDto'
         tenant:
           $ref: '#/components/schemas/BreadcrumbDto'
       required:
@@ -4657,30 +4619,22 @@ components:
     BreadcrumbsDto:
       type: object
       properties:
-        portfolio:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        property:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        unit:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
-        lease:
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/BreadcrumbDto'
         tenant:
           $ref: '#/components/schemas/BreadcrumbDto'
+        portfolio:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        lease:
+          $ref: '#/components/schemas/BreadcrumbDto'
       required:
+        - tenant
         - portfolio
         - property
         - unit
         - lease
-        - tenant
     PaginatedDto:
       type: object
       properties:

@@ -5,6 +5,8 @@ interface LabelParams {
 	title: string;
 }
 
+type LabelParamsId = Omit<LabelParams, 'title'>;
+
 export interface IBreadcrumbs {
 	tenant: LabelParams;
 	portfolio: LabelParams;
@@ -18,10 +20,6 @@ export interface IBreadcrumbs {
 			property: LabelParams & { portfolio: LabelParams };
 		};
 	};
-}
-
-interface LabelParamsId {
-	id: string;
 }
 
 export class BreadcrumbDto {
@@ -38,18 +36,13 @@ export class BreadcrumbDto {
 }
 
 export class BreadcrumbsDto {
-	// @ApiProperty({ readOnly: true })
 	tenant: BreadcrumbDto;
 
-	@ApiProperty({ readOnly: true })
 	portfolio: BreadcrumbDto;
 
-	@ApiProperty({ readOnly: true })
 	property: BreadcrumbDto;
 
-	@ApiProperty({ readOnly: true })
 	unit: BreadcrumbDto;
 
-	@ApiProperty({ readOnly: true })
 	lease: BreadcrumbDto;
 }

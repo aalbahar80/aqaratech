@@ -217,31 +217,31 @@ export interface BreadcrumbsDto {
 	 * @type {BreadcrumbDto}
 	 * @memberof BreadcrumbsDto
 	 */
-	readonly portfolio: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof BreadcrumbsDto
-	 */
-	readonly property: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof BreadcrumbsDto
-	 */
-	readonly unit: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof BreadcrumbsDto
-	 */
-	readonly lease: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof BreadcrumbsDto
-	 */
 	tenant: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof BreadcrumbsDto
+	 */
+	portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof BreadcrumbsDto
+	 */
+	property: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof BreadcrumbsDto
+	 */
+	unit: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof BreadcrumbsDto
+	 */
+	lease: BreadcrumbDto;
 }
 /**
  *
@@ -868,19 +868,19 @@ export interface ExpenseBreadcrumbsDto {
 	 * @type {BreadcrumbDto}
 	 * @memberof ExpenseBreadcrumbsDto
 	 */
-	readonly portfolio: BreadcrumbDto;
+	portfolio: BreadcrumbDto;
 	/**
 	 *
 	 * @type {BreadcrumbDto}
 	 * @memberof ExpenseBreadcrumbsDto
 	 */
-	readonly property?: BreadcrumbDto;
+	property?: BreadcrumbDto;
 	/**
 	 *
 	 * @type {BreadcrumbDto}
 	 * @memberof ExpenseBreadcrumbsDto
 	 */
-	readonly unit?: BreadcrumbDto;
+	unit?: BreadcrumbDto;
 }
 /**
  *
@@ -1238,25 +1238,25 @@ export interface LeaseBreadcrumbsDto {
 	 * @type {BreadcrumbDto}
 	 * @memberof LeaseBreadcrumbsDto
 	 */
-	readonly portfolio: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof LeaseBreadcrumbsDto
-	 */
-	readonly property: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof LeaseBreadcrumbsDto
-	 */
-	readonly unit: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof LeaseBreadcrumbsDto
-	 */
 	tenant: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseBreadcrumbsDto
+	 */
+	portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseBreadcrumbsDto
+	 */
+	property: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseBreadcrumbsDto
+	 */
+	unit: BreadcrumbDto;
 }
 /**
  *
@@ -1366,31 +1366,31 @@ export interface LeaseInvoiceBreadcrumbsDto {
 	 * @type {BreadcrumbDto}
 	 * @memberof LeaseInvoiceBreadcrumbsDto
 	 */
-	readonly portfolio: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof LeaseInvoiceBreadcrumbsDto
-	 */
-	readonly property: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof LeaseInvoiceBreadcrumbsDto
-	 */
-	readonly unit: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof LeaseInvoiceBreadcrumbsDto
-	 */
-	readonly lease: BreadcrumbDto;
-	/**
-	 *
-	 * @type {BreadcrumbDto}
-	 * @memberof LeaseInvoiceBreadcrumbsDto
-	 */
 	tenant: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseInvoiceBreadcrumbsDto
+	 */
+	portfolio: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseInvoiceBreadcrumbsDto
+	 */
+	property: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseInvoiceBreadcrumbsDto
+	 */
+	unit: BreadcrumbDto;
+	/**
+	 *
+	 * @type {BreadcrumbDto}
+	 * @memberof LeaseInvoiceBreadcrumbsDto
+	 */
+	lease: BreadcrumbDto;
 }
 /**
  *
@@ -1507,19 +1507,19 @@ export interface MaintenanceOrderBreadcrumbsDto {
 	 * @type {BreadcrumbDto}
 	 * @memberof MaintenanceOrderBreadcrumbsDto
 	 */
-	readonly portfolio: BreadcrumbDto;
+	portfolio: BreadcrumbDto;
 	/**
 	 *
 	 * @type {BreadcrumbDto}
 	 * @memberof MaintenanceOrderBreadcrumbsDto
 	 */
-	readonly property?: BreadcrumbDto;
+	property?: BreadcrumbDto;
 	/**
 	 *
 	 * @type {BreadcrumbDto}
 	 * @memberof MaintenanceOrderBreadcrumbsDto
 	 */
-	readonly unit?: BreadcrumbDto;
+	unit?: BreadcrumbDto;
 	/**
 	 *
 	 * @type {BreadcrumbDto}
@@ -2444,7 +2444,7 @@ export interface PayoutBreadcrumbsDto {
 	 * @type {BreadcrumbDto}
 	 * @memberof PayoutBreadcrumbsDto
 	 */
-	readonly portfolio: BreadcrumbDto;
+	portfolio: BreadcrumbDto;
 }
 /**
  *
@@ -2585,13 +2585,13 @@ export interface PropertyBreadcrumbsDto {
 	 * @type {BreadcrumbDto}
 	 * @memberof PropertyBreadcrumbsDto
 	 */
-	readonly portfolio: BreadcrumbDto;
+	portfolio: BreadcrumbDto;
 	/**
 	 *
 	 * @type {BreadcrumbDto}
 	 * @memberof PropertyBreadcrumbsDto
 	 */
-	readonly property: BreadcrumbDto;
+	property: BreadcrumbDto;
 }
 /**
  *
@@ -2897,19 +2897,19 @@ export interface UnitBreadcrumbsDto {
 	 * @type {BreadcrumbDto}
 	 * @memberof UnitBreadcrumbsDto
 	 */
-	readonly portfolio: BreadcrumbDto;
+	portfolio: BreadcrumbDto;
 	/**
 	 *
 	 * @type {BreadcrumbDto}
 	 * @memberof UnitBreadcrumbsDto
 	 */
-	readonly property: BreadcrumbDto;
+	property: BreadcrumbDto;
 	/**
 	 *
 	 * @type {BreadcrumbDto}
 	 * @memberof UnitBreadcrumbsDto
 	 */
-	readonly unit: BreadcrumbDto;
+	unit: BreadcrumbDto;
 }
 /**
  *
