@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.19.2
+
+### Patch Changes
+
+- 637d97a97: treemap tiles: stricter min height
+
 ## 2.19.1
 
 ### Patch Changes
