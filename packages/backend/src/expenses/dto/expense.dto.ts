@@ -82,8 +82,6 @@ export class ExpenseDto
 	unit: IBreadcrumbs['unit'] | null;
 }
 
-export class PartialExpenseDto extends PartialType(ExpenseDto) {}
-
 export class CreateExpenseDto
 	implements Exactly<ExpenseCreateSchema, CreateExpenseDto>
 {

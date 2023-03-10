@@ -16,9 +16,9 @@ import * as runtime from '../runtime';
 import type {
 	DeletedDto,
 	PaginatedLeaseDto,
-	PartialUnitDto,
 	UnitDto,
 	UpdateUnitDto,
+	UpdatedDto,
 } from '../models';
 
 export interface UnitsApiFindLeasesRequest {
@@ -220,7 +220,7 @@ export class UnitsApi extends runtime.BaseAPI {
 	async updateRaw(
 		requestParameters: UnitsApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialUnitDto>> {
+	): Promise<runtime.ApiResponse<UpdatedDto>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -268,7 +268,7 @@ export class UnitsApi extends runtime.BaseAPI {
 	async update(
 		requestParameters: UnitsApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialUnitDto> {
+	): Promise<UpdatedDto> {
 		const response = await this.updateRaw(requestParameters, initOverrides);
 		return await response.value();
 	}

@@ -13,11 +13,7 @@
  */
 
 import * as runtime from '../runtime';
-import type {
-	ExpenseDto,
-	PartialExpenseDto,
-	UpdateExpenseDto,
-} from '../models';
+import type { ExpenseDto, UpdateExpenseDto, UpdatedDto } from '../models';
 
 export interface ExpensesApiFindOneRequest {
 	id: string;
@@ -137,7 +133,7 @@ export class ExpensesApi extends runtime.BaseAPI {
 	async updateRaw(
 		requestParameters: ExpensesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialExpenseDto>> {
+	): Promise<runtime.ApiResponse<UpdatedDto>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -185,7 +181,7 @@ export class ExpensesApi extends runtime.BaseAPI {
 	async update(
 		requestParameters: ExpensesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialExpenseDto> {
+	): Promise<UpdatedDto> {
 		const response = await this.updateRaw(requestParameters, initOverrides);
 		return await response.value();
 	}

@@ -18,7 +18,7 @@ import { IUser } from 'src/interfaces/user.interface';
 import { LeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
-import { PartialUnitDto, UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
+import { UnitDto, UpdateUnitDto } from 'src/units/dto/unit.dto';
 
 import { UnitsService } from './units.service';
 
@@ -41,14 +41,12 @@ export class UnitsController {
 	}
 
 	@Patch(':id')
-	// TODO: review if PartialUnitDto needed
-	@ApiOkResponse({ type: PartialUnitDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
 		@Body(new ZodValidationPipe(unitUpdateSchema))
 		updateUnitDto: UpdateUnitDto,
-	): Promise<PartialUnitDto> {
+	) {
 		return this.unitsService.update({ id, updateUnitDto, user });
 	}
 

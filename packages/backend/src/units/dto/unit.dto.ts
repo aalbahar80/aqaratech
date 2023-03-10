@@ -155,8 +155,6 @@ export class UpdateUnitDto
 	extends PartialType(OmitType(CreateUnitDto, ['portfolioId', 'propertyId']))
 	implements Exactly<UnitUpdateSchema, UpdateUnitDto> {}
 
-export class PartialUnitDto extends PartialType(UnitDto) {}
-
 /**
  * For use in dropdowns
  */

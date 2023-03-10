@@ -17,8 +17,8 @@ import type {
 	LeaseDto,
 	PaginatedLeaseDto,
 	PaginatedLeaseInvoiceDto,
-	PartialLeaseDto,
 	UpdateLeaseDto,
+	UpdatedDto,
 } from '../models';
 
 export interface LeasesApiFindAllRequest {
@@ -293,7 +293,7 @@ export class LeasesApi extends runtime.BaseAPI {
 	async updateRaw(
 		requestParameters: LeasesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialLeaseDto>> {
+	): Promise<runtime.ApiResponse<UpdatedDto>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -341,7 +341,7 @@ export class LeasesApi extends runtime.BaseAPI {
 	async update(
 		requestParameters: LeasesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialLeaseDto> {
+	): Promise<UpdatedDto> {
 		const response = await this.updateRaw(requestParameters, initOverrides);
 		return await response.value();
 	}

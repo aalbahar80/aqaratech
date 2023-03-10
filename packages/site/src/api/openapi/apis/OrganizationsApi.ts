@@ -29,10 +29,6 @@ import type {
 	OrganizationDto,
 	PaginatedLeaseInvoiceDto,
 	PaginatedRoleDto,
-	PartialExpenseDto,
-	PartialLeaseDto,
-	PartialLeaseInvoiceDto,
-	PartialUnitDto,
 	PortfolioDto,
 	SearchDto,
 	TenantDto,
@@ -197,7 +193,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createExpenseRaw(
 		requestParameters: OrganizationsApiCreateExpenseRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialExpenseDto>> {
+	): Promise<runtime.ApiResponse<CreatedDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -248,7 +244,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createExpense(
 		requestParameters: OrganizationsApiCreateExpenseRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialExpenseDto> {
+	): Promise<CreatedDto> {
 		const response = await this.createExpenseRaw(
 			requestParameters,
 			initOverrides,
@@ -341,7 +337,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createLeaseRaw(
 		requestParameters: OrganizationsApiCreateLeaseRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialLeaseDto>> {
+	): Promise<runtime.ApiResponse<CreatedDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -392,7 +388,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createLease(
 		requestParameters: OrganizationsApiCreateLeaseRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialLeaseDto> {
+	): Promise<CreatedDto> {
 		const response = await this.createLeaseRaw(
 			requestParameters,
 			initOverrides,
@@ -407,7 +403,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createLeaseInvoiceRaw(
 		requestParameters: OrganizationsApiCreateLeaseInvoiceRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialLeaseInvoiceDto>> {
+	): Promise<runtime.ApiResponse<CreatedDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -458,7 +454,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createLeaseInvoice(
 		requestParameters: OrganizationsApiCreateLeaseInvoiceRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialLeaseInvoiceDto> {
+	): Promise<CreatedDto> {
 		const response = await this.createLeaseInvoiceRaw(
 			requestParameters,
 			initOverrides,
@@ -737,7 +733,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createUnitRaw(
 		requestParameters: OrganizationsApiCreateUnitRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PartialUnitDto>> {
+	): Promise<runtime.ApiResponse<CreatedDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -788,7 +784,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createUnit(
 		requestParameters: OrganizationsApiCreateUnitRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PartialUnitDto> {
+	): Promise<CreatedDto> {
 		const response = await this.createUnitRaw(requestParameters, initOverrides);
 		return await response.value();
 	}

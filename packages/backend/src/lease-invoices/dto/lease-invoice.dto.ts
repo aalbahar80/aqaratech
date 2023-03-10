@@ -97,8 +97,6 @@ export class LeaseInvoiceDto
 	}
 }
 
-export class PartialLeaseInvoiceDto extends PartialType(LeaseInvoiceDto) {}
-
 export class CreateLeaseInvoiceDto implements LeaseInvoiceCreateSchema {
 	portfolioId: string;
 	leaseId: string;

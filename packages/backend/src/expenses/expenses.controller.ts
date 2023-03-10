@@ -6,11 +6,7 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
-import {
-	ExpenseDto,
-	PartialExpenseDto,
-	UpdateExpenseDto,
-} from 'src/expenses/dto/expense.dto';
+import { ExpenseDto, UpdateExpenseDto } from 'src/expenses/dto/expense.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 
@@ -32,13 +28,12 @@ export class ExpensesController {
 	}
 
 	@Patch(':id')
-	@ApiOkResponse({ type: PartialExpenseDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
 		@Body(new ZodValidationPipe(expenseUpdateSchema))
 		updateExpenseDto: UpdateExpenseDto,
-	): Promise<PartialExpenseDto> {
+	) {
 		return this.expensesService.update({ id, updateExpenseDto, user });
 	}
 

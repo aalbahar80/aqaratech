@@ -13,6 +13,7 @@ import { PAID_LATE } from '@self/utils';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
+import { CreatedDto, UpdatedDto } from 'src/common/dto/abstract.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
@@ -52,12 +53,14 @@ export class LeaseInvoicesService {
 		createLeaseInvoiceDto: CreateLeaseInvoiceDto;
 		organizationId: string;
 	}) {
-		return await this.prisma.c.leaseInvoice.create({
+		const created = await this.prisma.c.leaseInvoice.create({
 			data: {
 				...createLeaseInvoiceDto,
 				organizationId,
 			},
 		});
+
+		return new CreatedDto(created);
 	}
 
 	async findAll({
@@ -161,13 +164,15 @@ export class LeaseInvoicesService {
 			);
 		}
 
-		return await this.prisma.c.leaseInvoice.update({
+		const updated = await this.prisma.c.leaseInvoice.update({
 			where: {
 				id,
 				AND: accessibleBy(user.ability, Action.Update).LeaseInvoice,
 			},
 			data: updateLeaseInvoiceDto,
 		});
+
+		return new UpdatedDto(updated);
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {

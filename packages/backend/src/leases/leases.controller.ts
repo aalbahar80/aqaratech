@@ -17,11 +17,7 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
-import {
-	LeaseDto,
-	PartialLeaseDto,
-	UpdateLeaseDto,
-} from 'src/leases/dto/lease.dto';
+import { LeaseDto, UpdateLeaseDto } from 'src/leases/dto/lease.dto';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 
 import { LeasesService } from './leases.service';
@@ -56,13 +52,12 @@ export class LeasesController {
 	}
 
 	@Patch(':id')
-	@ApiOkResponse({ type: PartialLeaseDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
 		@Body(new ZodValidationPipe(leaseUpdateSchema))
 		updateLeaseDto: UpdateLeaseDto,
-	): Promise<PartialLeaseDto> {
+	) {
 		return this.leasesService.update({ id, updateLeaseDto, user });
 	}
 

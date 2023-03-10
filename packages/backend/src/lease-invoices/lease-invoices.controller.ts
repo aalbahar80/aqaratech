@@ -21,7 +21,6 @@ import { EnvService } from 'src/env/env.service';
 import { IUser } from 'src/interfaces/user.interface';
 import {
 	LeaseInvoiceDto,
-	PartialLeaseInvoiceDto,
 	UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -85,13 +84,12 @@ export class LeaseInvoicesController {
 
 	@Patch(':id')
 	@CheckAbilities({ action: Action.Update, subject: SubjectType })
-	@ApiOkResponse({ type: PartialLeaseInvoiceDto })
 	update(
 		@User() user: IUser,
 		@Param('id') id: string,
 		@Body(new ZodValidationPipe(leaseInvoiceUpdateSchema))
 		updateLeaseInvoiceDto: UpdateLeaseInvoiceDto,
-	): Promise<PartialLeaseInvoiceDto> {
+	) {
 		return this.leaseInvoicesService.update({
 			id,
 			updateLeaseInvoiceDto,

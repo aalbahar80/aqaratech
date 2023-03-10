@@ -87,8 +87,6 @@ export class LeaseDto
 	}
 }
 
-export class PartialLeaseDto extends PartialType(LeaseDto) {}
-
 export class CreateLeaseDto implements LeaseCreateSchema {
 	portfolioId: string;
 	unitId: string;

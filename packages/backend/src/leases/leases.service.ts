@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client';
 
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
+import { CreatedDto, UpdatedDto } from 'src/common/dto/abstract.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -27,13 +28,14 @@ export class LeasesService {
 		createLeaseDto: CreateLeaseDto;
 		organizationId: string;
 	}) {
-		// TODO: consider returning a lease dto class
-		return await this.prisma.c.lease.create({
+		const created = await this.prisma.c.lease.create({
 			data: {
 				...createLeaseDto,
 				organizationId,
 			},
 		});
+
+		return new CreatedDto(created);
 	}
 
 	async findAll({
@@ -92,10 +94,12 @@ export class LeasesService {
 		updateLeaseDto: UpdateLeaseDto;
 		user: IUser;
 	}) {
-		return await this.prisma.c.lease.update({
+		const updated = await this.prisma.c.lease.update({
 			where: { id, AND: accessibleBy(user.ability, Action.Update).Lease },
 			data: updateLeaseDto,
 		});
+
+		return new UpdatedDto(updated);
 	}
 
 	async remove({ id }: { id: string }) {

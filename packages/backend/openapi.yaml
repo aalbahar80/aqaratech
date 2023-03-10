@@ -515,7 +515,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PartialLeaseInvoiceDto'
+                $ref: '#/components/schemas/UpdatedDto'
       tags: *ref_3
       security: *ref_4
     delete:
@@ -679,7 +679,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PartialLeaseDto'
+                $ref: '#/components/schemas/UpdatedDto'
       tags: *ref_5
       security: *ref_6
     delete:
@@ -1790,7 +1790,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PartialUnitDto'
+                $ref: '#/components/schemas/UpdatedDto'
       tags: *ref_13
       security: *ref_14
     delete:
@@ -2022,7 +2022,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PartialExpenseDto'
+                $ref: '#/components/schemas/UpdatedDto'
       tags: *ref_17
       security: *ref_18
     delete:
@@ -2424,7 +2424,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PartialUnitDto'
+                $ref: '#/components/schemas/CreatedDto'
       tags: *ref_21
       security: *ref_22
   /organizations/{organizationId}/leases:
@@ -2450,7 +2450,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PartialLeaseDto'
+                $ref: '#/components/schemas/CreatedDto'
       tags: *ref_21
       security: *ref_22
   /organizations/{organizationId}/leaseInvoices:
@@ -2476,7 +2476,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PartialLeaseInvoiceDto'
+                $ref: '#/components/schemas/CreatedDto'
       tags: *ref_21
       security: *ref_22
   /organizations/{organizationId}/lease/{id}/leaseInvoices:
@@ -2535,7 +2535,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PartialExpenseDto'
+                $ref: '#/components/schemas/CreatedDto'
       tags: *ref_21
       security: *ref_22
   /organizations/{organizationId}/payouts:
@@ -3272,47 +3272,14 @@ components:
         memo:
           type: string
           nullable: true
-    PartialLeaseInvoiceDto:
+    UpdatedDto:
       type: object
       properties:
         id:
           type: string
           readOnly: true
-        breadcrumbs:
-          $ref: '#/components/schemas/LeaseInvoiceBreadcrumbsDto'
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        amount:
-          type: number
-        postAt:
-          format: date-time
-          type: string
-        leaseId:
-          type: string
-        dueAt:
-          format: date-time
-          type: string
-          nullable: true
-        paidAt:
-          format: date-time
-          type: string
-          nullable: true
-        isPaid:
-          type: boolean
-        memo:
-          type: string
-          nullable: true
-        mfPaymentId:
-          type: string
-          nullable: true
+      required:
+        - id
     MessageDto:
       type: object
       properties:
@@ -3345,45 +3312,6 @@ components:
         notify:
           type: boolean
         canPay:
-          type: boolean
-        license:
-          type: string
-          nullable: true
-    PartialLeaseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        breadcrumbs:
-          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        tenantId:
-          type: string
-        unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-        deposit:
-          type: number
-        canPay:
-          type: boolean
-        notify:
           type: boolean
         license:
           type: string
@@ -3878,14 +3806,6 @@ components:
         paci:
           type: string
           nullable: true
-    UpdatedDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-      required:
-        - id
     UpdateUnitDto:
       type: object
       properties:
@@ -3915,56 +3835,6 @@ components:
         usage:
           type: string
           nullable: true
-    PartialUnitDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        vacancy:
-          $ref: '#/components/schemas/UnitVacancy'
-        breadcrumbs:
-          $ref: '#/components/schemas/UnitBreadcrumbsDto'
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        propertyId:
-          type: string
-        unitNumber:
-          type: string
-        floor:
-          type: number
-          nullable: true
-        size:
-          type: number
-          nullable: true
-        bed:
-          type: number
-          nullable: true
-        bath:
-          type: number
-          nullable: true
-        marketRent:
-          type: number
-          nullable: true
-        type:
-          type: string
-          nullable: true
-        usage:
-          type: string
-          nullable: true
-        label:
-          type: string
-          nullable: true
-        title:
-          type: string
     DeletedDto:
       type: object
       properties:
@@ -3989,47 +3859,6 @@ components:
         label:
           type: string
           nullable: true
-    PartialExpenseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        expenseType:
-          nullable: true
-          allOf:
-            - $ref: '#/components/schemas/ExpenseCategoryDto'
-        breadcrumbs:
-          $ref: '#/components/schemas/ExpenseBreadcrumbsDto'
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        portfolioId:
-          type: string
-        propertyId:
-          type: string
-          nullable: true
-        unitId:
-          type: string
-          nullable: true
-        amount:
-          type: number
-        postAt:
-          type: string
-        categoryId:
-          type: string
-          nullable: true
-        memo:
-          type: string
-          nullable: true
-        label:
-          type: string
-          nullable: true
-        organizationId:
-          type: string
     ValidatedUserDto:
       type: object
       properties:
