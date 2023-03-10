@@ -4,13 +4,13 @@ import { Prisma } from '@prisma/client';
 
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
+import { CreatedDto, UpdatedDto } from 'src/common/dto/abstract.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
 	CreatePropertyDto,
-	PropertyBasicDto,
 	PropertyDto,
 	UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
@@ -34,9 +34,7 @@ export class PropertiesService {
 			},
 		});
 
-		const property = new PropertyBasicDto(created);
-
-		return property;
+		return new CreatedDto(created);
 	}
 
 	async findAll({
@@ -96,9 +94,7 @@ export class PropertiesService {
 			data: updatePropertyDto,
 		});
 
-		const property = new PropertyBasicDto(updated);
-
-		return property;
+		return new UpdatedDto(updated);
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {

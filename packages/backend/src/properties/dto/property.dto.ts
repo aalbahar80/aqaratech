@@ -49,26 +49,19 @@ class PropertyBreadcrumbsDto extends PickType(BreadcrumbsDto, [
 	'property',
 ]) {}
 
-export class PropertyBasicDto
+export class PropertyDto
 	extends IntersectionType(
 		AbstractDto,
 		IntersectionType(PropertyRequiredDto, PropertyOptionalDto),
 	)
 	implements Property
 {
-	constructor(data: PropertyBasicDto) {
+	constructor(data: Omit<PropertyDto, 'breadcrumbs'>) {
 		super();
 		Object.assign(this, data);
 	}
 
 	title: string;
-}
-
-export class PropertyDto extends PropertyBasicDto {
-	constructor(data: PropertyBasicDto & Omit<PropertyDto, 'breadcrumbs'>) {
-		super(data);
-		Object.assign(this, data);
-	}
 
 	@ApiHideProperty()
 	@Exclude()

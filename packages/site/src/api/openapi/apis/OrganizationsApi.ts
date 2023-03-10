@@ -34,7 +34,6 @@ import type {
 	PartialLeaseInvoiceDto,
 	PartialUnitDto,
 	PortfolioDto,
-	PropertyBasicDto,
 	SearchDto,
 	TenantDto,
 	UpdateOrganizationDto,
@@ -606,7 +605,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createPropertyRaw(
 		requestParameters: OrganizationsApiCreatePropertyRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PropertyBasicDto>> {
+	): Promise<runtime.ApiResponse<CreatedDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -657,7 +656,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	async createProperty(
 		requestParameters: OrganizationsApiCreatePropertyRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PropertyBasicDto> {
+	): Promise<CreatedDto> {
 		const response = await this.createPropertyRaw(
 			requestParameters,
 			initOverrides,

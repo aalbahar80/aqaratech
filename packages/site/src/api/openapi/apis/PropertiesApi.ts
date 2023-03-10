@@ -15,9 +15,9 @@
 import * as runtime from '../runtime';
 import type {
 	PaginatedPropertyDto,
-	PropertyBasicDto,
 	PropertyDto,
 	UpdatePropertyDto,
+	UpdatedDto,
 } from '../models';
 
 export interface PropertiesApiFindAllRequest {
@@ -208,7 +208,7 @@ export class PropertiesApi extends runtime.BaseAPI {
 	async updateRaw(
 		requestParameters: PropertiesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<PropertyBasicDto>> {
+	): Promise<runtime.ApiResponse<UpdatedDto>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -256,7 +256,7 @@ export class PropertiesApi extends runtime.BaseAPI {
 	async update(
 		requestParameters: PropertiesApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<PropertyBasicDto> {
+	): Promise<UpdatedDto> {
 		const response = await this.updateRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
