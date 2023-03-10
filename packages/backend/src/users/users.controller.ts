@@ -15,13 +15,6 @@ import { UsersService } from './users.service';
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
 
-	// @Get()
-	// @CheckAbilities({ action: Action.Read, subject: 'User' })
-	// @ApiPaginatedResponse(UserDto)
-	// findAll() {
-	//   return this.usersService.findAll();
-	// }
-
 	// Don't check abilities here. This endpoint will return a user's role data,
 	// which is necessary to pass ability.guard will be used to determine the user's abilities.
 	//
@@ -36,12 +29,4 @@ export class UsersController {
 	findProfile(@UserBasic() user: AuthenticatedUser): Promise<ValidatedUserDto> {
 		return this.usersService.findOneByEmail(user.email);
 	}
-
-	// @Get(':id')
-	// @CheckAbilities({ action: Action.Read, subject: 'User' })
-	// @ApiOkResponse({ type: ValidatedUserDto })
-	// @ApiNotFoundResponse()
-	// findOne(@Param('id') id: string): Promise<ValidatedUserDto> {
-	//   return this.usersService.findOne(id);
-	// }
 }
