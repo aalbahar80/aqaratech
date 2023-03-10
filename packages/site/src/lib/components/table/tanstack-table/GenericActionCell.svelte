@@ -16,7 +16,6 @@
 </script>
 
 <div class="relative text-left text-sm font-medium">
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<svelte:element
 		this={options.element ?? 'button'}
 		href={'href' in options ? options.href : undefined}
