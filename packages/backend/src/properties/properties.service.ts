@@ -10,6 +10,7 @@ import { IUser } from 'src/interfaces/user.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 import {
 	CreatePropertyDto,
+	PropertyBasicDto,
 	PropertyDto,
 	UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
@@ -33,7 +34,7 @@ export class PropertiesService {
 			},
 		});
 
-		const property = new PropertyDto(created);
+		const property = new PropertyBasicDto(created);
 
 		return property;
 	}
@@ -95,7 +96,7 @@ export class PropertiesService {
 			data: updatePropertyDto,
 		});
 
-		const property = new PropertyDto(updated);
+		const property = new PropertyBasicDto(updated);
 
 		return property;
 	}

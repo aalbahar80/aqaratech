@@ -17,7 +17,6 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
-import { PropertyDto } from 'src/properties/dto/property.dto';
 import { Exactly } from 'src/types/exactly.type';
 
 class UnitRequiredDto {
@@ -121,10 +120,15 @@ export class UnitDto
 	@ApiProperty()
 	@Expose()
 	get breadcrumbs(): UnitBreadcrumbsDto {
-		const property = new PropertyDto(this.property);
 		return {
-			portfolio: property.breadcrumbs.portfolio,
-			property: property.breadcrumbs.property,
+			portfolio: new BreadcrumbDto({
+				id: this.portfolioId,
+				title: this.property.portfolio.title,
+			}),
+			property: new BreadcrumbDto({
+				id: this.propertyId,
+				title: this.property.title,
+			}),
 			unit: new BreadcrumbDto({
 				id: this.id,
 				title: this.title,

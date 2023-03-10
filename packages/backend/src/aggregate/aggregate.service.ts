@@ -17,7 +17,6 @@ import { ExpensesService } from 'src/expenses/expenses.service';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyDto } from 'src/properties/dto/property.dto';
 
 @Injectable()
 export class AggregateService {
@@ -195,7 +194,7 @@ export class AggregateService {
 			const property = units.find(
 				(u) => u.propertyId === g.propertyId,
 			)?.property;
-			const propertyTitle = property ? new PropertyDto(property).title : null;
+			const propertyTitle = property ? property.title : null;
 
 			if (g.unitId && unit && propertyTitle) {
 				// Add unitTitle to expenses where unitId is set

@@ -1724,7 +1724,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PropertyDto'
+                $ref: '#/components/schemas/PropertyBasicDto'
       tags: *ref_11
       security: *ref_12
     delete:
@@ -2398,7 +2398,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PropertyDto'
+                $ref: '#/components/schemas/PropertyBasicDto'
       tags: *ref_21
       security: *ref_22
   /organizations/{organizationId}/units:
@@ -3878,6 +3878,67 @@ components:
         paci:
           type: string
           nullable: true
+    PropertyBasicDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        title:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+        area:
+          type: string
+          nullable: true
+        block:
+          type: string
+          nullable: true
+        avenue:
+          type: string
+          nullable: true
+        street:
+          type: string
+          nullable: true
+        number:
+          type: string
+          nullable: true
+        parcel:
+          type: string
+          nullable: true
+        paci:
+          type: string
+          nullable: true
+        cost:
+          type: number
+          nullable: true
+        label:
+          type: string
+          nullable: true
+      required:
+        - id
+        - title
+        - createdAt
+        - updatedAt
+        - organizationId
+        - portfolioId
+        - area
+        - block
+        - avenue
+        - street
+        - number
+        - parcel
+        - paci
+        - cost
+        - label
     UpdateUnitDto:
       type: object
       properties:

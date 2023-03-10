@@ -16,6 +16,7 @@ import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import {
+	PropertyBasicDto,
 	PropertyDto,
 	UpdatePropertyDto,
 } from 'src/properties/dto/property.dto';
@@ -55,7 +56,7 @@ export class PropertiesController {
 		@Param('id') id: string,
 		@Body(new ZodValidationPipe(propertyUpdateSchema))
 		updatePropertyDto: UpdatePropertyDto,
-	): Promise<PropertyDto> {
+	): Promise<PropertyBasicDto> {
 		return this.propertiesService.update({ id, updatePropertyDto, user });
 	}
 
