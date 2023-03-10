@@ -4,6 +4,11 @@ import { Prisma } from '@prisma/client';
 
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
+import {
+	CreatedDto,
+	DeletedDto,
+	UpdatedDto,
+} from 'src/common/dto/abstract.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -48,7 +53,7 @@ export class UnitsService {
 			},
 		});
 
-		return created;
+		return new CreatedDto(created);
 	}
 
 	async findAll({
@@ -162,11 +167,12 @@ export class UnitsService {
 			data: updateUnitDto,
 		});
 
-		return updated;
+		return new UpdatedDto(updated);
 	}
 
 	async remove({ id }: { id: string }) {
 		await this.prisma.c.unit.delete({ where: { id } });
-		return id;
+
+		return new DeletedDto({ id });
 	}
 }

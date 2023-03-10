@@ -6,6 +6,7 @@ import { plainToInstance } from 'class-transformer';
 import { expenseCategorySchema } from '@self/utils';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
+import { CreatedDto, UpdatedDto } from 'src/common/dto/abstract.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import {
@@ -86,7 +87,7 @@ export class ExpensesService {
 			});
 		}
 
-		return plainToInstance(ExpenseDto, expense);
+		return new CreatedDto(expense);
 	}
 
 	async findAll({
@@ -184,7 +185,7 @@ export class ExpensesService {
 			data: updateExpenseDto,
 		});
 
-		return plainToInstance(ExpenseDto, expense);
+		return new UpdatedDto(expense);
 	}
 
 	async remove({ id, user }: { id: string; user: IUser }) {

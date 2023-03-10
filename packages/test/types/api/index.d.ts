@@ -839,6 +839,32 @@ export interface CreateUnitDto {
 /**
  *
  * @export
+ * @interface CreatedDto
+ */
+export interface CreatedDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreatedDto
+	 */
+	readonly id: string;
+}
+/**
+ *
+ * @export
+ * @interface DeletedDto
+ */
+export interface DeletedDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof DeletedDto
+	 */
+	readonly id: string;
+}
+/**
+ *
+ * @export
  * @interface DueDurationDto
  */
 export interface DueDurationDto {
@@ -2571,6 +2597,103 @@ export interface PortfolioDto {
 /**
  *
  * @export
+ * @interface PropertyBasicDto
+ */
+export interface PropertyBasicDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	title: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	createdAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	updatedAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	organizationId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	portfolioId: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	area: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	block: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	avenue: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	street: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	number: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	parcel: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	paci: string | null;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PropertyBasicDto
+	 */
+	cost: number | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof PropertyBasicDto
+	 */
+	label: string | null;
+}
+/**
+ *
+ * @export
  * @interface PropertyBreadcrumbsDto
  */
 export interface PropertyBreadcrumbsDto {
@@ -3520,6 +3643,19 @@ export interface UpdateUnitDto {
 	 * @memberof UpdateUnitDto
 	 */
 	usage?: string | null;
+}
+/**
+ *
+ * @export
+ * @interface UpdatedDto
+ */
+export interface UpdatedDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof UpdatedDto
+	 */
+	readonly id: string;
 }
 /**
  *

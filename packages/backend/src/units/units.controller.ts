@@ -54,8 +54,7 @@ export class UnitsController {
 
 	@Delete(':id')
 	@CheckAbilities({ action: Action.Delete, subject: SubjectType })
-	@ApiOkResponse({ type: String })
-	remove(@Param('id') id: string): Promise<string> {
+	remove(@Param('id') id: string) {
 		return this.unitsService.remove({ id });
 	}
 

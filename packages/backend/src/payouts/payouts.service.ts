@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client';
 
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
+import { CreatedDto } from 'src/common/dto/abstract.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -29,9 +30,7 @@ export class PayoutsService {
 			},
 		});
 
-		const payout = new PayoutDto(created);
-
-		return payout;
+		return new CreatedDto(created);
 	}
 
 	async findAll({

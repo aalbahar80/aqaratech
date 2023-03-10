@@ -35,7 +35,7 @@ import {
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { CreateLeaseDto, PartialLeaseDto } from 'src/leases/dto/lease.dto';
 import { LeasesService } from 'src/leases/leases.service';
-import { CreatePayoutDto, PayoutDto } from 'src/payouts/dto/payout.dto';
+import { CreatePayoutDto } from 'src/payouts/dto/payout.dto';
 import { PayoutsService } from 'src/payouts/payouts.service';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { CreatePortfolioDto } from 'src/portfolios/dto/portfolio.dto';
@@ -203,7 +203,7 @@ export class OrganizationsAdminController {
 		@Param('organizationId') organizationId: string,
 		@Body(new ZodValidationPipe(payoutCreateSchema))
 		createPayoutDto: CreatePayoutDto,
-	): Promise<PayoutDto> {
+	) {
 		return this.payoutsService.create({ createPayoutDto, organizationId });
 	}
 

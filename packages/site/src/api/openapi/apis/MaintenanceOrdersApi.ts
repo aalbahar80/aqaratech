@@ -15,9 +15,11 @@
 import * as runtime from '../runtime';
 import type {
 	CreateMaintenanceOrderDto,
+	CreatedDto,
 	MaintenanceOrderDto,
 	PaginatedMaintenanceOrderDto,
 	UpdateMaintenanceOrderDto,
+	UpdatedDto,
 } from '../models';
 
 export interface MaintenanceOrdersApiCreateRequest {
@@ -58,7 +60,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	async createRaw(
 		requestParameters: MaintenanceOrdersApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<MaintenanceOrderDto>> {
+	): Promise<runtime.ApiResponse<CreatedDto>> {
 		if (
 			requestParameters.organizationId === null ||
 			requestParameters.organizationId === undefined
@@ -109,7 +111,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	async create(
 		requestParameters: MaintenanceOrdersApiCreateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<MaintenanceOrderDto> {
+	): Promise<CreatedDto> {
 		const response = await this.createRaw(requestParameters, initOverrides);
 		return await response.value();
 	}
@@ -275,7 +277,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	async updateRaw(
 		requestParameters: MaintenanceOrdersApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<MaintenanceOrderDto>> {
+	): Promise<runtime.ApiResponse<UpdatedDto>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -323,7 +325,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	async update(
 		requestParameters: MaintenanceOrdersApiUpdateRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<MaintenanceOrderDto> {
+	): Promise<UpdatedDto> {
 		const response = await this.updateRaw(requestParameters, initOverrides);
 		return await response.value();
 	}

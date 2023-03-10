@@ -1809,7 +1809,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/DeletedDto'
       tags: *ref_13
       security: *ref_14
   /units/{id}/leases:
@@ -2561,7 +2561,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PayoutDto'
+                $ref: '#/components/schemas/CreatedDto'
       tags: *ref_21
       security: *ref_22
   /organizations/{organizationId}/leaseInvoices/{id}/send-invoice-email:
@@ -2839,7 +2839,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MaintenanceOrderDto'
+                $ref: '#/components/schemas/CreatedDto'
       tags: &ref_27
         - maintenance-orders
   /:
@@ -2942,7 +2942,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MaintenanceOrderDto'
+                $ref: '#/components/schemas/UpdatedDto'
       tags: *ref_27
     delete:
       operationId: MaintenanceOrdersController_remove
@@ -4018,6 +4018,14 @@ components:
           nullable: true
         title:
           type: string
+    DeletedDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+      required:
+        - id
     UpdateExpenseDto:
       type: object
       properties:
@@ -4474,6 +4482,14 @@ components:
         - portfolioId
         - amount
         - postAt
+    CreatedDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+      required:
+        - id
     FileRelationKeyEnum:
       type: string
       enum:
@@ -4677,6 +4693,14 @@ components:
         description:
           type: string
           nullable: true
+    UpdatedDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+      required:
+        - id
     BreadcrumbsDto:
       type: object
       properties:

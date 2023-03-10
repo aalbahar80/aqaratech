@@ -14,6 +14,7 @@
 
 import * as runtime from '../runtime';
 import type {
+	DeletedDto,
 	PaginatedLeaseDto,
 	PartialUnitDto,
 	UnitDto,
@@ -172,7 +173,7 @@ export class UnitsApi extends runtime.BaseAPI {
 	async removeRaw(
 		requestParameters: UnitsApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>> {
+	): Promise<runtime.ApiResponse<DeletedDto>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -197,7 +198,7 @@ export class UnitsApi extends runtime.BaseAPI {
 			initOverrides,
 		);
 
-		return new runtime.TextApiResponse(response) as any;
+		return new runtime.JSONApiResponse(response);
 	}
 
 	/**
@@ -207,7 +208,7 @@ export class UnitsApi extends runtime.BaseAPI {
 	async remove(
 		requestParameters: UnitsApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string> {
+	): Promise<DeletedDto> {
 		const response = await this.removeRaw(requestParameters, initOverrides);
 		return await response.value();
 	}

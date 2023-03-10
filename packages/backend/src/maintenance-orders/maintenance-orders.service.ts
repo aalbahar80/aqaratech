@@ -6,6 +6,7 @@ import { plainToInstance } from 'class-transformer';
 
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
+import { CreatedDto, UpdatedDto } from 'src/common/dto/abstract.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { IUser } from 'src/interfaces/user.interface';
@@ -21,7 +22,7 @@ import {
 export class MaintenanceOrdersService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	create({
+	async create({
 		createMaintenanceOrderDto,
 		user,
 		organizationId,
@@ -41,7 +42,7 @@ export class MaintenanceOrdersService {
 		const { portfolioId, propertyId, unitId, tenantId, ...data } =
 			createMaintenanceOrderDto;
 
-		const mo = this.prisma.c.maintenanceOrder.create({
+		const created = await this.prisma.c.maintenanceOrder.create({
 			data: {
 				...data,
 				organization: { connect: { id: organizationId } },
@@ -52,7 +53,7 @@ export class MaintenanceOrdersService {
 			},
 		});
 
-		return plainToInstance(MaintenanceOrderDto, mo);
+		return new CreatedDto(created);
 	}
 
 	async findAll({
@@ -125,7 +126,7 @@ export class MaintenanceOrdersService {
 			data: updateMaintenanceOrderDto,
 		});
 
-		return plainToInstance(MaintenanceOrderDto, data);
+		return new UpdatedDto(data);
 	}
 
 	remove({ id, user }: { id: string; user: IUser }) {
