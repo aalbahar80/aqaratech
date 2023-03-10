@@ -17,6 +17,8 @@ model User {
   fullName String?
 
   roles Role[]
+
+  @@index([email])
 }
 
 enum RoleType {
@@ -43,6 +45,9 @@ model Role {
   portfolio      Portfolio?   @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
   tenantId       String?
   tenant         Tenant?      @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+
+  @@index([userId])
+  @@index([organizationId])
 }
 
 model Organization {
@@ -246,6 +251,7 @@ model LeaseInvoice {
   @@index([leaseId])
   @@index([organizationId])
   @@index([portfolioId])
+  @@index([postAt])
 }
 
 view LeaseInvoiceV {
@@ -272,6 +278,7 @@ view LeaseInvoiceV {
   @@index([leaseId])
   @@index([organizationId])
   @@index([portfolioId])
+  @@index([postAt])
 }
 
 model Expense {
@@ -299,6 +306,7 @@ model Expense {
   @@index([propertyId])
   @@index([unitId])
   @@index([organizationId])
+  @@index([postAt])
 }
 
 model MaintenanceOrder {
