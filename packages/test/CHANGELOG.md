@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.18.1
+
+### Patch Changes
+
+- 6fa140a16: add user/postAt indexes
+
 ## 3.18.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.19.3
+
+### Patch Changes
+
+- 6fa140a16: add user/postAt indexes
+
 ## 2.19.2
 
 ### Patch Changes

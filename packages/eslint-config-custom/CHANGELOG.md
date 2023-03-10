@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.18.1
+
+### Patch Changes
+
+- 6fa140a16: add user/postAt indexes
+
 ## 2.18.0
 
 ### Minor Changes

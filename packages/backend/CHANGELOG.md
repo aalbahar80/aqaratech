@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.19.1
+
+### Patch Changes
+
+- 6fa140a16: add user/postAt indexes
+- Updated dependencies [6fa140a16]
+  - @self/utils@3.18.1
+
 ## 2.19.0
 
 ### Minor Changes
