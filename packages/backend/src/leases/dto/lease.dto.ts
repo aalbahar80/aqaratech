@@ -16,7 +16,7 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
-import { UnitDto } from 'src/units/dto/unit.dto';
+import { NonComputed } from 'src/types/common.types';
 
 class LeaseRequiredDto {
 	organizationId: string;
@@ -58,9 +58,9 @@ export class LeaseDto
 	)
 	implements Lease
 {
-	constructor(partial: Partial<LeaseDto>) {
+	constructor(data: NonComputed<LeaseDto>) {
 		super();
-		Object.assign(this, partial);
+		Object.assign(this, data);
 	}
 
 	@ApiHideProperty()
@@ -74,11 +74,19 @@ export class LeaseDto
 	@ApiProperty()
 	@Expose()
 	get breadcrumbs(): LeaseBreadcrumbsDto {
-		const unit = new UnitDto(this.unit);
 		return {
-			portfolio: unit.breadcrumbs.portfolio,
-			property: unit.breadcrumbs.property,
-			unit: unit.breadcrumbs.unit,
+			portfolio: new BreadcrumbDto({
+				id: this.portfolioId,
+				title: this.unit.property.portfolio.title,
+			}),
+			property: new BreadcrumbDto({
+				id: this.unit.property.id,
+				title: this.unit.property.title,
+			}),
+			unit: new BreadcrumbDto({
+				id: this.unit.id,
+				title: this.unit.title,
+			}),
 			tenant: new BreadcrumbDto({
 				id: this.tenant.id,
 				title: this.tenant.title,

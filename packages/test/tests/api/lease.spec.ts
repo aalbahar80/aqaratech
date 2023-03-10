@@ -6,8 +6,6 @@ import { FIELDS } from '@self/utils';
 
 import { test } from './api-fixtures';
 
-import type { PartialLeaseDto } from '../../types/api';
-
 const columns = ['portfolioId', 'unitId', ...FIELDS.lease.all] as const;
 
 const utc = (year: number, month: number, day: number) =>
@@ -148,7 +146,7 @@ test('start can be a date only', async ({
 
 	expect.soft(res.status()).toBe(201);
 
-	const body: unknown = (await res.json()) as PartialLeaseDto;
+	const body: unknown = await res.json();
 
 	expect(body).toHaveProperty('start', '2022-01-01T00:00:00.000Z');
 });
@@ -178,7 +176,7 @@ test.skip('rejects date range validation if one date is invalid ', async ({
 
 	expect.soft(res.status()).toBe(400);
 
-	const body: unknown = (await res.json()) as PartialLeaseDto;
+	const body: unknown = await res.json();
 
 	expect
 		.soft(body)
@@ -220,7 +218,7 @@ test('end can be a date only', async ({
 
 	expect.soft(res.status()).toBe(201);
 
-	const body: unknown = (await res.json()) as PartialLeaseDto;
+	const body: unknown = await res.json();
 
 	expect(body).toHaveProperty('end', '2022-01-01T00:00:00.000Z');
 });
@@ -250,7 +248,7 @@ test('start can be an ISO date', async ({
 
 	expect.soft(res.status()).toBe(201);
 
-	const body: unknown = (await res.json()) as PartialLeaseDto;
+	const body: unknown = await res.json();
 
 	expect(body).toHaveProperty('start', '2022-01-01T00:00:00.000Z');
 });
@@ -280,7 +278,7 @@ test.skip('end can be an ISO date', async ({
 
 	expect.soft(res.status()).toBe(201);
 
-	const body: unknown = (await res.json()) as PartialLeaseDto;
+	const body: unknown = await res.json();
 
 	expect(body).toHaveProperty('end', '2022-12-01T00:00:00.000Z');
 });

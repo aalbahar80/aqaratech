@@ -17,6 +17,7 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
+import { NonComputed } from 'src/types/common.types';
 import { Exactly } from 'src/types/exactly.type';
 
 class UnitRequiredDto {
@@ -68,9 +69,9 @@ export class UnitDto
 	)
 	implements Unit
 {
-	constructor(partial: Partial<UnitDto>) {
+	constructor(data: Omit<NonComputed<UnitDto>, 'vacancy'>) {
 		super();
-		Object.assign(this, partial);
+		Object.assign(this, data);
 	}
 
 	title: string;

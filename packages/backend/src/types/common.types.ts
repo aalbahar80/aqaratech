@@ -5,3 +5,5 @@ export interface ITitle {
 export interface IOrganizationId {
 	organizationId: string;
 }
+
+export type NonComputed<T> = Omit<T, 'breadcrumbs'>;

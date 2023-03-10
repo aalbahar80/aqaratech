@@ -20,6 +20,7 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
+import { NonComputed } from 'src/types/common.types';
 
 class LeaseInvoiceRequiredDto {
 	organizationId: string;
@@ -60,9 +61,9 @@ export class LeaseInvoiceDto
 	)
 	implements Omit<LeaseInvoice, 'mfData'>
 {
-	constructor(partial: Partial<LeaseInvoiceDto>) {
+	constructor(data: NonComputed<LeaseInvoiceDto>) {
 		super();
-		Object.assign(this, partial);
+		Object.assign(this, data);
 	}
 
 	@ApiHideProperty()

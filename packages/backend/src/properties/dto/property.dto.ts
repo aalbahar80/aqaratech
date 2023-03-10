@@ -16,6 +16,7 @@ import {
 	BreadcrumbsDto,
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
+import { NonComputed } from 'src/types/common.types';
 import { Exactly } from 'src/types/exactly.type';
 
 class PropertyRequiredDto {
@@ -56,7 +57,7 @@ export class PropertyDto
 	)
 	implements Property
 {
-	constructor(data: Omit<PropertyDto, 'breadcrumbs'>) {
+	constructor(data: NonComputed<PropertyDto>) {
 		super();
 		Object.assign(this, data);
 	}
