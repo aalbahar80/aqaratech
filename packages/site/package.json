@@ -67,7 +67,7 @@
 		"nanoid": "4.0.1",
 		"papaparse": "5.4.0",
 		"postcss": "8.4.21",
-		"remeda": "1.8.1",
+		"remeda": "1.9.0",
 		"rollup-plugin-visualizer": "5.9.0",
 		"sorcery": "0.11.0",
 		"source-map-support": "0.5.21",
