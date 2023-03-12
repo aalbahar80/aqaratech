@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.21.0
+
+### Minor Changes
+
+- 8d41d82b5: better redirects after payment
+
 ## 2.20.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.19.0
+
+### Minor Changes
+
+- 8d41d82b5: better redirects after payment
+
 ## 2.18.1
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @self/backend
 
+## 2.20.0
+
+### Minor Changes
+
+- 8d41d82b5: better redirects after payment
+
+### Patch Changes
+
+- Updated dependencies [8d41d82b5]
+  - @self/utils@3.19.0
+
 ## 2.19.1
 
 ### Patch Changes

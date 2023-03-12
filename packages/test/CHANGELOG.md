@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.19.0
+
+### Minor Changes
+
+- 8d41d82b5: better redirects after payment
+
 ## 3.18.1
 
 ### Patch Changes
