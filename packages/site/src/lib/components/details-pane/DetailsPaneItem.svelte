@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { formatValue } from '@self/utils';
-
-	import { getMyfatoorahReceipt } from '../leaseInvoice/get-myfatoorah-receipt';
+	import { formatValue, getMyfatoorahReceipt } from '@self/utils';
 
 	import { locale } from '$i18n/i18n-svelte';
+	import { environment } from '$lib/environment';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 
 	export let key: string;
@@ -21,7 +20,10 @@
 	>
 		{#if key === 'mfPaymentId' && value && typeof value === 'string'}
 			<a
-				href={getMyfatoorahReceipt(value)}
+				href={getMyfatoorahReceipt({
+					paymentId: value,
+					myfatoorahURL: environment.PUBLIC_MYFATOORAH_SITE_URL,
+				})}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="text-indigo-600 hover:text-indigo-900"

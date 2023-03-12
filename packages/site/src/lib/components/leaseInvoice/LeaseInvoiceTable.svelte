@@ -2,9 +2,7 @@
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
-	import { getLabel } from '@self/utils';
-
-	import { getMyfatoorahReceipt } from './get-myfatoorah-receipt';
+	import { getLabel, getMyfatoorahReceipt } from '@self/utils';
 
 	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
@@ -23,6 +21,7 @@
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
+	import { environment } from '$lib/environment';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 
@@ -117,7 +116,10 @@
 
 				return renderComponent(ActionCell, {
 					value: paymentId,
-					href: getMyfatoorahReceipt(paymentId),
+					href: getMyfatoorahReceipt({
+						paymentId,
+						myfatoorahURL: environment.PUBLIC_MYFATOORAH_SITE_URL,
+					}),
 				});
 			},
 		}),

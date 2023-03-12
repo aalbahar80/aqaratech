@@ -8,10 +8,17 @@ import {
 	Patch,
 	Query,
 	Redirect,
+	Req,
 } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { Request } from 'express';
 
-import { getRoute, leaseInvoiceUpdateSchema, PageType } from '@self/utils';
+import {
+	getMyfatoorahReceipt,
+	getRoute,
+	leaseInvoiceUpdateSchema,
+	PageType,
+} from '@self/utils';
 import { Public } from 'src/auth/public.decorator';
 import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
@@ -44,7 +51,10 @@ export class LeaseInvoicesController {
 	@Get(MYFATOORAH_CALLBACK_ENDPOINT)
 	@Redirect()
 	@Public()
-	async myfatoorahCallback(@Query('paymentId') paymentId: string) {
+	async myfatoorahCallback(
+		@Req() request: Request,
+		@Query('paymentId') paymentId: string,
+	) {
 		if (!paymentId) {
 			throw new BadRequestException('paymentId is required');
 		}
@@ -56,20 +66,38 @@ export class LeaseInvoicesController {
 			status,
 		);
 
-		// Redirect to the invoice page
-		const route = getRoute({
-			entity: 'leaseInvoice',
-			id: invoice.id,
-			pageType: PageType.Id,
-			params: {
-				organizationId: invoice.organizationId,
-				portfolioId: invoice.portfolioId,
-			},
-		});
+		const cookie = request.headers.cookie;
+		const isAuthorized = cookie?.includes('idToken');
 
-		return {
-			url: `${this.env.e.PUBLIC_SITE_URL}${route}`,
-		};
+		if (!isAuthorized || !status.isPaid) {
+			// If payment was not successful, redirect to public myfatoorah receipt page.
+			// This clearly indicates that the payment was not successful and contains
+			// details about the payment.
+
+			// Additionally, if user is not logged in, also redirect to public myfatoorah receipt page.
+			// Otherwise the user will be redirected to the login page
+			const url = getMyfatoorahReceipt({
+				paymentId,
+				myfatoorahURL: this.env.e.PUBLIC_MYFATOORAH_SITE_URL,
+			});
+
+			return { url };
+		} else {
+			// If user is logged in and payment was successful, redirect to our invoice page.
+			const route = getRoute({
+				entity: 'leaseInvoice',
+				id: invoice.id,
+				pageType: PageType.Id,
+				params: {
+					organizationId: invoice.organizationId,
+					portfolioId: invoice.portfolioId,
+				},
+			});
+
+			return {
+				url: `${this.env.e.PUBLIC_SITE_URL}${route}`,
+			};
+		}
 	}
 
 	@Get(':id')

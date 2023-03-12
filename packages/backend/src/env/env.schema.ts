@@ -27,6 +27,7 @@ export const backendEnvSchema = envSchema.pick({
 	// Myfatoorah
 	MYFATOORAH_KEY: true,
 	MYFATOORAH_URL: true,
+	PUBLIC_MYFATOORAH_SITE_URL: true,
 
 	PUBLIC_AQ_ENABLE_SENTRY: true,
 	PUBLIC_AQ_DEBUG_SENTRY: true,
