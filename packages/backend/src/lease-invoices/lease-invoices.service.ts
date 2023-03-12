@@ -5,6 +5,7 @@ import {
 	InternalServerErrorException,
 	Logger,
 } from '@nestjs/common';
+import { Cron } from '@nestjs/schedule';
 import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
 import { Any, Object } from 'ts-toolbelt';
@@ -330,6 +331,10 @@ export class LeaseInvoicesService {
 	}
 
 	async sendEmail(payload: InvoiceSendPayload) {
+		if (!payload.emails.length) {
+			return;
+		}
+
 		const invoice = payload.invoice;
 		const origin = this.env.e.PUBLIC_SITE_URL;
 
@@ -355,6 +360,64 @@ export class LeaseInvoicesService {
 				}),
 			},
 		});
+	}
+
+	@Cron('0 10 1,7,14 * *')
+	async sendReminders() {
+		this.logger.log('Sending invoice reminders', LeaseInvoicesService.name);
+
+		// Get all invoices posted between today and beginning of the current month
+		const startOfMonth = new Date(
+			Date.UTC(new Date().getFullYear(), new Date().getMonth(), 1),
+		);
+		const invoices = await this.prisma.c.leaseInvoice.findMany({
+			where: {
+				AND: {
+					isPaid: false,
+					lease: { notify: true },
+					postAt: { gte: startOfMonth, lte: new Date() },
+				},
+			},
+			select: {
+				id: true,
+				amount: true,
+				postAt: true,
+				portfolioId: true,
+				organizationId: true,
+				lease: {
+					select: {
+						tenant: {
+							select: {
+								roles: { select: { user: { select: { email: true } } } },
+							},
+						},
+					},
+				},
+			},
+		});
+
+		this.logger.log(
+			`Found ${invoices.length} invoices to send reminders for`,
+			LeaseInvoicesService.name,
+		);
+
+		const promises = invoices.map((invoice) => {
+			return this.sendEmail({
+				invoice,
+				emails: invoice.lease.tenant.roles.map((role) => role.user.email),
+			});
+		});
+
+		const results = await Promise.allSettled(promises);
+
+		this.logger.log(
+			{
+				message: 'Invoice reminders sent',
+				success: results.filter((r) => r.status === 'fulfilled').length,
+				failure: results.filter((r) => r.status === 'rejected').length,
+			},
+			LeaseInvoicesService.name,
+		);
 	}
 
 	async findMessages({ id, user }: { id: string; user: IUser }) {
