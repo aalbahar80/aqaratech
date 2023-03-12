@@ -12,7 +12,11 @@ test.describe('paid rent', () => {
 		invoicesParams: [{ isPaid: true }],
 	});
 
-	test('pay button is disabled', async ({ page, org, invoice }) => {
+	test('pay button is disabled in invoice page', async ({
+		page,
+		org,
+		invoice,
+	}) => {
 		const url = getRoute({
 			entity: 'leaseInvoice',
 			pageType: PageType.Id,
@@ -30,6 +34,30 @@ test.describe('paid rent', () => {
 
 		// Check that the pay button is disabled
 		const pay = page.locator('a', { hasText: 'Pay' });
+
+		await expect(pay).toBeVisible();
+		expect(await pay.getAttribute('href')).toBeNull();
+	});
+
+	test('pay button is disabled in table', async ({
+		page,
+		org,
+		invoice: _invoice,
+		tenant,
+	}) => {
+		const url = getRoute({
+			entity: 'leaseInvoice',
+			pageType: PageType.List,
+			params: {
+				organizationId: org.organization.id,
+				tenantId: tenant.id,
+			},
+		});
+
+		await page.goto(url);
+
+		// Check that the pay button is disabled
+		const pay = page.getByText('Pay', { exact: true });
 
 		await expect(pay).toBeVisible();
 		expect(await pay.getAttribute('href')).toBeNull();

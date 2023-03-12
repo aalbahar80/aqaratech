@@ -28,6 +28,7 @@
 					options: {
 						element: 'a',
 						label: $L.buttons.pay(),
+						disabled: invoice.isPaid,
 						href: `${environment.PUBLIC_API_URL}/leaseInvoices/${invoice.id}/pay`,
 					},
 				});
