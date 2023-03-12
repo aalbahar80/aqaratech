@@ -12,6 +12,7 @@
 				element: 'a';
 				label: string;
 				href: string;
+				disabled?: boolean;
 		  };
 
 	export let options: GenericActionCellProps;

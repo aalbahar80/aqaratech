@@ -11,7 +11,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { createPDF } from '$lib/components/leaseInvoice/invoice-to-pdf';
 	import LeaseInvoiceTabs from '$lib/components/leaseInvoice/LeaseInvoiceTabs.svelte';
-	import { environment } from '$lib/environment';
+	import { getPayURL } from '$lib/components/leaseInvoice/pay-url';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
@@ -23,7 +23,7 @@
 
 	$: badge = getInvoiceBadge(data.leaseInvoice);
 
-	$: payURL = `${environment.PUBLIC_API_URL}/leaseInvoices/${data.leaseInvoice.id}/pay`;
+	$: payURL = getPayURL(data.leaseInvoice.id);
 	$: payDisabled = data.leaseInvoice.isPaid;
 </script>
 

@@ -7,8 +7,8 @@
 
 	import L from '$i18n/i18n-svelte';
 	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
+	import { getPayURL } from '$lib/components/leaseInvoice/pay-url';
 	import GenericActionCell from '$lib/components/table/tanstack-table/GenericActionCell.svelte';
-	import { environment } from '$lib/environment';
 
 	export let data: PageData;
 
@@ -29,7 +29,7 @@
 						element: 'a',
 						label: $L.buttons.pay(),
 						disabled: invoice.isPaid,
-						href: `${environment.PUBLIC_API_URL}/leaseInvoices/${invoice.id}/pay`,
+						href: getPayURL(invoice.id),
 					},
 				});
 			},
