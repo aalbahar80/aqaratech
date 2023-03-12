@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.20.0
+
+### Minor Changes
+
+- f7f9ab167: enable pay button in tenant portal
+
 ## 2.19.3
 
 ### Patch Changes
