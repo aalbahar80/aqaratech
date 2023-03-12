@@ -8,6 +8,7 @@
 	import L from '$i18n/i18n-svelte';
 	import LeaseInvoiceTable from '$lib/components/leaseInvoice/LeaseInvoiceTable.svelte';
 	import GenericActionCell from '$lib/components/table/tanstack-table/GenericActionCell.svelte';
+	import { environment } from '$lib/environment';
 
 	export let data: PageData;
 
@@ -20,16 +21,14 @@
 		columnHelper.display({
 			id: 'pay',
 			header: '',
-			cell: () => {
-				// const invoice = props.row.original;
+			cell: (props) => {
+				const invoice = props.row.original;
 
 				return renderComponent(GenericActionCell, {
 					options: {
-						element: 'button',
+						element: 'a',
 						label: $L.buttons.pay(),
-						disabled: true, // TODO payment
-						// eslint-disable-next-line @typescript-eslint/no-empty-function
-						onClick: () => {},
+						href: `${environment.PUBLIC_API_URL}/leaseInvoices/${invoice.id}/pay`,
 					},
 				});
 			},
