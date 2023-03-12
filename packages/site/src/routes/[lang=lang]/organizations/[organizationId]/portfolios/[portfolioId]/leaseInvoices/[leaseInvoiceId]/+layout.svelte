@@ -24,9 +24,7 @@
 	$: badge = getInvoiceBadge(data.leaseInvoice);
 
 	$: payURL = `${environment.PUBLIC_API_URL}/leaseInvoices/${data.leaseInvoice.id}/pay`;
-	$: payDisabled =
-		data.leaseInvoice.isPaid ||
-		Date.now() < Date.parse(data.leaseInvoice.postAt);
+	$: payDisabled = data.leaseInvoice.isPaid;
 </script>
 
 <Heading

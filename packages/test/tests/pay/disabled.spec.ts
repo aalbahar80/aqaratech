@@ -67,34 +67,3 @@ test.describe('lease with disabled payments', () => {
 		);
 	});
 });
-
-test.describe('invoices not yet posted', () => {
-	test.use({
-		userRoleType: 'TENANT',
-		leasesParams: [{ canPay: true }],
-		invoicesParams: [{ isPaid: false, postAt: '2025-01-01' }],
-	});
-
-	test('pay button is disabled', async ({ page, org, invoice }) => {
-		const url = getRoute({
-			entity: 'leaseInvoice',
-			pageType: PageType.Id,
-			id: invoice.id,
-			params: {
-				organizationId: org.organization.id,
-				portfolioId: invoice.portfolioId,
-			},
-		});
-
-		await page.goto(url);
-
-		const badge = page.getByTestId('badge');
-		await expect(badge).toHaveText('Not yet due');
-
-		// Check that the pay button is disabled
-		const pay = page.locator('a', { hasText: 'Pay' });
-
-		await expect(pay).toBeVisible();
-		expect(await pay.getAttribute('href')).toBeNull();
-	});
-});
