@@ -9,6 +9,7 @@ import { EnvService } from 'src/env/env.service';
 import { RoleCreatedPayload } from 'src/events/role-created.event';
 import { IUser } from 'src/interfaces/user.interface';
 import { PostmarkService } from 'src/postmark/postmark.service';
+import { MESSAGE_TAG } from 'src/postmark/tags';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateRoleDto, RoleDto } from 'src/roles/dto/role.dto';
 
@@ -123,6 +124,7 @@ export class RolesService {
 				// TODO replace with url to either (if user !exists) signup page with email prefilled, or (if user exists) portfolio/tenant portal page
 				action_url: origin,
 			},
+			Tag: MESSAGE_TAG.ROLE_INVITE,
 		});
 
 		// eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
