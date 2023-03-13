@@ -10,7 +10,7 @@ import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
 import { Any, Object } from 'ts-toolbelt';
 
-import { PAID_LATE } from '@self/utils';
+import { PAID_LATE, getPayURL } from '@self/utils';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Action } from 'src/casl/action.enum';
 import { crumbs } from 'src/common/breadcrumb-select';
@@ -336,9 +336,11 @@ export class LeaseInvoicesService {
 		}
 
 		const invoice = payload.invoice;
-		const origin = this.env.e.PUBLIC_SITE_URL;
 
-		const trxUrl = `${origin}/en/organizations/${invoice.organizationId}/portfolios/${invoice.portfolioId}/leaseInvoices/${invoice.id}`;
+		const trxUrl = getPayURL({
+			apiURL: this.env.e.PUBLIC_API_URL,
+			invoiceId: invoice.id,
+		});
 
 		return await this.postmarkService.sendEmail({
 			From: 'Aqaratech <notifications@aqaratech.com>',
