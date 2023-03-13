@@ -56,7 +56,10 @@ export { PageTypePortfolio } from './route-helpers/enums/page-tab-portfolio.enum
 export { PageTab } from './route-helpers/enums/page-tab.enum';
 export { PageType } from './route-helpers/enums/page-type.enum';
 export { FilterInitial } from './route-helpers/get-dashboard-route';
-export { getMyfatoorahReceipt } from './route-helpers/get-myfatoorah-url';
+export {
+	getMyfatoorahReceipt,
+	getPayURL,
+} from './route-helpers/get-myfatoorah-url';
 export { getRoute } from './route-helpers/get-route';
 export { inferUrlRelation } from './route-helpers/infer-url-relation';
 export type { RouteParams } from './route-helpers/types/base-route.type';

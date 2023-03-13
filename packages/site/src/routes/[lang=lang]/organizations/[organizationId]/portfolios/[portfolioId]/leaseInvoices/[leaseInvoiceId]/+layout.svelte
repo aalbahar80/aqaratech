@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
-	import { getRoute, PageTab } from '@self/utils';
+	import { getRoute, PageTab, getPayURL } from '@self/utils';
 
 	import L from '$i18n/i18n-svelte';
 	import Badge from '$lib/components/Badge.svelte';
@@ -11,7 +11,7 @@
 	import Heading from '$lib/components/Heading.svelte';
 	import { createPDF } from '$lib/components/leaseInvoice/invoice-to-pdf';
 	import LeaseInvoiceTabs from '$lib/components/leaseInvoice/LeaseInvoiceTabs.svelte';
-	import { getPayURL } from '$lib/components/leaseInvoice/pay-url';
+	import { environment } from '$lib/environment';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
@@ -23,7 +23,10 @@
 
 	$: badge = getInvoiceBadge(data.leaseInvoice);
 
-	$: payURL = getPayURL(data.leaseInvoice.id);
+	$: payURL = getPayURL({
+		invoiceId: data.leaseInvoice.id,
+		apiURL: environment.PUBLIC_API_URL,
+	});
 	$: payDisabled = data.leaseInvoice.isPaid;
 </script>
 
