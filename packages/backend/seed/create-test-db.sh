@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DATABASE_URL=$(awk '/^DATABASE_URL/' ./prisma/.env.example | awk -F '=' '{print $2}')
 

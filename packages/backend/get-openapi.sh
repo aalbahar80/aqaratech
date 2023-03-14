@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 VERSION="6.2.1"
 JAR_FILE="openapi-generator-cli-$VERSION.jar"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # A script to orchestrate building and testing in seprate tmux panes.
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 SPEC_NAME=$1
 PROJECT_ID=$2

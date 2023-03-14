@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Script to start the backend and site containers, most useful for debugging
 # issues that only occur in production due to the docker setup

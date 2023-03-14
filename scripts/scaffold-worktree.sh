@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Scaffold a new worktree
 # Example: https://chrisdicarlo.ca/blog/working-with-git-worktrees-part-2/

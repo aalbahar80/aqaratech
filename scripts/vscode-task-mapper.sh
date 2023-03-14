@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # tsc --noEmit outputs file names in a relative path to sub-repo directory
 # This scripts maps the file names to the monorepo root directory

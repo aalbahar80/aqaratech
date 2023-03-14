@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Description
 # For a given set of commands, create and attach to a tmux session, run the commands, then kill the session.

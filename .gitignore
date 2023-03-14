@@ -6,6 +6,7 @@ dist
 tempsample
 
 .env
+.direnv
 
 .pnpm-store
 .pnpm-debug.log

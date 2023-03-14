@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # The script takes two arguments, the url to check and the timeout.
 # It then checks the health endpoint every 5 seconds until the timeout is reached.

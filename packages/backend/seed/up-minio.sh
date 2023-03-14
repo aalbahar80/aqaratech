@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 isRunning=$(docker inspect -f '{{.State.Running}}' minio)
 

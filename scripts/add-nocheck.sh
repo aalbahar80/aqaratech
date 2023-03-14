@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # @ts-nocheck
 sed -i '1 s/^/\/\/ @ts-nocheck\
