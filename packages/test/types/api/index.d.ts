@@ -49,6 +49,12 @@ export interface ArrayOfLeaseInvoiceDto {
 	 * @memberof ArrayOfLeaseInvoiceDto
 	 */
 	results?: Array<LeaseInvoiceDto>;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof ArrayOfLeaseInvoiceDto
+	 */
+	sum?: number;
 }
 /**
  *
@@ -1893,6 +1899,12 @@ export interface PaginatedLeaseInvoiceDto {
 	 * @memberof PaginatedLeaseInvoiceDto
 	 */
 	results: Array<LeaseInvoiceDto>;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof PaginatedLeaseInvoiceDto
+	 */
+	sum: number;
 }
 /**
  *

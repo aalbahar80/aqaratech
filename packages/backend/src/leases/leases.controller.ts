@@ -16,6 +16,7 @@ import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { LeaseInvoiceExtra } from 'src/lease-invoices/dto/lease-invoices-extra';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { LeaseDto, UpdateLeaseDto } from 'src/leases/dto/lease.dto';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
@@ -74,7 +75,7 @@ export class LeasesController {
 		{ action: Action.Read, subject: 'LeaseInvoice' },
 	)
 	@ApiQueryOptions()
-	@ApiPaginatedResponse(LeaseInvoiceDto)
+	@ApiPaginatedResponse(LeaseInvoiceDto, LeaseInvoiceExtra)
 	findInvoices(
 		@User() user: IUser,
 		@Param('id') id: string,

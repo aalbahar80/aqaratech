@@ -35,6 +35,7 @@ import { User } from 'src/decorators/user.decorator';
 import { EnvService } from 'src/env/env.service';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { LeaseInvoiceExtra } from 'src/lease-invoices/dto/lease-invoices-extra';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe';
 import { RoleDto } from 'src/roles/dto/role.dto';
@@ -172,7 +173,7 @@ export class OrganizationsController {
 	@Get(':id/leaseInvoices')
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
 	@ApiQueryOptions()
-	@ApiPaginatedResponse(LeaseInvoiceDto)
+	@ApiPaginatedResponse(LeaseInvoiceDto, LeaseInvoiceExtra)
 	findAllLeaseInvoices(
 		@User() user: IUser,
 		@Param('id') organizationId: string,
