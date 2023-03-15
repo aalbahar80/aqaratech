@@ -5,7 +5,6 @@ import {
 	InternalServerErrorException,
 	Logger,
 } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
 import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
 import { Any, Object } from 'ts-toolbelt';
@@ -364,7 +363,8 @@ export class LeaseInvoicesService {
 		});
 	}
 
-	@Cron('0 10 1,7,14 * *')
+	// Disabled until whatsapp is ready
+	// @Cron('0 10 1,7,14 * *')
 	async sendReminders() {
 		this.logger.log('Sending invoice reminders', LeaseInvoicesService.name);
 
