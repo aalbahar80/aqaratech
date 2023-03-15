@@ -30,7 +30,7 @@
 		</div>
 	{:else}
 		<div
-			class="prose prose-base lg:pb-10"
+			class="prose prose-base"
 			in:fade
 		>
 			<h3>{title}</h3>
@@ -43,6 +43,6 @@
 
 <style>
 	.chart-fixed-height {
-		height: 696px;
+		height: 446px;
 	}
 </style>

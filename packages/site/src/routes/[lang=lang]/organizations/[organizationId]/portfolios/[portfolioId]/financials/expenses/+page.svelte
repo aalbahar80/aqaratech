@@ -28,7 +28,7 @@
 	title={$L.charts.expensesLocationTreeMap.title()}
 	subtitle={$L.charts.expensesLocationTreeMap.subtitle()}
 	subtitle2={$L.charts.expensesLocationTreeMap.subtitle2()}
-	isFixedHeight={false}
+	isFixedHeight={data.expensesByLocation.length < 1}
 >
 	<ExpenseTreemapProperty expenses={data.expensesByLocation} />
 </ChartWrapper>
@@ -38,7 +38,7 @@
 	title={$L.charts.expensesCategoryTreeMap.title()}
 	subtitle={$L.charts.expensesCategoryTreeMap.subtitle()}
 	subtitle2={$L.charts.expensesCategoryTreeMap.subtitle2()}
-	isFixedHeight={false}
+	isFixedHeight={data.expensesByCategory.length < 1}
 >
 	<ExpenseTreemapCategory />
 </ChartWrapper>
