@@ -5,7 +5,7 @@ export const features = {
 			track:
 				'Comprehensive tracking of property-related data, including units, leases, tenants, and more.',
 			visualize:
-				"Visualize your properties' financial data to identify trends and patterns over time. Use our interactive dashboards to view income, expenses, and profit/loss for each portfolio, property, and unit.",
+				"Visualize your properties' financial data to identify trends and patterns over time. Use the interactive dashboards to view income, expenses, and profit/loss for each portfolio, property, and unit.",
 			monitor:
 				"Monitor your properties' occupancy rates and vacancy periods using heatmaps.",
 		},
