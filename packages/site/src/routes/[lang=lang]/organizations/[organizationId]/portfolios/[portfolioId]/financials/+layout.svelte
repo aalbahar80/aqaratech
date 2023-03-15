@@ -16,7 +16,7 @@
 
 <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
 	<div
-		class="flex flex-col items-center justify-center rounded-lg bg-white p-8 shadow lg:items-start lg:justify-start"
+		class="flex flex-col items-center justify-center rounded-lg bg-white p-4 shadow lg:items-start lg:justify-start"
 	>
 		<div class="flex items-center justify-between self-stretch pb-4">
 			<div class="block text-sm font-medium text-gray-700">
