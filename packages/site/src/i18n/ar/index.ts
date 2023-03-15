@@ -229,9 +229,9 @@ const ar: Translation = {
 		},
 	},
 	badge: {
-		notYetDue: 'لم يتم الدفع بعد',
+		notYetDue: 'لم يحن وقت السداد',
 		due: 'مستحق',
-		overdue: 'غير مدفوع',
+		overdue: 'متأخر',
 		paid: 'مدفوع',
 		unpaid: 'غير مدفوع',
 
