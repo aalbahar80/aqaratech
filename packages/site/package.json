@@ -27,7 +27,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.34",
+		"@iconify/json": "2.2.35",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.3.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -77,7 +77,7 @@
 		"svelte-frappe-charts": "1.10.0",
 		"svelte-french-toast": "1.0.3",
 		"svelte-headlessui": "0.0.15",
-		"svelte-preprocess": "5.0.1",
+		"svelte-preprocess": "5.0.2",
 		"tailwindcss": "3.2.7",
 		"tier": "5.6.0",
 		"tippy.js": "6.3.7",

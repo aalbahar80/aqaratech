@@ -26,7 +26,7 @@
 		"@self/site": "workspace:*",
 		"@self/utils": "workspace:*",
 		"@total-typescript/ts-reset": "0.4.2",
-		"@types/node": "18.15.2",
+		"@types/node": "18.15.3",
 		"dotenv": "16.0.3",
 		"dotenv-cli": "7.1.0",
 		"eslint-config-custom": "workspace:*",
