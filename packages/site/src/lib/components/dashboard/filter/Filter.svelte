@@ -15,7 +15,7 @@
 </script>
 
 <div
-	class="grid h-full grid-cols-2 gap-8 gap-x-2 rounded-lg bg-white p-8 shadow md:gap-8"
+	class="grid h-full grid-cols-2 gap-8 gap-x-2 rounded-lg bg-white p-4 shadow md:gap-8"
 >
 	{#if !hideRange}
 		<div class="col-span-full">

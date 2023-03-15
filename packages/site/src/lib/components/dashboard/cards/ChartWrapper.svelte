@@ -15,7 +15,7 @@
 
 <div
 	data-testid="chart-card"
-	class="w-full overflow-hidden rounded-lg bg-white p-8 shadow"
+	class="w-full overflow-hidden rounded-lg bg-white p-4 shadow"
 	class:chart-fixed-height={isFixedHeight}
 >
 	{#if empty}
