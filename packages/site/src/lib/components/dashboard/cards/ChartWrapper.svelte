@@ -15,7 +15,7 @@
 
 <div
 	data-testid="chart-card"
-	class="w-full overflow-hidden rounded-lg bg-white p-4 shadow"
+	class="flex w-full flex-col justify-between overflow-hidden rounded-lg bg-white p-4 shadow"
 	class:chart-fixed-height={isFixedHeight}
 >
 	{#if empty}
@@ -43,6 +43,6 @@
 
 <style>
 	.chart-fixed-height {
-		height: 446px;
+		height: 400px;
 	}
 </style>
