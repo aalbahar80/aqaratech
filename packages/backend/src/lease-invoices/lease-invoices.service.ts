@@ -71,7 +71,7 @@ export class LeaseInvoicesService {
 		user: IUser;
 		queryOptions: QueryOptionsDto;
 		whereCustom?: Prisma.LeaseInvoiceWhereInput;
-	}): Promise<WithCount<LeaseInvoiceDto>> {
+	}): Promise<WithCount<LeaseInvoiceDto> & { sum: number }> {
 		const { take, skip, sort, filter, filterCustom } = queryOptions;
 
 		const isPaidLateFilter = filterCustom.isPaidLate;
@@ -98,7 +98,7 @@ export class LeaseInvoicesService {
 			],
 		} satisfies Prisma.LeaseInvoiceVWhereInput;
 
-		const [data, total] = await Promise.all([
+		const [data, total, agg] = await Promise.all([
 			this.prisma.c.leaseInvoiceV.findMany({
 				take,
 				skip,
@@ -125,9 +125,17 @@ export class LeaseInvoicesService {
 				},
 			}),
 			this.prisma.c.leaseInvoiceV.count({ where }),
+			this.prisma.c.leaseInvoiceV.aggregate({
+				where,
+				_sum: { amount: true },
+			}),
 		]);
 
-		return { total, results: data.map((d) => new LeaseInvoiceDto(d)) };
+		return {
+			total,
+			results: data.map((d) => new LeaseInvoiceDto(d)),
+			sum: agg._sum.amount ?? 0,
+		};
 	}
 
 	async findOne({ id, user }: { id: string; user: IUser }) {
