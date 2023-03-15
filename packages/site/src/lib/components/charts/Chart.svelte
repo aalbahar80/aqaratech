@@ -25,28 +25,6 @@
 	import { CHART_HEIGHT } from '$lib/components/dashboard/cards/chart-height.const';
 	import { isRTL } from '$lib/i18n/locale-labels';
 
-	type ManualChartType = InstanceType<typeof Chart> & {
-		legend: {
-			height: number;
-			fit: () => void;
-		};
-	};
-
-	// Adds padding to legend
-	const legendMargin = {
-		id: 'legendMargin',
-		beforeInit(chart: ManualChartType) {
-			const fitValue = chart.legend.fit;
-
-			chart.legend.fit = function fit() {
-				fitValue.bind(chart.legend)();
-				// padding applied to bottom of legend
-
-				return (this.height += 100);
-			};
-		},
-	};
-
 	Chart.register(
 		Legend,
 		Tooltip,
@@ -61,7 +39,6 @@
 		LineController,
 		PieController,
 		ArcElement,
-		legendMargin,
 	);
 
 	// Disable some animations that cause high CPU usage
@@ -77,6 +54,7 @@
 	Chart.defaults.font.size = 16;
 	Chart.defaults.font.family =
 		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
+	Chart.defaults.plugins.legend.display = false;
 	Chart.defaults.plugins.legend.align = 'start';
 	Chart.defaults.plugins.legend.labels.usePointStyle = true;
 	Chart.defaults.plugins.legend.labels.pointStyle = 'rectRounded';
