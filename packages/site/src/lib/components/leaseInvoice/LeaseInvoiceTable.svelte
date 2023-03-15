@@ -14,6 +14,7 @@
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
+	import { getUnpaidBadge } from '$lib/components/leaseInvoice/badge';
 	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
 	import {
@@ -59,12 +60,31 @@
 			cell: (info) => {
 				const invoice = info.row.original;
 
-				if (!invoice.isPaid || !invoice.paidAt || !invoice.dueAt) {
+				if (invoice.isPaid && !invoice.paidAt) {
+					return '';
+				}
+
+				if (!invoice.isPaid && !invoice.dueAt) {
 					return '';
 				}
 
 				let label: string;
-				let badgeColor = 'green';
+				let badgeColor;
+
+				// NOTE: Client requested to show payment status in "Payment Time" column,
+				// for unpaid invoices.
+				if (!invoice.isPaid) {
+					const unpaid = getUnpaidBadge(invoice);
+					return renderComponent(Badge, {
+						label: unpaid.label,
+						badgeColor: unpaid.color,
+					});
+				}
+
+				// Typing purposes only. These cases have been handled above.
+				if (!invoice.paidAt || !invoice.dueAt) {
+					return '';
+				}
 
 				if (new Date(invoice.paidAt) > new Date(invoice.dueAt)) {
 					label = $L.badge.late();
