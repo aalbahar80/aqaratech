@@ -14,27 +14,15 @@ export const getInvoiceBadge = (trx: {
 }) => {
 	const LL = get(L);
 
-	const due = trx.dueAt && new Date(trx.dueAt);
-	const post = new Date(trx.postAt);
 	if (trx.isPaid) {
 		return {
 			label: LL.badge.paid(),
 			color: 'green',
 		};
-	} else if (due && due < new Date()) {
-		return {
-			label: `${LL.badge.unpaid()} (${LL.badge.overdue()})`,
-			color: 'red',
-		};
-	} else if (post < new Date()) {
-		return {
-			label: `${LL.badge.unpaid()} (${LL.badge.due()})`,
-			color: 'yellow',
-		};
 	} else {
 		return {
-			label: LL.badge.notYetDue(),
-			color: 'indigo',
+			label: LL.badge.unpaid(),
+			color: 'red',
 		};
 	}
 };
