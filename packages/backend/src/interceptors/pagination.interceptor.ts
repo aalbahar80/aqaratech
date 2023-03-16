@@ -48,7 +48,13 @@ export class PaginationInterceptor<T>
 					take: queryToInt(query[TAKE_PARAM]) ?? TAKE_PARAM_DEFAULT,
 				});
 
-				return { pagination, results: data.results };
+				// Remove total (count) from response,
+				// passthrough any unknown properties returned from the query
+				const { total, ...rest } = data;
+				return {
+					...rest,
+					pagination,
+				};
 			}),
 		);
 	}
@@ -65,7 +71,9 @@ const queryToInt = (q: unknown) => {
 };
 
 // Zod schema to validate withCount
-const withCountSchema = z.object({
-	total: z.number().min(0),
-	results: z.array(z.unknown()),
-});
+const withCountSchema = z
+	.object({
+		total: z.number().min(0),
+		results: z.array(z.unknown()),
+	})
+	.passthrough(); // Allow extra properties

@@ -38,6 +38,7 @@ import { ExpenseDto } from 'src/expenses/dto/expense.dto';
 import { ExpensesService } from 'src/expenses/expenses.service';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { LeaseInvoiceExtra } from 'src/lease-invoices/dto/lease-invoices-extra';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { PayoutDto } from 'src/payouts/dto/payout.dto';
 import { PayoutsService } from 'src/payouts/payouts.service';
@@ -232,7 +233,7 @@ export class PortfoliosController {
 		// Else, add orgId to the route params.
 	})
 	@ApiQueryOptions()
-	@ApiPaginatedResponse(LeaseInvoiceDto)
+	@ApiPaginatedResponse(LeaseInvoiceDto, LeaseInvoiceExtra)
 	findAllLeaseInvoices(
 		@User() user: IUser,
 		@Param('id') portfolioId: string,

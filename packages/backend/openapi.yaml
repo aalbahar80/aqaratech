@@ -246,6 +246,7 @@ paths:
                 title: PaginatedLeaseInvoiceDto
                 required:
                   - results
+                  - sum
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - title: ArrayOfLeaseInvoiceDto
@@ -254,6 +255,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
+                      sum:
+                        type: number
       tags: *ref_0
       security: *ref_1
   /tenants/{id}/roles:
@@ -756,6 +759,7 @@ paths:
                 title: PaginatedLeaseInvoiceDto
                 required:
                   - results
+                  - sum
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - title: ArrayOfLeaseInvoiceDto
@@ -764,6 +768,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
+                      sum:
+                        type: number
       tags: *ref_5
       security: *ref_6
   /portfolios:
@@ -1292,6 +1298,7 @@ paths:
                 title: PaginatedLeaseInvoiceDto
                 required:
                   - results
+                  - sum
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - title: ArrayOfLeaseInvoiceDto
@@ -1300,6 +1307,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
+                      sum:
+                        type: number
       tags: *ref_7
       security: *ref_8
   /portfolios/{id}/expenses:
@@ -2295,6 +2304,7 @@ paths:
                 title: PaginatedLeaseInvoiceDto
                 required:
                   - results
+                  - sum
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - title: ArrayOfLeaseInvoiceDto
@@ -2303,6 +2313,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
+                      sum:
+                        type: number
       tags: *ref_19
       security: *ref_20
   /organizations/{id}/status-refresh:

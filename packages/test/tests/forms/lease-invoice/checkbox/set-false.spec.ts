@@ -76,5 +76,5 @@ test('badge updates with value', async ({ org, portfolio, invoice, page }) => {
 
 	// badge should update
 
-	await expect(badge).toHaveText('Unpaid (Past due)');
+	await expect(badge).toHaveText('Unpaid');
 });
