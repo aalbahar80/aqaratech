@@ -1,5 +1,22 @@
 # @self/backend
 
+## 2.20.1
+
+### Patch Changes
+
+- 9beb9aa48: tag role invite emails
+- 91c11306c: add invoice reminder cron job
+- 67c0784ae: update deps
+- 275099f05: update deps
+- 572243818: update deps
+- 4a9266a95: disable notifications cron
+- 233e0d018: tolgee update
+- Updated dependencies [67c0784ae]
+- Updated dependencies [275099f05]
+- Updated dependencies [572243818]
+- Updated dependencies [233e0d018]
+  - @self/utils@3.19.1
+
 ## 2.20.0
 
 ### Minor Changes

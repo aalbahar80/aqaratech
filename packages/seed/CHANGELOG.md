@@ -1,5 +1,19 @@
 # @self/seed
 
+## 2.19.1
+
+### Patch Changes
+
+- 67c0784ae: update deps
+- 275099f05: update deps
+- 572243818: update deps
+- 233e0d018: tolgee update
+- Updated dependencies [67c0784ae]
+- Updated dependencies [275099f05]
+- Updated dependencies [572243818]
+- Updated dependencies [233e0d018]
+  - @self/utils@3.19.1
+
 ## 2.19.0
 
 ### Minor Changes

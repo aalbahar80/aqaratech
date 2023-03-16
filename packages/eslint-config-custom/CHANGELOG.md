@@ -1,5 +1,14 @@
 # eslint-config-custom
 
+## 2.19.1
+
+### Patch Changes
+
+- 67c0784ae: update deps
+- 275099f05: update deps
+- 572243818: update deps
+- 233e0d018: tolgee update
+
 ## 2.19.0
 
 ### Minor Changes
