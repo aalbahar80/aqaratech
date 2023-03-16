@@ -58,7 +58,7 @@ test('badge updates with value', async ({ org, portfolio, invoice, page }) => {
 
 	const badge = page.getByTestId('badge');
 
-	await expect(badge).toHaveText('Unpaid (Past due)');
+	await expect(badge).toHaveText('Unpaid');
 
 	await page.getByRole('link', { name: 'Edit' }).click();
 
