@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.19.2
+
+### Patch Changes
+
+- b7a10d797: update deps
+
 ## 3.19.1
 
 ### Patch Changes

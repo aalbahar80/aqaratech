@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.19.2
+
+### Patch Changes
+
+- b7a10d797: update deps
+- Updated dependencies [b7a10d797]
+  - @self/utils@3.19.2
+
 ## 2.19.1
 
 ### Patch Changes

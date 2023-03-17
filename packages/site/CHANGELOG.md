@@ -1,5 +1,15 @@
 # @self/site
 
+## 2.22.0
+
+### Minor Changes
+
+- de6c717fc: add logo
+
+### Patch Changes
+
+- b7a10d797: update deps
+
 ## 2.21.1
 
 ### Patch Changes
