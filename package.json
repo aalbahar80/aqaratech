@@ -38,7 +38,7 @@
 		"tsconfig": "workspace:*",
 		"tsx": "3.12.5",
 		"turbo": "1.8.3",
-		"typescript": "5.0.1-rc",
+		"typescript": "5.0.2",
 		"zx": "7.2.0"
 	},
 	"pnpm": {
