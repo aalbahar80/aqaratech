@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import L from '$i18n/i18n-svelte';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import { SIDEBAR_TOGGLE } from '$lib/constants/misc';
 	import LocaleSwitcher from '$lib/i18n/LocaleSwitcher.svelte';
+	import AqaratechLogo1 from '$lib/svgs/AqaratechLogo1.svelte';
 	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
 </script>
@@ -34,9 +34,9 @@
 			{/if}
 			<a
 				href={$page.data.user?.role?.meta.home ?? '/'}
-				class="text-3xl font-semibold text-gray-800 dark:text-white"
+				class="w-36 sm:w-44"
 			>
-				<h1>{$L.aqaratech.shortName()}</h1>
+				<AqaratechLogo1 />
 			</a>
 		</div>
 		<div class="flex flex-col gap-y-4 gap-x-12 text-gray-500 sm:flex-row">
