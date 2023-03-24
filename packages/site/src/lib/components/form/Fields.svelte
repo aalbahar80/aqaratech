@@ -1,5 +1,5 @@
 <div class="flex flex-col justify-between">
-	<div class="divide-y divide-gray-200 ">
+	<div class="divide-y divide-gray-200">
 		<!-- <h1 class="py-4 text-lg font-medium text-gray-700"> -->
 		<!-- {formType === 'update' ? 'Edit ' : 'Add '}{entitiesMap[entity] -->
 		<!-- 	.singularCap} -->

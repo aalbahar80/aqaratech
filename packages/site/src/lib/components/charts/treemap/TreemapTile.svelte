@@ -18,9 +18,9 @@
 </script>
 
 <svelte:head>
+	<!-- Polyfill for container queries -->
+	<!-- https://github.com/GoogleChromeLabs/container-query-polyfill -->
 	{#if browser && !('container' in document.documentElement.style)}
-		<!-- Polyfill for container queries -->
-		<!-- https://github.com/GoogleChromeLabs/container-query-polyfill -->
 		<script
 			src="https://cdn.jsdelivr.net/npm/container-query-polyfill@1/dist/container-query-polyfill.modern.js"
 		></script>

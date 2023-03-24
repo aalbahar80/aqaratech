@@ -27,7 +27,7 @@
 		</div>
 	</div>
 
-	<ul class="flex flex-col divide-y divide-gray-200 ">
+	<ul class="flex flex-col divide-y divide-gray-200">
 		<BalanceLineItem
 			href={getRoute({
 				...baseRoute,
