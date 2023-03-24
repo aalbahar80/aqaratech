@@ -12,6 +12,16 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
+
+      modifiedPlaywrightBrowsers =
+        pkgs.runCommand "modified-playwright-browsers" {
+          src = pkgs.playwright.browsers;
+        } ''
+          mkdir -p $out
+          cp -r ${pkgs.playwright.browsers}/* $out
+          mkdir -p $out/ffmpeg-1008
+          ln -s $out/ffmpeg-1007/ffmpeg-linux $out/ffmpeg-1008/ffmpeg-linux
+        '';
     in {
       devShell = pkgs.mkShell {
         nativeBuildInputs = [pkgs.bashInteractive];
@@ -37,10 +47,8 @@
 
           # Playwright nixOS combatibility
           export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
-          export PLAYWRIGHT_BROWSERS_PATH="${playwright.browsers}"
+          export PLAYWRIGHT_BROWSERS_PATH="${modifiedPlaywrightBrowsers}"
           export PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH="${chromium}/bin/chromium"
-          # Either turn off video trace or find way to make playwright find the ffmpeg binary using something like this:
-          # export PLAYWRIGHT_FFMPEG_EXECUTABLE_PATH=${playwright.browsers}/ffmpeg-1008/ffmpeg-linux
         '';
       };
     });

@@ -48,7 +48,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		ignoreHTTPSErrors: true,
 		bypassCSP: true,
 		baseURL: process.env.PUBLIC_SITE_URL,
-		video: process.env.IN_NIX_SHELL ? 'off' : NVIM ? 'on' : 'retain-on-failure',
+		video: NVIM ? 'on' : 'retain-on-failure',
 		trace: {
 			mode: NVIM ? 'on' : 'retain-on-failure',
 			screenshots: true,
