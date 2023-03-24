@@ -59,7 +59,7 @@
 		"dotenv": "16.0.3",
 		"dotenv-cli": "7.1.0",
 		"eslint-config-custom": "workspace:*",
-		"eslint-plugin-svelte": "2.22.0",
+		"eslint-plugin-svelte": "2.23.1",
 		"frappe-charts": "1.6.2",
 		"fuse.js": "6.6.2",
 		"jose": "4.13.1",
