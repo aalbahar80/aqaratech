@@ -48,7 +48,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		ignoreHTTPSErrors: true,
 		bypassCSP: true,
 		baseURL: process.env.PUBLIC_SITE_URL,
-		video: NVIM ? 'on' : 'retain-on-failure',
+		video: process.env.IN_NIX_SHELL ? 'off' : NVIM ? 'on' : 'retain-on-failure',
 		trace: {
 			mode: NVIM ? 'on' : 'retain-on-failure',
 			screenshots: true,
@@ -102,6 +102,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 				...devices['Desktop Chrome'],
 				launchOptions: {
 					args: ['--window-position=0,0'],
+					executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
 				},
 			},
 		},
@@ -137,7 +138,13 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
 				'**/tests/remove/**/*.spec.ts', // pagination assertion fails
 			],
-			use: devices['Pixel 5'],
+			use: {
+				...devices['Pixel 5'],
+				launchOptions: {
+					args: ['--window-position=0,0'],
+					executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+				},
+			},
 		},
 		{
 			name: 'site:webkit:mobile',
