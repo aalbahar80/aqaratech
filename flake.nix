@@ -34,6 +34,10 @@
 
           # Tell turbo where to find our nixOS-specific binary
           export TURBO_BINARY_PATH="${turbo}/bin/turbo"
+
+          export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+          export PLAYWRIGHT_BROWSERS_PATH="${playwright.browsers}"
+          export PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH="${chromium}/bin/chromium"
         '';
       };
     });
