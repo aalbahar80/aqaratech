@@ -57,10 +57,12 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			// @ts-expect-error bug
 			fullPage: true,
 		},
-		// launchOptions: {
-		// 	args: ['--window-position=0,0'],
-		// 	slowMo: 100,
-		// },
+		launchOptions: {
+			// slowMo: 100,
+			args: ['--window-position=0,0'],
+			// @ts-expect-error for nixOS
+			executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+		},
 	},
 	webServer: [
 		// To Debug, use env var: DEBUG="pw:webserver,pw:browser*,pw:api"
@@ -98,13 +100,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		{
 			name: 'site:chrome',
 			testIgnore: [...TESTS.NON_SITE, ...TESTS.MOBILE_ONLY],
-			use: {
-				...devices['Desktop Chrome'],
-				launchOptions: {
-					args: ['--window-position=0,0'],
-					executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
-				},
-			},
+			use: devices['Desktop Chrome'],
 		},
 		{
 			name: 'site:firefox',
@@ -138,13 +134,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
 				'**/tests/remove/**/*.spec.ts', // pagination assertion fails
 			],
-			use: {
-				...devices['Pixel 5'],
-				launchOptions: {
-					args: ['--window-position=0,0'],
-					executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
-				},
-			},
+			use: devices['Pixel 5'],
 		},
 		{
 			name: 'site:webkit:mobile',

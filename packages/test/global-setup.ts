@@ -30,8 +30,10 @@ async function globalSetup(config: FullConfig) {
 		throw new Error('Missing config'); // overkill?
 	}
 
+	const executablePath = project.use.launchOptions?.executablePath;
+
 	const browser = await chromium.launch({
-		executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+		...(executablePath ? { executablePath } : {}),
 	});
 
 	for (const { email, password, storageStateFilename } of [
