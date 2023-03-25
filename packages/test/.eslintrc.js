@@ -11,6 +11,8 @@ module.exports = {
 	rules: {
 		'no-empty-pattern': 'off',
 
+		'@typescript-eslint/no-non-null-assertion': 'off',
+
 		// Playwright fixtures can be unused
 		'@typescript-eslint/no-unused-vars': 'off',
 

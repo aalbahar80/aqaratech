@@ -48,8 +48,8 @@ export class LeasesController {
 	@Get(':id')
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
 	@ApiOkResponse({ type: LeaseDto })
-	findOne(@Param('id') id: string): Promise<LeaseDto> {
-		return this.leasesService.findOne({ id });
+	findOne(@User() user: IUser, @Param('id') id: string): Promise<LeaseDto> {
+		return this.leasesService.findOne({ id, user });
 	}
 
 	@Patch(':id')

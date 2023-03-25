@@ -74,9 +74,9 @@ export class LeasesService {
 		return { total, results: data.map((l) => new LeaseDto(l)) };
 	}
 
-	async findOne({ id }: { id: string }) {
+	async findOne({ id, user }: { id: string; user: IUser }) {
 		const data = await this.prisma.c.lease.findUniqueOrThrow({
-			where: { id },
+			where: { id, AND: accessibleBy(user.ability, Action.Read).Lease },
 			include: {
 				tenant: crumbs.tenant,
 				unit: crumbs.unit,
