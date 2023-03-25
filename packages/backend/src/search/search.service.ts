@@ -23,6 +23,7 @@ export class SearchService {
 		user: IUser;
 	}): Promise<SearchDto> {
 		const take = 20;
+		const roleType = user.role.roleType;
 
 		// lower the limit for the similarty function (default is 0.3)
 		await this.prisma.c.$executeRaw(Prisma.sql`SELECT set_limit(0.05);`);
@@ -60,6 +61,11 @@ export class SearchService {
 						OR "area" % ${query}
 						OR "street" % ${query})
 						AND "organizationId" = ${user.role.organizationId}
+						${
+							roleType === 'ORGADMIN'
+								? Prisma.empty
+								: Prisma.sql`AND "portfolioId" = ${user.role.portfolioId}`
+						}
 				ORDER BY score DESC
 				LIMIT ${take};
 			`,
@@ -84,17 +90,23 @@ export class SearchService {
 						OR "passportNum" % ${query}
 						OR "residencyNum" % ${query})
 						AND "organizationId" = ${user.role.organizationId}
+						${
+							roleType === 'ORGADMIN'
+								? Prisma.empty
+								: Prisma.sql`AND EXISTS (
+								SELECT 1 FROM "Lease" WHERE "Lease"."tenantId" = "Tenant"."id" AND "Lease"."portfolioId" = ${user.role.portfolioId}
+							)`
+						}
 				ORDER BY score DESC
 				LIMIT ${take};
 			`,
 		);
 
 		const [tenants, portfolios, properties] = await Promise.all([
-			// FIX:authz
+			// ivs FIX:authz
 			tenantsQuery,
 			// avoid returning the portfolio of the user searching
 			user.role.roleType === 'PORTFOLIO' ? [] : portfoliosQuery,
-			// FIX:authz
 			propertiesQuery,
 		]);
 
