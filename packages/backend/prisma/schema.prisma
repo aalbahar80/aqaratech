@@ -1,6 +1,7 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["extendedWhereUnique", "fullTextSearch", "fieldReference", "clientExtensions", "views"]
+  previewFeatures = ["extendedWhereUnique", "fullTextSearch", "fieldReference", "clientExtensions", "views", "postgresqlExtensions"]
+  extensions      = ["pg_trgm"]
 }
 
 datasource db {

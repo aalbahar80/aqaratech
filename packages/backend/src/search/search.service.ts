@@ -19,6 +19,27 @@ export class SearchService {
 	async search({ query, user }: { query: string; user: IUser }) {
 		const take = 20;
 
+		// lower the limit for the similarty function (default is 0.3)
+		await this.prisma.c.$executeRaw(Prisma.sql`SELECT set_limit(0.1);`);
+
+		const p = this.prisma.c.$queryRaw(
+			Prisma.sql`
+				SELECT *, 
+					GREATEST(
+						word_similarity("fullName", ${query}),
+						word_similarity("label", ${query}),
+						word_similarity("phone", ${query})
+					) AS score
+				FROM "Portfolio"
+				WHERE ("fullName" % ${query}
+						OR "label" % ${query}
+						OR "phone" % ${query})
+						AND "organizationId" = ${user.role.organizationId}
+				ORDER BY score DESC
+				LIMIT ${take};
+			`,
+		);
+
 		const [tenants, portfolios, properties] = await Promise.all([
 			this.prisma.c.tenant.findMany({
 				where: {
