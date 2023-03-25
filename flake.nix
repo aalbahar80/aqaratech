@@ -22,6 +22,36 @@
           mkdir -p $out/ffmpeg-1008
           ln -s $out/ffmpeg-1007/ffmpeg-linux $out/ffmpeg-1008/ffmpeg-linux
         '';
+
+      # Tier binary package
+      tier = {pkgs, ...}:
+        pkgs.stdenv.mkDerivation rec {
+          pname = "tier";
+          version = "0.10.0";
+
+          src = pkgs.fetchurl {
+            url = "https://github.com/tierrun/tier/releases/download/v${version}/tier_${version}_linux_amd64.tar.gz";
+            sha256 = "sha256-vH8+KCY9kZIYJYGuERyc7Dqe49kQb93O4HMACdCvluQ=";
+          };
+
+          # buildInputs = [pkgs.glibc];
+
+          unpackPhase = ''
+            tar -xzf $src
+          '';
+
+          dontBuild = true;
+
+          installPhase = ''
+            mkdir -p $out/bin
+            cp tier $out/bin/tier
+          '';
+
+          meta = {
+            description = "Tier binary";
+            homepage = "https://github.com/tierrun/tier";
+          };
+        };
     in {
       devShell = pkgs.mkShell {
         nativeBuildInputs = [pkgs.bashInteractive];
@@ -30,6 +60,9 @@
           openssl # otherwise prisma will complain about missing openssl
           turbo # npm binary doesn't work on nixOS
           go-task # version installed by pnpm is nowhere to be found on nixOS
+          zulu # java for openapi-generator-cli
+          # openapi-generator-cli # npm binary works on nixOS
+          (tier {inherit pkgs;})
         ];
         shellHook = with pkgs; ''
           export PRISMA_MIGRATION_ENGINE_BINARY="${prisma-engines}/bin/migration-engine"
