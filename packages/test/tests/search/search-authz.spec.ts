@@ -17,6 +17,7 @@ import type { SearchDto } from '../../types/api';
 
 // Sample test data to enter using prisma
 
+// Use beforeEach to get org fixture
 test.beforeEach(async ({ org }) => {
 	// use prisma client to create data enough to test all cases.
 	const organizationId = org.organization.id;
@@ -31,11 +32,23 @@ test.beforeEach(async ({ org }) => {
 	const TENANT1 = 'tenant1';
 	const TENANT2 = 'tenant2';
 	const TENANT3 = 'tenant3';
+	const UNIT1 = 'unit1';
+	const UNIT2 = 'unit2';
+	const LEASE1 = 'lease1';
+	const LEASE2 = 'lease2';
 
 	// Delete
 
 	await prisma.role.deleteMany({
 		where: { portfolioId: { in: [PORTFOLIO1, PORTFOLIO2, PORTFOLIO3] } },
+	});
+
+	await prisma.lease.deleteMany({
+		where: { id: { in: [LEASE1, LEASE2] } },
+	});
+
+	await prisma.unit.deleteMany({
+		where: { id: { in: [UNIT1, UNIT2] } },
 	});
 
 	await prisma.property.deleteMany({
@@ -79,6 +92,27 @@ test.beforeEach(async ({ org }) => {
 			{ id: TENANT1, fullName: TENANT1, organizationId },
 			{ id: TENANT2, fullName: TENANT2, organizationId },
 			{ id: TENANT3, fullName: TENANT3, organizationId: ORG2 },
+		],
+	});
+
+	await prisma.unit.createMany({
+		data: [
+			// prettier-ignore
+			{ id: UNIT1, unitNumber: UNIT1, propertyId: PROPERTY1, portfolioId: PORTFOLIO1, organizationId },
+			// prettier-ignore
+			{ id: UNIT2, unitNumber: UNIT2, propertyId: PROPERTY2, portfolioId: PORTFOLIO3, organizationId },
+		],
+	});
+
+	// prettier-ignore
+	const leaseData = { monthlyRent:1, start: new Date(), end: new Date(), organizationId };
+
+	await prisma.lease.createMany({
+		data: [
+			// prettier-ignore
+			{ id: LEASE1, tenantId: TENANT1, unitId: UNIT1, portfolioId: PORTFOLIO1, ...leaseData },
+			// prettier-ignore
+			{ id: LEASE2, tenantId: TENANT2, unitId: UNIT2, portfolioId: PORTFOLIO3, ...leaseData},
 		],
 	});
 });
@@ -189,6 +223,7 @@ test.describe('search authorization: portfolio', () => {
 
 		const data = (await res.json()) as SearchDto;
 
-		expect(data.tenant).toHaveLength(0);
+		expect(data.tenant).toHaveLength(1);
+		expect(data.tenant[0]!.id).toBe('tenant1');
 	});
 });
