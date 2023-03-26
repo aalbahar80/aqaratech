@@ -109,8 +109,8 @@ export class SearchService {
 				propertiesQuery,
 
 				// avoid returning the portfolio of the user searching
-				user.role.roleType === 'PORTFOLIO'
-					? ([] as unknown as typeof portfoliosQuery)
+				roleType === 'PORTFOLIO'
+					? this.prisma.c.$executeRaw(Prisma.empty)
 					: portfoliosQuery,
 			]);
 
@@ -121,11 +121,14 @@ export class SearchService {
 				title: n.hints['label'] ?? n.label ?? n.hints['fullName'] ?? n.fullName,
 			})),
 
-			portfolio: fuzzyMatch(query, portfolios).map((n) => ({
-				...n,
-				entity: 'portfolio',
-				title: n.hints['label'] ?? n.label ?? n.hints['fullName'] ?? n.fullName,
-			})),
+			portfolio: Array.isArray(portfolios)
+				? fuzzyMatch(query, portfolios).map((n) => ({
+						...n,
+						entity: 'portfolio',
+						title:
+							n.hints['label'] ?? n.label ?? n.hints['fullName'] ?? n.fullName,
+				  }))
+				: [],
 
 			property: fuzzyMatch(query, properties).map((n) => ({
 				...n,
