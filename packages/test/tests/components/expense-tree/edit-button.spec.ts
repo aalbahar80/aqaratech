@@ -39,6 +39,7 @@ test.describe('expense category group', () => {
 			params: {},
 		});
 
+		await page.waitForTimeout(1000);
 		await page.reload(); // reload to give a chance for category to show up (created using api)
 
 		const btn = page
@@ -70,6 +71,7 @@ test.describe('expense category group', () => {
 
 		await page.getByRole('button', { name: 'Save' }).click();
 
+		await page.waitForTimeout(1000);
 		await page.goto(url);
 
 		await expect.soft(page.getByText('Test Child')).toBeVisible();
