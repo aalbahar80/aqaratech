@@ -1,12 +1,12 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["extendedWhereUnique", "fullTextSearch", "fieldReference", "clientExtensions", "views", "postgresqlExtensions"]
-  extensions      = ["pg_trgm"]
 }
 
 datasource db {
-  provider = "postgres"
-  url      = env("DATABASE_URL")
+  provider   = "postgres"
+  url        = env("DATABASE_URL")
+  extensions = [pg_trgm]
 }
 
 model User {
