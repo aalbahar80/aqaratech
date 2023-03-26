@@ -19,8 +19,8 @@ export const inputs: SearchInput[] = [
 	},
 	{
 		queryExact: 'The Main St',
-		queryPrefix: 'Mai',
-		querySuffix: 'ain',
+		queryPrefix: 'Ma',
+		querySuffix: 'in',
 		resultText: 'The Main St',
 		keysToValidate: [['street', 'Main St']],
 		type: 'property',
