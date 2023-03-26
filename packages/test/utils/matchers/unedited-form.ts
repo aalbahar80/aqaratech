@@ -3,20 +3,13 @@ import * as R from 'remeda';
 
 import { apiURL } from '../../tests/api/fixtures/api-url';
 
-export const assertUneditedForm = async (
-	originalRes: Response,
-	latestRes: Response,
+export const assertUneditedForm = (
+	original: Record<string, unknown>,
+	latest: Record<string, unknown>,
 ) => {
-	const original: unknown = await originalRes.json();
-	const latest: unknown = await latestRes.json();
-
-	return (
-		expect
-			// @ts-expect-error test
-			.soft(R.omit(original, ['updatedAt']))
-			// @ts-expect-error test
-			.toEqual(R.omit(latest, ['updatedAt']))
-	);
+	return expect
+		.soft(R.omit(original, ['updatedAt']))
+		.toEqual(R.omit(latest, ['updatedAt']));
 };
 
 /** A helper function to get the response from the api */

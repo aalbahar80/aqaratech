@@ -2,27 +2,14 @@ import { expect } from '@playwright/test';
 
 import { getRoute, PageType } from '@self/utils';
 
-import {
-	assertUneditedForm,
-	fromApi,
-} from '../../../utils/matchers/unedited-form';
+import { prisma } from '../../../prisma';
+import { assertUneditedForm } from '../../../utils/matchers/unedited-form';
 import { test } from '../../api/api-fixtures';
 
 test('screenshot smoke test', async ({ page, org, portfolio, unit }) => {
-	const url = getRoute({
-		entity: 'unit',
-		pageType: PageType.Id,
-		id: unit.id,
-		params: { organizationId: org.organization.id, portfolioId: portfolio.id },
+	const original = await prisma.unit.findUniqueOrThrow({
+		where: { id: unit.id },
 	});
-
-	const resPromise = page.waitForResponse(fromApi);
-
-	await page.goto(url);
-
-	const original = await resPromise;
-
-	await page.getByRole('link', { name: 'Edit' }).click();
 
 	const edit = getRoute({
 		entity: 'unit',
@@ -31,16 +18,23 @@ test('screenshot smoke test', async ({ page, org, portfolio, unit }) => {
 		params: { organizationId: org.organization.id, portfolioId: portfolio.id },
 	});
 
-	await expect(page).toHaveURL(edit);
-
-	const resPromise2 = page.waitForResponse(fromApi);
+	await page.goto(edit);
 
 	await page.locator('text=Save').click();
+
+	const url = getRoute({
+		entity: 'unit',
+		pageType: PageType.Id,
+		id: unit.id,
+		params: { organizationId: org.organization.id, portfolioId: portfolio.id },
+	});
 
 	// ensure same entity
 	await expect(page).toHaveURL(url);
 
-	const latest = await resPromise2;
+	const latest = await prisma.unit.findUniqueOrThrow({
+		where: { id: unit.id },
+	});
 
-	await assertUneditedForm(original, latest);
+	assertUneditedForm(original, latest);
 });
