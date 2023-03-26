@@ -28,7 +28,9 @@ test.beforeEach(async ({ org }) => {
 	const PROPERTY1 = 'property1';
 	const PROPERTY2 = 'property2';
 	const PROPERTY3 = 'property3';
-	const PROPERTY4 = 'property4';
+	const TENANT1 = 'tenant1';
+	const TENANT2 = 'tenant2';
+	const TENANT3 = 'tenant3';
 
 	// Delete
 
@@ -37,7 +39,11 @@ test.beforeEach(async ({ org }) => {
 	});
 
 	await prisma.property.deleteMany({
-		where: { id: { in: [PROPERTY1, PROPERTY2, PROPERTY3, PROPERTY4] } },
+		where: { id: { in: [PROPERTY1, PROPERTY2, PROPERTY3] } },
+	});
+
+	await prisma.tenant.deleteMany({
+		where: { id: { in: [TENANT1, TENANT2, TENANT3] } },
 	});
 
 	await prisma.portfolio.deleteMany({
@@ -64,9 +70,15 @@ test.beforeEach(async ({ org }) => {
 			// prettier-ignore
 			{ id: PROPERTY2, label: PROPERTY2, portfolioId: PORTFOLIO3, organizationId },
 			// prettier-ignore
-			{ id: PROPERTY3, label: PROPERTY3, portfolioId: PORTFOLIO3, organizationId }, // FIX: rm
-			// prettier-ignore
-			{ id: PROPERTY4, label: PROPERTY4, portfolioId: PORTFOLIO2, organizationId: ORG2 },
+			{ id: PROPERTY3, label: PROPERTY3, portfolioId: PORTFOLIO2, organizationId: ORG2 },
+		],
+	});
+
+	await prisma.tenant.createMany({
+		data: [
+			{ id: TENANT1, fullName: TENANT1, organizationId },
+			{ id: TENANT2, fullName: TENANT2, organizationId },
+			{ id: TENANT3, fullName: TENANT3, organizationId: ORG2 },
 		],
 	});
 });
@@ -103,10 +115,28 @@ test.describe('search authorization: admin', () => {
 
 		const data = (await res.json()) as SearchDto;
 
-		expect(data.property).toHaveLength(3);
+		expect(data.property).toHaveLength(2);
 		expect(data.property[0]!.id).toBe('property1');
 		expect(data.property[1]!.id).toBe('property2');
-		expect(data.property[2]!.id).toBe('property3');
+	});
+
+	test('org admin: tenant', async ({ org, request }) => {
+		const searchUrl = `/organizations/${org.organization.id}/search`;
+
+		const query = 'tenant';
+
+		const url = apiURL + withQuery(searchUrl, { query });
+
+		const res = await request.get(url);
+
+		expect.soft(res.status()).toBe(200);
+
+		const data = (await res.json()) as SearchDto;
+
+		expect(data.tenant).toHaveLength(2);
+
+		expect(data.tenant[0]!.id).toBe('tenant1');
+		expect(data.tenant[1]!.id).toBe('tenant2');
 	});
 });
 
@@ -144,5 +174,21 @@ test.describe('search authorization: portfolio', () => {
 
 		expect(data.property).toHaveLength(1);
 		expect(data.property[0]!.id).toBe('property1');
+	});
+
+	test('portfolio admin: tenant', async ({ request, org }) => {
+		const searchUrl = `/organizations/${org.organization.id}/search`;
+
+		const query = 'tenant';
+
+		const url = apiURL + withQuery(searchUrl, { query });
+
+		const res = await request.get(url);
+
+		expect.soft(res.status()).toBe(200);
+
+		const data = (await res.json()) as SearchDto;
+
+		expect(data.tenant).toHaveLength(0);
 	});
 });
