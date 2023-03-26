@@ -25,9 +25,6 @@ export class SearchService {
 		const take = 20;
 		const roleType = user.role.roleType;
 
-		// lower the limit for the similarty function (default is 0.3)
-		await this.prisma.c.$executeRaw(Prisma.sql`SELECT set_limit(0.05);`);
-
 		const portfoliosQuery = this.prisma.c.$queryRaw<PortfolioDto[]>(
 			Prisma.sql`
 				SELECT *, 
@@ -102,13 +99,20 @@ export class SearchService {
 			`,
 		);
 
-		const [tenants, portfolios, properties] = await Promise.all([
-			// ivs FIX:authz
-			tenantsQuery,
-			// avoid returning the portfolio of the user searching
-			user.role.roleType === 'PORTFOLIO' ? [] : portfoliosQuery,
-			propertiesQuery,
-		]);
+		const [_, tenants, properties, portfolios] =
+			await this.prisma.c.$transaction([
+				// lower the limit for the similarty function (default is 0.3)
+				this.prisma.c.$executeRaw(Prisma.sql`SELECT set_limit(0.05);`),
+
+				// ivs FIX:authz
+				tenantsQuery,
+				propertiesQuery,
+
+				// avoid returning the portfolio of the user searching
+				user.role.roleType === 'PORTFOLIO'
+					? ([] as unknown as typeof portfoliosQuery)
+					: portfoliosQuery,
+			]);
 
 		const hits = {
 			tenant: fuzzyMatch(query, tenants).map((n) => ({
