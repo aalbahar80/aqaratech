@@ -55,9 +55,7 @@ test('can be submitted with all fields', async ({ org, tenant, page }) => {
 	await formPage.fillForm({
 		...fields,
 		nationality: new ComboboxOption({
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			label: countries.find((c) => c.alpha3Code === fields.nationality)!.name,
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			value: fields.nationality!,
 		}),
 	});

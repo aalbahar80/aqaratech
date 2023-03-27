@@ -36,8 +36,8 @@ export class UnitsController {
 	@Get(':id')
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
 	@ApiOkResponse({ type: UnitDto })
-	findOne(@Param('id') id: string): Promise<UnitDto> {
-		return this.unitsService.findOne({ id });
+	findOne(@User() user: IUser, @Param('id') id: string): Promise<UnitDto> {
+		return this.unitsService.findOne({ id, user });
 	}
 
 	@Patch(':id')

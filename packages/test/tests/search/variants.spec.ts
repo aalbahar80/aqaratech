@@ -81,7 +81,6 @@ for (const i of inputs) {
 
 				const result = results[0];
 
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				expect.soft(result).toHaveProperty(key!, value);
 			});
 		}

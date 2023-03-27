@@ -106,7 +106,6 @@ test('can be submitted with all fields', async ({
 
 	expect(res).toMatchObject({
 		...maintenanceOrder,
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		completedAt: new Date(maintenanceOrder.completedAt!).toISOString(),
 		unitId: unit.id,
 		propertyId: null,

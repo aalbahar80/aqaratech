@@ -44,12 +44,10 @@ test('cookies are cleared', async ({ browser }) => {
 	const locationHeader = response.headers()['location'];
 	expect.soft(locationHeader).toBeTruthy();
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const location = new URL(locationHeader!);
 	expect.soft(location.host).toContain('auth0.com');
 	expect.soft(location.pathname).toBe('/v2/logout');
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const redirectParam = new URL(location.searchParams.get('returnTo')!);
 	const redirect = new URL(redirectParam);
 

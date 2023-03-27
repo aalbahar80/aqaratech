@@ -138,9 +138,9 @@ export class UnitsService {
 		return { total, results: data };
 	}
 
-	async findOne({ id }: { id: string }): Promise<UnitDto> {
+	async findOne({ id, user }: { id: string; user: IUser }): Promise<UnitDto> {
 		const data = await this.prisma.c.unit.findUniqueOrThrow({
-			where: { id },
+			where: { id, AND: accessibleBy(user.ability, Action.Read).Unit },
 			include: {
 				leases: {
 					select: { start: true, end: true },

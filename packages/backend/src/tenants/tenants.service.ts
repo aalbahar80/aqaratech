@@ -63,9 +63,9 @@ export class TenantsService {
 		return { total, results };
 	}
 
-	async findOne({ id }: { id: string }) {
+	async findOne({ id, user }: { id: string; user: IUser }) {
 		const data = await this.prisma.c.tenant.findUniqueOrThrow({
-			where: { id },
+			where: { id, AND: accessibleBy(user.ability, Action.Read).Tenant },
 		});
 
 		return data;

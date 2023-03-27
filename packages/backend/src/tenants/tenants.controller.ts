@@ -55,8 +55,8 @@ export class TenantsController {
 	@Get(':id')
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
 	@ApiOkResponse({ type: TenantDto })
-	findOne(@Param('id') id: string): Promise<TenantDto> {
-		return this.tenantsService.findOne({ id });
+	findOne(@User() user: IUser, @Param('id') id: string): Promise<TenantDto> {
+		return this.tenantsService.findOne({ id, user });
 	}
 
 	@Patch(':id')

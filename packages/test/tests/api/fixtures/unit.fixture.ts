@@ -16,7 +16,6 @@ export const unitFixtures: AllFixtures = {
 		// Merge any declared params with the default params
 
 		const units = R.times(params.length, (n) => {
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const property = properties[n % properties.length]!;
 			return unitFactory.build({
 				organizationId: org.organization.id,

@@ -92,7 +92,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 					...created,
 					title: created.fullName,
 				},
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				roleId: created.roles[0]!.id,
 			} satisfies OrganizationCreatedDto;
 

@@ -54,11 +54,9 @@ test('unit filter resets when updating property', async ({
 	expect(await filters.unit.label()).toBe(computeLabelUnit(unit));
 
 	// Update property
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	await filters.property.el.selectOption({ value: properties[1]!.id });
 
 	expect(await filters.property.label()).toBe(
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		computeLabelProperty(properties[1]!),
 	);
 
