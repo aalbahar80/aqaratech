@@ -189,7 +189,6 @@ test.describe('final admin role cannot be deleted', () => {
 		await responsePromise;
 
 		const role = await prisma.role.findUnique({
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			where: { id: roles[0]!.id },
 		});
 

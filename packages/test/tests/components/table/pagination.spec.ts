@@ -77,7 +77,6 @@ test('pagination is updated when changing property filter', async ({
 
 	// Change property filter
 
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	await table.property.selectOption(properties[1]!.id);
 
 	// Expect pagination to be reset

@@ -48,12 +48,10 @@ for (const token of tokens) {
 			const locationHeader = response.headers()['location'];
 			expect(locationHeader).toBeTruthy();
 
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const location = new URL(locationHeader!);
 			expect.soft(location.host).toContain('auth0.com');
 			expect.soft(location.pathname).toBe('/authorize');
 
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			const redirectParam = new URL(location.searchParams.get('redirect_uri')!);
 			const redirect = new URL(redirectParam);
 
