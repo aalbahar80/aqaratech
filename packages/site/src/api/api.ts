@@ -45,7 +45,7 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 	if (import.meta.env.SSR) {
 		const transactionNode = SentryNode.getCurrentHub()
 			.getScope()
-			?.getTransaction();
+			.getTransaction();
 
 		traceValue = transactionNode?.toTraceparent();
 	}
@@ -53,7 +53,7 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 	if (!import.meta.env.SSR) {
 		const transactionSvelte = SentrySvelte.getCurrentHub()
 			.getScope()
-			?.getTransaction();
+			.getTransaction();
 
 		if (transactionSvelte) {
 			traceValue = transactionSvelte.toTraceparent();

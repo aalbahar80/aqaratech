@@ -8,7 +8,7 @@ import { logger } from '$lib/server/logger';
 
 export const getProfile = async (event: RequestEvent) => {
 	// Sentry
-	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();
+	const transaction = Sentry.getCurrentHub().getScope().getTransaction();
 	const span = transaction?.startChild({
 		op: 'getProfile',
 	});

@@ -18,7 +18,7 @@ export const handleAuth = (async ({ event, resolve }) => {
 	const selectedRoleId = event.cookies.get(Cookie.role);
 
 	// get current sentry transaction and add child span
-	const transaction = Sentry.getCurrentHub().getScope()?.getTransaction();
+	const transaction = Sentry.getCurrentHub().getScope().getTransaction();
 
 	const spanCookies = transaction?.startChild({
 		op: 'http.server',

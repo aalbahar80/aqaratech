@@ -61,6 +61,7 @@ module.exports = {
 					ignoreWarnings: [
 						'@typescript-eslint/no-unsafe-assignment', // reduce false positives
 						'@typescript-eslint/no-unsafe-member-access', // reduce false positives
+						'@typescript-eslint/no-unsafe-return', // reduce false positives
 					],
 				},
 			},
