@@ -137,8 +137,6 @@ export interface OrganizationsApiUpdateRequest {
  */
 export class OrganizationsApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async createRaw(
 		requestParameters: OrganizationsApiCreateRequest,
@@ -175,8 +173,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async create(
 		requestParameters: OrganizationsApiCreateRequest,
@@ -187,8 +183,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createExpenseRaw(
 		requestParameters: OrganizationsApiCreateExpenseRequest,
@@ -238,8 +232,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createExpense(
 		requestParameters: OrganizationsApiCreateExpenseRequest,
@@ -253,8 +245,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createInvoicesRaw(
 		requestParameters: OrganizationsApiCreateInvoicesRequest,
@@ -316,8 +306,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createInvoices(
 		requestParameters: OrganizationsApiCreateInvoicesRequest,
@@ -331,8 +319,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createLeaseRaw(
 		requestParameters: OrganizationsApiCreateLeaseRequest,
@@ -382,8 +368,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createLease(
 		requestParameters: OrganizationsApiCreateLeaseRequest,
@@ -397,8 +381,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createLeaseInvoiceRaw(
 		requestParameters: OrganizationsApiCreateLeaseInvoiceRequest,
@@ -448,8 +430,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createLeaseInvoice(
 		requestParameters: OrganizationsApiCreateLeaseInvoiceRequest,
@@ -463,8 +443,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createPayoutRaw(
 		requestParameters: OrganizationsApiCreatePayoutRequest,
@@ -514,8 +492,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createPayout(
 		requestParameters: OrganizationsApiCreatePayoutRequest,
@@ -529,8 +505,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createPortfolioRaw(
 		requestParameters: OrganizationsApiCreatePortfolioRequest,
@@ -580,8 +554,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createPortfolio(
 		requestParameters: OrganizationsApiCreatePortfolioRequest,
@@ -595,8 +567,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createPropertyRaw(
 		requestParameters: OrganizationsApiCreatePropertyRequest,
@@ -646,8 +616,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createProperty(
 		requestParameters: OrganizationsApiCreatePropertyRequest,
@@ -661,8 +629,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createTenantRaw(
 		requestParameters: OrganizationsApiCreateTenantRequest,
@@ -712,8 +678,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createTenant(
 		requestParameters: OrganizationsApiCreateTenantRequest,
@@ -727,8 +691,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createUnitRaw(
 		requestParameters: OrganizationsApiCreateUnitRequest,
@@ -778,8 +740,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createUnit(
 		requestParameters: OrganizationsApiCreateUnitRequest,
@@ -790,8 +750,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAllLeaseInvoicesRaw(
 		requestParameters: OrganizationsApiFindAllLeaseInvoicesRequest,
@@ -849,8 +807,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAllLeaseInvoices(
 		requestParameters: OrganizationsApiFindAllLeaseInvoicesRequest,
@@ -864,8 +820,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: OrganizationsApiFindOneRequest,
@@ -899,8 +853,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: OrganizationsApiFindOneRequest,
@@ -911,8 +863,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findRolesRaw(
 		requestParameters: OrganizationsApiFindRolesRequest,
@@ -970,8 +920,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findRoles(
 		requestParameters: OrganizationsApiFindRolesRequest,
@@ -982,8 +930,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: OrganizationsApiRemoveRequest,
@@ -1017,8 +963,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: OrganizationsApiRemoveRequest,
@@ -1029,8 +973,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async searchRaw(
 		requestParameters: OrganizationsApiSearchRequest,
@@ -1081,8 +1023,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async search(
 		requestParameters: OrganizationsApiSearchRequest,
@@ -1093,8 +1033,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async sendInvoiceEmailRaw(
 		requestParameters: OrganizationsApiSendInvoiceEmailRequest,
@@ -1143,8 +1081,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async sendInvoiceEmail(
 		requestParameters: OrganizationsApiSendInvoiceEmailRequest,
@@ -1204,8 +1140,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: OrganizationsApiUpdateRequest,
@@ -1252,8 +1186,6 @@ export class OrganizationsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: OrganizationsApiUpdateRequest,

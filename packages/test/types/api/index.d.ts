@@ -54,7 +54,13 @@ export interface ArrayOfLeaseInvoiceDto {
 	 * @type {number}
 	 * @memberof ArrayOfLeaseInvoiceDto
 	 */
-	sum?: number;
+	sum?: number | null;
+	/**
+	 *
+	 * @type {Array<LeaseInvoiceAggregateDto>}
+	 * @memberof ArrayOfLeaseInvoiceDto
+	 */
+	aggregate?: Array<LeaseInvoiceAggregateDto>;
 }
 /**
  *
@@ -890,6 +896,16 @@ export interface DueDurationDto {
 /**
  *
  * @export
+ */
+export declare const DueStatusEnum: {
+	readonly NotDue: 'NOT_DUE';
+	readonly Due: 'DUE';
+	readonly PastDue: 'PAST_DUE';
+};
+export type DueStatusEnum = (typeof DueStatusEnum)[keyof typeof DueStatusEnum];
+/**
+ *
+ * @export
  * @interface ExpenseBreadcrumbsDto
  */
 export interface ExpenseBreadcrumbsDto {
@@ -963,10 +979,10 @@ export interface ExpenseDto {
 	readonly id: string;
 	/**
 	 *
-	 * @type {ExpenseDtoExpenseType}
+	 * @type {ExpenseCategoryDto}
 	 * @memberof ExpenseDto
 	 */
-	expenseType: ExpenseDtoExpenseType | null;
+	expenseType: ExpenseCategoryDto | null;
 	/**
 	 *
 	 * @type {ExpenseBreadcrumbsDto}
@@ -1039,43 +1055,6 @@ export interface ExpenseDto {
 	 * @memberof ExpenseDto
 	 */
 	updatedAt: string;
-}
-/**
- *
- * @export
- * @interface ExpenseDtoExpenseType
- */
-export interface ExpenseDtoExpenseType {
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseDtoExpenseType
-	 */
-	id: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseDtoExpenseType
-	 */
-	labelEn: string;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseDtoExpenseType
-	 */
-	labelAr: string | null;
-	/**
-	 *
-	 * @type {string}
-	 * @memberof ExpenseDtoExpenseType
-	 */
-	parentId: string | null;
-	/**
-	 *
-	 * @type {boolean}
-	 * @memberof ExpenseDtoExpenseType
-	 */
-	isGroup: boolean;
 }
 /**
  *
@@ -1217,6 +1196,12 @@ export interface HitDto {
 	 * @memberof HitDto
 	 */
 	title: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof HitDto
+	 */
+	titleHtml: string;
 	/**
 	 *
 	 * @type {number}
@@ -1382,6 +1367,50 @@ export interface LeaseDto {
 	 * @memberof LeaseDto
 	 */
 	license: string | null;
+}
+/**
+ *
+ * @export
+ * @interface LeaseInvoiceAggregateDto
+ */
+export interface LeaseInvoiceAggregateDto {
+	/**
+	 *
+	 * @type {PaymentTimeEnum}
+	 * @memberof LeaseInvoiceAggregateDto
+	 */
+	paymentTime: PaymentTimeEnum;
+	/**
+	 *
+	 * @type {DueStatusEnum}
+	 * @memberof LeaseInvoiceAggregateDto
+	 */
+	dueStatus: DueStatusEnum;
+	/**
+	 *
+	 * @type {LeaseInvoiceAggregateSumDto}
+	 * @memberof LeaseInvoiceAggregateDto
+	 */
+	sum: LeaseInvoiceAggregateSumDto;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof LeaseInvoiceAggregateDto
+	 */
+	isPaid: boolean;
+}
+/**
+ *
+ * @export
+ * @interface LeaseInvoiceAggregateSumDto
+ */
+export interface LeaseInvoiceAggregateSumDto {
+	/**
+	 *
+	 * @type {number}
+	 * @memberof LeaseInvoiceAggregateSumDto
+	 */
+	amount: number | null;
 }
 /**
  *
@@ -1904,7 +1933,13 @@ export interface PaginatedLeaseInvoiceDto {
 	 * @type {number}
 	 * @memberof PaginatedLeaseInvoiceDto
 	 */
-	sum: number;
+	sum: number | null;
+	/**
+	 *
+	 * @type {Array<LeaseInvoiceAggregateDto>}
+	 * @memberof PaginatedLeaseInvoiceDto
+	 */
+	aggregate: Array<LeaseInvoiceAggregateDto>;
 }
 /**
  *
@@ -2071,6 +2106,17 @@ export interface PaginatedUnitMinimalDto {
 	 */
 	results: Array<UnitMinimalDto>;
 }
+/**
+ *
+ * @export
+ */
+export declare const PaymentTimeEnum: {
+	readonly Advanced: 'ADVANCED';
+	readonly OnTime: 'ON_TIME';
+	readonly Late: 'LATE';
+};
+export type PaymentTimeEnum =
+	(typeof PaymentTimeEnum)[keyof typeof PaymentTimeEnum];
 /**
  *
  * @export

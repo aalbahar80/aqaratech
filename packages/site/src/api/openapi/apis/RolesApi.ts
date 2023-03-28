@@ -47,8 +47,6 @@ export interface RolesApiSendInviteRequest {
  */
 export class RolesApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async createOrgAdminRoleRaw(
 		requestParameters: RolesApiCreateOrgAdminRoleRequest,
@@ -98,8 +96,6 @@ export class RolesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createOrgAdminRole(
 		requestParameters: RolesApiCreateOrgAdminRoleRequest,
@@ -113,8 +109,6 @@ export class RolesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createPortfolioRoleRaw(
 		requestParameters: RolesApiCreatePortfolioRoleRequest,
@@ -179,8 +173,6 @@ export class RolesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createPortfolioRole(
 		requestParameters: RolesApiCreatePortfolioRoleRequest,
@@ -194,8 +186,6 @@ export class RolesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createTenantRoleRaw(
 		requestParameters: RolesApiCreateTenantRoleRequest,
@@ -260,8 +250,6 @@ export class RolesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async createTenantRole(
 		requestParameters: RolesApiCreateTenantRoleRequest,
@@ -275,8 +263,6 @@ export class RolesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: RolesApiRemoveRequest,
@@ -325,8 +311,6 @@ export class RolesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: RolesApiRemoveRequest,
@@ -337,8 +321,6 @@ export class RolesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async sendInviteRaw(
 		requestParameters: RolesApiSendInviteRequest,
@@ -390,8 +372,6 @@ export class RolesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async sendInvite(
 		requestParameters: RolesApiSendInviteRequest,

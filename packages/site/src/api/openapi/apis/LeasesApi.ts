@@ -58,8 +58,6 @@ export interface LeasesApiUpdateRequest {
  */
 export class LeasesApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async findAllRaw(
 		requestParameters: LeasesApiFindAllRequest,
@@ -107,8 +105,6 @@ export class LeasesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAll(
 		requestParameters: LeasesApiFindAllRequest = {},
@@ -119,8 +115,6 @@ export class LeasesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findInvoicesRaw(
 		requestParameters: LeasesApiFindInvoicesRequest,
@@ -178,8 +172,6 @@ export class LeasesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findInvoices(
 		requestParameters: LeasesApiFindInvoicesRequest,
@@ -193,8 +185,6 @@ export class LeasesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: LeasesApiFindOneRequest,
@@ -228,8 +218,6 @@ export class LeasesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: LeasesApiFindOneRequest,
@@ -240,8 +228,6 @@ export class LeasesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: LeasesApiRemoveRequest,
@@ -275,8 +261,6 @@ export class LeasesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: LeasesApiRemoveRequest,
@@ -287,8 +271,6 @@ export class LeasesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: LeasesApiUpdateRequest,
@@ -335,8 +317,6 @@ export class LeasesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: LeasesApiUpdateRequest,

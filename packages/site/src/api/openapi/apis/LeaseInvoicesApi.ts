@@ -50,8 +50,6 @@ export interface LeaseInvoicesApiUpdateRequest {
  */
 export class LeaseInvoicesApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async findMessagesRaw(
 		requestParameters: LeaseInvoicesApiFindMessagesRequest,
@@ -85,8 +83,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findMessages(
 		requestParameters: LeaseInvoicesApiFindMessagesRequest,
@@ -100,8 +96,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: LeaseInvoicesApiFindOneRequest,
@@ -135,8 +129,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: LeaseInvoicesApiFindOneRequest,
@@ -147,8 +139,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async myfatoorahCallbackRaw(
 		requestParameters: LeaseInvoicesApiMyfatoorahCallbackRequest,
@@ -186,8 +176,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async myfatoorahCallback(
 		requestParameters: LeaseInvoicesApiMyfatoorahCallbackRequest,
@@ -197,8 +185,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async payInvoiceRaw(
 		requestParameters: LeaseInvoicesApiPayInvoiceRequest,
@@ -232,8 +218,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async payInvoice(
 		requestParameters: LeaseInvoicesApiPayInvoiceRequest,
@@ -243,8 +227,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: LeaseInvoicesApiRemoveRequest,
@@ -278,8 +260,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: LeaseInvoicesApiRemoveRequest,
@@ -290,8 +270,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: LeaseInvoicesApiUpdateRequest,
@@ -338,8 +316,6 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: LeaseInvoicesApiUpdateRequest,

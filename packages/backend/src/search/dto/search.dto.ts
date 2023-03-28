@@ -9,6 +9,7 @@ const SearchableEntityEnum = ['tenant', 'portfolio', 'property'] as const;
 export class HitDto {
 	id: string;
 	title: string;
+	titleHtml: string;
 	@ApiProperty({ enum: SearchableEntityEnum, enumName: 'SearchableEntityEnum' })
 	entity: SearchableEntity;
 	score: number;

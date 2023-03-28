@@ -54,8 +54,6 @@ export interface MaintenanceOrdersApiUpdateRequest {
  */
 export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async createRaw(
 		requestParameters: MaintenanceOrdersApiCreateRequest,
@@ -105,8 +103,6 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async create(
 		requestParameters: MaintenanceOrdersApiCreateRequest,
@@ -117,8 +113,6 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAllRaw(
 		requestParameters: MaintenanceOrdersApiFindAllRequest,
@@ -166,8 +160,6 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAll(
 		requestParameters: MaintenanceOrdersApiFindAllRequest = {},
@@ -178,8 +170,6 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: MaintenanceOrdersApiFindOneRequest,
@@ -213,8 +203,6 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: MaintenanceOrdersApiFindOneRequest,
@@ -225,8 +213,6 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: MaintenanceOrdersApiRemoveRequest,
@@ -260,8 +246,6 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: MaintenanceOrdersApiRemoveRequest,
@@ -271,8 +255,6 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: MaintenanceOrdersApiUpdateRequest,
@@ -319,8 +301,6 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: MaintenanceOrdersApiUpdateRequest,

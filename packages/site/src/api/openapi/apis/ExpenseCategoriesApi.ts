@@ -45,8 +45,6 @@ export interface ExpenseCategoriesApiUpdateAllRequest {
  */
 export class ExpenseCategoriesApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async createRaw(
 		requestParameters: ExpenseCategoriesApiCreateRequest,
@@ -96,8 +94,6 @@ export class ExpenseCategoriesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async create(
 		requestParameters: ExpenseCategoriesApiCreateRequest,
@@ -108,8 +104,6 @@ export class ExpenseCategoriesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAllRaw(
 		requestParameters: ExpenseCategoriesApiFindAllRequest,
@@ -146,8 +140,6 @@ export class ExpenseCategoriesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAll(
 		requestParameters: ExpenseCategoriesApiFindAllRequest,
@@ -158,8 +150,6 @@ export class ExpenseCategoriesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: ExpenseCategoriesApiUpdateRequest,
@@ -221,8 +211,6 @@ export class ExpenseCategoriesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: ExpenseCategoriesApiUpdateRequest,
@@ -233,8 +221,6 @@ export class ExpenseCategoriesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateAllRaw(
 		requestParameters: ExpenseCategoriesApiUpdateAllRequest,
@@ -284,8 +270,6 @@ export class ExpenseCategoriesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateAll(
 		requestParameters: ExpenseCategoriesApiUpdateAllRequest,

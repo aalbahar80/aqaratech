@@ -44,6 +44,9 @@ envs:
   - key: PUBLIC_TIER_PLAN_ID_1
     scope: RUN_AND_BUILD_TIME
     value: plan:core@1
+  - key: PUBLIC_MYFATOORAH_SITE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: https://demo.myfatoorah.com
 name: REPLACE_NAME
 region: fra
 services:
@@ -134,6 +137,3 @@ services:
       - key: ORIGIN
         scope: RUN_AND_BUILD_TIME
         value: ${APP_URL}
-      - key: PUBLIC_MYFATOORAH_SITE_URL
-        scope: RUN_AND_BUILD_TIME
-        value: https://demo.myfatoorah.com

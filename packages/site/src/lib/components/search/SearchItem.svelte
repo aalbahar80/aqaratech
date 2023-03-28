@@ -40,7 +40,7 @@
 				<div class="flex flex-col gap-y-1">
 					<p>
 						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-						{@html item.title}
+						{@html item.titleHtml}
 					</p>
 					<div class="flex flex-col gap-y-1 text-xs font-light">
 						{#each Object.entries(item.hints) as [key, val]}

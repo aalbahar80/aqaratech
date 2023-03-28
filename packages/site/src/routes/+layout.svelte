@@ -77,7 +77,14 @@
 	{:else}
 		<div class="my-grid">
 			{#if isSidebarAvailable($page.route) && data.user}
-				<Sidebar navigationTree={getNavigationTree(data.user, $L, $locale)} />
+				<Sidebar
+					navigationTree={getNavigationTree(
+						data.user,
+						$L,
+						$locale,
+						data.queryClient,
+					)}
+				/>
 			{/if}
 
 			<main class="col-span-full py-8 lg:col-start-2">

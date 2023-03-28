@@ -79,8 +79,6 @@ export interface TenantsApiUpdateRequest {
  */
 export class TenantsApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async findAllRaw(
 		requestParameters: TenantsApiFindAllRequest,
@@ -128,8 +126,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAll(
 		requestParameters: TenantsApiFindAllRequest = {},
@@ -140,8 +136,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findInvoicesRaw(
 		requestParameters: TenantsApiFindInvoicesRequest,
@@ -199,8 +193,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findInvoices(
 		requestParameters: TenantsApiFindInvoicesRequest,
@@ -214,8 +206,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findLeasesRaw(
 		requestParameters: TenantsApiFindLeasesRequest,
@@ -273,8 +263,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findLeases(
 		requestParameters: TenantsApiFindLeasesRequest,
@@ -285,8 +273,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: TenantsApiFindOneRequest,
@@ -320,8 +306,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: TenantsApiFindOneRequest,
@@ -332,8 +316,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findRolesRaw(
 		requestParameters: TenantsApiFindRolesRequest,
@@ -391,8 +373,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findRoles(
 		requestParameters: TenantsApiFindRolesRequest,
@@ -403,8 +383,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: TenantsApiRemoveRequest,
@@ -438,8 +416,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: TenantsApiRemoveRequest,
@@ -450,8 +426,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: TenantsApiUpdateRequest,
@@ -498,8 +472,6 @@ export class TenantsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: TenantsApiUpdateRequest,

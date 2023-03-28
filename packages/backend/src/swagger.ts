@@ -10,6 +10,7 @@ import { PaginatedMetaDto } from 'src/common/dto/paginated.dto';
 import { ExpenseCategoriesModule } from 'src/expense-categories/expense-categories.module';
 import { ExpensesModule } from 'src/expenses/expenses.module';
 import { FilesModule } from 'src/files/files.module';
+import { LeaseInvoiceAggregateDto } from 'src/lease-invoices/dto/lease-invoices-extra.dto';
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
 import { MaintenanceOrdersModule } from 'src/maintenance-orders/maintenance-orders.module';
@@ -50,7 +51,12 @@ export const setupSwagger = async (app: INestApplication) => {
 			PayoutsModule,
 			MaintenanceOrdersModule,
 		],
-		extraModels: [BreadcrumbDto, BreadcrumbsDto, PaginatedMetaDto],
+		extraModels: [
+			BreadcrumbDto,
+			BreadcrumbsDto,
+			PaginatedMetaDto,
+			LeaseInvoiceAggregateDto,
+		],
 		ignoreGlobalPrefix: true,
 	});
 

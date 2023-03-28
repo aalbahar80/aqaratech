@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION="6.2.1"
+VERSION="6.4.0"
 JAR_FILE="openapi-generator-cli-$VERSION.jar"
 
 # check if openapi-generator-cli.jar exists in the current directory

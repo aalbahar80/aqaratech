@@ -158,10 +158,10 @@ export const createSeed = (options?: SeedOptions) => {
 		let propertyId: string | null;
 		let unitId: string | null;
 
-		if (Math.random() < 0.5) {
+		if (Math.random() < 0.3) {
 			propertyId = null;
 			unitId = null;
-		} else if (Math.random() < 0.5) {
+		} else if (Math.random() < 0.6) {
 			propertyId = property.id;
 			unitId = null;
 		} else {

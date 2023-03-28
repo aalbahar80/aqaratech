@@ -1,21 +1,24 @@
+import { page } from '$app/stores';
+import { get } from 'svelte/store';
 import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 
+import type { PaginatedPortfolioDto } from '$api/openapi';
 import type L from '$i18n/i18n-svelte';
 import type { Locales } from '$i18n/i18n-types';
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
 import type { ReadableOf } from '$lib/utils/readable-of';
+import type { QueryClient } from '@tanstack/svelte-query';
 
+import { getDashboardLinks } from '$lib/components/sidebar/dashboard-links';
 import { LOGOUT, NEW_ORGANIZATION } from '$lib/constants/routes';
 import HeroiconsBanknotes from '~icons/heroicons/banknotes';
-import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 import HeroiconsPlus from '~icons/heroicons/plus';
 import HeroiconsReceiptPercent from '~icons/heroicons/receipt-percent';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
 import HeroiconsWrench from '~icons/heroicons/wrench';
 import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
-import HeroiconsOutlineDocumentReport from '~icons/heroicons-outline/document-report';
 import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text';
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
 import HeroiconsOutlineLogout from '~icons/heroicons-outline/logout';
@@ -27,6 +30,7 @@ export const getNavigationTree = (
 	user: User,
 	LL: ReadableOf<typeof L>,
 	locale: Locales,
+	queryClient: QueryClient,
 ): NavigationItem[] => {
 	const langParam = {
 		lang: locale,
@@ -68,9 +72,27 @@ export const getNavigationTree = (
 	const pageType = PageType.List;
 
 	if (user.role.roleType === 'ORGADMIN') {
+		const portfolios = queryClient.getQueryData<PaginatedPortfolioDto>([
+			'portfolios',
+		]);
+
+		// ivs TODO: pass in $page.params, rm get
+		const portfolioId =
+			get(page).params['portfolioId'] ?? portfolios?.results[0]?.id;
+
 		tree.splice(
 			0,
 			0,
+
+			...(portfolioId
+				? getDashboardLinks({
+						organizationId,
+						portfolioId,
+						lang: locale,
+						LL,
+				  })
+				: []),
+
 			{
 				name: LL.entity.portfolio.plural(),
 				href: getRoute({
@@ -174,64 +196,12 @@ export const getNavigationTree = (
 			0,
 			0,
 
-			{
-				name: LL.nav.financials(),
-				icon: HeroiconsOutlineDocumentReport,
-				href: getRoute({
-					...getRouteConfig,
-					pageType: PageTypePortfolio.Summary,
-				}),
-			},
-
-			{
-				name: LL.nav.income(),
-				icon: HeroiconsReceiptPercent,
-				href: getRoute({
-					...getRouteConfig,
-					pageType: PageTypePortfolio.Income,
-				}),
-				children: [
-					{
-						name: LL.nav.charts(),
-						href: getRoute({
-							...getRouteConfig,
-							pageType: PageTypePortfolio.Income,
-						}),
-					},
-					{
-						name: LL.nav.data(),
-						href: getRoute({
-							...getRouteConfig,
-							pageType: PageTypePortfolio.IncomeTable,
-						}),
-					},
-				],
-			},
-
-			{
-				name: LL.entity.expense.plural(),
-				icon: HeroiconsCreditCard,
-				href: getRoute({
-					...getRouteConfig,
-					pageType: PageTypePortfolio.Expenses,
-				}),
-				children: [
-					{
-						name: LL.nav.charts(),
-						href: getRoute({
-							...getRouteConfig,
-							pageType: PageTypePortfolio.Expenses,
-						}),
-					},
-					{
-						name: LL.nav.data(),
-						href: getRoute({
-							...getRouteConfig,
-							pageType: PageTypePortfolio.ExpensesTable,
-						}),
-					},
-				],
-			},
+			...getDashboardLinks({
+				organizationId,
+				portfolioId,
+				lang: locale,
+				LL,
+			}),
 
 			{
 				name: LL.entity.payout.plural(),

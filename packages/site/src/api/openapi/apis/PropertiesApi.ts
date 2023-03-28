@@ -47,8 +47,6 @@ export interface PropertiesApiUpdateRequest {
  */
 export class PropertiesApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async findAllRaw(
 		requestParameters: PropertiesApiFindAllRequest,
@@ -96,8 +94,6 @@ export class PropertiesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAll(
 		requestParameters: PropertiesApiFindAllRequest = {},
@@ -108,8 +104,6 @@ export class PropertiesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: PropertiesApiFindOneRequest,
@@ -143,8 +137,6 @@ export class PropertiesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: PropertiesApiFindOneRequest,
@@ -155,8 +147,6 @@ export class PropertiesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: PropertiesApiRemoveRequest,
@@ -190,8 +180,6 @@ export class PropertiesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: PropertiesApiRemoveRequest,
@@ -202,8 +190,6 @@ export class PropertiesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: PropertiesApiUpdateRequest,
@@ -250,8 +236,6 @@ export class PropertiesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: PropertiesApiUpdateRequest,

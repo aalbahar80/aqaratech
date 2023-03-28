@@ -3,8 +3,6 @@ paths:
   /tenants:
     get:
       operationId: TenantsController_findAll
-      summary: ''
-      description: ''
       parameters:
         - required: false
           name: page
@@ -65,8 +63,6 @@ paths:
   /tenants/{id}:
     get:
       operationId: TenantsController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -84,8 +80,6 @@ paths:
       security: *ref_1
     patch:
       operationId: TenantsController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -109,8 +103,6 @@ paths:
       security: *ref_1
     delete:
       operationId: TenantsController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -129,8 +121,6 @@ paths:
   /tenants/{id}/leases:
     get:
       operationId: TenantsController_findLeases
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -194,8 +184,6 @@ paths:
   /tenants/{id}/leaseInvoices:
     get:
       operationId: TenantsController_findInvoices
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -247,6 +235,7 @@ paths:
                 required:
                   - results
                   - sum
+                  - aggregate
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - title: ArrayOfLeaseInvoiceDto
@@ -257,13 +246,16 @@ paths:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
                       sum:
                         type: number
+                        nullable: true
+                      aggregate:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceAggregateDto'
       tags: *ref_0
       security: *ref_1
   /tenants/{id}/roles:
     get:
       operationId: TenantsController_findRoles
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -327,8 +319,6 @@ paths:
   /organizations/{organizationId}/roles:
     post:
       operationId: RolesController_createOrgAdminRole
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -353,8 +343,6 @@ paths:
   /organizations/{organizationId}/portfolios/{portfolioId}/roles:
     post:
       operationId: RolesController_createPortfolioRole
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -383,8 +371,6 @@ paths:
   /organizations/{organizationId}/tenants/{tenantId}/roles:
     post:
       operationId: RolesController_createTenantRole
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -413,8 +399,6 @@ paths:
   /organizations/{organizationId}/roles/{id}:
     delete:
       operationId: RolesController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -437,8 +421,6 @@ paths:
   /organizations/{organizationId}/roles/{roleId}/send-invite:
     post:
       operationId: RolesController_sendInvite
-      summary: ''
-      description: ''
       parameters:
         - name: roleId
           required: true
@@ -461,8 +443,6 @@ paths:
   /leaseInvoices/myfatoorah-callback:
     get:
       operationId: LeaseInvoicesController_myfatoorahCallback
-      summary: ''
-      description: ''
       parameters:
         - name: paymentId
           required: true
@@ -479,8 +459,6 @@ paths:
   /leaseInvoices/{id}:
     get:
       operationId: LeaseInvoicesController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -498,8 +476,6 @@ paths:
       security: *ref_4
     patch:
       operationId: LeaseInvoicesController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -523,8 +499,6 @@ paths:
       security: *ref_4
     delete:
       operationId: LeaseInvoicesController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -543,8 +517,6 @@ paths:
   /leaseInvoices/{id}/pay:
     get:
       operationId: LeaseInvoicesController_payInvoice
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -559,8 +531,6 @@ paths:
   /leaseInvoices/{id}/messages:
     get:
       operationId: LeaseInvoicesController_findMessages
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -581,8 +551,6 @@ paths:
   /leases:
     get:
       operationId: LeasesController_findAll
-      summary: ''
-      description: ''
       parameters:
         - required: false
           name: page
@@ -643,8 +611,6 @@ paths:
   /leases/{id}:
     get:
       operationId: LeasesController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -662,8 +628,6 @@ paths:
       security: *ref_6
     patch:
       operationId: LeasesController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -687,8 +651,6 @@ paths:
       security: *ref_6
     delete:
       operationId: LeasesController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -707,8 +669,6 @@ paths:
   /leases/{id}/leaseInvoices:
     get:
       operationId: LeasesController_findInvoices
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -760,6 +720,7 @@ paths:
                 required:
                   - results
                   - sum
+                  - aggregate
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - title: ArrayOfLeaseInvoiceDto
@@ -770,13 +731,16 @@ paths:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
                       sum:
                         type: number
+                        nullable: true
+                      aggregate:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceAggregateDto'
       tags: *ref_5
       security: *ref_6
   /portfolios:
     get:
       operationId: PortfoliosController_findAll
-      summary: ''
-      description: ''
       parameters:
         - required: false
           name: page
@@ -837,8 +801,6 @@ paths:
   /portfolios/{id}:
     get:
       operationId: PortfoliosController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -856,8 +818,6 @@ paths:
       security: *ref_8
     patch:
       operationId: PortfoliosController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -881,8 +841,6 @@ paths:
       security: *ref_8
     delete:
       operationId: PortfoliosController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -901,8 +859,6 @@ paths:
   /portfolios/{id}/roles:
     get:
       operationId: PortfoliosController_findRoles
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -966,8 +922,6 @@ paths:
   /portfolios/{id}/properties:
     get:
       operationId: PortfoliosController_findProperties
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1031,8 +985,6 @@ paths:
   /portfolios/{id}/units:
     get:
       operationId: PortfoliosController_findUnits
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1096,8 +1048,6 @@ paths:
   /portfolios/{id}/units-minimal:
     get:
       operationId: PortfoliosController_findUnitsMinimal
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1161,8 +1111,6 @@ paths:
   /portfolios/{id}/payouts:
     get:
       operationId: PortfoliosController_findPayouts
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1226,8 +1174,6 @@ paths:
   /portfolios/{id}/balance:
     get:
       operationId: PortfoliosController_getBalance
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1246,8 +1192,6 @@ paths:
   /portfolios/{id}/leaseInvoices:
     get:
       operationId: PortfoliosController_findAllLeaseInvoices
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1299,6 +1243,7 @@ paths:
                 required:
                   - results
                   - sum
+                  - aggregate
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - title: ArrayOfLeaseInvoiceDto
@@ -1309,13 +1254,16 @@ paths:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
                       sum:
                         type: number
+                        nullable: true
+                      aggregate:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceAggregateDto'
       tags: *ref_7
       security: *ref_8
   /portfolios/{id}/expenses:
     get:
       operationId: PortfoliosController_findAllExpenses
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1391,8 +1339,6 @@ paths:
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/income:
     get:
       operationId: PortfolioAggregateController_getIncomeByMonth
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -1438,8 +1384,6 @@ paths:
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses:
     get:
       operationId: PortfolioAggregateController_getExpensesByMonth
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -1487,8 +1431,6 @@ paths:
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses-by-category:
     get:
       operationId: PortfolioAggregateController_getExpensesByCategory
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -1536,8 +1478,6 @@ paths:
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses-by-location:
     get:
       operationId: PortfolioAggregateController_getExpensesByLocation
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -1585,8 +1525,6 @@ paths:
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/occupancy:
     get:
       operationId: PortfolioAggregateController_getOccupancy
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -1632,8 +1570,6 @@ paths:
   /properties:
     get:
       operationId: PropertiesController_findAll
-      summary: ''
-      description: ''
       parameters:
         - required: false
           name: page
@@ -1694,8 +1630,6 @@ paths:
   /properties/{id}:
     get:
       operationId: PropertiesController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1713,8 +1647,6 @@ paths:
       security: *ref_12
     patch:
       operationId: PropertiesController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1738,8 +1670,6 @@ paths:
       security: *ref_12
     delete:
       operationId: PropertiesController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1758,8 +1688,6 @@ paths:
   /units/{id}:
     get:
       operationId: UnitsController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1779,8 +1707,6 @@ paths:
         - accessToken: []
     patch:
       operationId: UnitsController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1804,8 +1730,6 @@ paths:
       security: *ref_14
     delete:
       operationId: UnitsController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1824,8 +1748,6 @@ paths:
   /units/{id}/leases:
     get:
       operationId: UnitsController_findLeases
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1889,8 +1811,6 @@ paths:
   /payouts:
     get:
       operationId: PayoutsController_findAll
-      summary: ''
-      description: ''
       parameters:
         - required: false
           name: page
@@ -1951,8 +1871,6 @@ paths:
   /payouts/{id}:
     get:
       operationId: PayoutsController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1970,8 +1888,6 @@ paths:
       security: *ref_16
     delete:
       operationId: PayoutsController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1990,8 +1906,6 @@ paths:
   /expenses/{id}:
     get:
       operationId: ExpensesController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2011,8 +1925,6 @@ paths:
         - accessToken: []
     patch:
       operationId: ExpensesController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2036,8 +1948,6 @@ paths:
       security: *ref_18
     delete:
       operationId: ExpensesController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2056,8 +1966,6 @@ paths:
   /users/me:
     get:
       operationId: UsersController_findProfile
-      summary: ''
-      description: ''
       parameters: []
       responses:
         '200':
@@ -2075,8 +1983,6 @@ paths:
   /organizations:
     post:
       operationId: OrganizationsController_create
-      summary: ''
-      description: ''
       parameters: []
       requestBody:
         required: true
@@ -2098,8 +2004,6 @@ paths:
   /organizations/{id}:
     get:
       operationId: OrganizationsController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2117,8 +2021,6 @@ paths:
       security: *ref_20
     patch:
       operationId: OrganizationsController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2142,8 +2044,6 @@ paths:
       security: *ref_20
     delete:
       operationId: OrganizationsController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2162,8 +2062,6 @@ paths:
   /organizations/{id}/roles:
     get:
       operationId: OrganizationsController_findRoles
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2227,8 +2125,6 @@ paths:
   /organizations/{organizationId}/search:
     get:
       operationId: OrganizationsController_search
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2252,8 +2148,6 @@ paths:
   /organizations/{id}/leaseInvoices:
     get:
       operationId: OrganizationsController_findAllLeaseInvoices
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2305,6 +2199,7 @@ paths:
                 required:
                   - results
                   - sum
+                  - aggregate
                 allOf:
                   - $ref: '#/components/schemas/PaginatedMetaDto'
                   - title: ArrayOfLeaseInvoiceDto
@@ -2315,6 +2210,11 @@ paths:
                           $ref: '#/components/schemas/LeaseInvoiceDto'
                       sum:
                         type: number
+                        nullable: true
+                      aggregate:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceAggregateDto'
       tags: *ref_19
       security: *ref_20
   /organizations/{id}/status-refresh:
@@ -2336,8 +2236,6 @@ paths:
   /organizations/{organizationId}/tenants:
     post:
       operationId: OrganizationsAdminController_createTenant
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2364,8 +2262,6 @@ paths:
   /organizations/{organizationId}/portfolios:
     post:
       operationId: OrganizationsAdminController_createPortfolio
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2390,8 +2286,6 @@ paths:
   /organizations/{organizationId}/properties:
     post:
       operationId: OrganizationsAdminController_createProperty
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2416,8 +2310,6 @@ paths:
   /organizations/{organizationId}/units:
     post:
       operationId: OrganizationsAdminController_createUnit
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2442,8 +2334,6 @@ paths:
   /organizations/{organizationId}/leases:
     post:
       operationId: OrganizationsAdminController_createLease
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2468,8 +2358,6 @@ paths:
   /organizations/{organizationId}/leaseInvoices:
     post:
       operationId: OrganizationsAdminController_createLeaseInvoice
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2494,8 +2382,6 @@ paths:
   /organizations/{organizationId}/lease/{id}/leaseInvoices:
     post:
       operationId: OrganizationsAdminController_createInvoices
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2527,8 +2413,6 @@ paths:
   /organizations/{organizationId}/expenses:
     post:
       operationId: OrganizationsAdminController_createExpense
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2553,8 +2437,6 @@ paths:
   /organizations/{organizationId}/payouts:
     post:
       operationId: OrganizationsAdminController_createPayout
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2579,8 +2461,6 @@ paths:
   /organizations/{organizationId}/leaseInvoices/{id}/send-invoice-email:
     post:
       operationId: OrganizationsAdminController_sendInvoiceEmail
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2606,8 +2486,6 @@ paths:
   /organizations/{organizationId}/files:
     post:
       operationId: FilesController_create
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2633,8 +2511,6 @@ paths:
         - accessToken: []
     get:
       operationId: FilesController_findAll
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2672,8 +2548,6 @@ paths:
       security: *ref_24
     delete:
       operationId: FilesController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2697,8 +2571,6 @@ paths:
   /organizations/{organizationId}/files/find-one:
     get:
       operationId: FilesController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2722,8 +2594,6 @@ paths:
   /organizations/{organizationId}/expense-categories:
     post:
       operationId: ExpenseCategoriesController_create
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2749,8 +2619,6 @@ paths:
         - accessToken: []
     get:
       operationId: ExpenseCategoriesController_findAll
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2770,8 +2638,6 @@ paths:
       security: *ref_26
     patch:
       operationId: ExpenseCategoriesController_updateAll
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2800,8 +2666,6 @@ paths:
   /organizations/{organizationId}/expense-categories/{id}:
     patch:
       operationId: ExpenseCategoriesController_update
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2831,8 +2695,6 @@ paths:
   /organizations/{organizationId}/maintenance-orders:
     post:
       operationId: MaintenanceOrdersController_create
-      summary: ''
-      description: ''
       parameters:
         - name: organizationId
           required: true
@@ -2857,8 +2719,6 @@ paths:
   /:
     get:
       operationId: MaintenanceOrdersController_findAll
-      summary: ''
-      description: ''
       parameters:
         - required: false
           name: page
@@ -2916,8 +2776,6 @@ paths:
   /maintenance-orders/{id}:
     get:
       operationId: MaintenanceOrdersController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2934,8 +2792,6 @@ paths:
       tags: *ref_27
     patch:
       operationId: MaintenanceOrdersController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -2958,8 +2814,6 @@ paths:
       tags: *ref_27
     delete:
       operationId: MaintenanceOrdersController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -3996,6 +3850,8 @@ components:
           type: string
         title:
           type: string
+        titleHtml:
+          type: string
         score:
           type: number
         hints:
@@ -4004,6 +3860,7 @@ components:
         - entity
         - id
         - title
+        - titleHtml
         - score
         - hints
     SearchDto:
@@ -4539,3 +4396,39 @@ components:
           $ref: '#/components/schemas/PaginatedDto'
       required:
         - pagination
+    PaymentTimeEnum:
+      type: string
+      enum:
+        - ADVANCED
+        - ON_TIME
+        - LATE
+    DueStatusEnum:
+      type: string
+      enum:
+        - NOT_DUE
+        - DUE
+        - PAST_DUE
+    LeaseInvoiceAggregateSumDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          nullable: true
+      required:
+        - amount
+    LeaseInvoiceAggregateDto:
+      type: object
+      properties:
+        paymentTime:
+          $ref: '#/components/schemas/PaymentTimeEnum'
+        dueStatus:
+          $ref: '#/components/schemas/DueStatusEnum'
+        sum:
+          $ref: '#/components/schemas/LeaseInvoiceAggregateSumDto'
+        isPaid:
+          type: boolean
+      required:
+        - paymentTime
+        - dueStatus
+        - sum
+        - isPaid

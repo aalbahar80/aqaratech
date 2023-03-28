@@ -20,8 +20,6 @@ import type { ValidatedUserDto } from '../models';
  */
 export class UsersApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async findProfileRaw(
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
@@ -44,8 +42,6 @@ export class UsersApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findProfile(
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,

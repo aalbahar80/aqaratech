@@ -33,8 +33,6 @@ export interface ExpensesApiUpdateRequest {
  */
 export class ExpensesApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: ExpensesApiFindOneRequest,
@@ -68,8 +66,6 @@ export class ExpensesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: ExpensesApiFindOneRequest,
@@ -80,8 +76,6 @@ export class ExpensesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: ExpensesApiRemoveRequest,
@@ -115,8 +109,6 @@ export class ExpensesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: ExpensesApiRemoveRequest,
@@ -127,8 +119,6 @@ export class ExpensesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: ExpensesApiUpdateRequest,
@@ -175,8 +165,6 @@ export class ExpensesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: ExpensesApiUpdateRequest,

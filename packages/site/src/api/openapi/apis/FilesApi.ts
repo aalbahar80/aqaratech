@@ -44,8 +44,6 @@ export interface FilesApiRemoveRequest {
  */
 export class FilesApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async createRaw(
 		requestParameters: FilesApiCreateRequest,
@@ -163,8 +161,6 @@ export class FilesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async create(
 		requestParameters: FilesApiCreateRequest,
@@ -175,8 +171,6 @@ export class FilesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAllRaw(
 		requestParameters: FilesApiFindAllRequest,
@@ -241,8 +235,6 @@ export class FilesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAll(
 		requestParameters: FilesApiFindAllRequest,
@@ -253,8 +245,6 @@ export class FilesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: FilesApiFindOneRequest,
@@ -302,8 +292,6 @@ export class FilesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: FilesApiFindOneRequest,
@@ -314,8 +302,6 @@ export class FilesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: FilesApiRemoveRequest,
@@ -363,8 +349,6 @@ export class FilesApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: FilesApiRemoveRequest,

@@ -49,8 +49,6 @@ export interface UnitsApiUpdateRequest {
  */
 export class UnitsApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async findLeasesRaw(
 		requestParameters: UnitsApiFindLeasesRequest,
@@ -108,8 +106,6 @@ export class UnitsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findLeases(
 		requestParameters: UnitsApiFindLeasesRequest,
@@ -120,8 +116,6 @@ export class UnitsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: UnitsApiFindOneRequest,
@@ -155,8 +149,6 @@ export class UnitsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: UnitsApiFindOneRequest,
@@ -167,8 +159,6 @@ export class UnitsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: UnitsApiRemoveRequest,
@@ -202,8 +192,6 @@ export class UnitsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: UnitsApiRemoveRequest,
@@ -214,8 +202,6 @@ export class UnitsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: UnitsApiUpdateRequest,
@@ -262,8 +248,6 @@ export class UnitsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: UnitsApiUpdateRequest,

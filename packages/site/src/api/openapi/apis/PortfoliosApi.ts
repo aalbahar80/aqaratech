@@ -180,8 +180,6 @@ export interface PortfoliosApiUpdateRequest {
  */
 export class PortfoliosApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async findAllRaw(
 		requestParameters: PortfoliosApiFindAllRequest,
@@ -229,8 +227,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAll(
 		requestParameters: PortfoliosApiFindAllRequest = {},
@@ -241,8 +237,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAllExpensesRaw(
 		requestParameters: PortfoliosApiFindAllExpensesRequest,
@@ -308,8 +302,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAllExpenses(
 		requestParameters: PortfoliosApiFindAllExpensesRequest,
@@ -323,8 +315,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAllLeaseInvoicesRaw(
 		requestParameters: PortfoliosApiFindAllLeaseInvoicesRequest,
@@ -382,8 +372,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAllLeaseInvoices(
 		requestParameters: PortfoliosApiFindAllLeaseInvoicesRequest,
@@ -397,8 +385,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: PortfoliosApiFindOneRequest,
@@ -432,8 +418,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: PortfoliosApiFindOneRequest,
@@ -444,8 +428,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findPayoutsRaw(
 		requestParameters: PortfoliosApiFindPayoutsRequest,
@@ -503,8 +485,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findPayouts(
 		requestParameters: PortfoliosApiFindPayoutsRequest,
@@ -518,8 +498,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findPropertiesRaw(
 		requestParameters: PortfoliosApiFindPropertiesRequest,
@@ -577,8 +555,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findProperties(
 		requestParameters: PortfoliosApiFindPropertiesRequest,
@@ -592,8 +568,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findRolesRaw(
 		requestParameters: PortfoliosApiFindRolesRequest,
@@ -651,8 +625,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findRoles(
 		requestParameters: PortfoliosApiFindRolesRequest,
@@ -663,8 +635,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findUnitsRaw(
 		requestParameters: PortfoliosApiFindUnitsRequest,
@@ -722,8 +692,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findUnits(
 		requestParameters: PortfoliosApiFindUnitsRequest,
@@ -734,8 +702,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findUnitsMinimalRaw(
 		requestParameters: PortfoliosApiFindUnitsMinimalRequest,
@@ -793,8 +759,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findUnitsMinimal(
 		requestParameters: PortfoliosApiFindUnitsMinimalRequest,
@@ -808,8 +772,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getBalanceRaw(
 		requestParameters: PortfoliosApiGetBalanceRequest,
@@ -843,8 +805,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getBalance(
 		requestParameters: PortfoliosApiGetBalanceRequest,
@@ -855,8 +815,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getExpensesByCategoryRaw(
 		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
@@ -924,8 +882,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getExpensesByCategory(
 		requestParameters: PortfoliosApiGetExpensesByCategoryRequest,
@@ -939,8 +895,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getExpensesByLocationRaw(
 		requestParameters: PortfoliosApiGetExpensesByLocationRequest,
@@ -1008,8 +962,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getExpensesByLocation(
 		requestParameters: PortfoliosApiGetExpensesByLocationRequest,
@@ -1023,8 +975,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getExpensesByMonthRaw(
 		requestParameters: PortfoliosApiGetExpensesByMonthRequest,
@@ -1092,8 +1042,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getExpensesByMonth(
 		requestParameters: PortfoliosApiGetExpensesByMonthRequest,
@@ -1107,8 +1055,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getIncomeByMonthRaw(
 		requestParameters: PortfoliosApiGetIncomeByMonthRequest,
@@ -1176,8 +1122,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getIncomeByMonth(
 		requestParameters: PortfoliosApiGetIncomeByMonthRequest,
@@ -1191,8 +1135,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getOccupancyRaw(
 		requestParameters: PortfoliosApiGetOccupancyRequest,
@@ -1260,8 +1202,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async getOccupancy(
 		requestParameters: PortfoliosApiGetOccupancyRequest,
@@ -1275,8 +1215,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: PortfoliosApiRemoveRequest,
@@ -1310,8 +1248,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: PortfoliosApiRemoveRequest,
@@ -1322,8 +1258,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async updateRaw(
 		requestParameters: PortfoliosApiUpdateRequest,
@@ -1370,8 +1304,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async update(
 		requestParameters: PortfoliosApiUpdateRequest,

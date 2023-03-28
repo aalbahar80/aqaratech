@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
+import * as R from 'remeda';
 import { Any, Object } from 'ts-toolbelt';
 
 import { PAID_LATE, getPayURL } from '@self/utils';
@@ -25,6 +26,7 @@ import {
 	LeaseInvoiceDto,
 	UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
+import { LeaseInvoiceAggregateDto } from 'src/lease-invoices/dto/lease-invoices-extra.dto';
 import { MyfatoorahService } from 'src/myfatoorah/myfatoorah.service';
 import { GetPaymentStatusResult } from 'src/myfatoorah/types/myfatoorah.types';
 import { PostmarkService } from 'src/postmark/postmark.service';
@@ -71,7 +73,12 @@ export class LeaseInvoicesService {
 		user: IUser;
 		queryOptions: QueryOptionsDto;
 		whereCustom?: Prisma.LeaseInvoiceWhereInput;
-	}): Promise<WithCount<LeaseInvoiceDto> & { sum: number }> {
+	}): Promise<
+		WithCount<LeaseInvoiceDto> & {
+			sum: number;
+			aggregate: LeaseInvoiceAggregateDto[];
+		}
+	> {
 		const { take, skip, sort, filter, filterCustom } = queryOptions;
 
 		const isPaidLateFilter = filterCustom.isPaidLate;
@@ -81,24 +88,15 @@ export class LeaseInvoicesService {
 				accessibleBy(user.ability, Action.Read).LeaseInvoiceV,
 				...(whereCustom ? [whereCustom] : []), // combine with other filters/remove?
 				filter,
-				// differentiate between undefined and false.
-				// undefined means no filter (PAID_LATE.ALL)
-				isPaidLateFilter === PAID_LATE.LATE
-					? { paidAt: { gt: this.prisma.c.leaseInvoiceV.fields.dueAt } }
-					: isPaidLateFilter === PAID_LATE.ON_TIME
-					? {
-							paidAt: {
-								lte: this.prisma.c.leaseInvoiceV.fields.dueAt,
-								gte: this.prisma.c.leaseInvoiceV.fields.postAt,
-							},
-					  }
-					: isPaidLateFilter === PAID_LATE.ADVANCED
-					? { paidAt: { lt: this.prisma.c.leaseInvoiceV.fields.postAt } }
-					: {},
+				{
+					// undefined means no filter (PAID_LATE.ALL)
+					paymentTime:
+						isPaidLateFilter === PAID_LATE.ALL ? undefined : isPaidLateFilter,
+				},
 			],
 		} satisfies Prisma.LeaseInvoiceVWhereInput;
 
-		const [data, total, agg] = await Promise.all([
+		const [data, total, aggregate] = await Promise.all([
 			this.prisma.c.leaseInvoiceV.findMany({
 				take,
 				skip,
@@ -125,16 +123,26 @@ export class LeaseInvoicesService {
 				},
 			}),
 			this.prisma.c.leaseInvoiceV.count({ where }),
-			this.prisma.c.leaseInvoiceV.aggregate({
+			this.prisma.c.leaseInvoiceV.groupBy({
 				where,
+				by: ['isPaid', 'paymentTime', 'dueStatus'],
 				_sum: { amount: true },
 			}),
 		]);
 
+		const sum = R.sumBy(aggregate, (a) => a._sum.amount ?? 0);
+
 		return {
 			total,
 			results: data.map((d) => new LeaseInvoiceDto(d)),
-			sum: agg._sum.amount ?? 0,
+			sum,
+			// HACK: rename _sum.amount to sum.amount because openapi-generator strips leading underscores
+			// https://github.com/OpenAPITools/openapi-generator/pull/14709
+			// @ts-expect-error type limitation
+			aggregate: R.map(
+				aggregate,
+				R.mapKeys((k) => (k === '_sum' ? 'sum' : k)),
+			),
 		};
 	}
 

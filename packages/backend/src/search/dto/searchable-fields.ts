@@ -29,6 +29,7 @@ const NON_SEARCHABLE_FIELDS = [
 /** Fields that should be returned with search results */
 export const ALL_RETURNED_FIELDS = [
 	'id',
+	'title',
 	...ALL_SEARCHABLE_FIELDS,
 	...NON_SEARCHABLE_FIELDS,
 ] as const;

@@ -1,9 +1,15 @@
 lockfileVersion: 5.4
 
+overrides:
+  '@rgossiaux/svelte-headlessui@1.0.2': npm:svelte-headlessui-combobox-temporary
+
 patchedDependencies:
   '@rgossiaux/svelte-headlessui@1.0.2':
     hash: tvgqshloapx5y3z3as5gnhnhfq
     path: patches/@rgossiaux__svelte-headlessui@1.0.2.patch
+  svelte-headlessui-combobox-temporary@0.0.7:
+    hash: wlwqkzers7xykygomhkihhba4a
+    path: patches/svelte-headlessui-combobox-temporary@0.0.7.patch
 
 importers:
 
@@ -64,7 +70,7 @@ importers:
       '@nestjs/platform-express': 9.3.11
       '@nestjs/schedule': 2.2.0
       '@nestjs/schematics': 9.0.4
-      '@nestjs/swagger': 6.1.4
+      '@nestjs/swagger': 6.2.1
       '@nestjs/testing': 9.3.11
       '@ntegral/nestjs-sentry': 4.0.0
       '@openapitools/openapi-generator-cli': 2.5.2
@@ -135,7 +141,7 @@ importers:
       '@nestjs/passport': 9.0.3_ff5tg6lmewzgiuuasalk2njh2a
       '@nestjs/platform-express': 9.3.11_xiomoxhobbq2lrbq7qad5cle4i
       '@nestjs/schedule': 2.2.0_hmudkfza6r5qf3fonlx2z4cgkq
-      '@nestjs/swagger': 6.1.4_7v7l3w5hjkj7cvwzmsmpigp2la
+      '@nestjs/swagger': 6.2.1_7v7l3w5hjkj7cvwzmsmpigp2la
       '@ntegral/nestjs-sentry': 4.0.0_u4bniiu5i2f2luedj2al7q52ja
       '@prisma-utils/nestjs-request-parser': 1.2.0_od7xtdsbhm55uo5pwg3f4p5bwy
       '@prisma/client': 4.11.0_prisma@4.11.0
@@ -264,7 +270,7 @@ importers:
       '@logtail/node': 0.3.3
       '@logtail/types': 0.3.0
       '@logtail/winston': 0.3.3
-      '@rgossiaux/svelte-headlessui': 1.0.2
+      '@rgossiaux/svelte-headlessui': npm:svelte-headlessui-combobox-temporary
       '@self/utils': workspace:*
       '@sentry/node': 7.44.2
       '@sentry/svelte': 7.44.2
@@ -283,7 +289,7 @@ importers:
       '@types/debounce': 1.2.1
       '@types/papaparse': 5.3.7
       autoprefixer: 10.4.14
-      chart.js: 4.0.1
+      chart.js: 4.2.1
       chartjs-adapter-date-fns: 3.0.0
       clsx: 1.2.1
       cookie: 0.5.0
@@ -299,6 +305,7 @@ importers:
       fuse.js: 6.6.2
       jose: 4.13.1
       jspdf: 2.5.1
+      just-debounce-it: 3.2.0
       nanoid: 4.0.1
       papaparse: 5.4.0
       postcss: 8.4.21
@@ -338,7 +345,7 @@ importers:
       '@iconify/json': 2.2.37
       '@intlify/eslint-plugin-svelte': 0.1.1_wzem237sbvnwe7n34ytc5phasy
       '@logtail/types': 0.3.0
-      '@rgossiaux/svelte-headlessui': 1.0.2_tvgqshloapx5y3z3as5gnhnhfq_svelte@3.57.0
+      '@rgossiaux/svelte-headlessui': /svelte-headlessui-combobox-temporary/0.0.7_wlwqkzers7xykygomhkihhba4a_svelte@3.57.0
       '@self/utils': link:../utils
       '@sentry/svelte': 7.44.2_svelte@3.57.0
       '@sentry/tracing': 7.44.2
@@ -356,8 +363,8 @@ importers:
       '@types/debounce': 1.2.1
       '@types/papaparse': 5.3.7
       autoprefixer: 10.4.14_postcss@8.4.21
-      chart.js: 4.0.1
-      chartjs-adapter-date-fns: 3.0.0_thp3sedjxvmiqxrdsmekdnimom
+      chart.js: 4.2.1
+      chartjs-adapter-date-fns: 3.0.0_rid3rx6orfiwps7kg2r43n6mvu
       clsx: 1.2.1
       cookie: 0.5.0
       d3: 7.8.2
@@ -372,6 +379,7 @@ importers:
       fuse.js: 6.6.2
       jose: 4.13.1
       jspdf: 2.5.1
+      just-debounce-it: 3.2.0
       nanoid: 4.0.1
       papaparse: 5.4.0
       postcss: 8.4.21
@@ -2420,6 +2428,10 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
+  /@kurkle/color/0.3.2:
+    resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
+    dev: true
+
   /@logtail/core/0.3.0:
     resolution: {integrity: sha512-PK/n/r9DriHoOnnhHuBi5u303x5QU2wJCeOIRQr7e+bVBmvn8gF+LdBS/CSkZQkKQo8v0xrp4I1cdnBfH4LtQg==}
     dependencies:
@@ -2735,24 +2747,6 @@ packages:
     dev: false
     optional: true
 
-  /@nestjs/mapped-types/1.2.0_ocbnc23ju6hrcgw5xdlfaeen5m:
-    resolution: {integrity: sha512-NTFwPZkQWsArQH8QSyFWGZvJ08gR+R4TofglqZoihn/vU+ktHEJjMqsIsADwb7XD97DhiD+TVv5ac+jG33BHrg==}
-    peerDependencies:
-      '@nestjs/common': ^7.0.8 || ^8.0.0 || ^9.0.0
-      class-transformer: ^0.2.0 || ^0.3.0 || ^0.4.0 || ^0.5.0
-      class-validator: ^0.11.1 || ^0.12.0 || ^0.13.0
-      reflect-metadata: ^0.1.12
-    peerDependenciesMeta:
-      class-transformer:
-        optional: true
-      class-validator:
-        optional: true
-    dependencies:
-      '@nestjs/common': 9.3.11_od7xtdsbhm55uo5pwg3f4p5bwy
-      class-transformer: 0.5.1
-      reflect-metadata: 0.1.13
-    dev: false
-
   /@nestjs/mapped-types/1.2.2_ocbnc23ju6hrcgw5xdlfaeen5m:
     resolution: {integrity: sha512-3dHxLXs3M0GPiriAcCFFJQHoDFUuzTD5w6JDhE7TyfT89YKpe6tcCCIqOZWdXmt9AZjjK30RkHRSFF+QEnWFQg==}
     peerDependencies:
@@ -2770,7 +2764,6 @@ packages:
       class-transformer: 0.5.1
       reflect-metadata: 0.1.13
     dev: false
-    optional: true
 
   /@nestjs/passport/9.0.3_ff5tg6lmewzgiuuasalk2njh2a:
     resolution: {integrity: sha512-HplSJaimEAz1IOZEu+pdJHHJhQyBOPAYWXYHfAPQvRqWtw4FJF1VXl1Qtk9dcXQX1eKytDtH+qBzNQc19GWNEg==}
@@ -2842,8 +2835,8 @@ packages:
       - chokidar
     dev: true
 
-  /@nestjs/swagger/6.1.4_7v7l3w5hjkj7cvwzmsmpigp2la:
-    resolution: {integrity: sha512-kE8VjR+NaoKqxg8XqM/YYfALScPh4AcoR8Wywga8/OxHsTHY+MKxqvTpWp7IhCUWSA6xT8nQUpcC9Rt7C+r7Hw==}
+  /@nestjs/swagger/6.2.1_7v7l3w5hjkj7cvwzmsmpigp2la:
+    resolution: {integrity: sha512-9M2vkfJHIzLqDZwvM5TEZO0MxRCvIb0xVy0LsmWwxH1lrb0z/4MhU+r2CWDhBtTccVJrKxVPiU2s3T3b9uUJbg==}
     peerDependencies:
       '@fastify/static': ^6.0.0
       '@nestjs/common': ^9.0.0
@@ -2861,7 +2854,7 @@ packages:
     dependencies:
       '@nestjs/common': 9.3.11_od7xtdsbhm55uo5pwg3f4p5bwy
       '@nestjs/core': 9.3.11_athbywszdzbn5zavk2rtmf5ypm
-      '@nestjs/mapped-types': 1.2.0_ocbnc23ju6hrcgw5xdlfaeen5m
+      '@nestjs/mapped-types': 1.2.2_ocbnc23ju6hrcgw5xdlfaeen5m
       class-transformer: 0.5.1
       js-yaml: 4.1.0
       lodash: 4.17.21
@@ -3042,15 +3035,6 @@ packages:
   /@prisma/engines/4.11.0:
     resolution: {integrity: sha512-0AEBi2HXGV02cf6ASsBPhfsVIbVSDC9nbQed4iiY5eHttW9ZtMxHThuKZE1pnESbr8HRdgmFSa/Kn4OSNYuibg==}
     requiresBuild: true
-
-  /@rgossiaux/svelte-headlessui/1.0.2_tvgqshloapx5y3z3as5gnhnhfq_svelte@3.57.0:
-    resolution: {integrity: sha512-sauopYTSivhzXe1kAvgawkhyYJcQlK8Li3p0d2OtcCIVprOzdbard5lbqWB4xHDv83zAobt2mR08oizO2poHLQ==}
-    peerDependencies:
-      svelte: ^3.44.0
-    dependencies:
-      svelte: 3.57.0
-    dev: true
-    patched: true
 
   /@rollup/plugin-commonjs/24.0.1_rollup@3.19.1:
     resolution: {integrity: sha512-15LsiWRZk4eOGqvrJyu3z3DaBu5BhXIMeWnijSRvd8irrrg9SHpQ1pH+BUK4H6Z9wL9yOxZJMTLU+Au86XHxow==}
@@ -4804,18 +4788,20 @@ packages:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
 
-  /chart.js/4.0.1:
-    resolution: {integrity: sha512-5/8/9eBivwBZK81mKvmIwTb2Pmw4D/5h1RK9fBWZLLZ8mCJ+kfYNmV9rMrGoa5Hgy2/wVDBMLSUDudul2/9ihA==}
+  /chart.js/4.2.1:
+    resolution: {integrity: sha512-6YbpQ0nt3NovAgOzbkSSeeAQu/3za1319dPUQTXn9WcOpywM8rGKxJHrhS8V8xEkAlk8YhEfjbuAPfUyp6jIsw==}
     engines: {pnpm: ^7.0.0}
+    dependencies:
+      '@kurkle/color': 0.3.2
     dev: true
 
-  /chartjs-adapter-date-fns/3.0.0_thp3sedjxvmiqxrdsmekdnimom:
+  /chartjs-adapter-date-fns/3.0.0_rid3rx6orfiwps7kg2r43n6mvu:
     resolution: {integrity: sha512-Rs3iEB3Q5pJ973J93OBTpnP7qoGwvq3nUnoMdtxO+9aoJof7UFcRbWcIDteXuYd1fgAvct/32T9qaLyLuZVwCg==}
     peerDependencies:
       chart.js: '>=2.8.0'
       date-fns: '>=2.0.0'
     dependencies:
-      chart.js: 4.0.1
+      chart.js: 4.2.1
       date-fns: 2.29.3
     dev: true
 
@@ -7826,7 +7812,7 @@ packages:
   /jsonfile/4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
     optionalDependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
     dev: true
 
   /jsonfile/6.1.0:
@@ -7834,7 +7820,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
     dev: true
 
   /jsonwebtoken/9.0.0:
@@ -7859,6 +7845,10 @@ packages:
       core-js: 3.29.1
       dompurify: 2.4.5
       html2canvas: 1.4.1
+    dev: true
+
+  /just-debounce-it/3.2.0:
+    resolution: {integrity: sha512-WXzwLL0745uNuedrCsCs3rpmfD6DBaf7uuVwaq98/8dafURfgQaBsSpjiPp5+CW6Vjltwy9cOGI6qE71b3T8iQ==}
     dev: true
 
   /just-extend/4.2.1:
@@ -10307,6 +10297,15 @@ packages:
     transitivePeerDependencies:
       - svelte
     dev: true
+
+  /svelte-headlessui-combobox-temporary/0.0.7_wlwqkzers7xykygomhkihhba4a_svelte@3.57.0:
+    resolution: {integrity: sha512-UBy13koWK3m9z5vamdqgyH1T9NZCrjDH5dETY5C99ccmJDdHtK04cjUaW1lklx6GBqZbaq+wY4SOJkelrJB39A==}
+    peerDependencies:
+      svelte: ^3.44.0
+    dependencies:
+      svelte: 3.57.0
+    dev: true
+    patched: true
 
   /svelte-headlessui/0.0.15:
     resolution: {integrity: sha512-yIRD2Wg8pqUOq7cbSgu4RKQ2FXf8vM2ORD3a8/d9rSxDWlBr8Ojt58VpFgdn9Fy0zUeI9By3qFRUaL+wD+Jf4A==}

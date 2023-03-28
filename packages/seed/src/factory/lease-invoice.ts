@@ -29,7 +29,17 @@ const base = Factory.Sync.makeFactoryWithRequired<
 	mfData: Factory.each(() => Prisma.DbNull),
 
 	// Dates
-	postAt: Factory.each(() => fakeDate()),
+	postAt: Factory.each(() => {
+		const date = fakeDate();
+		if (Math.random() > 0.8) {
+			// add 3 months
+			const d = new Date(date);
+			d.setMonth(d.getMonth() + 6);
+			return d.toISOString().slice(0, 10);
+		} else {
+			return date;
+		}
+	}),
 
 	paidAt: Factory.each(() => fakeDate()),
 });

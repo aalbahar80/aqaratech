@@ -4,7 +4,7 @@
 	"compilerOptions": {
 		"target": "ES2022",
 		"lib": ["ES2022"],
-		"declaration": true,
+		"declaration": false, // fix "A type annotation is necessary (swagger)"
 		"removeComments": true,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,

@@ -1,3 +1,15 @@
+export const colors = {
+	// light
+	// red: '#93c5fd',
+	// blue: '#fca5a5',
+	// darkBlue: '#376bd9',
+
+	// dark
+	red: '#ef5675',
+	blue: '#003f5c',
+	darkBlue: '#7a5195',
+};
+
 export const palette: Record<string, string[]> = {
 	2: ['#003f5c', '#f95d6a'],
 	3: ['#003f5c', '#bc5090', '#ffa600'],
@@ -25,10 +37,37 @@ export const palette: Record<string, string[]> = {
 	],
 };
 
+export const paletteLight: Record<string, string[]> = {
+	2: ['#93c5fd', '#fca5a5'],
+	3: ['#93c5fd', '#fca5a5', '#ffdb89'],
+	4: ['#93c5fd', '#fca5a5', '#ffdb89', '#fcbf7e'],
+	5: ['#93c5fd', '#fca5a5', '#ffdb89', '#fcbf7e', '#f9c7c9'],
+	6: ['#93c5fd', '#fca5a5', '#ffdb89', '#fcbf7e', '#f9c7c9', '#a1ddf1'],
+	7: [
+		'#93c5fd',
+		'#fca5a5',
+		'#ffdb89',
+		'#fcbf7e',
+		'#f9c7c9',
+		'#a1ddf1',
+		'#f0c3b8',
+	],
+	8: [
+		'#93c5fd',
+		'#fca5a5',
+		'#ffdb89',
+		'#fcbf7e',
+		'#f9c7c9',
+		'#a1ddf1',
+		'#f0c3b8',
+		'#ffd9b3',
+	],
+};
+
 export const getColor = (index: number, total: number) => {
 	const size = Math.max(2, Math.min(total, 8));
 	const backgroundColor = palette[size]?.[index];
-	return backgroundColor;
+	return backgroundColor ?? '#CFD8DC'; // gray fallback
 };
 
 export const COLORS = {

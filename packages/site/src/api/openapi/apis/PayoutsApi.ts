@@ -37,8 +37,6 @@ export interface PayoutsApiRemoveRequest {
  */
 export class PayoutsApi extends runtime.BaseAPI {
 	/**
-	 *
-	 *
 	 */
 	async findAllRaw(
 		requestParameters: PayoutsApiFindAllRequest,
@@ -86,8 +84,6 @@ export class PayoutsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findAll(
 		requestParameters: PayoutsApiFindAllRequest = {},
@@ -98,8 +94,6 @@ export class PayoutsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOneRaw(
 		requestParameters: PayoutsApiFindOneRequest,
@@ -133,8 +127,6 @@ export class PayoutsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async findOne(
 		requestParameters: PayoutsApiFindOneRequest,
@@ -145,8 +137,6 @@ export class PayoutsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async removeRaw(
 		requestParameters: PayoutsApiRemoveRequest,
@@ -180,8 +170,6 @@ export class PayoutsApi extends runtime.BaseAPI {
 	}
 
 	/**
-	 *
-	 *
 	 */
 	async remove(
 		requestParameters: PayoutsApiRemoveRequest,

@@ -19,6 +19,8 @@ export const load: LayoutLoad = async ({
 		defaultOptions: {
 			queries: {
 				enabled: browser,
+				refetchOnWindowFocus: false,
+				refetchOnMount: false,
 			},
 		},
 	});

@@ -104,7 +104,6 @@ export class SearchService {
 				// lower the limit for the similarty function (default is 0.3)
 				this.prisma.c.$executeRaw(Prisma.sql`SELECT set_limit(0.05);`),
 
-				// ivs FIX:authz
 				tenantsQuery,
 				propertiesQuery,
 
@@ -118,21 +117,26 @@ export class SearchService {
 			tenant: fuzzyMatch(query, tenants).map((n) => ({
 				...n,
 				entity: 'tenant',
-				title: n.hints['label'] ?? n.label ?? n.hints['fullName'] ?? n.fullName,
+				titleHtml:
+					n.hints['label'] ?? n.label ?? n.hints['fullName'] ?? n.fullName,
+				// Compute title manually since we're not using our custom Prisma client
+				title: n.label ?? n.fullName,
 			})),
 
 			portfolio: Array.isArray(portfolios)
 				? fuzzyMatch(query, portfolios).map((n) => ({
 						...n,
 						entity: 'portfolio',
-						title:
+						titleHtml:
 							n.hints['label'] ?? n.label ?? n.hints['fullName'] ?? n.fullName,
+						title: n.label ?? n.fullName,
 				  }))
 				: [],
 
 			property: fuzzyMatch(query, properties).map((n) => ({
 				...n,
-				title: n.hints['label'] ?? n.label ?? computeLabelProperty(n),
+				titleHtml: n.hints['label'] ?? n.label ?? computeLabelProperty(n),
+				title: n.label ?? computeLabelProperty(n),
 				entity: 'property',
 			})),
 		} satisfies SearchDto;

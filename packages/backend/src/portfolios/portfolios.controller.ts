@@ -38,7 +38,7 @@ import { ExpenseDto } from 'src/expenses/dto/expense.dto';
 import { ExpensesService } from 'src/expenses/expenses.service';
 import { IUser } from 'src/interfaces/user.interface';
 import { LeaseInvoiceDto } from 'src/lease-invoices/dto/lease-invoice.dto';
-import { LeaseInvoiceExtra } from 'src/lease-invoices/dto/lease-invoices-extra';
+import { LeaseInvoiceExtra } from 'src/lease-invoices/dto/lease-invoices-extra.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { PayoutDto } from 'src/payouts/dto/payout.dto';
 import { PayoutsService } from 'src/payouts/payouts.service';

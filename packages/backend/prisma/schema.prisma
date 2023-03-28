@@ -255,6 +255,18 @@ model LeaseInvoice {
   @@index([postAt])
 }
 
+enum PaymentTime {
+  ADVANCED
+  ON_TIME
+  LATE
+}
+
+enum DueStatus {
+  NOT_DUE
+  DUE
+  PAST_DUE
+}
+
 view LeaseInvoiceV {
   id          String    @id
   createdAt   DateTime
@@ -267,8 +279,12 @@ view LeaseInvoiceV {
   memo        String?
   mfPaymentId String?
   mfData      Json?
-  leaseId     String
-  lease       Lease     @relation(fields: [leaseId], references: [id], onDelete: Restrict)
+
+  paymentTime PaymentTime?
+  dueStatus   DueStatus?
+
+  leaseId String
+  lease   Lease  @relation(fields: [leaseId], references: [id], onDelete: Restrict)
 
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
 	import { getRoute, PageType } from '@self/utils';
@@ -6,7 +7,11 @@
 	import L from '$i18n/i18n-svelte';
 	import Arrow from '$lib/components/Arrow.svelte';
 	import Filter from '$lib/components/dashboard/filter/Filter.svelte';
+	import PortfolioSelect from '$lib/components/dashboard/filter/PortfolioSelect.svelte';
+	import { property } from '$lib/stores/filter/property';
+	import { unit } from '$lib/stores/filter/unit';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
+	import { getUpdatedRoute } from '$lib/utils/update-route';
 
 	export let data: LayoutData;
 
@@ -35,9 +40,48 @@
 				>
 			</RoleGuard>
 		</div>
-		<h2 class="text-2xl font-bold leading-7 text-gray-900 sm:tracking-tight">
-			{data.portfolio.fullName}
-		</h2>
+		{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
+			<RoleGuard roles={['ORGADMIN']}>
+				<PortfolioSelect
+					defaultLabel={data.portfolio.title}
+					comboboxInputClass="text-2xl font-bold leading-7 text-gray-900 sm:tracking-tight"
+					on:select={async (e) => {
+						if (!$page.route.id) {
+							throw new Error('Route id is not defined');
+						}
+
+						// @ts-expect-error Type Limitation
+						const portfolioId = e.detail.id;
+
+						if (!portfolioId) {
+							throw new Error('Portfolio ID is not defined');
+						}
+
+						const route = getUpdatedRoute({
+							params: $page.params,
+							routeId: $page.route.id,
+							props: new Map([
+								['lang=lang', $page.params['lang']],
+								['organizationId', $page.params['organizationId']],
+								['portfolioId', portfolioId],
+							]),
+						});
+
+						// Reset filters when switching portfolios
+						property.set(undefined);
+						unit.set(undefined);
+						await goto(route, {
+							keepFocus: true,
+							noScroll: true,
+						});
+					}}
+				/>
+			</RoleGuard>
+		{:else}
+			<h2 class="text-2xl font-bold leading-7 text-gray-900 sm:tracking-tight">
+				{data.portfolio.title}
+			</h2>
+		{/if}
 	</div>
 
 	<div class="lg:col-span-2">

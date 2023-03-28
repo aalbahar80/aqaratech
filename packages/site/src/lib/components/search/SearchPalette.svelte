@@ -38,6 +38,7 @@
 	let query = '';
 	export let open = false;
 
+	// TODO: use getSearch() if refactoring
 	const search = debounce(async (q: string) => {
 		if (!q || !$page.data.user?.role?.organizationId) return;
 		try {
