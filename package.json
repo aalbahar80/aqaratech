@@ -24,9 +24,9 @@
 	},
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.14",
-		"@changesets/cli": "2.26.0",
-		"@go-task/cli": "3.21.0",
-		"@types/node": "18.15.5",
+		"@changesets/cli": "2.26.1",
+		"@go-task/cli": "3.23.0",
+		"@types/node": "18.15.10",
 		"eslint": "8.36.0",
 		"eslint-config-custom": "workspace:*",
 		"madge": "6.0.0",
