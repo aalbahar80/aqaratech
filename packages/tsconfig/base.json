@@ -1,10 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
-	"extends": [
-		"@tsconfig/strictest/tsconfig",
-		"@tsconfig/node18/tsconfig",
-		"@tsconfig/esm/tsconfig"
-	],
+	"extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
 	"display": "Default",
 	"compilerOptions": {
 		"composite": false,

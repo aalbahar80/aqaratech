@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json.schemastore.org/tsconfig",
-	"extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node18/tsconfig"],
+	"extends": "@tsconfig/node18-strictest/tsconfig.json",
 	"compilerOptions": {
 		"target": "ES2022",
 		"lib": ["ES2022"],
@@ -24,7 +24,7 @@
 		"allowUnusedLabels": true,
 		"importsNotUsedAsValues": "remove",
 		"types": ["multer"],
-		"verbatimModuleSyntax": false,
+		// "verbatimModuleSyntax": true, // needs special consideration for nestjs
 		"paths": {
 			"src": ["./src/"],
 			"@self/utils": ["../utils/src"]
