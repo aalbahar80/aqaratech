@@ -80,7 +80,8 @@ importers:
       '@self/utils': workspace:*
       '@sentry/node': 7.44.2
       '@sentry/tracing': 7.44.2
-      '@tsconfig/node18-strictest': 1.0.0
+      '@tsconfig/node18': 1.0.1
+      '@tsconfig/strictest': 2.0.0
       '@types/cache-manager': 4.0.2
       '@types/cookie-parser': 1.4.3
       '@types/cron': 2.0.1
@@ -180,7 +181,8 @@ importers:
       '@nestjs/testing': 9.3.11_itcvwav43ind2ixbuvvdffcfcu
       '@openapitools/openapi-generator-cli': 2.5.2_pm2q6f27dx7tkfjxscsq5w3gzu
       '@self/seed': link:../seed
-      '@tsconfig/node18-strictest': 1.0.0
+      '@tsconfig/node18': 1.0.1
+      '@tsconfig/strictest': 2.0.0
       '@types/cache-manager': 4.0.2
       '@types/cookie-parser': 1.4.3
       '@types/cron': 2.0.1
@@ -467,9 +469,13 @@ importers:
 
   packages/tsconfig:
     specifiers:
-      '@tsconfig/node18-strictest-esm': 1.0.1
+      '@tsconfig/esm': 1.0.2
+      '@tsconfig/node18': 1.0.1
+      '@tsconfig/strictest': 2.0.0
     devDependencies:
-      '@tsconfig/node18-strictest-esm': 1.0.1
+      '@tsconfig/esm': 1.0.2
+      '@tsconfig/node18': 1.0.1
+      '@tsconfig/strictest': 2.0.0
 
   packages/utils:
     specifiers:
@@ -3389,12 +3395,16 @@ packages:
       path-browserify: 1.0.1
     dev: true
 
-  /@tsconfig/node18-strictest-esm/1.0.1:
-    resolution: {integrity: sha512-cHzmAqw7CMbyqROWeBgVhard3F2V6zxOSJnQ4E6SJWruXD5ypuP9/QKekwBdfXQ4oUTaizIICKIwb+v3v33t0w==}
+  /@tsconfig/esm/1.0.2:
+    resolution: {integrity: sha512-awiISx+G4L+7k97nKnfA5QF6rukawiuycMPfASFHG/0fqjrUlYBuNISy3Yjl1SHIpVi57lYf7dc6L/FoQQCKcA==}
     dev: true
 
-  /@tsconfig/node18-strictest/1.0.0:
-    resolution: {integrity: sha512-bOuNKwO4Fzbt+Su5wqI9zNHwx5C25gLnutwVQA1sBZk0cW8UjVPVcwzIUhJIIJDUx7zDEbAwdCD2HfvIsV8dYg==}
+  /@tsconfig/node18/1.0.1:
+    resolution: {integrity: sha512-sNFeK6X2ATlhlvzyH4kKYQlfHXE2f2/wxtB9ClvYXevWpmwkUT7VaSrjIN9E76Qebz8qP5JOJJ9jD3QoD/Z9TA==}
+    dev: true
+
+  /@tsconfig/strictest/2.0.0:
+    resolution: {integrity: sha512-E0dpiZNdwO20c8d3seh7OmjAvDpwoRkTcU6M8cvggzB45Bd45tyTU2XJeA5Wfq+8NzVGhunvqOJ30AjSkywMXA==}
     dev: true
 
   /@types/body-parser/1.19.2:
@@ -5867,7 +5877,7 @@ packages:
     resolution: {integrity: sha512-QHTXI/sZQmko1cbDoNAa3mJ5qhWUUNAq3vR0/YiD379fWQrcfuoX1+HW2S0MTt7XmoPLapdaDKUtelUSPic7hQ==}
     engines: {node: '>=10.13.0'}
     dependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       tapable: 2.2.1
     dev: true
 
@@ -7946,7 +7956,7 @@ packages:
     resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
     engines: {node: '>=6'}
     dependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
       js-yaml: 3.14.1
       pify: 4.0.1
       strip-bom: 3.0.0
