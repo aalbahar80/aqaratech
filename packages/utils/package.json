@@ -21,13 +21,13 @@
 	"devDependencies": {
 		"@logtail/types": "0.4.0",
 		"@sentry/types": "7.45.0",
-		"@types/node": "18.15.10",
-		"@vitest/ui": "0.29.7",
+		"@types/node": "18.15.11",
+		"@vitest/ui": "0.29.8",
 		"eslint-config-custom": "workspace:*",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"typescript": "5.0.2",
-		"vitest": "0.29.7"
+		"vitest": "0.29.8"
 	},
 	"private": true,
 	"engines": {
