@@ -6,6 +6,7 @@ import { Cookie } from '@self/utils';
 import type { Handle } from '@sveltejs/kit';
 
 import { MAX_AGE } from '$lib/constants/misc';
+import { COOKIE_OPTIONS } from '$lib/server/config/auth/cookie-options';
 import { logger } from '$lib/server/logger';
 import { getUser } from '$lib/server/utils/get-user';
 import { handleInvalidToken } from '$lib/server/utils/handle-invalid-token';
@@ -48,6 +49,7 @@ export const handleAuth = (async ({ event, resolve }) => {
 			event.cookies.set(Cookie.role, user.role.id, {
 				path: '/',
 				maxAge: MAX_AGE,
+				...COOKIE_OPTIONS,
 			});
 		}
 

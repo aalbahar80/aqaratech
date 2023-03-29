@@ -3,6 +3,7 @@ import { Cookie } from '@self/utils';
 
 import { baseLocale } from '$i18n/i18n-util';
 import { MAX_AGE, PREF_LOCALE, REDIRECT_TO } from '$lib/constants/misc';
+import { COOKIE_OPTIONS } from '$lib/server/config/auth/cookie-options';
 
 export const GET: RequestHandler = async ({
 	cookies,
@@ -14,6 +15,7 @@ export const GET: RequestHandler = async ({
 	cookies.set(Cookie.role, params.id, {
 		path: '/',
 		maxAge: MAX_AGE,
+		...COOKIE_OPTIONS,
 	});
 
 	const location =

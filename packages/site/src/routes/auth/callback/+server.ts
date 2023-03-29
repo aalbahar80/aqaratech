@@ -4,6 +4,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 
 import { DESTINATION, MAX_AGE } from '$lib/constants/misc';
 import { authConfig } from '$lib/server/config/auth';
+import { COOKIE_OPTIONS } from '$lib/server/config/auth/cookie-options';
 import { errorLogger } from '$lib/server/logger/error-logger';
 
 // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4dfd78d7d9a3fcd21a2eaf861756f6904881dbfa/types/auth0/index.d.ts#L691
@@ -58,11 +59,13 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 	cookies.set(Cookie.idToken, tokens.id_token, {
 		path: '/',
 		maxAge: MAX_AGE,
+		...COOKIE_OPTIONS,
 	});
 
 	cookies.set(Cookie.accessToken, tokens.access_token, {
 		path: '/',
 		maxAge: MAX_AGE,
+		...COOKIE_OPTIONS,
 	});
 
 	// Redirect to the destination or default location.

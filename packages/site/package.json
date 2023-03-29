@@ -5,7 +5,7 @@
 		"build"
 	],
 	"scripts": {
-		"dev": "vite dev --port 3000 --strictPort",
+		"dev": "vite dev --port 3000 --strictPort --host",
 		"build": "rm -rf ./{.svelte-kit,build} && svelte-kit sync && vite build",
 		"preview": "pnpm run preview:node",
 		"preview:vite": "vite preview --port 3000 --strictPort",
