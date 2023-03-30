@@ -27,7 +27,7 @@
 				<span>{filter.label}</span>
 				{#if showCount}
 					<span
-						class="ml-1.5 rounded bg-gray-200 py-0.5 px-1.5 text-xs font-semibold tabular-nums text-gray-700"
+						class="ml-1.5 rounded bg-gray-200 px-1.5 py-0.5 text-xs font-semibold tabular-nums text-gray-700"
 					>
 						{filter.options.filter((o) => o.active).length}
 					</span>

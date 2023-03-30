@@ -21,7 +21,7 @@
 	}).format(localizedEntities);
 </script>
 
-<div class="border-t border-gray-100 py-14 px-6 text-center text-sm sm:px-14">
+<div class="border-t border-gray-100 px-6 py-14 text-center text-sm sm:px-14">
 	<HeroiconsGlobeAlt
 		class="mx-auto h-6 w-6 text-gray-400"
 		aria-hidden="true"

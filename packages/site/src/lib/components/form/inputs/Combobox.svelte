@@ -196,7 +196,7 @@
 		id={inputId}
 		data-value={selection?.value}
 		{disabled}
-		class="w-full rounded-md border border-gray-300 bg-white py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none ltr:pr-10 ltr:pl-3 rtl:pl-10 rtl:pr-3 sm:text-sm"
+		class="w-full rounded-md border border-gray-300 bg-white py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none ltr:pl-3 ltr:pr-10 rtl:pl-10 rtl:pr-3 sm:text-sm"
 		class:form-invalid={invalid}
 		placeholder={`${$L.buttons.search()}...`}
 		autocomplete="off"
@@ -257,7 +257,7 @@
 					<li
 						value={item.value}
 						class={classes(
-							'relative cursor-default select-none py-2 ltr:pl-3 ltr:pr-9 rtl:pr-3 rtl:pl-9',
+							'relative cursor-default select-none py-2 ltr:pl-3 ltr:pr-9 rtl:pl-9 rtl:pr-3',
 							hovering || activeOption === item ? 'isActive' : '',
 							(hovering || activeOption === item) && !item.disabled
 								? 'bg-indigo-600 text-white'

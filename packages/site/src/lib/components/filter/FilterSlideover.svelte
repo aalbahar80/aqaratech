@@ -53,7 +53,7 @@
 			leaveTo="ltr:translate-x-full rtl:-translate-x-full"
 		>
 			<div
-				class="relative ml-auto flex h-full w-52 max-w-xs flex-col overflow-y-auto bg-white pt-52 pb-6 shadow-xl"
+				class="relative ml-auto flex h-full w-52 max-w-xs flex-col overflow-y-auto bg-white pb-6 pt-52 shadow-xl"
 			>
 				<div class="flex items-center justify-between px-4">
 					<h2 class="text-lg font-medium text-gray-900">

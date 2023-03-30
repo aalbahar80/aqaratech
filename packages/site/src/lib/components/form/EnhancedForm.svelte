@@ -90,7 +90,7 @@
 	<div class="border-t border-gray-200" />
 
 	<div class="flex flex-shrink-0 justify-end space-x-4 py-4 text-lg">
-		<button class="rounded bg-gray-500 py-1 px-5 text-white"
+		<button class="rounded bg-gray-500 px-5 py-1 text-white"
 			>{$L.buttons.save()}</button
 		>
 	</div>

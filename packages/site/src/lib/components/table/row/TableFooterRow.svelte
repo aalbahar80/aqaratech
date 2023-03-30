@@ -12,7 +12,7 @@
 	{#each group.headers as header}
 		<th
 			colSpan={header.colSpan}
-			class={`py-2 px-2 text-left text-sm font-semibold text-gray-900 ${TABLE_ROW_SPACING}`}
+			class={`px-2 py-2 text-left text-sm font-semibold text-gray-900 ${TABLE_ROW_SPACING}`}
 		>
 			{#if !header.isPlaceholder}
 				<svelte:component

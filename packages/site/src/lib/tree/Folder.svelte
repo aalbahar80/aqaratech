@@ -23,7 +23,7 @@
 	<button
 		class:expanded
 		on:click={toggle}
-		class="ps-6 flex gap-2 font-bold"
+		class="flex gap-2 ps-6 font-bold"
 	>
 		<svelte:component
 			this={expanded ? HeroiconsFolderOpen : HeroiconsFolder}
@@ -39,7 +39,7 @@
 
 {#if expanded}
 	<ul
-		class="ms-2 ps-2 list-none border-gray-200 py-2 ltr:border-l-2 rtl:border-r-2"
+		class="ms-2 list-none border-gray-200 py-2 ps-2 ltr:border-l-2 rtl:border-r-2"
 	>
 		{#each node.children ?? [null] as file}
 			<li class="p-1">

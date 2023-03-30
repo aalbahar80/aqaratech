@@ -8,7 +8,7 @@
 	export let node: ExpenseNode;
 </script>
 
-<div class="ps-6 flex gap-2 text-gray-700">
+<div class="flex gap-2 ps-6 text-gray-700">
 	<HeroiconsDocument class="text-gray-500" />
 
 	{node.data.label}

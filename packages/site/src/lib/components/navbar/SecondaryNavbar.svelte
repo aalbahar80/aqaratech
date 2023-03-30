@@ -17,7 +17,7 @@
 >
 	<!-- Main horizontal navbar area -->
 	<!-- NOTE: Any height offset should be kept in sync with Sidebar height -->
-	<div class="flex items-center justify-between py-4 px-4 sm:py-8">
+	<div class="flex items-center justify-between px-4 py-4 sm:py-8">
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
 			{#if isSidebarAvailable($page.route)}
@@ -39,7 +39,7 @@
 				<AqaratechLogo1 />
 			</a>
 		</div>
-		<div class="flex flex-col gap-y-4 gap-x-12 text-gray-500 sm:flex-row">
+		<div class="flex flex-col gap-x-12 gap-y-4 text-gray-500 sm:flex-row">
 			<LocaleSwitcher />
 			{#if isHomeRoute($page.route)}
 				<LoginButton />

@@ -4,7 +4,7 @@
 		<!-- {formType === 'update' ? 'Edit ' : 'Add '}{entitiesMap[entity] -->
 		<!-- 	.singularCap} -->
 		<!-- </h1> -->
-		<div class="space-y-6 pt-6 pb-5">
+		<div class="space-y-6 pb-5 pt-6">
 			<slot />
 		</div>
 	</div>

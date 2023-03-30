@@ -10,7 +10,7 @@
 		</div>
 	{/if}
 	<dl
-		class="grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x rtl:md:divide-x-reverse"
+		class="grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0 rtl:md:divide-x-reverse"
 	>
 		<slot name="panes" />
 	</dl>

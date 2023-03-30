@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<div
-				class="mt-5 sm:mt-0 sm:ml-6 sm:flex sm:flex-shrink-0 sm:items-center"
+				class="mt-5 sm:ml-6 sm:mt-0 sm:flex sm:flex-shrink-0 sm:items-center"
 			>
 				<slot name="button" />
 			</div>

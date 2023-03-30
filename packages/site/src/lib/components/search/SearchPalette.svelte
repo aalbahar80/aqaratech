@@ -138,14 +138,14 @@
 					{#if hasHits && query !== ''}
 						<ListboxOptions static>
 							<div
-								class="max-h-80 scroll-pt-11 scroll-pb-2 space-y-2 overflow-y-auto pb-2"
+								class="max-h-80 scroll-pb-2 scroll-pt-11 space-y-2 overflow-y-auto pb-2"
 								style:max-height="70vh"
 							>
 								{#each objectEntries(groups) as [entityTitle, group] (entityTitle)}
 									{#if isEntity(entityTitle) && group.length > 0}
 										<li>
 											<h2
-												class="bg-gray-100 py-2.5 px-4 text-xs font-semibold text-gray-900"
+												class="bg-gray-100 px-4 py-2.5 text-xs font-semibold text-gray-900"
 											>
 												{$L.entity[entityTitle].plural()}
 											</h2>
@@ -169,7 +169,7 @@
 
 					{#if query !== '' && !hasHits}
 						<div
-							class="border-t border-gray-100 py-14 px-6 text-center text-sm sm:px-14"
+							class="border-t border-gray-100 px-6 py-14 text-center text-sm sm:px-14"
 						>
 							<HeroiconsOutlineEmojiSad
 								class="mx-auto h-6 w-6 text-gray-400"

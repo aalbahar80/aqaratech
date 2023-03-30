@@ -60,7 +60,7 @@
 		class="fixed inset-0 z-50 overflow-y-auto"
 	>
 		<div
-			class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0"
+			class="flex min-h-screen items-end justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0"
 			transition:fade={{ duration: 100 }}
 		>
 			<DialogOverlay
@@ -78,7 +78,7 @@
 					data-testid="modal"
 					class="inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle"
 				>
-					<div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+					<div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
 						<div class="sm:flex sm:items-start">
 							<div
 								class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
@@ -105,7 +105,7 @@
 												<strong>{$isOpen.deletePrompt}</strong> organization and
 												all of its data.
 
-												<small class="block pt-4 pb-1">
+												<small class="block pb-1 pt-4">
 													Please type <strong class="inline"
 														>`{$isOpen.deletePrompt}`</strong
 													>
@@ -135,7 +135,7 @@
 						</button>
 						<button
 							type="button"
-							class="order-first mt-3 inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+							class="order-first mt-3 inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:ml-3 sm:mt-0 sm:w-auto sm:text-sm"
 							disabled={$isOpen.deletePrompt !== '' &&
 								promptInput !== $isOpen.deletePrompt}
 							on:click={handleConfirm}
