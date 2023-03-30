@@ -112,6 +112,8 @@ model Tenant {
   roles Role[]
 
   @@index([organizationId])
+  @@index([fullName(ops: raw("gin_trgm_ops"))], type: Gin)
+  @@index([label(ops: raw("gin_trgm_ops"))], type: Gin)
 }
 
 model Portfolio {
@@ -141,6 +143,8 @@ model Portfolio {
   Payout         Payout[]
 
   @@index([organizationId])
+  @@index([fullName(ops: raw("gin_trgm_ops"))], type: Gin)
+  @@index([label(ops: raw("gin_trgm_ops"))], type: Gin)
 }
 
 model Property {
