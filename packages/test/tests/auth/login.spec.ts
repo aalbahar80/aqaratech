@@ -44,7 +44,7 @@ test('login', async ({ page }) => {
 		domain,
 		path: '/',
 		expires: expect.any(Number),
-		httpOnly: true,
+		// httpOnly: true, # `false` for non-live environments
 		// sveltekit sets secure to true only in production
 		// secure: true,
 	};
