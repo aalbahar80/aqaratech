@@ -10,6 +10,7 @@
 	import { setLocale, locale } from '$i18n/i18n-svelte';
 	import { locales } from '$i18n/i18n-util';
 	import { loadLocaleAsync } from '$i18n/i18n-util.async';
+	import { PREF_LOCALE } from '$lib/constants/misc';
 	import { LOCALE_LABELS } from '$lib/i18n/locale-labels';
 
 	const switchLocale = async (
@@ -69,6 +70,9 @@
 <a
 	data-sveltekit-reload
 	href={`${replaceLocaleInUrl($page.url, unselectedLocale)}`}
+	on:click={() => {
+		document.cookie = `${PREF_LOCALE}=${unselectedLocale}; path=/; max-age=31536000`;
+	}}
 >
 	{LOCALE_LABELS[unselectedLocale]}
 </a>
