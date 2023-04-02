@@ -25,7 +25,8 @@ export const locationColumnDef = <
 	const user = get(page).data.user;
 
 	return columnHelper.group({
-		header: LL.landing.location(),
+		id: 'location',
+		header: '',
 		columns: [
 			columnHelper.accessor((a) => a.breadcrumbs.property, {
 				id: options.propertyColumnId,
