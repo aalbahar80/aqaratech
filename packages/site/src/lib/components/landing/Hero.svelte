@@ -48,7 +48,7 @@
 					variant: 'outline',
 				})}
 			>
-				{$L.landing.callToAction.button()}
+				{$L.buttons.signup()}
 			</a>
 		</div>
 	</div>

@@ -36,6 +36,7 @@ const en: BaseTranslation = {
 		copyPayLink: 'Copy payment link',
 		back: 'Back',
 		subscribe: 'Subscribe',
+		signup: 'Sign up',
 	},
 	billing: {
 		subscriptionSettings: 'Subscription settings',

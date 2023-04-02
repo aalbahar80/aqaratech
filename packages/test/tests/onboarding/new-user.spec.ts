@@ -41,7 +41,7 @@ test.describe('new user', () => {
 
 		await page
 			.getByTestId('hero')
-			.getByRole('link', { name: 'Log in' })
+			.getByRole('link', { name: 'Sign up' })
 			.click();
 
 		await expect(page).toHaveURL('/en/welcome');
@@ -62,7 +62,7 @@ test.describe('new user', () => {
 		});
 
 		await page.goto('/');
-		await page.getByRole('link', { name: 'Log in' }).first().click();
+		await page.getByRole('link', { name: 'Log in' }).click();
 
 		const url = getRoute({
 			entity: 'portfolio',
@@ -88,7 +88,7 @@ test.describe('new user', () => {
 		});
 
 		await page.goto('/');
-		await page.getByRole('link', { name: 'Log in' }).first().click();
+		await page.getByRole('link', { name: 'Log in' }).click();
 
 		const url = `${siteURL}/en/portal/tenant/${tenant.id}/leaseInvoices`;
 

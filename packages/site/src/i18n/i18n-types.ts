@@ -497,6 +497,10 @@ type RootTranslation = {
 		 * S​u​b​s​c​r​i​b​e
 		 */
 		subscribe: string
+		/**
+		 * S​i​g​n​ ​u​p
+		 */
+		signup: string
 	}
 	billing: {
 		/**
@@ -919,7 +923,7 @@ type RootTranslation = {
 					 */
 					track: string
 					/**
-					 * V​i​s​u​a​l​i​z​e​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​'​ ​f​i​n​a​n​c​i​a​l​ ​d​a​t​a​ ​t​o​ ​i​d​e​n​t​i​f​y​ ​t​r​e​n​d​s​ ​a​n​d​ ​p​a​t​t​e​r​n​s​ ​o​v​e​r​ ​t​i​m​e​.​ ​U​s​e​ ​o​u​r​ ​i​n​t​e​r​a​c​t​i​v​e​ ​d​a​s​h​b​o​a​r​d​s​ ​t​o​ ​v​i​e​w​ ​i​n​c​o​m​e​,​ ​e​x​p​e​n​s​e​s​,​ ​a​n​d​ ​p​r​o​f​i​t​/​l​o​s​s​ ​f​o​r​ ​e​a​c​h​ ​p​o​r​t​f​o​l​i​o​,​ ​p​r​o​p​e​r​t​y​,​ ​a​n​d​ ​u​n​i​t​.
+					 * V​i​s​u​a​l​i​z​e​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​'​ ​f​i​n​a​n​c​i​a​l​ ​d​a​t​a​ ​t​o​ ​i​d​e​n​t​i​f​y​ ​t​r​e​n​d​s​ ​a​n​d​ ​p​a​t​t​e​r​n​s​ ​o​v​e​r​ ​t​i​m​e​.​ ​U​s​e​ ​t​h​e​ ​i​n​t​e​r​a​c​t​i​v​e​ ​d​a​s​h​b​o​a​r​d​s​ ​t​o​ ​v​i​e​w​ ​i​n​c​o​m​e​,​ ​e​x​p​e​n​s​e​s​,​ ​a​n​d​ ​p​r​o​f​i​t​/​l​o​s​s​ ​f​o​r​ ​e​a​c​h​ ​p​o​r​t​f​o​l​i​o​,​ ​p​r​o​p​e​r​t​y​,​ ​a​n​d​ ​u​n​i​t​.
 					 */
 					visualize: string
 					/**
@@ -1636,6 +1640,10 @@ export type TranslationFunctions = {
 		 * Subscribe
 		 */
 		subscribe: () => LocalizedString
+		/**
+		 * Sign up
+		 */
+		signup: () => LocalizedString
 	}
 	billing: {
 		/**
@@ -2058,7 +2066,7 @@ export type TranslationFunctions = {
 					 */
 					track: () => LocalizedString
 					/**
-					 * Visualize your properties' financial data to identify trends and patterns over time. Use our interactive dashboards to view income, expenses, and profit/loss for each portfolio, property, and unit.
+					 * Visualize your properties' financial data to identify trends and patterns over time. Use the interactive dashboards to view income, expenses, and profit/loss for each portfolio, property, and unit.
 					 */
 					visualize: () => LocalizedString
 					/**

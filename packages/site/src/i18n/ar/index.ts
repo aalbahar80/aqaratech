@@ -149,6 +149,7 @@ const ar: Translation = {
 		copyPayLink: 'نسخ رابط الدفع',
 		back: 'عودة',
 		subscribe: 'اشترك',
+		signup: 'إنشاء حساب ',
 	},
 	billing: {
 		subscriptionSettings: 'إعدادات الاشتراك',
