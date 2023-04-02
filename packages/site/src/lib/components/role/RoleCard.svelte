@@ -1,4 +1,8 @@
 <script lang="ts">
+	import clsx from 'clsx';
+
+	import { page } from '$app/stores';
+
 	import type { ValidatedRoleDto } from '$api/openapi';
 	import type { IconTooltip } from '$lib/models/types/icon-tooltip.type';
 
@@ -14,12 +18,16 @@
 	export let icons: IconTooltip[];
 
 	$: meta = getRoleMeta(role, $L, $locale);
+	$: isActive = role.id === $page.data.user?.role?.id;
 </script>
 
 <a
 	href={`/auth/roles/${role.id}?${PREF_LOCALE}=${$locale}`}
 	data-sveltekit-reload
-	class="flex flex-col gap-4 px-4 py-4 hover:bg-gray-50 sm:px-6"
+	class={clsx(
+		'flex flex-col gap-4 px-4 py-4 hover:bg-gray-50 sm:px-6',
+		isActive && 'bg-indigo-100 hover:bg-indigo-200',
+	)}
 >
 	<div class="self-end">
 		{#if role.roleType === 'ORGADMIN'}

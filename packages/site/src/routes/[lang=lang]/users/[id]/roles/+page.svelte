@@ -6,4 +6,4 @@
 	export let data: PageData;
 </script>
 
-<RoleList roles={data.user.roles} />
+<RoleList roles={data.roles} />
