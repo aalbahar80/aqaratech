@@ -50,6 +50,7 @@
 		await switchLocale(state.locale, false);
 
 	// update locale when page store changes
+	// TODO: Still needed? Since we do a full page reload on locale switch.
 	$: if (browser) {
 		const lang = $page.params['lang'] as Locales;
 		void switchLocale(lang, false);
