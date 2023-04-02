@@ -348,6 +348,10 @@ type RootTranslation = {
 		 */
 		paidAt: string
 		/**
+		 * M​y​F​a​t​o​o​r​a​h​ ​P​a​y​m​e​n​t​ ​I​D
+		 */
+		mfPaymentId: string
+		/**
 		 * C​a​t​e​g​o​r​y
 		 */
 		categoryId: string
@@ -671,10 +675,6 @@ type RootTranslation = {
 		 * d​a​y​s
 		 */
 		days: string
-		/**
-		 * I​D
-		 */
-		id: string
 	}
 	charts: {
 		empty: {
@@ -1499,6 +1499,10 @@ export type TranslationFunctions = {
 		 */
 		paidAt: () => LocalizedString
 		/**
+		 * MyFatoorah Payment ID
+		 */
+		mfPaymentId: () => LocalizedString
+		/**
 		 * Category
 		 */
 		categoryId: () => LocalizedString
@@ -1822,10 +1826,6 @@ export type TranslationFunctions = {
 		 * days
 		 */
 		days: () => LocalizedString
-		/**
-		 * ID
-		 */
-		id: () => LocalizedString
 	}
 	charts: {
 		empty: {

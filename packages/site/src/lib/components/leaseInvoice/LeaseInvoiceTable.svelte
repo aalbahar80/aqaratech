@@ -2,7 +2,7 @@
 	import { createColumnHelper, renderComponent } from '@tanstack/svelte-table';
 
 	import { page } from '$app/stores';
-	import { getLabel, getMyfatoorahReceipt } from '@self/utils';
+	import { getMyfatoorahReceipt } from '@self/utils';
 
 	import type { LeaseInvoiceDto, PaginatedLeaseInvoiceDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
@@ -126,7 +126,7 @@
 		}),
 
 		columnHelper.accessor('mfPaymentId', {
-			header: getLabel('mfPaymentId'),
+			header: getIntlLabel('mfPaymentId'),
 			cell: (props) => {
 				const paymentId = props.cell.getValue();
 

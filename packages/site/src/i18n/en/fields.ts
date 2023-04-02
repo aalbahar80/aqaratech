@@ -123,6 +123,7 @@ export const fields = {
 	dueDurationMonths: 'Due duration (months)',
 	dueDurationDays: 'Due duration (days)',
 	paidAt: 'Paid At',
+	mfPaymentId: 'MyFatoorah Payment ID',
 
 	// expense
 	categoryId: 'Category',
@@ -158,4 +159,5 @@ type Fields = Record<Keys, string> & {
 	dueAt: string; // computed
 	[MONTHS_KEY]: string;
 	[DAYS_KEY]: string;
+	mfPaymentId: string; // LeaseInvoiceDto (not in schema)
 };

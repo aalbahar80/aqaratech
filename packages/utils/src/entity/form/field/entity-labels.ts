@@ -28,8 +28,6 @@ const entityFieldLabels = {
 
 	categoryId: 'Category',
 
-	mfPaymentId: 'MyFatoorah Payment ID',
-
 	key: 'Name',
 	dueDurationMonths: 'Due duration (months)',
 	dueDurationDays: 'Due duration (days)',
@@ -77,7 +75,6 @@ type Keys = keyof Union.IntersectOf<Schemas>;
 
 type FieldLabels = Partial<Union.Strict<Record<Keys, string>>> & {
 	key: string; // FileDto
-	mfPaymentId: string; // LeaseInvoiceDto (not in schema)
 	dueDurationMonths: string;
 	dueDurationDays: string;
 };

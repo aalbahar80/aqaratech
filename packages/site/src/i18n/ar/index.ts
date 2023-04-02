@@ -123,6 +123,7 @@ const ar: Translation = {
 		size2: 'حجم',
 		receivedAt: 'تاريخ الإستلام',
 		recipients: 'المستلمين',
+		mfPaymentId: 'معرف سداد ماي فاتورة',
 	},
 	buttons: {
 		login: 'تسجيل الدخول',
