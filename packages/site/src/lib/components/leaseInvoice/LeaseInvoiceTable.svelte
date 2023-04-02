@@ -169,6 +169,7 @@
 		dueAt: false,
 		paidAt: false,
 		mfPaymentId: false,
+		'portfolio.fullName': false,
 	}}
 >
 	<div
