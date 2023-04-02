@@ -52,8 +52,6 @@
 	// Chart.defaults.aspectRatio = 2;
 	Chart.defaults.maintainAspectRatio = false; // important for responsiveness
 	Chart.defaults.font.size = 16;
-	Chart.defaults.font.family =
-		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"';
 	Chart.defaults.plugins.legend.display = false;
 	Chart.defaults.plugins.legend.align = 'start';
 	Chart.defaults.plugins.legend.labels.usePointStyle = true;
