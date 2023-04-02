@@ -24,7 +24,7 @@ const ar: Translation = {
 			singular: 'مالك',
 		},
 		property: {
-			plural: 'العقارات',
+			plural: 'العقار',
 			singular: 'عقار',
 		},
 		unit: {
