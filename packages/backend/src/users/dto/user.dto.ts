@@ -41,12 +41,19 @@ export class ValidatedUserDto
 					properties: {
 						organization: {
 							type: 'object',
-							required: ['id', 'fullName'],
+							required: ['id', 'fullName', 'title'],
 							properties: {
 								id: { type: 'string' },
 								fullName: { type: 'string' },
 								title: { type: 'string' },
 								isActive: { type: 'boolean' },
+							},
+						},
+						portfolio: {
+							type: 'object',
+							required: ['title'],
+							properties: {
+								title: { type: 'string' },
 							},
 						},
 					},

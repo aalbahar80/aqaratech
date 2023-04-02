@@ -3,6 +3,8 @@
 
 	import { page } from '$app/stores';
 
+	import RoleDetails from './RoleDetails.svelte';
+
 	import type { ValidatedRoleDto } from '$api/openapi';
 	import type { IconTooltip } from '$lib/models/types/icon-tooltip.type';
 
@@ -54,9 +56,7 @@
 		{/if}
 	</div>
 
-	<p class="select-all truncate text-sm font-medium text-indigo-600">
-		{role.organization.title}
-	</p>
+	<RoleDetails {role} />
 	<div class="mt-2 sm:flex sm:justify-between">
 		<div class="sm:flex sm:space-x-4">
 			{#each icons as { label, icon, tooltip } (tooltip)}

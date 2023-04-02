@@ -35,6 +35,11 @@ export class UsersService {
 								isActive: true,
 							},
 						},
+						portfolio: {
+							select: {
+								title: true,
+							},
+						},
 					},
 				},
 			},
@@ -61,6 +66,11 @@ export class UsersService {
 									label: true,
 									title: true,
 									isActive: true,
+								},
+							},
+							portfolio: {
+								select: {
+									title: true,
 								},
 							},
 						},

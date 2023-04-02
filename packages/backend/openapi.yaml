@@ -3746,6 +3746,7 @@ components:
                     required:
                       - id
                       - fullName
+                      - title
                     properties:
                       id:
                         type: string
@@ -3755,6 +3756,13 @@ components:
                         type: string
                       isActive:
                         type: boolean
+                  portfolio:
+                    type: object
+                    required:
+                      - title
+                    properties:
+                      title:
+                        type: string
         email:
           type: string
         fullName:

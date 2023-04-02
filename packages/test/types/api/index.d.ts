@@ -3278,6 +3278,12 @@ export interface ValidatedRoleDto {
 	 * @memberof ValidatedRoleDto
 	 */
 	organization: ValidatedRoleDtoAllOfOrganization;
+	/**
+	 *
+	 * @type {ValidatedRoleDtoAllOfPortfolio}
+	 * @memberof ValidatedRoleDto
+	 */
+	portfolio?: ValidatedRoleDtoAllOfPortfolio;
 }
 /**
  *
@@ -3291,6 +3297,12 @@ export interface ValidatedRoleDtoAllOf {
 	 * @memberof ValidatedRoleDtoAllOf
 	 */
 	organization: ValidatedRoleDtoAllOfOrganization;
+	/**
+	 *
+	 * @type {ValidatedRoleDtoAllOfPortfolio}
+	 * @memberof ValidatedRoleDtoAllOf
+	 */
+	portfolio?: ValidatedRoleDtoAllOfPortfolio;
 }
 /**
  *
@@ -3315,13 +3327,26 @@ export interface ValidatedRoleDtoAllOfOrganization {
 	 * @type {string}
 	 * @memberof ValidatedRoleDtoAllOfOrganization
 	 */
-	title?: string;
+	title: string;
 	/**
 	 *
 	 * @type {boolean}
 	 * @memberof ValidatedRoleDtoAllOfOrganization
 	 */
 	isActive?: boolean;
+}
+/**
+ *
+ * @export
+ * @interface ValidatedRoleDtoAllOfPortfolio
+ */
+export interface ValidatedRoleDtoAllOfPortfolio {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedRoleDtoAllOfPortfolio
+	 */
+	title: string;
 }
 /**
  *
