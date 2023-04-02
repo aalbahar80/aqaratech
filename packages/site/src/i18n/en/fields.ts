@@ -66,6 +66,7 @@ type Keys = keyof Union.IntersectOf<Schemas>;
 
 export const fields = {
 	// common
+	id: 'ID',
 	fullName: 'Full Name',
 	label: 'Label',
 	dob: 'Date of Birth',

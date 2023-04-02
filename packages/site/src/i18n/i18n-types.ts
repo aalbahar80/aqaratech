@@ -168,6 +168,10 @@ type RootTranslation = {
 	}
 	fields: {
 		/**
+		 * I​D
+		 */
+		id: string
+		/**
 		 * F​u​l​l​ ​N​a​m​e
 		 */
 		fullName: string
@@ -667,6 +671,10 @@ type RootTranslation = {
 		 * d​a​y​s
 		 */
 		days: string
+		/**
+		 * I​D
+		 */
+		id: string
 	}
 	charts: {
 		empty: {
@@ -1311,6 +1319,10 @@ export type TranslationFunctions = {
 	}
 	fields: {
 		/**
+		 * ID
+		 */
+		id: () => LocalizedString
+		/**
 		 * Full Name
 		 */
 		fullName: () => LocalizedString
@@ -1810,6 +1822,10 @@ export type TranslationFunctions = {
 		 * days
 		 */
 		days: () => LocalizedString
+		/**
+		 * ID
+		 */
+		id: () => LocalizedString
 	}
 	charts: {
 		empty: {

@@ -65,6 +65,7 @@ const ar: Translation = {
 		},
 	},
 	fields: {
+		id: 'المعرف',
 		fullName: 'الاسم الكامل',
 		label: 'مسمى',
 		dob: 'تاريخ الولادة',
