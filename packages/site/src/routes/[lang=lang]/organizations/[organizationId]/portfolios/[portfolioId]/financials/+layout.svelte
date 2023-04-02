@@ -1,4 +1,6 @@
 <script lang="ts">
+	import clsx from 'clsx';
+
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
@@ -17,11 +19,18 @@
 
 	const hideRangePaths = ['financials/summary', 'payouts/table'];
 	const hidePropertyPaths = ['payouts/table'];
+	const showName = $page.data.user?.role?.roleType === 'ORGADMIN';
 </script>
 
-<div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+<div
+	class={clsx(
+		'grid grid-cols-1 gap-8',
+		showName ? 'lg:grid-cols-3' : 'lg:grid-cols-2',
+	)}
+>
 	<div
 		class="flex flex-col items-center justify-center rounded-lg bg-white p-4 shadow lg:items-start lg:justify-start"
+		class:hidden={!showName}
 	>
 		<div class="flex items-center justify-between self-stretch pb-4">
 			<div class="block text-sm font-medium text-gray-700">
