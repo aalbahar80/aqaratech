@@ -46,7 +46,7 @@
 			>
 				<MenuItemChild {active}>
 					<MenuItemIcon icon={Fa6SolidMoneyBillTransfer} />
-					Create payout
+					{$L.buttons.new() + ' ' + $L.entity.payout.singular()}
 				</MenuItemChild>
 			</a>
 		</MenuItem>

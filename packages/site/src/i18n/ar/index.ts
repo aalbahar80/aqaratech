@@ -45,7 +45,7 @@ const ar: Translation = {
 		},
 		payout: {
 			plural: 'المدفوعات',
-			singular: 'المدفوعات',
+			singular: 'دفعة',
 		},
 		expense: {
 			plural: 'المصروفات',
