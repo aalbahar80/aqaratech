@@ -6,7 +6,6 @@ import {
 	Injectable,
 	LoggerService,
 } from '@nestjs/common';
-import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { resolveURL } from 'ufo';
 
@@ -32,8 +31,6 @@ export class MyfatoorahService {
 		private readonly env: EnvService,
 		@Inject(WINSTON_MODULE_NEST_PROVIDER)
 		private readonly logger: LoggerService,
-		// @ts-expect-error until update to ts 5.0
-		@InjectSentry() private readonly sentry: SentryService,
 	) {
 		this.EXECUTE_PAYMENT_URL = `${this.env.e.MYFATOORAH_URL}/v2/ExecutePayment`;
 		this.GET_PAYMENT_STATUS_URL = `${this.env.e.MYFATOORAH_URL}/v2/GetPaymentStatus`;

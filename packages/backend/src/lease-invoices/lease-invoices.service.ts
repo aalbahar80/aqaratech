@@ -41,7 +41,6 @@ export class LeaseInvoicesService {
 		private readonly postmarkService: PostmarkService,
 		private readonly env: EnvService,
 		private readonly myfatoorah: MyfatoorahService,
-		// @ts-expect-error until update to ts 5.0
 		@InjectSentry() private readonly sentry: SentryService,
 	) {}
 	SubjectType = 'LeaseInvoice' as const;

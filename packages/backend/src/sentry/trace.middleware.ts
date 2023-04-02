@@ -7,7 +7,6 @@ import { getUserSentry } from 'src/sentry/get-user-sentry';
 
 @Injectable()
 export class TraceMiddleware implements NestMiddleware {
-	// @ts-expect-error until update to ts 5.0
 	constructor(@InjectSentry() private readonly sentry: SentryService) {}
 	use(req: Request, res: Response, next: NextFunction): void {
 		// TODO: How to use this.sentry.instance().extractRequestData(req) do?;

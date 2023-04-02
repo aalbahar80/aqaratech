@@ -3,7 +3,7 @@
 
 	import L from '$i18n/i18n-svelte';
 	import { buttonCn } from '$lib/components/landing/button-cn';
-	import { LOGIN } from '$lib/constants/routes';
+	import { SIGNUP } from '$lib/constants/routes';
 </script>
 
 <div
@@ -42,13 +42,13 @@
 			<a
 				rel="external"
 				data-sveltekit-reload
-				href={LOGIN}
+				href={SIGNUP}
 				class={buttonCn({
 					cs: 'w-32',
 					variant: 'outline',
 				})}
 			>
-				{$L.buttons.login()}
+				{$L.landing.callToAction.button()}
 			</a>
 		</div>
 	</div>

@@ -14,19 +14,19 @@
 	},
 	"dependencies": {
 		"date-fns": "2.29.3",
-		"remeda": "1.9.4",
+		"remeda": "1.10.0",
 		"winston": "3.8.2",
 		"zod": "3.21.4"
 	},
 	"devDependencies": {
 		"@logtail/types": "0.4.0",
-		"@sentry/types": "7.45.0",
+		"@sentry/types": "7.46.0",
 		"@types/node": "18.15.11",
 		"@vitest/ui": "0.29.8",
 		"eslint-config-custom": "workspace:*",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
-		"typescript": "5.0.2",
+		"typescript": "5.0.3",
 		"vitest": "0.29.8"
 	},
 	"private": true,
