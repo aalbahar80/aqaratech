@@ -21,7 +21,7 @@
 		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate && ./scripts/add-nocheck.sh && tsx ./scripts/rm-unused-jsdoc.ts && prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'",
 		"api:generate:all": "turbo run api:generate",
 		"seed": "pnpm -F @self/backend exec prisma migrate reset --force",
-		"precompute": "TIMING=1 turbo run format check lint build test --continue"
+		"precompute": "rm packages/site/.eslintcache; TIMING=1 turbo run format check lint build test --continue"
 	},
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.14",
