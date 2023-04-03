@@ -198,9 +198,19 @@ model Unit {
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
 
+  computed UnitComputed?
+
   @@index([propertyId])
   @@index([organizationId])
   @@index([portfolioId])
+}
+
+view UnitComputed {
+  id   String @id
+  unit Unit   @relation(fields: [id], references: [id])
+
+  title      String
+  titleScore Int
 }
 
 model Lease {

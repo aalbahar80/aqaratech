@@ -5,18 +5,26 @@ interface LabelParams {
 	title: string;
 }
 
+/** For models where we get the title from the underlying db view "computed". */
+interface LabelComputedParams {
+	id: string;
+	computed: {
+		title: string;
+	} | null;
+}
+
 type LabelParamsId = Omit<LabelParams, 'title'>;
 
 export interface IBreadcrumbs {
 	tenant: LabelParams;
 	portfolio: LabelParams;
 	property: LabelParams & { portfolio: LabelParams };
-	unit: LabelParams & {
+	unit: LabelComputedParams & {
 		property: LabelParams & { portfolio: LabelParams };
 	};
 	lease: LabelParamsId & {
 		tenant: LabelParams;
-		unit: LabelParams & {
+		unit: LabelComputedParams & {
 			property: LabelParams & { portfolio: LabelParams };
 		};
 	};

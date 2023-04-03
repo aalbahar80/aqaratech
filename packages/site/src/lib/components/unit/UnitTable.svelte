@@ -24,7 +24,10 @@
 
 		columnHelper.accessor('unitNumber', { header: getIntlLabel('unitNumber') }),
 
-		columnHelper.accessor('label', { header: getIntlLabel('label') }),
+		columnHelper.accessor('title', {
+			id: 'computed.titleScore',
+			header: getIntlLabel('label'),
+		}),
 
 		columnHelper.accessor('floor', {
 			header: getIntlLabel('floor'),

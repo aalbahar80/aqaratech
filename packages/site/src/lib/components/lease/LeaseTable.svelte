@@ -69,7 +69,7 @@
 
 		locationColumnDef(columnHelper, {
 			propertyColumnId: 'unit.property.label',
-			unitColumnId: 'unit.label',
+			unitColumnId: 'unit.computed.titleScore',
 		}),
 
 		...extraColumns,

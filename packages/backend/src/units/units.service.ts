@@ -89,6 +89,11 @@ export class UnitsService {
 						orderBy: { end: 'desc' },
 					},
 					property: crumbs.property,
+					computed: {
+						select: {
+							title: true,
+						},
+					},
 				},
 			}),
 			this.prisma.c.unit.count({ where }),
@@ -130,6 +135,11 @@ export class UnitsService {
 					type: true,
 					unitNumber: true,
 					propertyId: true,
+					computed: {
+						select: {
+							title: true,
+						},
+					},
 				},
 			}),
 			this.prisma.c.unit.count({ where }),
@@ -147,6 +157,11 @@ export class UnitsService {
 					orderBy: { end: 'desc' },
 				},
 				property: crumbs.property,
+				computed: {
+					select: {
+						title: true,
+					},
+				},
 			},
 		});
 

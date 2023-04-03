@@ -6,8 +6,8 @@ import {
 	PartialType,
 	PickType,
 } from '@nestjs/swagger';
-import { Unit } from '@prisma/client';
-import { Exclude, Expose } from 'class-transformer';
+import { Unit, UnitComputed } from '@prisma/client';
+import { Exclude, Expose, Transform } from 'class-transformer';
 import { formatDistance } from 'date-fns';
 
 import { hasItems, UnitCreateSchema, UnitUpdateSchema } from '@self/utils';
@@ -69,12 +69,21 @@ export class UnitDto
 	)
 	implements Unit
 {
-	constructor(data: Omit<NonComputed<UnitDto>, 'vacancy'>) {
+	constructor(data: Omit<NonComputed<UnitDto>, 'vacancy' | 'title'>) {
 		super();
 		Object.assign(this, data);
 	}
 
+	@Transform(({ obj }: { obj: ConstructorParameters<typeof UnitDto>[0] }) => {
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		return obj.computed!.title;
+	})
 	title: string;
+
+	// Instead of exposing the computed property, we expose it's values as top-level properties.
+	@ApiHideProperty()
+	@Exclude()
+	computed: Omit<UnitComputed, 'id' | 'titleScore'> | null; // HACK: Type Limitation
 
 	@ApiHideProperty()
 	@Exclude()
@@ -132,7 +141,8 @@ export class UnitDto
 			}),
 			unit: new BreadcrumbDto({
 				id: this.id,
-				title: this.title,
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				title: this.computed!.title,
 			}),
 		};
 	}

@@ -73,7 +73,7 @@
 
 		locationColumnDef(columnHelper, {
 			propertyColumnId: 'property.label',
-			unitColumnId: 'unit.label',
+			unitColumnId: 'unit.computed.titleScore',
 		}),
 
 		viewColumnDef(columnHelper, 'maintenanceOrder', $page.params),

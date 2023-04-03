@@ -1,7 +1,7 @@
 import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
-import { computeLabelProperty, computeLabelUnit } from '@self/utils';
+import { computeLabelProperty } from '@self/utils';
 
 @Injectable()
 export class PrismaService implements OnModuleInit {
@@ -62,14 +62,6 @@ const createPrismaClient = () => {
 					needs: { label: true, area: true, block: true, number: true },
 					compute(property) {
 						return property.label ?? computeLabelProperty(property);
-					},
-				},
-			},
-			unit: {
-				title: {
-					needs: { label: true, type: true, unitNumber: true },
-					compute(unit) {
-						return unit.label ?? computeLabelUnit(unit);
 					},
 				},
 			},

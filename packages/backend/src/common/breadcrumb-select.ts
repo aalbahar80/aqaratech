@@ -10,7 +10,11 @@ const lease = {
 		unit: {
 			select: {
 				id: true,
-				title: true,
+				computed: {
+					select: {
+						title: true,
+					},
+				},
 				property: {
 					select: {
 						id: true,
@@ -31,7 +35,11 @@ const lease = {
 const unit = {
 	select: {
 		id: true,
-		title: true,
+		computed: {
+			select: {
+				title: true,
+			},
+		},
 		propertyId: true,
 		property: {
 			select: {

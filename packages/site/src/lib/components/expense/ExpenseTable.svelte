@@ -43,7 +43,7 @@
 
 		locationColumnDef(columnHelper, {
 			propertyColumnId: 'property.label',
-			unitColumnId: 'unit.label',
+			unitColumnId: 'unit.computed.titleScore',
 		}),
 
 		viewColumnDef(columnHelper, 'expense', $page.params),

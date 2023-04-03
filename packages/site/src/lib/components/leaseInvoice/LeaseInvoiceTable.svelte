@@ -151,7 +151,7 @@
 
 		locationColumnDef(columnHelper, {
 			propertyColumnId: 'lease.unit.property.label',
-			unitColumnId: 'lease.unit.label',
+			unitColumnId: 'lease.unit.computed.titleScore',
 		}),
 
 		...extraColumns,

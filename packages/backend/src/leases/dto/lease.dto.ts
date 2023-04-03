@@ -85,7 +85,8 @@ export class LeaseDto
 			}),
 			unit: new BreadcrumbDto({
 				id: this.unit.id,
-				title: this.unit.title,
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				title: this.unit.computed!.title,
 			}),
 			tenant: new BreadcrumbDto({
 				id: this.tenant.id,
