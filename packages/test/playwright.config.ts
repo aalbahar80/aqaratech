@@ -105,6 +105,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		{
 			name: 'site:firefox',
 			testIgnore: [
+				...TESTS.MAIN_ONLY,
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
 				'**/tests/components/expense-tree/drag.spec.ts',
@@ -114,6 +115,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		{
 			name: 'site:webkit',
 			testIgnore: [
+				...TESTS.MAIN_ONLY,
 				...TESTS.NON_SITE,
 				...TESTS.MOBILE_ONLY,
 				'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit
@@ -129,6 +131,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		{
 			name: 'site:chrome:mobile',
 			testIgnore: [
+				...TESTS.MAIN_ONLY,
 				...TESTS.NON_SITE,
 				...TESTS.DESKTOP_ONLY,
 				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
@@ -140,6 +143,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			name: 'site:webkit:mobile',
 			use: devices['iPhone 13 Mini'],
 			testIgnore: [
+				...TESTS.MAIN_ONLY,
 				...TESTS.NON_SITE,
 				...TESTS.DESKTOP_ONLY,
 				'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit

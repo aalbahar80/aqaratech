@@ -5,9 +5,17 @@ const DESKTOP_ONLY: string[] = [
 	// '**/tests/components/expense-tree/drag.spec.ts',
 ];
 
+/** Some tests, especially those that are slow or don't work well in parallel,
+ * should only be run in the main project. */
+const MAIN_ONLY = [
+	'**/tests/billing/**/*.spec.ts',
+	'**/tests/search/search-authz.spec.ts',
+];
+
 export const TESTS = {
 	API,
 	NON_SITE,
 	MOBILE_ONLY,
 	DESKTOP_ONLY,
+	MAIN_ONLY,
 };
