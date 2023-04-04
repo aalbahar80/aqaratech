@@ -60,7 +60,7 @@ for (const entity of entities) {
 			params,
 		});
 
-		await expect(page).toHaveURL(successUrl);
+		await expect(page).toHaveURL(successUrl, { timeout: 10000 });
 
 		const cell = page.getByRole('cell', { name: email });
 

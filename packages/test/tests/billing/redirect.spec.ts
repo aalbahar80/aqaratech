@@ -13,6 +13,7 @@ test.describe.configure({ mode: 'parallel' });
 test.describe('redirect for non-active subscriptions- ORGADMIN', () => {
 	test.use({ organizationParams: { isActive: false } });
 	test('redirected to billing page to re-subscribe', async ({ page, org }) => {
+		test.setTimeout(90000); // slow call to site/org/:id/billing
 		const url = getRoute({
 			entity: 'portfolio',
 			pageType: PageType.List,
@@ -28,6 +29,8 @@ test.describe('redirect for non-active subscriptions- ORGADMIN', () => {
 	});
 
 	test('can still create new organization', async ({ page, isMobile }) => {
+		test.setTimeout(90000); // slow call to site/org/:id/billing
+
 		await page.goto(`${siteURL}/concierge`);
 		if (isMobile) {
 			await page.getByRole('button', { name: 'Sidebar' }).click();
