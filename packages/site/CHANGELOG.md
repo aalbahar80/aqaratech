@@ -1,5 +1,22 @@
 # @self/site
 
+## 2.23.0
+
+### Minor Changes
+
+- 837854075: fuzzy search
+- fa0f37136: smarter unit sort
+- 20a800dcb: add pie charts, portfolio switcher
+
+### Patch Changes
+
+- ece76d572: persist locale using cookies
+- 784010931: highlight current tole
+- e9ac2dbf4: change hero text to "sign up"
+- 7c9d020d9: fix dupe fetch request
+- 28536e8df: hide location label
+- edc9d2447: update deps
+
 ## 2.22.0
 
 ### Minor Changes

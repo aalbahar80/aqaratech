@@ -1,5 +1,24 @@
 # @self/backend
 
+## 2.21.0
+
+### Minor Changes
+
+- 837854075: fuzzy search
+- fa0f37136: smarter unit sort
+- 20a800dcb: add pie charts, portfolio switcher
+
+### Patch Changes
+
+- ece76d572: persist locale using cookies
+- edc9d2447: update deps
+- Updated dependencies [837854075]
+- Updated dependencies [ece76d572]
+- Updated dependencies [fa0f37136]
+- Updated dependencies [20a800dcb]
+- Updated dependencies [edc9d2447]
+  - @self/utils@3.20.0
+
 ## 2.20.2
 
 ### Patch Changes

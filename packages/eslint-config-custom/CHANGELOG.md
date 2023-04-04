@@ -1,5 +1,18 @@
 # eslint-config-custom
 
+## 2.20.0
+
+### Minor Changes
+
+- 837854075: fuzzy search
+- fa0f37136: smarter unit sort
+- 20a800dcb: add pie charts, portfolio switcher
+
+### Patch Changes
+
+- ece76d572: persist locale using cookies
+- edc9d2447: update deps
+
 ## 2.19.2
 
 ### Patch Changes
