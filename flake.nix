@@ -2,7 +2,7 @@
 # Might need to run `nix flake init`, then replace contents of generated file
 {
   description = "A prisma test project";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
+  inputs.nixpkgs.url = "path:/home/nbe/nixpkgs";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   outputs = {
