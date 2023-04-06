@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.20.1
+
+### Patch Changes
+
+- 543584b05: add search placeholder/hint
+
 ## 2.20.0
 
 ### Minor Changes

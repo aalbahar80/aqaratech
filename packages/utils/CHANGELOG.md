@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.20.1
+
+### Patch Changes
+
+- 543584b05: add search placeholder/hint
+
 ## 3.20.0
 
 ### Minor Changes

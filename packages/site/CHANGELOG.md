@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.23.1
+
+### Patch Changes
+
+- 543584b05: add search placeholder/hint
+
 ## 2.23.0
 
 ### Minor Changes

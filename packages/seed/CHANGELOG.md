@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.20.1
+
+### Patch Changes
+
+- 543584b05: add search placeholder/hint
+- Updated dependencies [543584b05]
+  - @self/utils@3.20.1
+
 ## 2.20.0
 
 ### Minor Changes
