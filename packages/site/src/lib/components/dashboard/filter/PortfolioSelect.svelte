@@ -5,6 +5,7 @@
 
 	import { page } from '$app/stores';
 
+	import L from '$i18n/i18n-svelte';
 	import Combobox from '$lib/components/combobox/Combobox.svelte';
 	import { getSearch } from '$lib/components/search/get-search';
 
@@ -30,6 +31,11 @@
 		select: (data) => data.portfolio,
 		// enabled: !!_q || !!$query?.data,
 	});
+
+	$: showHint =
+		_q.length > 0 &&
+		_q.length < 3 &&
+		($query?.data?.length === 0 || $query?.data === undefined);
 </script>
 
 <Combobox
@@ -46,3 +52,10 @@
 		<ComboboxLabel class="sr-only">Portfolio</ComboboxLabel>
 	</div>
 </Combobox>
+
+<div
+	class="prose w-full place-self-center ps-1 pt-1 text-xs italic"
+	class:hidden={!showHint}
+>
+	<p>{$L.other.typeMore() + '...'}</p>
+</div>

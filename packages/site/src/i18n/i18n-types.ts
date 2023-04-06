@@ -1161,6 +1161,10 @@ type RootTranslation = {
 		 * U​n​s​p​e​c​i​f​i​e​d​ ​p​r​o​p​e​r​t​y
 		 */
 		unspecifiedProperty: string
+		/**
+		 * T​y​p​e​ ​a​ ​f​e​w​ ​m​o​r​e​ ​c​h​a​r​a​c​t​e​r​s
+		 */
+		typeMore: string
 	}
 }
 
@@ -2312,6 +2316,10 @@ export type TranslationFunctions = {
 		 * Unspecified property
 		 */
 		unspecifiedProperty: () => LocalizedString
+		/**
+		 * Type a few more characters
+		 */
+		typeMore: () => LocalizedString
 	}
 }
 

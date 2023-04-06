@@ -184,6 +184,7 @@ const en: BaseTranslation = {
 			'Set the due duration for all invoices. Can be set as a number of months or days (or both).\n\nDue duration is used to determine when to consider a payment as late.',
 		unspecifiedUnit: 'Unspecified unit',
 		unspecifiedProperty: 'Unspecified property',
+		typeMore: 'Type a few more characters',
 	},
 };
 
