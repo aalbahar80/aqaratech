@@ -35,7 +35,7 @@
 		"@sentry/svelte": "7.47.0",
 		"@sentry/tracing": "7.47.0",
 		"@sveltejs/adapter-node": "1.2.3",
-		"@sveltejs/kit": "1.15.1",
+		"@sveltejs/kit": "1.15.2",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/container-queries": "0.1.1",
