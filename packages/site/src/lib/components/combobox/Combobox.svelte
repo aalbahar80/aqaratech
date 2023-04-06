@@ -10,6 +10,7 @@
 
 	import { createEventDispatcher } from 'svelte';
 
+	import L from '$i18n/i18n-svelte';
 	import HeroiconsCheck from '~icons/heroicons/check';
 	import HeroiconsOutlineSelector from '~icons/heroicons-outline/selector';
 
@@ -57,10 +58,11 @@
 		<ComboboxInput
 			autocomplete="off"
 			class={clsx(
-				'w-full rounded-md border-0 bg-white py-1.5 pe-10 ps-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6',
+				'w-full rounded-md border-0 bg-white py-1.5 pe-10 ps-3 text-gray-900 placeholder-gray-400 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-base placeholder:font-light placeholder:italic focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6',
 				comboboxInputClass,
 			)}
 			on:change={(e) => (q = e.detail)}
+			placeholder={$L.buttons.search() + '...'}
 			displayValue={getLabel}
 		/>
 
