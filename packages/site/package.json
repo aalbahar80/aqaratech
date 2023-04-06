@@ -27,13 +27,13 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.45",
+		"@iconify/json": "2.2.46",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",
-		"@sentry/svelte": "7.46.0",
-		"@sentry/tracing": "7.46.0",
+		"@sentry/svelte": "7.47.0",
+		"@sentry/tracing": "7.47.0",
 		"@sveltejs/adapter-node": "1.2.3",
 		"@sveltejs/kit": "1.15.1",
 		"@sveltejs/pancake": "0.0.18",
@@ -57,7 +57,7 @@
 		"debounce": "1.2.1",
 		"defu": "6.1.2",
 		"dotenv": "16.0.3",
-		"dotenv-cli": "7.1.0",
+		"dotenv-cli": "7.2.1",
 		"eslint-config-custom": "workspace:*",
 		"eslint-plugin-svelte": "2.25.0",
 		"frappe-charts": "1.6.2",
@@ -97,7 +97,7 @@
 	"dependencies": {
 		"@logtail/node": "0.4.0",
 		"@logtail/winston": "0.4.1",
-		"@sentry/node": "7.46.0",
+		"@sentry/node": "7.47.0",
 		"typesafe-i18n": "5.24.3",
 		"winston": "3.8.2"
 	},

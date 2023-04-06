@@ -17,7 +17,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@aws-sdk/client-s3": "3.305.0",
+		"@aws-sdk/client-s3": "3.306.0",
 		"@faker-js/faker": "7.6.0",
 		"@playwright/test": "1.32.2",
 		"@prisma/client": "4.12.0",
@@ -28,7 +28,7 @@
 		"@total-typescript/ts-reset": "0.4.2",
 		"@types/node": "18.15.11",
 		"dotenv": "16.0.3",
-		"dotenv-cli": "7.1.0",
+		"dotenv-cli": "7.2.1",
 		"eslint-config-custom": "workspace:*",
 		"eslint-plugin-playwright": "0.12.0",
 		"jose": "4.13.1",
