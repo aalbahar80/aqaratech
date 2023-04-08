@@ -28,7 +28,7 @@
 		"@changesets/cli": "2.26.1",
 		"@go-task/cli": "3.23.0",
 		"@types/node": "18.15.11",
-		"eslint": "8.37.0",
+		"eslint": "8.38.0",
 		"eslint-config-custom": "workspace:*",
 		"madge": "6.0.0",
 		"prettier": "2.8.7",
@@ -39,7 +39,7 @@
 		"tsconfig": "workspace:*",
 		"tsx": "3.12.6",
 		"turbo": "1.8.8",
-		"typescript": "5.0.3",
+		"typescript": "5.0.4",
 		"zx": "7.2.1"
 	},
 	"pnpm": {
