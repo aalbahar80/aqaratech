@@ -4,7 +4,7 @@ import * as R from 'remeda';
 import { maintenanceOrderPartialFactory } from '@self/seed';
 import { FIELDS, getRoute, PageType } from '@self/utils';
 
-import { fromApi } from '../../../utils/matchers/unedited-form';
+import { prisma } from '../../../prisma';
 import { uuid } from '../../../utils/uuid';
 import { test } from '../../api/api-fixtures';
 import { FormPage } from '../form-page-model';
@@ -39,20 +39,7 @@ test('can be submitted with minimal fields', async ({
 
 	await formPage.fillForm(maintenanceOrder);
 
-	const post = page.waitForResponse(fromApi);
-
 	await formPage.save();
-
-	const res: unknown = await post.then(
-		async (data) => (await data.json()) as unknown,
-	);
-
-	expect(res).toMatchObject({
-		...maintenanceOrder,
-		unitId: unit.id,
-		propertyId: null,
-		tenantId: null,
-	});
 
 	await formPage.verifyDetails(maintenanceOrder);
 
@@ -67,6 +54,17 @@ test('can be submitted with minimal fields', async ({
 	});
 
 	await expect(page).toHaveURL(uuid(successUrl));
+
+	const created = await prisma.maintenanceOrder.findFirstOrThrow({
+		where: { organizationId: org.organization.id },
+	});
+
+	expect(created).toMatchObject({
+		...maintenanceOrder,
+		unitId: unit.id,
+		propertyId: null,
+		tenantId: null,
+	});
 });
 
 test('can be submitted with all fields', async ({
@@ -96,21 +94,7 @@ test('can be submitted with all fields', async ({
 
 	await formPage.fillForm(maintenanceOrder);
 
-	const post = page.waitForResponse(fromApi);
-
 	await formPage.save();
-
-	const res: unknown = await post.then(
-		async (data) => (await data.json()) as unknown,
-	);
-
-	expect(res).toMatchObject({
-		...maintenanceOrder,
-		completedAt: new Date(maintenanceOrder.completedAt!).toISOString(),
-		unitId: unit.id,
-		propertyId: null,
-		tenantId: null,
-	});
 
 	await formPage.verifyDetails(maintenanceOrder);
 
@@ -125,4 +109,16 @@ test('can be submitted with all fields', async ({
 	});
 
 	await expect(page).toHaveURL(uuid(successUrl));
+
+	const created = await prisma.maintenanceOrder.findFirstOrThrow({
+		where: { organizationId: org.organization.id },
+	});
+
+	expect(created).toMatchObject({
+		...maintenanceOrder,
+		completedAt: new Date(maintenanceOrder.completedAt!),
+		unitId: unit.id,
+		propertyId: null,
+		tenantId: null,
+	});
 });
