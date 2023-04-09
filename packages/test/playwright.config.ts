@@ -60,8 +60,6 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		launchOptions: {
 			// slowMo: 100,
 			args: ['--window-position=1,1'],
-			// @ts-expect-error for nixOS
-			executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
 		},
 	},
 	webServer: [

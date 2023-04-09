@@ -13,16 +13,6 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
 
-      modifiedPlaywrightBrowsers =
-        pkgs.runCommand "modified-playwright-browsers" {
-          src = pkgs.playwright.browsers;
-        } ''
-          mkdir -p $out
-          cp -r ${pkgs.playwright.browsers}/* $out
-          mkdir -p $out/ffmpeg-1008
-          ln -s $out/ffmpeg-1007/ffmpeg-linux $out/ffmpeg-1008/ffmpeg-linux
-        '';
-
       # Tier binary package
       tier = {pkgs, ...}:
         pkgs.stdenv.mkDerivation rec {
@@ -77,11 +67,6 @@
 
           # Tell turbo where to find our nixOS-specific binary
           export TURBO_BINARY_PATH="${turbo}/bin/turbo"
-
-          # Playwright nixOS combatibility
-          export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
-          export PLAYWRIGHT_BROWSERS_PATH="${modifiedPlaywrightBrowsers}"
-          export PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH="${chromium}/bin/chromium"
         '';
       };
     });
