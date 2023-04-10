@@ -22,12 +22,12 @@
 		"@logtail/types": "0.4.0",
 		"@sentry/types": "7.47.0",
 		"@types/node": "18.15.11",
-		"@vitest/ui": "0.29.8",
+		"@vitest/ui": "0.30.0",
 		"eslint-config-custom": "workspace:*",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"typescript": "5.0.4",
-		"vitest": "0.29.8"
+		"vitest": "0.30.0"
 	},
 	"private": true,
 	"engines": {
