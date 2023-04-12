@@ -33,16 +33,16 @@
     },
     "nixpkgs-turbo": {
       "locked": {
-        "lastModified": 1680670362,
-        "narHash": "sha256-EUpnOQfjTvbGRrH08TwJ08Zu5XyC/PKzETu5jWInTMY=",
+        "lastModified": 1681274004,
+        "narHash": "sha256-cM5nfbrXjeFS/rBGwrLz20SROg5Q/8hMnX41XkajVns=",
         "owner": "thenbe",
         "repo": "nixpkgs",
-        "rev": "9780ac2b4f8ce0ebcbccb01d9bc90540af9dc266",
+        "rev": "5cfb4578ae5ae7db2bd889e6d5058d6894044db6",
         "type": "github"
       },
       "original": {
         "owner": "thenbe",
-        "ref": "turbo-1.8.8",
+        "ref": "turbo-1.9.0",
         "repo": "nixpkgs",
         "type": "github"
       }

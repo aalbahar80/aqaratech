@@ -4,7 +4,7 @@
   description = "A prisma test project";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.nixpkgs-turbo.url = "github:thenbe/nixpkgs/turbo-1.8.8";
+  inputs.nixpkgs-turbo.url = "github:thenbe/nixpkgs/turbo-1.9.0";
 
   outputs = {
     self,
@@ -69,7 +69,7 @@
           rm -rf node_modules/.bin/turbo # use the one from nix
 
           # Tell turbo where to find our nixOS-specific binary
-          export TURBO_BINARY_PATH="${turbo}/bin/turbo"
+          export TURBO_BINARY_PATH="${pkgsTurbo.turbo}/bin/turbo"
         '';
       };
     });
