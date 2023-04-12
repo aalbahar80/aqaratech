@@ -17,20 +17,41 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1680670379,
-        "narHash": "sha256-7MrH7BuT0+Cl46JyNmpYgDdoLpSek9EvaHT1eSgcW8U=",
-        "path": "/home/nbe/nixpkgs",
-        "type": "path"
+        "lastModified": 1681272286,
+        "narHash": "sha256-9X5p+gwYrowgbsRgkf14HFI0fkr6UikuwRIQAMlF1yI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6b70761ea8c896aff8994eb367d9526686501860",
+        "type": "github"
       },
       "original": {
-        "path": "/home/nbe/nixpkgs",
-        "type": "path"
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-turbo": {
+      "locked": {
+        "lastModified": 1680670362,
+        "narHash": "sha256-EUpnOQfjTvbGRrH08TwJ08Zu5XyC/PKzETu5jWInTMY=",
+        "owner": "thenbe",
+        "repo": "nixpkgs",
+        "rev": "9780ac2b4f8ce0ebcbccb01d9bc90540af9dc266",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thenbe",
+        "ref": "turbo-1.8.8",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-turbo": "nixpkgs-turbo"
       }
     }
   },

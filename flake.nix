@@ -2,16 +2,19 @@
 # Might need to run `nix flake init`, then replace contents of generated file
 {
   description = "A prisma test project";
-  inputs.nixpkgs.url = "path:/home/nbe/nixpkgs";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs.nixpkgs-turbo.url = "github:thenbe/nixpkgs/turbo-1.8.8";
 
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-turbo,
     flake-utils,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
+      pkgsTurbo = nixpkgs-turbo.legacyPackages.${system};
 
       # Tier binary package
       tier = {pkgs, ...}:
@@ -48,7 +51,7 @@
         buildInputs = with pkgs; [
           nodePackages.prisma # npm binary doesn't work on nixOS
           openssl # otherwise prisma will complain about missing openssl
-          turbo # npm binary doesn't work on nixOS
+          pkgsTurbo.turbo # npm binary doesn't work on nixOS
           go-task # version installed by pnpm is nowhere to be found on nixOS
           zulu # java for openapi-generator-cli
           # openapi-generator-cli # npm binary works on nixOS
