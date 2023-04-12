@@ -1,11 +1,13 @@
+import { isLiveEnv } from '@self/utils';
+
 import paidStamp from '../../../assets/paid-stamp.png';
 
 import type { LeaseInvoiceDto } from '$api/openapi';
 import type jsPDFInvoiceTemplate from '../../pdf/jspdf-invoice-template';
 
-/**
- * Only works in browser. Do not call server-side.
- */
+import { environment } from '$lib/environment';
+
+/** Only works in browser. Do not call server-side. */
 export const createPDF = async (options: PDFOptions) => {
 	// use inline import because `jsPDFInvoiceTemplate` package only works in browser
 	const pdfPkg = await import('../../pdf/jspdf-invoice-template');
@@ -34,7 +36,9 @@ export const preparePDF = (options: PDFOptions) => {
 	});
 	pdf.returnJsPDFDocObject = true;
 
-	// pdf.footer.text = invoice.id;
+	pdf.footer.text = isLiveEnv(environment.PUBLIC_AQARATECH_ENV)
+		? invoice.id
+		: ''; // hide uuid for pdf test
 	pdf.invoice.table = [['1', invoice.memo ?? '', total]];
 	pdf.invoice.additionalRows[0].col2 = total;
 
@@ -87,10 +91,7 @@ const stamp = {
 	margin: { top: -150, left: 130 },
 } satisfies PdfProps['stamp'];
 
-/**
- * https://github.com/edisonneza/jspdf-invoice-template
- */
-
+/** https://github.com/edisonneza/jspdf-invoice-template */
 const defaultPdfOptions = {
 	outputType: 'save',
 	returnJsPDFDocObject: true,
@@ -158,9 +159,9 @@ const defaultPdfOptions = {
 		// 	invDesc:
 		// 		"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
 	},
-	// footer: {
-	// 	text: 'The invoice is created on a computer and is valid without the signature and stamp.',
-	// },
+	footer: {
+		text: '',
+	},
 	pageEnable: true,
 	pageLabel: 'Page ',
 } satisfies PdfProps;
