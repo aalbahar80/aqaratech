@@ -42,7 +42,6 @@
 		"@nestjs/common": "9.4.0",
 		"@nestjs/config": "2.3.1",
 		"@nestjs/core": "9.4.0",
-		"@nestjs/event-emitter": "1.4.1",
 		"@nestjs/passport": "9.0.3",
 		"@nestjs/platform-express": "9.4.0",
 		"@nestjs/schedule": "2.2.1",
@@ -68,7 +67,6 @@
 		"passport-jwt": "4.0.1",
 		"postmark": "3.0.15",
 		"prisma": "4.12.0",
-		"query-types": "0.1.4",
 		"reflect-metadata": "0.1.13",
 		"remeda": "1.12.0",
 		"rimraf": "5.0.0",
@@ -81,7 +79,6 @@
 	"devDependencies": {
 		"@logtail/types": "0.4.0",
 		"@nestjs/cli": "9.4.0",
-		"@nestjs/devtools-integration": "0.1.4",
 		"@nestjs/schematics": "9.1.0",
 		"@nestjs/testing": "9.4.0",
 		"@openapitools/openapi-generator-cli": "2.6.0",

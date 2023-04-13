@@ -38,27 +38,6 @@ export const groupByMonth = (
 	return array satisfies GroupedByMonth[];
 };
 
-export const addEmptyMonths = (
-	records: GroupedByMonth[],
-	options: { start: string; end: string },
-) => {
-	const months = monthsInRange(options.start, options.end);
-
-	const recordsWithEmptyMonths = months.map((month) => {
-		const record = records.find((r) => r.date === month);
-		if (record) {
-			return record;
-		} else {
-			return {
-				date: month,
-				amount: 0,
-			};
-		}
-	});
-
-	return recordsWithEmptyMonths;
-};
-
 interface Records {
 	amount: number;
 	postAt: Date;
