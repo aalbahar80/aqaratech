@@ -30,6 +30,7 @@ test('login', async ({ page }) => {
 	const domain = new URL(siteURL).hostname;
 
 	const cookies = await page.context().cookies();
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 	const accessToken = cookies.find((c) => c.name === Cookie.accessToken);
 
 	const selectRolePage = /^users\/[\w-]+\.[\w-]+\.[\w-]+\/roles$/;
@@ -54,6 +55,7 @@ test('login', async ({ page }) => {
 		...token,
 	});
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 	const idToken = cookies.find((c) => c.name === Cookie.idToken);
 
 	expect.soft(idToken).toMatchObject({

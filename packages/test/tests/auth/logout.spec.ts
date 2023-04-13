@@ -17,6 +17,7 @@ test('cookies are cleared', async ({ browser }) => {
 	const initialCookies = await page.context().cookies();
 
 	for (const cookieName of cookieNames) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 		const cookie = initialCookies.find((cookie) => cookie.name === cookieName);
 
 		expect(cookie, {
@@ -57,6 +58,7 @@ test('cookies are cleared', async ({ browser }) => {
 	const cookies = await page.context().cookies();
 
 	for (const cookieName of cookieNames) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 		const cookie = cookies.find((cookie) => cookie.name === cookieName);
 
 		expect.soft(cookie).toBe(undefined);

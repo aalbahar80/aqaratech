@@ -19,6 +19,7 @@ export const getToken = async (
 ) => {
 	const cookies = await getCookies(filename);
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 	const token = cookies.find((c) => c.name === name);
 
 	if (!token) {

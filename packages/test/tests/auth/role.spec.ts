@@ -25,6 +25,7 @@ const test = base.extend({
 		await page.context().clearCookies();
 		await page
 			.context()
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 			.addCookies(cookies.filter((cookie) => cookie.name !== Cookie.role));
 
 		// assert that the role cookie is cleared

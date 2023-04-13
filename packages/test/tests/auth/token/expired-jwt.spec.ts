@@ -66,6 +66,7 @@ for (const token of tokens) {
 			const cookieNames = [Cookie.idToken, Cookie.accessToken];
 
 			for (const cookieName of cookieNames) {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
 				const cookie = cookies.find((cookie) => cookie.name === cookieName);
 
 				expect(cookie).toBe(undefined);
