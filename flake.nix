@@ -4,7 +4,7 @@
   description = "A prisma test project";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.nixpkgs-turbo.url = "github:thenbe/nixpkgs/turbo-1.9.0";
+  inputs.nixpkgs-turbo.url = "github:thenbe/nixpkgs/turbo-1.9.1";
 
   outputs = {
     self,
