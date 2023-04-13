@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.20.2
+
+### Patch Changes
+
+- 72e383314: update deps
+- Updated dependencies [72e383314]
+  - @self/utils@3.20.2
+
 ## 2.20.1
 
 ### Patch Changes

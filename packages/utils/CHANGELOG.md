@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.20.2
+
+### Patch Changes
+
+- 72e383314: update deps
+
 ## 3.20.1
 
 ### Patch Changes

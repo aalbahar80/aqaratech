@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.23.2
+
+### Patch Changes
+
+- 31d65d900: add uuid to invoice pdf
+- 72e383314: update deps
+
 ## 2.23.1
 
 ### Patch Changes
