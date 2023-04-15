@@ -1,6 +1,6 @@
 {
 	"name": "@self/test",
-	"version": "3.20.3",
+	"version": "3.20.4",
 	"description": "",
 	"main": "index.js",
 	"scripts": {

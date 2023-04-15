@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.21.4
+
+### Patch Changes
+
+- 9de0ad8e0: tolgee update 2023-04-15
+- Updated dependencies [9de0ad8e0]
+  - @self/utils@3.20.4
+
 ## 2.21.3
 
 ### Patch Changes

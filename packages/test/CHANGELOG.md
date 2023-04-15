@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.20.4
+
+### Patch Changes
+
+- 9de0ad8e0: tolgee update 2023-04-15
+
 ## 3.20.3
 
 ### Patch Changes

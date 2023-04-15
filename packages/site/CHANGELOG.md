@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.23.4
+
+### Patch Changes
+
+- 9de0ad8e0: tolgee update 2023-04-15
+
 ## 2.23.3
 
 ### Patch Changes
