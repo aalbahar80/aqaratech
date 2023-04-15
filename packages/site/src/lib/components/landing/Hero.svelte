@@ -18,8 +18,9 @@
 			<br />
 			<span class="relative whitespace-nowrap text-blue-600">
 				<UnderlineDecoration />
-				<span class="relative"> {$L.landing.hero.titleSuffix()}</span>
+				<span class="relative"> {$L.landing.hero.titleHighlight()}</span>
 			</span>
+			{$L.landing.hero.titleSuffix()}
 		</h1>
 
 		<p class="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">

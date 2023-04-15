@@ -279,7 +279,11 @@ type RootTranslation = {
 			 */
 			titlePrefix: string
 			/**
-			 * A​l​l​-​i​n​-​o​n​e​ ​p​l​a​t​f​o​r​m​.
+			 * A​l​l​-​i​n​-​o​n​e
+			 */
+			titleHighlight: string
+			/**
+			 * p​l​a​t​f​o​r​m​.
 			 */
 			titleSuffix: string
 		}
@@ -1598,7 +1602,11 @@ export type TranslationFunctions = {
 			 */
 			titlePrefix: () => LocalizedString
 			/**
-			 * All-in-one platform.
+			 * All-in-one
+			 */
+			titleHighlight: () => LocalizedString
+			/**
+			 * platform.
 			 */
 			titleSuffix: () => LocalizedString
 		}

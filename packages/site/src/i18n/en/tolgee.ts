@@ -123,7 +123,8 @@ export const tolgee = {
 			subtitle:
 				'Dedicated portals for the unique needs of property owners and portfolio managers.',
 			titlePrefix: 'Property management',
-			titleSuffix: 'All-in-one platform.',
+			titleHighlight: 'All-in-one',
+			titleSuffix: 'platform.',
 		},
 		location: 'Location',
 		map: 'Map',
