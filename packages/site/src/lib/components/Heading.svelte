@@ -38,13 +38,11 @@
 	{/if}
 
 	<!-- Title -->
-	<div class="flex items-center">
-		<h2
-			class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
-		>
-			{title}
-		</h2>
-	</div>
+	<h2
+		class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl"
+	>
+		{title}
+	</h2>
 
 	{#if $page.data.user?.role?.roleType === 'ORGADMIN'}
 		<!-- Edit/Delete button -->
@@ -146,3 +144,10 @@
 		</div>
 	{/if}
 </div>
+
+<!-- Title (print) -->
+<h2
+	class="hidden text-2xl font-bold leading-7 text-gray-900 print:block sm:truncate sm:text-3xl"
+>
+	{title}
+</h2>

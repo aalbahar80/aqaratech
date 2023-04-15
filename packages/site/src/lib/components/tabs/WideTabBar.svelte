@@ -23,7 +23,7 @@
 		$page.url.pathname.includes('/edit') ||
 		$page.url.pathname.includes('/contract')}
 >
-	<div class="sm:hidden">
+	<div class="print:hidden sm:hidden">
 		<label
 			for="tabs"
 			class="sr-only">Select a tab</label

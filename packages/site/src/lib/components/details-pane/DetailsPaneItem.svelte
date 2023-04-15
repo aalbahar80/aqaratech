@@ -38,7 +38,7 @@
 
 <style lang="postcss">
 	.row {
-		@apply px-4 py-5 first:rounded-t-md last:rounded-b-md odd:bg-gray-50 even:bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6;
+		@apply px-4 py-5 first:rounded-t-md last:rounded-b-md odd:bg-gray-50 even:bg-white print:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6;
 	}
 	.label {
 		@apply text-sm font-medium text-gray-500;

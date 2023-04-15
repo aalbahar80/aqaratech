@@ -9,7 +9,7 @@
 </script>
 
 <div data-testid="details-pane">
-	<dl class="rounded-lg shadow">
+	<dl class="rounded-lg shadow print:shadow-none">
 		{#each keys as key}
 			<DetailsPaneItem
 				{key}
