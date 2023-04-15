@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.21.3
+
+### Patch Changes
+
+- 68a9cb028: style printable invoice
+- Updated dependencies [68a9cb028]
+  - @self/utils@3.20.3
+
 ## 2.21.2
 
 ### Patch Changes

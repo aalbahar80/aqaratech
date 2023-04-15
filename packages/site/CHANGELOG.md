@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.23.3
+
+### Patch Changes
+
+- 68a9cb028: style printable invoice
+
 ## 2.23.2
 
 ### Patch Changes

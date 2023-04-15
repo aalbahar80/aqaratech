@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.20.3
+
+### Patch Changes
+
+- 68a9cb028: style printable invoice
+
 ## 2.20.2
 
 ### Patch Changes

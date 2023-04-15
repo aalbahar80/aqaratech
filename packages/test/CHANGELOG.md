@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.20.3
+
+### Patch Changes
+
+- 68a9cb028: style printable invoice
+
 ## 3.20.2
 
 ### Patch Changes
