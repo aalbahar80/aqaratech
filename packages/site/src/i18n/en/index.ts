@@ -1,7 +1,5 @@
-import { aqaratech } from './aqaratech';
 import { entity } from './entity';
 import { fields } from './fields';
-import { landing } from './landing';
 
 import type { BaseTranslation } from '../i18n-types';
 
@@ -171,8 +169,6 @@ const en: BaseTranslation = {
 		subtitle: 'Search by name, address, etc.',
 		noResults: 'No results found',
 	},
-	landing,
-	aqaratech,
 	other: {
 		progress: 'Progress',
 		vacancy: 'Vacancy',
