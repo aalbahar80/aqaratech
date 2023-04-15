@@ -1,0 +1,10 @@
+---
+'@self/backend': patch
+'eslint-config-custom': patch
+'@self/seed': patch
+'@self/site': patch
+'@self/test': patch
+'@self/utils': patch
+---
+
+tolgee update 2023-04-15
