@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.21.0
+
+### Minor Changes
+
+- 9358577ac: add pricing/faqs section
+
 ## 3.20.4
 
 ### Patch Changes

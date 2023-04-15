@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.21.0
+
+### Minor Changes
+
+- 9358577ac: add pricing/faqs section
+
 ## 2.20.4
 
 ### Patch Changes

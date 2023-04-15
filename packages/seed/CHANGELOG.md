@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.21.0
+
+### Minor Changes
+
+- 9358577ac: add pricing/faqs section
+
+### Patch Changes
+
+- Updated dependencies [9358577ac]
+  - @self/utils@3.21.0
+
 ## 2.20.4
 
 ### Patch Changes

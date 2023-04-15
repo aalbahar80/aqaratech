@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.24.0
+
+### Minor Changes
+
+- 9358577ac: add pricing/faqs section
+
 ## 2.23.4
 
 ### Patch Changes
