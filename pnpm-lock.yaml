@@ -76,8 +76,8 @@ importers:
       '@prisma/client': 4.12.0
       '@self/seed': workspace:*
       '@self/utils': workspace:*
-      '@sentry/node': 7.47.0
-      '@sentry/tracing': 7.47.0
+      '@sentry/node': 7.48.0
+      '@sentry/tracing': 7.48.0
       '@tsconfig/node18-strictest': 1.0.0
       '@types/cache-manager': 4.0.2
       '@types/cookie-parser': 1.4.3
@@ -138,12 +138,12 @@ importers:
       '@nestjs/platform-express': 9.4.0_gqkob5jndcfeb3wjw72wbdwyne
       '@nestjs/schedule': 2.2.1_oapxqihqbztbu6zsycplsfizdq
       '@nestjs/swagger': 6.3.0_cxzd2osubd6kf64otjop4yoxve
-      '@ntegral/nestjs-sentry': 4.0.0_gijfpmwknrb7a2zpv2ac5o3sw4
+      '@ntegral/nestjs-sentry': 4.0.0_azvdk2y4yvwl5xztzoukwqfmsm
       '@prisma-utils/nestjs-request-parser': 1.2.0_od7xtdsbhm55uo5pwg3f4p5bwy
       '@prisma/client': 4.12.0_prisma@4.12.0
       '@self/utils': link:../utils
-      '@sentry/node': 7.47.0
-      '@sentry/tracing': 7.47.0
+      '@sentry/node': 7.48.0
+      '@sentry/tracing': 7.48.0
       cache-manager: 5.2.0
       class-transformer: 0.5.1
       cookie-parser: 1.4.6
@@ -259,16 +259,16 @@ importers:
 
   packages/site:
     specifiers:
-      '@iconify/json': 2.2.49
+      '@iconify/json': 2.2.50
       '@intlify/eslint-plugin-svelte': 0.1.1
       '@logtail/node': 0.4.0
       '@logtail/types': 0.4.0
       '@logtail/winston': 0.4.1
       '@rgossiaux/svelte-headlessui': npm:svelte-headlessui-combobox-temporary
       '@self/utils': workspace:*
-      '@sentry/node': 7.47.0
-      '@sentry/svelte': 7.47.0
-      '@sentry/tracing': 7.47.0
+      '@sentry/node': 7.48.0
+      '@sentry/svelte': 7.48.0
+      '@sentry/tracing': 7.48.0
       '@sveltejs/adapter-node': 1.2.3
       '@sveltejs/kit': 1.15.5
       '@sveltejs/pancake': 0.0.18
@@ -297,7 +297,7 @@ importers:
       eslint-plugin-svelte: 2.26.0
       frappe-charts: 1.6.2
       fuse.js: 6.6.2
-      jose: 4.13.2
+      jose: 4.14.0
       jspdf: 2.5.1
       just-debounce-it: 3.2.0
       nanoid: 4.0.2
@@ -307,7 +307,7 @@ importers:
       rollup-plugin-visualizer: 5.9.0
       sorcery: 0.11.0
       source-map-support: 0.5.21
-      stripe: 12.1.0
+      stripe: 12.1.1
       svelte: 3.58.0
       svelte-check: 3.2.0
       svelte-frappe-charts: 1.10.0
@@ -332,17 +332,17 @@ importers:
     dependencies:
       '@logtail/node': 0.4.0
       '@logtail/winston': 0.4.1_winston@3.8.2
-      '@sentry/node': 7.47.0
+      '@sentry/node': 7.48.0
       typesafe-i18n: 5.24.3_typescript@5.0.4
       winston: 3.8.2
     devDependencies:
-      '@iconify/json': 2.2.49
+      '@iconify/json': 2.2.50
       '@intlify/eslint-plugin-svelte': 0.1.1_a4ckjr7darsrglbip3svgxgxc4
       '@logtail/types': 0.4.0
       '@rgossiaux/svelte-headlessui': /svelte-headlessui-combobox-temporary/0.0.7_wlwqkzers7xykygomhkihhba4a_svelte@3.58.0
       '@self/utils': link:../utils
-      '@sentry/svelte': 7.47.0_svelte@3.58.0
-      '@sentry/tracing': 7.47.0
+      '@sentry/svelte': 7.48.0_svelte@3.58.0
+      '@sentry/tracing': 7.48.0
       '@sveltejs/adapter-node': 1.2.3_@sveltejs+kit@1.15.5
       '@sveltejs/kit': 1.15.5_svelte@3.58.0+vite@4.2.1
       '@sveltejs/pancake': 0.0.18
@@ -371,7 +371,7 @@ importers:
       eslint-plugin-svelte: 2.26.0_a4ckjr7darsrglbip3svgxgxc4
       frappe-charts: 1.6.2
       fuse.js: 6.6.2
-      jose: 4.13.2
+      jose: 4.14.0
       jspdf: 2.5.1
       just-debounce-it: 3.2.0
       nanoid: 4.0.2
@@ -381,7 +381,7 @@ importers:
       rollup-plugin-visualizer: 5.9.0
       sorcery: 0.11.0
       source-map-support: 0.5.21
-      stripe: 12.1.0
+      stripe: 12.1.1
       svelte: 3.58.0
       svelte-check: 3.2.0_hr6j3rdz3345ss7d3smrgfivne
       svelte-frappe-charts: 1.10.0_svelte@3.58.0
@@ -419,7 +419,7 @@ importers:
       dotenv-cli: 7.2.1
       eslint-config-custom: workspace:*
       eslint-plugin-playwright: 0.12.0
-      jose: 4.13.2
+      jose: 4.14.0
       prisma: 4.12.0
       qs: 6.11.1
       remeda: 1.12.0
@@ -448,7 +448,7 @@ importers:
       dotenv-cli: 7.2.1
       eslint-config-custom: link:../eslint-config-custom
       eslint-plugin-playwright: 0.12.0_eslint@8.38.0
-      jose: 4.13.2
+      jose: 4.14.0
       prisma: 4.12.0
       remeda: 1.12.0
       simple-json-db: 2.0.0
@@ -468,7 +468,7 @@ importers:
   packages/utils:
     specifiers:
       '@logtail/types': 0.4.0
-      '@sentry/types': 7.47.0
+      '@sentry/types': 7.48.0
       '@types/node': 18.15.11
       '@vitest/ui': 0.30.1
       date-fns: 2.29.3
@@ -487,7 +487,7 @@ importers:
       zod: 3.21.4
     devDependencies:
       '@logtail/types': 0.4.0
-      '@sentry/types': 7.47.0
+      '@sentry/types': 7.48.0
       '@types/node': 18.15.11
       '@vitest/ui': 0.30.1
       eslint-config-custom: link:../eslint-config-custom
@@ -2284,8 +2284,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@iconify/json/2.2.49:
-    resolution: {integrity: sha512-s0KqXftC4jgxqXvihQWHadxX8tHe3HHdARgd32Y3otWEhGMBl/ZkneBvYFlYKkh1LEAKDJXkkV35U3nCDnBmBA==}
+  /@iconify/json/2.2.50:
+    resolution: {integrity: sha512-1npM4qNRV7WTNEsaey98DhOwxuAcHALjYEtebDGwdLGnh7Pim8ysj031RtZfyfOG2uYuXPobiRgJ0QHG246Y3Q==}
     dependencies:
       '@iconify/types': 2.0.0
       pathe: 1.1.0
@@ -2860,7 +2860,7 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@ntegral/nestjs-sentry/4.0.0_gijfpmwknrb7a2zpv2ac5o3sw4:
+  /@ntegral/nestjs-sentry/4.0.0_azvdk2y4yvwl5xztzoukwqfmsm:
     resolution: {integrity: sha512-6WHZcK7NLeg7ue1y3Z61msEBzCGZeXQ0hWhliH1ddQH0kPbZ6lXLxduGMWYb0N/fPjXAX1Astz8urqnoTOZBQw==}
     peerDependencies:
       '@nestjs/common': ^9.0.4
@@ -2873,8 +2873,8 @@ packages:
     dependencies:
       '@nestjs/common': 9.4.0_od7xtdsbhm55uo5pwg3f4p5bwy
       '@nestjs/core': 9.4.0_qfvkcqqlilywzuwwu2xqitbr3m
-      '@sentry/hub': 7.47.0
-      '@sentry/node': 7.47.0
+      '@sentry/hub': 7.48.0
+      '@sentry/node': 7.48.0
       reflect-metadata: 0.1.13
       rimraf: 5.0.0
       rxjs: 7.8.0
@@ -3061,53 +3061,53 @@ packages:
       rollup: 3.19.1
     dev: true
 
-  /@sentry-internal/tracing/7.47.0:
-    resolution: {integrity: sha512-udpHnCzF8DQsWf0gQwd0XFGp6Y8MOiwnl8vGt2ohqZGS3m1+IxoRLXsSkD8qmvN6KKDnwbaAvYnK0z0L+AW95g==}
+  /@sentry-internal/tracing/7.48.0:
+    resolution: {integrity: sha512-MFAPDTrvCtfSm0/Zbmx7HA0Q5uCfRadOUpN8Y8rP1ndz+329h2kA3mZRCuC+3/aXL11zs2CHUhcAkGjwH2vogg==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.47.0
-      '@sentry/types': 7.47.0
-      '@sentry/utils': 7.47.0
+      '@sentry/core': 7.48.0
+      '@sentry/types': 7.48.0
+      '@sentry/utils': 7.48.0
       tslib: 1.14.1
 
-  /@sentry/browser/7.47.0:
-    resolution: {integrity: sha512-L0t07kS/G1UGVZ9fpD6HLuaX8vVBqAGWgu+1uweXthYozu/N7ZAsakjU/Ozu6FSXj1mO3NOJZhOn/goIZLSj5A==}
+  /@sentry/browser/7.48.0:
+    resolution: {integrity: sha512-tdx/2nhuiykncmXFlV4Dpp+Hxgt/v31LiyXE79IcM560wc+QmWKtzoW9azBWQ0xt5KOO3ERMib9qPE4/ql1/EQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry-internal/tracing': 7.47.0
-      '@sentry/core': 7.47.0
-      '@sentry/replay': 7.47.0
-      '@sentry/types': 7.47.0
-      '@sentry/utils': 7.47.0
+      '@sentry-internal/tracing': 7.48.0
+      '@sentry/core': 7.48.0
+      '@sentry/replay': 7.48.0
+      '@sentry/types': 7.48.0
+      '@sentry/utils': 7.48.0
       tslib: 1.14.1
     dev: true
 
-  /@sentry/core/7.47.0:
-    resolution: {integrity: sha512-EFhZhKdMu7wKmWYZwbgTi8FNZ7Fq+HdlXiZWNz51Bqe3pHmfAkdHtAEs0Buo0v623MKA0CA4EjXIazGUM34XTg==}
+  /@sentry/core/7.48.0:
+    resolution: {integrity: sha512-8FYuJTMpyuxRZvlen3gQ3rpOtVInSDmSyXqWEhCLuG/w34AtWoTiW7G516rsAAh6Hy1TP91GooMWbonP3XQNTQ==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.47.0
-      '@sentry/utils': 7.47.0
+      '@sentry/types': 7.48.0
+      '@sentry/utils': 7.48.0
       tslib: 1.14.1
 
-  /@sentry/hub/7.47.0:
-    resolution: {integrity: sha512-pPu1SkUqCJjFuW3a73RADy/B51nzd5brTIrBE4zVL1FYm4JVzkzbtItSGtR6tosB1Ftkr3E2eLryEzeEsuppsw==}
+  /@sentry/hub/7.48.0:
+    resolution: {integrity: sha512-yCgcNpdbwy4bQr8LIrDzcP7otDNGYyFubcOohhB6XFKPh4dTI0GJyBkvWy0qtbgQUxL5he618gC3wOLV3/TFXw==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.47.0
-      '@sentry/types': 7.47.0
-      '@sentry/utils': 7.47.0
+      '@sentry/core': 7.48.0
+      '@sentry/types': 7.48.0
+      '@sentry/utils': 7.48.0
       tslib: 1.14.1
     dev: false
 
-  /@sentry/node/7.47.0:
-    resolution: {integrity: sha512-LTg2r5EV9yh4GLYDF+ViSltR9LLj/pcvk8YhANJcMO3Fp//xh8njcdU0FC2yNthUREawYDzAsVzLyCYJfV0H1A==}
+  /@sentry/node/7.48.0:
+    resolution: {integrity: sha512-DJyyZaVhv/pUzJPof7es6zYDHeWbNqE0T3tQfLCkShdyfR+Ew8In8W/x2s7S8vq0cfRq0rqv1E6B2/HpVdYO7g==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry-internal/tracing': 7.47.0
-      '@sentry/core': 7.47.0
-      '@sentry/types': 7.47.0
-      '@sentry/utils': 7.47.0
+      '@sentry-internal/tracing': 7.48.0
+      '@sentry/core': 7.48.0
+      '@sentry/types': 7.48.0
+      '@sentry/utils': 7.48.0
       cookie: 0.4.2
       https-proxy-agent: 5.0.1
       lru_map: 0.3.3
@@ -3116,44 +3116,44 @@ packages:
       - supports-color
     dev: false
 
-  /@sentry/replay/7.47.0:
-    resolution: {integrity: sha512-BFpVZVmwlezZ83y0L43TCTJY142Fxh+z+qZSwTag5HlhmIpBKw/WKg06ajOhrYJbCBkhHmeOvyKkxX0jnc39ZA==}
+  /@sentry/replay/7.48.0:
+    resolution: {integrity: sha512-8fRHMGJ0NJeIZi6UucxUTvfDPaBa7+jU1kCTLjCcuH3X/UVz5PtGLMtFSO5U8HP+mUDlPs97MP1uoDvMa4S2Ng==}
     engines: {node: '>=12'}
     dependencies:
-      '@sentry/core': 7.47.0
-      '@sentry/types': 7.47.0
-      '@sentry/utils': 7.47.0
+      '@sentry/core': 7.48.0
+      '@sentry/types': 7.48.0
+      '@sentry/utils': 7.48.0
     dev: true
 
-  /@sentry/svelte/7.47.0_svelte@3.58.0:
-    resolution: {integrity: sha512-oxuefbpCs+aVAyLIDZM2jyayJzSnCo39/MI800442uS+sOR0MXq/OKcfbiqytwbjX4zvsj4m+E0/pL9rY1yOMw==}
+  /@sentry/svelte/7.48.0_svelte@3.58.0:
+    resolution: {integrity: sha512-gKg89IGsE/7h2D8X/WfqfuZp8LMTs0HNfnLgx+crZM+T7QUmVnWqMz++c8Enpcz2jS4Y3DB/8uA9vYFb3yJBqQ==}
     engines: {node: '>=8'}
     peerDependencies:
       svelte: 3.x
     dependencies:
-      '@sentry/browser': 7.47.0
-      '@sentry/types': 7.47.0
-      '@sentry/utils': 7.47.0
+      '@sentry/browser': 7.48.0
+      '@sentry/types': 7.48.0
+      '@sentry/utils': 7.48.0
       magic-string: 0.26.7
       svelte: 3.58.0
       tslib: 1.14.1
     dev: true
 
-  /@sentry/tracing/7.47.0:
-    resolution: {integrity: sha512-hJCpKdekwaFNbCVXxfCz5IxfSEJIKnkPmRSVHITOm5VhKwq2e5kmy4Rn6bzSETwJFSDE8LGbR/3eSfGTqw37XA==}
+  /@sentry/tracing/7.48.0:
+    resolution: {integrity: sha512-X6w74Av0fyayNicKIlwL1IdpZ3O0ETQjyYXCDTwHoJL71ojrgrL5vdiNz8WwbPONTnqu98HehPYL/z3DCCKVbw==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry-internal/tracing': 7.47.0
+      '@sentry-internal/tracing': 7.48.0
 
-  /@sentry/types/7.47.0:
-    resolution: {integrity: sha512-GxXocplN0j1+uczovHrfkykl9wvkamDtWxlPUQgyGlbLGZn+UH1Y79D4D58COaFWGEZdSNKr62gZAjfEYu9nQA==}
+  /@sentry/types/7.48.0:
+    resolution: {integrity: sha512-kkAszZwQ5/v4n7Yyw/DPNRWx7h724mVNRGZIJa9ggUMvTgMe7UKCZZ5wfQmYiKVlGbwd9pxXAcP8Oq15EbByFQ==}
     engines: {node: '>=8'}
 
-  /@sentry/utils/7.47.0:
-    resolution: {integrity: sha512-A89SaOLp6XeZfByeYo2C8Ecye/YAtk/gENuyOUhQEdMulI6mZdjqtHAp7pTMVgkBc/YNARVuoa+kR/IdRrTPkQ==}
+  /@sentry/utils/7.48.0:
+    resolution: {integrity: sha512-d977sghkFVMfld0LrEyyY2gYrfayLPdDEpUDT+hg5y79r7zZDCFyHtdB86699E5K89MwDZahW7Erk+a1nk4x5w==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/types': 7.47.0
+      '@sentry/types': 7.48.0
       tslib: 1.14.1
 
   /@sinonjs/commons/2.0.0:
@@ -4653,7 +4653,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.20.13
       '@types/raf': 3.4.0
-      core-js: 3.30.0
+      core-js: 3.30.1
       raf: 3.4.1
       regenerator-runtime: 0.13.11
       rgbcolor: 1.0.1
@@ -5012,8 +5012,8 @@ packages:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
 
-  /core-js/3.30.0:
-    resolution: {integrity: sha512-hQotSSARoNh1mYPi9O2YaWeiq/cEB95kOrFb4NCrO4RIFt1qqNpKsaE+vy/L3oiqvND5cThqXzUU3r9F7Efztg==}
+  /core-js/3.30.1:
+    resolution: {integrity: sha512-ZNS5nbiSwDTq4hFosEDqm65izl2CWmLz0hARJMyNQBgkUZMIF51cQiMvIQKA6hvuaeWxQDP3hEedM1JZIgTldQ==}
     requiresBuild: true
     dev: true
     optional: true
@@ -6211,6 +6211,14 @@ packages:
       estraverse: 5.3.0
     dev: true
 
+  /eslint-scope/7.2.0:
+    resolution: {integrity: sha512-DYj5deGlHBfMt15J7rdtyKNq/Nqlv5KfU4iodrQ019XESsRnwXH9KAE0y3cwtUHDo2ob7CypAnCqefh6vioWRw==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dependencies:
+      esrecurse: 4.3.0
+      estraverse: 5.3.0
+    dev: true
+
   /eslint-utils/2.1.0:
     resolution: {integrity: sha512-w94dQYoauyvlDc43XnGB8lU3Zt713vNChgt4EWwhXAP2XkBvndfxF0AgIqKOOasjPIPzj9JqgwkwbCYD0/V3Zg==}
     engines: {node: '>=6'}
@@ -6266,7 +6274,7 @@ packages:
       debug: 4.3.4
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
-      eslint-scope: 7.1.1
+      eslint-scope: 7.2.0
       eslint-visitor-keys: 3.4.0
       espree: 9.5.1
       esquery: 1.5.0
@@ -7633,8 +7641,8 @@ packages:
     resolution: {integrity: sha512-njj0VL2TsIxCtgzhO+9RRobBvws4oYyCM8TpvoUQwl/MbIM3NFJRR9+e6x0sS5xXaP1t6OCBkaBME98OV9zU5A==}
     dev: false
 
-  /jose/4.13.2:
-    resolution: {integrity: sha512-GMUKtV+l05F6NY/06nM7rucHM6Ktvw6sxnyRqINBNWS/hCM/bBk7kanOEckRP8xtC/jzuGfTRVZvkjjuy+g4dA==}
+  /jose/4.14.0:
+    resolution: {integrity: sha512-LSA/XenLPwqk6e2L+PSUNuuY9G4NGsvjRWz6sJcUBmzTLEPJqQh46FHSUxnAQ64AWOkRO6bSXpy3yXuEKZkbIA==}
     dev: true
 
   /js-sdsl/4.4.0:
@@ -7759,7 +7767,7 @@ packages:
       fflate: 0.4.8
     optionalDependencies:
       canvg: 3.0.10
-      core-js: 3.30.0
+      core-js: 3.30.1
       dompurify: 2.4.5
       html2canvas: 1.4.1
     dev: true
@@ -10114,8 +10122,8 @@ packages:
       acorn: 8.8.2
     dev: true
 
-  /stripe/12.1.0:
-    resolution: {integrity: sha512-mq0Rsc4KD3IfmmMqlXjxpYTYfc5rFJidZdppo4TPU3vm5d9ylIBykA0XCQtzNkEe9dRLN88XMmeEZW68thYtWw==}
+  /stripe/12.1.1:
+    resolution: {integrity: sha512-vn74vXtZeJx18oGzA0AhL818euhLF/juCgkKrJfAS1Y0bp5/EzQKPuc/75qQUvY43nNGIkgOVb3kUBuyoeqEkA==}
     engines: {node: '>=12.*'}
     dependencies:
       '@types/node': 18.15.11
