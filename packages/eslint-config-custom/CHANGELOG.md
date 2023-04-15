@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.21.1
+
+### Patch Changes
+
+- cc2308545: trigger release 1
+
 ## 2.21.0
 
 ### Minor Changes

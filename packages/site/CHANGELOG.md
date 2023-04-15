@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.24.1
+
+### Patch Changes
+
+- cc2308545: trigger release 1
+
 ## 2.24.0
 
 ### Minor Changes

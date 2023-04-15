@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.21.1
+
+### Patch Changes
+
+- cc2308545: trigger release 1
+- Updated dependencies [cc2308545]
+  - @self/utils@3.21.1
+
 ## 2.21.0
 
 ### Minor Changes

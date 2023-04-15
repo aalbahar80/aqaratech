@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.21.1
+
+### Patch Changes
+
+- cc2308545: trigger release 1
+
 ## 3.21.0
 
 ### Minor Changes
