@@ -14,6 +14,380 @@ export type Translation = RootTranslation
 export type Translations = RootTranslation
 
 type RootTranslation = {
+	aqaratech: {
+		address: {
+			/**
+			 * 2​5​ ​A​l​s​h​u​h​a​d​a​ ​S​t​,​ ​S​u​l​a​i​m​a​n​ ​T​o​w​e​r
+			 */
+			line1: string
+			/**
+			 * S​h​a​r​q​,​ ​1​5​3​0​5​,​ ​K​u​w​a​i​t
+			 */
+			line2: string
+		}
+		/**
+		 * A​q​a​r​a​t​e​c​h​,​ ​W​L​L​.
+		 */
+		fullName: string
+		/**
+		 * A​q​a​r​a​t​e​c​h
+		 */
+		shortName: string
+	}
+	landing: {
+		callToAction: {
+			/**
+			 * C​r​e​a​t​e​ ​A​c​c​o​u​n​t
+			 */
+			button: string
+			/**
+			 * S​t​a​r​t​ ​m​a​n​a​g​i​n​g​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​ ​w​i​t​h​ ​j​u​s​t​ ​a​ ​f​e​w​ ​c​l​i​c​k​s​!​ ​S​i​g​n​ ​u​p​ ​n​o​w​ ​a​n​d​ ​s​e​e​ ​t​h​e​ ​d​i​f​f​e​r​e​n​c​e​.
+			 */
+			description: string
+			/**
+			 * G​e​t​ ​s​t​a​r​t​e​d​ ​t​o​d​a​y
+			 */
+			title: string
+		}
+		faqs: {
+			'1': {
+				/**
+				 * A​q​a​r​a​t​e​c​h​ ​i​s​ ​a​ ​p​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​m​e​n​t​ ​p​l​a​t​f​o​r​m​ ​d​e​s​i​g​n​e​d​ ​t​o​ ​s​t​r​e​a​m​l​i​n​e​ ​p​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​m​e​n​t​ ​f​o​r​ ​o​w​n​e​r​s​ ​a​n​d​ ​t​e​n​a​n​t​s​.​ ​I​t​ ​o​f​f​e​r​s​ ​d​e​d​i​c​a​t​e​d​ ​p​o​r​t​a​l​s​ ​f​o​r​ ​o​w​n​e​r​s​ ​a​n​d​ ​t​e​n​a​n​t​s​,​ ​e​n​a​b​l​i​n​g​ ​e​a​s​y​ ​c​o​m​m​u​n​i​c​a​t​i​o​n​,​ ​o​n​l​i​n​e​ ​r​e​n​t​ ​p​a​y​m​e​n​t​s​,​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​q​u​e​s​t​s​,​ ​a​n​d​ ​e​x​p​e​n​s​e​ ​t​r​a​c​k​i​n​g​.
+				 */
+				a: string
+				/**
+				 * W​h​a​t​ ​i​s​ ​A​q​a​r​a​t​e​c​h​?
+				 */
+				q: string
+			}
+			'2': {
+				/**
+				 * T​h​e​ ​o​w​n​e​r​’​s​ ​p​o​r​t​a​l​ ​p​r​o​v​i​d​e​s​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​w​i​t​h​ ​a​ ​d​a​s​h​b​o​a​r​d​ ​t​o​ ​m​a​n​a​g​e​ ​t​h​e​i​r​ ​p​r​o​p​e​r​t​i​e​s​.​ ​I​n​c​l​u​d​e​s​ ​f​e​a​t​u​r​e​s​ ​l​i​k​e​ ​t​e​n​a​n​t​ ​m​a​n​a​g​e​m​e​n​t​,​ ​r​e​n​t​ ​c​o​l​l​e​c​t​i​o​n​,​ ​e​x​p​e​n​s​e​ ​t​r​a​c​k​i​n​g​,​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​q​u​e​s​t​s​,​ ​a​n​d​ ​d​o​c​u​m​e​n​t​ ​s​t​o​r​a​g​e​,​ ​a​l​l​ ​w​i​t​h​i​n​ ​a​n​ ​e​a​s​y​-​t​o​-​u​s​e​ ​i​n​t​e​r​f​a​c​e​.
+				 */
+				a: string
+				/**
+				 * H​o​w​ ​d​o​e​s​ ​t​h​e​ ​o​w​n​e​r​’​s​ ​p​o​r​t​a​l​ ​w​o​r​k​?
+				 */
+				q: string
+			}
+			'3': {
+				/**
+				 * T​h​e​ ​t​e​n​a​n​t​’​s​ ​p​o​r​t​a​l​ ​a​l​l​o​w​s​ ​t​e​n​a​n​t​s​ ​t​o​ ​v​i​e​w​ ​t​h​e​i​r​ ​l​e​a​s​e​ ​d​e​t​a​i​l​s​,​ ​s​u​b​m​i​t​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​q​u​e​s​t​s​,​ ​c​o​m​m​u​n​i​c​a​t​e​ ​w​i​t​h​ ​p​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​r​s​,​ ​a​n​d​ ​p​a​y​ ​r​e​n​t​ ​o​n​l​i​n​e​ ​s​e​c​u​r​e​l​y​ ​a​n​d​ ​c​o​n​v​e​n​i​e​n​t​l​y​.
+				 */
+				a: string
+				/**
+				 * W​h​a​t​ ​f​e​a​t​u​r​e​s​ ​a​r​e​ ​a​v​a​i​l​a​b​l​e​ ​i​n​ ​t​h​e​ ​t​e​n​a​n​t​’​s​ ​p​o​r​t​a​l​?
+				 */
+				q: string
+			}
+			'4': {
+				/**
+				 * A​q​a​r​a​t​e​c​h​ ​o​f​f​e​r​s​ ​a​ ​s​e​c​u​r​e​ ​o​n​l​i​n​e​ ​p​a​y​m​e​n​t​ ​s​y​s​t​e​m​,​ ​a​l​l​o​w​i​n​g​ ​t​e​n​a​n​t​s​ ​t​o​ ​p​a​y​ ​r​e​n​t​ ​u​s​i​n​g​ ​v​a​r​i​o​u​s​ ​p​a​y​m​e​n​t​ ​m​e​t​h​o​d​s​.​ ​P​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​r​s​ ​c​a​n​ ​t​r​a​c​k​ ​p​a​y​m​e​n​t​s​,​ ​g​e​n​e​r​a​t​e​ ​r​e​c​e​i​p​t​s​,​ ​a​n​d​ ​s​e​t​ ​u​p​ ​a​u​t​o​m​a​t​i​c​ ​r​e​m​i​n​d​e​r​s​ ​f​o​r​ ​u​p​c​o​m​i​n​g​ ​r​e​n​t​ ​d​u​e​ ​d​a​t​e​s​.
+				 */
+				a: string
+				/**
+				 * H​o​w​ ​d​o​ ​o​n​l​i​n​e​ ​r​e​n​t​ ​p​a​y​m​e​n​t​s​ ​w​o​r​k​ ​i​n​ ​A​q​a​r​a​t​e​c​h​?
+				 */
+				q: string
+			}
+			'5': {
+				/**
+				 * T​e​n​a​n​t​s​ ​c​a​n​ ​s​u​b​m​i​t​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​q​u​e​s​t​s​ ​d​i​r​e​c​t​l​y​ ​t​h​r​o​u​g​h​ ​t​h​e​i​r​ ​p​o​r​t​a​l​ ​b​y​ ​p​r​o​v​i​d​i​n​g​ ​d​e​t​a​i​l​s​ ​a​b​o​u​t​ ​t​h​e​ ​i​s​s​u​e​ ​a​n​d​ ​a​t​t​a​c​h​i​n​g​ ​a​n​y​ ​r​e​l​e​v​a​n​t​ ​p​h​o​t​o​s​.​ ​P​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​r​s​ ​c​a​n​ ​t​h​e​n​ ​t​r​a​c​k​,​ ​p​r​i​o​r​i​t​i​z​e​,​ ​a​n​d​ ​r​e​s​o​l​v​e​ ​t​h​e​s​e​ ​r​e​q​u​e​s​t​s​ ​w​i​t​h​i​n​ ​t​h​e​ ​o​w​n​e​r​’​s​ ​p​o​r​t​a​l​.
+				 */
+				a: string
+				/**
+				 * H​o​w​ ​d​o​ ​t​e​n​a​n​t​s​ ​s​u​b​m​i​t​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​q​u​e​s​t​s​ ​t​h​r​o​u​g​h​ ​A​q​a​r​a​t​e​c​h​?
+				 */
+				q: string
+			}
+			'6': {
+				/**
+				 * T​h​e​ ​e​x​p​e​n​s​e​ ​t​r​a​c​k​i​n​g​ ​f​e​a​t​u​r​e​ ​i​n​ ​A​q​a​r​a​t​e​c​h​ ​e​n​a​b​l​e​s​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​m​a​n​a​g​e​r​s​ ​t​o​ ​m​o​n​i​t​o​r​ ​i​n​c​o​m​e​ ​a​n​d​ ​e​x​p​e​n​s​e​s​ ​r​e​l​a​t​e​d​ ​t​o​ ​t​h​e​i​r​ ​p​r​o​p​e​r​t​i​e​s​.​ ​T​h​e​y​ ​c​a​n​ ​c​a​t​e​g​o​r​i​z​e​ ​e​x​p​e​n​s​e​s​,​ ​t​r​a​c​k​ ​i​n​v​o​i​c​e​s​,​ ​a​n​d​ ​g​e​n​e​r​a​t​e​ ​c​u​s​t​o​m​i​z​a​b​l​e​ ​f​i​n​a​n​c​i​a​l​ ​r​e​p​o​r​t​s​.
+				 */
+				a: string
+				/**
+				 * H​o​w​ ​d​o​e​s​ ​t​h​e​ ​e​x​p​e​n​s​e​ ​t​r​a​c​k​i​n​g​ ​f​e​a​t​u​r​e​ ​w​o​r​k​ ​f​o​r​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​?
+				 */
+				q: string
+			}
+			'7': {
+				/**
+				 * Y​e​s​,​ ​A​q​a​r​a​t​e​c​h​ ​o​f​f​e​r​s​ ​a​ ​m​o​b​i​l​e​ ​f​r​i​e​n​d​l​y​ ​i​n​t​e​r​f​a​c​e​ ​f​o​r​ ​b​o​t​h​ ​A​n​d​r​o​i​d​ ​a​n​d​ ​i​O​S​ ​d​e​v​i​c​e​s​,​ ​a​l​l​o​w​i​n​g​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​t​e​n​a​n​t​s​ ​t​o​ ​a​c​c​e​s​s​ ​t​h​e​i​r​ ​p​o​r​t​a​l​s​ ​a​n​d​ ​m​a​n​a​g​e​ ​t​h​e​i​r​ ​p​r​o​p​e​r​t​i​e​s​ ​o​n​-​t​h​e​-​g​o​.
+				 */
+				a: string
+				/**
+				 * I​s​ ​A​q​a​r​a​t​e​c​h​ ​a​v​a​i​l​a​b​l​e​ ​o​n​ ​m​o​b​i​l​e​ ​d​e​v​i​c​e​s​?
+				 */
+				q: string
+			}
+			'8': {
+				/**
+				 * A​q​a​r​a​t​e​c​h​ ​a​d​h​e​r​e​s​ ​t​o​ ​i​n​d​u​s​t​r​y​-​s​t​a​n​d​a​r​d​ ​s​e​c​u​r​i​t​y​ ​p​r​o​t​o​c​o​l​s​ ​a​n​d​ ​d​a​t​a​ ​p​r​o​t​e​c​t​i​o​n​ ​r​e​g​u​l​a​t​i​o​n​s​ ​t​o​ ​e​n​s​u​r​e​ ​t​h​e​ ​c​o​n​f​i​d​e​n​t​i​a​l​i​t​y​ ​a​n​d​ ​s​e​c​u​r​i​t​y​ ​o​f​ ​y​o​u​r​ ​s​e​n​s​i​t​i​v​e​ ​i​n​f​o​r​m​a​t​i​o​n​.
+				 */
+				a: string
+				/**
+				 * H​o​w​ ​s​e​c​u​r​e​ ​i​s​ ​m​y​ ​d​a​t​a​ ​w​i​t​h​ ​A​q​a​r​a​t​e​c​h​?
+				 */
+				q: string
+			}
+			'9': {
+				/**
+				 * Y​e​s​,​ ​w​e​ ​o​f​f​e​r​ ​a​ ​f​r​e​e​ ​t​r​i​a​l​ ​v​e​r​s​i​o​n​ ​f​o​r​ ​i​n​t​e​r​e​s​t​e​d​ ​u​s​e​r​s​ ​t​o​ ​t​r​y​ ​t​h​e​ ​p​l​a​t​f​o​r​m​ ​f​e​a​t​u​r​e​s​ ​b​e​f​o​r​e​ ​c​o​m​m​i​t​t​i​n​g​ ​t​o​ ​a​ ​s​u​b​s​c​r​i​p​t​i​o​n​.​ ​P​l​e​a​s​e​ ​c​o​n​t​a​c​t​ ​o​u​r​ ​s​a​l​e​s​ ​t​e​a​m​ ​f​o​r​ ​m​o​r​e​ ​i​n​f​o​r​m​a​t​i​o​n​ ​o​n​ ​s​e​t​t​i​n​g​ ​u​p​ ​a​ ​t​r​i​a​l​.
+				 */
+				a: string
+				/**
+				 * I​s​ ​t​h​e​r​e​ ​a​ ​f​r​e​e​ ​t​r​i​a​l​ ​o​r​ ​d​e​m​o​ ​a​v​a​i​l​a​b​l​e​ ​f​o​r​ ​A​q​a​r​a​t​e​c​h​?
+				 */
+				q: string
+			}
+			/**
+			 * I​f​ ​y​o​u​ ​h​a​v​e​ ​a​n​y​ ​o​t​h​e​r​ ​q​u​e​s​t​i​o​n​s​,​ ​p​l​e​a​s​e​ ​f​e​e​l​ ​f​r​e​e​ ​t​o​ ​c​o​n​t​a​c​t​ ​u​s​.
+			 */
+			subtitle: string
+			/**
+			 * F​r​e​q​u​e​n​t​l​y​ ​A​s​k​e​d​ ​Q​u​e​s​t​i​o​n​s
+			 */
+			title: string
+		}
+		features: {
+			data: {
+				bullets: {
+					/**
+					 * O​c​c​u​p​a​n​c​y​ ​r​a​t​e​s​ ​a​n​d​ ​v​a​c​a​n​c​y​ ​p​e​r​i​o​d​s​ ​t​r​a​c​k​i​n​g​ ​u​s​i​n​g​ ​h​e​a​t​m​a​p​s​.
+					 */
+					monitor: string
+					/**
+					 * C​o​m​p​r​e​h​e​n​s​i​v​e​ ​t​r​a​c​k​i​n​g​ ​o​f​ ​p​r​o​p​e​r​t​y​-​r​e​l​a​t​e​d​ ​d​a​t​a​,​ ​i​n​c​l​u​d​i​n​g​ ​u​n​i​t​s​,​ ​l​e​a​s​e​s​,​ ​t​e​n​a​n​t​s​.
+					 */
+					track: string
+					/**
+					 * I​n​t​e​r​a​c​t​i​v​e​ ​d​a​s​h​b​o​a​r​d​s​ ​t​o​ ​v​i​e​w​ ​i​n​c​o​m​e​,​ ​e​x​p​e​n​s​e​s​,​ ​a​n​d​ ​p​r​o​f​i​t​/​l​o​s​s​ ​f​o​r​ ​e​a​c​h​ ​p​o​r​t​f​o​l​i​o​,​ ​p​r​o​p​e​r​t​y​.
+					 */
+					visualize: string
+				}
+				/**
+				 * D​a​t​a​ ​a​n​d​ ​A​n​a​l​y​t​i​c​s
+				 */
+				title: string
+			}
+			document: {
+				bullets: {
+					/**
+					 * Q​u​i​c​k​l​y​ ​a​c​c​e​s​s​ ​y​o​u​r​ ​d​o​c​u​m​e​n​t​s​ ​f​r​o​m​ ​a​n​y​w​h​e​r​e​,​ ​u​s​i​n​g​ ​a​n​y​ ​d​e​v​i​c​e​.
+					 */
+					access: string
+					/**
+					 * S​t​o​r​e​ ​a​n​y​ ​d​o​c​u​m​e​n​t​s​ ​r​e​l​a​t​e​d​ ​t​o​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​,​ ​i​n​c​l​u​d​i​n​g​ ​l​e​a​s​e​ ​a​g​r​e​e​m​e​n​t​s​,​ ​r​e​n​t​a​l​ ​p​a​y​m​e​n​t​ ​r​e​c​e​i​p​t​s​,​ ​a​n​d​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​c​o​r​d​s​.
+					 */
+					upload: string
+				}
+				/**
+				 * D​o​c​u​m​e​n​t​ ​M​a​n​a​g​e​m​e​n​t
+				 */
+				title: string
+			}
+			expense: {
+				bullets: {
+					/**
+					 * C​l​a​s​s​i​f​y​ ​e​x​p​e​n​s​e​s​ ​t​o​ ​o​f​f​e​r​ ​d​i​v​e​r​s​e​ ​m​e​t​h​o​d​s​ ​f​o​r​ ​v​i​s​u​a​l​i​z​i​n​g​ ​e​x​p​e​n​d​i​t​u​r​e​.
+					 */
+					categorize: string
+					/**
+					 * A​t​t​r​i​b​u​t​e​ ​e​x​p​e​n​s​e​s​ ​t​o​ ​a​ ​p​o​r​t​f​o​l​i​o​,​ ​p​r​o​p​e​r​t​y​,​ ​o​r​ ​a​ ​s​i​n​g​l​e​ ​u​n​i​t​.
+					 */
+					track: string
+					/**
+					 * V​i​s​u​a​l​i​z​e​ ​e​x​p​e​n​s​e​s​ ​u​s​i​n​g​ ​i​n​t​e​r​a​c​t​i​v​e​ ​t​r​e​e​m​a​p​s​,​ ​w​h​i​c​h​ ​a​l​l​o​w​ ​y​o​u​ ​t​o​ ​q​u​i​c​k​l​y​ ​i​d​e​n​t​i​f​y​ ​y​o​u​r​ ​c​o​s​t​ ​p​a​t​t​e​r​n​s​.
+					 */
+					visualize: string
+				}
+				/**
+				 * E​x​p​e​n​s​e​ ​T​r​a​c​k​i​n​g​ ​a​n​d​ ​V​i​s​u​a​l​i​z​a​t​i​o​n
+				 */
+				title: string
+			}
+			filter: {
+				bullets: {
+					/**
+					 * C​u​s​t​o​m​i​z​a​b​l​e​ ​f​i​l​t​e​r​s​ ​t​o​ ​v​i​e​w​ ​t​h​e​ ​m​o​s​t​ ​r​e​l​e​v​a​n​t​ ​i​n​f​o​r​m​a​t​i​o​n​.
+					 */
+					customizable: string
+					/**
+					 * F​i​l​t​e​r​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​ ​a​n​d​ ​t​e​n​a​n​t​ ​d​a​t​a​ ​b​y​ ​l​o​c​a​t​i​o​n​,​ ​i​n​c​l​u​d​i​n​g​ ​s​p​e​c​i​f​i​c​ ​p​r​o​p​e​r​t​i​e​s​ ​o​r​ ​u​n​i​t​s​ ​w​i​t​h​i​n​ ​p​r​o​p​e​r​t​i​e​s​.
+					 */
+					properties: string
+					/**
+					 * F​i​l​t​e​r​ ​b​y​ ​t​i​m​e​,​ ​i​n​c​l​u​d​i​n​g​ ​s​p​e​c​i​f​i​c​ ​d​a​t​e​ ​r​a​n​g​e​s​ ​o​r​ ​t​i​m​e​ ​p​e​r​i​o​d​s​.
+					 */
+					time: string
+				}
+				/**
+				 * A​d​v​a​n​c​e​d​ ​F​i​l​t​e​r​i​n​g
+				 */
+				title: string
+			}
+			rental: {
+				bullets: {
+					/**
+					 * A​u​t​o​m​a​t​e​d​ ​p​a​y​m​e​n​t​ ​r​e​m​i​n​d​e​r​s​.
+					 */
+					reminders: string
+					/**
+					 * E​a​s​y​ ​t​r​a​c​k​i​n​g​ ​a​n​d​ ​m​a​n​a​g​e​m​e​n​t​ ​o​f​ ​r​e​n​t​a​l​ ​p​a​y​m​e​n​t​s​ ​a​n​d​ ​l​e​a​s​e​ ​a​g​r​e​e​m​e​n​t​s​.
+					 */
+					track: string
+				}
+				/**
+				 * R​e​n​t​a​l​ ​P​a​y​m​e​n​t​ ​P​o​r​t​a​l
+				 */
+				title: string
+			}
+			search: {
+				bullets: {
+					/**
+					 * S​e​a​r​c​h​ ​t​h​r​o​u​g​h​ ​a​l​l​ ​o​f​ ​y​o​u​r​ ​d​a​t​a​ ​a​t​ ​t​h​e​ ​s​a​m​e​ ​t​i​m​e​.
+					 */
+					all: string
+					/**
+					 * F​i​n​d​ ​w​h​a​t​ ​y​o​u​'​r​e​ ​l​o​o​k​i​n​g​ ​f​o​r​ ​w​i​t​h​o​u​t​ ​k​n​o​w​i​n​g​ ​t​h​e​ ​e​x​a​c​t​ ​s​p​e​l​l​i​n​g​.
+					 */
+					spell: string
+				}
+				/**
+				 * P​o​w​e​r​f​u​l​ ​S​e​a​r​c​h
+				 */
+				title: string
+			}
+		}
+		footer: {
+			/**
+			 * A​q​a​r​a​t​e​c​h​,​ ​W​L​L​.​ ​A​l​l​ ​r​i​g​h​t​s​ ​r​e​s​e​r​v​e​d​.
+			 */
+			legal: string
+		}
+		hero: {
+			/**
+			 * A​n​ ​e​a​s​y​-​t​o​-​u​s​e​ ​p​l​a​t​f​o​r​m​ ​w​h​e​r​e​ ​y​o​u​ ​c​a​n​ ​m​a​n​a​g​e​ ​p​r​o​p​e​r​t​i​e​s​,​ ​k​e​e​p​ ​t​r​a​c​k​ ​o​f​ ​i​m​p​o​r​t​a​n​t​ ​t​a​s​k​s​,​ ​a​n​d​ ​q​u​i​c​k​l​y​ ​a​c​c​e​s​s​ ​i​n​f​o​r​m​a​t​i​o​n​.
+			 */
+			description: string
+			/**
+			 * D​e​d​i​c​a​t​e​d​ ​p​o​r​t​a​l​s​ ​f​o​r​ ​t​h​e​ ​u​n​i​q​u​e​ ​n​e​e​d​s​ ​o​f​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​p​o​r​t​f​o​l​i​o​ ​m​a​n​a​g​e​r​s​.
+			 */
+			subtitle: string
+			/**
+			 * P​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​m​e​n​t
+			 */
+			titlePrefix: string
+			/**
+			 * A​l​l​-​i​n​-​o​n​e​ ​p​l​a​t​f​o​r​m​.
+			 */
+			titleSuffix: string
+		}
+		/**
+		 * L​o​c​a​t​i​o​n
+		 */
+		location: string
+		/**
+		 * M​a​p
+		 */
+		map: string
+		pricing: {
+			features: {
+				/**
+				 * O​n​l​i​n​e​ ​c​o​l​l​e​c​t​i​o​n
+				 */
+				'1': string
+				/**
+				 * F​i​l​e​ ​s​t​o​r​a​g​e
+				 */
+				'2': string
+				/**
+				 * S​M​S​ ​a​n​d​ ​e​m​a​i​l​ ​n​o​t​i​f​i​c​a​t​i​o​n​s
+				 */
+				'3': string
+				/**
+				 * A​u​t​o​-​r​e​m​i​n​d​e​r​s
+				 */
+				'4': string
+				/**
+				 * M​u​l​t​i​-​b​e​n​e​f​i​c​i​a​r​y​ ​p​r​o​f​i​l​e​s
+				 */
+				'5': string
+				/**
+				 * R​e​a​l​-​t​i​m​e​ ​p​a​y​m​e​n​t​ ​t​r​a​c​k​i​n​g
+				 */
+				'6': string
+				/**
+				 * F​l​e​x​i​b​l​e​ ​p​a​y​m​e​n​t​s​ ​f​o​r​ ​t​e​n​a​n​t​s
+				 */
+				'7': string
+				/**
+				 * A​u​t​o​ ​s​e​t​t​l​e​m​e​n​t​s​ ​&​ ​r​e​c​o​n​c​i​l​i​a​t​i​o​n
+				 */
+				'8': string
+			}
+			/**
+			 * $​5
+			 */
+			price: string
+			/**
+			 * P​e​r​ ​u​n​i​t
+			 */
+			priceSubtitle: string
+			/**
+			 * S​u​b​s​c​r​i​p​t​i​o​n​ ​D​e​t​a​i​l​s​.
+			 */
+			subtitle: string
+			/**
+			 * P​r​i​c​i​n​g
+			 */
+			title: string
+		}
+		secondaryFeatures: {
+			managers: {
+				/**
+				 * A​q​a​r​a​t​e​c​h​ ​h​e​l​p​s​ ​y​o​u​ ​o​r​g​a​n​i​z​e​ ​y​o​u​r​ ​b​u​s​i​n​e​s​s​ ​a​n​d​ ​w​o​r​k​ ​e​f​f​i​c​i​e​n​t​l​y​.
+				 */
+				description: string
+				/**
+				 * S​t​r​e​a​m​l​i​n​e​ ​y​o​u​r​ ​w​o​r​k​f​l​o​w​s
+				 */
+				name: string
+				/**
+				 * P​r​o​p​e​r​t​y​ ​M​a​n​a​g​e​r​s
+				 */
+				summary: string
+			}
+			owners: {
+				/**
+				 * U​s​e​ ​t​h​e​ ​o​w​n​e​r​ ​p​o​r​t​a​l​ ​t​o​ ​v​i​e​w​ ​y​o​u​r​ ​p​r​o​p​e​r​t​y​ ​i​n​f​o​r​m​a​t​i​o​n​.
+				 */
+				description: string
+				/**
+				 * C​o​m​p​l​e​t​e​ ​v​i​s​i​b​i​l​i​t​y
+				 */
+				name: string
+				/**
+				 * P​r​o​p​e​r​t​y​ ​O​w​n​e​r​s
+				 */
+				summary: string
+			}
+			tenants: {
+				/**
+				 * A​q​a​r​a​t​e​c​h​ ​s​i​m​p​l​i​f​i​e​s​ ​t​h​e​ ​r​e​n​t​a​l​ ​p​r​o​c​e​s​s​ ​b​y​ ​a​l​l​o​w​i​n​g​ ​t​e​n​a​n​t​s​ ​t​o​ ​t​r​a​c​k​ ​t​h​e​i​r​ ​p​a​y​m​e​n​t​s​ ​a​n​d​ ​l​e​a​s​e​s​.
+				 */
+				description: string
+				/**
+				 * H​a​s​s​l​e​-​f​r​e​e​ ​r​e​n​t​a​l​s
+				 */
+				name: string
+				/**
+				 * T​e​n​a​n​t​s
+				 */
+				summary: string
+			}
+		}
+	}
 	entity: {
 		user: {
 			/**
@@ -947,6 +1321,380 @@ type RootTranslation = {
 }
 
 export type TranslationFunctions = {
+	aqaratech: {
+		address: {
+			/**
+			 * 25 Alshuhada St, Sulaiman Tower
+			 */
+			line1: () => LocalizedString
+			/**
+			 * Sharq, 15305, Kuwait
+			 */
+			line2: () => LocalizedString
+		}
+		/**
+		 * Aqaratech, WLL.
+		 */
+		fullName: () => LocalizedString
+		/**
+		 * Aqaratech
+		 */
+		shortName: () => LocalizedString
+	}
+	landing: {
+		callToAction: {
+			/**
+			 * Create Account
+			 */
+			button: () => LocalizedString
+			/**
+			 * Start managing your properties with just a few clicks! Sign up now and see the difference.
+			 */
+			description: () => LocalizedString
+			/**
+			 * Get started today
+			 */
+			title: () => LocalizedString
+		}
+		faqs: {
+			'1': {
+				/**
+				 * Aqaratech is a property management platform designed to streamline property management for owners and tenants. It offers dedicated portals for owners and tenants, enabling easy communication, online rent payments, maintenance requests, and expense tracking.
+				 */
+				a: () => LocalizedString
+				/**
+				 * What is Aqaratech?
+				 */
+				q: () => LocalizedString
+			}
+			'2': {
+				/**
+				 * The owner’s portal provides property owners with a dashboard to manage their properties. Includes features like tenant management, rent collection, expense tracking, maintenance requests, and document storage, all within an easy-to-use interface.
+				 */
+				a: () => LocalizedString
+				/**
+				 * How does the owner’s portal work?
+				 */
+				q: () => LocalizedString
+			}
+			'3': {
+				/**
+				 * The tenant’s portal allows tenants to view their lease details, submit maintenance requests, communicate with property managers, and pay rent online securely and conveniently.
+				 */
+				a: () => LocalizedString
+				/**
+				 * What features are available in the tenant’s portal?
+				 */
+				q: () => LocalizedString
+			}
+			'4': {
+				/**
+				 * Aqaratech offers a secure online payment system, allowing tenants to pay rent using various payment methods. Property managers can track payments, generate receipts, and set up automatic reminders for upcoming rent due dates.
+				 */
+				a: () => LocalizedString
+				/**
+				 * How do online rent payments work in Aqaratech?
+				 */
+				q: () => LocalizedString
+			}
+			'5': {
+				/**
+				 * Tenants can submit maintenance requests directly through their portal by providing details about the issue and attaching any relevant photos. Property managers can then track, prioritize, and resolve these requests within the owner’s portal.
+				 */
+				a: () => LocalizedString
+				/**
+				 * How do tenants submit maintenance requests through Aqaratech?
+				 */
+				q: () => LocalizedString
+			}
+			'6': {
+				/**
+				 * The expense tracking feature in Aqaratech enables property owners and managers to monitor income and expenses related to their properties. They can categorize expenses, track invoices, and generate customizable financial reports.
+				 */
+				a: () => LocalizedString
+				/**
+				 * How does the expense tracking feature work for property owners?
+				 */
+				q: () => LocalizedString
+			}
+			'7': {
+				/**
+				 * Yes, Aqaratech offers a mobile friendly interface for both Android and iOS devices, allowing property owners and tenants to access their portals and manage their properties on-the-go.
+				 */
+				a: () => LocalizedString
+				/**
+				 * Is Aqaratech available on mobile devices?
+				 */
+				q: () => LocalizedString
+			}
+			'8': {
+				/**
+				 * Aqaratech adheres to industry-standard security protocols and data protection regulations to ensure the confidentiality and security of your sensitive information.
+				 */
+				a: () => LocalizedString
+				/**
+				 * How secure is my data with Aqaratech?
+				 */
+				q: () => LocalizedString
+			}
+			'9': {
+				/**
+				 * Yes, we offer a free trial version for interested users to try the platform features before committing to a subscription. Please contact our sales team for more information on setting up a trial.
+				 */
+				a: () => LocalizedString
+				/**
+				 * Is there a free trial or demo available for Aqaratech?
+				 */
+				q: () => LocalizedString
+			}
+			/**
+			 * If you have any other questions, please feel free to contact us.
+			 */
+			subtitle: () => LocalizedString
+			/**
+			 * Frequently Asked Questions
+			 */
+			title: () => LocalizedString
+		}
+		features: {
+			data: {
+				bullets: {
+					/**
+					 * Occupancy rates and vacancy periods tracking using heatmaps.
+					 */
+					monitor: () => LocalizedString
+					/**
+					 * Comprehensive tracking of property-related data, including units, leases, tenants.
+					 */
+					track: () => LocalizedString
+					/**
+					 * Interactive dashboards to view income, expenses, and profit/loss for each portfolio, property.
+					 */
+					visualize: () => LocalizedString
+				}
+				/**
+				 * Data and Analytics
+				 */
+				title: () => LocalizedString
+			}
+			document: {
+				bullets: {
+					/**
+					 * Quickly access your documents from anywhere, using any device.
+					 */
+					access: () => LocalizedString
+					/**
+					 * Store any documents related to your properties, including lease agreements, rental payment receipts, and maintenance records.
+					 */
+					upload: () => LocalizedString
+				}
+				/**
+				 * Document Management
+				 */
+				title: () => LocalizedString
+			}
+			expense: {
+				bullets: {
+					/**
+					 * Classify expenses to offer diverse methods for visualizing expenditure.
+					 */
+					categorize: () => LocalizedString
+					/**
+					 * Attribute expenses to a portfolio, property, or a single unit.
+					 */
+					track: () => LocalizedString
+					/**
+					 * Visualize expenses using interactive treemaps, which allow you to quickly identify your cost patterns.
+					 */
+					visualize: () => LocalizedString
+				}
+				/**
+				 * Expense Tracking and Visualization
+				 */
+				title: () => LocalizedString
+			}
+			filter: {
+				bullets: {
+					/**
+					 * Customizable filters to view the most relevant information.
+					 */
+					customizable: () => LocalizedString
+					/**
+					 * Filter your properties and tenant data by location, including specific properties or units within properties.
+					 */
+					properties: () => LocalizedString
+					/**
+					 * Filter by time, including specific date ranges or time periods.
+					 */
+					time: () => LocalizedString
+				}
+				/**
+				 * Advanced Filtering
+				 */
+				title: () => LocalizedString
+			}
+			rental: {
+				bullets: {
+					/**
+					 * Automated payment reminders.
+					 */
+					reminders: () => LocalizedString
+					/**
+					 * Easy tracking and management of rental payments and lease agreements.
+					 */
+					track: () => LocalizedString
+				}
+				/**
+				 * Rental Payment Portal
+				 */
+				title: () => LocalizedString
+			}
+			search: {
+				bullets: {
+					/**
+					 * Search through all of your data at the same time.
+					 */
+					all: () => LocalizedString
+					/**
+					 * Find what you're looking for without knowing the exact spelling.
+					 */
+					spell: () => LocalizedString
+				}
+				/**
+				 * Powerful Search
+				 */
+				title: () => LocalizedString
+			}
+		}
+		footer: {
+			/**
+			 * Aqaratech, WLL. All rights reserved.
+			 */
+			legal: () => LocalizedString
+		}
+		hero: {
+			/**
+			 * An easy-to-use platform where you can manage properties, keep track of important tasks, and quickly access information.
+			 */
+			description: () => LocalizedString
+			/**
+			 * Dedicated portals for the unique needs of property owners and portfolio managers.
+			 */
+			subtitle: () => LocalizedString
+			/**
+			 * Property management
+			 */
+			titlePrefix: () => LocalizedString
+			/**
+			 * All-in-one platform.
+			 */
+			titleSuffix: () => LocalizedString
+		}
+		/**
+		 * Location
+		 */
+		location: () => LocalizedString
+		/**
+		 * Map
+		 */
+		map: () => LocalizedString
+		pricing: {
+			features: {
+				/**
+				 * Online collection
+				 */
+				'1': () => LocalizedString
+				/**
+				 * File storage
+				 */
+				'2': () => LocalizedString
+				/**
+				 * SMS and email notifications
+				 */
+				'3': () => LocalizedString
+				/**
+				 * Auto-reminders
+				 */
+				'4': () => LocalizedString
+				/**
+				 * Multi-beneficiary profiles
+				 */
+				'5': () => LocalizedString
+				/**
+				 * Real-time payment tracking
+				 */
+				'6': () => LocalizedString
+				/**
+				 * Flexible payments for tenants
+				 */
+				'7': () => LocalizedString
+				/**
+				 * Auto settlements & reconciliation
+				 */
+				'8': () => LocalizedString
+			}
+			/**
+			 * $5
+			 */
+			price: () => LocalizedString
+			/**
+			 * Per unit
+			 */
+			priceSubtitle: () => LocalizedString
+			/**
+			 * Subscription Details.
+			 */
+			subtitle: () => LocalizedString
+			/**
+			 * Pricing
+			 */
+			title: () => LocalizedString
+		}
+		secondaryFeatures: {
+			managers: {
+				/**
+				 * Aqaratech helps you organize your business and work efficiently.
+				 */
+				description: () => LocalizedString
+				/**
+				 * Streamline your workflows
+				 */
+				name: () => LocalizedString
+				/**
+				 * Property Managers
+				 */
+				summary: () => LocalizedString
+			}
+			owners: {
+				/**
+				 * Use the owner portal to view your property information.
+				 */
+				description: () => LocalizedString
+				/**
+				 * Complete visibility
+				 */
+				name: () => LocalizedString
+				/**
+				 * Property Owners
+				 */
+				summary: () => LocalizedString
+			}
+			tenants: {
+				/**
+				 * Aqaratech simplifies the rental process by allowing tenants to track their payments and leases.
+				 */
+				description: () => LocalizedString
+				/**
+				 * Hassle-free rentals
+				 */
+				name: () => LocalizedString
+				/**
+				 * Tenants
+				 */
+				summary: () => LocalizedString
+			}
+		}
+	}
 	entity: {
 		user: {
 			/**

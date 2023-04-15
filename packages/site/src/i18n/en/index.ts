@@ -1,9 +1,11 @@
 import { entity } from './entity';
 import { fields } from './fields';
+import { tolgee } from './tolgee';
 
 import type { BaseTranslation } from '../i18n-types';
 
 const en: BaseTranslation = {
+	...tolgee,
 	entity,
 	fields,
 	buttons: {
