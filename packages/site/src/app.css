@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--nav-h: 6rem;
+}
+
 @font-face {
 	font-family: 'Inter var';
 	font-style: normal;

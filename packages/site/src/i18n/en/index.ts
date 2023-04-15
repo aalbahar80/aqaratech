@@ -58,6 +58,9 @@ const en: BaseTranslation = {
 		account: 'Account',
 		info: 'Info',
 		net: 'Net',
+		features: 'Features',
+		pricing: 'Pricing',
+		faq: 'FAQs',
 	},
 	general: {
 		name: 'Name',

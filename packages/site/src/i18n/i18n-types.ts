@@ -955,6 +955,18 @@ type RootTranslation = {
 		 * N​e​t
 		 */
 		net: string
+		/**
+		 * F​e​a​t​u​r​e​s
+		 */
+		features: string
+		/**
+		 * P​r​i​c​i​n​g
+		 */
+		pricing: string
+		/**
+		 * F​A​Q​s
+		 */
+		faq: string
 	}
 	general: {
 		/**
@@ -2262,6 +2274,18 @@ export type TranslationFunctions = {
 		 * Net
 		 */
 		net: () => LocalizedString
+		/**
+		 * Features
+		 */
+		features: () => LocalizedString
+		/**
+		 * Pricing
+		 */
+		pricing: () => LocalizedString
+		/**
+		 * FAQs
+		 */
+		faq: () => LocalizedString
 	}
 	general: {
 		/**

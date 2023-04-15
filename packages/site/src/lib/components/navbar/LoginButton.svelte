@@ -9,7 +9,7 @@
 		href={LOGIN}
 		rel="external"
 		data-sveltekit-reload
-		class="font-semibold"
+		class="whitespace-nowrap font-semibold"
 	>
 		{$L.buttons.login()}
 	</a>

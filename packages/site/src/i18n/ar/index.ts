@@ -175,6 +175,9 @@ const ar: Translation = {
 		account: 'حساب',
 		info: 'تفاصيل',
 		net: 'صافي',
+		features: 'مميزات',
+		pricing: 'التسعير',
+		faq: 'أسئلة متكررة',
 	},
 	general: {
 		name: 'الاسم',

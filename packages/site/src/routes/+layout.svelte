@@ -71,11 +71,17 @@
 
 	<SecondaryNavbar />
 	{#if isHomeRoute($page.route)}
-		<main>
+		<main
+			class="bg-gray-50"
+			style:padding-top="var(--nav-h)"
+		>
 			<slot />
 		</main>
 	{:else}
-		<div class="my-grid">
+		<div
+			class="my-grid"
+			style:padding-top="var(--nav-h)"
+		>
 			{#if isSidebarAvailable($page.route) && data.user}
 				<Sidebar
 					navigationTree={getNavigationTree(
