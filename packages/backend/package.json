@@ -93,7 +93,7 @@
 		"@types/multer": "1.4.7",
 		"@types/node": "18.15.11",
 		"@types/passport-jwt": "3.0.8",
-		"@types/sinon": "10.0.13",
+		"@types/sinon": "10.0.14",
 		"dotenv": "16.0.3",
 		"eslint-config-custom": "workspace:*",
 		"js-yaml": "4.1.0",
