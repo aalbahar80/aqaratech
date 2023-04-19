@@ -44,5 +44,5 @@ runs:
         --app-name ${{ inputs.appName }} \
         --site-version ${{ inputs.siteTag }} \
         --backend-version ${{ inputs.backendTag }} | tee deploy_output.log
-        DEPLOY_URL=$(grep -oP 'live_url: \K.*' deploy_output.log)
+        DEPLOY_URL=$(grep -oP '(?<="live_url": ")[^"]+' deploy_output.log | tail -n1)
         echo "deploy-url=$DEPLOY_URL" >> $GITHUB_OUTPUT
