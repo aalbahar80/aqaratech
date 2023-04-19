@@ -18,6 +18,11 @@ inputs:
     required: false
     description: Version of the backend to deploy
 
+outputs:
+  deploy-url:
+    description: 'The URL of the deployed app'
+    value: ${{ steps.deploy-app.outputs.deploy-url }}
+
 runs:
   using: composite
   steps:
@@ -29,10 +34,15 @@ runs:
       with:
         token: ${{ inputs.token }}
 
-    - name: Create deployment on DigitalOcean
+      # To output the deployment URL:
+      # https://docs.github.com/en/actions/creating-actions/creating-a-composite-action#creating-an-action-metadata-file
+    - id: deploy-app
+      name: Create deployment on DigitalOcean
       shell: bash
       run: |
         npx zx ./scripts/deploy.mjs \
         --app-name ${{ inputs.appName }} \
         --site-version ${{ inputs.siteTag }} \
-        --backend-version ${{ inputs.backendTag }}
+        --backend-version ${{ inputs.backendTag }} | tee deploy_output.log
+        DEPLOY_URL=$(grep -oP 'live_url: \K.*' deploy_output.log)
+        echo "deploy-url=$DEPLOY_URL" >> $GITHUB_OUTPUT
