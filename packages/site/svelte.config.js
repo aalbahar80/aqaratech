@@ -38,7 +38,7 @@ const config = {
 			// https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector
 			/** shortcut: meta + shift */
 			inspector: {
-				toggleKeyCombo: 'meta-shift',
+				toggleKeyCombo: 'control-alt-s', // 'meta-shift' does not work on linux/firefox
 				// showToggleButton: 'active',
 				// showToggleButton: 'always',
 				holdMode: true,
