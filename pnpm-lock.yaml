@@ -168,6 +168,9 @@ importers:
       postmark:
         specifier: 3.0.15
         version: 3.0.15
+      prisma:
+        specifier: 4.12.0
+        version: 4.12.0
       reflect-metadata:
         specifier: 0.1.13
         version: 0.1.13
@@ -256,9 +259,6 @@ importers:
       nyc:
         specifier: 15.1.0
         version: 15.1.0
-      prisma:
-        specifier: 4.12.0
-        version: 4.12.0
       simple-json-db:
         specifier: 2.0.0
         version: 2.0.0
