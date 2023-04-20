@@ -80,7 +80,7 @@ importers:
         version: 6.4.0
       '@casl/prisma':
         specifier: 1.3.3
-        version: 1.3.3(@casl/ability@6.4.0)(@prisma/client@4.12.0)
+        version: 1.3.3(@casl/ability@6.4.0)(@prisma/client@4.13.0)
       '@logtail/node':
         specifier: 0.4.0
         version: 0.4.0
@@ -110,13 +110,13 @@ importers:
         version: 6.3.0(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(class-transformer@0.5.1)(reflect-metadata@0.1.13)
       '@ntegral/nestjs-sentry':
         specifier: 4.0.0
-        version: 4.0.0(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(@sentry/hub@7.48.0)(@sentry/node@7.48.0)(class-transformer@0.5.1)(graphql@16.6.0)(reflect-metadata@0.1.13)(rimraf@5.0.0)(rxjs@7.8.0)(ts-morph@18.0.0)
+        version: 4.0.0(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(@sentry/hub@7.48.0)(@sentry/node@7.48.0)(class-transformer@0.5.1)(graphql@16.6.0)(reflect-metadata@0.1.13)(rimraf@5.0.0)(rxjs@7.8.0)
       '@prisma-utils/nestjs-request-parser':
         specifier: 1.2.0
         version: 1.2.0(cache-manager@5.2.0)(class-transformer@0.5.1)(reflect-metadata@0.1.13)(rxjs@7.8.0)
       '@prisma/client':
-        specifier: 4.12.0
-        version: 4.12.0(prisma@4.12.0)
+        specifier: 4.13.0
+        version: 4.13.0(prisma@4.13.0)
       '@self/utils':
         specifier: workspace:*
         version: link:../utils
@@ -169,8 +169,8 @@ importers:
         specifier: 3.0.15
         version: 3.0.15
       prisma:
-        specifier: 4.12.0
-        version: 4.12.0
+        specifier: 4.13.0
+        version: 4.13.0
       reflect-metadata:
         specifier: 0.1.13
         version: 0.1.13
@@ -329,8 +329,8 @@ importers:
         specifier: 7.6.0
         version: 7.6.0
       '@prisma/client':
-        specifier: 4.12.0
-        version: 4.12.0(prisma@4.12.0)
+        specifier: 4.13.0
+        version: 4.13.0(prisma@4.13.0)
       '@self/utils':
         specifier: workspace:*
         version: link:../utils
@@ -351,8 +351,8 @@ importers:
         specifier: workspace:*
         version: link:../eslint-config-custom
       prisma:
-        specifier: 4.12.0
-        version: 4.12.0
+        specifier: 4.13.0
+        version: 4.13.0
       ts-toolbelt:
         specifier: 9.6.0
         version: 9.6.0
@@ -599,8 +599,8 @@ importers:
         specifier: 1.32.3
         version: 1.32.3
       '@prisma/client':
-        specifier: 4.12.0
-        version: 4.12.0(prisma@4.12.0)
+        specifier: 4.13.0
+        version: 4.13.0(prisma@4.13.0)
       '@self/backend':
         specifier: workspace:*
         version: link:../backend
@@ -635,8 +635,8 @@ importers:
         specifier: 4.14.1
         version: 4.14.1
       prisma:
-        specifier: 4.12.0
-        version: 4.12.0
+        specifier: 4.13.0
+        version: 4.13.0
       remeda:
         specifier: 1.12.0
         version: 1.12.0
@@ -1915,14 +1915,14 @@ packages:
       '@ucast/mongo2js': 1.3.4
     dev: false
 
-  /@casl/prisma@1.3.3(@casl/ability@6.4.0)(@prisma/client@4.12.0):
+  /@casl/prisma@1.3.3(@casl/ability@6.4.0)(@prisma/client@4.13.0):
     resolution: {integrity: sha512-G55pyNsIJlS18lfcf4Gj56g0TSHFF3kh8G6rLuUIac2e+lLzrkSWxSS15+YqPDkkVRr0rynKyCR/60CXNTMnhA==}
     peerDependencies:
       '@casl/ability': ^5.3.0 || ^6.0.0
       '@prisma/client': ^2.14.0 || ^3.0.0 || ^4.0.0
     dependencies:
       '@casl/ability': 6.4.0
-      '@prisma/client': 4.12.0(prisma@4.12.0)
+      '@prisma/client': 4.13.0(prisma@4.13.0)
       '@ucast/core': 1.10.1
       '@ucast/js': 3.0.2
     dev: false
@@ -2557,7 +2557,7 @@ packages:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
     dependencies:
       eslint: 8.38.0
-      eslint-visitor-keys: 3.3.0
+      eslint-visitor-keys: 3.4.0
     dev: true
 
   /@eslint-community/regexpp@4.5.0:
@@ -3045,7 +3045,7 @@ packages:
     transitivePeerDependencies:
       - encoding
 
-  /@nestjs/graphql@10.2.1(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(class-transformer@0.5.1)(graphql@16.6.0)(reflect-metadata@0.1.13)(ts-morph@18.0.0):
+  /@nestjs/graphql@10.2.1(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(class-transformer@0.5.1)(graphql@16.6.0)(reflect-metadata@0.1.13):
     resolution: {integrity: sha512-FBzYTymT4oopiGMpej7GTRyhz1BgJxLlXZPUueamC5J9u1WxCwJyETkzBI/zeUkUydlklF/xd5zDd/Md6//hEw==}
     requiresBuild: true
     peerDependencies:
@@ -3083,7 +3083,6 @@ packages:
       normalize-path: 3.0.0
       reflect-metadata: 0.1.13
       subscriptions-transport-ws: 0.11.0(graphql@16.6.0)
-      ts-morph: 18.0.0
       tslib: 2.5.0
       uuid: 9.0.0
       ws: 8.12.0
@@ -3230,7 +3229,7 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
-  /@ntegral/nestjs-sentry@4.0.0(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(@sentry/hub@7.48.0)(@sentry/node@7.48.0)(class-transformer@0.5.1)(graphql@16.6.0)(reflect-metadata@0.1.13)(rimraf@5.0.0)(rxjs@7.8.0)(ts-morph@18.0.0):
+  /@ntegral/nestjs-sentry@4.0.0(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(@sentry/hub@7.48.0)(@sentry/node@7.48.0)(class-transformer@0.5.1)(graphql@16.6.0)(reflect-metadata@0.1.13)(rimraf@5.0.0)(rxjs@7.8.0):
     resolution: {integrity: sha512-6WHZcK7NLeg7ue1y3Z61msEBzCGZeXQ0hWhliH1ddQH0kPbZ6lXLxduGMWYb0N/fPjXAX1Astz8urqnoTOZBQw==}
     peerDependencies:
       '@nestjs/common': ^9.0.4
@@ -3249,7 +3248,7 @@ packages:
       rimraf: 5.0.0
       rxjs: 7.8.0
     optionalDependencies:
-      '@nestjs/graphql': 10.2.1(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(class-transformer@0.5.1)(graphql@16.6.0)(reflect-metadata@0.1.13)(ts-morph@18.0.0)
+      '@nestjs/graphql': 10.2.1(@nestjs/common@9.4.0)(@nestjs/core@9.4.0)(class-transformer@0.5.1)(graphql@16.6.0)(reflect-metadata@0.1.13)
     transitivePeerDependencies:
       - '@apollo/subgraph'
       - bufferutil
@@ -3347,8 +3346,8 @@ packages:
       - rxjs
     dev: false
 
-  /@prisma/client@4.12.0(prisma@4.12.0):
-    resolution: {integrity: sha512-j9/ighfWwux97J2dS15nqhl60tYoH8V0IuSsgZDb6bCFcQD3fXbXmxjYC8GHhIgOk3lB7Pq+8CwElz2MiDpsSg==}
+  /@prisma/client@4.13.0(prisma@4.13.0):
+    resolution: {integrity: sha512-YaiiICcRB2hatxsbnfB66uWXjcRw3jsZdlAVxmx0cFcTc/Ad/sKdHCcWSnqyDX47vAewkjRFwiLwrOUjswVvmA==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
@@ -3357,14 +3356,14 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 4.12.0-67.659ef412370fa3b41cd7bf6e94587c1dfb7f67e7
-      prisma: 4.12.0
+      '@prisma/engines-version': 4.13.0-50.1e7af066ee9cb95cf3a403c78d9aab3e6b04f37a
+      prisma: 4.13.0
 
-  /@prisma/engines-version@4.12.0-67.659ef412370fa3b41cd7bf6e94587c1dfb7f67e7:
-    resolution: {integrity: sha512-JIHNj5jlXb9mcaJwakM0vpgRYJIAurxTUqM0iX0tfEQA5XLZ9ONkIckkhuAKdAzocZ+80GYg7QSsfpjg7OxbOA==}
+  /@prisma/engines-version@4.13.0-50.1e7af066ee9cb95cf3a403c78d9aab3e6b04f37a:
+    resolution: {integrity: sha512-fsQlbkhPJf08JOzKoyoD9atdUijuGBekwoOPZC3YOygXEml1MTtgXVpnUNchQlRSY82OQ6pSGQ9PxUe4arcSLQ==}
 
-  /@prisma/engines@4.12.0:
-    resolution: {integrity: sha512-0alKtnxhNB5hYU+ymESBlGI4b9XrGGSdv7Ud+8TE/fBNOEhIud0XQsAR+TrvUZgS4na5czubiMsODw0TUrgkIA==}
+  /@prisma/engines@4.13.0:
+    resolution: {integrity: sha512-HrniowHRZXHuGT9XRgoXEaP2gJLXM5RMoItaY2PkjvuZ+iHc0Zjbm/302MB8YsPdWozAPHHn+jpFEcEn71OgPw==}
     requiresBuild: true
 
   /@rollup/plugin-commonjs@24.0.1(rollup@3.19.1):
@@ -3697,6 +3696,7 @@ packages:
       minimatch: 7.4.3
       mkdirp: 2.1.6
       path-browserify: 1.0.1
+    dev: true
 
   /@tsconfig/node18-strictest-esm@1.0.1:
     resolution: {integrity: sha512-cHzmAqw7CMbyqROWeBgVhard3F2V6zxOSJnQ4E6SJWruXD5ypuP9/QKekwBdfXQ4oUTaizIICKIwb+v3v33t0w==}
@@ -5311,6 +5311,7 @@ packages:
 
   /code-block-writer@12.0.0:
     resolution: {integrity: sha512-q4dMFMlXtKR3XNBHyMHt/3pwYNA69EDk00lloMOaaUMKPUXBw6lpXtbu3MMVG6/uOihGnRDOlkyqsONEUj60+w==}
+    dev: true
 
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -8722,6 +8723,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       brace-expansion: 2.0.1
+    dev: true
 
   /minimatch@8.0.4:
     resolution: {integrity: sha512-W0Wvr9HyFXZRGIDgCicunpQ299OKXs9RgZfaukz4qAW/pJhcpUfupc9c+OObPOFueNy8VSrZgEmDtk6Kh4WzDA==}
@@ -8781,6 +8783,7 @@ packages:
     resolution: {integrity: sha512-+hEnITedc8LAtIP9u3HJDFIdcLV2vXP33sqLLIzkv1Db1zO/1OxbvYf0Y1OC/S/Qo5dxHXepofhmxL02PsKe+A==}
     engines: {node: '>=10'}
     hasBin: true
+    dev: true
 
   /mlly@1.2.0:
     resolution: {integrity: sha512-+c7A3CV0KGdKcylsI6khWyts/CYrGTrRVo4R/I7u/cUsy0Conxa6LUhiEzVKIw14lc2L5aiO4+SeVe4TeGRKww==}
@@ -9337,6 +9340,7 @@ packages:
 
   /path-browserify@1.0.1:
     resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
+    dev: true
 
   /path-exists@4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
@@ -9720,13 +9724,13 @@ packages:
       parse-ms: 2.1.0
     dev: true
 
-  /prisma@4.12.0:
-    resolution: {integrity: sha512-xqVper4mbwl32BWzLpdznHAYvYDWQQWK2tBfXjdUD397XaveRyAP7SkBZ6kFlIg8kKayF4hvuaVtYwXd9BodAg==}
+  /prisma@4.13.0:
+    resolution: {integrity: sha512-L9mqjnSmvWIRCYJ9mQkwCtj4+JDYYTdhoyo8hlsHNDXaZLh/b4hR0IoKIBbTKxZuyHQzLopb/+0Rvb69uGV7uA==}
     engines: {node: '>=14.17'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 4.12.0
+      '@prisma/engines': 4.13.0
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
@@ -11189,6 +11193,7 @@ packages:
     dependencies:
       '@ts-morph/common': 0.19.0
       code-block-writer: 12.0.0
+    dev: true
 
   /ts-toolbelt@9.6.0:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
