@@ -14,7 +14,7 @@
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
-      pkgsTurbo = nixpkgs-turbo.legacyPackages.${system};
+      inherit (nixpkgs-turbo.legacyPackages.${system}) turbo;
 
       # Tier binary package
       tier = {pkgs, ...}:
@@ -51,7 +51,7 @@
         buildInputs = with pkgs; [
           nodePackages.prisma # npm binary doesn't work on nixOS
           openssl # otherwise prisma will complain about missing openssl
-          pkgsTurbo.turbo # npm binary doesn't work on nixOS
+          turbo # npm binary doesn't work on nixOS
           go-task # version installed by pnpm is nowhere to be found on nixOS
           zulu # java for openapi-generator-cli
           # openapi-generator-cli # npm binary works on nixOS
@@ -69,7 +69,7 @@
           rm -rf node_modules/.bin/turbo # use the one from nix
 
           # Tell turbo where to find our nixOS-specific binary
-          export TURBO_BINARY_PATH="${pkgsTurbo.turbo}/bin/turbo"
+          export TURBO_BINARY_PATH="${turbo}/bin/turbo"
         '';
       };
     });
