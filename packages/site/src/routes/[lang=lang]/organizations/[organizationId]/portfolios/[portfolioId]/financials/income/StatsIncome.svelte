@@ -24,7 +24,7 @@
 	<Stats>
 		<svelte:fragment slot="panes">
 			<StatisticsPane
-				primaryText={$L.general.total() + ' ' + $L.nav.income()}
+				primaryText={$L.general.total() + ' ' + $L.entity.leaseInvoice.plural()}
 				secondaryText={$L.general.forPeriod()}
 				primaryValue={fmtCurrency(data.sumIncome.total)}
 			/>
