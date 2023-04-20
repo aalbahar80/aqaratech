@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.21.2
+
+### Patch Changes
+
+- 351e30748: update node to 18.16.0
+- Updated dependencies [351e30748]
+  - @self/utils@3.21.2
+
 ## 2.21.1
 
 ### Patch Changes

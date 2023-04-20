@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.21.2
+
+### Patch Changes
+
+- 351e30748: update node to 18.16.0
+
 ## 2.21.1
 
 ### Patch Changes

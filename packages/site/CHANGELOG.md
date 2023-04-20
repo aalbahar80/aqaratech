@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.24.2
+
+### Patch Changes
+
+- 351e30748: update node to 18.16.0
+
 ## 2.24.1
 
 ### Patch Changes
