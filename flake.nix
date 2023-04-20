@@ -5,16 +5,21 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.nixpkgs-turbo.url = "github:thenbe/nixpkgs/turbo-1.9.1";
+  inputs.nixpkgs-prisma.url = "github:pimeys/nixpkgs/prisma-4.13.0";
 
   outputs = {
     self,
     nixpkgs,
     nixpkgs-turbo,
+    nixpkgs-prisma,
     flake-utils,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
+      # Define some packages here to easily switch between versions
       inherit (nixpkgs-turbo.legacyPackages.${system}) turbo;
+      inherit (nixpkgs-prisma.legacyPackages.${system}) prisma-engines;
+      inherit (nixpkgs-prisma.legacyPackages.${system}.nodePackages) prisma;
 
       # Tier binary package
       tier = {pkgs, ...}:
@@ -49,7 +54,7 @@
       devShell = pkgs.mkShell {
         nativeBuildInputs = [pkgs.bashInteractive];
         buildInputs = with pkgs; [
-          nodePackages.prisma # npm binary doesn't work on nixOS
+          prisma # npm binary doesn't work on nixOS
           openssl # otherwise prisma will complain about missing openssl
           turbo # npm binary doesn't work on nixOS
           go-task # version installed by pnpm is nowhere to be found on nixOS
@@ -57,7 +62,7 @@
           # openapi-generator-cli # npm binary works on nixOS
           (tier {inherit pkgs;})
         ];
-        shellHook = with pkgs; ''
+        shellHook = ''
           export PRISMA_MIGRATION_ENGINE_BINARY="${prisma-engines}/bin/migration-engine"
           export PRISMA_QUERY_ENGINE_BINARY="${prisma-engines}/bin/query-engine"
           export PRISMA_QUERY_ENGINE_LIBRARY="${prisma-engines}/lib/libquery_engine.node"
