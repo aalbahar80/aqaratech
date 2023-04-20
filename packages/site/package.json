@@ -27,7 +27,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.51",
+		"@iconify/json": "2.2.52",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -62,12 +62,12 @@
 		"eslint-plugin-svelte": "2.26.0",
 		"frappe-charts": "1.6.2",
 		"fuse.js": "6.6.2",
-		"jose": "4.14.0",
+		"jose": "4.14.1",
 		"jspdf": "2.5.1",
 		"just-debounce-it": "3.2.0",
 		"nanoid": "4.0.2",
 		"papaparse": "5.4.1",
-		"postcss": "8.4.22",
+		"postcss": "8.4.23",
 		"remeda": "1.12.0",
 		"rollup-plugin-visualizer": "5.9.0",
 		"sorcery": "0.11.0",
