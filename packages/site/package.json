@@ -32,8 +32,8 @@
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",
-		"@sentry/svelte": "7.48.0",
-		"@sentry/tracing": "7.48.0",
+		"@sentry/svelte": "7.49.0",
+		"@sentry/tracing": "7.49.0",
 		"@sveltejs/adapter-node": "1.2.3",
 		"@sveltejs/kit": "1.15.7",
 		"@sveltejs/pancake": "0.0.18",
@@ -72,7 +72,7 @@
 		"rollup-plugin-visualizer": "5.9.0",
 		"sorcery": "0.11.0",
 		"source-map-support": "0.5.21",
-		"stripe": "12.1.1",
+		"stripe": "12.2.0",
 		"svelte": "3.58.0",
 		"svelte-check": "3.2.0",
 		"svelte-frappe-charts": "1.10.0",
@@ -97,7 +97,7 @@
 	"dependencies": {
 		"@logtail/node": "0.4.0",
 		"@logtail/winston": "0.4.1",
-		"@sentry/node": "7.48.0",
+		"@sentry/node": "7.49.0",
 		"typesafe-i18n": "5.24.3",
 		"winston": "3.8.2"
 	},
