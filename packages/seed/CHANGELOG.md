@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.21.3
+
+### Patch Changes
+
+- 7cc68fc83: fetch tolgee
+- Updated dependencies [7cc68fc83]
+  - @self/utils@3.21.3
+
 ## 2.21.2
 
 ### Patch Changes

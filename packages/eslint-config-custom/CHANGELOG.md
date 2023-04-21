@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.21.3
+
+### Patch Changes
+
+- 7cc68fc83: fetch tolgee
+
 ## 2.21.2
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.22.3
+
+### Patch Changes
+
+- 7cc68fc83: fetch tolgee
+- Updated dependencies [7cc68fc83]
+  - @self/utils@3.21.3
+
 ## 2.22.2
 
 ### Patch Changes

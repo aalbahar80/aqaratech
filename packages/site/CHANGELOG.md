@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.24.3
+
+### Patch Changes
+
+- 3353a9a53: fix: replace income with invoices
+- 7cc68fc83: fetch tolgee
+
 ## 2.24.2
 
 ### Patch Changes
