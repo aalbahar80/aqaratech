@@ -27,3 +27,20 @@ export const getLoginButton = async (page: Page, isMobile: boolean) => {
 		return loginButton;
 	}
 };
+
+/** Locale switcher */
+export const getLocaleSwitcher = async (
+	page: Page,
+	isMobile: boolean,
+	name = 'العربية',
+) => {
+	const localeSwitcher = page.getByRole('link', { name });
+	if (isMobile) {
+		// open sidebar
+		const sidebar = new SidebarModel(page);
+		await sidebar.open();
+		return localeSwitcher;
+	} else {
+		return localeSwitcher;
+	}
+};
