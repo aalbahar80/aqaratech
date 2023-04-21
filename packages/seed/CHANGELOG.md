@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.22.0
+
+### Minor Changes
+
+- 2a747dbff: move sidbar to landing page
+
+### Patch Changes
+
+- Updated dependencies [2a747dbff]
+  - @self/utils@3.22.0
+
 ## 2.21.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.22.0
+
+### Minor Changes
+
+- 2a747dbff: move sidbar to landing page
+
 ## 3.21.3
 
 ### Patch Changes

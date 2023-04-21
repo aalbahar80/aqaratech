@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.22.0
+
+### Minor Changes
+
+- 2a747dbff: move sidbar to landing page
+
 ## 2.21.3
 
 ### Patch Changes

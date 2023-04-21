@@ -1,5 +1,15 @@
 # @self/site
 
+## 2.25.0
+
+### Minor Changes
+
+- 2a747dbff: move sidbar to landing page
+
+### Patch Changes
+
+- 0bbfe0688: rm unused getPortfolios query
+
 ## 2.24.3
 
 ### Patch Changes
