@@ -4,6 +4,7 @@ import { expect } from '@playwright/test';
 
 import { PageTypePortfolio, getRoute } from '@self/utils';
 
+import { getLoginButton } from '../../locators/common';
 import { prisma } from '../../prisma';
 import { globalStoragePath } from '../../utils/global-storage-path';
 import { test } from '../api/api-fixtures';
@@ -25,13 +26,11 @@ test.describe('new user', () => {
 		await prisma.user.deleteMany({ where: { email } });
 	});
 
-	test('is redirected to /welcome if no role', async ({ page }) => {
+	test('is redirected to /welcome if no role', async ({ page, isMobile }) => {
 		await page.goto('/');
 
-		await page
-			.getByRole('banner', { name: 'Global' })
-			.getByRole('link', { name: 'Log in' })
-			.click();
+		const loginButton = await getLoginButton(page, isMobile);
+		await loginButton.click();
 
 		await expect(page).toHaveURL('/en/welcome');
 	});
@@ -50,6 +49,7 @@ test.describe('new user', () => {
 	test('is redirected to portfolio portal if portolio', async ({
 		page,
 		portfolio,
+		isMobile,
 	}) => {
 		// simulate that the user has been invited as a portfolio
 		await prisma.role.create({
@@ -62,7 +62,9 @@ test.describe('new user', () => {
 		});
 
 		await page.goto('/');
-		await page.getByRole('link', { name: 'Log in' }).click();
+
+		const loginButton = await getLoginButton(page, isMobile);
+		await loginButton.click();
 
 		const url = getRoute({
 			entity: 'portfolio',
@@ -76,7 +78,11 @@ test.describe('new user', () => {
 		await expect(page).toHaveURL(`${siteURL}${url}`);
 	});
 
-	test('is redirected to tenant portal if tenant', async ({ page, tenant }) => {
+	test('is redirected to tenant portal if tenant', async ({
+		page,
+		tenant,
+		isMobile,
+	}) => {
 		// simulate that the user has been invited as a tenant
 		await prisma.role.create({
 			data: {
@@ -88,7 +94,9 @@ test.describe('new user', () => {
 		});
 
 		await page.goto('/');
-		await page.getByRole('link', { name: 'Log in' }).click();
+
+		const loginButton = await getLoginButton(page, isMobile);
+		await loginButton.click();
 
 		const url = `${siteURL}/en/portal/tenant/${tenant.id}/leaseInvoices`;
 

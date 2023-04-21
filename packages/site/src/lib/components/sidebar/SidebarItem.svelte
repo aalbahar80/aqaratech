@@ -35,6 +35,8 @@
 		on:click={() => {
 			// always expand when clicking on a link
 			expanded = true;
+
+			'onClick' in item && item.onClick();
 		}}
 		{...item.linkOptions}
 	>

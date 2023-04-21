@@ -8,11 +8,19 @@ import type { Locales } from '$i18n/i18n-types';
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
 import type { ReadableOf } from '$lib/utils/readable-of';
+import type { LoadEvent } from '@sveltejs/kit';
 import type { QueryClient } from '@tanstack/svelte-query';
 
+import { landingLinks } from '$lib/components/navbar/landing-links';
 import { getDashboardLinks } from '$lib/components/sidebar/dashboard-links';
-import { LOGOUT, NEW_ORGANIZATION } from '$lib/constants/routes';
+import { PREF_LOCALE } from '$lib/constants/misc';
+import { LOGIN, LOGOUT, NEW_ORGANIZATION } from '$lib/constants/routes';
+import { LOCALE_LABELS } from '$lib/i18n/locale-labels';
+import { replaceLocaleInUrl } from '$lib/i18n/replace-local-url';
+import { isHomeRoute } from '$lib/utils/route-utils';
 import HeroiconsBanknotes from '~icons/heroicons/banknotes';
+// import HeroiconsCalculator from '~icons/heroicons/calculator';
+// import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 import HeroiconsPlus from '~icons/heroicons/plus';
 import HeroiconsReceiptPercent from '~icons/heroicons/receipt-percent';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
@@ -21,22 +29,73 @@ import HeroiconsOutlineCog8Tooth from '~icons/heroicons-outline/cog-8-tooth';
 import HeroiconsOutlineCollection from '~icons/heroicons-outline/collection';
 import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text';
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
+// import HeroiconsOutlineLogin from '~icons/heroicons-outline/login';
 import HeroiconsOutlineLogout from '~icons/heroicons-outline/logout';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
-// import HeroiconsCalculator from '~icons/heroicons/calculator';
-// import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 
 export const getNavigationTree = (
-	user: User,
+	user: User | undefined,
 	LL: ReadableOf<typeof L>,
 	locale: Locales,
 	queryClient: QueryClient,
+	route: LoadEvent['route'],
+	url: LoadEvent['url'],
 ): NavigationItem[] => {
+	const tree: NavigationItem[] = [];
+
+	// Locale
+	const unselectedLocale = locale === 'en' ? 'ar' : 'en';
+
+	const localeSwitch: NavigationItem = {
+		name: LOCALE_LABELS[unselectedLocale],
+		href: replaceLocaleInUrl(url, unselectedLocale),
+		linkOptions: {
+			'data-sveltekit-reload': '',
+		},
+		onClick: () => {
+			document.cookie = `${PREF_LOCALE}=${unselectedLocale}; path=/; max-age=31536000`;
+		},
+	};
+
+	tree.push(localeSwitch);
+
+	const login = {
+		name: LL.buttons.login(),
+		href: LOGIN,
+		// icon: HeroiconsOutlineLogin,
+		linkOptions: {
+			// Explicitly declare as external link to avoid a client-side error "Not Found".
+			'data-sveltekit-reload': '',
+			// TODO: needed? add to other links that use data-sveltekit-reload?
+			rel: 'external',
+		},
+	};
+
+	// FIX: determine if home page, return appropriate nav tree
+	if (isHomeRoute(route)) {
+		tree.splice(0, 0, login);
+
+		landingLinks(LL).forEach((link) => {
+			tree.splice(0, 0, {
+				name: link.label,
+				href: link.href,
+			});
+		});
+
+		return tree;
+	}
+
+	if (!user) {
+		return [login];
+	}
+
 	const langParam = {
 		lang: locale,
 	};
 
-	const tree: NavigationItem[] = [
+	tree.splice(
+		0,
+		0,
 		{
 			name: LL.nav.account(),
 			href: `/${locale}/users/${user.id}/roles`,
@@ -55,7 +114,7 @@ export const getNavigationTree = (
 				'data-sveltekit-reload': '',
 			},
 		},
-	];
+	);
 
 	if (!user.role) {
 		// New users have no role yet. Render basic nav links.
@@ -149,7 +208,7 @@ export const getNavigationTree = (
 			},
 		});
 
-		tree.splice(-1, 0, {
+		tree.splice(-2, 0, {
 			name: LL.nav.settings(),
 			href: settings,
 			icon: HeroiconsOutlineCog8Tooth,

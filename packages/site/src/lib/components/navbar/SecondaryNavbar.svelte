@@ -4,42 +4,27 @@
 	import L from '$i18n/i18n-svelte';
 	import { landingLinks } from '$lib/components/navbar/landing-links';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
-	import NavPopover, {
-		popover,
-	} from '$lib/components/navbar/NavPopover.svelte';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import { SIDEBAR_TOGGLE } from '$lib/constants/misc';
 	import LocaleSwitcher from '$lib/i18n/LocaleSwitcher.svelte';
+	import { widthNumber } from '$lib/stores/width';
 	import AqaratechLogo1 from '$lib/svgs/AqaratechLogo1.svelte';
 	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
-
-	let visible = true;
-	let last_scroll = 0;
-	function handle_scroll() {
-		const scroll = window.pageYOffset;
-		visible = scroll < 50 || scroll < last_scroll;
-
-		last_scroll = scroll;
-	}
 </script>
 
-<svelte:window on:scroll={handle_scroll} />
-
 <!-- Vertical Navbar Flexbox -->
-<!-- Never hide navbar if popover is open to avoid overlay dimming issue -->
 <header
-	class="fixed z-50 flex w-full flex-col justify-center bg-white shadow-md duration-300 ease-in-out print:hidden"
-	class:visible={visible || $popover.expanded || !isHomeRoute($page.route)}
+	class="fixed z-50 flex w-full flex-col justify-center bg-white shadow-md print:hidden"
 	style:height="var(--nav-h)"
 	aria-label="Global"
 >
 	<!-- Main horizontal navbar area -->
 	<!-- NOTE: Any height offset should be kept in sync with Sidebar height -->
-	<div class="flex items-center justify-between px-4 py-4 md:py-8">
+	<div class="flex items-center justify-between px-4 py-4 sm:py-8">
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
-			{#if isSidebarAvailable($page.route)}
+			{#if isSidebarAvailable($page.route, $widthNumber)}
 				<button
 					class="lg:hidden"
 					use:sidebar.button
@@ -59,7 +44,7 @@
 			</a>
 		</div>
 		{#if isHomeRoute($page.route)}
-			<div class="hidden gap-x-6 md:flex lg:gap-x-12">
+			<div class="hidden gap-x-6 lg:flex lg:gap-x-12">
 				{#each landingLinks($L) as { label, href } (href)}
 					<a
 						{href}
@@ -69,25 +54,11 @@
 				{/each}
 			</div>
 		{/if}
-		<div class="flex gap-4">
-			<div
-				class="flex flex-col justify-center gap-x-12 gap-y-4 text-gray-500 md:flex-row"
-			>
+		{#if !isSidebarAvailable($page.route, $widthNumber)}
+			<div class="flex flex-col gap-x-12 gap-y-4 text-gray-500 sm:flex-row">
 				<LocaleSwitcher />
-				{#if isHomeRoute($page.route)}
-					<LoginButton />
-				{/if}
+				<LoginButton />
 			</div>
-
-			{#if isHomeRoute($page.route)}
-				<NavPopover />
-			{/if}
-		</div>
+		{/if}
 	</div>
 </header>
-
-<style>
-	header:not(.visible) {
-		transform: translate(0, calc(-100% - 1rem));
-	}
-</style>

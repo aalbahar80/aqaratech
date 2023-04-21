@@ -2,9 +2,9 @@ import type { HTMLAttributes } from 'svelte/elements';
 
 import type { Icon } from '$lib/models/types/icon.type';
 
-type LinkOptions = Pick<
-	HTMLAttributes<HTMLAnchorElement>,
-	'data-sveltekit-reload'
+type LinkOptions = Partial<
+	| Pick<HTMLAttributes<HTMLAnchorElement>, 'data-sveltekit-reload'>
+	| Pick<HTMLAnchorElement, 'rel'>
 >;
 
 export interface NavigationItem {
@@ -18,4 +18,5 @@ export interface NavigationItem {
 	path?: string;
 	divided?: boolean;
 	linkOptions?: LinkOptions;
+	onClick?: () => void;
 }

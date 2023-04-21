@@ -1,21 +1,22 @@
 import { expect, type Page } from '@playwright/test';
 
+import { getLoginButton } from '../../locators/common';
 import { siteURL } from '../api/fixtures/site-url';
 
 export class LoginPage {
 	readonly page: Page;
+	readonly isMobile: boolean;
 
-	constructor(page: Page) {
+	constructor(page: Page, isMobile: boolean) {
 		this.page = page;
+		this.isMobile = isMobile;
 	}
 
 	async goto() {
 		await this.page.goto(siteURL);
 
-		await this.page
-			.getByRole('banner', { name: 'Global' })
-			.getByRole('link', { name: 'Log in' })
-			.click();
+		const loginButton = await getLoginButton(this.page, this.isMobile);
+		await loginButton.click();
 	}
 
 	async fill({ email, password }: { email: string; password: string }) {

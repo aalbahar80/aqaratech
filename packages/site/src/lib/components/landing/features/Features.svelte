@@ -9,7 +9,7 @@
 <!-- Use bottom padding to avoid clipping last icon if text is short enough. -->
 <div
 	id="features"
-	class="overflow-hidden bg-gray-100 pb-6 lg:pb-28"
+	class="overflow-hidden bg-gray-50 pb-6 lg:pb-28"
 >
 	<div class="relative mx-auto max-w-xl px-6 lg:max-w-7xl lg:px-8">
 		{#each features as feature, n (feature.title)}

@@ -18,12 +18,12 @@ test.use({
 	storageState: { cookies: [], origins: [] },
 });
 
-test('login', async ({ page }) => {
+test('login', async ({ page, isMobile }) => {
 	test.slow();
 
 	const { email, password } = user;
 
-	const loginPage = new LoginPage(page);
+	const loginPage = new LoginPage(page, isMobile);
 	await loginPage.goto();
 	await loginPage.fill({ email, password });
 

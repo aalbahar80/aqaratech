@@ -14,7 +14,7 @@
 	import clsx from 'clsx';
 
 	import { afterNavigate } from '$app/navigation';
-	import { fly } from 'svelte/transition';
+	import { page } from '$app/stores';
 
 	import type { NavigationItem } from '$lib/components/sidebar/types';
 
@@ -23,6 +23,7 @@
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
+	import { isHomeRoute } from '$lib/utils/route-utils';
 
 	export let navigationTree: NavigationItem[];
 
@@ -37,14 +38,15 @@
 		'fixed z-40 h-[calc(100%-68px)] w-64 flex-col gap-6 border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900 sm:h-[calc(100%-100px)]',
 		$sidebar.expanded ? 'flex' : 'hidden lg:flex', // ignore $isOpen on lg breakpoint
 	)}
-	in:fly={{ x: -100, duration: 150 }}
 	use:sidebar.panel
 	use:clickOutside
 	on:outclick={sidebar.close}
 >
-	<RoleGuard roles={['ORGADMIN', 'PORTFOLIO']}>
-		<SearchButton />
-	</RoleGuard>
+	{#if !isHomeRoute($page.route)}
+		<RoleGuard roles={['ORGADMIN', 'PORTFOLIO']}>
+			<SearchButton />
+		</RoleGuard>
+	{/if}
 
 	<nav class="flex flex-1 flex-col overflow-y-auto overscroll-y-contain">
 		{#each navigationTree as item}

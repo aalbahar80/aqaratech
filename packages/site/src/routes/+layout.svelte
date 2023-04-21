@@ -22,7 +22,7 @@
 	import { environment } from '$lib/environment';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
-	import { width } from '$lib/stores/width';
+	import { width, widthNumber } from '$lib/stores/width';
 	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 
@@ -62,6 +62,8 @@
 	<HeadHrefLangs />
 </svelte:head>
 
+<svelte:window bind:innerWidth={$widthNumber} />
+
 <QueryClientProvider client={data.queryClient}>
 	{#if $navigating && !$page.error}
 		<PreloadingIndicator />
@@ -70,30 +72,28 @@
 	<Modal />
 
 	<SecondaryNavbar />
-	{#if isHomeRoute($page.route)}
-		<main
-			class="bg-gray-50"
-			style:padding-top="var(--nav-h)"
-		>
-			<slot />
-		</main>
-	{:else}
-		<div
-			class="my-grid"
-			style:padding-top="var(--nav-h)"
-		>
-			{#if isSidebarAvailable($page.route) && data.user}
-				<Sidebar
-					navigationTree={getNavigationTree(
-						data.user,
-						$L,
-						$locale,
-						data.queryClient,
-					)}
-				/>
-			{/if}
+	<div
+		class:my-grid={isSidebarAvailable($page.route, $widthNumber)}
+		class:bg-gray-50={isHomeRoute($page.route)}
+		style:padding-top="var(--nav-h)"
+	>
+		{#if isSidebarAvailable($page.route, $widthNumber)}
+			<Sidebar
+				navigationTree={getNavigationTree(
+					data.user,
+					$L,
+					$locale,
+					data.queryClient,
+					$page.route,
+					$page.url,
+				)}
+			/>
+		{/if}
 
-			<main class="col-span-full py-8 lg:col-start-2">
+		<main class="col-span-full py-8 lg:col-start-2">
+			{#if isHomeRoute($page.route)}
+				<slot />
+			{:else}
 				<div
 					class={clsx(
 						'mx-auto flex flex-col space-y-6 px-4 sm:px-6 lg:px-8',
@@ -102,9 +102,9 @@
 				>
 					<slot />
 				</div>
-			</main>
-		</div>
-	{/if}
+			{/if}
+		</main>
+	</div>
 </QueryClientProvider>
 
 <style>

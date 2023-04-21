@@ -7,8 +7,9 @@ export const HOME = '/[lang=lang]';
 export const isHomeRoute = (route: Route) => route.id === HOME;
 
 /** A flag to indicate whether the sidebar and hamburger menu should be
- * available on the page. */
-export const isSidebarAvailable = (route: Route) => route.id !== HOME;
+ * available on the page. Sidebar is always on unless mobile on landing page. */
+export const isSidebarAvailable = (route: Route, widthNumber: number) =>
+	widthNumber < 1024 || route.id !== HOME;
 
 // ### Protected ###
 

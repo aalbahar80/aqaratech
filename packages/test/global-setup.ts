@@ -74,7 +74,7 @@ async function globalSetup(config: FullConfig) {
 
 		const page = await browser.newPage({ ignoreHTTPSErrors });
 
-		const loginPage = new LoginPage(page);
+		const loginPage = new LoginPage(page, false);
 
 		await loginPage.goto();
 		await loginPage.fill({ email, password });
