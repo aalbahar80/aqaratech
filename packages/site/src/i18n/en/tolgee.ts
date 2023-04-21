@@ -119,9 +119,9 @@ export const tolgee = {
 		},
 		hero: {
 			description:
-				'An easy-to-use platform where you can manage properties, keep track of important tasks, and quickly access information.',
+				'Aqaratech offers  an easy-to-use dashboard to manage properties, keep track of important tasks, and quickly access information.',
 			subtitle:
-				'Dedicated portals for the unique needs of property owners and portfolio managers.',
+				'Unique portals to suit the needs of property owners and real estate companies.',
 			titlePrefix: 'Property management',
 			titleHighlight: 'All-in-one',
 			titleSuffix: 'platform.',
@@ -146,19 +146,17 @@ export const tolgee = {
 		},
 		secondaryFeatures: {
 			managers: {
-				description:
-					'Aqaratech helps you organize your business and work efficiently.',
+				description: 'Organize operations and Increase efficiency.',
 				name: 'Streamline your workflows',
-				summary: 'Property Managers',
+				summary: 'Real Estate Companies',
 			},
 			owners: {
-				description: 'Use the owner portal to view your property information.',
+				description: 'View property information and categorize expenses.',
 				name: 'Complete visibility',
 				summary: 'Property Owners',
 			},
 			tenants: {
-				description:
-					'Aqaratech simplifies the rental process by allowing tenants to track their payments and leases.',
+				description: 'Online rent payments and maintenance requests.',
 				name: 'Hassle-free rentals',
 				summary: 'Tenants',
 			},
