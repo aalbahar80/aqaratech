@@ -41,7 +41,7 @@ jobs:
     # use env for auth0
     environment: dev
     runs-on:
-      group: ubuntu-runners
+      group: Default Larger Runners
       labels: ubuntu-latest-16-cores
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
