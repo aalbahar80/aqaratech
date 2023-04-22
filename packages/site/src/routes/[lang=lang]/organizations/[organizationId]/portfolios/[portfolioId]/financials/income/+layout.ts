@@ -9,7 +9,7 @@ import { isPaid } from '$lib/stores/filter/is-paid';
 import { isPaidLate } from '$lib/stores/filter/is-paid-late';
 import { isPaidOnline } from '$lib/stores/filter/is-paid-online';
 import { property } from '$lib/stores/filter/property';
-import { range } from '$lib/stores/filter/range';
+import { range, rangeKind } from '$lib/stores/filter/range';
 import { unit } from '$lib/stores/filter/unit';
 import { parseParams } from '$lib/utils/parse-params';
 
@@ -21,6 +21,7 @@ export const load: LayoutLoad = async ({
 }) => {
 	// Filter options
 	const { start, end } = get(range);
+	const rangeKindFilter = get(rangeKind);
 	const propertyId = get(property);
 	const unitId = get(unit);
 	const isPaidFilter = get(isPaid);
@@ -29,6 +30,7 @@ export const load: LayoutLoad = async ({
 
 	depends(
 		FilterEnum.Range,
+		FilterEnum.RangeKind,
 		FilterEnum.Property,
 		FilterEnum.Unit,
 		FilterEnum.IsPaid,
@@ -47,7 +49,7 @@ export const load: LayoutLoad = async ({
 	const { organizationId, portfolioId } = params;
 
 	const filter: Record<string, unknown> = {
-		postAt: { gte: new Date(start), lte: new Date(end) },
+		[rangeKindFilter]: { gte: new Date(start), lte: new Date(end) },
 		isPaid: isPaidFilter,
 		mfPaymentId:
 			isPaidOnlineFilter === true
@@ -89,13 +91,19 @@ export const load: LayoutLoad = async ({
 		}),
 	]);
 
-	/**
-	 * Summed income data, used by multiple components.
-	 */
+	/** Summed income data, used by multiple components. */
 	const sumIncome = {
-		total: R.sumBy(income.total, (x) => x.amount),
-		paid: R.sumBy(income.paid, (x) => x.amount),
-		unpaid: R.sumBy(income.unpaid, (x) => x.amount),
+		total: invoices.sum ?? 0,
+		paid: R.pipe(
+			invoices.aggregate,
+			R.filter((x) => x.isPaid),
+			R.sumBy((x) => x.sum.amount ?? 0),
+		),
+		unpaid: R.pipe(
+			invoices.aggregate,
+			R.filter((x) => !x.isPaid),
+			R.sumBy((x) => x.sum.amount ?? 0),
+		),
 	};
 
 	return {

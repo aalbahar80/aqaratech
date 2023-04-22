@@ -25,7 +25,7 @@
 <div
 	class={clsx(
 		'grid grid-cols-1 gap-8',
-		showName ? 'lg:grid-cols-3' : 'lg:grid-cols-2',
+		showName ? 'xl:grid-cols-3' : 'lg:grid-cols-2',
 	)}
 >
 	<div
@@ -93,7 +93,7 @@
 		{/if}
 	</div>
 
-	<div class="lg:col-span-2">
+	<div class="xl:col-span-2">
 		<!-- Dashboard Filter -->
 		<Filter
 			properties={data.properties}

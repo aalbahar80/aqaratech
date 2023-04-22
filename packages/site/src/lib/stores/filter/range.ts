@@ -2,6 +2,8 @@ import debounce from 'debounce';
 
 import { invalidate } from '$app/navigation';
 
+import type { LeaseInvoiceDto } from '$api/openapi';
+
 import { defaultRange } from '$lib/components/charts/utils/date-range';
 import { DateRange } from '$lib/models/classes/Range.class';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
@@ -53,3 +55,7 @@ export const range = createRange();
 const debouncedInvalidate = debounce(async () => {
 	await invalidate(FilterEnum.Range);
 }, 150);
+
+// range kind
+type RangeKind = Extract<keyof LeaseInvoiceDto, 'postAt' | 'paidAt'>;
+export const rangeKind = writable<RangeKind>('postAt');

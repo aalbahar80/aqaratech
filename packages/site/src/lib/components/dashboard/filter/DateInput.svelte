@@ -6,7 +6,7 @@
 <div class="block w-1/2">
 	<label
 		for={name}
-		class="block pb-2 text-sm font-medium text-gray-700"
+		class="pb-2 text-sm font-medium text-gray-700"
 	>
 		{name}
 	</label>

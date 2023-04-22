@@ -149,6 +149,7 @@ const en: BaseTranslation = {
 		start: 'Start',
 		end: 'End',
 		range: 'Range',
+		rangeKind: 'Range kind',
 		monthToDate: 'Month to date',
 		last3Months: 'Last 3 months',
 		last6Months: 'Last 6 months',

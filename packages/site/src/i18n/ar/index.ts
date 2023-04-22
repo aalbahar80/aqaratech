@@ -261,6 +261,7 @@ const ar: Translation = {
 		start: 'بداية',
 		end: 'نهاية',
 		range: 'نطاق',
+		rangeKind: 'نوع النطاق',
 		monthToDate: 'الشهر الحالي',
 		last3Months: 'آخر 3 أشهر',
 		last6Months: 'آخر 6 أشهر',

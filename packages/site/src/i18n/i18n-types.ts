@@ -1222,6 +1222,10 @@ type RootTranslation = {
 		 */
 		range: string
 		/**
+		 * R​a​n​g​e​ ​k​i​n​d
+		 */
+		rangeKind: string
+		/**
 		 * M​o​n​t​h​ ​t​o​ ​d​a​t​e
 		 */
 		monthToDate: string
@@ -2544,6 +2548,10 @@ export type TranslationFunctions = {
 		 * Range
 		 */
 		range: () => LocalizedString
+		/**
+		 * Range kind
+		 */
+		rangeKind: () => LocalizedString
 		/**
 		 * Month to date
 		 */
