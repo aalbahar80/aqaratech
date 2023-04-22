@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.26.0
+
+### Minor Changes
+
+- 82a1840ba: add lease phase filter
+
 ## 2.25.0
 
 ### Minor Changes

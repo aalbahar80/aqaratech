@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.23.0
+
+### Minor Changes
+
+- 82a1840ba: add lease phase filter
+
 ## 3.22.0
 
 ### Minor Changes

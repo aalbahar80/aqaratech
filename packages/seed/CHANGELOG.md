@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.23.0
+
+### Minor Changes
+
+- 82a1840ba: add lease phase filter
+
+### Patch Changes
+
+- Updated dependencies [82a1840ba]
+  - @self/utils@3.23.0
+
 ## 2.22.0
 
 ### Minor Changes
