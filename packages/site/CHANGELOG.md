@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.26.1
+
+### Patch Changes
+
+- aee919f71: reinstate getportfolios query
+
 ## 2.26.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.23.1
+
+### Patch Changes
+
+- aee919f71: reinstate getportfolios query
+
 ## 3.23.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.23.1
+
+### Patch Changes
+
+- aee919f71: reinstate getportfolios query
+
 ## 2.23.0
 
 ### Minor Changes

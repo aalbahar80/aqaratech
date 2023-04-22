@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.24.1
+
+### Patch Changes
+
+- aee919f71: reinstate getportfolios query
+- Updated dependencies [aee919f71]
+  - @self/utils@3.23.1
+
 ## 2.24.0
 
 ### Minor Changes
