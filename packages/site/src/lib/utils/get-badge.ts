@@ -4,6 +4,8 @@ import {
 	type MaintenanceOrderStatus,
 } from '@self/utils';
 
+import type { LeaseDto } from '$api/openapi';
+
 import L from '$i18n/i18n-svelte';
 import { getMaintenanceOrderLabels } from '$lib/constants/maintenance-status-options';
 
@@ -27,16 +29,16 @@ export const getInvoiceBadge = (trx: {
 	}
 };
 
-export const getLeaseBadge = (dates: { start: string; end: string }) => {
+export const getLeaseBadge = (lease: LeaseDto) => {
 	const LL = get(L);
 
-	if (new Date(dates.end) < new Date()) {
+	if (lease.computed.phase === 'COMPLETE') {
 		return {
 			label: LL.badge.expired(),
 			color: 'red',
 		};
 	}
-	if (new Date(dates.start) > new Date()) {
+	if (lease.computed.phase === 'FUTURE') {
 		return {
 			label: LL.badge.upcoming(),
 			color: 'indigo',

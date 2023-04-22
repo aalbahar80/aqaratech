@@ -7,6 +7,7 @@
 
 	import LeaseTable from '$lib/components/lease/LeaseTable.svelte';
 	import { tenantColumnDef } from '$lib/components/table/tanstack-table/columns/portfolio';
+	import { leasePhaseFilter } from '$lib/components/table/tanstack-table/filters/lease-phase';
 
 	export let data: PageData;
 
@@ -16,4 +17,5 @@
 <LeaseTable
 	data={data.leases}
 	extraColumns={[tenantColumnDef(columnHelper)]}
+	extraFilters={[$leasePhaseFilter]}
 />

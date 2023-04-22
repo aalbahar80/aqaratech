@@ -2926,6 +2926,19 @@ components:
         residencyNum:
           type: string
           nullable: true
+    LeasePhaseEnum:
+      type: string
+      enum:
+        - FUTURE
+        - ONGOING
+        - COMPLETE
+    LeaseComputedDto:
+      type: object
+      properties:
+        phase:
+          $ref: '#/components/schemas/LeasePhaseEnum'
+      required:
+        - phase
     BreadcrumbDto:
       type: object
       properties:
@@ -2958,6 +2971,8 @@ components:
         id:
           type: string
           readOnly: true
+        computed:
+          $ref: '#/components/schemas/LeaseComputedDto'
         breadcrumbs:
           $ref: '#/components/schemas/LeaseBreadcrumbsDto'
         createdAt:
@@ -2993,6 +3008,7 @@ components:
           nullable: true
       required:
         - id
+        - computed
         - breadcrumbs
         - createdAt
         - updatedAt

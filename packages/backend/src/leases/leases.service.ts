@@ -66,6 +66,11 @@ export class LeasesService {
 				include: {
 					tenant: crumbs.tenant,
 					unit: crumbs.unit,
+					computed: {
+						select: {
+							phase: true,
+						},
+					},
 				},
 			}),
 			this.prisma.c.lease.count({ where: filter }),
@@ -80,8 +85,14 @@ export class LeasesService {
 			include: {
 				tenant: crumbs.tenant,
 				unit: crumbs.unit,
+				computed: {
+					select: {
+						phase: true,
+					},
+				},
 			},
 		});
+
 		return new LeaseDto(data);
 	}
 

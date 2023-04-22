@@ -10,6 +10,7 @@
 		portfolioColumnDef,
 		tenantColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/portfolio';
+	import { leasePhaseFilter } from '$lib/components/table/tanstack-table/filters/lease-phase';
 
 	export let data: PageData;
 
@@ -22,4 +23,5 @@
 		portfolioColumnDef(columnHelper),
 		tenantColumnDef(columnHelper),
 	]}
+	extraFilters={[$leasePhaseFilter]}
 />

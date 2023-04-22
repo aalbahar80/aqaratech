@@ -6,7 +6,7 @@ import {
 	PartialType,
 	PickType,
 } from '@nestjs/swagger';
-import { Lease } from '@prisma/client';
+import { Lease, LeaseComputed, LeasePhase } from '@prisma/client';
 import { Exclude, Expose } from 'class-transformer';
 
 import { LeaseCreateSchema, LeaseUpdateSchema } from '@self/utils';
@@ -17,6 +17,8 @@ import {
 	IBreadcrumbs,
 } from 'src/common/dto/breadcrumb.dto';
 import { NonComputed } from 'src/types/common.types';
+import { Exactly } from 'src/types/exactly.type';
+import { ComputedCompatPrisma } from 'src/utils/has-computed';
 
 class LeaseRequiredDto {
 	organizationId: string;
@@ -51,6 +53,13 @@ class LeaseBreadcrumbsDto extends PickType(BreadcrumbsDto, [
 	'unit',
 ]) {}
 
+type TLeaseComputed = Pick<LeaseComputed, 'phase'>;
+
+class LeaseComputedDto implements Exactly<TLeaseComputed, LeaseComputedDto> {
+	@ApiProperty({ enum: LeasePhase, enumName: 'LeasePhaseEnum' })
+	phase: LeasePhase;
+}
+
 export class LeaseDto
 	extends IntersectionType(
 		AbstractDto,
@@ -58,10 +67,14 @@ export class LeaseDto
 	)
 	implements Lease
 {
-	constructor(data: NonComputed<LeaseDto>) {
+	constructor(data: NonComputed<ComputedCompatPrisma<LeaseDto>>) {
 		super();
 		Object.assign(this, data);
 	}
+
+	@ApiProperty()
+	@Expose()
+	computed: LeaseComputedDto;
 
 	@ApiHideProperty()
 	@Exclude()

@@ -6,6 +6,7 @@
 
 	import type { LeaseDto, PaginatedLeaseDto } from '$api/openapi';
 	import type { ColumnDto } from '$lib/components/table/column-type';
+	import type { Filter } from '$lib/models/interfaces/filter.interface';
 
 	import L from '$i18n/i18n-svelte';
 	import FilterBar from '$lib/components/filter/FilterBar.svelte';
@@ -27,6 +28,7 @@
 	export let data: PaginatedLeaseDto;
 	export let extraColumns: ColumnDto<LeaseDto>[] = [];
 	export let columnVisibility: ColumnVisibility = {};
+	export let extraFilters: Filter[] | undefined = undefined;
 
 	const columnHelper = createColumnHelper<LeaseDto>();
 
@@ -91,7 +93,7 @@
 		slot="filter"
 		let:filters
 	>
-		<FilterBar responsive={filters}>
+		<FilterBar responsive={[...filters, ...(extraFilters ?? [])]}>
 			<div slot="hero">
 				<!-- Don't show hero if we're on the unit page -->
 				{#if !('unitId' in $page.params)}

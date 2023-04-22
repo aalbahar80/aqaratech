@@ -237,10 +237,25 @@ model Lease {
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Restrict)
 
+  computed LeaseComputed?
+
   @@index([tenantId])
   @@index([unitId])
   @@index([organizationId])
   @@index([portfolioId])
+}
+
+enum LeasePhase {
+  FUTURE
+  ONGOING
+  COMPLETE
+}
+
+view LeaseComputed {
+  id    String @id
+  lease Lease  @relation(fields: [id], references: [id])
+
+  phase LeasePhase
 }
 
 model LeaseInvoice {

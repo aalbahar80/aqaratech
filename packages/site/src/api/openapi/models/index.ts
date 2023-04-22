@@ -1280,6 +1280,19 @@ export interface LeaseBreadcrumbsDto {
 /**
  *
  * @export
+ * @interface LeaseComputedDto
+ */
+export interface LeaseComputedDto {
+	/**
+	 *
+	 * @type {LeasePhaseEnum}
+	 * @memberof LeaseComputedDto
+	 */
+	phase: LeasePhaseEnum;
+}
+/**
+ *
+ * @export
  * @interface LeaseDto
  */
 export interface LeaseDto {
@@ -1289,6 +1302,12 @@ export interface LeaseDto {
 	 * @memberof LeaseDto
 	 */
 	readonly id: string;
+	/**
+	 *
+	 * @type {LeaseComputedDto}
+	 * @memberof LeaseDto
+	 */
+	computed: LeaseComputedDto;
 	/**
 	 *
 	 * @type {LeaseBreadcrumbsDto}
@@ -1546,6 +1565,18 @@ export interface LeaseInvoiceDto {
 	 */
 	mfPaymentId: string | null;
 }
+
+/**
+ *
+ * @export
+ */
+export const LeasePhaseEnum = {
+	Future: 'FUTURE',
+	Ongoing: 'ONGOING',
+	Complete: 'COMPLETE',
+} as const;
+export type LeasePhaseEnum =
+	(typeof LeasePhaseEnum)[keyof typeof LeasePhaseEnum];
 
 /**
  *

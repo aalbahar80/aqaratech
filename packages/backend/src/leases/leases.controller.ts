@@ -40,7 +40,8 @@ export class LeasesController {
 	@ApiQueryOptions()
 	findAll(
 		@User() user: IUser,
-		@QueryParser() queryOptions: QueryOptionsDto,
+		@QueryParser({ filterOptions: { keys: ['computed'] } })
+		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseDto>> {
 		return this.leasesService.findAll({ queryOptions, user });
 	}

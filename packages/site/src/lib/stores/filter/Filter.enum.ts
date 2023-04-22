@@ -5,4 +5,5 @@ export const FilterEnum = {
 	IsPaid: 'filter:is-paid',
 	IsPaidOnline: 'filter:is-paid-online',
 	IsPaidLate: 'filter:is-paid-late',
+	LeasePhase: 'filter:lease-phase',
 };
