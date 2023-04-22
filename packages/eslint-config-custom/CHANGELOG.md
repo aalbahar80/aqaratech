@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.24.0
+
+### Minor Changes
+
+- 109246785: (retrigger) add range kind filter
+
 ## 2.23.1
 
 ### Patch Changes

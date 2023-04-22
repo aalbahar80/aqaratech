@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.27.0
+
+### Minor Changes
+
+- 109246785: (retrigger) add range kind filter
+
 ## 2.26.2
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @self/backend
 
+## 2.25.0
+
+### Minor Changes
+
+- 109246785: (retrigger) add range kind filter
+
+### Patch Changes
+
+- Updated dependencies [109246785]
+  - @self/utils@3.24.0
+
 ## 2.24.1
 
 ### Patch Changes
