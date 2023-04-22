@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.26.2
+
+### Patch Changes
+
+- 7a0a78e20: fix: only getporfolios for admins
+- 7b6ab8fce: better size filter date inputs
+
 ## 2.26.1
 
 ### Patch Changes
