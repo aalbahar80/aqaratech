@@ -29,7 +29,7 @@
 
 <style>
 	.progress-container {
-		position: absolute;
+		position: fixed;
 		inset-block-start: 0;
 		inset-inline-start: 0;
 		inline-size: 100%;
