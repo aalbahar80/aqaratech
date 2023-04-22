@@ -5,6 +5,7 @@ import { getPortfolios } from '$lib/components/portfolio/get-portfolios';
 export const load: LayoutLoad = async ({ fetch, parent }) => {
 	const { queryClient } = await parent();
 
+	// Used in nav-tree
 	await queryClient.prefetchQuery({
 		queryKey: ['portfolios'],
 		queryFn: async () => await getPortfolios({ fetch }),
