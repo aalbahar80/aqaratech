@@ -31,6 +31,7 @@ async function globalSetup(config: FullConfig) {
 	}
 
 	const executablePath = project.use.launchOptions?.executablePath;
+	console.log({ executablePath });
 
 	const browser = await chromium.launch({
 		...(executablePath ? { executablePath } : {}),
