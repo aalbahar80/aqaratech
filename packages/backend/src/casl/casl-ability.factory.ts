@@ -6,12 +6,20 @@ import { TAppAbility } from 'src/casl/abilities/ability-types';
 import { defineOrgAdminAbility } from 'src/casl/abilities/org-admin-ability';
 import { definePortfolioAbility } from 'src/casl/abilities/portfolio-ability';
 import { defineTenantAbility } from 'src/casl/abilities/tenant-ability';
+import { defineUnauthenticatedAbility } from 'src/casl/abilities/unauthenticated-ability';
 import { Action } from 'src/casl/action.enum';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class CaslAbilityFactory {
 	constructor(private readonly prisma: PrismaService) {}
+
+	static defineUnauthenticatedAbility() {
+		const AppAbility = PrismaAbility as AbilityClass<TAppAbility>;
+		const { can, build } = new AbilityBuilder(AppAbility);
+		defineUnauthenticatedAbility(can);
+		return build();
+	}
 
 	private readonly logger = new Logger(CaslAbilityFactory.name);
 

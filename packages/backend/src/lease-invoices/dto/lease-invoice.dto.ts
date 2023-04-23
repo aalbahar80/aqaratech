@@ -99,6 +99,15 @@ export class LeaseInvoiceDto
 	}
 }
 
+export class LeaseInvoicePublicDto extends PickType(LeaseInvoiceDto, [
+	'id',
+	'amount',
+	'isPaid',
+	'postAt',
+	'paidAt',
+	'memo',
+]) {}
+
 export class CreateLeaseInvoiceDto implements LeaseInvoiceCreateSchema {
 	portfolioId: string;
 	leaseId: string;

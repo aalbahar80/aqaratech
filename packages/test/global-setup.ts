@@ -8,7 +8,10 @@ import { testUsers } from './tests/api/fixtures/users/test-users';
 import { LoginPage } from './tests/auth/login-page';
 import { checkStubbed } from './utils/check-stubbed';
 import { getToken } from './utils/get-token';
-import { globalStoragePath } from './utils/global-storage-path';
+import {
+	createDownloadsDir,
+	globalStoragePath,
+} from './utils/global-storage-path';
 
 async function globalSetup(config: FullConfig) {
 	const project = config.projects[0];
@@ -29,6 +32,8 @@ async function globalSetup(config: FullConfig) {
 	if (!baseURL || !storageState || !ignoreHTTPSErrors) {
 		throw new Error('Missing config'); // overkill?
 	}
+
+	createDownloadsDir();
 
 	const executablePath = project.use.launchOptions?.executablePath;
 	console.log({ executablePath });

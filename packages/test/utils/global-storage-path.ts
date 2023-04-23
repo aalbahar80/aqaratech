@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -9,3 +10,14 @@ export const globalStoragePath = path.join(
 	'playwright',
 	'storage-state',
 );
+
+/** Directory for storing downloads.
+ * LevelsDB expects the directory to exist.
+ */
+const DOWNLOADS = path.resolve(__dirname, '../downloads');
+
+export const createDownloadsDir = () => {
+	if (!fs.existsSync(DOWNLOADS)) {
+		fs.mkdirSync(DOWNLOADS);
+	}
+};

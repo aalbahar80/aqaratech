@@ -99,11 +99,7 @@ test.describe('not logged in: myfatoorah callback', () => {
 
 		expect(res.status()).toBe(302);
 
-		const redirectTo = getMyfatoorahReceipt({
-			paymentId: invoice.id,
-			myfatoorahURL: process.env.PUBLIC_MYFATOORAH_SITE_URL,
-		});
-
-		expect(res.headers()['location']).toBe(redirectTo);
+		const route = `/en/public/leaseInvoices/${invoice.id}`;
+		expect(res.headers()['location']).toBe(`${siteURL}${route}`);
 	});
 });

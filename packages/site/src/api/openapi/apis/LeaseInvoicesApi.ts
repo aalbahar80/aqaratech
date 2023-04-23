@@ -28,6 +28,10 @@ export interface LeaseInvoicesApiFindOneRequest {
 	id: string;
 }
 
+export interface LeaseInvoicesApiFindOnePublicRequest {
+	id: string;
+}
+
 export interface LeaseInvoicesApiMyfatoorahCallbackRequest {
 	paymentId: string;
 }
@@ -135,6 +139,52 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<LeaseInvoiceDto> {
 		const response = await this.findOneRaw(requestParameters, initOverrides);
+		return await response.value();
+	}
+
+	/**
+	 */
+	async findOnePublicRaw(
+		requestParameters: LeaseInvoicesApiFindOnePublicRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<runtime.ApiResponse<LeaseInvoiceDto>> {
+		if (requestParameters.id === null || requestParameters.id === undefined) {
+			throw new runtime.RequiredError(
+				'id',
+				'Required parameter requestParameters.id was null or undefined when calling findOnePublic.',
+			);
+		}
+
+		const queryParameters: any = {};
+
+		const headerParameters: runtime.HTTPHeaders = {};
+
+		const response = await this.request(
+			{
+				path: `/leaseInvoices/{id}/public`.replace(
+					`{${'id'}}`,
+					encodeURIComponent(String(requestParameters.id)),
+				),
+				method: 'GET',
+				headers: headerParameters,
+				query: queryParameters,
+			},
+			initOverrides,
+		);
+
+		return new runtime.JSONApiResponse(response);
+	}
+
+	/**
+	 */
+	async findOnePublic(
+		requestParameters: LeaseInvoicesApiFindOnePublicRequest,
+		initOverrides?: RequestInit | runtime.InitOverrideFunction,
+	): Promise<LeaseInvoiceDto> {
+		const response = await this.findOnePublicRaw(
+			requestParameters,
+			initOverrides,
+		);
 		return await response.value();
 	}
 

@@ -28,6 +28,7 @@ import { EnvService } from 'src/env/env.service';
 import { IUser } from 'src/interfaces/user.interface';
 import {
 	LeaseInvoiceDto,
+	LeaseInvoicePublicDto,
 	UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
@@ -69,21 +70,27 @@ export class LeaseInvoicesController {
 		const cookie = request.headers.cookie;
 		const isAuthorized = cookie?.includes('idToken');
 
-		if (!isAuthorized || !status.isPaid) {
-			// If payment was not successful, redirect to public myfatoorah receipt page.
-			// This clearly indicates that the payment was not successful and contains
-			// details about the payment.
+		if (!status.isPaid) {
+			// If payment was not successful, redirect to public myfatoorah receipt
+			// page. This clearly indicates that the payment was not successful and
+			// contains details about the payment.
 
-			// Additionally, if user is not logged in, also redirect to public myfatoorah receipt page.
-			// Otherwise the user will be redirected to the login page
 			const url = getMyfatoorahReceipt({
 				paymentId,
 				myfatoorahURL: this.env.e.PUBLIC_MYFATOORAH_SITE_URL,
 			});
 
 			return { url };
+		} else if (!isAuthorized) {
+			// If user is not logged in, redirect to our public invoice page.
+			const route = `/en/public/leaseInvoices/${invoice.id}`;
+
+			return {
+				url: `${this.env.e.PUBLIC_SITE_URL}${route}`,
+			};
 		} else {
-			// If user is logged in and payment was successful, redirect to our invoice page.
+			// If user is logged in and payment was successful, redirect to  invoice
+			// page in the tenant portal.
 			const route = getRoute({
 				entity: 'leaseInvoice',
 				id: invoice.id,
@@ -108,6 +115,13 @@ export class LeaseInvoicesController {
 		@User() user: IUser,
 	): Promise<LeaseInvoiceDto> {
 		return this.leaseInvoicesService.findOne({ id, user });
+	}
+
+	@Get(':id/public')
+	@Public()
+	@ApiOkResponse({ type: LeaseInvoiceDto })
+	findOnePublic(@Param('id') id: string): Promise<LeaseInvoicePublicDto> {
+		return this.leaseInvoicesService.findOnePublic({ id });
 	}
 
 	@Patch(':id')

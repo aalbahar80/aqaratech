@@ -13,6 +13,7 @@ import { Any, Object } from 'ts-toolbelt';
 import { PAID_LATE, getPayURL } from '@self/utils';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Action } from 'src/casl/action.enum';
+import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { crumbs } from 'src/common/breadcrumb-select';
 import { CreatedDto, UpdatedDto } from 'src/common/dto/abstract.dto';
 import { WithCount } from 'src/common/dto/paginated.dto';
@@ -153,6 +154,30 @@ export class LeaseInvoicesService {
 			include: { lease: crumbs.lease },
 		});
 		return new LeaseInvoiceDto(data);
+	}
+
+	async findOnePublic({ id }: { id: string }) {
+		const data = await this.prisma.c.leaseInvoiceV.findFirstOrThrow({
+			where: {
+				AND: [
+					{ id },
+					accessibleBy(
+						CaslAbilityFactory.defineUnauthenticatedAbility(),
+						Action.ReadOne,
+					).LeaseInvoiceV,
+				],
+			},
+			select: {
+				id: true,
+				amount: true,
+				isPaid: true,
+				postAt: true,
+				paidAt: true,
+				memo: true,
+			},
+		});
+
+		return data;
 	}
 
 	async update({

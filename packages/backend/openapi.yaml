@@ -514,6 +514,24 @@ paths:
                 type: string
       tags: *ref_3
       security: *ref_4
+  /leaseInvoices/{id}/public:
+    get:
+      operationId: LeaseInvoicesController_findOnePublic
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseInvoiceDto'
+      tags: *ref_3
+      security: *ref_4
   /leaseInvoices/{id}/pay:
     get:
       operationId: LeaseInvoicesController_payInvoice

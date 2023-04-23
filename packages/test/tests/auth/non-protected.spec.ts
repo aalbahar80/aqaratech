@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+import { siteURL } from '../api/fixtures/site-url';
+
 const PUBLIC_ROUTES = [
 	//
 	// '/', // TODO: test redirects to /en
@@ -33,14 +35,10 @@ test.describe('unauthorized users', () => {
 	});
 
 	for (const route of PUBLIC_ROUTES) {
-		test(`should be able to access ${route}`, async ({ page }) => {
-			const resPromise = page.waitForResponse(
-				(res) => new URL(res.url()).pathname === route,
-			);
+		test(`should be able to access ${route}`, async ({ request }) => {
+			const url = siteURL + route;
 
-			await page.goto(route);
-
-			const res = await resPromise;
+			const res = await request.get(url, { maxRedirects: 0 });
 
 			expect.soft(res.status()).toBe(200);
 		});
