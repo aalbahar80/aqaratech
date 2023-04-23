@@ -1,5 +1,18 @@
 # @self/site
 
+## 2.28.0
+
+### Minor Changes
+
+- 2ee8c66b9: create public invoice page
+
+### Patch Changes
+
+- 2ee8c66b9: fix: replace income with invoices
+- e5b1990c3: fix: placement of filter FilterSlideover children
+- d93aff341: fix: preloading indicator should always be visible
+- 7bf15f8fc: fix layout shift in search button
+
 ## 2.27.0
 
 ### Minor Changes

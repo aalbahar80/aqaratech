@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.25.0
+
+### Minor Changes
+
+- 2ee8c66b9: create public invoice page
+
+### Patch Changes
+
+- Updated dependencies [2ee8c66b9]
+  - @self/utils@3.25.0
+
 ## 2.24.0
 
 ### Minor Changes

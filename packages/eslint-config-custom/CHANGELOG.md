@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.25.0
+
+### Minor Changes
+
+- 2ee8c66b9: create public invoice page
+
 ## 2.24.0
 
 ### Minor Changes
