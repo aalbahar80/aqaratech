@@ -17,7 +17,7 @@
 		type ActiveElement,
 	} from 'chart.js';
 	import 'chartjs-adapter-date-fns';
-	import { ar } from 'date-fns/locale';
+	import ar from 'date-fns/locale/ar/index.js';
 
 	import { toBrowserLocale } from '@self/utils';
 

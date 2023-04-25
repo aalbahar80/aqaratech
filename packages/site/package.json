@@ -35,7 +35,7 @@
 		"@sentry/svelte": "7.49.0",
 		"@sentry/tracing": "7.49.0",
 		"@sveltejs/adapter-node": "1.2.3",
-		"@sveltejs/kit": "1.15.7",
+		"@sveltejs/kit": "1.15.8",
 		"@sveltejs/pancake": "0.0.18",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/container-queries": "0.1.1",
@@ -88,7 +88,7 @@
 		"typescript-svelte-plugin": "0.3.22",
 		"ufo": "1.1.1",
 		"unplugin-icons": "0.16.1",
-		"vite": "4.2.2",
+		"vite": "4.3.2",
 		"vite-plugin-iso-import": "1.0.0",
 		"vitest": "0.30.1",
 		"zod": "3.21.4"

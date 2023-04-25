@@ -1,4 +1,4 @@
-import { ar } from 'date-fns/locale';
+import ar from 'date-fns/locale/ar/index.js';
 
 import { isRTL } from './locale-labels';
 
