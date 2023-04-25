@@ -9,9 +9,6 @@
 	// Example: https://github.dev/frappe/charts/blob/7adc904b08fbb45fb30372d9c6a3c3df43f80085/docs/index.html#L174
 	// Layercake alternative: https://layercake.graphics/example-ssr/Calendar/
 
-	// forked from svelte-frappe-charts to add functionality (mainly countLabel prop + typescript)
-	// reuse package once functionality is merged
-
 	export let occupancy: Occupancy[];
 	export let title = '';
 	export let shouldClamp = false;
