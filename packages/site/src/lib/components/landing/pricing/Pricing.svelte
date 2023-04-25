@@ -6,10 +6,14 @@
 </script>
 
 <section
-	id="pricing"
 	aria-label="Pricing"
 	class="bg-slate-900 py-20 sm:py-32"
 >
+	<!-- phantom element to fix nav overlap for same-page links -->
+	<div
+		id="pricing"
+		class="relative -top-32"
+	/>
 	<Container>
 		<!-- <div class="md:text-center"> -->
 		<!-- 	<h2 class="font-display text-3xl tracking-tight text-white sm:text-4xl"> -->
