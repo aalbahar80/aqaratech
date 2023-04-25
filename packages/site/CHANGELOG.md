@@ -1,5 +1,13 @@
 # @self/site
 
+## 2.28.2
+
+### Patch Changes
+
+- 2fba85ba8: fix heatmap rtl
+- 22a320613: fix: nav overlap in-page link
+- bc552161b: update rangeKind label text
+
 ## 2.28.1
 
 ### Patch Changes
