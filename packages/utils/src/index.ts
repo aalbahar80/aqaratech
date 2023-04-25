@@ -28,15 +28,17 @@ export {
 	EMPTY_VALUE,
 	formatValue,
 	getLabel,
-	toUTCFormat,
-	toUTCFormatMonthYear,
 	type EntityFieldLabels,
-} from './entity/form/field';
+} from './entity/form/field/entity-labels';
 export {
 	AR_BROWSER_LOCALE,
 	fmt,
 	toBrowserLocale,
 } from './entity/form/field/format';
+export {
+	toUTCFormat,
+	toUTCFormatMonthYear,
+} from './entity/form/field/to-utc-format';
 export { fromUrl } from './entity/from-url';
 export { isEntity, isEntityUrlName } from './entity/is-entity';
 export type { KeysOfUnion } from './keys-of-union';
