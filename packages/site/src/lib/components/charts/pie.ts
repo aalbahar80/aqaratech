@@ -4,7 +4,7 @@ type Data = Chart<'pie', number[]>['data'];
 
 export function pie(node: HTMLCanvasElement, data: Data) {
 	const chart = new Chart(node, {
-		type: 'pie',
+		type: 'doughnut',
 		data,
 	});
 
