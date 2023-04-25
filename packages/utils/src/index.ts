@@ -30,6 +30,7 @@ export {
 	getLabel,
 	toUTCFormat,
 	toUTCFormatMonthYear,
+	type EntityFieldLabels,
 } from './entity/form/field';
 export {
 	AR_BROWSER_LOCALE,

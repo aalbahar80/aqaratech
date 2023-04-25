@@ -1,4 +1,5 @@
 import type {
+	EntityFieldLabels,
 	ExpenseCategoryCreateSchema,
 	ExpenseCategoryUpdateSchema,
 	ExpenseCreateSchema,
@@ -147,11 +148,21 @@ export const fields = {
 	// message
 	receivedAt: 'Received At',
 	recipients: 'Recipients',
+} as const satisfies Fields;
 
-	// @ts-expect-error wip
-} satisfies Fields;
+/** Fields that are not needed */
+type OmittedFields =
+	| 'portfolioId'
+	| 'propertyId'
+	| 'unitId'
+	| 'leaseId'
+	| 'settings'
+	| 'parentId'
+	| 'file'
+	| 'relationKey'
+	| 'relationValue';
 
-type Fields = Record<Keys, string> & {
+type Fields = Record<Exclude<Keys, OmittedFields>, string> & {
 	createdAt: string;
 	updatedAt: string;
 	key: string; // FileDto
@@ -160,4 +171,9 @@ type Fields = Record<Keys, string> & {
 	[MONTHS_KEY]: string;
 	[DAYS_KEY]: string;
 	mfPaymentId: string; // LeaseInvoiceDto (not in schema)
+} & IdenticalIfExists<EntityFieldLabels>;
+
+/** Ensure that fields declared twice have the same value */
+type IdenticalIfExists<T> = {
+	[K in keyof Partial<T>]: T[K] extends T[K] ? Partial<T[K]> : never;
 };

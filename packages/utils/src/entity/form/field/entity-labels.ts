@@ -31,7 +31,13 @@ const entityFieldLabels = {
 	key: 'Name',
 	dueDurationMonths: 'Due duration (months)',
 	dueDurationDays: 'Due duration (days)',
-} satisfies FieldLabels;
+
+	postAt: 'Due date',
+	dueAt: 'Past due date',
+	paidAt: 'Paid date',
+} as const satisfies FieldLabels;
+
+export type EntityFieldLabels = typeof entityFieldLabels;
 
 export const getLabel = (key: string) =>
 	(entityFieldLabels as Record<string, string>)[key] ?? startCase(key);
@@ -77,4 +83,5 @@ type FieldLabels = Partial<Union.Strict<Record<Keys, string>>> & {
 	key: string; // FileDto
 	dueDurationMonths: string;
 	dueDurationDays: string;
+	dueAt: string;
 };
