@@ -27,7 +27,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.54",
+		"@iconify/json": "2.2.55",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -41,7 +41,7 @@
 		"@tailwindcss/container-queries": "0.1.1",
 		"@tailwindcss/forms": "0.5.3",
 		"@tailwindcss/typography": "0.5.9",
-		"@tanstack/svelte-query": "4.29.1",
+		"@tanstack/svelte-query": "4.29.5",
 		"@tanstack/svelte-table": "8.8.2",
 		"@types/cookie": "0.5.1",
 		"@types/d3": "7.4.0",
@@ -68,7 +68,7 @@
 		"nanoid": "4.0.2",
 		"papaparse": "5.4.1",
 		"postcss": "8.4.23",
-		"remeda": "1.13.0",
+		"remeda": "1.14.0",
 		"rollup-plugin-visualizer": "5.9.0",
 		"sorcery": "0.11.0",
 		"source-map-support": "0.5.21",
