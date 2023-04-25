@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.28.3
+
+### Patch Changes
+
+- 7acd27267: add contact info to public invoice page
+
 ## 2.28.2
 
 ### Patch Changes
