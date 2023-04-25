@@ -16,7 +16,6 @@ export { PAID_LATE, type PaidLate } from './constants/paid-late.enum';
 export { endOfMonthN } from './date/end-of-month-n';
 export { getProgress } from './date/progress';
 export { startOfMonthN } from './date/start-of-month-n';
-export { dbEntity, nonDbEntity } from './entity/entity-definition';
 export type { DBEntity, Entity, NonDBEntity } from './entity/entity-definition';
 export { entitiesMap, entitiesMap as entity } from './entity/entity-map';
 export type {
