@@ -1,6 +1,7 @@
 <script lang="ts">
 	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
 	import Badge from '$lib/components/Badge.svelte';
+	import Contact from '$lib/components/landing/Contact.svelte';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 
 	export let data;
@@ -17,3 +18,5 @@
 	details={data.leaseInvoice}
 	keys={['amount', 'isPaid', 'postAt', 'dueAt', 'paidAt', 'memo', 'id']}
 />
+
+<Contact />
