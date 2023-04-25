@@ -40,7 +40,11 @@
 </p>
 
 {#key data}
-	<div class="overflow-x-auto py-4">
+	<div
+		class="overflow-x-auto py-4"
+		dir="ltr"
+		lang="en"
+	>
 		<FrappeChart
 			type="heatmap"
 			{data}
