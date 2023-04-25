@@ -25,7 +25,7 @@
 <div
 	class={clsx(
 		'grid grid-cols-1 gap-8',
-		showName ? 'xl:grid-cols-3' : 'lg:grid-cols-2',
+		showName ? 'xl:grid-cols-3' : 'xl:grid-cols-2',
 	)}
 >
 	<div
