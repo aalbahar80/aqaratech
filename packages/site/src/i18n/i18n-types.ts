@@ -267,11 +267,11 @@ type RootTranslation = {
 		}
 		hero: {
 			/**
-			 * A​n​ ​e​a​s​y​-​t​o​-​u​s​e​ ​p​l​a​t​f​o​r​m​ ​w​h​e​r​e​ ​y​o​u​ ​c​a​n​ ​m​a​n​a​g​e​ ​p​r​o​p​e​r​t​i​e​s​,​ ​k​e​e​p​ ​t​r​a​c​k​ ​o​f​ ​i​m​p​o​r​t​a​n​t​ ​t​a​s​k​s​,​ ​a​n​d​ ​q​u​i​c​k​l​y​ ​a​c​c​e​s​s​ ​i​n​f​o​r​m​a​t​i​o​n​.
+			 * A​q​a​r​a​t​e​c​h​ ​o​f​f​e​r​s​ ​ ​a​n​ ​e​a​s​y​-​t​o​-​u​s​e​ ​d​a​s​h​b​o​a​r​d​ ​t​o​ ​m​a​n​a​g​e​ ​p​r​o​p​e​r​t​i​e​s​,​ ​k​e​e​p​ ​t​r​a​c​k​ ​o​f​ ​i​m​p​o​r​t​a​n​t​ ​t​a​s​k​s​,​ ​a​n​d​ ​q​u​i​c​k​l​y​ ​a​c​c​e​s​s​ ​i​n​f​o​r​m​a​t​i​o​n​.
 			 */
 			description: string
 			/**
-			 * D​e​d​i​c​a​t​e​d​ ​p​o​r​t​a​l​s​ ​f​o​r​ ​t​h​e​ ​u​n​i​q​u​e​ ​n​e​e​d​s​ ​o​f​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​p​o​r​t​f​o​l​i​o​ ​m​a​n​a​g​e​r​s​.
+			 * U​n​i​q​u​e​ ​p​o​r​t​a​l​s​ ​t​o​ ​s​u​i​t​ ​t​h​e​ ​n​e​e​d​s​ ​o​f​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​r​e​a​l​ ​e​s​t​a​t​e​ ​c​o​m​p​a​n​i​e​s​.
 			 */
 			subtitle: string
 			/**
@@ -350,7 +350,7 @@ type RootTranslation = {
 		secondaryFeatures: {
 			managers: {
 				/**
-				 * A​q​a​r​a​t​e​c​h​ ​h​e​l​p​s​ ​y​o​u​ ​o​r​g​a​n​i​z​e​ ​y​o​u​r​ ​b​u​s​i​n​e​s​s​ ​a​n​d​ ​w​o​r​k​ ​e​f​f​i​c​i​e​n​t​l​y​.
+				 * O​r​g​a​n​i​z​e​ ​o​p​e​r​a​t​i​o​n​s​ ​a​n​d​ ​I​n​c​r​e​a​s​e​ ​e​f​f​i​c​i​e​n​c​y​.
 				 */
 				description: string
 				/**
@@ -358,13 +358,13 @@ type RootTranslation = {
 				 */
 				name: string
 				/**
-				 * P​r​o​p​e​r​t​y​ ​M​a​n​a​g​e​r​s
+				 * R​e​a​l​ ​E​s​t​a​t​e​ ​C​o​m​p​a​n​i​e​s
 				 */
 				summary: string
 			}
 			owners: {
 				/**
-				 * U​s​e​ ​t​h​e​ ​o​w​n​e​r​ ​p​o​r​t​a​l​ ​t​o​ ​v​i​e​w​ ​y​o​u​r​ ​p​r​o​p​e​r​t​y​ ​i​n​f​o​r​m​a​t​i​o​n​.
+				 * V​i​e​w​ ​p​r​o​p​e​r​t​y​ ​i​n​f​o​r​m​a​t​i​o​n​ ​a​n​d​ ​c​a​t​e​g​o​r​i​z​e​ ​e​x​p​e​n​s​e​s​.
 				 */
 				description: string
 				/**
@@ -378,7 +378,7 @@ type RootTranslation = {
 			}
 			tenants: {
 				/**
-				 * A​q​a​r​a​t​e​c​h​ ​s​i​m​p​l​i​f​i​e​s​ ​t​h​e​ ​r​e​n​t​a​l​ ​p​r​o​c​e​s​s​ ​b​y​ ​a​l​l​o​w​i​n​g​ ​t​e​n​a​n​t​s​ ​t​o​ ​t​r​a​c​k​ ​t​h​e​i​r​ ​p​a​y​m​e​n​t​s​ ​a​n​d​ ​l​e​a​s​e​s​.
+				 * O​n​l​i​n​e​ ​r​e​n​t​ ​p​a​y​m​e​n​t​s​ ​a​n​d​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​q​u​e​s​t​s​.
 				 */
 				description: string
 				/**
@@ -1102,6 +1102,14 @@ type RootTranslation = {
 			 * P​e​r​c​e​n​t​a​g​e​ ​o​f​ ​o​c​c​u​p​i​e​d​ ​u​n​i​t​s​.
 			 */
 			subtitle: string
+			/**
+			 * P​r​e​v​i​o​u​s​ ​p​e​r​i​o​d
+			 */
+			previous: string
+			/**
+			 * U​p​c​o​m​i​n​g​ ​p​e​r​i​o​d
+			 */
+			next: string
 		}
 		expensesBar: {
 			/**
@@ -1594,11 +1602,11 @@ export type TranslationFunctions = {
 		}
 		hero: {
 			/**
-			 * An easy-to-use platform where you can manage properties, keep track of important tasks, and quickly access information.
+			 * Aqaratech offers  an easy-to-use dashboard to manage properties, keep track of important tasks, and quickly access information.
 			 */
 			description: () => LocalizedString
 			/**
-			 * Dedicated portals for the unique needs of property owners and portfolio managers.
+			 * Unique portals to suit the needs of property owners and real estate companies.
 			 */
 			subtitle: () => LocalizedString
 			/**
@@ -1677,7 +1685,7 @@ export type TranslationFunctions = {
 		secondaryFeatures: {
 			managers: {
 				/**
-				 * Aqaratech helps you organize your business and work efficiently.
+				 * Organize operations and Increase efficiency.
 				 */
 				description: () => LocalizedString
 				/**
@@ -1685,13 +1693,13 @@ export type TranslationFunctions = {
 				 */
 				name: () => LocalizedString
 				/**
-				 * Property Managers
+				 * Real Estate Companies
 				 */
 				summary: () => LocalizedString
 			}
 			owners: {
 				/**
-				 * Use the owner portal to view your property information.
+				 * View property information and categorize expenses.
 				 */
 				description: () => LocalizedString
 				/**
@@ -1705,7 +1713,7 @@ export type TranslationFunctions = {
 			}
 			tenants: {
 				/**
-				 * Aqaratech simplifies the rental process by allowing tenants to track their payments and leases.
+				 * Online rent payments and maintenance requests.
 				 */
 				description: () => LocalizedString
 				/**
@@ -2429,6 +2437,14 @@ export type TranslationFunctions = {
 			 * Percentage of occupied units.
 			 */
 			subtitle: () => LocalizedString
+			/**
+			 * Previous period
+			 */
+			previous: () => LocalizedString
+			/**
+			 * Upcoming period
+			 */
+			next: () => LocalizedString
 		}
 		expensesBar: {
 			/**

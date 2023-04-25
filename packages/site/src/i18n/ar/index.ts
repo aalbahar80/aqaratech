@@ -220,6 +220,8 @@ const ar: Translation = {
 		occupancyHeatmap: {
 			title: 'الإشغال',
 			subtitle: 'نسبة الوحدات المؤجرة.',
+			previous: 'الفترة الماضية',
+			next: 'الفترة القادمة',
 		},
 		expensesBar: {
 			title: 'المصروفات: حسب الشهر',

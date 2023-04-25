@@ -35,11 +35,14 @@
 
 <svelte:window bind:innerWidth />
 
+<p class="prose prose-base">
+	{title}
+</p>
+
 {#key data}
 	<div class="overflow-x-auto py-4">
 		<FrappeChart
 			type="heatmap"
-			{title}
 			{data}
 			{colors}
 			height={200}

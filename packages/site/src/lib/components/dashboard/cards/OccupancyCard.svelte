@@ -17,11 +17,11 @@
 	<OccupancyHeatmap
 		{occupancy}
 		shouldClamp
-		title="Historical occupancy rates"
+		title={$L.charts.occupancyHeatmap.previous()}
 	/>
 	<div class="py-8" />
 	<OccupancyHeatmap
 		occupancy={futureOccupancy}
-		title="Expected occupancy for the upcoming year"
+		title={$L.charts.occupancyHeatmap.next()}
 	/>
 </DashCard>

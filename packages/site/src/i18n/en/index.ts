@@ -103,6 +103,8 @@ const en: BaseTranslation = {
 		occupancyHeatmap: {
 			title: 'Occupancy',
 			subtitle: 'Percentage of occupied units.',
+			previous: 'Previous period',
+			next: 'Upcoming period',
 		},
 		expensesBar: {
 			title: 'Expenses: by month',
