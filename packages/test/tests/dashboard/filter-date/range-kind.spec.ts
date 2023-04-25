@@ -39,8 +39,8 @@ test('range kind', async ({ page, org, portfolio, invoices: _ }) => {
 	const filters = new Filters(page);
 	await filters.end.fill('2030-02-01');
 
-	const postAtFilter = page.getByLabel('Post At');
-	const paidAtFilter = page.getByLabel('Paid At');
+	const postAtFilter = page.getByLabel('Due date');
+	const paidAtFilter = page.getByLabel('Paid date');
 
 	const invoice1 = page.getByRole('cell', { name: 'KWD 111' });
 	const invoice2 = page.getByRole('cell', { name: 'KWD 222' });

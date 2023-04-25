@@ -78,7 +78,7 @@ export const fields = {
 
 	createdAt: 'Created At',
 	updatedAt: 'Updated At',
-	postAt: 'Post At',
+	postAt: 'Due date',
 
 	// tenant
 	passportNum: 'Passport Number',
@@ -118,11 +118,11 @@ export const fields = {
 
 	// invoice
 	isPaid: 'Payment Status',
-	dueAt: 'Due At',
+	dueAt: 'Past due date',
 	dueDuration: 'Due Duration',
 	dueDurationMonths: 'Due duration (months)',
 	dueDurationDays: 'Due duration (days)',
-	paidAt: 'Paid At',
+	paidAt: 'Paid date',
 	mfPaymentId: 'MyFatoorah Payment ID',
 
 	// expense
