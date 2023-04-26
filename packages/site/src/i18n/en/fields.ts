@@ -123,7 +123,7 @@ export const fields = {
 	dueDuration: 'Due Duration',
 	dueDurationMonths: 'Due duration (months)',
 	dueDurationDays: 'Due duration (days)',
-	paidAt: 'Paid date',
+	paidAt: 'Payment date',
 	mfPaymentId: 'MyFatoorah Payment ID',
 
 	// expense

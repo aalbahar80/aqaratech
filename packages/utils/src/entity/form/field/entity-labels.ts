@@ -34,7 +34,7 @@ const entityFieldLabels = {
 
 	postAt: 'Due date',
 	dueAt: 'Past due date',
-	paidAt: 'Paid date',
+	paidAt: 'Payment date',
 } as const satisfies FieldLabels;
 
 export type EntityFieldLabels = typeof entityFieldLabels;
