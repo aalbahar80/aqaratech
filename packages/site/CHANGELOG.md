@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.28.5
+
+### Patch Changes
+
+- 052ba1eea: fix: ensure all date field labels are updated
+
 ## 2.28.4
 
 ### Patch Changes

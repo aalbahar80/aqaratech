@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.26.1
+
+### Patch Changes
+
+- 052ba1eea: fix: ensure all date field labels are updated
+- Updated dependencies [052ba1eea]
+  - @self/utils@3.25.1
+
 ## 2.26.0
 
 ### Minor Changes

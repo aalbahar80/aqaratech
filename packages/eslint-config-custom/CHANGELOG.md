@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.25.1
+
+### Patch Changes
+
+- 052ba1eea: fix: ensure all date field labels are updated
+
 ## 2.25.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.25.1
+
+### Patch Changes
+
+- 052ba1eea: fix: ensure all date field labels are updated
+
 ## 3.25.0
 
 ### Minor Changes
