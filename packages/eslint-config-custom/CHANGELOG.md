@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.25.2
+
+### Patch Changes
+
+- 327d691de: update "paid date" to "payment date"
+
 ## 2.25.1
 
 ### Patch Changes

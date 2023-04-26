@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.25.2
+
+### Patch Changes
+
+- 327d691de: update "paid date" to "payment date"
+- Updated dependencies [327d691de]
+  - @self/utils@3.25.2
+
 ## 2.25.1
 
 ### Patch Changes

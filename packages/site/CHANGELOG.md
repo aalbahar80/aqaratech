@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.28.6
+
+### Patch Changes
+
+- 327d691de: update "paid date" to "payment date"
+
 ## 2.28.5
 
 ### Patch Changes

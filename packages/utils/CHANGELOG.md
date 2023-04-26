@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.25.2
+
+### Patch Changes
+
+- 327d691de: update "paid date" to "payment date"
+
 ## 3.25.1
 
 ### Patch Changes
