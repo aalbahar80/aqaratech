@@ -18,7 +18,7 @@
 		"factory.ts": "1.4.0"
 	},
 	"devDependencies": {
-		"@types/node": "18.16.0",
+		"@types/node": "18.16.1",
 		"eslint-config-custom": "workspace:*",
 		"prisma": "4.13.0",
 		"ts-toolbelt": "9.6.0",
