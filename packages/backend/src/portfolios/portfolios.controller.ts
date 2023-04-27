@@ -16,7 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 
-import { portfolioUpdateSchema } from '@self/utils';
+import { MAX_LIMIT, portfolioUpdateSchema } from '@self/utils';
 import { AggregateService } from 'src/aggregate/aggregate.service';
 import { AggregateOptionsExpensesDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { BalanceDto } from 'src/aggregate/dto/balance.dto';
@@ -202,7 +202,8 @@ export class PortfoliosController {
 	@ApiPaginatedResponse(PayoutDto)
 	findPayouts(
 		@User() user: IUser,
-		@QueryParser() queryOptions: QueryOptionsDto,
+		@QueryParser({ parserOptions: { maxLimit: MAX_LIMIT } })
+		queryOptions: QueryOptionsDto,
 		@Param('id') id: string,
 	): Promise<WithCount<PayoutDto>> {
 		const where: Prisma.PayoutWhereInput = { portfolioId: { equals: id } };
@@ -238,13 +239,14 @@ export class PortfoliosController {
 		@User() user: IUser,
 		@Param('id') portfolioId: string,
 		@QueryParser({
-			parserOptions: { orderDefaultValue: 'postAt' },
+			parserOptions: { orderDefaultValue: 'postAt', maxLimit: MAX_LIMIT },
 			filterOptions: {
 				keys: ['postAt', 'paidAt', 'lease', 'isPaid', 'mfPaymentId'],
 			},
 		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {
+		console.log(queryOptions);
 		return this.leaseInvoicesService.findAll({
 			queryOptions,
 			user,
@@ -272,7 +274,7 @@ export class PortfoliosController {
 		@Param('id') portfolioId: string,
 
 		@QueryParser({
-			parserOptions: { orderDefaultValue: 'postAt' },
+			parserOptions: { orderDefaultValue: 'postAt', maxLimit: MAX_LIMIT },
 			filterOptions: { keys: ['postAt', 'propertyId', 'unitId'] },
 		})
 		queryOptions: QueryOptionsDto,

@@ -12,6 +12,7 @@ export { generateExpenseCategoryTree } from './constants/default-expense-categor
 export { FIELDS } from './constants/fields';
 export { MAINTENANCE_ORDER_STATUS } from './constants/maintenance-status';
 export type { MaintenanceOrderStatus } from './constants/maintenance-status';
+export { MAX_LIMIT } from './constants/misc';
 export { PAID_LATE, type PaidLate } from './constants/paid-late.enum';
 export { endOfMonthN } from './date/end-of-month-n';
 export { getProgress } from './date/progress';
