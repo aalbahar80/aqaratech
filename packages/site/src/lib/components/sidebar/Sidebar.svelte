@@ -23,7 +23,7 @@
 	import SidebarItem from '$lib/components/sidebar/SidebarItem.svelte';
 	import VersionFooter from '$lib/components/VersionFooter.svelte';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
-	import { isHomeRoute } from '$lib/utils/route-utils';
+	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 
 	export let navigationTree: NavigationItem[];
 
@@ -38,6 +38,7 @@
 		'fixed z-40 h-[calc(100%-68px)] w-64 flex-col gap-6 border-r bg-white px-4 py-8 dark:border-gray-700 dark:bg-gray-900 sm:h-[calc(100%-100px)]',
 		$sidebar.expanded ? 'flex' : 'hidden lg:flex', // ignore $isOpen on lg breakpoint
 	)}
+	class:sb:hidden={!isSidebarAvailable($page.route)}
 	use:sidebar.panel
 	use:clickOutside
 	on:outclick={sidebar.close}

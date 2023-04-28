@@ -6,6 +6,9 @@ module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
+			screens: {
+				sb: '1024px', // sidebar NOTE: keep width in sync with my-grid media query
+			},
 			fontFamily: {
 				sans: [
 					'Inter var',

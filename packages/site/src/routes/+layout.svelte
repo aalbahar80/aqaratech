@@ -22,7 +22,7 @@
 	import { environment } from '$lib/environment';
 	import { sentryConfig } from '$lib/environment/sentry.config';
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
-	import { width, widthNumber } from '$lib/stores/width';
+	import { width } from '$lib/stores/width';
 	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 	import { getSentryUser } from '$lib/utils/sentry/common';
 
@@ -62,8 +62,6 @@
 	<HeadHrefLangs />
 </svelte:head>
 
-<svelte:window bind:innerWidth={$widthNumber} />
-
 <QueryClientProvider client={data.queryClient}>
 	{#if $navigating && !$page.error}
 		<PreloadingIndicator />
@@ -73,22 +71,20 @@
 
 	<SecondaryNavbar />
 	<div
-		class:my-grid={isSidebarAvailable($page.route, $widthNumber)}
+		class:my-grid={isSidebarAvailable($page.route)}
 		class:bg-gray-50={isHomeRoute($page.route)}
 		style:padding-top="var(--nav-h)"
 	>
-		{#if isSidebarAvailable($page.route, $widthNumber)}
-			<Sidebar
-				navigationTree={getNavigationTree(
-					data.user,
-					$L,
-					$locale,
-					data.queryClient,
-					$page.route,
-					$page.url,
-				)}
-			/>
-		{/if}
+		<Sidebar
+			navigationTree={getNavigationTree(
+				data.user,
+				$L,
+				$locale,
+				data.queryClient,
+				$page.route,
+				$page.url,
+			)}
+		/>
 
 		<main class="col-span-full py-8 lg:col-start-2">
 			{#if isHomeRoute($page.route)}
@@ -108,8 +104,11 @@
 </QueryClientProvider>
 
 <style>
-	.my-grid {
-		display: grid;
-		grid-template-columns: minmax(0px, 16rem) repeat(1, minmax(0, 1fr));
+	/* NOTE: keep width in sync with custom tailwind breakpoint: `sb` */
+	@media (min-width: 1024px) {
+		.my-grid {
+			display: grid;
+			grid-template-columns: minmax(0px, 16rem) repeat(1, minmax(0, 1fr));
+		}
 	}
 </style>

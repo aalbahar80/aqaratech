@@ -7,7 +7,6 @@
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import { SIDEBAR_TOGGLE } from '$lib/constants/misc';
 	import LocaleSwitcher from '$lib/i18n/LocaleSwitcher.svelte';
-	import { widthNumber } from '$lib/stores/width';
 	import AqaratechLogo1 from '$lib/svgs/AqaratechLogo1.svelte';
 	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 	import HeroiconsBars3 from '~icons/heroicons/bars-3';
@@ -24,18 +23,16 @@
 	<div class="flex items-center justify-between px-4 py-4 sm:py-8">
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
-			{#if isSidebarAvailable($page.route, $widthNumber)}
-				<button
-					class="lg:hidden"
-					use:sidebar.button
-				>
-					<span class="sr-only">Toggle sidebar</span>
-					<HeroiconsBars3
-						class="h-8 w-8"
-						id={SIDEBAR_TOGGLE}
-					/>
-				</button>
-			{/if}
+			<button
+				class:sb:hidden={!isSidebarAvailable($page.route)}
+				use:sidebar.button
+			>
+				<span class="sr-only">Toggle sidebar</span>
+				<HeroiconsBars3
+					class="h-8 w-8"
+					id={SIDEBAR_TOGGLE}
+				/>
+			</button>
 			<a
 				href={$page.data.user?.role?.meta.home ?? '/'}
 				class="w-36 sm:w-44"
@@ -54,11 +51,12 @@
 				{/each}
 			</div>
 		{/if}
-		{#if !isSidebarAvailable($page.route, $widthNumber)}
-			<div class="flex flex-col gap-x-12 gap-y-4 text-gray-500 sm:flex-row">
-				<LocaleSwitcher />
-				<LoginButton />
-			</div>
-		{/if}
+		<div
+			class="hidden flex-col gap-x-12 gap-y-4 text-gray-500 sm:flex-row"
+			class:sb:flex={!isSidebarAvailable($page.route)}
+		>
+			<LocaleSwitcher />
+			<LoginButton />
+		</div>
 	</div>
 </header>
