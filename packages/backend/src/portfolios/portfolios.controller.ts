@@ -246,7 +246,6 @@ export class PortfoliosController {
 		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<LeaseInvoiceDto>> {
-		console.log(queryOptions);
 		return this.leaseInvoicesService.findAll({
 			queryOptions,
 			user,
