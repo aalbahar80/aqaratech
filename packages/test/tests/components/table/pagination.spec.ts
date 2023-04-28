@@ -85,14 +85,109 @@ test('pagination is updated when changing property filter', async ({
 	await expect(table.range(1)).toHaveAttribute('aria-current', 'page');
 });
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.fixme('should display current page number upon load', async ({}) => {});
+test('should display current page number upon load', async ({
+	page,
+	portfolio,
+}) => {
+	const url = getRoute({
+		entity: 'portfolio',
+		id: portfolio.id,
+		pageType: PageTypePortfolio.ExpensesTable,
+		params: {
+			organizationId: portfolio.organizationId,
+			portfolioId: portfolio.id,
+		},
+	});
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.fixme('page number updates when pressing back button', async ({}) => {});
+	await page.goto(url + '?page=2');
+	const table = new TablePage(page);
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.fixme('data updates when pressing back button', async ({}) => {});
+	// expect to be on page 2
+	await expect(table.range(2)).toHaveAttribute('aria-current', 'page');
+});
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.fixme('can update pagesize', async ({}) => {});
+test('page number updates when pressing back button', async ({
+	page,
+	portfolio,
+}) => {
+	const url = getRoute({
+		entity: 'portfolio',
+		id: portfolio.id,
+		pageType: PageTypePortfolio.ExpensesTable,
+		params: {
+			organizationId: portfolio.organizationId,
+			portfolioId: portfolio.id,
+		},
+	});
+	await page.goto(url);
+	const table = new TablePage(page);
+
+	// expect to start on page 1
+	await expect(table.range(1)).toHaveAttribute('aria-current', 'page');
+	await table.next.click();
+
+	// expect to be on page 2
+	await expect(table.range(2)).toHaveAttribute('aria-current', 'page');
+
+	// Go back
+	await page.goBack();
+
+	// expect to be on page 1
+	await expect(table.range(1)).toHaveAttribute('aria-current', 'page');
+});
+
+test('data updates when pressing back button', async ({ page, portfolio }) => {
+	const url = getRoute({
+		entity: 'portfolio',
+		id: portfolio.id,
+		pageType: PageTypePortfolio.ExpensesTable,
+		params: {
+			organizationId: portfolio.organizationId,
+			portfolioId: portfolio.id,
+		},
+	});
+	await page.goto(url);
+	const table = new TablePage(page);
+
+	const rows = page.locator('tbody tr');
+	const row = rows.first();
+
+	// take note of current data
+	const data1 = await row.innerText();
+
+	await table.next.click();
+
+	// wait for data to update
+	await expect(async () => {
+		const data2 = await row.innerText();
+		expect(data2).not.toBe(data1);
+	}).toPass();
+
+	// Go back
+	await page.goBack();
+
+	// expect data to be updated back to original
+	await expect(async () => {
+		const data3 = await row.innerText();
+		expect(data3).toBe(data1);
+	}).toPass();
+});
+
+test('can update pagesize', async ({ page, portfolio }) => {
+	const url = getRoute({
+		entity: 'portfolio',
+		id: portfolio.id,
+		pageType: PageTypePortfolio.ExpensesTable,
+		params: {
+			organizationId: portfolio.organizationId,
+			portfolioId: portfolio.id,
+		},
+	});
+	await page.goto(url);
+	const table = new TablePage(page);
+
+	await table.size.selectOption('50');
+
+	// expect url to be updated
+	await page.waitForURL((url) => url.toString().includes('take=50'));
+});
