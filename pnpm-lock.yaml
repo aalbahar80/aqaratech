@@ -43,8 +43,8 @@ importers:
         specifier: 2.10.0
         version: 2.10.0(prettier@2.8.8)(svelte@3.58.0)
       prettier-plugin-tailwindcss:
-        specifier: 0.2.7
-        version: 0.2.7(prettier-plugin-svelte@2.10.0)(prettier@2.8.8)
+        specifier: 0.2.8
+        version: 0.2.8(prettier-plugin-svelte@2.10.0)(prettier@2.8.8)
       tree-kill:
         specifier: 1.2.2
         version: 1.2.2
@@ -76,11 +76,11 @@ importers:
         specifier: 3.321.1
         version: 3.321.1
       '@casl/ability':
-        specifier: 6.4.0
-        version: 6.4.0
+        specifier: 6.5.0
+        version: 6.5.0
       '@casl/prisma':
-        specifier: 1.3.3
-        version: 1.3.3(@casl/ability@6.4.0)(@prisma/client@4.13.0)
+        specifier: 1.4.0
+        version: 1.4.0(@casl/ability@6.5.0)(@prisma/client@4.13.0)
       '@logtail/node':
         specifier: 0.4.0
         version: 0.4.0
@@ -1911,22 +1911,22 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@casl/ability@6.4.0:
-    resolution: {integrity: sha512-Z2bi5QdijspY/t4OhVjIWXV6kuKhZtZFI2nNthrcWEs9CtR2jkdDCjiqptFGlRBMTSZWJTCSVovtZfOzkGhhIA==}
+  /@casl/ability@6.5.0:
+    resolution: {integrity: sha512-3guc94ugr5ylZQIpJTLz0CDfwNi0mxKVECj1vJUPAvs+Lwunh/dcuUjwzc4MHM9D8JOYX0XUZMEPedpB3vIbOw==}
     dependencies:
       '@ucast/mongo2js': 1.3.4
     dev: false
 
-  /@casl/prisma@1.3.3(@casl/ability@6.4.0)(@prisma/client@4.13.0):
-    resolution: {integrity: sha512-G55pyNsIJlS18lfcf4Gj56g0TSHFF3kh8G6rLuUIac2e+lLzrkSWxSS15+YqPDkkVRr0rynKyCR/60CXNTMnhA==}
+  /@casl/prisma@1.4.0(@casl/ability@6.5.0)(@prisma/client@4.13.0):
+    resolution: {integrity: sha512-edDoBfm2aSww5HLyAqKmSYlGqCX06Bo8j+4P8hBNuIxmSO97Q1jEO8hkCzMThnucuGFEbNvUct1+K64CH2zTWQ==}
     peerDependencies:
       '@casl/ability': ^5.3.0 || ^6.0.0
       '@prisma/client': ^2.14.0 || ^3.0.0 || ^4.0.0
     dependencies:
-      '@casl/ability': 6.4.0
+      '@casl/ability': 6.5.0
       '@prisma/client': 4.13.0(prisma@4.13.0)
-      '@ucast/core': 1.10.1
-      '@ucast/js': 3.0.2
+      '@ucast/core': 1.10.2
+      '@ucast/js': 3.0.3
     dev: false
 
   /@changesets/apply-release-plan@6.1.3:
@@ -4328,18 +4328,8 @@ packages:
       eslint-visitor-keys: 3.4.0
     dev: true
 
-  /@ucast/core@1.10.1:
-    resolution: {integrity: sha512-sXKbvQiagjFh2JCpaHUa64P4UdJbOxYeC5xiZFn8y6iYdb0WkismduE+RmiJrIjw/eLDYmIEXiQeIYYowmkcAw==}
-    dev: false
-
   /@ucast/core@1.10.2:
     resolution: {integrity: sha512-ons5CwXZ/51wrUPfoduC+cO7AS1/wRb0ybpQJ9RrssossDxVy4t49QxWoWgfBDvVKsz9VXzBk9z0wqTdZ+Cq8g==}
-    dev: false
-
-  /@ucast/js@3.0.2:
-    resolution: {integrity: sha512-zxNkdIPVvqJjHI7D/iK8Aai1+59yqU+N7bpHFodVmiTN7ukeNiGGpNmmSjQgsUw7eNcEBnPrZHNzp5UBxwmaPw==}
-    dependencies:
-      '@ucast/core': 1.10.1
     dev: false
 
   /@ucast/js@3.0.3:
@@ -9561,12 +9551,11 @@ packages:
       svelte: 3.58.0
     dev: true
 
-  /prettier-plugin-tailwindcss@0.2.7(prettier-plugin-svelte@2.10.0)(prettier@2.8.8):
-    resolution: {integrity: sha512-jQopIOgjLpX+y8HeD56XZw7onupRTC0cw7eKKUimI7vhjkPF5/1ltW5LyqaPtSyc8HvEpvNZsvvsGFa2qpa59w==}
+  /prettier-plugin-tailwindcss@0.2.8(prettier-plugin-svelte@2.10.0)(prettier@2.8.8):
+    resolution: {integrity: sha512-KgPcEnJeIijlMjsA6WwYgRs5rh3/q76oInqtMXBA/EMcamrcYJpyhtRhyX1ayT9hnHlHTuO8sIifHF10WuSDKg==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
-      '@prettier/plugin-php': '*'
       '@prettier/plugin-pug': '*'
       '@shopify/prettier-plugin-liquid': '*'
       '@shufo/prettier-plugin-blade': '*'
@@ -9583,8 +9572,6 @@ packages:
       prettier-plugin-twig-melody: '*'
     peerDependenciesMeta:
       '@ianvs/prettier-plugin-sort-imports':
-        optional: true
-      '@prettier/plugin-php':
         optional: true
       '@prettier/plugin-pug':
         optional: true
