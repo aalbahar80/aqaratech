@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import { expect } from '@playwright/test';
 import * as R from 'remeda';
 
@@ -48,4 +50,26 @@ test('can update expense to leaf node category', async ({
 	});
 
 	expect(res.status()).toBe(200);
+});
+
+test('cannot create leaf with non-existing parent group', async ({
+	request,
+	org,
+	property,
+}) => {
+	const expense = R.pick(
+		expenseFactory.build({
+			organizationId: org.organization.id,
+			portfolioId: property.portfolioId,
+			propertyId: property.id,
+			categoryId: randomUUID(),
+		}),
+		['portfolioId', 'propertyId', 'unitId', 'amount', 'postAt', 'categoryId'],
+	);
+
+	const url = `/organizations/${org.organization.id}/expenses`;
+
+	const res = await request.post(url, { data: expense });
+
+	expect(res.status()).toBe(400);
 });

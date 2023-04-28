@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { expect } from '@playwright/test';
 import * as R from 'remeda';
 
@@ -29,15 +28,3 @@ test('cannot create expenseCategory in another org', async ({
 
 	expect(res.status()).toBe(403); // or 404?
 });
-
-// TODO: move to general expense-category tests:
-
-test.fixme('can create group', async () => {});
-
-test.fixme('can create leaf', async () => {});
-
-test.fixme('cannot create leaf with non-existing parent group', async () => {});
-
-test.fixme('cannot create expenses uner non-leaf nodes', async () => {});
-
-test.fixme('can enter expenses under leaf nodes', async () => {});
