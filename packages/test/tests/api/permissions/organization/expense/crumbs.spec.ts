@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test';
 
-import { resCheck } from '../../../../../utils/res-check';
 import { test as base } from '../../../api-fixtures';
 
 import type { ExpenseDto } from '../../../../../types/api';
@@ -9,8 +8,9 @@ const test = base.extend<{ expenseDto: ExpenseDto }>({
 	/** Override the default `maintenanceOrders` fixture to get the
 	 * maintenanceOrder with breadcrumbs. */
 	expenseDto: async ({ request, expense }, use) => {
-		const res = await request.get(`/expenses/${expense.id}`);
-		resCheck(res);
+		const res = await request.get(`/expenses/${expense.id}`, {
+			failOnStatusCode: true,
+		});
 
 		const body = (await res.json()) as ExpenseDto;
 

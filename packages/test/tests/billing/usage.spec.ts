@@ -7,7 +7,6 @@ import { unitFactory } from '@self/seed';
 import { tierid } from '@self/utils';
 
 import { prisma } from '../../prisma';
-import { resCheck } from '../../utils/res-check';
 import { test } from '../api/api-fixtures';
 import { apiURL } from '../api/fixtures/api-url';
 
@@ -66,6 +65,7 @@ test.describe('usage', () => {
 });
 
 const reportUsage = async (orgId: string, request: APIRequestContext) => {
-	const res = await request.post(`${apiURL}/organizations/${orgId}/report`);
-	resCheck(res);
+	await request.post(`${apiURL}/organizations/${orgId}/report`, {
+		failOnStatusCode: true,
+	});
 };

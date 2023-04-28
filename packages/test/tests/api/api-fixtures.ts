@@ -14,7 +14,6 @@ import { Cookie, generateExpenseCategoryTree, tierid } from '@self/utils';
 import { prisma } from '../../prisma';
 import { createBucketDev } from '../../utils/create-bucket';
 import { createRole } from '../../utils/create-role';
-import { resCheck } from '../../utils/res-check';
 
 import { apiURL } from './fixtures/api-url';
 import { plan } from './fixtures/env';
@@ -238,6 +237,7 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		);
 
 		const req = request.post(url, {
+			failOnStatusCode: true,
 			multipart: {
 				fileName: fileName,
 				relationKey: 'portfolio',
@@ -251,7 +251,6 @@ export const test = base.extend<TestFixtures & TestOptions>({
 		});
 
 		const res = await req;
-		resCheck(res);
 
 		const name = await res.text();
 		const key = `portfolio/${portfolio.id}/${name}`;

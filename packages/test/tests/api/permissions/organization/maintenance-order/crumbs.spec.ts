@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test';
 
-import { resCheck } from '../../../../../utils/res-check';
 import { test as base } from '../../../api-fixtures';
 
 import type { MaintenanceOrderDto } from '../../../../../types/api';
@@ -11,8 +10,8 @@ const test = base.extend<{ maintenanceOrderDto: MaintenanceOrderDto }>({
 	maintenanceOrderDto: async ({ request, maintenanceOrders }, use) => {
 		const res = await request.get(
 			`/maintenance-orders/${maintenanceOrders[0].id}`,
+			{ failOnStatusCode: true },
 		);
-		resCheck(res);
 
 		const body = (await res.json()) as MaintenanceOrderDto;
 
