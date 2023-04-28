@@ -45,51 +45,34 @@ test.describe('unauthorized users', () => {
 	}
 
 	for (const route of NONEXISTENT_ROUTES) {
-		test(`should get 404 for ${route}`, async ({ page }) => {
-			const resPromise = page.waitForResponse(
-				(res) => new URL(res.url()).pathname === route,
-			);
+		test(`should get 404 for ${route}`, async ({ request }) => {
+			const url = siteURL + route;
 
-			await page.goto(route);
-
-			const res = await resPromise;
+			const res = await request.get(url, { maxRedirects: 0 });
 
 			expect.soft(res.status()).toBe(404);
 		});
 	}
 
 	for (const route of PROTECTED_ROUTES) {
-		test(`should be redirected to login for ${route}`, async ({ page }) => {
-			const resPromise = page.waitForResponse(
-				(res) => new URL(res.url()).pathname === route,
-			);
+		test(`should be redirected to login for ${route}`, async ({ request }) => {
+			const url = siteURL + route;
 
-			await page.goto(route);
-
-			const res = await resPromise;
+			const res = await request.get(url, { maxRedirects: 0 });
 
 			expect.soft(res.status()).toBe(302);
-			expect.soft(res.headers()['location']).toBeTruthy();
+			expect
+				.soft(res.headers()['location'])
+				.toBe('/auth/login?destination=' + route);
 		});
 	}
 
-	test(`should be redirected to /en from /`, async ({ page }) => {
-		const resPromise = page.waitForResponse(
-			(res) => new URL(res.url()).pathname === '/',
-		);
+	test(`should be redirected to /en from /`, async ({ request }) => {
+		const url = siteURL + '/';
 
-		const resPromise2 = page.waitForResponse(
-			(res) => new URL(res.url()).pathname === '/en',
-		);
-
-		await page.goto('/');
-
-		const res = await resPromise;
+		const res = await request.get(url, { maxRedirects: 0 });
 
 		expect.soft(res.status()).toBe(302);
 		expect.soft(res.headers()['location']).toBe('/en');
-
-		const res2 = await resPromise2;
-		expect.soft(res2.status()).toBe(200);
 	});
 });
