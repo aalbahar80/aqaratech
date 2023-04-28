@@ -1,5 +1,12 @@
 # @self/test
 
+## 3.25.3
+
+### Patch Changes
+
+- 05684f207: update deps (adapter-node memory leak fix)
+- 8cf1a21eb: define MAX_LIMIT const
+
 ## 3.25.2
 
 ### Patch Changes

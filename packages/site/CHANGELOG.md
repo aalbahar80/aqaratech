@@ -1,5 +1,13 @@
 # @self/site
 
+## 2.28.7
+
+### Patch Changes
+
+- e66599da7: fix sidebar layout shift
+- 05684f207: update deps (adapter-node memory leak fix)
+- 8cf1a21eb: define MAX_LIMIT const
+
 ## 2.28.6
 
 ### Patch Changes

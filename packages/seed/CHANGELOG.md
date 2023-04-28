@@ -1,5 +1,15 @@
 # @self/seed
 
+## 2.25.3
+
+### Patch Changes
+
+- 05684f207: update deps (adapter-node memory leak fix)
+- 8cf1a21eb: define MAX_LIMIT const
+- Updated dependencies [05684f207]
+- Updated dependencies [8cf1a21eb]
+  - @self/utils@3.25.3
+
 ## 2.25.2
 
 ### Patch Changes
