@@ -72,14 +72,5 @@ for (const token of tokens) {
 				expect(cookie).toBe(undefined);
 			}
 		});
-
-		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		test.skip('expired cookies are handled', async () => {});
-
-		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		test.skip('expired accesstoken is refreshed', async () => {});
-
-		// eslint-disable-next-line @typescript-eslint/no-empty-function
-		test.skip('jwt is refreshed', async () => {});
 	});
 }
