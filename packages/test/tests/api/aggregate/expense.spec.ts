@@ -32,9 +32,6 @@ test('return 12 data points for a year', async ({ request, portfolio }) => {
 	expect(body).toHaveLength(12);
 });
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-test.skip('table shows 12 rows', () => {});
-
 test('return 12 data points for a year with correct data', async ({
 	request,
 	portfolio,
