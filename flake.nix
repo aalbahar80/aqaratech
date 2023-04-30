@@ -5,21 +5,19 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.nixpkgs-turbo.url = "github:thenbe/nixpkgs/turbo-1.9.3";
-  inputs.nixpkgs-prisma.url = "github:pimeys/nixpkgs/prisma-4.13.0";
 
   outputs = {
     self,
     nixpkgs,
     nixpkgs-turbo,
-    nixpkgs-prisma,
     flake-utils,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       # Define some packages here to easily switch between versions
       inherit (nixpkgs-turbo.legacyPackages.${system}) turbo;
-      inherit (nixpkgs-prisma.legacyPackages.${system}) prisma-engines;
-      inherit (nixpkgs-prisma.legacyPackages.${system}.nodePackages) prisma;
+      inherit (nixpkgs.legacyPackages.${system}) prisma-engines;
+      inherit (nixpkgs.legacyPackages.${system}.nodePackages) prisma;
 
       # Tier binary package
       tier = {pkgs, ...}:
