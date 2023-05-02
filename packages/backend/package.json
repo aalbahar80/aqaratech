@@ -55,7 +55,7 @@
 		"cache-manager": "5.2.1",
 		"class-transformer": "0.5.1",
 		"cookie-parser": "1.4.6",
-		"date-fns": "2.29.3",
+		"date-fns": "2.30.0",
 		"helmet": "6.1.5",
 		"jwks-rsa": "3.0.1",
 		"lodash.set": "4.3.2",

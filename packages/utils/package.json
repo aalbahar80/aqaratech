@@ -13,7 +13,7 @@
 		"test:ui": "vitest --ui"
 	},
 	"dependencies": {
-		"date-fns": "2.29.3",
+		"date-fns": "2.30.0",
 		"remeda": "1.14.0",
 		"winston": "3.8.2",
 		"zod": "3.21.4"

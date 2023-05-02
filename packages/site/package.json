@@ -27,7 +27,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.57",
+		"@iconify/json": "2.2.58",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -53,7 +53,7 @@
 		"clsx": "1.2.1",
 		"cookie": "0.5.0",
 		"d3": "7.8.4",
-		"date-fns": "2.29.3",
+		"date-fns": "2.30.0",
 		"debounce": "1.2.1",
 		"defu": "6.1.2",
 		"dotenv": "16.0.3",
@@ -62,7 +62,7 @@
 		"eslint-plugin-svelte": "2.27.2",
 		"frappe-charts": "1.6.2",
 		"fuse.js": "6.6.2",
-		"jose": "4.14.3",
+		"jose": "4.14.4",
 		"jspdf": "2.5.1",
 		"just-debounce-it": "3.2.0",
 		"nanoid": "4.0.2",
