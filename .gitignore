@@ -21,7 +21,8 @@ build
 
 dist
 
-vite.config.js.timestamp*
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
 
 # test
 test-results/
