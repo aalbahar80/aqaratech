@@ -3,6 +3,8 @@ import { Novu } from '@novu/node';
 
 import { EnvService } from 'src/env/env.service';
 
+import { SMSDirect } from './novu.types';
+
 @Injectable()
 export class NovuService {
 	constructor(private readonly env: EnvService) {
@@ -12,14 +14,14 @@ export class NovuService {
 
 	readonly novu: Novu;
 
-	async sendSMS(template: unknown) {
+	async sendSMS(template: SMSDirect) {
 		await this.novu.trigger('sms-direct', {
 			to: {
-				subscriberId: '<REPLACE_WITH_DATA>',
-				phone: '<REPLACE_WITH_DATA>',
+				subscriberId: template.to.subscriberId,
+				phone: template.to.phone,
 			},
 			payload: {
-				content: '<REPLACE_WITH_DATA>',
+				content: template.payload.content,
 			},
 		});
 	}
