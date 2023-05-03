@@ -1,10 +1,5 @@
 import { accessibleBy } from '@casl/prisma';
-import {
-	BadRequestException,
-	Injectable,
-	InternalServerErrorException,
-	Logger,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
@@ -20,7 +15,11 @@ import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { PaidStatus } from 'src/constants/paid-status.enum';
 import { EnvService } from 'src/env/env.service';
-import { InvoiceSendPayload } from 'src/events/invoice-send.event';
+import {
+	InvoiceSendInput,
+	InvoiceSendSMSPayload,
+	InvoiceSendEmailPayload,
+} from 'src/events/invoice-send.event';
 import { IUser } from 'src/interfaces/user.interface';
 import {
 	CreateLeaseInvoiceDto,
@@ -30,6 +29,7 @@ import {
 import { LeaseInvoiceAggregateDto } from 'src/lease-invoices/dto/lease-invoices-extra.dto';
 import { MyfatoorahService } from 'src/myfatoorah/myfatoorah.service';
 import { GetPaymentStatusResult } from 'src/myfatoorah/types/myfatoorah.types';
+import { NovuService } from 'src/novu/novu.service';
 import { PostmarkService } from 'src/postmark/postmark.service';
 import { MESSAGE_TAG } from 'src/postmark/tags';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -40,6 +40,7 @@ export class LeaseInvoicesService {
 	constructor(
 		private readonly prisma: PrismaService,
 		private readonly postmarkService: PostmarkService,
+		private readonly novuService: NovuService,
 		private readonly env: EnvService,
 		private readonly myfatoorah: MyfatoorahService,
 		@InjectSentry() private readonly sentry: SentryService,
@@ -339,7 +340,11 @@ export class LeaseInvoicesService {
 					select: {
 						tenant: {
 							select: {
-								roles: { select: { user: { select: { email: true } } } },
+								id: true,
+								phone: true,
+								roles: {
+									select: { user: { select: { email: true } } },
+								},
 							},
 						},
 					},
@@ -347,33 +352,58 @@ export class LeaseInvoicesService {
 			},
 		});
 
-		const emails = invoice.lease.tenant.roles.map((role) => role.user.email);
-
-		if (!emails.length) {
-			throw new BadRequestException('No emails found for tenant.');
-		}
-
-		try {
-			await this.sendEmail({
-				invoice,
-				emails: emails,
-			});
-		} catch (error) {
-			this.logger.error(error);
-
-			throw new InternalServerErrorException('Failed to send email', {
-				cause: new Error('Failed to send email', { cause: error }),
-			});
-		}
-
-		return emails;
+		return await this.notify({
+			method: 'SMS',
+			invoice,
+		});
 	}
 
-	async sendEmail(payload: InvoiceSendPayload) {
-		if (!payload.emails.length) {
-			return;
-		}
+	async notify(args: InvoiceSendInput) {
+		const paymentLink = getPayURL({
+			apiURL: this.env.e.PUBLIC_API_URL,
+			invoiceId: args.invoice.id,
+		});
 
+		const phone = args.invoice.lease.tenant.phone;
+
+		const emails = args.invoice.lease.tenant.roles.map(
+			(role) => role.user.email,
+		);
+
+		if (args.method === 'SMS' && phone) {
+			return await this.sendSMS({
+				invoice: args.invoice,
+				paymentLink,
+				method: args.method,
+				phone,
+			});
+		} else if (args.method === 'EMAIL' && emails.length) {
+			return await this.sendEmail({
+				invoice: args.invoice,
+				paymentLink,
+				method: args.method,
+				emails,
+			});
+		} else {
+			throw new BadRequestException(
+				'No emails or phone number found for tenant',
+			);
+		}
+	}
+
+	async sendSMS(payload: InvoiceSendSMSPayload) {
+		return await this.novuService.sendSMS({
+			to: {
+				subscriberId: payload.invoice.lease.tenant.id,
+				phone: payload.phone,
+			},
+			payload: {
+				content: `Use the link to view and pay your rent online: ${payload.paymentLink}`,
+			},
+		});
+	}
+
+	async sendEmail(payload: InvoiceSendEmailPayload) {
 		const invoice = payload.invoice;
 
 		const trxUrl = getPayURL({
@@ -430,6 +460,8 @@ export class LeaseInvoicesService {
 					select: {
 						tenant: {
 							select: {
+								id: true,
+								phone: true,
 								roles: { select: { user: { select: { email: true } } } },
 							},
 						},
@@ -444,9 +476,9 @@ export class LeaseInvoicesService {
 		);
 
 		const promises = invoices.map((invoice) => {
-			return this.sendEmail({
+			return this.notify({
+				method: 'SMS',
 				invoice,
-				emails: invoice.lease.tenant.roles.map((role) => role.user.email),
 			});
 		});
 

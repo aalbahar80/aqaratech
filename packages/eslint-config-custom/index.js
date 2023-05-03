@@ -92,6 +92,7 @@ module.exports = {
 		'@typescript-eslint/require-array-sort-compare': 'warn',
 		'@typescript-eslint/prefer-regexp-exec': 'warn',
 		'@typescript-eslint/switch-exhaustiveness-check': 'warn',
+		'@typescript-eslint/no-unnecessary-condition': 'off',
 
 		'eslint-comments/no-unlimited-disable': 'off', // Ideally turn off only for generated files
 		'eslint-comments/disable-enable-pair': ['warn', { allowWholeFile: true }],
