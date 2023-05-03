@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { flexRender, type HeaderGroup } from '@tanstack/svelte-table';
+	import type { HeaderGroup } from '@tanstack/svelte-table';
 
-	import { TABLE_ROW_SPACING } from './spacing';
+	import { flexRender } from '$lib/components/table/flex-render';
+	import { TABLE_ROW_SPACING } from '$lib/components/table/row/spacing';
 
 	type T = $$Generic;
 

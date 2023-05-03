@@ -42,7 +42,7 @@
 		"@tailwindcss/forms": "0.5.3",
 		"@tailwindcss/typography": "0.5.9",
 		"@tanstack/svelte-query": "4.29.5",
-		"@tanstack/svelte-table": "8.8.2",
+		"@tanstack/svelte-table": "8.9.1",
 		"@types/cookie": "0.5.1",
 		"@types/d3": "7.4.0",
 		"@types/debounce": "1.2.1",

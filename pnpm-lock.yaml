@@ -430,8 +430,8 @@ importers:
         specifier: 4.29.5
         version: 4.29.5(svelte@3.58.0)
       '@tanstack/svelte-table':
-        specifier: 8.8.2
-        version: 8.8.2(svelte@3.58.0)
+        specifier: 8.9.1
+        version: 8.9.1(svelte@3.58.0)
       '@types/cookie':
         specifier: 0.5.1
         version: 0.5.1
@@ -3485,18 +3485,18 @@ packages:
       svelte: 3.58.0
     dev: true
 
-  /@tanstack/svelte-table@8.8.2(svelte@3.58.0):
-    resolution: {integrity: sha512-M+CzLpnyfJzcMAXKvYPo137/PE0kI9Phcy7rOSp2dN0b/QxmiBM6zk/QeLy6zgNlu/kaah1utluI5cE0O9Y3wA==}
+  /@tanstack/svelte-table@8.9.1(svelte@3.58.0):
+    resolution: {integrity: sha512-c84SBP2rRbloBcA3/WFsfm0a4vJCeztbRxox4MHAPCwfLW955tmCYbIF6ihcDUZg5fsDvu992qdDEhKKLLxmEg==}
     engines: {node: '>=12'}
     peerDependencies:
       svelte: ^3.49.0
     dependencies:
-      '@tanstack/table-core': 8.8.2
+      '@tanstack/table-core': 8.9.1
       svelte: 3.58.0
     dev: true
 
-  /@tanstack/table-core@8.8.2:
-    resolution: {integrity: sha512-h0BbTJXxGc4e0e8KRMnXgdKJyfQSFjpYFrOlCZ7WmYE1YQKiCzK6moW13YCuk0+jPelPVFshk1Uf1NHdTqBfgw==}
+  /@tanstack/table-core@8.9.1:
+    resolution: {integrity: sha512-2+R83n8vMZND0q3W1lSiF7co9nFbeWbjAErFf27xwbeA9E0wtUu5ZDfgj+TZ6JzdAEQAgfxkk/QNFAKiS8E4MA==}
     engines: {node: '>=12'}
     dev: true
 

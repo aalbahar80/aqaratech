@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { flexRender, type Row } from '@tanstack/svelte-table';
 	import clsx from 'clsx';
 
-	import { TABLE_ROW_SPACING } from './spacing';
+	import type { Row } from '@tanstack/svelte-table';
+
+	import { flexRender } from '$lib/components/table/flex-render';
+	import { TABLE_ROW_SPACING } from '$lib/components/table/row/spacing';
 
 	export let row: Row<{ id: string }>;
 </script>
