@@ -1,4 +1,3 @@
-import { SubjectType } from '@casl/ability';
 import {
 	Body,
 	Controller,
