@@ -31,7 +31,6 @@ import { EnvService } from './env/env.service';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
 import { LogtailModule } from './logtail/logtail.module';
 import { MaintenanceOrdersModule } from './maintenance-orders/maintenance-orders.module';
-import { NovuModule } from './novu/novu.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
@@ -107,7 +106,6 @@ import { UsersModule } from './users/users.module';
 		OrganizationsModule,
 		MaintenanceOrdersModule,
 		ExpenseCategoriesModule,
-		NovuModule,
 		ScheduleModule.forRoot(),
 	],
 	controllers: [AppController],
