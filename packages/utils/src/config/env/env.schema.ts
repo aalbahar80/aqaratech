@@ -88,6 +88,9 @@ export const envSchema = z.object({
 	// Postmark
 	POSTMARK_TOKEN: z.string(),
 
+	// Novu
+	NOVU_TOKEN: z.string(),
+
 	// External
 	CI: zodEnvBooleanSchema().optional(),
 }) satisfies z.ZodType<AqaratechEnv, ZodTypeDef, unknown>;

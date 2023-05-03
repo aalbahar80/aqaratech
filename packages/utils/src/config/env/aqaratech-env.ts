@@ -63,6 +63,9 @@ export interface AqaratechEnv {
 	// Postmark
 	readonly POSTMARK_TOKEN: string;
 
+	// Novu
+	readonly NOVU_TOKEN: string;
+
 	// Myfatoorah
 	/** Myfatoorah's API URL */
 	readonly MYFATOORAH_URL: string;

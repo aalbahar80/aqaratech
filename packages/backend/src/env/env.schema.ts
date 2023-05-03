@@ -36,6 +36,9 @@ export const backendEnvSchema = envSchema.pick({
 
 	// Postmark
 	POSTMARK_TOKEN: true,
+
+	// Novu
+	NOVU_TOKEN: true,
 });
 
 export type BackendEnvSchema = z.infer<typeof backendEnvSchema>;
