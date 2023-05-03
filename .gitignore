@@ -14,6 +14,7 @@ package-lock.json
 
 
 .turbo
+.task
 .eslintcache
 pruned
 meili_data

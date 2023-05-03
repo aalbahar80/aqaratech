@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://json.schemastore.org/taskfile.json
+---
+version: '3'
+
+interval: '100ms'
+
+tasks:
+  clean:
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - rm -rf dist
+
+  dev:utils:
+    dir: '{{.USER_WORKING_DIR}}'
+    method: none
+    deps:
+      - clean
+    sources:
+      - ../utils/src/**/*.ts
+    cmds:
+      - pnpm swc -d dist ../utils/src
+
+  dev:backend:
+    dir: '{{.USER_WORKING_DIR}}'
+    method: none
+    deps:
+      - dev:utils
+    sources:
+      - src/**/*.ts
+    cmds:
+      - pnpm swc -d dist/backend/src src
+
+  build:
+    dir: '{{.USER_WORKING_DIR}}'
+    method: none
+    deps:
+      - dev:utils
+      - dev:backend
+    cmds:
+      - cp package.json dist/backend
+
+  start:
+    dir: '{{.USER_WORKING_DIR}}'
+    method: none
+    deps:
+      - build
+    cmds:
+      - node dist/backend/src/main.js

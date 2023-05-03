@@ -26,7 +26,7 @@
 		"types": ["multer"],
 		// "verbatimModuleSyntax": true, // needs special consideration for nestjs
 		"paths": {
-			"src": ["./src/"],
+			"src/*": ["./src/*"],
 			"@self/utils": ["../utils/src"]
 		}
 	},
