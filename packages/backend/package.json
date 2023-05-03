@@ -10,7 +10,7 @@
 		"prisma"
 	],
 	"scripts": {
-		"build": "rimraf dist && nest build --path tsconfig.build.json",
+		"build": "rm -rf dist && nest build --path tsconfig.build.json",
 		"dev": "nest start --watch --preserveWatchOutput --entryFile ./backend/src/main --path tsconfig.json",
 		"dev:debug": "pnpm run dev --debug",
 		"dev:setup": "PUBLIC_IS_TESTING=0 pnpm run setup:all",
@@ -69,7 +69,6 @@
 		"prisma": "4.13.0",
 		"reflect-metadata": "0.1.13",
 		"remeda": "1.14.0",
-		"rimraf": "5.0.0",
 		"rxjs": "7.8.1",
 		"tier": "5.9.0",
 		"ufo": "1.1.1",
