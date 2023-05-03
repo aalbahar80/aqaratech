@@ -59,7 +59,7 @@ export class MaintenanceOrdersController {
 		});
 	}
 
-	@Get()
+	@Get(`${urlName}`)
 	@CheckAbilities({ action: Action.Read, subject: SubjectType })
 	@ApiPaginatedResponse(MaintenanceOrderDto)
 	@ApiQueryOptions()

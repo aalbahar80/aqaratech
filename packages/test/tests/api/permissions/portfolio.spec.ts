@@ -14,6 +14,7 @@ const accessible = [
 	'/portfolios',
 	'/properties',
 	'/leases',
+	'/maintenance-orders',
 	// "/search",
 ];
 

@@ -148,7 +148,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 
 		const response = await this.request(
 			{
-				path: `/`,
+				path: `/maintenance-orders`,
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters,

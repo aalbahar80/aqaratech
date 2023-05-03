@@ -2734,7 +2734,7 @@ paths:
                 $ref: '#/components/schemas/CreatedDto'
       tags: &ref_27
         - maintenance-orders
-  /:
+  /maintenance-orders:
     get:
       operationId: MaintenanceOrdersController_findAll
       parameters:

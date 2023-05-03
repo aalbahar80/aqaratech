@@ -11,7 +11,7 @@ test.use({
 	userRoleType: 'TENANT',
 });
 
-const accessible = ['/leases'];
+const accessible = ['/leases', '/maintenance-orders'];
 const notAccessible = [
 	'/portfolios',
 	'/properties',
