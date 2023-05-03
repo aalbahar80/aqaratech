@@ -25,35 +25,18 @@ import { LoggingMiddleware } from 'src/middleware/logging.middleware';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { TraceMiddleware } from 'src/sentry/trace.middleware';
 
-import { AggregateModule } from './aggregate/aggregate.module';
 import { AppService } from './app.service';
 import { EnvModule } from './env/env.module';
 import { EnvService } from './env/env.service';
 import { ExpenseCategoriesModule } from './expense-categories/expense-categories.module';
-import { ExpensesModule } from './expenses/expenses.module';
-import { FilesModule } from './files/files.module';
-import { LeaseInvoicesModule } from './lease-invoices/lease-invoices.module';
-import { LeasesModule } from './leases/leases.module';
 import { LogtailModule } from './logtail/logtail.module';
 import { MaintenanceOrdersModule } from './maintenance-orders/maintenance-orders.module';
 import { OrganizationsModule } from './organizations/organizations.module';
-import { PayoutsModule } from './payouts/payouts.module';
-import { PortfoliosModule } from './portfolios/portfolios.module';
-import { PostmarkModule } from './postmark/postmark.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { PropertiesModule } from './properties/properties.module';
-import { RolesModule } from './roles/roles.module';
-import { SearchModule } from './search/search.module';
-import { TenantsModule } from './tenants/tenants.module';
-import { UnitsModule } from './units/units.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
 	imports: [
-		// DevtoolsModule.register({
-		// 	// @ts-expect-error overkill
-		// 	http: !isLiveEnv(process.env.PUBLIC_AQARATECH_ENV),
-		// }),
 		EnvModule,
 		// Example for centralized config module: https://github.com/podkrepi-bg/api/blob/13eadd726f3ae45c49ef9be66b76c589e2394b16/apps/api/src/config/swagger.config.ts
 
@@ -119,23 +102,10 @@ import { UsersModule } from './users/users.module';
 			},
 		}),
 
-		TenantsModule,
-		PortfoliosModule,
 		UsersModule,
-		PropertiesModule,
-		UnitsModule,
-		LeasesModule,
-		LeaseInvoicesModule,
-		ExpensesModule,
-		SearchModule,
-		RolesModule,
 		OrganizationsModule,
-		AggregateModule,
-		PostmarkModule,
-		ExpenseCategoriesModule,
-		FilesModule,
-		PayoutsModule,
 		MaintenanceOrdersModule,
+		ExpenseCategoriesModule,
 		ScheduleModule.forRoot(),
 	],
 	controllers: [AppController],

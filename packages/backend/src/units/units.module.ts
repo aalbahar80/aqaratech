@@ -1,4 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { LeasesModule } from 'src/leases/leases.module';
 
@@ -9,6 +9,6 @@ import { UnitsService } from './units.service';
 	controllers: [UnitsController],
 	providers: [UnitsService],
 	exports: [UnitsService],
-	imports: [forwardRef(() => LeasesModule)],
+	imports: [LeasesModule],
 })
 export class UnitsModule {}

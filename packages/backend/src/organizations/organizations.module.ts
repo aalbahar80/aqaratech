@@ -22,7 +22,6 @@ import { UnitsModule } from 'src/units/units.module';
 	providers: [OrganizationsService, OrganizationsSettingsService, TierService],
 	imports: [
 		RolesModule,
-		SearchModule,
 		TenantsModule,
 		PortfoliosModule,
 		PropertiesModule,
@@ -32,6 +31,7 @@ import { UnitsModule } from 'src/units/units.module';
 		ExpensesModule,
 		PayoutsModule,
 		FilesModule,
+		SearchModule,
 	],
 })
 export class OrganizationsModule {}

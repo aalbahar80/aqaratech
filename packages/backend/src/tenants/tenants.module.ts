@@ -1,4 +1,4 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { LeaseInvoicesModule } from 'src/lease-invoices/lease-invoices.module';
 import { LeasesModule } from 'src/leases/leases.module';
@@ -11,6 +11,6 @@ import { TenantsService } from './tenants.service';
 	controllers: [TenantsController],
 	providers: [TenantsService],
 	exports: [TenantsService],
-	imports: [RolesModule, LeaseInvoicesModule, forwardRef(() => LeasesModule)],
+	imports: [RolesModule, LeasesModule, LeaseInvoicesModule],
 })
 export class TenantsModule {}

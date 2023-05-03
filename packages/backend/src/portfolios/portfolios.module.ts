@@ -20,10 +20,10 @@ import { PortfoliosService } from './portfolios.service';
 		RolesModule,
 		PropertiesModule,
 		UnitsModule,
-		PayoutsModule,
-		AggregateModule,
 		LeaseInvoicesModule,
 		ExpensesModule,
+		PayoutsModule,
+		AggregateModule,
 	],
 })
 export class PortfoliosModule {}

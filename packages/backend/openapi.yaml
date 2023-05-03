@@ -1,5 +1,649 @@
 openapi: 3.0.0
 paths:
+  /users/me:
+    get:
+      operationId: UsersController_findProfile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatedUserDto'
+        '404':
+          description: ''
+      tags:
+        - users
+      security:
+        - accessToken: []
+  /organizations:
+    post:
+      operationId: OrganizationsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrganizationDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationCreatedDto'
+      tags: &ref_0
+        - organizations
+      security: &ref_1
+        - accessToken: []
+  /organizations/{id}:
+    get:
+      operationId: OrganizationsController_findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationDto'
+      tags: *ref_0
+      security: *ref_1
+    patch:
+      operationId: OrganizationsController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationDto'
+      tags: *ref_0
+      security: *ref_1
+    delete:
+      operationId: OrganizationsController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationDto'
+      tags: *ref_0
+      security: *ref_1
+  /organizations/{id}/roles:
+    get:
+      operationId: OrganizationsController_findRoles
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedRoleDto
+                required:
+                  - results
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfRoleDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/RoleDto'
+      tags: *ref_0
+      security: *ref_1
+  /organizations/{organizationId}/search:
+    get:
+      operationId: OrganizationsController_search
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: query
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchDto'
+      tags: *ref_0
+      security: *ref_1
+  /organizations/{id}/leaseInvoices:
+    get:
+      operationId: OrganizationsController_findAllLeaseInvoices
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - required: false
+          name: page
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: skip
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: take
+          in: query
+          schema:
+            type: number
+        - required: false
+          name: sort
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - required: false
+          name: filter
+          in: query
+          schema:
+            type: object
+        - required: false
+          description: |-
+            For arbitrary filters that are not part of the schema.
+            Ex. `filterCustom: { isPaidLate: true }`
+          name: filterCustom
+          in: query
+          schema:
+            type: object
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                title: PaginatedLeaseInvoiceDto
+                required:
+                  - results
+                  - sum
+                  - aggregate
+                allOf:
+                  - $ref: '#/components/schemas/PaginatedMetaDto'
+                  - title: ArrayOfLeaseInvoiceDto
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceDto'
+                      sum:
+                        type: number
+                        nullable: true
+                      aggregate:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/LeaseInvoiceAggregateDto'
+      tags: *ref_0
+      security: *ref_1
+  /organizations/{id}/status-refresh:
+    post:
+      operationId: OrganizationsController_statusRefresh
+      summary: ''
+      description: Trigger a refresh of the subscription status of an organization.
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      tags: *ref_0
+      security: *ref_1
+  /organizations/{organizationId}/tenants:
+    post:
+      operationId: OrganizationsAdminController_createTenant
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantDto'
+      tags: &ref_2
+        - organizations
+      security: &ref_3
+        - accessToken: []
+  /organizations/{organizationId}/portfolios:
+    post:
+      operationId: OrganizationsAdminController_createPortfolio
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePortfolioDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioDto'
+      tags: *ref_2
+      security: *ref_3
+  /organizations/{organizationId}/properties:
+    post:
+      operationId: OrganizationsAdminController_createProperty
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePropertyDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedDto'
+      tags: *ref_2
+      security: *ref_3
+  /organizations/{organizationId}/units:
+    post:
+      operationId: OrganizationsAdminController_createUnit
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUnitDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedDto'
+      tags: *ref_2
+      security: *ref_3
+  /organizations/{organizationId}/leases:
+    post:
+      operationId: OrganizationsAdminController_createLease
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLeaseDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedDto'
+      tags: *ref_2
+      security: *ref_3
+  /organizations/{organizationId}/leaseInvoices:
+    post:
+      operationId: OrganizationsAdminController_createLeaseInvoice
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLeaseInvoiceDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedDto'
+      tags: *ref_2
+      security: *ref_3
+  /organizations/{organizationId}/lease/{id}/leaseInvoices:
+    post:
+      operationId: OrganizationsAdminController_createInvoices
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateManyLeaseInvoicesDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_2
+      security: *ref_3
+  /organizations/{organizationId}/expenses:
+    post:
+      operationId: OrganizationsAdminController_createExpense
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedDto'
+      tags: *ref_2
+      security: *ref_3
+  /organizations/{organizationId}/payouts:
+    post:
+      operationId: OrganizationsAdminController_createPayout
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePayoutDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedDto'
+      tags: *ref_2
+      security: *ref_3
+  /organizations/{organizationId}/leaseInvoices/{id}/send-invoice-email:
+    post:
+      operationId: OrganizationsAdminController_sendInvoiceEmail
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      tags: *ref_2
+      security: *ref_3
+  /organizations/{organizationId}/roles:
+    post:
+      operationId: RolesController_createOrgAdminRole
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleDto'
+      tags: &ref_4
+        - roles
+  /organizations/{organizationId}/portfolios/{portfolioId}/roles:
+    post:
+      operationId: RolesController_createPortfolioRole
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: portfolioId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleDto'
+      tags: *ref_4
+  /organizations/{organizationId}/tenants/{tenantId}/roles:
+    post:
+      operationId: RolesController_createTenantRole
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: tenantId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleDto'
+      tags: *ref_4
+  /organizations/{organizationId}/roles/{id}:
+    delete:
+      operationId: RolesController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_4
+  /organizations/{organizationId}/roles/{roleId}/send-invite:
+    post:
+      operationId: RolesController_sendInvite
+      parameters:
+        - name: roleId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_4
   /tenants:
     get:
       operationId: TenantsController_findAll
@@ -56,9 +700,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/TenantDto'
-      tags: &ref_0
+      tags: &ref_5
         - tenants
-      security: &ref_1
+      security: &ref_6
         - accessToken: []
   /tenants/{id}:
     get:
@@ -76,8 +720,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: *ref_0
-      security: *ref_1
+      tags: *ref_5
+      security: *ref_6
     patch:
       operationId: TenantsController_update
       parameters:
@@ -99,8 +743,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TenantDto'
-      tags: *ref_0
-      security: *ref_1
+      tags: *ref_5
+      security: *ref_6
     delete:
       operationId: TenantsController_remove
       parameters:
@@ -116,8 +760,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_0
-      security: *ref_1
+      tags: *ref_5
+      security: *ref_6
   /tenants/{id}/leases:
     get:
       operationId: TenantsController_findLeases
@@ -179,8 +823,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_0
-      security: *ref_1
+      tags: *ref_5
+      security: *ref_6
   /tenants/{id}/leaseInvoices:
     get:
       operationId: TenantsController_findInvoices
@@ -251,8 +895,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceAggregateDto'
-      tags: *ref_0
-      security: *ref_1
+      tags: *ref_5
+      security: *ref_6
   /tenants/{id}/roles:
     get:
       operationId: TenantsController_findRoles
@@ -314,258 +958,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_0
-      security: *ref_1
-  /organizations/{organizationId}/roles:
-    post:
-      operationId: RolesController_createOrgAdminRole
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateRoleDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RoleDto'
-      tags: &ref_2
-        - roles
-  /organizations/{organizationId}/portfolios/{portfolioId}/roles:
-    post:
-      operationId: RolesController_createPortfolioRole
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: portfolioId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateRoleDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RoleDto'
-      tags: *ref_2
-  /organizations/{organizationId}/tenants/{tenantId}/roles:
-    post:
-      operationId: RolesController_createTenantRole
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: tenantId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateRoleDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RoleDto'
-      tags: *ref_2
-  /organizations/{organizationId}/roles/{id}:
-    delete:
-      operationId: RolesController_remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_2
-  /organizations/{organizationId}/roles/{roleId}/send-invite:
-    post:
-      operationId: RolesController_sendInvite
-      parameters:
-        - name: roleId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_2
-  /leaseInvoices/myfatoorah-callback:
-    get:
-      operationId: LeaseInvoicesController_myfatoorahCallback
-      parameters:
-        - name: paymentId
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-      tags: &ref_3
-        - leaseInvoices
-      security: &ref_4
-        - accessToken: []
-  /leaseInvoices/{id}:
-    get:
-      operationId: LeaseInvoicesController_findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_3
-      security: *ref_4
-    patch:
-      operationId: LeaseInvoicesController_update
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateLeaseInvoiceDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdatedDto'
-      tags: *ref_3
-      security: *ref_4
-    delete:
-      operationId: LeaseInvoicesController_remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_3
-      security: *ref_4
-  /leaseInvoices/{id}/public:
-    get:
-      operationId: LeaseInvoicesController_findOnePublic
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LeaseInvoiceDto'
-      tags: *ref_3
-      security: *ref_4
-  /leaseInvoices/{id}/pay:
-    get:
-      operationId: LeaseInvoicesController_payInvoice
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-      tags: *ref_3
-      security: *ref_4
-  /leaseInvoices/{id}/messages:
-    get:
-      operationId: LeaseInvoicesController_findMessages
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MessageDto'
-      tags: *ref_3
-      security: *ref_4
+      tags: *ref_5
+      security: *ref_6
   /leases:
     get:
       operationId: LeasesController_findAll
@@ -622,9 +1016,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: &ref_5
+      tags: &ref_7
         - leases
-      security: &ref_6
+      security: &ref_8
         - accessToken: []
   /leases/{id}:
     get:
@@ -642,8 +1036,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_5
-      security: *ref_6
+      tags: *ref_7
+      security: *ref_8
     patch:
       operationId: LeasesController_update
       parameters:
@@ -665,8 +1059,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdatedDto'
-      tags: *ref_5
-      security: *ref_6
+      tags: *ref_7
+      security: *ref_8
     delete:
       operationId: LeasesController_remove
       parameters:
@@ -682,8 +1076,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_5
-      security: *ref_6
+      tags: *ref_7
+      security: *ref_8
   /leases/{id}/leaseInvoices:
     get:
       operationId: LeasesController_findInvoices
@@ -754,8 +1148,134 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceAggregateDto'
-      tags: *ref_5
-      security: *ref_6
+      tags: *ref_7
+      security: *ref_8
+  /leaseInvoices/myfatoorah-callback:
+    get:
+      operationId: LeaseInvoicesController_myfatoorahCallback
+      parameters:
+        - name: paymentId
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: &ref_9
+        - leaseInvoices
+      security: &ref_10
+        - accessToken: []
+  /leaseInvoices/{id}:
+    get:
+      operationId: LeaseInvoicesController_findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseInvoiceDto'
+      tags: *ref_9
+      security: *ref_10
+    patch:
+      operationId: LeaseInvoicesController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLeaseInvoiceDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatedDto'
+      tags: *ref_9
+      security: *ref_10
+    delete:
+      operationId: LeaseInvoicesController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_9
+      security: *ref_10
+  /leaseInvoices/{id}/public:
+    get:
+      operationId: LeaseInvoicesController_findOnePublic
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaseInvoiceDto'
+      tags: *ref_9
+      security: *ref_10
+  /leaseInvoices/{id}/pay:
+    get:
+      operationId: LeaseInvoicesController_payInvoice
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_9
+      security: *ref_10
+  /leaseInvoices/{id}/messages:
+    get:
+      operationId: LeaseInvoicesController_findMessages
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MessageDto'
+      tags: *ref_9
+      security: *ref_10
   /portfolios:
     get:
       operationId: PortfoliosController_findAll
@@ -812,9 +1332,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PortfolioDto'
-      tags: &ref_7
+      tags: &ref_11
         - portfolios
-      security: &ref_8
+      security: &ref_12
         - accessToken: []
   /portfolios/{id}:
     get:
@@ -832,8 +1352,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
     patch:
       operationId: PortfoliosController_update
       parameters:
@@ -855,8 +1375,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
     delete:
       operationId: PortfoliosController_remove
       parameters:
@@ -872,8 +1392,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
   /portfolios/{id}/roles:
     get:
       operationId: PortfoliosController_findRoles
@@ -935,8 +1455,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/RoleDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
   /portfolios/{id}/properties:
     get:
       operationId: PortfoliosController_findProperties
@@ -998,8 +1518,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
   /portfolios/{id}/units:
     get:
       operationId: PortfoliosController_findUnits
@@ -1061,8 +1581,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
   /portfolios/{id}/units-minimal:
     get:
       operationId: PortfoliosController_findUnitsMinimal
@@ -1124,8 +1644,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/UnitMinimalDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
   /portfolios/{id}/payouts:
     get:
       operationId: PortfoliosController_findPayouts
@@ -1187,8 +1707,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
   /portfolios/{id}/balance:
     get:
       operationId: PortfoliosController_getBalance
@@ -1205,8 +1725,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BalanceDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
   /portfolios/{id}/leaseInvoices:
     get:
       operationId: PortfoliosController_findAllLeaseInvoices
@@ -1277,8 +1797,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseInvoiceAggregateDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
   /portfolios/{id}/expenses:
     get:
       operationId: PortfoliosController_findAllExpenses
@@ -1352,8 +1872,8 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ExpenseDto'
-      tags: *ref_7
-      security: *ref_8
+      tags: *ref_11
+      security: *ref_12
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/income:
     get:
       operationId: PortfolioAggregateController_getIncomeByMonth
@@ -1395,9 +1915,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IncomeByMonthDto'
-      tags: &ref_9
+      tags: &ref_13
         - portfolios
-      security: &ref_10
+      security: &ref_14
         - accessToken: []
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses:
     get:
@@ -1444,8 +1964,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GroupByMonthDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_13
+      security: *ref_14
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses-by-category:
     get:
       operationId: PortfolioAggregateController_getExpensesByCategory
@@ -1491,8 +2011,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GroupByCategoryDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_13
+      security: *ref_14
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses-by-location:
     get:
       operationId: PortfolioAggregateController_getExpensesByLocation
@@ -1538,8 +2058,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GroupByLocationDto'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_13
+      security: *ref_14
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/occupancy:
     get:
       operationId: PortfolioAggregateController_getOccupancy
@@ -1583,8 +2103,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Occupancy'
-      tags: *ref_9
-      security: *ref_10
+      tags: *ref_13
+      security: *ref_14
   /properties:
     get:
       operationId: PropertiesController_findAll
@@ -1641,9 +2161,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PropertyDto'
-      tags: &ref_11
+      tags: &ref_15
         - properties
-      security: &ref_12
+      security: &ref_16
         - accessToken: []
   /properties/{id}:
     get:
@@ -1661,8 +2181,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyDto'
-      tags: *ref_11
-      security: *ref_12
+      tags: *ref_15
+      security: *ref_16
     patch:
       operationId: PropertiesController_update
       parameters:
@@ -1684,8 +2204,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdatedDto'
-      tags: *ref_11
-      security: *ref_12
+      tags: *ref_15
+      security: *ref_16
     delete:
       operationId: PropertiesController_remove
       parameters:
@@ -1701,8 +2221,8 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_11
-      security: *ref_12
+      tags: *ref_15
+      security: *ref_16
   /units/{id}:
     get:
       operationId: UnitsController_findOne
@@ -1719,9 +2239,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnitDto'
-      tags: &ref_13
+      tags: &ref_17
         - units
-      security: &ref_14
+      security: &ref_18
         - accessToken: []
     patch:
       operationId: UnitsController_update
@@ -1744,8 +2264,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdatedDto'
-      tags: *ref_13
-      security: *ref_14
+      tags: *ref_17
+      security: *ref_18
     delete:
       operationId: UnitsController_remove
       parameters:
@@ -1761,8 +2281,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeletedDto'
-      tags: *ref_13
-      security: *ref_14
+      tags: *ref_17
+      security: *ref_18
   /units/{id}/leases:
     get:
       operationId: UnitsController_findLeases
@@ -1824,8 +2344,68 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/LeaseDto'
-      tags: *ref_13
-      security: *ref_14
+      tags: *ref_17
+      security: *ref_18
+  /expenses/{id}:
+    get:
+      operationId: ExpensesController_findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDto'
+      tags: &ref_19
+        - expenses
+      security: &ref_20
+        - accessToken: []
+    patch:
+      operationId: ExpensesController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExpenseDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatedDto'
+      tags: *ref_19
+      security: *ref_20
+    delete:
+      operationId: ExpensesController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_19
+      security: *ref_20
   /payouts:
     get:
       operationId: PayoutsController_findAll
@@ -1882,9 +2462,9 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/PayoutDto'
-      tags: &ref_15
+      tags: &ref_21
         - payouts
-      security: &ref_16
+      security: &ref_22
         - accessToken: []
   /payouts/{id}:
     get:
@@ -1902,8 +2482,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayoutDto'
-      tags: *ref_15
-      security: *ref_16
+      tags: *ref_21
+      security: *ref_22
     delete:
       operationId: PayoutsController_remove
       parameters:
@@ -1919,586 +2499,6 @@ paths:
             application/json:
               schema:
                 type: string
-      tags: *ref_15
-      security: *ref_16
-  /expenses/{id}:
-    get:
-      operationId: ExpensesController_findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExpenseDto'
-      tags: &ref_17
-        - expenses
-      security: &ref_18
-        - accessToken: []
-    patch:
-      operationId: ExpensesController_update
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateExpenseDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdatedDto'
-      tags: *ref_17
-      security: *ref_18
-    delete:
-      operationId: ExpensesController_remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_17
-      security: *ref_18
-  /users/me:
-    get:
-      operationId: UsersController_findProfile
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidatedUserDto'
-        '404':
-          description: ''
-      tags:
-        - users
-      security:
-        - accessToken: []
-  /organizations:
-    post:
-      operationId: OrganizationsController_create
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateOrganizationDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationCreatedDto'
-      tags: &ref_19
-        - organizations
-      security: &ref_20
-        - accessToken: []
-  /organizations/{id}:
-    get:
-      operationId: OrganizationsController_findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_19
-      security: *ref_20
-    patch:
-      operationId: OrganizationsController_update
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateOrganizationDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_19
-      security: *ref_20
-    delete:
-      operationId: OrganizationsController_remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrganizationDto'
-      tags: *ref_19
-      security: *ref_20
-  /organizations/{id}/roles:
-    get:
-      operationId: OrganizationsController_findRoles
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-        - required: false
-          name: page
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
-        - required: false
-          name: filter
-          in: query
-          schema:
-            type: object
-        - required: false
-          description: |-
-            For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
-          name: filterCustom
-          in: query
-          schema:
-            type: object
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedRoleDto
-                required:
-                  - results
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfRoleDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/RoleDto'
-      tags: *ref_19
-      security: *ref_20
-  /organizations/{organizationId}/search:
-    get:
-      operationId: OrganizationsController_search
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: query
-          required: true
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SearchDto'
-      tags: *ref_19
-      security: *ref_20
-  /organizations/{id}/leaseInvoices:
-    get:
-      operationId: OrganizationsController_findAllLeaseInvoices
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-        - required: false
-          name: page
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: skip
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: take
-          in: query
-          schema:
-            type: number
-        - required: false
-          name: sort
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
-        - required: false
-          name: filter
-          in: query
-          schema:
-            type: object
-        - required: false
-          description: |-
-            For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
-          name: filterCustom
-          in: query
-          schema:
-            type: object
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                title: PaginatedLeaseInvoiceDto
-                required:
-                  - results
-                  - sum
-                  - aggregate
-                allOf:
-                  - $ref: '#/components/schemas/PaginatedMetaDto'
-                  - title: ArrayOfLeaseInvoiceDto
-                    properties:
-                      results:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/LeaseInvoiceDto'
-                      sum:
-                        type: number
-                        nullable: true
-                      aggregate:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/LeaseInvoiceAggregateDto'
-      tags: *ref_19
-      security: *ref_20
-  /organizations/{id}/status-refresh:
-    post:
-      operationId: OrganizationsController_statusRefresh
-      summary: ''
-      description: Trigger a refresh of the subscription status of an organization.
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '201':
-          description: ''
-      tags: *ref_19
-      security: *ref_20
-  /organizations/{organizationId}/tenants:
-    post:
-      operationId: OrganizationsAdminController_createTenant
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateTenantDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TenantDto'
-      tags: &ref_21
-        - organizations
-      security: &ref_22
-        - accessToken: []
-  /organizations/{organizationId}/portfolios:
-    post:
-      operationId: OrganizationsAdminController_createPortfolio
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreatePortfolioDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PortfolioDto'
-      tags: *ref_21
-      security: *ref_22
-  /organizations/{organizationId}/properties:
-    post:
-      operationId: OrganizationsAdminController_createProperty
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreatePropertyDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreatedDto'
-      tags: *ref_21
-      security: *ref_22
-  /organizations/{organizationId}/units:
-    post:
-      operationId: OrganizationsAdminController_createUnit
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateUnitDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreatedDto'
-      tags: *ref_21
-      security: *ref_22
-  /organizations/{organizationId}/leases:
-    post:
-      operationId: OrganizationsAdminController_createLease
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateLeaseDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreatedDto'
-      tags: *ref_21
-      security: *ref_22
-  /organizations/{organizationId}/leaseInvoices:
-    post:
-      operationId: OrganizationsAdminController_createLeaseInvoice
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateLeaseInvoiceDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreatedDto'
-      tags: *ref_21
-      security: *ref_22
-  /organizations/{organizationId}/lease/{id}/leaseInvoices:
-    post:
-      operationId: OrganizationsAdminController_createInvoices
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/CreateManyLeaseInvoicesDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *ref_21
-      security: *ref_22
-  /organizations/{organizationId}/expenses:
-    post:
-      operationId: OrganizationsAdminController_createExpense
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateExpenseDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreatedDto'
-      tags: *ref_21
-      security: *ref_22
-  /organizations/{organizationId}/payouts:
-    post:
-      operationId: OrganizationsAdminController_createPayout
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreatePayoutDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreatedDto'
-      tags: *ref_21
-      security: *ref_22
-  /organizations/{organizationId}/leaseInvoices/{id}/send-invoice-email:
-    post:
-      operationId: OrganizationsAdminController_sendInvoiceEmail
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: string
       tags: *ref_21
       security: *ref_22
   /organizations/{organizationId}/files:
@@ -2609,107 +2609,6 @@ paths:
                 type: string
       tags: *ref_23
       security: *ref_24
-  /organizations/{organizationId}/expense-categories:
-    post:
-      operationId: ExpenseCategoriesController_create
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateExpenseCategoryDto'
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: &ref_25
-        - expense-categories
-      security: &ref_26
-        - accessToken: []
-    get:
-      operationId: ExpenseCategoriesController_findAll
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_25
-      security: *ref_26
-    patch:
-      operationId: ExpenseCategoriesController_updateAll
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/UpdateExpenseCategoryTreeDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_25
-      security: *ref_26
-  /organizations/{organizationId}/expense-categories/{id}:
-    patch:
-      operationId: ExpenseCategoriesController_update
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateExpenseCategoryDto'
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExpenseCategoryDto'
-      tags: *ref_25
-      security: *ref_26
   /organizations/{organizationId}/maintenance-orders:
     post:
       operationId: MaintenanceOrdersController_create
@@ -2732,7 +2631,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreatedDto'
-      tags: &ref_27
+      tags: &ref_25
         - maintenance-orders
   /maintenance-orders:
     get:
@@ -2790,7 +2689,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/MaintenanceOrderDto'
-      tags: *ref_27
+      tags: *ref_25
   /maintenance-orders/{id}:
     get:
       operationId: MaintenanceOrdersController_findOne
@@ -2807,7 +2706,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MaintenanceOrderDto'
-      tags: *ref_27
+      tags: *ref_25
     patch:
       operationId: MaintenanceOrdersController_update
       parameters:
@@ -2829,7 +2728,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdatedDto'
-      tags: *ref_27
+      tags: *ref_25
     delete:
       operationId: MaintenanceOrdersController_remove
       parameters:
@@ -2841,7 +2740,108 @@ paths:
       responses:
         '200':
           description: ''
-      tags: *ref_27
+      tags: *ref_25
+  /organizations/{organizationId}/expense-categories:
+    post:
+      operationId: ExpenseCategoriesController_create
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseCategoryDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseCategoryDto'
+      tags: &ref_26
+        - expense-categories
+      security: &ref_27
+        - accessToken: []
+    get:
+      operationId: ExpenseCategoriesController_findAll
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseCategoryDto'
+      tags: *ref_26
+      security: *ref_27
+    patch:
+      operationId: ExpenseCategoriesController_updateAll
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateExpenseCategoryTreeDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpenseCategoryDto'
+      tags: *ref_26
+      security: *ref_27
+  /organizations/{organizationId}/expense-categories/{id}:
+    patch:
+      operationId: ExpenseCategoriesController_update
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExpenseCategoryDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseCategoryDto'
+      tags: *ref_26
+      security: *ref_27
 info:
   title: Aqaratech
   description: Aqaratech API
@@ -2856,107 +2856,205 @@ components:
       in: cookie
       name: accessToken
   schemas:
-    TenantDto:
+    ValidatedUserDto:
       type: object
       properties:
         id:
           type: string
           readOnly: true
+        roles:
+          type: array
+          items:
+            title: ValidatedRoleDto
+            allOf:
+              - $ref: '#/components/schemas/RoleDto'
+              - type: object
+                required:
+                  - organization
+                properties:
+                  organization:
+                    type: object
+                    required:
+                      - id
+                      - fullName
+                      - title
+                    properties:
+                      id:
+                        type: string
+                      fullName:
+                        type: string
+                      title:
+                        type: string
+                      isActive:
+                        type: boolean
+                  portfolio:
+                    type: object
+                    required:
+                      - title
+                    properties:
+                      title:
+                        type: string
+        email:
+          type: string
+        fullName:
+          type: string
+          nullable: true
+      required:
+        - id
+        - roles
+        - email
+        - fullName
+    CreateOrganizationDto:
+      type: object
+      properties:
         fullName:
           type: string
         label:
           type: string
           nullable: true
-        civilid:
+      required:
+        - fullName
+    DueDurationDto:
+      type: object
+      properties:
+        months:
+          type: number
+        days:
+          type: number
+      required:
+        - months
+        - days
+    OrganizationSettingsDto:
+      type: object
+      properties:
+        dueDuration:
+          $ref: '#/components/schemas/DueDurationDto'
+      required:
+        - dueDuration
+    OrganizationDto:
+      type: object
+      properties:
+        id:
+          type: string
+        fullName:
+          type: string
+        label:
           type: string
           nullable: true
-        phone:
-          type: string
-          nullable: true
-        dob:
-          format: date-time
-          type: string
-          nullable: true
-        nationality:
-          type: string
-          nullable: true
-        passportNum:
-          type: string
-          nullable: true
-        residencyEnd:
-          format: date-time
-          type: string
-          nullable: true
-        residencyNum:
-          type: string
-          nullable: true
-        organizationId:
-          type: string
+        isActive:
+          type: boolean
         title:
+          type: string
+        settings:
+          $ref: '#/components/schemas/OrganizationSettingsDto'
+      required:
+        - id
+        - fullName
+        - isActive
+        - title
+    OrganizationCreatedDto:
+      type: object
+      properties:
+        organization:
+          $ref: '#/components/schemas/OrganizationDto'
+        roleId:
+          type: string
+      required:
+        - organization
+        - roleId
+    UpdateOrganizationDto:
+      type: object
+      properties:
+        fullName:
+          type: string
+        label:
+          type: string
+          nullable: true
+        settings:
+          $ref: '#/components/schemas/OrganizationSettingsDto'
+      required:
+        - fullName
+    RoleTypeEnum:
+      type: string
+      enum:
+        - ORGADMIN
+        - PORTFOLIO
+        - TENANT
+    RoleDto:
+      type: object
+      properties:
+        roleType:
+          $ref: '#/components/schemas/RoleTypeEnum'
+        id:
           type: string
         createdAt:
           format: date-time
           type: string
-        updatedAt:
-          format: date-time
+        email:
           type: string
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+          nullable: true
+        tenantId:
+          type: string
+          nullable: true
       required:
+        - roleType
         - id
-        - fullName
-        - label
-        - civilid
-        - phone
-        - dob
-        - nationality
-        - passportNum
-        - residencyEnd
-        - residencyNum
-        - organizationId
-        - title
         - createdAt
-        - updatedAt
-    UpdateTenantDto:
-      type: object
-      properties:
-        fullName:
-          type: string
-        label:
-          type: string
-          nullable: true
-        civilid:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-        dob:
-          type: string
-          nullable: true
-        nationality:
-          type: string
-          nullable: true
-        passportNum:
-          type: string
-          nullable: true
-        residencyEnd:
-          type: string
-          nullable: true
-        residencyNum:
-          type: string
-          nullable: true
-    LeasePhaseEnum:
+        - email
+        - organizationId
+        - portfolioId
+        - tenantId
+    SearchableEntityEnum:
       type: string
       enum:
-        - FUTURE
-        - ONGOING
-        - COMPLETE
-    LeaseComputedDto:
+        - tenant
+        - portfolio
+        - property
+    HitDto:
       type: object
       properties:
-        phase:
-          $ref: '#/components/schemas/LeasePhaseEnum'
+        entity:
+          $ref: '#/components/schemas/SearchableEntityEnum'
+        id:
+          type: string
+        title:
+          type: string
+        titleHtml:
+          type: string
+        score:
+          type: number
+        hints:
+          type: object
       required:
-        - phase
+        - entity
+        - id
+        - title
+        - titleHtml
+        - score
+        - hints
+    SearchDto:
+      type: object
+      properties:
+        tenant:
+          type: array
+          items:
+            $ref: '#/components/schemas/HitDto'
+        portfolio:
+          type: array
+          items:
+            $ref: '#/components/schemas/HitDto'
+        property:
+          type: array
+          items:
+            $ref: '#/components/schemas/HitDto'
+      required:
+        - tenant
+        - portfolio
+        - property
     BreadcrumbDto:
       type: object
       properties:
@@ -2967,80 +3065,6 @@ components:
       required:
         - id
         - label
-    LeaseBreadcrumbsDto:
-      type: object
-      properties:
-        tenant:
-          $ref: '#/components/schemas/BreadcrumbDto'
-        portfolio:
-          $ref: '#/components/schemas/BreadcrumbDto'
-        property:
-          $ref: '#/components/schemas/BreadcrumbDto'
-        unit:
-          $ref: '#/components/schemas/BreadcrumbDto'
-      required:
-        - tenant
-        - portfolio
-        - property
-        - unit
-    LeaseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        computed:
-          $ref: '#/components/schemas/LeaseComputedDto'
-        breadcrumbs:
-          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        organizationId:
-          type: string
-        portfolioId:
-          type: string
-        tenantId:
-          type: string
-        unitId:
-          type: string
-        start:
-          format: date-time
-          type: string
-        end:
-          format: date-time
-          type: string
-        monthlyRent:
-          type: number
-        deposit:
-          type: number
-        canPay:
-          type: boolean
-        notify:
-          type: boolean
-        license:
-          type: string
-          nullable: true
-      required:
-        - id
-        - computed
-        - breadcrumbs
-        - createdAt
-        - updatedAt
-        - organizationId
-        - portfolioId
-        - tenantId
-        - unitId
-        - start
-        - end
-        - monthlyRent
-        - deposit
-        - canPay
-        - notify
-        - license
     LeaseInvoiceBreadcrumbsDto:
       type: object
       properties:
@@ -3116,106 +3140,115 @@ components:
         - isPaid
         - memo
         - mfPaymentId
-    RoleTypeEnum:
-      type: string
-      enum:
-        - ORGADMIN
-        - PORTFOLIO
-        - TENANT
-    RoleDto:
+    CreateTenantDto:
       type: object
       properties:
-        roleType:
-          $ref: '#/components/schemas/RoleTypeEnum'
-        id:
+        fullName:
           type: string
-        createdAt:
-          format: date-time
-          type: string
-        email:
-          type: string
-        organizationId:
-          type: string
-        portfolioId:
+        label:
           type: string
           nullable: true
-        tenantId:
+        civilid:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        dob:
+          type: string
+          nullable: true
+        nationality:
+          type: string
+          nullable: true
+        passportNum:
+          type: string
+          nullable: true
+        residencyEnd:
+          type: string
+          nullable: true
+        residencyNum:
           type: string
           nullable: true
       required:
-        - roleType
-        - id
-        - createdAt
-        - email
-        - organizationId
-        - portfolioId
-        - tenantId
-    CreateRoleDto:
-      type: object
-      properties:
-        email:
-          type: string
-      required:
-        - email
-    UpdateLeaseInvoiceDto:
-      type: object
-      properties:
-        amount:
-          type: number
-        isPaid:
-          type: boolean
-        postAt:
-          type: string
-        paidAt:
-          type: string
-          nullable: true
-        memo:
-          type: string
-          nullable: true
-    UpdatedDto:
+        - fullName
+    TenantDto:
       type: object
       properties:
         id:
           type: string
           readOnly: true
-      required:
-        - id
-    MessageDto:
-      type: object
-      properties:
-        id:
+        fullName:
           type: string
-        status:
-          type: string
-        recipients:
-          type: array
-          items:
-            type: string
-        receivedAt:
-          type: string
-      required:
-        - id
-        - status
-        - recipients
-        - receivedAt
-    UpdateLeaseDto:
-      type: object
-      properties:
-        start:
-          type: string
-        monthlyRent:
-          type: number
-        deposit:
-          type: number
-        end:
-          type: string
-        notify:
-          type: boolean
-        canPay:
-          type: boolean
-        license:
+        label:
           type: string
           nullable: true
+        civilid:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        dob:
+          format: date-time
+          type: string
+          nullable: true
+        nationality:
+          type: string
+          nullable: true
+        passportNum:
+          type: string
+          nullable: true
+        residencyEnd:
+          format: date-time
+          type: string
+          nullable: true
+        residencyNum:
+          type: string
+          nullable: true
+        organizationId:
+          type: string
+        title:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - id
+        - fullName
+        - label
+        - civilid
+        - phone
+        - dob
+        - nationality
+        - passportNum
+        - residencyEnd
+        - residencyNum
+        - organizationId
+        - title
+        - createdAt
+        - updatedAt
+    CreatePortfolioDto:
+      type: object
+      properties:
+        fullName:
+          type: string
+        label:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        civilid:
+          type: string
+          nullable: true
+        dob:
+          type: string
+          nullable: true
+      required:
+        - fullName
     PortfolioDto:
       type: object
       properties:
@@ -3258,6 +3291,391 @@ components:
         - title
         - createdAt
         - updatedAt
+    CreatePropertyDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        number:
+          type: string
+        area:
+          type: string
+        block:
+          type: string
+        street:
+          type: string
+        label:
+          type: string
+          nullable: true
+        avenue:
+          type: string
+          nullable: true
+        parcel:
+          type: string
+          nullable: true
+        paci:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
+        - number
+        - area
+        - block
+        - street
+    CreatedDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+      required:
+        - id
+    CreateUnitDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        propertyId:
+          type: string
+        unitNumber:
+          type: string
+        marketRent:
+          type: number
+          nullable: true
+        label:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        bed:
+          type: number
+          nullable: true
+        bath:
+          type: number
+          nullable: true
+        size:
+          type: number
+          nullable: true
+        floor:
+          type: number
+          nullable: true
+        usage:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
+        - propertyId
+        - unitNumber
+    CreateLeaseDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        unitId:
+          type: string
+        tenantId:
+          type: string
+        start:
+          type: string
+        monthlyRent:
+          type: number
+        deposit:
+          type: number
+        end:
+          type: string
+        notify:
+          type: boolean
+        canPay:
+          type: boolean
+        license:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
+        - unitId
+        - tenantId
+        - start
+        - monthlyRent
+        - deposit
+        - end
+        - notify
+        - canPay
+    CreateLeaseInvoiceDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        leaseId:
+          type: string
+        amount:
+          type: number
+        isPaid:
+          type: boolean
+        postAt:
+          type: string
+        paidAt:
+          type: string
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
+        - leaseId
+        - amount
+        - isPaid
+        - postAt
+    CreateManyLeaseInvoicesDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        amount:
+          type: number
+        isPaid:
+          type: boolean
+        postAt:
+          type: string
+        paidAt:
+          type: string
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
+        - amount
+        - isPaid
+        - postAt
+    CreateExpenseDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        propertyId:
+          type: string
+          nullable: true
+        unitId:
+          type: string
+          nullable: true
+        amount:
+          type: number
+        postAt:
+          type: string
+        categoryId:
+          type: string
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+        label:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
+        - propertyId
+        - unitId
+        - amount
+        - postAt
+    CreatePayoutDto:
+      type: object
+      properties:
+        portfolioId:
+          type: string
+        amount:
+          type: number
+        postAt:
+          type: string
+        memo:
+          type: string
+          nullable: true
+      required:
+        - portfolioId
+        - amount
+        - postAt
+    CreateRoleDto:
+      type: object
+      properties:
+        email:
+          type: string
+      required:
+        - email
+    UpdateTenantDto:
+      type: object
+      properties:
+        fullName:
+          type: string
+        label:
+          type: string
+          nullable: true
+        civilid:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        dob:
+          type: string
+          nullable: true
+        nationality:
+          type: string
+          nullable: true
+        passportNum:
+          type: string
+          nullable: true
+        residencyEnd:
+          type: string
+          nullable: true
+        residencyNum:
+          type: string
+          nullable: true
+    LeasePhaseEnum:
+      type: string
+      enum:
+        - FUTURE
+        - ONGOING
+        - COMPLETE
+    LeaseComputedDto:
+      type: object
+      properties:
+        phase:
+          $ref: '#/components/schemas/LeasePhaseEnum'
+      required:
+        - phase
+    LeaseBreadcrumbsDto:
+      type: object
+      properties:
+        tenant:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        portfolio:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        property:
+          $ref: '#/components/schemas/BreadcrumbDto'
+        unit:
+          $ref: '#/components/schemas/BreadcrumbDto'
+      required:
+        - tenant
+        - portfolio
+        - property
+        - unit
+    LeaseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        computed:
+          $ref: '#/components/schemas/LeaseComputedDto'
+        breadcrumbs:
+          $ref: '#/components/schemas/LeaseBreadcrumbsDto'
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        organizationId:
+          type: string
+        portfolioId:
+          type: string
+        tenantId:
+          type: string
+        unitId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        monthlyRent:
+          type: number
+        deposit:
+          type: number
+        canPay:
+          type: boolean
+        notify:
+          type: boolean
+        license:
+          type: string
+          nullable: true
+      required:
+        - id
+        - computed
+        - breadcrumbs
+        - createdAt
+        - updatedAt
+        - organizationId
+        - portfolioId
+        - tenantId
+        - unitId
+        - start
+        - end
+        - monthlyRent
+        - deposit
+        - canPay
+        - notify
+        - license
+    UpdateLeaseDto:
+      type: object
+      properties:
+        start:
+          type: string
+        monthlyRent:
+          type: number
+        deposit:
+          type: number
+        end:
+          type: string
+        notify:
+          type: boolean
+        canPay:
+          type: boolean
+        license:
+          type: string
+          nullable: true
+    UpdatedDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+      required:
+        - id
+    UpdateLeaseInvoiceDto:
+      type: object
+      properties:
+        amount:
+          type: number
+        isPaid:
+          type: boolean
+        postAt:
+          type: string
+        paidAt:
+          type: string
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+    MessageDto:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        recipients:
+          type: array
+          items:
+            type: string
+        receivedAt:
+          type: string
+      required:
+        - id
+        - status
+        - recipients
+        - receivedAt
     UpdatePortfolioDto:
       type: object
       properties:
@@ -3759,424 +4177,6 @@ components:
         label:
           type: string
           nullable: true
-    ValidatedUserDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-        roles:
-          type: array
-          items:
-            title: ValidatedRoleDto
-            allOf:
-              - $ref: '#/components/schemas/RoleDto'
-              - type: object
-                required:
-                  - organization
-                properties:
-                  organization:
-                    type: object
-                    required:
-                      - id
-                      - fullName
-                      - title
-                    properties:
-                      id:
-                        type: string
-                      fullName:
-                        type: string
-                      title:
-                        type: string
-                      isActive:
-                        type: boolean
-                  portfolio:
-                    type: object
-                    required:
-                      - title
-                    properties:
-                      title:
-                        type: string
-        email:
-          type: string
-        fullName:
-          type: string
-          nullable: true
-      required:
-        - id
-        - roles
-        - email
-        - fullName
-    CreateOrganizationDto:
-      type: object
-      properties:
-        fullName:
-          type: string
-        label:
-          type: string
-          nullable: true
-      required:
-        - fullName
-    DueDurationDto:
-      type: object
-      properties:
-        months:
-          type: number
-        days:
-          type: number
-      required:
-        - months
-        - days
-    OrganizationSettingsDto:
-      type: object
-      properties:
-        dueDuration:
-          $ref: '#/components/schemas/DueDurationDto'
-      required:
-        - dueDuration
-    OrganizationDto:
-      type: object
-      properties:
-        id:
-          type: string
-        fullName:
-          type: string
-        label:
-          type: string
-          nullable: true
-        isActive:
-          type: boolean
-        title:
-          type: string
-        settings:
-          $ref: '#/components/schemas/OrganizationSettingsDto'
-      required:
-        - id
-        - fullName
-        - isActive
-        - title
-    OrganizationCreatedDto:
-      type: object
-      properties:
-        organization:
-          $ref: '#/components/schemas/OrganizationDto'
-        roleId:
-          type: string
-      required:
-        - organization
-        - roleId
-    UpdateOrganizationDto:
-      type: object
-      properties:
-        fullName:
-          type: string
-        label:
-          type: string
-          nullable: true
-        settings:
-          $ref: '#/components/schemas/OrganizationSettingsDto'
-      required:
-        - fullName
-    SearchableEntityEnum:
-      type: string
-      enum:
-        - tenant
-        - portfolio
-        - property
-    HitDto:
-      type: object
-      properties:
-        entity:
-          $ref: '#/components/schemas/SearchableEntityEnum'
-        id:
-          type: string
-        title:
-          type: string
-        titleHtml:
-          type: string
-        score:
-          type: number
-        hints:
-          type: object
-      required:
-        - entity
-        - id
-        - title
-        - titleHtml
-        - score
-        - hints
-    SearchDto:
-      type: object
-      properties:
-        tenant:
-          type: array
-          items:
-            $ref: '#/components/schemas/HitDto'
-        portfolio:
-          type: array
-          items:
-            $ref: '#/components/schemas/HitDto'
-        property:
-          type: array
-          items:
-            $ref: '#/components/schemas/HitDto'
-      required:
-        - tenant
-        - portfolio
-        - property
-    CreateTenantDto:
-      type: object
-      properties:
-        fullName:
-          type: string
-        label:
-          type: string
-          nullable: true
-        civilid:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-        dob:
-          type: string
-          nullable: true
-        nationality:
-          type: string
-          nullable: true
-        passportNum:
-          type: string
-          nullable: true
-        residencyEnd:
-          type: string
-          nullable: true
-        residencyNum:
-          type: string
-          nullable: true
-      required:
-        - fullName
-    CreatePortfolioDto:
-      type: object
-      properties:
-        fullName:
-          type: string
-        label:
-          type: string
-          nullable: true
-        phone:
-          type: string
-          nullable: true
-        civilid:
-          type: string
-          nullable: true
-        dob:
-          type: string
-          nullable: true
-      required:
-        - fullName
-    CreatePropertyDto:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        number:
-          type: string
-        area:
-          type: string
-        block:
-          type: string
-        street:
-          type: string
-        label:
-          type: string
-          nullable: true
-        avenue:
-          type: string
-          nullable: true
-        parcel:
-          type: string
-          nullable: true
-        paci:
-          type: string
-          nullable: true
-      required:
-        - portfolioId
-        - number
-        - area
-        - block
-        - street
-    CreatedDto:
-      type: object
-      properties:
-        id:
-          type: string
-          readOnly: true
-      required:
-        - id
-    CreateUnitDto:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        propertyId:
-          type: string
-        unitNumber:
-          type: string
-        marketRent:
-          type: number
-          nullable: true
-        label:
-          type: string
-          nullable: true
-        type:
-          type: string
-          nullable: true
-        bed:
-          type: number
-          nullable: true
-        bath:
-          type: number
-          nullable: true
-        size:
-          type: number
-          nullable: true
-        floor:
-          type: number
-          nullable: true
-        usage:
-          type: string
-          nullable: true
-      required:
-        - portfolioId
-        - propertyId
-        - unitNumber
-    CreateLeaseDto:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        unitId:
-          type: string
-        tenantId:
-          type: string
-        start:
-          type: string
-        monthlyRent:
-          type: number
-        deposit:
-          type: number
-        end:
-          type: string
-        notify:
-          type: boolean
-        canPay:
-          type: boolean
-        license:
-          type: string
-          nullable: true
-      required:
-        - portfolioId
-        - unitId
-        - tenantId
-        - start
-        - monthlyRent
-        - deposit
-        - end
-        - notify
-        - canPay
-    CreateLeaseInvoiceDto:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        leaseId:
-          type: string
-        amount:
-          type: number
-        isPaid:
-          type: boolean
-        postAt:
-          type: string
-        paidAt:
-          type: string
-          nullable: true
-        memo:
-          type: string
-          nullable: true
-      required:
-        - portfolioId
-        - leaseId
-        - amount
-        - isPaid
-        - postAt
-    CreateManyLeaseInvoicesDto:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        amount:
-          type: number
-        isPaid:
-          type: boolean
-        postAt:
-          type: string
-        paidAt:
-          type: string
-          nullable: true
-        memo:
-          type: string
-          nullable: true
-      required:
-        - portfolioId
-        - amount
-        - isPaid
-        - postAt
-    CreateExpenseDto:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        propertyId:
-          type: string
-          nullable: true
-        unitId:
-          type: string
-          nullable: true
-        amount:
-          type: number
-        postAt:
-          type: string
-        categoryId:
-          type: string
-          nullable: true
-        memo:
-          type: string
-          nullable: true
-        label:
-          type: string
-          nullable: true
-      required:
-        - portfolioId
-        - propertyId
-        - unitId
-        - amount
-        - postAt
-    CreatePayoutDto:
-      type: object
-      properties:
-        portfolioId:
-          type: string
-        amount:
-          type: number
-        postAt:
-          type: string
-        memo:
-          type: string
-          nullable: true
-      required:
-        - portfolioId
-        - amount
-        - postAt
     FileRelationKeyEnum:
       type: string
       enum:
@@ -4215,53 +4215,6 @@ components:
       required:
         - id
         - size
-    CreateExpenseCategoryDto:
-      type: object
-      properties:
-        labelEn:
-          type: string
-        labelAr:
-          type: string
-          nullable: true
-        parentId:
-          type: string
-          nullable: true
-        isGroup:
-          type: boolean
-      required:
-        - labelEn
-        - isGroup
-    UpdateExpenseCategoryTreeDto:
-      type: object
-      properties:
-        id:
-          type: string
-        labelEn:
-          type: string
-        labelAr:
-          type: string
-          nullable: true
-        parentId:
-          type: string
-          nullable: true
-      required:
-        - id
-        - labelEn
-        - labelAr
-        - parentId
-    UpdateExpenseCategoryDto:
-      type: object
-      properties:
-        labelEn:
-          type: string
-        labelAr:
-          type: string
-          nullable: true
-        parentId:
-          type: string
-          nullable: true
-      required:
-        - labelEn
     MAINTENANCE_ORDER_STATUS_ENUM:
       type: string
       enum:
@@ -4380,6 +4333,53 @@ components:
         description:
           type: string
           nullable: true
+    CreateExpenseCategoryDto:
+      type: object
+      properties:
+        labelEn:
+          type: string
+        labelAr:
+          type: string
+          nullable: true
+        parentId:
+          type: string
+          nullable: true
+        isGroup:
+          type: boolean
+      required:
+        - labelEn
+        - isGroup
+    UpdateExpenseCategoryTreeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        labelEn:
+          type: string
+        labelAr:
+          type: string
+          nullable: true
+        parentId:
+          type: string
+          nullable: true
+      required:
+        - id
+        - labelEn
+        - labelAr
+        - parentId
+    UpdateExpenseCategoryDto:
+      type: object
+      properties:
+        labelEn:
+          type: string
+        labelAr:
+          type: string
+          nullable: true
+        parentId:
+          type: string
+          nullable: true
+      required:
+        - labelEn
     BreadcrumbsDto:
       type: object
       properties:
