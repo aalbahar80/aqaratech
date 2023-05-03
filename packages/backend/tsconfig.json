@@ -2,8 +2,8 @@
 	"$schema": "http://json.schemastore.org/tsconfig",
 	"extends": "@tsconfig/node18-strictest/tsconfig.json",
 	"compilerOptions": {
-		"target": "ES2022",
-		"lib": ["ES2022"],
+		"target": "es2022",
+		"lib": ["es2022"],
 		"declaration": false, // fix "A type annotation is necessary (swagger)"
 		"removeComments": true,
 		"emitDecoratorMetadata": true,
@@ -23,7 +23,7 @@
 		"noUnusedParameters": false,
 		"allowUnusedLabels": true,
 		"importsNotUsedAsValues": "remove",
-		"types": ["multer"],
+		"types": ["multer", "vitest/globals"],
 		// "verbatimModuleSyntax": true, // needs special consideration for nestjs
 		"paths": {
 			"src/*": ["./src/*"],

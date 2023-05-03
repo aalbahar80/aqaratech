@@ -256,6 +256,9 @@ importers:
       '@types/sinon':
         specifier: 10.0.14
         version: 10.0.14
+      '@vitest/coverage-c8':
+        specifier: 0.30.1
+        version: 0.30.1(vitest@0.30.1)
       dotenv:
         specifier: 16.0.3
         version: 16.0.3
@@ -292,6 +295,12 @@ importers:
       typescript:
         specifier: 5.0.4
         version: 5.0.4
+      unplugin-swc:
+        specifier: 1.3.2
+        version: 1.3.2(@swc/core@1.3.56)(webpack@5.81.0)
+      vitest:
+        specifier: 0.30.1
+        version: 0.30.1(@vitest/ui@0.30.1)
 
   packages/eslint-config-custom:
     devDependencies:
@@ -1924,6 +1933,10 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
+    dev: true
+
+  /@bcoe/v8-coverage@0.2.3:
+    resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
   /@casl/ability@6.5.0:
@@ -3980,6 +3993,10 @@ packages:
       ci-info: 3.8.0
     dev: true
 
+  /@types/istanbul-lib-coverage@2.0.4:
+    resolution: {integrity: sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g==}
+    dev: true
+
   /@types/js-yaml@4.0.5:
     resolution: {integrity: sha512-FhpRzf927MNQdRZP0J5DLIdTXhjLYzeUTmLAu69mnVksLH9CJY3IuSeEgbKUki7GQZm0WqDkGzyxju2EZGD2wA==}
     dev: true
@@ -4360,6 +4377,17 @@ packages:
     dependencies:
       '@ucast/core': 1.10.2
     dev: false
+
+  /@vitest/coverage-c8@0.30.1(vitest@0.30.1):
+    resolution: {integrity: sha512-/Wa3dtSuckpdngAmiCwowaEXXgJkqPrtfvrs9HTB9QoEfNbZWPu4E4cjEn4lJZb4qcGf4fxFtUA2f9DnDNAzBA==}
+    peerDependencies:
+      vitest: '>=0.30.0 <1'
+    dependencies:
+      c8: 7.13.0
+      picocolors: 1.0.0
+      std-env: 3.3.2
+      vitest: 0.30.1(@vitest/ui@0.30.1)
+    dev: true
 
   /@vitest/expect@0.30.1:
     resolution: {integrity: sha512-c3kbEtN8XXJSeN81iDGq29bUzSjQhjES2WR3aColsS4lPGbivwLtas4DNUe0jD9gg/FYGIteqOenfU95EFituw==}
@@ -4989,6 +5017,25 @@ packages:
   /bytes@3.1.2:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
     engines: {node: '>= 0.8'}
+
+  /c8@7.13.0:
+    resolution: {integrity: sha512-/NL4hQTv1gBL6J6ei80zu3IiTrmePDKXKXOTLpHvcIWZTVYQlDhVWjjWvkhICylE8EwwnMVzDZugCvdx0/DIIA==}
+    engines: {node: '>=10.12.0'}
+    hasBin: true
+    dependencies:
+      '@bcoe/v8-coverage': 0.2.3
+      '@istanbuljs/schema': 0.1.3
+      find-up: 5.0.0
+      foreground-child: 2.0.0
+      istanbul-lib-coverage: 3.2.0
+      istanbul-lib-report: 3.0.0
+      istanbul-reports: 3.1.5
+      rimraf: 3.0.2
+      test-exclude: 6.0.0
+      v8-to-istanbul: 9.1.0
+      yargs: 16.2.0
+      yargs-parser: 20.2.9
+    dev: true
 
   /cac@6.7.14:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
@@ -11707,6 +11754,43 @@ packages:
       - supports-color
     dev: true
 
+  /unplugin-swc@1.3.2(@swc/core@1.3.56)(webpack@5.81.0):
+    resolution: {integrity: sha512-x0+NTM4NR1jWpailVhK5sXO9svyL4iWZ+yah0WZ1G+SaI1hPysa95nVSzXqLP7y4+MKTO17wP+EVqjrREqgBsw==}
+    peerDependencies:
+      '@swc/core': ^1.2.108
+    dependencies:
+      '@swc/core': 1.3.56
+      unplugin: 0.6.3(webpack@5.81.0)
+    transitivePeerDependencies:
+      - esbuild
+      - rollup
+      - vite
+      - webpack
+    dev: true
+
+  /unplugin@0.6.3(webpack@5.81.0):
+    resolution: {integrity: sha512-CoW88FQfCW/yabVc4bLrjikN9HC8dEvMU4O7B6K2jsYMPK0l6iAnd9dpJwqGcmXJKRCU9vwSsy653qg+RK0G6A==}
+    peerDependencies:
+      esbuild: '>=0.13'
+      rollup: ^2.50.0
+      vite: ^2.3.0
+      webpack: 4 || 5
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      chokidar: 3.5.3
+      webpack: 5.81.0(@swc/core@1.3.56)
+      webpack-sources: 3.2.3
+      webpack-virtual-modules: 0.4.6
+    dev: true
+
   /unplugin@1.3.1:
     resolution: {integrity: sha512-h4uUTIvFBQRxUKS2Wjys6ivoeofGhxzTe2sRWlooyjHXVttcVfV/JiavNd3d4+jty0SVV0dxGw9AkY9MwiaCEw==}
     dependencies:
@@ -11756,6 +11840,15 @@ packages:
     hasBin: true
     dev: false
 
+  /v8-to-istanbul@9.1.0:
+    resolution: {integrity: sha512-6z3GW9x8G1gd+JIIgQQQxXuiJtCXeAjp6RaPEPLv62mH3iPHPxV6W3robxtCzNErRo6ZwTmzWhsbNvjyEBKzKA==}
+    engines: {node: '>=10.12.0'}
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.18
+      '@types/istanbul-lib-coverage': 2.0.4
+      convert-source-map: 1.9.0
+    dev: true
+
   /validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
     dependencies:
@@ -11802,39 +11895,6 @@ packages:
       es-module-lexer: 1.1.0
       magic-string: 0.27.0
       vite: 4.3.4(@types/node@18.16.3)
-    dev: true
-
-  /vite@4.3.3(@types/node@18.16.3):
-    resolution: {integrity: sha512-MwFlLBO4udZXd+VBcezo3u8mC77YQk+ik+fbc0GZWGgzfbPP+8Kf0fldhARqvSYmtIWoAJ5BXPClUbMTlqFxrA==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 18.16.3
-      esbuild: 0.17.18
-      postcss: 8.4.23
-      rollup: 3.21.0
-    optionalDependencies:
-      fsevents: 2.3.2
     dev: true
 
   /vite@4.3.4(@types/node@18.16.3):
@@ -11936,7 +11996,7 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.4.0
       tinypool: 0.4.0
-      vite: 4.3.3(@types/node@18.16.3)
+      vite: 4.3.4(@types/node@18.16.3)
       vite-node: 0.30.1(@types/node@18.16.3)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
@@ -11983,6 +12043,10 @@ packages:
   /webpack-sources@3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
+    dev: true
+
+  /webpack-virtual-modules@0.4.6:
+    resolution: {integrity: sha512-5tyDlKLqPfMqjT3Q9TAqf2YqjwmnUleZwzJi1A5qXnlBCdj2AtOJ6wAWdglTIDOPgOiOrXeBeFcsQ8+aGQ6QbA==}
     dev: true
 
   /webpack-virtual-modules@0.5.0:
