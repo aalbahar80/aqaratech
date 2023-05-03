@@ -198,6 +198,7 @@ export class OrganizationsAdminController {
 		return this.payoutsService.create({ createPayoutDto, organizationId });
 	}
 
+	// b-novu  FIX: update endpoint name or add new endpoint for SMS
 	@Post('leaseInvoices/:id/send-invoice-email')
 	@CheckAbilities({
 		action: Action.Update,

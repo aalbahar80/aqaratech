@@ -371,19 +371,21 @@ export class LeaseInvoicesService {
 		);
 
 		if (args.method === 'SMS' && phone) {
-			return await this.sendSMS({
+			await this.sendSMS({
 				invoice: args.invoice,
 				paymentLink,
 				method: args.method,
 				phone,
 			});
+			return [phone];
 		} else if (args.method === 'EMAIL' && emails.length) {
-			return await this.sendEmail({
+			await this.sendEmail({
 				invoice: args.invoice,
 				paymentLink,
 				method: args.method,
 				emails,
 			});
+			return emails;
 		} else {
 			throw new BadRequestException(
 				'No emails or phone number found for tenant',
