@@ -80,9 +80,9 @@
 				data.user,
 				$L,
 				$locale,
-				data.queryClient,
 				$page.route,
 				$page.url,
+				$page.params['portfolioId'] ?? $page.data.fallbackPortfolioId,
 			)}
 		/>
 

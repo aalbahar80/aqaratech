@@ -1,15 +1,11 @@
-import { page } from '$app/stores';
-import { get } from 'svelte/store';
 import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 
-import type { PaginatedPortfolioDto } from '$api/openapi';
 import type L from '$i18n/i18n-svelte';
 import type { Locales } from '$i18n/i18n-types';
 import type { NavigationItem } from '$lib/components/sidebar/types';
 import type { User } from '$lib/models/types/auth.type';
 import type { ReadableOf } from '$lib/utils/readable-of';
 import type { LoadEvent } from '@sveltejs/kit';
-import type { QueryClient } from '@tanstack/svelte-query';
 
 import { landingLinks } from '$lib/components/navbar/landing-links';
 import { getDashboardLinks } from '$lib/components/sidebar/dashboard-links';
@@ -37,9 +33,9 @@ export const getNavigationTree = (
 	user: User | undefined,
 	LL: ReadableOf<typeof L>,
 	locale: Locales,
-	queryClient: QueryClient,
 	route: LoadEvent['route'],
 	url: LoadEvent['url'],
+	orgPortfolioId: string | undefined,
 ): NavigationItem[] => {
 	const tree: NavigationItem[] = [];
 
@@ -131,22 +127,16 @@ export const getNavigationTree = (
 	const pageType = PageType.List;
 
 	if (user.role.roleType === 'ORGADMIN') {
-		const portfolios = queryClient.getQueryData<PaginatedPortfolioDto>([
-			'portfolios',
-		]);
-
-		// ivs TODO: pass in $page.params, rm get
-		const portfolioId =
-			get(page).params['portfolioId'] ?? portfolios?.results[0]?.id;
-
 		tree.splice(
 			0,
 			0,
 
-			...(portfolioId
+			// Only render dashboard links if portfolioId is present. Example, a new
+			// org has no portfolios yet, so avoid rendering dashboard links.
+			...(orgPortfolioId
 				? getDashboardLinks({
 						organizationId,
-						portfolioId,
+						portfolioId: orgPortfolioId,
 						lang: locale,
 						LL,
 				  })
