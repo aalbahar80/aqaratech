@@ -10,7 +10,7 @@
 		"prisma"
 	],
 	"scripts": {
-		"build": "task -t ./Taskfile.yml build",
+		"build": "task -v -t ./Taskfile.yml build",
 		"dev": "task -t ./Taskfile.yml start -w",
 		"dev:debug": "pnpm run dev --debug",
 		"dev:setup": "PUBLIC_IS_TESTING=0 pnpm run setup:all",
