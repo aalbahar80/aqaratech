@@ -39,10 +39,18 @@ tasks:
     cmds:
       - cp package.json dist/backend
 
-  start:
+  start:prod:
     dir: '{{.USER_WORKING_DIR}}'
     method: none
     deps:
       - build
     cmds:
       - node dist/backend/src/main.js
+
+  start:mock:
+    dir: '{{.USER_WORKING_DIR}}'
+    method: none
+    deps:
+      - build
+    cmds:
+      - pnpm vitest --run mocked.spec.ts
