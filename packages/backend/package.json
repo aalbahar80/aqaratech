@@ -10,14 +10,14 @@
 		"prisma"
 	],
 	"scripts": {
-		"build": "task build",
-		"dev": "task start -w",
+		"build": "task -t ./Taskfile.yml build",
+		"dev": "task -t ./Taskfile.yml start -w",
 		"dev:debug": "pnpm run dev --debug",
 		"dev:setup": "PUBLIC_IS_TESTING=0 pnpm run setup:all",
 		"setup:all": "pnpm run up-minio && pnpm run seed",
 		"seed": "./seed/create-test-db.sh && tsx ./seed/seed.ts",
 		"start:prod": "node dist/backend/src/main.js",
-		"preview": "task start",
+		"preview": "task -t ./Taskfile.yml start",
 		"preview:coverage": "nyc --reporter=lcov --reporter=text-summary pnpm run preview",
 		"format": "task --taskfile ../../Taskfile.yml format",
 		"lint": "task --taskfile ../../Taskfile.yml lint",
