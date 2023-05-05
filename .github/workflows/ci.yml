@@ -79,6 +79,10 @@ jobs:
           # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
           cache: 'pnpm'
 
+        # BUG: (workaround) Task cli not correctly installed through npm
+      - name: Install Task
+        uses: arduino/setup-task@v1
+
       - run: pnpm -F . -F @self/${{ matrix.package }}... install --frozen-lockfile
         env:
           PRISMA_GENERATE_SKIP_AUTOINSTALL: 1

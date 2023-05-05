@@ -10,8 +10,8 @@
 		"prisma"
 	],
 	"scripts": {
-		"build": "pnpm task -v -t ./Taskfile.yml build",
-		"dev": "task -t ./Taskfile.yml start -w",
+		"build": "task build",
+		"dev": "task start -w",
 		"dev:debug": "pnpm run dev --debug",
 		"dev:setup": "PUBLIC_IS_TESTING=0 pnpm run setup:all",
 		"setup:all": "pnpm run up-minio && pnpm run seed",
