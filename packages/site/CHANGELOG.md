@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.28.8
+
+### Patch Changes
+
+- 3a4f3f13c: fix safari bug redirect loop
+
 ## 2.28.7
 
 ### Patch Changes
