@@ -18,7 +18,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@aws-sdk/client-s3": "3.325.0",
+		"@aws-sdk/client-s3": "3.327.0",
 		"@faker-js/faker": "7.6.0",
 		"@playwright/test": "1.33.0",
 		"@prisma/client": "4.13.0",
@@ -41,7 +41,7 @@
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",
 		"typescript": "5.0.4",
-		"ufo": "1.1.1"
+		"ufo": "1.1.2"
 	},
 	"dependencies": {
 		"@types/qs": "6.9.7",
