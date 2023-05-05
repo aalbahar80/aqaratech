@@ -10,7 +10,7 @@ tasks:
     cmds:
       - rm -rf dist
 
-  dev:utils:
+  build:utils:
     dir: '{{.USER_WORKING_DIR}}'
     method: none
     deps:
@@ -20,11 +20,11 @@ tasks:
     cmds:
       - pnpm swc -d dist ../utils/src
 
-  dev:backend:
+  build:backend:
     dir: '{{.USER_WORKING_DIR}}'
     method: none
     deps:
-      - dev:utils
+      - build:utils
     sources:
       - src/**/*.ts
     cmds:
@@ -34,8 +34,8 @@ tasks:
     dir: '{{.USER_WORKING_DIR}}'
     method: none
     deps:
-      - dev:utils
-      - dev:backend
+      - build:utils
+      - build:backend
     cmds:
       - cp package.json dist/backend
 
