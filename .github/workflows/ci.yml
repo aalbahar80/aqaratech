@@ -84,7 +84,7 @@ jobs:
           PRISMA_GENERATE_SKIP_AUTOINSTALL: 1
           # Also need to remove postinstall script
 
-      - run: pnpm turbo run build -vvv --filter @self/${{ matrix.package }}
+      - run: pnpm run build -vvv --filter @self/${{ matrix.package }}
 
       - name: Install sentry-cli
         shell: bash
