@@ -23,11 +23,11 @@
       tier = {pkgs, ...}:
         pkgs.stdenv.mkDerivation rec {
           pname = "tier";
-          version = "0.10.0";
+          version = "0.11.0";
 
           src = pkgs.fetchurl {
             url = "https://github.com/tierrun/tier/releases/download/v${version}/tier_${version}_linux_amd64.tar.gz";
-            sha256 = "sha256-vH8+KCY9kZIYJYGuERyc7Dqe49kQb93O4HMACdCvluQ=";
+            sha256 = "sha256-cX7+Pjx5JOwA1dcgAMO+MU9CJ5woIKZYYV8nyfYXkas=";
           };
 
           # buildInputs = [pkgs.glibc];
