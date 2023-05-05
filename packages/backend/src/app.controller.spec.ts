@@ -17,12 +17,11 @@ describe('AppController', () => {
 	});
 
 	describe('root', () => {
-		it('should return "pass"', () => {
-			console.log({ AppController });
-			expect(1).toBe(1);
+		it('should be defined', () => {
+			expect(appController).toBeDefined();
 		});
 
-		it('should return "Hello World!"', () => {
+		it('should respond to a health check', () => {
 			expect(appController.getHealth()).toBe('ok');
 		});
 	});
