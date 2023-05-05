@@ -62,4 +62,5 @@ cd packages/site
 pnpm typesafe-i18n
 ```
 
-- updating sentry cli (`SENTRY_CLI_VERSOIN` in `.github/workflows/ci.yml`)
+- updating sentry cli (`SENTRY_CLI_VERSOIN` in [file](.github/workflows/ci.yml))
+- openapi-generator-cli version. [file](packages/backend/get-openapi.sh)

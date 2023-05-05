@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION="6.4.0"
+VERSION="6.5.0"
 JAR_FILE="openapi-generator-cli-$VERSION.jar"
 CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/openapi-generator"
 mkdir -p "$CACHE_DIR"
