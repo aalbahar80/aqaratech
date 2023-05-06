@@ -4,6 +4,6 @@ export interface SMSDirect {
 		phone: string;
 	};
 	payload: {
-		content: string;
+		link: string;
 	};
 }

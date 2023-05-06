@@ -83,7 +83,7 @@ describe('LeaseInvoicesService', () => {
 				phone: '1234567890',
 			},
 			payload: {
-				content: `Use the link to view and pay your rent online: ${process.env.PUBLIC_API_URL}/leaseInvoices/1/pay`,
+				link: `${process.env.PUBLIC_API_URL}/leaseInvoices/1/pay`,
 			},
 		};
 

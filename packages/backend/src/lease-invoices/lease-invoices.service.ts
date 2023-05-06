@@ -400,7 +400,7 @@ export class LeaseInvoicesService {
 				phone: payload.phone,
 			},
 			payload: {
-				content: `Use the link to view and pay your rent online: ${payload.paymentLink}`,
+				link: payload.paymentLink,
 			},
 		});
 	}

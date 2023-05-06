@@ -21,7 +21,7 @@ export class NovuService {
 				phone: '+965' + template.to.phone,
 			},
 			payload: {
-				content: template.payload.content,
+				link: template.payload.link,
 			},
 		});
 	}
