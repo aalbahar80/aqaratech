@@ -5,6 +5,14 @@ export default defineConfig({
 	test: {
 		globals: true,
 		root: './',
+		exclude: [
+			'mocked.spec.ts',
+			'node_modules',
+			'dist',
+			'.idea',
+			'.git',
+			'.cache',
+		],
 		// alias: {
 		// 	src: path.resolve(__dirname, 'src'),
 		// 	'@self/utils': path.resolve(__dirname, '../utils/src'),

@@ -53,4 +53,4 @@ tasks:
     deps:
       - build
     cmds:
-      - pnpm vitest --run mocked.spec.ts
+      - pnpm vitest --run mocked.spec.ts -c vitest.config.mocked.ts
