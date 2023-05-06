@@ -4,6 +4,8 @@ version: '3'
 
 interval: '100ms'
 
+dotenv: ['../../.env']
+
 tasks:
   clean:
     dir: '{{.USER_WORKING_DIR}}'
@@ -54,3 +56,11 @@ tasks:
       - build
     cmds:
       - pnpm vitest --run mocked.spec.ts -c vitest.config.mocked.ts
+
+  start:
+    # Detect start mode based on PUBLIC_IS_TESTING from .env
+    dir: '{{.USER_WORKING_DIR}}'
+    deps:
+      - build
+    cmds:
+      - task: '{{if eq .PUBLIC_IS_TESTING "1"}}start:mock{{else}}start:prod{{end}}'
