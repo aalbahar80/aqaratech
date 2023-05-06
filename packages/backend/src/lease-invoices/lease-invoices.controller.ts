@@ -160,7 +160,10 @@ export class LeaseInvoicesController {
 		@Param('id') id: string,
 		@User() user: IUser,
 	): Promise<MessageDto[]> {
-		const messages = await this.leaseInvoicesService.findMessages({ id, user });
+		const messages = await this.leaseInvoicesService.findMessagesById({
+			id,
+			user,
+		});
 
 		return messages;
 	}

@@ -496,7 +496,7 @@ export class LeaseInvoicesService {
 		);
 	}
 
-	async findMessages({ id, user }: { id: string; user: IUser }) {
+	async findMessagesById({ id, user }: { id: string; user: IUser }) {
 		// authz check
 		await this.prisma.c.leaseInvoice.findFirstOrThrow({
 			where: {
