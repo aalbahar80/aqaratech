@@ -15,7 +15,6 @@ export class NovuService {
 	readonly novu: Novu;
 
 	async sendSMS(template: SMSDirect) {
-		throw new Error('TODO: implementing mock');
 		await this.novu.trigger('sms-direct', {
 			to: {
 				subscriberId: template.to.subscriberId,
