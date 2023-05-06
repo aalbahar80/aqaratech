@@ -1,5 +1,3 @@
-import '@sentry/tracing';
-
 import { bootstrap } from './create-app';
 
 async function main() {
