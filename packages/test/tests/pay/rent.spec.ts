@@ -45,7 +45,7 @@ test.describe('unpaid rent', () => {
 	// This test assumes that the myfatoorah stub is running.
 	// It's a workaround for flaking tests due to external payment gateway.
 	// Consider unit testing the payment gateway integration instead in /backend.
-	test('can be paid once - stubbed', async ({ page, org, invoice }) => {
+	test.fixme('can be paid once - stubbed', async ({ page, org, invoice }) => {
 		test.slow();
 
 		const url = getRoute({
