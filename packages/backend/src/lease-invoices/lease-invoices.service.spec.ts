@@ -38,7 +38,8 @@ describe('LeaseInvoicesService', () => {
 				}
 
 				if (typeof token === 'function') {
-					const mock = vi.fn(token);
+					// @ts-expect-error test
+					const mock = vi.fn().mockImplementation(token);
 					return mock;
 				}
 
