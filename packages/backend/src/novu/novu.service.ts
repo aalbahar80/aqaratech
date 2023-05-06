@@ -18,7 +18,7 @@ export class NovuService {
 		await this.novu.trigger('sms-direct', {
 			to: {
 				subscriberId: template.to.subscriberId,
-				phone: template.to.phone,
+				phone: '+965' + template.to.phone,
 			},
 			payload: {
 				content: template.payload.content,

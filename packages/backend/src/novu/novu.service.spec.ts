@@ -79,4 +79,21 @@ describe('Novu', () => {
 		expect(novu.trigger).toHaveBeenCalledTimes(1);
 		expect(novu.trigger).toHaveBeenCalledWith('sms-direct', expect.anything());
 	});
+
+	it('should be called with the correct country code', async () => {
+		await invoiceService.notify({
+			method: 'SMS',
+			invoice,
+		});
+
+		expect(novu.trigger).toHaveBeenCalledTimes(1);
+		expect(novu.trigger).toHaveBeenCalledWith(
+			expect.anything(),
+			expect.objectContaining({
+				to: expect.objectContaining({
+					phone: expect.stringMatching(/^\+965/),
+				}),
+			}),
+		);
+	});
 });
