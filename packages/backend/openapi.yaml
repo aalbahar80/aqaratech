@@ -495,7 +495,7 @@ paths:
                 $ref: '#/components/schemas/CreatedDto'
       tags: *ref_2
       security: *ref_3
-  /organizations/{organizationId}/leaseInvoices/{id}/send-invoice-email:
+  /organizations/{organizationId}/leaseInvoices/{id}/notify:
     post:
       operationId: OrganizationsAdminController_sendInvoiceEmail
       parameters:

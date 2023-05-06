@@ -325,7 +325,7 @@ export class LeaseInvoicesService {
 		return link;
 	}
 
-	async sendInvoice({ id, user }: { id: string; user: IUser }) {
+	async notifyById({ id, user }: { id: string; user: IUser }) {
 		const invoice = await this.prisma.c.leaseInvoice.findFirstOrThrow({
 			where: {
 				AND: [{ id }, accessibleBy(user.ability, Action.Update).LeaseInvoice],

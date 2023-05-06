@@ -1061,7 +1061,7 @@ export class OrganizationsApi extends runtime.BaseAPI {
 
 		const response = await this.request(
 			{
-				path: `/organizations/{organizationId}/leaseInvoices/{id}/send-invoice-email`
+				path: `/organizations/{organizationId}/leaseInvoices/{id}/notify`
 					.replace(
 						`{${'id'}}`,
 						encodeURIComponent(String(requestParameters.id)),
