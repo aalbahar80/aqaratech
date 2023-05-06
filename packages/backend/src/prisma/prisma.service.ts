@@ -14,7 +14,7 @@ export class PrismaService implements OnModuleInit {
 
 	// eslint-disable-next-line @typescript-eslint/require-await
 	async enableShutdownHooks(app: INestApplication) {
-		// eslint-disable-next-line @typescript-eslint/no-misused-promises, @typescript-eslint/no-unnecessary-condition
+		// eslint-disable-next-line @typescript-eslint/no-misused-promises
 		this.c?.$on('beforeExit', async () => {
 			await app.close();
 		});

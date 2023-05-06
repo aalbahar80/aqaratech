@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable security/detect-possible-timing-attacks */
 import { Test } from '@nestjs/testing';
 import { Novu } from '@novu/node';
 import { Mocked } from 'vitest';

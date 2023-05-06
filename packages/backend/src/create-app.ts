@@ -84,7 +84,6 @@ process.on('unhandledRejection', (error) => {
 	console.error('Unhandled Rejection caught. Logging and exiting.');
 	console.error(error);
 
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	if (Logger) {
 		Logger.error(error); // pretty print stack trace
 	}

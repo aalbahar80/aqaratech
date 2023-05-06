@@ -17,5 +17,13 @@ module.exports = {
 				'@typescript-eslint/no-extraneous-class': 'off',
 			},
 		},
+		{
+			files: ['*.spec.ts', '*.test.ts'],
+			rules: {
+				'@typescript-eslint/no-unsafe-member-access': 'off',
+				'@typescript-eslint/restrict-template-expressions': 'off',
+				'security/detect-possible-timing-attacks': 'off',
+			},
+		},
 	],
 };

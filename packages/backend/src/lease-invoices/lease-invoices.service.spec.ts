@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable security/detect-possible-timing-attacks */
 import { Test } from '@nestjs/testing';
 
 import { EnvModule } from 'src/env/env.module';
