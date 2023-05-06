@@ -504,12 +504,14 @@ export class LeaseInvoicesService {
 			},
 		});
 
-		const messages = await this.postmarkService.getSentEmails({
-			tag: MESSAGE_TAG.INVOICE_REMINDER,
-			leaseInvoiceId: id,
-		});
+		// TODO: implement SMS history once there is a way to get messages by invoiceId
 
-		return messages;
+		// const messages = await this.postmarkService.getSentEmails({
+		// 	tag: MESSAGE_TAG.INVOICE_REMINDER,
+		// 	leaseInvoiceId: id,
+		// });
+
+		return [];
 	}
 
 	// ::: HELPERS :::
