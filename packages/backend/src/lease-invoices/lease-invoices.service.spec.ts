@@ -87,6 +87,6 @@ describe('LeaseInvoicesService', () => {
 			},
 		};
 
-		expect(spy).toHaveBeenCalledWith(template);
+		expect(spy).toHaveBeenCalledWith('INVOICE_REMINDER', template);
 	});
 });

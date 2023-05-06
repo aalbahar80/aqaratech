@@ -77,7 +77,10 @@ describe('Novu', () => {
 		});
 
 		expect(novu.trigger).toHaveBeenCalledTimes(1);
-		expect(novu.trigger).toHaveBeenCalledWith('sms-direct', expect.anything());
+		expect(novu.trigger).toHaveBeenCalledWith(
+			'INVOICE_REMINDER',
+			expect.anything(),
+		);
 	});
 
 	it('should be called with the correct country code', async () => {
