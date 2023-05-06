@@ -2,7 +2,7 @@
 ---
 version: '3'
 
-interval: '100ms'
+interval: '300ms'
 
 dotenv: ['../../.env']
 
@@ -15,8 +15,6 @@ tasks:
   build:utils:
     dir: '{{.USER_WORKING_DIR}}'
     method: none
-    deps:
-      - clean
     sources:
       - ../utils/src/**/*.ts
     cmds:
@@ -25,21 +23,19 @@ tasks:
   build:backend:
     dir: '{{.USER_WORKING_DIR}}'
     method: none
-    deps:
-      - build:utils
     sources:
       - src/**/*.ts
     cmds:
       - pnpm swc -d dist/backend/src src
+      - cp package.json dist/backend
 
   build:
     dir: '{{.USER_WORKING_DIR}}'
     method: none
-    deps:
-      - build:utils
-      - build:backend
     cmds:
-      - cp package.json dist/backend
+      - task: clean
+      - task: build:utils
+      - task: build:backend
 
   start:prod:
     dir: '{{.USER_WORKING_DIR}}'
@@ -60,7 +56,5 @@ tasks:
   start:
     # Detect start mode based on PUBLIC_IS_TESTING from .env
     dir: '{{.USER_WORKING_DIR}}'
-    deps:
-      - build
     cmds:
       - task: '{{if eq .PUBLIC_IS_TESTING "1"}}start:mock{{else}}start:prod{{end}}'
