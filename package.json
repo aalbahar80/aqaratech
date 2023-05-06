@@ -18,7 +18,7 @@
 		"check:all": "turbo run check --continue --no-daemon",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
 		"ci:publish": "changeset tag",
-		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate && ./scripts/add-nocheck.sh && tsx ./scripts/rm-unused-jsdoc.ts && prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'",
+		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate && ./scripts/add-nocheck.sh && prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'",
 		"api:generate:all": "turbo run api:generate --no-cache --no-daemon",
 		"seed": "pnpm -F @self/backend exec prisma migrate reset --force",
 		"precompute": "rm packages/site/.eslintcache; pnpm -F @self/backend api:document && TIMING=1 turbo run format check lint build test --continue --no-daemon"
