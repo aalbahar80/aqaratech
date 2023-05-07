@@ -161,34 +161,6 @@ describe('Invoice reminders - data', () => {
 		service = moduleRef.get(LeaseInvoicesService);
 	});
 
-	it('should not notify if invoice is already paid', async () => {
-		await prisma.lease.create({
-			data: {
-				id: '1',
-				notify: true,
-				...SAMPLE.lease,
-			},
-		});
-
-		await prisma.leaseInvoice.createMany({
-			data: [
-				{
-					...SAMPLE.leaseInvoice,
-					id: '1',
-					leaseId: '1',
-					isPaid: true,
-					postAt: new Date(),
-				},
-			],
-		});
-
-		const spy = vi.spyOn(service, 'notify');
-
-		await service.sendReminders();
-
-		expect(spy).not.toHaveBeenCalled();
-	});
-
 	it('should notify unpaid invoices', async () => {
 		await prisma.lease.create({
 			data: {
@@ -238,5 +210,145 @@ describe('Invoice reminders - data', () => {
 				}),
 			}),
 		);
+	});
+
+	it('should not notify if invoice is already paid', async () => {
+		await prisma.lease.create({
+			data: {
+				id: '1',
+				notify: true,
+				...SAMPLE.lease,
+			},
+		});
+
+		await prisma.leaseInvoice.createMany({
+			data: [
+				{
+					...SAMPLE.leaseInvoice,
+					id: '1',
+					leaseId: '1',
+					isPaid: true,
+					postAt: new Date(),
+				},
+			],
+		});
+
+		const spy = vi.spyOn(service, 'notify');
+
+		await service.sendReminders();
+
+		expect(spy).not.toHaveBeenCalled();
+	});
+
+	it('should notify if lease is set to notify', async () => {
+		await prisma.lease.create({
+			data: {
+				id: '1',
+				notify: true,
+				...SAMPLE.lease,
+			},
+		});
+
+		await prisma.leaseInvoice.createMany({
+			data: [
+				{
+					...SAMPLE.leaseInvoice,
+					id: '1',
+					leaseId: '1',
+					isPaid: false,
+					postAt: new Date(),
+				},
+			],
+		});
+
+		const spy = vi.spyOn(service, 'notify');
+
+		await service.sendReminders();
+
+		expect(spy).toHaveBeenCalled();
+	});
+
+	it('should not notify if lease is not set to notify', async () => {
+		await prisma.lease.create({
+			data: {
+				id: '1',
+				notify: false,
+				...SAMPLE.lease,
+			},
+		});
+
+		await prisma.leaseInvoice.createMany({
+			data: [
+				{
+					...SAMPLE.leaseInvoice,
+					id: '1',
+					leaseId: '1',
+					isPaid: false,
+					postAt: new Date(),
+				},
+			],
+		});
+
+		const spy = vi.spyOn(service, 'notify');
+
+		await service.sendReminders();
+
+		expect(spy).not.toHaveBeenCalled();
+	});
+
+	it('should not notify future invoices', async () => {
+		await prisma.lease.create({
+			data: {
+				id: '1',
+				notify: true,
+				...SAMPLE.lease,
+			},
+		});
+
+		await prisma.leaseInvoice.createMany({
+			data: [
+				{
+					...SAMPLE.leaseInvoice,
+					id: '1',
+					leaseId: '1',
+					isPaid: false,
+					postAt: new Date(Date.now() + 86400000),
+				},
+			],
+		});
+
+		const spy = vi.spyOn(service, 'notify');
+
+		await service.sendReminders();
+
+		expect(spy).not.toHaveBeenCalled();
+	});
+
+	it('should not notify if invoice postDate is not this month', async () => {
+		await prisma.lease.create({
+			data: {
+				id: '1',
+				notify: true,
+				...SAMPLE.lease,
+			},
+		});
+
+		await prisma.leaseInvoice.createMany({
+			data: [
+				{
+					...SAMPLE.leaseInvoice,
+					id: '1',
+					leaseId: '1',
+					isPaid: false,
+					postAt: new Date(Date.now() - 86400000 * 35),
+				},
+			],
+		});
+
+		const spy = vi.spyOn(service, 'notify');
+
+		await service.sendReminders();
+
+		expect(spy).not.toHaveBeenCalled();
 	});
 });
