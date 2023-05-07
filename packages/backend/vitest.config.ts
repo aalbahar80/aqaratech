@@ -7,6 +7,8 @@ export default defineConfig({
 		mockReset: true,
 		clearMocks: true,
 		root: './',
+		threads: false, // incompatible with DB
+		setupFiles: ['test/util/setup.ts'],
 		exclude: [
 			'mocked.spec.ts',
 			'node_modules',
