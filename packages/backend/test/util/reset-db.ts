@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 
 export default async () => {
 	await prisma.$transaction([
+		prisma.$executeRaw`SET session_replication_role = 'replica';`,
 		prisma.user.deleteMany(),
 		prisma.role.deleteMany(),
 		prisma.organization.deleteMany(),

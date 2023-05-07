@@ -2,8 +2,10 @@ import { Test } from '@nestjs/testing';
 
 import { EnvModule } from 'src/env/env.module';
 import { NovuService } from 'src/novu/novu.service';
+import { PrismaService, createPrismaClient } from 'src/prisma/prisma.service';
 import prismaService from 'src/test/__mocks__/prisma';
 import { tokenMocker } from 'test/util';
+import prisma from 'test/util/prisma';
 
 import { LeaseInvoicesService } from './lease-invoices.service';
 
@@ -131,8 +133,103 @@ describe('Invoice reminders', () => {
 
 		expect(spy).toHaveBeenCalledTimes(2);
 	});
+});
 
-	it.todo('should not notify if invoice is already paid', async () => {
-		// add invoices where isPaid is true
+describe('Invoice reminders - data', () => {
+	let service: LeaseInvoicesService;
+
+	beforeEach(async () => {
+		// @ts-expect-error vitest
+		import.meta.env.PAUSE_AUTO_INVOICE_REMINDERS = '0';
+
+		const moduleRef = await Test.createTestingModule({
+			providers: [LeaseInvoicesService],
+			imports: [EnvModule],
+		})
+			.useMocker((token) => {
+				// use the real PrismaService (we want to test it)
+				if (token === PrismaService) {
+					return {
+						c: createPrismaClient(),
+					};
+				}
+				return tokenMocker(token);
+			})
+			.compile();
+
+		service = moduleRef.get(LeaseInvoicesService);
+	});
+
+	it('should not notify if invoice is already paid', async () => {
+		const invoices = await prisma.leaseInvoice.createMany({
+			data: [
+				{
+					amount: 1,
+					isPaid: false,
+					postAt: new Date(),
+					leaseId: '1',
+					portfolioId: '1',
+					organizationId: '1',
+				},
+			],
+		});
+
+		console.log({ invoices });
+
+		const spy = vi.spyOn(service, 'notify');
+
+		await service.sendReminders();
+
+		expect(spy).not.toHaveBeenCalled();
+	});
+
+	it('should notify unpaid invoices', async () => {
+		await prisma.tenant.create({
+			data: {
+				id: '1',
+				organizationId: '1',
+			},
+		});
+
+		await prisma.lease.create({
+			data: {
+				id: '1',
+				notify: true,
+				start: new Date(),
+				end: new Date(),
+				monthlyRent: 1,
+				organizationId: '1',
+				portfolioId: '1',
+				unitId: '1',
+				tenantId: '1',
+			},
+		});
+
+		await prisma.leaseInvoice.createMany({
+			data: [
+				{
+					amount: 1,
+					isPaid: false,
+					postAt: new Date(),
+					leaseId: '1',
+					portfolioId: '1',
+					organizationId: '1',
+				},
+				{
+					amount: 1,
+					isPaid: false,
+					postAt: new Date(),
+					leaseId: '1',
+					portfolioId: '1',
+					organizationId: '1',
+				},
+			],
+		});
+
+		const spy = vi.spyOn(service, 'notify');
+
+		await service.sendReminders();
+
+		expect(spy).toHaveBeenCalledTimes(2);
 	});
 });

@@ -21,7 +21,7 @@ export class PrismaService implements OnModuleInit {
 	}
 }
 
-const createPrismaClient = () => {
+export const createPrismaClient = () => {
 	const client = new PrismaClient({
 		// Consider using built-in debug mode
 		// Info: https://www.prisma.io/docs/concepts/components/prisma-client/debugging
