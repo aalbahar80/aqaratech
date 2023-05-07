@@ -6,6 +6,7 @@ import { PrismaService, createPrismaClient } from 'src/prisma/prisma.service';
 import prismaService from 'src/test/__mocks__/prisma';
 import { tokenMocker } from 'test/util';
 import prisma from 'test/util/prisma';
+import { SAMPLE } from 'test/util/sample';
 
 import { LeaseInvoicesService } from './lease-invoices.service';
 
@@ -161,20 +162,25 @@ describe('Invoice reminders - data', () => {
 	});
 
 	it('should not notify if invoice is already paid', async () => {
-		const invoices = await prisma.leaseInvoice.createMany({
+		await prisma.lease.create({
+			data: {
+				id: '1',
+				notify: true,
+				...SAMPLE.lease,
+			},
+		});
+
+		await prisma.leaseInvoice.createMany({
 			data: [
 				{
-					amount: 1,
-					isPaid: false,
-					postAt: new Date(),
+					...SAMPLE.leaseInvoice,
+					id: '1',
 					leaseId: '1',
-					portfolioId: '1',
-					organizationId: '1',
+					isPaid: true,
+					postAt: new Date(),
 				},
 			],
 		});
-
-		console.log({ invoices });
 
 		const spy = vi.spyOn(service, 'notify');
 
@@ -184,44 +190,29 @@ describe('Invoice reminders - data', () => {
 	});
 
 	it('should notify unpaid invoices', async () => {
-		await prisma.tenant.create({
-			data: {
-				id: '1',
-				organizationId: '1',
-			},
-		});
-
 		await prisma.lease.create({
 			data: {
 				id: '1',
 				notify: true,
-				start: new Date(),
-				end: new Date(),
-				monthlyRent: 1,
-				organizationId: '1',
-				portfolioId: '1',
-				unitId: '1',
-				tenantId: '1',
+				...SAMPLE.lease,
 			},
 		});
 
 		await prisma.leaseInvoice.createMany({
 			data: [
 				{
-					amount: 1,
+					...SAMPLE.leaseInvoice,
+					id: '1',
+					leaseId: '1',
 					isPaid: false,
 					postAt: new Date(),
-					leaseId: '1',
-					portfolioId: '1',
-					organizationId: '1',
 				},
 				{
-					amount: 1,
+					...SAMPLE.leaseInvoice,
+					id: '2',
+					leaseId: '1',
 					isPaid: false,
 					postAt: new Date(),
-					leaseId: '1',
-					portfolioId: '1',
-					organizationId: '1',
 				},
 			],
 		});
@@ -231,77 +222,21 @@ describe('Invoice reminders - data', () => {
 		await service.sendReminders();
 
 		expect(spy).toHaveBeenCalledTimes(2);
-	});
 
-	it.only('insert basic records', async () => {
-		await prisma.organization.create({
-			data: {
-				id: '1',
-			},
-		});
+		expect(spy).toHaveBeenCalledWith(
+			expect.objectContaining({
+				invoice: expect.objectContaining({
+					id: '1',
+				}),
+			}),
+		);
 
-		await prisma.tenant.create({
-			data: {
-				id: '1',
-				organizationId: '1',
-			},
-		});
-
-		await prisma.portfolio.create({
-			data: {
-				id: '1',
-				organizationId: '1',
-			},
-		});
-
-		await prisma.property.create({
-			data: {
-				id: '1',
-				organizationId: '1',
-				portfolioId: '1',
-			},
-		});
-
-		await prisma.unit.create({
-			data: {
-				id: '1',
-				unitNumber: '1',
-				organizationId: '1',
-				portfolioId: '1',
-				propertyId: '1',
-			},
-		});
-
-		await prisma.lease.create({
-			data: {
-				id: '1',
-				start: new Date(),
-				end: new Date(),
-				monthlyRent: 1,
-				organizationId: '1',
-				tenantId: '1',
-				portfolioId: '1',
-				unitId: '1',
-			},
-		});
-
-		await prisma.leaseInvoice.create({
-			data: {
-				amount: 1,
-				postAt: new Date(),
-				organizationId: '1',
-				portfolioId: '1',
-				leaseId: '1',
-			},
-		});
-
-		await prisma.expense.create({
-			data: {
-				amount: 1,
-				postAt: new Date(),
-				organizationId: '1',
-				portfolioId: '1',
-			},
-		});
+		expect(spy).toHaveBeenCalledWith(
+			expect.objectContaining({
+				invoice: expect.objectContaining({
+					id: '2',
+				}),
+			}),
+		);
 	});
 });
