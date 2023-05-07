@@ -1,11 +1,12 @@
 import { Test } from '@nestjs/testing';
+import { DeepMockProxy, mockDeep, mockReset } from 'vitest-mock-extended';
 
 import { EnvModule } from 'src/env/env.module';
 import { NovuService } from 'src/novu/novu.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { tokenMocker } from 'test/util';
 
 import { LeaseInvoicesService } from './lease-invoices.service';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 const invoice = {
 	id: '1',
@@ -107,6 +108,7 @@ describe('Invoice reminders - Paused', () => {
 
 describe('Invoice reminders', () => {
 	let service: LeaseInvoicesService;
+	let prisma: DeepMockProxy<PrismaService>;
 
 	beforeEach(async () => {
 		// @ts-expect-error vitest
@@ -118,31 +120,30 @@ describe('Invoice reminders', () => {
 		})
 			.useMocker((token) => {
 				if (token === PrismaService) {
-					return {
-						c: {
-							leaseInvoice: {
-								findMany: vi.fn().mockResolvedValue([{}, {}]),
-							},
-						},
-					};
+					return mockDeep<PrismaService>();
 				}
 				return tokenMocker(token);
 			})
 			.compile();
 
 		service = moduleRef.get(LeaseInvoicesService);
+		prisma = moduleRef.get(PrismaService);
 	});
 
 	afterEach(() => {
 		// TODO: apply to global vitest setting
 		vi.resetAllMocks();
+		mockReset(prisma); // TODO: Needed? Remove if convert to vi.mock
 	});
 
 	it('should run cron job', async () => {
+		prisma.c.leaseInvoice.findMany.mockResolvedValue([]);
 		await expect(service.sendReminders()).resolves.not.toBe(false);
 	});
 
 	it('notify each invoice', async () => {
+		prisma.c.leaseInvoice.findMany.mockResolvedValue([{}, {}]);
+
 		const spy = vi.spyOn(service, 'notify');
 
 		await service.sendReminders();

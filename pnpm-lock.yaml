@@ -307,6 +307,9 @@ importers:
       vitest:
         specifier: 0.31.0
         version: 0.31.0(@vitest/ui@0.31.0)
+      vitest-mock-extended:
+        specifier: ^1.1.3
+        version: 1.1.3(typescript@5.0.4)(vitest@0.31.0)
 
   packages/eslint-config-custom:
     devDependencies:
@@ -11455,6 +11458,14 @@ packages:
     resolution: {integrity: sha512-XrHUvV5HpdLmIj4uVMxHggLbFSZYIn7HEWsqePZcI50pco+MPqJ50wMGY794X7AOOhxOBAjbkqfAbEe/QMp2Lw==}
     dev: false
 
+  /ts-essentials@9.3.2(typescript@5.0.4):
+    resolution: {integrity: sha512-JxKJzuWqH1MmH4ZFHtJzGEhkfN3QvVR3C3w+4BIoWeoY68UVVoA2Np/Bca9z0IPSErVCWhv439aT0We4Dks8kQ==}
+    peerDependencies:
+      typescript: '>=4.1.0'
+    dependencies:
+      typescript: 5.0.4
+    dev: true
+
   /ts-graphviz@1.5.4:
     resolution: {integrity: sha512-oxhI6wfPQBJC8WSiP0AjDI8z+9hcc9yl1etaynQJmQ2Yivn0KlT0oImLzJct7Es0TR/6xphzvJBAhGzgOjTGmQ==}
     engines: {node: '>=14.16'}
@@ -12030,6 +12041,17 @@ packages:
         optional: true
     dependencies:
       vite: 4.3.5(@types/node@18.16.3)
+    dev: true
+
+  /vitest-mock-extended@1.1.3(typescript@5.0.4)(vitest@0.31.0):
+    resolution: {integrity: sha512-MiaKYZbTg+fjozKnCpoTTva0BnlSNYyk4jiPuM2xVhg4aou112QIrALdH3/ZKK6qfXWh0A17gFIjWJjylOlXxg==}
+    peerDependencies:
+      typescript: 3.x || 4.x || 5.x
+      vitest: '>=0.29.2'
+    dependencies:
+      ts-essentials: 9.3.2(typescript@5.0.4)
+      typescript: 5.0.4
+      vitest: 0.31.0(@vitest/ui@0.31.0)
     dev: true
 
   /vitest@0.31.0(@vitest/ui@0.31.0):
