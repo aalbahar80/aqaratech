@@ -5,6 +5,7 @@ import { Mocked } from 'vitest';
 import { EnvService } from 'src/env/env.service';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { NovuService } from 'src/novu/novu.service';
+import { tokenMocker } from 'test/util';
 
 const invoice = {
 	id: '1',
@@ -41,18 +42,7 @@ describe('Novu', () => {
 				if (token === EnvService) {
 					return { e: { NOVU_TOKEN: '123' } };
 				}
-
-				if (typeof token === 'function') {
-					// @ts-expect-error test
-					const mock = vi.fn().mockImplementation(token);
-					return mock;
-				}
-
-				if (typeof token === 'symbol') {
-					return token;
-				}
-
-				return;
+				return tokenMocker(token);
 			})
 			.compile();
 

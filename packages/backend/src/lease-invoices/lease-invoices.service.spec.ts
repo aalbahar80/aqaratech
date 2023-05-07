@@ -2,6 +2,7 @@ import { Test } from '@nestjs/testing';
 
 import { EnvModule } from 'src/env/env.module';
 import { NovuService } from 'src/novu/novu.service';
+import { tokenMocker } from 'test/util';
 
 import { LeaseInvoicesService } from './lease-invoices.service';
 
@@ -36,18 +37,7 @@ describe('LeaseInvoicesService', () => {
 						sendSMS: vi.fn().mockResolvedValue(undefined),
 					};
 				}
-
-				if (typeof token === 'function') {
-					// @ts-expect-error test
-					const mock = vi.fn().mockImplementation(token);
-					return mock;
-				}
-
-				if (typeof token === 'symbol') {
-					return token;
-				}
-
-				return;
+				return tokenMocker(token);
 			})
 			.compile();
 
@@ -102,26 +92,7 @@ describe('Invoice reminders - Paused', () => {
 			providers: [LeaseInvoicesService],
 			imports: [EnvModule],
 		})
-			.useMocker((token) => {
-				// mock NovuService to avoid sending SMS
-				if (token === NovuService) {
-					return {
-						sendSMS: vi.fn().mockResolvedValue(undefined),
-					};
-				}
-
-				if (typeof token === 'function') {
-					// @ts-expect-error test
-					const mock = vi.fn().mockImplementation(token);
-					return mock;
-				}
-
-				if (typeof token === 'symbol') {
-					return token;
-				}
-
-				return;
-			})
+			.useMocker(tokenMocker)
 			.compile();
 
 		service = moduleRef.get(LeaseInvoicesService);
