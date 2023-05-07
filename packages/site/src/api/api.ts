@@ -66,7 +66,6 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 			});
 
 			// TODO why is transaction possibly undefined?
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			traceValue = transaction?.toTraceparent();
 		}
 	}
@@ -96,10 +95,8 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 						level: 'error',
 						...context,
 					};
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 					if (import.meta.env.SSR && SentryNode) {
 						SentryNode.addBreadcrumb(breadcrumb);
-						// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 					} else if (!import.meta.env.SSR && SentrySvelte) {
 						SentrySvelte.addBreadcrumb(breadcrumb);
 					}

@@ -42,7 +42,6 @@ export const actions: Actions = {
 						portfolioId: relationValue,
 						organizationId: event.params.organizationId,
 					});
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 				} else if (relationKey === 'organization') {
 					submitted = await api.roles.createOrgAdminRole({
 						createRoleDto: data,

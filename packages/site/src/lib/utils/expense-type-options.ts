@@ -46,7 +46,6 @@ const injectRoot = (categories: ExpenseCategoryLocalized[]) => {
 	// convert any node with a parentId of `null` to have a parentId of 'root' (the artificial root node)
 	const updated = categories.map((c) => {
 		// check for both null and undefined
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (c.parentId === null || c.parentId === undefined) {
 			return { ...c, parentId: ROOT_ID };
 		}

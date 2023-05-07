@@ -20,7 +20,6 @@ export const test = base.extend<TokenTestOptions>({
 
 		const page = await context.newPage();
 
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (!token) {
 			throw new Error('token is not set');
 		}
