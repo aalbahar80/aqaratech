@@ -19,13 +19,16 @@ export const tokenMocker = function (token?: InjectionToken) {
 		// return token;
 
 		// vitest
+		// Too limiting, only mocks self/top-level.
 		// return vi.fn();
 
 		// vitest-mock-extended
+		// Very liberal, everything is a mock, even non-existing methods.
 		// return mockDeep();
 
 		// Jest
 		// https://docs.nestjs.com/fundamentals/testing#auto-mocking
+		// Convenient. Produces a mocks with the same shape as the original.
 		type T = typeof token;
 		const mockMetadata = moduleMocker.getMetadata(
 			token,

@@ -31,15 +31,7 @@ describe('LeaseInvoicesService', () => {
 			providers: [LeaseInvoicesService],
 			imports: [EnvModule],
 		})
-			.useMocker((token) => {
-				// mock NovuService to avoid sending SMS
-				if (token === NovuService) {
-					return {
-						sendSMS: vi.fn().mockResolvedValue(undefined),
-					};
-				}
-				return tokenMocker(token);
-			})
+			.useMocker(tokenMocker)
 			.compile();
 
 		service = moduleRef.get(LeaseInvoicesService);
