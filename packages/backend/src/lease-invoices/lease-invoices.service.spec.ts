@@ -91,3 +91,43 @@ describe('LeaseInvoicesService', () => {
 		expect(spy).toHaveBeenCalledWith('INVOICE_REMINDER', template);
 	});
 });
+
+describe('Invoice reminders - Paused', () => {
+	let service: LeaseInvoicesService;
+
+	beforeEach(async () => {
+		import.meta.env.PAUSE_AUTO_INVOICE_REMINDERS = '1';
+
+		const moduleRef = await Test.createTestingModule({
+			providers: [LeaseInvoicesService],
+			imports: [EnvModule],
+		})
+			.useMocker((token) => {
+				// mock NovuService to avoid sending SMS
+				if (token === NovuService) {
+					return {
+						sendSMS: vi.fn().mockResolvedValue(undefined),
+					};
+				}
+
+				if (typeof token === 'function') {
+					// @ts-expect-error test
+					const mock = vi.fn().mockImplementation(token);
+					return mock;
+				}
+
+				if (typeof token === 'symbol') {
+					return token;
+				}
+
+				return;
+			})
+			.compile();
+
+		service = moduleRef.get(LeaseInvoicesService);
+	});
+
+	it('should abort cron job', async () => {
+		await expect(service.sendReminders()).resolves.toBe(false);
+	});
+});

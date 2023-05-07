@@ -36,6 +36,8 @@ export interface AqaratechEnv {
 	 */
 	readonly PUBLIC_API_URL_LOCAL: string;
 
+	readonly PAUSE_AUTO_INVOICE_REMINDERS?: boolean;
+
 	// Prisma
 	readonly DATABASE_URL: string;
 

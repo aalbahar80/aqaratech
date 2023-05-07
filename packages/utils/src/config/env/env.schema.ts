@@ -50,6 +50,9 @@ export const envSchema = z.object({
 	// @ts-expect-error - zod wrongly infers the type
 	PUBLIC_AQ_DEBUG_SENTRY: zodEnvBooleanSchema().default(false),
 
+	// @ts-expect-error - zod wrongly infers the type
+	PAUSE_AUTO_INVOICE_REMINDERS: zodEnvBooleanSchema().default(false),
+
 	// Stripe
 	STRIPE_API_KEY: z.string(),
 	// @ts-expect-error - zod wrongly infers the type

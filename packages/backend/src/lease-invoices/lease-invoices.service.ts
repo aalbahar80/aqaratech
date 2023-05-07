@@ -435,9 +435,17 @@ export class LeaseInvoicesService {
 		});
 	}
 
-	// Disabled until whatsapp is ready
+	// TODO: Enable
 	// @Cron('0 10 1,7,14 * *')
 	async sendReminders() {
+		if (this.env.e.PAUSE_AUTO_INVOICE_REMINDERS) {
+			this.logger.warn(
+				'PAUSE_AUTO_INVOICE_REMINDERS is set, skipping cron job',
+				LeaseInvoicesService.name,
+			);
+			return false;
+		}
+
 		this.logger.log('Sending invoice reminders', LeaseInvoicesService.name);
 
 		// Get all invoices posted between today and beginning of the current month
@@ -494,6 +502,8 @@ export class LeaseInvoicesService {
 			},
 			LeaseInvoicesService.name,
 		);
+
+		return results;
 	}
 
 	async findMessagesById({ id, user }: { id: string; user: IUser }) {

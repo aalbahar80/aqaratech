@@ -13,6 +13,8 @@ export const backendEnvSchema = envSchema.pick({
 	PUBLIC_API_URL: true,
 	BODY_SIZE_LIMIT: true,
 
+	PAUSE_AUTO_INVOICE_REMINDERS: true,
+
 	// Stripe
 	STRIPE_API_KEY: true,
 	STRIPE_PAUSE_USAGE_REPORTS: true,
