@@ -2,7 +2,7 @@ import { InjectionToken } from '@nestjs/common';
 import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
 
 import { PrismaService } from 'src/prisma/prisma.service';
-import prisma from 'src/test/__mocks__/prisma';
+import prismaService from 'src/test/__mocks__/prisma';
 
 const moduleMocker = new ModuleMocker(global);
 
@@ -11,7 +11,7 @@ export const tokenMocker = function (token?: InjectionToken) {
 		// Return the PrismaService defined in __mocks__. This is so we can get a
 		// reference to the mock instance during any test. This is useful for
 		// spying/mocking on methods.
-		return prisma;
+		return prismaService;
 	}
 
 	if (typeof token === 'function') {

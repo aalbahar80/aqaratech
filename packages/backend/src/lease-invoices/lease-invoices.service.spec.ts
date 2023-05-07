@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 
 import { EnvModule } from 'src/env/env.module';
 import { NovuService } from 'src/novu/novu.service';
-import prisma from 'src/test/__mocks__/prisma';
+import prismaService from 'src/test/__mocks__/prisma';
 import { tokenMocker } from 'test/util';
 
 import { LeaseInvoicesService } from './lease-invoices.service';
@@ -115,12 +115,15 @@ describe('Invoice reminders', () => {
 	});
 
 	it('should run cron job', async () => {
-		prisma.c.leaseInvoice.findMany.mockResolvedValueOnce([]);
+		prismaService.c.leaseInvoice.findMany.mockResolvedValueOnce([]);
 		await expect(service.sendReminders()).resolves.not.toBe(false);
 	});
 
 	it('notify each invoice', async () => {
-		prisma.c.leaseInvoice.findMany.mockResolvedValueOnce([{}, {}] as any);
+		prismaService.c.leaseInvoice.findMany.mockResolvedValueOnce([
+			{},
+			{},
+		] as any);
 
 		const spy = vi.spyOn(service, 'notify');
 
