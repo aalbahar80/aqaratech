@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { Novu } from '@novu/node';
 import { Mocked } from 'vitest';
 
-import { EnvService } from 'src/env/env.service';
+import { EnvModule } from 'src/env/env.module';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { NovuService } from 'src/novu/novu.service';
 import { tokenMocker } from 'test/util';
@@ -37,22 +37,14 @@ describe('Novu', () => {
 	beforeEach(async () => {
 		const moduleRef = await Test.createTestingModule({
 			providers: [NovuService, LeaseInvoicesService],
+			imports: [EnvModule],
 		})
-			.useMocker((token) => {
-				if (token === EnvService) {
-					return { e: { NOVU_TOKEN: '123' } };
-				}
-				return tokenMocker(token);
-			})
+			.useMocker(tokenMocker)
 			.compile();
 
 		service = moduleRef.get(NovuService);
 		invoiceService = moduleRef.get(LeaseInvoicesService);
 		novu = new Novu('') as Mocked<Novu>;
-	});
-
-	afterEach(() => {
-		vi.clearAllMocks();
 	});
 
 	it('should be defined', () => {

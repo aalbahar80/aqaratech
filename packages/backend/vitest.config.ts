@@ -5,6 +5,7 @@ export default defineConfig({
 	test: {
 		globals: true,
 		mockReset: true,
+		clearMocks: true,
 		root: './',
 		exclude: [
 			'mocked.spec.ts',
