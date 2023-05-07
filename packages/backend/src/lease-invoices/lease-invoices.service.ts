@@ -494,16 +494,15 @@ export class LeaseInvoicesService {
 
 		const results = await Promise.allSettled(promises);
 
-		this.logger.log(
-			{
-				message: 'Invoice reminders sent',
-				success: results.filter((r) => r.status === 'fulfilled').length,
-				failure: results.filter((r) => r.status === 'rejected').length,
-			},
-			LeaseInvoicesService.name,
-		);
+		const result = {
+			message: 'Invoice reminders sent',
+			success: results.filter((r) => r.status === 'fulfilled').length,
+			failure: results.filter((r) => r.status === 'rejected').length,
+		};
 
-		return results;
+		this.logger.log(result, LeaseInvoicesService.name);
+
+		return result;
 	}
 
 	async findMessagesById({ id, user }: { id: string; user: IUser }) {

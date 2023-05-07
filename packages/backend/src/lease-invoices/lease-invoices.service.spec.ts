@@ -5,6 +5,7 @@ import { NovuService } from 'src/novu/novu.service';
 import { tokenMocker } from 'test/util';
 
 import { LeaseInvoicesService } from './lease-invoices.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 const invoice = {
 	id: '1',
@@ -100,5 +101,45 @@ describe('Invoice reminders - Paused', () => {
 
 	it('should abort cron job', async () => {
 		await expect(service.sendReminders()).resolves.toBe(false);
+	});
+});
+
+describe('Invoice reminders', () => {
+	let service: LeaseInvoicesService;
+
+	beforeEach(async () => {
+		import.meta.env.PAUSE_AUTO_INVOICE_REMINDERS = '0';
+
+		const moduleRef = await Test.createTestingModule({
+			providers: [LeaseInvoicesService],
+			imports: [EnvModule],
+		})
+			.useMocker((token) => {
+				if (token === PrismaService) {
+					return {
+						c: {
+							leaseInvoice: {
+								findMany: vi.fn().mockResolvedValue([{}, {}]),
+							},
+						},
+					};
+				}
+				return tokenMocker(token);
+			})
+			.compile();
+
+		service = moduleRef.get(LeaseInvoicesService);
+	});
+
+	it('should run cron job', async () => {
+		await expect(service.sendReminders()).resolves.not.toBe(false);
+	});
+
+	it('notify each invoice', async () => {
+		const spy = vi.spyOn(service, 'notify');
+
+		await service.sendReminders();
+
+		expect(spy).toHaveBeenCalledTimes(2);
 	});
 });
