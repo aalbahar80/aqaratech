@@ -6,24 +6,5 @@
 		"checkJs": true,
 		"diagnostics": true
 	},
-	"include": [
-		"src/**/*.js",
-		"src/**/*.cjs",
-		"src/**/*.mjs",
-		"src/**/*.ts",
-		"src/**/*.cts",
-		"src/**/*.mts",
-
-		// include files in current directory
-		"./*.js",
-		"./*.cjs",
-		"./*.mjs",
-		"./*.ts",
-		"./*.cts",
-		"./*.mts",
-
-		// dotfiles
-		"./.*.js",
-		"./.*.cjs"
-	]
+	"include": ["**/*", "./.*"]
 }

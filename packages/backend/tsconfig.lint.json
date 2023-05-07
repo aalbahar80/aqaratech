@@ -6,28 +6,6 @@
 		"checkJs": true,
 		"diagnostics": true
 	},
-	"include": [
-		"src/**/*.js",
-		"src/**/*.cjs",
-		"src/**/*.mjs",
-		"src/**/*.ts",
-		"src/**/*.cts",
-		"src/**/*.mts",
-		"src/**/*.d.ts",
-
-		// include files in current directory
-		"./*.js",
-		"./*.cjs",
-		"./*.mjs",
-		"./*.ts",
-		"./*.cts",
-		"./*.mts",
-
-		// dotfiles
-		"./.*.js",
-		"./.*.cjs",
-
-		// cutom
-		"seed/**/*.ts"
-	]
+	"include": ["**/*", "./.*"],
+	"exclude": ["**/dist/**/*"]
 }
