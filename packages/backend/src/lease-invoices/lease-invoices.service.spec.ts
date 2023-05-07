@@ -122,11 +122,6 @@ describe('Invoice reminders', () => {
 		service = moduleRef.get(LeaseInvoicesService);
 	});
 
-	afterEach(() => {
-		// TODO: apply to global vitest setting
-		vi.resetAllMocks();
-	});
-
 	it('should run cron job', async () => {
 		prisma.c.leaseInvoice.findMany.mockResolvedValue([]);
 		await expect(service.sendReminders()).resolves.not.toBe(false);
