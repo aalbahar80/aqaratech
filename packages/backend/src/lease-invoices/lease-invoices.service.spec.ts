@@ -232,4 +232,76 @@ describe('Invoice reminders - data', () => {
 
 		expect(spy).toHaveBeenCalledTimes(2);
 	});
+
+	it.only('insert basic records', async () => {
+		await prisma.organization.create({
+			data: {
+				id: '1',
+			},
+		});
+
+		await prisma.tenant.create({
+			data: {
+				id: '1',
+				organizationId: '1',
+			},
+		});
+
+		await prisma.portfolio.create({
+			data: {
+				id: '1',
+				organizationId: '1',
+			},
+		});
+
+		await prisma.property.create({
+			data: {
+				id: '1',
+				organizationId: '1',
+				portfolioId: '1',
+			},
+		});
+
+		await prisma.unit.create({
+			data: {
+				id: '1',
+				unitNumber: '1',
+				organizationId: '1',
+				portfolioId: '1',
+				propertyId: '1',
+			},
+		});
+
+		await prisma.lease.create({
+			data: {
+				id: '1',
+				start: new Date(),
+				end: new Date(),
+				monthlyRent: 1,
+				organizationId: '1',
+				tenantId: '1',
+				portfolioId: '1',
+				unitId: '1',
+			},
+		});
+
+		await prisma.leaseInvoice.create({
+			data: {
+				amount: 1,
+				postAt: new Date(),
+				organizationId: '1',
+				portfolioId: '1',
+				leaseId: '1',
+			},
+		});
+
+		await prisma.expense.create({
+			data: {
+				amount: 1,
+				postAt: new Date(),
+				organizationId: '1',
+				portfolioId: '1',
+			},
+		});
+	});
 });
