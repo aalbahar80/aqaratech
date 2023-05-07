@@ -1,4 +1,3 @@
-/* eslint-disable security/detect-possible-timing-attacks */
 import { InjectionToken } from '@nestjs/common';
 
 import { PrismaService } from 'src/prisma/prisma.service';
