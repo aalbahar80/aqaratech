@@ -87,6 +87,7 @@ describe('Invoice reminders - Paused', () => {
 	let service: LeaseInvoicesService;
 
 	beforeEach(async () => {
+		// @ts-expect-error vitest
 		import.meta.env.PAUSE_AUTO_INVOICE_REMINDERS = '1';
 
 		const moduleRef = await Test.createTestingModule({
@@ -108,6 +109,7 @@ describe('Invoice reminders', () => {
 	let service: LeaseInvoicesService;
 
 	beforeEach(async () => {
+		// @ts-expect-error vitest
 		import.meta.env.PAUSE_AUTO_INVOICE_REMINDERS = '0';
 
 		const moduleRef = await Test.createTestingModule({
@@ -141,5 +143,9 @@ describe('Invoice reminders', () => {
 		await service.sendReminders();
 
 		expect(spy).toHaveBeenCalledTimes(2);
+	});
+
+	it.todo('should not notify if invoice is already paid', async () => {
+		// add invoices where isPaid is true
 	});
 });
