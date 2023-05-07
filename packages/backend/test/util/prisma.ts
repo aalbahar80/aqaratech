@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { createPrismaClient } from 'src/prisma/prisma.service';
 
-const prisma = new PrismaClient();
+const prisma = createPrismaClient();
 await prisma.$executeRaw`SET session_replication_role = 'replica';`;
 export default prisma;
