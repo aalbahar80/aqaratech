@@ -1,7 +1,8 @@
+import { beforeEach } from 'vitest';
+
 import prisma from './prisma';
 import resetDb from './reset-db';
 import { SAMPLE } from './sample';
-import { beforeEach } from 'vitest';
 
 beforeEach(async () => {
 	await resetDb();

@@ -10,6 +10,8 @@ import { SAMPLE } from 'test/util/sample';
 
 import { LeaseInvoicesService } from './lease-invoices.service';
 
+import type { LeaseInvoice } from '@prisma/client';
+
 const invoice = {
 	id: '1',
 	amount: 2,
@@ -126,7 +128,7 @@ describe('Invoice reminders', () => {
 		prismaService.c.leaseInvoice.findMany.mockResolvedValueOnce([
 			{},
 			{},
-		] as any);
+		] as LeaseInvoice[]);
 
 		const spy = vi.spyOn(service, 'notify');
 
