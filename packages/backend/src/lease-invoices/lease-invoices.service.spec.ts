@@ -1,9 +1,8 @@
 import { Test } from '@nestjs/testing';
-import { DeepMockProxy, mockDeep, mockReset } from 'vitest-mock-extended';
 
 import { EnvModule } from 'src/env/env.module';
 import { NovuService } from 'src/novu/novu.service';
-import { PrismaService } from 'src/prisma/prisma.service';
+import prisma from 'src/test/__mocks__/prisma';
 import { tokenMocker } from 'test/util';
 
 import { LeaseInvoicesService } from './lease-invoices.service';
@@ -108,7 +107,6 @@ describe('Invoice reminders - Paused', () => {
 
 describe('Invoice reminders', () => {
 	let service: LeaseInvoicesService;
-	let prisma: DeepMockProxy<PrismaService>;
 
 	beforeEach(async () => {
 		// @ts-expect-error vitest
@@ -118,22 +116,15 @@ describe('Invoice reminders', () => {
 			providers: [LeaseInvoicesService],
 			imports: [EnvModule],
 		})
-			.useMocker((token) => {
-				if (token === PrismaService) {
-					return mockDeep<PrismaService>();
-				}
-				return tokenMocker(token);
-			})
+			.useMocker(tokenMocker)
 			.compile();
 
 		service = moduleRef.get(LeaseInvoicesService);
-		prisma = moduleRef.get(PrismaService);
 	});
 
 	afterEach(() => {
 		// TODO: apply to global vitest setting
 		vi.resetAllMocks();
-		mockReset(prisma); // TODO: Needed? Remove if convert to vi.mock
 	});
 
 	it('should run cron job', async () => {
