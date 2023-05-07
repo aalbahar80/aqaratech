@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 
 import { testOrgUserId } from '@self/seed';
-import { getRoute, PageType } from '@self/utils';
+import { getRoute, PageTab, PageType } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
 import { siteURL } from '../api/fixtures/site-url';
@@ -12,20 +12,30 @@ test.describe.configure({ mode: 'parallel' });
 
 test.describe('redirect for non-active subscriptions- ORGADMIN', () => {
 	test.use({ organizationParams: { isActive: false } });
-	test('redirected to billing page to re-subscribe', async ({ page, org }) => {
-		test.setTimeout(90000); // slow call to site/org/:id/billing
+	test('redirected to billing page to re-subscribe', async ({
+		request,
+		org,
+	}) => {
 		const url = getRoute({
 			entity: 'portfolio',
 			pageType: PageType.List,
 			params: { organizationId: org.organization.id },
 		});
 
-		await page.goto(url);
+		const res = await request.get(url, { maxRedirects: 0 });
 
-		await expect(page).toHaveURL(/\/billing/);
+		expect(res.status()).toBe(302);
 
-		const btn = page.getByRole('button', { name: 'Subscribe' });
-		await expect(btn).toBeVisible();
+		const route = getRoute({
+			entity: 'organization',
+			pageType: PageTab.Billing,
+			id: org.organization.id,
+			params: {
+				organizationId: org.organization.id,
+			},
+		});
+
+		expect(res.headers()['location']).toBe(route);
 	});
 
 	test('can still create new organization', async ({ page, isMobile }) => {
