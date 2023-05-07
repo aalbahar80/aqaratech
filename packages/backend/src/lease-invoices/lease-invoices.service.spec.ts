@@ -123,12 +123,12 @@ describe('Invoice reminders', () => {
 	});
 
 	it('should run cron job', async () => {
-		prisma.c.leaseInvoice.findMany.mockResolvedValue([]);
+		prisma.c.leaseInvoice.findMany.mockResolvedValueOnce([]);
 		await expect(service.sendReminders()).resolves.not.toBe(false);
 	});
 
 	it('notify each invoice', async () => {
-		prisma.c.leaseInvoice.findMany.mockResolvedValue([{}, {}]);
+		prisma.c.leaseInvoice.findMany.mockResolvedValueOnce([{}, {}] as any);
 
 		const spy = vi.spyOn(service, 'notify');
 
