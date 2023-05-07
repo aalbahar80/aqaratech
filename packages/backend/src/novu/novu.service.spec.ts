@@ -5,7 +5,7 @@ import { Mocked } from 'vitest';
 import { EnvModule } from 'src/env/env.module';
 import { LeaseInvoicesService } from 'src/lease-invoices/lease-invoices.service';
 import { NovuService } from 'src/novu/novu.service';
-import { tokenMocker } from 'test/util';
+import { tokenMocker } from 'test/util/mocker';
 
 const invoice = {
 	id: '1',

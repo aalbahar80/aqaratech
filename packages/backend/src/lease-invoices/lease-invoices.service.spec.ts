@@ -4,7 +4,7 @@ import { EnvModule } from 'src/env/env.module';
 import { NovuService } from 'src/novu/novu.service';
 import { PrismaService, createPrismaClient } from 'src/prisma/prisma.service';
 import prismaService from 'src/test/__mocks__/prisma';
-import { tokenMocker } from 'test/util';
+import { tokenMocker } from 'test/util/mocker';
 import prisma from 'test/util/prisma';
 import { SAMPLE } from 'test/util/sample';
 
