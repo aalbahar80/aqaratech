@@ -34,6 +34,7 @@ export const tokenMocker = function (token?: InjectionToken) {
 			token,
 		) as MockFunctionMetadata<T>;
 		const Mock = moduleMocker.generateFromMetadata(mockMetadata);
+		// @ts-expect-error tbd
 		return new Mock();
 	}
 
