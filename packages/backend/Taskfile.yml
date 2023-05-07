@@ -58,3 +58,13 @@ tasks:
     dir: '{{.USER_WORKING_DIR}}'
     cmds:
       - task: '{{if eq .PUBLIC_IS_TESTING "1"}}start:mock{{else}}start:prod{{end}}'
+
+  test:
+    dir: '{{.USER_WORKING_DIR}}'
+    env:
+      DATABASE_URL: 'postgresql://postgres:postgres@localhost:5435/aq-db'
+    cmds:
+      - docker compose -f docker-compose-test.yml up -d
+      - until nc -z localhost 5435; do sleep 1; done;
+      - pnpm prisma migrate reset --force --skip-seed
+      - '{{if eq .TEST_WATCH "1"}}pnpm vitest{{else}}pnpm vitest --run{{end}}'

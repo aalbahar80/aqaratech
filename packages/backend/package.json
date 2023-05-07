@@ -29,8 +29,8 @@
 		"api:document": "GENERATE_SWAGGER=1 nest start --entryFile ./backend/src/main --path tsconfig.json",
 		"api:generate": "pnpm api:document && ./get-openapi.sh && rm -rf ../site/src/api/openapi && openapi-generator-cli generate",
 		"up-minio": "./seed/up-minio.sh",
-		"test": "vitest --run",
-		"test:watch": "vitest"
+		"test": "task test",
+		"test:watch": "TEST_WATCH=1 task test"
 	},
 	"prisma": {
 		"seed": "tsx ./seed/seed.ts"
