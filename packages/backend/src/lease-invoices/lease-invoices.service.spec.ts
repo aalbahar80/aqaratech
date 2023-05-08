@@ -1,9 +1,9 @@
 import { Test } from '@nestjs/testing';
+import { DeepMockProxy } from 'vitest-mock-extended';
 
 import { EnvModule } from 'src/env/env.module';
 import { NovuService } from 'src/novu/novu.service';
 import { PrismaService, createPrismaClient } from 'src/prisma/prisma.service';
-import prismaService from 'src/test/__mocks__/prisma';
 import { tokenMocker } from 'test/util/mocker';
 import prisma from 'test/util/prisma';
 import { SAMPLE } from 'test/util/sample';
@@ -104,6 +104,7 @@ describe('Invoice reminders - Paused', () => {
 
 describe('Invoice reminders', () => {
 	let service: LeaseInvoicesService;
+	let prismaService: DeepMockProxy<PrismaService>;
 
 	beforeEach(async () => {
 		// @ts-expect-error vitest
@@ -117,6 +118,7 @@ describe('Invoice reminders', () => {
 			.compile();
 
 		service = moduleRef.get(LeaseInvoicesService);
+		prismaService = moduleRef.get(PrismaService);
 	});
 
 	it('should run cron job', async () => {
