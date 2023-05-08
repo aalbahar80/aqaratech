@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.28.9
+
+### Patch Changes
+
+- aa97f2052: trigger full release (maintenance order fix)
+
 ## 2.28.8
 
 ### Patch Changes

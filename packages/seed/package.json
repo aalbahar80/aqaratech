@@ -1,6 +1,6 @@
 {
 	"name": "@self/seed",
-	"version": "2.25.3",
+	"version": "2.25.4",
 	"main": "src/index.ts",
 	"types": "src/index.ts",
 	"scripts": {

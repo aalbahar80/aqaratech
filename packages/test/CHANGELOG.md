@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.25.4
+
+### Patch Changes
+
+- aa97f2052: trigger full release (maintenance order fix)
+
 ## 3.25.3
 
 ### Patch Changes
