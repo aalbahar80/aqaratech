@@ -11,6 +11,7 @@ export const tokenMocker = function (token?: InjectionToken) {
 		// Return the PrismaService defined in __mocks__. This is so we can get a
 		// reference to the mock instance during any test. This is useful for
 		// spying/mocking on methods.
+		// We use a DeepMock for prisma because prisma.c is defined at a later stage.
 		return prismaService;
 	}
 
