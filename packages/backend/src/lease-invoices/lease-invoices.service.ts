@@ -1,5 +1,6 @@
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { Cron } from '@nestjs/schedule';
 import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
@@ -435,8 +436,7 @@ export class LeaseInvoicesService {
 		});
 	}
 
-	// TODO: Enable
-	// @Cron('0 10 1,7,14 * *')
+	@Cron('0 10 1,7,14 * *')
 	async sendReminders() {
 		if (this.env.e.PAUSE_AUTO_INVOICE_REMINDERS) {
 			this.logger.warn(
