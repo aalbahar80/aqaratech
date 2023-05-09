@@ -103,6 +103,9 @@ services:
       - key: MYFATOORAH_KEY
         scope: RUN_AND_BUILD_TIME
         value: 'Isy2OQPlrapEAp_uM4eWpZDhzmWCeyElhXRYhxzIOMDyi9eKYJzmkH7BYRGqgwSVsAQNJ50i9obH_BHuwsClPQc0V6sWGci9h_1FzigleH0jDo1TCcapqIXvuY3SODLWcBDYjjtz6tTTUNAuH7EoeCTo4KHqFSWC4UBTDP92gsVRv393VPnDiBgBtQNoAOLOfRFx_gBOoGEpw4QJ4Oki-ftqxk87f0KWcTc8EIjtNyKD5_pGy7tJ0dO-nn1_t1WpHLO96K6GpxVfR-pE5Ji765QLkOWrMELBWxdNILzeXwXPZDkZPES499eDgBqZB-ODDv6cS2JPD9JgSGSahmLlCwMgC0UuI0B4PcwqQcuzMgDl3esa0NBQC_LgwKRE4hb-mEU3gnqqcR18l8puTLI-Tjz4Z_7x4PJ_nAAkL94vWs4UnhgZNZULoWWSPESyI9R3vDN1IW8MF14IRjX5IdmAzAo4-dksseJLLDRAIbR_Tgdw1GxQtPf3njSzpq0EwQvXLh9wiZFgvZFHWhd8ncw5SEmoEqeNdpqR7onWW82CqCWmI7L-TaIaeTDIdk9_ep377mRmGlY72ZCVpSWLI4Gn3f1n8XnQM-Z92mjXASaSS6f2pbCpATSIa_vllKy9xh-CPAwHxrD6eVSbeRZmjPvLrGa8v3DuywYaHee5ffCmqyozYZDvrfvGeWWl80mzL7If8ZIxiQ'
+      - key: NOVU_TOKEN
+        scope: RUN_AND_BUILD_TIME
+        value: 'abc'
   - name: site
     image:
       registry_type: DOCR

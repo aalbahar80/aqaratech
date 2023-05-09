@@ -48,7 +48,8 @@ export async function bootstrap() {
 		.parse(process.env);
 
 	if (env.PUBLIC_IS_TESTING) {
-		const createTestApp = (await import('./test/create-app.stub'))
+		console.log('PUBLIC_IS_TESTING is set. Using test app.');
+		const createTestApp = (await import('../test/create-app.stub'))
 			.createTestApp;
 		app = await createTestApp(options);
 	} else {

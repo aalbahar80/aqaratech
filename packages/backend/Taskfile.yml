@@ -18,7 +18,7 @@ tasks:
     sources:
       - ../utils/src/**/*.ts
     cmds:
-      - pnpm swc -d dist ../utils/src
+      - pnpm swc --config exclude="/**/*.(spec|stub).ts" -d dist ../utils/src
 
   build:backend:
     dir: '{{.USER_WORKING_DIR}}'
@@ -26,7 +26,7 @@ tasks:
     sources:
       - src/**/*.ts
     cmds:
-      - pnpm swc -d dist/backend/src src
+      - pnpm swc --config exclude="/**/*.(spec|stub).ts" -d dist/backend/src src
       - cp package.json dist/backend
 
   build:
@@ -51,7 +51,7 @@ tasks:
     deps:
       - build
     cmds:
-      - pnpm vitest --run mocked.spec.ts -c vitest.config.mocked.ts
+      - pnpm vitest --run test/mocked.spec.ts -c vitest.config.mocked.ts
 
   start:
     # Detect start mode based on PUBLIC_IS_TESTING from .env

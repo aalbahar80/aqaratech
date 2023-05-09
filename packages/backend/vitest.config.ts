@@ -10,7 +10,7 @@ export default defineConfig({
 		threads: false, // incompatible with DB
 		setupFiles: ['test/util/setup.ts'],
 		exclude: [
-			'mocked.spec.ts',
+			'test/mocked.spec.ts',
 			'node_modules',
 			'dist',
 			'.idea',

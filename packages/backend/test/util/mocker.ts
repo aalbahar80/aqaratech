@@ -2,7 +2,8 @@ import { InjectionToken } from '@nestjs/common';
 import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
 
 import { PrismaService } from 'src/prisma/prisma.service';
-import prismaService from 'src/test/__mocks__/prisma';
+
+import prismaService from '../__mocks__/prisma';
 
 const moduleMocker = new ModuleMocker(global);
 
