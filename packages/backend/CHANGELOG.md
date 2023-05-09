@@ -1,5 +1,17 @@
 # @self/backend
 
+## 2.27.0
+
+### Minor Changes
+
+- c8468615a: add SMS (novu)
+
+### Patch Changes
+
+- bb781006a: check lease.canPay before sms
+- Updated dependencies [c8468615a]
+  - @self/utils@3.26.0
+
 ## 2.26.4
 
 ### Patch Changes

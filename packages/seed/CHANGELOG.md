@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.26.0
+
+### Minor Changes
+
+- c8468615a: add SMS (novu)
+
+### Patch Changes
+
+- Updated dependencies [c8468615a]
+  - @self/utils@3.26.0
+
 ## 2.25.4
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.29.0
+
+### Minor Changes
+
+- c8468615a: add SMS (novu)
+
 ## 2.28.9
 
 ### Patch Changes
