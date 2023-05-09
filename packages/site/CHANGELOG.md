@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.29.1
+
+### Patch Changes
+
+- 6b2c04800: tolgee refresh
+
 ## 2.29.0
 
 ### Minor Changes
