@@ -157,7 +157,7 @@ export const tolgee = {
 			},
 			tenants: {
 				description: 'Online rent payments and maintenance requests.',
-				name: 'Hassle-free rentals',
+				name: 'Resident Center',
 				summary: 'Tenants',
 			},
 		},
