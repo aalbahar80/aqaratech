@@ -54,6 +54,8 @@ describe('Novu', () => {
 	});
 
 	it('should be called with the correct template name', async () => {
+		vi.spyOn(invoiceService, 'generatePaymentLink').mockResolvedValue('link');
+
 		await invoiceService.notify({
 			method: 'SMS',
 			invoice,
@@ -67,6 +69,8 @@ describe('Novu', () => {
 	});
 
 	it('should be called with the correct country code', async () => {
+		vi.spyOn(invoiceService, 'generatePaymentLink').mockResolvedValue('link');
+
 		await invoiceService.notify({
 			method: 'SMS',
 			invoice,

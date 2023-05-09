@@ -48,6 +48,9 @@ describe('LeaseInvoicesService', () => {
 	});
 
 	it('should call sendSMS once', async () => {
+		vi.spyOn(service, 'generatePaymentLink').mockResolvedValue('link');
+
+		// insert invoice
 		const spy = vi.spyOn(novuService, 'sendSMS');
 
 		await service.notify({
@@ -59,6 +62,8 @@ describe('LeaseInvoicesService', () => {
 	});
 
 	it('should call sendSMS with correct arguments', async () => {
+		vi.spyOn(service, 'generatePaymentLink').mockResolvedValue('link');
+
 		const spy = vi.spyOn(novuService, 'sendSMS');
 
 		await service.notify({
@@ -72,7 +77,7 @@ describe('LeaseInvoicesService', () => {
 				phone: '1234567890',
 			},
 			payload: {
-				link: `${process.env.PUBLIC_API_URL}/leaseInvoices/1/pay`,
+				link: 'link',
 			},
 		};
 

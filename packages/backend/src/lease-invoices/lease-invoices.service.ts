@@ -360,10 +360,7 @@ export class LeaseInvoicesService {
 	}
 
 	async notify(args: InvoiceSendInput) {
-		const paymentLink = getPayURL({
-			apiURL: this.env.e.PUBLIC_API_URL,
-			invoiceId: args.invoice.id,
-		});
+		const paymentLink = await this.generatePaymentLink(args.invoice.id);
 
 		const phone = args.invoice.lease.tenant.phone;
 
