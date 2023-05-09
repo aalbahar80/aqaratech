@@ -38,6 +38,8 @@ jobs:
         # BUG: (workaround) Task cli not correctly installed through npm
       - name: Install Task
         uses: arduino/setup-task@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install deps (seed & backend)
         run: pnpm -F . -F @self/seed... -F @self/backend... install --frozen-lockfile
