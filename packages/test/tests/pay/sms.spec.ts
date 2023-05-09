@@ -6,6 +6,7 @@ import { test } from '../api/api-fixtures';
 
 test.use({
 	tenantsParams: [{ phone: '12384687' }],
+	leasesParams: [{ canPay: true }],
 	invoicesParams: [{ isPaid: false }],
 });
 

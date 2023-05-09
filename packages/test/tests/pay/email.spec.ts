@@ -6,7 +6,10 @@ import { getRoute, PageTab } from '@self/utils';
 import { prisma } from '../../prisma';
 import { test } from '../api/api-fixtures';
 
-test.use({ invoicesParams: [{ isPaid: false }] });
+test.use({
+	leasesParams: [{ canPay: true }],
+	invoicesParams: [{ isPaid: false }],
+});
 
 const email1 = 'test-1@aqtest.com';
 const email2 = 'test-2@aqtest.com';
