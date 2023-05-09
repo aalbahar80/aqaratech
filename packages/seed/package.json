@@ -15,7 +15,7 @@
 		"@self/utils": "workspace:*",
 		"date-fns": "2.30.0",
 		"dotenv": "16.0.3",
-		"factory.ts": "1.4.0"
+		"factory.ts": "1.4.1"
 	},
 	"devDependencies": {
 		"@types/node": "18.16.3",
