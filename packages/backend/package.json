@@ -22,7 +22,7 @@
 		"format": "task -t ../../Taskfile.yml format",
 		"lint": "task -t ../../Taskfile.yml lint",
 		"lint:fix": "task -t ../../Taskfile.yml lint -- --fix",
-		"check": "tsc --noEmit --project tsconfig.build.json",
+		"check": "tsc --noEmit --project tsconfig.lint.json",
 		"check:watch": "pnpm run check --watch",
 		"postinstall": "prisma generate",
 		"sentry:release": "../../scripts/upload-sourcemaps.mjs",

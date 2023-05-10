@@ -33,6 +33,7 @@ export const createBucketDev = async (
 				}),
 			);
 		} catch (error) {
+			// @ts-expect-error non-essential
 			if (error.name === 'BucketAlreadyOwnedByYou') {
 				console.log(`Test Bucket ${bucketName} already exists. Continuing...`);
 			} else {

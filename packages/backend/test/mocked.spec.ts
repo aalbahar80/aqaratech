@@ -19,7 +19,7 @@ describe('App', () => {
 	});
 
 	it('starts with mocked dependencies', () => {
-		return new Promise((resolve) => {
+		return new Promise<void>((resolve) => {
 			setTimeout(() => {
 				resolve();
 			}, 1000000000);
