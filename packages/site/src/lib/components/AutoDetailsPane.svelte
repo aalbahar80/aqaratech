@@ -5,7 +5,7 @@
 	type Keys = $$Generic<keyof Details>;
 
 	export let details: Details;
-	export let keys: Exclude<Keys, number | symbol>[];
+	export let keys: Readonly<Exclude<Keys, number | symbol>[]>;
 </script>
 
 <div data-testid="details-pane">

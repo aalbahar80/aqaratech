@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as R from 'remeda';
 
+	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 
 	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
@@ -12,11 +13,8 @@
 		property: data.leaseInvoice.breadcrumbs.property.label,
 		unit: data.leaseInvoice.breadcrumbs.unit.label,
 	});
-</script>
 
-<AutoDetailsPane
-	details={obj}
-	keys={[
+	const ALL_KEYS = [
 		'amount',
 		'memo',
 		'isPaid',
@@ -28,5 +26,17 @@
 		'unit',
 		'id',
 		'mfPaymentId',
-	]}
+	] as const;
+
+	$: keys =
+		$page.data.user?.role?.roleType === 'TENANT'
+			? ALL_KEYS.filter(
+					(key) => !['isPaid', 'dueAt', 'memo', 'mfPaymentId'].includes(key),
+			  )
+			: ALL_KEYS;
+</script>
+
+<AutoDetailsPane
+	details={obj}
+	{keys}
 />

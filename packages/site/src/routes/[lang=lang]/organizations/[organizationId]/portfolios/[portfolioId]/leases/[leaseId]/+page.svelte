@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as R from 'remeda';
 
+	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 
 	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
@@ -10,11 +11,8 @@
 	$: obj = R.merge(data.lease, {
 		tenant: data.lease.breadcrumbs.tenant.label,
 	});
-</script>
 
-<AutoDetailsPane
-	details={obj}
-	keys={[
+	const ALL_KEYS = [
 		'tenant',
 		'start',
 		'end',
@@ -23,5 +21,15 @@
 		'license',
 		'notify',
 		'canPay',
-	]}
+	] as const;
+
+	$: keys =
+		$page.data.user?.role?.roleType === 'TENANT'
+			? ALL_KEYS.filter((key) => !['canPay', 'notify', 'license'].includes(key))
+			: ALL_KEYS;
+</script>
+
+<AutoDetailsPane
+	details={obj}
+	{keys}
 />
