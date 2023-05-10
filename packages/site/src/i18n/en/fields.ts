@@ -32,38 +32,35 @@ import type {
 	DAYS_KEY,
 	MONTHS_KEY,
 } from '$lib/components/form/model/organization';
-import type { Union } from 'ts-toolbelt';
 
-type Schemas =
-	| OrganizationSettingsSchema
-	| UserCreateSchema
-	| UserUpdateSchema
-	| RoleCreateSchema
-	| OrganizationSchema
-	| TenantCreateSchema
-	| TenantUpdateSchema
-	| PortfolioCreateSchema
-	| PortfolioUpdateSchema
-	| PropertyCreateSchema
-	| PropertyUpdateSchema
-	| UnitCreateSchema
-	| UnitUpdateSchema
-	| LeaseCreateSchema
-	| LeaseUpdateSchema
-	| LeaseInvoiceCreateSchema
-	| LeaseInvoiceUpdateSchema
-	| ExpenseCreateSchema
-	| ExpenseUpdateSchema
-	| ExpenseCategoryCreateSchema
-	| ExpenseCategoryUpdateSchema
-	| MaintenanceOrderCreateSchema
-	| MaintenanceOrderUpdateSchema
-	| PayoutCreateSchema
-	| FileCreateSchema
-	| MessageDto;
+type Schemas = OrganizationSettingsSchema &
+	UserCreateSchema &
+	UserUpdateSchema &
+	RoleCreateSchema &
+	OrganizationSchema &
+	TenantCreateSchema &
+	TenantUpdateSchema &
+	PortfolioCreateSchema &
+	PortfolioUpdateSchema &
+	PropertyCreateSchema &
+	PropertyUpdateSchema &
+	UnitCreateSchema &
+	UnitUpdateSchema &
+	LeaseCreateSchema &
+	LeaseUpdateSchema &
+	LeaseInvoiceCreateSchema &
+	LeaseInvoiceUpdateSchema &
+	ExpenseCreateSchema &
+	ExpenseUpdateSchema &
+	ExpenseCategoryCreateSchema &
+	ExpenseCategoryUpdateSchema &
+	MaintenanceOrderCreateSchema &
+	MaintenanceOrderUpdateSchema &
+	PayoutCreateSchema &
+	FileCreateSchema &
+	MessageDto;
 
-// type Keys = KeysOfUnion<Schemas>;
-type Keys = keyof Union.IntersectOf<Schemas>;
+type Keys = keyof Schemas;
 
 export const fields = {
 	// common

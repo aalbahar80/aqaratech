@@ -11,7 +11,6 @@ import type {
 	PortfolioCreateSchema,
 	TenantCreateSchema,
 } from '../../../schemas';
-import type { Union } from 'ts-toolbelt';
 
 const entityFieldLabels = {
 	fullName: 'Full Name',
@@ -70,16 +69,15 @@ export const formatValue = (
 	}
 };
 
-type Schemas =
-	| PortfolioCreateSchema
-	| TenantCreateSchema
-	| ExpenseCreateSchema
-	| LeaseInvoiceCreateSchema
-	| LeaseCreateSchema;
+type Schemas = PortfolioCreateSchema &
+	TenantCreateSchema &
+	ExpenseCreateSchema &
+	LeaseInvoiceCreateSchema &
+	LeaseCreateSchema;
 
-type Keys = keyof Union.IntersectOf<Schemas>;
-
-type FieldLabels = Partial<Union.Strict<Record<Keys, string>>> & {
+type Keys = keyof Schemas;
+type KeysObj = Record<Keys, string>;
+type FieldLabels = Partial<KeysObj> & {
 	key: string; // FileDto
 	dueDurationMonths: string;
 	dueDurationDays: string;
