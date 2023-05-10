@@ -1,6 +1,6 @@
 import { beforeEach, describe, it, vi } from 'vitest';
 
-import { bootstrap } from './src/create-app';
+import { bootstrap } from '../src/create-app';
 
 import type { INestApplication } from '@nestjs/common';
 
