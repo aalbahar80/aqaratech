@@ -31,20 +31,11 @@ const config = {
 			$i18n: 'src/i18n',
 		},
 	},
-	vitePlugin: {
-		// https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#inspector
-		/** shortcut: meta + shift */
-		inspector: {
-			toggleKeyCombo: 'control-alt-s', // 'meta-shift' does not work on linux/firefox
-			// showToggleButton: 'active',
-			// showToggleButton: 'always',
-			holdMode: true,
-			toggleButtonPos: 'bottom-right',
-		},
-		experimental: {
-			// 	prebundleSvelteLibraries: true,
-		},
-	},
+	// vitePlugin: {
+	// 	experimental: {
+	// 		// 	prebundleSvelteLibraries: true,
+	// 	},
+	// },
 	onwarn: (
 		/** @type {import('svelte/types/compiler/interfaces').Warning} */
 		warning,
