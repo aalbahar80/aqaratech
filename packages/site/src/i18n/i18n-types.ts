@@ -382,7 +382,7 @@ type RootTranslation = {
 				 */
 				description: string
 				/**
-				 * H​a​s​s​l​e​-​f​r​e​e​ ​r​e​n​t​a​l​s
+				 * R​e​s​i​d​e​n​t​ ​C​e​n​t​e​r
 				 */
 				name: string
 				/**
@@ -391,6 +391,16 @@ type RootTranslation = {
 				summary: string
 			}
 		}
+	}
+	misc: {
+		/**
+		 * T​h​a​n​k​ ​y​o​u​ ​f​o​r​ ​y​o​u​r​ ​p​a​y​m​e​n​t​.
+		 */
+		invoiceSuccess: string
+		/**
+		 * P​l​e​a​s​e​ ​l​o​g​ ​i​n​ ​t​o​ ​v​i​e​w​ ​y​o​u​r​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​a​n​d​ ​p​r​i​n​t​ ​y​o​u​r​ ​i​n​v​o​i​c​e​.
+		 */
+		tenantLogin: string
 	}
 	entity: {
 		user: {
@@ -590,7 +600,7 @@ type RootTranslation = {
 		 */
 		updatedAt: string
 		/**
-		 * P​o​s​t​ ​A​t
+		 * D​u​e​ ​d​a​t​e
 		 */
 		postAt: string
 		/**
@@ -706,7 +716,7 @@ type RootTranslation = {
 		 */
 		isPaid: string
 		/**
-		 * D​u​e​ ​A​t
+		 * P​a​s​t​ ​d​u​e​ ​d​a​t​e
 		 */
 		dueAt: string
 		/**
@@ -722,7 +732,7 @@ type RootTranslation = {
 		 */
 		dueDurationDays: string
 		/**
-		 * P​a​i​d​ ​A​t
+		 * P​a​y​m​e​n​t​ ​d​a​t​e
 		 */
 		paidAt: string
 		/**
@@ -1230,7 +1240,7 @@ type RootTranslation = {
 		 */
 		range: string
 		/**
-		 * R​a​n​g​e​ ​k​i​n​d
+		 * F​i​l​t​e​r​ ​b​y
 		 */
 		rangeKind: string
 		/**
@@ -1717,7 +1727,7 @@ export type TranslationFunctions = {
 				 */
 				description: () => LocalizedString
 				/**
-				 * Hassle-free rentals
+				 * Resident Center
 				 */
 				name: () => LocalizedString
 				/**
@@ -1726,6 +1736,16 @@ export type TranslationFunctions = {
 				summary: () => LocalizedString
 			}
 		}
+	}
+	misc: {
+		/**
+		 * Thank you for your payment.
+		 */
+		invoiceSuccess: () => LocalizedString
+		/**
+		 * Please log in to view your payment history and print your invoice.
+		 */
+		tenantLogin: () => LocalizedString
 	}
 	entity: {
 		user: {
@@ -1925,7 +1945,7 @@ export type TranslationFunctions = {
 		 */
 		updatedAt: () => LocalizedString
 		/**
-		 * Post At
+		 * Due date
 		 */
 		postAt: () => LocalizedString
 		/**
@@ -2041,7 +2061,7 @@ export type TranslationFunctions = {
 		 */
 		isPaid: () => LocalizedString
 		/**
-		 * Due At
+		 * Past due date
 		 */
 		dueAt: () => LocalizedString
 		/**
@@ -2057,7 +2077,7 @@ export type TranslationFunctions = {
 		 */
 		dueDurationDays: () => LocalizedString
 		/**
-		 * Paid At
+		 * Payment date
 		 */
 		paidAt: () => LocalizedString
 		/**
@@ -2565,7 +2585,7 @@ export type TranslationFunctions = {
 		 */
 		range: () => LocalizedString
 		/**
-		 * Range kind
+		 * Filter by
 		 */
 		rangeKind: () => LocalizedString
 		/**
