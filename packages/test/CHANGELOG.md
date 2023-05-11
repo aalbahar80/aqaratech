@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.26.1
+
+### Patch Changes
+
+- a4e255426: omit fields from tenant portal
+
 ## 3.26.0
 
 ### Minor Changes

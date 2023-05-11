@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.26.1
+
+### Patch Changes
+
+- a4e255426: omit fields from tenant portal
+- Updated dependencies [a4e255426]
+  - @self/utils@3.26.1
+
 ## 2.26.0
 
 ### Minor Changes

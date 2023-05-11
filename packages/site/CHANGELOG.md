@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.29.2
+
+### Patch Changes
+
+- a4e255426: omit fields from tenant portal
+
 ## 2.29.1
 
 ### Patch Changes
