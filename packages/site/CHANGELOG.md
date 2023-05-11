@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.29.8
+
+### Patch Changes
+
+- 150bf74c1: decrease owner name font size #EXE-56
+- 7a229a4ca: reduce donut chart thickness
+
 ## 2.29.7
 
 ### Patch Changes
