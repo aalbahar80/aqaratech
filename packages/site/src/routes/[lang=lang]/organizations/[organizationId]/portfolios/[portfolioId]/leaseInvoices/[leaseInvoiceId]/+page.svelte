@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 
+	import L from '$i18n/i18n-svelte';
 	import AutoDetailsPane from '$lib/components/AutoDetailsPane.svelte';
 
 	export let data: PageData;
@@ -40,7 +41,6 @@
 	details={obj}
 	{keys}
 	fieldLabels={{
-		// FIX: i18n
-		id: 'Invoice ID',
+		id: $L.other.invoiceId(),
 	}}
 />

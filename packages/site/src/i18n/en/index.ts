@@ -189,6 +189,7 @@ const en: BaseTranslation = {
 		unspecifiedUnit: 'Unspecified unit',
 		unspecifiedProperty: 'Unspecified property',
 		typeMore: 'Type a few more characters',
+		invoiceId: 'Invoice ID',
 	},
 };
 

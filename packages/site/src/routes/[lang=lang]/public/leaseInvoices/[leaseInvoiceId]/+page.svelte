@@ -30,8 +30,7 @@
 	details={data.leaseInvoice}
 	keys={['amount', 'postAt', 'paidAt', 'id']}
 	fieldLabels={{
-		// FIX: i18n
-		id: 'Invoice ID',
+		id: $L.other.invoiceId(),
 	}}
 />
 

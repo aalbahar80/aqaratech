@@ -298,6 +298,7 @@ const ar: Translation = {
 		unspecifiedUnit: 'وحدة غير محددة',
 		unspecifiedProperty: 'عقار غير محدد',
 		typeMore: 'اكتب بضعة أحرف أخرى',
+		invoiceId: 'رقم الفاتورة',
 	},
 };
 

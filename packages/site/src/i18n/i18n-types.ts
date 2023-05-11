@@ -1355,6 +1355,10 @@ type RootTranslation = {
 		 * T​y​p​e​ ​a​ ​f​e​w​ ​m​o​r​e​ ​c​h​a​r​a​c​t​e​r​s
 		 */
 		typeMore: string
+		/**
+		 * I​n​v​o​i​c​e​ ​I​D
+		 */
+		invoiceId: string
 	}
 }
 
@@ -2700,6 +2704,10 @@ export type TranslationFunctions = {
 		 * Type a few more characters
 		 */
 		typeMore: () => LocalizedString
+		/**
+		 * Invoice ID
+		 */
+		invoiceId: () => LocalizedString
 	}
 }
 
