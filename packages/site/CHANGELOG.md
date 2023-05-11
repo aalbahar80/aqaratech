@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.29.4
+
+### Patch Changes
+
+- 7bf140df1: enable locale switch on public invoice page
+
 ## 2.29.3
 
 ### Patch Changes
