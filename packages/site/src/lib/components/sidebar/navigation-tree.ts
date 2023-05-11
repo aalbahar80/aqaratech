@@ -55,6 +55,7 @@ export const getNavigationTree = (
 
 	tree.push(localeSwitch);
 
+	// Login
 	const login = {
 		name: LL.buttons.login(),
 		href: LOGIN,
@@ -67,10 +68,15 @@ export const getNavigationTree = (
 		},
 	};
 
-	// FIX: determine if home page, return appropriate nav tree
-	if (isHomeRoute(route)) {
+	// Add a login button:
+	// - when their is no user.
+	// - when on the home page regardless of user.
+	if (!user || isHomeRoute(route)) {
 		tree.splice(0, 0, login);
+	}
 
+	// Add landing links when on the home page and return.
+	if (isHomeRoute(route)) {
 		landingLinks(LL).forEach((link) => {
 			tree.splice(0, 0, {
 				name: link.label,
@@ -81,8 +87,9 @@ export const getNavigationTree = (
 		return tree;
 	}
 
+	// No user, not on landing page. Return.
 	if (!user) {
-		return [login];
+		return tree;
 	}
 
 	const langParam = {
