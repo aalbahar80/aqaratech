@@ -16,7 +16,7 @@
 
 <AutoDetailsPane
 	details={data.leaseInvoice}
-	keys={['amount', 'isPaid', 'postAt', 'dueAt', 'paidAt', 'memo', 'id']}
+	keys={['amount', 'postAt', 'paidAt', 'id']}
 />
 
 <Contact />
