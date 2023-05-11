@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.29.5
+
+### Patch Changes
+
+- 80d6d570d: add message to public invoice page
+
 ## 2.29.4
 
 ### Patch Changes

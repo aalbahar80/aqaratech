@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.26.2
+
+### Patch Changes
+
+- 80d6d570d: add message to public invoice page
+
 ## 3.26.1
 
 ### Patch Changes
