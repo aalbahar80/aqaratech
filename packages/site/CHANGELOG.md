@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.29.6
+
+### Patch Changes
+
+- 24fd577f0: rename id label to Invoice ID
+
 ## 2.29.5
 
 ### Patch Changes
