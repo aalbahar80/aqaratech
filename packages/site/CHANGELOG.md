@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.29.7
+
+### Patch Changes
+
+- f1b01a0e9: differentiate between overdue and late in arabic
+
 ## 2.29.6
 
 ### Patch Changes
