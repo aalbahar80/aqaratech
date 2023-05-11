@@ -6,6 +6,9 @@ export function pie(node: HTMLCanvasElement, data: Data) {
 	const chart = new Chart(node, {
 		type: 'doughnut',
 		data,
+		options: {
+			cutout: '70%',
+		},
 	});
 
 	return {
