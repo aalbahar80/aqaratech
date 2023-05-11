@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.29.3
+
+### Patch Changes
+
+- 2dbe20346: public invoice page - omit keys
+
 ## 2.29.2
 
 ### Patch Changes
