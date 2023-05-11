@@ -241,7 +241,7 @@ const ar: Translation = {
 	badge: {
 		notYetDue: 'لم يحن وقت السداد',
 		due: 'مستحق',
-		overdue: 'متأخر',
+		overdue: 'تجاوز موعد الاستحقاق',
 		paid: 'مدفوع',
 		unpaid: 'غير مدفوع',
 
