@@ -29,6 +29,10 @@
 <AutoDetailsPane
 	details={data.leaseInvoice}
 	keys={['amount', 'postAt', 'paidAt', 'id']}
+	fieldLabels={{
+		// FIX: i18n
+		id: 'Invoice ID',
+	}}
 />
 
 {#if data.leaseInvoice.isPaid && !$page.data.user}

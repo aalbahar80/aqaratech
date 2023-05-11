@@ -39,4 +39,8 @@
 <AutoDetailsPane
 	details={obj}
 	{keys}
+	fieldLabels={{
+		// FIX: i18n
+		id: 'Invoice ID',
+	}}
 />

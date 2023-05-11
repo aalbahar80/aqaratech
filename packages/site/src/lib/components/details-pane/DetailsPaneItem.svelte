@@ -7,13 +7,16 @@
 
 	export let key: string;
 	export let value: unknown;
+
+	/** A label to display for the key. If not provided, a label will be generated from the key. */
+	export let label: string | undefined = undefined;
 </script>
 
 <div
 	class="row"
 	data-testid={key}
 >
-	<dt class="label">{getIntlLabel(key)}</dt>
+	<dt class="label">{label ?? getIntlLabel(key)}</dt>
 	<dd
 		class="definition"
 		data-testid={value ?? ''}
