@@ -24,7 +24,9 @@ test('can be submitted with minimal fields', async ({ org, page }) => {
 	});
 
 	await formPage.goto();
-	await formPage.fillForm(fields);
+	await formPage.fillForm(fields, {
+		'Full organization name': fields.fullName,
+	});
 	await formPage.save();
 
 	await formPage.verifyDetails(fields);
@@ -42,7 +44,10 @@ test('can be submitted with all fields', async ({ org, page }) => {
 		fixtures: { org },
 	});
 	await formPage.goto();
-	await formPage.fillForm(fields);
+	await formPage.fillForm(fields, {
+		'Full organization name': fields.fullName,
+		'Short organization name': fields.label,
+	});
 	await formPage.save();
 
 	await formPage.verifyDetails(fields);

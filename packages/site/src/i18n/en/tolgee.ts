@@ -163,6 +163,7 @@ export const tolgee = {
 		},
 	},
 	misc: {
+		contactOrg: 'Please contact your organization to request access.',
 		invoiceSuccess: 'Thank you for your payment.',
 		searchByName: 'Search by Name',
 		tenantLogin:

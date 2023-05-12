@@ -209,7 +209,9 @@ test('due duration fields should not be viewable in create form', async ({
 
 	await page.goto(url);
 
-	await expect(page.getByLabel(getLabel('fullName'))).toBeVisible();
+	await expect(
+		page.getByLabel(getLabel('Full organization name')),
+	).toBeVisible();
 	await expect(page.getByLabel(months)).toBeHidden();
 	await expect(page.getByLabel(days)).toBeHidden();
 });

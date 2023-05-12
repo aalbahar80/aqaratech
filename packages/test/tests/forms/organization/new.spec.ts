@@ -23,7 +23,9 @@ test('can be submitted with minimal fields', async ({ org, page }) => {
 	});
 
 	await formPage.goto();
-	await formPage.fillForm(organization);
+	await formPage.fillForm(organization, {
+		'Full organization name': organization.fullName,
+	});
 
 	const responsePromise = page.waitForResponse(
 		(res) => res.request().method() === 'POST',
@@ -51,7 +53,10 @@ test('can be submitted with all fields', async ({ org, page }) => {
 	});
 
 	await formPage.goto();
-	await formPage.fillForm(organization);
+	await formPage.fillForm(organization, {
+		'Full organization name': organization.fullName,
+		'Short organization name': organization.label,
+	});
 
 	const responsePromise = page.waitForResponse(
 		(res) => res.request().method() === 'POST',

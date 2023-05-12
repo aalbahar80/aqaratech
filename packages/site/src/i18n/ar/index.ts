@@ -178,6 +178,7 @@ const ar: Translation = {
 		features: 'مميزات',
 		pricing: 'التسعير',
 		faq: 'أسئلة متكررة',
+		start: 'ابدأ',
 	},
 	general: {
 		name: 'الاسم',
@@ -299,6 +300,9 @@ const ar: Translation = {
 		unspecifiedProperty: 'عقار غير محدد',
 		typeMore: 'اكتب بضعة أحرف أخرى',
 		invoiceId: 'رقم الفاتورة',
+		iAmA: 'أنا',
+		chooseRole: 'اختر نوع المستخدم',
+		welcomeToAqaratech: 'مرحبًا بك في عقاراتك',
 	},
 };
 

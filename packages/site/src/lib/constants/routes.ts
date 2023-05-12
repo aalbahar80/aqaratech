@@ -17,3 +17,8 @@ export const NEW_ORGANIZATION = (locale: Locales) =>
 			lang: locale,
 		},
 	});
+
+export const CONTACT_ORG = '/contact-org';
+
+export const withLocale = (path: string, locale: Locales) =>
+	`/${locale}${path}`;

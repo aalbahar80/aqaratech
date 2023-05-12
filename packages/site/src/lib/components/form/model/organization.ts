@@ -16,10 +16,12 @@ export const organizationFormModel = () =>
 		updateSchema: organizationSchema,
 		fields: {
 			fullName: createFormField('fullName', {
+				label: 'Full organization name',
 				required: true,
 			}),
 
 			label: createFormField('label', {
+				label: 'Short organization name',
 				hint: labelHint(),
 			}),
 

@@ -10,14 +10,13 @@ import type { LoadEvent } from '@sveltejs/kit';
 import { landingLinks } from '$lib/components/navbar/landing-links';
 import { getDashboardLinks } from '$lib/components/sidebar/dashboard-links';
 import { PREF_LOCALE } from '$lib/constants/misc';
-import { LOGIN, LOGOUT, NEW_ORGANIZATION } from '$lib/constants/routes';
+import { LOGIN, LOGOUT, withLocale } from '$lib/constants/routes';
 import { LOCALE_LABELS } from '$lib/i18n/locale-labels';
 import { replaceLocaleInUrl } from '$lib/i18n/replace-local-url';
 import { isHomeRoute } from '$lib/utils/route-utils';
 import HeroiconsBanknotes from '~icons/heroicons/banknotes';
 // import HeroiconsCalculator from '~icons/heroicons/calculator';
 // import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
-import HeroiconsPlus from '~icons/heroicons/plus';
 import HeroiconsReceiptPercent from '~icons/heroicons/receipt-percent';
 import HeroiconsUserGroup from '~icons/heroicons/user-group';
 import HeroiconsWrench from '~icons/heroicons/wrench';
@@ -122,9 +121,8 @@ export const getNavigationTree = (
 	if (!user.role) {
 		// New users have no role yet. Render basic nav links.
 		tree.splice(0, 0, {
-			name: [LL.buttons.new(), LL.entity.organization.singular()].join(' '),
-			href: NEW_ORGANIZATION(locale),
-			icon: HeroiconsPlus,
+			name: LL.nav.start(),
+			href: withLocale('/welcome', locale),
 			divided: true,
 		});
 		return tree;

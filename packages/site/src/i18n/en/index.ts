@@ -61,6 +61,7 @@ const en: BaseTranslation = {
 		features: 'Features',
 		pricing: 'Pricing',
 		faq: 'FAQs',
+		start: 'Start',
 	},
 	general: {
 		name: 'Name',
@@ -190,6 +191,9 @@ const en: BaseTranslation = {
 		unspecifiedProperty: 'Unspecified property',
 		typeMore: 'Type a few more characters',
 		invoiceId: 'Invoice ID',
+		iAmA: 'I am a',
+		chooseRole: 'Choose a role',
+		welcomeToAqaratech: 'Welcome to Aqaratech',
 	},
 };
 

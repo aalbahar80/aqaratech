@@ -48,10 +48,14 @@ export class FormPage {
 		await expect(this.page).toHaveURL(formUrl);
 	}
 
-	fillForm = async (fields: Record<string, unknown>) => {
+	fillForm = async (
+		fields: Record<string, unknown>,
+		/** Opt-out of automically inferring labels. */
+		customFields?: Record<string, unknown>,
+	) => {
 		const labeled = R.mapKeys(fields, (key) => getLabel(key));
 
-		for (const [key, value] of Object.entries(labeled)) {
+		for (const [key, value] of Object.entries(customFields ?? labeled)) {
 			// The key may be followed by an asterisk.
 			const keyRegex = key;
 

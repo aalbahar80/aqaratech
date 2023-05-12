@@ -10,6 +10,7 @@ import { globalStoragePath } from '../../utils/global-storage-path';
 import { test } from '../api/api-fixtures';
 import { siteURL } from '../api/fixtures/site-url';
 import { testUsers } from '../api/fixtures/users/test-users';
+import { SidebarModel } from '../components/sidebar/sidebar-model';
 
 // "New user" is a user that is logging in for the first time.
 
@@ -18,6 +19,8 @@ const file = testUsers.freshUser.storageStateFilename;
 const storagePath = path.join(globalStoragePath, file);
 
 test.use({ storageState: storagePath });
+
+const contactOrg = 'Please contact your organization';
 
 test.describe('new user', () => {
 	test.beforeEach(async () => {
@@ -33,15 +36,65 @@ test.describe('new user', () => {
 		await loginButton.click();
 
 		await expect(page).toHaveURL('/en/welcome');
+
+		await expect(page.getByText('Choose a role')).toBeVisible();
 	});
 
-	test('is redirected to /welcome if no role (hero)', async ({ page }) => {
+	test('is redirected to /welcome if no role (signup button)', async ({
+		page,
+	}) => {
 		await page.goto('/');
 
 		await page
 			.getByTestId('hero')
 			.getByRole('link', { name: 'Sign up' })
 			.click();
+
+		await expect(page).toHaveURL('/en/welcome');
+	});
+
+	test('no role - tenant - prompted to contact org', async ({ page }) => {
+		await page.goto('/en/welcome');
+
+		await page.getByRole('link', { name: 'Tenant' }).click();
+
+		await expect(page).toHaveURL('/en/contact-org');
+		await expect(page.getByText(contactOrg)).toBeVisible();
+	});
+
+	test('no role - portfolio - prompted to contact org', async ({ page }) => {
+		await page.goto('/en/welcome');
+
+		await page.getByRole('link', { name: 'Owner' }).click();
+
+		await expect(page).toHaveURL('/en/contact-org');
+		await expect(page.getByText(contactOrg)).toBeVisible();
+	});
+
+	test('no role - organization - prompted to contact org', async ({ page }) => {
+		await page.goto('/en/welcome');
+
+		await page.getByRole('link', { name: 'Organization', exact: true }).click();
+
+		await expect(page).toHaveURL('/en/organizations/new');
+	});
+
+	test('no role - can get to welcome page from sidebar', async ({
+		page,
+		isMobile,
+	}) => {
+		await page.goto('/en/organizations/new');
+		if (isMobile) {
+			const sidebar = new SidebarModel(page);
+			await sidebar.open();
+		}
+		await page.getByRole('link', { name: 'Account' }).click();
+
+		if (isMobile) {
+			const sidebar = new SidebarModel(page);
+			await sidebar.open();
+		}
+		await page.getByRole('link', { name: 'Start' }).click();
 
 		await expect(page).toHaveURL('/en/welcome');
 	});

@@ -394,6 +394,10 @@ type RootTranslation = {
 	}
 	misc: {
 		/**
+		 * P​l​e​a​s​e​ ​c​o​n​t​a​c​t​ ​y​o​u​r​ ​o​r​g​a​n​i​z​a​t​i​o​n​ ​t​o​ ​r​e​q​u​e​s​t​ ​a​c​c​e​s​s​.
+		 */
+		contactOrg: string
+		/**
 		 * T​h​a​n​k​ ​y​o​u​ ​f​o​r​ ​y​o​u​r​ ​p​a​y​m​e​n​t​.
 		 */
 		invoiceSuccess: string
@@ -985,6 +989,10 @@ type RootTranslation = {
 		 * F​A​Q​s
 		 */
 		faq: string
+		/**
+		 * S​t​a​r​t
+		 */
+		start: string
 	}
 	general: {
 		/**
@@ -1363,6 +1371,18 @@ type RootTranslation = {
 		 * I​n​v​o​i​c​e​ ​I​D
 		 */
 		invoiceId: string
+		/**
+		 * I​ ​a​m​ ​a
+		 */
+		iAmA: string
+		/**
+		 * C​h​o​o​s​e​ ​a​ ​r​o​l​e
+		 */
+		chooseRole: string
+		/**
+		 * W​e​l​c​o​m​e​ ​t​o​ ​A​q​a​r​a​t​e​c​h
+		 */
+		welcomeToAqaratech: string
 	}
 }
 
@@ -1746,6 +1766,10 @@ export type TranslationFunctions = {
 		}
 	}
 	misc: {
+		/**
+		 * Please contact your organization to request access.
+		 */
+		contactOrg: () => LocalizedString
 		/**
 		 * Thank you for your payment.
 		 */
@@ -2338,6 +2362,10 @@ export type TranslationFunctions = {
 		 * FAQs
 		 */
 		faq: () => LocalizedString
+		/**
+		 * Start
+		 */
+		start: () => LocalizedString
 	}
 	general: {
 		/**
@@ -2716,6 +2744,18 @@ export type TranslationFunctions = {
 		 * Invoice ID
 		 */
 		invoiceId: () => LocalizedString
+		/**
+		 * I am a
+		 */
+		iAmA: () => LocalizedString
+		/**
+		 * Choose a role
+		 */
+		chooseRole: () => LocalizedString
+		/**
+		 * Welcome to Aqaratech
+		 */
+		welcomeToAqaratech: () => LocalizedString
 	}
 }
 
