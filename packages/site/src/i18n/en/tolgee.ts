@@ -164,6 +164,7 @@ export const tolgee = {
 	},
 	misc: {
 		invoiceSuccess: 'Thank you for your payment.',
+		searchByName: 'Search by Name',
 		tenantLogin:
 			'Please log in to view your payment history and print your invoice.',
 	},

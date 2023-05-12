@@ -157,6 +157,7 @@ export const tolgee = {
 	},
 	misc: {
 		invoiceSuccess: 'شكرا على سداد الفاتورة.',
+		searchByName: 'بحث بالاسم',
 		tenantLogin: 'يرجى تسجيل الدخول لعرض عمليات التسديد وطباعة الفاتورة.',
 	},
 };

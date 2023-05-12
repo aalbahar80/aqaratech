@@ -34,7 +34,7 @@
 	>
 		<div class="flex items-center justify-between self-stretch pb-4">
 			<div class="block text-sm font-medium text-gray-700">
-				{$L.general.name()}
+				{$L.misc.searchByName()}
 			</div>
 
 			<RoleGuard roles={['ORGADMIN']}>

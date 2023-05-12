@@ -398,6 +398,10 @@ type RootTranslation = {
 		 */
 		invoiceSuccess: string
 		/**
+		 * S​e​a​r​c​h​ ​b​y​ ​N​a​m​e
+		 */
+		searchByName: string
+		/**
 		 * P​l​e​a​s​e​ ​l​o​g​ ​i​n​ ​t​o​ ​v​i​e​w​ ​y​o​u​r​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​a​n​d​ ​p​r​i​n​t​ ​y​o​u​r​ ​i​n​v​o​i​c​e​.
 		 */
 		tenantLogin: string
@@ -1746,6 +1750,10 @@ export type TranslationFunctions = {
 		 * Thank you for your payment.
 		 */
 		invoiceSuccess: () => LocalizedString
+		/**
+		 * Search by Name
+		 */
+		searchByName: () => LocalizedString
 		/**
 		 * Please log in to view your payment history and print your invoice.
 		 */
