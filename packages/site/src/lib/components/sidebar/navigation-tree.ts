@@ -95,10 +95,18 @@ export const getNavigationTree = (
 		lang: locale,
 	};
 
-	tree.splice(
-		0,
-		0,
-		{
+	tree.splice(0, 0, {
+		name: LL.buttons.logout(),
+		href: LOGOUT,
+		icon: HeroiconsOutlineLogout,
+		linkOptions: {
+			// Explicitly declare as external link to avoid a client-side error "Not Found".
+			'data-sveltekit-reload': '',
+		},
+	});
+
+	if (user.role) {
+		tree.splice(0, 0, {
 			name: LL.nav.account(),
 			href: `/${locale}/users/${user.id}/roles`,
 			icon: HeroiconsOutlineUser,
@@ -106,24 +114,12 @@ export const getNavigationTree = (
 			linkOptions: {
 				'data-sveltekit-reload': '',
 			},
-		},
-		{
-			name: LL.buttons.logout(),
-			href: LOGOUT,
-			icon: HeroiconsOutlineLogout,
-			linkOptions: {
-				// Explicitly declare as external link to avoid a client-side error "Not Found".
-				'data-sveltekit-reload': '',
-			},
-		},
-	);
-
-	if (!user.role) {
-		// New users have no role yet. Render basic nav links.
+		});
+	} else {
+		// New users have no role yet. Return with basic nav links.
 		tree.splice(0, 0, {
 			name: LL.nav.start(),
 			href: withLocale('/welcome', locale),
-			divided: true,
 		});
 		return tree;
 	}

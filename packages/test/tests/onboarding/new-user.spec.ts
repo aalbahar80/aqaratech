@@ -84,11 +84,6 @@ test.describe('new user', () => {
 		isMobile,
 	}) => {
 		await page.goto('/en/organizations/new');
-		if (isMobile) {
-			const sidebar = new SidebarModel(page);
-			await sidebar.open();
-		}
-		await page.getByRole('link', { name: 'Account' }).click();
 
 		if (isMobile) {
 			const sidebar = new SidebarModel(page);
