@@ -27,7 +27,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.63",
+		"@iconify/json": "2.2.64",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -72,7 +72,7 @@
 		"rollup-plugin-visualizer": "5.9.0",
 		"sorcery": "0.11.0",
 		"source-map-support": "0.5.21",
-		"stripe": "12.4.0",
+		"stripe": "12.5.0",
 		"svelte": "3.59.1",
 		"svelte-check": "3.3.2",
 		"svelte-french-toast": "1.0.3",
