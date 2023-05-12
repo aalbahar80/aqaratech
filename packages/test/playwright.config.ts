@@ -96,6 +96,11 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			},
 		},
 		{
+			name: 'billing',
+			testMatch: [...TESTS.BILLING],
+			use: devices['Desktop Chrome'],
+		},
+		{
 			name: 'site:chrome',
 			testIgnore: [...TESTS.NON_SITE, ...TESTS.MOBILE_ONLY],
 			use: devices['Desktop Chrome'],
@@ -150,11 +155,6 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 				'**/tests/remove/**/*.spec.ts', // pagination assertion fails
 			],
 			timeout: BASE_TIMEOUT * 2,
-		},
-		{
-			name: 'billing',
-			testMatch: [...TESTS.BILLING],
-			use: devices['Desktop Chrome'],
 		},
 	],
 };
