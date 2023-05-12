@@ -53,7 +53,7 @@
 			<RoleGuard roles={['ORGADMIN']}>
 				<PortfolioSelect
 					defaultLabel={data.portfolio.title}
-					comboboxInputClass="font-bold leading-7 text-gray-900 sm:tracking-tight"
+					comboboxInputClass="text-sm leading-7 text-gray-900 sm:tracking-tight"
 					on:select={async (e) => {
 						if (!$page.route.id) {
 							throw new Error('Route id is not defined');
@@ -87,7 +87,7 @@
 				/>
 			</RoleGuard>
 		{:else}
-			<h2 class="font-bold leading-7 text-gray-900 sm:tracking-tight">
+			<h2 class="text-sm leading-7 text-gray-900 sm:tracking-tight">
 				{data.portfolio.title}
 			</h2>
 		{/if}
