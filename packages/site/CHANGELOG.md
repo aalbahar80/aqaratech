@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.30.1
+
+### Patch Changes
+
+- 8871c51dc: rename panel from Name to Search By Name #EXE-59
+- 5d42385a5: further reduce owner name to 14px
+
 ## 2.30.0
 
 ### Minor Changes
