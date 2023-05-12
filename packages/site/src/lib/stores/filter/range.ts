@@ -1,8 +1,7 @@
 import debounce from 'debounce';
 
 import { invalidate } from '$app/navigation';
-
-import type { LeaseInvoiceDto } from '$api/openapi';
+import type { RangeKind } from '@self/utils';
 
 import { defaultRange } from '$lib/components/charts/utils/date-range';
 import { DateRange } from '$lib/models/classes/Range.class';
@@ -56,5 +55,4 @@ const debouncedInvalidate = debounce(async () => {
 }, 150);
 
 // range kind
-type RangeKind = Extract<keyof LeaseInvoiceDto, 'postAt' | 'paidAt'>;
 export const rangeKind = writable<RangeKind>('postAt');

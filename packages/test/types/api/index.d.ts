@@ -2413,6 +2413,15 @@ export interface PropertyDto {
 /**
  *
  * @export
+ */
+export declare const RangeKind: {
+	readonly PostAt: 'postAt';
+	readonly PaidAt: 'paidAt';
+};
+export type RangeKind = (typeof RangeKind)[keyof typeof RangeKind];
+/**
+ *
+ * @export
  * @interface RoleDto
  */
 export interface RoleDto {

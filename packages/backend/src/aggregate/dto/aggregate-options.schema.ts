@@ -1,6 +1,11 @@
 import { z } from 'zod';
 
-import { endOfMonthN, startOfMonthN, zodDateOnly } from '@self/utils';
+import {
+	RangeKind,
+	endOfMonthN,
+	startOfMonthN,
+	zodDateOnly,
+} from '@self/utils';
 
 export const aggregateOptionsSchema = z
 	.object({
@@ -8,6 +13,9 @@ export const aggregateOptionsSchema = z
 		end: zodDateOnly.default(() => endOfMonthN(0).slice(0, 10)),
 		propertyId: z.string().uuid().optional(),
 		unitId: z.string().uuid().optional(),
+		rangeKind: z
+			.enum(['postAt', 'paidAt'] as const satisfies Readonly<RangeKind[]>)
+			.default('postAt'),
 	})
 	.strict();
 

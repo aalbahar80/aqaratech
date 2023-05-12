@@ -9,7 +9,7 @@ export const groupByMonth = (
 ) => {
 	// group by year-month
 	const grouped = R.groupBy(records, (record) =>
-		isoToYearMonth(record.postAt.toISOString()),
+		isoToYearMonth(record.date.toISOString()),
 	);
 
 	// sum up the amounts
@@ -40,7 +40,7 @@ export const groupByMonth = (
 
 interface Records {
 	amount: number;
-	postAt: Date;
+	date: Date;
 }
 
 interface GroupByMonthOptions {

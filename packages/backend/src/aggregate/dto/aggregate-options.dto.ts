@@ -1,5 +1,6 @@
 import { ApiPropertyOptional, OmitType } from '@nestjs/swagger';
 
+import { RangeKind } from '@self/utils';
 import {
 	AggregateOptionsExpensesSchema,
 	AggregateOptionsSchema,
@@ -17,6 +18,12 @@ export class AggregateOptionsDto
 
 	propertyId?: string;
 	unitId?: string;
+
+	@ApiPropertyOptional({
+		enum: ['postAt', 'paidAt'] satisfies RangeKind[],
+		enumName: 'RangeKind',
+	})
+	rangeKind: RangeKind;
 }
 
 /**
@@ -35,7 +42,7 @@ export class AggregateOptionsDto
  * Otherwise identical to `AggregateOptionsDto`.
  */
 export class AggregateOptionsExpensesDto
-	extends OmitType(AggregateOptionsDto, ['propertyId', 'unitId'])
+	extends OmitType(AggregateOptionsDto, ['propertyId', 'unitId', 'rangeKind'])
 	implements
 		Exactly<AggregateOptionsExpensesSchema, AggregateOptionsExpensesDto>
 {

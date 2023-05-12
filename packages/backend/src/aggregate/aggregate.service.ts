@@ -45,7 +45,7 @@ export class AggregateService {
 					{
 						organizationId,
 						portfolioId,
-						postAt: { gte: options.start, lte: options.end },
+						[options.rangeKind]: { gte: options.start, lte: options.end },
 					},
 					this.leaseInvoicesService.parseLocationFilter({
 						filter: {
@@ -57,10 +57,18 @@ export class AggregateService {
 					this.leaseInvoicesService.parseIsPaidFilter({ paidStatus }),
 				],
 			},
-			select: { amount: true, postAt: true },
+			select: { amount: true, postAt: true, paidAt: true },
 		});
 
-		const grouped = groupByMonth(leaseInvoices, {
+		const records = leaseInvoices
+			.map((invoice) => ({
+				amount: invoice.amount,
+				date: invoice[options.rangeKind],
+			}))
+			// Calling .filter for type narrowing. We've already filtered out null paidAt's in the db query.
+			.filter((n): n is { amount: number; date: Date } => n.date !== null);
+
+		const grouped = groupByMonth(records, {
 			includeEmptyMonths: true,
 			start: options.start,
 			end: options.end,
@@ -127,7 +135,12 @@ export class AggregateService {
 			options,
 		});
 
-		const grouped = groupByMonth(expenses, {
+		const records = expenses.map((expense) => ({
+			amount: expense.amount,
+			date: expense.postAt,
+		}));
+
+		const grouped = groupByMonth(records, {
 			includeEmptyMonths: true,
 			start: options.start,
 			end: options.end,

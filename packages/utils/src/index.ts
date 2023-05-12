@@ -164,3 +164,4 @@ export type {
 	StringifyDateKeys,
 } from './types/date-as-string';
 export type { Mutable } from './types/mutable';
+export type { RangeKind } from './types/range-kind';

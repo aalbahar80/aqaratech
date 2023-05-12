@@ -1898,6 +1898,11 @@ paths:
           in: query
           schema:
             type: string
+        - name: rangeKind
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/RangeKind'
         - name: propertyId
           required: false
           in: query
@@ -2084,6 +2089,11 @@ paths:
           in: query
           schema:
             type: string
+        - name: rangeKind
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/RangeKind'
         - name: propertyId
           required: false
           in: query
@@ -4026,6 +4036,11 @@ components:
         - organizationId
         - createdAt
         - updatedAt
+    RangeKind:
+      type: string
+      enum:
+        - postAt
+        - paidAt
     GroupByMonthDto:
       type: object
       properties:

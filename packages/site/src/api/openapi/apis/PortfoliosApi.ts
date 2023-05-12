@@ -29,6 +29,7 @@ import type {
 	PaginatedUnitDto,
 	PaginatedUnitMinimalDto,
 	PortfolioDto,
+	RangeKind,
 	UpdatePortfolioDto,
 } from '../models';
 
@@ -153,6 +154,7 @@ export interface PortfoliosApiGetIncomeByMonthRequest {
 	portfolioId: string;
 	start?: string | undefined;
 	end?: string | undefined;
+	rangeKind?: RangeKind | undefined;
 	propertyId?: string | undefined;
 	unitId?: string | undefined;
 }
@@ -162,6 +164,7 @@ export interface PortfoliosApiGetOccupancyRequest {
 	portfolioId: string;
 	start?: string | undefined;
 	end?: string | undefined;
+	rangeKind?: RangeKind | undefined;
 	propertyId?: string | undefined;
 	unitId?: string | undefined;
 }
@@ -1090,6 +1093,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 			queryParameters['end'] = requestParameters.end;
 		}
 
+		if (requestParameters.rangeKind !== undefined) {
+			queryParameters['rangeKind'] = requestParameters.rangeKind;
+		}
+
 		if (requestParameters.propertyId !== undefined) {
 			queryParameters['propertyId'] = requestParameters.propertyId;
 		}
@@ -1168,6 +1175,10 @@ export class PortfoliosApi extends runtime.BaseAPI {
 
 		if (requestParameters.end !== undefined) {
 			queryParameters['end'] = requestParameters.end;
+		}
+
+		if (requestParameters.rangeKind !== undefined) {
+			queryParameters['rangeKind'] = requestParameters.rangeKind;
 		}
 
 		if (requestParameters.propertyId !== undefined) {

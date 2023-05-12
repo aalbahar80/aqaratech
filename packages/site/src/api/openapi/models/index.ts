@@ -2421,6 +2421,17 @@ export interface PropertyDto {
 	 */
 	label: string | null;
 }
+
+/**
+ *
+ * @export
+ */
+export const RangeKind = {
+	PostAt: 'postAt',
+	PaidAt: 'paidAt',
+} as const;
+export type RangeKind = (typeof RangeKind)[keyof typeof RangeKind];
+
 /**
  *
  * @export

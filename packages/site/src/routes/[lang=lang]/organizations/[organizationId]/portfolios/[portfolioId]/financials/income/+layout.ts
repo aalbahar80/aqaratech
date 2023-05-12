@@ -80,6 +80,7 @@ export const load: LayoutLoad = async ({
 			unitId: unitId === null ? undefined : unitId,
 			start,
 			end,
+			rangeKind: rangeKindFilter,
 		}),
 		api.portfolios.findAllLeaseInvoices({
 			id: params.portfolioId,
