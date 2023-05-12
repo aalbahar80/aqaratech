@@ -20,34 +20,28 @@ export const propertyFactory = Factory.Sync.makeFactoryWithRequired<
 		() => areas[Math.floor(Math.random() * areas.length)]?.[1] ?? null,
 	),
 
-	label: Factory.each(() => faker.address.streetAddress()),
+	label: Factory.each(() => faker.location.streetAddress()),
 
 	cost: null, // rm?
 
 	// address
-	block: Factory.each(() =>
-		faker.datatype.number({ min: 1, max: 13 }).toString(),
-	),
+	block: Factory.each(() => faker.number.int({ min: 1, max: 13 }).toString()),
 
 	street: `شارع ${faker.helpers.arrayElement([
-		faker.name.lastName(),
-		faker.datatype.number({ min: 1, max: 500 }).toString(),
+		faker.person.lastName(),
+		faker.number.int({ min: 1, max: 500 }).toString(),
 	])}`,
 
-	avenue: Factory.each(() =>
-		faker.datatype.number({ min: 1, max: 100 }).toString(),
-	),
+	avenue: Factory.each(() => faker.number.int({ min: 1, max: 100 }).toString()),
 
-	number: Factory.each(() =>
-		faker.datatype.number({ min: 1, max: 100 }).toString(),
-	),
+	number: Factory.each(() => faker.number.int({ min: 1, max: 100 }).toString()),
 
 	paci: Factory.each(() =>
-		faker.datatype.number({ min: 10000000, max: 19999999 }).toString(),
+		faker.number.int({ min: 10000000, max: 19999999 }).toString(),
 	),
 
 	parcel: Factory.each(() =>
-		faker.datatype.number({ min: 100, max: 999999 }).toString(),
+		faker.number.int({ min: 100, max: 999999 }).toString(),
 	),
 });
 

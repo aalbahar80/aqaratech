@@ -18,7 +18,7 @@ const base = Factory.Sync.makeFactoryWithRequired<
 	updatedAt: Factory.each(() => updatedAt()),
 
 	amount: Factory.each(
-		() => Math.round(faker.datatype.number({ min: 500, max: 3000 }) / 50) * 50,
+		() => Math.round(faker.number.int({ min: 500, max: 3000 }) / 50) * 50,
 	),
 
 	memo: Factory.each(() => faker.lorem.sentence()),
@@ -50,7 +50,7 @@ export const leaseInvoiceFactory = base
 			return null;
 		}
 
-		const dur = faker.datatype.number({ min: -10, max: 40 });
+		const dur = faker.number.int({ min: -10, max: 40 });
 
 		const paidAt = new Date(leaseInvoice.postAt);
 		paidAt.setDate(paidAt.getDate() + dur);

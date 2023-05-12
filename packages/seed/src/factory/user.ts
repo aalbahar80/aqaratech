@@ -12,7 +12,7 @@ export const userFactory = Factory.Sync.makeFactory<User>({
 	createdAt: Factory.each(() => createdAt()),
 	updatedAt: Factory.each(() => updatedAt()),
 
-	fullName: Factory.Sync.each(() => faker.name.fullName()),
+	fullName: Factory.Sync.each(() => faker.person.fullName()),
 
 	email: Factory.Sync.each(() => faker.internet.email()),
 });

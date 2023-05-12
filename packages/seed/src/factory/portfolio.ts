@@ -17,15 +17,17 @@ const base = Factory.Sync.makeFactoryWithRequired<Portfolio, 'organizationId'>({
 
 	fullName: Factory.each(() => {
 		const f = Math.random() > 0.5 ? faker : fakerAr;
-		return [f.name.firstName(), f.name.firstName(), f.name.lastName()].join(
-			' ',
-		);
+		return [
+			f.person.firstName(),
+			f.person.firstName(),
+			f.person.lastName(),
+		].join(' ');
 	}),
 
-	label: Factory.each(() => faker.name.jobTitle()),
+	label: Factory.each(() => faker.person.jobTitle()),
 
 	civilid: Factory.each(() =>
-		faker.datatype.number({ min: 200000000000, max: 399999999999 }).toString(),
+		faker.number.int({ min: 200000000000, max: 399999999999 }).toString(),
 	),
 
 	dob: Factory.each(() => fakeDate()),

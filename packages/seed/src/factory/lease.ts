@@ -21,15 +21,14 @@ const base = Factory.Sync.makeFactoryWithRequired<
 
 	end: Factory.each(() => fakeDate()),
 
-	license: Factory.each(() => faker.company.bs()),
+	license: Factory.each(() => faker.company.buzzPhrase()),
 
 	monthlyRent: Factory.each(
-		() => Math.round(faker.datatype.number({ min: 500, max: 3000 }) / 50) * 50,
+		() => Math.round(faker.number.int({ min: 500, max: 3000 }) / 50) * 50,
 	),
 
 	deposit: Factory.each(
-		() =>
-			Math.round(faker.datatype.number({ min: 500, max: 2000 }) / 100) * 100,
+		() => Math.round(faker.number.int({ min: 500, max: 2000 }) / 100) * 100,
 	),
 
 	canPay: Factory.each(() => faker.datatype.boolean()),

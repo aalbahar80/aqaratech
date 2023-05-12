@@ -8,4 +8,4 @@ import { TIMESPAN } from '../constants';
  * Format: YYYY-MM-DD
  */
 export const fakeDate = (span: number = TIMESPAN) =>
-	faker.date.past(span).toISOString().slice(0, 10);
+	faker.date.past({ years: span }).toISOString().slice(0, 10);

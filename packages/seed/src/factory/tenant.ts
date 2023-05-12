@@ -17,15 +17,17 @@ const base = Factory.Sync.makeFactoryWithRequired<Tenant, 'organizationId'>({
 
 	fullName: Factory.each(() => {
 		const f = Math.random() > 0.5 ? faker : fakerAr;
-		return [f.name.firstName(), f.name.firstName(), f.name.lastName()].join(
-			' ',
-		);
+		return [
+			f.person.firstName(),
+			f.person.firstName(),
+			f.person.lastName(),
+		].join(' ');
 	}),
 
 	label: Factory.each(() => null),
 
 	civilid: Factory.each(() =>
-		faker.datatype.number({ min: 200000000000, max: 399999999999 }).toString(),
+		faker.number.int({ min: 200000000000, max: 399999999999 }).toString(),
 	),
 
 	dob: Factory.each(() => fakeDate()),
@@ -33,13 +35,13 @@ const base = Factory.Sync.makeFactoryWithRequired<Tenant, 'organizationId'>({
 	phone: Factory.each(() => faker.phone.number('9#######')),
 
 	passportNum: Factory.each(() =>
-		faker.datatype.number({ min: 100000000, max: 999999999 }).toString(),
+		faker.number.int({ min: 100000000, max: 999999999 }).toString(),
 	),
 
-	nationality: Factory.each(() => faker.address.countryCode('alpha-3')),
+	nationality: Factory.each(() => faker.location.countryCode('alpha-3')),
 
 	residencyNum: Factory.each(() =>
-		faker.datatype.number({ min: 100000000, max: 999999999 }).toString(),
+		faker.number.int({ min: 100000000, max: 999999999 }).toString(),
 	),
 
 	residencyEnd: Factory.each(() => fakeDate()),
