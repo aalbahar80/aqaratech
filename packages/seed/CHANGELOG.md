@@ -1,5 +1,12 @@
 # @self/seed
 
+## 2.26.2
+
+### Patch Changes
+
+- Updated dependencies [89f15f208]
+  - @self/utils@3.27.0
+
 ## 2.26.1
 
 ### Patch Changes

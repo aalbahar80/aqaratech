@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.27.0
+
+### Minor Changes
+
+- 89f15f208: group income by range kind
+
 ## 3.26.1
 
 ### Patch Changes

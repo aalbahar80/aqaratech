@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.30.0
+
+### Minor Changes
+
+- 89f15f208: group income by range kind
+
 ## 2.29.8
 
 ### Patch Changes

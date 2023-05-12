@@ -1,5 +1,16 @@
 # @self/backend
 
+## 2.28.0
+
+### Minor Changes
+
+- 89f15f208: group income by range kind
+
+### Patch Changes
+
+- Updated dependencies [89f15f208]
+  - @self/utils@3.27.0
+
 ## 2.27.1
 
 ### Patch Changes
