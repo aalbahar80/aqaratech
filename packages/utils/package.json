@@ -1,6 +1,6 @@
 {
 	"name": "@self/utils",
-	"version": "3.27.0",
+	"version": "3.28.0",
 	"type": "module",
 	"main": "src/index",
 	"types": "src/index",

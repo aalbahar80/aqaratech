@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.27.0
+
+### Minor Changes
+
+- bdcceac9a: add welcome page role selection
+
 ## 2.26.1
 
 ### Patch Changes

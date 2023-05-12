@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.31.0
+
+### Minor Changes
+
+- bdcceac9a: add welcome page role selection
+
 ## 2.30.1
 
 ### Patch Changes

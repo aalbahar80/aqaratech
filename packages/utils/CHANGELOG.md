@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.28.0
+
+### Minor Changes
+
+- bdcceac9a: add welcome page role selection
+
 ## 3.27.0
 
 ### Minor Changes

@@ -1,5 +1,16 @@
 # @self/seed
 
+## 2.27.0
+
+### Minor Changes
+
+- bdcceac9a: add welcome page role selection
+
+### Patch Changes
+
+- Updated dependencies [bdcceac9a]
+  - @self/utils@3.28.0
+
 ## 2.26.2
 
 ### Patch Changes
