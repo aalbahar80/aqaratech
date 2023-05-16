@@ -119,9 +119,9 @@ export const tolgee = {
 		},
 		hero: {
 			description:
-				'Aqaratech offers  an easy-to-use dashboard to manage properties, keep track of important tasks, and quickly access information.',
-			subtitle:
 				'Unique portals to suit the needs of property owners and real estate companies.',
+			subtitle:
+				'Aqaratech offers a Smart Meter-integrated platform to manage properties and keep track of energy consumption.',
 			titlePrefix: 'Property management',
 			titleHighlight: 'All-in-one',
 			titleSuffix: 'platform.',
