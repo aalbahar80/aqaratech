@@ -8,7 +8,6 @@ import '@sentry/tracing';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import kill from 'tree-kill';
 
 import { envSchema } from '@self/utils';
 import { AppModule } from 'src/app.module';
@@ -70,7 +69,7 @@ export async function bootstrap() {
 	if (process.env['GENERATE_SWAGGER'] === '1') {
 		await setupSwagger(app);
 		console.log('Exiting after generating swagger');
-		kill(process.pid);
+		process.exit(0); // revert to using tree-kill if this doesn't work through pnpm/turbo/task/etc
 	} else {
 		Logger.warn('Swagger is not enabled in production/staging');
 	}
