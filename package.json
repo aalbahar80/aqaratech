@@ -18,10 +18,9 @@
 		"check:all": "turbo run check --continue --no-daemon",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
 		"ci:publish": "changeset tag",
-		"api:generate": "pnpm run -F @self/backend api:generate && pnpm run -F @self/test api:generate && ./scripts/add-nocheck.sh && prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'",
-		"api:generate:all": "turbo run api:generate --no-cache --no-daemon",
+		"api:generate": "task -t ./packages/backend/Taskfile.yml swagger:generate && task swagger:propogate",
 		"seed": "pnpm -F @self/backend exec prisma migrate reset --force",
-		"precompute": "rm packages/site/.eslintcache; pnpm -F @self/backend api:document && TIMING=1 turbo run format check lint build test --continue --no-daemon"
+		"precompute": "rm packages/site/.eslintcache; pnpm api:generate && TIMING=1 turbo run format check lint build test --continue --no-daemon"
 	},
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.14",

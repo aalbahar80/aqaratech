@@ -8,12 +8,10 @@ dotenv: ['../../.env']
 
 tasks:
   clean:
-    dir: '{{.USER_WORKING_DIR}}'
     cmds:
       - rm -rf dist
 
   build:utils:
-    dir: '{{.USER_WORKING_DIR}}'
     method: none
     sources:
       - ../utils/src/**/*.ts
@@ -21,7 +19,6 @@ tasks:
       - pnpm swc --config exclude="/**/*.(spec|stub).ts" -d dist ../utils/src
 
   build:backend:
-    dir: '{{.USER_WORKING_DIR}}'
     method: none
     sources:
       - src/**/*.ts
@@ -30,7 +27,6 @@ tasks:
       - cp package.json dist/backend
 
   build:
-    dir: '{{.USER_WORKING_DIR}}'
     method: none
     cmds:
       - task: clean
@@ -38,7 +34,6 @@ tasks:
       - task: build:backend
 
   start:prod:
-    dir: '{{.USER_WORKING_DIR}}'
     method: none
     deps:
       - build
@@ -46,7 +41,6 @@ tasks:
       - node dist/backend/src/main.js
 
   start:mock:
-    dir: '{{.USER_WORKING_DIR}}'
     method: none
     deps:
       - build
@@ -55,12 +49,10 @@ tasks:
 
   start:
     # Detect start mode based on PUBLIC_IS_TESTING from .env
-    dir: '{{.USER_WORKING_DIR}}'
     cmds:
       - task: '{{if eq .PUBLIC_IS_TESTING "1"}}start:mock{{else}}start:prod{{end}}'
 
   test:
-    dir: '{{.USER_WORKING_DIR}}'
     env:
       DATABASE_URL: 'postgresql://postgres:postgres@localhost:5435/aq-db'
     cmds:
@@ -68,3 +60,12 @@ tasks:
       - until nc -z localhost 5435; do sleep 1; done;
       - pnpm prisma migrate reset --force --skip-seed
       - '{{if eq .TEST_WATCH "1"}}pnpm vitest{{else}}pnpm vitest --run{{end}}'
+
+  swagger:generate:
+    env:
+      GENERATE_SWAGGER: '1'
+    cmds:
+      - pnpm nest start --entryFile ./backend/src/main --path tsconfig.json
+      - ./get-openapi.sh
+      - rm -rf ../site/src/api/openapi
+      - pnpm openapi-generator-cli generate

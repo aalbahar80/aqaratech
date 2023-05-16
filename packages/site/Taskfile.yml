@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://json.schemastore.org/taskfile.json
+---
+version: '3'
+
+interval: '300ms'
+
+dotenv: ['../../.env']
+
+# Sveltekit adapter-node
+# More info: See definition in packages/utils/src/config/env/aqaratech-env.ts
+env:
+  PORT: '{{.PORT_SITE}}'
+  ORIGIN: '{{.PUBLIC_SITE_URL}}'
+
+tasks:
+  clean:
+    cmds:
+      - rm -rf {.svelte-kit,build}
+
+  sync:
+    cmds:
+      - pnpm svelte-kit sync
+
+  check:
+    method: none
+    sources:
+      - src/**/*
+      - svelte.config.*
+      - vite.config.*
+    cmds:
+      - task: sync
+        # Prettify: --output human
+      - pnpm svelte-check --compiler-warnings "a11y-click-events-have-key-events:ignore"
+      # - pnpm tsc --noEmit --project tsconfig.lint.json # check config files
+
+  build:
+    cmds:
+      - task: clean
+      - pnpm svelte-kit sync
+      - pnpm vite build
+
+  preview:
+    cmds:
+      # - task: build
+      # - pnpm vite preview --port $PORT --strictPort
+      - node build/index.js
+
+  dev:
+    cmds:
+      - task: clean # cleans build too
+      - pnpm vite dev --port $PORT --strictPort --host

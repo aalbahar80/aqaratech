@@ -13,3 +13,9 @@ tasks:
     dir: '{{.USER_WORKING_DIR}}'
     cmds:
       - pnpm eslint --max-warnings 0 --report-unused-disable-directives --ignore-path ../../.gitignore "**/*.{js,cjs,mjs,ts,cts,mts,svelte}" {{.CLI_ARGS}}
+
+  swagger:propogate:
+    cmds:
+      - pnpm run -F @self/test api:generate
+      - ./scripts/add-nocheck.sh
+      - pnpm prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'

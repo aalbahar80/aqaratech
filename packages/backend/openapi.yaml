@@ -620,7 +620,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: string
       tags: *ref_4
   /organizations/{organizationId}/roles/{roleId}/send-invite:
     post:
@@ -2750,10 +2750,6 @@ paths:
       responses:
         '200':
           description: ''
-          content:
-            application/json:
-              schema:
-                type: object
       tags: *ref_25
   /organizations/{organizationId}/expense-categories:
     post:

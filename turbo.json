@@ -87,14 +87,6 @@
 		"//#check": {
 			"inputs": [".do/**", "scripts/**", "types/**", "tsconfig.json"],
 			"outputMode": "new-only"
-		},
-
-		"//#api:generate": {
-			"outputs": [
-				"packages/site/src/api/openapi/**",
-				"packages/test/types/api/**"
-			],
-			"inputs": ["packages/backend/openapi.yaml"]
 		}
 	}
 }
