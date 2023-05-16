@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.27.1
+
+### Patch Changes
+
+- edf3253c8: refresh tolgee
+- Updated dependencies [edf3253c8]
+  - @self/utils@3.28.1
+
 ## 2.27.0
 
 ### Minor Changes

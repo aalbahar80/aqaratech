@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.27.1
+
+### Patch Changes
+
+- edf3253c8: refresh tolgee
+
 ## 2.27.0
 
 ### Minor Changes

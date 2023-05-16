@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.29.1
+
+### Patch Changes
+
+- edf3253c8: refresh tolgee
+- Updated dependencies [edf3253c8]
+  - @self/utils@3.28.1
+
 ## 2.29.0
 
 ### Minor Changes

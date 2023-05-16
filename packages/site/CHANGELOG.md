@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.31.1
+
+### Patch Changes
+
+- edf3253c8: refresh tolgee
+
 ## 2.31.0
 
 ### Minor Changes

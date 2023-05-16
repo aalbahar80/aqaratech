@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.28.1
+
+### Patch Changes
+
+- edf3253c8: refresh tolgee
+
 ## 3.28.0
 
 ### Minor Changes
