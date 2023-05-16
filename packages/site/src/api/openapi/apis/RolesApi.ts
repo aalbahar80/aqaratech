@@ -267,7 +267,7 @@ export class RolesApi extends runtime.BaseAPI {
 	async removeRaw(
 		requestParameters: RolesApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<string>> {
+	): Promise<runtime.ApiResponse<object>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -307,7 +307,7 @@ export class RolesApi extends runtime.BaseAPI {
 			initOverrides,
 		);
 
-		return new runtime.TextApiResponse(response) as any;
+		return new runtime.JSONApiResponse<any>(response);
 	}
 
 	/**
@@ -315,7 +315,7 @@ export class RolesApi extends runtime.BaseAPI {
 	async remove(
 		requestParameters: RolesApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<string> {
+	): Promise<object> {
 		const response = await this.removeRaw(requestParameters, initOverrides);
 		return await response.value();
 	}

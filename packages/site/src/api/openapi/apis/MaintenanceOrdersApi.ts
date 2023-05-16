@@ -217,7 +217,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	async removeRaw(
 		requestParameters: MaintenanceOrdersApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<void>> {
+	): Promise<runtime.ApiResponse<object>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -242,7 +242,7 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 			initOverrides,
 		);
 
-		return new runtime.VoidApiResponse(response);
+		return new runtime.JSONApiResponse<any>(response);
 	}
 
 	/**
@@ -250,8 +250,9 @@ export class MaintenanceOrdersApi extends runtime.BaseAPI {
 	async remove(
 		requestParameters: MaintenanceOrdersApiRemoveRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<void> {
-		await this.removeRaw(requestParameters, initOverrides);
+	): Promise<object> {
+		const response = await this.removeRaw(requestParameters, initOverrides);
+		return await response.value();
 	}
 
 	/**
