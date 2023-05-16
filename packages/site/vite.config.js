@@ -21,7 +21,6 @@ export default defineConfig(() => {
 			sveltekit(),
 			icons({ compiler: 'svelte' }),
 			isoImport(),
-			// @ts-expect-error Should be typecasted to `PluginOption`
 			// See: https://github.com/btd/rollup-plugin-visualizer#usage
 			...(ANALYZE_BUNDLE
 				? [
