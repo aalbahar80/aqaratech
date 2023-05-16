@@ -10,8 +10,8 @@
 		"check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@faker-js/faker": "8.0.0",
-		"@prisma/client": "4.13.0",
+		"@faker-js/faker": "8.0.1",
+		"@prisma/client": "4.14.0",
 		"@self/utils": "workspace:*",
 		"date-fns": "2.30.0",
 		"dotenv": "16.0.3",

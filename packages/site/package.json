@@ -27,13 +27,13 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.64",
+		"@iconify/json": "2.2.65",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
 		"@self/utils": "workspace:*",
-		"@sentry/svelte": "7.51.2",
-		"@sentry/tracing": "7.51.2",
+		"@sentry/svelte": "7.52.1",
+		"@sentry/tracing": "7.52.1",
 		"@sveltejs/adapter-node": "1.2.4",
 		"@sveltejs/kit": "1.16.3",
 		"@sveltejs/pancake": "0.0.18",
@@ -41,7 +41,7 @@
 		"@tailwindcss/container-queries": "0.1.1",
 		"@tailwindcss/forms": "0.5.3",
 		"@tailwindcss/typography": "0.5.9",
-		"@tanstack/svelte-query": "4.29.5",
+		"@tanstack/svelte-query": "4.29.7",
 		"@tanstack/svelte-table": "8.9.1",
 		"@types/cookie": "0.5.1",
 		"@types/d3": "7.4.0",
@@ -86,7 +86,7 @@
 		"typescript-svelte-plugin": "0.3.25",
 		"ufo": "1.1.2",
 		"unplugin-icons": "0.16.1",
-		"vite": "4.3.5",
+		"vite": "4.3.6",
 		"vite-plugin-iso-import": "1.0.0",
 		"vitest": "0.31.0",
 		"zod": "3.21.4"
@@ -95,7 +95,7 @@
 	"dependencies": {
 		"@logtail/node": "0.4.0",
 		"@logtail/winston": "0.4.1",
-		"@sentry/node": "7.51.2",
+		"@sentry/node": "7.52.1",
 		"typesafe-i18n": "5.24.3",
 		"winston": "3.8.2"
 	},
