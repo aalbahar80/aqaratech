@@ -35,12 +35,7 @@ async function globalSetup(config: FullConfig) {
 
 	createDownloadsDir();
 
-	const executablePath = project.use.launchOptions?.executablePath;
-	console.log({ executablePath });
-
-	const browser = await chromium.launch({
-		...(executablePath ? { executablePath } : {}),
-	});
+	const browser = await chromium.launch();
 
 	for (const { email, password, storageStateFilename } of [
 		testUsers.orgAdmin,
