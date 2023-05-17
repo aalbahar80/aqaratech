@@ -1,5 +1,3 @@
-import '@sentry/tracing';
-
 import {
 	formatRequestLog,
 	formatResponseLog,

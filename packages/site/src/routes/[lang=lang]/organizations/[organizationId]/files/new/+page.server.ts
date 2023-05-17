@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/node';
 import { error } from '@sveltejs/kit';
 
 import type { Actions } from './$types';
@@ -50,28 +49,6 @@ export const actions: Actions = {
 						backendUrl: url,
 						status: res.status,
 					});
-
-					// log error on sentry
-					// NOTE: consider loosening this to only log 5xx errors to Sentry
-					Sentry.captureException(
-						new Error(`Failed to create file: ${res.statusText}`),
-						{
-							tags: {
-								routeId: event.route.id,
-								pathname: event.url.pathname,
-								status: res.status,
-							},
-							extra: {
-								href: event.url.href,
-								params: event.params,
-								query_string: event.url.search,
-								backendUrl: url,
-							},
-							requestSession: {
-								status: 'errored',
-							},
-						},
-					);
 
 					// return error to client. If error status is *not* 400, handleForm will render error page.
 					throw error(res.status, res.statusText);

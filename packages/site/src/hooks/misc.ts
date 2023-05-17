@@ -1,5 +1,3 @@
-import '@sentry/tracing';
-
 import type { Handle } from '@sveltejs/kit';
 
 import { environment } from '$aqenvironment';

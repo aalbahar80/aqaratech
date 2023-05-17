@@ -1,5 +1,4 @@
-import * as Sentry from '@sentry/node';
-import '@sentry/tracing';
+import * as Sentry from '@sentry/sveltekit';
 
 import { Cookie } from '@self/utils';
 
@@ -11,20 +10,12 @@ import { logger } from '$lib/server/logger';
 import { getUser } from '$lib/server/utils/get-user';
 import { handleInvalidToken } from '$lib/server/utils/handle-invalid-token';
 import { validateToken } from '$lib/server/utils/validate';
-import { getSentryUser } from '$lib/utils/sentry/common';
+import { getSentryUser } from '$lib/utils/sentry';
 
 export const handleAuth = (async ({ event, resolve }) => {
 	const idToken = event.cookies.get(Cookie.idToken);
 	const accessToken = event.cookies.get(Cookie.accessToken);
 	const selectedRoleId = event.cookies.get(Cookie.role);
-
-	// get current sentry transaction and add child span
-	const transaction = Sentry.getCurrentHub().getScope().getTransaction();
-
-	const spanCookies = transaction?.startChild({
-		op: 'http.server',
-		description: 'parse cookies and get user',
-	});
 
 	// consume idToken and set user. Any redirects should be handled by layout/page load functions.
 	if (idToken && accessToken) {
@@ -53,22 +44,13 @@ export const handleAuth = (async ({ event, resolve }) => {
 			});
 		}
 
-		Sentry.configureScope((scope) => {
-			scope.setUser(getSentryUser(event.locals.user));
-		});
-
 		// set user in locals
 		event.locals.user = user;
+
+		Sentry.setUser(getSentryUser(user));
 	}
 
-	spanCookies?.finish();
-
 	const response = await resolve(event);
-
-	// Unset the Sentry user on the scope
-	Sentry.configureScope((scope) => {
-		scope.setUser(null);
-	});
 
 	return response;
 }) satisfies Handle;

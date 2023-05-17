@@ -1,64 +1,41 @@
-import * as Sentry from '@sentry/node';
+import * as Sentry from '@sentry/sveltekit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 import { handleAuth } from './hooks/auth';
 import { handleLocale } from './hooks/locale';
 import { handleLog } from './hooks/log';
 import { handleMisc } from './hooks/misc';
-import { handleSentry } from './hooks/sentry';
 
 import type { HandleFetch, HandleServerError } from '@sveltejs/kit';
 
 import { ResponseError } from '$api/openapi';
 import { environment } from '$aqenvironment';
+import { sentryConfig } from '$lib/environment/sentry.config';
 import { errorLogger } from '$lib/server/logger/error-logger';
 import { logConfig } from '$lib/server/logger/startup';
-import { extractRequestInfo, getSentryUser } from '$lib/utils/sentry/common';
-import { isNotFoundError } from '$lib/utils/sentry/redirect';
+
+Sentry.init({
+	dsn: 'https://16f4a4de6ab74e6e817b44cfd87b723d@o1210217.ingest.sentry.io/4505194893803520',
+	...sentryConfig,
+});
 
 logConfig();
 
 export const handle = sequence(
+	Sentry.sentryHandle(),
 	handleLog,
 	handleMisc,
-	handleSentry,
 	handleLocale,
 	handleAuth,
 );
 
-export const handleError = (({ error, event }) => {
+const customHandleError = (({ error, event }) => {
 	// discard map file errors
 	if (event.url.pathname.endsWith('js.map')) {
 		return;
 	}
 
 	console.log(error);
-
-	const info = extractRequestInfo(event);
-	const user = getSentryUser(event.locals.user);
-
-	console.debug({ info, user });
-
-	if (isNotFoundError(error, event)) {
-		// Most 404's are from random bots, but some may be legit.
-		// So we log them to Sentry as 'info' instead of 'error'.
-		// Alternate solution: https://github.com/sveltejs/kit/issues/6774#issuecomment-1246090470
-		Sentry.captureEvent({
-			level: 'info',
-			message: 'NotFoundError (404) - HandleServerError',
-			tags: {
-				status: error.status,
-				location: error.location,
-				redirectFrom: event.url.href,
-			},
-			request: info,
-		});
-		return;
-	}
-
-	Sentry.captureException(error, {
-		user,
-	});
 
 	errorLogger(error); // send to logtail at the end only
 
@@ -71,6 +48,8 @@ export const handleError = (({ error, event }) => {
 
 	return;
 }) satisfies HandleServerError;
+
+export const handleError = Sentry.handleErrorWithSentry(customHandleError);
 
 export const handleFetch = (async ({ event, request, fetch }) => {
 	// Runs when a load uses `fetch()` on the server

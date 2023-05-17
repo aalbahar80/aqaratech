@@ -2,6 +2,8 @@
 
 // ESLINT_IGNORE
 
+// WARN: site sourcemaps are uploaded during the build step. This script is only used for backend sourcemaps now.
+
 console.log({ argv });
 const TIMER = 'upload-sourcemaps.mjs';
 console.time(TIMER);
@@ -91,6 +93,9 @@ if (projectName === 'site') {
 	await $`sentry-cli sourcemaps upload build/client ${org} ${site_client_project} --release ${prefixedVersion}`;
 	// alternative: sentry-cli releases files site-client-1.3.1 upload-sourcemaps ./build/client --org aqaratech --project site-client
 } else if (projectName === 'backend') {
+	// Inject debug_id into sourcemap files
+	// https://docs.sentry.io/platforms/node/sourcemaps/uploading/typescript/?original_referrer=https%3A%2F%2Fdocs.sentry.io%2Fplatforms%2Fjavascript%2Fsourcemaps%2Ftroubleshooting_js%2Fartifact-bundles%2F%3Foriginal_referrer%3Dhttps%253A%252F%252Fdocs.sentry.io%252Fplatforms%252Fnode%252Fsourcemaps%252F#3-inject-debug-ids-into-artifacts
+	await $`sentry-cli sourcemaps inject dist`;
 	// setting the path to the dist directory is enough because we use inlineSources in tsconfig.json, which embeds the source code in the sourcemaps (in the "sourcesContent" property)
 	await $`sentry-cli sourcemaps upload dist ${org} ${project} --release ${prefixedVersion}`;
 }

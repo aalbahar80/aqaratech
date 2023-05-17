@@ -1,5 +1,3 @@
-import * as Sentry from '@sentry/node';
-
 import type { ValidatedUserDto } from '$api/openapi';
 import type { RequestEvent } from '@sveltejs/kit';
 
@@ -7,24 +5,9 @@ import { environment } from '$aqenvironment';
 import { logger } from '$lib/server/logger';
 
 export const getProfile = async (event: RequestEvent) => {
-	// Sentry
-	const transaction = Sentry.getCurrentHub().getScope().getTransaction();
-	const span = transaction?.startChild({
-		op: 'getProfile',
-	});
-
 	const headers: Record<string, string> = {
 		'Content-Type': 'application/json',
 	};
-
-	if (span) {
-		headers['sentry-trace'] = `${span.toTraceparent()}`;
-	} else {
-		logger.log({
-			level: 'debug',
-			message: 'Could not get span for getProfile',
-		});
-	}
 
 	// Either get the user or return undefined.
 	// construct url

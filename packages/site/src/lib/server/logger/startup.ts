@@ -1,5 +1,3 @@
-import '@sentry/tracing';
-
 import { environment } from '$aqenvironment';
 import { sentryConfig } from '$lib/environment/sentry.config';
 import { privateEnvironment } from '$lib/server/config/private-environment';

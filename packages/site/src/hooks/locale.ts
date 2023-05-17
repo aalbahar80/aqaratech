@@ -1,4 +1,3 @@
-import '@sentry/tracing';
 import { initAcceptLanguageHeaderDetector } from 'typesafe-i18n/detectors';
 
 import type { Locales } from '$i18n/i18n-types';

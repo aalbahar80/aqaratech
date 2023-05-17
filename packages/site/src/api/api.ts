@@ -1,8 +1,3 @@
-import * as SentryNode from '@sentry/node?server';
-import * as SentrySvelte from '@sentry/svelte?client';
-
-import type { Breadcrumb } from '@sentry/svelte';
-
 import {
 	Configuration,
 	ExpenseCategoriesApi,
@@ -39,46 +34,6 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 		basePath = environment.PUBLIC_API_URL;
 	}
 
-	// Sentry
-	let traceValue: string | undefined;
-
-	if (import.meta.env.SSR) {
-		const transactionNode = SentryNode.getCurrentHub()
-			.getScope()
-			.getTransaction();
-
-		traceValue = transactionNode?.toTraceparent();
-	}
-
-	if (!import.meta.env.SSR) {
-		const transactionSvelte = SentrySvelte.getCurrentHub()
-			.getScope()
-			.getTransaction();
-
-		if (transactionSvelte) {
-			traceValue = transactionSvelte.toTraceparent();
-		} else {
-			// create a new transaction manually
-			// when running in load in the browser, the Sentry browser SDK does not create a transaction (yet)
-			const transaction = SentrySvelte.startTransaction({
-				op: 'http.client',
-				name: 'api()',
-			});
-
-			// TODO why is transaction possibly undefined?
-			traceValue = transaction?.toTraceparent();
-		}
-	}
-
-	// Skip in load functions. Causes duplicate requests because sveltekit now takes headers into account
-	// when calculate hash.
-	if (traceValue && !loadFetch) {
-		// TODO avoid reusing api() more than once to ensure no duplicate trace headers
-		// Applying middleware to the Config class causes loadFetch to be not used (duplicate data requests)
-		// Alternative: update node version in production 18.3.0+
-		headers['sentry-trace'] = traceValue;
-	}
-
 	const config = new Configuration({
 		...(loadFetch ? { fetchApi: loadFetch } : {}),
 		headers,
@@ -89,17 +44,6 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 				// eslint-disable-next-line @typescript-eslint/require-await
 				async onError(context) {
 					console.log('error in api middleware', context);
-					const breadcrumb: Breadcrumb = {
-						category: 'http',
-						message: `Error in api middleware while fetching: ${context.url}`,
-						level: 'error',
-						...context,
-					};
-					if (import.meta.env.SSR && SentryNode) {
-						SentryNode.addBreadcrumb(breadcrumb);
-					} else if (!import.meta.env.SSR && SentrySvelte) {
-						SentrySvelte.addBreadcrumb(breadcrumb);
-					}
 				},
 			},
 		],
