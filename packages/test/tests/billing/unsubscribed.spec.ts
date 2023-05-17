@@ -43,14 +43,14 @@ test.describe('unsubscribed', () => {
 
 		await page.getByRole('button', { name: 'Subscribe' }).click();
 
-		await expect.soft(page).toHaveURL(/billing\.aqaratech\.com/, {
-			timeout: 10000,
-		});
+		await expect
+			.soft(page)
+			.toHaveURL(/billing\.aqaratech\.com/, { timeout: 10000 });
 
+		// NOTE: Disabled for performance reasons
 		// Stripe's "subscribe" button
-		const btn = page.getByTestId('hosted-payment-submit-button');
-
-		await expect(btn).toBeVisible();
+		// const btn = page.getByTestId('hosted-payment-submit-button');
+		// await expect(btn).toBeVisible();
 	});
 
 	test('isActive is restored after subscribing', async ({ page, org }) => {

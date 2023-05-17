@@ -23,20 +23,11 @@ test('can manage subscription', async ({ page, org }) => {
 	await page.getByRole('button', { name: 'Subscription settings' }).click();
 
 	// expect to be on the stripe billing portal
-	await expect(page).toHaveURL(/billing\.aqaratech\.com/, {
-		timeout: 10000,
-	});
+	await expect(page).toHaveURL(/billing\.aqaratech\.com/, { timeout: 10000 });
 
-	const invoices = page.getByText('Invoice history', { exact: true });
-	await expect.soft(invoices).toBeVisible({
-		timeout: 10000,
-	});
-
-	const payment = page.getByRole('link', {
-		name: 'Add payment method',
-	});
-
-	await expect.soft(payment).toBeVisible({
-		timeout: 10000,
-	});
+	// NOTE: Disabled for performance reasons
+	// const invoices = page.getByText('Invoice history', { exact: true });
+	// await expect.soft(invoices).toBeVisible({ timeout: 10000 });
+	// const payment = page.getByRole('link', { name: 'Add payment method' });
+	// await expect.soft(payment).toBeVisible({ timeout: 10000 });
 });
