@@ -25,7 +25,6 @@
 		"check": "tsc --noEmit --project tsconfig.lint.json",
 		"check:watch": "pnpm run check --watch",
 		"postinstall": "prisma generate",
-		"sentry:release": "../../scripts/upload-sourcemaps.mjs",
 		"up-minio": "./seed/up-minio.sh",
 		"test": "task test",
 		"test:watch": "TEST_WATCH=1 task test"

@@ -3,6 +3,7 @@
 	"pipeline": {
 		"build": {
 			"dependsOn": ["^build", "check"],
+			"env": ["SENTRY_RELEASE_ENABLE"],
 			"outputs": [".svelte-kit/**", "dist/**", "build/**"],
 			"outputMode": "new-only"
 		},

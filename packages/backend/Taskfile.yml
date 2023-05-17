@@ -69,3 +69,12 @@ tasks:
       - ./get-openapi.sh
       - rm -rf ../site/src/api/openapi
       - pnpm openapi-generator-cli generate
+
+  sentry:release:
+    env:
+      SENTRY_PROPERTIES: 'sentry.properties'
+    cmds:
+      - sentry-cli sourcemaps inject dist
+      - sentry-cli sourcemaps upload dist
+      - sentry-cli releases set-commits --auto backend-$SENTRY_RELEASE_VERSION
+      - sentry-cli releases deploys backend-$SENTRY_RELEASE_VERSION new -e $SENTRY_RELEASE_ENVIRONMENT
