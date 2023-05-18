@@ -121,7 +121,7 @@ export const tolgee = {
 			description:
 				'Unique portals to suit the needs of property owners and real estate companies.',
 			subtitle:
-				'Aqaratech offers a Smart Meter-integrated platform to manage properties and keep track of energy consumption.',
+				'Offering integrated smart metering system to keep track of energy consumption.',
 			titlePrefix: 'Property management',
 			titleHighlight: 'All-in-one',
 			titleSuffix: 'platform.',
@@ -158,7 +158,7 @@ export const tolgee = {
 			tenants: {
 				description: 'Online rent payments and maintenance requests.',
 				name: 'Resident Center',
-				summary: 'Tenants',
+				summary: 'Residents',
 			},
 		},
 	},
