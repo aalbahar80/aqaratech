@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.29.2
+
+### Patch Changes
+
+- da78e4578: reduce timeout time
+
 ## 2.29.1
 
 ### Patch Changes
