@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	import L from '$i18n/i18n-svelte';
+	import L, { locale } from '$i18n/i18n-svelte';
 	import { landingLinks } from '$lib/components/navbar/landing-links';
 	import LoginButton from '$lib/components/navbar/LoginButton.svelte';
 	import { sidebar } from '$lib/components/sidebar/Sidebar.svelte';
 	import { SIDEBAR_TOGGLE } from '$lib/constants/misc';
+	import { withLocale } from '$lib/constants/routes';
 	import LocaleSwitcher from '$lib/i18n/LocaleSwitcher.svelte';
 	import AqaratechLogo1 from '$lib/svgs/AqaratechLogo1.svelte';
 	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
@@ -34,7 +35,7 @@
 				/>
 			</button>
 			<a
-				href={$page.data.user?.role?.meta.home ?? '/'}
+				href={$page.data.user?.role?.meta.home ?? withLocale('/', $locale)}
 				class="w-36 sm:w-44"
 			>
 				<AqaratechLogo1 />

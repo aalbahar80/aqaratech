@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { locale } from '$i18n/i18n-svelte';
+	import { withLocale } from '$lib/constants/routes';
 	import HeroiconsXMark from '~icons/heroicons/x-mark';
 
 	/** key to use for local storage */
@@ -26,11 +28,10 @@
 			<div
 				class="order-3 mt-2 w-full flex-shrink-0 sm:order-2 sm:mt-0 sm:w-auto"
 			>
-				<!-- WARN: add href -->
 				<!-- TODO: use slot. pass classes as prop -->
 
 				<a
-					href="/"
+					href={withLocale('/', $locale)}
 					class="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-indigo-600 shadow-sm hover:bg-indigo-50"
 				>
 					{buttonText}
