@@ -29,6 +29,7 @@ import { CheckAbilities } from 'src/casl/abilities.decorator';
 import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import { CustomTimeout } from 'src/decorators/custom-timeout.decorator';
 import { SwaggerAuth } from 'src/decorators/swagger-auth.decorator';
 import { User } from 'src/decorators/user.decorator';
 import { BackendEnvSchema } from 'src/env/env.schema';
@@ -45,6 +46,7 @@ import { FilesService } from './files.service';
 @Controller()
 @ApiTags('files')
 @SwaggerAuth()
+@CustomTimeout(30000)
 export class FilesController {
 	constructor(private readonly filesService: FilesService) {}
 

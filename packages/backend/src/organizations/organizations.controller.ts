@@ -25,6 +25,7 @@ import { Action } from 'src/casl/action.enum';
 import { WithCount } from 'src/common/dto/paginated.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { ApiPaginatedResponse } from 'src/decorators/api-paginated-response';
+import { CustomTimeout } from 'src/decorators/custom-timeout.decorator';
 import {
 	ApiQueryOptions,
 	QueryParser,
@@ -69,6 +70,7 @@ export class OrganizationsController {
 	@Post()
 	// No need to check abilities here. Any authenticated user can create an organization.
 	@SkipRoleGuard()
+	@CustomTimeout(45000)
 	@ApiCreatedResponse({ type: OrganizationCreatedDto })
 	create(
 		@UserBasic() user: AuthenticatedUser,
