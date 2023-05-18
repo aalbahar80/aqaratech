@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.31.4
+
+### Patch Changes
+
+- feab66831: fix hamburger menu
+- d00e52d88: include locale in home page hrefs
+
 ## 2.31.3
 
 ### Patch Changes
