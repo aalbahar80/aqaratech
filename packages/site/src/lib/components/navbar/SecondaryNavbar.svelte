@@ -24,7 +24,7 @@
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
 			<button
-				class:sb:hidden={!isSidebarAvailable($page.route)}
+				class="sb:hidden"
 				use:sidebar.button
 			>
 				<span class="sr-only">Toggle sidebar</span>
