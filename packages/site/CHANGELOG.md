@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.31.2
+
+### Patch Changes
+
+- 01fa25e52: add translations
+
 ## 2.31.1
 
 ### Patch Changes
