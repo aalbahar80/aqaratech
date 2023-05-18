@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.31.3
+
+### Patch Changes
+
+- a71de93ae: set rel external on role card
+
 ## 2.31.2
 
 ### Patch Changes
