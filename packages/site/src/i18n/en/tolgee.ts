@@ -123,8 +123,8 @@ export const tolgee = {
 			subtitle:
 				'Offering integrated smart metering system to keep track of energy consumption.',
 			titlePrefix: 'Property management',
-			titleHighlight: 'All-in-one',
-			titleSuffix: 'platform.',
+			titleHighlight: 'platform.',
+			titleSuffix: '',
 		},
 		location: 'Location',
 		map: 'Map',
