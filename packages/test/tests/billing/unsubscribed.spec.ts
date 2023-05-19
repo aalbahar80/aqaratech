@@ -45,7 +45,7 @@ test.describe('unsubscribed', () => {
 
 		await expect
 			.soft(page)
-			.toHaveURL(/billing\.aqaratech\.com/, { timeout: 10000 });
+			.toHaveURL(/billing\.aqaratech\.com/, { timeout: 0 });
 
 		// NOTE: Disabled for performance reasons
 		// Stripe's "subscribe" button

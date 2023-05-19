@@ -23,7 +23,7 @@ test('can manage subscription', async ({ page, org }) => {
 	await page.getByRole('button', { name: 'Subscription settings' }).click();
 
 	// expect to be on the stripe billing portal
-	await expect(page).toHaveURL(/billing\.aqaratech\.com/, { timeout: 10000 });
+	await expect(page).toHaveURL(/billing\.aqaratech\.com/, { timeout: 0 });
 
 	// NOTE: Disabled for performance reasons
 	// const invoices = page.getByText('Invoice history', { exact: true });

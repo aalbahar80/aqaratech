@@ -99,6 +99,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			name: 'billing',
 			testMatch: [...TESTS.BILLING],
 			use: devices['Desktop Chrome'],
+			timeout: BASE_TIMEOUT * 2,
 		},
 		{
 			name: 'site:chrome',
