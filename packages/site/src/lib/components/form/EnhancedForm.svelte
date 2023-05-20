@@ -44,7 +44,7 @@
 	use:enhance={() => {
 		const toastId = toast.loading('Loading...');
 
-		// eslint-disable-next-line @typescript-eslint/require-await
+		// eslint-disable-next-line @typescript-eslint/no-misused-promises
 		return async ({ result, update }) => {
 			if (result.type === 'failure') {
 				toast.error('Invalid form', {
@@ -63,7 +63,7 @@
 				toast.dismiss(toastId);
 			}
 
-			update();
+			await update();
 		};
 	}}
 >
