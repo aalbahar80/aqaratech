@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.30.1
+
+### Patch Changes
+
+- 85029e6eb: update tier cli
+
 ## 2.30.0
 
 ### Minor Changes

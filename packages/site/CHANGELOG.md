@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.32.1
+
+### Patch Changes
+
+- 2cbdcfe14: remove manual sourcemap workaround
+- 85029e6eb: update tier cli
+
 ## 2.32.0
 
 ### Minor Changes
