@@ -1,5 +1,16 @@
 # @self/backend
 
+## 2.30.0
+
+### Minor Changes
+
+- f94f9f68f: add more subscription plans
+
+### Patch Changes
+
+- Updated dependencies [f94f9f68f]
+  - @self/utils@3.29.0
+
 ## 2.29.2
 
 ### Patch Changes

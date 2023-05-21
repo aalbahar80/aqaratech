@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.28.0
+
+### Minor Changes
+
+- f94f9f68f: add more subscription plans
+
 ## 2.27.1
 
 ### Patch Changes

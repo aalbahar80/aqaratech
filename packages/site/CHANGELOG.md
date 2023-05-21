@@ -1,5 +1,15 @@
 # @self/site
 
+## 2.32.0
+
+### Minor Changes
+
+- f94f9f68f: add more subscription plans
+
+### Patch Changes
+
+- 69a48e87f: rtl modal
+
 ## 2.31.4
 
 ### Patch Changes

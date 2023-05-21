@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.29.0
+
+### Minor Changes
+
+- f94f9f68f: add more subscription plans
+
 ## 3.28.1
 
 ### Patch Changes
