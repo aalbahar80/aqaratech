@@ -45,8 +45,6 @@ pnpm changeset
 # The PR can be merged to trigger a release.
 ```
 
-#
-
 # Manual Tasks
 
 ```bash
@@ -62,5 +60,6 @@ cd packages/site
 pnpm typesafe-i18n
 ```
 
-- updating sentry cli (`SENTRY_CLI_VERSOIN` in [file](.github/workflows/ci.yml))
-- openapi-generator-cli version. [file](packages/backend/get-openapi.sh)
+- `TIER_CLI_VERSION` in dockerfiles
+- `SENTRY_CLI_VERSION` in `.github/workflows/ci.yml`
+- openapi-generator-cli version in `packages/backend/get-openapi.sh`

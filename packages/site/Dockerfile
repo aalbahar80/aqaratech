@@ -13,13 +13,12 @@ ENV BODY_SIZE_LIMIT=${BODY_SIZE_LIMIT}
 
 WORKDIR /app
 
-# Add tools required for installing tier cli
+# Install tier cli
 RUN apk update && apk add wget tar
-
-# Download and extract the "tier" binary
-RUN wget --verbose https://github.com/tierrun/tier/releases/download/v0.8.0/tier_0.8.0_linux_amd64.tar.gz \
-    && tar -xzvf tier_0.8.0_linux_amd64.tar.gz \
-    && rm tier_0.8.0_linux_amd64.tar.gz
+ARG TIER_CLI_VERSION=0.11.1
+RUN wget --verbose https://github.com/tierrun/tier/releases/download/v${TIER_CLI_VERSION}/tier_${TIER_CLI_VERSION}_linux_amd64.tar.gz \
+    && tar -xzvf tier_${TIER_CLI_VERSION}_linux_amd64.tar.gz \
+    && rm tier_${TIER_CLI_VERSION}_linux_amd64.tar.gz
 
 # Add tier to PATH
 ENV PATH="${PATH}:/app"
