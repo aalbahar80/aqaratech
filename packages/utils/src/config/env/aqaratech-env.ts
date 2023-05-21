@@ -55,6 +55,7 @@ export interface AqaratechEnv {
 	 * *Literal Type is taken from tier sdk library.*
 	 */
 	readonly PUBLIC_TIER_PLAN_ID_1: Feature;
+	readonly PUBLIC_TIER_PLAN_ID_2: Feature;
 	/** A flag to enable/disable the paywall. Used to disable the paywall in
 	 * development and staging environments. */
 	readonly PUBLIC_IS_PAYWALL_ACTIVE: boolean;

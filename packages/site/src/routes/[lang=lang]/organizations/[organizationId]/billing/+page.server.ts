@@ -1,6 +1,6 @@
 import { inspect } from 'node:util';
 
-import { redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import Stripe from 'stripe';
 import tier, { isTierError } from 'tier';
 
@@ -77,6 +77,17 @@ export const actions: Actions = {
 
 	// Redirect to stripe checkout to enter card details and resubscribe.
 	resubscribe: async (event) => {
+		const data = await event.request.formData();
+		const selectedPlan = data.get('plan');
+		if (selectedPlan !== '1' && selectedPlan !== '2') {
+			return fail(400, { plan: 'Invalid plan' });
+		}
+		const plans = {
+			'1': environment.PUBLIC_TIER_PLAN_ID_1,
+			'2': environment.PUBLIC_TIER_PLAN_ID_2,
+		};
+		const plan = plans[selectedPlan];
+
 		assertRole(event.locals.user);
 
 		const role = event.locals.user.role;
@@ -85,7 +96,7 @@ export const actions: Actions = {
 			tierid(role.organizationId),
 			event.url.toString(),
 			{
-				features: environment.PUBLIC_TIER_PLAN_ID_1,
+				features: plan,
 			},
 		);
 

@@ -267,11 +267,11 @@ type RootTranslation = {
 		}
 		hero: {
 			/**
-			 * A​q​a​r​a​t​e​c​h​ ​o​f​f​e​r​s​ ​ ​a​n​ ​e​a​s​y​-​t​o​-​u​s​e​ ​d​a​s​h​b​o​a​r​d​ ​t​o​ ​m​a​n​a​g​e​ ​p​r​o​p​e​r​t​i​e​s​,​ ​k​e​e​p​ ​t​r​a​c​k​ ​o​f​ ​i​m​p​o​r​t​a​n​t​ ​t​a​s​k​s​,​ ​a​n​d​ ​q​u​i​c​k​l​y​ ​a​c​c​e​s​s​ ​i​n​f​o​r​m​a​t​i​o​n​.
+			 * U​n​i​q​u​e​ ​p​o​r​t​a​l​s​ ​t​o​ ​s​u​i​t​ ​t​h​e​ ​n​e​e​d​s​ ​o​f​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​r​e​a​l​ ​e​s​t​a​t​e​ ​c​o​m​p​a​n​i​e​s​.
 			 */
 			description: string
 			/**
-			 * U​n​i​q​u​e​ ​p​o​r​t​a​l​s​ ​t​o​ ​s​u​i​t​ ​t​h​e​ ​n​e​e​d​s​ ​o​f​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​r​e​a​l​ ​e​s​t​a​t​e​ ​c​o​m​p​a​n​i​e​s​.
+			 * O​f​f​e​r​i​n​g​ ​a​ ​c​o​m​p​a​t​i​b​l​e​ ​s​m​a​r​t​ ​m​e​t​e​r​i​n​g​ ​s​y​s​t​e​m​ ​t​o​ ​t​r​a​c​k​ ​e​n​e​r​g​y​ ​c​o​n​s​u​m​p​t​i​o​n​.
 			 */
 			subtitle: string
 			/**
@@ -279,12 +279,9 @@ type RootTranslation = {
 			 */
 			titlePrefix: string
 			/**
-			 * A​l​l​-​i​n​-​o​n​e
-			 */
-			titleHighlight: string
-			/**
 			 * p​l​a​t​f​o​r​m​.
 			 */
+			titleHighlight: string
 			titleSuffix: string
 		}
 		/**
@@ -296,50 +293,97 @@ type RootTranslation = {
 		 */
 		map: string
 		pricing: {
-			features: {
-				/**
-				 * O​n​l​i​n​e​ ​c​o​l​l​e​c​t​i​o​n
-				 */
-				'1': string
-				/**
-				 * F​i​l​e​ ​s​t​o​r​a​g​e
-				 */
-				'2': string
-				/**
-				 * S​M​S​ ​a​n​d​ ​e​m​a​i​l​ ​n​o​t​i​f​i​c​a​t​i​o​n​s
-				 */
-				'3': string
-				/**
-				 * A​u​t​o​-​r​e​m​i​n​d​e​r​s
-				 */
-				'4': string
-				/**
-				 * M​u​l​t​i​-​b​e​n​e​f​i​c​i​a​r​y​ ​p​r​o​f​i​l​e​s
-				 */
-				'5': string
-				/**
-				 * R​e​a​l​-​t​i​m​e​ ​p​a​y​m​e​n​t​ ​t​r​a​c​k​i​n​g
-				 */
-				'6': string
-				/**
-				 * F​l​e​x​i​b​l​e​ ​p​a​y​m​e​n​t​s​ ​f​o​r​ ​t​e​n​a​n​t​s
-				 */
-				'7': string
-				/**
-				 * A​u​t​o​ ​s​e​t​t​l​e​m​e​n​t​s​ ​&​ ​r​e​c​o​n​c​i​l​i​a​t​i​o​n
-				 */
-				'8': string
+			plans: {
+				'1': {
+					description: string
+					features: {
+						/**
+						 * O​n​l​i​n​e​ ​c​o​l​l​e​c​t​i​o​n
+						 */
+						'1': string
+						/**
+						 * F​i​l​e​ ​s​t​o​r​a​g​e
+						 */
+						'2': string
+						/**
+						 * S​M​S​ ​a​n​d​ ​e​m​a​i​l​ ​n​o​t​i​f​i​c​a​t​i​o​n​s
+						 */
+						'3': string
+						/**
+						 * A​u​t​o​-​r​e​m​i​n​d​e​r​s
+						 */
+						'4': string
+						/**
+						 * M​u​l​t​i​-​b​e​n​e​f​i​c​i​a​r​y​ ​p​r​o​f​i​l​e​s
+						 */
+						'5': string
+						/**
+						 * R​e​a​l​-​t​i​m​e​ ​p​a​y​m​e​n​t​ ​t​r​a​c​k​i​n​g
+						 */
+						'6': string
+						/**
+						 * F​l​e​x​i​b​l​e​ ​p​a​y​m​e​n​t​s​ ​f​o​r​ ​t​e​n​a​n​t​s
+						 */
+						'7': string
+						/**
+						 * A​u​t​o​ ​s​e​t​t​l​e​m​e​n​t​s​ ​&​ ​r​e​c​o​n​c​i​l​i​a​t​i​o​n
+						 */
+						'8': string
+					}
+					/**
+					 * S​t​a​r​t​e​r
+					 */
+					name: string
+					/**
+					 * $​1​.​5
+					 */
+					price: string
+				}
+				'2': {
+					description: string
+					features: {
+						/**
+						 * E​v​e​r​y​t​h​i​n​g​ ​i​n​ ​S​t​a​r​t​e​r​ ​p​l​a​n
+						 */
+						'1': string
+						/**
+						 * E​x​p​e​n​s​e​ ​M​a​n​a​g​e​m​e​n​t
+						 */
+						'2': string
+					}
+					/**
+					 * P​l​u​s
+					 */
+					name: string
+					/**
+					 * $​5
+					 */
+					price: string
+				}
+				'3': {
+					description: string
+					features: {
+						/**
+						 * E​v​e​r​y​t​h​i​n​g​ ​i​n​ ​P​l​u​s​ ​p​l​a​n
+						 */
+						'1': string
+						/**
+						 * D​e​d​i​c​a​t​e​d​ ​p​o​r​t​f​o​l​i​o​ ​m​a​n​a​g​e​r
+						 */
+						'2': string
+					}
+					/**
+					 * P​r​e​m​i​u​m
+					 */
+					name: string
+					/**
+					 * C​o​n​t​a​c​t​ ​u​s
+					 */
+					price: string
+				}
 			}
 			/**
-			 * $​5
-			 */
-			price: string
-			/**
-			 * P​e​r​ ​u​n​i​t
-			 */
-			priceSubtitle: string
-			/**
-			 * S​u​b​s​c​r​i​p​t​i​o​n​ ​D​e​t​a​i​l​s​.
+			 * P​r​i​c​e​ ​i​s​ ​p​e​r​ ​u​n​i​t​ ​p​e​r​ ​m​o​n​t​h​.
 			 */
 			subtitle: string
 			/**
@@ -386,7 +430,7 @@ type RootTranslation = {
 				 */
 				name: string
 				/**
-				 * T​e​n​a​n​t​s
+				 * R​e​s​i​d​e​n​t​s
 				 */
 				summary: string
 			}
@@ -1640,11 +1684,11 @@ export type TranslationFunctions = {
 		}
 		hero: {
 			/**
-			 * Aqaratech offers  an easy-to-use dashboard to manage properties, keep track of important tasks, and quickly access information.
+			 * Unique portals to suit the needs of property owners and real estate companies.
 			 */
 			description: () => LocalizedString
 			/**
-			 * Unique portals to suit the needs of property owners and real estate companies.
+			 * Offering a compatible smart metering system to track energy consumption.
 			 */
 			subtitle: () => LocalizedString
 			/**
@@ -1652,12 +1696,9 @@ export type TranslationFunctions = {
 			 */
 			titlePrefix: () => LocalizedString
 			/**
-			 * All-in-one
-			 */
-			titleHighlight: () => LocalizedString
-			/**
 			 * platform.
 			 */
+			titleHighlight: () => LocalizedString
 			titleSuffix: () => LocalizedString
 		}
 		/**
@@ -1669,50 +1710,97 @@ export type TranslationFunctions = {
 		 */
 		map: () => LocalizedString
 		pricing: {
-			features: {
-				/**
-				 * Online collection
-				 */
-				'1': () => LocalizedString
-				/**
-				 * File storage
-				 */
-				'2': () => LocalizedString
-				/**
-				 * SMS and email notifications
-				 */
-				'3': () => LocalizedString
-				/**
-				 * Auto-reminders
-				 */
-				'4': () => LocalizedString
-				/**
-				 * Multi-beneficiary profiles
-				 */
-				'5': () => LocalizedString
-				/**
-				 * Real-time payment tracking
-				 */
-				'6': () => LocalizedString
-				/**
-				 * Flexible payments for tenants
-				 */
-				'7': () => LocalizedString
-				/**
-				 * Auto settlements & reconciliation
-				 */
-				'8': () => LocalizedString
+			plans: {
+				'1': {
+					description: () => LocalizedString
+					features: {
+						/**
+						 * Online collection
+						 */
+						'1': () => LocalizedString
+						/**
+						 * File storage
+						 */
+						'2': () => LocalizedString
+						/**
+						 * SMS and email notifications
+						 */
+						'3': () => LocalizedString
+						/**
+						 * Auto-reminders
+						 */
+						'4': () => LocalizedString
+						/**
+						 * Multi-beneficiary profiles
+						 */
+						'5': () => LocalizedString
+						/**
+						 * Real-time payment tracking
+						 */
+						'6': () => LocalizedString
+						/**
+						 * Flexible payments for tenants
+						 */
+						'7': () => LocalizedString
+						/**
+						 * Auto settlements & reconciliation
+						 */
+						'8': () => LocalizedString
+					}
+					/**
+					 * Starter
+					 */
+					name: () => LocalizedString
+					/**
+					 * $1.5
+					 */
+					price: () => LocalizedString
+				}
+				'2': {
+					description: () => LocalizedString
+					features: {
+						/**
+						 * Everything in Starter plan
+						 */
+						'1': () => LocalizedString
+						/**
+						 * Expense Management
+						 */
+						'2': () => LocalizedString
+					}
+					/**
+					 * Plus
+					 */
+					name: () => LocalizedString
+					/**
+					 * $5
+					 */
+					price: () => LocalizedString
+				}
+				'3': {
+					description: () => LocalizedString
+					features: {
+						/**
+						 * Everything in Plus plan
+						 */
+						'1': () => LocalizedString
+						/**
+						 * Dedicated portfolio manager
+						 */
+						'2': () => LocalizedString
+					}
+					/**
+					 * Premium
+					 */
+					name: () => LocalizedString
+					/**
+					 * Contact us
+					 */
+					price: () => LocalizedString
+				}
 			}
 			/**
-			 * $5
-			 */
-			price: () => LocalizedString
-			/**
-			 * Per unit
-			 */
-			priceSubtitle: () => LocalizedString
-			/**
-			 * Subscription Details.
+			 * Price is per unit per month.
 			 */
 			subtitle: () => LocalizedString
 			/**
@@ -1759,7 +1847,7 @@ export type TranslationFunctions = {
 				 */
 				name: () => LocalizedString
 				/**
-				 * Tenants
+				 * Residents
 				 */
 				summary: () => LocalizedString
 			}

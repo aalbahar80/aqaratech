@@ -20,7 +20,7 @@ const storagePath = path.join(globalStoragePath, file);
 
 test.use({ storageState: storagePath });
 
-const contactOrg = 'Please contact your organization';
+const contactOrg = 'Please contact your';
 
 test.describe('new user', () => {
 	test.beforeEach(async () => {

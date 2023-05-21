@@ -8,6 +8,7 @@ import { test } from '../api/api-fixtures';
 import { plan } from '../api/fixtures/env';
 import { siteURL } from '../api/fixtures/site-url';
 
+// NOTE: Reset stripe test data if performance degrades
 test.slow();
 
 // tests in describe don't run in parallel
@@ -51,6 +52,48 @@ test.describe('unsubscribed', () => {
 		// Stripe's "subscribe" button
 		// const btn = page.getByTestId('hosted-payment-submit-button');
 		// await expect(btn).toBeVisible();
+	});
+
+	test('can subscribe to plan 1', async ({ page, org }) => {
+		const url = getRoute({
+			entity: 'organization',
+			pageType: PageTab.Billing,
+			id: org.organization.id,
+			params: {
+				organizationId: org.organization.id,
+			},
+		});
+
+		await page.goto(url);
+
+		await page.getByTestId('plan-1').click();
+		await page.getByRole('button', { name: 'Subscribe' }).click();
+
+		const description = page
+			.getByTestId('line-item-product-name')
+			.getByText('Aqaratech Essential - Per Unit');
+		await expect(description).toBeVisible();
+	});
+
+	test('can subscribe to plan 2', async ({ page, org }) => {
+		const url = getRoute({
+			entity: 'organization',
+			pageType: PageTab.Billing,
+			id: org.organization.id,
+			params: {
+				organizationId: org.organization.id,
+			},
+		});
+
+		await page.goto(url);
+
+		await page.getByTestId('plan-2').click();
+		await page.getByRole('button', { name: 'Subscribe' }).click();
+
+		const description = page
+			.getByTestId('line-item-product-name')
+			.getByText('Aqaratech Premium - Per Unit');
+		await expect(description).toBeVisible();
 	});
 
 	test('isActive is restored after subscribing', async ({ page, org }) => {

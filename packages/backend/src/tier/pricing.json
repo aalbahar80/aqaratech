@@ -11,6 +11,28 @@
 					"tiers": [{ "price": 500, "base": 0 }]
 				}
 			}
+		},
+		"plan:essential@0": {
+			"title": "Aqaratech Essential",
+			"interval": "@monthly",
+			"features": {
+				"feature:unit": {
+					"title": "Per Unit",
+					"aggregate": "perpetual",
+					"tiers": [{ "price": 150, "base": 0 }]
+				}
+			}
+		},
+		"plan:premium@0": {
+			"title": "Aqaratech Premium",
+			"interval": "@monthly",
+			"features": {
+				"feature:unit": {
+					"title": "Per Unit",
+					"aggregate": "perpetual",
+					"tiers": [{ "price": 500, "base": 0 }]
+				}
+			}
 		}
 	}
 }

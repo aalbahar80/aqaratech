@@ -1,5 +1,6 @@
 import { InjectionToken } from '@nestjs/common';
 import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
+import { mockDeep } from 'vitest-mock-extended';
 
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -42,6 +43,11 @@ export const tokenMocker = function (token?: InjectionToken) {
 
 	if (typeof token === 'symbol') {
 		return token;
+	}
+
+	// NestWinston
+	if (typeof token === 'string') {
+		return mockDeep();
 	}
 
 	return;

@@ -10,6 +10,28 @@ vi.mock('@novu/node', () => ({
 	})),
 }));
 
+vi.mock(
+	'tier',
+	async (importOriginal: () => Promise<typeof import('tier')>) => {
+		const tier = await importOriginal();
+		const client = {
+			// If orgname is 'no-stub', don't stub the subscription, instead create a real subscription
+			subscribe: vi.fn().mockImplementation(async (arg1, arg2, arg3) => {
+				const name = arg3?.info?.name as string | undefined;
+				if (name?.includes('no-stub')) {
+					console.log('not stubbing subscription');
+					return await tier.subscribe(arg1, arg2, arg3);
+				}
+				console.log('stubbing subscription');
+				return;
+			}),
+			// cancel: tier.cancel,
+			// report: tier.report,
+		};
+		return { default: client };
+	},
+);
+
 describe('App', () => {
 	let app: INestApplication;
 

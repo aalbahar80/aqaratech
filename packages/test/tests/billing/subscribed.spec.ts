@@ -4,7 +4,6 @@ import tier from 'tier';
 import { getRoute, PageTab, tierid } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
-import { apiURL } from '../api/fixtures/api-url';
 import { plan } from '../api/fixtures/env';
 
 test.use({ organizationParams: { isActive: true } });
@@ -39,18 +38,6 @@ test.describe('subscribed', () => {
 		await page.waitForTimeout(3000);
 
 		const promise = tier.lookupPhase(orgId);
-
-		await expect(promise).rejects.toThrowError('Not Found');
-	});
-
-	test('is unsubscribed after deleting org', async ({ request, org }) => {
-		const url = `${apiURL}/organizations/${org.organization.id}`;
-
-		const res = await request.delete(url);
-
-		expect(res.status()).toBe(200);
-
-		const promise = tier.lookupPhase(tierid(org.organization.id));
 
 		await expect(promise).rejects.toThrowError('Not Found');
 	});

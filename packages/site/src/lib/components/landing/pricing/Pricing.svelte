@@ -47,21 +47,36 @@
 		>
 			<Plan
 				plan={{
-					name: $L.landing.pricing.priceSubtitle(),
-					price: $L.landing.pricing.price(),
-					description: '',
+					name: $L.landing.pricing.plans['1'].name(),
+					price: $L.landing.pricing.plans['1'].price(),
+					description: $L.landing.pricing.plans['1'].description(),
 					href: SIGNUP,
-					features: [
-						$L.landing.pricing.features['1'](),
-						$L.landing.pricing.features['2'](),
-						$L.landing.pricing.features['3'](),
-						$L.landing.pricing.features['4'](),
-						$L.landing.pricing.features['5'](),
-						$L.landing.pricing.features['6'](),
-						$L.landing.pricing.features['7'](),
-						$L.landing.pricing.features['8'](),
-					],
+					features: Object.values($L.landing.pricing.plans['1'].features).map(
+						(v) => v(),
+					),
+				}}
+			/>
+			<Plan
+				plan={{
 					featured: true,
+					name: $L.landing.pricing.plans['2'].name(),
+					price: $L.landing.pricing.plans['2'].price(),
+					description: $L.landing.pricing.plans['2'].description(),
+					href: SIGNUP,
+					features: Object.values($L.landing.pricing.plans['2'].features).map(
+						(v) => v(),
+					),
+				}}
+			/>
+			<Plan
+				plan={{
+					name: $L.landing.pricing.plans['3'].name(),
+					price: $L.landing.pricing.plans['3'].price(),
+					description: $L.landing.pricing.plans['3'].description(),
+					href: SIGNUP,
+					features: Object.values($L.landing.pricing.plans['3'].features).map(
+						(v) => v(),
+					),
 				}}
 			/>
 		</div>

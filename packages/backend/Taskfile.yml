@@ -42,6 +42,8 @@ tasks:
 
   start:mock:
     method: none
+    sources:
+      - test/**/*
     deps:
       - build
     cmds:

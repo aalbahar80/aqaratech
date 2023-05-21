@@ -4,18 +4,12 @@ import {
 	Delete,
 	ForbiddenException,
 	Get,
-	NotFoundException,
 	Param,
 	Patch,
 	Post,
 	Query,
 } from '@nestjs/common';
-import {
-	ApiCreatedResponse,
-	ApiExcludeEndpoint,
-	ApiOkResponse,
-	ApiTags,
-} from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Prisma, RoleType } from '@prisma/client';
 
 import { organizationSchema } from '@self/utils';
@@ -191,20 +185,6 @@ export class OrganizationsController {
 			queryOptions,
 			user,
 			whereCustom: { organizationId },
-		});
-	}
-
-	/** Report usage of the API */
-	@Post(':id/report')
-	@ApiExcludeEndpoint()
-	report(@Param('id') organizationId: string) {
-		// Rely on cron job in production
-		if (this.env.e.PUBLIC_AQARATECH_ENV === 'production') {
-			throw new NotFoundException();
-		}
-
-		return this.organizationsService.reportUsageAll({
-			id: organizationId,
 		});
 	}
 

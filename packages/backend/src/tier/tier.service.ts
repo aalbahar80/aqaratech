@@ -17,7 +17,7 @@ export class TierService {
 	}) {
 		await tier.subscribe(
 			tierid(organization.id),
-			this.env.e.PUBLIC_TIER_PLAN_ID_1,
+			this.env.e.PUBLIC_TIER_PLAN_ID_2,
 			{
 				trialDays: 90,
 				info: {

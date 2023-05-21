@@ -45,11 +45,50 @@
 				rel="external"
 				use:enhance={externalRedirect}
 			>
-				<button
-					class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+				<div
+					class="flex flex-col items-start gap-x-8 gap-y-4 sm:flex-row sm:items-center"
 				>
-					{$L.buttons.subscribe()}
-				</button>
+					<div class="flex items-center gap-4">
+						<div>
+							<input
+								type="radio"
+								data-testid="plan-1"
+								id="plan-1"
+								name="plan"
+								value="1"
+								class="text-indigo-600 focus:ring-indigo-500"
+								checked
+							/>
+							<label
+								for="plan-1"
+								class="ms-2"
+							>
+								{$L.landing.pricing.plans['1'].name()}
+							</label>
+						</div>
+						<div>
+							<input
+								type="radio"
+								data-testid="plan-2"
+								id="plan-2"
+								name="plan"
+								value="2"
+								class="text-indigo-600 focus:ring-indigo-500"
+							/>
+							<label
+								for="plan-2"
+								class="ms-2"
+							>
+								{$L.landing.pricing.plans['2'].name()}
+							</label>
+						</div>
+					</div>
+					<button
+						class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+					>
+						{$L.buttons.subscribe()}
+					</button>
+				</div>
 			</form>
 		</div>
 	</ActionPanel>

@@ -118,10 +118,9 @@ export const tolgee = {
 			legal: 'Aqaratech, WLL. All rights reserved.',
 		},
 		hero: {
-			description:
-				'Unique portals to suit the needs of property owners and real estate companies.',
+			description: 'Conveniently manage your properties from any location.',
 			subtitle:
-				'Offering integrated smart metering system to keep track of energy consumption.',
+				'Unique portals to suit the needs of property owners and real estate companies.',
 			titlePrefix: 'Property management',
 			titleHighlight: 'platform.',
 			titleSuffix: '',
@@ -129,19 +128,42 @@ export const tolgee = {
 		location: 'Location',
 		map: 'Map',
 		pricing: {
-			features: {
-				'1': 'Online collection',
-				'2': 'File storage',
-				'3': 'SMS and email notifications',
-				'4': 'Auto-reminders',
-				'5': 'Multi-beneficiary profiles',
-				'6': 'Real-time payment tracking',
-				'7': 'Flexible payments for tenants',
-				'8': 'Auto settlements & reconciliation',
+			plans: {
+				'1': {
+					description: '',
+					features: {
+						'1': 'Online collection',
+						'2': 'File storage',
+						'3': 'SMS and email notifications',
+						'4': 'Auto-reminders',
+						'5': 'Multi-beneficiary profiles',
+						'6': 'Real-time payment tracking',
+						'7': 'Flexible payments for tenants',
+						'8': 'Auto settlements & reconciliation',
+					},
+					name: 'Essential',
+					price: '$1.5',
+				},
+				'2': {
+					description: '',
+					features: {
+						'1': 'Everything in essential plan',
+						'2': 'Uploading and classifying expense invoices',
+					},
+					name: 'Premium',
+					price: '$5',
+				},
+				'3': {
+					description: '',
+					features: {
+						'1': 'Everything in Plus plan',
+						'2': 'Dedicated portfolio manager',
+					},
+					name: 'Complete Management',
+					price: 'Contact us',
+				},
 			},
-			price: '$5',
-			priceSubtitle: 'Per unit',
-			subtitle: 'Subscription Details.',
+			subtitle: 'Price is per unit per month.',
 			title: 'Pricing',
 		},
 		secondaryFeatures: {
@@ -163,10 +185,11 @@ export const tolgee = {
 		},
 	},
 	misc: {
-		contactOrg: 'Please contact your organization to request access.',
+		contactOrg: 'Please contact your property manager to request access.',
 		invoiceSuccess: 'Thank you for your payment.',
 		searchByName: 'Search by Name',
-		tenantLogin:
-			'Please log in to view your payment history and print your invoice.',
+		tenantLogin: 'Please log in to view your payment history and receipts.',
 	},
 };
+
+export type Tolgee = typeof tolgee;

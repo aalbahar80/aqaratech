@@ -20,6 +20,7 @@ export const backendEnvSchema = envSchema.pick({
 	STRIPE_PAUSE_USAGE_REPORTS: true,
 	STRIPE_USAGE_REPORT_CRON: true,
 	PUBLIC_TIER_PLAN_ID_1: true,
+	PUBLIC_TIER_PLAN_ID_2: true,
 
 	// R2
 	R2_ENDPOINT: true,

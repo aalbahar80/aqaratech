@@ -59,6 +59,7 @@ export const envSchema = z.object({
 	STRIPE_PAUSE_USAGE_REPORTS: zodEnvBooleanSchema().default(false),
 	STRIPE_USAGE_REPORT_CRON: z.string().optional(),
 	PUBLIC_TIER_PLAN_ID_1: featureSchema,
+	PUBLIC_TIER_PLAN_ID_2: featureSchema,
 	// @ts-expect-error - zod wrongly infers the type
 	PUBLIC_IS_PAYWALL_ACTIVE: zodEnvBooleanSchema().default(true),
 

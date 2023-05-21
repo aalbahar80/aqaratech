@@ -17,6 +17,7 @@ const siteEnvSchema = envSchema.pick({
 	PUBLIC_AQ_DEBUG_LEVEL: true,
 	PUBLIC_MYFATOORAH_SITE_URL: true,
 	PUBLIC_TIER_PLAN_ID_1: true,
+	PUBLIC_TIER_PLAN_ID_2: true,
 	PUBLIC_IS_PAYWALL_ACTIVE: true,
 });
 

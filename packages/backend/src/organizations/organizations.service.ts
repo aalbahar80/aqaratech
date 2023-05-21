@@ -219,18 +219,11 @@ export class OrganizationsService {
 	// params should be optional, when called from cron it doesn't have any
 	async reportUsageAll({ id }: { id?: string } = {}) {
 		if (this.env.e.STRIPE_PAUSE_USAGE_REPORTS) {
-			if (id) {
-				// if id is defined, then that means:
-				// (a) we are testing usage reporting and
-				// (b) this is not a cron job that will hit API limits
-				// so we can still report usage for a single organization
-			} else {
-				this.logger.warn(
-					'STRIPE_PAUSE_USAGE_REPORTS is set, skipping usage report',
-					OrganizationsService.name,
-				);
-				return;
-			}
+			this.logger.warn(
+				'STRIPE_PAUSE_USAGE_REPORTS is set, skipping usage report',
+				OrganizationsService.name,
+			);
+			return false;
 		}
 
 		this.logger.log(
@@ -268,11 +261,12 @@ export class OrganizationsService {
 			},
 			OrganizationsService.name,
 		);
+
+		return true;
 	}
 
 	/** Report usage for a single organization. */
 	async reportUsage(organization: Organization & { _count: { Unit: number } }) {
-		// TODO: stub to avoid running in dev
 		return await tier.report(
 			tierid(organization.id),
 			'feature:unit',
