@@ -1,10 +1,10 @@
 ---
-'@self/backend': major
-'@self/utils': major
-'@self/site': major
-'@self/test': major
-'eslint-config-custom': major
-'@self/seed': major
+'@self/backend': minor
+'@self/utils': minor
+'@self/site': minor
+'@self/test': minor
+'eslint-config-custom': minor
+'@self/seed': minor
 ---
 
 add more subscription plans
