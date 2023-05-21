@@ -60,28 +60,6 @@ export default defineConfig(() => {
 			// set chart.js && papaparse as `noExternal` to avoid issues in SSR (when running `vite preview`)
 			noExternal: ['typesafe-i18n'],
 		},
-		build: {
-			// Generate sourcemaps for all builds. In production, remove them before building Docker image.
-			// This is to match the random chunk names with their original sourcemaps.
-			sourcemap: true,
-			rollupOptions: {
-				// with rollupOptions, source maps work for BUILD: pnpm build && node --inspect -r source-map-support/register build/index.js
-				// without rollupOptions, source maps work for PREVIEW: pnpm build && pnpm vite preview --port 3000
-				output: {
-					sourcemap: true,
-					sourcemapPathTransform: (relativeSourcePath) => {
-						if (relativeSourcePath.includes('../src')) {
-							// adjust path by one level down
-							return relativeSourcePath.replace('../src', 'src');
-						}
-						return relativeSourcePath;
-					},
-				},
-			},
-		},
-		// esbuild: {
-		// 	sourcemap: true, // no effect?
-		// },
 	};
 
 	return config;

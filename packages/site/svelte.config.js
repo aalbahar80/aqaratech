@@ -2,6 +2,8 @@
 import adapterNode from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
+import { isLiveEnv } from '@self/utils';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
@@ -9,7 +11,8 @@ const config = {
 
 	// DOCS: https://svelte.dev/docs#compile-time-svelte-compile
 	compilerOptions: {
-		enableSourcemap: true,
+		// @ts-expect-error defaults to "not live"
+		enableSourcemap: !isLiveEnv(process.env.PUBLIC_AQARATECH_ENV),
 	},
 	kit: {
 		adapter: adapterNode(),
