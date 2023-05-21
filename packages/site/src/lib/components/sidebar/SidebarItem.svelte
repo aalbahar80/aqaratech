@@ -26,7 +26,7 @@
 		isCurrent && !item.children?.length
 			? 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200'
 			: 'transform text-gray-600 transition-colors duration-100 hover:bg-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200',
-		isChild ? 'mt-2' : 'mt-5',
+		isChild ? 'mt-2' : 'mt-2',
 	)}
 >
 	<a
