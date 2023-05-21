@@ -8,4 +8,4 @@ export const LEASE_PHASE = {
 
 export type LeasePhase = (typeof LEASE_PHASE)[keyof typeof LEASE_PHASE];
 
-export const leasePhase = writable<LeasePhase>(LEASE_PHASE.ALL);
+export const leasePhase = writable<LeasePhase>(LEASE_PHASE.Ongoing);
