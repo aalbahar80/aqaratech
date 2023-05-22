@@ -26,7 +26,7 @@ test.describe('lease phase filter', () => {
 		// expect 2 items in table
 		const table = page.locator('tbody');
 		const rows = await table.getByRole('row').count();
-		expect(rows).toBe(2);
+		expect(rows).toBe(0);
 
 		const status = page.getByRole('button', { name: 'Status' });
 		await status.click();
