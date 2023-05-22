@@ -7,10 +7,10 @@ import { defineConfig } from 'vite';
 import { version } from './package.json';
 
 console.log({
-	SENTRY_RELEASE_ENABLE: process.env.SENTRY_RELEASE_ENABLE,
-	SENTRY_RELEASE_VERSION: process.env.SENTRY_RELEASE_VERSION,
-	SENTRY_RELEASE_ENVIRONMENT: process.env.SENTRY_RELEASE_ENVIRONMENT,
-	ANALYZE_BUNDLE: process.env.ANALYZE_BUNDLE,
+	SENTRY_RELEASE_ENABLE: process.env['SENTRY_RELEASE_ENABLE'],
+	SENTRY_RELEASE_VERSION: process.env['SENTRY_RELEASE_VERSION'],
+	SENTRY_RELEASE_ENVIRONMENT: process.env['SENTRY_RELEASE_ENVIRONMENT'],
+	ANALYZE_BUNDLE: process.env['ANALYZE_BUNDLE'],
 });
 
 export default defineConfig({
@@ -20,18 +20,18 @@ export default defineConfig({
 	},
 	plugins: [
 		sentrySvelteKit({
-			debug: !!process.env.SENTRY_RELEASE_ENABLE,
-			autoUploadSourceMaps: !!process.env.SENTRY_RELEASE_ENABLE,
+			debug: !!process.env['SENTRY_RELEASE_ENABLE'],
+			autoUploadSourceMaps: !!process.env['SENTRY_RELEASE_ENABLE'],
 			// Other sentry config in `sentry.properties`
 			sourceMapsUploadOptions: {
 				debug: true,
-				release: 'site-' + (process.env.SENTRY_RELEASE_VERSION ?? 'unknown'),
+				release: 'site-' + (process.env['SENTRY_RELEASE_VERSION'] ?? 'unknown'),
 				setCommits: {
 					auto: true,
 				},
 				deploy: {
 					env:
-						process.env.SENTRY_RELEASE_ENVIRONMENT === 'prod'
+						process.env['SENTRY_RELEASE_ENVIRONMENT'] === 'prod'
 							? 'production'
 							: 'staging',
 				},
@@ -41,7 +41,7 @@ export default defineConfig({
 		sveltekit(),
 		icons({ compiler: 'svelte' }),
 		// See: https://github.com/btd/rollup-plugin-visualizer#usage
-		...(process.env.ANALYZE_BUNDLE === '1'
+		...(process.env['ANALYZE_BUNDLE'] === '1'
 			? [
 					visualizer({
 						emitFile: true,
