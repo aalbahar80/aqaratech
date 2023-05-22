@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.30.0
+
+### Minor Changes
+
+- 6e9a81492: add extended payphase filter
+
 ## 3.29.0
 
 ### Minor Changes

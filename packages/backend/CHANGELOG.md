@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.31.0
+
+### Minor Changes
+
+- 6e9a81492: add extended payphase filter
+
 ## 2.30.1
 
 ### Patch Changes

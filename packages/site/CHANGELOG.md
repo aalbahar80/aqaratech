@@ -1,5 +1,15 @@
 # @self/site
 
+## 2.33.0
+
+### Minor Changes
+
+- 6e9a81492: add extended payphase filter
+
+### Patch Changes
+
+- cceb2c878: tolgee premium plan
+
 ## 2.32.2
 
 ### Patch Changes
