@@ -1,5 +1,3 @@
-// @ts-check
-
 import { sentrySvelteKit } from '@sentry/sveltekit';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -15,7 +13,6 @@ console.log({
 	ANALYZE_BUNDLE: process.env.ANALYZE_BUNDLE,
 });
 
-/** @type {import('vite').UserConfigExport} */
 export default defineConfig({
 	define: {
 		__AQARATECH_APP_VERSION__: JSON.stringify(version),
