@@ -13,7 +13,7 @@ export { FIELDS } from './constants/fields';
 export { MAINTENANCE_ORDER_STATUS } from './constants/maintenance-status';
 export type { MaintenanceOrderStatus } from './constants/maintenance-status';
 export { MAX_LIMIT } from './constants/misc';
-export { PAID_LATE, type PaidLate } from './constants/paid-late.enum';
+export { PAY_PHASE, type PayPhase } from './constants/pay-phase.enum';
 export { endOfMonthN } from './date/end-of-month-n';
 export { getProgress } from './date/progress';
 export { startOfMonthN } from './date/start-of-month-n';

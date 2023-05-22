@@ -267,11 +267,11 @@ type RootTranslation = {
 		}
 		hero: {
 			/**
-			 * U​n​i​q​u​e​ ​p​o​r​t​a​l​s​ ​t​o​ ​s​u​i​t​ ​t​h​e​ ​n​e​e​d​s​ ​o​f​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​r​e​a​l​ ​e​s​t​a​t​e​ ​c​o​m​p​a​n​i​e​s​.
+			 * C​o​n​v​e​n​i​e​n​t​l​y​ ​m​a​n​a​g​e​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​ ​f​r​o​m​ ​a​n​y​ ​l​o​c​a​t​i​o​n​.
 			 */
 			description: string
 			/**
-			 * O​f​f​e​r​i​n​g​ ​a​ ​c​o​m​p​a​t​i​b​l​e​ ​s​m​a​r​t​ ​m​e​t​e​r​i​n​g​ ​s​y​s​t​e​m​ ​t​o​ ​t​r​a​c​k​ ​e​n​e​r​g​y​ ​c​o​n​s​u​m​p​t​i​o​n​.
+			 * U​n​i​q​u​e​ ​p​o​r​t​a​l​s​ ​t​o​ ​s​u​i​t​ ​t​h​e​ ​n​e​e​d​s​ ​o​f​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​r​e​a​l​ ​e​s​t​a​t​e​ ​c​o​m​p​a​n​i​e​s​.
 			 */
 			subtitle: string
 			/**
@@ -331,7 +331,7 @@ type RootTranslation = {
 						'8': string
 					}
 					/**
-					 * S​t​a​r​t​e​r
+					 * E​s​s​e​n​t​i​a​l
 					 */
 					name: string
 					/**
@@ -343,16 +343,16 @@ type RootTranslation = {
 					description: string
 					features: {
 						/**
-						 * E​v​e​r​y​t​h​i​n​g​ ​i​n​ ​S​t​a​r​t​e​r​ ​p​l​a​n
+						 * E​v​e​r​y​t​h​i​n​g​ ​i​n​ ​e​s​s​e​n​t​i​a​l​ ​p​l​a​n
 						 */
 						'1': string
 						/**
-						 * E​x​p​e​n​s​e​ ​M​a​n​a​g​e​m​e​n​t
+						 * U​p​l​o​a​d​i​n​g​ ​a​n​d​ ​c​l​a​s​s​i​f​y​i​n​g​ ​e​x​p​e​n​s​e​ ​i​n​v​o​i​c​e​s
 						 */
 						'2': string
 					}
 					/**
-					 * P​l​u​s
+					 * P​r​e​m​i​u​m
 					 */
 					name: string
 					/**
@@ -373,7 +373,7 @@ type RootTranslation = {
 						'2': string
 					}
 					/**
-					 * P​r​e​m​i​u​m
+					 * C​o​m​p​l​e​t​e​ ​M​a​n​a​g​e​m​e​n​t
 					 */
 					name: string
 					/**
@@ -438,7 +438,7 @@ type RootTranslation = {
 	}
 	misc: {
 		/**
-		 * P​l​e​a​s​e​ ​c​o​n​t​a​c​t​ ​y​o​u​r​ ​o​r​g​a​n​i​z​a​t​i​o​n​ ​t​o​ ​r​e​q​u​e​s​t​ ​a​c​c​e​s​s​.
+		 * P​l​e​a​s​e​ ​c​o​n​t​a​c​t​ ​y​o​u​r​ ​p​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​r​ ​t​o​ ​r​e​q​u​e​s​t​ ​a​c​c​e​s​s​.
 		 */
 		contactOrg: string
 		/**
@@ -450,7 +450,7 @@ type RootTranslation = {
 		 */
 		searchByName: string
 		/**
-		 * P​l​e​a​s​e​ ​l​o​g​ ​i​n​ ​t​o​ ​v​i​e​w​ ​y​o​u​r​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​a​n​d​ ​p​r​i​n​t​ ​y​o​u​r​ ​i​n​v​o​i​c​e​.
+		 * P​l​e​a​s​e​ ​l​o​g​ ​i​n​ ​t​o​ ​v​i​e​w​ ​y​o​u​r​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​a​n​d​ ​r​e​c​e​i​p​t​s​.
 		 */
 		tenantLogin: string
 	}
@@ -1322,7 +1322,7 @@ type RootTranslation = {
 		/**
 		 * P​a​y​m​e​n​t​ ​t​i​m​e
 		 */
-		isPaidLate: string
+		payPhase: string
 	}
 	pagination: {
 		/**
@@ -1684,11 +1684,11 @@ export type TranslationFunctions = {
 		}
 		hero: {
 			/**
-			 * Unique portals to suit the needs of property owners and real estate companies.
+			 * Conveniently manage your properties from any location.
 			 */
 			description: () => LocalizedString
 			/**
-			 * Offering a compatible smart metering system to track energy consumption.
+			 * Unique portals to suit the needs of property owners and real estate companies.
 			 */
 			subtitle: () => LocalizedString
 			/**
@@ -1748,7 +1748,7 @@ export type TranslationFunctions = {
 						'8': () => LocalizedString
 					}
 					/**
-					 * Starter
+					 * Essential
 					 */
 					name: () => LocalizedString
 					/**
@@ -1760,16 +1760,16 @@ export type TranslationFunctions = {
 					description: () => LocalizedString
 					features: {
 						/**
-						 * Everything in Starter plan
+						 * Everything in essential plan
 						 */
 						'1': () => LocalizedString
 						/**
-						 * Expense Management
+						 * Uploading and classifying expense invoices
 						 */
 						'2': () => LocalizedString
 					}
 					/**
-					 * Plus
+					 * Premium
 					 */
 					name: () => LocalizedString
 					/**
@@ -1790,7 +1790,7 @@ export type TranslationFunctions = {
 						'2': () => LocalizedString
 					}
 					/**
-					 * Premium
+					 * Complete Management
 					 */
 					name: () => LocalizedString
 					/**
@@ -1855,7 +1855,7 @@ export type TranslationFunctions = {
 	}
 	misc: {
 		/**
-		 * Please contact your organization to request access.
+		 * Please contact your property manager to request access.
 		 */
 		contactOrg: () => LocalizedString
 		/**
@@ -1867,7 +1867,7 @@ export type TranslationFunctions = {
 		 */
 		searchByName: () => LocalizedString
 		/**
-		 * Please log in to view your payment history and print your invoice.
+		 * Please log in to view your payment history and receipts.
 		 */
 		tenantLogin: () => LocalizedString
 	}
@@ -2739,7 +2739,7 @@ export type TranslationFunctions = {
 		/**
 		 * Payment time
 		 */
-		isPaidLate: () => LocalizedString
+		payPhase: () => LocalizedString
 	}
 	pagination: {
 		/**

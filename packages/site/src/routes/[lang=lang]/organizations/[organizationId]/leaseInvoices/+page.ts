@@ -4,8 +4,8 @@ import { get } from 'svelte/store';
 import { createApi } from '$api';
 import { FilterEnum } from '$lib/stores/filter/Filter.enum';
 import { isPaid } from '$lib/stores/filter/is-paid';
-import { isPaidLate } from '$lib/stores/filter/is-paid-late';
 import { isPaidOnline } from '$lib/stores/filter/is-paid-online';
+import { payPhase } from '$lib/stores/filter/pay-phase';
 import { range, rangeKind } from '$lib/stores/filter/range';
 import { parseParams } from '$lib/utils/parse-params';
 
@@ -20,14 +20,14 @@ export const load: PageLoad = async ({
 	const rangeKindFilter = get(rangeKind);
 	const isPaidFilter = get(isPaid);
 	const isPaidOnlineFilter = get(isPaidOnline);
-	const isPaidLateFilter = get(isPaidLate);
+	const payPhaseFilter = get(payPhase);
 
 	depends(
 		FilterEnum.Range,
 		FilterEnum.RangeKind,
 		FilterEnum.IsPaid,
 		FilterEnum.IsPaidOnline,
-		FilterEnum.IsPaidLate,
+		FilterEnum.PayPhase,
 	);
 
 	const filter: Record<string, unknown> = {
@@ -47,7 +47,7 @@ export const load: PageLoad = async ({
 		id: params.organizationId,
 		filter,
 		filterCustom: {
-			isPaidLate: isPaidLateFilter,
+			payPhase: payPhaseFilter,
 		},
 		...parseParams(searchParams),
 	});

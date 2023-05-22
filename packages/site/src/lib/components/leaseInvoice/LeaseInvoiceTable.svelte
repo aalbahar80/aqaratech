@@ -54,8 +54,8 @@
 		}),
 
 		columnHelper.display({
-			id: 'isPaidLate',
-			header: $L.filter.isPaidLate(),
+			id: 'payPhase',
+			header: $L.filter.payPhase(),
 			enableSorting: false,
 			cell: (info) => {
 				const invoice = info.row.original;

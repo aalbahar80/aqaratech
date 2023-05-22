@@ -270,7 +270,7 @@ const ar: Translation = {
 		last6Months: 'آخر 6 أشهر',
 		last12Months: 'آخر 12 شهر',
 		custom: 'مخصص',
-		isPaidLate: 'وقت السداد',
+		payPhase: 'وقت السداد',
 	},
 	pagination: {
 		next: 'التالي',

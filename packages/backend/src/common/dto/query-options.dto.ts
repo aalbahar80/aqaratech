@@ -3,7 +3,7 @@ import {
 	ParsedQuerySortModel,
 } from '@prisma-utils/nestjs-request-parser';
 
-import { PaidLate } from '@self/utils';
+import { PayPhase } from '@self/utils';
 
 /**
  * Query options after parsing.
@@ -15,7 +15,7 @@ export class QueryOptionsDto implements Omit<ParsedQueryModel, 'filter'> {
 	sort: ParsedQuerySortModel[];
 	filter: object;
 	filterCustom: {
-		isPaidLate: PaidLate | undefined;
+		payPhase: PayPhase | undefined;
 		[key: string]: unknown;
 	};
 }
@@ -34,6 +34,6 @@ export class QueryOptionsRequestDto
 	sort?: string[];
 	filter?: object;
 	/** For arbitrary filters that are not part of the schema.
-	 * Ex. `filterCustom: { isPaidLate: true }` */
+	 * Ex. `filterCustom: { payPhase: true }` */
 	filterCustom?: object;
 }

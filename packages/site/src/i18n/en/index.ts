@@ -158,7 +158,7 @@ const en: BaseTranslation = {
 		last6Months: 'Last 6 months',
 		last12Months: 'Last 12 months',
 		custom: 'Custom',
-		isPaidLate: 'Payment time',
+		payPhase: 'Payment time',
 	},
 	pagination: {
 		next: 'Next',

@@ -135,7 +135,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -221,7 +221,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -678,7 +678,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -801,7 +801,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -864,7 +864,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -936,7 +936,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -994,7 +994,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -1117,7 +1117,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -1310,7 +1310,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -1433,7 +1433,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -1496,7 +1496,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -1559,7 +1559,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -1622,7 +1622,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -1685,7 +1685,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -1766,7 +1766,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -1838,7 +1838,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -2149,7 +2149,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -2332,7 +2332,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -2450,7 +2450,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:
@@ -2677,7 +2677,7 @@ paths:
         - required: false
           description: |-
             For arbitrary filters that are not part of the schema.
-            Ex. `filterCustom: { isPaidLate: true }`
+            Ex. `filterCustom: { payPhase: true }`
           name: filterCustom
           in: query
           schema:

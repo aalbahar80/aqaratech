@@ -6,7 +6,7 @@ import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Any, Object } from 'ts-toolbelt';
 
-import { PAID_LATE, getPayURL } from '@self/utils';
+import { PAY_PHASE, getPayURL } from '@self/utils';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Action } from 'src/casl/action.enum';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
@@ -83,7 +83,7 @@ export class LeaseInvoicesService {
 	> {
 		const { take, skip, sort, filter, filterCustom } = queryOptions;
 
-		const isPaidLateFilter = filterCustom.isPaidLate;
+		const payPhaseFilter = filterCustom.payPhase;
 
 		const where = {
 			AND: [
@@ -91,9 +91,9 @@ export class LeaseInvoicesService {
 				...(whereCustom ? [whereCustom] : []), // combine with other filters/remove?
 				filter,
 				{
-					// undefined means no filter (PAID_LATE.ALL)
+					// undefined means no filter (PAY_PHASE.ALL)
 					paymentTime:
-						isPaidLateFilter === PAID_LATE.ALL ? undefined : isPaidLateFilter,
+						payPhaseFilter === PAY_PHASE.ALL ? undefined : payPhaseFilter,
 				},
 			],
 		} satisfies Prisma.LeaseInvoiceVWhereInput;
