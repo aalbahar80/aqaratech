@@ -20,7 +20,7 @@ export const payPhaseFilter = derived(payPhase, ($payPhase) => {
 		type: FILTER_TYPE.RADIO,
 		options: [
 			{
-				label: LL.badge.advanced(),
+				label: LL.badge.advanced() + ' / ' + LL.badge.notYetDue(),
 				value: PAY_PHASE.ADVANCED,
 				active: PAY_PHASE.ADVANCED === $payPhase,
 				action: async () => {
@@ -29,7 +29,7 @@ export const payPhaseFilter = derived(payPhase, ($payPhase) => {
 				},
 			},
 			{
-				label: LL.badge.onTime(),
+				label: LL.badge.onTime() + ' / ' + LL.badge.due(),
 				value: PAY_PHASE.ON_TIME,
 				active: PAY_PHASE.ON_TIME === $payPhase,
 				action: async () => {
@@ -38,7 +38,7 @@ export const payPhaseFilter = derived(payPhase, ($payPhase) => {
 				},
 			},
 			{
-				label: LL.general.late(),
+				label: LL.general.late() + ' / ' + LL.badge.overdue(),
 				value: PAY_PHASE.LATE,
 				active: PAY_PHASE.LATE === $payPhase,
 				action: async () => {

@@ -4,6 +4,8 @@ import { getRoute, PageTab } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
 
+const RECENT_DATE = Date.now() - 5 * 24 * 3600 * 1000; // 5 days ago
+
 test.use({
 	invoicesParams: [
 		// advance
@@ -24,9 +26,21 @@ test.use({
 			paidAt: Date.UTC(2030, 3, 20),
 			isPaid: true,
 		},
-		// unpaid
+		// not due
 		{
 			postAt: Date.UTC(2030, 3, 1),
+			paidAt: null,
+			isPaid: false,
+		},
+		// due
+		{
+			postAt: RECENT_DATE,
+			paidAt: null,
+			isPaid: false,
+		},
+		// past due
+		{
+			postAt: Date.UTC(2020, 5, 1),
 			paidAt: null,
 			isPaid: false,
 		},
@@ -53,18 +67,27 @@ test('filter on payment time', async ({ page, org, invoices, isMobile }) => {
 	const filter = page.getByRole('button', { name: 'Payment time' });
 	await filter.click();
 
+	// RECENT_DATE as 'mmm d, yyyy'
+	const RECENT = new Intl.DateTimeFormat('en-US', {
+		dateStyle: 'medium',
+	}).format(RECENT_DATE);
+
 	// select advance
 	await page.getByLabel('Advanced').click();
 	await expect.soft(page.getByText('Feb 1, 2030')).toBeHidden();
-	await expect.soft(page.getByText('Apr 1, 2030')).toBeHidden();
 	await expect.soft(page.getByText('Mar 1, 2030')).toBeHidden();
+	await expect.soft(page.getByText(RECENT)).toBeHidden();
+	await expect.soft(page.getByText('June 1, 2020')).toBeHidden();
 	await expect.soft(page.getByText('Jan 1, 2030')).toBeVisible();
+	await expect.soft(page.getByText('Apr 1, 2030')).toBeVisible();
 
 	// select ontime
 	await page.getByLabel('On time').click();
 	await expect.soft(page.getByText('Jan 1, 2030')).toBeHidden();
 	await expect.soft(page.getByText('Mar 1, 2030')).toBeHidden();
 	await expect.soft(page.getByText('Apr 1, 2030')).toBeHidden();
+	await expect.soft(page.getByText('June 1, 2020')).toBeHidden();
+	await expect.soft(page.getByText(RECENT)).toBeVisible();
 	await expect.soft(page.getByText('Feb 1, 2030')).toBeVisible();
 
 	// select late
@@ -72,6 +95,8 @@ test('filter on payment time', async ({ page, org, invoices, isMobile }) => {
 	await expect.soft(page.getByText('Jan 1, 2030')).toBeHidden();
 	await expect.soft(page.getByText('Feb 1, 2030')).toBeHidden();
 	await expect.soft(page.getByText('Apr 1, 2030')).toBeHidden();
+	await expect.soft(page.getByText('June 1, 2020')).toBeHidden();
+	await expect.soft(page.getByText(RECENT)).toBeHidden();
 	await expect.soft(page.getByText('Mar 1, 2030')).toBeVisible();
 
 	// select all
@@ -80,4 +105,6 @@ test('filter on payment time', async ({ page, org, invoices, isMobile }) => {
 	await expect.soft(page.getByText('Feb 1, 2030')).toBeVisible();
 	await expect.soft(page.getByText('Mar 1, 2030')).toBeVisible();
 	await expect.soft(page.getByText('Apr 1, 2030')).toBeVisible();
+	await expect.soft(page.getByText('Jun 1, 2020')).toBeVisible();
+	await expect.soft(page.getByText(RECENT)).toBeVisible();
 });

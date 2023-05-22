@@ -6,7 +6,7 @@ import { Prisma } from '@prisma/client';
 import * as R from 'remeda';
 import { Any, Object } from 'ts-toolbelt';
 
-import { PAY_PHASE, getPayURL } from '@self/utils';
+import { getPayURL } from '@self/utils';
 import { AggregateOptionsDto } from 'src/aggregate/dto/aggregate-options.dto';
 import { Action } from 'src/casl/action.enum';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
@@ -83,18 +83,26 @@ export class LeaseInvoicesService {
 	> {
 		const { take, skip, sort, filter, filterCustom } = queryOptions;
 
+		// See EXE-61
 		const payPhaseFilter = filterCustom.payPhase;
+		let payPhaseWhere: Prisma.LeaseInvoiceVWhereInput = {};
+		if (payPhaseFilter === 'LATE') {
+			// prettier-ignore
+			payPhaseWhere = { OR: [{ paymentTime: 'LATE' }, { dueStatus: 'PAST_DUE' }] };
+		} else if (payPhaseFilter === 'ON_TIME') {
+			// prettier-ignore
+			payPhaseWhere = { OR: [{ paymentTime: 'ON_TIME' }, { dueStatus: 'DUE' }] };
+		} else if (payPhaseFilter === 'ADVANCED') {
+			// prettier-ignore
+			payPhaseWhere = { OR: [{ paymentTime: 'ADVANCED' }, { dueStatus: 'NOT_DUE' }] };
+		}
 
 		const where = {
 			AND: [
 				accessibleBy(user.ability, Action.Read).LeaseInvoiceV,
 				...(whereCustom ? [whereCustom] : []), // combine with other filters/remove?
 				filter,
-				{
-					// undefined means no filter (PAY_PHASE.ALL)
-					paymentTime:
-						payPhaseFilter === PAY_PHASE.ALL ? undefined : payPhaseFilter,
-				},
+				payPhaseWhere,
 			],
 		} satisfies Prisma.LeaseInvoiceVWhereInput;
 
