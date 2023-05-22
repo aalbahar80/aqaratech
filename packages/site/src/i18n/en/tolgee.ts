@@ -156,7 +156,7 @@ export const tolgee = {
 				'3': {
 					description: '',
 					features: {
-						'1': 'Everything in Plus plan',
+						'1': 'Everything in Premium plan',
 						'2': 'Dedicated portfolio manager',
 					},
 					name: 'Complete Management',
