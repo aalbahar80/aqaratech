@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.32.2
+
+### Patch Changes
+
+- 5c4ee138e: default lease phase, sidebar spacing
+
 ## 2.32.1
 
 ### Patch Changes
