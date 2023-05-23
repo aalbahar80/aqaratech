@@ -68,7 +68,7 @@
 				$locale,
 				$page.route,
 				$page.url,
-				$page.params['portfolioId'] ?? $page.data.fallbackPortfolioId,
+				$page.params['portfolioId'],
 			)}
 		/>
 

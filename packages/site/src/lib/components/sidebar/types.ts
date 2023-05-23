@@ -7,16 +7,24 @@ type LinkOptions = Partial<
 	| Pick<HTMLAnchorElement, 'rel'>
 >;
 
-export interface NavigationItem {
+export type NavigationItemAction =
+	| {
+			href: string;
+			isButton?: false;
+			onClick?: () => void | Promise<void>;
+	  }
+	| {
+			isButton: true;
+			onClick: () => void | Promise<void>;
+	  };
+
+export type NavigationItem = {
 	name: string;
-	href: string;
 	icon?: Icon;
-	children?: {
+	children?: ({
 		name: string;
-		href: string;
-	}[];
+	} & NavigationItemAction)[];
 	path?: string;
 	divided?: boolean;
 	linkOptions?: LinkOptions;
-	onClick?: () => void;
-}
+} & NavigationItemAction;

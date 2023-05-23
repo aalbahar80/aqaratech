@@ -13,11 +13,15 @@
 
 	// expand the sidebar item if the current page is a child of the item
 	// only runs once
-	if (item.children?.some((child) => child.href === $page.url.pathname)) {
+	if (
+		item.children?.some(
+			(child) => 'href' in child && child.href === $page.url.pathname,
+		)
+	) {
 		expanded = true;
 	}
 
-	$: isCurrent = $page.url.pathname === item.href;
+	$: isCurrent = !item.isButton && $page.url.pathname === item.href;
 </script>
 
 <div
@@ -28,14 +32,15 @@
 			: 'transform text-gray-600 transition-colors duration-100 hover:bg-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200',
 	)}
 >
-	<a
+	<svelte:element
+		this={item.isButton ? 'button' : 'a'}
 		class="inline-flex grow py-2"
-		href={item.href}
-		on:click={() => {
+		href={item.isButton ? 'false' : item.href}
+		on:click={async () => {
 			// always expand when clicking on a link
 			expanded = true;
 
-			'onClick' in item && item.onClick();
+			'onClick' in item && (await item.onClick());
 		}}
 		{...item.linkOptions}
 	>
@@ -50,7 +55,7 @@
 		{/if}
 
 		<span class="mx-4 font-medium">{item.name}</span>
-	</a>
+	</svelte:element>
 
 	{#if item.children && item.children?.length > 0}
 		<button

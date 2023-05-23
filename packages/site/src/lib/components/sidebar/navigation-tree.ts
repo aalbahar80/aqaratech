@@ -134,14 +134,12 @@ export const getNavigationTree = (
 
 			// Only render dashboard links if portfolioId is present. Example, a new
 			// org has no portfolios yet, so avoid rendering dashboard links.
-			...(orgPortfolioId
-				? getDashboardLinks({
-						organizationId,
-						portfolioId: orgPortfolioId,
-						lang: locale,
-						LL,
-				  })
-				: []),
+			...getDashboardLinks({
+				organizationId,
+				portfolioId: orgPortfolioId, // we can't guarantee that portfolioId will be defined
+				lang: locale,
+				LL,
+			}),
 
 			{
 				name: LL.entity.portfolio.plural(),

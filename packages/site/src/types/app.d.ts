@@ -15,9 +15,6 @@ declare namespace App {
 	interface PageData {
 		user: import('$models/types/auth.type').User | undefined;
 		tabLabels?: import('$lib/components/tabs/tab-labels').TabLabels | undefined;
-		fallbackPortfolioId?:
-			| import('$lib/stores/fallback-portfolio-id').FallBackPortfolioId
-			| undefined;
 	}
 
 	interface Error {

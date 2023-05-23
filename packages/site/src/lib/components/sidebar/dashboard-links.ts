@@ -1,52 +1,85 @@
+import { goto } from '$app/navigation';
 import { getRoute, PageTypePortfolio } from '@self/utils';
 
 import type L from '$i18n/i18n-svelte';
 import type { ReadableOf } from '$lib/utils/readable-of';
+import type { NavigationItem, NavigationItemAction } from './types';
 
+import { createApi } from '$api';
 import HeroiconsCreditCard from '~icons/heroicons/credit-card';
 import HeroiconsReceiptPercent from '~icons/heroicons/receipt-percent';
 // import HeroiconsCalculator from '~icons/heroicons/calculator';
 // import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 
-/** Get the dashboard links for a portfolio. */
-export const getDashboardLinks = ({
-	organizationId,
-	portfolioId,
-	lang,
-	LL,
-}: {
-	portfolioId: string;
+interface GetDashboardLinksArgs {
+	portfolioId: string | undefined;
 	organizationId: string;
 	lang: string;
 	LL: ReadableOf<typeof L>;
-}) => {
-	const getRouteConfig = {
-		entity: 'portfolio',
-		id: portfolioId,
-		params: { organizationId, portfolioId, lang },
-	} as const;
+}
 
+type LazyGetRouteParams = GetDashboardLinksArgs & {
+	pageType: PageTypePortfolio;
+};
+const lazyGetRoute = (args: LazyGetRouteParams): NavigationItemAction => {
+	const getRouteConfig = (portfolioId: string) =>
+		({
+			entity: 'portfolio',
+			id: portfolioId, // we can't guarantee that portfolioId will be defined (this is the case for org admins), so we try to get it from the url
+			pageType: args.pageType,
+			params: {
+				organizationId: args.organizationId,
+				portfolioId,
+				lang: args.lang,
+			},
+		} as const);
+
+	if (args.portfolioId) {
+		return {
+			href: getRoute(getRouteConfig(args.portfolioId)),
+		};
+	} else {
+		return {
+			isButton: true,
+			onClick: async () => {
+				const portfolios = await createApi().portfolios.findAll();
+				const lazyPortfolioId = portfolios.results[0]?.id;
+				if (!lazyPortfolioId) {
+					throw new Error('No portfolio found.');
+				}
+				const url = getRoute(getRouteConfig(lazyPortfolioId));
+				return await goto(url);
+			},
+		};
+	}
+};
+
+/** Get the dashboard links for a portfolio. */
+export const getDashboardLinks = (
+	args: GetDashboardLinksArgs,
+): NavigationItem[] => {
+	const { LL } = args;
 	return [
 		{
 			name: LL.nav.income(),
 			icon: HeroiconsReceiptPercent,
-			href: getRoute({
+			...lazyGetRoute({
 				pageType: PageTypePortfolio.Income,
-				...getRouteConfig,
+				...args,
 			}),
 			children: [
 				{
 					name: LL.nav.charts(),
-					href: getRoute({
-						...getRouteConfig,
+					...lazyGetRoute({
 						pageType: PageTypePortfolio.Income,
+						...args,
 					}),
 				},
 				{
 					name: LL.nav.data(),
-					href: getRoute({
-						...getRouteConfig,
+					...lazyGetRoute({
 						pageType: PageTypePortfolio.IncomeTable,
+						...args,
 					}),
 				},
 			],
@@ -55,23 +88,23 @@ export const getDashboardLinks = ({
 		{
 			name: LL.entity.expense.plural(),
 			icon: HeroiconsCreditCard,
-			href: getRoute({
-				...getRouteConfig,
+			...lazyGetRoute({
 				pageType: PageTypePortfolio.Expenses,
+				...args,
 			}),
 			children: [
 				{
 					name: LL.nav.charts(),
-					href: getRoute({
-						...getRouteConfig,
+					...lazyGetRoute({
 						pageType: PageTypePortfolio.Expenses,
+						...args,
 					}),
 				},
 				{
 					name: LL.nav.data(),
-					href: getRoute({
-						...getRouteConfig,
+					...lazyGetRoute({
 						pageType: PageTypePortfolio.ExpensesTable,
+						...args,
 					}),
 				},
 			],
