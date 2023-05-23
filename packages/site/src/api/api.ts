@@ -21,10 +21,6 @@ import type { LoadEvent } from '@sveltejs/kit';
 import { environment } from '$aqenvironment';
 
 export const createApi = (loadFetch?: LoadEvent['fetch']) => {
-	const headers: Record<string, string> = {
-		// origin: PUBLIC_SITE_URL,
-	};
-
 	let basePath: string;
 	const isReverseProxy = environment.PUBLIC_API_URL.endsWith('/api');
 
@@ -36,17 +32,8 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 
 	const config = new Configuration({
 		...(loadFetch ? { fetchApi: loadFetch } : {}),
-		headers,
 		basePath,
 		credentials: 'include',
-		middleware: [
-			{
-				// eslint-disable-next-line @typescript-eslint/require-await
-				async onError(context) {
-					console.log('error in api middleware', context);
-				},
-			},
-		],
 	});
 
 	return {
