@@ -1,5 +1,13 @@
 # @self/backend
 
+## 2.31.1
+
+### Patch Changes
+
+- af0b3ed77: fix sentry env name for site
+- Updated dependencies [af0b3ed77]
+  - @self/utils@3.29.1
+
 ## 2.31.0
 
 ### Minor Changes

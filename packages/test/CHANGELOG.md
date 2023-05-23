@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.30.1
+
+### Patch Changes
+
+- af0b3ed77: fix sentry env name for site
+
 ## 3.30.0
 
 ### Minor Changes

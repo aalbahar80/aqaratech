@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.28.1
+
+### Patch Changes
+
+- af0b3ed77: fix sentry env name for site
+
 ## 2.28.0
 
 ### Minor Changes

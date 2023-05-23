@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.29.1
+
+### Patch Changes
+
+- af0b3ed77: fix sentry env name for site
+
 ## 3.29.0
 
 ### Minor Changes

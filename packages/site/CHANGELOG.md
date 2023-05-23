@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.34.2
+
+### Patch Changes
+
+- af0b3ed77: fix sentry env name for site
+
 ## 2.34.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.28.1
+
+### Patch Changes
+
+- af0b3ed77: fix sentry env name for site
+- Updated dependencies [af0b3ed77]
+  - @self/utils@3.29.1
+
 ## 2.28.0
 
 ### Minor Changes
