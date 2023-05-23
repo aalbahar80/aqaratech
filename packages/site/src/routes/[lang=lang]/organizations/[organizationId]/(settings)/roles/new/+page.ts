@@ -3,8 +3,7 @@ import { z } from 'zod';
 import type { PageLoad } from './$types';
 import type { Entity } from '@self/utils';
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const load: PageLoad = async ({ url: { searchParams } }) => {
+export const load: PageLoad = ({ url: { searchParams } }) => {
 	const keys = [
 		'organization',
 		'portfolio',

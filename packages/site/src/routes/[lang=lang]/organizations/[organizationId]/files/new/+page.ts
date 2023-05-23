@@ -2,8 +2,7 @@ import type { PageLoad } from './$types';
 
 import { hasFileSupport } from '$lib/utils/file';
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const load: PageLoad = async ({ url: { searchParams } }) => {
+export const load: PageLoad = ({ url: { searchParams } }) => {
 	const relationKey = searchParams.get('relationKey');
 	const relationValue = searchParams.get('relationValue');
 

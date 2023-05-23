@@ -7,8 +7,7 @@ import { REDIRECT_TO } from '$lib/constants/misc';
 import { property } from '$lib/stores/filter/property';
 import { unit } from '$lib/stores/filter/unit';
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const load: PageLoad = async ({ url: { searchParams } }) => {
+export const load: PageLoad = ({ url: { searchParams } }) => {
 	// Initialize filter stores (property/unit), then redirect to the appropriate
 	// page. Ideally, we would implement this in financials/+layout.ts. The reason
 	// we can't do that is because this function requires url.searchParams. Making
