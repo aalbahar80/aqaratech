@@ -47,7 +47,7 @@ tasks:
     deps:
       - build
     cmds:
-      - pnpm vitest --run test/mocked.spec.ts -c vitest.config.mocked.ts
+      - pnpm vitest --run test/mocked.spec.ts -c vitest.config.mocked.ts --reporter basic
 
   start:
     # Detect start mode based on PUBLIC_IS_TESTING from .env
