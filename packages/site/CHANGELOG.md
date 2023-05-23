@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.34.0
+
+### Minor Changes
+
+- ea0bbf116: add income pie charts to portfolio charts page EXE-41
+
 ## 2.33.0
 
 ### Minor Changes
