@@ -65,7 +65,7 @@ jobs:
     env:
       SENTRY_RELEASE_ENABLE: 1 # invalidates turbo cache (build) to upload sourcemaps
       SENTRY_RELEASE_VERSION: ${{ matrix.sentryRelease || matrix.tag }}
-      SENTRY_RELEASE_ENVIRONMENT: ${{ inputs.environment }}
+      SENTRY_RELEASE_ENVIRONMENT: ${{ inputs.environment == 'prod' && 'production' || 'staging' }}
 
     steps:
       - name: Check out code
