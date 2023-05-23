@@ -254,6 +254,7 @@
 				<Hoverable let:hovering>
 					<!-- TODO classes can be simplified. It'd be preferrable to not use BOTH `classes()` utility AND `style` tag -->
 					<!-- Don't confuse `disabled` (entire component) with `item.disabled` (single option) -->
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<li
 						value={item.value}
 						class={classes(
@@ -268,8 +269,6 @@
 							!hovering && !activeOption ? 'text-gray-900' : '',
 						)}
 						class:disabled={item.disabled}
-						aria-selected={selected}
-						aria-disabled={item.disabled}
 						on:click={() => {
 							void select(item);
 						}}

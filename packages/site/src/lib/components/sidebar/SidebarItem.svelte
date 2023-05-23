@@ -9,7 +9,6 @@
 
 	export let item: NavigationItem;
 	export let expanded = false;
-	export let isChild = false;
 
 	// expand the sidebar item if the current page is a child of the item
 	// only runs once
@@ -70,9 +69,6 @@
 </div>
 {#if item.children && expanded}
 	{#each item.children as child}
-		<svelte:self
-			item={child}
-			isChild
-		/>
+		<svelte:self item={child} />
 	{/each}
 {/if}
