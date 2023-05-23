@@ -6,13 +6,6 @@ import { defineConfig } from 'vite';
 
 import { version } from './package.json';
 
-console.log({
-	SENTRY_RELEASE_ENABLE: process.env['SENTRY_RELEASE_ENABLE'],
-	SENTRY_RELEASE_VERSION: process.env['SENTRY_RELEASE_VERSION'],
-	SENTRY_RELEASE_ENVIRONMENT: process.env['SENTRY_RELEASE_ENVIRONMENT'],
-	ANALYZE_BUNDLE: process.env['ANALYZE_BUNDLE'],
-});
-
 export default defineConfig({
 	define: {
 		__AQARATECH_APP_VERSION__: JSON.stringify(version),
@@ -30,10 +23,7 @@ export default defineConfig({
 					auto: true,
 				},
 				deploy: {
-					env:
-						process.env['SENTRY_RELEASE_ENVIRONMENT'] === 'prod'
-							? 'production'
-							: 'staging',
+					env: process.env['SENTRY_RELEASE_ENVIRONMENT'] ?? '',
 				},
 				// cleanArtifacts: true, // enable?
 			},
