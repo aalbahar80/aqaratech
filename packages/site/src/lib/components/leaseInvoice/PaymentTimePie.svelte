@@ -1,14 +1,9 @@
 <script lang="ts">
-	import { setContext } from 'svelte';
+	import type { PieConfig } from '$lib/models/interfaces/pie-config.interface';
 
 	import { PaymentTimeEnum, type LeaseInvoiceAggregateDto } from '$api/openapi';
 	import L from '$i18n/i18n-svelte';
 	import Pie from '$lib/components/leaseInvoice/Pie.svelte';
-	import {
-		CHART_CONTEXT,
-		type ChartContext,
-		type PieConfig,
-	} from '$lib/models/interfaces/pie-config.interface';
 	import { colors } from '$lib/utils/colors';
 
 	export let aggregate: LeaseInvoiceAggregateDto[];
@@ -26,13 +21,11 @@
 		},
 		groupByFunc: (x) => x.paymentTime,
 	} satisfies PieConfig<PaymentTimeEnum>;
-
-	setContext<ChartContext>(CHART_CONTEXT, {
-		title: $L.general.collected(),
-	});
 </script>
 
 <Pie
 	{aggregate}
 	{config}
-/>
+>
+	<slot />
+</Pie>

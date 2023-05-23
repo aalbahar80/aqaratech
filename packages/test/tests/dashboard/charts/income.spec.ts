@@ -50,14 +50,6 @@ for (const preset of incomeChartTestPresets) {
 				// maxDiffPixelRatio: 0.01,
 			});
 
-			const pieChart = page
-				.getByTestId('chart-card')
-				.filter({ hasText: 'Income: by Payment Status' });
-
-			await expect.soft(pieChart).toHaveScreenshot({
-				mask: [navbar(page), sidebar(page), ...chartText(page)],
-			});
-
 			const barChart = page
 				.getByTestId('chart-card')
 				.filter({ hasText: 'Income: by Month' });

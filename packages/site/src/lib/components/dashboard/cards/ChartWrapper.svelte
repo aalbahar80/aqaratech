@@ -5,7 +5,7 @@
 	import HeroiconsChartPie from '~icons/heroicons/chart-pie';
 
 	export let empty: boolean;
-	export let title: string;
+	export let title = '';
 	export let subtitle = '';
 	export let subtitle2 = '';
 	/** Should be the same for all charts. Except treemaps, which have a larger height.
@@ -29,14 +29,16 @@
 			>
 		</div>
 	{:else}
-		<div
-			class="prose prose-base"
-			in:fade
-		>
-			<h3>{title}</h3>
-			<p>{subtitle}</p>
-			<p class="italic text-gray-500">{subtitle2}</p>
-		</div>
+		{#if title}
+			<div
+				class="prose prose-base"
+				in:fade
+			>
+				<h3>{title}</h3>
+				<p>{subtitle}</p>
+				<p class="italic text-gray-500">{subtitle2}</p>
+			</div>
+		{/if}
 		<slot />
 	{/if}
 </div>

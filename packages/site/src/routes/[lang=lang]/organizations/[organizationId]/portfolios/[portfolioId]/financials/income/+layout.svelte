@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
 
 	import StatsIncome from './StatsIncome.svelte';
@@ -8,7 +9,10 @@
 	export let data: LayoutData;
 </script>
 
-<StatsIncome {data} />
+<!-- Remove when stats are shown in pie charts (EXE-41) -->
+{#if $page.route.id?.endsWith('table')}
+	<StatsIncome {data} />
+{/if}
 
 <slot />
 

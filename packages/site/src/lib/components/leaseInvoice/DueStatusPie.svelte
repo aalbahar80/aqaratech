@@ -35,4 +35,6 @@
 <Pie
 	{aggregate}
 	{config}
-/>
+>
+	<slot />
+</Pie>

@@ -1,23 +1,15 @@
 <script lang="ts">
 	import * as R from 'remeda';
 
-	import { getContext } from 'svelte';
-
 	import type { LeaseInvoiceAggregateDto } from '$api/openapi';
+	import type { PieConfig } from '$lib/models/interfaces/pie-config.interface';
 
 	import Chart from '$lib/components/charts/Chart.svelte';
 	import { pie } from '$lib/components/charts/pie';
 	import ChartWrapper from '$lib/components/dashboard/cards/ChartWrapper.svelte';
-	import {
-		CHART_CONTEXT,
-		type ChartContext,
-		type PieConfig,
-	} from '$lib/models/interfaces/pie-config.interface';
 
 	export let config: PieConfig;
 	export let aggregate: LeaseInvoiceAggregateDto[];
-
-	const title = getContext<ChartContext>(CHART_CONTEXT)?.title;
 
 	$: grouped = R.pipe(
 		aggregate,
@@ -39,10 +31,10 @@
 </script>
 
 <ChartWrapper
-	{title}
 	empty={Object.keys(grouped).length === 0}
 	isFixedHeight={false}
 >
+	<slot />
 	<Chart
 		let:height
 		let:width
