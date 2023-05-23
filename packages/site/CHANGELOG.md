@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.34.1
+
+### Patch Changes
+
+- c2e4cf7ad: fix: avoid early portfolio request
+
 ## 2.34.0
 
 ### Minor Changes
