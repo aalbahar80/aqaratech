@@ -119,8 +119,7 @@ export const tolgee = {
 		},
 		hero: {
 			description: 'Conveniently manage your properties from any location.',
-			subtitle:
-				'Unique portals to suit the needs of property owners and real estate companies.',
+			subtitle: 'Unique portal to suit the needs of real estate companies.',
 			titlePrefix: 'Property management',
 			titleHighlight: 'platform.',
 			titleSuffix: '',
