@@ -20,7 +20,7 @@
 	/>
 
 	<SummaryStats
-		title={$L.nav.income()}
+		title={$L.other.revenue()}
 		data={data.income.paid}
 		kind="Income"
 	/>

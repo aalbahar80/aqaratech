@@ -19,8 +19,8 @@ export const entity = {
 		singular: 'Role',
 	},
 	tenant: {
-		plural: 'Tenants',
-		singular: 'Tenant',
+		plural: 'Customers',
+		singular: 'Customer',
 	},
 	portfolio: {
 		plural: 'Owners',
@@ -47,8 +47,8 @@ export const entity = {
 		singular: 'Maintenance',
 	},
 	payout: {
-		plural: 'Payouts',
-		singular: 'Payout',
+		plural: 'Transfers',
+		singular: 'Transfer',
 	},
 	expense: {
 		plural: 'Expenses',

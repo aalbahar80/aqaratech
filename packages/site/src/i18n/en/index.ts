@@ -57,7 +57,7 @@ const en: BaseTranslation = {
 		billing: 'Billing',
 		account: 'Account',
 		info: 'Info',
-		net: 'Net',
+		net: 'Net Income',
 		features: 'Features',
 		pricing: 'Pricing',
 		faq: 'FAQs',
@@ -194,6 +194,7 @@ const en: BaseTranslation = {
 		iAmA: 'I am a',
 		chooseRole: 'Choose a role',
 		welcomeToAqaratech: 'Welcome to Aqaratech',
+		revenue: 'Gross income',
 	},
 };
 

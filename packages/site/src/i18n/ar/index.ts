@@ -18,8 +18,8 @@ const ar: Translation = {
 			singular: 'دور',
 		},
 		tenant: {
-			plural: 'المستأجرين',
-			singular: 'مستأجر',
+			plural: 'العملاء',
+			singular: 'عميل',
 		},
 		portfolio: {
 			plural: 'الملاك',
@@ -42,12 +42,12 @@ const ar: Translation = {
 			singular: 'فاتورة',
 		},
 		maintenanceOrder: {
-			plural: 'اعمال الصيانة',
-			singular: 'عمل صيانة',
+			plural: 'طلبات الصيانة',
+			singular: 'طلب صيانة',
 		},
 		payout: {
-			plural: 'المدفوعات',
-			singular: 'دفعة',
+			plural: 'التحويلات',
+			singular: 'تحويل',
 		},
 		expense: {
 			plural: 'المصروفات',
@@ -174,7 +174,7 @@ const ar: Translation = {
 		billing: 'الاشتراك',
 		account: 'حساب',
 		info: 'تفاصيل',
-		net: 'صافي',
+		net: 'صافي الدخل',
 		features: 'مميزات',
 		pricing: 'التسعير',
 		faq: 'أسئلة متكررة',
@@ -192,7 +192,7 @@ const ar: Translation = {
 		total: 'إجمالي',
 		forPeriod: 'للفترة',
 		collected: 'المحصل',
-		uncollected: 'غير المحصل',
+		uncollected: 'الغير محصل',
 		unspecified: 'غير محدد',
 		thisMonth: 'الشهر الحالي',
 		lastMonth: 'الشهر الماضى',
@@ -261,9 +261,9 @@ const ar: Translation = {
 	},
 	filter: {
 		filters: 'تصفية',
-		start: 'بداية',
-		end: 'نهاية',
-		range: 'نطاق',
+		start: 'بداية الفترة',
+		end: 'نهاية الفترة',
+		range: 'اختر النطاق',
 		rangeKind: 'تصفية حسب',
 		monthToDate: 'الشهر الحالي',
 		last3Months: 'آخر 3 أشهر',
@@ -303,6 +303,7 @@ const ar: Translation = {
 		iAmA: 'أنا',
 		chooseRole: 'اختر نوع المستخدم',
 		welcomeToAqaratech: 'مرحبًا بك في عقاراتك',
+		revenue: 'إجمالي الدخل',
 	},
 };
 

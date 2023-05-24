@@ -271,7 +271,7 @@ type RootTranslation = {
 			 */
 			description: string
 			/**
-			 * U​n​i​q​u​e​ ​p​o​r​t​a​l​s​ ​t​o​ ​s​u​i​t​ ​t​h​e​ ​n​e​e​d​s​ ​o​f​ ​p​r​o​p​e​r​t​y​ ​o​w​n​e​r​s​ ​a​n​d​ ​r​e​a​l​ ​e​s​t​a​t​e​ ​c​o​m​p​a​n​i​e​s​.
+			 * U​n​i​q​u​e​ ​p​o​r​t​a​l​ ​t​o​ ​s​u​i​t​ ​t​h​e​ ​n​e​e​d​s​ ​o​f​ ​r​e​a​l​ ​e​s​t​a​t​e​ ​c​o​m​p​a​n​i​e​s​.
 			 */
 			subtitle: string
 			/**
@@ -364,7 +364,7 @@ type RootTranslation = {
 					description: string
 					features: {
 						/**
-						 * E​v​e​r​y​t​h​i​n​g​ ​i​n​ ​P​l​u​s​ ​p​l​a​n
+						 * E​v​e​r​y​t​h​i​n​g​ ​i​n​ ​P​r​e​m​i​u​m​ ​p​l​a​n
 						 */
 						'1': string
 						/**
@@ -487,11 +487,11 @@ type RootTranslation = {
 		}
 		tenant: {
 			/**
-			 * T​e​n​a​n​t​s
+			 * C​u​s​t​o​m​e​r​s
 			 */
 			plural: string
 			/**
-			 * T​e​n​a​n​t
+			 * C​u​s​t​o​m​e​r
 			 */
 			singular: string
 		}
@@ -557,11 +557,11 @@ type RootTranslation = {
 		}
 		payout: {
 			/**
-			 * P​a​y​o​u​t​s
+			 * T​r​a​n​s​f​e​r​s
 			 */
 			plural: string
 			/**
-			 * P​a​y​o​u​t
+			 * T​r​a​n​s​f​e​r
 			 */
 			singular: string
 		}
@@ -1018,7 +1018,7 @@ type RootTranslation = {
 		 */
 		info: string
 		/**
-		 * N​e​t
+		 * N​e​t​ ​I​n​c​o​m​e
 		 */
 		net: string
 		/**
@@ -1427,6 +1427,10 @@ type RootTranslation = {
 		 * W​e​l​c​o​m​e​ ​t​o​ ​A​q​a​r​a​t​e​c​h
 		 */
 		welcomeToAqaratech: string
+		/**
+		 * G​r​o​s​s​ ​i​n​c​o​m​e
+		 */
+		revenue: string
 	}
 }
 
@@ -1688,7 +1692,7 @@ export type TranslationFunctions = {
 			 */
 			description: () => LocalizedString
 			/**
-			 * Unique portals to suit the needs of property owners and real estate companies.
+			 * Unique portal to suit the needs of real estate companies.
 			 */
 			subtitle: () => LocalizedString
 			/**
@@ -1781,7 +1785,7 @@ export type TranslationFunctions = {
 					description: () => LocalizedString
 					features: {
 						/**
-						 * Everything in Plus plan
+						 * Everything in Premium plan
 						 */
 						'1': () => LocalizedString
 						/**
@@ -1904,11 +1908,11 @@ export type TranslationFunctions = {
 		}
 		tenant: {
 			/**
-			 * Tenants
+			 * Customers
 			 */
 			plural: () => LocalizedString
 			/**
-			 * Tenant
+			 * Customer
 			 */
 			singular: () => LocalizedString
 		}
@@ -1974,11 +1978,11 @@ export type TranslationFunctions = {
 		}
 		payout: {
 			/**
-			 * Payouts
+			 * Transfers
 			 */
 			plural: () => LocalizedString
 			/**
-			 * Payout
+			 * Transfer
 			 */
 			singular: () => LocalizedString
 		}
@@ -2435,7 +2439,7 @@ export type TranslationFunctions = {
 		 */
 		info: () => LocalizedString
 		/**
-		 * Net
+		 * Net Income
 		 */
 		net: () => LocalizedString
 		/**
@@ -2844,6 +2848,10 @@ export type TranslationFunctions = {
 		 * Welcome to Aqaratech
 		 */
 		welcomeToAqaratech: () => LocalizedString
+		/**
+		 * Gross income
+		 */
+		revenue: () => LocalizedString
 	}
 }
 

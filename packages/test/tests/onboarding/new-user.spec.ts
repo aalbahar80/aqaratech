@@ -56,7 +56,7 @@ test.describe('new user', () => {
 	test('no role - tenant - prompted to contact org', async ({ page }) => {
 		await page.goto('/en/welcome');
 
-		await page.getByRole('link', { name: 'Tenant' }).click();
+		await page.getByRole('link', { name: 'Customer' }).click();
 
 		await expect(page).toHaveURL('/en/contact-org');
 		await expect(page.getByText(contactOrg)).toBeVisible();
