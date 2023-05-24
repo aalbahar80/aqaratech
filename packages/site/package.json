@@ -22,7 +22,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.68",
+		"@iconify/json": "2.2.69",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "1.0.2",
@@ -86,7 +86,7 @@
 	"dependencies": {
 		"@logtail/node": "0.4.0",
 		"@logtail/winston": "0.4.1",
-		"@sentry/sveltekit": "^7.53.0",
+		"@sentry/sveltekit": "^7.53.1",
 		"typesafe-i18n": "5.24.3",
 		"winston": "3.8.2"
 	},
