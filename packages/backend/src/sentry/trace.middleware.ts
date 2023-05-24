@@ -1,5 +1,5 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
-import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
+import { InjectSentry, SentryService } from '@travelerdev/nestjs-sentry';
 import { NextFunction, Request, Response } from 'express';
 
 import { extractTraceData } from 'src/sentry/extract-trace';

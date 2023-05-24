@@ -1,8 +1,8 @@
 import { accessibleBy } from '@casl/prisma';
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
-import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import { Prisma } from '@prisma/client';
+import { InjectSentry, SentryService } from '@travelerdev/nestjs-sentry';
 import * as R from 'remeda';
 import { Any, Object } from 'ts-toolbelt';
 

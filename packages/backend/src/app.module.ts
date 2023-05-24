@@ -7,9 +7,9 @@ import {
 import { RouteInfo } from '@nestjs/common/interfaces';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
-import { SentryInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
+import { SentryInterceptor, SentryModule } from '@travelerdev/nestjs-sentry';
 import { WinstonModule } from 'nest-winston';
 
 import { AppController } from 'src/app.controller';
