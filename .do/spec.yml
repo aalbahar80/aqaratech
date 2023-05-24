@@ -64,8 +64,9 @@ services:
     instance_count: 1
     http_port: 3002
     health_check:
-      failure_threshold: 6
       http_path: /health
+      period_seconds: 3
+      timeout_seconds: 2
     alerts:
       - operator: GREATER_THAN
         rule: CPU_UTILIZATION
@@ -120,8 +121,9 @@ services:
       - path: /
     http_port: 3000
     health_check:
-      failure_threshold: 6
       http_path: /health
+      period_seconds: 3
+      timeout_seconds: 2
     alerts:
       - operator: GREATER_THAN
         rule: CPU_UTILIZATION
