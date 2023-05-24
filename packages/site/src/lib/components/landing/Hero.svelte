@@ -24,8 +24,8 @@
 		</h1>
 
 		<p class="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
-			<!-- Powerful for property managers. Transparent for owners. Convenient for -->
-			<!-- tenants. -->
+			{$L.landing.hero.subtitle()}
+			{$L.landing.hero.description()}
 		</p>
 		<div class="flex justify-center gap-8">
 			<a
