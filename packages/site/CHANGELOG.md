@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.34.6
+
+### Patch Changes
+
+- 94b8cb9e7: update deps
+- 938b98782: refresh tolgee
+
 ## 2.34.5
 
 ### Patch Changes

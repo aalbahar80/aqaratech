@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.31.4
+
+### Patch Changes
+
+- 94b8cb9e7: update deps
+
 ## 2.31.3
 
 ### Patch Changes
