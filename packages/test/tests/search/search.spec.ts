@@ -59,18 +59,18 @@ for (const i of inputs) {
 }
 
 // TODO: enable after implementing
-test.skip('multiple matched words within same field are highlighted', async ({
-	page,
-	isMobile,
-}) => {
-	const searchPalette = new SearchPalette({ page, isMobile });
+test.fixme(
+	'multiple matched words within same field are highlighted',
+	async ({ page, isMobile }) => {
+		const searchPalette = new SearchPalette({ page, isMobile });
 
-	await searchPalette.open();
-	await searchPalette.input.fill('Alex Anderson');
+		await searchPalette.open();
+		await searchPalette.input.fill('Alex Anderson');
 
-	const firstName = page.locator('mark').getByText('Alex').first();
-	const lastName = page.locator('mark').getByText('Anderson').first();
+		const firstName = page.locator('mark').getByText('Alex').first();
+		const lastName = page.locator('mark').getByText('Anderson').first();
 
-	await expect.soft(firstName).toBeVisible();
-	await expect.soft(lastName).toBeVisible();
-});
+		await expect.soft(firstName).toBeVisible();
+		await expect.soft(lastName).toBeVisible();
+	},
+);

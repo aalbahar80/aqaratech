@@ -151,7 +151,7 @@ test('start can be a date only', async ({
 	expect(body).toHaveProperty('start', '2022-01-01T00:00:00.000Z');
 });
 
-test.skip('rejects date range validation if one date is invalid ', async ({
+test('rejects date range validation if one date is invalid ', async ({
 	request,
 	org,
 	portfolio,
@@ -165,7 +165,7 @@ test.skip('rejects date range validation if one date is invalid ', async ({
 			unitId: unit.id,
 			tenantId: tenant.id,
 			start: '2022-01-01',
-			end: '2022-31-12',
+			end: '2022-99-12',
 		}),
 		columns,
 	);
@@ -180,17 +180,17 @@ test.skip('rejects date range validation if one date is invalid ', async ({
 
 	expect
 		.soft(body)
-		.not.toHaveProperty('fieldErrors.end', [
-			'End date must be after start date',
-		]);
+		.not.toHaveProperty(
+			'fieldErrors.start',
+			expect.arrayContaining(['Invalid date']),
+		);
 
 	expect
 		.soft(body)
-		.not.toHaveProperty('fieldErrors.start', [
-			'Start date must be before end date',
-		]);
-
-	expect(body).toHaveProperty('fieldErrors.end', ['Invalid date']);
+		.toHaveProperty(
+			'fieldErrors.end',
+			expect.arrayContaining(['Invalid date']),
+		);
 });
 
 test('end can be a date only', async ({
@@ -251,36 +251,7 @@ test('start can be an ISO date', async ({
 	const body: unknown = await res.json();
 
 	expect(body).toHaveProperty('start', '2022-01-01T00:00:00.000Z');
-});
-
-test.skip('end can be an ISO date', async ({
-	request,
-	org,
-	portfolio,
-	unit,
-	tenant,
-}) => {
-	const lease = R.pick(
-		leaseFactory.build({
-			organizationId: org.organization.id,
-			portfolioId: portfolio.id,
-			unitId: unit.id,
-			tenantId: tenant.id,
-			start: '2022-01-01',
-			end: utc(2022, 11, 1),
-		}),
-		columns,
-	);
-
-	const url = `/organizations/${org.organization.id}/leases`;
-
-	const res = await request.post(url, { data: lease });
-
-	expect.soft(res.status()).toBe(201);
-
-	const body: unknown = await res.json();
-
-	expect(body).toHaveProperty('end', '2022-12-01T00:00:00.000Z');
+	expect(body).toHaveProperty('end', '2022-12-31T00:00:00.000Z');
 });
 
 test('number can be a decimal', async ({

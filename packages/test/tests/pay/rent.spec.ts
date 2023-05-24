@@ -97,7 +97,7 @@ test.describe('unpaid rent', () => {
 	});
 
 	// This test is flaky because of the external payment gateway.
-	test.skip('can be paid once - actual', async ({ page, org, invoice }) => {
+	test.fixme('can be paid once - actual', async ({ page, org, invoice }) => {
 		test.slow();
 
 		const url = getRoute({

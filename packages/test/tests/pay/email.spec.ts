@@ -26,7 +26,7 @@ test.beforeAll(() => {
 	});
 });
 
-test.skip('invoice due email', async ({ page, tenant, invoice }) => {
+test.fixme('invoice due email', async ({ page, tenant, invoice }) => {
 	// ensure tenant has an email
 	emails.forEach((email) => {
 		prisma.role

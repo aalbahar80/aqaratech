@@ -4,8 +4,6 @@ import { getRoute, PageTab } from '@self/utils';
 
 import { test } from '../api/api-fixtures';
 
-test.skip(({ isMobile }) => isMobile);
-
 test('locale switch updates $page.pathname', async ({ page, portfolio }) => {
 	const url = getRoute({
 		entity: 'portfolio',
