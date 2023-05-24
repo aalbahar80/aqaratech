@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.34.4
+
+### Patch Changes
+
+- 01ca649ce: (site) add profiling
+
 ## 2.34.3
 
 ### Patch Changes
