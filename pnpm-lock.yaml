@@ -605,8 +605,8 @@ importers:
         specifier: 8.0.1
         version: 8.0.1
       '@playwright/test':
-        specifier: 1.33.0
-        version: 1.33.0
+        specifier: 1.34.1
+        version: 1.34.1
       '@prisma/client':
         specifier: 4.14.0
         version: 4.14.0(prisma@4.13.0)
@@ -3101,13 +3101,13 @@ packages:
       tslib: 2.5.1
     dev: true
 
-  /@playwright/test@1.33.0:
-    resolution: {integrity: sha512-YunBa2mE7Hq4CfPkGzQRK916a4tuZoVx/EpLjeWlTVOnD4S2+fdaQZE0LJkbfhN5FTSKNLdcl7MoT5XB37bTkg==}
+  /@playwright/test@1.34.1:
+    resolution: {integrity: sha512-hKBpxD79vGkmeqLkJwPBjd4DMUahf1W7ra+83lDNL4JPmLhjITMiy0HoR0WM/PGU6nqnl1cisHc3yKQQgKMxOQ==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.16.3
-      playwright-core: 1.33.0
+      playwright-core: 1.34.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -9188,6 +9188,7 @@ packages:
   /node-fetch@2.6.11:
     resolution: {integrity: sha512-4I6pdBY1EthSqDmJkiNk3JIT8cswwR9nfeW/cPdUagJYEQG7R95WRH74wpz7ma8Gh/9dI9FP+OU+0E4FvtA55w==}
     engines: {node: 4.x || >=6.0.0}
+    requiresBuild: true
     peerDependencies:
       encoding: ^0.1.0
     peerDependenciesMeta:
@@ -9713,8 +9714,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core@1.33.0:
-    resolution: {integrity: sha512-aizyPE1Cj62vAECdph1iaMILpT0WUDCq3E6rW6I+dleSbBoGbktvJtzS6VHkZ4DKNEOG9qJpiom/ZxO+S15LAw==}
+  /playwright-core@1.34.1:
+    resolution: {integrity: sha512-4Y5hGLoSrnB/BXj2NFKBNWP/bI9uVejTVbso1ZBtkKZ+O2KiVIeCJ3R4c7Cf2PbP7htjLolHXY+mImt2IWOlEg==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
