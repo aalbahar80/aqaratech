@@ -1,5 +1,15 @@
 # @self/seed
 
+## 2.28.2
+
+### Patch Changes
+
+- 1556084a1: manually add /api suffix to do spec
+- fa4f83f9c: Revert "(site) add profiling"
+- Updated dependencies [1556084a1]
+- Updated dependencies [fa4f83f9c]
+  - @self/utils@3.29.2
+
 ## 2.28.1
 
 ### Patch Changes

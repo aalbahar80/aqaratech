@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.34.5
+
+### Patch Changes
+
+- 1556084a1: manually add /api suffix to do spec
+- fa4f83f9c: Revert "(site) add profiling"
+
 ## 2.34.4
 
 ### Patch Changes
