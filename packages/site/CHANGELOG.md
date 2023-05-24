@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.34.3
+
+### Patch Changes
+
+- 19fbc067d: update sentry sdk
+
 ## 2.34.2
 
 ### Patch Changes

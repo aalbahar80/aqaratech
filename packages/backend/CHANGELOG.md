@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.31.2
+
+### Patch Changes
+
+- 19fbc067d: update sentry sdk
+
 ## 2.31.1
 
 ### Patch Changes

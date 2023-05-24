@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.30.2
+
+### Patch Changes
+
+- 19fbc067d: update sentry sdk
+
 ## 3.30.1
 
 ### Patch Changes
