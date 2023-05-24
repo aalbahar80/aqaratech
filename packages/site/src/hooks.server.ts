@@ -1,3 +1,4 @@
+import { ProfilingIntegration } from '@sentry/profiling-node';
 import * as Sentry from '@sentry/sveltekit';
 import { sequence } from '@sveltejs/kit/hooks';
 
@@ -16,6 +17,8 @@ import { logConfig } from '$lib/server/logger/startup';
 
 Sentry.init({
 	dsn: 'https://16f4a4de6ab74e6e817b44cfd87b723d@o1210217.ingest.sentry.io/4505194893803520',
+	profilesSampleRate: 1,
+	integrations: [new ProfilingIntegration()],
 	...sentryConfig,
 });
 
