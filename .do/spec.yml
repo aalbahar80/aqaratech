@@ -18,7 +18,7 @@ envs:
     value: ${APP_URL}
   - key: PUBLIC_API_URL
     scope: RUN_AND_BUILD_TIME
-    value: ${backend.PUBLIC_URL}
+    value: ${backend.PUBLIC_URL}/api
   - key: PUBLIC_API_URL_LOCAL
     scope: RUN_AND_BUILD_TIME
     value: ${backend.PRIVATE_URL}
