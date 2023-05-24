@@ -126,6 +126,9 @@ importers:
       '@sentry/tracing':
         specifier: 7.53.1
         version: 7.53.1
+      '@sentry/utils':
+        specifier: 7.53.1
+        version: 7.53.1
       '@travelerdev/nestjs-sentry':
         specifier: 4.1.2
         version: 4.1.2(@nestjs/common@9.4.2)(@nestjs/core@9.4.2)(@sentry/hub@7.53.1)(@sentry/node@7.53.1)(reflect-metadata@0.1.13)(rxjs@7.8.1)
@@ -2984,7 +2987,7 @@ packages:
       is-glob: 4.0.3
       open: 9.1.0
       picocolors: 1.0.0
-      tslib: 2.5.1
+      tslib: 2.5.2
     dev: true
 
   /@playwright/test@1.34.2:
@@ -10376,7 +10379,7 @@ packages:
   /rxjs@7.8.0:
     resolution: {integrity: sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==}
     dependencies:
-      tslib: 2.5.0
+      tslib: 2.5.2
     dev: true
 
   /rxjs@7.8.1:
@@ -11143,7 +11146,7 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     dependencies:
       '@pkgr/utils': 2.4.0
-      tslib: 2.5.1
+      tslib: 2.5.2
     dev: true
 
   /tailwindcss@3.3.2:
