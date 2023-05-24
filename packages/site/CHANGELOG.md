@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.34.7
+
+### Patch Changes
+
+- ebb624014: hide cta and secondary feature EXE-76
+
 ## 2.34.6
 
 ### Patch Changes
