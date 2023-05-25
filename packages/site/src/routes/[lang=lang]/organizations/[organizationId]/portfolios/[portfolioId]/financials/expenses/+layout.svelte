@@ -8,8 +8,8 @@
 	export let data: LayoutData;
 </script>
 
+<LinkData dataType="Expenses" />
+
 <StatsExpenses expenses={data.expensesByMonth} />
 
 <slot />
-
-<LinkData dataType="Expenses" />

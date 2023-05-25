@@ -14,6 +14,6 @@
 	<StatsIncome {data} />
 {/if}
 
-<slot />
-
 <LinkData dataType="Income" />
+
+<slot />

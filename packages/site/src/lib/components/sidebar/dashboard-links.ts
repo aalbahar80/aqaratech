@@ -67,22 +67,6 @@ export const getDashboardLinks = (
 				pageType: PageTypePortfolio.Income,
 				...args,
 			}),
-			children: [
-				{
-					name: LL.nav.charts(),
-					...lazyGetRoute({
-						pageType: PageTypePortfolio.Income,
-						...args,
-					}),
-				},
-				{
-					name: LL.nav.data(),
-					...lazyGetRoute({
-						pageType: PageTypePortfolio.IncomeTable,
-						...args,
-					}),
-				},
-			],
 		},
 
 		{
@@ -92,22 +76,6 @@ export const getDashboardLinks = (
 				pageType: PageTypePortfolio.Expenses,
 				...args,
 			}),
-			children: [
-				{
-					name: LL.nav.charts(),
-					...lazyGetRoute({
-						pageType: PageTypePortfolio.Expenses,
-						...args,
-					}),
-				},
-				{
-					name: LL.nav.data(),
-					...lazyGetRoute({
-						pageType: PageTypePortfolio.ExpensesTable,
-						...args,
-					}),
-				},
-			],
 		},
 	];
 };
