@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.34.10
+
+### Patch Changes
+
+- 6a6d59fd2: tenant portal messages
+
 ## 2.34.9
 
 ### Patch Changes
