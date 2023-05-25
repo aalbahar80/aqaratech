@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.34.9
+
+### Patch Changes
+
+- f8e5eec47: rm dash submenus EXE-75
+
 ## 2.34.8
 
 ### Patch Changes
