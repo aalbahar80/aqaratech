@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.31.5
+
+### Patch Changes
+
+- d955846c9: use sentry express as template for trace middleware
+
 ## 2.31.4
 
 ### Patch Changes

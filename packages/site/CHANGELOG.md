@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.34.8
+
+### Patch Changes
+
+- 661e687b1: update translations EXE-74
+
 ## 2.34.7
 
 ### Patch Changes
