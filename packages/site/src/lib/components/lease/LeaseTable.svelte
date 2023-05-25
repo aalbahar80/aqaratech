@@ -29,6 +29,7 @@
 	export let extraColumns: ColumnDto<LeaseDto>[] = [];
 	export let columnVisibility: ColumnVisibility = {};
 	export let extraFilters: Filter[] | undefined = undefined;
+	export let subtitle = '';
 
 	const columnHelper = createColumnHelper<LeaseDto>();
 
@@ -97,7 +98,10 @@
 			<div slot="hero">
 				<!-- Don't show hero if we're on the unit page -->
 				{#if !('unitId' in $page.params)}
-					<FilterHero title={$L.entity.lease.plural()} />
+					<FilterHero
+						title={$L.entity.lease.plural()}
+						{subtitle}
+					/>
 				{/if}
 			</div>
 			<div slot="custom">

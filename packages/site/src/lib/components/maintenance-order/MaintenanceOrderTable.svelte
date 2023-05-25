@@ -37,6 +37,7 @@
 	export let data: PaginatedMaintenanceOrderDto;
 	export let extraColumns: ColumnDef<MaintenanceOrderDto, string>[] = [];
 	export let columnVisibility: ColumnVisibility = {};
+	export let subtitle = '';
 
 	const columnHelper = createColumnHelper<MaintenanceOrderDto>();
 
@@ -94,7 +95,10 @@
 			<div slot="hero">
 				<!-- Don't show hero if we're on the property/unit pages -->
 				{#if !('unitId' in $page.params) && !('propertyId' in $page.params)}
-					<FilterHero title={$L.entity.maintenanceOrder.plural()} />
+					<FilterHero
+						title={$L.entity.maintenanceOrder.plural()}
+						{subtitle}
+					/>
 				{/if}
 			</div>
 			<div slot="custom">

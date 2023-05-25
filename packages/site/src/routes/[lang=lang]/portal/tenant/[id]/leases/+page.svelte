@@ -16,10 +16,9 @@
 	const columnHelper = createColumnHelper<LeaseDto>();
 </script>
 
-<h3>{$L.misc.tenantLeasePage()}</h3>
-
 <LeaseTable
 	data={data.leases}
+	subtitle={$L.misc.tenantLeasePage()}
 	extraColumns={[
 		columnHelper.display({
 			id: 'pay',

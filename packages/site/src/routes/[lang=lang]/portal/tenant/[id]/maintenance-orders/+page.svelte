@@ -7,6 +7,7 @@
 	export let data: PageData;
 </script>
 
-<h3>{$L.misc.tenantMaintenancePage()}</h3>
-
-<MaintenanceOrderTable data={data.maintenanceOrders} />
+<MaintenanceOrderTable
+	data={data.maintenanceOrders}
+	subtitle={$L.misc.tenantMaintenancePage()}
+/>

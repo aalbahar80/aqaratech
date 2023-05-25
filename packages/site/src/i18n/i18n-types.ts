@@ -458,17 +458,13 @@ type RootTranslation = {
 		 */
 		tenantLeasePage: string
 		/**
-		 * Y​o​u​ ​c​a​n​ ​v​i​e​w​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​p​r​i​n​t​ ​r​e​c​e​i​p​t​s​.
+		 * W​e​l​c​o​m​e​,​ ​y​o​u​ ​c​a​n​ ​v​i​e​w​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​p​r​i​n​t​ ​r​e​c​e​i​p​t​s​.
 		 */
 		tenantInvoicePage: string
 		/**
 		 * P​l​e​a​s​e​ ​v​i​s​i​t​ ​t​h​e​ ​l​e​a​s​e​s​ ​p​a​g​e​ ​t​o​ ​o​p​e​n​ ​a​ ​n​e​w​ ​m​a​i​n​t​e​n​a​n​c​e​ ​o​r​d​e​r​.
 		 */
 		tenantMaintenancePage: string
-		/**
-		 * W​e​l​c​o​m​e
-		 */
-		welcome: string
 	}
 	entity: {
 		user: {
@@ -1899,17 +1895,13 @@ export type TranslationFunctions = {
 		 */
 		tenantLeasePage: () => LocalizedString
 		/**
-		 * You can view payment history print receipts.
+		 * Welcome, you can view payment history print receipts.
 		 */
 		tenantInvoicePage: () => LocalizedString
 		/**
 		 * Please visit the leases page to open a new maintenance order.
 		 */
 		tenantMaintenancePage: () => LocalizedString
-		/**
-		 * Welcome
-		 */
-		welcome: () => LocalizedString
 	}
 	entity: {
 		user: {

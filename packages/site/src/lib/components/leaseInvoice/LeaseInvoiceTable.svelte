@@ -14,6 +14,7 @@
 	import FilterBarActions from '$lib/components/filter/FilterBarActions.svelte';
 	import FilterBarActionsExport from '$lib/components/filter/FilterBarActionsExport.svelte';
 	import FilterBarButtonForm from '$lib/components/filter/FilterBarButtonForm.svelte';
+	import FilterHero from '$lib/components/filter/FilterHero.svelte';
 	import { getUnpaidBadge } from '$lib/components/leaseInvoice/badge';
 	import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
 	import { fmtCell } from '$lib/components/table/tanstack-table/columns/as-date';
@@ -30,6 +31,7 @@
 	export let showOptions = false;
 	export let extraColumns: ColumnDto<LeaseInvoiceDto>[] = [];
 	export let extraFilters: Filter[] | undefined = undefined;
+	export let subtitle = '';
 
 	const columnHelper = createColumnHelper<LeaseInvoiceDto>();
 
@@ -177,6 +179,15 @@
 		let:filters
 	>
 		<FilterBar responsive={[...filters, ...(extraFilters ?? [])]}>
+			<div slot="hero">
+				<!-- Only show hero on the tenant portal -->
+				{#if $page.route?.id?.includes('portal/tenant')}
+					<FilterHero
+						title={$L.entity.leaseInvoice.plural()}
+						{subtitle}
+					/>
+				{/if}
+			</div>
 			<div slot="custom">
 				{#if showOptions}
 					<FilterBarActions>

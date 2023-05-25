@@ -16,11 +16,9 @@
 	const columnHelper = createColumnHelper<LeaseInvoiceDto>();
 </script>
 
-<p>{$L.misc.welcome()}</p>
-<h3>{$L.misc.tenantInvoicePage()}</h3>
-
 <LeaseInvoiceTable
 	data={data.invoices}
+	subtitle={$L.misc.tenantInvoicePage()}
 	extraColumns={[
 		columnHelper.display({
 			id: 'pay',

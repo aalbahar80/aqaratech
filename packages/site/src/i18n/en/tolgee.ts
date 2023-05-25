@@ -189,10 +189,9 @@ export const tolgee = {
 		searchByName: 'Search by Name',
 		tenantLogin: 'Please log in to view your payment history and receipts.',
 		tenantLeasePage: 'View leases related to the rental unit.',
-		tenantInvoicePage: 'You can view payment history print receipts.',
+		tenantInvoicePage: 'Welcome, you can view payment history print receipts.',
 		tenantMaintenancePage:
 			'Please visit the leases page to open a new maintenance order.',
-		welcome: 'Welcome',
 	},
 };
 
