@@ -46,7 +46,9 @@
 			class="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-3 xl:mx-0 xl:gap-x-8"
 		>
 			<Plan
+				cs="bg-[#6699CC]"
 				plan={{
+					featured: true,
 					name: $L.landing.pricing.plans['1'].name(),
 					price: $L.landing.pricing.plans['1'].price(),
 					description: $L.landing.pricing.plans['1'].description(),
@@ -57,6 +59,7 @@
 				}}
 			/>
 			<Plan
+				cs="bg-[#0D0D70]"
 				plan={{
 					featured: true,
 					name: $L.landing.pricing.plans['2'].name(),
@@ -69,7 +72,9 @@
 				}}
 			/>
 			<Plan
+				cs="bg-[#4060E4]"
 				plan={{
+					featured: true,
 					name: $L.landing.pricing.plans['3'].name(),
 					price: $L.landing.pricing.plans['3'].price(),
 					description: $L.landing.pricing.plans['3'].description(),

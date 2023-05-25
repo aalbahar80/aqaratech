@@ -15,12 +15,14 @@
 	}
 
 	export let plan: Plan;
+	export let cs: string;
 </script>
 
 <section
 	class={clsx(
 		'flex flex-col rounded-3xl px-6 sm:px-8 only:lg:col-start-2',
-		plan.featured ? 'bg-blue-600 py-8 lg:order-none' : 'lg:py-8',
+		plan.featured ? 'py-8 lg:order-none' : 'lg:py-8',
+		cs,
 	)}
 >
 	<h3 class="font-display mt-5 text-lg text-white">{plan.name}</h3>
