@@ -32,7 +32,8 @@
 	$: keys =
 		$page.data.user?.role?.roleType === 'TENANT'
 			? ALL_KEYS.filter(
-					(key) => !['isPaid', 'dueAt', 'memo', 'mfPaymentId'].includes(key),
+					(key) =>
+						!['isPaid', 'dueAt', 'memo', 'mfPaymentId', 'tenant'].includes(key),
 			  )
 			: ALL_KEYS;
 </script>
