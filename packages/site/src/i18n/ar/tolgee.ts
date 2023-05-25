@@ -184,5 +184,9 @@ export const tolgee: Tolgee = {
 		invoiceSuccess: 'شكرا على سداد الفاتورة.',
 		searchByName: 'بحث بالاسم',
 		tenantLogin: 'الرجاء تسجيل الدخول لعرض الإيصالات وعمليات التسديد.',
+		tenantLeasePage: ' عقود الايجار المتعلقة بالوحدة المؤجرة',
+		tenantInvoicePage: 'بإمكانك الاطلاع على عمليات التسديد وطباعة الوصولات',
+		tenantMaintenancePage: 'يرجى زيارة صفحة العقود لفتح ملف صيانة جديد',
+		welcome: 'مرحبا',
 	},
 };

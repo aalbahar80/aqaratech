@@ -453,6 +453,22 @@ type RootTranslation = {
 		 * P​l​e​a​s​e​ ​l​o​g​ ​i​n​ ​t​o​ ​v​i​e​w​ ​y​o​u​r​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​a​n​d​ ​r​e​c​e​i​p​t​s​.
 		 */
 		tenantLogin: string
+		/**
+		 * V​i​e​w​ ​l​e​a​s​e​s​ ​r​e​l​a​t​e​d​ ​t​o​ ​t​h​e​ ​r​e​n​t​a​l​ ​u​n​i​t​.
+		 */
+		tenantLeasePage: string
+		/**
+		 * Y​o​u​ ​c​a​n​ ​v​i​e​w​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​p​r​i​n​t​ ​r​e​c​e​i​p​t​s​.
+		 */
+		tenantInvoicePage: string
+		/**
+		 * P​l​e​a​s​e​ ​v​i​s​i​t​ ​t​h​e​ ​l​e​a​s​e​s​ ​p​a​g​e​ ​t​o​ ​o​p​e​n​ ​a​ ​n​e​w​ ​m​a​i​n​t​e​n​a​n​c​e​ ​o​r​d​e​r​.
+		 */
+		tenantMaintenancePage: string
+		/**
+		 * W​e​l​c​o​m​e
+		 */
+		welcome: string
 	}
 	entity: {
 		user: {
@@ -1878,6 +1894,22 @@ export type TranslationFunctions = {
 		 * Please log in to view your payment history and receipts.
 		 */
 		tenantLogin: () => LocalizedString
+		/**
+		 * View leases related to the rental unit.
+		 */
+		tenantLeasePage: () => LocalizedString
+		/**
+		 * You can view payment history print receipts.
+		 */
+		tenantInvoicePage: () => LocalizedString
+		/**
+		 * Please visit the leases page to open a new maintenance order.
+		 */
+		tenantMaintenancePage: () => LocalizedString
+		/**
+		 * Welcome
+		 */
+		welcome: () => LocalizedString
 	}
 	entity: {
 		user: {

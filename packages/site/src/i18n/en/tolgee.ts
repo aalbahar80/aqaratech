@@ -188,6 +188,11 @@ export const tolgee = {
 		invoiceSuccess: 'Thank you for your payment.',
 		searchByName: 'Search by Name',
 		tenantLogin: 'Please log in to view your payment history and receipts.',
+		tenantLeasePage: 'View leases related to the rental unit.',
+		tenantInvoicePage: 'You can view payment history print receipts.',
+		tenantMaintenancePage:
+			'Please visit the leases page to open a new maintenance order.',
+		welcome: 'Welcome',
 	},
 };
 
