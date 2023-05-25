@@ -7,7 +7,7 @@
 
 	import type { LeaseDto } from '$api/openapi';
 
-	import L from '$i18n/i18n-svelte';
+	import L, { locale } from '$i18n/i18n-svelte';
 	import LeaseTable from '$lib/components/lease/LeaseTable.svelte';
 	import GenericActionCell from '$lib/components/table/tanstack-table/GenericActionCell.svelte';
 
@@ -37,6 +37,7 @@
 							params: {
 								organizationId: lease.organizationId,
 								portfolioId: lease.portfolioId,
+								lang: $locale,
 							},
 							predefined: {
 								unitId: lease.unitId,
