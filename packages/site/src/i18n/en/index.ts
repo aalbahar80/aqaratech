@@ -195,6 +195,7 @@ const en: BaseTranslation = {
 		chooseRole: 'Choose a role',
 		welcomeToAqaratech: 'Welcome to Aqaratech',
 		revenue: 'Gross income',
+		accountType: 'Account type',
 	},
 };
 

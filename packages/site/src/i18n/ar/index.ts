@@ -304,6 +304,7 @@ const ar: Translation = {
 		chooseRole: 'اختر نوع المستخدم',
 		welcomeToAqaratech: 'مرحبًا بك في عقاراتك',
 		revenue: 'إجمالي الدخل',
+		accountType: 'نوع الحساب',
 	},
 };
 

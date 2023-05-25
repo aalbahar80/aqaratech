@@ -1431,6 +1431,10 @@ type RootTranslation = {
 		 * G​r​o​s​s​ ​i​n​c​o​m​e
 		 */
 		revenue: string
+		/**
+		 * A​c​c​o​u​n​t​ ​t​y​p​e
+		 */
+		accountType: string
 	}
 }
 
@@ -2852,6 +2856,10 @@ export type TranslationFunctions = {
 		 * Gross income
 		 */
 		revenue: () => LocalizedString
+		/**
+		 * Account type
+		 */
+		accountType: () => LocalizedString
 	}
 }
 

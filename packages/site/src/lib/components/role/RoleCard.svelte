@@ -32,7 +32,8 @@
 		isActive && 'bg-indigo-100 hover:bg-indigo-200',
 	)}
 >
-	<div class="self-end">
+	<div class="inline-flex gap-2 self-end text-sm text-gray-600">
+		{$L.other.accountType()}:
 		{#if role.roleType === 'ORGADMIN'}
 			<Badge
 				label={meta.roleLabel}
