@@ -1,5 +1,7 @@
 import { getRoute, PageTab, PageType, PageTypePortfolio } from '@self/utils';
 
+import { NAV_KEY } from './nav-key';
+
 import type L from '$i18n/i18n-svelte';
 import type { Locales } from '$i18n/i18n-types';
 import type { NavigationItem } from '$lib/components/sidebar/types';
@@ -27,6 +29,8 @@ import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
 // import HeroiconsOutlineLogin from '~icons/heroicons-outline/login';
 import HeroiconsOutlineLogout from '~icons/heroicons-outline/logout';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
+import MdiAbjadArabic from '~icons/mdi/abjad-arabic';
+import MdiFormatLetterCase from '~icons/mdi/format-letter-case';
 
 export const getNavigationTree = (
 	user: User | undefined,
@@ -44,6 +48,8 @@ export const getNavigationTree = (
 	const localeSwitch: NavigationItem = {
 		name: LOCALE_LABELS[unselectedLocale],
 		href: replaceLocaleInUrl(url, unselectedLocale),
+		icon: locale === 'en' ? MdiAbjadArabic : MdiFormatLetterCase,
+		navKey: NAV_KEY.LOCALE_SWITCH,
 		linkOptions: {
 			'data-sveltekit-reload': '',
 		},
@@ -58,6 +64,7 @@ export const getNavigationTree = (
 	const login = {
 		name: LL.buttons.login(),
 		href: LOGIN,
+		// navKey: NAV_KEY.LOGIN,
 		// icon: HeroiconsOutlineLogin,
 		linkOptions: {
 			// Explicitly declare as external link to avoid a client-side error "Not Found".
@@ -98,6 +105,7 @@ export const getNavigationTree = (
 	tree.splice(0, 0, {
 		name: LL.buttons.logout(),
 		href: LOGOUT,
+		navKey: NAV_KEY.LOGOUT,
 		icon: HeroiconsOutlineLogout,
 		linkOptions: {
 			// Explicitly declare as external link to avoid a client-side error "Not Found".
@@ -109,6 +117,7 @@ export const getNavigationTree = (
 		tree.splice(0, 0, {
 			name: LL.nav.account(),
 			href: `/${locale}/users/${user.id}/roles`,
+			navKey: NAV_KEY.ACCOUNT,
 			icon: HeroiconsOutlineUser,
 			divided: true,
 			linkOptions: {
@@ -200,6 +209,7 @@ export const getNavigationTree = (
 		tree.splice(-2, 0, {
 			name: LL.nav.settings(),
 			href: settings,
+			navKey: NAV_KEY.SETTINGS,
 			icon: HeroiconsOutlineCog8Tooth,
 			// path: '/settings/',
 			children: [

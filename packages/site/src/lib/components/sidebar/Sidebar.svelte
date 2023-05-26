@@ -12,6 +12,7 @@
 
 <script lang="ts">
 	import clsx from 'clsx';
+	import * as R from 'remeda';
 
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -26,6 +27,8 @@
 	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
 
 	export let navigationTree: NavigationItem[];
+
+	$: [iconNavTree, navTree] = R.partition(navigationTree, (n) => 'navKey' in n);
 
 	// Close sidebar after navigation
 	afterNavigate(() => {
@@ -50,13 +53,31 @@
 	{/if}
 
 	<nav class="flex flex-1 flex-col overflow-y-auto overscroll-y-contain">
-		{#each navigationTree as item}
+		{#each navTree as item}
 			{#if item.divided}
 				<hr class="my-6 border-gray-200 dark:border-gray-600" />
 			{/if}
 
 			<SidebarItem {item} />
 		{/each}
+
+		<!-- Horizontal icon buttons -->
+		<div class="flex flex-row justify-between px-4 pt-8">
+			{#each iconNavTree as item}
+				<svelte:element
+					this={item.isButton ? 'button' : 'a'}
+					href={item.isButton ? 'false' : item.href}
+					on:click={item.onClick}
+					{...item.linkOptions}
+					aria-label={item.name}
+				>
+					<svelte:component
+						this={item.icon}
+						class="h-5 w-5 text-gray-700 hover:text-gray-900"
+					/>
+				</svelte:element>
+			{/each}
+		</div>
 	</nav>
 	<VersionFooter />
 </aside>
