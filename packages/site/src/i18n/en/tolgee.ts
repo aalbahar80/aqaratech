@@ -80,8 +80,7 @@ export const tolgee = {
 				bullets: {
 					categorize:
 						'Classify expenses to offer diverse methods for visualizing expenditure.',
-					track:
-						'Attribute expenses to a portfolio, property, or a single unit.',
+					track: 'Attribute expenses to an owner, property, or a single unit.',
 					visualize:
 						'Visualize expenses using interactive treemaps, which allow you to quickly identify your cost patterns.',
 				},
@@ -118,7 +117,7 @@ export const tolgee = {
 			legal: 'Aqaratech, WLL. All rights reserved.',
 		},
 		hero: {
-			description: 'Conveniently manage your properties from any location.',
+			description: 'Conveniently manage properties from any location.',
 			subtitle: 'Unique portal to suit the needs of real estate companies.',
 			titlePrefix: 'Property management',
 			titleHighlight: 'platform.',
@@ -187,9 +186,9 @@ export const tolgee = {
 		contactOrg: 'Please contact your property manager to request access.',
 		invoiceSuccess: 'Thank you for your payment.',
 		searchByName: 'Search by Name',
-		tenantLogin: 'Please log in to view your payment history and receipts.',
-		tenantLeasePage: 'View leases related to the rental unit.',
 		tenantInvoicePage: 'Welcome, you can view payment history print receipts.',
+		tenantLeasePage: 'View leases related to the rental unit.',
+		tenantLogin: 'Please log in to view your payment history and receipts.',
 		tenantMaintenancePage:
 			'Please visit the leases page to open a new maintenance order.',
 	},
