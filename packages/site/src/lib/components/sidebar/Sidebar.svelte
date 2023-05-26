@@ -52,14 +52,18 @@
 		</RoleGuard>
 	{/if}
 
-	<nav class="flex flex-1 flex-col overflow-y-auto overscroll-y-contain">
-		{#each navTree as item}
-			{#if item.divided}
-				<hr class="my-6 border-gray-200 dark:border-gray-600" />
-			{/if}
+	<nav
+		class="flex flex-1 flex-col justify-between overflow-y-auto overscroll-y-contain"
+	>
+		<div>
+			{#each navTree as item}
+				{#if item.divided}
+					<hr class="my-6 border-gray-200 dark:border-gray-600" />
+				{/if}
 
-			<SidebarItem {item} />
-		{/each}
+				<SidebarItem {item} />
+			{/each}
+		</div>
 
 		<!-- Horizontal icon buttons -->
 		<div class="flex flex-row justify-between px-4 pt-8">
