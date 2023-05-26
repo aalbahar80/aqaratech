@@ -4,7 +4,6 @@ import {
 	NestApplicationOptions,
 } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import '@sentry/tracing';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';

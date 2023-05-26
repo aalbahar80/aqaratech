@@ -51,7 +51,6 @@
 		"@prisma/client": "4.14.0",
 		"@self/utils": "workspace:*",
 		"@sentry/node": "7.53.1",
-		"@sentry/tracing": "7.53.1",
 		"@sentry/utils": "7.53.1",
 		"@travelerdev/nestjs-sentry": "4.1.2",
 		"cache-manager": "5.2.1",
