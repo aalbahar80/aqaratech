@@ -29,7 +29,7 @@
 	)}
 >
 	<div
-		class="flex flex-col items-center justify-center rounded-lg bg-white p-4 lg:items-start lg:justify-start"
+		class="flex flex-col items-start justify-start rounded-lg bg-white p-4 pb-0"
 		class:hidden={!showName}
 	>
 		<div class="flex items-center gap-2 self-stretch">
