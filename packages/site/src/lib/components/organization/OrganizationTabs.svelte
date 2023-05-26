@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { getRoute, PageTab, PageType } from '@self/utils';
 
+	import L from '$i18n/i18n-svelte';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 
 	$: baseRouteConfig = {
@@ -25,6 +26,20 @@
 			href: getRoute({
 				...baseRouteConfig,
 				pageType: PageTab.Roles,
+			}),
+		},
+		{
+			label: $L.nav.billing(),
+			href: getRoute({
+				...baseRouteConfig,
+				pageType: PageTab.Billing,
+			}),
+		},
+		{
+			label: $L.entity.expenseCategory.plural(),
+			href: getRoute({
+				...baseRouteConfig,
+				pageType: PageTab.ExpenseCategories,
 			}),
 		},
 	];

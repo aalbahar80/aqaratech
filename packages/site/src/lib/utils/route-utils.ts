@@ -35,7 +35,7 @@ export const isProtectedRoute = (route: Route) => {
 // ### Inactive ###
 
 const INACTIVE = [
-	'/[lang=lang]/organizations/[organizationId]/billing',
+	'/[lang=lang]/organizations/[organizationId]/(settings)/billing',
 	'/[lang=lang]/users/[id]/roles',
 ];
 

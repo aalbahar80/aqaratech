@@ -212,34 +212,6 @@ export const getNavigationTree = (
 			navKey: NAV_KEY.SETTINGS,
 			icon: HeroiconsOutlineCog8Tooth,
 			// path: '/settings/',
-			children: [
-				{
-					name: LL.entity.organization.singular(),
-					href: settings,
-				},
-				{
-					name: LL.nav.billing(),
-					href: getRoute({
-						entity: 'organization',
-						pageType: PageTab.Billing,
-						id: organizationId,
-						params: {
-							...langParam,
-						},
-					}),
-				},
-				{
-					name: LL.entity.expenseCategory.plural(),
-					href: getRoute({
-						entity: 'organization',
-						pageType: PageTab.ExpenseCategories,
-						id: organizationId,
-						params: {
-							...langParam,
-						},
-					}),
-				},
-			],
 		});
 	} else if (user.role.roleType === 'PORTFOLIO' && user.role.portfolioId) {
 		const portfolioId = user.role.portfolioId;
