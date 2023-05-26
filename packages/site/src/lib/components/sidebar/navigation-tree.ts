@@ -54,7 +54,9 @@ export const getNavigationTree = (
 			'data-sveltekit-reload': '',
 		},
 		onClick: () => {
-			document.cookie = `${PREF_LOCALE}=${unselectedLocale}; path=/; max-age=31536000`;
+			if (document) {
+				document.cookie = `${PREF_LOCALE}=${unselectedLocale}; path=/; max-age=31536000`;
+			}
 		},
 	};
 
