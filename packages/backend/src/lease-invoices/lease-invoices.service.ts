@@ -453,6 +453,11 @@ export class LeaseInvoicesService {
 
 		this.logger.log('Sending invoice reminders', LeaseInvoicesService.name);
 
+		const checkInId = this.sentry.instance().captureCheckIn({
+			monitorSlug: 'invoice-reminders',
+			status: 'in_progress',
+		});
+
 		// Get all invoices posted between today and beginning of the current month
 		const startOfMonth = new Date(
 			Date.UTC(new Date().getFullYear(), new Date().getMonth(), 1),
@@ -506,6 +511,12 @@ export class LeaseInvoicesService {
 		};
 
 		this.logger.log(result, LeaseInvoicesService.name);
+
+		this.sentry.instance().captureCheckIn({
+			checkInId,
+			monitorSlug: 'invoice-reminders',
+			status: 'ok',
+		});
 
 		return result;
 	}

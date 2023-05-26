@@ -1,4 +1,5 @@
 import { InjectionToken } from '@nestjs/common';
+import { SENTRY_TOKEN } from '@travelerdev/nestjs-sentry';
 import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
 import { mockDeep } from 'vitest-mock-extended';
 
@@ -39,6 +40,15 @@ export const tokenMocker = function (token?: InjectionToken) {
 		const Mock = moduleMocker.generateFromMetadata(mockMetadata);
 		// @ts-expect-error tbd
 		return new Mock();
+	}
+
+	// Sentry
+	if (token === SENTRY_TOKEN) {
+		return {
+			instance() {
+				return mockDeep();
+			},
+		};
 	}
 
 	if (typeof token === 'symbol') {

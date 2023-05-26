@@ -5,6 +5,7 @@ import { accessibleBy } from '@casl/prisma';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { Organization } from '@prisma/client';
+import { InjectSentry, SentryService } from '@travelerdev/nestjs-sentry';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import tier from 'tier';
 
@@ -32,6 +33,7 @@ export class OrganizationsService {
 		private readonly env: EnvService,
 		private readonly tier: TierService,
 		private readonly organizationSettings: OrganizationsSettingsService,
+		@InjectSentry() private readonly sentry: SentryService,
 	) {}
 	SubjectType = 'Organization' as const;
 
@@ -233,6 +235,11 @@ export class OrganizationsService {
 			OrganizationsService.name,
 		);
 
+		const checkInId = this.sentry.instance().captureCheckIn({
+			monitorSlug: 'usage-report',
+			status: 'in_progress',
+		});
+
 		const organizations = id
 			? await this.prisma.c.organization.findMany({
 					where: { id },
@@ -262,6 +269,12 @@ export class OrganizationsService {
 			OrganizationsService.name,
 		);
 
+		this.sentry.instance().captureCheckIn({
+			checkInId,
+			monitorSlug: 'usage-report',
+			status: 'ok',
+		});
+
 		return true;
 	}
 
@@ -280,6 +293,11 @@ export class OrganizationsService {
 	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 	@Cron(process.env.STRIPE_USAGE_REPORT_CRON || '0 0,12 * * *')
 	async refreshActiveStatus({ id }: { id?: string } = {}) {
+		const checkInId = this.sentry.instance().captureCheckIn({
+			monitorSlug: 'refresh-active-status',
+			status: 'in_progress',
+		});
+
 		const organizations = id
 			? await this.prisma.c.organization.findMany({
 					where: { id },
@@ -325,5 +343,11 @@ export class OrganizationsService {
 		});
 
 		await Promise.all(promises);
+
+		this.sentry.instance().captureCheckIn({
+			checkInId,
+			monitorSlug: 'refresh-active-status',
+			status: 'ok',
+		});
 	}
 }
