@@ -32,7 +32,7 @@
 		class="flex flex-col items-center justify-center rounded-lg bg-white p-4 lg:items-start lg:justify-start"
 		class:hidden={!showName}
 	>
-		<div class="flex items-center gap-2 self-stretch pb-4">
+		<div class="flex items-center gap-2 self-stretch">
 			<div class="block text-sm font-medium text-gray-700">
 				{$L.misc.searchByName()}
 			</div>
