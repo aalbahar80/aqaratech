@@ -3,7 +3,7 @@ import { withQuery } from 'ufo';
 
 import { getRoute, PageTab } from '@self/utils';
 
-import type { LoadEvent } from '@sveltejs/kit/types';
+import type { LoadEvent } from '@sveltejs/kit';
 
 import { DESTINATION } from '$lib/constants/misc';
 import { LOGIN } from '$lib/constants/routes';

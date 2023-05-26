@@ -1,6 +1,6 @@
 import { applyAction } from '$app/forms';
 
-import type { SubmitFunction } from '@sveltejs/kit/types';
+import type { SubmitFunction } from '@sveltejs/kit';
 
 /**
  * Uses `window.location` instead of `goto` if the `result` is a `redirect.`
