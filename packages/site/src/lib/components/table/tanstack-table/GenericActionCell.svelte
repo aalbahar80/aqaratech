@@ -1,6 +1,8 @@
 <script lang="ts">
 	import clsx from 'clsx';
 
+	import type { LinkOptions } from '$lib/components/sidebar/types';
+
 	type GenericActionCellProps =
 		| {
 				element: 'button';
@@ -13,6 +15,7 @@
 				label: string;
 				href: string;
 				disabled?: boolean;
+				linkOptions?: LinkOptions;
 		  };
 
 	export let options: GenericActionCellProps;
@@ -29,6 +32,7 @@
 			'inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
 			disabled && 'cursor-not-allowed opacity-30',
 		)}
+		{...'linkOptions' in options ? options.linkOptions : {}}
 	>
 		{options.label}
 	</svelte:element>

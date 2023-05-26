@@ -35,6 +35,10 @@
 							invoiceId: invoice.id,
 							apiURL: environment.PUBLIC_API_URL,
 						}),
+						linkOptions: {
+							rel: 'external',
+							'data-sveltekit-reload': '',
+						},
 					},
 				});
 			},

@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'svelte/elements';
 import type { Icon } from '$lib/models/types/icon.type';
 import type { NavKey } from './nav-key';
 
-type LinkOptions = Partial<
+export type LinkOptions = Partial<
 	| Pick<HTMLAttributes<HTMLAnchorElement>, 'data-sveltekit-reload'>
 	| Pick<HTMLAnchorElement, 'rel'>
 >;
