@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.35.0
+
+### Minor Changes
+
+- 54165a8e8: color all pricing cards EXE-69
+
 ## 2.34.10
 
 ### Patch Changes
