@@ -1,5 +1,16 @@
 # @self/site
 
+## 2.36.0
+
+### Minor Changes
+
+- 1267f3101: merge filter cards
+- ed34c0930: horizontal icon nav EXE-75
+
+### Patch Changes
+
+- 8d6a74abe: add back site profiling
+
 ## 2.35.0
 
 ### Minor Changes
