@@ -8,6 +8,7 @@ import { RouteInfo } from '@nestjs/common/interfaces';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 import * as Sentry from '@sentry/node';
+import { ProfilingIntegration } from '@sentry/profiling-node';
 import { SentryInterceptor, SentryModule } from '@travelerdev/nestjs-sentry';
 import { WinstonModule } from 'nest-winston';
 
@@ -53,6 +54,7 @@ import { UsersModule } from './users/users.module';
 				const sentryConfig = env.sentry;
 				return {
 					...sentryConfig,
+					profilesSampleRate: 1.0, // Set sampling rate for profiling - this is relative to tracesSampleRate
 
 					/** Adding data using the beforeSend callback seems to be more
 					 * consistent, especially for nested objects. For example, calling
@@ -96,6 +98,8 @@ import { UsersModule } from './users/users.module';
 
 						// Potential troublemaker. Investigate: shutdown hooks, add prisma to imports array, prisma in main.ts vs using nestjs-prisma package.
 						new Sentry.Integrations.Prisma({ client: prismaClient }),
+						new ProfilingIntegration(),
+						// ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
 					],
 				};
 			},

@@ -43,13 +43,13 @@ export const tokenMocker = function (token?: InjectionToken) {
 	}
 
 	// Sentry
-	if (token === SENTRY_TOKEN) {
-		return {
-			instance() {
-				return mockDeep();
-			},
-		};
-	}
+	// if (token === SENTRY_TOKEN) {
+	// 	return {
+	// 		instance() {
+	// 			return mockDeep();
+	// 		},
+	// 	};
+	// }
 
 	if (typeof token === 'symbol') {
 		return token;
