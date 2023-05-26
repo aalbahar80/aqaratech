@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.36.1
+
+### Patch Changes
+
+- 184b95376: declare pay link as external to avoid false 404
+
 ## 2.36.0
 
 ### Minor Changes
