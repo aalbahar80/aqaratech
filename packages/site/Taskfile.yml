@@ -36,7 +36,7 @@ tasks:
   build:
     cmds:
       - task: clean
-      - pnpm svelte-kit sync
+      - task: sync
       - pnpm vite build
 
   preview:
