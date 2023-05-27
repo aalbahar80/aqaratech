@@ -153,20 +153,20 @@ type RootTranslation = {
 			data: {
 				bullets: {
 					/**
-					 * O​c​c​u​p​a​n​c​y​ ​r​a​t​e​s​ ​a​n​d​ ​v​a​c​a​n​c​y​ ​p​e​r​i​o​d​s​ ​t​r​a​c​k​i​n​g​ ​u​s​i​n​g​ ​h​e​a​t​m​a​p​s​.
+					 * H​e​a​t​m​a​p​s​ ​t​r​a​c​k​i​n​g​ ​o​f​ ​o​c​c​u​p​a​n​c​y​ ​r​a​t​e​s​ ​a​n​d​ ​v​a​c​a​n​c​y​ ​p​e​r​i​o​d​s​.
 					 */
 					monitor: string
 					/**
-					 * C​o​m​p​r​e​h​e​n​s​i​v​e​ ​t​r​a​c​k​i​n​g​ ​o​f​ ​p​r​o​p​e​r​t​y​-​r​e​l​a​t​e​d​ ​d​a​t​a​,​ ​i​n​c​l​u​d​i​n​g​ ​u​n​i​t​s​,​ ​l​e​a​s​e​s​,​ ​t​e​n​a​n​t​s​.
+					 * V​i​e​w​ ​p​r​o​p​e​r​t​y​-​r​e​l​a​t​e​d​ ​i​n​f​o​r​m​a​t​i​o​n​,​ ​i​n​c​l​u​d​i​n​g​ ​l​e​a​s​e​s​,​ ​m​a​i​n​t​e​n​a​n​c​e​ ​o​r​d​e​r​s​,​ ​a​n​d​ ​v​a​c​a​n​c​i​e​s​.
 					 */
 					track: string
 					/**
-					 * I​n​t​e​r​a​c​t​i​v​e​ ​d​a​s​h​b​o​a​r​d​s​ ​t​o​ ​v​i​e​w​ ​i​n​c​o​m​e​,​ ​e​x​p​e​n​s​e​s​,​ ​a​n​d​ ​p​r​o​f​i​t​/​l​o​s​s​ ​f​o​r​ ​e​a​c​h​ ​p​o​r​t​f​o​l​i​o​,​ ​p​r​o​p​e​r​t​y​.
+					 * I​n​t​e​r​a​c​t​i​v​e​ ​d​a​s​h​b​o​a​r​d​s​ ​t​o​ ​v​i​e​w​ ​i​n​c​o​m​e​,​ ​e​x​p​e​n​s​e​s​ ​f​o​r​ ​e​a​c​h​ ​u​n​i​t​.
 					 */
 					visualize: string
 				}
 				/**
-				 * D​a​t​a​ ​a​n​d​ ​A​n​a​l​y​t​i​c​s
+				 * A​n​a​l​y​t​i​c​s​ ​D​a​s​h​b​o​a​r​d
 				 */
 				title: string
 			}
@@ -193,16 +193,16 @@ type RootTranslation = {
 					 */
 					categorize: string
 					/**
-					 * A​t​t​r​i​b​u​t​e​ ​e​x​p​e​n​s​e​s​ ​t​o​ ​a​ ​p​o​r​t​f​o​l​i​o​,​ ​p​r​o​p​e​r​t​y​,​ ​o​r​ ​a​ ​s​i​n​g​l​e​ ​u​n​i​t​.
+					 * A​t​t​r​i​b​u​t​e​ ​e​x​p​e​n​s​e​s​ ​t​o​ ​o​w​n​e​r​s​,​ ​p​r​o​p​e​r​t​i​e​s​ ​a​n​d​ ​u​n​i​t​s​.
 					 */
 					track: string
 					/**
-					 * V​i​s​u​a​l​i​z​e​ ​e​x​p​e​n​s​e​s​ ​u​s​i​n​g​ ​i​n​t​e​r​a​c​t​i​v​e​ ​t​r​e​e​m​a​p​s​,​ ​w​h​i​c​h​ ​a​l​l​o​w​ ​y​o​u​ ​t​o​ ​q​u​i​c​k​l​y​ ​i​d​e​n​t​i​f​y​ ​y​o​u​r​ ​c​o​s​t​ ​p​a​t​t​e​r​n​s​.
+					 * V​i​s​u​a​l​i​z​e​ ​e​x​p​e​n​s​e​s​ ​u​s​i​n​g​ ​i​n​t​e​r​a​c​t​i​v​e​ ​t​r​e​e​m​a​p​s​.
 					 */
 					visualize: string
 				}
 				/**
-				 * E​x​p​e​n​s​e​ ​T​r​a​c​k​i​n​g​ ​a​n​d​ ​V​i​s​u​a​l​i​z​a​t​i​o​n
+				 * E​x​p​e​n​s​e​ ​t​r​a​c​k​i​n​g
 				 */
 				title: string
 			}
@@ -213,11 +213,11 @@ type RootTranslation = {
 					 */
 					customizable: string
 					/**
-					 * F​i​l​t​e​r​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​ ​a​n​d​ ​t​e​n​a​n​t​ ​d​a​t​a​ ​b​y​ ​l​o​c​a​t​i​o​n​,​ ​i​n​c​l​u​d​i​n​g​ ​s​p​e​c​i​f​i​c​ ​p​r​o​p​e​r​t​i​e​s​ ​o​r​ ​u​n​i​t​s​ ​w​i​t​h​i​n​ ​p​r​o​p​e​r​t​i​e​s​.
+					 * F​i​l​t​e​r​ ​p​r​o​p​e​r​t​i​e​s​ ​a​n​d​ ​u​n​i​t​s​ ​b​y​ ​l​o​c​a​t​i​o​n​.
 					 */
 					properties: string
 					/**
-					 * F​i​l​t​e​r​ ​b​y​ ​t​i​m​e​,​ ​i​n​c​l​u​d​i​n​g​ ​s​p​e​c​i​f​i​c​ ​d​a​t​e​ ​r​a​n​g​e​s​ ​o​r​ ​t​i​m​e​ ​p​e​r​i​o​d​s​.
+					 * F​i​l​t​e​r​ ​b​y​ ​s​p​e​c​i​f​i​c​ ​d​a​t​e​ ​r​a​n​g​e​s​ ​o​r​ ​t​i​m​e​ ​p​e​r​i​o​d​s​.
 					 */
 					time: string
 				}
@@ -233,23 +233,23 @@ type RootTranslation = {
 					 */
 					reminders: string
 					/**
-					 * E​a​s​y​ ​t​r​a​c​k​i​n​g​ ​a​n​d​ ​m​a​n​a​g​e​m​e​n​t​ ​o​f​ ​r​e​n​t​a​l​ ​p​a​y​m​e​n​t​s​ ​a​n​d​ ​l​e​a​s​e​ ​a​g​r​e​e​m​e​n​t​s​.
+					 * L​i​v​e​ ​t​r​a​c​k​i​n​g​ ​o​f​ ​p​a​y​m​e​n​t​s​ ​t​r​a​n​s​a​c​t​i​o​n​s​.
 					 */
 					track: string
 				}
 				/**
-				 * R​e​n​t​a​l​ ​P​a​y​m​e​n​t​ ​P​o​r​t​a​l
+				 * P​a​y​m​e​n​t​ ​p​o​r​t​a​l
 				 */
 				title: string
 			}
 			search: {
 				bullets: {
 					/**
-					 * S​e​a​r​c​h​ ​t​h​r​o​u​g​h​ ​a​l​l​ ​o​f​ ​y​o​u​r​ ​d​a​t​a​ ​a​t​ ​t​h​e​ ​s​a​m​e​ ​t​i​m​e​.
+					 * Q​u​i​c​k​ ​s​e​a​r​c​h​ ​t​h​r​o​u​g​h​ ​a​l​l​ ​i​n​f​o​r​m​a​t​i​o​n​.
 					 */
 					all: string
 					/**
-					 * F​i​n​d​ ​w​h​a​t​ ​y​o​u​'​r​e​ ​l​o​o​k​i​n​g​ ​f​o​r​ ​w​i​t​h​o​u​t​ ​k​n​o​w​i​n​g​ ​t​h​e​ ​e​x​a​c​t​ ​s​p​e​l​l​i​n​g​.
+					 * F​i​n​d​ ​i​n​f​o​r​m​a​t​i​o​n​ ​i​r​r​e​s​p​e​c​t​i​v​e​ ​o​f​ ​s​p​e​l​l​i​n​g​ ​i​n​a​c​c​u​r​a​c​i​e​s​.
 					 */
 					spell: string
 				}
@@ -267,7 +267,7 @@ type RootTranslation = {
 		}
 		hero: {
 			/**
-			 * C​o​n​v​e​n​i​e​n​t​l​y​ ​m​a​n​a​g​e​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​ ​f​r​o​m​ ​a​n​y​ ​l​o​c​a​t​i​o​n​.
+			 * A​c​c​e​s​s​ ​i​n​f​o​r​m​a​t​i​o​n​ ​e​f​f​o​r​t​l​e​s​s​l​y​,​ ​a​n​y​t​i​m​e​.
 			 */
 			description: string
 			/**
@@ -368,12 +368,12 @@ type RootTranslation = {
 						 */
 						'1': string
 						/**
-						 * D​e​d​i​c​a​t​e​d​ ​p​o​r​t​f​o​l​i​o​ ​m​a​n​a​g​e​r
+						 * D​e​d​i​c​a​t​e​d​ ​a​c​c​o​u​n​t​ ​m​a​n​a​g​e​r
 						 */
 						'2': string
 					}
 					/**
-					 * C​o​m​p​l​e​t​e​ ​M​a​n​a​g​e​m​e​n​t
+					 * I​n​c​l​u​s​i​v​e
 					 */
 					name: string
 					/**
@@ -450,17 +450,17 @@ type RootTranslation = {
 		 */
 		searchByName: string
 		/**
-		 * P​l​e​a​s​e​ ​l​o​g​ ​i​n​ ​t​o​ ​v​i​e​w​ ​y​o​u​r​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​a​n​d​ ​r​e​c​e​i​p​t​s​.
+		 * W​e​l​c​o​m​e​,​ ​y​o​u​ ​c​a​n​ ​v​i​e​w​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​p​r​i​n​t​ ​r​e​c​e​i​p​t​s​.
 		 */
-		tenantLogin: string
+		tenantInvoicePage: string
 		/**
 		 * V​i​e​w​ ​l​e​a​s​e​s​ ​r​e​l​a​t​e​d​ ​t​o​ ​t​h​e​ ​r​e​n​t​a​l​ ​u​n​i​t​.
 		 */
 		tenantLeasePage: string
 		/**
-		 * W​e​l​c​o​m​e​,​ ​y​o​u​ ​c​a​n​ ​v​i​e​w​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​p​r​i​n​t​ ​r​e​c​e​i​p​t​s​.
+		 * P​l​e​a​s​e​ ​l​o​g​ ​i​n​ ​t​o​ ​v​i​e​w​ ​y​o​u​r​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​a​n​d​ ​r​e​c​e​i​p​t​s​.
 		 */
-		tenantInvoicePage: string
+		tenantLogin: string
 		/**
 		 * P​l​e​a​s​e​ ​v​i​s​i​t​ ​t​h​e​ ​l​e​a​s​e​s​ ​p​a​g​e​ ​t​o​ ​o​p​e​n​ ​a​ ​n​e​w​ ​m​a​i​n​t​e​n​a​n​c​e​ ​o​r​d​e​r​.
 		 */
@@ -1590,20 +1590,20 @@ export type TranslationFunctions = {
 			data: {
 				bullets: {
 					/**
-					 * Occupancy rates and vacancy periods tracking using heatmaps.
+					 * Heatmaps tracking of occupancy rates and vacancy periods.
 					 */
 					monitor: () => LocalizedString
 					/**
-					 * Comprehensive tracking of property-related data, including units, leases, tenants.
+					 * View property-related information, including leases, maintenance orders, and vacancies.
 					 */
 					track: () => LocalizedString
 					/**
-					 * Interactive dashboards to view income, expenses, and profit/loss for each portfolio, property.
+					 * Interactive dashboards to view income, expenses for each unit.
 					 */
 					visualize: () => LocalizedString
 				}
 				/**
-				 * Data and Analytics
+				 * Analytics Dashboard
 				 */
 				title: () => LocalizedString
 			}
@@ -1630,16 +1630,16 @@ export type TranslationFunctions = {
 					 */
 					categorize: () => LocalizedString
 					/**
-					 * Attribute expenses to a portfolio, property, or a single unit.
+					 * Attribute expenses to owners, properties and units.
 					 */
 					track: () => LocalizedString
 					/**
-					 * Visualize expenses using interactive treemaps, which allow you to quickly identify your cost patterns.
+					 * Visualize expenses using interactive treemaps.
 					 */
 					visualize: () => LocalizedString
 				}
 				/**
-				 * Expense Tracking and Visualization
+				 * Expense tracking
 				 */
 				title: () => LocalizedString
 			}
@@ -1650,11 +1650,11 @@ export type TranslationFunctions = {
 					 */
 					customizable: () => LocalizedString
 					/**
-					 * Filter your properties and tenant data by location, including specific properties or units within properties.
+					 * Filter properties and units by location.
 					 */
 					properties: () => LocalizedString
 					/**
-					 * Filter by time, including specific date ranges or time periods.
+					 * Filter by specific date ranges or time periods.
 					 */
 					time: () => LocalizedString
 				}
@@ -1670,23 +1670,23 @@ export type TranslationFunctions = {
 					 */
 					reminders: () => LocalizedString
 					/**
-					 * Easy tracking and management of rental payments and lease agreements.
+					 * Live tracking of payments transactions.
 					 */
 					track: () => LocalizedString
 				}
 				/**
-				 * Rental Payment Portal
+				 * Payment portal
 				 */
 				title: () => LocalizedString
 			}
 			search: {
 				bullets: {
 					/**
-					 * Search through all of your data at the same time.
+					 * Quick search through all information.
 					 */
 					all: () => LocalizedString
 					/**
-					 * Find what you're looking for without knowing the exact spelling.
+					 * Find information irrespective of spelling inaccuracies.
 					 */
 					spell: () => LocalizedString
 				}
@@ -1704,7 +1704,7 @@ export type TranslationFunctions = {
 		}
 		hero: {
 			/**
-			 * Conveniently manage your properties from any location.
+			 * Access information effortlessly, anytime.
 			 */
 			description: () => LocalizedString
 			/**
@@ -1805,12 +1805,12 @@ export type TranslationFunctions = {
 						 */
 						'1': () => LocalizedString
 						/**
-						 * Dedicated portfolio manager
+						 * Dedicated account manager
 						 */
 						'2': () => LocalizedString
 					}
 					/**
-					 * Complete Management
+					 * Inclusive
 					 */
 					name: () => LocalizedString
 					/**
@@ -1887,17 +1887,17 @@ export type TranslationFunctions = {
 		 */
 		searchByName: () => LocalizedString
 		/**
-		 * Please log in to view your payment history and receipts.
+		 * Welcome, you can view payment history print receipts.
 		 */
-		tenantLogin: () => LocalizedString
+		tenantInvoicePage: () => LocalizedString
 		/**
 		 * View leases related to the rental unit.
 		 */
 		tenantLeasePage: () => LocalizedString
 		/**
-		 * Welcome, you can view payment history print receipts.
+		 * Please log in to view your payment history and receipts.
 		 */
-		tenantInvoicePage: () => LocalizedString
+		tenantLogin: () => LocalizedString
 		/**
 		 * Please visit the leases page to open a new maintenance order.
 		 */

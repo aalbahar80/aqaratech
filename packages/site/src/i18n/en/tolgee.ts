@@ -58,14 +58,13 @@ export const tolgee = {
 		features: {
 			data: {
 				bullets: {
-					monitor:
-						'Occupancy rates and vacancy periods tracking using heatmaps.',
+					monitor: 'Heatmaps tracking of occupancy rates and vacancy periods.',
 					track:
-						'Comprehensive tracking of property-related data, including units, leases, tenants.',
+						'View property-related information, including leases, maintenance orders, and vacancies.',
 					visualize:
-						'Interactive dashboards to view income, expenses, and profit/loss for each portfolio, property.',
+						'Interactive dashboards to view income, expenses for each unit.',
 				},
-				title: 'Data and Analytics',
+				title: 'Analytics Dashboard',
 			},
 			document: {
 				bullets: {
@@ -80,35 +79,31 @@ export const tolgee = {
 				bullets: {
 					categorize:
 						'Classify expenses to offer diverse methods for visualizing expenditure.',
-					track: 'Attribute expenses to an owner, property, or a single unit.',
-					visualize:
-						'Visualize expenses using interactive treemaps, which allow you to quickly identify your cost patterns.',
+					track: 'Attribute expenses to owners, properties and units.',
+					visualize: 'Visualize expenses using interactive treemaps.',
 				},
-				title: 'Expense Tracking and Visualization',
+				title: 'Expense tracking',
 			},
 			filter: {
 				bullets: {
 					customizable:
 						'Customizable filters to view the most relevant information.',
-					properties:
-						'Filter your properties and tenant data by location, including specific properties or units within properties.',
-					time: 'Filter by time, including specific date ranges or time periods.',
+					properties: 'Filter properties and units by location.',
+					time: 'Filter by specific date ranges or time periods.',
 				},
 				title: 'Advanced Filtering',
 			},
 			rental: {
 				bullets: {
 					reminders: 'Automated payment reminders.',
-					track:
-						'Easy tracking and management of rental payments and lease agreements.',
+					track: 'Live tracking of payments transactions.',
 				},
-				title: 'Rental Payment Portal',
+				title: 'Payment portal',
 			},
 			search: {
 				bullets: {
-					all: 'Search through all of your data at the same time.',
-					spell:
-						"Find what you're looking for without knowing the exact spelling.",
+					all: 'Quick search through all information.',
+					spell: 'Find information irrespective of spelling inaccuracies.',
 				},
 				title: 'Powerful Search',
 			},
@@ -117,7 +112,7 @@ export const tolgee = {
 			legal: 'Aqaratech, WLL. All rights reserved.',
 		},
 		hero: {
-			description: 'Conveniently manage properties from any location.',
+			description: 'Access information effortlessly, anytime.',
 			subtitle: 'Unique portal to suit the needs of real estate companies.',
 			titlePrefix: 'Property management',
 			titleHighlight: 'platform.',
@@ -155,9 +150,9 @@ export const tolgee = {
 					description: '',
 					features: {
 						'1': 'Everything in Premium plan',
-						'2': 'Dedicated portfolio manager',
+						'2': 'Dedicated account manager',
 					},
-					name: 'Complete Management',
+					name: 'Inclusive',
 					price: 'Contact us',
 				},
 			},
