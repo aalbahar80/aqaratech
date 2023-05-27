@@ -18,9 +18,8 @@
 		"check:all": "turbo run check --continue --no-daemon",
 		"ci:version": "changeset version && pnpm install --lockfile-only",
 		"ci:publish": "changeset tag",
-		"api:generate": "task -t ./packages/backend/Taskfile.yml swagger:generate && task swagger:propogate",
 		"seed": "pnpm -F @self/backend exec prisma migrate reset --force",
-		"precompute": "rm packages/site/.eslintcache; pnpm api:generate && TIMING=1 turbo run format check lint build test --continue --no-daemon"
+		"precompute": "rm packages/site/.eslintcache; task swagger:all && TIMING=1 turbo run format check lint build test --continue --no-daemon"
 	},
 	"devDependencies": {
 		"@changesets/changelog-git": "0.1.14",

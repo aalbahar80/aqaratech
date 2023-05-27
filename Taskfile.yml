@@ -19,3 +19,14 @@ tasks:
       - pnpm run -F @self/test api:generate
       - ./scripts/add-nocheck.sh
       - pnpm prettier --write './packages/site/src/api/openapi/**/*.ts' './packages/test/types/**/*.ts'
+
+  swagger:all:
+    sources:
+      - packages/backend/src/**/*.ts
+    generates:
+      - packages/backend/openapi.yaml
+      - packages/site/src/api/openapi/**/*
+      - packages/test/types/api/**/*
+    cmds:
+      - task -t ./packages/backend/Taskfile.yml swagger:generate
+      - task: swagger:propogate
