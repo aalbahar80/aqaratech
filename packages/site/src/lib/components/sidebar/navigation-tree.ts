@@ -30,7 +30,7 @@ import HeroiconsOutlineHome from '~icons/heroicons-outline/home';
 import HeroiconsOutlineLogout from '~icons/heroicons-outline/logout';
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user';
 import MdiAbjadArabic from '~icons/mdi/abjad-arabic';
-import MdiFormatLetterCase from '~icons/mdi/format-letter-case';
+import RiEnglishInput from '~icons/ri/english-input';
 
 export const getNavigationTree = (
 	user: User | undefined,
@@ -48,7 +48,7 @@ export const getNavigationTree = (
 	const localeSwitch: NavigationItem = {
 		name: LOCALE_LABELS[unselectedLocale],
 		href: replaceLocaleInUrl(url, unselectedLocale),
-		icon: locale === 'en' ? MdiAbjadArabic : MdiFormatLetterCase,
+		icon: locale === 'en' ? MdiAbjadArabic : RiEnglishInput,
 		navKey: NAV_KEY.LOCALE_SWITCH,
 		linkOptions: {
 			'data-sveltekit-reload': '',
