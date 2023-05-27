@@ -15,7 +15,7 @@
 
 <!-- Vertical Navbar Flexbox -->
 <header
-	class="fixed z-50 flex w-full flex-col justify-center bg-white shadow-md print:hidden"
+	class="fixed z-50 flex w-full flex-col justify-center bg-white shadow-sm print:hidden"
 	style:height="var(--nav-h)"
 	aria-label="Global"
 >
