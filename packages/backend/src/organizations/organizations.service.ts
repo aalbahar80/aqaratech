@@ -308,7 +308,6 @@ export class OrganizationsService {
 			  });
 
 		const promises = organizations.map(async (organization) => {
-			// TODO: stub to avoid running in dev
 			const active = await tier.can(tierid(organization.id), 'feature:unit');
 			if (active.err) {
 				// Don't update the organization's status if we can't check it
