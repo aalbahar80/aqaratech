@@ -100,7 +100,7 @@ jobs:
         shell: bash
         # Releases: https://github.com/getsentry/sentry-cli/releases
         run: |
-          curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.18.0" bash
+          curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.18.1" bash
           task -t ./packages/backend/Taskfile.yml sentry:release
 
       - name: Delete sourcemaps from client bundle
