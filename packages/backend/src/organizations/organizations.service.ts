@@ -293,6 +293,11 @@ export class OrganizationsService {
 	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 	@Cron(process.env.STRIPE_USAGE_REPORT_CRON || '0 0,12 * * *')
 	async refreshActiveStatus({ id }: { id?: string } = {}) {
+		this.logger.log(
+			{ message: 'Refreshing active status', id },
+			OrganizationsService.name,
+		);
+
 		const checkInId = this.sentry.instance().captureCheckIn({
 			monitorSlug: 'refresh-active-status',
 			status: 'in_progress',
@@ -328,7 +333,7 @@ export class OrganizationsService {
 
 				this.logger.log({
 					level: 'info',
-					message: `Updating isActive status for organization ${organization.id}`,
+					message: `Updating active status for organization ${organization.id}`,
 					active: active.ok,
 				});
 
@@ -342,6 +347,11 @@ export class OrganizationsService {
 		});
 
 		await Promise.all(promises);
+
+		this.logger.log(
+			{ message: 'Refreshed active status', id },
+			OrganizationsService.name,
+		);
 
 		this.sentry.instance().captureCheckIn({
 			checkInId,
