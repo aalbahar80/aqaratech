@@ -77,7 +77,8 @@ tasks:
       SENTRY_PROPERTIES: 'sentry.properties'
     cmds:
       - echo "SENTRY_RELEASE_VERSION=$SENTRY_RELEASE_VERSION" "SENTRY_RELEASE_ENVIRONMENT=$SENTRY_RELEASE_ENVIRONMENT"
-      - sentry-cli sourcemaps inject dist
-      - sentry-cli sourcemaps upload dist
+      - sentry-cli releases new backend-$SENTRY_RELEASE_VERSION --finalize
+      - sentry-cli sourcemaps inject --release=backend-$SENTRY_RELEASE_VERSION dist
+      - sentry-cli sourcemaps upload --release=backend-$SENTRY_RELEASE_VERSION dist
       - sentry-cli releases set-commits --auto backend-$SENTRY_RELEASE_VERSION
       - sentry-cli releases deploys backend-$SENTRY_RELEASE_VERSION new -e $SENTRY_RELEASE_ENVIRONMENT
