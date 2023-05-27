@@ -346,10 +346,15 @@ export class OrganizationsService {
 			return organization;
 		});
 
-		await Promise.all(promises);
+		const results = await Promise.allSettled(promises);
 
 		this.logger.log(
-			{ message: 'Refreshed active status', id },
+			{
+				message: 'Refreshed active status',
+				id,
+				success: results.filter((x) => x.status === 'fulfilled').length,
+				failure: results.filter((x) => x.status === 'rejected').length,
+			},
 			OrganizationsService.name,
 		);
 
