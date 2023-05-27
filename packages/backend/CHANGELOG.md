@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.32.0
+
+### Minor Changes
+
+- c7e648ad8: backend profiling
+
 ## 2.31.5
 
 ### Patch Changes

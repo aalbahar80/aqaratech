@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.37.0
+
+### Minor Changes
+
+- c7e648ad8: backend profiling
+
 ## 2.36.1
 
 ### Patch Changes
