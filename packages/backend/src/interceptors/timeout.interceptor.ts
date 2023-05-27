@@ -29,7 +29,7 @@ export class TimeoutInterceptor implements NestInterceptor {
 		const url = context.switchToHttp().getRequest<Request>().url;
 
 		const customTimeout = this.reflector.get<number>(CUSTOM_TIMEOUT, handler);
-		const TIMEOUT = customTimeout || 5000;
+		const TIMEOUT = customTimeout || 10000;
 
 		return next.handle().pipe(
 			timeout(TIMEOUT),
