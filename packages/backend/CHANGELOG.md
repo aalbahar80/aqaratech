@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.32.1
+
+### Patch Changes
+
+- e207daf51: sentry changes
+
 ## 2.32.0
 
 ### Minor Changes
