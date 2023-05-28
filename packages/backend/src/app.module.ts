@@ -50,7 +50,7 @@ import { UsersModule } from './users/users.module';
 		// or use async: https://github.com/podkrepi-bg/api/blob/f62fba53eea6405539653c022c13f1d49990b93c/apps/api/src/app/app.module.ts#L60
 		SentryModule.forRootAsync({
 			inject: [EnvService, PrismaService],
-			useFactory: (env: EnvService, prismaClient: PrismaService) => {
+			useFactory: (env: EnvService, prisma: PrismaService) => {
 				const sentryConfig = env.sentry;
 				return {
 					...sentryConfig,
@@ -97,7 +97,7 @@ import { UsersModule } from './users/users.module';
 						}),
 
 						// Potential troublemaker. Investigate: shutdown hooks, add prisma to imports array, prisma in main.ts vs using nestjs-prisma package.
-						new Sentry.Integrations.Prisma({ client: prismaClient }), // FIX: prismaClient is undefined
+						new Sentry.Integrations.Prisma({ client: prisma.c }),
 						new ProfilingIntegration(),
 						// ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
 					],

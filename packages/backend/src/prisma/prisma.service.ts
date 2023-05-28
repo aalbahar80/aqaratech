@@ -5,10 +5,13 @@ import { computeLabelProperty } from '@self/utils';
 
 @Injectable()
 export class PrismaService implements OnModuleInit {
-	public c!: ExtendedPrismaClient;
+	constructor() {
+		this.c = createPrismaClient();
+	}
+
+	public c: ExtendedPrismaClient;
 
 	async onModuleInit() {
-		this.c = createPrismaClient();
 		await this.c.$connect();
 	}
 
