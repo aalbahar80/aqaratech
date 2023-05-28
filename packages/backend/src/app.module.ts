@@ -99,7 +99,7 @@ import { UsersModule } from './users/users.module';
 						// Potential troublemaker. Investigate: shutdown hooks, add prisma to imports array, prisma in main.ts vs using nestjs-prisma package.
 						new Sentry.Integrations.Prisma({ client: prisma.c }),
 						new ProfilingIntegration(),
-						// ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
+						...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
 					],
 				};
 			},
