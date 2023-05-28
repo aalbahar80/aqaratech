@@ -39,3 +39,4 @@ coverage/
 **/tolgee/generated
 
 Session.vim
+.aider*

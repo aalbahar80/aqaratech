@@ -34,15 +34,15 @@
 /* 	font-named-instance: 'Regular'; */
 /* } */
 
-/*Almarai Light*/
-@font-face {
-	font-family: 'Almarai';
-	font-style: normal;
-	font-weight: 300;
-	font-display: swap;
-	src: url('./assets/fonts/Almarai/Almarai-Light.ttf') format('truetype');
-	font-named-instance: 'Light';
-}
+/* Almarai Light */
+/* @font-face { */
+/* 	font-family: 'Almarai'; */
+/* 	font-style: normal; */
+/* 	font-weight: 300; */
+/* 	font-display: swap; */
+/* 	src: url('./assets/fonts/Almarai/Almarai-Light.ttf') format('truetype'); */
+/* 	font-named-instance: 'Light'; */
+/* } */
 
 /* Almarai Regular */
 @font-face {
@@ -54,25 +54,25 @@
 	font-named-instance: 'Regular';
 }
 
-/*Almarai Bold*/
-@font-face {
-	font-family: 'Almarai';
-	font-style: normal;
-	font-weight: 700;
-	font-display: swap;
-	src: url('./assets/fonts/Almarai/Almarai-Bold.ttf') format('truetype');
-	font-named-instance: 'Bold';
-}
+/* Almarai Bold */
+/* @font-face { */
+/* 	font-family: 'Almarai'; */
+/* 	font-style: normal; */
+/* 	font-weight: 700; */
+/* 	font-display: swap; */
+/* 	src: url('./assets/fonts/Almarai/Almarai-Bold.ttf') format('truetype'); */
+/* 	font-named-instance: 'Bold'; */
+/* } */
 
-/*Almarai ExtraBold*/
-@font-face {
-	font-family: 'Almarai';
-	font-style: normal;
-	font-weight: 800;
-	font-display: swap;
-	src: url('./assets/fonts/Almarai/Almarai-ExtraBold.ttf') format('truetype');
-	font-named-instance: 'ExtraBold';
-}
+/* Almarai ExtraBold */
+/* @font-face { */
+/* 	font-family: 'Almarai'; */
+/* 	font-style: normal; */
+/* 	font-weight: 800; */
+/* 	font-display: swap; */
+/* 	src: url('./assets/fonts/Almarai/Almarai-ExtraBold.ttf') format('truetype'); */
+/* 	font-named-instance: 'ExtraBold'; */
+/* } */
 
 .tippy-content {
 	white-space: pre-line;
