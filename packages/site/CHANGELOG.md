@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.37.2
+
+### Patch Changes
+
+- e0b439660: sentry prisma tracing, autonodeintegration
+- 4caf8f805: explicitly set font based on lang
+
 ## 2.37.1
 
 ### Patch Changes

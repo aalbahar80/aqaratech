@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.32.2
+
+### Patch Changes
+
+- e0b439660: sentry prisma tracing, autonodeintegration
+
 ## 2.32.1
 
 ### Patch Changes
