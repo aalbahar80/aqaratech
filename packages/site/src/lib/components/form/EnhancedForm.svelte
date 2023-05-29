@@ -41,6 +41,7 @@
 <form
 	method="POST"
 	class="flex h-full flex-col gap-y-4 divide-gray-200 rounded-md bg-white px-4 shadow sm:px-6"
+	enctype="multipart/form-data"
 	use:enhance={() => {
 		const toastId = toast.loading('Loading...');
 
