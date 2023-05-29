@@ -1,6 +1,7 @@
 import {
 	INestApplication,
 	Logger,
+	LoggerService,
 	NestApplicationOptions,
 } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
@@ -10,6 +11,7 @@ import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 import { envSchema } from '@self/utils';
 import { AppModule } from 'src/app.module';
+import { EnvService } from 'src/env/env.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { setupSwagger } from 'src/swagger';
 
@@ -54,7 +56,15 @@ export async function bootstrap() {
 		app = await NestFactory.create(AppModule, options);
 	}
 
-	app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+	const loggerService = app.get<LoggerService>(WINSTON_MODULE_NEST_PROVIDER);
+	app.useLogger(loggerService);
+
+	// Log config
+	// Don't clutter the console when running tests
+	if (!env.PUBLIC_IS_TESTING) {
+		const envService = app.get(EnvService);
+		loggerService.log(envService.getLoggable(), envService.constructor.name);
+	}
 
 	Logger.log(`Version: ${version}`);
 

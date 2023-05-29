@@ -20,35 +20,28 @@ export class EnvService {
 		this.auth = authConfig(parsed);
 		this.sentry = sentryConfig(parsed);
 		this.winston = winstonConfig;
+	}
 
-		if (!this.e.PUBLIC_IS_TESTING) {
-			// Don't clutter the console when running tests
-			console.log(
-				'EnvService',
-				R.pick(this.e, [
-					'PUBLIC_AQARATECH_ENV',
-					'PUBLIC_AQ_DEBUG_LEVEL',
-					'PUBLIC_IS_TESTING',
-					'PUBLIC_SITE_URL',
-					'R2_ENDPOINT',
-					'BODY_SIZE_LIMIT',
-					'STRIPE_PAUSE_USAGE_REPORTS',
-					'PAUSE_AUTO_INVOICE_REMINDERS',
-				]),
-			);
-
-			console.log(
-				'AuthConfig',
-				R.pick(this.auth, [
-					'AUTH0_DOMAIN',
-					'AUTH0_API_AUDIENCE',
-					'AUTH0_API_NAMESPACE',
-				]),
-			);
-
-			console.log('SentryConfig', this.sentry);
-
-			console.log('WinstonConfig', R.pick(this.winston, ['level']));
-		}
+	/** Returns an object with all the config values that should be logged. */
+	getLoggable() {
+		return {
+			EnvService: R.pick(this.e, [
+				'PUBLIC_AQARATECH_ENV',
+				'PUBLIC_AQ_DEBUG_LEVEL',
+				'PUBLIC_IS_TESTING',
+				'PUBLIC_SITE_URL',
+				'R2_ENDPOINT',
+				'BODY_SIZE_LIMIT',
+				'STRIPE_PAUSE_USAGE_REPORTS',
+				'PAUSE_AUTO_INVOICE_REMINDERS',
+			]),
+			AuthConfig: R.pick(this.auth, [
+				'AUTH0_DOMAIN',
+				'AUTH0_API_AUDIENCE',
+				'AUTH0_API_NAMESPACE',
+			]),
+			SentryConfig: this.sentry,
+			WinstonConfig: R.pick(this.winston, ['level']),
+		};
 	}
 }
