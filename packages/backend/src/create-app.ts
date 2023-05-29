@@ -63,7 +63,13 @@ export async function bootstrap() {
 	// Don't clutter the console when running tests
 	if (!env.PUBLIC_IS_TESTING) {
 		const envService = app.get(EnvService);
-		loggerService.log(envService.getLoggable(), envService.constructor.name);
+		loggerService.log(
+			{
+				message: 'Config',
+				...envService.getLoggable(),
+			},
+			envService.constructor.name,
+		);
 	}
 
 	Logger.log(`Version: ${version}`);
