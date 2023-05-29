@@ -54,9 +54,9 @@ export async function bootstrap() {
 		app = await NestFactory.create(AppModule, options);
 	}
 
-	Logger.log(`Version: ${version}`);
-
 	app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+
+	Logger.log(`Version: ${version}`);
 
 	app.use(helmet()); // before other middleware
 	app.use(cookieParser());
