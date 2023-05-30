@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.38.1
+
+### Patch Changes
+
+- f529bc39a: align numbers only in table cells
+- 290941bd0: center table header
+
 ## 2.38.0
 
 ### Minor Changes
