@@ -4,7 +4,7 @@
 	// import TablerBrandInstagram from '~icons/tabler/brand-instagram';
 </script>
 
-<footer class="pt-16">
+<footer>
 	<Container>
 		<div
 			class="flex flex-col items-center border-t border-slate-400/10 py-10 sm:flex-row-reverse sm:justify-around"

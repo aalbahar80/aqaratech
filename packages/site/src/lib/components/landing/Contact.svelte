@@ -3,9 +3,7 @@
 </script>
 
 <div class="mt-20 border-t border-gray-200">
-	<div
-		class="mx-auto max-w-md px-6 py-24 sm:max-w-3xl sm:py-32 lg:max-w-7xl lg:px-8"
-	>
+	<div class="mx-auto max-w-md px-6 py-20 sm:max-w-3xl lg:max-w-7xl lg:px-8">
 		<div class="divide-y divide-slate-200">
 			<section
 				class="lg:grid lg:grid-cols-3 lg:gap-8"
