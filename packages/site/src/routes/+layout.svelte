@@ -19,6 +19,7 @@
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import Modal from '$lib/components/toast/Modal.svelte';
 	import { environment } from '$lib/environment';
+	import { sentryConfig } from '$lib/environment/sentry.config';
 	import HeadHrefLangs from '$lib/i18n/HeadHrefLangs.svelte';
 	import { width } from '$lib/stores/width';
 	import { isHomeRoute, isSidebarAvailable } from '$lib/utils/route-utils';
@@ -30,7 +31,9 @@
 	setLocale(data.locale ?? baseLocale);
 
 	onMount(() => {
-		Sentry.setUser(getSentryUser(data.user));
+		if (sentryConfig.enabled) {
+			Sentry.setUser(getSentryUser(data.user));
+		}
 
 		if (!isLiveEnv(environment.PUBLIC_AQARATECH_ENV)) {
 			// communicate that the app is ready - used for testing
