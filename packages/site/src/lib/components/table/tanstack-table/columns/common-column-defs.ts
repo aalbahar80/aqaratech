@@ -13,6 +13,8 @@ import type {
 
 import L from '$i18n/i18n-svelte';
 import ActionCell from '$lib/components/table/tanstack-table/ActionCell.svelte';
+import ViewCell from '$lib/components/table/tanstack-table/columns/ViewCell.svelte';
+import GenericActionCell from '$lib/components/table/tanstack-table/GenericActionCell.svelte';
 
 export const locationColumnDef = <
 	T extends Breadcrumbs & { portfolioId: string },
@@ -111,11 +113,9 @@ export const viewColumnDef = <
 	entity: Entity,
 	params: Record<string, string>,
 ) => {
-	const LL = get(L);
-
 	return columnHelper.display({
 		id: 'view',
-		header: LL.buttons.view(),
+		header: '', // LL.buttons.view(),
 		cell: (props) => {
 			// for portal/tenant page, grab the organizationId from the row
 			const paramsWithOrgId =
@@ -126,21 +126,28 @@ export const viewColumnDef = <
 					  }
 					: params;
 
-			return renderComponent(ActionCell, {
-				value: get(L).buttons.view(),
-				href: getRoute({
-					entity,
-					id: props.row.original.id,
-					pageType: PageType.Id,
-					// Add portfolioId to params from table row. Required for organizations/leases page.
-					params:
-						'portfolioId' in props.row.original
-							? {
-									portfolioId: props.row.original.portfolioId,
-									...paramsWithOrgId,
-							  }
-							: paramsWithOrgId,
-				}),
+			return renderComponent(GenericActionCell, {
+				options: {
+					element: 'a',
+					label: '',
+					slot: ViewCell,
+					href: getRoute({
+						entity,
+						id: props.row.original.id,
+						pageType: PageType.Id,
+						// Add portfolioId to params from table row. Required for organizations/leases page.
+						params:
+							'portfolioId' in props.row.original
+								? {
+										portfolioId: props.row.original.portfolioId,
+										...paramsWithOrgId,
+								  }
+								: paramsWithOrgId,
+					}),
+					linkOptions: {
+						title: get(L).buttons.view(),
+					},
+				},
 			});
 		},
 	});

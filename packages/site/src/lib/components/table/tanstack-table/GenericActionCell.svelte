@@ -1,21 +1,25 @@
 <script lang="ts">
 	import clsx from 'clsx';
 
+	import type { SvelteComponent } from 'svelte';
+
 	import type { LinkOptions } from '$lib/components/sidebar/types';
 
 	type GenericActionCellProps =
 		| {
 				element: 'button';
 				label: string;
+				slot?: typeof SvelteComponent;
 				onClick: () => void;
 				disabled?: boolean;
 		  }
 		| {
 				element: 'a';
 				label: string;
+				slot?: typeof SvelteComponent;
 				href: string;
 				disabled?: boolean;
-				linkOptions?: LinkOptions;
+				linkOptions?: LinkOptions | Partial<HTMLAnchorElement>;
 		  };
 
 	export let options: GenericActionCellProps;
@@ -34,6 +38,9 @@
 		)}
 		{...'linkOptions' in options ? options.linkOptions : {}}
 	>
+		{#if options.slot}
+			<svelte:component this={options.slot} />
+		{/if}
 		{options.label}
 	</svelte:element>
 </div>
