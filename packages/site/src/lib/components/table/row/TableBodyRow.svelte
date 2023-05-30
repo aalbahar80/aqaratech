@@ -14,7 +14,8 @@
 	<td
 		class={clsx(
 			'px-2 py-2 text-center text-base text-gray-600',
-			{ 'slashed-zero tabular-nums': cellValueType === 'number' },
+			cellValueType === 'number' &&
+				'slashed-zero tabular-nums ltr:text-end rtl:text-start',
 			TABLE_ROW_SPACING,
 		)}
 	>
