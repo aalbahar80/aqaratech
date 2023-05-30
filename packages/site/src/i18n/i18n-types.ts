@@ -1447,6 +1447,10 @@ type RootTranslation = {
 		 * A​c​c​o​u​n​t​ ​t​y​p​e
 		 */
 		accountType: string
+		/**
+		 * W​h​a​t​s​A​p​p
+		 */
+		whatsapp: string
 	}
 }
 
@@ -2884,6 +2888,10 @@ export type TranslationFunctions = {
 		 * Account type
 		 */
 		accountType: () => LocalizedString
+		/**
+		 * WhatsApp
+		 */
+		whatsapp: () => LocalizedString
 	}
 }
 

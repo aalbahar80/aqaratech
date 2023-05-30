@@ -196,6 +196,7 @@ const en: BaseTranslation = {
 		welcomeToAqaratech: 'Welcome to Aqaratech',
 		revenue: 'Gross income',
 		accountType: 'Account type',
+		whatsapp: 'WhatsApp',
 	},
 };
 

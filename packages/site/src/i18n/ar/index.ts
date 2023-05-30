@@ -305,6 +305,7 @@ const ar: Translation = {
 		welcomeToAqaratech: 'مرحبًا بك في عقاراتك',
 		revenue: 'إجمالي الدخل',
 		accountType: 'نوع الحساب',
+		whatsapp: 'واتساب',
 	},
 };
 
