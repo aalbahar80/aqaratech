@@ -10,24 +10,16 @@ This repository is a mono-repo containing multiple packages located in the `pack
 
 `seed`: Helpers for generating realistic fake data to use for development/testing.
 
-## Develop:
-
-> In the root directory, run `pnpm install`, then:
-
-### Dev 🛠️
+### Development 🛠️
 
 ```bash
+# clone the repo and scaffold .env files
+git clone https://github.com/aqaratech/aqtech.git && cd aqtech && ./scripts/scaffold-worktree.sh
+# run site on port 3000 and backend on port 3002.
 pnpm dev
-# runs site on port 3000, and backend on port 3002.
 ```
 
 Take a look [.env.example](.env.example) to know what env vars are required.
-
-### Test 🧪
-
-```bash
-pnpm run test
-```
 
 ### Build 📦
 
@@ -35,21 +27,26 @@ pnpm run test
 pnpm run build
 ```
 
-### Update 📦
+### Test 🧪
 
 ```bash
-# create a changeset file
-pnpm changeset
+pnpm run test
 
-# Changeset files will be consumed by CI and a PR will be opened.
-# The PR can be merged to trigger a release.
+# Alternatively, run `precompute` in the repo root to lint, type-check, build, and test all packages.
+pnpm run precompute
 ```
+
+# Release
+
+1. Create a changeset (`pnpm changeset`), commit it, push it to master.
+2. A PR called "Version Packages" will be created automatically.
+3. Merge the PR to trigger a release.
 
 # Manual Tasks
 
 ```bash
-# generate types after changing openapi schema (note: openapi schema is only generated in when running pnpm dev)
-pnpm run api:generate:all --force
+# Regenerate openapi schema and types
+task swagger:all
 
 # Test all browsers
 cd packages/test
@@ -60,6 +57,6 @@ cd packages/site
 pnpm typesafe-i18n
 ```
 
-- `TIER_CLI_VERSION` in dockerfiles
-- `SENTRY_CLI_VERSION` in `.github/workflows/ci.yml`
-- openapi-generator-cli version in `packages/backend/get-openapi.sh`
+- `TIER_CLI_VERSION` in dockerfiles. [Releases](https://github.com/tierrun/tier/releases/)
+- `SENTRY_CLI_VERSION` in `.github/workflows/ci.yml`. [Releases](https://github.com/getsentry/sentry-cli/releases)
+- openapi-generator-cli version in `packages/backend/get-openapi.sh`. [Releases](https://github.com/OpenAPITools/openapi-generator/releases)
