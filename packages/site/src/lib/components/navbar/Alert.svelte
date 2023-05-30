@@ -28,6 +28,7 @@
 					<button
 						class="inline-flex rounded-md bg-yellow-50 text-yellow-500 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:ring-offset-2 focus:ring-offset-yellow-50"
 						on:click={() => {
+							if (typeof window === 'undefined') return;
 							localStorage.setItem(key, 'true');
 							dismissed = true;
 						}}
