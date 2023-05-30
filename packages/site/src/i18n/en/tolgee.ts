@@ -70,8 +70,7 @@ export const tolgee = {
 				bullets: {
 					access:
 						'Quickly access your documents from anywhere, using any device.',
-					upload:
-						'Store any documents related to your properties, including lease agreements, rental payment receipts, and maintenance records.',
+					upload: 'Store lease agreements, receipts, and maintenance records.',
 				},
 				title: 'Document Management',
 			},
@@ -79,10 +78,10 @@ export const tolgee = {
 				bullets: {
 					categorize:
 						'Classify expenses to offer diverse methods for visualizing expenditure.',
-					track: 'Attribute expenses to owners, properties and units.',
+					track: 'Attribute bills to an owner, property or a unit.',
 					visualize: 'Visualize expenses using interactive treemaps.',
 				},
-				title: 'Expense tracking',
+				title: 'Bill Tracking',
 			},
 			filter: {
 				bullets: {
@@ -98,7 +97,7 @@ export const tolgee = {
 					reminders: 'Automated payment reminders.',
 					track: 'Live tracking of payments transactions.',
 				},
-				title: 'Payment portal',
+				title: 'Payment gateway',
 			},
 			search: {
 				bullets: {
@@ -181,8 +180,8 @@ export const tolgee = {
 		contactOrg: 'Please contact your property manager to request access.',
 		invoiceSuccess: 'Thank you for your payment.',
 		searchByName: 'Search by Name',
-		tenantInvoicePage: 'Welcome, you can view payment history print receipts.',
-		tenantLeasePage: 'View leases related to the rental unit.',
+		tenantInvoicePage: 'Welcome, view your payment transactions and receipts.',
+		tenantLeasePage: 'View related leases and issue maintenance orders.',
 		tenantLogin: 'Please log in to view your payment history and receipts.',
 		tenantMaintenancePage:
 			'Please visit the leases page to open a new maintenance order.',
