@@ -33,14 +33,14 @@ export const handle = sequence(
 );
 
 const customHandleError = (({ error, event }) => {
+	console.log(error);
+
+	errorLogger(error); // send to logtail at the end only
+
 	// discard map file errors
 	if (event.url.pathname.endsWith('js.map')) {
 		return;
 	}
-
-	console.log(error);
-
-	errorLogger(error); // send to logtail at the end only
 
 	if (error instanceof ResponseError) {
 		return {
