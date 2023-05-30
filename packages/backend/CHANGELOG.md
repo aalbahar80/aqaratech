@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.32.3
+
+### Patch Changes
+
+- f4e6e6b3b: log version after useLogger
+
 ## 2.32.2
 
 ### Patch Changes

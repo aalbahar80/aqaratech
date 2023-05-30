@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.37.3
+
+### Patch Changes
+
+- 956d01683: update deps
+- 67122c9a5: set multipart/form-data
+
 ## 2.37.2
 
 ### Patch Changes
