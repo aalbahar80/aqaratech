@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.38.0
+
+### Minor Changes
+
+- 161eaa4b6: various updates
+
 ## 2.37.3
 
 ### Patch Changes

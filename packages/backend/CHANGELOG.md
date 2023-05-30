@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.33.0
+
+### Minor Changes
+
+- 161eaa4b6: various updates
+
 ## 2.32.3
 
 ### Patch Changes
