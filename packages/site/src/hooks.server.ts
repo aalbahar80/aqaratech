@@ -32,15 +32,10 @@ export const handle = sequence(
 	handleAuth,
 );
 
-const customHandleError = (({ error, event }) => {
+const customHandleError = (({ error }) => {
 	console.log(error);
 
 	errorLogger(error); // send to logtail at the end only
-
-	// discard map file errors
-	if (event.url.pathname.endsWith('js.map')) {
-		return;
-	}
 
 	if (error instanceof ResponseError) {
 		return {
