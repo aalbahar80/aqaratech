@@ -10,7 +10,6 @@
 		type VisibilityState,
 	} from '@tanstack/svelte-table';
 
-	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
 	import { writable } from 'svelte/store';
@@ -114,7 +113,7 @@
 		},
 
 		getCoreRowModel: getCoreRowModel(),
-		debugTable: dev,
+		debugTable: false,
 
 		// Pagination. Docs: https://tanstack.com/table/v8/docs/api/features/pagination
 		manualPagination: true, // use false for client-side pagination
