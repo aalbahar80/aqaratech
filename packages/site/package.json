@@ -79,7 +79,7 @@
 		"ufo": "1.1.2",
 		"unplugin-icons": "0.16.1",
 		"vite": "4.3.9",
-		"vitest": "0.31.2",
+		"vitest": "0.31.3",
 		"zod": "3.21.4"
 	},
 	"type": "module",
