@@ -28,7 +28,7 @@
 	$: disabled = 'disabled' in options && options.disabled;
 </script>
 
-<div class="relative text-left text-sm font-medium">
+<div class="relative inline-flex text-left text-sm font-medium">
 	<svelte:element
 		this={options.element ?? 'button'}
 		href={'href' in options && !disabled ? options.href : undefined}
