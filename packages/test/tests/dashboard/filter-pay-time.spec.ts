@@ -69,6 +69,7 @@ test('filter on payment time', async ({ page, org, invoices, isMobile }) => {
 
 	// RECENT_DATE as 'mmm d, yyyy'
 	const RECENT = new Intl.DateTimeFormat('en-US', {
+		timeZone: 'UTC',
 		dateStyle: 'medium',
 	}).format(RECENT_DATE);
 
