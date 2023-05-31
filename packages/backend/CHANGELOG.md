@@ -1,5 +1,12 @@
 # @self/backend
 
+## 2.33.1
+
+### Patch Changes
+
+- 21b7071de: remove manifest.json
+- 7e4984396: re-order sentry interceptor
+
 ## 2.33.0
 
 ### Minor Changes

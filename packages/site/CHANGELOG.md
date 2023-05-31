@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.38.2
+
+### Patch Changes
+
+- 21b7071de: remove manifest.json
+
 ## 2.38.1
 
 ### Patch Changes
