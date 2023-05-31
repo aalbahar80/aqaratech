@@ -42,6 +42,11 @@
 				pageType: PageTab.ExpenseCategories,
 			}),
 		},
+		{
+			label: 'Zoho',
+			isExternal: true,
+			href: 'https://books.aqaratech.com/portal', // FIX: get from env
+		},
 	];
 </script>
 
