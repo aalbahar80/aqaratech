@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.38.4
+
+### Patch Changes
+
+- 010bb232e: hide portfolio name from lease table EXE-95
+
 ## 2.38.3
 
 ### Patch Changes
