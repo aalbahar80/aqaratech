@@ -5,6 +5,7 @@
 	import L from '$i18n/i18n-svelte';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
 	import { environment } from '$lib/environment';
+	import HeroiconsArrowTopRightOnSquareSolid from '~icons/heroicons/arrow-top-right-on-square-solid';
 
 	$: baseRouteConfig = {
 		entity: 'organization',
@@ -45,8 +46,9 @@
 		},
 		{
 			label: 'Zoho',
-			isExternal: true,
 			href: environment.PUBLIC_ZOHO_PORTAL_URL,
+			isExternal: true,
+			icon: HeroiconsArrowTopRightOnSquareSolid,
 		},
 	];
 </script>
