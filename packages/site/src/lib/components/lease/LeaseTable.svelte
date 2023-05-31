@@ -23,7 +23,8 @@
 
 	type ColumnVisibility =
 		| Partial<Record<keyof LeaseDto | 'property' | 'unit', boolean>>
-		| Record<string, never>; // empty object
+		| Record<string, never> // empty object
+		| Record<string, boolean>; // id's from extraColumns
 
 	export let data: PaginatedLeaseDto;
 	export let extraColumns: ColumnDto<LeaseDto>[] = [];

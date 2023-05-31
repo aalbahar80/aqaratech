@@ -24,4 +24,7 @@
 		tenantColumnDef(columnHelper),
 	]}
 	extraFilters={[$leasePhaseFilter]}
+	columnVisibility={{
+		'portfolio.fullName': false,
+	}}
 />
