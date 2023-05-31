@@ -84,6 +84,7 @@
 								class="hover:text-slate-900"
 								href="https://wa.me/+96597944943"
 								data-sveltekit-reload
+								rel="external"
 								target="_blank noopener noreferrer">+965 97944943</a
 							>
 						</div>
