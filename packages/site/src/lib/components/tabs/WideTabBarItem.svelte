@@ -36,7 +36,7 @@
 	{#if tab.icon}
 		<svelte:component
 			this={tab.icon}
-			class="h-5 w-5"
+			class="h-5 w-5 rtl:-scale-x-100"
 		/>
 	{/if}
 </a>
