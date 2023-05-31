@@ -3,4 +3,4 @@
 '@self/site': patch
 ---
 
-remove favicon.ico and manifest.json
+remove manifest.json
