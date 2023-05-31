@@ -31,7 +31,6 @@ export default defineConfig({
 		sveltekit(),
 		icons({ compiler: 'svelte' }),
 		// See: https://github.com/btd/rollup-plugin-visualizer#usage
-		// @ts-expect-error vite version out of sync
 		...(process.env['ANALYZE_BUNDLE'] === '1'
 			? [
 					visualizer({
