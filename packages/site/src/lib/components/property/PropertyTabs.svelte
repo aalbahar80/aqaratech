@@ -10,6 +10,7 @@
 
 	import { RoleTypeEnum } from '$api/openapi';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
+	import HeroiconsArrowTopRightOnSquareSolid from '~icons/heroicons/arrow-top-right-on-square-solid';
 
 	$: baseRoute = getRoute({
 		entity: 'property',
@@ -35,8 +36,8 @@
 		},
 		{
 			label: $page.data.tabLabels!.financials,
-			isExternal: true,
 			href: financialsRoute,
+			icon: HeroiconsArrowTopRightOnSquareSolid,
 		},
 		{
 			label: $page.data.tabLabels![PageTab.Occupancy],

@@ -2,9 +2,9 @@
 	import { page } from '$app/stores';
 
 	import type { RoleDto } from '$api/openapi';
+	import type { Icon } from '$lib/models/types/icon.type';
 
 	import { classes } from '$lib/utils/classes';
-	import HeroiconsArrowTopRightOnSquareSolid from '~icons/heroicons/arrow-top-right-on-square-solid';
 
 	export let tab: {
 		label: string;
@@ -12,6 +12,7 @@
 		isExternal?: boolean;
 		/** If the tab is only visible to users with the given roles. */
 		roles?: RoleDto['roleType'][];
+		icon?: Icon;
 	};
 
 	$: active = $page.url.pathname === tab.href;
@@ -30,7 +31,10 @@
 	<div class="grow">
 		{tab.label}
 	</div>
-	{#if tab.isExternal}
-		<HeroiconsArrowTopRightOnSquareSolid class="h-5 w-5" />
+	{#if tab.icon}
+		<svelte:component
+			this={tab.icon}
+			class="h-5 w-5"
+		/>
 	{/if}
 </a>
