@@ -27,6 +27,8 @@
 			? 'border-indigo-500 text-indigo-600'
 			: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
 	)}
+	data-sveltekit-reload={'isExternal' in tab && tab.isExternal ? '' : 'off'}
+	rel={tab.isExternal ? 'external' : undefined}
 >
 	<div class="grow">
 		{tab.label}

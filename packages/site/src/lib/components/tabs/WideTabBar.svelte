@@ -28,7 +28,6 @@
 			for="tabs"
 			class="sr-only">Select a tab</label
 		>
-		<!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
 		<select
 			id="tabs"
 			name="tabs"
@@ -36,7 +35,8 @@
 			on:change={(e) => {
 				// @ts-expect-error it exists
 				const url = e.target?.value;
-				void goto(url);
+				const isExternal = tabs.find((tab) => tab.href === url)?.isExternal;
+				isExternal ? (window.location = url) : void goto(url);
 			}}
 		>
 			{#each authorizedTabs as tab}
