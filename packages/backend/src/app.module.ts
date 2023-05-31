@@ -115,9 +115,9 @@ import { UsersModule } from './users/users.module';
 	providers: [
 		{ provide: APP_INTERCEPTOR, useClass: ResponseInterceptor },
 		{ provide: APP_INTERCEPTOR, useClass: ErrorsInterceptor },
+		{ provide: APP_INTERCEPTOR, useFactory: () => new SentryInterceptor() },
 		{ provide: APP_INTERCEPTOR, useClass: TimeoutInterceptor },
 		AppService,
-		{ provide: APP_INTERCEPTOR, useFactory: () => new SentryInterceptor() },
 		{ provide: APP_GUARD, useClass: JwtAuthGuard },
 		{ provide: APP_GUARD, useClass: RoleGuard },
 		{ provide: APP_GUARD, useClass: AbilitiesGuard },
