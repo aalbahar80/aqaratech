@@ -4,6 +4,7 @@
 
 	import L from '$i18n/i18n-svelte';
 	import WideTabBar from '$lib/components/tabs/WideTabBar.svelte';
+	import { environment } from '$lib/environment';
 
 	$: baseRouteConfig = {
 		entity: 'organization',
@@ -45,7 +46,7 @@
 		{
 			label: 'Zoho',
 			isExternal: true,
-			href: 'https://books.aqaratech.com/portal', // FIX: get from env
+			href: environment.PUBLIC_ZOHO_PORTAL_URL,
 		},
 	];
 </script>

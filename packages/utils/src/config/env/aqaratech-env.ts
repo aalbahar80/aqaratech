@@ -38,6 +38,9 @@ export interface AqaratechEnv {
 
 	readonly PAUSE_AUTO_INVOICE_REMINDERS?: boolean;
 
+	// Zoho
+	readonly PUBLIC_ZOHO_PORTAL_URL: string;
+
 	// Prisma
 	readonly DATABASE_URL: string;
 

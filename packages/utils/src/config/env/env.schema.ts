@@ -81,6 +81,9 @@ export const envSchema = z.object({
 	PUBLIC_API_URL_LOCAL: z.string().url(),
 	AUTH0_CLIENT_SECRET: z.string(),
 
+	// Zoho
+	PUBLIC_ZOHO_PORTAL_URL: z.string().url(),
+
 	// Backend specific
 	DATABASE_URL: z.string(),
 

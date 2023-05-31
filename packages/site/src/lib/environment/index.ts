@@ -10,6 +10,7 @@ const siteEnvSchema = envSchema.pick({
 	PUBLIC_SITE_URL: true,
 	PUBLIC_API_URL: true,
 	PUBLIC_API_URL_LOCAL: true,
+	PUBLIC_ZOHO_PORTAL_URL: true,
 	PUBLIC_AQ_ENABLE_SENTRY: true,
 	PUBLIC_AQ_DEBUG_SENTRY: true,
 	PUBLIC_TRACE_RATE: true,

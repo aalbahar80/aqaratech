@@ -22,6 +22,9 @@ envs:
   - key: PUBLIC_API_URL_LOCAL
     scope: RUN_AND_BUILD_TIME
     value: ${backend.PRIVATE_URL}
+  - key: PUBLIC_ZOHO_PORTAL_URL
+    scope: RUN_AND_BUILD_TIME
+    value: https://books.zoho.com/portal/aqaratechtest
   - key: PUBLIC_AQ_DEBUG_LEVEL
     scope: RUN_AND_BUILD_TIME
     value: 'verbose'
