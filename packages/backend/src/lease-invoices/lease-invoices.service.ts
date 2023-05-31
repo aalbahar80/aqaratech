@@ -459,9 +459,11 @@ export class LeaseInvoicesService {
 		});
 
 		// Get all invoices posted between today and beginning of the current month
+		const now = new Date();
 		const startOfMonth = new Date(
-			Date.UTC(new Date().getFullYear(), new Date().getMonth(), 1),
+			Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1),
 		);
+
 		const invoices = await this.prisma.c.leaseInvoice.findMany({
 			where: {
 				AND: {
