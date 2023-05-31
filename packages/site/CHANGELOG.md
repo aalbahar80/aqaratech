@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.38.3
+
+### Patch Changes
+
+- 1811ba7ee: use custom frameless style for view cell icon button EXE-92
+
 ## 2.38.2
 
 ### Patch Changes
