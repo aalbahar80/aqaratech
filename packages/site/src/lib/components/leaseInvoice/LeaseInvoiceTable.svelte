@@ -22,6 +22,7 @@
 		locationColumnDef,
 		viewColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/common-column-defs';
+	import { PORTFOLIO_FULLNAME } from '$lib/components/table/tanstack-table/columns/portfolio';
 	import Table from '$lib/components/table/tanstack-table/Table.svelte';
 	import { environment } from '$lib/environment';
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
@@ -171,7 +172,7 @@
 		dueAt: false,
 		paidAt: false,
 		mfPaymentId: false,
-		'portfolio.fullName': false,
+		[PORTFOLIO_FULLNAME]: false,
 	}}
 >
 	<div

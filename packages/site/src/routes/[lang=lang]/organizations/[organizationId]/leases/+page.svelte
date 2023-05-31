@@ -7,6 +7,7 @@
 
 	import LeaseTable from '$lib/components/lease/LeaseTable.svelte';
 	import {
+		PORTFOLIO_FULLNAME,
 		portfolioColumnDef,
 		tenantColumnDef,
 	} from '$lib/components/table/tanstack-table/columns/portfolio';
@@ -25,6 +26,6 @@
 	]}
 	extraFilters={[$leasePhaseFilter]}
 	columnVisibility={{
-		'portfolio.fullName': false,
+		[PORTFOLIO_FULLNAME]: false,
 	}}
 />

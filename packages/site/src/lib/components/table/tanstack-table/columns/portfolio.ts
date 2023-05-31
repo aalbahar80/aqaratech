@@ -24,6 +24,8 @@ type Helper =
 
 type HelperEntity = LeaseInvoiceDto | LeaseDto | MaintenanceOrderDto;
 
+export const PORTFOLIO_FULLNAME = 'portfolio.fullName';
+
 export const portfolioColumnDef = <
 	T extends Helper,
 	K extends HelperEntity = T extends ColumnHelper<infer Entity>
@@ -37,7 +39,7 @@ export const portfolioColumnDef = <
 	return (helper.accessor as unknown as ColumnHelper<K>['accessor'])(
 		'breadcrumbs.portfolio.label' as unknown as AccessorFn<K>,
 		{
-			id: 'portfolio.fullName', // used for sorting
+			id: PORTFOLIO_FULLNAME, // used for sorting
 			header: get(L).entity.portfolio.singular(),
 			cell: (info) => {
 				const row = info.row.original;
