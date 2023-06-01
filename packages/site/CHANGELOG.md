@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.40.0
+
+### Minor Changes
+
+- ef237eadf: custom file input EXE-87
+- f779ebc1b: add tenant name to role card EXE-96
+
 ## 2.39.0
 
 ### Minor Changes

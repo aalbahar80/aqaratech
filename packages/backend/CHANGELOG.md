@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.34.1
+
+### Patch Changes
+
+- 544efef3c: increase default timeout to 20s
+
 ## 2.34.0
 
 ### Minor Changes
