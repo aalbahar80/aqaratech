@@ -1,4 +1,6 @@
 <script lang="ts">
+	import clsx from 'clsx';
+
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
 
 	import FieldLabel from '$lib/components/form/enhanced/fields/FieldLabel.svelte';
@@ -29,7 +31,11 @@
 		name={formField.name}
 		id={formField.name}
 		value={parse(value)}
-		class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none sm:text-sm"
+		class={clsx(
+			'block w-full disabled:cursor-not-allowed disabled:text-slate-500 sm:text-sm',
+			formField.type !== 'file' &&
+				'rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:shadow-none',
+		)}
 		placeholder={formField.placeholder}
 		aria-describedby={formField.hintId}
 		class:invalid={errors}
