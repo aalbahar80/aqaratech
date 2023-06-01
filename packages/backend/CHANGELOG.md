@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.34.0
+
+### Minor Changes
+
+- 90d892bcd: add zoho link
+
 ## 2.33.1
 
 ### Patch Changes

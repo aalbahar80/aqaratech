@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.39.0
+
+### Minor Changes
+
+- 90d892bcd: add zoho link
+
 ## 2.38.4
 
 ### Patch Changes
