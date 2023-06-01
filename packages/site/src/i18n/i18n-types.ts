@@ -177,7 +177,7 @@ type RootTranslation = {
 					 */
 					access: string
 					/**
-					 * S​t​o​r​e​ ​a​n​y​ ​d​o​c​u​m​e​n​t​s​ ​r​e​l​a​t​e​d​ ​t​o​ ​y​o​u​r​ ​p​r​o​p​e​r​t​i​e​s​,​ ​i​n​c​l​u​d​i​n​g​ ​l​e​a​s​e​ ​a​g​r​e​e​m​e​n​t​s​,​ ​r​e​n​t​a​l​ ​p​a​y​m​e​n​t​ ​r​e​c​e​i​p​t​s​,​ ​a​n​d​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​c​o​r​d​s​.
+					 * S​t​o​r​e​ ​l​e​a​s​e​ ​a​g​r​e​e​m​e​n​t​s​,​ ​r​e​c​e​i​p​t​s​,​ ​a​n​d​ ​m​a​i​n​t​e​n​a​n​c​e​ ​r​e​c​o​r​d​s​.
 					 */
 					upload: string
 				}
@@ -193,7 +193,7 @@ type RootTranslation = {
 					 */
 					categorize: string
 					/**
-					 * A​t​t​r​i​b​u​t​e​ ​e​x​p​e​n​s​e​s​ ​t​o​ ​o​w​n​e​r​s​,​ ​p​r​o​p​e​r​t​i​e​s​ ​a​n​d​ ​u​n​i​t​s​.
+					 * A​t​t​r​i​b​u​t​e​ ​b​i​l​l​s​ ​t​o​ ​a​n​ ​o​w​n​e​r​,​ ​p​r​o​p​e​r​t​y​ ​o​r​ ​a​ ​u​n​i​t​.
 					 */
 					track: string
 					/**
@@ -202,7 +202,7 @@ type RootTranslation = {
 					visualize: string
 				}
 				/**
-				 * E​x​p​e​n​s​e​ ​t​r​a​c​k​i​n​g
+				 * B​i​l​l​ ​T​r​a​c​k​i​n​g
 				 */
 				title: string
 			}
@@ -238,7 +238,7 @@ type RootTranslation = {
 					track: string
 				}
 				/**
-				 * P​a​y​m​e​n​t​ ​p​o​r​t​a​l
+				 * P​a​y​m​e​n​t​ ​g​a​t​e​w​a​y
 				 */
 				title: string
 			}
@@ -450,11 +450,11 @@ type RootTranslation = {
 		 */
 		searchByName: string
 		/**
-		 * W​e​l​c​o​m​e​,​ ​y​o​u​ ​c​a​n​ ​v​i​e​w​ ​p​a​y​m​e​n​t​ ​h​i​s​t​o​r​y​ ​p​r​i​n​t​ ​r​e​c​e​i​p​t​s​.
+		 * W​e​l​c​o​m​e​,​ ​v​i​e​w​ ​y​o​u​r​ ​p​a​y​m​e​n​t​ ​t​r​a​n​s​a​c​t​i​o​n​s​ ​a​n​d​ ​r​e​c​e​i​p​t​s​.
 		 */
 		tenantInvoicePage: string
 		/**
-		 * V​i​e​w​ ​l​e​a​s​e​s​ ​r​e​l​a​t​e​d​ ​t​o​ ​t​h​e​ ​r​e​n​t​a​l​ ​u​n​i​t​.
+		 * V​i​e​w​ ​r​e​l​a​t​e​d​ ​l​e​a​s​e​s​ ​a​n​d​ ​i​s​s​u​e​ ​m​a​i​n​t​e​n​a​n​c​e​ ​o​r​d​e​r​s​.
 		 */
 		tenantLeasePage: string
 		/**
@@ -961,6 +961,10 @@ type RootTranslation = {
 		 * S​i​g​n​ ​u​p
 		 */
 		signup: string
+		/**
+		 * C​h​o​o​s​e​ ​f​i​l​e
+		 */
+		fileInput: string
 	}
 	billing: {
 		/**
@@ -1618,7 +1622,7 @@ export type TranslationFunctions = {
 					 */
 					access: () => LocalizedString
 					/**
-					 * Store any documents related to your properties, including lease agreements, rental payment receipts, and maintenance records.
+					 * Store lease agreements, receipts, and maintenance records.
 					 */
 					upload: () => LocalizedString
 				}
@@ -1634,7 +1638,7 @@ export type TranslationFunctions = {
 					 */
 					categorize: () => LocalizedString
 					/**
-					 * Attribute expenses to owners, properties and units.
+					 * Attribute bills to an owner, property or a unit.
 					 */
 					track: () => LocalizedString
 					/**
@@ -1643,7 +1647,7 @@ export type TranslationFunctions = {
 					visualize: () => LocalizedString
 				}
 				/**
-				 * Expense tracking
+				 * Bill Tracking
 				 */
 				title: () => LocalizedString
 			}
@@ -1679,7 +1683,7 @@ export type TranslationFunctions = {
 					track: () => LocalizedString
 				}
 				/**
-				 * Payment portal
+				 * Payment gateway
 				 */
 				title: () => LocalizedString
 			}
@@ -1891,11 +1895,11 @@ export type TranslationFunctions = {
 		 */
 		searchByName: () => LocalizedString
 		/**
-		 * Welcome, you can view payment history print receipts.
+		 * Welcome, view your payment transactions and receipts.
 		 */
 		tenantInvoicePage: () => LocalizedString
 		/**
-		 * View leases related to the rental unit.
+		 * View related leases and issue maintenance orders.
 		 */
 		tenantLeasePage: () => LocalizedString
 		/**
@@ -2402,6 +2406,10 @@ export type TranslationFunctions = {
 		 * Sign up
 		 */
 		signup: () => LocalizedString
+		/**
+		 * Choose file
+		 */
+		fileInput: () => LocalizedString
 	}
 	billing: {
 		/**

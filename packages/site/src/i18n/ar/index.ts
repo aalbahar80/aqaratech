@@ -154,6 +154,7 @@ const ar: Translation = {
 		back: 'عودة',
 		subscribe: 'اشترك',
 		signup: 'إنشاء حساب ',
+		fileInput: 'اختر ملف',
 	},
 	billing: {
 		subscriptionSettings: 'إعدادات الاشتراك',

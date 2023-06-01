@@ -37,6 +37,7 @@ const en: BaseTranslation = {
 		back: 'Back',
 		subscribe: 'Subscribe',
 		signup: 'Sign up',
+		fileInput: 'Choose file',
 	},
 	billing: {
 		subscriptionSettings: 'Subscription settings',

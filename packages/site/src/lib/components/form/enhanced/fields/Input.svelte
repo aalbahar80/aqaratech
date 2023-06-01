@@ -3,6 +3,7 @@
 
 	import type { FormField } from '$lib/components/form/model/form-field.interface';
 
+	import L from '$i18n/i18n-svelte';
 	import FieldLabel from '$lib/components/form/enhanced/fields/FieldLabel.svelte';
 
 	type Name = $$Generic;
@@ -30,7 +31,7 @@
 			for={formField.name}
 			class="inline-flex cursor-pointer rounded bg-gray-500 px-5 py-1 text-white"
 		>
-			Choose File
+			{$L.buttons.fileInput()}
 		</label>
 	{/if}
 	<svelte:element
