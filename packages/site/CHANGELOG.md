@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.40.1
+
+### Patch Changes
+
+- 427c35ced: use flex column for role card details
+
 ## 2.40.0
 
 ### Minor Changes

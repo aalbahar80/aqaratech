@@ -1,6 +1,6 @@
 {
 	"name": "@self/site",
-	"version": "2.40.0",
+	"version": "2.40.1",
 	"files": [
 		"build"
 	],
