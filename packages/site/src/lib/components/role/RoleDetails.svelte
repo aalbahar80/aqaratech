@@ -12,16 +12,13 @@
 	]);
 </script>
 
-<ul class="space-y-2">
-	<!-- Keep and sort falsey values to ensure consistent card height -->
-	{#each Array.from(input).sort((a) => (a[1] ? 1 : -1)) as [key, value]}
+<ul class="inline-flex flex-1 flex-col gap-2">
+	{#each Array.from(input) as [key, value]}
 		{#if value}
 			<li>
 				<span class="text-sm font-medium text-indigo-500">{key}:</span>
 				<span class="text-sm text-gray-600">{value}</span>
 			</li>
-		{:else}
-			&nbsp;
 		{/if}
 	{/each}
 </ul>

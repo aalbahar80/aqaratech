@@ -28,7 +28,7 @@
 	data-sveltekit-reload
 	rel="external"
 	class={clsx(
-		'flex flex-col gap-4 px-4 py-4 hover:bg-gray-50 sm:px-6',
+		'flex h-52 flex-col gap-4 px-4 py-4 hover:bg-gray-50 sm:px-6',
 		isActive && 'bg-indigo-100 hover:bg-indigo-200',
 	)}
 >
