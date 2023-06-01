@@ -45,7 +45,7 @@
 			}),
 		},
 		{
-			label: 'Zoho',
+			label: $L.nav.accountingPortal(),
 			href: environment.PUBLIC_ZOHO_PORTAL_URL,
 			isExternal: true,
 			icon: HeroiconsArrowTopRightOnSquareSolid,

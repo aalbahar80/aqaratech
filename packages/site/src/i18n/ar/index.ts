@@ -180,6 +180,7 @@ const ar: Translation = {
 		pricing: 'التسعير',
 		faq: 'أسئلة متكررة',
 		start: 'ابدأ',
+		accountingPortal: 'كشف الحساب',
 	},
 	general: {
 		name: 'الاسم',

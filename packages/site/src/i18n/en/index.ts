@@ -63,6 +63,7 @@ const en: BaseTranslation = {
 		pricing: 'Pricing',
 		faq: 'FAQs',
 		start: 'Start',
+		accountingPortal: 'Books',
 	},
 	general: {
 		name: 'Name',

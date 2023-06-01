@@ -1053,6 +1053,10 @@ type RootTranslation = {
 		 * S​t​a​r​t
 		 */
 		start: string
+		/**
+		 * B​o​o​k​s
+		 */
+		accountingPortal: string
 	}
 	general: {
 		/**
@@ -2498,6 +2502,10 @@ export type TranslationFunctions = {
 		 * Start
 		 */
 		start: () => LocalizedString
+		/**
+		 * Books
+		 */
+		accountingPortal: () => LocalizedString
 	}
 	general: {
 		/**
