@@ -2904,6 +2904,13 @@ components:
                     properties:
                       title:
                         type: string
+                  tenant:
+                    type: object
+                    required:
+                      - title
+                    properties:
+                      title:
+                        type: string
         email:
           type: string
         fullName:

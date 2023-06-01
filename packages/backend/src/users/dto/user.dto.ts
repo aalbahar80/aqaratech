@@ -56,6 +56,13 @@ export class ValidatedUserDto
 								title: { type: 'string' },
 							},
 						},
+						tenant: {
+							type: 'object',
+							required: ['title'],
+							properties: {
+								title: { type: 'string' },
+							},
+						},
 					},
 				},
 			],

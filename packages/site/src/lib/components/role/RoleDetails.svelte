@@ -8,11 +8,13 @@
 	const input = new Map([
 		[$L.entity.organization.singular(), role.organization.title],
 		[$L.entity.portfolio.singular(), role.portfolio?.title],
+		[$L.entity.tenant.singular(), role.tenant?.title],
 	]);
 </script>
 
 <ul class="space-y-2">
-	{#each Array.from(input) as [key, value]}
+	<!-- Keep and sort falsey values to ensure consistent card height -->
+	{#each Array.from(input).sort((a) => (a[1] ? 1 : -1)) as [key, value]}
 		{#if value}
 			<li>
 				<span class="text-sm font-medium text-indigo-500">{key}:</span>

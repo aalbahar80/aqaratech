@@ -3340,6 +3340,12 @@ export interface ValidatedRoleDto {
 	 * @memberof ValidatedRoleDto
 	 */
 	portfolio?: ValidatedRoleDtoAllOfPortfolio;
+	/**
+	 *
+	 * @type {ValidatedRoleDtoAllOfPortfolio}
+	 * @memberof ValidatedRoleDto
+	 */
+	tenant?: ValidatedRoleDtoAllOfPortfolio;
 }
 /**
  *
@@ -3359,6 +3365,12 @@ export interface ValidatedRoleDtoAllOf {
 	 * @memberof ValidatedRoleDtoAllOf
 	 */
 	portfolio?: ValidatedRoleDtoAllOfPortfolio;
+	/**
+	 *
+	 * @type {ValidatedRoleDtoAllOfPortfolio}
+	 * @memberof ValidatedRoleDtoAllOf
+	 */
+	tenant?: ValidatedRoleDtoAllOfPortfolio;
 }
 /**
  *

@@ -40,6 +40,11 @@ export class UsersService {
 								title: true,
 							},
 						},
+						tenant: {
+							select: {
+								title: true,
+							},
+						},
 					},
 				},
 			},
@@ -69,6 +74,11 @@ export class UsersService {
 								},
 							},
 							portfolio: {
+								select: {
+									title: true,
+								},
+							},
+							tenant: {
 								select: {
 									title: true,
 								},
