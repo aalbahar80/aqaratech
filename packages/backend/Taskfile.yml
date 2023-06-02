@@ -47,6 +47,7 @@ tasks:
     deps:
       - build
     cmds:
+      # - pnpm vitest --run test/mocked.spec.ts -c vitest.config.mocked.ts --reporter basic --inspect --single-thread
       - pnpm vitest --run test/mocked.spec.ts -c vitest.config.mocked.ts --reporter basic
 
   start:
