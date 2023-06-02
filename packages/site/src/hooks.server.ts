@@ -19,6 +19,23 @@ Sentry.init({
 	dsn: 'https://16f4a4de6ab74e6e817b44cfd87b723d@o1210217.ingest.sentry.io/4505194893803520',
 	profilesSampleRate: 1,
 	integrations: [new ProfilingIntegration()],
+	beforeSend(event, hint) {
+		if (hint.originalException instanceof ResponseError) {
+			const response = hint.originalException.response;
+			// Sentry only captures basic info for openapi's ResponseError,
+			// so we manually add extra info here. This is about the nested
+			// error reponse received by the sveltekit server.
+			event.extra = {
+				...event.extra,
+				api_response: {
+					status: response.status,
+					statusText: response.statusText,
+					url: response.url,
+				},
+			};
+		}
+		return event;
+	},
 	...sentryConfig,
 });
 
