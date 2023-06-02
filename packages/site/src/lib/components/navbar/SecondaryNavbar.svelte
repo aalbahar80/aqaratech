@@ -15,7 +15,7 @@
 
 <!-- Vertical Navbar Flexbox -->
 <header
-	class="fixed z-50 flex w-full flex-col justify-center bg-white shadow-sm print:hidden"
+	class="fixed z-50 flex w-full flex-col justify-center bg-white shadow-sm"
 	style:height="var(--nav-h)"
 	aria-label="Global"
 >
@@ -25,7 +25,7 @@
 		<!-- Logo and Hamburger Icon -->
 		<div class="flex items-center gap-6">
 			<button
-				class="sb:hidden"
+				class="sb:hidden print:hidden"
 				use:sidebar.button
 			>
 				<span class="sr-only">Toggle sidebar</span>
