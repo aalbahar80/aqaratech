@@ -19,11 +19,12 @@
 </script>
 
 <div
+	class="print:hidden"
 	class:hidden={$page.url.pathname.includes('/new') ||
 		$page.url.pathname.includes('/edit') ||
 		$page.url.pathname.includes('/contract')}
 >
-	<div class="print:hidden sm:hidden">
+	<div class="sm:hidden">
 		<label
 			for="tabs"
 			class="sr-only">Select a tab</label
@@ -50,7 +51,7 @@
 	<div class="hidden sm:block">
 		<div class="border-b border-gray-200">
 			<nav
-				class="-mb-px flex print:hidden"
+				class="-mb-px flex"
 				aria-label="Tabs"
 			>
 				{#each authorizedTabs as tab}
