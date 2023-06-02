@@ -13,12 +13,14 @@
 </script>
 
 <div
-	class="row"
+	class="px-4 py-5 first:rounded-t-md last:rounded-b-md odd:bg-gray-50 even:bg-white print:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 	data-testid={key}
 >
-	<dt class="label">{label ?? getIntlLabel(key)}</dt>
+	<dt class="text-sm font-medium text-gray-500">
+		{label ?? getIntlLabel(key)}
+	</dt>
 	<dd
-		class="definition"
+		class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0"
 		data-testid={value ?? ''}
 	>
 		{#if key === 'mfPaymentId' && value && typeof value === 'string'}
@@ -38,15 +40,3 @@
 		{/if}
 	</dd>
 </div>
-
-<style lang="postcss">
-	.row {
-		@apply px-4 py-5 first:rounded-t-md last:rounded-b-md odd:bg-gray-50 even:bg-white print:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6;
-	}
-	.label {
-		@apply text-sm font-medium text-gray-500;
-	}
-	.definition {
-		@apply mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0;
-	}
-</style>
