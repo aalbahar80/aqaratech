@@ -8,8 +8,12 @@ import { RouteInfo } from '@nestjs/common/interfaces';
 import { APP_GUARD, APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 import * as Sentry from '@sentry/node';
+import { PolymorphicRequest } from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
-import { addRequestDataToEvent } from '@sentry/utils';
+import {
+	addRequestDataToEvent,
+	extractPathForTransaction,
+} from '@sentry/utils';
 import { SentryInterceptor, SentryModule } from '@travelerdev/nestjs-sentry';
 import { WinstonModule } from 'nest-winston';
 
@@ -68,8 +72,31 @@ import { UsersModule } from './users/users.module';
 						const error = hint.originalException;
 
 						const cause = error instanceof Error ? error.cause : undefined;
-						const request = event.extra?.req;
-						addRequestDataToEvent(event, request);
+
+						// Add request data to the event (might already be added by the sentry sdk)
+						const request = event.extra?.['req'] as
+							| PolymorphicRequest
+							| undefined;
+						if (request) {
+							addRequestDataToEvent(event, request, {
+								include: {
+									transaction: true,
+									user: true,
+									request: true,
+								},
+							});
+
+							// Set better transaction name
+							const [name] = extractPathForTransaction(request, {
+								path: true,
+								method: true,
+							});
+							console.log({
+								oldTransaction: event.transaction,
+								newTransaction: name,
+							});
+							event.transaction = name;
+						}
 
 						const extra = {
 							...event.extra,
