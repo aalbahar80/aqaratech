@@ -53,6 +53,6 @@
 
 <style lang="postcss">
 	.invalid {
-		@apply border-pink-500 text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
+		@apply border-pink-500 text-red-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500;
 	}
 </style>
