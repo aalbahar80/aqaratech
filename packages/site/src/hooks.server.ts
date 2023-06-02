@@ -50,7 +50,9 @@ export const handle = sequence(
 );
 
 const customHandleError = (({ error }) => {
-	console.log(error);
+	// @ts-expect-error this conforms to the default implementation (including this ts-expect-error)
+	// eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+	console.error(error && error.stack);
 
 	errorLogger(error); // send to logtail at the end only
 
