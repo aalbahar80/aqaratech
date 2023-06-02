@@ -50,7 +50,7 @@
 	<div class="hidden sm:block">
 		<div class="border-b border-gray-200">
 			<nav
-				class="-mb-px flex"
+				class="-mb-px flex print:hidden"
 				aria-label="Tabs"
 			>
 				{#each authorizedTabs as tab}
