@@ -84,6 +84,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			reuseExistingServer: !process.env.CI,
 			ignoreHTTPSErrors: true,
 			timeout: 120 * 1000,
+			stderr: 'ignore',
 			env,
 		},
 	],
