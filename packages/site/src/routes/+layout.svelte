@@ -62,7 +62,7 @@
 	<div
 		class:my-grid={isSidebarAvailable($page.route)}
 		class:bg-gray-50={isHomeRoute($page.route)}
-		style:padding-top="var(--nav-h)"
+		class="pt-[--nav-h]"
 	>
 		<Sidebar
 			navigationTree={getNavigationTree(
