@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.28.3
+
+### Patch Changes
+
+- 588a5e42d: update ts to 5.1.3
+- Updated dependencies [588a5e42d]
+  - @self/utils@3.29.3
+
 ## 2.28.2
 
 ### Patch Changes

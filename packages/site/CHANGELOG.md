@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.40.2
+
+### Patch Changes
+
+- 588a5e42d: update ts to 5.1.3
+
 ## 2.40.1
 
 ### Patch Changes

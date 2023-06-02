@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.30.4
+
+### Patch Changes
+
+- 588a5e42d: update ts to 5.1.3
+
 ## 3.30.3
 
 ### Patch Changes
