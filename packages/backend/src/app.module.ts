@@ -5,7 +5,7 @@ import {
 	RequestMethod,
 } from '@nestjs/common';
 import { RouteInfo } from '@nestjs/common/interfaces';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
@@ -20,6 +20,7 @@ import { RoleGuard } from 'src/casl/role.guard';
 import { WinstonConfigService } from 'src/config/winston-config.service';
 import { HttpLoggerService } from 'src/http-logger/HttpLogger.service';
 import { ResponseInterceptor } from 'src/http-logger/response.interceptor';
+import { AllExceptionsFilter } from 'src/interceptors/all-exceptions.filter';
 import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { TimeoutInterceptor } from 'src/interceptors/timeout.interceptor';
 import { LoggingMiddleware } from 'src/middleware/logging.middleware';
@@ -130,6 +131,7 @@ import { UsersModule } from './users/users.module';
 		{ provide: APP_GUARD, useClass: AbilitiesGuard },
 		{ provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor },
 		HttpLoggerService,
+		{ provide: APP_FILTER, useClass: AllExceptionsFilter },
 	],
 })
 export class AppModule {
