@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.40.3
+
+### Patch Changes
+
+- cd190eff7: remove separate invoice pdf
+
 ## 2.40.2
 
 ### Patch Changes
