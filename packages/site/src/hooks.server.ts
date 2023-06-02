@@ -33,6 +33,9 @@ Sentry.init({
 					url: response.url,
 				},
 			};
+			if (event.tags) {
+				event.tags['status'] = response.status;
+			}
 		}
 		return event;
 	},
