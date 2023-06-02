@@ -12,6 +12,7 @@ import { ProfilingIntegration } from '@sentry/profiling-node';
 import { SentryInterceptor, SentryModule } from '@travelerdev/nestjs-sentry';
 import { WinstonModule } from 'nest-winston';
 
+import { isLiveEnv } from '@self/utils';
 import { AppController } from 'src/app.controller';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AbilitiesGuard } from 'src/casl/abilities.guard';
@@ -83,6 +84,12 @@ import { UsersModule } from './users/users.module';
 							console.log('event', event);
 							console.log('hint', hint);
 							console.log('extra', extra);
+						if (
+							!isLiveEnv(env.e.PUBLIC_AQARATECH_ENV) &&
+							sentryConfig.tracesSampleRate === 0
+						) {
+							console.log('Sentry tracesSampleRate is 0. Not sending event');
+							return null;
 						}
 
 						return event;

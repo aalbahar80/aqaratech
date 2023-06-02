@@ -11,7 +11,7 @@ export class AppService {
 		return {
 			PUBLIC_AQARATECH_ENV,
 			PUBLIC_IS_TESTING,
-			SENTRY_ENABLED: this.env.sentry.enabled,
+			SENTRY_ENABLED: this.env.sentry.enabled, // return false if nothing will be sent to sentry (shouldAlwaysSend is false)
 		};
 	}
 
