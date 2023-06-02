@@ -25,16 +25,16 @@ Sentry.init({
 			// Sentry only captures basic info for openapi's ResponseError,
 			// so we manually add extra info here. This is about the nested
 			// error reponse received by the sveltekit server.
-			event.extra = {
-				...event.extra,
-				api_response: {
+			if (event.tags) {
+				event.tags['status'] = response.status;
+			}
+
+			if (event.extra) {
+				event.extra['api_response'] = {
 					status: response.status,
 					statusText: response.statusText,
 					url: response.url,
-				},
-			};
-			if (event.tags) {
-				event.tags['status'] = response.status;
+				};
 			}
 		}
 		return event;
