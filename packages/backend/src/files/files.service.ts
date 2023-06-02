@@ -1,13 +1,8 @@
 import { ListObjectsV2CommandOutput } from '@aws-sdk/client-s3';
 import { ForbiddenError, subject } from '@casl/ability';
 import { accessibleBy } from '@casl/prisma';
-import {
-	CACHE_MANAGER,
-	ForbiddenException,
-	Inject,
-	Injectable,
-	Logger,
-} from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { ForbiddenException, Inject, Injectable, Logger } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
 import {

@@ -1,4 +1,5 @@
-import { CacheModule, Module } from '@nestjs/common';
+import { CacheModule } from '@nestjs/cache-manager';
+import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 
 import { JwtStrategy } from 'src/auth/jwt.strategy';
