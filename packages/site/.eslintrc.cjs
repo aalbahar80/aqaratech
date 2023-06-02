@@ -22,7 +22,6 @@ module.exports = {
 		'shortcut.ts',
 		'flatten.ts',
 		'FrappeChart.svelte',
-		'jspdf-invoice-template.js',
 		'src/i18n/ar/index.ts', // reports unused eslint-disable directive
 	],
 	rules: {

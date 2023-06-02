@@ -12,7 +12,7 @@ test.use({ createBucket: true });
 
 const FILES = {
 	png: path.resolve(__dirname, './samples/upload-test.png'),
-	pdf: path.resolve(__dirname, '../../components/pdf/invoice-paid-sample.pdf'),
+	pdf: path.resolve(__dirname, './samples/invoice-paid-sample.pdf'),
 
 	// NOTE: make sure to test large pdf uploads while starting server with node
 	// build/index.js, which enforces BODY_SIZE_LIMIT just like production. On

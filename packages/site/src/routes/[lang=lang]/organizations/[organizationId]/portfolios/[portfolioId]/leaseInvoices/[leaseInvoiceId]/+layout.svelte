@@ -9,7 +9,6 @@
 	import { buttonCn } from '$lib/components/buttons/button-cn';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Heading from '$lib/components/Heading.svelte';
-	import { createPDF } from '$lib/components/leaseInvoice/invoice-to-pdf';
 	import LeaseInvoiceTabs from '$lib/components/leaseInvoice/LeaseInvoiceTabs.svelte';
 	import { environment } from '$lib/environment';
 	import { addSuccessToast } from '$lib/stores/toast';
@@ -86,8 +85,9 @@
 			icon={HeroiconsDocumentText}
 			text={$L.buttons.print()}
 			as="button"
-			on:click={async () =>
-				await createPDF({ invoice: data.leaseInvoice, outputType: 'save' })}
+			on:click={() => {
+				window.print();
+			}}
 			class="w-full sm:w-auto"
 			prefetch
 		/>
