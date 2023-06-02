@@ -19,7 +19,7 @@ export const getSentryConfig = (config: Config) => {
 	const sampleRate = PUBLIC_TRACE_RATE;
 	const debug = PUBLIC_AQ_DEBUG_SENTRY;
 
-	const sentryConfig = {
+	const sentryConfig: AqaratechSentryConfig = {
 		enabled: PUBLIC_AQ_ENABLE_SENTRY,
 		environment: PUBLIC_AQARATECH_ENV,
 		debug,
@@ -33,13 +33,13 @@ export const getSentryConfig = (config: Config) => {
 			}
 			return sampleRate;
 		},
-	} satisfies Options;
+	};
 
 	// Suppress sending events in dev unless debugging
 	const sendEventConfig = getSendEventConfig(config, { debug, sampleRate });
 
 	if (!sendEventConfig.shouldAlwaysSend) {
-		(sentryConfig as Options).beforeSend = sendEventConfig.beforeSend;
+		sentryConfig.beforeSend = sendEventConfig.beforeSend;
 	}
 
 	return sentryConfig satisfies AqaratechSentryConfig;
