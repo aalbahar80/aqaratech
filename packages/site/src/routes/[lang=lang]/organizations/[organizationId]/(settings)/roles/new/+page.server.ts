@@ -55,6 +55,7 @@ export const actions: Actions = {
 			},
 
 			redirectTo: () =>
+				// @ts-expect-error BUG: typecript 5.1.3
 				getRoute({
 					entity: relationKey,
 					id: relationValue,

@@ -36,6 +36,7 @@ for (const entity of entities) {
 				throw new Error('entity not found');
 		}
 
+		// @ts-expect-error BUG: typecript 5.1.3
 		const url = getRoute({
 			entity,
 			id,
@@ -53,6 +54,7 @@ for (const entity of entities) {
 
 		await formPage.save();
 
+		// @ts-expect-error BUG: typecript 5.1.3
 		const successUrl = getRoute({
 			entity,
 			pageType: PageTab.Roles,

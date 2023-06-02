@@ -24,6 +24,7 @@ for (const input of inputs) {
 
 		const id = entity.id;
 
+		// @ts-expect-error BUG: typecript 5.1.3
 		const url = getRoute({
 			entity: input,
 			id: id,
