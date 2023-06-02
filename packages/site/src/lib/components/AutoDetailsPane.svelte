@@ -18,7 +18,9 @@
 </script>
 
 <div data-testid="details-pane">
-	<dl class="rounded-lg shadow print:shadow-none">
+	<dl
+		class="rounded-lg shadow print:border-2 print:border-gray-200 print:shadow-none"
+	>
 		{#each keys as key}
 			<DetailsPaneItem
 				{key}
