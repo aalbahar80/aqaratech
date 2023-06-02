@@ -26,6 +26,14 @@
 <FieldLabel {formField} />
 
 <div class="mt-1">
+	{#if formField.type === 'file'}
+		<label
+			for={formField.name}
+			class="inline-flex cursor-pointer rounded bg-gray-500 px-5 py-1 text-white"
+		>
+			{$L.buttons.fileInput()}
+		</label>
+	{/if}
 	<svelte:element
 		this={formField.type === 'textarea' ? 'textarea' : 'input'}
 		type={formField.type === 'number' ? 'tel' : formField.type}
@@ -34,9 +42,8 @@
 		value={parse(value)}
 		class={clsx(
 			'block w-full disabled:cursor-not-allowed disabled:text-slate-500 sm:text-sm',
-			formField.type !== 'file' &&
-				'rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:shadow-none',
-			'file:rounded file:border-0 file:bg-gray-500 file:px-5 file:py-1 file:text-white',
+			'rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:border-slate-200 disabled:bg-slate-50 disabled:shadow-none',
+			formField.type === 'file' && 'hidden',
 		)}
 		placeholder={formField.placeholder}
 		aria-describedby={formField.hintId}
