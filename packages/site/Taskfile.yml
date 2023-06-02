@@ -43,6 +43,7 @@ tasks:
     cmds:
       # - task: build
       # - pnpm vite preview --port $PORT --strictPort
+      # - node --inspect -r source-map-support/register build/index.js
       - node build/index.js
 
   dev:
