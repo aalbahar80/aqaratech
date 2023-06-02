@@ -35,7 +35,7 @@
 			</button>
 			<a
 				href={$page.data.user?.role?.meta.home ?? withLocale('/', $locale)}
-				class="w-36 sm:w-44"
+				class="w-36 print:w-56 sm:w-44"
 			>
 				<AqaratechLogo1 />
 			</a>
