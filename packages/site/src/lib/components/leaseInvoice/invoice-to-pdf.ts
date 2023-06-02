@@ -43,7 +43,7 @@ export const preparePDF = (options: PDFOptions) => {
 	pdf.invoice.additionalRows[0].col2 = total;
 
 	// Tenant
-	pdf.contact.name = invoice.breadcrumbs.tenant.label;
+	pdf.contact.name = invoice.breadcrumbs.tenant.fullName;
 
 	// Address
 	const property = invoice.breadcrumbs.property.label;
