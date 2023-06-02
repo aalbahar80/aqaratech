@@ -9,6 +9,7 @@ import { APP_GUARD, APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
+import { addRequestDataToEvent } from '@sentry/utils';
 import { SentryInterceptor, SentryModule } from '@travelerdev/nestjs-sentry';
 import { WinstonModule } from 'nest-winston';
 
@@ -67,6 +68,8 @@ import { UsersModule } from './users/users.module';
 						const error = hint.originalException;
 
 						const cause = error instanceof Error ? error.cause : undefined;
+						const request = event.extra?.req;
+						addRequestDataToEvent(event, request);
 
 						const extra = {
 							...event.extra,
@@ -85,6 +88,8 @@ import { UsersModule } from './users/users.module';
 							console.log('event', event);
 							console.log('hint', hint);
 							console.log('extra', extra);
+						}
+
 						if (
 							!isLiveEnv(env.e.PUBLIC_AQARATECH_ENV) &&
 							sentryConfig.tracesSampleRate === 0
@@ -93,6 +98,7 @@ import { UsersModule } from './users/users.module';
 							return null;
 						}
 
+						console.log('Sending event to Sentry');
 						return event;
 					},
 					integrations: [
