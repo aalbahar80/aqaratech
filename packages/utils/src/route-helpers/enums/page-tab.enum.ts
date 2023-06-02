@@ -49,13 +49,3 @@ export type InvoicePageTab = PageTab.Files | PageTab.Messages;
 export type ExpensePageTab = PageTab.Files;
 
 export type MaintenancePageTab = PageTab.Files;
-
-export type PageTabType =
-	| OrganizationPageTab
-	| TenantPageTab
-	| PropertyPageTab
-	| UnitPageTab
-	| LeasePageTab
-	| InvoicePageTab
-	| ExpensePageTab
-	| MaintenancePageTab;
