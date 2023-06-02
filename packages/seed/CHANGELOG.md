@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.28.4
+
+### Patch Changes
+
+- c58ee7db0: manual sentry backend exceptions
+- Updated dependencies [c58ee7db0]
+  - @self/utils@3.29.4
+
 ## 2.28.3
 
 ### Patch Changes

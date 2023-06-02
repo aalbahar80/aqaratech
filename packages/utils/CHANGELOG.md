@@ -1,5 +1,11 @@
 # @self/utils
 
+## 3.29.4
+
+### Patch Changes
+
+- c58ee7db0: manual sentry backend exceptions
+
 ## 3.29.3
 
 ### Patch Changes

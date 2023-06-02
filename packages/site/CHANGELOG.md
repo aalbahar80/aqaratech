@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.40.4
+
+### Patch Changes
+
+- c58ee7db0: manual sentry backend exceptions
+- 4ba94dc35: set apiresponse status tag
+
 ## 2.40.3
 
 ### Patch Changes

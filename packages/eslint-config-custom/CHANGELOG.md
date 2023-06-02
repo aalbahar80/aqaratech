@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.28.4
+
+### Patch Changes
+
+- c58ee7db0: manual sentry backend exceptions
+
 ## 2.28.3
 
 ### Patch Changes

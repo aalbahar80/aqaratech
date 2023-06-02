@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.30.5
+
+### Patch Changes
+
+- c58ee7db0: manual sentry backend exceptions
+
 ## 3.30.4
 
 ### Patch Changes
