@@ -97,50 +97,50 @@ test.describe('unpaid rent', () => {
 	});
 
 	// This test is flaky because of the external payment gateway.
-	test.fixme('can be paid once - actual', async ({ page, org, invoice }) => {
-		test.slow();
-
-		const url = getRoute({
-			entity: 'leaseInvoice',
-			pageType: PageType.Id,
-			id: invoice.id,
-			params: {
-				organizationId: org.organization.id,
-				portfolioId: invoice.portfolioId,
-			},
-		});
-
-		await page.goto(url);
-
-		const pay = page.getByRole('link', { name: 'Pay' });
-
-		await pay.click();
-
-		await page
-			.getByRole('combobox')
-			.first()
-			.selectOption('201825717889145|Knet Test Card [KNET1]|0.000');
-
-		await page.waitForTimeout(1000); // Otherwise the next input fill is flaky
-
-		await page
-			.getByTitle('Should be in number. Length should be 10')
-			.fill('0000000001');
-
-		await page.getByRole('combobox').nth(2).selectOption('9');
-
-		await page.getByRole('combobox').nth(3).selectOption('2025');
-
-		await page
-			.getByRole('textbox', { name: 'Should be in number. Length should be 4' })
-			.fill('1234');
-
-		await page.getByRole('button', { name: 'Submit' }).click();
-		await page.getByRole('button', { name: 'Confirm' }).click();
-
-		const badge = page.getByTestId('badge');
-
-		await expect(badge).toHaveText('Paid');
-		await expect(page.getByRole('button', { name: 'Pay' })).toBeDisabled();
-	});
+	// test.fixme('can be paid once - actual', async ({ page, org, invoice }) => {
+	// 	test.slow();
+	//
+	// 	const url = getRoute({
+	// 		entity: 'leaseInvoice',
+	// 		pageType: PageType.Id,
+	// 		id: invoice.id,
+	// 		params: {
+	// 			organizationId: org.organization.id,
+	// 			portfolioId: invoice.portfolioId,
+	// 		},
+	// 	});
+	//
+	// 	await page.goto(url);
+	//
+	// 	const pay = page.getByRole('link', { name: 'Pay' });
+	//
+	// 	await pay.click();
+	//
+	// 	await page
+	// 		.getByRole('combobox')
+	// 		.first()
+	// 		.selectOption('201825717889145|Knet Test Card [KNET1]|0.000');
+	//
+	// 	await page.waitForTimeout(1000); // Otherwise the next input fill is flaky
+	//
+	// 	await page
+	// 		.getByTitle('Should be in number. Length should be 10')
+	// 		.fill('0000000001');
+	//
+	// 	await page.getByRole('combobox').nth(2).selectOption('9');
+	//
+	// 	await page.getByRole('combobox').nth(3).selectOption('2025');
+	//
+	// 	await page
+	// 		.getByRole('textbox', { name: 'Should be in number. Length should be 4' })
+	// 		.fill('1234');
+	//
+	// 	await page.getByRole('button', { name: 'Submit' }).click();
+	// 	await page.getByRole('button', { name: 'Confirm' }).click();
+	//
+	// 	const badge = page.getByTestId('badge');
+	//
+	// 	await expect(badge).toHaveText('Paid');
+	// 	await expect(page.getByRole('button', { name: 'Pay' })).toBeDisabled();
+	// });
 });
