@@ -31,6 +31,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-prisma": {
+      "locked": {
+        "lastModified": 1685805757,
+        "narHash": "sha256-+9ZdR3QEn486uNt2EZSIvLLQs4lCNbs+AbGdIvWj9CE=",
+        "owner": "thenbe",
+        "repo": "nixpkgs",
+        "rev": "c06ec6e8ff9570d9132e587a856f47e49865691a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thenbe",
+        "ref": "prisma-4.15.0",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-turbo": {
       "locked": {
         "lastModified": 1682820793,
@@ -51,6 +67,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-prisma": "nixpkgs-prisma",
         "nixpkgs-turbo": "nixpkgs-turbo"
       }
     }

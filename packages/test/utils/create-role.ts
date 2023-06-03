@@ -9,7 +9,7 @@ type RoleInput = Pick<Role, 'organizationId' | 'roleType'> & {
 };
 
 export const createRole = async (r: RoleInput) => {
-	const data: Prisma.RoleCreateInput<unknown> = {
+	const data: Prisma.RoleCreateInput = {
 		user: {
 			connectOrCreate: {
 				where: { email: r.email },
