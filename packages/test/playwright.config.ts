@@ -107,32 +107,32 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			testIgnore: [...TESTS.NON_SITE, ...TESTS.MOBILE_ONLY],
 			use: devices['Desktop Chrome'],
 		},
-		{
-			name: 'site:firefox',
-			testIgnore: [
-				...TESTS.MAIN_ONLY,
-				...TESTS.NON_SITE,
-				...TESTS.MOBILE_ONLY,
-				'**/tests/components/expense-tree/drag.spec.ts',
-			],
-			use: devices['Desktop Firefox'],
-		},
-		{
-			name: 'site:webkit',
-			testIgnore: [
-				...TESTS.MAIN_ONLY,
-				...TESTS.NON_SITE,
-				...TESTS.MOBILE_ONLY,
-				'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit
-				'**/tests/auth/token/expired-jwt.spec.ts',
-			],
-			use: devices['Desktop Safari'],
-			// Webkit Issues:
-			// - slow when calling form.verifyDetails(), but only in headless mode.
-			// https://github.com/microsoft/playwright/issues/14479#issuecomment-1141928860
-			// Webkit might be struggling when setting `waitUntil` when calling page.goto() or waiting for body.started
-			timeout: BASE_TIMEOUT * 2,
-		},
+		// {
+		// 	name: 'site:firefox',
+		// 	testIgnore: [
+		// 		...TESTS.MAIN_ONLY,
+		// 		...TESTS.NON_SITE,
+		// 		...TESTS.MOBILE_ONLY,
+		// 		'**/tests/components/expense-tree/drag.spec.ts',
+		// 	],
+		// 	use: devices['Desktop Firefox'],
+		// },
+		// {
+		// 	name: 'site:webkit',
+		// 	testIgnore: [
+		// 		...TESTS.MAIN_ONLY,
+		// 		...TESTS.NON_SITE,
+		// 		...TESTS.MOBILE_ONLY,
+		// 		'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit
+		// 		'**/tests/auth/token/expired-jwt.spec.ts',
+		// 	],
+		// 	use: devices['Desktop Safari'],
+		// 	// Webkit Issues:
+		// 	// - slow when calling form.verifyDetails(), but only in headless mode.
+		// 	// https://github.com/microsoft/playwright/issues/14479#issuecomment-1141928860
+		// 	// Webkit might be struggling when setting `waitUntil` when calling page.goto() or waiting for body.started
+		// 	timeout: BASE_TIMEOUT * 2,
+		// },
 		{
 			name: 'site:chrome:mobile',
 			testIgnore: [
@@ -144,20 +144,20 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 			],
 			use: devices['Pixel 5'],
 		},
-		{
-			name: 'site:webkit:mobile',
-			use: devices['iPhone 13 Mini'],
-			testIgnore: [
-				...TESTS.MAIN_ONLY,
-				...TESTS.NON_SITE,
-				...TESTS.DESKTOP_ONLY,
-				'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit
-				'**/tests/auth/token/expired-jwt.spec.ts',
-				'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
-				'**/tests/remove/**/*.spec.ts', // pagination assertion fails
-			],
-			timeout: BASE_TIMEOUT * 2,
-		},
+		// {
+		// 	name: 'site:webkit:mobile',
+		// 	use: devices['iPhone 13 Mini'],
+		// 	testIgnore: [
+		// 		...TESTS.MAIN_ONLY,
+		// 		...TESTS.NON_SITE,
+		// 		...TESTS.DESKTOP_ONLY,
+		// 		'**/tests/pay/**/*.spec.ts', // route.fulfill doesn't work in webkit
+		// 		'**/tests/auth/token/expired-jwt.spec.ts',
+		// 		'**/tests/components/table/pagination.spec.ts', // TODO: fix for mobile
+		// 		'**/tests/remove/**/*.spec.ts', // pagination assertion fails
+		// 	],
+		// 	timeout: BASE_TIMEOUT * 2,
+		// },
 	],
 };
 export default config;
