@@ -1,7 +1,7 @@
 # Example: https://github.com/pimeys/nix-prisma-example/tree/main
 # Might need to run `nix flake init`, then replace contents of generated file
 {
-  description = "A prisma test project";
+  description = "Aqaratech dev environment";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.nixpkgs-turbo.url = "github:thenbe/nixpkgs/turbo-1.9.3";
