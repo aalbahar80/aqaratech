@@ -150,7 +150,10 @@ export class PortfoliosController {
 	findUnits(
 		@User() user: IUser,
 		@Param('id') id: string,
-		@QueryParser({ filterOptions: { keys: ['propertyId'] } })
+		@QueryParser({
+			parserOptions: { orderDefaultValue: 'computed.titleScore' },
+			filterOptions: { keys: ['propertyId'] },
+		})
 		queryOptions: QueryOptionsDto,
 	): Promise<WithCount<UnitDto>> {
 		const where = {
@@ -178,6 +181,7 @@ export class PortfoliosController {
 			filterOptions: { keys: ['propertyId'] },
 			parserOptions: {
 				maxLimit: 1000,
+				orderDefaultValue: 'computed.titleScore',
 			},
 		})
 		queryOptions: QueryOptionsDto,
