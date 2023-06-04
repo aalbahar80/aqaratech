@@ -153,13 +153,17 @@ test('data updates when pressing back button', async ({ page, portfolio }) => {
 	const row = rows.first();
 
 	// take note of current data
-	const data1 = await row.innerText();
+	const data1 = await row
+		.getByRole('link', { name: 'View' })
+		.getAttribute('href');
 
 	await table.next.click();
 
 	// wait for data to update
 	await expect(async () => {
-		const data2 = await row.innerText();
+		const data2 = await row
+			.getByRole('link', { name: 'View' })
+			.getAttribute('href');
 		expect(data2).not.toBe(data1);
 	}).toPass();
 
@@ -168,7 +172,9 @@ test('data updates when pressing back button', async ({ page, portfolio }) => {
 
 	// expect data to be updated back to original
 	await expect(async () => {
-		const data3 = await row.innerText();
+		const data3 = await row
+			.getByRole('link', { name: 'View' })
+			.getAttribute('href');
 		expect(data3).toBe(data1);
 	}).toPass();
 });
