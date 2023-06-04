@@ -70,10 +70,10 @@
 			{#each iconNavTree as item}
 				<svelte:element
 					this={item.isButton ? 'button' : 'a'}
+					title={item.name}
 					href={item.isButton ? 'false' : item.href}
 					on:click={item.onClick}
 					{...item.linkOptions}
-					aria-label={item.name}
 				>
 					<svelte:component
 						this={item.icon}
