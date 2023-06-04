@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.35.0
+
+### Minor Changes
+
+- d7018a76d: set default unit sort
+
 ## 2.34.3
 
 ### Patch Changes

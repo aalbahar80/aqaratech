@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.41.0
+
+### Minor Changes
+
+- d7018a76d: set default unit sort
+
 ## 2.40.4
 
 ### Patch Changes
