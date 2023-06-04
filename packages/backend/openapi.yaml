@@ -2858,7 +2858,8 @@ info:
   version: '1.0'
   contact: {}
 tags: []
-servers: []
+servers:
+  - url: http://localhost
 components:
   securitySchemes:
     cookie:

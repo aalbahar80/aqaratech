@@ -28,6 +28,7 @@ export const setupSwagger = async (app: INestApplication) => {
 		.setTitle('Aqaratech')
 		.setDescription('Aqaratech API')
 		.setVersion('1.0')
+		.addServer('http://localhost')
 		.addCookieAuth(Cookie.accessToken, {
 			type: 'apiKey',
 		})
