@@ -57,7 +57,7 @@ cd packages/site
 pnpm typesafe-i18n
 ```
 
-- `NODE_VERSION` in dockerfiles. [Releases](https://nodejs.org/en/about/releases/)
+- `NODE_VERSION` in dockerfiles + `@types/node` in root `package.json` under `pnpm.overrides`. [Releases](https://nodejs.org/en/about/releases/)
 - `TIER_CLI_VERSION` in dockerfiles. [Releases](https://github.com/tierrun/tier/releases/)
 - `SENTRY_CLI_VERSION` in `.github/workflows/ci.yml`. [Releases](https://github.com/getsentry/sentry-cli/releases)
 - openapi-generator-cli version in `packages/backend/get-openapi.sh`. [Releases](https://github.com/OpenAPITools/openapi-generator/releases)

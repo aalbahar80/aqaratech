@@ -48,7 +48,8 @@
 		},
 		"allowNonAppliedPatches": true,
 		"overrides": {
-			"@rgossiaux/svelte-headlessui@1.0.2": "npm:svelte-headlessui-combobox-temporary"
+			"@rgossiaux/svelte-headlessui@1.0.2": "npm:svelte-headlessui-combobox-temporary",
+			"@types/node": "^18.16.0"
 		}
 	},
 	"private": true,
