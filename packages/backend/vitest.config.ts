@@ -1,4 +1,5 @@
 import swc from 'unplugin-swc';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -23,6 +24,7 @@ export default defineConfig({
 		// },
 	},
 	plugins: [
+		tsconfigPaths(), // Required to run vitest
 		swc.vite({
 			module: {
 				type: 'es6', // explicitly set the module type to es6 (avoid inheriting from .swcrc)
