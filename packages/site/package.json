@@ -25,7 +25,7 @@
 		"@iconify/json": "2.2.74",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
-		"@rgossiaux/svelte-headlessui": "1.0.2",
+		"@rgossiaux/svelte-headlessui": "npm:svelte-headlessui-combobox-temporary@^0.0.7",
 		"@self/utils": "workspace:*",
 		"@sveltejs/adapter-node": "1.2.4",
 		"@sveltejs/kit": "1.20.2",
