@@ -7,6 +7,7 @@ export * from './LeasesApi';
 export * from './MaintenanceOrdersApi';
 export * from './OrganizationsApi';
 export * from './PayoutsApi';
+export * from './PhoneVerifyApi';
 export * from './PortfoliosApi';
 export * from './PropertiesApi';
 export * from './RolesApi';

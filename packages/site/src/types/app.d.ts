@@ -13,7 +13,7 @@ declare namespace App {
 	}
 
 	interface PageData {
-		user: import('$models/types/auth.type').User | undefined;
+		user: import('$models/types/auth.type').User;
 		tabLabels?: import('$lib/components/tabs/tab-labels').TabLabels | undefined;
 	}
 

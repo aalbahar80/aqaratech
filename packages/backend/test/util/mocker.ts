@@ -1,3 +1,4 @@
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { InjectionToken } from '@nestjs/common';
 import { SENTRY_TOKEN } from '@travelerdev/nestjs-sentry';
 import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
@@ -10,12 +11,21 @@ import prismaService from '../__mocks__/prisma';
 const moduleMocker = new ModuleMocker(global);
 
 export const tokenMocker = function (token?: InjectionToken) {
+	// console.log({ token, typeof: typeof token });
 	if (token === PrismaService) {
 		// Return the PrismaService defined in __mocks__. This is so we can get a
 		// reference to the mock instance during any test. This is useful for
 		// spying/mocking on methods.
 		// We use a DeepMock for prisma because prisma.c is defined at a later stage.
 		return prismaService;
+	}
+
+	if (token === CACHE_MANAGER) {
+		return {
+			get: vi.fn(),
+			set: vi.fn(),
+			del: vi.fn(),
+		};
 	}
 
 	if (typeof token === 'function') {

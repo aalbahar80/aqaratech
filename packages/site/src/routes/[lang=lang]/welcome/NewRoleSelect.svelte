@@ -1,10 +1,12 @@
 <script lang="ts">
 	import L, { locale } from '$i18n/i18n-svelte';
+	import { CLAIM_ROLES } from '$lib/constants/misc';
 	import {
 		NEW_ORGANIZATION,
 		CONTACT_ORG,
 		withLocale,
 	} from '$lib/constants/routes';
+	import { environment } from '$lib/environment';
 	import BxsBusiness from '~icons/bxs/business';
 	import MdiAccount from '~icons/mdi/account';
 	import MdiAccountTie from '~icons/mdi/account-tie';
@@ -25,7 +27,13 @@
 	<div class="flex h-36 flex-col justify-stretch gap-12 p-6 pt-0 md:flex-row">
 		<a
 			class={boxClass}
-			href={withLocale(CONTACT_ORG, $locale)}
+			href={withLocale(
+				CONTACT_ORG +
+					(environment.PUBLIC_FEATURE_PHONE_VERIFICATION
+						? `?${CLAIM_ROLES}=1`
+						: ''),
+				$locale,
+			)}
 		>
 			<MdiAccount class={iconClass} />
 			{$L.entity.tenant.singular()}

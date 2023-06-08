@@ -1,1 +1,1 @@
-export const S3_TTL = 3600;
+export const S3_TTL_SECONDS = 3600; // 1 hour

@@ -122,7 +122,7 @@ export class UsersService {
 			});
 
 			// cache it
-			await this.cacheManager.set(cacheKey, ability, 60 * 60);
+			await this.cacheManager.set(cacheKey, ability, 300000); // 5 min
 
 			return ability;
 		}

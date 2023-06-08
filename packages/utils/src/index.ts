@@ -107,7 +107,6 @@ export {
 	unitCreateSchema,
 	unitUpdateSchema,
 	userCreateSchema,
-	userSchema,
 	userUpdateSchema,
 	zodDateOnly,
 	zodDateOnlyOptional,
@@ -153,9 +152,11 @@ export type {
 	UserCreateSchema,
 	UserSchema,
 	UserUpdateSchema,
+	ValidatedUserSchema,
 } from './schemas';
 export { isDateOnly } from './schemas/utils/date/is-date-only';
 export { isDatetime } from './schemas/utils/date/is-date-time';
+export { phoneSchema } from './schemas/utils/phone.schema';
 export { startCase } from './start-case';
 export { tierid } from './tier-id';
 export type {

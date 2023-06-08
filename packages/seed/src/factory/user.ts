@@ -15,4 +15,6 @@ export const userFactory = Factory.Sync.makeFactory<User>({
 	fullName: Factory.Sync.each(() => faker.person.fullName()),
 
 	email: Factory.Sync.each(() => faker.internet.email()),
+	phone: Factory.Sync.each(() => null),
+	isPhoneVerified: Factory.Sync.each(() => false),
 });

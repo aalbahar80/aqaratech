@@ -114,6 +114,8 @@ export class RoleGuard implements CanActivate {
 			role,
 			id: user.id,
 			fullName: user.fullName,
+			phone: user.phone,
+			isPhoneVerified: user.isPhoneVerified,
 		} satisfies IUser;
 
 		request.user = authorizedUser;

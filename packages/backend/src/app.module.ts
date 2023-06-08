@@ -39,6 +39,7 @@ import { ExpenseCategoriesModule } from './expense-categories/expense-categories
 import { LogtailModule } from './logtail/logtail.module';
 import { MaintenanceOrdersModule } from './maintenance-orders/maintenance-orders.module';
 import { OrganizationsModule } from './organizations/organizations.module';
+import { PhoneVerifyModule } from './phone-verify/phone-verify.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 
@@ -151,6 +152,7 @@ import { UsersModule } from './users/users.module';
 		MaintenanceOrdersModule,
 		ExpenseCategoriesModule,
 		ScheduleModule.forRoot(),
+		PhoneVerifyModule,
 	],
 	controllers: [AppController],
 	providers: [

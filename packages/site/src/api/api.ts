@@ -8,6 +8,7 @@ import {
 	MaintenanceOrdersApi,
 	OrganizationsApi,
 	PayoutsApi,
+	PhoneVerifyApi,
 	PortfoliosApi,
 	PropertiesApi,
 	RolesApi,
@@ -51,6 +52,7 @@ export const createApi = (loadFetch?: LoadEvent['fetch']) => {
 		files: new FilesApi(config),
 		payouts: new PayoutsApi(config),
 		maintenanceOrders: new MaintenanceOrdersApi(config),
+		phoneVerify: new PhoneVerifyApi(config),
 	};
 };
 

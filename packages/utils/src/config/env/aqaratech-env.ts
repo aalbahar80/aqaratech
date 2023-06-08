@@ -122,6 +122,9 @@ export interface AqaratechEnv {
 
 	// External
 	readonly CI?: boolean | undefined;
+
+	// Feature flags
+	readonly PUBLIC_FEATURE_PHONE_VERIFICATION: boolean;
 }
 
 /**

@@ -1,14 +1,22 @@
-import type { ITriggerPayloadOptions } from '@novu/node';
+import { MESSAGE_TAG } from 'src/postmark/tags';
 
-export interface SMSTemplate extends ITriggerPayloadOptions {
-	to: {
-		subscriberId: string;
-		phone: string;
-	};
+export interface SMSTemplateBase {
+	subscriberId: string;
+	phone: string;
 }
 
-export interface InvoiceReminderTemplate extends SMSTemplate {
+export interface InvoiceReminderTemplate extends SMSTemplateBase {
+	tag: typeof MESSAGE_TAG.INVOICE_REMINDER;
 	payload: {
 		link: string;
 	};
 }
+
+export interface PhoneVerificationTemplate extends SMSTemplateBase {
+	tag: typeof MESSAGE_TAG.PHONE_VERIFICATION;
+	payload: {
+		code: string;
+	};
+}
+
+export type SMSTemplate = InvoiceReminderTemplate | PhoneVerificationTemplate;

@@ -3,6 +3,7 @@ import { DeepMockProxy } from 'vitest-mock-extended';
 
 import { EnvModule } from 'src/env/env.module';
 import { NovuService } from 'src/novu/novu.service';
+import { MESSAGE_TAG } from 'src/postmark/tags';
 import { PrismaService, createPrismaClient } from 'src/prisma/prisma.service';
 import { tokenMocker } from 'test/util/mocker';
 import prisma from 'test/util/prisma';
@@ -72,16 +73,15 @@ describe('LeaseInvoicesService', () => {
 		});
 
 		const template = {
-			to: {
-				subscriberId: '5',
-				phone: '1234567890',
-			},
+			tag: MESSAGE_TAG.INVOICE_REMINDER,
+			subscriberId: '5',
+			phone: '1234567890',
 			payload: {
 				link: 'link',
 			},
 		};
 
-		expect(spy).toHaveBeenCalledWith('INVOICE_REMINDER', template);
+		expect(spy).toHaveBeenCalledWith(template);
 	});
 });
 

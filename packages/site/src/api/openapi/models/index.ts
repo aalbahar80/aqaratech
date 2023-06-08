@@ -258,6 +258,50 @@ export interface BreadcrumbsDto {
 /**
  *
  * @export
+ * @interface ClaimRolesResponse
+ */
+export interface ClaimRolesResponse {
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof ClaimRolesResponse
+	 */
+	success: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ClaimRolesResponse
+	 */
+	message: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof ClaimRolesResponse
+	 */
+	roleCount: number;
+}
+/**
+ *
+ * @export
+ * @interface ConfirmPhoneDto
+ */
+export interface ConfirmPhoneDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ConfirmPhoneDto
+	 */
+	code: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ConfirmPhoneDto
+	 */
+	phone: string;
+}
+/**
+ *
+ * @export
  * @interface CreateExpenseCategoryDto
  */
 export interface CreateExpenseCategoryDto {
@@ -3446,4 +3490,48 @@ export interface ValidatedUserDto {
 	 * @memberof ValidatedUserDto
 	 */
 	fullName: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof ValidatedUserDto
+	 */
+	phone: string | null;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof ValidatedUserDto
+	 */
+	isPhoneVerified: boolean;
+}
+/**
+ *
+ * @export
+ * @interface VerificationResponse
+ */
+export interface VerificationResponse {
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof VerificationResponse
+	 */
+	success: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof VerificationResponse
+	 */
+	message: string;
+}
+/**
+ *
+ * @export
+ * @interface VerifyPhoneDto
+ */
+export interface VerifyPhoneDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof VerifyPhoneDto
+	 */
+	phone: string;
 }

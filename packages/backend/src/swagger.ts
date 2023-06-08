@@ -16,6 +16,7 @@ import { LeasesModule } from 'src/leases/leases.module';
 import { MaintenanceOrdersModule } from 'src/maintenance-orders/maintenance-orders.module';
 import { OrganizationsModule } from 'src/organizations/organizations.module';
 import { PayoutsModule } from 'src/payouts/payouts.module';
+import { PhoneVerifyModule } from 'src/phone-verify/phone-verify.module';
 import { PortfoliosModule } from 'src/portfolios/portfolios.module';
 import { PropertiesModule } from 'src/properties/properties.module';
 import { RolesModule } from 'src/roles/roles.module';
@@ -51,6 +52,7 @@ export const setupSwagger = async (app: INestApplication) => {
 			FilesModule,
 			PayoutsModule,
 			MaintenanceOrdersModule,
+			PhoneVerifyModule,
 		],
 		extraModels: [
 			BreadcrumbDto,

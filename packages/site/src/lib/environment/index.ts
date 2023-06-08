@@ -20,6 +20,7 @@ const siteEnvSchema = envSchema.pick({
 	PUBLIC_TIER_PLAN_ID_1: true,
 	PUBLIC_TIER_PLAN_ID_2: true,
 	PUBLIC_IS_PAYWALL_ACTIVE: true,
+	PUBLIC_FEATURE_PHONE_VERIFICATION: true,
 });
 
 type SiteEnvSchema = z.infer<typeof siteEnvSchema>;

@@ -100,4 +100,8 @@ export const envSchema = z.object({
 
 	// External
 	CI: zodEnvBooleanSchema().optional(),
+
+	// Feature flags
+	// @ts-expect-error - zod wrongly infers the type
+	PUBLIC_FEATURE_PHONE_VERIFICATION: zodEnvBooleanSchema().default(true),
 }) satisfies z.ZodType<AqaratechEnv, ZodTypeDef, unknown>;

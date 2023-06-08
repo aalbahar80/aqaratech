@@ -12,6 +12,8 @@ import { siteURL } from '../api/fixtures/site-url';
 import { testUsers } from '../api/fixtures/users/test-users';
 import { SidebarModel } from '../components/sidebar/sidebar-model';
 
+import type { ClaimRolesResponse, VerificationResponse } from '../../types/api';
+
 // "New user" is a user that is logging in for the first time.
 
 const email = testUsers.freshUser.email;
@@ -58,6 +60,99 @@ test.describe('new user', () => {
 
 		await page.getByRole('link', { name: 'Customer' }).click();
 
+		await expect(page).toHaveURL('/en/contact-org?claim-roles=1');
+		await expect(page.getByText(contactOrg)).toBeVisible();
+	});
+
+	test('no role - tenant - redirected after number verification - phone number on file', async ({
+		page,
+	}) => {
+		await page.goto('/en/welcome');
+
+		await page.getByRole('link', { name: 'Customer' }).click();
+		await page.getByTestId('claim-roles').click();
+		await page.getByRole('link', { name: 'Verify Phone' }).click();
+		await page.getByLabel('Phone').fill('12345678');
+		await page.getByRole('button', { name: 'Get Code' }).click();
+
+		await page.getByLabel('Code').fill('123456');
+
+		// mock server response to indicate 1 role was claimed
+		await page.route('**/phone-verify/confirm', async (route) => {
+			return await route.fulfill({
+				json: {
+					success: true,
+					message: 'Phone number verified',
+				} satisfies VerificationResponse,
+			});
+		});
+
+		await page.route('**/phone-verify/claim-roles', async (route) => {
+			return await route.fulfill({
+				json: {
+					success: true,
+					message: 'Roles claimed',
+					roleCount: 1,
+				} satisfies ClaimRolesResponse,
+			});
+		});
+
+		await page.getByRole('button', { name: 'Submit' }).click();
+
+		await expect(page).toHaveURL(/\/en\/users\/[a-z\d-]{36}\/claim-roles/);
+
+		// click claim button (force)
+		const claim = page.getByRole('button', { name: 'Claim roles' });
+		await claim.evaluate((el) => el.removeAttribute('disabled'));
+		await claim.click();
+
+		// expect to be on the user's roles page (**/users/:uuid/roles)
+		await expect(page).toHaveURL(/\/en\/users\/[a-z\d-]{36}\/roles/);
+	});
+
+	test('no role - tenant - redirected after number verification - no phone on file', async ({
+		page,
+	}) => {
+		await page.goto('/en/welcome');
+
+		await page.getByRole('link', { name: 'Customer' }).click();
+		await page.getByTestId('claim-roles').click();
+		await page.getByRole('link', { name: 'Verify Phone' }).click();
+		await page.getByLabel('Phone').fill('12345678');
+		await page.getByRole('button', { name: 'Get Code' }).click();
+
+		await page.getByLabel('Code').fill('123456');
+
+		// mock server response to indicate 1 role was claimed
+		await page.route('**/phone-verify/confirm', async (route) => {
+			return await route.fulfill({
+				json: {
+					success: true,
+					message: 'Phone number verified',
+				} satisfies VerificationResponse,
+			});
+		});
+
+		await page.route('**/phone-verify/claim-roles', async (route) => {
+			return await route.fulfill({
+				json: {
+					success: true,
+					message: 'Roles claimed',
+					roleCount: 0,
+				} satisfies ClaimRolesResponse,
+			});
+		});
+
+		await page.getByRole('button', { name: 'Submit' }).click();
+
+		await expect(page).toHaveURL(/\/en\/users\/[a-z\d-]{36}\/claim-roles/);
+
+		// click claim button (force)
+		const claim = page.getByRole('button', { name: 'Claim roles' });
+		await claim.evaluate((el) => el.removeAttribute('disabled'));
+		await claim.click();
+
+		// expect to be back on the contact-org page
 		await expect(page).toHaveURL('/en/contact-org');
 		await expect(page.getByText(contactOrg)).toBeVisible();
 	});

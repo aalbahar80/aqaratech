@@ -2852,6 +2852,59 @@ paths:
                 $ref: '#/components/schemas/ExpenseCategoryDto'
       tags: *ref_26
       security: *ref_27
+  /phone-verify/initiate:
+    post:
+      operationId: PhoneVerifyController_initiate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyPhoneDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResponse'
+      tags: &ref_28
+        - phone-verify
+      security: &ref_29
+        - accessToken: []
+  /phone-verify/confirm:
+    post:
+      operationId: PhoneVerifyController_confirm
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmPhoneDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResponse'
+      tags: *ref_28
+      security: *ref_29
+  /phone-verify/claim-roles:
+    post:
+      operationId: PhoneVerifyController_claimRoles
+      parameters: []
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimRolesResponse'
+      tags: *ref_28
+      security: *ref_29
 info:
   title: Aqaratech
   description: Aqaratech API
@@ -2917,11 +2970,18 @@ components:
         fullName:
           type: string
           nullable: true
+        phone:
+          type: string
+          nullable: true
+        isPhoneVerified:
+          type: boolean
       required:
         - id
         - roles
         - email
         - fullName
+        - phone
+        - isPhoneVerified
     CreateOrganizationDto:
       type: object
       properties:
@@ -4403,6 +4463,46 @@ components:
           nullable: true
       required:
         - labelEn
+    VerifyPhoneDto:
+      type: object
+      properties:
+        phone:
+          type: string
+      required:
+        - phone
+    VerificationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+      required:
+        - success
+        - message
+    ConfirmPhoneDto:
+      type: object
+      properties:
+        code:
+          type: string
+        phone:
+          type: string
+      required:
+        - code
+        - phone
+    ClaimRolesResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        roleCount:
+          type: number
+      required:
+        - success
+        - message
+        - roleCount
     BreadcrumbsDto:
       type: object
       properties:

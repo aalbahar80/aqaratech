@@ -60,7 +60,7 @@
 						element: 'button',
 						label: $L.buttons.view(),
 						onClick: async () => {
-							await view(file, $page.data.user!.role!.organizationId);
+							await view(file, $page.data.user.role!.organizationId);
 						},
 					},
 				});
@@ -81,7 +81,7 @@
 						element: 'button',
 						label: $L.buttons.delete(),
 						onClick: () => {
-							remove(file, $page.data.user!.role!.organizationId);
+							remove(file, $page.data.user.role!.organizationId);
 						},
 					},
 				});

@@ -22,11 +22,11 @@
 	// TODO:? prefetch on server
 	$: query = createQuery({
 		refetchOnMount: false, // Avoid fetch on each page load
-		queryKey: ['search', _q, $page.data.user!.role!.organizationId],
+		queryKey: ['search', _q, $page.data.user.role!.organizationId],
 		queryFn: async () =>
 			await getSearch({
 				query: _q,
-				organizationId: $page.data.user!.role!.organizationId,
+				organizationId: $page.data.user.role!.organizationId,
 			}),
 		select: (data) => data.portfolio,
 		// enabled: !!_q || !!$query?.data,

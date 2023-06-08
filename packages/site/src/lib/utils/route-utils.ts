@@ -53,6 +53,8 @@ export const isAllowedWhileInactive = (route: Route) => {
 
 const NO_ROLE = [
 	'/[lang=lang]/users/[id]/roles',
+	'/[lang=lang]/users/[id]/verify-phone',
+	'/[lang=lang]/users/[id]/claim-roles',
 	'/[lang=lang]/welcome',
 	'/[lang=lang]/organizations/new',
 ];

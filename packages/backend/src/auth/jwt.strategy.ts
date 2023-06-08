@@ -26,9 +26,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		const jwks = auth.JWKS;
 
 		const cookieExtractor = function (req: Request) {
-			const cookiesSchema = z.object({
-				[Cookie.accessToken]: z.string().optional(),
-			});
+			const cookiesSchema = z.object(
+				{ [Cookie.accessToken]: z.string().optional() },
+				{
+					required_error: 'Error parsing cookies: missing required field',
+					invalid_type_error: 'Error parsing cookies: invalid type',
+				},
+			);
 
 			const cookies = cookiesSchema.parse(req.cookies);
 

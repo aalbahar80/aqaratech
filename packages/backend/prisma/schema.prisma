@@ -14,8 +14,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email    String  @unique
-  fullName String?
+  email           String  @unique
+  fullName        String?
+  phone           String?
+  isPhoneVerified Boolean @default(false)
 
   roles Role[]
 

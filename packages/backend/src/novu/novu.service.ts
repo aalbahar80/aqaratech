@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { Novu } from '@novu/node';
 
 import { EnvService } from 'src/env/env.service';
-import { MessageTag } from 'src/postmark/tags';
 
 import { SMSTemplate } from './novu.types';
 
@@ -15,13 +14,13 @@ export class NovuService {
 
 	readonly novu: Novu;
 
-	async sendSMS(tag: MessageTag, template: SMSTemplate) {
-		await this.novu.trigger(tag, {
+	async sendSMS(template: SMSTemplate) {
+		await this.novu.trigger(template.tag, {
 			// TODO: add transactionId to the template
-			...template,
+			payload: template.payload,
 			to: {
-				subscriberId: template.to.subscriberId,
-				phone: '+965' + template.to.phone,
+				subscriberId: template.subscriberId,
+				phone: '+965' + template.phone,
 			},
 		});
 	}

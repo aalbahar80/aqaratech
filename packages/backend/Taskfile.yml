@@ -8,6 +8,7 @@ dotenv: ['../../.env']
 
 tasks:
   clean:
+    run: once
     cmds:
       - rm -rf dist
 
@@ -63,6 +64,12 @@ tasks:
       - until nc -z localhost 5435; do sleep 1; done;
       - pnpm prisma migrate reset --force --skip-seed
       - '{{if eq .TEST_WATCH "1"}}pnpm vitest{{else}}pnpm vitest --run{{end}} {{.CLI_ARGS}}'
+
+  check:
+    sources:
+      - ./**/*.ts
+    cmds:
+      - tsc --noEmit --project tsconfig.lint.json
 
   swagger:generate:
     env:

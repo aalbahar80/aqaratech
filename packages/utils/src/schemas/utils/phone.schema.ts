@@ -4,7 +4,7 @@ import { zodEmpty } from './zod-empty';
 import { zodString } from './zod-string';
 import { digitsOnly } from './zod-transformers';
 
-const phoneSchema = zodString
+export const phoneSchema = zodString
 	.refine((val) => val.length === 8, {
 		message: 'Phone number must be 8 digits',
 	})

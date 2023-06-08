@@ -13,7 +13,7 @@ import {
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { Injectable, Logger } from '@nestjs/common';
 
-import { S3_TTL } from 'src/constants/s3-ttl';
+import { S3_TTL_SECONDS } from 'src/constants/s3-ttl';
 import { EnvService } from 'src/env/env.service';
 
 @Injectable()
@@ -58,7 +58,7 @@ export class S3Service {
 		const command = new GetObjectCommand(options);
 
 		const url = await getSignedUrl(this._client, command, {
-			expiresIn: S3_TTL,
+			expiresIn: S3_TTL_SECONDS,
 		});
 		this.logger.debug(
 			`Returning signed url for Key: ${options.Key ?? ''}: - URL: ${url}`,
