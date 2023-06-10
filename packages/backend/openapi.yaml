@@ -1239,7 +1239,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LeaseInvoiceDto'
+                $ref: '#/components/schemas/LeaseInvoicePublicDto'
       tags: *ref_9
       security: *ref_10
   /leaseInvoices/{id}/pay:
@@ -3721,6 +3721,33 @@ components:
           readOnly: true
       required:
         - id
+    LeaseInvoicePublicDto:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        amount:
+          type: number
+        isPaid:
+          type: boolean
+        postAt:
+          format: date-time
+          type: string
+        paidAt:
+          format: date-time
+          type: string
+          nullable: true
+        memo:
+          type: string
+          nullable: true
+      required:
+        - id
+        - amount
+        - isPaid
+        - postAt
+        - paidAt
+        - memo
     UpdateLeaseInvoiceDto:
       type: object
       properties:

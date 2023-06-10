@@ -1,12 +1,13 @@
 <script lang="ts">
 	import DetailsPaneItem from '$lib/components/details-pane/DetailsPaneItem.svelte';
 
-	type Details = $$Generic;
+	type Details = $$Generic<Record<unknown, unknown>>;
 	type TKeysLiteral = $$Generic<keyof Details>;
 	type TFieldLabels = $$Generic<Record<TKeysLiteral, string>>;
+	type Keys = Readonly<Exclude<TKeysLiteral, number | symbol>[]>;
 
 	export let details: Details;
-	export let keys: Readonly<Exclude<TKeysLiteral, number | symbol>[]>;
+	export let keys: Keys = Object.keys(details) as unknown as Keys;
 
 	/** Allows overriding the default labels for the keys.
 	 * @example

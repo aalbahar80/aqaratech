@@ -89,6 +89,11 @@ const en: BaseTranslation = {
 		notLate: 'Not late',
 		months: 'months',
 		days: 'days',
+		propertyManager: 'Property manager',
+		paymentComplete: 'Payment complete',
+		invoiceDetails: 'Invoice details',
+		paymentDetails: 'Payment details',
+		relatedDetails: 'Additional information ',
 	},
 	charts: {
 		empty: {

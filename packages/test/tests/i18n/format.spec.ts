@@ -30,6 +30,6 @@ test('dates in utc', async ({ page, org, invoices }) => {
 	await page.goto(url);
 
 	await expect(page.getByText('Jan 1, 2023')).toBeVisible();
-	await expect(page.getByText('Feb 1, 2023')).toBeVisible();
+	// await expect(page.getByText('Feb 1, 2023')).toBeVisible(); // Due date hidden on invoice page
 	await expect(page.getByText('Jan 15, 2023')).toBeVisible();
 });

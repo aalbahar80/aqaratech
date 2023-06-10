@@ -147,7 +147,7 @@
 
 <!-- Title (print) -->
 <h2
-	class="hidden text-2xl font-bold leading-7 text-gray-900 print:block sm:truncate sm:text-3xl"
+	class="hidden text-2xl font-bold leading-7 text-gray-900 print:hidden sm:truncate sm:text-3xl"
 >
 	{title}
 </h2>

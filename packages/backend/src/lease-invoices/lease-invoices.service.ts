@@ -25,6 +25,7 @@ import { IUser } from 'src/interfaces/user.interface';
 import {
 	CreateLeaseInvoiceDto,
 	LeaseInvoiceDto,
+	LeaseInvoicePublicDto,
 	UpdateLeaseInvoiceDto,
 } from 'src/lease-invoices/dto/lease-invoice.dto';
 import { LeaseInvoiceAggregateDto } from 'src/lease-invoices/dto/lease-invoices-extra.dto';
@@ -166,7 +167,7 @@ export class LeaseInvoicesService {
 		return new LeaseInvoiceDto(data);
 	}
 
-	async findOnePublic({ id }: { id: string }) {
+	async findOnePublic({ id }: { id: string }): Promise<LeaseInvoicePublicDto> {
 		const data = await this.prisma.c.leaseInvoiceV.findFirstOrThrow({
 			where: {
 				AND: [

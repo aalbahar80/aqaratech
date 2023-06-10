@@ -1151,6 +1151,26 @@ type RootTranslation = {
 		 * d​a​y​s
 		 */
 		days: string
+		/**
+		 * P​r​o​p​e​r​t​y​ ​m​a​n​a​g​e​r
+		 */
+		propertyManager: string
+		/**
+		 * P​a​y​m​e​n​t​ ​c​o​m​p​l​e​t​e
+		 */
+		paymentComplete: string
+		/**
+		 * I​n​v​o​i​c​e​ ​d​e​t​a​i​l​s
+		 */
+		invoiceDetails: string
+		/**
+		 * P​a​y​m​e​n​t​ ​d​e​t​a​i​l​s
+		 */
+		paymentDetails: string
+		/**
+		 * A​d​d​i​t​i​o​n​a​l​ ​i​n​f​o​r​m​a​t​i​o​n​ 
+		 */
+		relatedDetails: string
 	}
 	charts: {
 		empty: {
@@ -2600,6 +2620,26 @@ export type TranslationFunctions = {
 		 * days
 		 */
 		days: () => LocalizedString
+		/**
+		 * Property manager
+		 */
+		propertyManager: () => LocalizedString
+		/**
+		 * Payment complete
+		 */
+		paymentComplete: () => LocalizedString
+		/**
+		 * Invoice details
+		 */
+		invoiceDetails: () => LocalizedString
+		/**
+		 * Payment details
+		 */
+		paymentDetails: () => LocalizedString
+		/**
+		 * Additional information 
+		 */
+		relatedDetails: () => LocalizedString
 	}
 	charts: {
 		empty: {

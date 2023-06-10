@@ -15,6 +15,7 @@
 import * as runtime from '../runtime';
 import type {
 	LeaseInvoiceDto,
+	LeaseInvoicePublicDto,
 	MessageDto,
 	UpdateLeaseInvoiceDto,
 	UpdatedDto,
@@ -147,7 +148,7 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	async findOnePublicRaw(
 		requestParameters: LeaseInvoicesApiFindOnePublicRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<LeaseInvoiceDto>> {
+	): Promise<runtime.ApiResponse<LeaseInvoicePublicDto>> {
 		if (requestParameters.id === null || requestParameters.id === undefined) {
 			throw new runtime.RequiredError(
 				'id',
@@ -180,7 +181,7 @@ export class LeaseInvoicesApi extends runtime.BaseAPI {
 	async findOnePublic(
 		requestParameters: LeaseInvoicesApiFindOnePublicRequest,
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<LeaseInvoiceDto> {
+	): Promise<LeaseInvoicePublicDto> {
 		const response = await this.findOnePublicRaw(
 			requestParameters,
 			initOverrides,

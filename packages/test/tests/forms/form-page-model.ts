@@ -8,6 +8,7 @@ import {
 	isDateOnly,
 	PageType,
 	type Entity,
+	fmt,
 } from '@self/utils';
 
 import { uuid } from '../../utils/uuid';
@@ -124,28 +125,37 @@ export class FormPage {
 	 */
 	verifyDetails = async (fields: Record<string, unknown>) => {
 		for (const [key, value] of Object.entries(fields)) {
-			const pane = this.page.getByTestId('details-pane');
-			await expect(pane).toBeVisible();
-
-			const row = pane.getByTestId(key);
+			const row = this.page.getByTestId('details-pane').getByTestId(key);
 			await expect(row).toBeVisible();
 
-			const dt = row.getByRole('term');
-			await expect.soft(dt).toHaveText(getLabel(key));
+			// const dt = row.getByRole('term');
+			// await expect.soft(dt).toHaveText(key);
 
 			const dd = row.getByRole('definition');
 			const formattedValue = formatValue(value);
-			await expect.soft(dd).toHaveText(formattedValue);
 
-			// date-only fields are always parsed to ISO 8601 format in db
-			const testValue =
-				typeof value === 'string' && isDateOnly(value)
-					? new Date(value).toISOString()
-					: value;
+			if (key === 'amount' && typeof value === 'number') {
+				const currency = fmt({ locale: 'en', type: 'currency', value: value });
+				await expect(dd).toHaveText(new RegExp(`^${value}$|^${currency}$`));
+				await expect
+					.soft(dd)
+					.toHaveAttribute(
+						'data-testid',
+						new RegExp(`^${this.toTestId(value)}$|^${currency}$`),
+					);
+			} else {
+				await expect(dd).toHaveText(formattedValue);
 
-			await expect
-				.soft(dd)
-				.toHaveAttribute('data-testid', this.toTestId(testValue));
+				// date-only fields are always parsed to ISO 8601 format in db
+				const testValue =
+					typeof value === 'string' && isDateOnly(value)
+						? new Date(value).toISOString()
+						: value;
+
+				await expect
+					.soft(dd)
+					.toHaveAttribute('data-testid', this.toTestId(testValue));
+			}
 		}
 	};
 

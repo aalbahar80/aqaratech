@@ -206,6 +206,11 @@ const ar: Translation = {
 		notLate: 'غير متأخر',
 		months: 'أشهر',
 		days: 'أيام',
+		propertyManager: 'مدير العقار',
+		paymentComplete: 'تم الدفع',
+		invoiceDetails: 'تفاصيل الفاتورة',
+		paymentDetails: 'تفاصيل الدفع',
+		relatedDetails: 'معلومات إضافية',
 	},
 	charts: {
 		empty: {

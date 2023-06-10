@@ -119,7 +119,6 @@ export class LeaseInvoicesController {
 
 	@Get(':id/public')
 	@Public()
-	@ApiOkResponse({ type: LeaseInvoiceDto })
 	findOnePublic(@Param('id') id: string): Promise<LeaseInvoicePublicDto> {
 		return this.leaseInvoicesService.findOnePublic({ id });
 	}

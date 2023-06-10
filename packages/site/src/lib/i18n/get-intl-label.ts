@@ -16,6 +16,10 @@ const NON_FORM_LABELS: Record<string, { en: string; ar: string }> = {
 		en: 'Payment Status',
 		ar: 'حالة السداد',
 	},
+	mfPaymentId: {
+		en: 'Payment ID',
+		ar: 'رقم الوصل',
+	},
 };
 
 /** Attempt to get label based on locale, falling back to English.

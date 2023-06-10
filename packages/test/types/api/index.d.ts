@@ -1606,6 +1606,49 @@ export interface LeaseInvoiceDto {
 /**
  *
  * @export
+ * @interface LeaseInvoicePublicDto
+ */
+export interface LeaseInvoicePublicDto {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoicePublicDto
+	 */
+	readonly id: string;
+	/**
+	 *
+	 * @type {number}
+	 * @memberof LeaseInvoicePublicDto
+	 */
+	amount: number;
+	/**
+	 *
+	 * @type {boolean}
+	 * @memberof LeaseInvoicePublicDto
+	 */
+	isPaid: boolean;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoicePublicDto
+	 */
+	postAt: string;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoicePublicDto
+	 */
+	paidAt: string | null;
+	/**
+	 *
+	 * @type {string}
+	 * @memberof LeaseInvoicePublicDto
+	 */
+	memo: string | null;
+}
+/**
+ *
+ * @export
  */
 export declare const LeasePhaseEnum: {
 	readonly Future: 'FUTURE';
