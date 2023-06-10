@@ -32,6 +32,7 @@ import { LeaseInvoiceAggregateDto } from 'src/lease-invoices/dto/lease-invoices-
 import { MyfatoorahService } from 'src/myfatoorah/myfatoorah.service';
 import { GetPaymentStatusResult } from 'src/myfatoorah/types/myfatoorah.types';
 import { NovuService } from 'src/novu/novu.service';
+import { MessageDto } from 'src/postmark/message.dto';
 import { PostmarkService } from 'src/postmark/postmark.service';
 import { MESSAGE_TAG } from 'src/postmark/tags';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -523,7 +524,13 @@ export class LeaseInvoicesService {
 		return result;
 	}
 
-	async findMessagesById({ id, user }: { id: string; user: IUser }) {
+	async findMessagesById({
+		id,
+		user,
+	}: {
+		id: string;
+		user: IUser;
+	}): Promise<MessageDto[]> {
 		// authz check
 		await this.prisma.c.leaseInvoice.findFirstOrThrow({
 			where: {
@@ -531,14 +538,14 @@ export class LeaseInvoicesService {
 			},
 		});
 
-		// TODO: implement SMS history once there is a way to get messages by invoiceId
+		const messages = await this.novuService.getMessagesBySubscriber(id);
 
 		// const messages = await this.postmarkService.getSentEmails({
 		// 	tag: MESSAGE_TAG.INVOICE_REMINDER,
 		// 	leaseInvoiceId: id,
 		// });
 
-		return [];
+		return messages;
 	}
 
 	// ::: HELPERS :::

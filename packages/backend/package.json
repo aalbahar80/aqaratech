@@ -106,6 +106,7 @@
 		"eslint-config-custom": "workspace:*",
 		"jest-mock": "^29.5.0",
 		"js-yaml": "4.1.0",
+		"msw": "1.2.2",
 		"nyc": "15.1.0",
 		"simple-json-db": "2.0.0",
 		"sinon": "15.1.0",
