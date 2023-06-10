@@ -403,7 +403,7 @@ export class LeaseInvoicesService {
 	async sendSMS(payload: InvoiceSendSMSPayload) {
 		return await this.novuService.sendSMS({
 			tag: MESSAGE_TAG.INVOICE_REMINDER,
-			subscriberId: payload.invoice.lease.tenant.id,
+			subscriberId: payload.invoice.id,
 			phone: payload.phone,
 			payload: {
 				link: payload.paymentLink,

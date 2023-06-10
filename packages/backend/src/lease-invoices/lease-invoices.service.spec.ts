@@ -74,7 +74,7 @@ describe('LeaseInvoicesService', () => {
 
 		const template = {
 			tag: MESSAGE_TAG.INVOICE_REMINDER,
-			subscriberId: '5',
+			subscriberId: '1', // invoice id
 			phone: '1234567890',
 			payload: {
 				link: 'link',
