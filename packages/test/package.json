@@ -18,7 +18,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@aws-sdk/client-s3": "3.348.0",
+		"@aws-sdk/client-s3": "3.350.0",
 		"@faker-js/faker": "8.0.2",
 		"@playwright/test": "1.34.2",
 		"@prisma/client": "4.15.0",
@@ -36,7 +36,7 @@
 		"prisma": "4.15.0",
 		"remeda": "1.19.0",
 		"simple-json-db": "2.0.0",
-		"tier": "5.9.0",
+		"tier": "5.10.0",
 		"tree-kill": "1.2.2",
 		"ts-toolbelt": "9.6.0",
 		"tsconfig": "workspace:*",

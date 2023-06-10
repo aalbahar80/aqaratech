@@ -22,7 +22,7 @@
 		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.75",
+		"@iconify/json": "2.2.76",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "npm:svelte-headlessui-combobox-temporary@^0.0.7",
@@ -35,7 +35,7 @@
 		"@tailwindcss/forms": "0.5.3",
 		"@tailwindcss/typography": "0.5.9",
 		"@tanstack/svelte-query": "4.29.11",
-		"@tanstack/svelte-table": "8.9.1",
+		"@tanstack/svelte-table": "8.9.2",
 		"@types/cookie": "0.5.1",
 		"@types/d3": "7.4.0",
 		"@types/debounce": "1.2.1",
@@ -63,14 +63,14 @@
 		"rollup-plugin-visualizer": "5.9.0",
 		"sorcery": "0.11.0",
 		"source-map-support": "0.5.21",
-		"stripe": "12.8.0",
+		"stripe": "12.9.0",
 		"svelte": "3.59.1",
 		"svelte-check": "3.4.3",
 		"svelte-french-toast": "1.0.3",
 		"svelte-headlessui": "0.0.16",
 		"svelte-preprocess": "5.0.4",
 		"tailwindcss": "3.3.2",
-		"tier": "5.9.0",
+		"tier": "5.10.0",
 		"tippy.js": "6.3.7",
 		"tslib": "2.5.3",
 		"typescript": "5.1.3",
@@ -85,7 +85,7 @@
 	"dependencies": {
 		"@logtail/node": "0.4.0",
 		"@logtail/winston": "0.4.1",
-		"@sentry/profiling-node": "0.3.0",
+		"@sentry/profiling-node": "1.0.2",
 		"@sentry/sveltekit": "^7.54.0",
 		"typesafe-i18n": "5.24.3",
 		"winston": "3.9.0"
