@@ -23,7 +23,7 @@
 	</ul>
 </section>
 
-<style>
+<style lang="postcss">
 	section {
 		border-bottom-right-radius: var(--border-radius-b, 0.375rem);
 		border-bottom-left-radius: var(--border-radius-b, 0.375rem);

@@ -27,7 +27,7 @@
 	<div class="fade" />
 {/if}
 
-<style>
+<style lang="postcss">
 	.progress-container {
 		position: fixed;
 		inset-block-start: 0;

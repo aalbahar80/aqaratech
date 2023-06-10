@@ -92,7 +92,7 @@
 	</div>
 </QueryClientProvider>
 
-<style>
+<style lang="postcss">
 	/* NOTE: keep width in sync with custom tailwind breakpoint: `sb` */
 	@media (min-width: 1024px) {
 		.my-grid {

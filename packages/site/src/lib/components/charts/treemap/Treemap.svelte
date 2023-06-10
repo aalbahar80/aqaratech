@@ -17,7 +17,7 @@
 	</TreemapNode>
 </pancake-treemap>
 
-<style>
+<style lang="postcss">
 	pancake-treemap {
 		position: absolute;
 		width: 100%;

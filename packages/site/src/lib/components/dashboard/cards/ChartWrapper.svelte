@@ -43,7 +43,7 @@
 	{/if}
 </div>
 
-<style>
+<style lang="postcss">
 	.chart-fixed-height {
 		height: 400px;
 	}
