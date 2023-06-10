@@ -1,5 +1,12 @@
 # @self/utils
 
+## 3.30.0
+
+### Minor Changes
+
+- 5481b9d57: verify phone numbers
+- a682e5bcd: update invoice layout
+
 ## 3.29.4
 
 ### Patch Changes

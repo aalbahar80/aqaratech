@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.42.0
+
+### Minor Changes
+
+- 5481b9d57: verify phone numbers
+- a682e5bcd: update invoice layout
+
 ## 2.41.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # @self/backend
 
+## 2.36.0
+
+### Minor Changes
+
+- 5481b9d57: verify phone numbers
+- a682e5bcd: update invoice layout
+
+### Patch Changes
+
+- Updated dependencies [5481b9d57]
+- Updated dependencies [a682e5bcd]
+  - @self/utils@3.30.0
+
 ## 2.35.0
 
 ### Minor Changes
