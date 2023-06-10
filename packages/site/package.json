@@ -60,7 +60,7 @@
 		"papaparse": "5.4.1",
 		"postcss": "8.4.24",
 		"remeda": "1.19.0",
-		"rollup-plugin-visualizer": "5.9.0",
+		"rollup-plugin-visualizer": "5.9.2",
 		"sorcery": "0.11.0",
 		"source-map-support": "0.5.21",
 		"stripe": "12.9.0",
