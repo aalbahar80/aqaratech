@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.42.1
+
+### Patch Changes
+
+- b1fa40465: specify postcss on all style blocks
+- 06e402aa7: fix: webkit print style issue
+
 ## 2.42.0
 
 ### Minor Changes

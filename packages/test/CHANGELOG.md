@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.31.1
+
+### Patch Changes
+
+- b1fa40465: specify postcss on all style blocks
+
 ## 3.31.0
 
 ### Minor Changes

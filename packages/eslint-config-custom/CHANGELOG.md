@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 2.29.1
+
+### Patch Changes
+
+- b1fa40465: specify postcss on all style blocks
+
 ## 2.29.0
 
 ### Minor Changes

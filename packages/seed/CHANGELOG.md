@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.29.1
+
+### Patch Changes
+
+- b1fa40465: specify postcss on all style blocks
+- Updated dependencies [b1fa40465]
+  - @self/utils@3.30.1
+
 ## 2.29.0
 
 ### Minor Changes
