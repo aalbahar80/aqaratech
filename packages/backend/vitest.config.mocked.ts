@@ -6,6 +6,7 @@ export default defineConfig({
 		globals: true,
 		root: './',
 		include: ['./test/mocked.spec.ts'],
+		setupFiles: ['./test/setup.ts'],
 	},
 	plugins: [
 		swc.vite({

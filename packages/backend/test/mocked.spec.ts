@@ -1,20 +1,8 @@
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
-import {
-	afterAll,
-	afterEach,
-	beforeAll,
-	beforeEach,
-	describe,
-	it,
-	vi,
-} from 'vitest';
+import { beforeEach, describe, it, vi } from 'vitest';
 
 import { envSchema } from '@self/utils';
 
 import { bootstrap } from '../src/create-app';
-
-import { MESSAGES_RES_MOCK } from './util/messages';
 
 import type { INestApplication } from '@nestjs/common';
 import type { TemplatedMessage } from 'postmark';
@@ -108,20 +96,8 @@ vi.mock(
 	},
 );
 
-export const restHandlers = [
-	rest.get('https://api.novu.co/v1/messages', (_req, res, ctx) => {
-		console.log('[ MOCK ] - api.novu.co/v1/messages');
-		return res(ctx.status(200), ctx.json(MESSAGES_RES_MOCK));
-	}),
-];
-const server = setupServer(...restHandlers);
-
 describe('App', () => {
 	let app: INestApplication;
-
-	beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
-	afterAll(() => server.close());
-	afterEach(() => server.resetHandlers()); // Reset handlers after each test `important for test isolation`
 
 	beforeEach(async () => {
 		app = await bootstrap();

@@ -9,7 +9,7 @@ export default defineConfig({
 		clearMocks: true,
 		root: './',
 		threads: false, // incompatible with DB
-		setupFiles: ['test/util/setup.ts'],
+		setupFiles: ['test/util/setup.ts', 'test/setup.ts'],
 		exclude: [
 			'test/mocked.spec.ts',
 			'node_modules',
