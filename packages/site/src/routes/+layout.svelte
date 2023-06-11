@@ -62,7 +62,7 @@
 	<div
 		class:bg-gray-50={isHomeRoute($page.route)}
 		class={clsx(
-			'pt-[--nav-h]',
+			'pt-[--nav-h] print:pt-[calc(var(--nav-h)-2rem)]',
 			isSidebarAvailable($page.route) &&
 				'sb:grid sb:grid-cols-my-grid sb:print:block', // be explicit with `sb:print:block` (insted of just `print:block`) to avoid webkit issue
 		)}

@@ -14,7 +14,7 @@
 
 <!-- HACK: print: and sm: are duplicated because chrome refuses to apply the sm: to the print layout -->
 <div
-	class="px-4 py-5 first:rounded-t-md last:rounded-b-md odd:bg-gray-50 even:bg-white print:grid print:grid-cols-3 print:py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+	class="px-4 py-5 first:rounded-t-md last:rounded-b-md odd:bg-gray-50 even:bg-white print:grid print:grid-cols-3 print:py-1.5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
 	data-testid={key}
 >
 	<dt class="text-sm font-medium text-gray-500">
