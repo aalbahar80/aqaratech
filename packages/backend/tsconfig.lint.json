@@ -7,5 +7,5 @@
 		"diagnostics": true
 	},
 	"include": ["**/*", "./.*"],
-	"exclude": ["**/dist/**/*"]
+	"exclude": ["**/dist/**/*", "**/coverage/**/*"]
 }
