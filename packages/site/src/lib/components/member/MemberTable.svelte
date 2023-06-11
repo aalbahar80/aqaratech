@@ -85,8 +85,6 @@
 
 								await invalidateAll();
 							} catch (e) {
-								console.error(e);
-
 								await handleApiError(e);
 							}
 						},

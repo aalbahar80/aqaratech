@@ -8,7 +8,6 @@ export const withApi = async <T>(callback: ApiCallback<T>) => {
 	try {
 		return await callback(api);
 	} catch (e) {
-		console.error(e);
 		await handleApiError(e);
 		return;
 	}
