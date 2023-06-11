@@ -60,9 +60,11 @@
 
 	<SecondaryNavbar />
 	<div
-		class:my-grid={isSidebarAvailable($page.route)}
 		class:bg-gray-50={isHomeRoute($page.route)}
-		class="pt-[--nav-h]"
+		class={clsx(
+			'pt-[--nav-h]',
+			isSidebarAvailable($page.route) && 'sb:grid sb:grid-cols-my-grid',
+		)}
 	>
 		<Sidebar
 			navigationTree={getNavigationTree(
@@ -91,13 +93,3 @@
 		</main>
 	</div>
 </QueryClientProvider>
-
-<style lang="postcss">
-	/* NOTE: keep width in sync with custom tailwind breakpoint: `sb` */
-	@media (min-width: 1024px) {
-		.my-grid {
-			display: grid;
-			grid-template-columns: minmax(0px, 16rem) repeat(1, minmax(0, 1fr));
-		}
-	}
-</style>

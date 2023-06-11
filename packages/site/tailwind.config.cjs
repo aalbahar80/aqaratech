@@ -6,6 +6,9 @@ module.exports = {
 			screens: {
 				sb: '1024px', // sidebar NOTE: keep width in sync with my-grid media query
 			},
+			gridTemplateColumns: {
+				'my-grid': 'minmax(0px, 16rem) repeat(1, minmax(0, 1fr))',
+			},
 			fontFamily: {
 				sans: [
 					'Inter var',
