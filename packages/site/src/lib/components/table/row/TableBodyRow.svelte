@@ -22,9 +22,11 @@
 		<!-- Rendering null cells throws. This might only be an issue
 									when the entire column is null on a given page. -->
 		{#if cell.getValue() !== null}
-			<svelte:component
-				this={flexRender(cell.column.columnDef.cell, cell.getContext())}
-			/>
+			<div class={cell.column.columnDef.meta?.cls ?? ''}>
+				<svelte:component
+					this={flexRender(cell.column.columnDef.cell, cell.getContext())}
+				/>
+			</div>
 		{/if}
 	</td>
 {/each}

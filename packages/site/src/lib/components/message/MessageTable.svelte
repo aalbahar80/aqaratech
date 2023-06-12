@@ -48,6 +48,7 @@
 		columnHelper.accessor('recipients', {
 			header: getIntlLabel('recipients'),
 			enableSorting: false,
+			meta: { cls: '[direction:ltr]' },
 			cell: (props) => props.getValue().join(', '),
 		}),
 	];
