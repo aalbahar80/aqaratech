@@ -7,6 +7,8 @@
 		toBrowserLocale,
 	} from '@self/utils/src/entity/form/field/format';
 
+	import AlertWarn from '../AlertWarn.svelte';
+
 	import type { LeaseInvoiceDto, MessageDto } from '$api/openapi';
 
 	import { createApi } from '$api';
@@ -17,7 +19,6 @@
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { addSuccessToast } from '$lib/stores/toast';
 	import RoleGuard from '$lib/utils/RoleGuard.svelte';
-
 	export let data: MessageDto[];
 	export let invoice: LeaseInvoiceDto;
 
@@ -53,6 +54,8 @@
 		}),
 	];
 </script>
+
+<AlertWarn message={$L.other.smsDeliveryWarn()} />
 
 <Table
 	items={data}

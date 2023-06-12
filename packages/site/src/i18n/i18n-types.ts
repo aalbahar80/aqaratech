@@ -1479,6 +1479,10 @@ type RootTranslation = {
 		 * W​h​a​t​s​A​p​p
 		 */
 		whatsapp: string
+		/**
+		 * D​u​e​ ​t​o​ ​f​a​c​t​o​r​s​ ​b​e​y​o​n​d​ ​o​u​r​ ​c​o​n​t​r​o​l​,​ ​S​M​S​ ​d​e​l​i​v​e​r​y​ ​m​a​y​ ​f​a​i​l​ ​e​v​e​n​ ​i​f​ ​t​h​e​ ​s​t​a​t​u​s​ ​i​n​d​i​c​a​t​e​s​ ​o​t​h​e​r​w​i​s​e​.​ ​W​e​ ​e​x​p​e​c​t​ ​t​h​i​s​ ​t​o​ ​b​e​ ​r​e​s​o​l​v​e​d​ ​s​o​o​n​.
+		 */
+		smsDeliveryWarn: string
 	}
 }
 
@@ -2948,6 +2952,10 @@ export type TranslationFunctions = {
 		 * WhatsApp
 		 */
 		whatsapp: () => LocalizedString
+		/**
+		 * Due to factors beyond our control, SMS delivery may fail even if the status indicates otherwise. We expect this to be resolved soon.
+		 */
+		smsDeliveryWarn: () => LocalizedString
 	}
 }
 

@@ -204,6 +204,8 @@ const en: BaseTranslation = {
 		revenue: 'Gross income',
 		accountType: 'Account type',
 		whatsapp: 'WhatsApp',
+		smsDeliveryWarn:
+			'Due to factors beyond our control, SMS delivery may fail even if the status indicates otherwise. We expect this to be resolved soon.',
 	},
 };
 
