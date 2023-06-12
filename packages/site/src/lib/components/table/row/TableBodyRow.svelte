@@ -17,16 +17,15 @@
 			cellValueType === 'number' &&
 				'slashed-zero tabular-nums ltr:text-end rtl:text-start',
 			TABLE_ROW_SPACING,
+			cell.column.columnDef.meta?.cls,
 		)}
 	>
 		<!-- Rendering null cells throws. This might only be an issue
 									when the entire column is null on a given page. -->
 		{#if cell.getValue() !== null}
-			<div class={cell.column.columnDef.meta?.cls ?? ''}>
-				<svelte:component
-					this={flexRender(cell.column.columnDef.cell, cell.getContext())}
-				/>
-			</div>
+			<svelte:component
+				this={flexRender(cell.column.columnDef.cell, cell.getContext())}
+			/>
 		{/if}
 	</td>
 {/each}
