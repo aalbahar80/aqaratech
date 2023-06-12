@@ -40,7 +40,7 @@
 			cell: (props) =>
 				new Intl.DateTimeFormat(toBrowserLocale($locale), {
 					...FORMATS.datetime,
-					timeZoneName: 'short',
+					timeZoneName: 'shortOffset',
 					timeZone: undefined,
 				}).format(new Date(props.getValue())),
 		}),
