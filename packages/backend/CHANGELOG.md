@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.37.0
+
+### Minor Changes
+
+- a00ea6ec1: feat: sms history
+
 ## 2.36.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.42.2
+
+### Patch Changes
+
+- 72aee5a33: add notice about sms testing
+
 ## 2.42.1
 
 ### Patch Changes
