@@ -41,7 +41,7 @@
 				new Intl.DateTimeFormat(toBrowserLocale($locale), {
 					...FORMATS.datetime,
 					timeZoneName: 'shortOffset',
-					timeZone: undefined,
+					timeZone: 'UTC', // Explicitly set UTC to avoid flash on ssr
 				}).format(new Date(props.getValue())),
 		}),
 
