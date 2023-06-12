@@ -34,7 +34,7 @@ export class PostmarkService {
 		const messages = sentEmails.Messages.map((m) => ({
 			id: m.MessageID,
 			status: m.Status,
-			receivedAt: m.ReceivedAt,
+			date: m.ReceivedAt,
 			recipients: m.Recipients,
 		})) satisfies MessageDto[];
 

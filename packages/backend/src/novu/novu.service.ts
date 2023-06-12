@@ -49,7 +49,7 @@ export class NovuService {
 				id: m.id,
 				status: m.status,
 				recipients: m.phone ? [m.phone] : [],
-				receivedAt: m.updatedAt,
+				date: m.updatedAt,
 			})) satisfies MessageDto[];
 
 		return messages;

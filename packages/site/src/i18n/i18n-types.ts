@@ -848,10 +848,6 @@ type RootTranslation = {
 		 */
 		size2: string
 		/**
-		 * R​e​c​e​i​v​e​d​ ​A​t
-		 */
-		receivedAt: string
-		/**
 		 * R​e​c​i​p​i​e​n​t​s
 		 */
 		recipients: string
@@ -2320,10 +2316,6 @@ export type TranslationFunctions = {
 		 * Size
 		 */
 		size2: () => LocalizedString
-		/**
-		 * Received At
-		 */
-		receivedAt: () => LocalizedString
 		/**
 		 * Recipients
 		 */

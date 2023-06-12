@@ -143,7 +143,6 @@ export const fields = {
 	size2: 'Size',
 
 	// message
-	receivedAt: 'Received At',
 	recipients: 'Recipients',
 } as const satisfies Fields;
 

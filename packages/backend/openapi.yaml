@@ -3774,13 +3774,13 @@ components:
           type: array
           items:
             type: string
-        receivedAt:
+        date:
           type: string
       required:
         - id
         - status
         - recipients
-        - receivedAt
+        - date
     UpdatePortfolioDto:
       type: object
       properties:

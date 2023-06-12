@@ -35,8 +35,8 @@
 			enableSorting: false,
 		}),
 
-		columnHelper.accessor('receivedAt', {
-			header: getIntlLabel('receivedAt'),
+		columnHelper.accessor('date', {
+			header: getIntlLabel('date'),
 			enableSorting: false,
 			cell: (props) =>
 				new Intl.DateTimeFormat(toBrowserLocale($locale), {

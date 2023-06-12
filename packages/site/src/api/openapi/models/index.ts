@@ -1822,7 +1822,7 @@ export interface MessageDto {
 	 * @type {string}
 	 * @memberof MessageDto
 	 */
-	receivedAt: string;
+	date: string;
 }
 /**
  *
