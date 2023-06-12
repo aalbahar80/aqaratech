@@ -848,6 +848,10 @@ type RootTranslation = {
 		 */
 		size2: string
 		/**
+		 * D​a​t​e
+		 */
+		date: string
+		/**
 		 * R​e​c​i​p​i​e​n​t​s
 		 */
 		recipients: string
@@ -2316,6 +2320,10 @@ export type TranslationFunctions = {
 		 * Size
 		 */
 		size2: () => LocalizedString
+		/**
+		 * Date
+		 */
+		date: () => LocalizedString
 		/**
 		 * Recipients
 		 */
