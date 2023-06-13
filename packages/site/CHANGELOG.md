@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.42.3
+
+### Patch Changes
+
+- ed19778a6: add backend profiling
+
 ## 2.42.2
 
 ### Patch Changes

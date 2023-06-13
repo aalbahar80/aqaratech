@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.37.1
+
+### Patch Changes
+
+- ed19778a6: add backend profiling
+
 ## 2.37.0
 
 ### Minor Changes
