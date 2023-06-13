@@ -1,5 +1,12 @@
 # @self/site
 
+## 2.42.4
+
+### Patch Changes
+
+- 1bf004036: pin sentry profiling-node
+- 40e457989: update deps
+
 ## 2.42.3
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @self/backend
 
+## 2.37.2
+
+### Patch Changes
+
+- 1bf004036: pin sentry profiling-node
+- 40e457989: update deps
+- Updated dependencies [40e457989]
+  - @self/utils@3.30.2
+
 ## 2.37.1
 
 ### Patch Changes

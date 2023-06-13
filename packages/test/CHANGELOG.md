@@ -1,5 +1,11 @@
 # @self/test
 
+## 3.31.2
+
+### Patch Changes
+
+- 40e457989: update deps
+
 ## 3.31.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @self/seed
 
+## 2.29.2
+
+### Patch Changes
+
+- 40e457989: update deps
+- Updated dependencies [40e457989]
+  - @self/utils@3.30.2
+
 ## 2.29.1
 
 ### Patch Changes
