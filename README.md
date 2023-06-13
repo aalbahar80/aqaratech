@@ -60,7 +60,15 @@ task swagger:all
 
 ## Update non-npm dependencies
 
-- `NODE_VERSION` in dockerfiles + `@types/node` in root `package.json` under `pnpm.overrides`. [Releases](https://nodejs.org/en/about/releases/)
-- `TIER_CLI_VERSION` in dockerfiles. [Releases](https://github.com/tierrun/tier/releases/)
-- `SENTRY_CLI_VERSION` in `.github/workflows/ci.yml`. [Releases](https://github.com/getsentry/sentry-cli/releases)
-- openapi-generator-cli version in `packages/backend/get-openapi.sh`. [Releases](https://github.com/OpenAPITools/openapi-generator/releases)
+- `NODE_VERSION` - [Releases](https://nodejs.org/en/about/releases/)
+  - `packages/site/Dockerfile`
+  - `packages/backend/Dockerfile`
+  - `@types/node` in root `package.json` under `pnpm.overrides`
+- `TIER_CLI_VERSION` - [Releases](https://github.com/tierrun/tier/releases/)
+  - `packages/site/Dockerfile`
+  - `packages/backend/Dockerfile`
+  - `flake.nix`
+- `SENTRY_CLI_VERSION` - [Releases](https://github.com/getsentry/sentry-cli/releases)
+  - `.github/workflows/ci.yml`
+- `openapi-generator-cli` - [Releases](https://github.com/OpenAPITools/openapi-generator/releases)
+  - `packages/backend/get-openapi.sh`
