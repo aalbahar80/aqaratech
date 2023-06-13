@@ -1,12 +1,12 @@
 This repository is a mono-repo containing multiple packages located in the `packages` directory. Maintained using [pnpm](https://pnpm.io/) and [turborepo](https://turborepo.org/).
 
-`site`: Main site built with [sveltekit](https://kit.svelte.dev/) & `typescript`.
+`site`: [sveltekit](https://kit.svelte.dev/) frontend.
 
-`backend`: Server built with [nest](https://github.com/nestjs/nest) & `typescript`.
+`backend`: [nestjs](https://github.com/nestjs/nest) backend server.
 
-`test`: End-to-end tests for both site and backend. Uses with [playwright](https://playwright.dev/).
+`test`: End-to-end [playwright](https://playwright.dev/)tests for both site and backend.
 
-`utils`: Various utilities used by other packages.
+`utils`: Various shared utilities.
 
 `seed`: Helpers for generating realistic fake data to use for development/testing.
 
@@ -15,11 +15,11 @@ This repository is a mono-repo containing multiple packages located in the `pack
 ```bash
 # clone the repo and scaffold .env files
 git clone https://github.com/aqaratech/aqtech.git && cd aqtech && ./scripts/scaffold-worktree.sh
-# run site on port 3000 and backend on port 3002.
+# run site on port 3000 and backend on port 3002. (run from root directory)
 pnpm dev
 ```
 
-Take a look [.env.example](.env.example) to know what env vars are required.
+Take a look [.env.example](.env.example) to know what env vars are required. Environment variables are validated using Zod. Description of each variable + schema in `packages/utils/src/config/env/*`
 
 ### Build 📦
 
@@ -72,3 +72,11 @@ task swagger:all
   - `.github/workflows/ci.yml`
 - `openapi-generator-cli` - [Releases](https://github.com/OpenAPITools/openapi-generator/releases)
   - `packages/backend/get-openapi.sh`
+
+# More info
+
+Other topics are covered in their own `README` files:
+
+- `packages/backend/src/myfatoorah/README.md`
+- `packages/backend/src/tier/README.md`
+- `packages/backend/README.md`
