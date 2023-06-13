@@ -47,13 +47,9 @@ pnpm run precompute
 ```bash
 # Regenerate openapi schema and types
 task swagger:all
-
-# Test all browsers
-cd packages/test
-pnpm run test:all-browsers
 ```
 
-# i18n
+## i18n
 
 1. Go to https://app.tolgee.io/projects/1593/export
 1. Check `Nested Structure`
@@ -61,6 +57,8 @@ pnpm run test:all-browsers
 1. Paste contents of `en.json` into `packages/site/src/i18n/en/tolgee.json`.
 1. Paste contents of `ar.json` into `packages/site/src/i18n/ar/tolgee.json`.
 1. Generate types: `cd packages/site && pnpm typesafe-i18n` (should be done whenever i18n files `packages/site/src/i18n/*` are updated)
+
+## Update non-npm dependencies
 
 - `NODE_VERSION` in dockerfiles + `@types/node` in root `package.json` under `pnpm.overrides`. [Releases](https://nodejs.org/en/about/releases/)
 - `TIER_CLI_VERSION` in dockerfiles. [Releases](https://github.com/tierrun/tier/releases/)

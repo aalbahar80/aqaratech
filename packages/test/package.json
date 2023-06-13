@@ -5,9 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test:setup": "PUBLIC_IS_TESTING=1 pnpm run -F @self/backend setup:all",
-		"test": "dotenv -e ../../.env.test -- pnpm run test:setup && pnpm run test:chrome",
-		"test:chrome": "playwright test --project api billing site:chrome site:chrome:mobile",
-		"test:all-browsers": "pnpm run test:setup && playwright test",
+		"test": "dotenv -e ../../.env.test -- pnpm run test:setup && playwright test",
 		"api:generate": "tsc --project tsconfig.api.json",
 		"format": "task format",
 		"lint": "task lint",

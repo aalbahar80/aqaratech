@@ -22,7 +22,7 @@ const env = {
 
 const BASE_TIMEOUT = 15 * 1000;
 
-// @ts-expect-error ---
+// @ts-expect-error Alter test config when running from editor
 const NVIM: unknown = process.env.PW_NVIM;
 
 const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
