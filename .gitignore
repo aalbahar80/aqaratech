@@ -35,8 +35,5 @@ packages/test/downloads/
 .nyc_output/
 coverage/
 
-# i18n
-**/tolgee/generated
-
 Session.vim
 .aider*

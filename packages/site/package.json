@@ -15,11 +15,7 @@
 		"lint:fix": "task -t ../../Taskfile.yml lint -- --fix",
 		"flatten-sourcemaps": "../../scripts/flatten-sourcemaps.sh",
 		"test": "vitest --run",
-		"test:ui": "vitest --ui",
-		"i18n:export:tolgee": "typesafe-i18n --no-watch && ./src/i18n/translate/export.ts",
-		"i18n:export": "typesafe-i18n --no-watch && ./src/i18n/translate/export.ts --skip-send --lang en && ./src/i18n/translate/export.ts --skip-send --lang ar",
-		"i18n:import": "./src/i18n/translate/import.ts --tolgee && typesafe-i18n --no-watch",
-		"i18n:dev": "./src/i18n/translate/import.ts && typesafe-i18n --no-watch"
+		"test:ui": "vitest --ui"
 	},
 	"devDependencies": {
 		"@iconify/json": "2.2.77",
