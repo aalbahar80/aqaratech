@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.43.0
+
+### Minor Changes
+
+- d96dbde1a: add receipts page
+
 ## 2.42.4
 
 ### Patch Changes
