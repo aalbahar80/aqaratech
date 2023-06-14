@@ -170,10 +170,10 @@
 	columnVisibility={{
 		id: false,
 		dueAt: false,
-		paidAt: false,
 		mfPaymentId: false,
 		[PORTFOLIO_FULLNAME]: false,
 	}}
+	sorting={$$props['sorting'] ?? []}
 >
 	<div
 		slot="filter"

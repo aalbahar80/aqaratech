@@ -11,6 +11,11 @@
 	import { fmtCurrency } from '$lib/i18n/format';
 
 	export let aggregate: LeaseInvoiceAggregateDto[];
+	export let visibility = {
+		paymentStatusPie: true,
+		paymentTimePie: true,
+		dueStatusPie: true,
+	};
 
 	$: paid = R.pipe(
 		aggregate,
@@ -26,27 +31,33 @@
 </script>
 
 <div class="flex flex-col gap-4 sm:flex-row">
-	<PaymentStatusPie {aggregate}>
-		<PieStats
-			primaryText={$L.general.total() + ' ' + $L.entity.leaseInvoice.plural()}
-			secondaryText={$L.general.forPeriod()}
-			primaryValue={fmtCurrency(paid + unpaid ?? 0)}
-		/>
-	</PaymentStatusPie>
+	{#if visibility.paymentStatusPie}
+		<PaymentStatusPie {aggregate}>
+			<PieStats
+				primaryText={$L.general.total() + ' ' + $L.entity.leaseInvoice.plural()}
+				secondaryText={$L.general.forPeriod()}
+				primaryValue={fmtCurrency(paid + unpaid ?? 0)}
+			/>
+		</PaymentStatusPie>
+	{/if}
 
-	<PaymentTimePie {aggregate}>
-		<PieStats
-			primaryText={$L.general.collected()}
-			secondaryText={$L.general.forPeriod()}
-			primaryValue={fmtCurrency(paid)}
-		/>
-	</PaymentTimePie>
+	{#if visibility.paymentTimePie}
+		<PaymentTimePie {aggregate}>
+			<PieStats
+				primaryText={$L.general.collected()}
+				secondaryText={$L.general.forPeriod()}
+				primaryValue={fmtCurrency(paid)}
+			/>
+		</PaymentTimePie>
+	{/if}
 
-	<DueStatusPie {aggregate}>
-		<PieStats
-			primaryText={$L.general.uncollected()}
-			secondaryText={$L.general.forPeriod()}
-			primaryValue={fmtCurrency(unpaid)}
-		/>
-	</DueStatusPie>
+	{#if visibility.dueStatusPie}
+		<DueStatusPie {aggregate}>
+			<PieStats
+				primaryText={$L.general.uncollected()}
+				secondaryText={$L.general.forPeriod()}
+				primaryValue={fmtCurrency(unpaid)}
+			/>
+		</DueStatusPie>
+	{/if}
 </div>

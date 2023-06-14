@@ -181,6 +181,7 @@ const ar: Translation = {
 		faq: 'أسئلة متكررة',
 		start: 'ابدأ',
 		accountingPortal: 'كشف الحساب',
+		receipts: 'الوصولات',
 	},
 	general: {
 		name: 'الاسم',

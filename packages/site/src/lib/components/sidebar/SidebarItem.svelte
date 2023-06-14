@@ -20,7 +20,9 @@
 		expanded = true;
 	}
 
-	$: isCurrent = !item.isButton && $page.url.pathname === item.href;
+	$: isCurrent =
+		!item.isButton &&
+		$page.url.pathname === new URL(`http://example.com${item.href}`).pathname; // HACK: extract pathname (strip search params )
 </script>
 
 <div

@@ -17,6 +17,7 @@ import { LOCALE_LABELS } from '$lib/i18n/locale-labels';
 import { replaceLocaleInUrl } from '$lib/i18n/replace-local-url';
 import { isHomeRoute } from '$lib/utils/route-utils';
 import HeroiconsBanknotes from '~icons/heroicons/banknotes';
+import HeroiconsNewspaper from '~icons/heroicons/newspaper';
 // import HeroiconsCalculator from '~icons/heroicons/calculator';
 // import HeroiconsCurrencyDollar from '~icons/heroicons/currency-dollar';
 import HeroiconsReceiptPercent from '~icons/heroicons/receipt-percent';
@@ -178,6 +179,14 @@ export const getNavigationTree = (
 					params: { organizationId, ...langParam },
 				}),
 				icon: HeroiconsReceiptPercent,
+			},
+			{
+				name: LL.nav.receipts(),
+				href: withLocale(
+					`/organizations/${organizationId}/receipts?sort=-paidAt`, // keep in sync with sorting passed to table in /receipts/+page.svelte
+					locale,
+				),
+				icon: HeroiconsNewspaper,
 			},
 			{
 				name: LL.entity.tenant.plural(),

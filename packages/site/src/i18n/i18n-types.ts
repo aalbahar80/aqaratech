@@ -1057,6 +1057,10 @@ type RootTranslation = {
 		 * B​o​o​k​s
 		 */
 		accountingPortal: string
+		/**
+		 * R​e​c​e​i​p​t​s
+		 */
+		receipts: string
 	}
 	general: {
 		/**
@@ -2530,6 +2534,10 @@ export type TranslationFunctions = {
 		 * Books
 		 */
 		accountingPortal: () => LocalizedString
+		/**
+		 * Receipts
+		 */
+		receipts: () => LocalizedString
 	}
 	general: {
 		/**
