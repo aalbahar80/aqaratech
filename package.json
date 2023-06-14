@@ -58,6 +58,11 @@
 				"@tsconfig/node18-strictest",
 				"@tsconfig/node18-strictest-esm"
 			]
+		},
+		"peerDependencyRules": {
+			"allowedVersions": {
+				"@nestjs/axios@0.0.8>@nestjs/common": "^9.0.0"
+			}
 		}
 	},
 	"private": true,
