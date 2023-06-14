@@ -18,7 +18,7 @@
 		"test:ui": "vitest --ui"
 	},
 	"devDependencies": {
-		"@iconify/json": "2.2.77",
+		"@iconify/json": "2.2.78",
 		"@intlify/eslint-plugin-svelte": "0.1.1",
 		"@logtail/types": "0.4.0",
 		"@rgossiaux/svelte-headlessui": "npm:svelte-headlessui-combobox-temporary@^0.0.7",
@@ -81,7 +81,7 @@
 	"dependencies": {
 		"@logtail/node": "0.4.0",
 		"@logtail/winston": "0.4.1",
-		"@sentry/sveltekit": "^7.55.0",
+		"@sentry/sveltekit": "^7.55.2",
 		"typesafe-i18n": "5.24.3",
 		"winston": "3.9.0"
 	},
