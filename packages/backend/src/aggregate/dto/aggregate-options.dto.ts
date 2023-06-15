@@ -16,6 +16,7 @@ export class AggregateOptionsDto
 	@ApiPropertyOptional() // optional because of default value
 	end: string;
 
+	portfolioId?: string;
 	propertyId?: string;
 	unitId?: string;
 
@@ -25,6 +26,10 @@ export class AggregateOptionsDto
 	})
 	rangeKind: RangeKind;
 }
+
+export class GetOccupancyOptionsDto extends OmitType(AggregateOptionsDto, [
+	'portfolioId',
+]) {}
 
 /**
  * Differentiates between `undefined` and `null` values for `propertyId` and `unitId` properties.
@@ -42,7 +47,12 @@ export class AggregateOptionsDto
  * Otherwise identical to `AggregateOptionsDto`.
  */
 export class AggregateOptionsExpensesDto
-	extends OmitType(AggregateOptionsDto, ['propertyId', 'unitId', 'rangeKind'])
+	extends OmitType(AggregateOptionsDto, [
+		'portfolioId', // expense aggregate is scoped to a single portfolio
+		'propertyId',
+		'unitId',
+		'rangeKind',
+	])
 	implements
 		Exactly<AggregateOptionsExpensesSchema, AggregateOptionsExpensesDto>
 {

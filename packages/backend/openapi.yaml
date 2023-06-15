@@ -1874,56 +1874,6 @@ paths:
                           $ref: '#/components/schemas/ExpenseDto'
       tags: *ref_11
       security: *ref_12
-  /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/income:
-    get:
-      operationId: PortfolioAggregateController_getIncomeByMonth
-      parameters:
-        - name: organizationId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: portfolioId
-          required: true
-          in: path
-          schema:
-            type: string
-        - name: start
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: end
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: rangeKind
-          required: false
-          in: query
-          schema:
-            $ref: '#/components/schemas/RangeKind'
-        - name: propertyId
-          required: false
-          in: query
-          schema:
-            type: string
-        - name: unitId
-          required: false
-          in: query
-          schema:
-            type: string
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/IncomeByMonthDto'
-      tags: &ref_13
-        - portfolios
-      security: &ref_14
-        - accessToken: []
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses:
     get:
       operationId: PortfolioAggregateController_getExpensesByMonth
@@ -1969,8 +1919,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GroupByMonthDto'
-      tags: *ref_13
-      security: *ref_14
+      tags: &ref_13
+        - portfolios
+      security: &ref_14
+        - accessToken: []
   /organizations/{organizationId}/portfolios/{portfolioId}/aggregate/expenses-by-category:
     get:
       operationId: PortfolioAggregateController_getExpensesByCategory
@@ -2511,6 +2463,56 @@ paths:
                 type: string
       tags: *ref_21
       security: *ref_22
+  /organizations/{organizationId}/aggregate/income:
+    get:
+      operationId: AggregateController_getIncomeByMonth
+      parameters:
+        - name: organizationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: start
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: end
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: rangeKind
+          required: false
+          in: query
+          schema:
+            $ref: '#/components/schemas/RangeKind'
+        - name: portfolioId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: propertyId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: unitId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeByMonthDto'
+      tags:
+        - organizations
+      security:
+        - accessToken: []
   /organizations/{organizationId}/files:
     post:
       operationId: FilesController_create
@@ -4131,11 +4133,6 @@ components:
         - organizationId
         - createdAt
         - updatedAt
-    RangeKind:
-      type: string
-      enum:
-        - postAt
-        - paidAt
     GroupByMonthDto:
       type: object
       properties:
@@ -4146,25 +4143,6 @@ components:
       required:
         - date
         - amount
-    IncomeByMonthDto:
-      type: object
-      properties:
-        total:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupByMonthDto'
-        paid:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupByMonthDto'
-        unpaid:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupByMonthDto'
-      required:
-        - total
-        - paid
-        - unpaid
     GroupByCategoryDto:
       type: object
       properties:
@@ -4201,6 +4179,11 @@ components:
         - propertyTitle
         - unitTitle
         - amount
+    RangeKind:
+      type: string
+      enum:
+        - postAt
+        - paidAt
     Occupancy:
       type: object
       properties:
@@ -4287,6 +4270,25 @@ components:
         label:
           type: string
           nullable: true
+    IncomeByMonthDto:
+      type: object
+      properties:
+        total:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupByMonthDto'
+        paid:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupByMonthDto'
+        unpaid:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupByMonthDto'
+      required:
+        - total
+        - paid
+        - unpaid
     FileRelationKeyEnum:
       type: string
       enum:

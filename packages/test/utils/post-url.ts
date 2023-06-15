@@ -41,12 +41,13 @@ export const getUrl = ({
 	portfolioId?: string | null;
 	tenantId?: string | null;
 }) => {
-	if (!organizationId || !portfolioId) {
-		throw new Error('Missing organizationId or portfolioId');
+	if (!organizationId) {
+		throw new Error('Missing organizationId');
 	}
 
 	return {
-		incomeAggregate: `${apiURL}/organizations/${organizationId}/portfolios/${portfolioId}/aggregate/income`,
+		incomeAggregate: `${apiURL}/organizations/${organizationId}/aggregate/income`,
+		// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 		expensesAggregate: `${apiURL}/organizations/${organizationId}/portfolios/${portfolioId}/aggregate/expenses`,
 	};
 };

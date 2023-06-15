@@ -11,6 +11,7 @@ export const aggregateOptionsSchema = z
 	.object({
 		start: zodDateOnly.default(() => startOfMonthN(1).slice(0, 10)),
 		end: zodDateOnly.default(() => endOfMonthN(0).slice(0, 10)),
+		portfolioId: z.string().uuid().optional(),
 		propertyId: z.string().uuid().optional(),
 		unitId: z.string().uuid().optional(),
 		rangeKind: z

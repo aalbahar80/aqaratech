@@ -8,7 +8,7 @@
 	import { getColor } from '$lib/utils/colors';
 
 	export let income: IncomeByMonthDto;
-	export let empty: boolean;
+	export let empty = false;
 
 	$: barDatasets = [
 		{

@@ -10,9 +10,10 @@
 	$: empty = data.sumIncome.paid === 0 && data.sumIncome.unpaid === 0;
 </script>
 
-<PieCharts aggregate={data.invoices.aggregate} />
+<div class="flex flex-col gap-4 sm:flex-row">
+	<PieCharts aggregate={data.invoices.aggregate} />
+</div>
 
-<!-- /aggregate endpoint, which provides data grouped by month, does not respect the rangeKind filter. -->
 <BarChart
 	income={data.income}
 	{empty}

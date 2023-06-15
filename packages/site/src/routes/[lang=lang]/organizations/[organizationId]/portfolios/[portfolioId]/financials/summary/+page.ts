@@ -20,7 +20,7 @@ export const load: PageLoad = async ({ fetch, params, depends }) => {
 	const { organizationId, portfolioId } = params;
 
 	const [income, expenses] = await Promise.all([
-		api.portfolios.getIncomeByMonth({
+		api.organizations.getIncomeByMonth({
 			organizationId,
 			portfolioId,
 			start,

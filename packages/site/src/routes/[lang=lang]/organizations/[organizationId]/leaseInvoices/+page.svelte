@@ -27,7 +27,9 @@
 	</div>
 </div>
 
-<PieCharts aggregate={data.invoices.aggregate} />
+<div class="flex flex-col gap-4 sm:flex-row">
+	<PieCharts aggregate={data.invoices.aggregate} />
+</div>
 
 <LeaseInvoiceTable
 	data={data.invoices}

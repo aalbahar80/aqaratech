@@ -41,14 +41,21 @@ export const load: PageLoad = async ({
 
 	const api = createApi(fetch);
 
-	const invoices = await api.organizations.findAllLeaseInvoices({
-		id: params.organizationId,
-		filter,
-		filterCustom: {
-			payPhase: payPhaseFilter,
-		},
-		...parseParams(searchParams),
-	});
+	const [income, invoices] = await Promise.all([
+		api.organizations.getIncomeByMonth({
+			organizationId: params.organizationId,
+			start,
+			end,
+		}),
+		api.organizations.findAllLeaseInvoices({
+			id: params.organizationId,
+			filter,
+			filterCustom: {
+				payPhase: payPhaseFilter,
+			},
+			...parseParams(searchParams),
+		}),
+	]);
 
-	return { invoices };
+	return { income, invoices };
 };

@@ -30,34 +30,32 @@
 	);
 </script>
 
-<div class="flex flex-col gap-4 sm:flex-row">
-	{#if visibility.paymentStatusPie}
-		<PaymentStatusPie {aggregate}>
-			<PieStats
-				primaryText={$L.general.total() + ' ' + $L.entity.leaseInvoice.plural()}
-				secondaryText={$L.general.forPeriod()}
-				primaryValue={fmtCurrency(paid + unpaid ?? 0)}
-			/>
-		</PaymentStatusPie>
-	{/if}
+{#if visibility.paymentStatusPie}
+	<PaymentStatusPie {aggregate}>
+		<PieStats
+			primaryText={$L.general.total() + ' ' + $L.entity.leaseInvoice.plural()}
+			secondaryText={$L.general.forPeriod()}
+			primaryValue={fmtCurrency(paid + unpaid ?? 0)}
+		/>
+	</PaymentStatusPie>
+{/if}
 
-	{#if visibility.paymentTimePie}
-		<PaymentTimePie {aggregate}>
-			<PieStats
-				primaryText={$L.general.collected()}
-				secondaryText={$L.general.forPeriod()}
-				primaryValue={fmtCurrency(paid)}
-			/>
-		</PaymentTimePie>
-	{/if}
+{#if visibility.paymentTimePie}
+	<PaymentTimePie {aggregate}>
+		<PieStats
+			primaryText={$L.general.collected()}
+			secondaryText={$L.general.forPeriod()}
+			primaryValue={fmtCurrency(paid)}
+		/>
+	</PaymentTimePie>
+{/if}
 
-	{#if visibility.dueStatusPie}
-		<DueStatusPie {aggregate}>
-			<PieStats
-				primaryText={$L.general.uncollected()}
-				secondaryText={$L.general.forPeriod()}
-				primaryValue={fmtCurrency(unpaid)}
-			/>
-		</DueStatusPie>
-	{/if}
-</div>
+{#if visibility.dueStatusPie}
+	<DueStatusPie {aggregate}>
+		<PieStats
+			primaryText={$L.general.uncollected()}
+			secondaryText={$L.general.forPeriod()}
+			primaryValue={fmtCurrency(unpaid)}
+		/>
+	</DueStatusPie>
+{/if}

@@ -12,7 +12,6 @@ for (const agg of aggregateTypes) {
 	}) => {
 		const url = getUrl({
 			organizationId: portfolio.organizationId,
-			portfolioId: portfolio.id,
 		})[agg];
 
 		const res = await request.get(url);
@@ -85,7 +84,6 @@ for (const agg of aggregateTypes) {
 	}) => {
 		const url = getUrl({
 			organizationId: portfolio.organizationId,
-			portfolioId: portfolio.id,
 		})[agg];
 
 		const res = await request.get(url);

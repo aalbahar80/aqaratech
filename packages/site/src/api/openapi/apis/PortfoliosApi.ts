@@ -18,7 +18,6 @@ import type {
 	GroupByCategoryDto,
 	GroupByLocationDto,
 	GroupByMonthDto,
-	IncomeByMonthDto,
 	Occupancy,
 	PaginatedExpenseDto,
 	PaginatedLeaseInvoiceDto,
@@ -147,16 +146,6 @@ export interface PortfoliosApiGetExpensesByMonthRequest {
 	end?: string | undefined;
 	propertyId?: string | null | undefined;
 	unitId?: string | null | undefined;
-}
-
-export interface PortfoliosApiGetIncomeByMonthRequest {
-	organizationId: string;
-	portfolioId: string;
-	start?: string | undefined;
-	end?: string | undefined;
-	rangeKind?: RangeKind | undefined;
-	propertyId?: string | undefined;
-	unitId?: string | undefined;
 }
 
 export interface PortfoliosApiGetOccupancyRequest {
@@ -1051,90 +1040,6 @@ export class PortfoliosApi extends runtime.BaseAPI {
 		initOverrides?: RequestInit | runtime.InitOverrideFunction,
 	): Promise<Array<GroupByMonthDto>> {
 		const response = await this.getExpensesByMonthRaw(
-			requestParameters,
-			initOverrides,
-		);
-		return await response.value();
-	}
-
-	/**
-	 */
-	async getIncomeByMonthRaw(
-		requestParameters: PortfoliosApiGetIncomeByMonthRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<runtime.ApiResponse<IncomeByMonthDto>> {
-		if (
-			requestParameters.organizationId === null ||
-			requestParameters.organizationId === undefined
-		) {
-			throw new runtime.RequiredError(
-				'organizationId',
-				'Required parameter requestParameters.organizationId was null or undefined when calling getIncomeByMonth.',
-			);
-		}
-
-		if (
-			requestParameters.portfolioId === null ||
-			requestParameters.portfolioId === undefined
-		) {
-			throw new runtime.RequiredError(
-				'portfolioId',
-				'Required parameter requestParameters.portfolioId was null or undefined when calling getIncomeByMonth.',
-			);
-		}
-
-		const queryParameters: any = {};
-
-		if (requestParameters.start !== undefined) {
-			queryParameters['start'] = requestParameters.start;
-		}
-
-		if (requestParameters.end !== undefined) {
-			queryParameters['end'] = requestParameters.end;
-		}
-
-		if (requestParameters.rangeKind !== undefined) {
-			queryParameters['rangeKind'] = requestParameters.rangeKind;
-		}
-
-		if (requestParameters.propertyId !== undefined) {
-			queryParameters['propertyId'] = requestParameters.propertyId;
-		}
-
-		if (requestParameters.unitId !== undefined) {
-			queryParameters['unitId'] = requestParameters.unitId;
-		}
-
-		const headerParameters: runtime.HTTPHeaders = {};
-
-		const response = await this.request(
-			{
-				path: `/organizations/{organizationId}/portfolios/{portfolioId}/aggregate/income`
-					.replace(
-						`{${'organizationId'}}`,
-						encodeURIComponent(String(requestParameters.organizationId)),
-					)
-					.replace(
-						`{${'portfolioId'}}`,
-						encodeURIComponent(String(requestParameters.portfolioId)),
-					),
-				method: 'GET',
-				headers: headerParameters,
-				query: queryParameters,
-			},
-			initOverrides,
-		);
-
-		return new runtime.JSONApiResponse(response);
-	}
-
-	/**
-	 */
-	async getIncomeByMonth(
-		requestParameters: PortfoliosApiGetIncomeByMonthRequest,
-		initOverrides?: RequestInit | runtime.InitOverrideFunction,
-	): Promise<IncomeByMonthDto> {
-		const response = await this.getIncomeByMonthRaw(
 			requestParameters,
 			initOverrides,
 		);

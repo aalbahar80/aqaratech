@@ -66,19 +66,51 @@ for (const route of scoped) {
 	});
 }
 
-test('can get data from /aggregate', async ({ portfolio, request }) => {
+test('can get data from /aggregate/income with portfolioId', async ({
+	portfolio,
+	request,
+}) => {
+	const base = getUrl({
+		organizationId: portfolio.organizationId,
+	});
+
+	const url = base.incomeAggregate;
+
+	const res = await request.get(url, { params: { portfolioId: portfolio.id } });
+
+	await expect(res).toBeOK();
+});
+
+test('cannot get data from /aggregate/income without portfolioId', async ({
+	portfolio,
+	request,
+}) => {
+	const base = getUrl({
+		organizationId: portfolio.organizationId,
+	});
+
+	const url = base.incomeAggregate;
+
+	const res = await request.get(url);
+
+	await expect(res).not.toBeOK();
+	expect(res.status()).toBe(403);
+});
+
+test('can get data from /aggregate/expenses', async ({
+	portfolio,
+	request,
+}) => {
 	const base = getUrl({
 		organizationId: portfolio.organizationId,
 		portfolioId: portfolio.id,
 	});
 
-	const urls = [base.incomeAggregate, base.expensesAggregate];
+	const url = base.expensesAggregate;
 
-	for (const url of urls) {
-		const res = await request.get(url);
+	const res = await request.get(url);
 
-		await expect(res).toBeOK();
-	}
+	await expect(res).toBeOK();
 });
 
 const units = ['/units', '/units-minimal'];

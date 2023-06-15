@@ -57,21 +57,75 @@ test('can only get self from /tenants', async ({ request }) => {
 	expect(body.results).toHaveLength(1);
 });
 
-test('cannot get data from /aggregate', async ({ portfolio, request }) => {
+test('cannot get data from /aggregate/income - must specify portfolioId', async ({
+	portfolio,
+	request,
+}) => {
+	const base = getUrl({
+		organizationId: portfolio.organizationId,
+	});
+
+	const url = base.incomeAggregate;
+
+	const res = await request.get(url);
+
+	await expect.soft(res).not.toBeOK();
+
+	expect(res.status()).toBe(403);
+});
+
+test('cannot get data from /aggregate/income - specify portfolioId', async ({
+	portfolio,
+	request,
+}) => {
+	const base = getUrl({
+		organizationId: portfolio.organizationId,
+	});
+
+	const url = base.incomeAggregate;
+
+	const portfolioId = portfolio.id;
+	const res = await request.get(url, { params: { portfolioId } });
+
+	await expect.soft(res).not.toBeOK();
+
+	expect(res.status()).toBe(403);
+});
+
+test('cannot get data from /aggregate/expenses', async ({
+	portfolio,
+	request,
+}) => {
 	const base = getUrl({
 		organizationId: portfolio.organizationId,
 		portfolioId: portfolio.id,
 	});
 
-	const urls = [base.incomeAggregate, base.expensesAggregate];
+	const url = base.expensesAggregate;
 
-	for (const url of urls) {
-		const res = await request.get(url);
+	const res = await request.get(url);
 
-		await expect.soft(res).not.toBeOK();
+	await expect.soft(res).not.toBeOK();
 
-		expect(res.status()).toBe(403);
-	}
+	expect(res.status()).toBe(403);
+});
+
+test('cannot get data from /aggregate/expenses - specify portfolioId', async ({
+	portfolio,
+	request,
+}) => {
+	const base = getUrl({
+		organizationId: portfolio.organizationId,
+	});
+
+	const url = base.expensesAggregate;
+
+	const portfolioId = portfolio.id;
+	const res = await request.get(url, { params: { portfolioId } });
+
+	await expect.soft(res).not.toBeOK();
+
+	expect(res.status()).toBe(403);
 });
 
 test.describe('files', () => {

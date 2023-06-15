@@ -1,12 +1,16 @@
 import { randomUUID } from 'crypto';
 
-import { expect } from '@playwright/test';
+import { expect, type APIResponse } from '@playwright/test';
 
 import { sample } from '@self/seed';
 
 import { getUrl } from '../../../../../../utils/post-url';
 import { test } from '../../../../api-fixtures';
-import { aggregateBodyToArray, aggregateTypes } from '../aggregate-types';
+import {
+	AggregateType,
+	aggregateBodyToArray,
+	aggregateTypes,
+} from '../aggregate-types';
 
 for (const agg of aggregateTypes) {
 	test(`can get ${agg} for portfolio in own org`, async ({
@@ -18,7 +22,12 @@ for (const agg of aggregateTypes) {
 			portfolioId: portfolio.id,
 		})[agg];
 
-		const res = await request.get(url);
+		let res: APIResponse;
+		if (agg === AggregateType.Income) {
+			res = await request.get(url, { params: { portfolioId: portfolio.id } });
+		} else {
+			res = await request.get(url);
+		}
 
 		expect(res.status()).toBe(200);
 	});
@@ -32,8 +41,14 @@ for (const agg of aggregateTypes) {
 			portfolioId: sample.portfolios[0].id,
 		})[agg];
 
-		const res = await request.get(url);
-
+		let res: APIResponse;
+		if (agg === AggregateType.Income) {
+			res = await request.get(url, {
+				params: { portfolioId: sample.portfolios[0].id },
+			});
+		} else {
+			res = await request.get(url);
+		}
 		expect(res.status()).toBe(403);
 	});
 
@@ -41,24 +56,31 @@ for (const agg of aggregateTypes) {
 		org,
 		request,
 	}) => {
+		const portfolioId = randomUUID();
 		const url = getUrl({
 			organizationId: org.organization.id,
-			portfolioId: randomUUID(),
+			portfolioId,
 		})[agg];
 
-		const res = await request.get(url);
+		let res: APIResponse;
+		if (agg === AggregateType.Income) {
+			res = await request.get(url, { params: { portfolioId } });
+			expect.soft(res.status()).toBe(403);
+		} else {
+			res = await request.get(url);
 
-		expect.soft(res.status()).toBe(200);
+			expect.soft(res.status()).toBe(200);
 
-		const body: unknown = await res.json();
+			const body: unknown = await res.json();
 
-		const data = aggregateBodyToArray(body, agg);
+			const data = aggregateBodyToArray(body, agg);
 
-		for (const item of data) {
-			expect.soft(item).toContainEqual({
-				amount: 0, // should return "blank" data points
-				date: expect.any(String),
-			});
+			for (const item of data) {
+				expect.soft(item).toContainEqual({
+					amount: 0, // should return "blank" data points
+					date: expect.any(String),
+				});
+			}
 		}
 	});
 }

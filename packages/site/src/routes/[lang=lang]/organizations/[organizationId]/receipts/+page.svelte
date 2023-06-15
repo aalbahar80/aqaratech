@@ -3,6 +3,8 @@
 
 	import type { PageData } from './$types';
 
+	import BarChart from '../portfolios/[portfolioId]/financials/income/BarChart.svelte';
+
 	import type { LeaseInvoiceDto } from '$api/openapi';
 
 	import L from '$i18n/i18n-svelte';
@@ -26,14 +28,18 @@
 	</div>
 </div>
 
-<PieCharts
-	aggregate={data.invoices.aggregate}
-	visibility={{
-		paymentStatusPie: false,
-		paymentTimePie: true,
-		dueStatusPie: false,
-	}}
-/>
+<div class="flex flex-col gap-4 lg:flex-row">
+	<PieCharts
+		aggregate={data.invoices.aggregate}
+		visibility={{
+			paymentStatusPie: false,
+			paymentTimePie: true,
+			dueStatusPie: false,
+		}}
+	/>
+
+	<BarChart income={data.income} />
+</div>
 
 <LeaseInvoiceTable
 	data={data.invoices}

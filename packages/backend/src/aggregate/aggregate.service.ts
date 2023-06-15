@@ -1,4 +1,5 @@
 import { ForbiddenError, subject } from '@casl/ability';
+import { accessibleBy } from '@casl/prisma';
 import { Inject, Injectable, LoggerService } from '@nestjs/common';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
@@ -28,33 +29,37 @@ export class AggregateService {
 		private readonly expensesService: ExpensesService,
 	) {}
 
-	async portfolioIncomeByMonth({
+	async incomeByMonth({
+		user,
 		organizationId,
-		portfolioId,
 		options,
 		paidStatus,
 	}: {
+		user: IUser;
 		organizationId: string;
-		portfolioId: string;
 		options: AggregateOptionsDto;
 		paidStatus: PaidStatus;
 	}) {
+		const portfolioId = options.portfolioId;
 		const leaseInvoices = await this.prisma.c.leaseInvoice.findMany({
 			where: {
 				AND: [
 					{
 						organizationId,
-						portfolioId,
+						...(portfolioId && { portfolioId }),
 						[options.rangeKind]: { gte: options.start, lte: options.end },
 					},
-					this.leaseInvoicesService.parseLocationFilter({
-						filter: {
-							portfolioId,
-							propertyId: options.propertyId,
-							unitId: options.unitId,
-						},
-					}),
+					portfolioId
+						? this.leaseInvoicesService.parseLocationFilter({
+								filter: {
+									portfolioId,
+									propertyId: options.propertyId,
+									unitId: options.unitId,
+								},
+						  })
+						: {},
 					this.leaseInvoicesService.parseIsPaidFilter({ paidStatus }),
+					accessibleBy(user.ability, Action.Read).LeaseInvoice,
 				],
 			},
 			select: { amount: true, postAt: true, paidAt: true },

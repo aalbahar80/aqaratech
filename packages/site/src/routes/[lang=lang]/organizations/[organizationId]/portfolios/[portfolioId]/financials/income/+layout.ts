@@ -73,7 +73,7 @@ export const load: LayoutLoad = async ({
 	const api = createApi(fetch);
 
 	const [income, invoices] = await Promise.all([
-		api.portfolios.getIncomeByMonth({
+		api.organizations.getIncomeByMonth({
 			organizationId,
 			portfolioId,
 			propertyId: propertyId === null ? undefined : propertyId,
