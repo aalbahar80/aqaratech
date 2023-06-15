@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.44.0
+
+### Minor Changes
+
+- 8052b54bb: feat: income by month can be scoped to entire org
+
 ## 2.43.0
 
 ### Minor Changes

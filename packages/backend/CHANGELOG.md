@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.38.0
+
+### Minor Changes
+
+- 8052b54bb: feat: income by month can be scoped to entire org
+
 ## 2.37.2
 
 ### Patch Changes
