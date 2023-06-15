@@ -9,7 +9,6 @@ import { APP_GUARD, APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { ScheduleModule } from '@nestjs/schedule';
 import * as Sentry from '@sentry/node';
 import { PolymorphicRequest } from '@sentry/node';
-import { ProfilingIntegration } from '@sentry/profiling-node';
 import {
 	addRequestDataToEvent,
 	extractPathForTransaction,
@@ -140,7 +139,6 @@ import { UsersModule } from './users/users.module';
 
 						// Potential troublemaker. Investigate: shutdown hooks, add prisma to imports array, prisma in main.ts vs using nestjs-prisma package.
 						new Sentry.Integrations.Prisma({ client: prisma.c }),
-						new ProfilingIntegration(),
 						...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
 					],
 				};
