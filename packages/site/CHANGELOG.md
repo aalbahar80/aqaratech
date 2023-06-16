@@ -1,5 +1,11 @@
 # @self/site
 
+## 2.45.0
+
+### Minor Changes
+
+- cda53ffe3: replace favicon
+
 ## 2.44.0
 
 ### Minor Changes
