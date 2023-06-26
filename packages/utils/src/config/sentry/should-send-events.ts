@@ -14,8 +14,6 @@ export const getSendEventConfig = (
 	helpers: { debug: boolean; sampleRate: number },
 ) => {
 	if (isLiveEnv(config.PUBLIC_AQARATECH_ENV)) {
-		// TODO: don't log in production, until then disabling this:
-		// console.log('Sending all events to Sentry', config.PUBLIC_AQARATECH_ENV);
 		return {
 			shouldAlwaysSend: true,
 		} satisfies SendEventConfig;

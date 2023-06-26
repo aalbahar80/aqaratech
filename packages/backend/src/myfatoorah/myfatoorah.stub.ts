@@ -7,7 +7,7 @@ import * as sinon from 'sinon';
 
 import { MyfatoorahService } from './myfatoorah.service';
 
-// BUG: Path could be resolved from dist/..
+// Path may be resolved from dist/..
 const LEVELDB_PATH = path.resolve(__dirname, '../../../test/downloads/leveldb');
 
 export function createStubMyfatoorah() {

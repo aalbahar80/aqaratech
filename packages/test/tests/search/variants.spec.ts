@@ -8,7 +8,7 @@ import { inputs } from './test-data';
 
 import type { SearchDto } from '../../types/api';
 
-// TODO: Make tests re-use organization fixture
+// PERF: Make tests re-use organization fixture
 
 const test = base.extend<{
 	searchUrl: string;

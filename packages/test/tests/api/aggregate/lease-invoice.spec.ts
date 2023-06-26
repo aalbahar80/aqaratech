@@ -59,7 +59,6 @@ test('return 12 data points for a year', async ({ request, portfolio }) => {
 		params: {
 			start: '2021-01-01',
 			end: '2021-12-31',
-			// end: '2022-01-01', // TODO: test this too
 		},
 	});
 

@@ -28,5 +28,5 @@ export interface IUser extends AuthenticatedUser {
 	phone: string | null;
 	isPhoneVerified: boolean;
 	ability: TAppAbility;
-	role: ValidatedUserDto['roles'][0]; // TODO rm?
+	role: ValidatedUserDto['roles'][0];
 }

@@ -71,8 +71,8 @@ export const getNavigationTree = (
 		// icon: HeroiconsOutlineLogin,
 		linkOptions: {
 			// Explicitly declare as external link to avoid a client-side error "Not Found".
+			// TODO: add to other links that use data-sveltekit-reload as needed
 			'data-sveltekit-reload': '',
-			// TODO: needed? add to other links that use data-sveltekit-reload?
 			rel: 'external',
 		},
 	};

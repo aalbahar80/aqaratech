@@ -8,7 +8,6 @@ export const definePortfolioAbility = (role: Role, can: TCan) => {
 		throw new Error('roleType is not portfolio or portfolioId is not set');
 	}
 
-	// TODO: limit fields
 	can(Action.Read, ['Role'], {
 		tenant: { leases: { some: { portfolioId: { equals: role.portfolioId } } } }, // prettier-ignore
 	});
