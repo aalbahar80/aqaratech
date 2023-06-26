@@ -49,8 +49,7 @@
 		"allowNonAppliedPatches": true,
 		"overrides": {
 			"@rgossiaux/svelte-headlessui@1.0.2": "npm:svelte-headlessui-combobox-temporary",
-			"@types/node": "^18.16.0",
-			"@travelerdev/nestjs-sentry@4.1.2": "npm:@thenbe/nestjs-sentry@4.1.5"
+			"@types/node": "^18.16.0"
 		},
 		"updateConfig": {
 			"ignoreDependencies": [

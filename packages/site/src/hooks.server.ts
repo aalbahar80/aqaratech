@@ -16,9 +16,6 @@ import { logConfig } from '$lib/server/logger/startup';
 
 Sentry.init({
 	dsn: 'https://16f4a4de6ab74e6e817b44cfd87b723d@o1210217.ingest.sentry.io/4505194893803520',
-	// BUG: https://github.com/getsentry/profiling-node/issues/160
-	// profilesSampleRate: 1,
-	// integrations: [new ProfilingIntegration()],
 	beforeSend(event, hint) {
 		if (hint.originalException instanceof ResponseError) {
 			const response = hint.originalException.response;

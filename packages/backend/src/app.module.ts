@@ -61,8 +61,6 @@ import { UsersModule } from './users/users.module';
 				const sentryConfig = env.sentry;
 				return {
 					...sentryConfig,
-					profilesSampleRate: 1.0, // Set sampling rate for profiling - this is relative to tracesSampleRate
-
 					/** Adding data using the beforeSend callback seems to be more
 					 * consistent, especially for nested objects. For example, calling
 					 * sentry.captureEvent() and setting the extra & data properties renders nested
