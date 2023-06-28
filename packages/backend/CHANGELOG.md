@@ -1,5 +1,11 @@
 # @self/backend
 
+## 2.38.1
+
+### Patch Changes
+
+- 30b961fbc: handle novu api error (messages)
+
 ## 2.38.0
 
 ### Minor Changes
