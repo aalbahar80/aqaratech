@@ -33,11 +33,25 @@ export class NovuService {
 		const baseUrl = 'https://api.novu.co/v1/messages';
 		const url = `${baseUrl}?${query.toString()}`;
 
-		const dataRaw = await this.getMessagesBySubscriberRaw(url, {
+		const res = await fetch(url, {
 			headers: {
 				Authorization: `ApiKey ${this.env.e.NOVU_TOKEN}`,
 			},
 		});
+
+		if (res.status === 404) {
+			return []; // No such subscriberId
+		} else if (!res.ok) {
+			throw new Error('Novu API error', {
+				cause: {
+					status: res.status,
+					statusText: res.statusText,
+					url,
+				},
+			});
+		}
+
+		const dataRaw: unknown = await res.json();
 
 		const data = messagesResponseSchema.parse(dataRaw);
 
@@ -53,10 +67,5 @@ export class NovuService {
 			})) satisfies MessageDto[];
 
 		return messages;
-	}
-
-	async getMessagesBySubscriberRaw(url: string, options?: RequestInit) {
-		const res = await fetch(url, options);
-		return (await res.json()) as unknown;
 	}
 }
