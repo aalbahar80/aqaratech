@@ -43,10 +43,8 @@
 	},
 	"pnpm": {
 		"patchedDependencies": {
-			"@rgossiaux/svelte-headlessui@1.0.2": "patches/@rgossiaux__svelte-headlessui@1.0.2.patch",
 			"svelte-headlessui-combobox-temporary@0.0.7": "patches/svelte-headlessui-combobox-temporary@0.0.7.patch"
 		},
-		"allowNonAppliedPatches": true,
 		"overrides": {
 			"@rgossiaux/svelte-headlessui@1.0.2": "npm:svelte-headlessui-combobox-temporary",
 			"@types/node": "^18.16.0"
