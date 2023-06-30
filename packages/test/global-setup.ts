@@ -21,7 +21,9 @@ async function globalSetup(config: FullConfig) {
 
 	if (!isStubbed) {
 		// Throw error if running pay tests without stubbing
-		throw new Error('Pay tests should be run with stubbed services');
+		throw new Error(
+			'Tests should be run with mocked services. Set PUBLIC_IS_TESTING=1 in .env to mock external services.',
+		);
 	}
 
 	if (!project) {

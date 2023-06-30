@@ -29,7 +29,7 @@ const tenant = {
 const freshUser = {
 	roleType: 'FRESH',
 	email: 'dev.tester.1@mailthink.net',
-	password: 'cloud12',
+	password: testPassword,
 	storageStateFilename: 'fresh-user.json',
 } as const;
 
