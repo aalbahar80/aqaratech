@@ -1,5 +1,8 @@
 #!/usr/bin/env -S npx tsx
 
+// A helper script able to kill any stubborn process listening on a port, along
+// with it's entire process tree. No process will be left standing.
+
 import kill from 'tree-kill';
 import 'zx/globals';
 

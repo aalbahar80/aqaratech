@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Used in CI to purge Cloudflare cache when a new version of the site is
+# deployed. Might not be required anymore.
+
 echo "Checking token validity..."
 
 curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \

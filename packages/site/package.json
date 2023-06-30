@@ -13,7 +13,6 @@
 		"format": "task -t ../../Taskfile.yml format",
 		"lint": "task -t ../../Taskfile.yml lint",
 		"lint:fix": "task -t ../../Taskfile.yml lint -- --fix",
-		"flatten-sourcemaps": "../../scripts/flatten-sourcemaps.sh",
 		"test": "vitest --run",
 		"test:ui": "vitest --ui"
 	},
