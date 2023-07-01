@@ -173,11 +173,12 @@ export const getNavigationTree = (
 			},
 			{
 				name: LL.entity.leaseInvoice.plural(),
-				href: getRoute({
-					entity: 'leaseInvoice',
-					pageType,
-					params: { organizationId, ...langParam },
-				}),
+				href:
+					getRoute({
+						entity: 'leaseInvoice',
+						pageType,
+						params: { organizationId, ...langParam },
+					}) + '?sort=-postAt', // keep in sync with sorting passed to table in /leaseInvoices/+page.svelte
 				icon: HeroiconsReceiptPercent,
 			},
 			{

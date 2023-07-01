@@ -45,4 +45,11 @@
 	columnVisibility={{
 		paidAt: false,
 	}}
+	sorting={[
+		// keep in sync with link in nav tree
+		{
+			id: 'postAt',
+			desc: false,
+		},
+	]}
 />
