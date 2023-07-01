@@ -46,6 +46,7 @@ export const load: PageLoad = async ({
 			organizationId: params.organizationId,
 			start,
 			end,
+			rangeKind: rangeKindFilter,
 		}),
 		api.organizations.findAllLeaseInvoices({
 			id: params.organizationId,
