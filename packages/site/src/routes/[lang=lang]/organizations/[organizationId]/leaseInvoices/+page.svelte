@@ -42,4 +42,7 @@
 			accessorKey: 'breadcrumbs.tenant.label', // used for display
 		},
 	]}
+	columnVisibility={{
+		paidAt: false,
+	}}
 />

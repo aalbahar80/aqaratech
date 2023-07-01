@@ -172,6 +172,7 @@
 		dueAt: false,
 		mfPaymentId: false,
 		[PORTFOLIO_FULLNAME]: false,
+		...$$props['columnVisibility'],
 	}}
 	sorting={$$props['sorting'] ?? []}
 >
