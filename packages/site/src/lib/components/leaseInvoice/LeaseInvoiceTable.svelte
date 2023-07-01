@@ -28,9 +28,12 @@
 	import { getIntlLabel } from '$lib/i18n/get-intl-label';
 	import { getInvoiceBadge } from '$lib/utils/get-badge';
 
+	type ColumnVisibility = Partial<Record<keyof LeaseInvoiceDto, boolean>>;
+
 	export let data: PaginatedLeaseInvoiceDto;
 	export let showOptions = false;
 	export let extraColumns: ColumnDto<LeaseInvoiceDto>[] = [];
+	export let columnVisibility: ColumnVisibility = {};
 	export let extraFilters: Filter[] | undefined = undefined;
 	export let subtitle = '';
 
@@ -172,7 +175,7 @@
 		dueAt: false,
 		mfPaymentId: false,
 		[PORTFOLIO_FULLNAME]: false,
-		...$$props['columnVisibility'],
+		...columnVisibility,
 	}}
 	sorting={$$props['sorting'] ?? []}
 >
