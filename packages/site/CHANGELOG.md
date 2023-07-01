@@ -1,5 +1,15 @@
 # @self/site
 
+## 2.46.0
+
+### Minor Changes
+
+- 2ec2ac5d7: adjust default column visibility
+
+### Patch Changes
+
+- 3b0ec8968: fix: pass rangeKind filter to incomeByMonth query
+
 ## 2.45.0
 
 ### Minor Changes
