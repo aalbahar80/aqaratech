@@ -31,7 +31,6 @@
 		"eslint-config-custom": "workspace:*",
 		"eslint-plugin-playwright": "0.12.0",
 		"jose": "4.14.4",
-		"prisma": "4.15.0",
 		"remeda": "1.19.0",
 		"simple-json-db": "2.0.0",
 		"tier": "5.10.0",
