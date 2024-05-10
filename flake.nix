@@ -3,16 +3,25 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.nixpkgs-prisma.url = "github:thenbe/nixpkgs/prisma-4.15.0"; # prisma v4.15.0
+  inputs.playwright = { url = "github:pietdevries94/playwright-web-flake/1.42.1"; inputs.nixpkgs.follows = "nixpkgs"; };
 
   outputs =
     { self
     , nixpkgs
     , flake-utils
     , nixpkgs-prisma
-    }:
+    , ...
+    } @ inputs:
     flake-utils.lib.eachDefaultSystem (system:
     let
-      pkgs = nixpkgs.legacyPackages.${system};
+      overlay = _final: _prev: {
+        inherit (inputs.playwright.packages.${system}) playwright-test playwright-driver;
+      };
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ overlay ];
+        config.allowUnfree = true;
+      };
       nodejs_custom = pkgs.nodejs_18; # keep version in sync with `@types/node`, `engines.node`, CI scripts
       # Define some packages here to easily switch between versions
       inherit (nixpkgs-prisma.legacyPackages.${system}) prisma-engines;
@@ -58,10 +67,13 @@
           zulu # java for openapi-generator-cli
           # openapi-generator-cli # npm binary works on nixOS
           (tier { inherit pkgs; })
+          pkgs.playwright-test
           nodejs_custom
           nodejs_custom.pkgs.pnpm
         ];
         shellHook = ''
+          export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+          export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
           export PRISMA_MIGRATION_ENGINE_BINARY=${prisma-engines}/bin/migration-engine
           export PRISMA_QUERY_ENGINE_BINARY=${prisma-engines}/bin/query-engine
           export PRISMA_QUERY_ENGINE_LIBRARY=${prisma-engines}/lib/libquery_engine.node

@@ -37,7 +37,7 @@ const config: PlaywrightTestConfig<TestOptions & TokenTestOptions> = {
 		: [['list'], ['html', { open: 'never' }]],
 	retries: NVIM ? 0 : 1,
 	timeout: process.env.CI ? 30 * 1000 : BASE_TIMEOUT,
-	maxFailures: 40,
+	maxFailures: 100,
 	// workers: process.env.CI ? undefined : '35%',
 	use: {
 		storageState: path.join(

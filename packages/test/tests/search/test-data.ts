@@ -22,7 +22,7 @@ export const inputs: SearchInput[] = [
 		queryPrefix: 'Ma',
 		querySuffix: 'in',
 		resultText: 'The Main St',
-		keysToValidate: [['street', 'Main St']],
+		keysToValidate: [['street', 'The Main St']],
 		type: 'property',
 	},
 ];

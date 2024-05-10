@@ -76,12 +76,12 @@ for (const i of inputs) {
 
 				expect.soft(results).toHaveLength(1);
 
-				const key = i.keysToValidate[0];
-				const value = i.keysToValidate[1];
+				const key = i.keysToValidate[0][0];
+				const value = i.keysToValidate[0][1];
 
 				const result = results[0];
 
-				expect.soft(result).toHaveProperty(key!, value);
+				expect.soft(result).toHaveProperty(key, value);
 			});
 		}
 	});

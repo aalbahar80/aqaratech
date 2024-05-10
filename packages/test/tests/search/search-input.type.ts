@@ -7,6 +7,6 @@ export interface SearchInput {
 	/** Ideally, the suffix should be of a word that is not the last word in the resultText. */
 	querySuffix: string;
 	resultText: string;
-	keysToValidate: DetailsPaneItem[];
+	keysToValidate: [DetailsPaneItem];
 	type: string;
 }

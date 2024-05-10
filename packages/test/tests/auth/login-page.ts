@@ -27,9 +27,14 @@ export class LoginPage {
 		}).toBeVisible();
 		await emailInput.fill(email);
 		await this.page.getByLabel('Password').fill(password);
-		await this.page.getByRole('button', { name: 'Continue' }).click();
+		await this.page
+			.getByRole('button', { name: 'Continue', exact: true })
+			.click();
 
-		// wait to be redirected to our domain
-		await expect(this.page).toHaveURL(new RegExp(`^${siteURL}`));
+		// wait to be redirected to our domain (disabled because of constant error during refactor)
+		await expect(this.page, {
+			message:
+				'Make sure that all four test users exist in auth0 database. Sign in with each of them manually at least once to accept the connection.',
+		}).toHaveURL(new RegExp(`^${siteURL}`));
 	}
 }
