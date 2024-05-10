@@ -10,7 +10,7 @@ export const authConfig = (environment: BackendEnvSchema) => {
 };
 
 const devAuthConfig = {
-	AUTH0_DOMAIN: 'https://dev-eehvhdp2.eu.auth0.com',
+	AUTH0_DOMAIN: 'https://aqaratech-dev.eu.auth0.com',
 	AUTH0_API_NAMESPACE: 'https://letand.be',
 	AUTH0_API_AUDIENCE: 'letand.be/api',
 	JWKS: {
