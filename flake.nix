@@ -13,6 +13,7 @@
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
+      nodejs_custom = pkgs.nodejs_18; # keep version in sync with `@types/node`, `engines.node`, CI scripts
       # Define some packages here to easily switch between versions
       inherit (nixpkgs-prisma.legacyPackages.${system}) prisma-engines;
       inherit (nixpkgs-prisma.legacyPackages.${system}.nodePackages) prisma;
@@ -57,6 +58,8 @@
           zulu # java for openapi-generator-cli
           # openapi-generator-cli # npm binary works on nixOS
           (tier { inherit pkgs; })
+          nodejs_custom
+          nodejs_custom.pkgs.pnpm
         ];
         shellHook = ''
           export PRISMA_MIGRATION_ENGINE_BINARY=${prisma-engines}/bin/migration-engine
