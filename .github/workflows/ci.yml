@@ -96,6 +96,7 @@ jobs:
       - run: pnpm run build -vvv --filter @self/${{ matrix.package }}
 
       - name: Upload source maps to Sentry
+        continue-on-error: true
         if: ${{ matrix.package == 'backend' }} # site sourcemaps are uploaded during the build step
         shell: bash
         # Releases: https://github.com/getsentry/sentry-cli/releases
@@ -133,6 +134,7 @@ jobs:
           backendTag: ${{ inputs.backendTag }}
 
       - name: purge cloudflare cache
+        continue-on-error: true
         if: ${{ inputs.environment == 'prod' }}
         shell: bash
         run: ./scripts/purge-cache-cf.sh
