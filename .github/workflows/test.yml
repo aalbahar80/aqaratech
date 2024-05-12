@@ -54,43 +54,31 @@ jobs:
         with:
           fetch-depth: 2
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Check Nixpkgs inputs
+        uses: DeterminateSystems/flake-checker-action@main
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: 'pnpm'
+      - run: nix develop --command pnpm install --frozen-lockfile
 
-        # BUG: (workaround) Task cli not correctly installed through npm
-      - name: Install Task
-        uses: arduino/setup-task@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - run: pnpm install --frozen-lockfile
-
-      - run: pnpm -F @self/test exec playwright install chromium firefox webkit
-
-      - run: pnpm run build -vvv
+      - run: nix develop --command pnpm run build -vvv
 
       - name: Set .env file
         shell: bash
         run: cp ./.env.example ./.env && cat ./packages/backend/prisma/.env.example >> ./.env
 
       # Move format/lint/check to a seperate job when removing `continue-on-error`
-      - run: pnpm run format:all
+      - run: nix develop --command pnpm run format:all
         continue-on-error: true
 
-      - run: pnpm run lint:all
+      - run: nix develop --command pnpm run lint:all
         continue-on-error: true
 
-      - run: pnpm run check:all
+      - run: nix develop --command pnpm run check:all
         continue-on-error: true
 
-      - run: pnpm run test -vvv
+      - run: nix develop --command pnpm run test -vvv
         # env:
         #   DEBUG: 'pw:webserver'
 

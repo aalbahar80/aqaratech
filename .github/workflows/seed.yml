@@ -25,30 +25,20 @@ jobs:
         with:
           fetch-depth: 2
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: 'pnpm'
-
-        # BUG: (workaround) Task cli not correctly installed through npm
-      - name: Install Task
-        uses: arduino/setup-task@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Check Nixpkgs inputs
+        uses: DeterminateSystems/flake-checker-action@main
 
       - name: Install deps (seed & backend)
-        run: pnpm -F . -F @self/seed... -F @self/backend... install --frozen-lockfile
+        run: nix develop --command pnpm -F . -F @self/seed... -F @self/backend... install --frozen-lockfile
 
       - name: Build deps (seed & backend)
-        run: pnpm turbo run build --filter=@self/backend --filter=@self/seed
+        run: nix develop --command pnpm turbo run build --filter=@self/backend --filter=@self/seed
 
       - name: Seed db
-        run: pnpm -F @self/backend exec prisma migrate reset --force
+        run: nix develop --command pnpm -F @self/backend exec prisma migrate reset --force
         env:
           DATABASE_URL: ${{ github.event.inputs.db_url }}
           PUBLIC_AQARATECH_ENV: 'staging'

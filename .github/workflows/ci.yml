@@ -73,27 +73,17 @@ jobs:
         with:
           fetch-depth: 2
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Check Nixpkgs inputs
+        uses: DeterminateSystems/flake-checker-action@main
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: 'pnpm'
-
-        # BUG: (workaround) Task cli not correctly installed through npm
-      - name: Install Task
-        uses: arduino/setup-task@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - run: pnpm -F . -F @self/${{ matrix.package }}... install --frozen-lockfile
+      - run: nix develop --command pnpm -F . -F @self/${{ matrix.package }}... install --frozen-lockfile
         env:
           PRISMA_GENERATE_SKIP_AUTOINSTALL: 1 # Also need to remove postinstall script
 
-      - run: pnpm run build -vvv --filter @self/${{ matrix.package }}
+      - run: nix develop --command pnpm run build -vvv --filter @self/${{ matrix.package }}
 
       - name: Upload source maps to Sentry
         continue-on-error: true
@@ -102,14 +92,14 @@ jobs:
         # Releases: https://github.com/getsentry/sentry-cli/releases
         run: |
           curl -sL https://sentry.io/get-cli/ | SENTRY_CLI_VERSION="2.18.1" bash
-          task -t ./packages/backend/Taskfile.yml sentry:release
+          nix develop --command task -t ./packages/backend/Taskfile.yml sentry:release
 
       - name: Delete sourcemaps from client bundle
         if: ${{ inputs.environment == 'prod' && matrix.package == 'site' }}
         shell: bash
-        run: pnpm zx ./scripts/rm-sourcemaps.mjs ./packages/site/build/client --force
+        run: nix develop --command pnpm zx ./scripts/rm-sourcemaps.mjs ./packages/site/build/client --force
 
-      - run: pnpm --filter @self/${{ matrix.package }} --prod deploy pruned
+      - run: nix develop --command pnpm --filter @self/${{ matrix.package }} --prod deploy pruned
 
       - uses: ./.github/actions/build-image
         with:
