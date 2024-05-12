@@ -4,6 +4,8 @@
 
 console.log({ argv });
 
+import { inspect } from 'node:util';
+
 /**
  * @type {string | undefined}
  */
@@ -115,7 +117,7 @@ console.log(chalk.blue(`Saving spec...`));
 await fs.writeFile(SPEC, YAML.stringify(latestSpec));
 
 console.log(chalk.yellow('console.log'));
-console.log(latestSpec);
+console.log(inspect(latestSpec, false, null, true));
 
 console.log(chalk.yellow('echo'));
 echo(latestSpec);
@@ -128,8 +130,8 @@ console.log(chalk.blue(`Deploying...`));
 
 if (WILL_CREATE) {
 	// Create new app
-	await $`doctl apps create --spec ${SPEC} --output json`;
+	await $`doctl apps create --spec ${SPEC} --output json --verbose`;
 } else if (appId) {
 	// Update existing app
-	await $`doctl apps update ${appId} --spec ${SPEC} --output json`;
+	await $`doctl apps update ${appId} --spec ${SPEC} --output json --verbose`;
 }
