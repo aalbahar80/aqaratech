@@ -26,23 +26,13 @@ jobs:
           # https://github.com/changesets/action/issues/200#issuecomment-1225472569
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Check Nixpkgs inputs
+        uses: DeterminateSystems/flake-checker-action@main
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: 'pnpm'
-
-        # BUG: (workaround) Task cli not correctly installed through npm
-      - name: Install Task
-        uses: arduino/setup-task@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - run: pnpm install --frozen-lockfile
+      - run: nix develop --command pnpm install --frozen-lockfile
 
       # If there are changesets, open a PR with the new versions
       - name: Create Release Pull Request
