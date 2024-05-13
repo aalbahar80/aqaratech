@@ -2,7 +2,7 @@
   description = "Aqaratech dev environment";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.nixpkgs-prisma.url = "github:thenbe/nixpkgs/prisma-4.15.0"; # prisma v4.15.0
+  inputs.nixpkgs-prisma.url = "github:NixOS/nixpkgs/29bcead8405cfe4c00085843eb372cc43837bb9d"; # prisma v4.13.0
   inputs.playwright = { url = "github:pietdevries94/playwright-web-flake/1.42.1"; inputs.nixpkgs.follows = "nixpkgs"; };
 
   outputs =

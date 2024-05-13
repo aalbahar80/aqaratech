@@ -49,7 +49,7 @@
 		"@nestjs/swagger": "6.3.0",
 		"@novu/node": "0.16.0",
 		"@prisma-utils/nestjs-request-parser": "1.2.0",
-		"@prisma/client": "4.15.0",
+		"@prisma/client": "4.13.0",
 		"@self/utils": "workspace:*",
 		"@sentry/node": "7.55.2",
 		"@sentry/utils": "7.55.2",
