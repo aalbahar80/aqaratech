@@ -1,5 +1,13 @@
 # @self/backend
 
+## 3.0.1
+
+### Patch Changes
+
+- 846159f30: trigger release
+- Updated dependencies [846159f30]
+  - @self/utils@4.0.1
+
 ## 3.0.0
 
 ### Major Changes

@@ -1,5 +1,11 @@
 # @self/utils
 
+## 4.0.1
+
+### Patch Changes
+
+- 846159f30: trigger release
+
 ## 4.0.0
 
 ### Major Changes
