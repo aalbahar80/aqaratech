@@ -15,7 +15,7 @@ import { errorLogger } from '$lib/server/logger/error-logger';
 import { logConfig } from '$lib/server/logger/startup';
 
 Sentry.init({
-	dsn: 'https://16f4a4de6ab74e6e817b44cfd87b723d@o1210217.ingest.sentry.io/4505194893803520',
+	dsn: 'https://d386f6544b94f9e54961015e98dc0306@o4507250750128128.ingest.de.sentry.io/4507250766708816',
 	beforeSend(event, hint) {
 		if (hint.originalException instanceof ResponseError) {
 			const response = hint.originalException.response;
