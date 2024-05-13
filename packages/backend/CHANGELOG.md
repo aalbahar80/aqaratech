@@ -1,5 +1,16 @@
 # @self/backend
 
+## 3.0.0
+
+### Major Changes
+
+- c7512768a: revive
+
+### Patch Changes
+
+- Updated dependencies [c7512768a]
+  - @self/utils@4.0.0
+
 ## 2.38.1
 
 ### Patch Changes

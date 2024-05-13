@@ -1,5 +1,11 @@
 # @self/utils
 
+## 4.0.0
+
+### Major Changes
+
+- c7512768a: revive
+
 ## 3.30.2
 
 ### Patch Changes
