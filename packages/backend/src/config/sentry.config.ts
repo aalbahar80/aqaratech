@@ -43,6 +43,6 @@ export const sentryConfig = (environment: BackendEnvSchema) => {
 
 	return {
 		...base,
-		dsn: 'https://c0020b9f9062452a826fcb956eb7f542@o1210217.ingest.sentry.io/6528733',
+		dsn: 'https://7d39dac4f1e5759fa15abeea8997cb2c@o4507250750128128.ingest.de.sentry.io/4507250760351824',
 	};
 };

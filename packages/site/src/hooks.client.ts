@@ -5,7 +5,7 @@ import type { HandleClientError } from '@sveltejs/kit';
 import { sentryConfig } from '$lib/environment/sentry.config';
 
 Sentry.init({
-	dsn: 'https://16f4a4de6ab74e6e817b44cfd87b723d@o1210217.ingest.sentry.io/4505194893803520',
+	dsn: 'https://d386f6544b94f9e54961015e98dc0306@o4507250750128128.ingest.de.sentry.io/4507250766708816',
 	replaysSessionSampleRate: 0.1,
 	replaysOnErrorSampleRate: 1,
 	integrations: [new Sentry.Replay()],
