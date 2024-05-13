@@ -1,5 +1,11 @@
 # @self/site
 
+## 3.0.1
+
+### Patch Changes
+
+- 846159f30: trigger release
+
 ## 3.0.0
 
 ### Major Changes
