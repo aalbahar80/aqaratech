@@ -1,5 +1,11 @@
 # eslint-config-custom
 
+## 3.0.0
+
+### Major Changes
+
+- c7512768a: revive
+
 ## 2.29.2
 
 ### Patch Changes

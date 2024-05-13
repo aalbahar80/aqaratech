@@ -1,5 +1,11 @@
 # @self/test
 
+## 4.0.0
+
+### Major Changes
+
+- c7512768a: revive
+
 ## 3.31.2
 
 ### Patch Changes
