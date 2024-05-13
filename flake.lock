@@ -54,17 +54,17 @@
     },
     "nixpkgs-prisma": {
       "locked": {
-        "lastModified": 1685805757,
-        "narHash": "sha256-+9ZdR3QEn486uNt2EZSIvLLQs4lCNbs+AbGdIvWj9CE=",
-        "owner": "thenbe",
+        "lastModified": 1689449371,
+        "narHash": "sha256-sK3Oi8uEFrFPL83wKPV6w0+96NrmwqIpw9YFffMifVg=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c06ec6e8ff9570d9132e587a856f47e49865691a",
+        "rev": "29bcead8405cfe4c00085843eb372cc43837bb9d",
         "type": "github"
       },
       "original": {
-        "owner": "thenbe",
-        "ref": "prisma-4.15.0",
+        "owner": "NixOS",
         "repo": "nixpkgs",
+        "rev": "29bcead8405cfe4c00085843eb372cc43837bb9d",
         "type": "github"
       }
     },
