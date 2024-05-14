@@ -78,9 +78,9 @@ jobs:
       - run: nix develop --command pnpm run check:all
         continue-on-error: true
 
-      - run: nix develop --command pnpm run test -vvv
-        # env:
-        #   DEBUG: 'pw:webserver'
+      # - run: nix develop --command pnpm run test -vvv
+      #   env:
+      #     DEBUG: 'pw:webserver'
 
       - uses: actions/upload-artifact@v2
         if: failure()
