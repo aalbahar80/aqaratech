@@ -10,6 +10,14 @@ This repository is a mono-repo containing multiple packages located in the `pack
 
 `seed`: Helpers for generating realistic fake data to use for development/testing.
 
+### System Requirements
+
+- [nix](https://zero-to-nix.com/start/install)
+- docker
+- [op](https://developer.1password.com/docs/cli/)
+
+The nix [devshell](https://zero-to-nix.com/concepts/dev-env) can provide most of the system dependencies (such as `node`, `pnpm`, `task`, etc). Enter the devshell by running `nix develop`.
+
 ### Development 🛠️
 
 ```bash
