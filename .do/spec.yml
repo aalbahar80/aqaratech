@@ -7,7 +7,7 @@ databases:
     name: db-stage
     num_nodes: 1
     size: db-s-dev-database
-    version: '12'
+    version: '14'
     production: false
 # domains:
 #   - domain: aqaratech.com
