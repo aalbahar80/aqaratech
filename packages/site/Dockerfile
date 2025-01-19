@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.4
 
-FROM node:18.16-alpine
+FROM node:18.18-alpine
 
 # For sentry.release. Git is not installed in the node-alpine image.
 ARG PUBLIC_COMMIT_SHA
@@ -34,6 +34,6 @@ USER sveltejs
 
 EXPOSE 3000
 
-# ORIGIN & PORT env vars should be available at runtime for adapter-node. 
+# ORIGIN & PORT env vars should be available at runtime for adapter-node.
 # More info: https://github.com/sveltejs/kit/blob/master/packages/adapter-node/README.md#environment-variables
 CMD node build/index.js
