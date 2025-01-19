@@ -4,6 +4,8 @@
 
 console.log({ argv });
 
+import { inspect } from 'util';
+
 /**
  * @type {string | undefined}
  */
@@ -118,18 +120,19 @@ console.log(chalk.yellow('console.log'));
 console.log(latestSpec);
 
 console.log(chalk.yellow('echo'));
-echo(latestSpec);
+console.log(inspect(latestSpec, false, null, false));
 
 console.log(chalk.yellow('await cat:'));
 await $`cat ${SPEC}`;
 
 // deploy
 console.log(chalk.blue(`Deploying...`));
+console.log(chalk.blue(`WILL_CREATE: ${WILL_CREATE}`));
 
 if (WILL_CREATE) {
 	// Create new app
-	await $`doctl apps create --spec ${SPEC} --output json`;
+	await $`doctl apps create --spec ${SPEC} --output json --verbose`;
 } else if (appId) {
 	// Update existing app
-	await $`doctl apps update ${appId} --spec ${SPEC} --output json`;
+	await $`doctl apps update ${appId} --spec ${SPEC} --output json --verbose`;
 }
