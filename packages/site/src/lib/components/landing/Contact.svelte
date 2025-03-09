@@ -39,10 +39,10 @@
 						</div>
 					</div>
 
-					<!-- Phone -->
+					<!-- Phone + Whatsapp (Renamed) -->
 					<div>
 						<h3 class="text-lg font-medium text-slate-900">
-							{$L.general.phone()}
+							Phone + WhatsApp
 						</h3>
 						<div class="mt-2 text-base text-slate-500">
 							<a
@@ -70,23 +70,6 @@
 							>
 								{$L.buttons.contact()}
 							</a>
-						</div>
-					</div>
-
-					<!-- WhatsApp -->
-					<div>
-						<h3 class="text-lg font-medium text-slate-900">
-							{$L.other.whatsapp()}
-						</h3>
-						<div class="mt-2 text-base text-slate-500">
-							<a
-								dir="auto"
-								class="hover:text-slate-900"
-								href="https://wa.me/+96597944943"
-								data-sveltekit-reload
-								rel="external"
-								target="_blank noopener noreferrer">+965 97944943</a
-							>
 						</div>
 					</div>
 				</div>
