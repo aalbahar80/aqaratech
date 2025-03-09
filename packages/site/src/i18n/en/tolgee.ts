@@ -1,8 +1,8 @@
 export const tolgee = {
 	aqaratech: {
 		address: {
-			line1: '25 Alshuhada St, Sulaiman Tower',
-			line2: 'Sharq, 15305, Kuwait',
+			line1: 'Al Enmaa Tower, Abdullah Al Mubarak St',
+			line2: 'Kuwait City, Kuwait',
 		},
 		fullName: 'Aqaratech, WLL.',
 		shortName: 'Aqaratech',
