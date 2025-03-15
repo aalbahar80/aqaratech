@@ -69,6 +69,17 @@ export class RoleGuard implements CanActivate {
 		const cookies = cookiesSchema.parse(request.cookies);
 		const roleId = cookies.role;
 
+this.logger.warn(
+    {
+        level: 'warn',
+        message: '🔍 RoleGuard Debugging - Checking roleId',
+        userEmail: authenticatedUser.email,
+        roleIdReceived: roleId,
+        cookiesReceived: request.cookies,
+    },
+    RoleGuard.name,
+		);
+
 		this.logger.log(`🍪 Extracted roleId from cookies: ${roleId}`, RoleGuard.name);
 
 		// If no roleId, reject request
