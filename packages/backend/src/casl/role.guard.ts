@@ -14,14 +14,6 @@ import { IS_PUBLIC_KEY, SKIP_ROLE_GUARD_KEY } from 'src/auth/public.decorator';
 import { AuthenticatedUser, IUser } from 'src/interfaces/user.interface';
 import { UsersService } from 'src/users/users.service';
 
-/**
- *
- * This guard:
- * 1. Checks for a valid roleId
- * 2. Adds role to request.user
- * 3. Adds ability to request.user
- *
- */
 @Injectable()
 export class RoleGuard implements CanActivate {
 	constructor(
@@ -32,82 +24,84 @@ export class RoleGuard implements CanActivate {
 	) {}
 
 	async canActivate(context: ExecutionContext): Promise<boolean> {
+		this.logger.log('🔍 RoleGuard execution started', RoleGuard.name);
+		const request = context.switchToHttp().getRequest<IRequest>();
+
+		// Log incoming request details
+		this.logger.log(
+			`🛑 Incoming request: ${request.method} ${request.url}`,
+			RoleGuard.name,
+		);
+
+		// Check if route is public
 		const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
 			context.getHandler(),
 			context.getClass(),
 		]);
 
+		if (isPublic) {
+			this.logger.log('✅ Public route, skipping RoleGuard', RoleGuard.name);
+			return true;
+		}
+
+		// Check if role guard should be skipped
 		const skipRoleGuard = this.reflector.getAllAndOverride<boolean>(
 			SKIP_ROLE_GUARD_KEY,
 			[context.getHandler(), context.getClass()],
 		);
 
-		if (isPublic || skipRoleGuard) {
+		if (skipRoleGuard) {
+			this.logger.log('⚠️ RoleGuard skipped for this route', RoleGuard.name);
 			return true;
 		}
 
-		const request = context.switchToHttp().getRequest<IRequest>();
-
+		// Check if request has user
 		if (!request.user) {
-			this.logger.warn(
-				{
-					level: 'warn',
-					message: 'No user found in request',
-				},
-				RoleGuard.name,
-			);
-
+			this.logger.warn('🚨 No user found in request', RoleGuard.name);
 			return false;
 		}
 
-		// Get Role
-
+		// Extract role from cookies
 		const cookiesSchema = z.object({
 			role: z.string().optional(),
 		});
 
 		const cookies = cookiesSchema.parse(request.cookies);
-
 		const roleId = cookies.role;
 
-		const authenticatedUser = request.user; // safe to use email because it is set by jwt.strategy from accessToken
+		this.logger.log(`🍪 Extracted roleId from cookies: ${roleId}`, RoleGuard.name);
 
+		// If no roleId, reject request
 		if (!roleId) {
-			// Can't add abilities if there is no role.
-
-			this.logger.warn(
-				{
-					level: 'warn',
-					message: 'No roleId found in request',
-				},
-				RoleGuard.name,
-			);
-
+			this.logger.warn('🚨 No roleId found in request', RoleGuard.name);
 			return false;
 		}
 
-		const user = await this.usersService.findOneByEmail(
-			authenticatedUser.email,
-		);
+		const authenticatedUser = request.user;
+		this.logger.log(`👤 Authenticated user email: ${authenticatedUser.email}`, RoleGuard.name);
 
+		// Find user in the database
+		const user = await this.usersService.findOneByEmail(authenticatedUser.email);
+		if (!user) {
+			this.logger.warn(`🚨 No user found with email: ${authenticatedUser.email}`, RoleGuard.name);
+			return false;
+		}
+
+		// Check if user has the role
 		const role = user.roles.find((r) => r.id === roleId);
-
 		if (!role) {
 			this.logger.warn(
-				{
-					level: 'warn',
-					message: `User does not have role with roleId ${roleId}`,
-				},
+				`🚨 User does not have role with roleId: ${roleId}`,
 				RoleGuard.name,
 			);
-
 			return false;
 		}
 
+		// Fetch ability for the role
 		const ability = await this.usersService.getAbility(user.email, role.id);
+		this.logger.log(`✅ Role verified: ${role.id} | Ability granted`, RoleGuard.name);
 
-		// attach ability & roleId to request
-		// TODO spreading here works ok for nested object?
+		// Attach role and ability to request
 		const authorizedUser = {
 			...request.user,
 			ability,
@@ -120,6 +114,7 @@ export class RoleGuard implements CanActivate {
 
 		request.user = authorizedUser;
 
+		this.logger.log('✅ User authorized successfully', RoleGuard.name);
 		return true;
 	}
 }
