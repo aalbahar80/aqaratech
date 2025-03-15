@@ -82,11 +82,16 @@ jobs:
       #   env:
       #     DEBUG: 'pw:webserver'
 
-      - uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          name: playwright-report
-          retention-days: 2
-          path: |
-            packages/test/playwright-report/
-            packages/test/test-results/
+- name: Check if Playwright reports exist
+  run: |
+    mkdir -p packages/test/playwright-report
+    mkdir -p packages/test/test-results
+
+- uses: actions/upload-artifact@v3
+  if: failure()
+  with:
+    name: playwright-report
+    retention-days: 2
+    path: |
+      packages/test/playwright-report/
+      packages/test/test-results/
