@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
 
-# cancel in-progress runs on new commits to same PR (gitub.event.number), fallback to ref
+# cancel in-progress runs on new commits to same PR (github.event.number), fallback to ref
 # https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -68,7 +68,7 @@ jobs:
         shell: bash
         run: cp ./.env.example ./.env && cat ./packages/backend/prisma/.env.example >> ./.env
 
-      # Move format/lint/check to a seperate job when removing `continue-on-error`
+      # Move format/lint/check to a separate job when removing `continue-on-error`
       - run: nix develop --command pnpm run format:all
         continue-on-error: true
 
@@ -82,16 +82,17 @@ jobs:
       #   env:
       #     DEBUG: 'pw:webserver'
 
-- name: Check if Playwright reports exist
-  run: |
-    mkdir -p packages/test/playwright-report
-    mkdir -p packages/test/test-results
+      - name: Check if Playwright reports exist
+        run: |
+          mkdir -p packages/test/playwright-report
+          mkdir -p packages/test/test-results
 
-- uses: actions/upload-artifact@v3
-  if: failure()
-  with:
-    name: playwright-report
-    retention-days: 2
-    path: |
-      packages/test/playwright-report/
-      packages/test/test-results/
+      - name: Upload Playwright reports
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: playwright-report
+          retention-days: 2
+          path: |
+            packages/test/playwright-report/
+            packages/test/test-results/
