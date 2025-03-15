@@ -67,17 +67,25 @@ export class RoleGuard implements CanActivate {
 		});
 
 		const cookies = cookiesSchema.parse(request.cookies);
+
+		// ✅ FIXED: Declare `authenticatedUser` BEFORE using it
+		const authenticatedUser = request.user;
+
+		// ✅ FIXED: Use optional chaining (`?.`) to avoid undefined crashes
+		this.logger.log(
+			`👤 Authenticated user email: ${authenticatedUser?.email ?? 'Unknown'}`,
+			RoleGuard.name,
+		);
+
 		const roleId = cookies.role;
 
-this.logger.warn(
-    {
-        level: 'warn',
-        message: '🔍 RoleGuard Debugging - Checking roleId',
-        userEmail: authenticatedUser.email,
-        roleIdReceived: roleId,
-        cookiesReceived: request.cookies,
-    },
-    RoleGuard.name,
+		// ✅ FIXED: Removed `{ level: 'warn' }` since Winston already assigns log levels
+		this.logger.warn(
+			`🔍 RoleGuard Debugging - Checking roleId:
+			 User Email: ${authenticatedUser?.email ?? 'Unknown'}
+			 Role ID Received: ${roleId ?? 'None'}
+			 Cookies Received: ${JSON.stringify(request.cookies)}`,
+			RoleGuard.name,
 		);
 
 		this.logger.log(`🍪 Extracted roleId from cookies: ${roleId}`, RoleGuard.name);
@@ -88,13 +96,13 @@ this.logger.warn(
 			return false;
 		}
 
-		const authenticatedUser = request.user;
-		this.logger.log(`👤 Authenticated user email: ${authenticatedUser.email}`, RoleGuard.name);
-
 		// Find user in the database
 		const user = await this.usersService.findOneByEmail(authenticatedUser.email);
 		if (!user) {
-			this.logger.warn(`🚨 No user found with email: ${authenticatedUser.email}`, RoleGuard.name);
+			this.logger.warn(
+				`🚨 No user found with email: ${authenticatedUser.email}`,
+				RoleGuard.name,
+			);
 			return false;
 		}
 
@@ -110,7 +118,10 @@ this.logger.warn(
 
 		// Fetch ability for the role
 		const ability = await this.usersService.getAbility(user.email, role.id);
-		this.logger.log(`✅ Role verified: ${role.id} | Ability granted`, RoleGuard.name);
+		this.logger.log(
+			`✅ Role verified: ${role.id} | Ability granted`,
+			RoleGuard.name,
+		);
 
 		// Attach role and ability to request
 		const authorizedUser = {
