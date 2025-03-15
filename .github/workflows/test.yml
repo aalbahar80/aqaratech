@@ -82,7 +82,7 @@ jobs:
       #   env:
       #     DEBUG: 'pw:webserver'
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: playwright-report
