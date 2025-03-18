@@ -30,7 +30,7 @@
 							</p>
 							<a
 								class="underline hover:text-slate-900"
-								href="https://goo.gl/maps/8v94cnqcoFJxJvc57"
+								href=""
 								data-sveltekit-reload
 								target="_blank noopener noreferrer"
 							>
@@ -42,14 +42,14 @@
 					<!-- Phone + Whatsapp (Renamed) -->
 					<div>
 						<h3 class="text-lg font-medium text-slate-900">
-							Phone + WhatsApp
+							Phone
 						</h3>
 						<div class="mt-2 text-base text-slate-500">
 							<a
 								dir="auto"
 								class="hover:text-slate-900"
 								href="tel:+96522466664"
-								data-sveltekit-reload>+965 22466664</a
+								data-sveltekit-reload>+965</a
 							>
 						</div>
 					</div>

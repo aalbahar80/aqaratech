@@ -3,10 +3,10 @@ import type { Tolgee } from '../en/tolgee';
 export const tolgee: Tolgee = {
 	aqaratech: {
 		address: {
-			line1: 'برج الإنماء، شارع عبد الله المبارك',
-			line2: 'مدينة الكويت، الكويت',
+			line1: 'الكويت',
+			line2: 'الكويت',
 		},
-		fullName: 'شركة عقاراتك، ذ. م. م.',
+		fullName: ' عقاراتك',
 		shortName: 'عقاراتك',
 	},
 	landing: {
